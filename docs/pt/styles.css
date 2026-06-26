@@ -1,0 +1,72 @@
+/* Fondo del bloque de título */
+.quarto-title-block {
+  background-image: url("flyer/smallcourse_banner.png");
+  background-size: cover;      /* Ajusta la imagen al tamaño del bloque */
+  background-position: center; /* Centra la imagen */
+  padding: 2rem;
+  border-radius: 8px;
+  color: #fff;                 /* Texto en blanco para contraste */
+}
+
+/* Enlaces dentro del title block */
+.quarto-title-block a {
+  color:#fff; /* color normal */
+  text-decoration: underline; /* opcional */
+}
+
+.quarto-title-block a:hover {
+  color: #ff3fc8; /* color al pasar el mouse */
+}
+
+.quarto-title-block a:visited {
+  color: #7c3aed; /* color cuando ya fue visitado */
+}
+
+
+/* Opcional: ajustar tipografía */
+.quarto-title-block .quarto-title-authors .author,
+.quarto-title-block .quarto-title-authors .affiliation {
+  color: #071322; /* texto principal */
+}
+
+/* Text */
+
+.text-blue { color: #007f99; }   /* azul */
+.text-red { color: #ff3c3c; }    /* rojo */
+.text-green { color: #10c970; }  /* verde */
+
+/* center Text */
+.center {
+  text-align: center;
+}
+
+/* Letters */
+body {
+  font-family: "Inter", "Segoe UI", Roboto, Arial, sans-serif;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600&display=swap');
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Oswald", sans-serif;
+  font-weight: bold;   /* fuerza negritas */
+  letter-spacing: 0.5px;
+}
+
+/* Callout morado para Actividades */
+.actividad .callout-tip.callout {
+  border-left-color: #9333ea !important;
+}
+
+.actividad .callout-tip .callout-header {
+  background-color: rgba(147, 51, 234, 0.12) !important;
+}
+
+.actividad .callout-tip .callout-title-container {
+  color: #49006a;
+  font-weight: 700;
+}
+
+
+
+

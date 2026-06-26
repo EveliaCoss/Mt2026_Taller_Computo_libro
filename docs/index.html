@@ -1,15 +1,16 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
-
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<link rel="alternate" hreflang="en" href="/index.html" />
+<link rel="alternate" hreflang="es" href="/es/index.es.html" />
+<link rel="alternate" hreflang="pt" href="/pt/index.pt.html" />
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.9.37">
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-
 <meta name="author" content="Thais Crippa de Oliveira">
 <meta name="author" content="Evelia Coss">
 <meta name="dcterms.date" content="2026-06-25">
-
 <title>Survival Course: scRNA‑seq + CITE‑seq</title>
 <style>
 /* Default styles provided by pandoc.
@@ -27,28 +28,14 @@ ul.task-list li input[type="checkbox"] {
   vertical-align: middle;
 }
 </style>
-
-
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-nav/quarto-nav.js"></script><script src="site_libs/quarto-nav/headroom.min.js"></script><script src="site_libs/clipboard/clipboard.min.js"></script><script src="site_libs/quarto-search/autocomplete.umd.js"></script><script src="site_libs/quarto-search/fuse.min.js"></script><script src="site_libs/quarto-search/quarto-search.js"></script><meta name="quarto:offset" content="./">
 <link href="./cap1_repaso.html" rel="next">
 <link href="./enesLogo.png" rel="icon" type="image/png">
-<script src="site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script><script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script><script src="site_libs/quarto-html/popper.min.js"></script><script src="site_libs/quarto-html/tippy.umd.min.js"></script><script src="site_libs/quarto-html/anchor.min.js"></script><link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-d0ae9245876894da5ac7e18953ecc5cc.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script><link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="site_libs/bootstrap/bootstrap-e83d5f2733c6de3275a8c91f12f69221.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
 <link href="site_libs/bootstrap/bootstrap-dark-36caa4c25f3af19bbb3787ac612658d3.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <link href="site_libs/bootstrap/bootstrap-e83d5f2733c6de3275a8c91f12f69221.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
@@ -78,13 +65,10 @@ ul.task-list li input[type="checkbox"] {
     "search-submit-button-title": "Submit",
     "search-label": "Search"
   }
-}</script>
-
-
-<link rel="stylesheet" href="styles.css">
+}</script><link rel="stylesheet" href="styles.css">
 </head>
-
-<body class="nav-sidebar floating quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+<body class="nav-sidebar floating quarto-light">
+<script id="quarto-html-before-body" type="application/javascript">
     const toggleBodyColorMode = (bsSheetEl) => {
       const mode = bsSheetEl.getAttribute("data-mode");
       const bodyEl = window.document.querySelector("body");
@@ -246,29 +230,20 @@ ul.task-list li input[type="checkbox"] {
     } else {
       toggleColorMode(false);
     }
-  </script>
-
-<div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top">
-  <nav class="quarto-secondary-nav">
-    <div class="container-fluid d-flex">
+  </script><div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">General information</a></li></ol></nav>
-        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">General information</a></li></ol></nav><a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
       </button>
     </div>
-  </nav>
-</header>
-<!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+  </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
-    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="./">Survival Course: scRNA‑seq + CITE‑seq</a> 
         <div class="sidebar-tools-main tools-wide">
@@ -276,7 +251,7 @@ ul.task-list li input[type="checkbox"] {
     <div class="dropdown">
       <a href="" title="Share" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" role="link" aria-label="Share"><i class="bi bi-share"></i></a>
       <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-0">
-          <li>
+<li>
             <a class="dropdown-item sidebar-tools-main-item" href="https://twitter.com/intent/tweet?url=|url|">
               <i class="bi bi-twitter pe-1"></i>
             Twitter
@@ -295,7 +270,7 @@ ul.task-list li input[type="checkbox"] {
             </a>
           </li>
       </ul>
-    </div>
+</div>
   <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
 </div>
     </div>
@@ -305,9 +280,15 @@ ul.task-list li input[type="checkbox"] {
         <div id="quarto-search" class="" title="Search"></div>
         </div>
         </div>
-    <div class="sidebar-menu-container"> 
+    <div class="dropdown" id="languages-links-parent">
+<button class="btn btn-primary dropdown-toggle babelquarto-languages-button" type="button" data-bs-toggle="dropdown" aria-expanded="false" id="languages-button"><i class="bi bi-globe2"></i> English</button><ul class="dropdown-menu" id="languages-links">
+<li><a class="dropdown-item" href="/pt/index.pt.html" id="language-link-pt">Português</a></li>
+<li><a class="dropdown-item" href="/es/index.es.html" id="language-link-es">Español</a></li>
+</ul>
+</div>
+<div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
-        <li class="sidebar-item">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./index.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">General information</span></a>
@@ -316,59 +297,52 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./cap1_repaso.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Repaso: scRNA-seq vs bulk-RNA-seq</span></span></a>
+ <span class="menu-text"><span class="chapter-number">1</span>  <span class="chapter-title">Repaso: scRNA-seq vs bulk-RNA-seq</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./intro_citeseq.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Repaso: CITE-seq + scRNA-seq</span></span></a>
+ <span class="menu-text"><span class="chapter-number">2</span>  <span class="chapter-title">Repaso: CITE-seq + scRNA-seq</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Cap1.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">About Dataset</span></span></a>
+ <span class="menu-text"><span class="chapter-number">3</span>  <span class="chapter-title">About Dataset</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Cap2.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Resources</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>  <span class="chapter-title">Resources</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Cap3.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Single-Cell Survival Course with Seurat v5</span></span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>  <span class="chapter-title">Single-Cell Survival Course with Seurat v5</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./notas.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Notas</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>  <span class="chapter-title">Notas</span></span></a>
   </div>
 </li>
     </ul>
-    </div>
-</nav>
-<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+</div>
+</nav><div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">Table of contents</h2>
+        <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#general-information" id="toc-general-information" class="nav-link active" data-scroll-target="#general-information">General information</a></li>
-  </ul>
-</nav>
-    </div>
+<li><a href="#general-information" id="toc-general-information" class="nav-link active" data-scroll-target="#general-information">General information</a></li>
+  </ul></nav>
+</div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
-
-
-<header id="title-block-header" class="quarto-title-block default">
-<div class="quarto-title">
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
 <h1 class="title">Survival Course: scRNA‑seq + CITE‑seq</h1>
 </div>
 
@@ -412,13 +386,13 @@ ul.task-list li input[type="checkbox"] {
   
 
 
-</header>
-
-
-<section id="general-information" class="level1 unnumbered">
-<h1 class="unnumbered">General information</h1>
-<div class="tabset-margin-container"></div><div class="panel-tabset" data-group="globalInfo">
-<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true" href="" aria-current="page">About the course 📌</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false" href="">Prerequisites for the Course</a></li></ul>
+</header><section id="general-information" class="level1 unnumbered"><h1 class="unnumbered">General information</h1>
+<div class="tabset-margin-container"></div>
+<div class="panel-tabset" data-group="globalInfo">
+<ul class="nav nav-tabs" role="tablist">
+<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true" href="" aria-current="page">About the course 📌</a></li>
+<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false" href="">Prerequisites for the Course</a></li>
+</ul>
 <div class="tab-content" data-group="globalInfo">
 <div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
 <div style="text-align: center;">
@@ -426,30 +400,35 @@ ul.task-list li input[type="checkbox"] {
 <p><span class="text-blue"><strong>Solving problems focused</strong></span></p>
 </div>
 <ul>
-<li><strong>Date:</strong> 2nd July, 2026 (Thursday)</li>
-<li><strong>Time:</strong> 10 am (GMT-6)</li>
-<li><strong>Duration:</strong> 3 hours</li>
-<li><strong>Level:</strong> Intermediate</li>
-<li><strong>Register to receive the pre-course instructions:</strong> <a href="https://docs.google.com/forms/d/e/1FAIpQLSefUomOjP_j8vjOcPbGMwq9MNDOYB0zIHfEV_WMBqhmFxTelQ/viewform">Google form</a></li>
+<li>
+<strong>Date:</strong> 2nd July, 2026 (Thursday)</li>
+<li>
+<strong>Time:</strong> 10 am (GMT-6)</li>
+<li>
+<strong>Duration:</strong> 3 hours</li>
+<li>
+<strong>Level:</strong> Intermediate</li>
+<li>
+<strong>Register to receive the pre-course instructions:</strong> <a href="https://docs.google.com/forms/d/e/1FAIpQLSefUomOjP_j8vjOcPbGMwq9MNDOYB0zIHfEV_WMBqhmFxTelQ/viewform">Google form</a>
+</li>
 </ul>
-<section id="instructors" class="level4">
-<h4 class="anchored" data-anchor-id="instructors"><strong>Instructors:</strong></h4>
+<section id="instructors" class="level4"><h4 class="anchored" data-anchor-id="instructors"><strong>Instructors:</strong></h4>
 <ul>
-<li><strong>Thais Crippa de Oliveira, PhD</strong> - Posdoctoral Researcher at UNICAMP, Brazil</li>
-<li><strong>Evelia Lorena Coss-Navarrete, PhD</strong> - Associate Professor at ENES, Juriquilla-UNAM, México. <a href="https://eveliacoss.github.io/">Web page</a></li>
+<li>
+<strong>Thais Crippa de Oliveira, PhD</strong> - Posdoctoral Researcher at UNICAMP, Brazil</li>
+<li>
+<strong>Evelia Lorena Coss-Navarrete, PhD</strong> - Associate Professor at ENES, Juriquilla-UNAM, México. <a href="https://eveliacoss.github.io/">Web page</a>
+</li>
 </ul>
 <p>Assistance:</p>
 <ul>
-<li><strong>Juliana Pinto</strong> - PhD student, UFPA, Brazil</li>
-<li><strong>Adriana da Silva, PhD</strong> - Post-doc, UNIFESP, Brazil</li>
-</ul>
-</section>
-<section id="general-goal" class="level3">
-<h3 class="anchored" data-anchor-id="general-goal">🎯 General Goal</h3>
+<li>
+<strong>Juliana Pinto</strong> - PhD student, UFPA, Brazil</li>
+<li>
+<strong>Adriana da Silva, PhD</strong> - Post-doc, UNIFESP, Brazil</li>
+</ul></section><section id="general-goal" class="level3"><h3 class="anchored" data-anchor-id="general-goal">🎯 General Goal</h3>
 <p>Enable participants to navigate a multimodal dataset (RNA + ADT), perform essential preprocessing, and interpret basic results without getting lost in technical details.</p>
-</section>
-<section id="expected-outcomes" class="level3">
-<h3 class="anchored" data-anchor-id="expected-outcomes">✅ Expected Outcomes</h3>
+</section><section id="expected-outcomes" class="level3"><h3 class="anchored" data-anchor-id="expected-outcomes">✅ Expected Outcomes</h3>
 <ul>
 <li>Confidence to open and explore multimodal data.</li>
 <li>Ability to run a basic Seurat pipeline.</li>
@@ -457,13 +436,10 @@ ul.task-list li input[type="checkbox"] {
 <li>Awareness of research questions and limitations in CITE‑seq.</li>
 </ul>
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="flyer/Survival Course_ENG.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="405"></p>
+<figure class="figure"><p><img src="flyer/Survival%20Course_ENG.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="405"></p>
 </figure>
 </div>
-</section>
-<section id="citar-y-reutilizar-el-material-del-curso" class="level3">
-<h3 class="anchored" data-anchor-id="citar-y-reutilizar-el-material-del-curso">Citar y reutilizar el material del curso</h3>
+</section><section id="citar-y-reutilizar-el-material-del-curso" class="level3"><h3 class="anchored" data-anchor-id="citar-y-reutilizar-el-material-del-curso">Citar y reutilizar el material del curso</h3>
 <p>Course data may be freely reused and adapted with proper attribution. All course data from these repositories is subject to the <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)</a>.</p>
 </section>
 </div>
@@ -478,10 +454,7 @@ ul.task-list li input[type="checkbox"] {
 </div>
 
 
-</section>
-
-</main> <!-- /main -->
-<script id="quarto-html-after-body" type="application/javascript">
+</section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     // Ensure there is a toggle, if there isn't float one in the top right
     if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
@@ -893,13 +866,11 @@ ul.task-list li input[type="checkbox"] {
       }
     }
   });
-  </script>
-<nav class="page-navigation">
-  <div class="nav-page nav-page-previous">
+  </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
   </div>
   <div class="nav-page nav-page-next">
       <a href="./cap1_repaso.html" class="pagination-link" aria-label="Repaso: scRNA-seq vs bulk-RNA-seq">
-        <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Repaso: scRNA-seq vs bulk-RNA-seq</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">1</span>  <span class="chapter-title">Repaso: scRNA-seq vs bulk-RNA-seq</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
@@ -908,4 +879,5 @@ ul.task-list li input[type="checkbox"] {
 
 
 
-</body></html>
+</body>
+</html>
