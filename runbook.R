@@ -6,18 +6,13 @@ babelquarto::quarto_multilingual_book(
   further_languages = c("es", "pt")
 )
 
-
-
-babelquarto::render_book(".")
-babelquarto::render_book(site_url= "https://eveliacoss.github.io/Workshop2026_scRNAseq_CITEseq_libro/")
- 
-
+# Correr los archivos con el enlace del sitio web
 babelquarto::render_book(
   project_path = ".",
-  site_url = "https://eveliacoss.github.io/Workshop2026_scRNAseq_CITEseq_libro/",
-  profile = NULL,
-  preview = servr::httw("docs")
+  site_url = "https://eveliacoss.github.io/Workshop2026_scRNAseq_CITEseq_libro",
+  preview = servr::httw("docs") # Revisualizar
 )
+
 
 # For a multilingual book
 servr::httw("_book")
