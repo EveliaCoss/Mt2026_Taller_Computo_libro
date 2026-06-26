@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>6&nbsp; Buenas practicas en R – Workshop</title>
+<title>2&nbsp; Repaso: CITE-seq + scRNA-seq – Survival Course: scRNA‑seq + CITE‑seq</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -33,7 +33,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./Cap4.html" rel="prev">
+<link href="./Cap1.html" rel="next">
+<link href="./intro.html" rel="prev">
 <link href="./enesLogo.png" rel="icon" type="image/png">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
@@ -46,9 +47,9 @@ ul.task-list li input[type="checkbox"] {
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-367522ac618891c39d4b2ae87ea7600e.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark-c5491cb7295b3d79f070a3ccf938a403.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="site_libs/bootstrap/bootstrap-367522ac618891c39d4b2ae87ea7600e.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-e83d5f2733c6de3275a8c91f12f69221.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-36caa4c25f3af19bbb3787ac612658d3.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-e83d5f2733c6de3275a8c91f12f69221.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -78,6 +79,7 @@ ul.task-list li input[type="checkbox"] {
 }</script>
 
 
+<link rel="stylesheet" href="styles.css">
 </head>
 
 <body class="nav-sidebar floating quarto-light"><script id="quarto-html-before-body" type="application/javascript">
@@ -251,7 +253,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Cap5.html"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Buenas practicas en R</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./intro_citeseq.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Repaso: CITE-seq + scRNA-seq</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -266,9 +268,9 @@ ul.task-list li input[type="checkbox"] {
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
-      <a href="./">Workshop</a> 
+      <a href="./">Survival Course: scRNA‑seq + CITE‑seq</a> 
         <div class="sidebar-tools-main tools-wide">
-    <a href="https://github.com/EveliaCoss/Template_Workshop_Quarto_ELCN" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+    <a href="https://github.com/EveliaCoss/Workshop2026_scRNAseq_CITEseq_libro" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
     <div class="dropdown">
       <a href="" title="Share" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" role="link" aria-label="Share"><i class="bi bi-share"></i></a>
       <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-0">
@@ -306,43 +308,43 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Información general</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./Cap1.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Recordatorio de pasos en Bash</span></span></a>
+ <span class="menu-text">General information</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./intro.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Introducción Sobre el Workshop</span></span></a>
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Repaso: scRNA-seq vs bulk-RNA-seq</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./intro_citeseq.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Repaso: CITE-seq + scRNA-seq</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Cap1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">About Dataset</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Cap2.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Instalar Git Bash en Windows</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Resources</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Cap3.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Conectar a GitHub con SSH</span></span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Single-Cell Survival Course with Seurat v5</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Cap4.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Comandos usados en Github y RStudio</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./Cap5.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Buenas practicas en R</span></span></a>
+  <a href="./notas.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Notas</span></span></a>
   </div>
 </li>
     </ul>
@@ -355,14 +357,10 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#materiales-informativos" id="toc-materiales-informativos" class="nav-link active" data-scroll-target="#materiales-informativos"><span class="header-section-number">6.1</span> Materiales informativos</a></li>
-  <li><a href="#un-algoritmo-nos-permite-resolver-un-problema" id="toc-un-algoritmo-nos-permite-resolver-un-problema" class="nav-link" data-scroll-target="#un-algoritmo-nos-permite-resolver-un-problema"><span class="header-section-number">6.2</span> <strong>Un algoritmo nos permite resolver un problema ⭐</strong></a></li>
-  <li><a href="#para-escribir-un-buen-software-necesitas" id="toc-para-escribir-un-buen-software-necesitas" class="nav-link" data-scroll-target="#para-escribir-un-buen-software-necesitas"><span class="header-section-number">6.3</span> <strong>Para escribir un buen software necesitas:</strong></a></li>
-  <li><a href="#paso-7-documentación" id="toc-paso-7-documentación" class="nav-link" data-scroll-target="#paso-7-documentación"><span class="header-section-number">6.4</span> <strong>Paso 7: Documentación</strong></a></li>
-  <li><a href="#puntos-claves-para-buenas-practicas-en-bioinfo" id="toc-puntos-claves-para-buenas-practicas-en-bioinfo" class="nav-link" data-scroll-target="#puntos-claves-para-buenas-practicas-en-bioinfo"><span class="header-section-number">6.5</span> Puntos claves para buenas practicas en bioinfo ⭐</a></li>
-  <li><a href="#pagina-web-en-github" id="toc-pagina-web-en-github" class="nav-link" data-scroll-target="#pagina-web-en-github"><span class="header-section-number">6.6</span> Pagina web en GitHub</a></li>
-  <li><a href="#top-github-users-by-public-contributions-in-mexico" id="toc-top-github-users-by-public-contributions-in-mexico" class="nav-link" data-scroll-target="#top-github-users-by-public-contributions-in-mexico"><span class="header-section-number">6.7</span> Top GitHub Users By Public Contributions in Mexico</a></li>
-  <li><a href="#referencias" id="toc-referencias" class="nav-link" data-scroll-target="#referencias"><span class="header-section-number">6.8</span> Referencias</a></li>
+  <li><a href="#what-is-cite-seq" id="toc-what-is-cite-seq" class="nav-link active" data-scroll-target="#what-is-cite-seq"><span class="header-section-number">2.1</span> <strong>What is CITE-Seq?</strong></a></li>
+  <li><a href="#principles-of-cite-seq" id="toc-principles-of-cite-seq" class="nav-link" data-scroll-target="#principles-of-cite-seq"><span class="header-section-number">2.2</span> <strong>Principles of CITE-Seq</strong></a></li>
+  <li><a href="#overview" id="toc-overview" class="nav-link" data-scroll-target="#overview"><span class="header-section-number">2.3</span> Overview</a></li>
+  <li><a href="#referencias" id="toc-referencias" class="nav-link" data-scroll-target="#referencias"><span class="header-section-number">2.4</span> Referencias</a></li>
   </ul>
 </nav>
     </div>
@@ -372,7 +370,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Buenas practicas en R</span></h1>
+<h1 class="title"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Repaso: CITE-seq + scRNA-seq</span></h1>
 </div>
 
 
@@ -389,159 +387,53 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>Notas personales recabadas a partir de los tutoriales y ejemplos 😊. Espero que les funcione 💜</p>
-<section id="materiales-informativos" class="level2" data-number="6.1">
-<h2 data-number="6.1" class="anchored" data-anchor-id="materiales-informativos"><span class="header-section-number">6.1</span> Materiales informativos</h2>
 <ul>
-<li><p><a href="https://comunidadbioinfo.github.io/cdsb2023/creaci%C3%B3n-de-vi%C3%B1etas.html">Curso de Joselyn Cristina Chávez Fuentes</a></p></li>
-<li><p>Me ayudo mucho este <a href="https://www.youtube.com/watch?v=7ZgZ6qUKZvE&amp;ab_channel=DaniMedi">Video</a></p></li>
-<li><p><a href="https://comunidadbioinfo.github.io/cdsb2023/documentaci%C3%B3n-de-funciones.html">Documentación de funciones de Andrés Arredondo Cruz</a></p></li>
+<li>Overview: general workflow related to cite-seq (muestras)</li>
+<li>Pipeline general Bioinfo de citeseq</li>
 </ul>
-<p>💪 Estuve muy intensa viendo su codigo. Muchas gracias por tenerlos publico.</p>
+<section id="what-is-cite-seq" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="what-is-cite-seq"><span class="header-section-number">2.1</span> <strong>What is CITE-Seq?</strong></h2>
+<p>CITE-Seq, or Cellular Indexing of Transcriptomes and Epitopes by Sequencing, is a technique that enables the simultaneous sequencing of RNA and the quantification and characterization of surface proteins using specific antibodies at the level of individual cells. It combines highly multiplexed antibody-based detection of protein markers with unbiased transcriptome profiling for thousands of single cells in parallel.</p>
 </section>
-<section id="un-algoritmo-nos-permite-resolver-un-problema" class="level2" data-number="6.2">
-<h2 data-number="6.2" class="anchored" data-anchor-id="un-algoritmo-nos-permite-resolver-un-problema"><span class="header-section-number">6.2</span> <strong>Un algoritmo nos permite resolver un problema ⭐</strong></h2>
-<p>Un algoritmo es un método para resolver un problema mediante una serie de pasos <strong>definidos, precisos</strong> y <strong>finitos</strong>.</p>
+<section id="principles-of-cite-seq" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="principles-of-cite-seq"><span class="header-section-number">2.2</span> <strong>Principles of CITE-Seq</strong></h2>
+<p>Cellular Indexing of Transcriptomes and Epitopes (CITE-seq) <strong>uses unique oligo-tagged antibodies to identify surface proteins, using sequencing as a readout</strong>. The number of barcodes that can be conjugated to antibodies surpasses the number of fluorophores or heavy metal tags used in flow cytometry or CyTOF, expanding the number of proteins that can be measured simultaneously with RNA. These barcoded antibodies are part of a unique <a href="https://www.illumina.com/techniques/sequencing/rna-sequencing/cite-seq.html"><strong>workflow</strong></a> that produces protein and nucleic acid data using next-generation sequencing (NGS) technologies.</p>
+<p>This:</p>
 <ul>
-<li><p><strong>Definido</strong>: si se sigue dos veces, se obtiene el mismo resultado. Es reproducible.</p></li>
-<li><p><strong>Preciso</strong>: implica el orden de realización de cada uno de los pasos.</p></li>
-<li><p><strong>Finito</strong>: Tiene un numero determinado de pasos, implica que tiene un fin.</p></li>
+<li><strong>helps in the creation of oligo dT-based RNA sequencing libraries</strong></li>
+<li><strong>enables barcode-based antibody identification</strong></li>
+<li><strong>allows specific PCR amplification</strong></li>
 </ul>
-<blockquote class="blockquote">
-<p>Un algoritmo podemos definirlo como un <strong>programa o software</strong>.</p>
-</blockquote>
-</section>
-<section id="para-escribir-un-buen-software-necesitas" class="level2" data-number="6.3">
-<h2 data-number="6.3" class="anchored" data-anchor-id="para-escribir-un-buen-software-necesitas"><span class="header-section-number">6.3</span> <strong>Para escribir un buen software necesitas:</strong></h2>
-<blockquote class="blockquote">
-<p>Escribir <strong>código mantenible (maintainable code), usar control de versiones (version control) y rastreadores de problemas (issue trackers), revisiones de código (code reviews), pruebas unitarias (unit testing) y automatización de tareas (task automation)</strong>.</p>
-<p>Wilson, et al.&nbsp;2014. PLOS Biology</p>
-</blockquote>
-<p>Con el fin de&nbsp;<em>previnir retracciones</em>.</p>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Pasos para escribir un buen software
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<ol type="1">
-<li><p>Análisis del problema / Definir el problema</p></li>
-<li><p>Diseño del algoritmo / Diseño del programa</p></li>
-<li><p>Codificación / Escribir el código</p></li>
-<li><p>Compilación y ejecución del programa</p></li>
-<li><p>Verificación / Realizar pruebas</p></li>
-<li><p>Depuración / Detectar los errores y corregirlos</p></li>
-</ol>
-<blockquote class="blockquote">
-<p>Programacion defensiva</p>
-</blockquote>
-<ol start="7" type="1">
-<li>Documentación</li>
-</ol>
-</div>
-</div>
+<p>The number of reads corresponding to each conjugated DNA barcode reflects the identity and abundance of proteins.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://eveliacoss.github.io/Buenaspracticas_R_Mayo2024/BestPractices/figures/homersapien.jpg" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="https://www.elucidata.io/blog/cite-seq-the-future-of-single-cell-rna-seq-analysis"><img src="figures/cite-seq.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></a></p>
+</figure>
+</div>
+<figcaption>Schematic of the wet lab workflow for CITE-Seq</figcaption>
 </figure>
 </div>
 </section>
-<section id="paso-7-documentación" class="level2" data-number="6.4">
-<h2 data-number="6.4" class="anchored" data-anchor-id="paso-7-documentación"><span class="header-section-number">6.4</span> <strong>Paso 7: Documentación</strong></h2>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Note
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<ul>
-<li><p><em>Autor (author)</em>: Su nombre</p></li>
-<li><p><em>Dia (date)</em>: Fecha de creación</p></li>
-<li><p><em>Paquetes (packages)</em></p></li>
-<li><p><em>Directorio de trabajo (Working directory)</em>: En que carpeta se encuentra tu datos y programa.</p></li>
-<li><p><em>Información descriptiva del programa (Description)</em>: ¿Para qué sirve el programa? Ej: El siguiente programa realiza la suma de dos numeros enteros a partir de la entrada del usuario y posteriormente la imprime en pantalla.</p></li>
-<li><p><em>Usage</em> ¿Cómo se utiliza?</p></li>
-<li><p><em>Argumentos (Arguments)</em></p>
-<ul>
-<li><p><em>Información de entrada (Data Inputs)</em>: Ej: Solo numeros enteros (sin decimales).</p></li>
-<li><p><em>Información de salida (Outpus)</em>: Graficas, figuras, tablas, etc.</p></li>
-</ul></li>
-</ul>
-</div>
-</div>
+<section id="overview" class="level2" data-number="2.3">
+<h2 data-number="2.3" class="anchored" data-anchor-id="overview"><span class="header-section-number">2.3</span> Overview</h2>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://eveliacoss.github.io/Buenaspracticas_R_Mayo2024/BestPractices/figures/meme_documentacion.jpg" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+<p><a href="https://en.wikipedia.org/wiki/CITE-Seq"><img src="figures/overview.png" class="img-fluid figure-img"></a></p>
+<figcaption>Schematic of the dry lab workflow for CITE-Seq</figcaption>
 </figure>
 </div>
 </section>
-<section id="puntos-claves-para-buenas-practicas-en-bioinfo" class="level2" data-number="6.5">
-<h2 data-number="6.5" class="anchored" data-anchor-id="puntos-claves-para-buenas-practicas-en-bioinfo"><span class="header-section-number">6.5</span> Puntos claves para buenas practicas en bioinfo ⭐</h2>
-<ol type="1">
-<li><p>Escriba <strong>programas para personas, no para computadoras</strong> (Documenta qué hace y por qué). - Se coherente en la nomenclatura, indentación y otros aspectos del estilo.</p></li>
-<li><p>Divide los programas en <em>funciones cortas de un solo propósito.</em> 💻 📚</p></li>
-<li><p><strong>No repitas tu código</strong>. Crea pasos reproducibles o que se repitan por si solas. ➰</p></li>
-<li><p>Planifique los errores (<strong>Programacion defensiva</strong>) 🚩</p></li>
-<li><p>Optimice el software sólo después de que funcione correctamente. - Si funciona no lo modifiques, simplificalo.</p></li>
-<li><p>Colaborar - Busque siempre bibliotecas de software bien mantenidas que hagan lo que necesita. 👥</p></li>
-</ol>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Ejemplo de como realizo mis documentos 💜
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Aqui les dejo el script que les doy a mis alumnos <a href="https://github.com/EveliaCoss/RNAseq_classFEB2024/blob/main/Practica_Dia3/scripts/VisualizacionDatos.R">VisualizacionDatos.R</a> del curso de <a href="https://github.com/EveliaCoss/RNAseq_classFEB2024">Análisis de datos de RNA-Seq</a>.</p>
-</div>
-</div>
-</section>
-<section id="pagina-web-en-github" class="level2" data-number="6.6">
-<h2 data-number="6.6" class="anchored" data-anchor-id="pagina-web-en-github"><span class="header-section-number">6.6</span> Pagina web en GitHub</h2>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Actividad
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<ol type="1">
-<li>En GitHub, crea un repositorio con el mismo nombre de usuario y agregale “.github.io”. Ejemplo: Mi usuario es EveliaCoss y mi repositorio se llama “EveliaCoss.github.io”, dandome la siguiente liga https://github.com/EveliaCoss/EveliaCoss.github.io</li>
-<li>Descarga el archivo <a href="https://github.com/EveliaCoss/EveliaCoss.github.io/blob/main/index.Rmd">index.Rmd</a> y modificalo con tu informacion en tu repositorio.</li>
-<li>No olvides sincronizar el GitHub en RStudio y realiza los cambios desde ahi.</li>
-<li>En GitHub, convierte en pagina web tu repositorio en Settings &gt; Pages &gt; Branch cambia a Main y root &gt; Save</li>
-</ol>
-</div>
-</div>
-<p><a href="https://eveliacoss.github.io/"><img src="figures/EveliaCoss_webpage.jpg" class="img-fluid"></a></p>
-</section>
-<section id="top-github-users-by-public-contributions-in-mexico" class="level2" data-number="6.7">
-<h2 data-number="6.7" class="anchored" data-anchor-id="top-github-users-by-public-contributions-in-mexico"><span class="header-section-number">6.7</span> Top GitHub Users By Public Contributions in Mexico</h2>
-<p><a href="https://github.com/gayanvoice/top-github-users/blob/main/markdown/public_contributions/mexico.md"><img src="figures/Evelia_awards.jpg" class="img-fluid"></a></p>
-</section>
-<section id="referencias" class="level2" data-number="6.8">
-<h2 data-number="6.8" class="anchored" data-anchor-id="referencias"><span class="header-section-number">6.8</span> Referencias</h2>
-<ul>
-<li>Haydee tutorial: <a href="https://haydeeperuyero.github.io/Computo_Cientifico/">Temas Selectos de Análisis Numérico y Computación Científica: Computo científico para el análisis de datos</a></li>
-<li>Alejandra Medina tutorial: <a href="https://comunidadbioinfo.github.io/cdsb2023/control-de-versiones-con-github-y-rstudio.html">Control de versiones con GitHub y RStudio</a></li>
-<li>Wilson, et al.&nbsp;2014. <a href="https://journals.plos.org/plosbiology/article?id=10.1371/journal.pbio.1001745">Best Practices for Scientific Computing</a>. PLOS Biology</li>
-<li>Evelia Coss - tutorial <a href="https://github.com/EveliaCoss/Buenaspracticas_R_Mayo2024">Buenas practicas en R</a></li>
-<li>Evelia Coss - <a href="https://github.com/EveliaCoss/Make_yourCV">Make your CV tutorial</a></li>
-</ul>
+<section id="referencias" class="level2" data-number="2.4">
+<h2 data-number="2.4" class="anchored" data-anchor-id="referencias"><span class="header-section-number">2.4</span> Referencias</h2>
+<p><a href="https://hoohm.github.io/CITE-seq-Count/Running-the-script/" class="uri">https://hoohm.github.io/CITE-seq-Count/Running-the-script/</a></p>
+<p><a href="https://www.signiosbio.com/blog/introduction-to-single-cell-sequencing-cite-seq-series-3/" class="uri">https://www.signiosbio.com/blog/introduction-to-single-cell-sequencing-cite-seq-series-3/</a></p>
+<p><a href="https://www.elucidata.io/blog/cite-seq-the-future-of-single-cell-rna-seq-analysis" class="uri">https://www.elucidata.io/blog/cite-seq-the-future-of-single-cell-rna-seq-analysis</a></p>
+<p><a href="https://en.wikipedia.org/wiki/CITE-Seq" class="uri">https://en.wikipedia.org/wiki/CITE-Seq</a></p>
+<p><a href="https://www.scdiscoveries.com/blog/knowledge/cite-seq/" class="uri">https://www.scdiscoveries.com/blog/knowledge/cite-seq/</a></p>
+<p><a href="https://broadinstitute.github.io/2020_scWorkshop/cite-seq.html" class="uri">https://broadinstitute.github.io/2020_scWorkshop/cite-seq.html</a></p>
+<p><a href="https://cran.r-project.org/web/packages/dsb/vignettes/end_to_end_workflow.html">End-to-end CITE-seq analysis workflow using dsb for ADT normalization and Seurat for multimodal clustering</a></p>
 
 
 </section>
@@ -962,11 +854,14 @@ Note
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./Cap4.html" class="pagination-link" aria-label="Comandos usados en Github y RStudio">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Comandos usados en Github y RStudio</span></span>
+      <a href="./intro.html" class="pagination-link" aria-label="Repaso: scRNA-seq vs bulk-RNA-seq">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Repaso: scRNA-seq vs bulk-RNA-seq</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
+      <a href="./Cap1.html" class="pagination-link" aria-label="About Dataset">
+        <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">About Dataset</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
   </div>
 </nav>
 </div> <!-- /content -->

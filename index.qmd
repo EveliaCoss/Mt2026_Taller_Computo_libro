@@ -1,83 +1,50 @@
-::: {layout-ncol="2"}
-![](figures/enesLogo.png)
+# General information {.unnumbered}
+
+:::: {.panel-tabset group="globalInfo"}
+## About the course 📌
+
+::: {style="text-align: center;"}
+**PRACTICAL MULTILINGUAL ONLINE COURSE**
+
+[**Solving problems focused**]{.text-blue}
 :::
 
-# Información general {.unnumbered}
+- **Date:** 2nd July, 2026 (Thursday)
+- **Time:** 10 am (GMT-6)
+- **Duration:** 3 hours
+- **Level:** Intermediate
+- **Register to receive the pre-course instructions:** [Google form](https://docs.google.com/forms/d/e/1FAIpQLSefUomOjP_j8vjOcPbGMwq9MNDOYB0zIHfEV_WMBqhmFxTelQ/viewform)
 
-- ::: {.panel-tabset group="globalInfo"}
-  ### Sobre el curso 📌
+#### **Instructors:**
 
-  Fuente del curso
+- **Thais Crippa de Oliveira, PhD** - Posdoctoral Researcher at UNICAMP, Brazil
+- **Evelia Lorena Coss-Navarrete, PhD** - Associate Professor at ENES, Juriquilla-UNAM, México. [Web page](https://eveliacoss.github.io/)
 
-  - **Fechas:** Dias de la semana/ dias del mes
+Assistance:
 
-  - **Duración del curso:** X horas
+- **Juliana Pinto** - PhD student, UFPA, Brazil
+- **Adriana da Silva, PhD** - Post-doc, UNIFESP, Brazil
 
-  #### **Instructores:**
+### 🎯 General Goal
 
-  - **Evelia Lorena Coss-Navarrete** - PostDoc, LIIGH-UNAM. [Pagina web](https://eveliacoss.github.io/)
+Enable participants to navigate a multimodal dataset (RNA + ADT), perform essential preprocessing, and interpret basic results without getting lost in technical details.
 
-  Ayudantes:
+### ✅ Expected Outcomes
 
-  - **Nombre - cargo, escuela**
+- Confidence to open and explore multimodal data.
+- Ability to run a basic Seurat pipeline.
+- Understanding of how ADT complements RNA.
+- Awareness of research questions and limitations in CITE‑seq.
 
-  #### **Resumen:**
+![](flyer/Survival Course_ENG.png){fig-align="center" width="405"}
 
-  Para que es el curso, que se va abordar y que se espera que aprendan. Ejemplo:
+### Citar y reutilizar el material del curso
 
-  Este tutorial te enseñará los conceptos fundamentales en el empleo y manejo de Bash Shell, incluyendo **la creación de scripts de Bash, generación de programas con funcionalidades sencillas aplicables a bioinformática y a programación en general.**
+Course data may be freely reused and adapted with proper attribution. All course data from these repositories is subject to the [Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)](https://creativecommons.org/licenses/by-nc-sa/4.0/).
 
-  #### **Objetivos:**
+## Prerequisites for the Course
 
-  En esta guía rápida aprenderás a:
-
-  - Crear y gestionar un repositorio.
-
-  - Iniciar y administrar una nueva rama.
-
-  - Realizar cambios en un archivo y enviarlos a GitHub como confirmación.
-
-  - Crear tu página de inicio en Github.
-
-  - Crear tu página web.
-
-  ## Citar y reutilizar el material del curso
-
-  Los datos del curso se pueden reutilizar y adaptar libremente con la debida atribución. Todos los datos de los cursos de estos repositorios están sujetos a la licencia [Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)](https://creativecommons.org/licenses/by-nc-sa/4.0/).
-
-  ### Requisitos previos
-
-  - Debes tener una **cuenta de usuario de GitHub**. Para más información, consulta "[Creación de una cuenta en GitHub](https://docs.github.com/es/get-started/start-your-journey/creating-an-account-on-github)".
-
-  - No necesitas saber cómo codificar, utilizar la línea de comandos o instalar Git (el software de control de versiones en el que está compilado GitHub).
-
-  - Contar con una terminal con Git, en Windows puedes usar [Git Bash.](https://miguel-mx.github.io/2024-01-24-ccm-unam-swc/)
-
-  ### Agenda 📆 {#agenda}
-
-  +----------------------------------------------------+--------------+
-  | Tema                                               | Tiempo       |
-  +====================================================+:============:+
-  | 🔷 **Sección** **1 - (11:30 - 13:30 h) (7 marzo)** |              |
-  +----------------------------------------------------+--------------+
-  | - Creación de una cuenta en GitHub                 | 5 min        |
-  +----------------------------------------------------+--------------+
-  | - Introducción a Git / GitHub                      | 15 min       |
-  +----------------------------------------------------+--------------+
-  | - **Actividad 1**: Sincronización y llaves         | 15 min       |
-  +----------------------------------------------------+--------------+
-  | ☕ *Coffee break (10 min) - (12:00-12:10) ☕*      | 10 min       |
-  +----------------------------------------------------+--------------+
-  | 🔷  **Sección** **2 - (12:10-13:00 h)**            |              |
-  +----------------------------------------------------+--------------+
-  | - Comandos usados en Github y RStudio              | 25 min       |
-  +----------------------------------------------------+--------------+
-  | - **Actividad 2:** Pagina de inicio en GitHub      | 15 min       |
-  +----------------------------------------------------+--------------+
-  | 🔷  **Sección 3 - (11:30 - 13:30 h) (14 marzo)**   |              |
-  +----------------------------------------------------+--------------+
-  | - Buenas practicas en R                            | 30 min       |
-  +----------------------------------------------------+--------------+
-  | - **Actividad 3:** Pagina web en GitHub            | 1:30 min     |
-  +----------------------------------------------------+--------------+
-  :::
+- Verify that all required R packages are installed, following the instructions provided in [Get ready for the workshop](scripts/scSurvival_PreCourse_Setup.html).
+- Ensure you have Git, R, RStudio, and Bash properly installed and working on your computer.
+- Confirm you have access to a stable internet connection for repository synchronization and package downloads.
+::::

@@ -2,291 +2,161 @@
   {
     "objectID": "index.html",
     "href": "index.html",
-    "title": "Workshop",
+    "title": "Survival Course: scRNA‑seq + CITE‑seq",
     "section": "",
-    "text": "Información general\n\n\nSobre el curso 📌Requisitos previosAgenda 📆\n\n\nFuente del curso\n\nFechas: Dias de la semana/ dias del mes\nDuración del curso: X horas\n\nInstructores:\n\nEvelia Lorena Coss-Navarrete - PostDoc, LIIGH-UNAM. Pagina web\n\nAyudantes:\n\nNombre - cargo, escuela\n\nResumen:\nPara que es el curso, que se va abordar y que se espera que aprendan. Ejemplo:\nEste tutorial te enseñará los conceptos fundamentales en el empleo y manejo de Bash Shell, incluyendo la creación de scripts de Bash, generación de programas con funcionalidades sencillas aplicables a bioinformática y a programación en general.\nObjetivos:\nEn esta guía rápida aprenderás a:\n\nCrear y gestionar un repositorio.\nIniciar y administrar una nueva rama.\nRealizar cambios en un archivo y enviarlos a GitHub como confirmación.\nCrear tu página de inicio en Github.\nCrear tu página web.\n\nCitar y reutilizar el material del curso\nLos datos del curso se pueden reutilizar y adaptar libremente con la debida atribución. Todos los datos de los cursos de estos repositorios están sujetos a la licencia Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0).\n\n\n\nDebes tener una cuenta de usuario de GitHub. Para más información, consulta “Creación de una cuenta en GitHub”.\nNo necesitas saber cómo codificar, utilizar la línea de comandos o instalar Git (el software de control de versiones en el que está compilado GitHub).\nContar con una terminal con Git, en Windows puedes usar Git Bash.\n\n\n\n\n\n\n\n\n\n\nTema\nTiempo\n\n\n\n\n🔷 Sección 1 - (11:30 - 13:30 h) (7 marzo)\n\n\n\n\nCreación de una cuenta en GitHub\n\n5 min\n\n\n\nIntroducción a Git / GitHub\n\n15 min\n\n\n\nActividad 1: Sincronización y llaves\n\n15 min\n\n\n☕ Coffee break (10 min) - (12:00-12:10) ☕\n10 min\n\n\n🔷  Sección 2 - (12:10-13:00 h)\n\n\n\n\nComandos usados en Github y RStudio\n\n25 min\n\n\n\nActividad 2: Pagina de inicio en GitHub\n\n15 min\n\n\n🔷  Sección 3 - (11:30 - 13:30 h) (14 marzo)\n\n\n\n\nBuenas practicas en R\n\n30 min\n\n\n\nActividad 3: Pagina web en GitHub\n\n1:30 min",
+    "text": "General information\n\nAbout the course 📌Prerequisites for the Course\n\n\n\nPRACTICAL MULTILINGUAL ONLINE COURSE\nSolving problems focused\n\n\nDate: 2nd July, 2026 (Thursday)\nTime: 10 am (GMT-6)\nDuration: 3 hours\nLevel: Intermediate\nRegister to receive the pre-course instructions: Google form\n\n\nInstructors:\n\nThais Crippa de Oliveira, PhD - Posdoctoral Researcher at UNICAMP, Brazil\nEvelia Lorena Coss-Navarrete, PhD - Associate Professor at ENES, Juriquilla-UNAM, México. Web page\n\nAssistance:\n\nJuliana Pinto - PhD student, UFPA, Brazil\nAdriana da Silva, PhD - Post-doc, UNIFESP, Brazil\n\n\n\n🎯 General Goal\nEnable participants to navigate a multimodal dataset (RNA + ADT), perform essential preprocessing, and interpret basic results without getting lost in technical details.\n\n\n✅ Expected Outcomes\n\nConfidence to open and explore multimodal data.\nAbility to run a basic Seurat pipeline.\nUnderstanding of how ADT complements RNA.\nAwareness of research questions and limitations in CITE‑seq.\n\n\n\n\n\n\n\n\nCitar y reutilizar el material del curso\nCourse data may be freely reused and adapted with proper attribution. All course data from these repositories is subject to the Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0).\n\n\n\n\nVerify that all required R packages are installed, following the instructions provided in Get ready for the workshop.\nEnsure you have Git, R, RStudio, and Bash properly installed and working on your computer.\nConfirm you have access to a stable internet connection for repository synchronization and package downloads.",
     "crumbs": [
-      "Información general"
-    ]
-  },
-  {
-    "objectID": "Cap1.html",
-    "href": "Cap1.html",
-    "title": "1  Recordatorio de pasos en Bash",
-    "section": "",
-    "text": "1.1 Preparación del directorio de trabajo",
-    "crumbs": [
-      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Recordatorio de pasos en Bash</span>"
-    ]
-  },
-  {
-    "objectID": "Cap1.html#preparación-del-directorio-de-trabajo",
-    "href": "Cap1.html#preparación-del-directorio-de-trabajo",
-    "title": "1  Recordatorio de pasos en Bash",
-    "section": "",
-    "text": "Ruta / Camino absoluto\ncd /home/usuario/data/\nRuta / Camino relativo\ncd ../ # Ir a la carpeta anterior",
-    "crumbs": [
-      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Recordatorio de pasos en Bash</span>"
-    ]
-  },
-  {
-    "objectID": "Cap1.html#comandos-básicos",
-    "href": "Cap1.html#comandos-básicos",
-    "title": "1  Recordatorio de pasos en Bash",
-    "section": "1.2 Comandos básicos",
-    "text": "1.2 Comandos básicos\n\n\n\n\n\n\n\n\nComandos\nInformación\nArgumentos\n\n\n\n\nssh\nConexión a servidores\nssh usuario@servidor.mx\n\n\nls\nObservar el contenido de los archivos en una carpeta\nls directorio/\n\n\ncd\nMoverse de directorios\ncd /home/usuario/data/\n\n\nmkdir\nCrear un nuevo directorio\nmkdir data\n\n\nrmdir\nEliminar el directorio\nrmkdir -rf data\n\n\nnano/vim\nEditores de texto plano\nnano Archivo.txt / vim Archivo.txt\n\n\ncp\nCopiar archivos\ncp Archivo1.txt /home/usuario/data/\n\n\nmv\nMover un archivo o carpeta\n\n\n\necho\nPara llamar y/o declarar variables\necho “Hello world”\n\n\nchmod\nCambiar permisos del usuario\nchmod 777 data/\n\n\nrsync\nDescargar o subir archivos\n\n\n\nscp\nDescargar o subir archivos",
-    "crumbs": [
-      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Recordatorio de pasos en Bash</span>"
+      "General information"
     ]
   },
   {
     "objectID": "intro.html",
     "href": "intro.html",
-    "title": "2  Introducción Sobre el Workshop",
+    "title": "1  Repaso: scRNA-seq vs bulk-RNA-seq",
     "section": "",
-    "text": "2.1 Referencias\nAgregar informacion y figuras.\nNo olvides las referencias",
+    "text": "1.1 Single cell RNA-seq (scRNA-seq)",
     "crumbs": [
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Introducción Sobre el Workshop</span>"
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Repaso: scRNA-seq vs bulk-RNA-seq</span>"
+    ]
+  },
+  {
+    "objectID": "intro.html#single-cell-rna-seq-scrna-seq",
+    "href": "intro.html#single-cell-rna-seq-scrna-seq",
+    "title": "1  Repaso: scRNA-seq vs bulk-RNA-seq",
+    "section": "",
+    "text": "Primera publicación en 2009 (Tang et al, 2009)\nPopularidad en 2014\nEstimar la distribución de los niveles de expresión de cada gen en una población celular.\nAnálisis a nivel de célula individual\nPermite revelar tipos celulares (poblaciones raras)\nAnalizar las dinámicas temporales y heterogeneidad.\n\n\n\n\nImagen tomada de: Single cell RNA sequencing",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Repaso: scRNA-seq vs bulk-RNA-seq</span>"
+    ]
+  },
+  {
+    "objectID": "intro.html#heterogeneidad-diversidad-interna-de-un-sistema-o-de-un-conjunto",
+    "href": "intro.html#heterogeneidad-diversidad-interna-de-un-sistema-o-de-un-conjunto",
+    "title": "1  Repaso: scRNA-seq vs bulk-RNA-seq",
+    "section": "1.2 Heterogeneidad: Diversidad interna de un sistema o de un conjunto",
+    "text": "1.2 Heterogeneidad: Diversidad interna de un sistema o de un conjunto\n\n🔬 No todas las células son iguales: incluso dentro de un mismo tejido, existen diferencias en tipos celulares, estados funcionales y niveles de expresión génica.\n🧬 Variabilidad genética y transcriptómica: cada célula puede expresar distintos genes o cantidades de RNA, reflejando funciones específicas.\n🩺 Relevancia en enfermedad: la heterogeneidad celular explica por qué un tumor, por ejemplo, contiene subpoblaciones con distintos comportamientos (algunas más agresivas, otras más sensibles a tratamiento).\n\nVisualización a través de UMAP (Uniform Manifold Approximation and Projection):\n\n\n\n\n\n\n\nImagen tomada de: Explicación completa de un UMAP",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Repaso: scRNA-seq vs bulk-RNA-seq</span>"
+    ]
+  },
+  {
+    "objectID": "intro.html#preguntas-que-se-pueden-responde-scrna-seq",
+    "href": "intro.html#preguntas-que-se-pueden-responde-scrna-seq",
+    "title": "1  Repaso: scRNA-seq vs bulk-RNA-seq",
+    "section": "1.3 Preguntas que se pueden responde scRNA-seq",
+    "text": "1.3 Preguntas que se pueden responde scRNA-seq\n\nDescubrir tipos celulares nuevos o raros.\nIdentificar composición celular diferencial entre sano vs. enfermo.\nComprender la diferenciación celular en desarrollo y regeneración.\nAnalizar plasticidad y dinámicas de expresión en células individuales.\nConstruir atlas celulares/genéticos → catálogo completo de diversidad celular.\nAplicaciones en investigación básica y medicina personalizada.\n\n\n\n\n\n\n\n\nImagen tomada de: Kageyama, et al. 2018. Front. Neurosci",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Repaso: scRNA-seq vs bulk-RNA-seq</span>"
+    ]
+  },
+  {
+    "objectID": "intro.html#flujo-experimental-de-scrna-seq",
+    "href": "intro.html#flujo-experimental-de-scrna-seq",
+    "title": "1  Repaso: scRNA-seq vs bulk-RNA-seq",
+    "section": "1.4 Flujo experimental de scRNA-Seq",
+    "text": "1.4 Flujo experimental de scRNA-Seq\n\n\n\nImagen tomada de: Biorender",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Repaso: scRNA-seq vs bulk-RNA-seq</span>"
+    ]
+  },
+  {
+    "objectID": "intro.html#referencias",
+    "href": "intro.html#referencias",
+    "title": "1  Repaso: scRNA-seq vs bulk-RNA-seq",
+    "section": "1.5 Referencias",
+    "text": "1.5 Referencias",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Repaso: scRNA-seq vs bulk-RNA-seq</span>"
+    ]
+  },
+  {
+    "objectID": "intro_citeseq.html",
+    "href": "intro_citeseq.html",
+    "title": "2  Repaso: CITE-seq + scRNA-seq",
+    "section": "",
+    "text": "2.1 What is CITE-Seq?\nCITE-Seq, or Cellular Indexing of Transcriptomes and Epitopes by Sequencing, is a technique that enables the simultaneous sequencing of RNA and the quantification and characterization of surface proteins using specific antibodies at the level of individual cells. It combines highly multiplexed antibody-based detection of protein markers with unbiased transcriptome profiling for thousands of single cells in parallel.",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Repaso: CITE-seq + scRNA-seq</span>"
+    ]
+  },
+  {
+    "objectID": "intro_citeseq.html#principles-of-cite-seq",
+    "href": "intro_citeseq.html#principles-of-cite-seq",
+    "title": "2  Repaso: CITE-seq + scRNA-seq",
+    "section": "2.2 Principles of CITE-Seq",
+    "text": "2.2 Principles of CITE-Seq\nCellular Indexing of Transcriptomes and Epitopes (CITE-seq) uses unique oligo-tagged antibodies to identify surface proteins, using sequencing as a readout. The number of barcodes that can be conjugated to antibodies surpasses the number of fluorophores or heavy metal tags used in flow cytometry or CyTOF, expanding the number of proteins that can be measured simultaneously with RNA. These barcoded antibodies are part of a unique workflow that produces protein and nucleic acid data using next-generation sequencing (NGS) technologies.\nThis:\n\nhelps in the creation of oligo dT-based RNA sequencing libraries\nenables barcode-based antibody identification\nallows specific PCR amplification\n\nThe number of reads corresponding to each conjugated DNA barcode reflects the identity and abundance of proteins.\n\n\n\n\n\n\n\nSchematic of the wet lab workflow for CITE-Seq",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Repaso: CITE-seq + scRNA-seq</span>"
+    ]
+  },
+  {
+    "objectID": "intro_citeseq.html#overview",
+    "href": "intro_citeseq.html#overview",
+    "title": "2  Repaso: CITE-seq + scRNA-seq",
+    "section": "2.3 Overview",
+    "text": "2.3 Overview\n\n\n\nSchematic of the dry lab workflow for CITE-Seq",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Repaso: CITE-seq + scRNA-seq</span>"
+    ]
+  },
+  {
+    "objectID": "intro_citeseq.html#referencias",
+    "href": "intro_citeseq.html#referencias",
+    "title": "2  Repaso: CITE-seq + scRNA-seq",
+    "section": "2.4 Referencias",
+    "text": "2.4 Referencias\nhttps://hoohm.github.io/CITE-seq-Count/Running-the-script/\nhttps://www.signiosbio.com/blog/introduction-to-single-cell-sequencing-cite-seq-series-3/\nhttps://www.elucidata.io/blog/cite-seq-the-future-of-single-cell-rna-seq-analysis\nhttps://en.wikipedia.org/wiki/CITE-Seq\nhttps://www.scdiscoveries.com/blog/knowledge/cite-seq/\nhttps://broadinstitute.github.io/2020_scWorkshop/cite-seq.html\nEnd-to-end CITE-seq analysis workflow using dsb for ADT normalization and Seurat for multimodal clustering",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Repaso: CITE-seq + scRNA-seq</span>"
+    ]
+  },
+  {
+    "objectID": "Cap1.html",
+    "href": "Cap1.html",
+    "title": "3  About Dataset",
+    "section": "",
+    "text": "3.1 gse149689_subset_3k",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>About Dataset</span>"
+    ]
+  },
+  {
+    "objectID": "Cap1.html#paper-an-immunophenotype-coupled-transcriptomic-atlas-of-human-hematopoietic-progenitors",
+    "href": "Cap1.html#paper-an-immunophenotype-coupled-transcriptomic-atlas-of-human-hematopoietic-progenitors",
+    "title": "3  About Dataset",
+    "section": "3.2 Paper: An immunophenotype-coupled transcriptomic atlas of human hematopoietic progenitors",
+    "text": "3.2 Paper: An immunophenotype-coupled transcriptomic atlas of human hematopoietic progenitors\nNature immunology: https://www.nature.com/articles/s41590-024-01782-4#data-availability \nRaw sequencing FASTQ files and the processed HDF5 (h5) matrix have been deposited in the Gene Expression Omnibus database under accession code GSE245108. CITE-seq data generated by Pei et al. were accessed via the accession ID GSE232559. All imputed Infinity Flow objects are available in the FlowRepository under ID FR-FCM-Z6UQ. An interactive web portal with the associated Azimuth instance and data visualization tools is available at https://altanalyze.org/MarrowAtlas/. Interactive data visualization and analysis tools for the CITE-seq bone marrow single-cell datasets are provided at https://altanalyze.org/MarrowAtlas/. Source data are provided with this paper.\n\n\nCITE-seq https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE245108\nscRNA-seq https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE232559\nGithub: https://github.com/nsalomonis/Human-Bone-Marrow-Titration-Atlas\n\nNOTAS: ADD image. Info Sobre el dataset (tipo de células o tejidos, Número de células detectadas, tecnología, secuenciador, plataforma, genoma usado para el alineamiento, versión de cell ranger) (D5 https://eveliacoss.github.io/Workshop_scRNAseq_presentacion/Clase2_Normalizacion.html#5 )",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>About Dataset</span>"
     ]
   },
   {
     "objectID": "Cap2.html",
     "href": "Cap2.html",
-    "title": "3  Instalar Git Bash en Windows",
+    "title": "4  Resources",
     "section": "",
-    "text": "3.1 Referencia\nNota: Para obtener más detalles sobre cómo instalar y configurar Git Bash, puedes ver este video tutorial: Instrucciones para instalar Git Bash en Windows.\nEsto te proporcionará tanto Git como Bash en el programa Git Bash.",
+    "text": "When you can work on your computer and when you need to work on the cluster ..  source , RAM, etc. -  number of samples?",
     "crumbs": [
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Instalar Git Bash en Windows</span>"
-    ]
-  },
-  {
-    "objectID": "Cap2.html#referencia",
-    "href": "Cap2.html#referencia",
-    "title": "3  Instalar Git Bash en Windows",
-    "section": "",
-    "text": "Guia de instalacion de Git Bash",
-    "crumbs": [
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Instalar Git Bash en Windows</span>"
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Resources</span>"
     ]
   },
   {
     "objectID": "Cap3.html",
     "href": "Cap3.html",
-    "title": "4  Conectar a GitHub con SSH",
+    "title": "5  Single-Cell Survival Course with Seurat v5",
     "section": "",
-    "text": "4.1 Paso 1. Generar una llave pública\nPuedes conectarte a GitHub utilizando el protocolo Secure Shell (SSH), lo cual proporciona un canal seguro sobre una red insegura.\nTambién puedes asegurar tus claves SSH y configurar un agente de autenticación para no tener que ingresar tu contraseña cada vez que utilices tus claves SSH.\nCuando ejecutes el programa, te va a preguntar si quieres generar una frase, identificar y como quieres nombrar la llave. Si no quieres complicarte presiona 3 veces ENTER, hasta que te parezca una pantalla como al siguiente:\nPosteriormente, tendras una carpeta llamada .ssh/, entra en esa carpeta y tendras dos archivos, si no los renombraste tendran el nombre de id_ed25519.\nVamos a abrir la terminal y vamos a ver el contenido de la carpeta .ssh/:",
+    "text": "HOW TO USE\nRun interactively, section by section (Ctrl+Enter / Cmd+Enter), from top\nto bottom. Do NOT source() the whole file in one go: several chunks are\ndeliberate errors meant to be read, and Block 8 is optional take-home\nwork that depends on a file released separately after the session.\nDELIBERATE ERRORS\nFive steps are designed to fail (v4 slot access, GetAssayData slot=,\nwrong filter thresholds, dims &gt; npcs, plotting a label before adding it).\nThey are wrapped in try() so the error prints to the console without\nhalting a full run. Read the message, then continue.\nWORKING DIRECTORY\nSet the working directory to the folder holding this script and the data/\nsubfolder (Session &gt; Set Working Directory &gt; To Source File Location).",
     "crumbs": [
-      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Conectar a GitHub con SSH</span>"
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Single-Cell Survival Course with Seurat v5</span>"
     ]
   },
   {
-    "objectID": "Cap3.html#paso-1.-generar-una-llave-pública",
-    "href": "Cap3.html#paso-1.-generar-una-llave-pública",
-    "title": "4  Conectar a GitHub con SSH",
+    "objectID": "notas.html",
+    "href": "notas.html",
+    "title": "6  Notas",
     "section": "",
-    "text": "NoteActividad (15 min)\n\n\n\nDeberan contar con:\n\nUna cuenta en GitHub\nR y RStudio actualizados\nGit instalado\nColoca en la terminal la siguiente información para generar una clave con el mismo correo que usaste para registrar tu cuenta en GitHub.\nssh-keygen -t ed25519 -C \"your_email@example.com\"\nNOTA: Si no cuentas con ssh-keygen instalado, primero corre este código.\nsudo apt-get install ssh-keygen\n\n\n\n\n\n\n\nid_ed25519: llave local, no la vamos a usar. Tampoco la compartas.\nid_ed25519.pub : llave publica. La usaremos para copiarla en los servidores que usaremos.\n\n\nls .ssh/",
+    "text": "Notenotas\n\n\n\n\n\n\n\n\n\n\n\n\nTipTip\n\n\n\n\n\n\n\n\n\n\n\n\nImportantImportant\n\n\n\n\n\n\n\n\n\n\n\n\nCautionCaution\n\n\n\n\n\n\n\n\n\n\n\n\nWarningWarning\n\n\n\n\n\n\n\n\n\n\n\n\n\nTipActividad: Taller de Cerámica\n\n\n\nSábados 10:00 am · Cupo limitado a 12 personas.",
     "crumbs": [
-      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Conectar a GitHub con SSH</span>"
-    ]
-  },
-  {
-    "objectID": "Cap3.html#paso-2.-copiar-la-clave-ssh-pública",
-    "href": "Cap3.html#paso-2.-copiar-la-clave-ssh-pública",
-    "title": "4  Conectar a GitHub con SSH",
-    "section": "4.2 Paso 2. Copiar la clave SSH pública",
-    "text": "4.2 Paso 2. Copiar la clave SSH pública\n\nAccede a la terminal en tu computadora.\nCopia la clave SSH generada anteriormente usando el siguiente comando:\n\ncat ~/.ssh/id_ed25519.pub\nEste comando mostrará tu clave pública en la terminal.\n\nSelecciona y copia toda la clave que aparece en la terminal. Asegúrate de copiar desde ssh-rsa hasta el final de tu correo electrónico.",
-    "crumbs": [
-      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Conectar a GitHub con SSH</span>"
-    ]
-  },
-  {
-    "objectID": "Cap3.html#paso-3.-agregar-la-clave-ssh-a-tu-cuenta-de-github",
-    "href": "Cap3.html#paso-3.-agregar-la-clave-ssh-a-tu-cuenta-de-github",
-    "title": "4  Conectar a GitHub con SSH",
-    "section": "4.3 Paso 3. Agregar la clave SSH a tu cuenta de GitHub",
-    "text": "4.3 Paso 3. Agregar la clave SSH a tu cuenta de GitHub\n\nInicia sesión en GitHub en tu navegador.\nHaz clic en tu foto de perfil en la esquina superior derecha y selecciona “Settings” (Configuración).\nEn el menú lateral izquierdo, selecciona “SSH and GPG keys”.\nHaz clic en el botón verde “New SSH key”.\nEn el campo “Title”, ingresa un nombre descriptivo para tu clave (por ejemplo, “Mi computadora personal”).\nEn el campo “Key”, pega la clave SSH que copiaste previamente de la terminal.\nHaz clic en “Add SSH key” para guardar la clave.",
-    "crumbs": [
-      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Conectar a GitHub con SSH</span>"
-    ]
-  },
-  {
-    "objectID": "Cap3.html#paso-4.-configurar-rstudio-para-usar-git-bash-como-terminal",
-    "href": "Cap3.html#paso-4.-configurar-rstudio-para-usar-git-bash-como-terminal",
-    "title": "4  Conectar a GitHub con SSH",
-    "section": "4.4 Paso 4. Configurar RStudio para usar Git Bash como terminal",
-    "text": "4.4 Paso 4. Configurar RStudio para usar Git Bash como terminal\n\nAbre RStudio.\nDirígete a Tools (Herramientas) en la barra superior y selecciona Global Options (Opciones globales).\nEn el menú de opciones globales, selecciona la pestaña Terminal.\nEn el campo New terminal open with, selecciona Git Bash.\n\nHaz clic en Apply y luego en OK.",
-    "crumbs": [
-      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Conectar a GitHub con SSH</span>"
-    ]
-  },
-  {
-    "objectID": "Cap3.html#paso-5.-abrir-la-terminal-de-git-bash-en-rstudio",
-    "href": "Cap3.html#paso-5.-abrir-la-terminal-de-git-bash-en-rstudio",
-    "title": "4  Conectar a GitHub con SSH",
-    "section": "4.5 Paso 5. Abrir la terminal de Git Bash en RStudio",
-    "text": "4.5 Paso 5. Abrir la terminal de Git Bash en RStudio\nAhora, para abrir la terminal de Git Bash dentro de RStudio, solo tienes que:\n\nIr al Tools , hacer clic en Terminal y en abrir New terminal.\nDeberías ver que se abre una nueva sesión con Git Bash como la terminal predeterminada.",
-    "crumbs": [
-      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Conectar a GitHub con SSH</span>"
-    ]
-  },
-  {
-    "objectID": "Cap3.html#paso-6.-verificar-la-conexión",
-    "href": "Cap3.html#paso-6.-verificar-la-conexión",
-    "title": "4  Conectar a GitHub con SSH",
-    "section": "4.6 Paso 6. Verificar la conexión",
-    "text": "4.6 Paso 6. Verificar la conexión\nVuelve a la terminal y ejecuta el siguiente comando para verificar que tu clave SSH está correctamente configurada con GitHub:\nssh -T git@github.com\nEn caso de que se necesite, puedes especificar la llave que usaste:\nssh -i ~/.ssh/id_ed25519.pub -T git@github.com\nEl comando ssh -T git@github.com simplemente verifica que tu clave privada se está usando correctamente y que tu clave pública ha sido registrada en GitHub.\nSi es la primera vez que te conectas a GitHub con SSH, puede que veas un mensaje que te pregunte si deseas continuar conectándote. Escribe “yes”.\nSi todo está bien configurado, deberías ver un mensaje similar a este:\nHi username! You've successfully authenticated, but GitHub does not provide shell access.\nEsto confirmará que tu clave SSH se ha agregado correctamente a tu cuenta de GitHub y que la conexión es exitosa.\n\n4.6.1 Solución a Error de Configuración de Usuario en Git\nEl comando git config se utiliza para configurar opciones en Git, y los siguientes comandos en particular se usan para establecer tu nombre y correo electrónico globalmente en tu configuración de Git:\ngit config --global user.email \"you@example.com\"\ngit config --global user.name \"Your Name\"\n\ngit config --global user.email \"you@example.com\"\n\nEste comando configura tu dirección de correo electrónico, la cual será utilizada en todos tus commits de Git. El correo electrónico asociado con los commits es importante porque ayuda a identificar quién realizó qué cambios en el repositorio. –global significa que esta configuración se aplicará a todos los repositorios en tu máquina.\n\ngit config --global user.name \"Your Name\"\n\nEste comando establece tu nombre de usuario, que también se asociará con los commits que realices. Al igual que el correo electrónico, se utilizará en todos tus commits en cualquier repositorio de Git en tu máquina.",
-    "crumbs": [
-      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Conectar a GitHub con SSH</span>"
-    ]
-  },
-  {
-    "objectID": "Cap3.html#referencias",
-    "href": "Cap3.html#referencias",
-    "title": "4  Conectar a GitHub con SSH",
-    "section": "4.7 Referencias",
-    "text": "4.7 Referencias\n\nHaydee tutorial: Temas Selectos de Análisis Numérico y Computación Científica: Computo científico para el análisis de datos\nAlejandra Medina tutorial: Control de versiones con GitHub y RStudio",
-    "crumbs": [
-      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Conectar a GitHub con SSH</span>"
-    ]
-  },
-  {
-    "objectID": "Cap4.html",
-    "href": "Cap4.html",
-    "title": "5  Comandos usados en Github y RStudio",
-    "section": "",
-    "text": "5.1 GitHub primero, RStudio después…\nEsto nos generará los siguientes elementos:\nCon este procedimiento ya no es necesario preocuparse por configurar controles remotos Git y rastrear ramas en la línea de comandos.",
-    "crumbs": [
-      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Comandos usados en Github y RStudio</span>"
-    ]
-  },
-  {
-    "objectID": "Cap4.html#github-primero-rstudio-después",
-    "href": "Cap4.html#github-primero-rstudio-después",
-    "title": "5  Comandos usados en Github y RStudio",
-    "section": "",
-    "text": "Crea un repositorio en GitHub: mi_repositorio &gt; Public &gt; YES initialize this repository with a README &gt; clicken el gran botón verde “Create repository”\nEn RStudio crea un nuevo proyecto: File &gt; New Project &gt; Version Control &gt; Git. Ahi pega el URL del repositorio https://github.com/mi_usuario/mi_repositorio.git. Da click en Create Project.\n\n\n\nUn directorio nuevo\nUn repositorio Git enlazado a al repositorio de GitHub\nUn proyecto en RStudio",
-    "crumbs": [
-      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Comandos usados en Github y RStudio</span>"
-    ]
-  },
-  {
-    "objectID": "Cap4.html#comentar-pull-y-push-en-rstudio",
-    "href": "Cap4.html#comentar-pull-y-push-en-rstudio",
-    "title": "5  Comandos usados en Github y RStudio",
-    "section": "5.2 Comentar, pull y push en Rstudio",
-    "text": "5.2 Comentar, pull y push en Rstudio\n\nCon la flecha azul podemos hacer pull (RECUERDA HACERLO ANTES DE HACER UN PUSH), y con la flecha verde un push. Para poder comentar y hacer push debemos marcar con una palomita mediante un click en las pequeñas cajas blancas de la columna Staged, damos click en commit lo cual nos abre la siguiente ventana.\n\nVolvemos a dar click en commit, y finalizamos con push (flecha verde).",
-    "crumbs": [
-      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Comandos usados en Github y RStudio</span>"
-    ]
-  },
-  {
-    "objectID": "Cap4.html#pagina-de-inicio-en-github",
-    "href": "Cap4.html#pagina-de-inicio-en-github",
-    "title": "5  Comandos usados en Github y RStudio",
-    "section": "5.3 Pagina de inicio en GitHub",
-    "text": "5.3 Pagina de inicio en GitHub\n\n\n\n\n\n\nNoteActividad\n\n\n\n\nEn GitHub, crea un repositorio con el mismo nombre de usuario. Ejemplo: Mi usuario es EveliaCoss y mi repositorio se llama EveliaCoss, dandome la siguiente liga https://github.com/EveliaCoss/EveliaCoss\nAgrega un README al repositorio con tu informacion. Por Default ya trae una plantilla, modificala y adaptala a tu gusto.\nVisualiza como cambia tu inicio en el Github.\nSincroniza el GitHub en RStudio y realiza los cambios desde ahi.",
-    "crumbs": [
-      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Comandos usados en Github y RStudio</span>"
-    ]
-  },
-  {
-    "objectID": "Cap4.html#referencias",
-    "href": "Cap4.html#referencias",
-    "title": "5  Comandos usados en Github y RStudio",
-    "section": "5.4 Referencias",
-    "text": "5.4 Referencias\n\nHaydee tutorial: Temas Selectos de Análisis Numérico y Computación Científica: Computo científico para el análisis de datos\nAlejandra Medina tutorial: Control de versiones con GitHub y RStudio",
-    "crumbs": [
-      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Comandos usados en Github y RStudio</span>"
-    ]
-  },
-  {
-    "objectID": "Cap5.html",
-    "href": "Cap5.html",
-    "title": "6  Buenas practicas en R",
-    "section": "",
-    "text": "6.1 Materiales informativos\nNotas personales recabadas a partir de los tutoriales y ejemplos 😊. Espero que les funcione 💜\n💪 Estuve muy intensa viendo su codigo. Muchas gracias por tenerlos publico.",
-    "crumbs": [
-      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Buenas practicas en R</span>"
-    ]
-  },
-  {
-    "objectID": "Cap5.html#materiales-informativos",
-    "href": "Cap5.html#materiales-informativos",
-    "title": "6  Buenas practicas en R",
-    "section": "",
-    "text": "Curso de Joselyn Cristina Chávez Fuentes\nMe ayudo mucho este Video\nDocumentación de funciones de Andrés Arredondo Cruz",
-    "crumbs": [
-      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Buenas practicas en R</span>"
-    ]
-  },
-  {
-    "objectID": "Cap5.html#un-algoritmo-nos-permite-resolver-un-problema",
-    "href": "Cap5.html#un-algoritmo-nos-permite-resolver-un-problema",
-    "title": "6  Buenas practicas en R",
-    "section": "6.2 Un algoritmo nos permite resolver un problema ⭐",
-    "text": "6.2 Un algoritmo nos permite resolver un problema ⭐\nUn algoritmo es un método para resolver un problema mediante una serie de pasos definidos, precisos y finitos.\n\nDefinido: si se sigue dos veces, se obtiene el mismo resultado. Es reproducible.\nPreciso: implica el orden de realización de cada uno de los pasos.\nFinito: Tiene un numero determinado de pasos, implica que tiene un fin.\n\n\nUn algoritmo podemos definirlo como un programa o software.",
-    "crumbs": [
-      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Buenas practicas en R</span>"
-    ]
-  },
-  {
-    "objectID": "Cap5.html#para-escribir-un-buen-software-necesitas",
-    "href": "Cap5.html#para-escribir-un-buen-software-necesitas",
-    "title": "6  Buenas practicas en R",
-    "section": "6.3 Para escribir un buen software necesitas:",
-    "text": "6.3 Para escribir un buen software necesitas:\n\nEscribir código mantenible (maintainable code), usar control de versiones (version control) y rastreadores de problemas (issue trackers), revisiones de código (code reviews), pruebas unitarias (unit testing) y automatización de tareas (task automation).\nWilson, et al. 2014. PLOS Biology\n\nCon el fin de previnir retracciones.\n\n\n\n\n\n\nNotePasos para escribir un buen software\n\n\n\n\nAnálisis del problema / Definir el problema\nDiseño del algoritmo / Diseño del programa\nCodificación / Escribir el código\nCompilación y ejecución del programa\nVerificación / Realizar pruebas\nDepuración / Detectar los errores y corregirlos\n\n\nProgramacion defensiva\n\n\nDocumentación",
-    "crumbs": [
-      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Buenas practicas en R</span>"
-    ]
-  },
-  {
-    "objectID": "Cap5.html#paso-7-documentación",
-    "href": "Cap5.html#paso-7-documentación",
-    "title": "6  Buenas practicas en R",
-    "section": "6.4 Paso 7: Documentación",
-    "text": "6.4 Paso 7: Documentación\n\n\n\n\n\n\nNote\n\n\n\n\nAutor (author): Su nombre\nDia (date): Fecha de creación\nPaquetes (packages)\nDirectorio de trabajo (Working directory): En que carpeta se encuentra tu datos y programa.\nInformación descriptiva del programa (Description): ¿Para qué sirve el programa? Ej: El siguiente programa realiza la suma de dos numeros enteros a partir de la entrada del usuario y posteriormente la imprime en pantalla.\nUsage ¿Cómo se utiliza?\nArgumentos (Arguments)\n\nInformación de entrada (Data Inputs): Ej: Solo numeros enteros (sin decimales).\nInformación de salida (Outpus): Graficas, figuras, tablas, etc.",
-    "crumbs": [
-      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Buenas practicas en R</span>"
-    ]
-  },
-  {
-    "objectID": "Cap5.html#puntos-claves-para-buenas-practicas-en-bioinfo",
-    "href": "Cap5.html#puntos-claves-para-buenas-practicas-en-bioinfo",
-    "title": "6  Buenas practicas en R",
-    "section": "6.5 Puntos claves para buenas practicas en bioinfo ⭐",
-    "text": "6.5 Puntos claves para buenas practicas en bioinfo ⭐\n\nEscriba programas para personas, no para computadoras (Documenta qué hace y por qué). - Se coherente en la nomenclatura, indentación y otros aspectos del estilo.\nDivide los programas en funciones cortas de un solo propósito. 💻 📚\nNo repitas tu código. Crea pasos reproducibles o que se repitan por si solas. ➰\nPlanifique los errores (Programacion defensiva) 🚩\nOptimice el software sólo después de que funcione correctamente. - Si funciona no lo modifiques, simplificalo.\nColaborar - Busque siempre bibliotecas de software bien mantenidas que hagan lo que necesita. 👥\n\n\n\n\n\n\n\nNoteEjemplo de como realizo mis documentos 💜\n\n\n\nAqui les dejo el script que les doy a mis alumnos VisualizacionDatos.R del curso de Análisis de datos de RNA-Seq.",
-    "crumbs": [
-      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Buenas practicas en R</span>"
-    ]
-  },
-  {
-    "objectID": "Cap5.html#pagina-web-en-github",
-    "href": "Cap5.html#pagina-web-en-github",
-    "title": "6  Buenas practicas en R",
-    "section": "6.6 Pagina web en GitHub",
-    "text": "6.6 Pagina web en GitHub\n\n\n\n\n\n\nNoteActividad\n\n\n\n\nEn GitHub, crea un repositorio con el mismo nombre de usuario y agregale “.github.io”. Ejemplo: Mi usuario es EveliaCoss y mi repositorio se llama “EveliaCoss.github.io”, dandome la siguiente liga https://github.com/EveliaCoss/EveliaCoss.github.io\nDescarga el archivo index.Rmd y modificalo con tu informacion en tu repositorio.\nNo olvides sincronizar el GitHub en RStudio y realiza los cambios desde ahi.\nEn GitHub, convierte en pagina web tu repositorio en Settings &gt; Pages &gt; Branch cambia a Main y root &gt; Save",
-    "crumbs": [
-      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Buenas practicas en R</span>"
-    ]
-  },
-  {
-    "objectID": "Cap5.html#top-github-users-by-public-contributions-in-mexico",
-    "href": "Cap5.html#top-github-users-by-public-contributions-in-mexico",
-    "title": "6  Buenas practicas en R",
-    "section": "6.7 Top GitHub Users By Public Contributions in Mexico",
-    "text": "6.7 Top GitHub Users By Public Contributions in Mexico",
-    "crumbs": [
-      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Buenas practicas en R</span>"
-    ]
-  },
-  {
-    "objectID": "Cap5.html#referencias",
-    "href": "Cap5.html#referencias",
-    "title": "6  Buenas practicas en R",
-    "section": "6.8 Referencias",
-    "text": "6.8 Referencias\n\nHaydee tutorial: Temas Selectos de Análisis Numérico y Computación Científica: Computo científico para el análisis de datos\nAlejandra Medina tutorial: Control de versiones con GitHub y RStudio\nWilson, et al. 2014. Best Practices for Scientific Computing. PLOS Biology\nEvelia Coss - tutorial Buenas practicas en R\nEvelia Coss - Make your CV tutorial",
-    "crumbs": [
-      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Buenas practicas en R</span>"
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Notas</span>"
     ]
   }
 ]

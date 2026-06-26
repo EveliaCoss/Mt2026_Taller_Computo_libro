@@ -1,5 +1,5 @@
-# Template para Workshop de RSG-Mexico
+# Single-Cell Survival Course with Seurat v5 (CITE-seq, RNA + ADT)
 
-Creadora: Evelia Coss, posdoctoral de la Dra. Alejandra Medina, LIIGH-UNAM
+Creadoras: Thais y Evelia
 
-Fecha: 27 de marzo, 2025
+Fecha: 26 de junio, 2026

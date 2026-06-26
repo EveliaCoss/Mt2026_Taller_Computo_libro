@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>4&nbsp; Conectar a GitHub con SSH – Workshop</title>
+<title>5&nbsp; Single-Cell Survival Course with Seurat v5 – Survival Course: scRNA‑seq + CITE‑seq</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -23,41 +23,6 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for syntax highlighting */
-html { -webkit-text-size-adjust: 100%; }
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
 </style>
 
 
@@ -68,7 +33,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./Cap4.html" rel="next">
+<link href="./notas.html" rel="next">
 <link href="./Cap2.html" rel="prev">
 <link href="./enesLogo.png" rel="icon" type="image/png">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
@@ -82,9 +47,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-367522ac618891c39d4b2ae87ea7600e.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark-c5491cb7295b3d79f070a3ccf938a403.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="site_libs/bootstrap/bootstrap-367522ac618891c39d4b2ae87ea7600e.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-e83d5f2733c6de3275a8c91f12f69221.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-36caa4c25f3af19bbb3787ac612658d3.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-e83d5f2733c6de3275a8c91f12f69221.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -114,6 +79,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 }</script>
 
 
+<link rel="stylesheet" href="styles.css">
 </head>
 
 <body class="nav-sidebar floating quarto-light"><script id="quarto-html-before-body" type="application/javascript">
@@ -287,7 +253,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Cap3.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Conectar a GitHub con SSH</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Cap3.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Single-Cell Survival Course with Seurat v5</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -302,9 +268,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
-      <a href="./">Workshop</a> 
+      <a href="./">Survival Course: scRNA‑seq + CITE‑seq</a> 
         <div class="sidebar-tools-main tools-wide">
-    <a href="https://github.com/EveliaCoss/Template_Workshop_Quarto_ELCN" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+    <a href="https://github.com/EveliaCoss/Workshop2026_scRNAseq_CITEseq_libro" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
     <div class="dropdown">
       <a href="" title="Share" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" role="link" aria-label="Share"><i class="bi bi-share"></i></a>
       <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-0">
@@ -342,43 +308,43 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Información general</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./Cap1.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Recordatorio de pasos en Bash</span></span></a>
+ <span class="menu-text">General information</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./intro.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Introducción Sobre el Workshop</span></span></a>
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Repaso: scRNA-seq vs bulk-RNA-seq</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./intro_citeseq.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Repaso: CITE-seq + scRNA-seq</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Cap1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">About Dataset</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Cap2.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Instalar Git Bash en Windows</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Resources</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Cap3.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Conectar a GitHub con SSH</span></span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Single-Cell Survival Course with Seurat v5</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Cap4.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Comandos usados en Github y RStudio</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./Cap5.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Buenas practicas en R</span></span></a>
+  <a href="./notas.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Notas</span></span></a>
   </div>
 </li>
     </ul>
@@ -386,23 +352,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">Table of contents</h2>
-   
-  <ul>
-  <li><a href="#paso-1.-generar-una-llave-pública" id="toc-paso-1.-generar-una-llave-pública" class="nav-link active" data-scroll-target="#paso-1.-generar-una-llave-pública"><span class="header-section-number">4.1</span> Paso 1. Generar una llave pública</a></li>
-  <li><a href="#paso-2.-copiar-la-clave-ssh-pública" id="toc-paso-2.-copiar-la-clave-ssh-pública" class="nav-link" data-scroll-target="#paso-2.-copiar-la-clave-ssh-pública"><span class="header-section-number">4.2</span> Paso 2. Copiar la clave SSH pública</a></li>
-  <li><a href="#paso-3.-agregar-la-clave-ssh-a-tu-cuenta-de-github" id="toc-paso-3.-agregar-la-clave-ssh-a-tu-cuenta-de-github" class="nav-link" data-scroll-target="#paso-3.-agregar-la-clave-ssh-a-tu-cuenta-de-github"><span class="header-section-number">4.3</span> Paso 3. Agregar la clave SSH a tu cuenta de GitHub</a></li>
-  <li><a href="#paso-4.-configurar-rstudio-para-usar-git-bash-como-terminal" id="toc-paso-4.-configurar-rstudio-para-usar-git-bash-como-terminal" class="nav-link" data-scroll-target="#paso-4.-configurar-rstudio-para-usar-git-bash-como-terminal"><span class="header-section-number">4.4</span> Paso 4. Configurar RStudio para usar Git Bash como terminal</a></li>
-  <li><a href="#paso-5.-abrir-la-terminal-de-git-bash-en-rstudio" id="toc-paso-5.-abrir-la-terminal-de-git-bash-en-rstudio" class="nav-link" data-scroll-target="#paso-5.-abrir-la-terminal-de-git-bash-en-rstudio"><span class="header-section-number">4.5</span> Paso 5. Abrir la terminal de Git Bash en RStudio</a></li>
-  <li><a href="#paso-6.-verificar-la-conexión" id="toc-paso-6.-verificar-la-conexión" class="nav-link" data-scroll-target="#paso-6.-verificar-la-conexión"><span class="header-section-number">4.6</span> Paso 6. Verificar la conexión</a>
-  <ul>
-  <li><a href="#solución-a-error-de-configuración-de-usuario-en-git" id="toc-solución-a-error-de-configuración-de-usuario-en-git" class="nav-link" data-scroll-target="#solución-a-error-de-configuración-de-usuario-en-git"><span class="header-section-number">4.6.1</span> Solución a Error de Configuración de Usuario en Git</a></li>
-  </ul></li>
-  <li><a href="#referencias" id="toc-referencias" class="nav-link" data-scroll-target="#referencias"><span class="header-section-number">4.7</span> Referencias</a></li>
-  </ul>
-</nav>
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+        
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -410,7 +361,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Conectar a GitHub con SSH</span></h1>
+<h1 class="title"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Single-Cell Survival Course with Seurat v5</span></h1>
 </div>
 
 
@@ -427,120 +378,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<p>Puedes conectarte a GitHub utilizando el <strong>protocolo Secure Shell (SSH)</strong>, lo cual proporciona un canal seguro sobre una red insegura.</p>
-<p>También puedes asegurar tus claves SSH y configurar un agente de autenticación para no tener que ingresar tu contraseña cada vez que utilices tus claves SSH.</p>
-<section id="paso-1.-generar-una-llave-pública" class="level2" data-number="4.1">
-<h2 data-number="4.1" class="anchored" data-anchor-id="paso-1.-generar-una-llave-pública"><span class="header-section-number">4.1</span> Paso 1. Generar una llave pública</h2>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Actividad (15 min)
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Deberan contar con:</p>
-<ol type="1">
-<li><p>Una cuenta en GitHub</p></li>
-<li><p><strong>R</strong> y <strong>RStudio</strong> actualizados</p></li>
-<li><p><a href="https://miguel-mx.github.io/2024-01-24-ccm-unam-swc/#the-bash-shell">Git instalado</a></p></li>
-<li><p>Coloca en la terminal la siguiente información para generar una clave con el mismo correo que usaste para registrar tu cuenta en GitHub.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1" data-eval="false"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh-keygen</span> <span class="at">-t</span> ed25519 <span class="at">-C</span> <span class="st">"your_email@example.com"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>NOTA: Si no cuentas con <code>ssh-keygen</code> instalado, primero corre este código.</p>
-<pre><code>sudo apt-get install ssh-keygen</code></pre></li>
-</ol>
-</div>
-</div>
-<p>Cuando ejecutes el programa, te va a preguntar si quieres generar una frase, identificar y como quieres nombrar la llave. Si no quieres complicarte presiona <strong>3 veces ENTER</strong>, hasta que te parezca una pantalla como al siguiente:</p>
-<p><img src="figures/pantalla.png" class="img-fluid"></p>
-<p>Posteriormente, tendras una carpeta llamada <code>.ssh/</code>, entra en esa carpeta y tendras dos archivos, si no los renombraste tendran el nombre de <code>id_ed25519</code>.</p>
-<ul>
-<li><p><code>id_ed25519</code>: llave local, no la vamos a usar. Tampoco la compartas.</p></li>
-<li><p><code>id_ed25519.pub</code> : llave publica. La usaremos para copiarla en los servidores que usaremos.</p></li>
-</ul>
-<p>Vamos a abrir la terminal y vamos a ver el contenido de la carpeta <code>.ssh/</code>:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3" data-eval="false"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> .ssh/</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</section>
-<section id="paso-2.-copiar-la-clave-ssh-pública" class="level2" data-number="4.2">
-<h2 data-number="4.2" class="anchored" data-anchor-id="paso-2.-copiar-la-clave-ssh-pública"><span class="header-section-number">4.2</span> Paso 2. Copiar la clave SSH pública</h2>
-<ol type="1">
-<li>Accede a la terminal en tu computadora.</li>
-<li>Copia la clave SSH generada anteriormente usando el siguiente comando:</li>
-</ol>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4" data-eval="false"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> ~/.ssh/id_ed25519.pub</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Este comando mostrará tu clave pública en la terminal.</p>
-<ol start="3" type="1">
-<li>Selecciona y copia toda la clave que aparece en la terminal. Asegúrate de copiar desde ssh-rsa hasta el final de tu correo electrónico.</li>
-</ol>
-</section>
-<section id="paso-3.-agregar-la-clave-ssh-a-tu-cuenta-de-github" class="level2" data-number="4.3">
-<h2 data-number="4.3" class="anchored" data-anchor-id="paso-3.-agregar-la-clave-ssh-a-tu-cuenta-de-github"><span class="header-section-number">4.3</span> Paso 3. Agregar la clave SSH a tu cuenta de GitHub</h2>
-<ol type="1">
-<li>Inicia sesión en GitHub en tu navegador.</li>
-<li>Haz clic en tu foto de perfil en la esquina superior derecha y selecciona <strong>“Settings”</strong> (Configuración).</li>
-<li>En el menú lateral izquierdo, selecciona <strong>“SSH and GPG keys”</strong>.</li>
-<li>Haz clic en el botón verde <strong>“New SSH key”</strong>.</li>
-<li>En el campo <strong>“Title”</strong>, ingresa un nombre descriptivo para tu clave (por ejemplo, “Mi computadora personal”).</li>
-<li>En el campo <strong>“Key”</strong>, pega la clave SSH que copiaste previamente de la terminal.</li>
-<li>Haz clic en <strong>“Add SSH key”</strong> para guardar la clave.</li>
-</ol>
-</section>
-<section id="paso-4.-configurar-rstudio-para-usar-git-bash-como-terminal" class="level2" data-number="4.4">
-<h2 data-number="4.4" class="anchored" data-anchor-id="paso-4.-configurar-rstudio-para-usar-git-bash-como-terminal"><span class="header-section-number">4.4</span> Paso 4. Configurar RStudio para usar Git Bash como terminal</h2>
-<ol type="1">
-<li><p>Abre <strong>RStudio</strong>.</p></li>
-<li><p>Dirígete a <strong>Tools</strong> (Herramientas) en la barra superior y selecciona <strong>Global Options</strong> (Opciones globales).</p></li>
-<li><p>En el menú de opciones globales, selecciona la pestaña <strong>Terminal</strong>.</p></li>
-<li><p>En el campo <strong>New terminal open with</strong>, selecciona <strong>Git Bash</strong>.</p>
-<p><img src="figures/Rstudio_GitBash.jpg" class="img-fluid"></p></li>
-<li><p>Haz clic en <strong>Apply</strong> y luego en <strong>OK</strong>.</p></li>
-</ol>
-</section>
-<section id="paso-5.-abrir-la-terminal-de-git-bash-en-rstudio" class="level2" data-number="4.5">
-<h2 data-number="4.5" class="anchored" data-anchor-id="paso-5.-abrir-la-terminal-de-git-bash-en-rstudio"><span class="header-section-number">4.5</span> Paso 5. Abrir la terminal de Git Bash en RStudio</h2>
-<p>Ahora, para abrir la terminal de <strong>Git Bash dentro de RStudio</strong>, solo tienes que:</p>
-<ul>
-<li><p>Ir al <strong>Tools</strong> , hacer clic en <strong>Terminal</strong> y en abrir <strong>New terminal</strong>.</p></li>
-<li><p>Deberías ver que se abre una nueva sesión con <strong>Git Bash</strong> como la terminal predeterminada.</p></li>
-</ul>
-</section>
-<section id="paso-6.-verificar-la-conexión" class="level2" data-number="4.6">
-<h2 data-number="4.6" class="anchored" data-anchor-id="paso-6.-verificar-la-conexión"><span class="header-section-number">4.6</span> Paso 6. Verificar la conexión</h2>
-<p>Vuelve a la terminal y ejecuta el siguiente comando para verificar que tu clave SSH está correctamente configurada con GitHub:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5" data-eval="false"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh</span> <span class="at">-T</span> git@github.com</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>En caso de que se necesite, puedes especificar la llave que usaste:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6" data-eval="false"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh</span> <span class="at">-i</span> ~/.ssh/id_ed25519.pub <span class="at">-T</span> git@github.com</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>El comando <code>ssh -T git@github.com</code> simplemente verifica que tu clave privada se está usando correctamente y que tu clave pública ha sido registrada en GitHub.</p>
-<p>Si es la primera vez que te conectas a GitHub con SSH, puede que veas un mensaje que te pregunte si deseas continuar conectándote. Escribe “yes”.</p>
-<p>Si todo está bien configurado, deberías ver un mensaje similar a este:</p>
-<pre><code>Hi username! You've successfully authenticated, but GitHub does not provide shell access.</code></pre>
-<p>Esto confirmará que tu clave SSH se ha agregado correctamente a tu cuenta de GitHub y que la conexión es exitosa.</p>
-<section id="solución-a-error-de-configuración-de-usuario-en-git" class="level3" data-number="4.6.1">
-<h3 data-number="4.6.1" class="anchored" data-anchor-id="solución-a-error-de-configuración-de-usuario-en-git"><span class="header-section-number">4.6.1</span> Solución a Error de Configuración de Usuario en Git</h3>
-<p>El comando <code>git config</code> se utiliza para configurar opciones en Git, y los siguientes comandos en particular se usan para establecer tu nombre y correo electrónico globalmente en tu configuración de Git:</p>
-<pre><code>git config --global user.email "you@example.com"
-git config --global user.name "Your Name"</code></pre>
-<ol type="1">
-<li><code>git config --global user.email "you@example.com"</code></li>
-</ol>
-<p>Este comando configura tu dirección de correo electrónico, la cual será utilizada en todos tus commits de Git. El correo electrónico asociado con los commits es importante porque ayuda a identificar quién realizó qué cambios en el repositorio. –global significa que esta configuración se aplicará a todos los repositorios en tu máquina.</p>
-<ol start="2" type="1">
-<li><code>git config --global user.name "Your Name"</code></li>
-</ol>
-<p>Este comando establece tu nombre de usuario, que también se asociará con los commits que realices. Al igual que el correo electrónico, se utilizará en todos tus commits en cualquier repositorio de Git en tu máquina.</p>
-</section>
-</section>
-<section id="referencias" class="level2" data-number="4.7">
-<h2 data-number="4.7" class="anchored" data-anchor-id="referencias"><span class="header-section-number">4.7</span> Referencias</h2>
-<ul>
-<li>Haydee tutorial: <a href="https://haydeeperuyero.github.io/Computo_Cientifico/">Temas Selectos de Análisis Numérico y Computación Científica: Computo científico para el análisis de datos</a></li>
-<li>Alejandra Medina tutorial: <a href="https://comunidadbioinfo.github.io/cdsb2023/control-de-versiones-con-github-y-rstudio.html">Control de versiones con GitHub y RStudio</a></li>
-</ul>
+<p>HOW TO USE</p>
+<p>Run interactively, section by section (Ctrl+Enter / Cmd+Enter), from top</p>
+<p>to bottom. Do NOT source() the whole file in one go: several chunks are</p>
+<p>deliberate errors meant to be read, and Block 8 is optional take-home</p>
+<p>work that depends on a file released separately after the session.</p>
+<p>DELIBERATE ERRORS</p>
+<p>Five steps are designed to fail (v4 slot access, GetAssayData slot=,</p>
+<p>wrong filter thresholds, dims &gt; npcs, plotting a label before adding it).</p>
+<p>They are wrapped in try() so the error prints to the console without</p>
+<p>halting a full run. Read the message, then continue.</p>
+<p>WORKING DIRECTORY</p>
+<p>Set the working directory to the folder holding this script and the data/</p>
+<p>subfolder (Session &gt; Set Working Directory &gt; To Source File Location).</p>
 
 
-</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -958,13 +810,13 @@ git config --global user.name "Your Name"</code></pre>
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./Cap2.html" class="pagination-link" aria-label="Instalar Git Bash en Windows">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Instalar Git Bash en Windows</span></span>
+      <a href="./Cap2.html" class="pagination-link" aria-label="Resources">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Resources</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./Cap4.html" class="pagination-link" aria-label="Comandos usados en Github y RStudio">
-        <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Comandos usados en Github y RStudio</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./notas.html" class="pagination-link" aria-label="Notas">
+        <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Notas</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

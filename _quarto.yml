@@ -3,20 +3,38 @@ project:
   output-dir: docs
 
 book:
-  title: "Workshop"
-  author: "Dra. Evelia Coss"
+  title: "Survival Course: scRNA‑seq + CITE‑seq"
+  author: 
+    - name: Thais Crippa de Oliveira
+      degrees: PhD
+      url: https://portal.edat.unicamp.br/perfil?origem=&docente=332656&sigla_unidade=&nome_unidade=&nome_programa=
+      orcid: https://orcid.org/0000-0002-9959-0690
+      email: crippathais@gmail.com 
+      affiliations:
+        - name: UNICAMP
+          country: Brasil
+    - name: Evelia Coss
+      degrees: PhD
+      url: https://eveliacoss.github.io/ 
+      orcid: https://orcid.org/0000-0002-7087-2977
+      email: ecosnav@gmail.com
+      affiliations:
+        - name: ENES, Juriquilla - UNAM
+          country: México
+          url: https://www.enesjuriquilla.unam.mx/
+  
   date: "06/25/2026"
   page-navigation: true
   chapters:
     - index.qmd
-    - Cap1.qmd
     - intro.qmd
+    - intro_citeseq.qmd
+    - Cap1.qmd
     - Cap2.qmd
     - Cap3.qmd
-    - Cap4.qmd
-    - Cap5.qmd
+    - notas.qmd
   # Information
-  repo-url: https://github.com/EveliaCoss/Template_Workshop_Quarto_ELCN # link de Github
+  repo-url: https://github.com/EveliaCoss/Workshop2026_scRNAseq_CITEseq_libro # link de Github
   sharing: [twitter, facebook, linkedin]
   favicon: "enesLogo.png" # icono de la pagina en pestana
 
@@ -25,6 +43,10 @@ format:
   html:
     toc-depth: 4
     number-depth: 3
+    # css
+    css: styles.css
+    linkcolor: "#007f99"
+    
   # Boton para cambiar tema de oscuro a claro
     theme:
       light: cosmo
