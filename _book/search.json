@@ -2,29 +2,161 @@
   {
     "objectID": "index.html",
     "href": "index.html",
-    "title": "Control de versiones con GitHub y RStudio",
+    "title": "Survival Course: scRNA‑seq + CITE‑seq",
     "section": "",
-    "text": "Información general\n\n\nSobre el curso 📌Requisitos previosAgenda 📆\n\n\nEste documento se basa en \"Happy Git with R\" de Jenny Bryan, los STAT 545 TAs, Jim Hester, así como lasguías practicas de Github.\n\nFechas: 16 y 18 octubre 2024\nDuración del curso: 3 horas y 30 minutos\n\nInstructora:\n\nEvelia Lorena Coss-Navarrete - PostDoc, LIIGH-UNAM.\n\nResumen:\nEste tutorial te enseñará los conceptos fundamentales de GitHub, incluyendo repositorios, ramas, confirmaciones y solicitudes de cambio. A través de la creación de tu propio repositorio personalizado y pagina web, aprenderás a gestionar el flujo de trabajo de las solicitudes de cambio, un método ampliamente utilizado para colaborar en la creación y revisión de código.\nObjetivos:\nEn esta guía rápida aprenderás a:\n\nCrear y gestionar un repositorio.\nIniciar y administrar una nueva rama.\nRealizar cambios en un archivo y enviarlos a GitHub como confirmación.\nCrear tu página de inicio en Github.\nCrear tu página web.\n\nCitar y reutilizar el material del curso\nLos datos del curso se pueden reutilizar y adaptar libremente con la debida atribución. Todos los datos de los cursos de estos repositorios están sujetos a la licencia Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0).\n\n\n\nDebes tener una cuenta de usuario de GitHub. Para más información, consulta “Creación de una cuenta en GitHub”.\nNo necesitas saber cómo codificar, utilizar la línea de comandos o instalar Git (el software de control de versiones en el que está compilado GitHub).\nContar con una terminal con Git, en Windows puedes usar Git Bash.\n\n\n\n\n\n\n\n\n\n\nTema\nTiempo\n\n\n\n\n🔷 Section 1 - Introduction and Quality control (45 min) - (8:30 - 10:00 h)\n\n\n\n\nCreación de una cuenta en GitHub\n\n5 min\n\n\n\nIntroducción a Git / GitHub\n\n15 min (9:45- 10:00)\n\n\n\nPractical 13: scATAC-seq Pre-Processing and Quality Control\n\n30 min\n(10:00-10:30)\n\n\n☕ Coffee break (10 min) - (10:30-11:00 h) ☕\n\n\n\n🔷 Section 2 - scATAC-seq Downstream analysis (2 h) - (11:00-13:00 h)\n\n\n\n\nPractical 14: scATAC-seq Downstream\n\n1 h\n(11:00-12:00)\n\n\n\nPractical 15: Analyses and scRNA-seq Integration\n\n1 h\n(12:00-13:00)\n\n\n🍖🍗 Lunch (1 h) - (13:00 - 14:00) 🍖🍗\n\n\n\n🔷 Section 3 - Motif analysis and results (14:00 - 15:30 h)\n\n\n\n\nPractical 16: Motif analysis with Signac\n\n30 min\n(14:00-14:30)\n\n\n\nPractical 17: Exploring results (graphs)\n\n30 min (14:30-15:00)\n\n\n\nOther tools used in scATAC-seq\n\n30 min (15:00-15:30)"
+    "text": "General information\n\nAbout the course 📌Prerequisites for the Course\n\n\n\nPRACTICAL MULTILINGUAL ONLINE COURSE\nSolving problems focused\n\n\nDate: 2nd July, 2026 (Thursday)\nTime: 10 am (GMT-6)\nDuration: 3 hours\nLevel: Intermediate\nRegister to receive the pre-course instructions: Google form\n\n\nInstructors:\n\nThais Crippa de Oliveira, PhD - Posdoctoral Researcher at UNICAMP, Brazil\nEvelia Lorena Coss-Navarrete, PhD - Associate Professor at ENES, Juriquilla-UNAM, México. Web page\n\nAssistance:\n\nJuliana Pinto - PhD student, UFPA, Brazil\nAdriana da Silva, PhD - Post-doc, UNIFESP, Brazil\n\n\n\n🎯 General Goal\nEnable participants to navigate a multimodal dataset (RNA + ADT), perform essential preprocessing, and interpret basic results without getting lost in technical details.\n\n\n✅ Expected Outcomes\n\nConfidence to open and explore multimodal data.\nAbility to run a basic Seurat pipeline.\nUnderstanding of how ADT complements RNA.\nAwareness of research questions and limitations in CITE‑seq.\n\n\n\n\n\n\n\n\nCitar y reutilizar el material del curso\nCourse data may be freely reused and adapted with proper attribution. All course data from these repositories is subject to the Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0).\n\n\n\n\nVerify that all required R packages are installed, following the instructions provided in Get ready for the workshop.\nEnsure you have Git, R, RStudio, and Bash properly installed and working on your computer.\nConfirm you have access to a stable internet connection for repository synchronization and package downloads.",
+    "crumbs": [
+      "General information"
+    ]
   },
   {
-    "objectID": "index.html#sobre-el-curso",
-    "href": "index.html#sobre-el-curso",
-    "title": "Control de versiones con GitHub y RStudio",
-    "section": "1.1 Sobre el curso 📌",
-    "text": "1.1 Sobre el curso 📌\n\nInstructora: Evelia Coss, posdoc, Laboratorio Internacional de Investigación sobre el Genoma Humano (LIIGH) UNAM.\n\nEste tutorial te enseñará los conceptos fundamentales de GitHub, incluyendo repositorios, ramas, confirmaciones y solicitudes de cambio. A través de la creación de tu propio repositorio personalizado y pagina web, aprenderás a gestionar el flujo de trabajo de las solicitudes de cambio, un método ampliamente utilizado para colaborar en la creación y revisión de código.\nEn esta guía rápida aprenderás a:\n\nCrear y gestionar un repositorio.\nIniciar y administrar una nueva rama.\nRealizar cambios en un archivo y enviarlos a GitHub como confirmaciones.\nCrear tu pagina de inicio en Github.\nCrear tu pagina web.\n\nEste documento se basa en \"Happy Git with R\" de Jenny Bryan, los STAT 545 TAs, Jim Hester, asi como las guias practicas de Github."
+    "objectID": "cap1_repaso.html",
+    "href": "cap1_repaso.html",
+    "title": "1  Repaso: scRNA-seq vs bulk-RNA-seq",
+    "section": "",
+    "text": "1.1 Single cell RNA-seq (scRNA-seq)",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Repaso: scRNA-seq vs bulk-RNA-seq</span>"
+    ]
   },
   {
-    "objectID": "intro.html",
-    "href": "intro.html",
-    "title": "1  Introducción a Git/GitHub",
+    "objectID": "cap1_repaso.html#single-cell-rna-seq-scrna-seq",
+    "href": "cap1_repaso.html#single-cell-rna-seq-scrna-seq",
+    "title": "1  Repaso: scRNA-seq vs bulk-RNA-seq",
     "section": "",
-    "text": "Este tutorial te enseñará los conceptos fundamentales de GitHub, incluyendo repositorios, ramas, confirmaciones y solicitudes de cambio. A través de la creación de tu propio repositorio personalizado y pagina web, aprenderás a gestionar el flujo de trabajo de las solicitudes de cambio, un método ampliamente utilizado para colaborar en la creación y revisión de código.\nEn esta guía rápida aprenderás a:\n\nCrear y gestionar un repositorio.\nIniciar y administrar una nueva rama.\nRealizar cambios en un archivo y enviarlos a GitHub como confirmaciones.\nCrear tu pagina de inicio en Github.\nCrear tu pagina web.\n\nEste documento se basa en \"Happy Git with R\" de Jenny Bryan, los STAT 545 TAs, Jim Hester, asi como las guias practicas de Github."
+    "text": "Primera publicación en 2009 (Tang et al, 2009)\nPopularidad en 2014\nEstimar la distribución de los niveles de expresión de cada gen en una población celular.\nAnálisis a nivel de célula individual\nPermite revelar tipos celulares (poblaciones raras)\nAnalizar las dinámicas temporales y heterogeneidad.\n\n\n\n\nImagen tomada de: Single cell RNA sequencing",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Repaso: scRNA-seq vs bulk-RNA-seq</span>"
+    ]
   },
   {
-    "objectID": "summary.html",
-    "href": "summary.html",
-    "title": "3  Summary",
+    "objectID": "cap1_repaso.html#heterogeneidad-diversidad-interna-de-un-sistema-o-de-un-conjunto",
+    "href": "cap1_repaso.html#heterogeneidad-diversidad-interna-de-un-sistema-o-de-un-conjunto",
+    "title": "1  Repaso: scRNA-seq vs bulk-RNA-seq",
+    "section": "1.2 Heterogeneidad: Diversidad interna de un sistema o de un conjunto",
+    "text": "1.2 Heterogeneidad: Diversidad interna de un sistema o de un conjunto\n\n🔬 No todas las células son iguales: incluso dentro de un mismo tejido, existen diferencias en tipos celulares, estados funcionales y niveles de expresión génica.\n🧬 Variabilidad genética y transcriptómica: cada célula puede expresar distintos genes o cantidades de RNA, reflejando funciones específicas.\n🩺 Relevancia en enfermedad: la heterogeneidad celular explica por qué un tumor, por ejemplo, contiene subpoblaciones con distintos comportamientos (algunas más agresivas, otras más sensibles a tratamiento).\n\nVisualización a través de UMAP (Uniform Manifold Approximation and Projection):\n\n\n\n\n\n\n\nImagen tomada de: Explicación completa de un UMAP",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Repaso: scRNA-seq vs bulk-RNA-seq</span>"
+    ]
+  },
+  {
+    "objectID": "cap1_repaso.html#preguntas-que-se-pueden-responde-scrna-seq",
+    "href": "cap1_repaso.html#preguntas-que-se-pueden-responde-scrna-seq",
+    "title": "1  Repaso: scRNA-seq vs bulk-RNA-seq",
+    "section": "1.3 Preguntas que se pueden responde scRNA-seq",
+    "text": "1.3 Preguntas que se pueden responde scRNA-seq\n\nDescubrir tipos celulares nuevos o raros.\nIdentificar composición celular diferencial entre sano vs. enfermo.\nComprender la diferenciación celular en desarrollo y regeneración.\nAnalizar plasticidad y dinámicas de expresión en células individuales.\nConstruir atlas celulares/genéticos → catálogo completo de diversidad celular.\nAplicaciones en investigación básica y medicina personalizada.\n\n\n\n\n\n\n\n\nImagen tomada de: Kageyama, et al. 2018. Front. Neurosci",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Repaso: scRNA-seq vs bulk-RNA-seq</span>"
+    ]
+  },
+  {
+    "objectID": "cap1_repaso.html#flujo-experimental-de-scrna-seq",
+    "href": "cap1_repaso.html#flujo-experimental-de-scrna-seq",
+    "title": "1  Repaso: scRNA-seq vs bulk-RNA-seq",
+    "section": "1.4 Flujo experimental de scRNA-Seq",
+    "text": "1.4 Flujo experimental de scRNA-Seq\n\n\n\nImagen tomada de: Biorender",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Repaso: scRNA-seq vs bulk-RNA-seq</span>"
+    ]
+  },
+  {
+    "objectID": "cap1_repaso.html#referencias",
+    "href": "cap1_repaso.html#referencias",
+    "title": "1  Repaso: scRNA-seq vs bulk-RNA-seq",
+    "section": "1.5 Referencias",
+    "text": "1.5 Referencias",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Repaso: scRNA-seq vs bulk-RNA-seq</span>"
+    ]
+  },
+  {
+    "objectID": "intro_citeseq.html",
+    "href": "intro_citeseq.html",
+    "title": "2  Repaso: CITE-seq + scRNA-seq",
     "section": "",
-    "text": "In summary, this book has no content whatsoever.\n\n1 + 1\n\n[1] 2"
+    "text": "2.1 What is CITE-Seq?\nCITE-Seq, or Cellular Indexing of Transcriptomes and Epitopes by Sequencing, is a technique that enables the simultaneous sequencing of RNA and the quantification and characterization of surface proteins using specific antibodies at the level of individual cells. It combines highly multiplexed antibody-based detection of protein markers with unbiased transcriptome profiling for thousands of single cells in parallel.",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Repaso: CITE-seq + scRNA-seq</span>"
+    ]
+  },
+  {
+    "objectID": "intro_citeseq.html#principles-of-cite-seq",
+    "href": "intro_citeseq.html#principles-of-cite-seq",
+    "title": "2  Repaso: CITE-seq + scRNA-seq",
+    "section": "2.2 Principles of CITE-Seq",
+    "text": "2.2 Principles of CITE-Seq\nCellular Indexing of Transcriptomes and Epitopes (CITE-seq) uses unique oligo-tagged antibodies to identify surface proteins, using sequencing as a readout. The number of barcodes that can be conjugated to antibodies surpasses the number of fluorophores or heavy metal tags used in flow cytometry or CyTOF, expanding the number of proteins that can be measured simultaneously with RNA. These barcoded antibodies are part of a unique workflow that produces protein and nucleic acid data using next-generation sequencing (NGS) technologies.\nThis:\n\nhelps in the creation of oligo dT-based RNA sequencing libraries\nenables barcode-based antibody identification\nallows specific PCR amplification\n\nThe number of reads corresponding to each conjugated DNA barcode reflects the identity and abundance of proteins.\n\n\n\n\n\n\n\nSchematic of the wet lab workflow for CITE-Seq",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Repaso: CITE-seq + scRNA-seq</span>"
+    ]
+  },
+  {
+    "objectID": "intro_citeseq.html#overview",
+    "href": "intro_citeseq.html#overview",
+    "title": "2  Repaso: CITE-seq + scRNA-seq",
+    "section": "2.3 Overview",
+    "text": "2.3 Overview\n\n\n\nSchematic of the dry lab workflow for CITE-Seq",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Repaso: CITE-seq + scRNA-seq</span>"
+    ]
+  },
+  {
+    "objectID": "intro_citeseq.html#referencias",
+    "href": "intro_citeseq.html#referencias",
+    "title": "2  Repaso: CITE-seq + scRNA-seq",
+    "section": "2.4 Referencias",
+    "text": "2.4 Referencias\nhttps://hoohm.github.io/CITE-seq-Count/Running-the-script/\nhttps://www.signiosbio.com/blog/introduction-to-single-cell-sequencing-cite-seq-series-3/\nhttps://www.elucidata.io/blog/cite-seq-the-future-of-single-cell-rna-seq-analysis\nhttps://en.wikipedia.org/wiki/CITE-Seq\nhttps://www.scdiscoveries.com/blog/knowledge/cite-seq/\nhttps://broadinstitute.github.io/2020_scWorkshop/cite-seq.html\nEnd-to-end CITE-seq analysis workflow using dsb for ADT normalization and Seurat for multimodal clustering",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Repaso: CITE-seq + scRNA-seq</span>"
+    ]
+  },
+  {
+    "objectID": "Cap1.html",
+    "href": "Cap1.html",
+    "title": "3  About Dataset",
+    "section": "",
+    "text": "3.1 gse149689_subset_3k",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>About Dataset</span>"
+    ]
+  },
+  {
+    "objectID": "Cap1.html#paper-an-immunophenotype-coupled-transcriptomic-atlas-of-human-hematopoietic-progenitors",
+    "href": "Cap1.html#paper-an-immunophenotype-coupled-transcriptomic-atlas-of-human-hematopoietic-progenitors",
+    "title": "3  About Dataset",
+    "section": "3.2 Paper: An immunophenotype-coupled transcriptomic atlas of human hematopoietic progenitors",
+    "text": "3.2 Paper: An immunophenotype-coupled transcriptomic atlas of human hematopoietic progenitors\nNature immunology: https://www.nature.com/articles/s41590-024-01782-4#data-availability \nRaw sequencing FASTQ files and the processed HDF5 (h5) matrix have been deposited in the Gene Expression Omnibus database under accession code GSE245108. CITE-seq data generated by Pei et al. were accessed via the accession ID GSE232559. All imputed Infinity Flow objects are available in the FlowRepository under ID FR-FCM-Z6UQ. An interactive web portal with the associated Azimuth instance and data visualization tools is available at https://altanalyze.org/MarrowAtlas/. Interactive data visualization and analysis tools for the CITE-seq bone marrow single-cell datasets are provided at https://altanalyze.org/MarrowAtlas/. Source data are provided with this paper.\n\n\nCITE-seq https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE245108\nscRNA-seq https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE232559\nGithub: https://github.com/nsalomonis/Human-Bone-Marrow-Titration-Atlas\n\nNOTAS: ADD image. Info Sobre el dataset (tipo de células o tejidos, Número de células detectadas, tecnología, secuenciador, plataforma, genoma usado para el alineamiento, versión de cell ranger) (D5 https://eveliacoss.github.io/Workshop_scRNAseq_presentacion/Clase2_Normalizacion.html#5 )",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>About Dataset</span>"
+    ]
+  },
+  {
+    "objectID": "Cap2.html",
+    "href": "Cap2.html",
+    "title": "4  Resources",
+    "section": "",
+    "text": "When you can work on your computer and when you need to work on the cluster ..  source , RAM, etc. -  number of samples?",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Resources</span>"
+    ]
+  },
+  {
+    "objectID": "Cap3.html",
+    "href": "Cap3.html",
+    "title": "5  Single-Cell Survival Course with Seurat v5",
+    "section": "",
+    "text": "HOW TO USE\nRun interactively, section by section (Ctrl+Enter / Cmd+Enter), from top\nto bottom. Do NOT source() the whole file in one go: several chunks are\ndeliberate errors meant to be read, and Block 8 is optional take-home\nwork that depends on a file released separately after the session.\nDELIBERATE ERRORS\nFive steps are designed to fail (v4 slot access, GetAssayData slot=,\nwrong filter thresholds, dims &gt; npcs, plotting a label before adding it).\nThey are wrapped in try() so the error prints to the console without\nhalting a full run. Read the message, then continue.\nWORKING DIRECTORY\nSet the working directory to the folder holding this script and the data/\nsubfolder (Session &gt; Set Working Directory &gt; To Source File Location).",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Single-Cell Survival Course with Seurat v5</span>"
+    ]
+  },
+  {
+    "objectID": "notas.html",
+    "href": "notas.html",
+    "title": "6  Notas",
+    "section": "",
+    "text": "Notenotas\n\n\n\n\n\n\n\n\n\n\n\n\nTipTip\n\n\n\n\n\n\n\n\n\n\n\n\nImportantImportant\n\n\n\n\n\n\n\n\n\n\n\n\nCautionCaution\n\n\n\n\n\n\n\n\n\n\n\n\nWarningWarning\n\n\n\n\n\n\n\n\n\n\n\n\n\nTipActividad: Taller de Cerámica\n\n\n\nSábados 10:00 am · Cupo limitado a 12 personas.",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Notas</span>"
+    ]
   }
 ]

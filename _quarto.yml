@@ -1,6 +1,6 @@
 project:
   type: book
-  output-dir: docs
+  output-dir: _book #docs
 
 book:
   title: "Survival Course: scRNA‑seq + CITE‑seq"

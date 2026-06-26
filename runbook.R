@@ -9,6 +9,7 @@ babelquarto::quarto_multilingual_book(
 
 
 babelquarto::render_book(".")
-
+# For a multilingual book
+servr::httw("docs")
 
 
