@@ -1,0 +1,33 @@
+# Recordatorio de pasos en Bash
+
+## Preparación del directorio de trabajo
+
+-   Ruta / Camino absoluto
+
+    ``` {.bash code-copy="true" eval="false"}
+    cd /home/usuario/data/
+    ```
+
+
+-   Ruta / Camino relativo
+
+    ``` {.bash code-copy="true" eval="false"}
+    cd ../ # Ir a la carpeta anterior
+    ```
+
+## **Comandos básicos**
+
+| Comandos       | Información                                          | Argumentos                          |
+|----------------|------------------------------------------------------|-------------------------------------|
+| `ssh`          | Conexión a servidores                                | ssh usuario\@servidor.mx            |
+| `ls`           | Observar el contenido de los archivos en una carpeta | ls directorio/                      |
+| `cd`           | Moverse de directorios                               | cd /home/usuario/data/              |
+| `mkdir`        | Crear un nuevo directorio                            | mkdir data                          |
+| `rmdir`        | Eliminar el directorio                               | rmkdir -rf data                     |
+| `nano`/`vim` | Editores de texto plano                              | nano Archivo.txt / vim Archivo.txt  |
+| `cp`           | Copiar archivos                                      | cp Archivo1.txt /home/usuario/data/ |
+| `mv`           | Mover un archivo o carpeta                           |                                     |
+| `echo`         | Para llamar y/o declarar variables                   | echo "Hello world"                  |
+| `chmod`        | Cambiar permisos del usuario                         | chmod 777 data/                     |
+| `rsync`        | Descargar o subir archivos                           |                                     |
+| `scp`          | Descargar o subir archivos                           |                                     |

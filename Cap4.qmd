@@ -1,0 +1,65 @@
+# Comandos usados en Github y RStudio
+
+[![](https://neurathsboat.blog/post/git-intro/featured.png)](https://neurathsboat.blog/post/git-intro/)
+
+::: callout-important
+-   `git add:` Agregar cambios
+
+-   `git status:` Revisamos el estado del proyecto
+
+-   `git coomit:` comentar los cambios
+
+-   `git checkout:` Pordemos regresar cambios o cambiar de rama.
+
+En Git, los comandos `git pull` y `git push` **son utilizados para sincronizar y actualizar el contenido de un repositorio**: 
+
+-   `git pull:` Actualiza la versión local de un repositorio desde otro remoto (en R studio flecha azul).
+
+-   `git push:` Carga contenido en un repositorio remoto (en R studio flecha verde)
+:::
+
+![](figures/git-push.png){fig-align="center" width="450"}
+
+## GitHub primero, RStudio después...
+
+1.  Crea un repositorio en GitHub: `mi_repositorio` \> *Public* \> *YES* initialize this repository with a *README* \> `click`en el gran botón verde "Create repository"
+
+2.  En RStudio crea un nuevo proyecto: *File* \> *New Project* \> *Version Control* \> *Git*. Ahi pega el URL del repositorio `https://github.com/mi_usuario/mi_repositorio.git`. Da click en *Create Project*.
+
+Esto nos generará los siguientes elementos:
+
+-   Un directorio nuevo
+
+-   Un repositorio Git enlazado a al repositorio de GitHub
+
+-   Un proyecto en RStudio
+
+Con este procedimiento ya no es necesario preocuparse por configurar controles remotos Git y rastrear ramas en la línea de comandos.
+
+## Comentar, pull y push en Rstudio
+
+[![](https://comunidadbioinfo.github.io/cdsb2023/img/gitrstudio_comment.png){width="600"}](https://comunidadbioinfo.github.io/cdsb2023/control-de-versiones-con-github-y-rstudio.html)
+
+Con la **flecha azul** podemos hacer pull (**RECUERDA HACERLO ANTES DE HACER UN PUSH**), y con la flecha verde un `push`. Para poder comentar y hacer push debemos marcar con una palomita mediante un `click` en las pequeñas cajas blancas de la columna *Staged*, damos click en *commit* lo cual nos abre la siguiente ventana.
+
+![](https://comunidadbioinfo.github.io/cdsb2023/img/gitrstudio_push.png)
+
+Volvemos a dar `click` en *commit*, y finalizamos con *push* (flecha verde).
+
+## Pagina de inicio en GitHub
+
+::: callout-note
+## Actividad
+
+1.  En GitHub, crea un repositorio con el mismo nombre de usuario. Ejemplo: Mi usuario es EveliaCoss y mi repositorio se llama EveliaCoss, dandome la siguiente liga https://github.com/EveliaCoss/EveliaCoss
+2.  Agrega un README al repositorio con tu informacion. Por Default ya trae una plantilla, modificala y adaptala a tu gusto.
+3.  Visualiza como cambia tu inicio en el Github.
+4.  Sincroniza el GitHub en RStudio y realiza los cambios desde ahi.
+:::
+
+[![](figures/EveliaCoss_inciio.jpg)](https://github.com/EveliaCoss)
+
+## Referencias
+
+-   Haydee tutorial: [Temas Selectos de Análisis Numérico y Computación Científica: Computo científico para el análisis de datos](https://haydeeperuyero.github.io/Computo_Cientifico/)
+-   Alejandra Medina tutorial: [Control de versiones con GitHub y RStudio](https://comunidadbioinfo.github.io/cdsb2023/control-de-versiones-con-github-y-rstudio.html)

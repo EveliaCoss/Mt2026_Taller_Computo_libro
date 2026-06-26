@@ -1,0 +1,292 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Workshop",
+    "section": "",
+    "text": "Información general\n\n\nSobre el curso 📌Requisitos previosAgenda 📆\n\n\nFuente del curso\n\nFechas: Dias de la semana/ dias del mes\nDuración del curso: X horas\n\nInstructores:\n\nEvelia Lorena Coss-Navarrete - PostDoc, LIIGH-UNAM. Pagina web\n\nAyudantes:\n\nNombre - cargo, escuela\n\nResumen:\nPara que es el curso, que se va abordar y que se espera que aprendan. Ejemplo:\nEste tutorial te enseñará los conceptos fundamentales en el empleo y manejo de Bash Shell, incluyendo la creación de scripts de Bash, generación de programas con funcionalidades sencillas aplicables a bioinformática y a programación en general.\nObjetivos:\nEn esta guía rápida aprenderás a:\n\nCrear y gestionar un repositorio.\nIniciar y administrar una nueva rama.\nRealizar cambios en un archivo y enviarlos a GitHub como confirmación.\nCrear tu página de inicio en Github.\nCrear tu página web.\n\nCitar y reutilizar el material del curso\nLos datos del curso se pueden reutilizar y adaptar libremente con la debida atribución. Todos los datos de los cursos de estos repositorios están sujetos a la licencia Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0).\n\n\n\nDebes tener una cuenta de usuario de GitHub. Para más información, consulta “Creación de una cuenta en GitHub”.\nNo necesitas saber cómo codificar, utilizar la línea de comandos o instalar Git (el software de control de versiones en el que está compilado GitHub).\nContar con una terminal con Git, en Windows puedes usar Git Bash.\n\n\n\n\n\n\n\n\n\n\nTema\nTiempo\n\n\n\n\n🔷 Sección 1 - (11:30 - 13:30 h) (7 marzo)\n\n\n\n\nCreación de una cuenta en GitHub\n\n5 min\n\n\n\nIntroducción a Git / GitHub\n\n15 min\n\n\n\nActividad 1: Sincronización y llaves\n\n15 min\n\n\n☕ Coffee break (10 min) - (12:00-12:10) ☕\n10 min\n\n\n🔷  Sección 2 - (12:10-13:00 h)\n\n\n\n\nComandos usados en Github y RStudio\n\n25 min\n\n\n\nActividad 2: Pagina de inicio en GitHub\n\n15 min\n\n\n🔷  Sección 3 - (11:30 - 13:30 h) (14 marzo)\n\n\n\n\nBuenas practicas en R\n\n30 min\n\n\n\nActividad 3: Pagina web en GitHub\n\n1:30 min",
+    "crumbs": [
+      "Información general"
+    ]
+  },
+  {
+    "objectID": "Cap1.html",
+    "href": "Cap1.html",
+    "title": "1  Recordatorio de pasos en Bash",
+    "section": "",
+    "text": "1.1 Preparación del directorio de trabajo",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Recordatorio de pasos en Bash</span>"
+    ]
+  },
+  {
+    "objectID": "Cap1.html#preparación-del-directorio-de-trabajo",
+    "href": "Cap1.html#preparación-del-directorio-de-trabajo",
+    "title": "1  Recordatorio de pasos en Bash",
+    "section": "",
+    "text": "Ruta / Camino absoluto\ncd /home/usuario/data/\nRuta / Camino relativo\ncd ../ # Ir a la carpeta anterior",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Recordatorio de pasos en Bash</span>"
+    ]
+  },
+  {
+    "objectID": "Cap1.html#comandos-básicos",
+    "href": "Cap1.html#comandos-básicos",
+    "title": "1  Recordatorio de pasos en Bash",
+    "section": "1.2 Comandos básicos",
+    "text": "1.2 Comandos básicos\n\n\n\n\n\n\n\n\nComandos\nInformación\nArgumentos\n\n\n\n\nssh\nConexión a servidores\nssh usuario@servidor.mx\n\n\nls\nObservar el contenido de los archivos en una carpeta\nls directorio/\n\n\ncd\nMoverse de directorios\ncd /home/usuario/data/\n\n\nmkdir\nCrear un nuevo directorio\nmkdir data\n\n\nrmdir\nEliminar el directorio\nrmkdir -rf data\n\n\nnano/vim\nEditores de texto plano\nnano Archivo.txt / vim Archivo.txt\n\n\ncp\nCopiar archivos\ncp Archivo1.txt /home/usuario/data/\n\n\nmv\nMover un archivo o carpeta\n\n\n\necho\nPara llamar y/o declarar variables\necho “Hello world”\n\n\nchmod\nCambiar permisos del usuario\nchmod 777 data/\n\n\nrsync\nDescargar o subir archivos\n\n\n\nscp\nDescargar o subir archivos",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Recordatorio de pasos en Bash</span>"
+    ]
+  },
+  {
+    "objectID": "intro.html",
+    "href": "intro.html",
+    "title": "2  Introducción Sobre el Workshop",
+    "section": "",
+    "text": "2.1 Referencias\nAgregar informacion y figuras.\nNo olvides las referencias",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Introducción Sobre el Workshop</span>"
+    ]
+  },
+  {
+    "objectID": "Cap2.html",
+    "href": "Cap2.html",
+    "title": "3  Instalar Git Bash en Windows",
+    "section": "",
+    "text": "3.1 Referencia\nNota: Para obtener más detalles sobre cómo instalar y configurar Git Bash, puedes ver este video tutorial: Instrucciones para instalar Git Bash en Windows.\nEsto te proporcionará tanto Git como Bash en el programa Git Bash.",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Instalar Git Bash en Windows</span>"
+    ]
+  },
+  {
+    "objectID": "Cap2.html#referencia",
+    "href": "Cap2.html#referencia",
+    "title": "3  Instalar Git Bash en Windows",
+    "section": "",
+    "text": "Guia de instalacion de Git Bash",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Instalar Git Bash en Windows</span>"
+    ]
+  },
+  {
+    "objectID": "Cap3.html",
+    "href": "Cap3.html",
+    "title": "4  Conectar a GitHub con SSH",
+    "section": "",
+    "text": "4.1 Paso 1. Generar una llave pública\nPuedes conectarte a GitHub utilizando el protocolo Secure Shell (SSH), lo cual proporciona un canal seguro sobre una red insegura.\nTambién puedes asegurar tus claves SSH y configurar un agente de autenticación para no tener que ingresar tu contraseña cada vez que utilices tus claves SSH.\nCuando ejecutes el programa, te va a preguntar si quieres generar una frase, identificar y como quieres nombrar la llave. Si no quieres complicarte presiona 3 veces ENTER, hasta que te parezca una pantalla como al siguiente:\nPosteriormente, tendras una carpeta llamada .ssh/, entra en esa carpeta y tendras dos archivos, si no los renombraste tendran el nombre de id_ed25519.\nVamos a abrir la terminal y vamos a ver el contenido de la carpeta .ssh/:",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Conectar a GitHub con SSH</span>"
+    ]
+  },
+  {
+    "objectID": "Cap3.html#paso-1.-generar-una-llave-pública",
+    "href": "Cap3.html#paso-1.-generar-una-llave-pública",
+    "title": "4  Conectar a GitHub con SSH",
+    "section": "",
+    "text": "NoteActividad (15 min)\n\n\n\nDeberan contar con:\n\nUna cuenta en GitHub\nR y RStudio actualizados\nGit instalado\nColoca en la terminal la siguiente información para generar una clave con el mismo correo que usaste para registrar tu cuenta en GitHub.\nssh-keygen -t ed25519 -C \"your_email@example.com\"\nNOTA: Si no cuentas con ssh-keygen instalado, primero corre este código.\nsudo apt-get install ssh-keygen\n\n\n\n\n\n\n\nid_ed25519: llave local, no la vamos a usar. Tampoco la compartas.\nid_ed25519.pub : llave publica. La usaremos para copiarla en los servidores que usaremos.\n\n\nls .ssh/",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Conectar a GitHub con SSH</span>"
+    ]
+  },
+  {
+    "objectID": "Cap3.html#paso-2.-copiar-la-clave-ssh-pública",
+    "href": "Cap3.html#paso-2.-copiar-la-clave-ssh-pública",
+    "title": "4  Conectar a GitHub con SSH",
+    "section": "4.2 Paso 2. Copiar la clave SSH pública",
+    "text": "4.2 Paso 2. Copiar la clave SSH pública\n\nAccede a la terminal en tu computadora.\nCopia la clave SSH generada anteriormente usando el siguiente comando:\n\ncat ~/.ssh/id_ed25519.pub\nEste comando mostrará tu clave pública en la terminal.\n\nSelecciona y copia toda la clave que aparece en la terminal. Asegúrate de copiar desde ssh-rsa hasta el final de tu correo electrónico.",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Conectar a GitHub con SSH</span>"
+    ]
+  },
+  {
+    "objectID": "Cap3.html#paso-3.-agregar-la-clave-ssh-a-tu-cuenta-de-github",
+    "href": "Cap3.html#paso-3.-agregar-la-clave-ssh-a-tu-cuenta-de-github",
+    "title": "4  Conectar a GitHub con SSH",
+    "section": "4.3 Paso 3. Agregar la clave SSH a tu cuenta de GitHub",
+    "text": "4.3 Paso 3. Agregar la clave SSH a tu cuenta de GitHub\n\nInicia sesión en GitHub en tu navegador.\nHaz clic en tu foto de perfil en la esquina superior derecha y selecciona “Settings” (Configuración).\nEn el menú lateral izquierdo, selecciona “SSH and GPG keys”.\nHaz clic en el botón verde “New SSH key”.\nEn el campo “Title”, ingresa un nombre descriptivo para tu clave (por ejemplo, “Mi computadora personal”).\nEn el campo “Key”, pega la clave SSH que copiaste previamente de la terminal.\nHaz clic en “Add SSH key” para guardar la clave.",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Conectar a GitHub con SSH</span>"
+    ]
+  },
+  {
+    "objectID": "Cap3.html#paso-4.-configurar-rstudio-para-usar-git-bash-como-terminal",
+    "href": "Cap3.html#paso-4.-configurar-rstudio-para-usar-git-bash-como-terminal",
+    "title": "4  Conectar a GitHub con SSH",
+    "section": "4.4 Paso 4. Configurar RStudio para usar Git Bash como terminal",
+    "text": "4.4 Paso 4. Configurar RStudio para usar Git Bash como terminal\n\nAbre RStudio.\nDirígete a Tools (Herramientas) en la barra superior y selecciona Global Options (Opciones globales).\nEn el menú de opciones globales, selecciona la pestaña Terminal.\nEn el campo New terminal open with, selecciona Git Bash.\n\nHaz clic en Apply y luego en OK.",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Conectar a GitHub con SSH</span>"
+    ]
+  },
+  {
+    "objectID": "Cap3.html#paso-5.-abrir-la-terminal-de-git-bash-en-rstudio",
+    "href": "Cap3.html#paso-5.-abrir-la-terminal-de-git-bash-en-rstudio",
+    "title": "4  Conectar a GitHub con SSH",
+    "section": "4.5 Paso 5. Abrir la terminal de Git Bash en RStudio",
+    "text": "4.5 Paso 5. Abrir la terminal de Git Bash en RStudio\nAhora, para abrir la terminal de Git Bash dentro de RStudio, solo tienes que:\n\nIr al Tools , hacer clic en Terminal y en abrir New terminal.\nDeberías ver que se abre una nueva sesión con Git Bash como la terminal predeterminada.",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Conectar a GitHub con SSH</span>"
+    ]
+  },
+  {
+    "objectID": "Cap3.html#paso-6.-verificar-la-conexión",
+    "href": "Cap3.html#paso-6.-verificar-la-conexión",
+    "title": "4  Conectar a GitHub con SSH",
+    "section": "4.6 Paso 6. Verificar la conexión",
+    "text": "4.6 Paso 6. Verificar la conexión\nVuelve a la terminal y ejecuta el siguiente comando para verificar que tu clave SSH está correctamente configurada con GitHub:\nssh -T git@github.com\nEn caso de que se necesite, puedes especificar la llave que usaste:\nssh -i ~/.ssh/id_ed25519.pub -T git@github.com\nEl comando ssh -T git@github.com simplemente verifica que tu clave privada se está usando correctamente y que tu clave pública ha sido registrada en GitHub.\nSi es la primera vez que te conectas a GitHub con SSH, puede que veas un mensaje que te pregunte si deseas continuar conectándote. Escribe “yes”.\nSi todo está bien configurado, deberías ver un mensaje similar a este:\nHi username! You've successfully authenticated, but GitHub does not provide shell access.\nEsto confirmará que tu clave SSH se ha agregado correctamente a tu cuenta de GitHub y que la conexión es exitosa.\n\n4.6.1 Solución a Error de Configuración de Usuario en Git\nEl comando git config se utiliza para configurar opciones en Git, y los siguientes comandos en particular se usan para establecer tu nombre y correo electrónico globalmente en tu configuración de Git:\ngit config --global user.email \"you@example.com\"\ngit config --global user.name \"Your Name\"\n\ngit config --global user.email \"you@example.com\"\n\nEste comando configura tu dirección de correo electrónico, la cual será utilizada en todos tus commits de Git. El correo electrónico asociado con los commits es importante porque ayuda a identificar quién realizó qué cambios en el repositorio. –global significa que esta configuración se aplicará a todos los repositorios en tu máquina.\n\ngit config --global user.name \"Your Name\"\n\nEste comando establece tu nombre de usuario, que también se asociará con los commits que realices. Al igual que el correo electrónico, se utilizará en todos tus commits en cualquier repositorio de Git en tu máquina.",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Conectar a GitHub con SSH</span>"
+    ]
+  },
+  {
+    "objectID": "Cap3.html#referencias",
+    "href": "Cap3.html#referencias",
+    "title": "4  Conectar a GitHub con SSH",
+    "section": "4.7 Referencias",
+    "text": "4.7 Referencias\n\nHaydee tutorial: Temas Selectos de Análisis Numérico y Computación Científica: Computo científico para el análisis de datos\nAlejandra Medina tutorial: Control de versiones con GitHub y RStudio",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Conectar a GitHub con SSH</span>"
+    ]
+  },
+  {
+    "objectID": "Cap4.html",
+    "href": "Cap4.html",
+    "title": "5  Comandos usados en Github y RStudio",
+    "section": "",
+    "text": "5.1 GitHub primero, RStudio después…\nEsto nos generará los siguientes elementos:\nCon este procedimiento ya no es necesario preocuparse por configurar controles remotos Git y rastrear ramas en la línea de comandos.",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Comandos usados en Github y RStudio</span>"
+    ]
+  },
+  {
+    "objectID": "Cap4.html#github-primero-rstudio-después",
+    "href": "Cap4.html#github-primero-rstudio-después",
+    "title": "5  Comandos usados en Github y RStudio",
+    "section": "",
+    "text": "Crea un repositorio en GitHub: mi_repositorio &gt; Public &gt; YES initialize this repository with a README &gt; clicken el gran botón verde “Create repository”\nEn RStudio crea un nuevo proyecto: File &gt; New Project &gt; Version Control &gt; Git. Ahi pega el URL del repositorio https://github.com/mi_usuario/mi_repositorio.git. Da click en Create Project.\n\n\n\nUn directorio nuevo\nUn repositorio Git enlazado a al repositorio de GitHub\nUn proyecto en RStudio",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Comandos usados en Github y RStudio</span>"
+    ]
+  },
+  {
+    "objectID": "Cap4.html#comentar-pull-y-push-en-rstudio",
+    "href": "Cap4.html#comentar-pull-y-push-en-rstudio",
+    "title": "5  Comandos usados en Github y RStudio",
+    "section": "5.2 Comentar, pull y push en Rstudio",
+    "text": "5.2 Comentar, pull y push en Rstudio\n\nCon la flecha azul podemos hacer pull (RECUERDA HACERLO ANTES DE HACER UN PUSH), y con la flecha verde un push. Para poder comentar y hacer push debemos marcar con una palomita mediante un click en las pequeñas cajas blancas de la columna Staged, damos click en commit lo cual nos abre la siguiente ventana.\n\nVolvemos a dar click en commit, y finalizamos con push (flecha verde).",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Comandos usados en Github y RStudio</span>"
+    ]
+  },
+  {
+    "objectID": "Cap4.html#pagina-de-inicio-en-github",
+    "href": "Cap4.html#pagina-de-inicio-en-github",
+    "title": "5  Comandos usados en Github y RStudio",
+    "section": "5.3 Pagina de inicio en GitHub",
+    "text": "5.3 Pagina de inicio en GitHub\n\n\n\n\n\n\nNoteActividad\n\n\n\n\nEn GitHub, crea un repositorio con el mismo nombre de usuario. Ejemplo: Mi usuario es EveliaCoss y mi repositorio se llama EveliaCoss, dandome la siguiente liga https://github.com/EveliaCoss/EveliaCoss\nAgrega un README al repositorio con tu informacion. Por Default ya trae una plantilla, modificala y adaptala a tu gusto.\nVisualiza como cambia tu inicio en el Github.\nSincroniza el GitHub en RStudio y realiza los cambios desde ahi.",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Comandos usados en Github y RStudio</span>"
+    ]
+  },
+  {
+    "objectID": "Cap4.html#referencias",
+    "href": "Cap4.html#referencias",
+    "title": "5  Comandos usados en Github y RStudio",
+    "section": "5.4 Referencias",
+    "text": "5.4 Referencias\n\nHaydee tutorial: Temas Selectos de Análisis Numérico y Computación Científica: Computo científico para el análisis de datos\nAlejandra Medina tutorial: Control de versiones con GitHub y RStudio",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Comandos usados en Github y RStudio</span>"
+    ]
+  },
+  {
+    "objectID": "Cap5.html",
+    "href": "Cap5.html",
+    "title": "6  Buenas practicas en R",
+    "section": "",
+    "text": "6.1 Materiales informativos\nNotas personales recabadas a partir de los tutoriales y ejemplos 😊. Espero que les funcione 💜\n💪 Estuve muy intensa viendo su codigo. Muchas gracias por tenerlos publico.",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Buenas practicas en R</span>"
+    ]
+  },
+  {
+    "objectID": "Cap5.html#materiales-informativos",
+    "href": "Cap5.html#materiales-informativos",
+    "title": "6  Buenas practicas en R",
+    "section": "",
+    "text": "Curso de Joselyn Cristina Chávez Fuentes\nMe ayudo mucho este Video\nDocumentación de funciones de Andrés Arredondo Cruz",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Buenas practicas en R</span>"
+    ]
+  },
+  {
+    "objectID": "Cap5.html#un-algoritmo-nos-permite-resolver-un-problema",
+    "href": "Cap5.html#un-algoritmo-nos-permite-resolver-un-problema",
+    "title": "6  Buenas practicas en R",
+    "section": "6.2 Un algoritmo nos permite resolver un problema ⭐",
+    "text": "6.2 Un algoritmo nos permite resolver un problema ⭐\nUn algoritmo es un método para resolver un problema mediante una serie de pasos definidos, precisos y finitos.\n\nDefinido: si se sigue dos veces, se obtiene el mismo resultado. Es reproducible.\nPreciso: implica el orden de realización de cada uno de los pasos.\nFinito: Tiene un numero determinado de pasos, implica que tiene un fin.\n\n\nUn algoritmo podemos definirlo como un programa o software.",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Buenas practicas en R</span>"
+    ]
+  },
+  {
+    "objectID": "Cap5.html#para-escribir-un-buen-software-necesitas",
+    "href": "Cap5.html#para-escribir-un-buen-software-necesitas",
+    "title": "6  Buenas practicas en R",
+    "section": "6.3 Para escribir un buen software necesitas:",
+    "text": "6.3 Para escribir un buen software necesitas:\n\nEscribir código mantenible (maintainable code), usar control de versiones (version control) y rastreadores de problemas (issue trackers), revisiones de código (code reviews), pruebas unitarias (unit testing) y automatización de tareas (task automation).\nWilson, et al. 2014. PLOS Biology\n\nCon el fin de previnir retracciones.\n\n\n\n\n\n\nNotePasos para escribir un buen software\n\n\n\n\nAnálisis del problema / Definir el problema\nDiseño del algoritmo / Diseño del programa\nCodificación / Escribir el código\nCompilación y ejecución del programa\nVerificación / Realizar pruebas\nDepuración / Detectar los errores y corregirlos\n\n\nProgramacion defensiva\n\n\nDocumentación",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Buenas practicas en R</span>"
+    ]
+  },
+  {
+    "objectID": "Cap5.html#paso-7-documentación",
+    "href": "Cap5.html#paso-7-documentación",
+    "title": "6  Buenas practicas en R",
+    "section": "6.4 Paso 7: Documentación",
+    "text": "6.4 Paso 7: Documentación\n\n\n\n\n\n\nNote\n\n\n\n\nAutor (author): Su nombre\nDia (date): Fecha de creación\nPaquetes (packages)\nDirectorio de trabajo (Working directory): En que carpeta se encuentra tu datos y programa.\nInformación descriptiva del programa (Description): ¿Para qué sirve el programa? Ej: El siguiente programa realiza la suma de dos numeros enteros a partir de la entrada del usuario y posteriormente la imprime en pantalla.\nUsage ¿Cómo se utiliza?\nArgumentos (Arguments)\n\nInformación de entrada (Data Inputs): Ej: Solo numeros enteros (sin decimales).\nInformación de salida (Outpus): Graficas, figuras, tablas, etc.",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Buenas practicas en R</span>"
+    ]
+  },
+  {
+    "objectID": "Cap5.html#puntos-claves-para-buenas-practicas-en-bioinfo",
+    "href": "Cap5.html#puntos-claves-para-buenas-practicas-en-bioinfo",
+    "title": "6  Buenas practicas en R",
+    "section": "6.5 Puntos claves para buenas practicas en bioinfo ⭐",
+    "text": "6.5 Puntos claves para buenas practicas en bioinfo ⭐\n\nEscriba programas para personas, no para computadoras (Documenta qué hace y por qué). - Se coherente en la nomenclatura, indentación y otros aspectos del estilo.\nDivide los programas en funciones cortas de un solo propósito. 💻 📚\nNo repitas tu código. Crea pasos reproducibles o que se repitan por si solas. ➰\nPlanifique los errores (Programacion defensiva) 🚩\nOptimice el software sólo después de que funcione correctamente. - Si funciona no lo modifiques, simplificalo.\nColaborar - Busque siempre bibliotecas de software bien mantenidas que hagan lo que necesita. 👥\n\n\n\n\n\n\n\nNoteEjemplo de como realizo mis documentos 💜\n\n\n\nAqui les dejo el script que les doy a mis alumnos VisualizacionDatos.R del curso de Análisis de datos de RNA-Seq.",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Buenas practicas en R</span>"
+    ]
+  },
+  {
+    "objectID": "Cap5.html#pagina-web-en-github",
+    "href": "Cap5.html#pagina-web-en-github",
+    "title": "6  Buenas practicas en R",
+    "section": "6.6 Pagina web en GitHub",
+    "text": "6.6 Pagina web en GitHub\n\n\n\n\n\n\nNoteActividad\n\n\n\n\nEn GitHub, crea un repositorio con el mismo nombre de usuario y agregale “.github.io”. Ejemplo: Mi usuario es EveliaCoss y mi repositorio se llama “EveliaCoss.github.io”, dandome la siguiente liga https://github.com/EveliaCoss/EveliaCoss.github.io\nDescarga el archivo index.Rmd y modificalo con tu informacion en tu repositorio.\nNo olvides sincronizar el GitHub en RStudio y realiza los cambios desde ahi.\nEn GitHub, convierte en pagina web tu repositorio en Settings &gt; Pages &gt; Branch cambia a Main y root &gt; Save",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Buenas practicas en R</span>"
+    ]
+  },
+  {
+    "objectID": "Cap5.html#top-github-users-by-public-contributions-in-mexico",
+    "href": "Cap5.html#top-github-users-by-public-contributions-in-mexico",
+    "title": "6  Buenas practicas en R",
+    "section": "6.7 Top GitHub Users By Public Contributions in Mexico",
+    "text": "6.7 Top GitHub Users By Public Contributions in Mexico",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Buenas practicas en R</span>"
+    ]
+  },
+  {
+    "objectID": "Cap5.html#referencias",
+    "href": "Cap5.html#referencias",
+    "title": "6  Buenas practicas en R",
+    "section": "6.8 Referencias",
+    "text": "6.8 Referencias\n\nHaydee tutorial: Temas Selectos de Análisis Numérico y Computación Científica: Computo científico para el análisis de datos\nAlejandra Medina tutorial: Control de versiones con GitHub y RStudio\nWilson, et al. 2014. Best Practices for Scientific Computing. PLOS Biology\nEvelia Coss - tutorial Buenas practicas en R\nEvelia Coss - Make your CV tutorial",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Buenas practicas en R</span>"
+    ]
+  }
+]

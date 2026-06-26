@@ -1,0 +1,55 @@
+# Instalar Git Bash en Windows
+
+::: callout-note
+Si necesitas que los participantes instalen algo, puedes dejar la informacion con las instrucciones
+:::
+
+**Nota:** Para obtener más detalles sobre cómo instalar y configurar Git Bash, puedes ver este video tutorial: [Instrucciones para instalar Git Bash en Windows](https://youtu.be/339AEqk9c-8).
+
+1.  Descarga el instalador de [Git para Windows](https://gitforwindows.org/).
+
+2.  Ejecuta el instalador y sigue los siguientes pasos:
+
+    -   Haz clic en **"Next" cuatro veces** (dos veces si ya has instalado Git previamente). No necesitas cambiar nada en las pantallas de Información, ubicación, componentes y menú de inicio.
+
+    -   En el menú desplegable **"Choosing the default editor used by Git", selecciona "Use the Nano editor by default"** (NOTA: necesitarás desplazarte hacia arriba para encontrarlo) y haz clic en "Next".
+
+    -   En la página que dice **"Adjusting the name of the initial branch in new repositories", asegúrate de que "Let Git decide"** esté seleccionado. Esto garantizará el nivel más alto de compatibilidad para nuestras lecciones.
+
+    -   Asegúrate de que esté seleccionada la opción **"Git from the command line and also from 3rd-party software" y haz clic en "Next".** (Si no haces esto, Git Bash no funcionará correctamente, lo que te obligará a eliminar la instalación de Git Bash, volver a ejecutar el instalador y seleccionar la opción "**Git from the command line and also from 3rd-party software").**
+
+    -   Selecciona **"Use bundled OpenSSH"**.
+
+    -   Asegúrate de que **"Use the native Windows Secure Channel Library" esté seleccionada y haz clic en "Next"**.
+
+    -   Asegúrate de que **"Checkout Windows-style, commit Unix-style line endings" esté seleccionada y haz clic en "Next".**
+
+    -   Asegúrate de que \*\*"Use Windows'\*\* default console window" esté seleccionada y haz clic en "Next".
+
+    -   Asegúrate de que **"Default (fast-forward or merge)"** esté seleccionada y haz clic en "Next".
+
+    -   Asegúrate de que **"Git Credential Manager"** esté seleccionada y haz clic en "Next".
+
+    -   Asegúrate de que **"Enable file system caching"** esté seleccionada y haz clic en "Next".
+
+    -   Haz clic en **"Install"**.
+
+    -   Haz clic en **"Finish" o "Next"**.
+
+3.  Si tu variable de entorno **"HOME"** no está configurada (o no sabes qué es):
+
+-   Abre el símbolo del sistema (abre el menú de inicio, luego escribe `cmd` y presiona **Enter**).
+-   Escribe la siguiente línea exactamente como se muestra en la ventana del símbolo del sistema.
+
+``` {.bash eval="false"}
+setx HOME "%USERPROFILE%"
+```
+
+-   Presiona Enter, deberías ver "SUCCESS: Specified value was saved".
+-   Cierra el símbolo del sistema escribiendo "exit" y presionando Enter.
+
+Esto te proporcionará tanto Git como Bash en el programa Git Bash.
+
+## Referencia
+
+-   Guia de instalacion de [Git Bash](https://miguel-mx.github.io/2024-01-24-ccm-unam-swc/#the-bash-shell)

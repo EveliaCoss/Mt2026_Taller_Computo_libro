@@ -1,0 +1,124 @@
+# Buenas practicas en R
+
+Notas personales recabadas a partir de los tutoriales y ejemplos 😊. Espero que les funcione 💜
+
+## Materiales informativos
+
+-   [Curso de Joselyn Cristina Chávez Fuentes](https://comunidadbioinfo.github.io/cdsb2023/creaci%C3%B3n-de-vi%C3%B1etas.html)
+
+-   Me ayudo mucho este [Video](https://www.youtube.com/watch?v=7ZgZ6qUKZvE&ab_channel=DaniMedi)
+
+-   [Documentación de funciones de Andrés Arredondo Cruz](https://comunidadbioinfo.github.io/cdsb2023/documentaci%C3%B3n-de-funciones.html)
+
+💪 Estuve muy intensa viendo su codigo. Muchas gracias por tenerlos publico.
+
+## **Un algoritmo nos permite resolver un problema ⭐**
+
+Un algoritmo es un método para resolver un problema mediante una serie de pasos **definidos, precisos** y **finitos**.
+
+-   **Definido**: si se sigue dos veces, se obtiene el mismo resultado. Es reproducible.
+
+-   **Preciso**: implica el orden de realización de cada uno de los pasos.
+
+-   **Finito**: Tiene un numero determinado de pasos, implica que tiene un fin.
+
+> Un algoritmo podemos definirlo como un **programa o software**.
+
+## **Para escribir un buen software necesitas:**
+
+> Escribir **código mantenible (maintainable code), usar control de versiones (version control) y rastreadores de problemas (issue trackers), revisiones de código (code reviews), pruebas unitarias (unit testing) y automatización de tareas (task automation)**.
+>
+> Wilson, et al. 2014. PLOS Biology
+
+Con el fin de *previnir retracciones*.
+
+::: callout-note
+## Pasos para escribir un buen software
+
+1.  Análisis del problema / Definir el problema
+
+2.  Diseño del algoritmo / Diseño del programa
+
+3.  Codificación / Escribir el código
+
+4.  Compilación y ejecución del programa
+
+5.  Verificación / Realizar pruebas
+
+6.  Depuración / Detectar los errores y corregirlos
+
+> Programacion defensiva
+
+7.  Documentación
+:::
+
+![](https://eveliacoss.github.io/Buenaspracticas_R_Mayo2024/BestPractices/figures/homersapien.jpg){fig-align="center"}
+
+## **Paso 7: Documentación**
+
+::: callout-note
+-   *Autor (author)*: Su nombre
+
+-   *Dia (date)*: Fecha de creación
+
+-   *Paquetes (packages)*
+
+-   *Directorio de trabajo (Working directory)*: En que carpeta se encuentra tu datos y programa.
+
+-   *Información descriptiva del programa (Description)*: ¿Para qué sirve el programa? Ej: El siguiente programa realiza la suma de dos numeros enteros a partir de la entrada del usuario y posteriormente la imprime en pantalla.
+
+-   *Usage* ¿Cómo se utiliza?
+
+-   *Argumentos (Arguments)*
+
+    -   *Información de entrada (Data Inputs)*: Ej: Solo numeros enteros (sin decimales).
+
+    -   *Información de salida (Outpus)*: Graficas, figuras, tablas, etc.
+:::
+
+![](https://eveliacoss.github.io/Buenaspracticas_R_Mayo2024/BestPractices/figures/meme_documentacion.jpg){fig-align="center"}
+
+## Puntos claves para buenas practicas en bioinfo ⭐
+
+1.  Escriba **programas para personas, no para computadoras** (Documenta qué hace y por qué). - Se coherente en la nomenclatura, indentación y otros aspectos del estilo.
+
+2.  Divide los programas en *funciones cortas de un solo propósito.* 💻 📚
+
+3.  **No repitas tu código**. Crea pasos reproducibles o que se repitan por si solas. ➰
+
+4.  Planifique los errores (**Programacion defensiva**) 🚩
+
+5.  Optimice el software sólo después de que funcione correctamente. - Si funciona no lo modifiques, simplificalo.
+
+6.  Colaborar - Busque siempre bibliotecas de software bien mantenidas que hagan lo que necesita. 👥
+
+::: callout-note
+## Ejemplo de como realizo mis documentos 💜
+
+Aqui les dejo el script que les doy a mis alumnos [VisualizacionDatos.R](https://github.com/EveliaCoss/RNAseq_classFEB2024/blob/main/Practica_Dia3/scripts/VisualizacionDatos.R) del curso de [Análisis de datos de RNA-Seq](https://github.com/EveliaCoss/RNAseq_classFEB2024).
+:::
+
+## Pagina web en GitHub
+
+::: callout-note
+## Actividad
+
+1.  En GitHub, crea un repositorio con el mismo nombre de usuario y agregale ".github.io". Ejemplo: Mi usuario es EveliaCoss y mi repositorio se llama "EveliaCoss.github.io", dandome la siguiente liga https://github.com/EveliaCoss/EveliaCoss.github.io
+2.  Descarga el archivo [index.Rmd](https://github.com/EveliaCoss/EveliaCoss.github.io/blob/main/index.Rmd) y modificalo con tu informacion en tu repositorio.
+3.  No olvides sincronizar el GitHub en RStudio y realiza los cambios desde ahi.
+4.  En GitHub, convierte en pagina web tu repositorio en Settings \> Pages \> Branch cambia a Main y root \> Save
+:::
+
+[![](figures/EveliaCoss_webpage.jpg)](https://eveliacoss.github.io/)
+
+## Top GitHub Users By Public Contributions in Mexico
+
+[![](figures/Evelia_awards.jpg)](https://github.com/gayanvoice/top-github-users/blob/main/markdown/public_contributions/mexico.md)
+
+## Referencias
+
+-   Haydee tutorial: [Temas Selectos de Análisis Numérico y Computación Científica: Computo científico para el análisis de datos](https://haydeeperuyero.github.io/Computo_Cientifico/)
+-   Alejandra Medina tutorial: [Control de versiones con GitHub y RStudio](https://comunidadbioinfo.github.io/cdsb2023/control-de-versiones-con-github-y-rstudio.html)
+-   Wilson, et al. 2014. [Best Practices for Scientific Computing](https://journals.plos.org/plosbiology/article?id=10.1371/journal.pbio.1001745). PLOS Biology
+-   Evelia Coss - tutorial [Buenas practicas en R](https://github.com/EveliaCoss/Buenaspracticas_R_Mayo2024)
+-   Evelia Coss - [Make your CV tutorial](https://github.com/EveliaCoss/Make_yourCV)

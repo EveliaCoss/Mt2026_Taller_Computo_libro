@@ -1,0 +1,30 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Control de versiones con GitHub y RStudio",
+    "section": "",
+    "text": "Información general\n\n\nSobre el curso 📌Requisitos previosAgenda 📆\n\n\nEste documento se basa en \"Happy Git with R\" de Jenny Bryan, los STAT 545 TAs, Jim Hester, así como lasguías practicas de Github.\n\nFechas: 16 y 18 octubre 2024\nDuración del curso: 3 horas y 30 minutos\n\nInstructora:\n\nEvelia Lorena Coss-Navarrete - PostDoc, LIIGH-UNAM.\n\nResumen:\nEste tutorial te enseñará los conceptos fundamentales de GitHub, incluyendo repositorios, ramas, confirmaciones y solicitudes de cambio. A través de la creación de tu propio repositorio personalizado y pagina web, aprenderás a gestionar el flujo de trabajo de las solicitudes de cambio, un método ampliamente utilizado para colaborar en la creación y revisión de código.\nObjetivos:\nEn esta guía rápida aprenderás a:\n\nCrear y gestionar un repositorio.\nIniciar y administrar una nueva rama.\nRealizar cambios en un archivo y enviarlos a GitHub como confirmación.\nCrear tu página de inicio en Github.\nCrear tu página web.\n\nCitar y reutilizar el material del curso\nLos datos del curso se pueden reutilizar y adaptar libremente con la debida atribución. Todos los datos de los cursos de estos repositorios están sujetos a la licencia Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0).\n\n\n\nDebes tener una cuenta de usuario de GitHub. Para más información, consulta “Creación de una cuenta en GitHub”.\nNo necesitas saber cómo codificar, utilizar la línea de comandos o instalar Git (el software de control de versiones en el que está compilado GitHub).\nContar con una terminal con Git, en Windows puedes usar Git Bash.\n\n\n\n\n\n\n\n\n\n\nTema\nTiempo\n\n\n\n\n🔷 Section 1 - Introduction and Quality control (45 min) - (8:30 - 10:00 h)\n\n\n\n\nCreación de una cuenta en GitHub\n\n5 min\n\n\n\nIntroducción a Git / GitHub\n\n15 min (9:45- 10:00)\n\n\n\nPractical 13: scATAC-seq Pre-Processing and Quality Control\n\n30 min\n(10:00-10:30)\n\n\n☕ Coffee break (10 min) - (10:30-11:00 h) ☕\n\n\n\n🔷 Section 2 - scATAC-seq Downstream analysis (2 h) - (11:00-13:00 h)\n\n\n\n\nPractical 14: scATAC-seq Downstream\n\n1 h\n(11:00-12:00)\n\n\n\nPractical 15: Analyses and scRNA-seq Integration\n\n1 h\n(12:00-13:00)\n\n\n🍖🍗 Lunch (1 h) - (13:00 - 14:00) 🍖🍗\n\n\n\n🔷 Section 3 - Motif analysis and results (14:00 - 15:30 h)\n\n\n\n\nPractical 16: Motif analysis with Signac\n\n30 min\n(14:00-14:30)\n\n\n\nPractical 17: Exploring results (graphs)\n\n30 min (14:30-15:00)\n\n\n\nOther tools used in scATAC-seq\n\n30 min (15:00-15:30)"
+  },
+  {
+    "objectID": "index.html#sobre-el-curso",
+    "href": "index.html#sobre-el-curso",
+    "title": "Control de versiones con GitHub y RStudio",
+    "section": "1.1 Sobre el curso 📌",
+    "text": "1.1 Sobre el curso 📌\n\nInstructora: Evelia Coss, posdoc, Laboratorio Internacional de Investigación sobre el Genoma Humano (LIIGH) UNAM.\n\nEste tutorial te enseñará los conceptos fundamentales de GitHub, incluyendo repositorios, ramas, confirmaciones y solicitudes de cambio. A través de la creación de tu propio repositorio personalizado y pagina web, aprenderás a gestionar el flujo de trabajo de las solicitudes de cambio, un método ampliamente utilizado para colaborar en la creación y revisión de código.\nEn esta guía rápida aprenderás a:\n\nCrear y gestionar un repositorio.\nIniciar y administrar una nueva rama.\nRealizar cambios en un archivo y enviarlos a GitHub como confirmaciones.\nCrear tu pagina de inicio en Github.\nCrear tu pagina web.\n\nEste documento se basa en \"Happy Git with R\" de Jenny Bryan, los STAT 545 TAs, Jim Hester, asi como las guias practicas de Github."
+  },
+  {
+    "objectID": "intro.html",
+    "href": "intro.html",
+    "title": "1  Introducción a Git/GitHub",
+    "section": "",
+    "text": "Este tutorial te enseñará los conceptos fundamentales de GitHub, incluyendo repositorios, ramas, confirmaciones y solicitudes de cambio. A través de la creación de tu propio repositorio personalizado y pagina web, aprenderás a gestionar el flujo de trabajo de las solicitudes de cambio, un método ampliamente utilizado para colaborar en la creación y revisión de código.\nEn esta guía rápida aprenderás a:\n\nCrear y gestionar un repositorio.\nIniciar y administrar una nueva rama.\nRealizar cambios en un archivo y enviarlos a GitHub como confirmaciones.\nCrear tu pagina de inicio en Github.\nCrear tu pagina web.\n\nEste documento se basa en \"Happy Git with R\" de Jenny Bryan, los STAT 545 TAs, Jim Hester, asi como las guias practicas de Github."
+  },
+  {
+    "objectID": "summary.html",
+    "href": "summary.html",
+    "title": "3  Summary",
+    "section": "",
+    "text": "In summary, this book has no content whatsoever.\n\n1 + 1\n\n[1] 2"
+  }
+]

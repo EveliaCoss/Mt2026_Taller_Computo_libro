@@ -1,0 +1,37 @@
+project:
+  type: book
+  output-dir: docs
+
+book:
+  title: "Workshop"
+  author: "Dra. Evelia Coss"
+  date: "06/25/2026"
+  page-navigation: true
+  chapters:
+    - index.qmd
+    - Cap1.qmd
+    - intro.qmd
+    - Cap2.qmd
+    - Cap3.qmd
+    - Cap4.qmd
+    - Cap5.qmd
+  # Information
+  repo-url: https://github.com/EveliaCoss/Template_Workshop_Quarto_ELCN # link de Github
+  sharing: [twitter, facebook, linkedin]
+  favicon: "enesLogo.png" # icono de la pagina en pestana
+
+
+format:
+  html:
+    toc-depth: 4
+    number-depth: 3
+  # Boton para cambiar tema de oscuro a claro
+    theme:
+      light: cosmo
+      dark: darkly
+    code-fold: show # Ocultar codigo
+    code-copy: true # Copy button
+    freeze: false  # Desactivar congelamiento
+
+editor: visual
+
