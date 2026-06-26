@@ -9,7 +9,9 @@ babelquarto::quarto_multilingual_book(
 
 
 babelquarto::render_book(".")
+babelquarto::render_book(site_url= "https://eveliacoss.github.io/Workshop2026_scRNAseq_CITEseq_libro/")
+ 
 # For a multilingual book
+servr::httw("_book")
 servr::httw("docs")
-
 
