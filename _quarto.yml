@@ -4,6 +4,7 @@ project:
 
 book:
   title: "Survival Course: scRNA‑seq + CITE‑seq"
+  site-url: https://eveliacoss.github.io/Workshop2026_scRNAseq_CITEseq_libro/
   author: 
     - name: Thais Crippa de Oliveira
       degrees: PhD
@@ -20,14 +21,14 @@ book:
       email: ecosnav@gmail.com
       affiliations:
         - name: ENES, Juriquilla - UNAM
-          country: México
+          country: Mexico
           url: https://www.enesjuriquilla.unam.mx/
   
   date: "06/25/2026"
   page-navigation: true
   chapters:
     - index.qmd
-    - intro.qmd
+    - cap1_repaso.qmd
     - intro_citeseq.qmd
     - Cap1.qmd
     - Cap2.qmd
@@ -56,4 +57,56 @@ format:
     freeze: false  # Desactivar congelamiento
 
 editor: visual
+
+babelquarto:
+  languagecodes:
+  - name: es
+    text: "Español"
+  - name: pt
+    text: "Português"
+  - name: en
+    text: "English"
+  mainlanguage: 'en'
+  languages: ['es', 'pt']
+title-es: "Curso de supervivencia: scRNA-seq + CITE-se"
+title-pt: "Curso de sobrevivencia: scRNA-seq + CITE-seq"
+description-es: description in es
+description-pt: description in pt
+author-es: 
+    - name: Thais Crippa de Oliveira
+      degrees: Dra.
+      url: https://portal.edat.unicamp.br/perfil?origem=&docente=332656&sigla_unidade=&nome_unidade=&nome_programa=
+      orcid: https://orcid.org/0000-0002-9959-0690
+      email: crippathais@gmail.com 
+      affiliations:
+        - name: UNICAMP
+          country: Brasil
+    - name: Evelia Coss
+      degrees: Dra.
+      url: https://eveliacoss.github.io/ 
+      orcid: https://orcid.org/0000-0002-7087-2977
+      email: ecosnav@gmail.com
+      affiliations:
+        - name: ENES, Juriquilla - UNAM
+          country: México
+          url: https://www.enesjuriquilla.unam.mx/
+author-pt: 
+    - name: Thais Crippa de Oliveira
+      degrees: Dra.
+      url: https://portal.edat.unicamp.br/perfil?origem=&docente=332656&sigla_unidade=&nome_unidade=&nome_programa=
+      orcid: https://orcid.org/0000-0002-9959-0690
+      email: crippathais@gmail.com 
+      affiliations:
+        - name: UNICAMP
+          country: Brasil
+    - name: Evelia Coss
+      degrees: Dra.
+      url: https://eveliacoss.github.io/ 
+      orcid: https://orcid.org/0000-0002-7087-2977
+      email: ecosnav@gmail.com
+      affiliations:
+        - name: ENES, Juriquilla - UNAM
+          country: México
+          url: https://www.enesjuriquilla.unam.mx/
+lang: en
 

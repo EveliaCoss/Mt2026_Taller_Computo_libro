@@ -1,0 +1,1725 @@
+---
+title: "Single-Cell Survival Course"
+subtitle: "CITE-seq Troubleshooting with Seurat v5"
+author: "Workshop | GSE149689 | RNA + ADT | 7 donors | 3,000 cells"
+date: "`r format(Sys.Date(), '%B %d, %Y')`"
+output:
+  html_document:
+    toc: true
+    toc_float:
+      collapsed: false
+      smooth_scroll: true
+    toc_depth: 3
+    number_sections: false
+    self_contained: true
+    code_folding: show
+    df_print: paged
+    css: course_style.css
+---
+
+```{r global_setup, include=FALSE}
+knitr::opts_chunk$set(
+  echo       = TRUE,
+  warning    = FALSE,
+  message    = FALSE,
+  fig.width  = 11,
+  fig.height = 5,
+  fig.align  = "center",
+  comment    = "#>"
+)
+```
+
+---
+
+# Single-Cell Survival Course
+
+**CITE-seq Troubleshooting with Seurat v5**
+
+`GSE149689` | `RNA + ADT` | `7 donors` | `3,000 cells` | `24 proteins` | `Wilk et al., Nature Medicine 2021`
+
+---
+
+> **How to use this notebook**
+> Run every chunk in order from top to bottom. Some chunks will produce errors.
+> That is intentional. When an error or suspicious result appears, read the
+> paragraph below the chunk before running the next one.
+> Sections marked **Challenge** ask you to answer a question before continuing.
+> Sections marked **Survival moment** flag decisions that ruin analyses silently.
+
+**Pre-course checklist**
+
+- [ ] R 4.3 or higher installed
+- [ ] RStudio ready and a new session started (Session > Restart R)
+- [ ] Packages installed (Block 0, Step 0.1)
+- [ ] Dataset downloaded to `data/gse149689_subset_3k.rds`
+- [ ] `sobj_broken.rds` kept private until Block 5
+
+---
+
+***
+
+# ══════════════════════════════════════════
+# BLOCK 0  |  Setup
+# ══════════════════════════════════════════
+
+*Run at home before the course*
+
+***
+
+## Step 0.1  |  Install packages
+
+This chunk checks every package before installing. If `install.packages()`
+fails, it retries automatically via BiocManager. Safe to run multiple times.
+
+```{r install_auto}
+# [BLOCK 0 | Step 0.1 | Package installation with CRAN + BiocManager fallback]
+
+if (!requireNamespace("BiocManager", quietly = TRUE))
+  install.packages("BiocManager")
+
+all_pkgs <- c(
+  "Seurat", "SeuratObject", "ggplot2", "patchwork",
+  "dplyr", "Matrix", "harmony", "scales", "ggrepel",
+  "SingleR", "celldex", "BiocParallel", "scDblFinder"
+)
+
+for (pkg in all_pkgs) {
+  if (!requireNamespace(pkg, quietly = TRUE)) {
+    message("Installing: ", pkg)
+    tryCatch(install.packages(pkg, quiet = TRUE),
+             error   = function(e) NULL,
+             warning = function(w) NULL)
+    if (!requireNamespace(pkg, quietly = TRUE)) {
+      message("  CRAN failed. Retrying via BiocManager...")
+      tryCatch(
+        BiocManager::install(pkg, ask = FALSE, update = FALSE),
+        error   = function(e) message("  FAILED: ", e$message),
+        warning = function(w) NULL
+      )
+    }
+    if (requireNamespace(pkg, quietly = TRUE))
+      message("  OK: ", pkg, " (", as.character(packageVersion(pkg)), ")")
+    else
+      message("  FAILED: ", pkg, " -- run the fallback chunk below")
+  } else {
+    message("Already installed: ", pkg,
+            " (", as.character(packageVersion(pkg)), ")")
+  }
+}
+```
+
+## Step 0.1b  |  Fallback: force reinstall individual packages
+
+Only run lines for packages that appeared as FAILED above.
+After running any line here, do **Session > Restart R** before continuing.
+
+```{r install_fallback, eval=FALSE}
+# [BLOCK 0 | Step 0.1b | Force reinstall via BiocManager]
+BiocManager::install("Seurat",       force = TRUE)
+BiocManager::install("SeuratObject", force = TRUE)
+BiocManager::install("ggplot2",      force = TRUE)
+BiocManager::install("patchwork",    force = TRUE)
+BiocManager::install("dplyr",        force = TRUE)
+BiocManager::install("Matrix",       force = TRUE)
+BiocManager::install("harmony",      force = TRUE)
+BiocManager::install("scales",       force = TRUE)
+BiocManager::install("ggrepel",      force = TRUE)
+BiocManager::install("SingleR",      force = TRUE)
+BiocManager::install("celldex",      force = TRUE)
+BiocManager::install("BiocParallel", force = TRUE)
+BiocManager::install("scDblFinder",  force = TRUE)
+```
+
+## Step 0.2  |  Verify and load all libraries
+
+All packages are loaded here. No `library()` calls appear later in the notebook.
+
+> If you see `namespace 'ggplot2' is imported by 'Seurat'...`, that is not
+> an error. The package is already active. Always do **Session > Restart R**
+> before opening the notebook to avoid namespace conflicts.
+
+```{r load_libs}
+# [BLOCK 0 | Step 0.2 | Verify and load all libraries]
+
+pkgs <- c("Seurat", "SeuratObject", "ggplot2", "patchwork",
+          "dplyr", "Matrix", "SingleR", "celldex",
+          "harmony", "scales", "ggrepel", "BiocParallel")
+
+for (pkg in pkgs)
+  cat(sprintf("  %-18s %s\n", pkg,
+              ifelse(requireNamespace(pkg, quietly = TRUE), "OK", "MISSING")))
+
+cat("\nSeurat version:", as.character(packageVersion("Seurat")), "\n")
+
+suppressPackageStartupMessages({
+  library(Seurat);   library(SeuratObject); library(ggplot2)
+  library(patchwork); library(dplyr);       library(Matrix)
+  library(SingleR);  library(celldex);      library(BiocParallel)
+  library(harmony);  library(scales);       library(ggrepel)
+})
+cat("\nAll libraries loaded.\n")
+```
+
+## Step 0.3  |  Create folders and download dataset
+
+```{r folders}
+# [BLOCK 0 | Step 0.3 | Folder structure]
+dir.create("data",    showWarnings = FALSE)
+dir.create("outputs", showWarnings = FALSE)
+cat("Folders ready.\n")
+```
+
+```{r download, eval=FALSE}
+# [BLOCK 0 | Step 0.3 | Download dataset from Google Drive]
+# FILE_ID is set to the course dataset. Change only if you have a different file.
+FILE_ID <- "1mCg4VD91qK7pg-zL1iYUUBFWBr7fmmCM"
+options(timeout = 600)
+download.file(
+  url      = paste0("https://drive.google.com/uc?export=download&confirm=t&id=",
+                    FILE_ID),
+  destfile = "data/gse149689_subset_3k.rds",
+  mode     = "wb"
+)
+cat("File exists:", file.exists("data/gse149689_subset_3k.rds"), "\n")
+cat("Size (MB)  :", round(file.size("data/gse149689_subset_3k.rds") / 1e6, 1), "\n")
+```
+
+---
+
+***
+
+# ══════════════════════════════════════════
+# BLOCK 1  |  Foundations and Dataset
+# ══════════════════════════════════════════
+
+*0:00 to 0:30 | 30 min*
+
+***
+
+## Step 1.1  |  Why single-cell RNA-seq?
+
+Bulk RNA-seq collapses an entire sample into one number per gene: the
+population average. A signal that appears in 10% of cells at high intensity
+and in 90% at zero will look like a dim signal in every cell. You cannot tell
+which cells express it, or whether the expressing cells are a specific
+subpopulation.
+
+scRNA-seq gives each cell its own profile. The key trade-off:
+
+| Property | Bulk RNA-seq | scRNA-seq |
+|---|---|---|
+| Resolution | Population average | Per-cell |
+| Sensitivity for low-expressed genes | High | Low (dropout) |
+| Sparsity | Dense matrix | ~90% zeros |
+| Throughput (cells) | All | Sampled subset |
+| Cost per sample | Low | High |
+
+The ~90% sparsity is not instrument noise. A transcript detected at low copy
+number will simply not be captured in many cells even if truly expressed.
+This is called **dropout**, and it drives most of the analytical decisions
+in scRNA-seq: normalization, dimensionality reduction, and annotation.
+
+```{r bulk_vs_sc, fig.height=5}
+# [BLOCK 1 | Step 1.1 | Simulated bulk vs single-cell comparison]
+set.seed(42)
+n  <- 200
+sc <- rbind(
+  data.frame(CD3E = rnorm(n/2, 8, 1), CD14 = rnorm(n/2, 1, 0.5),
+             Type = "T cell"),
+  data.frame(CD3E = rnorm(n/2, 1, 0.5), CD14 = rnorm(n/2, 8, 1),
+             Type = "Monocyte")
+)
+bulk <- data.frame(CD3E = mean(sc$CD3E), CD14 = mean(sc$CD14))
+
+ggplot(sc, aes(CD3E, CD14, color = Type)) +
+  geom_point(alpha = 0.55, size = 1.8) +
+  geom_point(data = bulk, color = "#111827", size = 9, shape = 18) +
+  annotate("text", x = bulk$CD3E + 0.4, y = bulk$CD14,
+           label = "Bulk average\n(no real cell)", hjust = 0, size = 3.2) +
+  scale_color_manual(values = c("T cell" = "#0d7377", "Monocyte" = "#92400e")) +
+  labs(title    = "Bulk RNA-seq loses the structure",
+       subtitle = "The average is a ghost: it corresponds to no real biological state",
+       x = "CD3E expression (T cell marker)",
+       y = "CD14 expression (Monocyte marker)") +
+  theme_classic(base_size = 13)
+```
+
+## Step 1.2  |  CITE-seq: adding the protein layer
+
+CITE-seq (Cellular Indexing of Transcriptomes and Epitopes by Sequencing)
+extends scRNA-seq by simultaneously measuring surface protein abundance.
+Antibodies conjugated to short DNA barcodes (Antibody-Derived Tags, ADT)
+are stained on cells, then sequenced alongside the RNA in the same library.
+
+Each cell yields two measurement vectors:
+
+| Modality | Features | Typical values | Main strength |
+|---|---|---|---|
+| RNA | ~500 genes (full: ~33,000) | 0-50 UMIs per gene | Transcriptional state, pathways, trajectories |
+| ADT | 24 surface proteins | 1-1,000 counts per protein | Clean bimodal signal, gating, protein abundance |
+
+The protein layer is critical for three reasons:
+
+1. **Dropout**: canonical surface markers like CD4, CD8, CD14 are frequently
+   undetected at the RNA level even in cells that clearly express the protein.
+2. **Gating**: protein data replicates the information from flow cytometry
+   directly, connecting computational results to established biology.
+3. **Integration**: the WNN (Weighted Nearest Neighbor) algorithm can combine
+   both modalities, giving each cell a per-modality weight based on
+   information content.
+
+## Step 1.3  |  Dataset: GSE149689
+
+**Wilk et al., Nature Medicine 2021** : CITE-seq of PBMCs from:
+
+- 3 healthy donors (Donor01, Donor02, Donor03)
+- 4 COVID-19 donors: Donor04 (Mild), Donor05 (Moderate),
+  Donor06 (Severe), Donor07 (Severe)
+
+Cell types represented: CD4 T, CD8 T, NK, classical Monocyte,
+non-classical Monocyte, B cell, Plasmablast, DC, Platelet.
+
+We use a synthetic 3,000-cell subset that mirrors the biological structure
+of the full dataset: same donor proportions, same cell type composition,
+same ADT panel, and an interferon response signal in COVID-19 donors.
+
+---
+
+> **Discussion pause**
+>
+> - CD4 protein cleanly separates CD4 T cells by flow cytometry. Why does CD4
+>   RNA often fail to do the same in scRNA-seq?
+> - Plasmablasts are expanded in severe COVID-19. What RNA markers would you
+>   expect to be elevated? What ADT markers?
+> - What is the minimum number of donors per condition to make a group-level
+>   claim statistically defensible?
+
+---
+
+***
+
+# ══════════════════════════════════════════
+# BLOCK 2  |  Object Inspection and QC
+# ══════════════════════════════════════════
+
+*0:30 to 1:00 | 30 min*
+
+***
+
+## Step 2.1  |  Load the object
+
+```{r load_object}
+# [BLOCK 2 | Step 2.1 | Load Seurat object]
+sobj <- readRDS("data/gse149689_subset_3k.rds")
+print(sobj)
+```
+
+## Step 2.2  |  Object anatomy: Seurat v4 vs v5
+
+Seurat v5 changed how count matrices are stored internally. Scripts written
+for v4 break in v5 in ways that are not always obvious. Run the next two
+chunks exactly as they are.
+
+```{r v4_slot_direct, error=TRUE}
+# [BLOCK 2 | Step 2.2 | v4 direct slot access -- will error in v5]
+# In Seurat v4, this was the standard way to get the count matrix.
+counts_old <- sobj@assays$RNA@counts
+```
+
+The `@counts` slot no longer exists in Seurat v5 `Assay5` objects. The
+count matrix lives inside a layer system.
+
+```{r v4_getassaydata, error=TRUE}
+# [BLOCK 2 | Step 2.2 | GetAssayData with slot= argument -- deprecated in v5]
+counts_old2 <- GetAssayData(sobj, slot = "counts")
+```
+
+`slot=` is deprecated. The v5 argument is `layer=`. Both of these errors are
+extremely common when receiving objects from collaborators or running old
+pipeline scripts.
+
+```{r v5_correct_access}
+# [BLOCK 2 | Step 2.2 | Correct v5 access patterns]
+
+# Pattern 1: LayerData() -- recommended for v5
+counts_rna <- LayerData(sobj, assay = "RNA", layer = "counts")
+cat("RNA counts matrix dimensions (genes x cells):\n")
+cat(" ", dim(counts_rna), "\n\n")
+
+# Pattern 2: assay class
+cat("RNA assay class :", class(sobj[["RNA"]]), "\n")
+cat("ADT assay class :", class(sobj[["ADT"]]), "\n\n")
+
+# Pattern 3: available layers
+cat("RNA layers      :", paste(Layers(sobj[["RNA"]]), collapse = ", "), "\n")
+cat("ADT layers      :", paste(Layers(sobj[["ADT"]]), collapse = ", "), "\n\n")
+
+# Pattern 4: Seurat object version
+cat("Object version  :", as.character(sobj@version), "\n")
+```
+
+## Step 2.3  |  Deep object inspection (intermediate challenges)
+
+These are not tutorial exercises. Each question requires understanding what
+is inside the Seurat object and how to get it out.
+
+```{r challenge_sparsity}
+# [BLOCK 2 | Step 2.3 | Challenge 1: sparsity of the count matrix]
+# Sparsity = fraction of zero entries. Drives normalization decisions.
+
+counts_mat <- LayerData(sobj, assay = "RNA", layer = "counts")
+total_entries  <- prod(dim(counts_mat))
+nonzero        <- Matrix::nnzero(counts_mat)
+sparsity       <- 1 - nonzero / total_entries
+
+cat("RNA count matrix:\n")
+cat("  Genes   :", nrow(counts_mat), "\n")
+cat("  Cells   :", ncol(counts_mat), "\n")
+cat("  Total entries  :", format(total_entries, big.mark = ","), "\n")
+cat("  Non-zero entries:", format(nonzero, big.mark = ","), "\n")
+cat("  Sparsity        :", round(sparsity * 100, 1), "%\n\n")
+
+# ADT sparsity for comparison
+adt_counts  <- LayerData(sobj, assay = "ADT", layer = "counts")
+adt_nonzero <- Matrix::nnzero(adt_counts)
+adt_total   <- prod(dim(adt_counts))
+cat("ADT count matrix:\n")
+cat("  Proteins:", nrow(adt_counts), "\n")
+cat("  Cells   :", ncol(adt_counts), "\n")
+cat("  Sparsity:", round((1 - adt_nonzero / adt_total) * 100, 1), "%\n")
+```
+
+> **Challenge 1:** Why is ADT sparsity so much lower than RNA sparsity?
+> What does that imply about the biological interpretation of zero values
+> in each modality?
+
+```{r challenge_memory}
+# [BLOCK 2 | Step 2.3 | Challenge 2: memory footprint of layers]
+# Dense vs sparse storage matters at scale. A full 10x experiment with
+# 50,000 cells and 33,000 genes as a dense matrix exceeds 50 GB.
+
+# Compare sparse (counts) vs dense (after scaling) memory
+counts_rna_sz <- object.size(LayerData(sobj, assay = "RNA", layer = "counts"))
+cat("RNA counts layer (sparse):", format(counts_rna_sz, units = "Mb"), "\n")
+
+# The full object
+obj_size <- object.size(sobj)
+cat("Full Seurat object       :", format(obj_size, units = "Mb"), "\n\n")
+
+cat("Key insight: scale.data stores a DENSE matrix (genes x cells).\n")
+cat("After ScaleData(), memory footprint increases substantially.\n")
+cat("In full datasets: only scale the genes you will use in PCA.\n")
+```
+
+```{r challenge_pca_embeddings}
+# [BLOCK 2 | Step 2.3 | Challenge 3: navigating reductions and embeddings]
+# After RunPCA(), where do the PC coordinates live?
+# How do you get them for a specific cell?
+
+# First, check what reductions exist right now (before PCA has been run)
+cat("Reductions in the object:\n")
+print(Reductions(sobj))
+cat("(empty -- no PCA yet, that comes in Block 3)\n\n")
+
+# After PCA runs, the embeddings will be at:
+# sobj@reductions$pca@cell.embeddings  -- cells x dims matrix
+# Embeddings(sobj, reduction = "pca")  -- same thing, recommended
+# sobj@reductions$pca@feature.loadings -- gene loadings
+
+# For now, check the metadata in detail
+cat("Metadata columns and types:\n")
+str(sobj@meta.data)
+```
+
+```{r challenge_metadata_query}
+# [BLOCK 2 | Step 2.3 | Challenge 4: querying cells by metadata]
+# Real analysis constantly requires subsetting or querying cells by
+# combinations of metadata. Practice the patterns here.
+
+# How many cells per donor?
+cat("Cells per donor:\n")
+print(table(sobj$donor_id))
+
+# How many cells per condition?
+cat("\nCells per condition:\n")
+print(table(sobj$condition))
+
+# Cells from COVID-19 donors with more than 100 genes detected
+covid_highgene <- sobj@meta.data %>%
+  filter(condition == "COVID19", nFeature_RNA > 100)
+cat("\nCOVID-19 cells with nFeature_RNA > 100:", nrow(covid_highgene), "\n")
+
+# Cross-tabulation: condition x severity
+cat("\nCondition x Severity:\n")
+print(table(sobj$condition, sobj$severity))
+```
+
+```{r challenge_adt_names}
+# [BLOCK 2 | Step 2.3 | Challenge 5: ADT feature naming and access]
+# ADT feature names often differ from RNA gene names.
+# CD3 protein != CD3E gene. CD8a protein != CD8A gene.
+# This mismatch is a frequent source of confusion.
+
+cat("ADT protein names:\n")
+print(rownames(sobj[["ADT"]]))
+
+cat("\nRNA marker names for comparison:\n")
+rna_markers <- c("CD3E", "CD4", "CD8A", "CD14", "CD19", "NCAM1")
+cat(rna_markers, "\n")
+
+cat("\nImportant: 'CD8a' in ADT vs 'CD8A' in RNA.\n")
+cat("FetchData() handles this transparently, but FeaturePlot()\n")
+cat("requires you to be on the correct DefaultAssay first.\n")
+
+# Demonstrate: what happens when you try to access an ADT feature
+# using the RNA gene name
+cat("\nDoes 'CD8A' exist in ADT?\n")
+cat("'CD8A' in ADT rownames:", "CD8A" %in% rownames(sobj[["ADT"]]), "\n")
+cat("'CD8a' in ADT rownames:", "CD8a" %in% rownames(sobj[["ADT"]]), "\n")
+```
+
+---
+
+> **Discussion pause**
+>
+> - The counts layer is sparse; the scale.data layer is dense. What does this
+>   mean for large datasets (50,000 cells, 33,000 genes)?
+> - You receive an object where `Reductions(sobj)` returns `"pca"` and `"umap"`
+>   but `Layers(sobj[["RNA"]])` returns only `"counts"`. The data layer is
+>   missing. Can you trust the UMAP? What would you do?
+> - What is the difference between `sobj[["RNA"]]` and `sobj@assays[["RNA"]]`
+>   in Seurat v5?
+
+---
+
+## Step 2.4  |  Quality control metrics
+
+### 2.4.1  |  Calculate QC metrics
+
+Mitochondrial percentage (`percent.mt`) measures the fraction of UMIs
+from mitochondrial genes. High values indicate either stressed/dying cells
+(cytoplasmic RNA degrades faster than mitochondrial) or low-quality droplets.
+Ribosomal percentage (`percent.ribo`) measures ribosomal protein gene
+expression, which can be used to flag highly proliferating or metabolically
+active cells.
+
+```{r qc_metrics}
+# [BLOCK 2 | Step 2.4.1 | QC metrics]
+sobj[["percent.mt"]]   <- PercentageFeatureSet(sobj, pattern = "^MT-")
+sobj[["percent.ribo"]] <- PercentageFeatureSet(sobj, pattern = "^RP[SL]")
+
+summary(sobj@meta.data[, c("nFeature_RNA", "nCount_RNA", "percent.mt")])
+```
+
+### 2.4.2  |  Visualize distributions
+
+```{r qc_violin, fig.height=5}
+# [BLOCK 2 | Step 2.4.2 | QC violin plots]
+VlnPlot(sobj,
+        features = c("nFeature_RNA", "nCount_RNA", "percent.mt"),
+        ncol = 3, pt.size = 0.05, alpha = 0.3)
+```
+
+```{r qc_scatter, fig.width=12, fig.height=4}
+# [BLOCK 2 | Step 2.4.2 | QC scatter plots]
+p1 <- FeatureScatter(sobj, "nCount_RNA", "nFeature_RNA") +
+  ggtitle("Counts vs genes detected") +
+  theme(plot.title = element_text(size = 10))
+p2 <- FeatureScatter(sobj, "nCount_RNA", "percent.mt") +
+  ggtitle("Counts vs mitochondrial %") +
+  theme(plot.title = element_text(size = 10))
+p1 | p2
+```
+
+> **Challenge 6:** In the scatter plot of nCount_RNA vs nFeature_RNA,
+> cells that fall far above the main diagonal are likely doublets (two cells
+> captured together). Cells that cluster at the lower left are likely
+> empty droplets. Do you see either population in this dataset?
+> Write code to count cells where nFeature_RNA > 200 AND nCount_RNA < 500.
+
+```{r challenge_outlier_detection}
+# [BLOCK 2 | Step 2.4.2 | Challenge 6: outlier detection]
+# Cells that are high in nFeature relative to nCount might be doublets.
+# Low nCount with low nFeature = empty droplet.
+# High percent.mt alone = stressed/dying cell.
+
+# Cells that are potential outliers: nFeature > 2 SD above mean
+mean_feat <- mean(sobj$nFeature_RNA)
+sd_feat   <- sd(sobj$nFeature_RNA)
+high_feat <- sum(sobj$nFeature_RNA > mean_feat + 2 * sd_feat)
+cat("Cells with nFeature > mean + 2 SD (potential doublets):",
+    high_feat, "\n")
+
+# Cells with high mt: > 95th percentile
+mt_95 <- quantile(sobj$percent.mt, 0.95)
+high_mt <- sum(sobj$percent.mt > mt_95)
+cat("Cells with percent.mt > 95th percentile:", high_mt, "\n")
+
+# Distribution per condition: is mt% elevated in COVID-19?
+cat("\nMedian percent.mt by condition:\n")
+sobj@meta.data %>%
+  group_by(condition) %>%
+  summarise(median_mt = round(median(percent.mt), 2),
+            mean_mt   = round(mean(percent.mt),   2),
+            .groups   = "drop") %>%
+  print()
+```
+
+### 2.4.3  |  Applying published thresholds without looking at the data
+
+The original GSE149689 paper used these thresholds on the full 10x dataset
+with ~33,000 genes. We apply them to our 500-gene dataset without checking.
+
+```{r filter_wrong, error=TRUE}
+# [BLOCK 2 | Step 2.4.3 | Applying tutorial thresholds blindly -- ERROR]
+sobj_filt <- subset(
+  sobj,
+  subset = nFeature_RNA > 200 &
+           nFeature_RNA < 5000 &
+           percent.mt   < 20
+)
+```
+
+**"No cells found"** is the canonical result of copying thresholds from
+a tutorial without checking your own data distribution. The threshold
+`nFeature_RNA > 200` was calibrated for a transcriptome of ~33,000 genes
+where cells typically detect 2,000-3,000 genes. In a 500-gene panel, most
+cells detect 50-150 genes. The filter removes every single cell.
+
+```{r thresholds_comparison}
+# [BLOCK 2 | Step 2.4.3 | Compare published vs data-driven thresholds]
+cat("--- Published thresholds (full 10x, 33k genes) ---\n")
+cat("  nFeature_RNA > 200   removes empty droplets\n")
+cat("  nFeature_RNA < 5000  removes likely doublets\n")
+cat("  percent.mt   < 20%   removes dead/stressed cells\n\n")
+
+cat("--- This dataset (500 genes) ---\n")
+print(round(quantile(sobj$nFeature_RNA,
+      probs = c(0.01, 0.05, 0.25, 0.5, 0.75, 0.95, 0.99))))
+
+cat("\n--- Data-driven thresholds ---\n")
+min_features <- max(10, round(quantile(sobj$nFeature_RNA, 0.02)))
+max_features <-          round(quantile(sobj$nFeature_RNA, 0.98))
+max_mt       <-          round(quantile(sobj$percent.mt,   0.95), 1)
+
+cat("  nFeature_RNA > ", min_features, "  (same intent: empty droplets)\n")
+cat("  nFeature_RNA < ", max_features, " (same intent: doublets)\n")
+cat("  percent.mt   < ", max_mt, "%  (same intent: dead cells)\n")
+```
+
+```{r filter_correct}
+# [BLOCK 2 | Step 2.4.3 | Apply data-driven thresholds]
+cat("Cells before filtering:", ncol(sobj), "\n")
+
+sobj_filt <- subset(
+  sobj,
+  subset = nFeature_RNA > min_features &
+           nFeature_RNA < max_features &
+           percent.mt   < max_mt
+)
+
+cat("Cells after filtering :", ncol(sobj_filt), "\n")
+cat("Cells removed         :", ncol(sobj) - ncol(sobj_filt), "\n")
+cat("Retention rate        :",
+    round(ncol(sobj_filt) / ncol(sobj) * 100, 1), "%\n")
+
+if (ncol(sobj_filt) < 500) {
+  cat("\nWARNING: fewer than 500 cells remaining.\n")
+  cat("Options: relax max_mt or lower min_features,\n")
+  cat("or request pre-filtered matrices from GEO.\n")
+} else {
+  cat("\nCell count adequate for downstream analysis.\n")
+}
+```
+
+---
+
+***
+
+# ══════════════════════════════════════════
+# BLOCK 3  |  Preprocessing
+# ══════════════════════════════════════════
+
+*1:00 to 1:55 | 55 min*
+
+***
+
+## Step 3.1  |  Normalization
+
+### 3.1.1  |  RNA normalization
+
+LogNormalize divides each cell's counts by its total counts, multiplies by
+a scale factor (10,000 by default), then applies log1p. This removes the
+effect of variable sequencing depth across cells while preserving relative
+expression differences.
+
+The scale factor of 10,000 (counts per ten thousand, CP10K) is conventional.
+It does not affect downstream results if PCA is used, because PCA is
+scale-invariant. It matters only when comparing raw normalized values directly.
+
+```{r norm_rna}
+# [BLOCK 3 | Step 3.1.1 | RNA LogNormalize]
+sobj_filt <- NormalizeData(
+  sobj_filt,
+  normalization.method = "LogNormalize",
+  scale.factor         = 10000
+)
+cat("RNA normalized. Layer 'data' now populated.\n")
+cat("Layers present:", paste(Layers(sobj_filt[["RNA"]]), collapse = ", "), "\n")
+
+# Verify: log-normalized values should be non-negative
+data_layer <- LayerData(sobj_filt, assay = "RNA", layer = "data")
+cat("Any negative values in RNA data layer:", any(data_layer < 0), "\n")
+cat("Max value in RNA data layer          :",
+    round(max(data_layer@x), 2), "\n")
+```
+
+### 3.1.2  |  ADT normalization: the wrong margin first
+
+ADT normalization uses CLR (Centered Log-Ratio). The `margin` argument
+determines the direction of normalization:
+- `margin = 1`: normalizes each protein across all cells (makes row means ~0)
+- `margin = 2`: normalizes each cell across all proteins (makes column means ~0)
+
+For ADT, `margin = 2` is correct. It removes cell-to-cell technical variation
+in total antibody capture efficiency, analogous to library size normalization
+in RNA. `margin = 1` is wrong for ADT, but it runs without any error or warning.
+
+```{r norm_adt_wrong}
+# [BLOCK 3 | Step 3.1.2 | ADT CLR with margin=1 -- WRONG, no error produced]
+DefaultAssay(sobj_filt) <- "ADT"
+
+sobj_filt <- NormalizeData(
+  sobj_filt,
+  normalization.method = "CLR",
+  margin               = 1  # WRONG for ADT
+)
+
+# Diagnostic: with margin=1, row means (per protein) will be ~0
+adt_m1 <- LayerData(sobj_filt, layer = "data")
+cat("Row means after margin=1 (per protein) -- all ~0, signature of wrong margin:\n")
+print(round(rowMeans(adt_m1), 4))
+cat("\nColumn means after margin=1 (per cell) -- these are NOT ~0:\n")
+print(round(colMeans(adt_m1)[1:8], 4))
+
+DefaultAssay(sobj_filt) <- "RNA"
+```
+
+The row means are all near zero. That is the fingerprint of `margin=1`:
+each protein was independently centered across cells, removing biological
+variation. The data layer is now useless for any downstream protein analysis.
+We will see the consequence in Block 4 when CD4 gating fails.
+
+```{r norm_adt_correct}
+# [BLOCK 3 | Step 3.1.2 | ADT CLR with margin=2 -- correct]
+DefaultAssay(sobj_filt) <- "ADT"
+
+sobj_filt <- NormalizeData(
+  sobj_filt,
+  normalization.method = "CLR",
+  margin               = 2  # CORRECT: normalizes each cell across proteins
+)
+
+adt_m2 <- LayerData(sobj_filt, layer = "data")
+cat("Column means after margin=2 (per cell) -- now ~0, correct:\n")
+print(round(colMeans(adt_m2)[1:8], 4))
+cat("\nRow means (per protein) -- NOT ~0, biological variation preserved:\n")
+print(round(rowMeans(adt_m2), 4))
+
+DefaultAssay(sobj_filt) <- "RNA"
+cat("\nADT normalized correctly.\n")
+```
+
+> **Survival moment:** `margin=1` runs silently. It is not detectable from the
+> pipeline output unless you check the row/column means of the normalized ADT
+> layer. In published analyses, this error has been found post-publication.
+> Always verify: if row means are all ~0, re-run with `margin=2`.
+
+## Step 3.2  |  Feature selection, scaling, and PCA
+
+### 3.2.1  |  Highly variable genes
+
+```{r hvgs}
+# [BLOCK 3 | Step 3.2.1 | Highly variable gene selection]
+sobj_filt <- FindVariableFeatures(
+  sobj_filt,
+  selection.method = "vst",
+  nfeatures        = 2000
+)
+
+top10 <- head(VariableFeatures(sobj_filt), 10)
+cat("Top 10 most variable genes:\n")
+print(top10)
+cat("\nTotal variable features selected:", length(VariableFeatures(sobj_filt)), "\n")
+
+# Challenge: what fraction of all genes are selected as variable?
+all_genes <- nrow(sobj_filt[["RNA"]])
+n_var     <- length(VariableFeatures(sobj_filt))
+cat("Variable fraction:", round(n_var / all_genes * 100, 1), "% of all genes\n")
+```
+
+### 3.2.2  |  Scaling and PCA
+
+```{r scale_pca}
+# [BLOCK 3 | Step 3.2.2 | Scale and run PCA]
+# vars.to.regress removes the linear effect of percent.mt from each gene
+# before scaling. This reduces the influence of cell stress/quality on
+# the principal components.
+sobj_filt <- ScaleData(
+  sobj_filt,
+  vars.to.regress = "percent.mt",
+  verbose         = FALSE
+)
+
+sobj_filt <- RunPCA(sobj_filt, npcs = 30, verbose = FALSE)
+
+# Inspect the top loadings of PC1 and PC2
+cat("Top genes loading on PC1:\n")
+print(head(sobj_filt@reductions$pca@feature.loadings[
+  order(abs(sobj_filt@reductions$pca@feature.loadings[,1]),
+        decreasing = TRUE), 1], 10))
+```
+
+```{r elbow, fig.height=4}
+# [BLOCK 3 | Step 3.2.2 | Elbow plot to select number of PCs]
+# The elbow is where adding more PCs explains little additional variance.
+# Use this to set dims in FindNeighbors and RunUMAP.
+ElbowPlot(sobj_filt, ndims = 30) +
+  geom_vline(xintercept = 20, linetype = "dashed", color = "#991b1b") +
+  annotate("text", x = 21, y = 2.5, label = "~20 PCs", hjust = 0,
+           color = "#991b1b") +
+  ggtitle("Elbow Plot: variance explained per PC")
+```
+
+## Step 3.3  |  Clustering and UMAP
+
+### 3.3.1  |  Inconsistent dims between RunPCA and FindNeighbors
+
+```{r neighbors_wrong, error=TRUE}
+# [BLOCK 3 | Step 3.3.1 | FindNeighbors with dims > npcs -- ERROR]
+# npcs=30 was used in RunPCA. What happens if we request 50 dims?
+sobj_filt <- FindNeighbors(sobj_filt, dims = 1:50, verbose = FALSE)
+```
+
+The error occurs because the PCA object contains only 30 components.
+`dims = 1:50` requests components that do not exist.
+This is common when adjusting `npcs` in RunPCA without updating downstream calls.
+
+```{r neighbors_correct}
+# [BLOCK 3 | Step 3.3.1 | Correct: dims consistent with RunPCA]
+sobj_filt <- FindNeighbors(sobj_filt, dims = 1:20, verbose = FALSE)
+```
+
+### 3.3.2  |  Resolution sensitivity
+
+The `resolution` parameter in `FindClusters` is one of the most consequential
+but arbitrary choices in the workflow. Higher resolution = more, smaller clusters.
+There is no single correct value. The choice should be validated against
+known biology (do canonical marker genes match cluster assignments?).
+
+```{r clustering_resolution, fig.width=12, fig.height=4}
+# [BLOCK 3 | Step 3.3.2 | Resolution sensitivity]
+# How much does the clustering change between resolution 0.2 and 1.2?
+
+res_values <- c(0.2, 0.5, 1.2)
+n_clusters <- sapply(res_values, function(r) {
+  tmp <- FindClusters(sobj_filt, resolution = r, verbose = FALSE)
+  length(unique(tmp$seurat_clusters))
+})
+
+cat("Resolution vs number of clusters:\n")
+for (i in seq_along(res_values)) {
+  cat("  resolution =", res_values[i], "->", n_clusters[i], "clusters\n")
+}
+cat("\nUsing resolution = 0.5 for the rest of the analysis.\n")
+```
+
+```{r final_clustering}
+# [BLOCK 3 | Step 3.3.2 | Final clustering at resolution 0.5]
+sobj_filt <- FindClusters(sobj_filt, resolution = 0.5, verbose = FALSE)
+cat("Clusters found:", length(unique(sobj_filt$seurat_clusters)), "\n")
+print(table(sobj_filt$seurat_clusters))
+```
+
+### 3.3.3  |  UMAP and condition overlay
+
+```{r umap, fig.width=12, fig.height=5}
+# [BLOCK 3 | Step 3.3.3 | UMAP with cluster and donor visualization]
+# Three questions to answer immediately after generating the UMAP:
+# 1. Do cells cluster by biology or by donor? (batch effect check)
+# 2. Do canonical marker genes map to expected clusters?
+# 3. Does condition (Healthy vs COVID-19) show any spatial structure?
+set.seed(42)
+sobj_filt <- RunUMAP(sobj_filt, dims = 1:20, verbose = FALSE)
+
+p1 <- DimPlot(sobj_filt, group.by = "seurat_clusters",
+              label = TRUE, label.size = 4) +
+  NoLegend() + ggtitle("Clusters (resolution = 0.5)")
+
+p2 <- DimPlot(sobj_filt, group.by = "orig.ident") +
+  ggtitle("By donor: batch effect?") +
+  theme(legend.text = element_text(size = 7))
+
+p1 | p2
+```
+
+```{r umap_condition, fig.width=12, fig.height=5}
+# [BLOCK 3 | Step 3.3.3 | Condition and severity on UMAP]
+p_cond <- DimPlot(sobj_filt, group.by = "condition",
+                  cols = c("Healthy" = "#0d7377", "COVID19" = "#991b1b"),
+                  pt.size = 0.5) +
+  ggtitle("Healthy vs COVID-19")
+
+p_sev <- DimPlot(sobj_filt, group.by = "severity",
+                 pt.size = 0.5) +
+  ggtitle("COVID-19 severity") +
+  theme(legend.text = element_text(size = 8))
+
+p_cond | p_sev
+```
+
+```{r markers_rna, fig.height=8}
+# [BLOCK 3 | Step 3.3.3 | Canonical PBMC markers on UMAP]
+# Match marker expression to cluster locations before formal annotation
+FeaturePlot(sobj_filt,
+            features   = c("CD3E", "CD19", "CD14", "NCAM1", "IL7R", "FCGR3A"),
+            ncol       = 3,
+            min.cutoff = "q05")
+```
+
+```{r dot_plot, fig.height=5}
+# [BLOCK 3 | Step 3.3.3 | Dot plot: expression level and frequency by cluster]
+DotPlot(sobj_filt,
+        features = c("CD3E", "CD4", "CD8A", "CD19", "MS4A1",
+                     "CD14", "FCGR3A", "NCAM1", "PPBP"),
+        group.by = "seurat_clusters") +
+  RotatedAxis() +
+  ggtitle("Marker expression by cluster")
+```
+
+```{r prop_condition, fig.height=4}
+# [BLOCK 3 | Step 3.3.3 | Cluster proportion by condition]
+# This is a preliminary result. It must be validated after annotation.
+props <- sobj_filt@meta.data %>%
+  group_by(condition, seurat_clusters) %>%
+  summarise(n = n(), .groups = "drop") %>%
+  group_by(condition) %>%
+  mutate(prop = n / sum(n))
+
+ggplot(props, aes(x = condition, y = prop, fill = seurat_clusters)) +
+  geom_bar(stat = "identity", width = 0.6) +
+  scale_y_continuous(labels = percent_format()) +
+  labs(title    = "Cluster proportions: Healthy vs COVID-19",
+       subtitle = "Check per-donor before interpreting any group difference",
+       x = "Condition", y = "Proportion", fill = "Cluster") +
+  theme_classic(base_size = 12)
+```
+
+> **Survival moment:** A cluster that is visually larger in COVID-19 than
+> Healthy might be driven entirely by one donor with unusual composition.
+> Never report a condition effect from aggregated data without first checking
+> `DimPlot(group.by = "orig.ident")` and confirming the pattern is
+> consistent across all donors within each group.
+
+```{r checkpoint}
+# [BLOCK 3 | Checkpoint save]
+saveRDS(sobj_filt, "outputs/sobj_preprocessed.rds")
+cat("Checkpoint saved: outputs/sobj_preprocessed.rds\n")
+cat("To reload: sobj_filt <- readRDS('outputs/sobj_preprocessed.rds')\n")
+```
+
+---
+
+# BREAK: 15 minutes  |  1:55 to 2:10
+
+Look at the UMAP colored by condition. Does any cluster appear exclusively
+or predominantly in COVID-19 donors? Look at the DotPlot: which clusters
+could be monocytes based on CD14 and FCGR3A expression?
+After the break, we add the protein layer to test these interpretations.
+
+---
+
+***
+
+# ══════════════════════════════════════════
+# BLOCK 4  |  CITE-seq Integrative Analysis
+# ══════════════════════════════════════════
+
+*2:10 to 3:10 | 60 min*
+
+***
+
+## Step 4.1  |  Cell type annotation with SingleR
+
+SingleR assigns a cell type label by correlating each cell's normalized
+expression profile against a reference dataset of known cell types. It uses
+Spearman correlation across the top marker genes for each reference label,
+then selects the label with the highest correlation.
+
+The main limitation: any cell type absent from the reference will be
+assigned to the most similar reference type. Low-confidence assignments
+are flagged by a pruning step (`pruned.labels`). Cells with NA in pruned
+labels had too low a score difference to be reliably assigned.
+
+```{r singler_run}
+# [BLOCK 4 | Step 4.1 | Run SingleR against Human Primary Cell Atlas]
+cat("Loading reference (Human Primary Cell Atlas)...\n")
+ref     <- celldex::HumanPrimaryCellAtlasData()
+rna_mat <- LayerData(sobj_filt, assay = "RNA", layer = "data")
+
+cat("Running SingleR...\n")
+singler_res <- SingleR(
+  test    = rna_mat,
+  ref     = ref,
+  labels  = ref$label.main,
+  BPPARAM = BiocParallel::SerialParam()
+)
+
+cat("\nCell type distribution:\n")
+print(sort(table(singler_res$labels), decreasing = TRUE))
+
+cat("\nLow-confidence cells (NA in pruned labels):",
+    sum(is.na(singler_res$pruned.labels)), "\n")
+```
+
+### 4.1.1  |  Plotting before adding labels to the object
+
+```{r singler_plot_early, error=TRUE}
+# [BLOCK 4 | Step 4.1.1 | Plotting singler_label before adding it -- ERROR]
+# singler_res is a separate object. Labels must be transferred to sobj_filt first.
+DimPlot(sobj_filt, group.by = "singler_label")
+```
+
+`singler_label` does not exist in `sobj_filt@meta.data` yet. `singler_res`
+is a `DataFrame` (Bioconductor class). The labels must be explicitly
+added to the Seurat metadata.
+
+```{r singler_add_labels}
+# [BLOCK 4 | Step 4.1.1 | Add SingleR labels to Seurat object]
+sobj_filt$singler_label  <- singler_res$labels
+sobj_filt$singler_pruned <- singler_res$pruned.labels
+
+# Verify
+cat("singler_label in metadata:", "singler_label" %in% colnames(sobj_filt@meta.data), "\n")
+cat("Distribution:\n")
+print(sort(table(sobj_filt$singler_label), decreasing = TRUE))
+```
+
+```{r singler_umap, fig.width=12, fig.height=5}
+# [BLOCK 4 | Step 4.1.1 | Annotated UMAP + condition overlay]
+p_ann <- DimPlot(sobj_filt, group.by = "singler_label",
+                 label = TRUE, label.size = 3, repel = TRUE) +
+  ggtitle("SingleR annotation") + NoLegend()
+
+p_cond <- DimPlot(sobj_filt, group.by = "condition",
+                  cols = c("Healthy" = "#0d7377", "COVID19" = "#991b1b"),
+                  pt.size = 0.4) +
+  ggtitle("Condition")
+
+p_ann | p_cond
+```
+
+```{r singler_qc_scores, fig.height=5}
+# [BLOCK 4 | Step 4.1.1 | Score heatmap: annotation confidence]
+# Cells with similar scores across multiple types are ambiguous.
+# Wide spread = high confidence. Narrow spread = low confidence.
+plotScoreHeatmap(singler_res,
+                 main = "SingleR annotation scores (wider spread = more confident)")
+```
+
+## Step 4.2  |  RNA vs protein: the CITE-seq contrast
+
+### 4.2.1  |  The DefaultAssay problem
+
+```{r adt_wrong_assay, fig.width=12, fig.height=5}
+# [BLOCK 4 | Step 4.2.1 | Plotting ADT without switching DefaultAssay]
+# What happens when we forget to set DefaultAssay("ADT") before FeaturePlot?
+cat("Current DefaultAssay:", DefaultAssay(sobj_filt), "\n")
+
+# This will plot RNA, not ADT -- no error, just the wrong modality
+p_forgotten <- FeaturePlot(sobj_filt, "CD4", min.cutoff = "q05") +
+  ggtitle("CD4: DefaultAssay = RNA (forgot to switch)") +
+  scale_color_gradient(low = "lightgrey", high = "#374151")
+
+print(p_forgotten)
+```
+
+This plot shows CD4 RNA. It looks dim and patchy because of dropout. The
+problem is entirely silent: no error, no warning, just a biologically
+misleading visualization. If you labeled this as "CD4 protein expression"
+in a figure, it would be factually incorrect.
+
+```{r rna_vs_adt_contrast, fig.width=12, fig.height=5}
+# [BLOCK 4 | Step 4.2.1 | Correct comparison: RNA vs ADT for CD4]
+DefaultAssay(sobj_filt) <- "RNA"
+p_rna <- FeaturePlot(sobj_filt, "CD4", min.cutoff = "q05") +
+  ggtitle("CD4 via RNA\n(dropout: many CD4+ cells read as zero)") +
+  scale_color_gradient(low = "lightgrey", high = "#991b1b")
+
+DefaultAssay(sobj_filt) <- "ADT"
+p_adt <- FeaturePlot(sobj_filt, "CD4", min.cutoff = "q05") +
+  ggtitle("CD4 via ADT protein\n(bimodal, reliable)") +
+  scale_color_gradient(low = "lightgrey", high = "#0d7377")
+
+p_rna | p_adt
+DefaultAssay(sobj_filt) <- "RNA"
+```
+
+> **This is the core argument for CITE-seq.** CD4 RNA shows extensive dropout
+> in true CD4+ T cells. CD4 protein from ADT is clean and bimodal. If you
+> annotate T cell subsets using RNA alone, you will misclassify a fraction
+> of CD4+ cells because their CD4 RNA reads as zero.
+
+```{r rna_adt_correlation}
+# [BLOCK 4 | Step 4.2.2 | Quantify RNA-protein correlation per marker]
+# For each ADT protein with an RNA counterpart, compute the Spearman
+# correlation across all cells. Low correlation = high dropout in RNA.
+
+adt_rna_pairs <- list(
+  CD3  = "CD3E",
+  CD4  = "CD4",
+  CD8a = "CD8A",
+  CD14 = "CD14",
+  CD19 = "CD19",
+  CD56 = "NCAM1"
+)
+
+DefaultAssay(sobj_filt) <- "ADT"
+adt_vals <- t(LayerData(sobj_filt, layer = "data"))
+DefaultAssay(sobj_filt) <- "RNA"
+rna_vals <- t(LayerData(sobj_filt, layer = "data"))
+
+cat("Spearman correlation (RNA vs ADT) per marker:\n")
+cat(sprintf("  %-8s %s\n", "Marker", "Spearman rho"))
+cat(sprintf("  %-8s %s\n", "------", "------------"))
+
+for (adt_name in names(adt_rna_pairs)) {
+  rna_gene <- adt_rna_pairs[[adt_name]]
+  if (rna_gene %in% colnames(rna_vals) &&
+      adt_name %in% colnames(adt_vals)) {
+    rho <- cor(rna_vals[, rna_gene],
+               adt_vals[, adt_name],
+               method = "spearman")
+    cat(sprintf("  %-8s %.3f\n", adt_name, rho))
+  }
+}
+DefaultAssay(sobj_filt) <- "RNA"
+```
+
+> **Challenge 7:** Which markers show the lowest RNA-protein correlation?
+> Are these the markers where dropout would most severely affect annotation?
+> What biological factors (expression level, transcript stability) might
+> explain why some markers have higher correlation than others?
+
+```{r dropout_quantification}
+# [BLOCK 4 | Step 4.2.2 | Quantify dropout: cells positive by ADT but zero by RNA]
+# For each marker, find cells that are clearly protein-positive (ADT > threshold)
+# but have zero RNA counts. These are the cells that would be misannotated
+# by RNA-only analysis.
+
+DefaultAssay(sobj_filt) <- "ADT"
+adt_data <- LayerData(sobj_filt, layer = "data")
+DefaultAssay(sobj_filt) <- "RNA"
+rna_counts <- LayerData(sobj_filt, layer = "counts")
+
+cat("Dropout analysis: cells positive by ADT but zero by RNA\n")
+cat(sprintf("  %-8s %-12s %-12s %s\n",
+            "Marker", "ADT+ cells", "RNA==0 among ADT+", "Dropout rate"))
+cat(sprintf("  %-8s %-12s %-12s %s\n",
+            "------", "----------", "-----------------", "------------"))
+
+marker_pairs <- list(CD4 = "CD4", CD14 = "CD14", CD19 = "CD19")
+for (adt_name in names(marker_pairs)) {
+  rna_gene <- marker_pairs[[adt_name]]
+  if (rna_gene %in% rownames(rna_counts) && adt_name %in% rownames(adt_data)) {
+    adt_pos  <- which(adt_data[adt_name, ] > 1.0)
+    rna_zero <- sum(rna_counts[rna_gene, adt_pos] == 0)
+    pct      <- round(rna_zero / length(adt_pos) * 100, 1)
+    cat(sprintf("  %-8s %-12d %-12d %s%%\n",
+                adt_name, length(adt_pos), rna_zero, pct))
+  }
+}
+```
+
+## Step 4.3  |  Digital gating
+
+Digital gating replicates the biaxial scatter plots from flow cytometry
+using ADT data. It allows computational cell classification with the same
+logic immunologists use at the bench.
+
+```{r digital_gating, fig.height=5}
+# [BLOCK 4 | Step 4.3 | CD4 vs CD8a digital gating]
+DefaultAssay(sobj_filt) <- "ADT"
+
+color_by <- if ("singler_label" %in% colnames(sobj_filt@meta.data)) {
+  "singler_label"
+} else {
+  "cell_type"
+}
+
+gate_data <- FetchData(sobj_filt, vars = c("CD4", "CD8a", color_by))
+names(gate_data)[3] <- "label"
+
+ggplot(gate_data, aes(CD4, CD8a, color = label)) +
+  geom_point(alpha = 0.4, size = 0.8) +
+  geom_density_2d(color = "grey50", linewidth = 0.3) +
+  geom_vline(xintercept = 1.5, linetype = "dashed", color = "#991b1b") +
+  geom_hline(yintercept = 1.5, linetype = "dashed", color = "#991b1b") +
+  annotate("text", x = 3.5, y = 0.4, label = "CD4+ T cells", size = 3.5) +
+  annotate("text", x = 0.4, y = 3.5, label = "CD8+ T cells", size = 3.5) +
+  labs(title    = "Digital gating: CD4 vs CD8a (ADT protein)",
+       subtitle = "Only possible with ADT; RNA dropout makes this scatter uninformative",
+       x = "CD4 (CLR normalized)", y = "CD8a (CLR normalized)",
+       color = NULL) +
+  theme_classic(base_size = 13) +
+  theme(legend.text = element_text(size = 7))
+
+DefaultAssay(sobj_filt) <- "RNA"
+```
+
+## Step 4.4  |  WNN: combining RNA and protein
+
+Weighted Nearest Neighbor integration learns the relative contribution of
+each modality per cell. A cell where RNA is informative (high complexity,
+many genes detected) receives more RNA weight. A cell where protein is more
+discriminating (e.g., ambiguous T cell subtype) receives more ADT weight.
+
+WNN requires a PCA for each modality separately before integration.
+
+### 4.4.1  |  Running WNN without the ADT PCA first
+
+```{r wnn_missing_reduction, error=TRUE}
+# [BLOCK 4 | Step 4.4.1 | WNN without ADT PCA -- ERROR]
+# RunPCA was only called on RNA in Block 3. 'pca.adt' does not exist yet.
+sobj_filt <- FindMultiModalNeighbors(
+  sobj_filt,
+  reduction.list       = list("pca", "pca.adt"),
+  dims.list            = list(1:20, 1:15),
+  modality.weight.name = "RNA.weight",
+  verbose              = FALSE
+)
+```
+
+The reduction `pca.adt` was never computed. WNN requires a separate PCA
+for each modality. We must scale the ADT data and run PCA on it first.
+
+```{r wnn_adt_pca}
+# [BLOCK 4 | Step 4.4.1 | Compute ADT PCA first, then run WNN]
+# ADT has only 24 proteins. FindVariableFeatures is not needed.
+# Both ScaleData and RunPCA require an explicit features list when
+# no VariableFeatures exist for the assay.
+DefaultAssay(sobj_filt) <- "ADT"
+
+adt_features <- rownames(sobj_filt[["ADT"]])  # all 24 proteins
+
+sobj_filt <- ScaleData(
+  sobj_filt,
+  features = adt_features,
+  verbose  = FALSE
+)
+
+sobj_filt <- RunPCA(
+  sobj_filt,
+  features       = adt_features,
+  npcs           = 20,
+  reduction.name = "pca.adt",
+  reduction.key  = "pcaADT_",
+  verbose        = FALSE
+)
+
+cat("Reductions now available:", paste(Reductions(sobj_filt), collapse = ", "), "\n")
+```
+
+```{r wnn_compute}
+# [BLOCK 4 | Step 4.4.1 | WNN integration]
+sobj_filt <- FindMultiModalNeighbors(
+  sobj_filt,
+  reduction.list       = list("pca", "pca.adt"),
+  dims.list            = list(1:20, 1:15),
+  modality.weight.name = "RNA.weight",
+  verbose              = FALSE
+)
+
+sobj_filt <- RunUMAP(
+  sobj_filt,
+  nn.name        = "weighted.nn",
+  reduction.name = "wnn.umap",
+  reduction.key  = "wnnUMAP_",
+  verbose        = FALSE
+)
+
+DefaultAssay(sobj_filt) <- "RNA"
+cat("WNN complete. New reduction: wnn.umap\n")
+```
+
+```{r wnn_compare, fig.width=12, fig.height=5}
+# [BLOCK 4 | Step 4.4.1 | RNA-only UMAP vs WNN UMAP]
+p_rna <- DimPlot(sobj_filt, reduction = "umap",
+                 group.by = "singler_label",
+                 label = TRUE, label.size = 2.5, repel = TRUE) +
+  ggtitle("RNA-only UMAP") + NoLegend()
+
+p_wnn <- DimPlot(sobj_filt, reduction = "wnn.umap",
+                 group.by = "singler_label",
+                 label = TRUE, label.size = 2.5, repel = TRUE) +
+  ggtitle("WNN UMAP (RNA + ADT)") + NoLegend()
+
+p_rna | p_wnn
+```
+
+```{r modality_weights, fig.height=4}
+# [BLOCK 4 | Step 4.4.1 | Modality weights: which cells rely more on ADT?]
+# RNA.weight close to 1 = cell is better characterized by RNA
+# RNA.weight close to 0 = cell is better characterized by ADT
+
+ggplot(sobj_filt@meta.data, aes(x = RNA.weight, fill = singler_label)) +
+  geom_histogram(bins = 40, alpha = 0.8) +
+  facet_wrap(~singler_label, scales = "free_y") +
+  labs(title    = "Per-cell RNA modality weight from WNN",
+       subtitle = "Low weight = ADT more informative for that cell",
+       x = "RNA weight (1 = fully RNA, 0 = fully ADT)") +
+  theme_classic(base_size = 10) +
+  theme(legend.position = "none",
+        strip.text      = element_text(size = 7))
+```
+
+## Step 4.5  |  Condition comparison: Healthy vs COVID-19
+
+### 4.5.1  |  Group-level plot without per-donor validation
+
+```{r covid_group_plot, fig.height=4}
+# [BLOCK 4 | Step 4.5.1 | Condition comparison -- group level only]
+# This plot looks informative. But with 3 Healthy and 4 COVID-19 donors,
+# it can be completely driven by one outlier donor.
+group_props <- sobj_filt@meta.data %>%
+  filter(!is.na(singler_label), !is.na(condition)) %>%
+  group_by(condition, singler_label) %>%
+  summarise(n = n(), .groups = "drop") %>%
+  group_by(condition) %>%
+  mutate(prop = n / sum(n))
+
+ggplot(group_props, aes(x = condition, y = prop, fill = singler_label)) +
+  geom_bar(stat = "identity", width = 0.6) +
+  scale_y_continuous(labels = percent_format()) +
+  labs(title    = "Cell type proportions by condition",
+       subtitle = "Looks clear -- but is it driven by one donor?",
+       x = "Condition", y = "Proportion", fill = "Cell type") +
+  theme_classic(base_size = 12) +
+  theme(legend.text = element_text(size = 8))
+```
+
+```{r covid_per_donor, fig.height=5}
+# [BLOCK 4 | Step 4.5.1 | Per-donor validation of group difference]
+donor_props <- sobj_filt@meta.data %>%
+  filter(!is.na(singler_label)) %>%
+  group_by(donor_id, condition, singler_label) %>%
+  summarise(n = n(), .groups = "drop") %>%
+  group_by(donor_id) %>%
+  mutate(prop = n / sum(n))
+
+ggplot(donor_props, aes(x = donor_id, y = prop, fill = singler_label)) +
+  geom_bar(stat = "identity", width = 0.7) +
+  scale_y_continuous(labels = percent_format()) +
+  facet_wrap(~condition, scales = "free_x") +
+  labs(title    = "Cell type proportions per donor",
+       subtitle = "Consistent pattern across donors within each group = robust finding",
+       x = NULL, y = "Proportion (%)", fill = "Cell type") +
+  theme_classic(base_size = 11) +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1),
+        legend.text = element_text(size = 7),
+        strip.text  = element_text(face = "bold"))
+```
+
+> **Survival moment:** If the group-level difference is driven by a single
+> donor, the finding is not generalizable. With n=3 per group, you cannot
+> perform a standard statistical test. The minimum defensible design for
+> condition-level claims is 4-5 donors per group with at least 1,000 cells
+> per donor. Always report n per group in any figure legend.
+
+```{r save_annotated}
+saveRDS(sobj_filt, "outputs/sobj_annotated.rds")
+cat("Annotated object saved: outputs/sobj_annotated.rds\n")
+```
+
+---
+
+---
+
+> **Discussion pause**
+>
+> - The WNN modality weights show that some cell types rely more on ADT than
+>   RNA. Which cell types had the lowest RNA weight? Why does that make sense?
+> - The dropout rate for CD4 RNA was calculated above. What would a naive
+>   RNA-only analysis conclude about those cells?
+> - You see monocytes are expanded in COVID-19. How would you test whether
+>   this is a statistically significant finding given n=3 Healthy donors?
+
+---
+
+***
+
+# ══════════════════════════════════════════
+# BLOCK 5  |  Troubleshooting Scenarios
+# ══════════════════════════════════════════
+
+*3:10 to 4:10 | 60 min | groups of 3 to 4*
+
+***
+
+> **Instructions**
+> The instructor has posted `sobj_broken.rds` in Google Classroom right now.
+> Download it and save to `data/sobj_broken.rds`.
+> For each scenario: run the diagnostic chunks, write your group hypothesis
+> as a comment in the code, then expand the solution.
+> The hypothesis step is mandatory.
+
+```{r load_broken}
+# [BLOCK 5 | Load broken object]
+sobj_broken <- readRDS("data/sobj_broken.rds")
+print(sobj_broken)
+head(sobj_broken@meta.data, 3)
+```
+
+---
+
+## Scenario 1  |  Wrong default assay (15 min)
+
+**Context:** You received this object from a collaborator. You run the standard
+RNA preprocessing workflow. Everything executes without errors but the results
+are completely wrong: FindVariableFeatures returns fewer features than expected,
+PCA explains almost all variance in PC1, and the UMAP is a single blob.
+
+```{r s1_diag1}
+# [BLOCK 5 | Scenario 1 | Diagnostic]
+cat("Default assay        :", DefaultAssay(sobj_broken), "\n")
+cat("Features active assay:", nrow(sobj_broken), "\n")
+cat("All assays           :", paste(Assays(sobj_broken), collapse = ", "), "\n")
+```
+
+```{r s1_diag2}
+# What does FindVariableFeatures return on this object?
+test_hvg <- FindVariableFeatures(sobj_broken, nfeatures = 2000, verbose = FALSE)
+cat("Variable features found:", length(VariableFeatures(test_hvg)), "\n")
+cat("Feature names:\n")
+print(head(VariableFeatures(test_hvg), 15))
+```
+
+```{r s1_diag3}
+# Compare RNA and ADT feature counts
+cat("Features in RNA assay:", nrow(sobj_broken[["RNA"]]), "\n")
+cat("Features in ADT assay:", nrow(sobj_broken[["ADT"]]), "\n")
+```
+
+> 📝 **Write your group hypothesis before expanding the solution.**
+> What is the DefaultAssay? Why does FindVariableFeatures return so few features?
+> What would happen if you ran RunPCA and RunUMAP on this object without fixing it?
+> How would you detect this problem in a published Seurat object you downloaded?
+
+
+```{r s1_fix}
+# [BLOCK 5 | Scenario 1 | Solution]
+cat("Before fix:", DefaultAssay(sobj_broken), "\n")
+
+# The DefaultAssay is set to "ADT" (24 proteins).
+# All RNA functions are running silently on 24 protein features instead
+# of 500 RNA genes. FindVariableFeatures returns 24 features because that
+# is all that exists in the active assay.
+
+DefaultAssay(sobj_broken) <- "RNA"
+cat("After fix :", DefaultAssay(sobj_broken), "\n")
+cat("Features  :", nrow(sobj_broken), "\n")
+
+test_fixed <- FindVariableFeatures(sobj_broken, nfeatures = 2000, verbose = FALSE)
+cat("Variable features now:", length(VariableFeatures(test_fixed)), "\n")
+```
+
+**Lessons learned:**
+
+1. `DefaultAssay()` is the first line to run on any received object.
+2. This error is completely silent. No warning. No error. Just wrong results.
+3. `FindVariableFeatures`, `ScaleData`, `RunPCA`, `FindMarkers` all operate
+   on the active assay. A PCA run on 24 ADT features is not a transcriptomic PCA.
+4. Always check `DefaultAssay()` after any assay switch to confirm it reset.
+
+
+---
+
+## Scenario 2  |  Metadata inconsistencies (20 min)
+
+**Context:** This object was assembled from samples processed at multiple sites.
+Grouping by `condition` and `donor_id` produces unexpected results. Some
+samples are missing from plots and certain donors appear duplicated.
+
+```{r s2_diag1}
+# [BLOCK 5 | Scenario 2 | Diagnostic: metadata audit]
+cat("Metadata columns:\n")
+print(colnames(sobj_broken@meta.data))
+
+cat("\nNAs per column:\n")
+print(colSums(is.na(sobj_broken@meta.data)))
+```
+
+```{r s2_diag2}
+# Inspect the problematic columns
+cat("Unique donor_id values:\n")
+print(sort(unique(sobj_broken$donor_id)))
+
+cat("\nCondition table (including NAs):\n")
+print(table(sobj_broken$condition, useNA = "always"))
+
+cat("\nCell type NAs:", sum(is.na(sobj_broken$cell_type)), "\n")
+```
+
+```{r s2_diag3}
+# What does a DimPlot by condition look like?
+DimPlot(sobj_broken, group.by = "condition") +
+  ggtitle("Condition plot: how many groups appear?")
+```
+
+> 📝 **Write your group hypothesis before expanding the solution.**
+> How many distinct problems did you find? What would the biological consequence
+> be if each went unfixed? For example: if condition labels are inconsistent,
+> what happens to a Healthy vs COVID-19 comparison?
+
+<details>
+<summary>Reveal solution</summary>
+
+```{r s2_fix}
+# [BLOCK 5 | Scenario 2 | Solution]
+sobj_meta <- sobj_broken
+
+# PROBLEM 1: donor_id has three different formats for the same donors
+# e.g. "Donor01", "donor1", "DONOR01" all mean the same donor
+cat("=== FIX 1: donor_id ===\n")
+sobj_meta$donor_id <- toupper(gsub("[^A-Z0-9a-z]", "", sobj_meta$donor_id))
+print(table(sobj_meta$donor_id))
+
+# PROBLEM 2: condition has 4 variants of 2 values
+# "COVID19", "covid19", "Covid-19", "HC", NA
+cat("\n=== FIX 2: condition ===\n")
+sobj_meta$condition_clean <- dplyr::case_when(
+  grepl("covid", sobj_meta$condition, ignore.case = TRUE) ~ "COVID-19",
+  grepl("healthy|HC|control", sobj_meta$condition,
+        ignore.case = TRUE)                               ~ "Healthy",
+  TRUE                                                    ~ NA_character_
+)
+print(table(sobj_meta$condition_clean, useNA = "always"))
+
+# PROBLEM 3: 200 cells have NA in cell_type
+cat("\n=== FIX 3: cell_type NAs ===\n")
+cat("NAs before:", sum(is.na(sobj_meta$cell_type)), "\n")
+sobj_meta$cell_type[is.na(sobj_meta$cell_type)] <- "Unknown"
+cat("NAs after :", sum(is.na(sobj_meta$cell_type)), "\n")
+```
+
+**Lessons learned:**
+
+1. `table(col, useNA = "always")` and `str(meta.data)` before every analysis.
+2. Multi-site data almost always has formatting inconsistencies.
+3. NA in condition: that cell is excluded from any Healthy vs COVID-19 comparison.
+   With 30 NAs, you are silently dropping 1% of cells from all group comparisons.
+4. Case-sensitivity matters: `"COVID19" == "covid19"` is `FALSE` in R.
+
+</details>
+
+---
+
+## Scenario 3  |  Normalization failure and batch effect (25 min)
+
+**Context:** The UMAP shows clear separation by donor rather than by cell type.
+Additionally, the ADT data appears distorted. Identify both problems and fix them.
+
+```{r s3_diag1, fig.height=4}
+# [BLOCK 5 | Scenario 3 | Diagnostic: batch effect in UMAP]
+DimPlot(sobj_broken, group.by = "orig.ident") +
+  ggtitle("Donors separate in UMAP: batch effect or biology?")
+```
+
+```{r s3_diag2}
+# [BLOCK 5 | Scenario 3 | Diagnostic: ADT normalization direction]
+DefaultAssay(sobj_broken) <- "ADT"
+adt_data <- LayerData(sobj_broken, layer = "data")
+
+cat("Row means (per protein) -- near 0 means margin=1 was used (wrong):\n")
+print(round(rowMeans(adt_data), 4))
+
+cat("\nColumn means (per cell, first 10) -- near 0 means margin=2 (correct):\n")
+print(round(colMeans(adt_data)[1:10], 4))
+
+DefaultAssay(sobj_broken) <- "RNA"
+```
+
+```{r s3_diag3}
+# [BLOCK 5 | Scenario 3 | Diagnostic: RNA data layer integrity]
+rna_data <- LayerData(sobj_broken, assay = "RNA", layer = "data")
+cat("Any negative values in RNA data layer?",
+    any(rna_data < 0), "\n")
+cat("(TRUE would indicate SCTransform residuals stored as 'data')\n")
+cat("\nRange of non-zero values in RNA data:\n")
+print(summary(rna_data@x))
+```
+
+> 📝 **Write your group hypothesis before expanding the solution.**
+> How did you determine which margin was used? What is the consequence of the
+> batch effect for any condition-level comparison? If you published the original
+> UMAP as a figure, what scientific claim would be invalidated?
+
+<details>
+<summary>Reveal solution</summary>
+
+```{r s3_fix}
+# [BLOCK 5 | Scenario 3 | Solution: re-normalize and apply Harmony]
+sobj_renorm <- sobj_broken
+
+# STEP 1: Re-normalize RNA from counts (counts layer is untouched)
+DefaultAssay(sobj_renorm) <- "RNA"
+sobj_renorm <- NormalizeData(sobj_renorm,
+  normalization.method = "LogNormalize",
+  scale.factor         = 10000,
+  verbose              = FALSE)
+cat("RNA re-normalized from counts.\n")
+
+# STEP 2: Re-normalize ADT with correct margin
+DefaultAssay(sobj_renorm) <- "ADT"
+sobj_renorm <- NormalizeData(sobj_renorm,
+  normalization.method = "CLR",
+  margin               = 2,
+  verbose              = FALSE)
+cat("ADT re-normalized (CLR, margin=2).\n")
+
+# STEP 3: Rerun preprocessing
+DefaultAssay(sobj_renorm) <- "RNA"
+sobj_renorm <- FindVariableFeatures(sobj_renorm, verbose = FALSE)
+sobj_renorm <- ScaleData(sobj_renorm, verbose = FALSE)
+sobj_renorm <- RunPCA(sobj_renorm, npcs = 30, verbose = FALSE)
+
+# STEP 4: Harmony batch correction
+sobj_renorm <- RunHarmony(
+  sobj_renorm,
+  group.by.vars  = "orig.ident",
+  reduction      = "pca",
+  reduction.save = "harmony",
+  verbose        = FALSE
+)
+
+sobj_renorm <- RunUMAP(sobj_renorm,
+  reduction      = "harmony",
+  dims           = 1:20,
+  reduction.name = "umap.harmony",
+  verbose        = FALSE)
+
+cat("Harmony applied.\n")
+```
+
+```{r s3_compare, fig.width=12, fig.height=4}
+p_before <- DimPlot(sobj_renorm, reduction = "umap",
+                    group.by = "orig.ident") +
+  ggtitle("Before Harmony") + theme(legend.position = "none")
+
+p_after  <- DimPlot(sobj_renorm, reduction = "umap.harmony",
+                    group.by = "orig.ident") +
+  ggtitle("After Harmony") + theme(legend.position = "none")
+
+p_before | p_after
+```
+
+**Lessons learned:**
+
+1. Row means ~0 in ADT data is the diagnostic signature of `margin=1`. Wrong.
+2. Column means ~0 in ADT data is the signature of `margin=2`. Correct.
+3. The counts layer is the ground truth. Re-normalize from it; never overwrite it.
+4. Donor separation in UMAP = batch effect. Run `DimPlot(group.by="orig.ident")`
+   before interpreting any UMAP biologically.
+5. Harmony corrects for donor-level batch effects while preserving biological
+   variation. It requires at least 3 donors per group to be reliable.
+
+</details>
+
+---
+
+***
+
+# ══════════════════════════════════════════
+# BLOCK 6  |  Wrap-up
+# ══════════════════════════════════════════
+
+*4:10 to 4:50 | 40 min*
+
+***
+
+## Step 6.1  |  Biological summary: Healthy vs COVID-19
+
+```{r final_proportions, fig.height=5}
+# [BLOCK 6 | Step 6.1 | Final annotated proportions]
+if ("singler_label" %in% colnames(sobj_filt@meta.data)) {
+  final_props <- sobj_filt@meta.data %>%
+    filter(!is.na(condition), !is.na(singler_label)) %>%
+    group_by(condition, singler_label) %>%
+    summarise(n = n(), .groups = "drop") %>%
+    group_by(condition) %>%
+    mutate(prop = n / sum(n))
+
+  ggplot(final_props, aes(condition, prop, fill = singler_label)) +
+    geom_bar(stat = "identity", width = 0.65) +
+    scale_y_continuous(labels = percent_format()) +
+    labs(title = "Cell type proportions: final annotated result",
+         x = "Condition", y = "Proportion (%)", fill = "Cell type") +
+    theme_classic(base_size = 12) +
+    theme(legend.text = element_text(size = 8),
+          axis.text.x = element_text(angle = 45, hjust = 1))
+}
+```
+
+## Step 6.2  |  Pitfalls reference table
+
+```{r pitfalls_final, echo=FALSE}
+# [BLOCK 6 | Step 6.2 | Pitfall reference]
+pit <- data.frame(
+  Pitfall = c(
+    "UMAP interpreted as distance",
+    "Per-cell differential expression",
+    "Single annotation source",
+    "ADT with margin=1",
+    "Wrong DefaultAssay",
+    "Group comparison without per-donor check",
+    "Threshold copied from tutorial"
+  ),
+  Consequence = c(
+    "Cluster proximity in UMAP has no quantitative meaning",
+    "Inflated false positives by pseudoreplication",
+    "Rare or novel types misclassified",
+    "Protein normalization wrong; no error produced",
+    "Analysis on wrong modality; no error produced",
+    "Group effect driven by single donor",
+    "No cells remaining after filtering"
+  ),
+  Prevention = c(
+    "Use graph-based distance, not UMAP coordinates",
+    "DESeq2 with pseudobulk aggregation per donor",
+    "Validate with RNA markers + ADT + external reference",
+    "Check rowMeans of ADT data layer; must NOT be ~0",
+    "Check DefaultAssay() as first line on any received object",
+    "Always facet or stratify by donor_id",
+    "Inspect data distribution before setting any threshold"
+  )
+)
+knitr::kable(pit, col.names = c("Pitfall", "Consequence", "Prevention"))
+```
+
+## Step 6.3  |  Session info
+
+```{r session_info}
+# [BLOCK 6 | Step 6.3 | Session info -- save with every analysis]
+sessionInfo()
+```
+
+---
+
+> **You completed the Survival Course.**
+> Every error in this notebook occurs in real published analyses, often
+> silently. The skills practiced here: auditing objects before trusting them,
+> verifying normalization by diagnostic checks, separating batch effects from
+> biology, cross-validating annotation with RNA and protein, and checking
+> per-donor consistency before any group-level claim.
+
+*Single-Cell Survival Course | Seurat v5 | GSE149689 | Wilk et al., Nature Medicine 2021*

@@ -10,8 +10,8 @@
     ]
   },
   {
-    "objectID": "intro.html",
-    "href": "intro.html",
+    "objectID": "cap1_repaso.html",
+    "href": "cap1_repaso.html",
     "title": "1  Repaso: scRNA-seq vs bulk-RNA-seq",
     "section": "",
     "text": "1.1 Single cell RNA-seq (scRNA-seq)",
@@ -20,8 +20,8 @@
     ]
   },
   {
-    "objectID": "intro.html#single-cell-rna-seq-scrna-seq",
-    "href": "intro.html#single-cell-rna-seq-scrna-seq",
+    "objectID": "cap1_repaso.html#single-cell-rna-seq-scrna-seq",
+    "href": "cap1_repaso.html#single-cell-rna-seq-scrna-seq",
     "title": "1  Repaso: scRNA-seq vs bulk-RNA-seq",
     "section": "",
     "text": "Primera publicación en 2009 (Tang et al, 2009)\nPopularidad en 2014\nEstimar la distribución de los niveles de expresión de cada gen en una población celular.\nAnálisis a nivel de célula individual\nPermite revelar tipos celulares (poblaciones raras)\nAnalizar las dinámicas temporales y heterogeneidad.\n\n\n\n\nImagen tomada de: Single cell RNA sequencing",
@@ -30,8 +30,8 @@
     ]
   },
   {
-    "objectID": "intro.html#heterogeneidad-diversidad-interna-de-un-sistema-o-de-un-conjunto",
-    "href": "intro.html#heterogeneidad-diversidad-interna-de-un-sistema-o-de-un-conjunto",
+    "objectID": "cap1_repaso.html#heterogeneidad-diversidad-interna-de-un-sistema-o-de-un-conjunto",
+    "href": "cap1_repaso.html#heterogeneidad-diversidad-interna-de-un-sistema-o-de-un-conjunto",
     "title": "1  Repaso: scRNA-seq vs bulk-RNA-seq",
     "section": "1.2 Heterogeneidad: Diversidad interna de un sistema o de un conjunto",
     "text": "1.2 Heterogeneidad: Diversidad interna de un sistema o de un conjunto\n\n🔬 No todas las células son iguales: incluso dentro de un mismo tejido, existen diferencias en tipos celulares, estados funcionales y niveles de expresión génica.\n🧬 Variabilidad genética y transcriptómica: cada célula puede expresar distintos genes o cantidades de RNA, reflejando funciones específicas.\n🩺 Relevancia en enfermedad: la heterogeneidad celular explica por qué un tumor, por ejemplo, contiene subpoblaciones con distintos comportamientos (algunas más agresivas, otras más sensibles a tratamiento).\n\nVisualización a través de UMAP (Uniform Manifold Approximation and Projection):\n\n\n\n\n\n\n\nImagen tomada de: Explicación completa de un UMAP",
@@ -40,8 +40,8 @@
     ]
   },
   {
-    "objectID": "intro.html#preguntas-que-se-pueden-responde-scrna-seq",
-    "href": "intro.html#preguntas-que-se-pueden-responde-scrna-seq",
+    "objectID": "cap1_repaso.html#preguntas-que-se-pueden-responde-scrna-seq",
+    "href": "cap1_repaso.html#preguntas-que-se-pueden-responde-scrna-seq",
     "title": "1  Repaso: scRNA-seq vs bulk-RNA-seq",
     "section": "1.3 Preguntas que se pueden responde scRNA-seq",
     "text": "1.3 Preguntas que se pueden responde scRNA-seq\n\nDescubrir tipos celulares nuevos o raros.\nIdentificar composición celular diferencial entre sano vs. enfermo.\nComprender la diferenciación celular en desarrollo y regeneración.\nAnalizar plasticidad y dinámicas de expresión en células individuales.\nConstruir atlas celulares/genéticos → catálogo completo de diversidad celular.\nAplicaciones en investigación básica y medicina personalizada.\n\n\n\n\n\n\n\n\nImagen tomada de: Kageyama, et al. 2018. Front. Neurosci",
@@ -50,8 +50,8 @@
     ]
   },
   {
-    "objectID": "intro.html#flujo-experimental-de-scrna-seq",
-    "href": "intro.html#flujo-experimental-de-scrna-seq",
+    "objectID": "cap1_repaso.html#flujo-experimental-de-scrna-seq",
+    "href": "cap1_repaso.html#flujo-experimental-de-scrna-seq",
     "title": "1  Repaso: scRNA-seq vs bulk-RNA-seq",
     "section": "1.4 Flujo experimental de scRNA-Seq",
     "text": "1.4 Flujo experimental de scRNA-Seq\n\n\n\nImagen tomada de: Biorender",
@@ -60,8 +60,8 @@
     ]
   },
   {
-    "objectID": "intro.html#referencias",
-    "href": "intro.html#referencias",
+    "objectID": "cap1_repaso.html#referencias",
+    "href": "cap1_repaso.html#referencias",
     "title": "1  Repaso: scRNA-seq vs bulk-RNA-seq",
     "section": "1.5 Referencias",
     "text": "1.5 Referencias",
