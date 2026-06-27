@@ -1,7 +1,75 @@
----
-title: "multilingual_website"
----
+# Informações gerais {.unnumbered}
 
-This is a Quarto website.
+:::: {.panel-tabset group="globalInfo"}
+## Sobre o curso 📌
 
-To learn more about Quarto websites visit <https://quarto.org/docs/websites>.
+::: {style="text-align: center;"}
+**CURSO PRÁTICO MULTILÍNGUE ONLINE**
+
+[**Foco na resolução de problemas**]{.text-blue}
+:::
+
+- **Data:** 2 de julho de 2026 (quinta-feira)
+- **Conversão de horário da reunião:**
+  - **Cidade do México, México**
+
+    - Fuso horário: GMT‑6
+
+    <!-- -->
+
+    - Horário: **10:00 AM**
+
+  - **Brasília, Brasil**
+
+    - Fuso horário: GMT‑3
+
+    - Horário equivalente: **01:00 PM**
+- **Duração:** 3 horas
+- **Nível:** Intermediário
+- Inscreva-se para receber as instruções prévias ao curso: [Google form](https://docs.google.com/forms/d/e/1FAIpQLSefUomOjP_j8vjOcPbGMwq9MNDOYB0zIHfEV_WMBqhmFxTelQ/viewform)
+
+#### **Instructoras:**
+
+- **Dra. Thais Crippa de Oliveira** - Pesquisadora de pós‑doutorado na UNICAMP, Brasil
+- **Dra. Evelia Lorena Coss-Navarrete** - Professora associada na ENES, Juriquilla-UNAM, México. [Página web](https://eveliacoss.github.io/)
+
+Assistência:
+
+- **Juliana Pinto** - Estudante de doutorado na, UFPA, Brasil
+- **Adriana da Silva, PhD** - Pesquisadora de pós‑doutorado na UNIFESP, Brasil
+
+### 🎯 Objetivo Geral
+
+Permitir que os participantes naveguem em um conjunto de dados multimodal (**RNA + ADT**), realizem o pré‑processamento essencial e interpretem resultados básicos sem se perder nos detalhes técnicos.
+
+### ✅ Resultados Esperados
+
+- Confiança para abrir e explorar dados multimodais.
+- Capacidade de executar um pipeline básico no **Seurat**.
+- Compreensão de como os **ADT** complementam o **RNA**.
+- Consciência das perguntas de pesquisa e limitações no **CITE‑seq**.
+
+![](flyer/Survival Course_POR.png){fig-align="center" width="405"}
+
+### Citar e reutilizar o material do curso
+
+Os dados do curso podem ser livremente reutilizados e adaptados com a devida atribuição. Todos os dados destes repositórios estão sujeitos à licença [Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)](https://creativecommons.org/licenses/by-nc-sa/4.0/).
+
+## Pré‑requisitos para o curso
+
+- Verifique se todos os pacotes necessários do **R** estão instalados, seguindo as instruções fornecidas em [Get ready for the workshop](scripts/scSurvival_PreCourse_Setup.html).
+- Certifique‑se de que possui **Git, R, RStudio e Bash** corretamente instalados e funcionando em seu computador.
+- Confirme que você tem acesso a uma **conexão de internet estável** para sincronização de repositórios e download de pacotes.
+
+## Agenda 📆
+
+| Tópico | Duração | Instructora |
+|------------------------------------|------------------|------------------|
+| Recapitulação rápida: Introdução ao scRNA‑seq + CITE‑seq | 30 min | Evelia Coss |
+| Configuração e uso do **VirtualBox** | 20 min | Thais Crippa |
+| 🎮 **Kahoot Quiz: Introdução + Configuração** | 10 min | Both |
+| scRNA‑seq — Erros e sobrevivência | 50 min | Thais Crippa |
+| 🎮 **Kahoot Quiz: Fundamentos de scRNA‑seq** | 10 min | Thais Crippa |
+| CITE‑seq — Erros e sobrevivência | 50 min | Evelia Coss |
+| 🎮 **Kahoot Quiz: Fundamentos de CITE‑seq** | 10 min | Evelia Coss |
+::::

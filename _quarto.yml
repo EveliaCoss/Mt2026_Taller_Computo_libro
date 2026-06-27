@@ -24,7 +24,7 @@ book:
           country: Mexico
           url: https://www.enesjuriquilla.unam.mx/
   
-  date: "`r Sys.Date()`"
+  date: "07/02/2026"
   page-navigation: true
   chapters:
     - index.qmd

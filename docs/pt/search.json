@@ -4,119 +4,119 @@
     "href": "index.pt.html",
     "title": "Curso de sobrevivencia: scRNA-seq + CITE-seq",
     "section": "",
-    "text": "This is a Quarto website.\nTo learn more about Quarto websites visit https://quarto.org/docs/websites.",
+    "text": "Informações gerais\n\nSobre o curso 📌Pré‑requisitos para o cursoAgenda 📆\n\n\n\nCURSO PRÁTICO MULTILÍNGUE ONLINE\nFoco na resolução de problemas\n\n\nData: 2 de julho de 2026 (quinta-feira)\nConversão de horário da reunião:\n\nCidade do México, México\n\nFuso horário: GMT‑6\n\n\n\nHorário: 10:00 AM\n\nBrasília, Brasil\n\nFuso horário: GMT‑3\nHorário equivalente: 01:00 PM\n\n\nDuração: 3 horas\nNível: Intermediário\nInscreva-se para receber as instruções prévias ao curso: Google form\n\n\nInstructoras:\n\nDra. Thais Crippa de Oliveira - Pesquisadora de pós‑doutorado na UNICAMP, Brasil\nDra. Evelia Lorena Coss-Navarrete - Professora associada na ENES, Juriquilla-UNAM, México. Página web\n\nAssistência:\n\nJuliana Pinto - Estudante de doutorado na, UFPA, Brasil\nAdriana da Silva, PhD - Pesquisadora de pós‑doutorado na UNIFESP, Brasil\n\n\n\n🎯 Objetivo Geral\nPermitir que os participantes naveguem em um conjunto de dados multimodal (RNA + ADT), realizem o pré‑processamento essencial e interpretem resultados básicos sem se perder nos detalhes técnicos.\n\n\n✅ Resultados Esperados\n\nConfiança para abrir e explorar dados multimodais.\nCapacidade de executar um pipeline básico no Seurat.\nCompreensão de como os ADT complementam o RNA.\nConsciência das perguntas de pesquisa e limitações no CITE‑seq.\n\n\n\n\n\n\n\n\nCitar e reutilizar o material do curso\nOs dados do curso podem ser livremente reutilizados e adaptados com a devida atribuição. Todos os dados destes repositórios estão sujeitos à licença Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0).\n\n\n\n\nVerifique se todos os pacotes necessários do R estão instalados, seguindo as instruções fornecidas em Get ready for the workshop.\nCertifique‑se de que possui Git, R, RStudio e Bash corretamente instalados e funcionando em seu computador.\nConfirme que você tem acesso a uma conexão de internet estável para sincronização de repositórios e download de pacotes.\n\n\n\n\n\n\n\n\n\n\n\nTópico\nDuração\nInstructora\n\n\n\n\nRecapitulação rápida: Introdução ao scRNA‑seq + CITE‑seq\n30 min\nEvelia Coss\n\n\nConfiguração e uso do VirtualBox\n20 min\nThais Crippa\n\n\n🎮 Kahoot Quiz: Introdução + Configuração\n10 min\nBoth\n\n\nscRNA‑seq — Erros e sobrevivência\n50 min\nThais Crippa\n\n\n🎮 Kahoot Quiz: Fundamentos de scRNA‑seq\n10 min\nThais Crippa\n\n\nCITE‑seq — Erros e sobrevivência\n50 min\nEvelia Coss\n\n\n🎮 Kahoot Quiz: Fundamentos de CITE‑seq\n10 min\nEvelia Coss",
     "crumbs": [
-      "<span class='chapter-number'>1</span>  <span class='chapter-title'>multilingual_website</span>"
+      "Informações gerais"
     ]
   },
   {
     "objectID": "cap1_repaso.pt.html",
     "href": "cap1_repaso.pt.html",
-    "title": "2  Repaso: scRNA-seq vs bulk-RNA-seq",
+    "title": "1  Repaso: scRNA-seq vs bulk-RNA-seq",
     "section": "",
-    "text": "2.1 Single cell RNA-seq (scRNA-seq)",
+    "text": "1.1 Single cell RNA-seq (scRNA-seq)",
     "crumbs": [
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Repaso: scRNA-seq vs bulk-RNA-seq</span>"
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Repaso: scRNA-seq vs bulk-RNA-seq</span>"
     ]
   },
   {
     "objectID": "cap1_repaso.pt.html#single-cell-rna-seq-scrna-seq",
     "href": "cap1_repaso.pt.html#single-cell-rna-seq-scrna-seq",
-    "title": "2  Repaso: scRNA-seq vs bulk-RNA-seq",
+    "title": "1  Repaso: scRNA-seq vs bulk-RNA-seq",
     "section": "",
     "text": "Primera publicación en 2009 (Tang et al, 2009)\nPopularidad en 2014\nEstimar la distribución de los niveles de expresión de cada gen en una población celular.\nAnálisis a nivel de célula individual\nPermite revelar tipos celulares (poblaciones raras)\nAnalizar las dinámicas temporales y heterogeneidad.\n\n\n\n\nImagen tomada de: Single cell RNA sequencing",
     "crumbs": [
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Repaso: scRNA-seq vs bulk-RNA-seq</span>"
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Repaso: scRNA-seq vs bulk-RNA-seq</span>"
     ]
   },
   {
     "objectID": "cap1_repaso.pt.html#heterogeneidad-diversidad-interna-de-un-sistema-o-de-un-conjunto",
     "href": "cap1_repaso.pt.html#heterogeneidad-diversidad-interna-de-un-sistema-o-de-un-conjunto",
-    "title": "2  Repaso: scRNA-seq vs bulk-RNA-seq",
-    "section": "2.2 Heterogeneidad: Diversidad interna de un sistema o de un conjunto",
-    "text": "2.2 Heterogeneidad: Diversidad interna de un sistema o de un conjunto\n\n🔬 No todas las células son iguales: incluso dentro de un mismo tejido, existen diferencias en tipos celulares, estados funcionales y niveles de expresión génica.\n🧬 Variabilidad genética y transcriptómica: cada célula puede expresar distintos genes o cantidades de RNA, reflejando funciones específicas.\n🩺 Relevancia en enfermedad: la heterogeneidad celular explica por qué un tumor, por ejemplo, contiene subpoblaciones con distintos comportamientos (algunas más agresivas, otras más sensibles a tratamiento).\n\nVisualización a través de UMAP (Uniform Manifold Approximation and Projection):\n\n\n\n\n\n\n\nImagen tomada de: Explicación completa de un UMAP",
+    "title": "1  Repaso: scRNA-seq vs bulk-RNA-seq",
+    "section": "1.2 Heterogeneidad: Diversidad interna de un sistema o de un conjunto",
+    "text": "1.2 Heterogeneidad: Diversidad interna de un sistema o de un conjunto\n\n🔬 No todas las células son iguales: incluso dentro de un mismo tejido, existen diferencias en tipos celulares, estados funcionales y niveles de expresión génica.\n🧬 Variabilidad genética y transcriptómica: cada célula puede expresar distintos genes o cantidades de RNA, reflejando funciones específicas.\n🩺 Relevancia en enfermedad: la heterogeneidad celular explica por qué un tumor, por ejemplo, contiene subpoblaciones con distintos comportamientos (algunas más agresivas, otras más sensibles a tratamiento).\n\nVisualización a través de UMAP (Uniform Manifold Approximation and Projection):\n\n\n\n\n\n\n\nImagen tomada de: Explicación completa de un UMAP",
     "crumbs": [
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Repaso: scRNA-seq vs bulk-RNA-seq</span>"
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Repaso: scRNA-seq vs bulk-RNA-seq</span>"
     ]
   },
   {
     "objectID": "cap1_repaso.pt.html#preguntas-que-se-pueden-responde-scrna-seq",
     "href": "cap1_repaso.pt.html#preguntas-que-se-pueden-responde-scrna-seq",
-    "title": "2  Repaso: scRNA-seq vs bulk-RNA-seq",
-    "section": "2.3 Preguntas que se pueden responde scRNA-seq",
-    "text": "2.3 Preguntas que se pueden responde scRNA-seq\n\nDescubrir tipos celulares nuevos o raros.\nIdentificar composición celular diferencial entre sano vs. enfermo.\nComprender la diferenciación celular en desarrollo y regeneración.\nAnalizar plasticidad y dinámicas de expresión en células individuales.\nConstruir atlas celulares/genéticos → catálogo completo de diversidad celular.\nAplicaciones en investigación básica y medicina personalizada.\n\n\n\n\n\n\n\n\nImagen tomada de: Kageyama, et al. 2018. Front. Neurosci",
+    "title": "1  Repaso: scRNA-seq vs bulk-RNA-seq",
+    "section": "1.3 Preguntas que se pueden responde scRNA-seq",
+    "text": "1.3 Preguntas que se pueden responde scRNA-seq\n\nDescubrir tipos celulares nuevos o raros.\nIdentificar composición celular diferencial entre sano vs. enfermo.\nComprender la diferenciación celular en desarrollo y regeneración.\nAnalizar plasticidad y dinámicas de expresión en células individuales.\nConstruir atlas celulares/genéticos → catálogo completo de diversidad celular.\nAplicaciones en investigación básica y medicina personalizada.\n\n\n\n\n\n\n\n\nImagen tomada de: Kageyama, et al. 2018. Front. Neurosci",
     "crumbs": [
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Repaso: scRNA-seq vs bulk-RNA-seq</span>"
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Repaso: scRNA-seq vs bulk-RNA-seq</span>"
     ]
   },
   {
     "objectID": "cap1_repaso.pt.html#flujo-experimental-de-scrna-seq",
     "href": "cap1_repaso.pt.html#flujo-experimental-de-scrna-seq",
-    "title": "2  Repaso: scRNA-seq vs bulk-RNA-seq",
-    "section": "2.4 Flujo experimental de scRNA-Seq",
-    "text": "2.4 Flujo experimental de scRNA-Seq\n\n\n\nImagen tomada de: Biorender",
+    "title": "1  Repaso: scRNA-seq vs bulk-RNA-seq",
+    "section": "1.4 Flujo experimental de scRNA-Seq",
+    "text": "1.4 Flujo experimental de scRNA-Seq\n\n\n\nImagen tomada de: Biorender",
     "crumbs": [
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Repaso: scRNA-seq vs bulk-RNA-seq</span>"
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Repaso: scRNA-seq vs bulk-RNA-seq</span>"
     ]
   },
   {
     "objectID": "cap1_repaso.pt.html#referencias",
     "href": "cap1_repaso.pt.html#referencias",
-    "title": "2  Repaso: scRNA-seq vs bulk-RNA-seq",
-    "section": "2.5 Referencias",
-    "text": "2.5 Referencias",
+    "title": "1  Repaso: scRNA-seq vs bulk-RNA-seq",
+    "section": "1.5 Referencias",
+    "text": "1.5 Referencias",
     "crumbs": [
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Repaso: scRNA-seq vs bulk-RNA-seq</span>"
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Repaso: scRNA-seq vs bulk-RNA-seq</span>"
     ]
   },
   {
     "objectID": "cap2_resources.pt.html",
     "href": "cap2_resources.pt.html",
-    "title": "3  Resources",
+    "title": "2  Resources",
     "section": "",
     "text": "When you can work on your computer and when you need to work on the cluster ..  source , RAM, etc. -  number of samples?",
     "crumbs": [
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Resources</span>"
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Resources</span>"
     ]
   },
   {
     "objectID": "cap3_aboutDataset.pt.html",
     "href": "cap3_aboutDataset.pt.html",
-    "title": "4  About Dataset",
+    "title": "3  About Dataset",
     "section": "",
-    "text": "4.1 gse149689_subset_3k",
+    "text": "3.1 gse149689_subset_3k",
     "crumbs": [
-      "<span class='chapter-number'>4</span>  <span class='chapter-title'>About Dataset</span>"
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>About Dataset</span>"
     ]
   },
   {
     "objectID": "cap3_aboutDataset.pt.html#paper-an-immunophenotype-coupled-transcriptomic-atlas-of-human-hematopoietic-progenitors",
     "href": "cap3_aboutDataset.pt.html#paper-an-immunophenotype-coupled-transcriptomic-atlas-of-human-hematopoietic-progenitors",
-    "title": "4  About Dataset",
-    "section": "4.2 Paper: An immunophenotype-coupled transcriptomic atlas of human hematopoietic progenitors",
-    "text": "4.2 Paper: An immunophenotype-coupled transcriptomic atlas of human hematopoietic progenitors\nNature immunology: https://www.nature.com/articles/s41590-024-01782-4#data-availability \nRaw sequencing FASTQ files and the processed HDF5 (h5) matrix have been deposited in the Gene Expression Omnibus database under accession code GSE245108. CITE-seq data generated by Pei et al. were accessed via the accession ID GSE232559. All imputed Infinity Flow objects are available in the FlowRepository under ID FR-FCM-Z6UQ. An interactive web portal with the associated Azimuth instance and data visualization tools is available at https://altanalyze.org/MarrowAtlas/. Interactive data visualization and analysis tools for the CITE-seq bone marrow single-cell datasets are provided at https://altanalyze.org/MarrowAtlas/. Source data are provided with this paper.\n\n\nCITE-seq https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE245108\nscRNA-seq https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE232559\nGithub: https://github.com/nsalomonis/Human-Bone-Marrow-Titration-Atlas\n\nNOTAS: ADD image. Info Sobre el dataset (tipo de células o tejidos, Número de células detectadas, tecnología, secuenciador, plataforma, genoma usado para el alineamiento, versión de cell ranger) (D5 https://eveliacoss.github.io/Workshop_scRNAseq_presentacion/Clase2_Normalizacion.html#5 )",
+    "title": "3  About Dataset",
+    "section": "3.2 Paper: An immunophenotype-coupled transcriptomic atlas of human hematopoietic progenitors",
+    "text": "3.2 Paper: An immunophenotype-coupled transcriptomic atlas of human hematopoietic progenitors\nNature immunology: https://www.nature.com/articles/s41590-024-01782-4#data-availability \nRaw sequencing FASTQ files and the processed HDF5 (h5) matrix have been deposited in the Gene Expression Omnibus database under accession code GSE245108. CITE-seq data generated by Pei et al. were accessed via the accession ID GSE232559. All imputed Infinity Flow objects are available in the FlowRepository under ID FR-FCM-Z6UQ. An interactive web portal with the associated Azimuth instance and data visualization tools is available at https://altanalyze.org/MarrowAtlas/. Interactive data visualization and analysis tools for the CITE-seq bone marrow single-cell datasets are provided at https://altanalyze.org/MarrowAtlas/. Source data are provided with this paper.\n\n\nCITE-seq https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE245108\nscRNA-seq https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE232559\nGithub: https://github.com/nsalomonis/Human-Bone-Marrow-Titration-Atlas\n\nNOTAS: ADD image. Info Sobre el dataset (tipo de células o tejidos, Número de células detectadas, tecnología, secuenciador, plataforma, genoma usado para el alineamiento, versión de cell ranger) (D5 https://eveliacoss.github.io/Workshop_scRNAseq_presentacion/Clase2_Normalizacion.html#5 )",
     "crumbs": [
-      "<span class='chapter-number'>4</span>  <span class='chapter-title'>About Dataset</span>"
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>About Dataset</span>"
     ]
   },
   {
     "objectID": "cap4_course.pt.html",
     "href": "cap4_course.pt.html",
-    "title": "5  Single-Cell Survival Course with Seurat v5",
+    "title": "4  Single-Cell Survival Course with Seurat v5",
     "section": "",
     "text": "HOW TO USE\nRun interactively, section by section (Ctrl+Enter / Cmd+Enter), from top\nto bottom. Do NOT source() the whole file in one go: several chunks are\ndeliberate errors meant to be read, and Block 8 is optional take-home\nwork that depends on a file released separately after the session.\nDELIBERATE ERRORS\nFive steps are designed to fail (v4 slot access, GetAssayData slot=,\nwrong filter thresholds, dims &gt; npcs, plotting a label before adding it).\nThey are wrapped in try() so the error prints to the console without\nhalting a full run. Read the message, then continue.\nWORKING DIRECTORY\nSet the working directory to the folder holding this script and the data/\nsubfolder (Session &gt; Set Working Directory &gt; To Source File Location).",
     "crumbs": [
-      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Single-Cell Survival Course with Seurat v5</span>"
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Single-Cell Survival Course with Seurat v5</span>"
     ]
   },
   {
     "objectID": "notas.pt.html",
     "href": "notas.pt.html",
-    "title": "6  Notas",
+    "title": "5  Notas",
     "section": "",
     "text": "Notanotas\n\n\n\n\n\n\n\n\n\n\n\n\nDicaTip\n\n\n\n\n\n\n\n\n\n\n\n\nImportanteImportant\n\n\n\n\n\n\n\n\n\n\n\n\nCuidadoCaution\n\n\n\n\n\n\n\n\n\n\n\n\nAvisoWarning\n\n\n\n\n\n\n\n\n\n\n\n\n\nDicaActividad: Taller de Cerámica\n\n\n\nSábados 10:00 am · Cupo limitado a 12 personas.",
     "crumbs": [
-      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Notas</span>"
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Notas</span>"
     ]
   }
 ]

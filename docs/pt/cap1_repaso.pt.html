@@ -8,7 +8,7 @@
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.9.37">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<title>2  Repaso: scRNA-seq vs bulk-RNA-seq – Curso de sobrevivencia: scRNA-seq + CITE-seq</title>
+<title>1  Repaso: scRNA-seq vs bulk-RNA-seq – Curso de sobrevivencia: scRNA-seq + CITE-seq</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -233,7 +233,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./cap1_repaso.pt.html"><span class="chapter-number">2</span>  <span class="chapter-title">Repaso: scRNA-seq vs bulk-RNA-seq</span></a></li></ol></nav><a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./cap1_repaso.pt.html"><span class="chapter-number">1</span>  <span class="chapter-title">Repaso: scRNA-seq vs bulk-RNA-seq</span></a></li></ol></nav><a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Procurar" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
@@ -289,37 +289,37 @@ ul.task-list li input[type="checkbox"] {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./index.pt.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">1</span>  <span class="chapter-title">multilingual_website</span></span></a>
+ <span class="menu-text">Informações gerais</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./cap1_repaso.pt.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">2</span>  <span class="chapter-title">Repaso: scRNA-seq vs bulk-RNA-seq</span></span></a>
+ <span class="menu-text"><span class="chapter-number">1</span>  <span class="chapter-title">Repaso: scRNA-seq vs bulk-RNA-seq</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./cap2_resources.pt.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>  <span class="chapter-title">Resources</span></span></a>
+ <span class="menu-text"><span class="chapter-number">2</span>  <span class="chapter-title">Resources</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./cap3_aboutDataset.pt.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>  <span class="chapter-title">About Dataset</span></span></a>
+ <span class="menu-text"><span class="chapter-number">3</span>  <span class="chapter-title">About Dataset</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./cap4_course.pt.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>  <span class="chapter-title">Single-Cell Survival Course with Seurat v5</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>  <span class="chapter-title">Single-Cell Survival Course with Seurat v5</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./notas.pt.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>  <span class="chapter-title">Notas</span></span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>  <span class="chapter-title">Notas</span></span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
@@ -334,17 +334,17 @@ ul.task-list li input[type="checkbox"] {
         <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Índice</h2>
    
   <ul>
-<li><a href="#single-cell-rna-seq-scrna-seq" id="toc-single-cell-rna-seq-scrna-seq" class="nav-link active" data-scroll-target="#single-cell-rna-seq-scrna-seq"><span class="header-section-number">2.1</span> <strong>Single cell RNA-seq (scRNA-seq)</strong></a></li>
-  <li><a href="#heterogeneidad-diversidad-interna-de-un-sistema-o-de-un-conjunto" id="toc-heterogeneidad-diversidad-interna-de-un-sistema-o-de-un-conjunto" class="nav-link" data-scroll-target="#heterogeneidad-diversidad-interna-de-un-sistema-o-de-un-conjunto"><span class="header-section-number">2.2</span> <strong>Heterogeneidad: Diversidad interna de un sistema o de un conjunto</strong></a></li>
-  <li><a href="#preguntas-que-se-pueden-responde-scrna-seq" id="toc-preguntas-que-se-pueden-responde-scrna-seq" class="nav-link" data-scroll-target="#preguntas-que-se-pueden-responde-scrna-seq"><span class="header-section-number">2.3</span> <strong>Preguntas que se pueden responde scRNA-seq</strong></a></li>
-  <li><a href="#flujo-experimental-de-scrna-seq" id="toc-flujo-experimental-de-scrna-seq" class="nav-link" data-scroll-target="#flujo-experimental-de-scrna-seq"><span class="header-section-number">2.4</span> <strong>Flujo experimental de scRNA-Seq</strong></a></li>
-  <li><a href="#referencias" id="toc-referencias" class="nav-link" data-scroll-target="#referencias"><span class="header-section-number">2.5</span> Referencias</a></li>
+<li><a href="#single-cell-rna-seq-scrna-seq" id="toc-single-cell-rna-seq-scrna-seq" class="nav-link active" data-scroll-target="#single-cell-rna-seq-scrna-seq"><span class="header-section-number">1.1</span> <strong>Single cell RNA-seq (scRNA-seq)</strong></a></li>
+  <li><a href="#heterogeneidad-diversidad-interna-de-un-sistema-o-de-un-conjunto" id="toc-heterogeneidad-diversidad-interna-de-un-sistema-o-de-un-conjunto" class="nav-link" data-scroll-target="#heterogeneidad-diversidad-interna-de-un-sistema-o-de-un-conjunto"><span class="header-section-number">1.2</span> <strong>Heterogeneidad: Diversidad interna de un sistema o de un conjunto</strong></a></li>
+  <li><a href="#preguntas-que-se-pueden-responde-scrna-seq" id="toc-preguntas-que-se-pueden-responde-scrna-seq" class="nav-link" data-scroll-target="#preguntas-que-se-pueden-responde-scrna-seq"><span class="header-section-number">1.3</span> <strong>Preguntas que se pueden responde scRNA-seq</strong></a></li>
+  <li><a href="#flujo-experimental-de-scrna-seq" id="toc-flujo-experimental-de-scrna-seq" class="nav-link" data-scroll-target="#flujo-experimental-de-scrna-seq"><span class="header-section-number">1.4</span> <strong>Flujo experimental de scRNA-Seq</strong></a></li>
+  <li><a href="#referencias" id="toc-referencias" class="nav-link" data-scroll-target="#referencias"><span class="header-section-number">1.5</span> Referencias</a></li>
   </ul></nav>
 </div>
 <!-- main -->
 <main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
 <h1 class="title">
-<span class="chapter-number">2</span>  <span class="chapter-title">Repaso: scRNA-seq vs bulk-RNA-seq</span>
+<span class="chapter-number">1</span>  <span class="chapter-title">Repaso: scRNA-seq vs bulk-RNA-seq</span>
 </h1>
 </div>
 
@@ -375,8 +375,8 @@ ul.task-list li input[type="checkbox"] {
 </div>
 <figcaption>Imagen tomada de: Yan et al. 2024. Int J Biol Sci</figcaption></figure>
 </div>
-<section id="single-cell-rna-seq-scrna-seq" class="level2" data-number="2.1"><h2 data-number="2.1" class="anchored" data-anchor-id="single-cell-rna-seq-scrna-seq">
-<span class="header-section-number">2.1</span> <strong>Single cell RNA-seq (scRNA-seq)</strong>
+<section id="single-cell-rna-seq-scrna-seq" class="level2" data-number="1.1"><h2 data-number="1.1" class="anchored" data-anchor-id="single-cell-rna-seq-scrna-seq">
+<span class="header-section-number">1.1</span> <strong>Single cell RNA-seq (scRNA-seq)</strong>
 </h2>
 <ul>
 <li>Primera publicación en 2009 (<a href="https://www.nature.com/articles/nmeth.1315">Tang <em>et al</em>, 2009</a>)</li>
@@ -392,8 +392,8 @@ ul.task-list li input[type="checkbox"] {
 <figure class="figure"><p><a href="https://learn.gencore.bio.nyu.edu/transcriptomics/single_cell_rna_seq.html"><img src="figures/overview%20SingleRNAseq.jpeg" class="img-fluid figure-img"></a></p>
 <figcaption>Imagen tomada de: Single cell RNA sequencing</figcaption></figure>
 </div>
-</section><section id="heterogeneidad-diversidad-interna-de-un-sistema-o-de-un-conjunto" class="level2" data-number="2.2"><h2 data-number="2.2" class="anchored" data-anchor-id="heterogeneidad-diversidad-interna-de-un-sistema-o-de-un-conjunto">
-<span class="header-section-number">2.2</span> <strong>Heterogeneidad: Diversidad interna de un sistema o de un conjunto</strong>
+</section><section id="heterogeneidad-diversidad-interna-de-un-sistema-o-de-un-conjunto" class="level2" data-number="1.2"><h2 data-number="1.2" class="anchored" data-anchor-id="heterogeneidad-diversidad-interna-de-un-sistema-o-de-un-conjunto">
+<span class="header-section-number">1.2</span> <strong>Heterogeneidad: Diversidad interna de un sistema o de un conjunto</strong>
 </h2>
 <ul>
 <li><p>🔬 <strong>No todas las células son iguales:</strong> incluso dentro de un mismo tejido, existen diferencias en <em>tipos celulares, estados funcionales y niveles de expresión génica</em>.</p></li>
@@ -408,8 +408,8 @@ ul.task-list li input[type="checkbox"] {
 </div>
 <figcaption>Imagen tomada de: Explicación completa de un UMAP</figcaption></figure>
 </div>
-</section><section id="preguntas-que-se-pueden-responde-scrna-seq" class="level2" data-number="2.3"><h2 data-number="2.3" class="anchored" data-anchor-id="preguntas-que-se-pueden-responde-scrna-seq">
-<span class="header-section-number">2.3</span> <strong>Preguntas que se pueden responde scRNA-seq</strong>
+</section><section id="preguntas-que-se-pueden-responde-scrna-seq" class="level2" data-number="1.3"><h2 data-number="1.3" class="anchored" data-anchor-id="preguntas-que-se-pueden-responde-scrna-seq">
+<span class="header-section-number">1.3</span> <strong>Preguntas que se pueden responde scRNA-seq</strong>
 </h2>
 <ul>
 <li>Descubrir <strong>tipos celulares nuevos o raros</strong>.</li>
@@ -426,15 +426,15 @@ ul.task-list li input[type="checkbox"] {
 </div>
 <figcaption>Imagen tomada de: Kageyama, et al. 2018. Front. Neurosci</figcaption></figure>
 </div>
-</section><section id="flujo-experimental-de-scrna-seq" class="level2" data-number="2.4"><h2 data-number="2.4" class="anchored" data-anchor-id="flujo-experimental-de-scrna-seq">
-<span class="header-section-number">2.4</span> <strong>Flujo experimental de scRNA-Seq</strong>
+</section><section id="flujo-experimental-de-scrna-seq" class="level2" data-number="1.4"><h2 data-number="1.4" class="anchored" data-anchor-id="flujo-experimental-de-scrna-seq">
+<span class="header-section-number">1.4</span> <strong>Flujo experimental de scRNA-Seq</strong>
 </h2>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure"><p><img src="figures/scrnaseq_desing.png" class="img-fluid figure-img"></p>
 <figcaption>Imagen tomada de: Biorender</figcaption></figure>
 </div>
-</section><section id="referencias" class="level2" data-number="2.5"><h2 data-number="2.5" class="anchored" data-anchor-id="referencias">
-<span class="header-section-number">2.5</span> Referencias</h2>
+</section><section id="referencias" class="level2" data-number="1.5"><h2 data-number="1.5" class="anchored" data-anchor-id="referencias">
+<span class="header-section-number">1.5</span> Referencias</h2>
 
 
 </section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
@@ -850,13 +850,13 @@ ul.task-list li input[type="checkbox"] {
     }
   });
   </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
-      <a href="./index.pt.html" class="pagination-link" aria-label="multilingual_website">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">1</span>  <span class="chapter-title">multilingual_website</span></span>
+      <a href="./index.pt.html" class="pagination-link" aria-label="Informações gerais">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Informações gerais</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="./cap2_resources.pt.html" class="pagination-link" aria-label="Resources">
-        <span class="nav-page-text"><span class="chapter-number">3</span>  <span class="chapter-title">Resources</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">2</span>  <span class="chapter-title">Resources</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
