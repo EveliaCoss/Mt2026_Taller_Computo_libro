@@ -4,7 +4,7 @@
     "href": "index.html",
     "title": "Survival Course: scRNA‑seq + CITE‑seq",
     "section": "",
-    "text": "General information\n\nAbout the course 📌Prerequisites for the Course\n\n\n\nPRACTICAL MULTILINGUAL ONLINE COURSE\nSolving problems focused\n\n\nDate: 2nd July, 2026 (Thursday)\nTime: 10 am (GMT-6)\nDuration: 3 hours\nLevel: Intermediate\nRegister to receive the pre-course instructions: Google form\n\n\nInstructors:\n\nThais Crippa de Oliveira, PhD - Posdoctoral Researcher at UNICAMP, Brazil\nEvelia Lorena Coss-Navarrete, PhD - Associate Professor at ENES, Juriquilla-UNAM, México. Web page\n\nAssistance:\n\nJuliana Pinto - PhD student, UFPA, Brazil\nAdriana da Silva, PhD - Post-doc, UNIFESP, Brazil\n\n\n\n🎯 General Goal\nEnable participants to navigate a multimodal dataset (RNA + ADT), perform essential preprocessing, and interpret basic results without getting lost in technical details.\n\n\n✅ Expected Outcomes\n\nConfidence to open and explore multimodal data.\nAbility to run a basic Seurat pipeline.\nUnderstanding of how ADT complements RNA.\nAwareness of research questions and limitations in CITE‑seq.\n\n\n\n\n\n\n\n\nCitar y reutilizar el material del curso\nCourse data may be freely reused and adapted with proper attribution. All course data from these repositories is subject to the Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0).\n\n\n\n\nVerify that all required R packages are installed, following the instructions provided in Get ready for the workshop.\nEnsure you have Git, R, RStudio, and Bash properly installed and working on your computer.\nConfirm you have access to a stable internet connection for repository synchronization and package downloads.",
+    "text": "General information\n\nAbout the course 📌Prerequisites for the CourseAgenda 📆\n\n\n\nPRACTICAL MULTILINGUAL ONLINE COURSE\nSolving problems focused\n\n\nDate: 2nd July, 2026 (Thursday)\nMeeting Time Conversion:\n\nMexico City, Mexico\n\nTime zone: GMT‑6\nTime: 10:00 AM\n\nBrasília, Brazil\n\nTime zone: GMT‑3\nEquivalent time: 01:00 PM\n\n\nDuration: 3 hours\nLevel: Intermediate\nRegister to receive the pre-course instructions: Google form\n\n\nInstructors:\n\nThais Crippa de Oliveira, PhD - Posdoctoral Researcher at UNICAMP, Brazil\nEvelia Lorena Coss-Navarrete, PhD - Associate Professor at ENES, Juriquilla-UNAM, México. Web page\n\nAssistance:\n\nJuliana Pinto - PhD student, UFPA, Brazil\nAdriana da Silva, PhD - Post-doc, UNIFESP, Brazil\n\n\n\n🎯 General Goal\nEnable participants to navigate a multimodal dataset (RNA + ADT), perform essential preprocessing, and interpret basic results without getting lost in technical details.\n\n\n✅ Expected Outcomes\n\nConfidence to open and explore multimodal data.\nAbility to run a basic Seurat pipeline.\nUnderstanding of how ADT complements RNA.\nAwareness of research questions and limitations in CITE‑seq.\n\n\n\n\n\n\n\n\nCite and reuse course material\nCourse data may be freely reused and adapted with proper attribution. All course data from these repositories is subject to the Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0).\n\n\n\n\nVerify that all required R packages are installed, following the instructions provided in Get ready for the workshop.\nEnsure you have Git, R, RStudio, and Bash properly installed and working on your computer.\nConfirm you have access to a stable internet connection for repository synchronization and package downloads.\n\n\n\n\n\n\n\n\n\n\n\nTopic\nDuration\nInstructor\n\n\n\n\nQuick Recap: Introduction to scRNA‑seq + CITE-seq\n30 min\nEvelia Coss\n\n\nVirtualBox setup and usage\n20 min\nThais Crippa\n\n\n🎮 Kahoot Quiz: Introduction + Setup\n10 min\nBoth\n\n\nscRNA‑seq — Errors & Survival\n50 min\nThais Crippa\n\n\n🎮 Kahoot Quiz: scRNA‑seq Basics\n10 min\nThais Crippa\n\n\nCITE‑seq — Errors & Survival\n50 min\nEvelia Coss\n\n\n🎮 Kahoot Quiz: CITE‑seq Basics\n10 min\nEvelia Coss",
     "crumbs": [
       "General information"
     ]
@@ -12,106 +12,136 @@
   {
     "objectID": "cap1_repaso.html",
     "href": "cap1_repaso.html",
-    "title": "1  Repaso: scRNA-seq vs bulk-RNA-seq",
+    "title": "1  Quick Recap: Introduction to scRNA‑seq + CITE-seq",
     "section": "",
-    "text": "1.1 Single cell RNA-seq (scRNA-seq)",
+    "text": "1.1 scRNA-seq vs bulk-RNA-seq",
     "crumbs": [
-      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Repaso: scRNA-seq vs bulk-RNA-seq</span>"
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Quick Recap: Introduction to scRNA‑seq + CITE-seq</span>"
+    ]
+  },
+  {
+    "objectID": "cap1_repaso.html#scrna-seq-vs-bulk-rna-seq",
+    "href": "cap1_repaso.html#scrna-seq-vs-bulk-rna-seq",
+    "title": "1  Quick Recap: Introduction to scRNA‑seq + CITE-seq",
+    "section": "",
+    "text": "Bulk RNA‑seq: measures average gene expression in a tissue; useful for detecting global changes, but it hides cellular heterogeneity.\n\nInsufficient for: early developmental studies or complex tissues such as the brain.\n\n\n\n\n\n\n\n\n\nImage source: Yan et al. 2024. Int J Biol Sci",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Quick Recap: Introduction to scRNA‑seq + CITE-seq</span>"
     ]
   },
   {
     "objectID": "cap1_repaso.html#single-cell-rna-seq-scrna-seq",
     "href": "cap1_repaso.html#single-cell-rna-seq-scrna-seq",
-    "title": "1  Repaso: scRNA-seq vs bulk-RNA-seq",
-    "section": "",
-    "text": "Primera publicación en 2009 (Tang et al, 2009)\nPopularidad en 2014\nEstimar la distribución de los niveles de expresión de cada gen en una población celular.\nAnálisis a nivel de célula individual\nPermite revelar tipos celulares (poblaciones raras)\nAnalizar las dinámicas temporales y heterogeneidad.\n\n\n\n\nImagen tomada de: Single cell RNA sequencing",
+    "title": "1  Quick Recap: Introduction to scRNA‑seq + CITE-seq",
+    "section": "1.2 Single cell RNA-seq (scRNA-seq)",
+    "text": "1.2 Single cell RNA-seq (scRNA-seq)\n\nFirst publication: 2009 (Tang et al, 2009)\nPopularity: 2014\nEstimate the distribution of gene expression levels across a cell population.\nAnalysis at the single‑cell level.\nReveals cell types, including rare populations.\nAnalyze temporal dynamics and heterogeneity.\n\n\n\n\n\n\n\n\nImage source: Single cell RNA sequencing",
     "crumbs": [
-      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Repaso: scRNA-seq vs bulk-RNA-seq</span>"
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Quick Recap: Introduction to scRNA‑seq + CITE-seq</span>"
     ]
   },
   {
-    "objectID": "cap1_repaso.html#heterogeneidad-diversidad-interna-de-un-sistema-o-de-un-conjunto",
-    "href": "cap1_repaso.html#heterogeneidad-diversidad-interna-de-un-sistema-o-de-un-conjunto",
-    "title": "1  Repaso: scRNA-seq vs bulk-RNA-seq",
-    "section": "1.2 Heterogeneidad: Diversidad interna de un sistema o de un conjunto",
-    "text": "1.2 Heterogeneidad: Diversidad interna de un sistema o de un conjunto\n\n🔬 No todas las células son iguales: incluso dentro de un mismo tejido, existen diferencias en tipos celulares, estados funcionales y niveles de expresión génica.\n🧬 Variabilidad genética y transcriptómica: cada célula puede expresar distintos genes o cantidades de RNA, reflejando funciones específicas.\n🩺 Relevancia en enfermedad: la heterogeneidad celular explica por qué un tumor, por ejemplo, contiene subpoblaciones con distintos comportamientos (algunas más agresivas, otras más sensibles a tratamiento).\n\nVisualización a través de UMAP (Uniform Manifold Approximation and Projection):\n\n\n\n\n\n\n\nImagen tomada de: Explicación completa de un UMAP",
+    "objectID": "cap1_repaso.html#heterogeneity-internal-diversity-within-a-system-or-a-set",
+    "href": "cap1_repaso.html#heterogeneity-internal-diversity-within-a-system-or-a-set",
+    "title": "1  Quick Recap: Introduction to scRNA‑seq + CITE-seq",
+    "section": "1.3 Heterogeneity: Internal diversity within a system or a set",
+    "text": "1.3 Heterogeneity: Internal diversity within a system or a set\n\n🔬 Not all cells are the same: even within the same tissue, there are differences in cell types, functional states, and gene expression levels.\n🧬 Genetic and transcriptomic variability: each cell may express different genes or varying amounts of RNA, reflecting specific functions.\n🩺 Relevance in disease: cellular heterogeneity explains why a tumor, for example, contains subpopulations with distinct behaviors (some more aggressive, others more sensitive to treatment).\n\nVisualization through UMAP (Uniform Manifold Approximation and Projection):\n\n\n\n\n\n\n\nImage source: Explicación completa de un UMAP",
     "crumbs": [
-      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Repaso: scRNA-seq vs bulk-RNA-seq</span>"
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Quick Recap: Introduction to scRNA‑seq + CITE-seq</span>"
     ]
   },
   {
-    "objectID": "cap1_repaso.html#preguntas-que-se-pueden-responde-scrna-seq",
-    "href": "cap1_repaso.html#preguntas-que-se-pueden-responde-scrna-seq",
-    "title": "1  Repaso: scRNA-seq vs bulk-RNA-seq",
-    "section": "1.3 Preguntas que se pueden responde scRNA-seq",
-    "text": "1.3 Preguntas que se pueden responde scRNA-seq\n\nDescubrir tipos celulares nuevos o raros.\nIdentificar composición celular diferencial entre sano vs. enfermo.\nComprender la diferenciación celular en desarrollo y regeneración.\nAnalizar plasticidad y dinámicas de expresión en células individuales.\nConstruir atlas celulares/genéticos → catálogo completo de diversidad celular.\nAplicaciones en investigación básica y medicina personalizada.\n\n\n\n\n\n\n\n\nImagen tomada de: Kageyama, et al. 2018. Front. Neurosci",
+    "objectID": "cap1_repaso.html#questions-scrnaseq-can-answer",
+    "href": "cap1_repaso.html#questions-scrnaseq-can-answer",
+    "title": "1  Quick Recap: Introduction to scRNA‑seq + CITE-seq",
+    "section": "1.4 Questions scRNA‑seq can answer",
+    "text": "1.4 Questions scRNA‑seq can answer\n\nDiscover new or rare cell types.\nIdentify differential cellular composition between healthy vs. diseased samples.\nUnderstand cell differentiation in development and regeneration.\nAnalyze plasticity and expression dynamics at the single‑cell level.\nBuild cellular/genetic atlases → comprehensive catalog of cellular diversity.\nApplications in basic research and personalized medicine.\n\n\n\n\n\n\n\n\nImage source: Kageyama, et al. 2018. Front. Neurosci",
     "crumbs": [
-      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Repaso: scRNA-seq vs bulk-RNA-seq</span>"
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Quick Recap: Introduction to scRNA‑seq + CITE-seq</span>"
     ]
   },
   {
-    "objectID": "cap1_repaso.html#flujo-experimental-de-scrna-seq",
-    "href": "cap1_repaso.html#flujo-experimental-de-scrna-seq",
-    "title": "1  Repaso: scRNA-seq vs bulk-RNA-seq",
-    "section": "1.4 Flujo experimental de scRNA-Seq",
-    "text": "1.4 Flujo experimental de scRNA-Seq\n\n\n\nImagen tomada de: Biorender",
+    "objectID": "cap1_repaso.html#general-pipeline-for-scrnaseq-with-seurat",
+    "href": "cap1_repaso.html#general-pipeline-for-scrnaseq-with-seurat",
+    "title": "1  Quick Recap: Introduction to scRNA‑seq + CITE-seq",
+    "section": "1.5 General Pipeline for scRNA‑seq with Seurat",
+    "text": "1.5 General Pipeline for scRNA‑seq with Seurat\n\n\n\n\n\n\n\n\nStep\nPurpose\nSeurat Command\n\n\n\n\n\nPreprocessing\n\nLoad raw count matrix and create Seurat object\nRead10X(), CreateSeuratObject()\n\n\n\nQuality Control (QC)\n\nFilter cells/genes based on metrics (e.g., nFeature_RNA, percent.mt)\nsubset(), PercentageFeatureSet()\n\n\n\nNormalization\n\nAdjust counts for sequencing depth\nNormalizeData() or SCTransform()\n\n\n\nFeature Selection\n\nIdentify variable genes\nFindVariableFeatures()\n\n\n\nDimensionality Reduction\n\nReduce dimensions for visualization\nScaleData(), RunPCA(), RunUMAP(), RunTSNE()\n\n\n\nClustering & Annotation\n\nGroup cells and assign biological meaning\nFindNeighbors(), FindClusters(), FindAllMarkers()\n\n\n\nDataset Integration\n\nCombine multiple datasets, remove batch effects\nFindIntegrationAnchors(), IntegrateData()\n\n\n\nDownstream Analysis\n\nSpecific goals: DEGs, trajectories, cell communication\nFindMarkers(), CellCycleScoring(), external packages",
     "crumbs": [
-      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Repaso: scRNA-seq vs bulk-RNA-seq</span>"
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Quick Recap: Introduction to scRNA‑seq + CITE-seq</span>"
+    ]
+  },
+  {
+    "objectID": "cap1_repaso.html#variations-of-scrnaseq",
+    "href": "cap1_repaso.html#variations-of-scrnaseq",
+    "title": "1  Quick Recap: Introduction to scRNA‑seq + CITE-seq",
+    "section": "1.6 Variations of scRNA‑seq",
+    "text": "1.6 Variations of scRNA‑seq\n\n\n\n\n\n\n\nType of Analysis\nContribution\n\n\n\n\nUnimodal (RNA only)\nCellular heterogeneity in gene expression\n\n\nMultimodal (RNA + others, e.g., CITE‑seq)\nRegulation, proteomics, and biological context\n\n\nTrajectories\nTemporal dynamics of biological processes\n\n\nCellular Interactions\nCommunication and functional networks\n\n\nDataset Integration\nComparison across conditions",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Quick Recap: Introduction to scRNA‑seq + CITE-seq</span>"
+    ]
+  },
+  {
+    "objectID": "cap1_repaso.html#what-is-cite-seq",
+    "href": "cap1_repaso.html#what-is-cite-seq",
+    "title": "1  Quick Recap: Introduction to scRNA‑seq + CITE-seq",
+    "section": "1.7 What is CITE-Seq?",
+    "text": "1.7 What is CITE-Seq?\nCITE‑seq (Cellular Indexing of Transcriptomes and Epitopes by Sequencing) is a multimodal single‑cell technique that combines RNA sequencing with protein profiling at the level of individual cells.\n\n1.7.1 📌 Key points about CITE‑seq\n\nSimultaneous measurements → captures both the transcriptome (scRNA‑seq) and surface proteins using antibody‑derived tags (ADTs).\nHighly multiplexed → allows detection of many protein markers in parallel, alongside unbiased RNA profiling.\nSingle‑cell resolution → thousands of cells can be analyzed at once, integrating RNA and protein data.\nMultimodal context → CITE‑seq is part of the broader multimodal analysis frontier in single‑cell genomics, where multiple data types (RNA, ATAC, methylation, perturbations) are measured in the same cell.\nApplications → improves cell type identification, refines clustering, and reveals functional states that RNA alone might miss.\n\n\n\n\n\n\n\n\nSchematic figure of (A) the CITE-seq antibody linked with the barcoded oligo (B) the CITE-seq protocol. Credit: Winston & Gregory Timp (2020), license: CC-BY 4.0",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Quick Recap: Introduction to scRNA‑seq + CITE-seq</span>"
+    ]
+  },
+  {
+    "objectID": "cap1_repaso.html#overview",
+    "href": "cap1_repaso.html#overview",
+    "title": "1  Quick Recap: Introduction to scRNA‑seq + CITE-seq",
+    "section": "1.8 Overview",
+    "text": "1.8 Overview\n\n\n\nSchematic of the dry lab workflow for CITE-Seq",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Quick Recap: Introduction to scRNA‑seq + CITE-seq</span>"
+    ]
+  },
+  {
+    "objectID": "cap1_repaso.html#general-pipeline-for-citeseq",
+    "href": "cap1_repaso.html#general-pipeline-for-citeseq",
+    "title": "1  Quick Recap: Introduction to scRNA‑seq + CITE-seq",
+    "section": "1.9 General Pipeline for CITE‑seq",
+    "text": "1.9 General Pipeline for CITE‑seq\n\n\n\n\n\n\n\n\nStep\nPurpose\nSeurat Command\n\n\n\n\n\nPreprocessing\n\nLoad RNA counts and antibody‑derived tags (ADT)\nRead10X(), CreateSeuratObject()\n\n\n\nQuality Control (QC)\n\nFilter cells/genes based on RNA metrics and ADT counts\nPercentageFeatureSet(), subset()\n\n\n\nNormalization (RNA)\n\nAdjust RNA counts for sequencing depth\nSCTransform() or NormalizeData()\n\n\n\nNormalization (ADT)\n\nCenter and scale protein counts\nNormalizeData(assay = \"ADT\"), ScaleData(assay = \"ADT\")\n\n\n\nFeature Selection (RNA)\n\nIdentify variable genes\nFindVariableFeatures()\n\n\n\nDimensionality Reduction\n\nReduce dimensions for RNA and ADT separately\nRunPCA(assay = \"RNA\"), RunPCA(assay = \"ADT\")\n\n\n\nMultimodal Integration\n\nCombine RNA + ADT signals\nFindMultiModalNeighbors(), RunUMAP(nn.name = \"weighted.nn\")\n\n\n\nClustering & Annotation\n\nGroup cells and assign biological meaning\nFindClusters(), FindAllMarkers()\n\n\n\nDownstream Analysis\n\nDiscover enriched proteins per cluster, refine cell types\nFindMarkers(assay = \"ADT\"), external multimodal workflows",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Quick Recap: Introduction to scRNA‑seq + CITE-seq</span>"
+    ]
+  },
+  {
+    "objectID": "cap1_repaso.html#scrna-seq-vs-scrna-seq-citeseq",
+    "href": "cap1_repaso.html#scrna-seq-vs-scrna-seq-citeseq",
+    "title": "1  Quick Recap: Introduction to scRNA‑seq + CITE-seq",
+    "section": "1.10 scRNA-seq vs scRNA-seq + CITE‑seq",
+    "text": "1.10 scRNA-seq vs scRNA-seq + CITE‑seq\n\n\n\n\n\n\n\n\nApproach\nType\nPurpose\n\n\n\n\nscRNA‑seq\nUnimodal (RNA only)\nCharacterize transcriptomic heterogeneity: identify cell types, states, and gene expression dynamics based solely on RNA.\n\n\nCITE‑seq\nMultimodal (RNA + proteins)\nIntegrate RNA + surface proteins: refine cell type annotation, validate clusters, and capture functional context beyond transcriptomics.",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Quick Recap: Introduction to scRNA‑seq + CITE-seq</span>"
     ]
   },
   {
     "objectID": "cap1_repaso.html#referencias",
     "href": "cap1_repaso.html#referencias",
-    "title": "1  Repaso: scRNA-seq vs bulk-RNA-seq",
-    "section": "1.5 Referencias",
-    "text": "1.5 Referencias",
+    "title": "1  Quick Recap: Introduction to scRNA‑seq + CITE-seq",
+    "section": "1.11 Referencias",
+    "text": "1.11 Referencias\n\nCite-seq-Count\nCITE-Seq tutorial\nEnd-to-end CITE-seq analysis workflow using dsb for ADT normalization and Seurat for multimodal clustering\nUsing Seurat with multimodal data\nSimultaneous epitope and transcriptome measurement in single cells\nIntroducción a scRNA-seq y control de calidad\nWorkshop de scRNA-seq",
     "crumbs": [
-      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Repaso: scRNA-seq vs bulk-RNA-seq</span>"
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Quick Recap: Introduction to scRNA‑seq + CITE-seq</span>"
     ]
   },
   {
-    "objectID": "intro_citeseq.html",
-    "href": "intro_citeseq.html",
-    "title": "2  Repaso: CITE-seq + scRNA-seq",
+    "objectID": "cap2_resources.html",
+    "href": "cap2_resources.html",
+    "title": "2  Resources",
     "section": "",
-    "text": "2.1 What is CITE-Seq?\nCITE-Seq, or Cellular Indexing of Transcriptomes and Epitopes by Sequencing, is a technique that enables the simultaneous sequencing of RNA and the quantification and characterization of surface proteins using specific antibodies at the level of individual cells. It combines highly multiplexed antibody-based detection of protein markers with unbiased transcriptome profiling for thousands of single cells in parallel.",
+    "text": "When you can work on your computer and when you need to work on the cluster ..  source , RAM, etc. -  number of samples?",
     "crumbs": [
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Repaso: CITE-seq + scRNA-seq</span>"
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Resources</span>"
     ]
   },
   {
-    "objectID": "intro_citeseq.html#principles-of-cite-seq",
-    "href": "intro_citeseq.html#principles-of-cite-seq",
-    "title": "2  Repaso: CITE-seq + scRNA-seq",
-    "section": "2.2 Principles of CITE-Seq",
-    "text": "2.2 Principles of CITE-Seq\nCellular Indexing of Transcriptomes and Epitopes (CITE-seq) uses unique oligo-tagged antibodies to identify surface proteins, using sequencing as a readout. The number of barcodes that can be conjugated to antibodies surpasses the number of fluorophores or heavy metal tags used in flow cytometry or CyTOF, expanding the number of proteins that can be measured simultaneously with RNA. These barcoded antibodies are part of a unique workflow that produces protein and nucleic acid data using next-generation sequencing (NGS) technologies.\nThis:\n\nhelps in the creation of oligo dT-based RNA sequencing libraries\nenables barcode-based antibody identification\nallows specific PCR amplification\n\nThe number of reads corresponding to each conjugated DNA barcode reflects the identity and abundance of proteins.\n\n\n\n\n\n\n\nSchematic of the wet lab workflow for CITE-Seq",
-    "crumbs": [
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Repaso: CITE-seq + scRNA-seq</span>"
-    ]
-  },
-  {
-    "objectID": "intro_citeseq.html#overview",
-    "href": "intro_citeseq.html#overview",
-    "title": "2  Repaso: CITE-seq + scRNA-seq",
-    "section": "2.3 Overview",
-    "text": "2.3 Overview\n\n\n\nSchematic of the dry lab workflow for CITE-Seq",
-    "crumbs": [
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Repaso: CITE-seq + scRNA-seq</span>"
-    ]
-  },
-  {
-    "objectID": "intro_citeseq.html#referencias",
-    "href": "intro_citeseq.html#referencias",
-    "title": "2  Repaso: CITE-seq + scRNA-seq",
-    "section": "2.4 Referencias",
-    "text": "2.4 Referencias\nhttps://hoohm.github.io/CITE-seq-Count/Running-the-script/\nhttps://www.signiosbio.com/blog/introduction-to-single-cell-sequencing-cite-seq-series-3/\nhttps://www.elucidata.io/blog/cite-seq-the-future-of-single-cell-rna-seq-analysis\nhttps://en.wikipedia.org/wiki/CITE-Seq\nhttps://www.scdiscoveries.com/blog/knowledge/cite-seq/\nhttps://broadinstitute.github.io/2020_scWorkshop/cite-seq.html\nEnd-to-end CITE-seq analysis workflow using dsb for ADT normalization and Seurat for multimodal clustering",
-    "crumbs": [
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Repaso: CITE-seq + scRNA-seq</span>"
-    ]
-  },
-  {
-    "objectID": "Cap1.html",
-    "href": "Cap1.html",
+    "objectID": "cap3_aboutDataset.html",
+    "href": "cap3_aboutDataset.html",
     "title": "3  About Dataset",
     "section": "",
     "text": "3.1 gse149689_subset_3k",
@@ -120,8 +150,8 @@
     ]
   },
   {
-    "objectID": "Cap1.html#paper-an-immunophenotype-coupled-transcriptomic-atlas-of-human-hematopoietic-progenitors",
-    "href": "Cap1.html#paper-an-immunophenotype-coupled-transcriptomic-atlas-of-human-hematopoietic-progenitors",
+    "objectID": "cap3_aboutDataset.html#paper-an-immunophenotype-coupled-transcriptomic-atlas-of-human-hematopoietic-progenitors",
+    "href": "cap3_aboutDataset.html#paper-an-immunophenotype-coupled-transcriptomic-atlas-of-human-hematopoietic-progenitors",
     "title": "3  About Dataset",
     "section": "3.2 Paper: An immunophenotype-coupled transcriptomic atlas of human hematopoietic progenitors",
     "text": "3.2 Paper: An immunophenotype-coupled transcriptomic atlas of human hematopoietic progenitors\nNature immunology: https://www.nature.com/articles/s41590-024-01782-4#data-availability \nRaw sequencing FASTQ files and the processed HDF5 (h5) matrix have been deposited in the Gene Expression Omnibus database under accession code GSE245108. CITE-seq data generated by Pei et al. were accessed via the accession ID GSE232559. All imputed Infinity Flow objects are available in the FlowRepository under ID FR-FCM-Z6UQ. An interactive web portal with the associated Azimuth instance and data visualization tools is available at https://altanalyze.org/MarrowAtlas/. Interactive data visualization and analysis tools for the CITE-seq bone marrow single-cell datasets are provided at https://altanalyze.org/MarrowAtlas/. Source data are provided with this paper.\n\n\nCITE-seq https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE245108\nscRNA-seq https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE232559\nGithub: https://github.com/nsalomonis/Human-Bone-Marrow-Titration-Atlas\n\nNOTAS: ADD image. Info Sobre el dataset (tipo de células o tejidos, Número de células detectadas, tecnología, secuenciador, plataforma, genoma usado para el alineamiento, versión de cell ranger) (D5 https://eveliacoss.github.io/Workshop_scRNAseq_presentacion/Clase2_Normalizacion.html#5 )",
@@ -130,33 +160,23 @@
     ]
   },
   {
-    "objectID": "Cap2.html",
-    "href": "Cap2.html",
-    "title": "4  Resources",
-    "section": "",
-    "text": "When you can work on your computer and when you need to work on the cluster ..  source , RAM, etc. -  number of samples?",
-    "crumbs": [
-      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Resources</span>"
-    ]
-  },
-  {
-    "objectID": "Cap3.html",
-    "href": "Cap3.html",
-    "title": "5  Single-Cell Survival Course with Seurat v5",
+    "objectID": "cap4_course.html",
+    "href": "cap4_course.html",
+    "title": "4  Single-Cell Survival Course with Seurat v5",
     "section": "",
     "text": "HOW TO USE\nRun interactively, section by section (Ctrl+Enter / Cmd+Enter), from top\nto bottom. Do NOT source() the whole file in one go: several chunks are\ndeliberate errors meant to be read, and Block 8 is optional take-home\nwork that depends on a file released separately after the session.\nDELIBERATE ERRORS\nFive steps are designed to fail (v4 slot access, GetAssayData slot=,\nwrong filter thresholds, dims &gt; npcs, plotting a label before adding it).\nThey are wrapped in try() so the error prints to the console without\nhalting a full run. Read the message, then continue.\nWORKING DIRECTORY\nSet the working directory to the folder holding this script and the data/\nsubfolder (Session &gt; Set Working Directory &gt; To Source File Location).",
     "crumbs": [
-      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Single-Cell Survival Course with Seurat v5</span>"
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Single-Cell Survival Course with Seurat v5</span>"
     ]
   },
   {
     "objectID": "notas.html",
     "href": "notas.html",
-    "title": "6  Notas",
+    "title": "5  Notas",
     "section": "",
     "text": "Notenotas\n\n\n\n\n\n\n\n\n\n\n\n\nTipTip\n\n\n\n\n\n\n\n\n\n\n\n\nImportantImportant\n\n\n\n\n\n\n\n\n\n\n\n\nCautionCaution\n\n\n\n\n\n\n\n\n\n\n\n\nWarningWarning\n\n\n\n\n\n\n\n\n\n\n\n\n\nTipActividad: Taller de Cerámica\n\n\n\nSábados 10:00 am · Cupo limitado a 12 personas.",
     "crumbs": [
-      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Notas</span>"
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Notas</span>"
     ]
   }
 ]

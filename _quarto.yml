@@ -24,15 +24,14 @@ book:
           country: Mexico
           url: https://www.enesjuriquilla.unam.mx/
   
-  date: "06/25/2026"
+  date: "`r Sys.Date()`"
   page-navigation: true
   chapters:
     - index.qmd
     - cap1_repaso.qmd
-    - intro_citeseq.qmd
-    - Cap1.qmd
-    - Cap2.qmd
-    - Cap3.qmd
+    - cap2_resources.qmd
+    - cap3_aboutDataset.qmd
+    - cap4_course.qmd
     - notas.qmd
   # Information
   repo-url: https://github.com/EveliaCoss/Workshop2026_scRNAseq_CITEseq_libro # link de Github
@@ -70,8 +69,6 @@ babelquarto:
   languages: ['es', 'pt']
 title-es: "Curso de supervivencia: scRNA-seq + CITE-se"
 title-pt: "Curso de sobrevivencia: scRNA-seq + CITE-seq"
-description-es: description in es
-description-pt: description in pt
 author-es: 
     - name: Thais Crippa de Oliveira
       degrees: Dra.

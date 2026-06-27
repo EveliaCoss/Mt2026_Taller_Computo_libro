@@ -10,7 +10,13 @@
 :::
 
 - **Date:** 2nd July, 2026 (Thursday)
-- **Time:** 10 am (GMT-6)
+- **Meeting Time Conversion:**
+  - **Mexico City, Mexico**
+    - Time zone: GMT‑6
+    - Time: 10:00 AM
+  - **Brasília, Brazil**
+    - Time zone: GMT‑3
+    - Equivalent time: 01:00 PM
 - **Duration:** 3 hours
 - **Level:** Intermediate
 - **Register to receive the pre-course instructions:** [Google form](https://docs.google.com/forms/d/e/1FAIpQLSefUomOjP_j8vjOcPbGMwq9MNDOYB0zIHfEV_WMBqhmFxTelQ/viewform)
@@ -38,7 +44,7 @@ Enable participants to navigate a multimodal dataset (RNA + ADT), perform essent
 
 ![](flyer/Survival%20Course_ENG.png){fig-align="center" width="405"}
 
-### Citar y reutilizar el material del curso
+### Cite and reuse course material
 
 Course data may be freely reused and adapted with proper attribution. All course data from these repositories is subject to the [Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)](https://creativecommons.org/licenses/by-nc-sa/4.0/).
 
@@ -47,4 +53,16 @@ Course data may be freely reused and adapted with proper attribution. All course
 - Verify that all required R packages are installed, following the instructions provided in [Get ready for the workshop](scripts/scSurvival_PreCourse_Setup.html).
 - Ensure you have Git, R, RStudio, and Bash properly installed and working on your computer.
 - Confirm you have access to a stable internet connection for repository synchronization and package downloads.
+
+## Agenda 📆
+
+| Topic                                             | Duration | Instructor   |
+|--------------------------------------------|--------------|--------------|
+| Quick Recap: Introduction to scRNA‑seq + CITE-seq | 30 min   | Evelia Coss  |
+| VirtualBox setup and usage                        | 20 min   | Thais Crippa |
+| 🎮 Kahoot Quiz: Introduction + Setup              | 10 min   | Both         |
+| scRNA‑seq — Errors & Survival                     | 50 min   | Thais Crippa |
+| 🎮 Kahoot Quiz: scRNA‑seq Basics                  | 10 min   | Thais Crippa |
+| CITE‑seq — Errors & Survival                      | 50 min   | Evelia Coss  |
+| 🎮 Kahoot Quiz: CITE‑seq Basics                   | 10 min   | Evelia Coss  |
 ::::

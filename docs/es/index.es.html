@@ -10,7 +10,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <meta name="author" content="Thais Crippa de Oliveira">
 <meta name="author" content="Evelia Coss">
-<meta name="description" content="description in es">
 <title>Curso de supervivencia: scRNA-seq + CITE-se</title>
 <style>
 /* Default styles provided by pandoc.
@@ -67,7 +66,7 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script><link rel="stylesheet" href="styles.css">
 </head>
-<body class="nav-sidebar floating fullcontent quarto-light">
+<body class="nav-sidebar floating quarto-light">
 <script id="quarto-html-before-body" type="application/javascript">
     const toggleBodyColorMode = (bsSheetEl) => {
       const mode = bsSheetEl.getAttribute("data-mode");
@@ -235,7 +234,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.es.html"><span class="chapter-number">1</span>  <span class="chapter-title">Información General</span></a></li></ol></nav><a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.es.html">Información general</a></li></ol></nav><a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Buscar" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
@@ -291,43 +290,37 @@ ul.task-list li input[type="checkbox"] {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./index.es.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">1</span>  <span class="chapter-title">Información General</span></span></a>
+ <span class="menu-text">Información general</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./cap1_repaso.es.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>  <span class="chapter-title">Repaso: scRNA-seq vs bulk-RNA-seq</span></span></a>
+ <span class="menu-text"><span class="chapter-number">1</span>  <span class="chapter-title">Repaso: scRNA-seq vs bulk-RNA-seq</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./intro_citeseq.es.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>  <span class="chapter-title">Repaso: CITE-seq + scRNA-seq</span></span></a>
+  <a href="./cap2_resources.es.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>  <span class="chapter-title">Resources</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Cap1.es.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>  <span class="chapter-title">About Dataset</span></span></a>
+  <a href="./cap3_aboutDataset.es.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>  <span class="chapter-title">About Dataset</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Cap2.es.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>  <span class="chapter-title">Resources</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./Cap3.es.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>  <span class="chapter-title">Single-Cell Survival Course with Seurat v5</span></span></a>
+  <a href="./cap4_course.es.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>  <span class="chapter-title">Single-Cell Survival Course with Seurat v5</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./notas.es.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>  <span class="chapter-title">Notas</span></span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>  <span class="chapter-title">Notas</span></span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
@@ -338,17 +331,18 @@ ul.task-list li input[type="checkbox"] {
 </div>
 </nav><div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Tabla de contenidos</h2>
+   
+  <ul>
+<li><a href="#informaci%C3%B3n-general" id="toc-información-general" class="nav-link active" data-scroll-target="#información-general">Información general</a></li>
+  </ul></nav>
+</div>
 <!-- main -->
 <main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
 <h1 class="title">Curso de supervivencia: scRNA-seq + CITE-se</h1>
 </div>
 
-<div>
-  <div class="description">
-    description in es
-  </div>
-</div>
 
 <div class="quarto-title-meta-author">
   <div class="quarto-title-meta-heading">Autores/as</div>
@@ -380,7 +374,7 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Fecha de publicación</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">25 de junio de 2026</p>
+      <p class="date">Invalid Date</p>
     </div>
   </div>
   
@@ -389,12 +383,151 @@ ul.task-list li input[type="checkbox"] {
   
 
 
-</header><p>This is a Quarto website.</p>
-<p>To learn more about Quarto websites visit <a href="https://quarto.org/docs/websites" class="uri">https://quarto.org/docs/websites</a>.</p>
+</header><section id="información-general" class="level1 unnumbered"><h1 class="unnumbered">Información general</h1>
+<div class="tabset-margin-container"></div>
+<div class="panel-tabset" data-group="globalInfo">
+<ul class="nav nav-tabs" role="tablist">
+<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true" href="" aria-current="page">Sobre el curso 📌</a></li>
+<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false" href="">Requisitos previos para el curso</a></li>
+<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-3" role="tab" aria-controls="tabset-1-3" aria-selected="false" href="">Agenda 📆</a></li>
+</ul>
+<div class="tab-content" data-group="globalInfo">
+<div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
+<div style="text-align: center;">
+<p><strong>Curso práctico multilingüe en línea</strong></p>
+<p><span class="text-blue"><strong>Enfoque en la resolución de problemas</strong></span></p>
+</div>
+<ul>
+<li>
+<strong>Fecha</strong>: <strong>2 de julio de 2026 (jueves)</strong>
+</li>
+<li>
+<strong>Conversión de horario:</strong>
+<ul>
+<li>
+<p><strong>Ciudad de México, México</strong></p>
+<ul>
+<li><p>Zona horaria: GMT‑6</p></li>
+<li><p>Hora: <strong>10:00 AM</strong></p></li>
+</ul>
+</li>
+<li>
+<p><strong>Brasilia, Brasil</strong></p>
+<ul>
+<li><p>Zona horaria: GMT‑3</p></li>
+<li><p>Hora equivalente: <strong>01:00 PM</strong></p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<strong>Duración</strong>: <strong>3 horas</strong>
+</li>
+<li>
+<strong>Nivel</strong>: <strong>Intermedio</strong>
+</li>
+<li>
+<strong>Regístrate para recibir las instrucciones previas al curso:</strong> <a href="https://docs.google.com/forms/d/e/1FAIpQLSefUomOjP_j8vjOcPbGMwq9MNDOYB0zIHfEV_WMBqhmFxTelQ/viewform">Google form</a>
+</li>
+</ul>
+<section id="instructoras" class="level4"><h4 class="anchored" data-anchor-id="instructoras"><strong>Instructoras:</strong></h4>
+<ul>
+<li>
+<strong>Thais Crippa de Oliveira, PhD</strong> - Investigadora posdoctoral en UNICAMP, Brasil</li>
+<li>
+<strong>Evelia Lorena Coss-Navarrete, PhD</strong> - Profesora asociada en ENES, Juriquilla-UNAM, México. <a href="https://eveliacoss.github.io/">Página web</a>
+</li>
+</ul>
+<p>Ayudantes:</p>
+<ul>
+<li>
+<strong>Juliana Pinto</strong> - Estudiante de doctorado, UFPA, Brasil</li>
+<li>
+<strong>Adriana da Silva, PhD</strong> - Investigadora posdoctoral en UNIFESP, Brasil</li>
+</ul></section><section id="objetivo-general" class="level3"><h3 class="anchored" data-anchor-id="objetivo-general">🎯 Objetivo general</h3>
+<p>Permitir que los participantes naveguen en un conjunto de datos multimodal (<strong>RNA + ADT</strong>), realicen el preprocesamiento esencial e interpreten resultados básicos sin perderse en los detalles técnicos.</p>
+</section><section id="resultados-esperados" class="level3"><h3 class="anchored" data-anchor-id="resultados-esperados">✅ Resultados esperados</h3>
+<ul>
+<li>Confianza para abrir y explorar datos multimodales.</li>
+<li>Capacidad para ejecutar un pipeline básico en <strong>Seurat</strong>.</li>
+<li>Comprensión de cómo los <strong>ADT</strong> complementan al <strong>RNA</strong>.</li>
+<li>Conocimiento de las preguntas de investigación y limitaciones en <strong>CITE‑seq</strong>.</li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="flyer/Survival%20Course_ESP.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="405"></p>
+</figure>
+</div>
+</section><section id="citar-y-reutilizar-el-material-del-curso" class="level3"><h3 class="anchored" data-anchor-id="citar-y-reutilizar-el-material-del-curso">Citar y reutilizar el material del curso</h3>
+<p>Los datos del curso pueden reutilizarse y adaptarse libremente con la debida atribución. Todos los datos de estos repositorios están sujetos a la licencia <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)</a>.</p>
+</section>
+</div>
+<div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
+<ul>
+<li>Verifica que todos los paquetes requeridos de <strong>R</strong> estén instalados, siguiendo las instrucciones proporcionadas en <a href="scripts/scSurvival_PreCourse_Setup.html">Get ready for the workshop</a>.</li>
+<li>Asegúrate de tener <strong>Git, R, RStudio y Bash</strong> correctamente instalados y funcionando en tu computadora.</li>
+<li>Confirma que tienes acceso a una <strong>conexión a internet estable</strong> para la sincronización de repositorios y la descarga de paquetes.</li>
+</ul>
+</div>
+<div id="tabset-1-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-3-tab">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 67%">
+<col style="width: 13%">
+<col style="width: 18%">
+</colgroup>
+<thead><tr class="header">
+<th>Tema</th>
+<th>Duración</th>
+<th>Instructora</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td>Repaso: Introducción a scRNA‑seq + CITE‑seq</td>
+<td>30 min</td>
+<td>Evelia Coss</td>
+</tr>
+<tr class="even">
+<td>Configuración y uso de <strong>VirtualBox</strong>
+</td>
+<td>20 min</td>
+<td>Thais Crippa</td>
+</tr>
+<tr class="odd">
+<td>🎮 <strong>Kahoot Quiz: Introducción + Configuración</strong>
+</td>
+<td>10 min</td>
+<td>Both</td>
+</tr>
+<tr class="even">
+<td>scRNA‑seq — Errores y supervivencia</td>
+<td>50 min</td>
+<td>Thais Crippa</td>
+</tr>
+<tr class="odd">
+<td>🎮 <strong>Kahoot Quiz: Fundamentos de scRNA‑seq</strong>
+</td>
+<td>10 min</td>
+<td>Thais Crippa</td>
+</tr>
+<tr class="even">
+<td>CITE‑seq — Errores y supervivencia</td>
+<td>50 min</td>
+<td>Evelia Coss</td>
+</tr>
+<tr class="odd">
+<td>🎮 <strong>Kahoot Quiz: Fundamentos de CITE‑seq</strong>
+</td>
+<td>10 min</td>
+<td>Evelia Coss</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
 
 
-
-</main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
+</section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     // Ensure there is a toggle, if there isn't float one in the top right
     if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
@@ -810,7 +943,7 @@ ul.task-list li input[type="checkbox"] {
   </div>
   <div class="nav-page nav-page-next">
       <a href="./cap1_repaso.es.html" class="pagination-link" aria-label="Repaso: scRNA-seq vs bulk-RNA-seq">
-        <span class="nav-page-text"><span class="chapter-number">2</span>  <span class="chapter-title">Repaso: scRNA-seq vs bulk-RNA-seq</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">1</span>  <span class="chapter-title">Repaso: scRNA-seq vs bulk-RNA-seq</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
