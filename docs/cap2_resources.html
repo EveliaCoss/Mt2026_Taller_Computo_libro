@@ -1,14 +1,13 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
-<head>
-<link rel="alternate" hreflang="en" href="https://eveliacoss.github.io/Workshop2026_scRNAseq_CITEseq_libro/cap2_resources.html" />
-<link rel="alternate" hreflang="es" href="https://eveliacoss.github.io/Workshop2026_scRNAseq_CITEseq_libro/es/cap2_resources.es.html" />
-<link rel="alternate" hreflang="pt" href="https://eveliacoss.github.io/Workshop2026_scRNAseq_CITEseq_libro/pt/cap2_resources.pt.html" />
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.9.37">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<title>2  Resources – Survival Course: scRNA‑seq + CITE‑seq</title>
+
+
+<title>2&nbsp; VirtualBox Setup and Usage – Survival Course: scRNA‑seq + CITE‑seq</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -25,18 +24,32 @@ ul.task-list li input[type="checkbox"] {
   vertical-align: middle;
 }
 </style>
-<script src="site_libs/quarto-nav/quarto-nav.js"></script><script src="site_libs/quarto-nav/headroom.min.js"></script><script src="site_libs/clipboard/clipboard.min.js"></script><script src="site_libs/quarto-search/autocomplete.umd.js"></script><script src="site_libs/quarto-search/fuse.min.js"></script><script src="site_libs/quarto-search/quarto-search.js"></script><meta name="quarto:offset" content="./">
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
 <link href="./cap3_aboutDataset.html" rel="next">
 <link href="./cap1_repaso.html" rel="prev">
 <link href="./enesLogo.png" rel="icon" type="image/png">
-<script src="site_libs/quarto-html/quarto.js" type="module"></script><script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script><script src="site_libs/quarto-html/popper.min.js"></script><script src="site_libs/quarto-html/tippy.umd.min.js"></script><script src="site_libs/quarto-html/anchor.min.js"></script><link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-d0ae9245876894da5ac7e18953ecc5cc.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script><link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-e83d5f2733c6de3275a8c91f12f69221.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark-36caa4c25f3af19bbb3787ac612658d3.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="site_libs/bootstrap/bootstrap-e83d5f2733c6de3275a8c91f12f69221.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-6f5e339e910af865eb2cfbba9cbcf7d6.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-8a99b70e60639ec84de21ff0ca486063.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-6f5e339e910af865eb2cfbba9cbcf7d6.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -63,10 +76,13 @@ ul.task-list li input[type="checkbox"] {
     "search-submit-button-title": "Submit",
     "search-label": "Search"
   }
-}</script><link rel="stylesheet" href="styles.css">
+}</script>
+
+
+<link rel="stylesheet" href="styles.css">
 </head>
-<body class="nav-sidebar floating quarto-light">
-<script id="quarto-html-before-body" type="application/javascript">
+
+<body class="nav-sidebar floating quarto-light"><script id="quarto-html-before-body" type="application/javascript">
     const toggleBodyColorMode = (bsSheetEl) => {
       const mode = bsSheetEl.getAttribute("data-mode");
       const bodyEl = window.document.querySelector("body");
@@ -228,20 +244,29 @@ ul.task-list li input[type="checkbox"] {
     } else {
       toggleColorMode(false);
     }
-  </script><div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./cap2_resources.html"><span class="chapter-number">2</span>  <span class="chapter-title">Resources</span></a></li></ol></nav><a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./cap2_resources.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">VirtualBox Setup and Usage</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
       </button>
     </div>
-  </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="./">Survival Course: scRNA‑seq + CITE‑seq</a> 
         <div class="sidebar-tools-main tools-wide">
@@ -249,7 +274,7 @@ ul.task-list li input[type="checkbox"] {
     <div class="dropdown">
       <a href="" title="Share" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" role="link" aria-label="Share"><i class="bi bi-share"></i></a>
       <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-0">
-<li>
+          <li>
             <a class="dropdown-item sidebar-tools-main-item" href="https://twitter.com/intent/tweet?url=|url|">
               <i class="bi bi-twitter pe-1"></i>
             Twitter
@@ -268,7 +293,7 @@ ul.task-list li input[type="checkbox"] {
             </a>
           </li>
       </ul>
-</div>
+    </div>
   <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
 </div>
     </div>
@@ -278,15 +303,9 @@ ul.task-list li input[type="checkbox"] {
         <div id="quarto-search" class="" title="Search"></div>
         </div>
         </div>
-    <div class="dropdown" id="languages-links-parent">
-<button class="btn btn-primary dropdown-toggle babelquarto-languages-button" type="button" data-bs-toggle="dropdown" aria-expanded="false" id="languages-button"><i class="bi bi-globe2"></i> English</button><ul class="dropdown-menu" id="languages-links">
-<li><a class="dropdown-item" href="https://eveliacoss.github.io/Workshop2026_scRNAseq_CITEseq_libro/pt/cap2_resources.pt.html" id="language-link-pt">Português</a></li>
-<li><a class="dropdown-item" href="https://eveliacoss.github.io/Workshop2026_scRNAseq_CITEseq_libro/es/cap2_resources.es.html" id="language-link-es">Español</a></li>
-</ul>
-</div>
-<div class="sidebar-menu-container"> 
+    <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
-<li class="sidebar-item">
+        <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">General information</span></a>
@@ -295,45 +314,107 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./cap1_repaso.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">1</span>  <span class="chapter-title">Quick Recap: Introduction to scRNA‑seq + CITE-seq</span></span></a>
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Quick Recap: Introduction to scRNA‑seq + CITE-seq</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./cap2_resources.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">2</span>  <span class="chapter-title">Resources</span></span></a>
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">VirtualBox Setup and Usage</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./cap3_aboutDataset.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>  <span class="chapter-title">About Dataset</span></span></a>
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">About Dataset (GSE149689)</span></span></a>
   </div>
 </li>
-        <li class="sidebar-item">
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text"><strong>scRNA‑seq — Errors &amp; Survival</strong></span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./cap4_course.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>  <span class="chapter-title">Single-Cell Survival Course with Seurat v5</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">scRNA‑seq — Errors &amp; Survival</span></span></a>
   </div>
 </li>
-        <li class="sidebar-item">
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text"><strong>CITE‑seq — Errors &amp; Survival</strong></span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cap5_course.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">CITE‑seq — Errors &amp; Survival</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">Appendices</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cap6_extra.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Extra</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./resources.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Code</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./notas.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>  <span class="chapter-title">Notas</span></span></a>
+ <span class="menu-text"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">Notas</span></span></a>
   </div>
 </li>
+      </ul>
+  </li>
     </ul>
-</div>
-</nav><div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#what-is-a-vb" id="toc-what-is-a-vb" class="nav-link active" data-scroll-target="#what-is-a-vb"><span class="header-section-number">2.1</span> 🖥️ What is a VB?</a></li>
+  <li><a href="#when-is-it-used" id="toc-when-is-it-used" class="nav-link" data-scroll-target="#when-is-it-used"><span class="header-section-number">2.2</span> 📌 When is it used?</a></li>
+  <li><a href="#steps-to-set-up-virtualbox" id="toc-steps-to-set-up-virtualbox" class="nav-link" data-scroll-target="#steps-to-set-up-virtualbox"><span class="header-section-number">2.3</span> Steps to Set Up VirtualBox</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
-<h1 class="title">
-<span class="chapter-number">2</span>  <span class="chapter-title">Resources</span>
-</h1>
+<main class="content" id="quarto-document-content">
+
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">VirtualBox Setup and Usage</span></h1>
 </div>
 
 
@@ -347,11 +428,77 @@ ul.task-list li input[type="checkbox"] {
   
 
 
-</header><p>When you can work on your computer and when you need to work on the cluster ..  source , RAM, etc. -  number of samples?</p>
+</header>
 
 
+<p>A virtual <strong>machine (VB, VirtualBox)</strong> is a simulated environment that works like a “computer inside your computer.”</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="figures/virtualbox-maquina-virtual-780x470.jpg.webp" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+<section id="what-is-a-vb" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="what-is-a-vb"><span class="header-section-number">2.1</span> 🖥️ What is a VB?</h2>
+<ul>
+<li><strong>Virtual machine</strong>: software that mimics a complete operating system using the host computer’s resources (RAM, CPU, disk).</li>
+<li>It runs inside a program called a <strong>hypervisor</strong> (e.g., VirtualBox, VMware).</li>
+</ul>
+</section>
+<section id="when-is-it-used" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="when-is-it-used"><span class="header-section-number">2.2</span> 📌 When is it used?</h2>
+<ul>
+<li><strong>Testing operating systems</strong> without affecting your main PC.</li>
+<li><strong>Software development and testing</strong> in isolated environments.</li>
+<li><strong>Running legacy software</strong> that no longer works on modern systems.</li>
+<li><strong>Security</strong>: analyzing suspicious files without risk.</li>
+<li><strong>Education</strong>: teaching system installation and configuration.</li>
+</ul>
+</section>
+<section id="steps-to-set-up-virtualbox" class="level2" data-number="2.3">
+<h2 data-number="2.3" class="anchored" data-anchor-id="steps-to-set-up-virtualbox"><span class="header-section-number">2.3</span> Steps to Set Up VirtualBox</h2>
+<ol type="1">
+<li><strong>Install VirtualBox</strong>
+<ul>
+<li>Download VirtualBox from Oracle’s official website.</li>
+<li>Run the installer and follow the instructions.</li>
+<li>Restart your computer if necessary.</li>
+</ul></li>
+<li><strong>Create a new virtual machine</strong>
+<ul>
+<li>Open VirtualBox and select <strong>New</strong>.</li>
+<li>Assign a name and choose the operating system to install.</li>
+<li>Define the amount of RAM to allocate.</li>
+</ul></li>
+<li><strong>Configure storage</strong>
+<ul>
+<li>Create a virtual hard disk (VDI recommended).</li>
+<li>Choose dynamic or fixed size depending on your needs.</li>
+<li>Set the disk space (e.g., 20 GB or more).</li>
+</ul></li>
+<li><strong>Mount the operating system</strong>
+<ul>
+<li>In the VM settings, go to <strong>Storage</strong>.</li>
+<li>Add the ISO image of the operating system.</li>
+<li>Save the changes.</li>
+</ul></li>
+<li><strong>Start the virtual machine</strong>
+<ul>
+<li>Click <strong>Start</strong>.</li>
+<li>The operating system will boot from the ISO.</li>
+<li>Proceed with installation as if it were a physical computer.</li>
+</ul></li>
+<li><strong>Install Guest Additions (optional but recommended)</strong>
+<ul>
+<li>Once the OS is installed, in the VirtualBox menu select: <strong>Devices → Insert Guest Additions CD image</strong>.</li>
+<li>Install the add-ons to improve performance and compatibility.</li>
+</ul></li>
+</ol>
 
-</main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     // Ensure there is a toggle, if there isn't float one in the top right
     if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
@@ -705,25 +852,64 @@ ul.task-list li input[type="checkbox"] {
           }
         };
       }
-        // Attach click handler to the DT
-        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
-        for (const annoteDlNode of annoteDls) {
-          annoteDlNode.addEventListener('click', (event) => {
-            const clickedEl = event.target;
-            if (clickedEl !== selectedAnnoteEl) {
-              unselectCodeLines();
-              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
-              if (activeEl) {
-                activeEl.classList.remove('code-annotation-active');
-              }
-              selectCodeLines(clickedEl);
-              clickedEl.classList.add('code-annotation-active');
-            } else {
-              // Unselect the line
-              unselectCodeLines();
-              clickedEl.classList.remove('code-annotation-active');
+        const annoteTargets = window.document.querySelectorAll('.code-annotation-anchor');
+        for (let i=0; i<annoteTargets.length; i++) {
+          const annoteTarget = annoteTargets[i];
+          const targetCell = annoteTarget.getAttribute("data-target-cell");
+          const targetAnnotation = annoteTarget.getAttribute("data-target-annotation");
+          const contentFn = () => {
+            const content = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+            if (content) {
+              const tipContent = content.cloneNode(true);
+              tipContent.classList.add("code-annotation-tip-content");
+              return tipContent.outerHTML;
             }
-          });
+          }
+          const config = {
+            allowHTML: true,
+            content: contentFn,
+            onShow: (instance) => {
+              selectCodeLines(instance.reference);
+              instance.reference.classList.add('code-annotation-active');
+              window.tippy.hideAll();
+            },
+            onHide: (instance) => {
+              unselectCodeLines();
+              instance.reference.classList.remove('code-annotation-active');
+            },
+            maxWidth: 300,
+            delay: [50, 0],
+            duration: [200, 0],
+            offset: [5, 10],
+            arrow: true,
+            appendTo: function(el) {
+              return el.parentElement.parentElement.parentElement;
+            },
+            interactive: true,
+            interactiveBorder: 10,
+            theme: 'quarto',
+            placement: 'right',
+            popperOptions: {
+              modifiers: [
+              {
+                name: 'flip',
+                options: {
+                  flipVariations: false, // true by default
+                  allowedAutoPlacements: ['right'],
+                  fallbackPlacements: ['right', 'top', 'top-start', 'top-end', 'bottom', 'bottom-start', 'bottom-end', 'left'],
+                },
+              },
+              {
+                name: 'preventOverflow',
+                options: {
+                  mainAxis: false,
+                  altAxis: false
+                }
+              }
+              ]        
+            }      
+          };
+          window.tippy(annoteTarget, config); 
         }
     const findCites = (el) => {
       const parentEl = el.parentElement;
@@ -763,21 +949,35 @@ ul.task-list li input[type="checkbox"] {
       }
     }
   });
-  </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
       <a href="./cap1_repaso.html" class="pagination-link" aria-label="Quick Recap: Introduction to scRNA‑seq + CITE-seq">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">1</span>  <span class="chapter-title">Quick Recap: Introduction to scRNA‑seq + CITE-seq</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Quick Recap: Introduction to scRNA‑seq + CITE-seq</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./cap3_aboutDataset.html" class="pagination-link" aria-label="About Dataset">
-        <span class="nav-page-text"><span class="chapter-number">3</span>  <span class="chapter-title">About Dataset</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./cap3_aboutDataset.html" class="pagination-link" aria-label="About Dataset (GSE149689)">
+        <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">About Dataset (GSE149689)</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
 </div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+<p>Survival Course: Evelia Coss and Thais Crippa</p>
+</div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
 
 
 
 
-</body>
-</html>
+</body></html>

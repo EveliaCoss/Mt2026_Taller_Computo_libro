@@ -1525,14 +1525,14 @@ plotScoreHeatmap(singler_res,
 # supported by only a handful of cells (low-confidence noise, not real
 # populations). Plotting all of them produces an unreadable legend and
 # defeats the purpose of every downstream comparison.
-#
+# 
 # `singler_label` (full detail) is kept untouched in the metadata for cases
 # where the exact label matters. `singler_label_top` collapses every label
 # outside the top N most frequent into "Other (n small labels)" and is what
 # every plot from here on uses by default. The same pass that builds the
 # consolidation also checks whether the underlying distribution looks like a
 # real PBMC annotation, since both questions come from the same table.
-#
+# 
 # What this step decides, and what it does not: this is a count-based
 # decision about which CATEGORIES are worth their own color in a plot. It
 # never looks at a single gene or a single cell's expression. A cell labeled
@@ -1654,7 +1654,7 @@ print(setdiff(colnames(sobj_filt@meta.data), colnames(sobj@meta.data)))
 # that lineage. The label-distribution sanity check already ran in Step
 # 5.2b, right after the labels were consolidated; this step is a different
 # kind of check, on the per-marker evidence rather than the label counts.
-#
+# 
 # Step 5.2b asked "how many cells share this label, and is that count
 # plausible for PBMC?" That is a question about labels as categories: it
 # never inspected a single gene. This step asks a different question: "for
@@ -1886,7 +1886,7 @@ p4_harmony_donor <- DimPlot(sobj_filt, reduction = "umap.harmony", group.by = "d
 
 # Explicit about what this test actually uses, since the object now carries
 # both a plain PCA/UMAP and a Harmony-corrected PCA/UMAP from Step 5.4e:
-#
+# 
 #   Assay         : RNA, "data" layer (log-normalized counts from Block 4).
 #                   Harmony only touches the PCA/UMAP embeddings (used for
 #                   visualization and clustering); it never modifies the

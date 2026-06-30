@@ -1,0 +1,98 @@
+# Extra
+
+## **Block 8**
+
+::: content-box-gray
+**Goal:** compute QC metrics, look at their distributions across donors, and filter cells using thresholds chosen from the data, not from a tutorial.
+:::
+
+
+:::: question
+::: {.callout-tip icon="false"}
+## QUESTION 2.8
+
+Is your dataset's percent.mt distribution closer to a fraction or a percentage? Run `summary(sobj$percent.mt)` to confirm and remember this trap when reading code from other groups.
+
+:::
+::::
+
+::: {.callout-tip icon="false" collapse="true"}
+### ANSWER
+
+
+
+LIVE DEMO:
+
+```{r}
+
+```
+:::
+
+
+:::: question
+::: {.callout-tip icon="false"}
+## QUESTION 2.8
+
+Is your dataset's percent.mt distribution closer to a fraction or a percentage? Run `summary(sobj$percent.mt)` to confirm and remember this trap when reading code from other groups.
+
+:::
+::::
+
+::: {.callout-tip icon="false" collapse="true"}
+### ANSWER
+
+LIVE DEMO:
+
+```{r}
+
+```
+:::
+
+## **Block 9**
+
+::: content-box-gray
+**Goal:** compute QC metrics, look at their distributions across donors, and filter cells using thresholds chosen from the data, not from a tutorial.
+:::
+
+
+
+:::: question
+::: {.callout-tip icon="false"}
+## QUESTION 2.8
+
+Is your dataset's percent.mt distribution closer to a fraction or a percentage? Run `summary(sobj$percent.mt)` to confirm and remember this trap when reading code from other groups.
+
+:::
+::::
+
+::: {.callout-tip icon="false" collapse="true"}
+### ANSWER
+
+
+
+LIVE DEMO:
+
+```{r}
+
+```
+:::
+
+
+:::: question
+::: {.callout-tip icon="false"}
+## QUESTION 2.8
+
+Is your dataset's percent.mt distribution closer to a fraction or a percentage? Run `summary(sobj$percent.mt)` to confirm and remember this trap when reading code from other groups.
+
+:::
+::::
+
+::: {.callout-tip icon="false" collapse="true"}
+### ANSWER
+
+LIVE DEMO:
+
+```{r}
+
+```
+:::

@@ -1,0 +1,54 @@
+# Configuración y uso de VirtualBox
+
+Una **máquina virtual (VB, VirtualBox)** es un entorno simulado que funciona como un “computador dentro de tu computador”.
+
+![](figures/virtualbox-maquina-virtual-780x470.jpg.webp){fig-align="center"}
+
+## 🖥️ ¿Qué es un VB?
+
+- Máquina virtual: software que imita un sistema operativo completo usando recursos del equipo anfitrión (RAM, CPU, disco).
+- Se ejecuta dentro de un programa llamado hipervisor (ej. VirtualBox, VMware).
+
+### 📌 ¿Cuándo se usa?
+
+- **Probar sistemas operativos** sin afectar tu PC principal.
+- **Desarrollo y pruebas** de software en entornos aislados.
+- **Ejecutar software antiguo** que ya no corre en sistemas modernos.
+- **Seguridad**: analizar archivos sospechosos sin riesgo.
+- **Educación**: enseñar instalación y configuración de sistemas.
+
+## Pasos para configurar VirtualBox
+
+### 1. Instalar VirtualBox
+
+- Descarga VirtualBox desde la página oficial de Oracle.
+- Ejecuta el instalador y sigue las instrucciones.
+- Reinicia tu computadora si es necesario.
+
+### 2. Crear una nueva máquina virtual
+
+- Abre VirtualBox y selecciona **Nueva**.
+- Asigna un nombre y elige el sistema operativo que instalarás.
+- Define la cantidad de memoria RAM a usar.
+
+### 3. Configurar almacenamiento
+
+- Crea un disco duro virtual (VDI recomendado).
+- Selecciona tamaño dinámico o fijo según tus necesidades.
+- Ajusta el espacio en GB (ej. 20 GB o más).
+
+### 4. Montar el sistema operativo
+
+- En la configuración de la VM, ve a **Almacenamiento**.
+- Añade la imagen ISO del sistema operativo.
+- Guarda los cambios.
+
+### 5. Iniciar la máquina virtual
+
+- Haz clic en **Iniciar**.
+- El sistema operativo arrancará desde la ISO.
+- Procede con la instalación como si fuera un equipo físico.
+
+### 6. Instalar Guest Additions (opcional pero recomendado)
+
+- Una vez instalado el sistema, en el menú de VirtualBox selecciona: \*\*Dispositivos

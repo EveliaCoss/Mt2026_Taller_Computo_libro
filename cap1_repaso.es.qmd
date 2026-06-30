@@ -38,7 +38,7 @@ Visualización a través de **UMAP** (Uniform Manifold Approximation and Project
 - Construir **atlas celulares/genéticos** → catálogo completo de diversidad celular.
 - Aplicaciones en **investigación básica y medicina personalizada**.
 
-![Image source: Kageyama, et al. 2018. Front. Neurosci](figures/scrnaseq.png){alt="Image source: Kageyama, et al. 2018. Front. Neurosci" fig-align="center"}
+![Image source: Kageyama, et al. 2018. Front. Neurosci](figures/scrnaseq.png){fig-align="center"}
 
 ## General Pipeline for scRNA‑seq with Seurat
 
@@ -64,19 +64,13 @@ Visualización a través de **UMAP** (Uniform Manifold Approximation and Project
 
 ## Variations of scRNA‑seq
 
-+-----------------------------------------------+------------------------------------------------+
-| **Type of Analysis**                          | **Contribution**                               |
-+===============================================+================================================+
-| **Unimodal (RNA only)**                       | Cellular heterogeneity in gene expression      |
-+-----------------------------------------------+------------------------------------------------+
+| **Type of Analysis** | **Contribution** |
+|----|----|
+| **Unimodal (RNA only)** | Cellular heterogeneity in gene expression |
 | **Multimodal (RNA + others, e.g., CITE‑seq)** | Regulation, proteomics, and biological context |
-+-----------------------------------------------+------------------------------------------------+
-| **Trajectories**                              | Temporal dynamics of biological processes      |
-+-----------------------------------------------+------------------------------------------------+
-| **Cellular Interactions**                     | Communication and functional networks          |
-+-----------------------------------------------+------------------------------------------------+
-| **Dataset Integration**                       | Comparison across conditions                   |
-+-----------------------------------------------+------------------------------------------------+
+| **Trajectories** | Temporal dynamics of biological processes |
+| **Cellular Interactions** | Communication and functional networks |
+| **Dataset Integration** | Comparison across conditions |
 
 ## What is CITE-Seq?
 
@@ -90,11 +84,11 @@ CITE‑seq (**Cellular Indexing of Transcriptomes and Epitopes by Sequencing**) 
 - **Multimodal context** → CITE‑seq is part of the broader **multimodal analysis** frontier in single‑cell genomics, where multiple data types (RNA, ATAC, methylation, perturbations) are measured in the same cell.
 - **Applications** → improves cell type identification, refines clustering, and reveals functional states that RNA alone might miss.
 
-![Schematic figure of (A) the CITE-seq antibody linked with the barcoded oligo (B) the CITE-seq protocol. Credit: Winston & Gregory Timp (2020), license: CC-BY 4.0](figures/cite-seq.png){alt="Schematic figure of (A) the CITE-seq antibody linked with the barcoded oligo (B) the CITE-seq protocol. Credit: Winston & Gregory Timp (2020), license: CC-BY 4.0" fig-align="center"}
+![Schematic figure of (A) the CITE-seq antibody linked with the barcoded oligo (B) the CITE-seq protocol. Credit: Winston & Gregory Timp (2020), license: CC-BY 4.0](figures/cite-seq.png){fig-align="center"}
 
 ## Overview
 
-![Schematic of the dry lab workflow for CITE-Seq](figures/overview.png){alt="Schematic of the dry lab workflow for CITE-Seq"}
+![Schematic of the dry lab workflow for CITE-Seq](figures/overview.png)
 
 ## General Pipeline for CITE‑seq
 
@@ -122,13 +116,10 @@ CITE‑seq (**Cellular Indexing of Transcriptomes and Epitopes by Sequencing**) 
 
 ## scRNA-seq vs scRNA-seq + CITE‑seq
 
-+---------------+---------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------+
-| **Approach**  | **Type**                        | **Purpose**                                                                                                                                  |
-+===============+=================================+==============================================================================================================================================+
-| **scRNA‑seq** | **Unimodal (RNA only)**         | Characterize **transcriptomic heterogeneity**: identify cell types, states, and gene expression dynamics based solely on RNA.                |
-+---------------+---------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------+
-| **CITE‑seq**  | **Multimodal (RNA + proteins)** | Integrate **RNA + surface proteins**: refine cell type annotation, validate clusters, and capture functional context beyond transcriptomics. |
-+---------------+---------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------+
+| **Approach** | **Type** | **Purpose** |
+|----|----|----|
+| **scRNA‑seq** | **Unimodal (RNA only)** | Characterize **transcriptomic heterogeneity**: identify cell types, states, and gene expression dynamics based solely on RNA. |
+| **CITE‑seq** | **Multimodal (RNA + proteins)** | Integrate **RNA + surface proteins**: refine cell type annotation, validate clusters, and capture functional context beyond transcriptomics. |
 
 ## Referencias
 

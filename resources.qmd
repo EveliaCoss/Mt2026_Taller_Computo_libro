@@ -1,0 +1,44 @@
+# Code
+
+When you can work on your computer and when you need to work on the cluster .. source , RAM, etc. - number of samples?
+
+```{r}
+# Notas
+a <- 3
+b <- 2
+suma <- a + b
+suma 
+```
+
+```{r, eval=FALSE}
+InstallData("pbmc3k")
+data("pbmc3k")
+pbmc3k
+```
+
+```{r, eval=FALSE}
+library(tidyverse)
+library(palmerpenguins)
+penguins |>                                      # <1>
+  mutate(                                        # <2>
+    bill_ratio = bill_depth_mm / bill_length_mm, # <2>
+    bill_area  = bill_depth_mm * bill_length_mm  # <2>
+  )                                              # <2>
+```
+
+1.  Take `penguins`, and then,
+2.  add new columns for the bill ratio and bill area.
+
+``` text
+video-game-sales-r/
+├── data/
+│   └── vgsales.csv
+├── scripts/
+│   └── 01_analisis_videojuegos.R
+├── figures/
+│   ├── grafica_01.png
+│   ├── grafica_02.png
+│   └── grafica_final.png
+├── ejercicio_videojuegos.qmd
+└── README.md
+```

@@ -66,19 +66,13 @@ Visualization through **UMAP** (Uniform Manifold Approximation and Projection):
 
 ## Variations of scRNA‑seq
 
-+-----------------------------------------------+------------------------------------------------+
-| **Type of Analysis**                          | **Contribution**                               |
-+===============================================+================================================+
-| **Unimodal (RNA only)**                       | Cellular heterogeneity in gene expression      |
-+-----------------------------------------------+------------------------------------------------+
+| **Type of Analysis** | **Contribution** |
+|----|----|
+| **Unimodal (RNA only)** | Cellular heterogeneity in gene expression |
 | **Multimodal (RNA + others, e.g., CITE‑seq)** | Regulation, proteomics, and biological context |
-+-----------------------------------------------+------------------------------------------------+
-| **Trajectories**                              | Temporal dynamics of biological processes      |
-+-----------------------------------------------+------------------------------------------------+
-| **Cellular Interactions**                     | Communication and functional networks          |
-+-----------------------------------------------+------------------------------------------------+
-| **Dataset Integration**                       | Comparison across conditions                   |
-+-----------------------------------------------+------------------------------------------------+
+| **Trajectories** | Temporal dynamics of biological processes |
+| **Cellular Interactions** | Communication and functional networks |
+| **Dataset Integration** | Comparison across conditions |
 
 ## What is CITE-Seq?
 
@@ -96,7 +90,7 @@ CITE‑seq (**Cellular Indexing of Transcriptomes and Epitopes by Sequencing**) 
 
 ## Overview
 
-![Schematic of the dry lab workflow for CITE-Seq](figures/overview.png){alt="Schematic of the dry lab workflow for CITE-Seq"}
+![Schematic of the dry lab workflow for CITE-Seq](figures/overview.png)
 
 ## General Pipeline for CITE‑seq
 
@@ -124,13 +118,10 @@ CITE‑seq (**Cellular Indexing of Transcriptomes and Epitopes by Sequencing**) 
 
 ## scRNA-seq vs scRNA-seq + CITE‑seq
 
-+---------------+---------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------+
-| **Approach**  | **Type**                        | **Purpose**                                                                                                                                  |
-+===============+=================================+==============================================================================================================================================+
-| **scRNA‑seq** | **Unimodal (RNA only)**         | Characterize **transcriptomic heterogeneity**: identify cell types, states, and gene expression dynamics based solely on RNA.                |
-+---------------+---------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------+
-| **CITE‑seq**  | **Multimodal (RNA + proteins)** | Integrate **RNA + surface proteins**: refine cell type annotation, validate clusters, and capture functional context beyond transcriptomics. |
-+---------------+---------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------+
+| **Approach** | **Type** | **Purpose** |
+|----|----|----|
+| **scRNA‑seq** | **Unimodal (RNA only)** | Characterize **transcriptomic heterogeneity**: identify cell types, states, and gene expression dynamics based solely on RNA. |
+| **CITE‑seq** | **Multimodal (RNA + proteins)** | Integrate **RNA + surface proteins**: refine cell type annotation, validate clusters, and capture functional context beyond transcriptomics. |
 
 ## References
 

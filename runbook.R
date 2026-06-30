@@ -13,4 +13,3 @@ babelquarto::render_book(
   preview = servr::httw("docs") # Revisualizar # For a multilingual book
 )
 
-

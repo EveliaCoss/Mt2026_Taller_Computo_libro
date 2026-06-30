@@ -5,6 +5,7 @@ project:
 book:
   title: "Survival Course: scRNA‑seq + CITE‑seq"
   site-url: https://eveliacoss.github.io/Workshop2026_scRNAseq_CITEseq_libro/
+  page-footer:  "Survival Course: Evelia Coss and Thais Crippa" 
   author: 
     - name: Thais Crippa de Oliveira
       degrees: PhD
@@ -31,7 +32,15 @@ book:
     - cap1_repaso.qmd
     - cap2_resources.qmd
     - cap3_aboutDataset.qmd
-    - cap4_course.qmd
+    - part: "**scRNA‑seq — Errors & Survival**"
+      chapters: 
+        - cap4_course.qmd
+    - part: "**CITE‑seq — Errors & Survival**"
+      chapters: 
+        - cap5_course.qmd
+  appendices: 
+    - cap6_extra.qmd
+    - resources.qmd 
     - notas.qmd
   # Information
   repo-url: https://github.com/EveliaCoss/Workshop2026_scRNAseq_CITEseq_libro # link de Github
@@ -53,6 +62,11 @@ format:
       dark: darkly
     code-fold: show # Ocultar codigo
     code-copy: true # Copy button
+    code-line-numbers: false #Numero de lineas
+    code-annotations: hover #c(hover, below, select): posicion https://quarto.org/docs/authoring/code-annotation.html
+    code-block-bg: true # Bloque de código
+    code-block-border-left: "#007f99" # color del borde izquierdo del codigo
+    syntax-highlighting: arrow # Estilo de los codigos https://quarto.org/docs/output-formats/html-code.html#highlighting
     freeze: false  # Desactivar congelamiento
 
 editor: visual
@@ -106,4 +120,8 @@ author-pt:
           country: México
           url: https://www.enesjuriquilla.unam.mx/
 lang: en
+
+execute:
+  error: true # Se aceptan errores
+  message: false # Silenciar mensajes de salida
 

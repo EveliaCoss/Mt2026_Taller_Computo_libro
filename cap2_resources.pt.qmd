@@ -1,0 +1,56 @@
+# Configuração e uso do VirtualBox
+
+Uma máquina virtual (VB, VirtualBox) é um ambiente simulado que funciona como um “computador dentro do seu computador”.
+
+![](figures/virtualbox-maquina-virtual-780x470.jpg.webp){fig-align="center"}
+
+## 🖥️ O que é um VB?
+
+- **Máquina virtual**: software que imita um sistema operacional completo usando os recursos do computador hospedeiro (RAM, CPU, disco).
+- É executada dentro de um programa chamado **hipervisor** (ex.: VirtualBox, VMware).
+
+## 📌 Quando se usa?
+
+- **Testar sistemas operacionais** sem afetar o PC principal.
+- **Desenvolvimento e testes** de software em ambientes isolados.
+- **Executar softwares antigos** que já não funcionam em sistemas modernos.
+- **Segurança**: analisar arquivos suspeitos sem risco.
+- **Educação**: ensinar instalação e configuração de sistemas.
+
+## Passos para configurar o VirtualBox
+
+1.  **Instalar o VirtualBox**
+
+    - Baixe o VirtualBox no site oficial da Oracle.
+    - Execute o instalador e siga as instruções.
+    - Reinicie o computador se necessário.
+
+2.  **Criar uma nova máquina virtual**
+
+    - Abra o VirtualBox e selecione **Novo**.
+    - Dê um nome e escolha o sistema operacional a ser instalado.
+    - Defina a quantidade de memória RAM.
+
+3.  **Configurar armazenamento**
+
+    - Crie um disco rígido virtual (VDI recomendado).
+    - Escolha tamanho dinâmico ou fixo conforme a necessidade.
+    - Ajuste o espaço em GB (ex.: 20 GB ou mais).
+
+4.  **Montar o sistema operacional**
+
+    - Nas configurações da VM, vá em **Armazenamento**.
+    - Adicione a imagem ISO do sistema operacional.
+    - Salve as alterações.
+
+5.  **Iniciar a máquina virtual**
+
+    - Clique em **Iniciar**.
+    - O sistema operacional será carregado a partir da ISO.
+    - Prossiga com a instalação como se fosse um computador físico.
+
+6.  **Instalar Guest Additions (opcional, mas recomendado)**
+
+    - Após instalar o sistema, no menu do VirtualBox selecione:
+      **Dispositivos → Inserir imagem de CD das Guest Additions**.
+    - Instale os complementos para melhorar desempenho e compatibilidade.
