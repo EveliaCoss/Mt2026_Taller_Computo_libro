@@ -30,7 +30,7 @@ For long-term projects, especially those shared on GitHub or used in teaching, c
 
 Run interactively, section by section (`Ctrl+Enter / Cmd+Enter`), from top to bottom. Do NOT `source()` the whole file in one go: several chunks are deliberate errors meant to be read, and **Block 8** is optional take-home work that depends on a file released separately after the session.
 
-## **Install packages and setup**
+## **Block 0 - Install packages and setup**
 
 ### Step 0.1 - Install packages
 
@@ -1639,7 +1639,7 @@ is_integer_counts(LayerData(sobj_filt, assay="RNA", layer="counts"))
 ```
 :::
 
-### Step 4.2 - RNA normalization: LogNormalize
+### Step 4.2 - RNA normalization: `LogNormalize`
 
 ```{r}
 sobj_filt <- NormalizeData(
@@ -2014,7 +2014,7 @@ The error occurs because the PCA object contains only 30 components.
 sobj_filt <- FindNeighbors(sobj_filt, dims = 1:20, verbose = FALSE)
 ```
 
-### Step 4.6 | Resolution sensitivity and final clustering
+### Step 4.6 - Resolution sensitivity and final clustering
 
 How much does the clustering change between resolution 0.2 and 1.2?
 

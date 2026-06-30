@@ -1,13 +1,14 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="es" xml:lang="es"><head>
-
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es" xml:lang="es">
+<head>
+<link rel="alternate" hreflang="en" href="https://eveliacoss.github.io/Workshop2026_scRNAseq_CITEseq_libro/cap1_repaso.html" />
+<link rel="alternate" hreflang="es" href="https://eveliacoss.github.io/Workshop2026_scRNAseq_CITEseq_libro/es/cap1_repaso.es.html" />
+<link rel="alternate" hreflang="pt" href="https://eveliacoss.github.io/Workshop2026_scRNAseq_CITEseq_libro/pt/cap1_repaso.pt.html" />
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.9.37">
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-
-
-<title>1&nbsp; Repaso: scRNA-seq vs bulk-RNA-seq – Curso de supervivencia: scRNA-seq + CITE-seq</title>
+<title>1  Repaso: scRNA-seq vs bulk-RNA-seq – Curso de supervivencia: scRNA-seq + CITE-seq</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -24,29 +25,15 @@ ul.task-list li input[type="checkbox"] {
   vertical-align: middle;
 }
 </style>
-
-
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-nav/quarto-nav.js"></script><script src="site_libs/quarto-nav/headroom.min.js"></script><script src="site_libs/clipboard/clipboard.min.js"></script><script src="site_libs/quarto-search/autocomplete.umd.js"></script><script src="site_libs/quarto-search/fuse.min.js"></script><script src="site_libs/quarto-search/quarto-search.js"></script><meta name="quarto:offset" content="./">
 <link href="./cap2_resources.es.html" rel="next">
 <link href="./index.es.html" rel="prev">
 <link href="./enesLogo.png" rel="icon" type="image/png">
-<script src="site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script><script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script><script src="site_libs/quarto-html/popper.min.js"></script><script src="site_libs/quarto-html/tippy.umd.min.js"></script><script src="site_libs/quarto-html/anchor.min.js"></script><link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-d0ae9245876894da5ac7e18953ecc5cc.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script><link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="site_libs/bootstrap/bootstrap-6f5e339e910af865eb2cfbba9cbcf7d6.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
 <link href="site_libs/bootstrap/bootstrap-dark-8a99b70e60639ec84de21ff0ca486063.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <link href="site_libs/bootstrap/bootstrap-6f5e339e910af865eb2cfbba9cbcf7d6.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
@@ -76,13 +63,10 @@ ul.task-list li input[type="checkbox"] {
     "search-submit-button-title": "Enviar",
     "search-label": "Buscar"
   }
-}</script>
-
-
-<link rel="stylesheet" href="styles.css">
+}</script><link rel="stylesheet" href="styles.css">
 </head>
-
-<body class="nav-sidebar floating quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+<body class="nav-sidebar floating quarto-light">
+<script id="quarto-html-before-body" type="application/javascript">
     const toggleBodyColorMode = (bsSheetEl) => {
       const mode = bsSheetEl.getAttribute("data-mode");
       const bodyEl = window.document.querySelector("body");
@@ -244,29 +228,20 @@ ul.task-list li input[type="checkbox"] {
     } else {
       toggleColorMode(false);
     }
-  </script>
-
-<div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top">
-  <nav class="quarto-secondary-nav">
-    <div class="container-fluid d-flex">
+  </script><div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./cap1_repaso.es.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Repaso: scRNA-seq vs bulk-RNA-seq</span></a></li></ol></nav>
-        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./cap1_repaso.es.html"><span class="chapter-number">1</span>  <span class="chapter-title">Repaso: scRNA-seq vs bulk-RNA-seq</span></a></li></ol></nav><a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Buscar" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
       </button>
     </div>
-  </nav>
-</header>
-<!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+  </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
-    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="./">Curso de supervivencia: scRNA-seq + CITE-seq</a> 
         <div class="sidebar-tools-main tools-wide">
@@ -274,7 +249,7 @@ ul.task-list li input[type="checkbox"] {
     <div class="dropdown">
       <a href="" title="Compartir" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" role="link" aria-label="Compartir"><i class="bi bi-share"></i></a>
       <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-0">
-          <li>
+<li>
             <a class="dropdown-item sidebar-tools-main-item" href="https://twitter.com/intent/tweet?url=|url|">
               <i class="bi bi-twitter pe-1"></i>
             Twitter
@@ -293,7 +268,7 @@ ul.task-list li input[type="checkbox"] {
             </a>
           </li>
       </ul>
-    </div>
+</div>
   <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Alternar modo oscuro"><i class="bi"></i></a>
 </div>
     </div>
@@ -303,9 +278,15 @@ ul.task-list li input[type="checkbox"] {
         <div id="quarto-search" class="" title="Buscar"></div>
         </div>
         </div>
-    <div class="sidebar-menu-container"> 
+    <div class="dropdown" id="languages-links-parent">
+<button class="btn btn-primary dropdown-toggle babelquarto-languages-button" type="button" data-bs-toggle="dropdown" aria-expanded="false" id="languages-button"><i class="bi bi-globe2"></i> Español</button><ul class="dropdown-menu" id="languages-links">
+<li><a class="dropdown-item" href="https://eveliacoss.github.io/Workshop2026_scRNAseq_CITEseq_libro/pt/cap1_repaso.pt.html" id="language-link-pt">Português</a></li>
+<li><a class="dropdown-item" href="https://eveliacoss.github.io/Workshop2026_scRNAseq_CITEseq_libro/cap1_repaso.html" id="language-link-en">English</a></li>
+</ul>
+</div>
+<div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
-        <li class="sidebar-item">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./index.es.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Información general</span></a>
@@ -314,19 +295,19 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./cap1_repaso.es.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Repaso: scRNA-seq vs bulk-RNA-seq</span></span></a>
+ <span class="menu-text"><span class="chapter-number">1</span>  <span class="chapter-title">Repaso: scRNA-seq vs bulk-RNA-seq</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./cap2_resources.es.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Configuración y uso de VirtualBox</span></span></a>
+ <span class="menu-text"><span class="chapter-number">2</span>  <span class="chapter-title">Configuración y uso de VirtualBox</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./cap3_aboutDataset.es.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Acerca del conjunto de datos (GSE149689)</span></span></a>
+ <span class="menu-text"><span class="chapter-number">3</span>  <span class="chapter-title">Acerca del conjunto de datos (GSE149689)</span></span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
@@ -337,15 +318,15 @@ ul.task-list li input[type="checkbox"] {
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./cap4_course.es.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">scRNA‑seq — Errors &amp; Survival</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>  <span class="chapter-title">scRNA‑seq — Errors &amp; Survival</span></span></a>
   </div>
 </li>
       </ul>
-  </li>
+</li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
@@ -354,15 +335,15 @@ ul.task-list li input[type="checkbox"] {
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./cap5_course.es.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">CITE‑seq — Errors &amp; Survival</span></span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>  <span class="chapter-title">CITE‑seq — Errors &amp; Survival</span></span></a>
   </div>
 </li>
       </ul>
-  </li>
+</li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
@@ -371,60 +352,57 @@ ul.task-list li input[type="checkbox"] {
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./cap6_extra.es.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Extra</span></span></a>
+ <span class="menu-text"><span class="chapter-number">A</span>  <span class="chapter-title">Extra</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./resources.es.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Code</span></span></a>
+ <span class="menu-text"><span class="chapter-number">B</span>  <span class="chapter-title">Code</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./notas.es.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">Notas</span></span></a>
+ <span class="menu-text"><span class="chapter-number">C</span>  <span class="chapter-title">Notas</span></span></a>
   </div>
 </li>
       </ul>
-  </li>
+</li>
     </ul>
-    </div>
-</nav>
-<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+</div>
+</nav><div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">Tabla de contenidos</h2>
+        <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Tabla de contenidos</h2>
    
   <ul>
-  <li><a href="#single-cell-rna-seq-scrna-seq" id="toc-single-cell-rna-seq-scrna-seq" class="nav-link active" data-scroll-target="#single-cell-rna-seq-scrna-seq"><span class="header-section-number">1.1</span> Single cell RNA-seq (<span class="text-blue">scRNA-seq</span>)</a></li>
+<li><a href="#single-cell-rna-seq-scrna-seq" id="toc-single-cell-rna-seq-scrna-seq" class="nav-link active" data-scroll-target="#single-cell-rna-seq-scrna-seq"><span class="header-section-number">1.1</span> Single cell RNA-seq (<span class="text-blue">scRNA-seq</span>)</a></li>
   <li><a href="#heterogeneidad-diversidad-interna-de-un-sistema-o-de-un-conjunto" id="toc-heterogeneidad-diversidad-interna-de-un-sistema-o-de-un-conjunto" class="nav-link" data-scroll-target="#heterogeneidad-diversidad-interna-de-un-sistema-o-de-un-conjunto"><span class="header-section-number">1.2</span> Heterogeneidad: Diversidad interna de un sistema o de un conjunto</a></li>
   <li><a href="#preguntas-que-se-pueden-responde-scrna-seq" id="toc-preguntas-que-se-pueden-responde-scrna-seq" class="nav-link" data-scroll-target="#preguntas-que-se-pueden-responde-scrna-seq"><span class="header-section-number">1.3</span> <strong>Preguntas que se pueden responde scRNA-seq</strong></a></li>
   <li><a href="#general-pipeline-for-scrnaseq-with-seurat" id="toc-general-pipeline-for-scrnaseq-with-seurat" class="nav-link" data-scroll-target="#general-pipeline-for-scrnaseq-with-seurat"><span class="header-section-number">1.4</span> General Pipeline for scRNA‑seq with Seurat</a></li>
   <li><a href="#variations-of-scrnaseq" id="toc-variations-of-scrnaseq" class="nav-link" data-scroll-target="#variations-of-scrnaseq"><span class="header-section-number">1.5</span> Variations of scRNA‑seq</a></li>
-  <li><a href="#what-is-cite-seq" id="toc-what-is-cite-seq" class="nav-link" data-scroll-target="#what-is-cite-seq"><span class="header-section-number">1.6</span> What is CITE-Seq?</a>
+  <li>
+<a href="#what-is-cite-seq" id="toc-what-is-cite-seq" class="nav-link" data-scroll-target="#what-is-cite-seq"><span class="header-section-number">1.6</span> What is CITE-Seq?</a>
   <ul>
-  <li><a href="#key-points-about-citeseq" id="toc-key-points-about-citeseq" class="nav-link" data-scroll-target="#key-points-about-citeseq"><span class="header-section-number">1.6.1</span> 📌 Key points about CITE‑seq</a></li>
-  </ul></li>
+<li><a href="#key-points-about-citeseq" id="toc-key-points-about-citeseq" class="nav-link" data-scroll-target="#key-points-about-citeseq"><span class="header-section-number">1.6.1</span> 📌 Key points about CITE‑seq</a></li>
+  </ul>
+</li>
   <li><a href="#overview" id="toc-overview" class="nav-link" data-scroll-target="#overview"><span class="header-section-number">1.7</span> Overview</a></li>
   <li><a href="#general-pipeline-for-citeseq" id="toc-general-pipeline-for-citeseq" class="nav-link" data-scroll-target="#general-pipeline-for-citeseq"><span class="header-section-number">1.8</span> General Pipeline for CITE‑seq</a></li>
   <li><a href="#scrna-seq-vs-scrna-seq-citeseq" id="toc-scrna-seq-vs-scrna-seq-citeseq" class="nav-link" data-scroll-target="#scrna-seq-vs-scrna-seq-citeseq"><span class="header-section-number">1.9</span> scRNA-seq vs scRNA-seq + CITE‑seq</a></li>
   <li><a href="#referencias" id="toc-referencias" class="nav-link" data-scroll-target="#referencias"><span class="header-section-number">1.10</span> Referencias</a></li>
-  </ul>
-</nav>
-    </div>
+  </ul></nav>
+</div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
-
-
-<header id="title-block-header" class="quarto-title-block default">
-<div class="quarto-title">
-<h1 class="title"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Repaso: scRNA-seq vs bulk-RNA-seq</span></h1>
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
+<h1 class="title">
+<span class="chapter-number">1</span>  <span class="chapter-title">Repaso: scRNA-seq vs bulk-RNA-seq</span>
+</h1>
 </div>
 
 
@@ -438,44 +416,40 @@ ul.task-list li input[type="checkbox"] {
   
 
 
-</header>
-
-
+</header><ul>
+<li>
+<p><strong>Bulk RNA-seq:</strong> mide expresión promedio en un tejido; útil para detectar cambios globales, pero oculta heterogeneidad celular.</p>
 <ul>
-<li><p><strong>Bulk RNA-seq:</strong> mide expresión promedio en un tejido; útil para detectar cambios globales, pero oculta heterogeneidad celular.</p>
-<ul>
-<li><strong>Insuficiente para:</strong> estudios de desarrollo temprano o tejidos complejos como el cerebro.</li>
-</ul></li>
+<li>
+<strong>Insuficiente para:</strong> estudios de desarrollo temprano o tejidos complejos como el cerebro.</li>
+</ul>
+</li>
 </ul>
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><a href="https://www.ijbs.com/v20p2151.htm"><img src="figures/models.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></a></p>
+<figure class="figure"><div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><a href="https://www.ijbs.com/v20p2151.htm"><img src="figures/models.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></a></p>
 </figure>
 </div>
-<figcaption>Imagen tomada de: Yan et al.&nbsp;2024. Int J Biol Sci</figcaption>
-</figure>
+<figcaption>Imagen tomada de: Yan et al. 2024. Int J Biol Sci</figcaption></figure>
 </div>
-<section id="single-cell-rna-seq-scrna-seq" class="level2" data-number="1.1">
-<h2 data-number="1.1" class="anchored" data-anchor-id="single-cell-rna-seq-scrna-seq"><span class="header-section-number">1.1</span> Single cell RNA-seq (<span class="text-blue">scRNA-seq</span>)</h2>
+<section id="single-cell-rna-seq-scrna-seq" class="level2" data-number="1.1"><h2 data-number="1.1" class="anchored" data-anchor-id="single-cell-rna-seq-scrna-seq">
+<span class="header-section-number">1.1</span> Single cell RNA-seq (<span class="text-blue">scRNA-seq</span>)</h2>
 <ul>
 <li>Primera publicación en 2009 (<a href="https://www.nature.com/articles/nmeth.1315">Tang <em>et al</em>, 2009</a>)</li>
-<li>Popularidad en <a href="https://www.nature.com/articles/nmeth.2801">2014</a></li>
+<li>Popularidad en <a href="https://www.nature.com/articles/nmeth.2801">2014</a>
+</li>
 <li>Estimar la distribución de los <strong>niveles de expresión de cada gen en una población celular</strong>.</li>
-<li>Análisis a <strong>nivel de célula individual</strong></li>
+<li>Análisis a <strong>nivel de célula individual</strong>
+</li>
 <li>Permite revelar <strong>tipos celulares</strong> (poblaciones raras)</li>
 <li>Analizar las <strong>dinámicas temporales y heterogeneidad</strong>.</li>
 </ul>
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><a href="https://learn.gencore.bio.nyu.edu/transcriptomics/single_cell_rna_seq.html"><img src="figures/overview SingleRNAseq.jpeg" class="img-fluid figure-img"></a></p>
-<figcaption>Imagen tomada de: Single cell RNA sequencing</figcaption>
-</figure>
+<figure class="figure"><p><a href="https://learn.gencore.bio.nyu.edu/transcriptomics/single_cell_rna_seq.html"><img src="figures/overview%20SingleRNAseq.jpeg" class="img-fluid figure-img"></a></p>
+<figcaption>Imagen tomada de: Single cell RNA sequencing</figcaption></figure>
 </div>
-</section>
-<section id="heterogeneidad-diversidad-interna-de-un-sistema-o-de-un-conjunto" class="level2" data-number="1.2">
-<h2 data-number="1.2" class="anchored" data-anchor-id="heterogeneidad-diversidad-interna-de-un-sistema-o-de-un-conjunto"><span class="header-section-number">1.2</span> Heterogeneidad: Diversidad interna de un sistema o de un conjunto</h2>
+</section><section id="heterogeneidad-diversidad-interna-de-un-sistema-o-de-un-conjunto" class="level2" data-number="1.2"><h2 data-number="1.2" class="anchored" data-anchor-id="heterogeneidad-diversidad-interna-de-un-sistema-o-de-un-conjunto">
+<span class="header-section-number">1.2</span> Heterogeneidad: Diversidad interna de un sistema o de un conjunto</h2>
 <ul>
 <li><p>🔬 <strong>No todas las células son iguales:</strong> incluso dentro de un mismo tejido, existen diferencias en <em>tipos celulares, estados funcionales y niveles de expresión génica</em>.</p></li>
 <li><p>🧬 <strong>Variabilidad genética y transcriptómica:</strong> cada célula puede expresar distintos genes o cantidades de RNA, reflejando funciones específicas.</p></li>
@@ -483,69 +457,67 @@ ul.task-list li input[type="checkbox"] {
 </ul>
 <p>Visualización a través de <strong>UMAP</strong> (Uniform Manifold Approximation and Projection):</p>
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><a href="https://biostatsquid.com/umap-simply-explained/"><img src="figures/umap_example.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></a></p>
+<figure class="figure"><div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><a href="https://biostatsquid.com/umap-simply-explained/"><img src="figures/umap_example.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></a></p>
 </figure>
 </div>
-<figcaption>Imagen tomada de: Explicación completa de un UMAP</figcaption>
-</figure>
+<figcaption>Imagen tomada de: Explicación completa de un UMAP</figcaption></figure>
 </div>
-</section>
-<section id="preguntas-que-se-pueden-responde-scrna-seq" class="level2" data-number="1.3">
-<h2 data-number="1.3" class="anchored" data-anchor-id="preguntas-que-se-pueden-responde-scrna-seq"><span class="header-section-number">1.3</span> <strong>Preguntas que se pueden responde scRNA-seq</strong></h2>
+</section><section id="preguntas-que-se-pueden-responde-scrna-seq" class="level2" data-number="1.3"><h2 data-number="1.3" class="anchored" data-anchor-id="preguntas-que-se-pueden-responde-scrna-seq">
+<span class="header-section-number">1.3</span> <strong>Preguntas que se pueden responde scRNA-seq</strong>
+</h2>
 <ul>
 <li>Descubrir <strong>tipos celulares nuevos o raros</strong>.</li>
-<li>Identificar <strong>composición celular diferencial</strong> entre sano vs.&nbsp;enfermo.</li>
+<li>Identificar <strong>composición celular diferencial</strong> entre sano vs. enfermo.</li>
 <li>Comprender la <strong>diferenciación celular</strong> en desarrollo y regeneración.</li>
 <li>Analizar <strong>plasticidad y dinámicas de expresión</strong> en células individuales.</li>
 <li>Construir <strong>atlas celulares/genéticos</strong> → catálogo completo de diversidad celular.</li>
 <li>Aplicaciones en <strong>investigación básica y medicina personalizada</strong>.</li>
 </ul>
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="figures/scrnaseq.png" class="img-fluid figure-img"></p>
-<figcaption>Image source: Kageyama, et al.&nbsp;2018. Front. Neurosci</figcaption>
-</figure>
+<figure class="figure"><p><img src="figures/scrnaseq.png" class="img-fluid figure-img"></p>
+<figcaption>Image source: Kageyama, et al. 2018. Front. Neurosci</figcaption></figure>
 </div>
-</section>
-<section id="general-pipeline-for-scrnaseq-with-seurat" class="level2" data-number="1.4">
-<h2 data-number="1.4" class="anchored" data-anchor-id="general-pipeline-for-scrnaseq-with-seurat"><span class="header-section-number">1.4</span> General Pipeline for scRNA‑seq with Seurat</h2>
+</section><section id="general-pipeline-for-scrnaseq-with-seurat" class="level2" data-number="1.4"><h2 data-number="1.4" class="anchored" data-anchor-id="general-pipeline-for-scrnaseq-with-seurat">
+<span class="header-section-number">1.4</span> General Pipeline for scRNA‑seq with Seurat</h2>
 <table class="caption-top table">
 <colgroup>
 <col style="width: 21%">
 <col style="width: 42%">
 <col style="width: 35%">
 </colgroup>
-<thead>
-<tr class="header">
+<thead><tr class="header">
 <th><strong>Step</strong></th>
 <th><strong>Purpose</strong></th>
 <th><strong>Seurat Command</strong></th>
-</tr>
-</thead>
+</tr></thead>
 <tbody>
 <tr class="odd">
 <td><ol type="1">
 <li><strong>Preprocessing</strong></li>
 </ol></td>
 <td>Load raw count matrix and create Seurat object</td>
-<td><code>Read10X()</code>, <code>CreateSeuratObject()</code></td>
+<td>
+<code>Read10X()</code>, <code>CreateSeuratObject()</code>
+</td>
 </tr>
 <tr class="even">
 <td><ol start="2" type="1">
 <li><strong>Quality Control (QC)</strong></li>
 </ol></td>
 <td>Filter cells/genes based on metrics (e.g., nFeature_RNA, percent.mt)</td>
-<td><code>subset()</code>, <code>PercentageFeatureSet()</code></td>
+<td>
+<code>subset()</code>, <code>PercentageFeatureSet()</code>
+</td>
 </tr>
 <tr class="odd">
 <td><ol start="3" type="1">
 <li><strong>Normalization</strong></li>
 </ol></td>
 <td>Adjust counts for sequencing depth</td>
-<td><code>NormalizeData()</code> or <code>SCTransform()</code></td>
+<td>
+<code>NormalizeData()</code> or <code>SCTransform()</code>
+</td>
 </tr>
 <tr class="even">
 <td><ol start="4" type="1">
@@ -559,45 +531,48 @@ ul.task-list li input[type="checkbox"] {
 <li><strong>Dimensionality Reduction</strong></li>
 </ol></td>
 <td>Reduce dimensions for visualization</td>
-<td><code>ScaleData()</code>, <code>RunPCA()</code>, <code>RunUMAP()</code>, <code>RunTSNE()</code></td>
+<td>
+<code>ScaleData()</code>, <code>RunPCA()</code>, <code>RunUMAP()</code>, <code>RunTSNE()</code>
+</td>
 </tr>
 <tr class="even">
 <td><ol start="6" type="1">
 <li><strong>Clustering &amp; Annotation</strong></li>
 </ol></td>
 <td>Group cells and assign biological meaning</td>
-<td><code>FindNeighbors()</code>, <code>FindClusters()</code>, <code>FindAllMarkers()</code></td>
+<td>
+<code>FindNeighbors()</code>, <code>FindClusters()</code>, <code>FindAllMarkers()</code>
+</td>
 </tr>
 <tr class="odd">
 <td><ol start="7" type="1">
 <li><strong>Dataset Integration</strong></li>
 </ol></td>
 <td>Combine multiple datasets, remove batch effects</td>
-<td><code>FindIntegrationAnchors()</code>, <code>IntegrateData()</code></td>
+<td>
+<code>FindIntegrationAnchors()</code>, <code>IntegrateData()</code>
+</td>
 </tr>
 <tr class="even">
 <td><ol start="8" type="1">
 <li><strong>Downstream Analysis</strong></li>
 </ol></td>
 <td>Specific goals: DEGs, trajectories, cell communication</td>
-<td><code>FindMarkers()</code>, <code>CellCycleScoring()</code>, external packages</td>
+<td>
+<code>FindMarkers()</code>, <code>CellCycleScoring()</code>, external packages</td>
 </tr>
 </tbody>
-</table>
-</section>
-<section id="variations-of-scrnaseq" class="level2" data-number="1.5">
-<h2 data-number="1.5" class="anchored" data-anchor-id="variations-of-scrnaseq"><span class="header-section-number">1.5</span> Variations of scRNA‑seq</h2>
+</table></section><section id="variations-of-scrnaseq" class="level2" data-number="1.5"><h2 data-number="1.5" class="anchored" data-anchor-id="variations-of-scrnaseq">
+<span class="header-section-number">1.5</span> Variations of scRNA‑seq</h2>
 <table class="caption-top table">
 <colgroup>
 <col style="width: 50%">
 <col style="width: 50%">
 </colgroup>
-<thead>
-<tr class="header">
+<thead><tr class="header">
 <th><strong>Type of Analysis</strong></th>
 <th><strong>Contribution</strong></th>
-</tr>
-</thead>
+</tr></thead>
 <tbody>
 <tr class="odd">
 <td><strong>Unimodal (RNA only)</strong></td>
@@ -620,80 +595,82 @@ ul.task-list li input[type="checkbox"] {
 <td>Comparison across conditions</td>
 </tr>
 </tbody>
-</table>
-</section>
-<section id="what-is-cite-seq" class="level2" data-number="1.6">
-<h2 data-number="1.6" class="anchored" data-anchor-id="what-is-cite-seq"><span class="header-section-number">1.6</span> What is CITE-Seq?</h2>
+</table></section><section id="what-is-cite-seq" class="level2" data-number="1.6"><h2 data-number="1.6" class="anchored" data-anchor-id="what-is-cite-seq">
+<span class="header-section-number">1.6</span> What is CITE-Seq?</h2>
 <p>CITE‑seq (<strong>Cellular Indexing of Transcriptomes and Epitopes by Sequencing</strong>) is a <strong>multimodal single‑cell technique</strong> that combines RNA sequencing with protein profiling at the level of individual cells.</p>
-<section id="key-points-about-citeseq" class="level3" data-number="1.6.1">
-<h3 data-number="1.6.1" class="anchored" data-anchor-id="key-points-about-citeseq"><span class="header-section-number">1.6.1</span> 📌 Key points about CITE‑seq</h3>
+<section id="key-points-about-citeseq" class="level3" data-number="1.6.1"><h3 data-number="1.6.1" class="anchored" data-anchor-id="key-points-about-citeseq">
+<span class="header-section-number">1.6.1</span> 📌 Key points about CITE‑seq</h3>
 <ul>
-<li><strong>Simultaneous measurements</strong> → captures both the <strong>transcriptome (scRNA‑seq)</strong> and <strong>surface proteins</strong> using antibody‑derived tags (ADTs).</li>
-<li><strong>Highly multiplexed</strong> → allows detection of many protein markers in parallel, alongside unbiased RNA profiling.</li>
-<li><strong>Single‑cell resolution</strong> → thousands of cells can be analyzed at once, integrating RNA and protein data.</li>
-<li><strong>Multimodal context</strong> → CITE‑seq is part of the broader <strong>multimodal analysis</strong> frontier in single‑cell genomics, where multiple data types (RNA, ATAC, methylation, perturbations) are measured in the same cell.</li>
-<li><strong>Applications</strong> → improves cell type identification, refines clustering, and reveals functional states that RNA alone might miss.</li>
+<li>
+<strong>Simultaneous measurements</strong> → captures both the <strong>transcriptome (scRNA‑seq)</strong> and <strong>surface proteins</strong> using antibody‑derived tags (ADTs).</li>
+<li>
+<strong>Highly multiplexed</strong> → allows detection of many protein markers in parallel, alongside unbiased RNA profiling.</li>
+<li>
+<strong>Single‑cell resolution</strong> → thousands of cells can be analyzed at once, integrating RNA and protein data.</li>
+<li>
+<strong>Multimodal context</strong> → CITE‑seq is part of the broader <strong>multimodal analysis</strong> frontier in single‑cell genomics, where multiple data types (RNA, ATAC, methylation, perturbations) are measured in the same cell.</li>
+<li>
+<strong>Applications</strong> → improves cell type identification, refines clustering, and reveals functional states that RNA alone might miss.</li>
 </ul>
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="figures/cite-seq.png" class="img-fluid figure-img"></p>
-<figcaption>Schematic figure of (A) the CITE-seq antibody linked with the barcoded oligo (B) the CITE-seq protocol. Credit: Winston &amp; Gregory Timp (2020), license: CC-BY 4.0</figcaption>
-</figure>
+<figure class="figure"><p><img src="figures/cite-seq.png" class="img-fluid figure-img"></p>
+<figcaption>Schematic figure of (A) the CITE-seq antibody linked with the barcoded oligo (B) the CITE-seq protocol. Credit: Winston &amp; Gregory Timp (2020), license: CC-BY 4.0</figcaption></figure>
 </div>
-</section>
-</section>
-<section id="overview" class="level2" data-number="1.7">
-<h2 data-number="1.7" class="anchored" data-anchor-id="overview"><span class="header-section-number">1.7</span> Overview</h2>
+</section></section><section id="overview" class="level2" data-number="1.7"><h2 data-number="1.7" class="anchored" data-anchor-id="overview">
+<span class="header-section-number">1.7</span> Overview</h2>
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="figures/overview.png" class="img-fluid figure-img"></p>
-<figcaption>Schematic of the dry lab workflow for CITE-Seq</figcaption>
-</figure>
+<figure class="figure"><p><img src="figures/overview.png" class="img-fluid figure-img"></p>
+<figcaption>Schematic of the dry lab workflow for CITE-Seq</figcaption></figure>
 </div>
-</section>
-<section id="general-pipeline-for-citeseq" class="level2" data-number="1.8">
-<h2 data-number="1.8" class="anchored" data-anchor-id="general-pipeline-for-citeseq"><span class="header-section-number">1.8</span> General Pipeline for CITE‑seq</h2>
+</section><section id="general-pipeline-for-citeseq" class="level2" data-number="1.8"><h2 data-number="1.8" class="anchored" data-anchor-id="general-pipeline-for-citeseq">
+<span class="header-section-number">1.8</span> General Pipeline for CITE‑seq</h2>
 <table class="caption-top table">
 <colgroup>
 <col style="width: 21%">
 <col style="width: 37%">
 <col style="width: 40%">
 </colgroup>
-<thead>
-<tr class="header">
+<thead><tr class="header">
 <th><strong>Step</strong></th>
 <th><strong>Purpose</strong></th>
 <th><strong>Seurat Command</strong></th>
-</tr>
-</thead>
+</tr></thead>
 <tbody>
 <tr class="odd">
 <td><ol type="1">
 <li><strong>Preprocessing</strong></li>
 </ol></td>
 <td>Load RNA counts and antibody‑derived tags (ADT)</td>
-<td><code>Read10X()</code>, <code>CreateSeuratObject()</code></td>
+<td>
+<code>Read10X()</code>, <code>CreateSeuratObject()</code>
+</td>
 </tr>
 <tr class="even">
 <td><ol start="2" type="1">
 <li><strong>Quality Control (QC)</strong></li>
 </ol></td>
 <td>Filter cells/genes based on RNA metrics and ADT counts</td>
-<td><code>PercentageFeatureSet()</code>, <code>subset()</code></td>
+<td>
+<code>PercentageFeatureSet()</code>, <code>subset()</code>
+</td>
 </tr>
 <tr class="odd">
 <td><ol start="3" type="1">
 <li><strong>Normalization (RNA)</strong></li>
 </ol></td>
 <td>Adjust RNA counts for sequencing depth</td>
-<td><code>SCTransform()</code> or <code>NormalizeData()</code></td>
+<td>
+<code>SCTransform()</code> or <code>NormalizeData()</code>
+</td>
 </tr>
 <tr class="even">
 <td><ol start="4" type="1">
 <li><strong>Normalization (ADT)</strong></li>
 </ol></td>
 <td>Center and scale protein counts</td>
-<td><code>NormalizeData(assay = "ADT")</code>, <code>ScaleData(assay = "ADT")</code></td>
+<td>
+<code>NormalizeData(assay = "ADT")</code>, <code>ScaleData(assay = "ADT")</code>
+</td>
 </tr>
 <tr class="odd">
 <td><ol start="5" type="1">
@@ -707,47 +684,50 @@ ul.task-list li input[type="checkbox"] {
 <li><strong>Dimensionality Reduction</strong></li>
 </ol></td>
 <td>Reduce dimensions for RNA and ADT separately</td>
-<td><code>RunPCA(assay = "RNA")</code>, <code>RunPCA(assay = "ADT")</code></td>
+<td>
+<code>RunPCA(assay = "RNA")</code>, <code>RunPCA(assay = "ADT")</code>
+</td>
 </tr>
 <tr class="odd">
 <td><ol start="7" type="1">
 <li><strong>Multimodal Integration</strong></li>
 </ol></td>
 <td>Combine RNA + ADT signals</td>
-<td><code>FindMultiModalNeighbors()</code>, <code>RunUMAP(nn.name = "weighted.nn")</code></td>
+<td>
+<code>FindMultiModalNeighbors()</code>, <code>RunUMAP(nn.name = "weighted.nn")</code>
+</td>
 </tr>
 <tr class="even">
 <td><ol start="8" type="1">
 <li><strong>Clustering &amp; Annotation</strong></li>
 </ol></td>
 <td>Group cells and assign biological meaning</td>
-<td><code>FindClusters()</code>, <code>FindAllMarkers()</code></td>
+<td>
+<code>FindClusters()</code>, <code>FindAllMarkers()</code>
+</td>
 </tr>
 <tr class="odd">
 <td><ol start="9" type="1">
 <li><strong>Downstream Analysis</strong></li>
 </ol></td>
 <td>Discover enriched proteins per cluster, refine cell types</td>
-<td><code>FindMarkers(assay = "ADT")</code>, external multimodal workflows</td>
+<td>
+<code>FindMarkers(assay = "ADT")</code>, external multimodal workflows</td>
 </tr>
 </tbody>
-</table>
-</section>
-<section id="scrna-seq-vs-scrna-seq-citeseq" class="level2" data-number="1.9">
-<h2 data-number="1.9" class="anchored" data-anchor-id="scrna-seq-vs-scrna-seq-citeseq"><span class="header-section-number">1.9</span> scRNA-seq vs scRNA-seq + CITE‑seq</h2>
+</table></section><section id="scrna-seq-vs-scrna-seq-citeseq" class="level2" data-number="1.9"><h2 data-number="1.9" class="anchored" data-anchor-id="scrna-seq-vs-scrna-seq-citeseq">
+<span class="header-section-number">1.9</span> scRNA-seq vs scRNA-seq + CITE‑seq</h2>
 <table class="caption-top table">
 <colgroup>
 <col style="width: 33%">
 <col style="width: 33%">
 <col style="width: 33%">
 </colgroup>
-<thead>
-<tr class="header">
+<thead><tr class="header">
 <th><strong>Approach</strong></th>
 <th><strong>Type</strong></th>
 <th><strong>Purpose</strong></th>
-</tr>
-</thead>
+</tr></thead>
 <tbody>
 <tr class="odd">
 <td><strong>scRNA‑seq</strong></td>
@@ -760,10 +740,8 @@ ul.task-list li input[type="checkbox"] {
 <td>Integrate <strong>RNA + surface proteins</strong>: refine cell type annotation, validate clusters, and capture functional context beyond transcriptomics.</td>
 </tr>
 </tbody>
-</table>
-</section>
-<section id="referencias" class="level2" data-number="1.10">
-<h2 data-number="1.10" class="anchored" data-anchor-id="referencias"><span class="header-section-number">1.10</span> Referencias</h2>
+</table></section><section id="referencias" class="level2" data-number="1.10"><h2 data-number="1.10" class="anchored" data-anchor-id="referencias">
+<span class="header-section-number">1.10</span> Referencias</h2>
 <ul>
 <li><a href="https://hoohm.github.io/CITE-seq-Count/">Cite-seq-Count</a></li>
 <li><a href="https://broadinstitute.github.io/2020_scWorkshop/cite-seq.html">CITE-Seq tutorial</a></li>
@@ -772,13 +750,7 @@ ul.task-list li input[type="checkbox"] {
 <li><a href="https://www.nature.com/articles/nmeth.4380">Simultaneous epitope and transcriptome measurement in single cells</a></li>
 <li><a href="https://eveliacoss.github.io/Workshop_scRNAseq_presentacion/Clase1_Intro_QC.html#1">Introducción a scRNA-seq y control de calidad</a></li>
 <li><a href="https://github.com/EveliaCoss/Workshop_scRNAseq_presentacion">Workshop de scRNA-seq</a></li>
-</ul>
-
-
-</section>
-
-</main> <!-- /main -->
-<script id="quarto-html-after-body" type="application/javascript">
+</ul></section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     // Ensure there is a toggle, if there isn't float one in the top right
     if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
@@ -1229,35 +1201,29 @@ ul.task-list li input[type="checkbox"] {
       }
     }
   });
-  </script>
-<nav class="page-navigation">
-  <div class="nav-page nav-page-previous">
+  </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
       <a href="./index.es.html" class="pagination-link" aria-label="Información general">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Información general</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="./cap2_resources.es.html" class="pagination-link" aria-label="Configuración y uso de VirtualBox">
-        <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Configuración y uso de VirtualBox</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">2</span>  <span class="chapter-title">Configuración y uso de VirtualBox</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
 </div> <!-- /content -->
-<footer class="footer">
-  <div class="nav-footer">
+<footer class="footer"><div class="nav-footer">
     <div class="nav-footer-left">
-      &nbsp;
+       
     </div>   
     <div class="nav-footer-center">
 <p>Survival Course: Evelia Coss and Thais Crippa</p>
 </div>
     <div class="nav-footer-right">
-      &nbsp;
+       
     </div>
   </div>
 </footer>
-
-
-
-
-</body></html>
+</body>
+</html>
