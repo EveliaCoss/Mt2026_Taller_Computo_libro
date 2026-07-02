@@ -1,0 +1,1381 @@
+# CITE‑seq — Errores y Supervivencia
+
+## **Bloque 6 - Integración CITE-seq (ADT + RNA)** {#sec-block6}
+
+::: content-box-gray
+**Objetivo:** Incorporar la capa de proteína al análisis. El flujo de trabajo de RNA hasta el **Bloque 5** ignoró por completo el ADT. El valor añadido de CITE-seq es la capacidad de resolver el dropout, validar la anotación y ponderar las modalidades por célula.
+:::
+
+```{r load_packages, echo=FALSE, message=FALSE, warning=FALSE}
+pkgs <- c("Seurat", "SeuratObject", "ggplot2", "patchwork",
+          "dplyr", "tidyr", "Matrix", "SingleR", 
+          "harmony", "scales", "ggrepel", "BiocParallel",
+          "scDblFinder", "SingleCellExperiment")
+
+suppressPackageStartupMessages({
+  library(Seurat);   library(SeuratObject); library(ggplot2)
+  library(patchwork); library(dplyr);     library(tidyr);       library(Matrix)
+  library(SingleR);   library(BiocParallel)
+  library(harmony);  library(scales);       library(ggrepel)
+})
+
+#Instructor only
+source("scripts/safe_accessor_function.R")
+source("scripts/instructor_answers.R")
+source("scripts/reveal_function.R")
+```
+
+Orden de las operaciones: inspeccionar la capa de ADT y contrastarla con RNA, normalizar, hacer control de calidad (QC) del panel, contrastar RNA vs ADT para marcadores coincidentes, realizar gating, verificar canales intercambiados, construir el PCA de ADT, y luego integrar con WNN.
+
+**Cargar el archivo en R:**
+
+```{r}
+library(here) # install.packages("here")
+sobj_filt <- readRDS(
+  here("checkpoints", "outputs", "sobj_preprocessed.rds")
+)
+# top markers
+top_markers <- readRDS(
+  here("checkpoints", "outputs", "top_markers.rds")
+)
+```
+
+```{r}
+DefaultAssay(sobj_filt) <- "ADT"
+adt_counts <- LayerData(sobj_filt, assay = "ADT", layer = "counts")
+
+cat("ADT count matrix:\n")
+cat("  Proteins (rows):", nrow(adt_counts), "\n")
+cat("  Cells   (cols) :", ncol(adt_counts), "\n")
+cat("  Class          :", class(adt_counts), "\n")
+cat("  Layers in ADT  :", paste(SafeLayers(sobj_filt[["ADT"]]), collapse = ", "), "\n\n")
+```
+
+Resumen por proteína: escala y distribución:
+
+```{r}
+adt_summary <- data.frame(
+  protein  = rownames(adt_counts),
+  min      = apply(adt_counts, 1, min),
+  median   = apply(adt_counts, 1, median),
+  mean     = round(Matrix::rowMeans(adt_counts), 2),
+  max      = apply(adt_counts, 1, max),
+  pct_zero = round(Matrix::rowMeans(adt_counts == 0) * 100, 1)
+)
+cat("Per-protein distribution (first 8 proteins):\n")
+print(head(adt_summary, 8), row.names = FALSE)
+```
+
+Conteo total de ADT por célula
+
+```{r}
+total_adt_per_cell <- Matrix::colSums(adt_counts)
+cat("\nPer-cell total ADT counts:\n")
+print(round(quantile(total_adt_per_cell, c(0.05, 0.25, 0.5, 0.75, 0.95)), 0))
+
+DefaultAssay(sobj_filt) <- "RNA"
+```
+
+:::: question
+::: {.callout-tip icon="false"}
+## PREGUNTA 6.0a
+
+Una proteína de ADT con mediana \~0 pero un máximo en los cientos altos es una bimodalidad típica (células de fondo vs células teñidas). Una proteína con media por debajo de 1 en cada célula es algo distinto. ¿Cuál es cuál en la tabla anterior?
+:::
+::::
+
+::: {.callout-tip icon="false" collapse="true"}
+### RESPUESTA
+
+Bimodal saludable: mediana cercana a 0, media unas pocas unidades más alta, máximo en los cientos. La proteína no está teñida en la mayoría de las células y es fuertemente positiva en su subconjunto objetivo. Patrón de anticuerpo muerto: media por debajo de 1, máximo también bajo (por debajo de 10), `pct_zero` muy alto. Nada se eleva por encima del fondo porque el anticuerpo no es funcional. En el conjunto de datos inyectado, CD56 muestra el patrón muerto; CD3, CD4, CD8a, CD14, CD19 muestran el patrón bimodal. Examina la tabla ordenada por media para detectar la anomalía.
+
+DEMOSTRACIÓN EN VIVO:
+
+```{r}
+DefaultAssay(sobj_filt) <- "ADT"
+adt <- LayerData(sobj_filt, assay="ADT", layer="counts")
+qc <- data.frame(
+  protein  = rownames(adt),
+  median   = apply(adt, 1, median),
+  mean     = round(Matrix::rowMeans(adt), 2),
+  max      = apply(adt, 1, max),
+  pct_zero = round(Matrix::rowMeans(adt == 0)*100, 1)
+)
+qc[order(qc$mean), ]
+DefaultAssay(sobj_filt) <- "RNA"
+```
+
+GRÁFICO / SALIDA:
+
+También podría usarse:
+
+```{r}
+RidgePlot(sobj_filt, features=rownames(sobj_filt[['ADT']])[1:6], assay='ADT')
+```
+:::
+
+### Paso 6.0b - Dispersión de RNA vs dispersión de ADT
+
+El **Bloque 1** (@sec-block1) midió la dispersión (sparsity) de RNA por sí sola. Ahora que la capa de ADT también ha sido inspeccionada, la comparación es el punto clave: las mismas células, dos ensayos, tasas de ceros muy diferentes.
+
+```{r}
+rna_counts_b6 <- LayerData(sobj_filt, assay = "RNA", layer = "counts")
+rna_sparsity  <- 1 - Matrix::nnzero(rna_counts_b6) / prod(dim(rna_counts_b6))
+adt_sparsity  <- 1 - Matrix::nnzero(adt_counts)     / prod(dim(adt_counts))
+
+cat("RNA sparsity:", round(rna_sparsity * 100, 1), "%\n")
+cat("ADT sparsity:", round(adt_sparsity * 100, 1), "%\n")
+```
+
+:::: question
+::: {.callout-tip icon="false"}
+## PREGUNTA 6.0b
+
+¿Por qué la dispersión de ADT es tan inferior a la de RNA? ¿Qué significa cada cero biológicamente en las dos modalidades?
+:::
+::::
+
+::: {.callout-tip icon="false" collapse="true"}
+### RESPUESTA
+
+La dispersión de RNA en este subconjunto de 500+9 genes sigue siendo sustancial; la dispersión de ADT típicamente está por debajo del 5%. Una sola molécula de mRNA debe ser capturada por un primer oligo-dT, transcrita de forma reversa, amplificada y secuenciada. Los pasos de captura y RT fallan a una tasa sustancial por molécula, produciendo un cero donde el gen se expresaba. Esto es dropout. Un cero de ADT proviene de la tinción con anticuerpos: las células se incuban con cientos a miles de moléculas de anticuerpo por proteína, y la profundidad de secuenciación para las etiquetas de proteína también es más alta por célula. La única forma de leer cero es que la proteína esté ausente o por debajo del fondo de detección. Los ceros de RNA mezclan la ausencia verdadera con el fallo de captura; los ceros de ADT son mayormente ausencia verdadera.
+
+DEMOSTRACIÓN EN VIVO:
+
+```{r}
+rna <- LayerData(sobj_filt, assay="RNA", layer="counts")
+adt <- LayerData(sobj_filt, assay="ADT", layer="counts")
+mean(rna == 0) * 100        # RNA sparsity %
+mean(adt == 0) * 100        # ADT sparsity %
+# CD4 specifically:
+sum(rna["CD4", ] == 0) / ncol(rna) * 100
+sum(adt["CD4", ] == 0) / ncol(adt) * 100
+```
+
+GRÁFICO / SALIDA: Consola; los histogramas de la tasa de ceros *por célula* también funcionan para el impacto visual
+:::
+
+### Paso 6.1 - Reinspeccionar la capa de ADT
+
+ADT ha permanecido intacta desde el **Bloque 1** (@sec-block1). Confirma su estado explícitamente antes de normalizar.
+
+```{r}
+DefaultAssay(sobj_filt) <- "ADT"
+cat("ADT assay current state:\n")
+cat("  Active assay : ADT\n")
+cat("  Proteins     :", nrow(sobj_filt[["ADT"]]), "\n")
+cat("  Cells (post-QC):", ncol(sobj_filt), "\n")
+cat("  Layers       :", paste(SafeLayers(sobj_filt[["ADT"]]), collapse = ", "), "\n")
+```
+
+En este punto esperamos: `solo counts`. Sin `data`, sin `scale.data`. La normalización es el siguiente paso.
+
+:::: puzzle
+::: {.callout-tip icon="false"}
+## ACERTIJO 6.1/A (ADT)
+
+Sin normalizar todavía, ¿qué proteína tiene la mayor varianza cruda entre células? ¿Es un marcador de linaje (CD3, CD4, CD8a, CD14, CD19, CD56) o un marcador de activación (HLADR, CD69, CD25, PD1)?
+
+```{r}
+adt_counts <- LayerData(sobj_filt, assay = "ADT", layer = "counts")
+adt_var <- apply(adt_counts, 1, var)
+cat("\nTop 5 ADT proteins by raw-count variance:\n")
+print(round(sort(adt_var, decreasing = TRUE)[1:5], 1))
+```
+:::
+::::
+
+::: {.callout-tip icon="false" collapse="true"}
+### RESPUESTA
+
+Los marcadores de linaje suelen ganar: CD4, CD8a, CD14, CD19, CD3 tienen la mayor varianza cruda porque pasan de un fondo bajo en células no objetivo a muy alto en células objetivo. Los marcadores de activación como CD69, HLADR, CD25 tienen menor varianza porque se expresan en niveles moderados en muchas células. Si un marcador de activación encabeza la lista, el conjunto de datos puede estar enriquecido en células activadas, o un anticuerpo se está comportando de forma inusual.
+
+DEMOSTRACIÓN EN VIVO:
+
+```{r}
+adt <- LayerData(sobj_filt, assay="ADT", layer="counts")
+var_per_prot <- apply(adt, 1, var)
+sort(var_per_prot, decreasing = TRUE)[1:5]
+```
+:::
+
+:::: puzzle
+::: {.callout-tip icon="false"}
+## ACERTIJO 6.1/B (ADT)
+
+¿Cuántas células son positivas para AMBOS CD4 y CD8a en los `conteos crudos` (\> 5 conteos cada uno)? En PBMC saludables esto debería estar cerca de cero; cualquier cosa sustancial es una señal de doublet o contaminación.
+
+```{r}
+cd4_pos <- adt_counts["CD4", ] > 5
+cd8_pos <- adt_counts["CD8a", ] > 5
+cat("\nADT CD4+ cells              :", sum(cd4_pos), "\n")
+cat("ADT CD8a+ cells             :", sum(cd8_pos), "\n")
+cat("Double-positive (suspicious):", sum(cd4_pos & cd8_pos), "  (~0 expected)\n")
+```
+:::
+::::
+
+::: {.callout-tip icon="false" collapse="true"}
+### RESPUESTA
+
+El doble positivo CD4+/CD8a+ en ADT crudo debería estar cerca de cero en PBMC. Más del 1-2% de las células: sospecha de doublets que scDblFinder pasó por alto, o de derrame (spillover) de anticuerpos. Investiga vía nCount_RNA y ADT total para las células sospechosas.
+
+DEMOSTRACIÓN EN VIVO:
+
+```{r}
+cd4 <- adt["CD4", ] > 5
+cd8 <- adt["CD8a", ] > 5
+sum(cd4 & cd8)
+table(cd4 & cd8, sobj_filt$is_dbl)
+```
+
+GRÁFICO / SALIDA: Salida de consola
+:::
+
+:::: question
+::: {.callout-tip icon="false"}
+## PREGUNTA 6.1
+
+¿El conteo de doble positivos coincide con lo que esperas biológicamente, o indica doublets que sobrevivieron a scDblFinder? ¿Qué harías al respecto antes de anotar los subtipos de células T?
+:::
+::::
+
+::: {.callout-tip icon="false" collapse="true"}
+### RESPUESTA
+
+Se espera cercano a cero (menos del 1% de las células). Las células verdaderamente doble positivas CD4+/CD8+ son raras en PBMC (algunas células T MAIT y gamma-delta). Más del 1-2% y las células probablemente son doublets que scDblFinder pasó por alto (doublets homotípicos de células T). Verifica contra la clase de doublet de scDblFinder; si muchos doble positivos no están marcados como doublets, aumenta el umbral de scDblFinder o elimina los doble positivos manualmente antes de anotar los subtipos de células T.
+
+DEMOSTRACIÓN EN VIVO:
+
+```{r}
+adt <- LayerData(sobj_filt, assay="ADT", layer="counts")
+cd4 <- adt["CD4", ] > 5
+cd8 <- adt["CD8a", ] > 5
+table(double_pos = cd4 & cd8, scDbl = sobj_filt$is_dbl)
+```
+
+GRÁFICO / SALIDA: Tabla de consola; los conteos pequeños en la celda (TRUE, FALSE) son los casos sospechosos
+:::
+
+### Paso 6.2 - Normalización de ADT (CLR, margin = 2)
+
+Normalización CLR (Centered Log-Ratio, log-ratio centrado). El argumento margin establece la dirección: + `margin = 1`: normaliza cada proteína a través de todas las células (medias de fila \~0) + `margin = 2`: normaliza cada célula a través de todas las proteínas (medias de columna \~0)
+
+`margin = 2` es correcto para CITE-seq. Elimina la variación por célula en la captura total de anticuerpos, análogo a la normalización por tamaño de biblioteca en RNA. `margin = 1` se ejecuta sin error pero destruye la señal biológica. Diagnosticarás un objeto real normalizado de forma incorrecta en el **Bloque 8, Escenario 3**.
+
+```{r}
+DefaultAssay(sobj_filt) <- "ADT"
+
+sobj_filt <- NormalizeData(
+  sobj_filt,
+  normalization.method = "CLR",
+  margin               = 2  # CORRECT: normalizes each cell across proteins
+)
+
+adt_m2 <- LayerData(sobj_filt, layer = "data")
+cat("Column means after margin=2 (per cell), expected ~0:\n")
+print(round(colMeans(adt_m2)[1:8], 4))
+cat("\nRow means (per protein), should NOT be ~0 (biological variation preserved):\n")
+print(round(rowMeans(adt_m2), 4))
+
+DefaultAssay(sobj_filt) <- "RNA"
+cat("\nADT normalized correctly.\n")
+```
+
+:::: question
+::: {.callout-tip icon="false"}
+## PREGUNTA 6.2
+
+¿Por qué la media de fila es un diagnóstico útil? ¿Cómo se verían las medias de fila si margin se hubiera fijado en 1?
+:::
+::::
+
+::: {.callout-tip icon="false" collapse="true"}
+### RESPUESTA
+
+Después de CLR con margin=2 (por célula a través de proteínas), las medias de columna son \~0 por construcción (los valores de proteína de cada célula fueron centrados). Las medias de fila (por proteína a través de células) llevan la señal biológica de qué proteínas son abundantes y NO deberían estar cerca de cero. Reflejan las diferencias de abundancia de proteínas en todo el conjunto de datos. Si se hubiera usado margin=1 en su lugar (por proteína a través de células), las medias de fila estarían cerca de cero. Esa es la huella del margin incorrecto. El Escenario 3 del Bloque 7 contiene exactamente este fallo.
+
+DEMOSTRACIÓN EN VIVO:
+
+```{r}
+sobj_filt <- NormalizeData(sobj_filt, assay="ADT",
+                           normalization.method="CLR", margin=2)
+d <- LayerData(sobj_filt, assay="ADT", layer="data")
+round(rowMeans(d), 3)
+round(colMeans(d), 3)[1:5]
+```
+
+GRÁFICO / SALIDA: Salida de consola; `las medias de fila != 0, las medias de columna ~ 0`.
+:::
+
+### Paso 6.3 - QC del panel de ADT: detectar anticuerpos muertos / fallidos
+
+Una conjugación fallida o un anticuerpo degradado producen un "canal muerto": la proteína se lee cerca de cero en cada célula, con casi ninguna varianza. No genera error. Si haces gating o anotas sobre un canal muerto, pierdes silenciosamente toda una población.
+
+```{r}
+DefaultAssay(sobj_filt) <- "ADT"
+adt_counts <- LayerData(sobj_filt, layer = "counts")
+
+panel_qc <- data.frame(
+  protein   = rownames(adt_counts),
+  median    = round(apply(adt_counts, 1, median), 2),
+  mean      = round(Matrix::rowMeans(adt_counts), 2),
+  pct_zero  = round(Matrix::rowMeans(adt_counts == 0) * 100, 1),
+  max       = apply(adt_counts, 1, max)
+)
+panel_qc <- panel_qc[order(panel_qc$mean), ]
+cat("ADT panel QC (sorted by mean; suspicious = bottom rows):\n")
+print(head(panel_qc, 6), row.names = FALSE)
+
+DefaultAssay(sobj_filt) <- "RNA"
+```
+
+:::: question
+::: {.callout-tip icon="false"}
+## PREGUNTA 6.3
+
+Una proteína tiene conteos cercanos a cero en esencialmente todas las células, mientras que su contraparte de RNA se expresa claramente en un cluster definido. ¿Qué proteína, y qué tipo celular marca?
+:::
+::::
+
+::: {.callout-tip icon="false" collapse="true"}
+### RESPUESTA
+
+En el conjunto de datos inyectado: CD56 (codificada por NCAM1). CD56 marca las células NK. Con CD56 ADT muerta, cualquier anotación de células NK basada solo en ADT falla. El bloque de diagnóstico compara CD56 ADT (casi cero) con NCAM1 RNA (señal clara en el cluster NK) y expone la inconsistencia. Hábito: siempre verifica las proteínas de ADT con menor media contra sus contrapartes de RNA.
+
+DEMOSTRACIÓN EN VIVO:
+
+```{r}
+FeaturePlot(sobj_filt, c("CD56", "NCAM1"), reduction = "umap")
+```
+
+GRÁFICO / SALIDA: Panel FeaturePlot: CD56 ADT (plano) junto a NCAM1 RNA (positivo en un cluster)
+:::
+
+Compara la proteína sospechosa (ADT) con su gen de RNA lado a lado.
+
+Edita `suspect_adt` / `suspect_rna` a la proteína marcada anteriormente.
+
+```{r}
+suspect_adt <- "CD56"     # protein flagged as near-zero in panel QC
+suspect_rna <- "NCAM1"    # its RNA counterpart (NK marker)
+```
+
+Decide el título a partir de los números reales de `panel_qc` en lugar de afirmar una afirmación fija. En el objeto limpio esta proteína está saludable; en el objeto inyectado está muerta. El título debe indicar lo que sea cierto para el objeto que realmente está cargado.
+
+```{r}
+suspect_row <- panel_qc[panel_qc$protein == suspect_adt, ]
+is_dead <- nrow(suspect_row) == 1 && suspect_row$pct_zero > 90 && suspect_row$mean < 1
+
+adt_title <- if (is_dead) {
+  paste0(suspect_adt, " ADT\n(flat: likely failed antibody)")
+} else {
+  paste0(suspect_adt, " ADT\n(signal present: not a dead channel here)")
+}
+
+DefaultAssay(sobj_filt) <- "ADT"
+p_dead <- FeaturePlot(sobj_filt, suspect_adt, min.cutoff = "q05") +
+  ggtitle(adt_title)
+
+DefaultAssay(sobj_filt) <- "RNA"
+p_alive <- FeaturePlot(sobj_filt, suspect_rna, min.cutoff = "q05") +
+  ggtitle(paste0(suspect_rna, " RNA\n(clear NK signal: protein should exist)"))
+
+p_dead | p_alive
+DefaultAssay(sobj_filt) <- "RNA"
+```
+
+### Paso 6.4 - RNA vs ADT para el mismo marcador (dropout)
+
+Comparación directa. El mRNA de CD4 se lee como cero en muchas células T CD4+ (dropout), mientras que la proteína CD4 de ADT es bimodal a través de las mismas células.
+
+```{r}
+DefaultAssay(sobj_filt) <- "RNA"
+p_rna <- FeaturePlot(sobj_filt, "CD4", min.cutoff = "q05") +
+  ggtitle("CD4 via RNA\n(dropout: many CD4+ cells read as zero)") +
+  scale_color_gradient(low = "lightgrey", high = "#991b1b")
+
+DefaultAssay(sobj_filt) <- "ADT"
+p_adt <- FeaturePlot(sobj_filt, "CD4", min.cutoff = "q05") +
+  ggtitle("CD4 via ADT protein\n(bimodal, reliable)") +
+  scale_color_gradient(low = "lightgrey", high = "#0d7377")
+
+p_rna | p_adt
+DefaultAssay(sobj_filt) <- "RNA"
+```
+
+### Paso 6.5 - Correlación RNA-proteína a través de todos los marcadores coincidentes
+
+Para cada proteína de ADT con una contraparte de RNA, calcula la **correlación de Spearman** a través de todas las células. Correlación baja = dropout alto en RNA.
+
+```{r}
+adt_rna_pairs <- list(
+  CD3  = "CD3E",
+  CD4  = "CD4",
+  CD8a = "CD8A",
+  CD14 = "CD14",
+  CD19 = "CD19",
+  CD56 = "NCAM1"
+)
+
+DefaultAssay(sobj_filt) <- "ADT"
+adt_vals <- t(LayerData(sobj_filt, layer = "data"))
+DefaultAssay(sobj_filt) <- "RNA"
+rna_vals <- t(LayerData(sobj_filt, layer = "data"))
+
+cat("Spearman correlation (RNA vs ADT) per marker:\n")
+cat(sprintf("  %-8s %s\n", "Marker", "Spearman rho"))
+cat(sprintf("  %-8s %s\n", "------", "------------"))
+
+for (adt_name in names(adt_rna_pairs)) {
+  rna_gene <- adt_rna_pairs[[adt_name]]
+  if (rna_gene %in% colnames(rna_vals) &&
+      adt_name %in% colnames(adt_vals)) {
+    rho <- cor(rna_vals[, rna_gene],
+               adt_vals[, adt_name],
+               method = "spearman")
+    cat(sprintf("  %-8s %.3f\n", adt_name, rho))
+  }
+}
+DefaultAssay(sobj_filt) <- "RNA"
+```
+
+### Paso 6.6 - Cuantificar el dropout: células ADT-positivas pero RNA-cero
+
+Para cada marcador, encuentra las células que son claramente positivas para la proteína (ADT \> umbral) pero tienen cero conteos de RNA. Estas son las células que se anotarían incorrectamente con un análisis basado solo en RNA.
+
+```{r}
+DefaultAssay(sobj_filt) <- "ADT"
+adt_data <- LayerData(sobj_filt, layer = "data")
+DefaultAssay(sobj_filt) <- "RNA"
+rna_counts <- LayerData(sobj_filt, layer = "counts")
+
+cat("Dropout analysis: cells positive by ADT but zero by RNA\n")
+cat(sprintf("  %-8s %-12s %-12s %s\n",
+            "Marker", "ADT+ cells", "RNA==0 among ADT+", "Dropout rate"))
+cat(sprintf("  %-8s %-12s %-12s %s\n",
+            "------", "----------", "-----------------", "------------"))
+
+marker_pairs <- list(CD4 = "CD4", CD14 = "CD14", CD19 = "CD19")
+for (adt_name in names(marker_pairs)) {
+  rna_gene <- marker_pairs[[adt_name]]
+  if (rna_gene %in% rownames(rna_counts) && adt_name %in% rownames(adt_data)) {
+    adt_pos  <- which(adt_data[adt_name, ] > 1.0)
+    rna_zero <- sum(rna_counts[rna_gene, adt_pos] == 0)
+    pct      <- round(rna_zero / length(adt_pos) * 100, 1)
+    cat(sprintf("  %-8s %-12d %-12d %s%%\n",
+                adt_name, length(adt_pos), rna_zero, pct))
+  }
+}
+```
+
+:::: question
+::: {.callout-tip icon="false"}
+## PREGUNTA 6.6
+
+Para un marcador con 80% de dropout, ¿qué fracción de células se anotaría incorrectamente en un flujo de trabajo basado solo en RNA? Aritmética rápida:
+
+```{r}
+cat("\nWorked example: 80% dropout on CD4 RNA\n")
+cat("  Single-marker decision (CD4 RNA > 0): misses 80% of true CD4+ cells.\n")
+cat("  Marker panel of N independent markers (each with 80% dropout):\n")
+cat("    P(all N drop)= 0.8^N\n")
+for (n in c(1, 2, 3, 5)) {
+  cat(sprintf("    N = %d markers -> %.1f%% of cells still misannotated\n",
+              n, 0.8^n * 100))
+}
+cat("Rule of thumb: with 80% per-marker dropout, you need >= 3 independent\n")
+cat("markers in the panel to reduce misannotation below 50%.\n")
+```
+:::
+::::
+
+::: {.callout-tip icon="false" collapse="true"}
+### RESPUESTA
+
+Decisiones de un solo marcador: hasta un 80% mal anotadas para células cuyo RNA sufrió dropout. El script imprime la aritmética para 1, 2, 3, 5 marcadores independientes (cada uno con 80% de dropout): regla P(todos fallan) = 0.8\^N. Entonces 64%, 51%, 33% con 2, 3, 5 marcadores respectivamente. La anotación nunca debería depender de un solo marcador para un gen con alto dropout. ADT rescata porque el dropout de proteína está cerca de cero.
+
+DEMOSTRACIÓN EN VIVO:
+
+```{r}
+for (n in 1:5) cat(sprintf("N=%d -> %.1f%% still miss\n", n, 0.8^n*100))
+```
+
+GRÁFICO / SALIDA: Salida de consola
+:::
+
+### Paso 6.7 - Gating digital
+
+El gating digital replica los gráficos de dispersión biaxiales de la citometría de flujo usando datos de ADT. Permite la clasificación computacional de células con la misma lógica que usan los inmunólogos en el laboratorio.
+
+```{r}
+DefaultAssay(sobj_filt) <- "ADT"
+
+color_by <- if ("singler_label_top" %in% colnames(sobj_filt@meta.data)) {
+  "singler_label_top"
+} else {
+  "cell_type"
+}
+
+gate_data <- FetchData(sobj_filt, vars = c("CD4", "CD8a", color_by))
+names(gate_data)[3] <- "label"
+
+ggplot(gate_data, aes(CD4, CD8a, color = label)) +
+  geom_point(alpha = 0.4, size = 0.8) +
+  geom_density_2d(color = "grey50", linewidth = 0.3) +
+  geom_vline(xintercept = 1.5, linetype = "dashed", color = "#991b1b") +
+  geom_hline(yintercept = 1.5, linetype = "dashed", color = "#991b1b") +
+  annotate("text", x = 3.5, y = 0.4, label = "CD4+ T cells", size = 3.5) +
+  annotate("text", x = 0.4, y = 3.5, label = "CD8+ T cells", size = 3.5) +
+  labs(title    = "Digital gating: CD4 vs CD8a (ADT protein)",
+       subtitle = "Only possible with ADT; RNA dropout makes this scatter uninformative",
+       x = "CD4 (CLR normalized)", y = "CD8a (CLR normalized)",
+       color = NULL) +
+  theme_classic(base_size = 13) +
+  theme(legend.text = element_text(size = 7))
+
+DefaultAssay(sobj_filt) <- "RNA"
+```
+
+### Paso 6.7b - Fallo silencioso: DefaultAssay olvidado entre llamadas
+
+Una llamada a función que "funciona" en el ensayo equivocado produce un error silencioso.
+
+- `FeaturePlot("CD4")` con `DefaultAssay = "RNA"` grafica el gen CD4 de RNA.
+- `FeaturePlot("CD4")` con `DefaultAssay = "ADT"` grafica la proteína CD4.
+
+El gráfico se RENDERIZA en ambos casos, y los dos gráficos pueden parecer engañosamente similares: `min.cutoff = "q05"` reescala el gradiente de color de cada panel a su propio rango de valores, de modo que una señal de RNA dispersa y una señal de ADT densa terminan ambas estiradas a través de una escala de color de apariencia similar. El fallo es silencioso precisamente porque nada en el gráfico renderizado te advierte de qué ensayo lo produjo.
+
+Cuantifica la diferencia que el gráfico por sí solo oculta: qué fracción de células lee exactamente cero en cada modalidad para este marcador.
+
+```{r}
+DefaultAssay(sobj_filt) <- "RNA"
+cd4_rna_zero_pct <- mean(LayerData(sobj_filt, layer = "counts")["CD4", ] == 0) * 100
+DefaultAssay(sobj_filt) <- "ADT"
+cd4_adt_zero_pct <- mean(LayerData(sobj_filt, layer = "counts")["CD4", ] == 0) * 100
+DefaultAssay(sobj_filt) <- "RNA"
+
+cat(sprintf("CD4 zero rate: %.1f%% of cells in RNA, %.1f%% of cells in ADT\n",
+            cd4_rna_zero_pct, cd4_adt_zero_pct))
+cat("The plots below can look similar at a glance; the zero rates above are\n")
+cat("the actual difference the two assays are reporting for the same gene.\n")
+```
+
+Demuéstralo dibujando la misma llamada bajo ambos ensayos. Los títulos se mantienen cortos y el tamaño de fuente está restringido, ya que los dos gráficos se renderizan lado a lado a la mitad del ancho cada uno.
+
+```{r}
+DefaultAssay(sobj_filt) <- "RNA"
+p_as_rna <- FeaturePlot(sobj_filt, "CD4", min.cutoff = "q05") +
+  ggtitle("'CD4' | DefaultAssay = RNA") +
+  theme(plot.title = element_text(size = 11))
+
+DefaultAssay(sobj_filt) <- "ADT"
+p_as_adt <- FeaturePlot(sobj_filt, "CD4", min.cutoff = "q05") +
+  ggtitle("'CD4' | DefaultAssay = ADT") +
+  theme(plot.title = element_text(size = 11))
+
+p_as_rna | p_as_adt
+DefaultAssay(sobj_filt) <- "RNA"
+```
+
+:::: question
+::: {.callout-tip icon="false"}
+## PREGUNTA 6.7b
+
+Ambos gráficos se renderizaron, y a simple vista pueden parecer casi iguales. Los números de tasa de cero impresos arriba cuentan una historia diferente. Si guardaras uno de estos gráficos como figura para un artículo sin verificar primero `DefaultAssay`, ¿cuál tendrías, y podría un lector saber solo a partir de la figura que 'CD4' significaba algo diferente en cada panel?
+:::
+::::
+
+::: {.callout-tip icon="false" collapse="true"}
+### RESPUESTA
+
+Tendrías el ensayo que estuviera activo en el momento de la llamada al gráfico, y un lector no podría distinguir cuál a partir de la figura sola: el título del gráfico dice solo 'CD4', los ejes son coordenadas UMAP idénticas, y `min.cutoff='q05'` reescala el gradiente de color propio de cada panel de forma independiente, de modo que una señal de RNA dispersa y una señal de ADT más densa terminan estiradas a través de escalas de apariencia visual similar. Esta es exactamente la razón por la que importan los números de tasa de cero: muestran la diferencia real en qué fracción de células se lee como positiva en cada modalidad, una diferencia que el gradiente de color reescalado oculta. La figura publicada podría mostrar silenciosamente CD4 RNA cuando se pretendía CD4 proteína, o viceversa, y nada en la imagen misma señalaría la discrepancia. Hábito: establece `DefaultAssay` explícitamente al inicio de cualquier bloque de graficado, Y/O pasa el ensayo dentro de la llamada; mejor aún, edita el título del gráfico para incluir el nombre del ensayo y considera reportar la tasa de cero junto con la figura para que la diferencia de modalidad quede documentada, no solo visible para quien ya sepa buscarla.
+
+DEMOSTRACIÓN EN VIVO:
+
+```{r}
+DefaultAssay(sobj_filt) <- "RNA"
+mean(LayerData(sobj_filt, layer="counts")["CD4", ] == 0) * 100   # RNA zero rate
+DefaultAssay(sobj_filt) <- "ADT"
+mean(LayerData(sobj_filt, layer="counts")["CD4", ] == 0) * 100   # ADT zero rate
+DefaultAssay(sobj_filt) <- "RNA"
+FeaturePlot(sobj_filt, "CD4") + ggtitle("CD4 protein (ADT)")
+FeaturePlot(sobj_filt, "CD4") + ggtitle("CD4 mRNA (RNA)")
+```
+
+GRÁFICO / SALIDA: Dos `FeaturePlots` lado a lado, uno por ensayo, con títulos distintos; los números de tasa de cero explican lo que los gráficos solos no muestran.
+:::
+
+### Paso 6.7c - Encuentra el error
+
+Lee el código de abajo. Parece correcto. ¿Qué está mal?
+
+```{r}
+DefaultAssay(sobj_filt) <- "RNA"
+adt_markers <- FindMarkers(sobj_filt, ident.1 = "CD4Tcell",
+                             group.by = "cell_type",
+                             min.pct  = 0.25)
+```
+
+Tu respuesta:
+
+**REVELAR:** la llamada pide marcadores de células T CD4 pero DefaultAssay es RNA. Devuelve marcadores de RNA, no marcadores de ADT. La salida es correcta para RNA pero no responde la pregunta "qué proteínas distinguen a las células T CD4". O bien establece `DefaultAssay = "ADT"` primero, o pasa `assay = "ADT"` dentro de la llamada a `FindMarkers`. El `min.pct = 0.25` también es incorrecto para ADT (diseñado para RNA disperso); para ADT usa un valor como 0.5 o 0.0 con `logfc.threshold`.
+
+### Paso 6.8 - Cuando el gating no tiene sentido biológico: un canal intercambiado
+
+Un canal intercambiado o mal etiquetado se ejecuta perfectamente. CLR lo normaliza, `FeaturePlot` lo dibuja, el gating lo agrupa. Nada da error. La única señal es que la biología es imposible. La defensa es verificar cada proteína contra una etiqueta independiente (su marcador de RNA).
+
+Cada proteína debería correlacionarse con su propio gen de RNA a través de las células.
+
+Un marcador canónico con rho cercano a 0 es un canal mal etiquetado.
+
+```{r}
+DefaultAssay(sobj_filt) <- "ADT"
+adt_d <- t(LayerData(sobj_filt, layer = "data"))
+DefaultAssay(sobj_filt) <- "RNA"
+rna_d <- t(LayerData(sobj_filt, layer = "data"))
+
+check_pairs <- list(CD4 = "CD4", CD8a = "CD8A", CD19 = "CD19",
+                    CD14 = "CD14", CD3 = "CD3E")
+
+cat(sprintf("  %-6s %-12s %-10s\n", "ADT", "rho(self)", "verdict"))
+cat(sprintf("  %-6s %-12s %-10s\n", "---", "---------", "-------"))
+for (a in names(check_pairs)) {
+  g <- check_pairs[[a]]
+  if (a %in% colnames(adt_d) && g %in% colnames(rna_d)) {
+    rho <- round(cor(adt_d[, a], rna_d[, g], method = "spearman"), 3)
+    verdict <- if (rho < 0.05) "SUSPECT" else "ok"
+    cat(sprintf("  %-6s %-12s %-10s\n", a, rho, verdict))
+  }
+}
+```
+
+:::: question
+::: {.callout-tip icon="false"}
+## PREGUNTA 6.8:
+
+Dos canales de ADT muestran rho cercano a 0 contra su propio gen de RNA, mientras que el par cruzado es alto. Confirma el intercambio con la visualización de abajo.
+
+```{r}
+DefaultAssay(sobj_filt) <- "ADT"
+g <- FetchData(sobj_filt, vars = c("CD14", "CD19"))
+DefaultAssay(sobj_filt) <- "RNA"
+g$CD19_rna <- FetchData(sobj_filt, vars = "CD19")[, 1]  # B cell RNA marker
+
+ggplot(g, aes(CD14, CD19, color = CD19_rna)) +
+  geom_point(alpha = 0.5, size = 0.8) +
+  scale_color_gradient(low = "lightgrey", high = "#991b1b") +
+  labs(title    = "CD14 vs CD19 (ADT), colored by CD19 RNA",
+       subtitle = "If CD19 RNA piles up on the CD14 axis, the labels are swapped",
+       x = "CD14 (ADT)", y = "CD19 (ADT)", color = "CD19 RNA") +
+  theme_classic(base_size = 12)
+DefaultAssay(sobj_filt) <- "RNA"
+```
+:::
+::::
+
+::: {.callout-tip icon="false" collapse="true"}
+### RESPUESTA
+
+Rho de Spearman entre cada proteína de ADT y su contraparte de RNA a través de las células. Los marcadores saludables muestran rho de 0.3-0.7. Huella del intercambio: ADT_X vs RNA_X cerca de cero Y ADT_X vs RNA_Y alto; lo mismo con X,Y invertidos. En el conjunto de datos inyectado, los rownames de CD14 y CD19 en ADT están intercambiados. El bloque de corrección reconstruye el ensayo ADT con los rownames reintercambiados y vuelve a ejecutar CLR. Es condicional, así que en datos limpios no hace nada.
+
+DEMOSTRACIÓN EN VIVO:
+
+```{r}
+DefaultAssay(sobj_filt) <- "ADT"
+FeatureScatter(sobj_filt, "CD14", "CD19") + ggtitle("ADT CD14 vs ADT CD19")
+DefaultAssay(sobj_filt) <- "RNA"
+FeatureScatter(sobj_filt, "CD14", "CD19") + ggtitle("RNA CD14 vs RNA CD19")
+```
+
+GRÁFICO / SALIDA: Dos gráficos de dispersión lado a lado. Saludable: los dispersogramas de ADT y RNA coinciden. Con un intercambio: divergen
+:::
+
+- `Seguro para v5`: reconstruye el ensayo ADT a partir de su matriz de conteos con los nombres corregidos.
+- `Condicional`: solo actúa si el intercambio se detecta realmente (seguro en datos limpios).
+
+```{r}
+DefaultAssay(sobj_filt) <- "ADT"
+adt_d <- t(LayerData(sobj_filt, layer = "data"))
+rna_d <- t(LayerData(sobj_filt, assay = "RNA", layer = "data"))
+
+swapped <- FALSE
+if (all(c("CD14", "CD19") %in% colnames(adt_d))) {
+  rho14 <- cor(adt_d[, "CD14"], rna_d[, "CD14"], method = "spearman")
+  swapped <- is.na(rho14) || rho14 < 0.05
+}
+
+if (swapped) {
+  adt_counts <- LayerData(sobj_filt, assay = "ADT", layer = "counts")
+  rn  <- rownames(adt_counts)
+  i14 <- which(rn == "CD14"); i19 <- which(rn == "CD19")
+  rn[c(i14, i19)] <- rn[c(i19, i14)]
+  rownames(adt_counts) <- rn
+  # CreateAssay5Object() builds a fresh assay with only the counts layer, so
+  # the [[<- replacement method warns that it differs in structure (no
+  # data/scale.data layers yet) from the ADT assay it replaces. Expected and
+  # harmless here; suppressWarnings() wraps the assignment itself, since the
+  # notice comes from the replacement method, not from CreateAssay5Object().
+  new_adt_assay <- CreateAssay5Object(counts = adt_counts)
+  suppressWarnings(sobj_filt[["ADT"]] <- new_adt_assay)
+  sobj_filt <- NormalizeData(sobj_filt, normalization.method = "CLR",
+                             margin = 2, verbose = FALSE)
+  cat("ADT labels corrected (CD14 <-> CD19) and re-normalized.\n")
+} else {
+  cat("No swap detected; ADT labels left unchanged.\n")
+}
+```
+
+```{r}
+# Re-check
+adt_d <- t(LayerData(sobj_filt, layer = "data"))
+rna_d <- t(LayerData(sobj_filt, assay = "RNA", layer = "data"))
+for (a in c("CD14", "CD19")) {
+  rho <- round(cor(adt_d[, a], rna_d[, a], method = "spearman"), 3)
+  cat(sprintf("  %-6s rho(self) = %s\n", a, rho))
+}
+DefaultAssay(sobj_filt) <- "RNA"
+```
+
+### Paso 6.9 - WNN: calcular el PCA de ADT, luego integrar
+
+La integración WNN (Weighted Nearest Neighbor, vecino más cercano ponderado) aprende la contribución relativa de cada modalidad por célula. Las células donde el RNA es informativo reciben más peso de RNA; las células donde la proteína es más discriminante reciben más peso de ADT. WNN requiere un PCA por modalidad. El PCA de RNA existe desde el Bloque 4; ahora construimos el PCA de ADT.
+
+```{r}
+DefaultAssay(sobj_filt) <- "ADT"
+
+adt_features <- rownames(sobj_filt[["ADT"]])  # all 24 proteins
+
+sobj_filt <- ScaleData(
+  sobj_filt,
+  features = adt_features,
+  verbose  = FALSE
+)
+```
+
+Con 24 proteínas, solicitar 20 PCs desencadena una advertencia de Seurat sobre calcular demasiados valores singulares vía SVD truncado. Ambas soluciones funcionan:
+
+- 
+
+  (a) reducir npcs a 15 (todavía captura la estructura), o
+
+- 
+
+  (b) pasar approx = FALSE para usar SVD exacto.
+
+Usamos (a) porque 15 PCs es suficiente señal para 24 proteínas.
+
+```{r}
+sobj_filt <- RunPCA(
+  sobj_filt,
+  features       = adt_features,
+  npcs           = 15,
+  reduction.name = "pca.adt",
+  reduction.key  = "pcaADT_",
+  verbose        = FALSE
+)
+
+cat("Reductions now available:", paste(SafeReductions(sobj_filt), collapse = ", "), "\n")
+```
+
+`Seurat` espera un nombre de peso por modalidad. Pasar solo "RNA.weight" desencadena una advertencia de que ADT.weight se ha asignado automáticamente. Pasa ambos explícitamente para silenciar el aviso y documentar los nombres de columna previstos.
+
+```{r}
+sobj_filt <- FindMultiModalNeighbors(
+  sobj_filt,
+  reduction.list       = list("pca", "pca.adt"),
+  dims.list            = list(1:20, 1:15),
+  modality.weight.name = c("RNA.weight", "ADT.weight"),
+  verbose              = FALSE
+)
+
+sobj_filt <- RunUMAP(
+  sobj_filt,
+  nn.name        = "weighted.nn",
+  reduction.name = "wnn.umap",
+  reduction.key  = "wnnUMAP_",
+  verbose        = FALSE
+)
+
+DefaultAssay(sobj_filt) <- "RNA"
+cat("WNN complete. New reduction: wnn.umap\n")
+```
+
+### Paso 6.10 - UMAP solo de RNA vs UMAP de WNN
+
+WNN no necesariamente mueve cada tipo celular a una región visualmente distinta; los diseños de UMAP pueden rotar o reflejarse entre ejecuciones incluso cuando las vecindades subyacentes apenas cambian. Los dos paneles de abajo pueden parecer similares a primera vista. Lo que realmente importa es si el conjunto de células agrupadas cambió, no si la imagen se ve diferente.
+
+El **Paso 6.11c** (más adelante) verifica esto directamente por tipo celular mediante una tabla cruzada; aquí, una comparación rápida de clustering da una primera lectura antes de eso.
+
+```{r}
+sobj_filt <- FindClusters(sobj_filt, resolution = 0.5,
+                          cluster.name = "rna_only_clusters_preview",
+                          verbose = FALSE)
+rna_only_clusters <- sobj_filt$rna_only_clusters_preview
+
+sobj_filt <- FindClusters(sobj_filt, graph.name = "wsnn", resolution = 0.5,
+                          cluster.name = "wnn_clusters_preview",
+                          verbose = FALSE)
+wnn_clusters_preview <- sobj_filt$wnn_clusters_preview
+
+agreement_tab <- table(RNA_only = rna_only_clusters, WNN = wnn_clusters_preview)
+cat("Cluster membership: RNA-only vs WNN (rows: RNA-only clusters, cols: WNN clusters)\n")
+print(agreement_tab)
+```
+
+Una puntuación de acuerdo simple: para cada cluster solo-RNA, qué fracción de sus células cae en el único cluster de WNN que captura la mayoría de ellas.
+
+```{r}
+best_match_frac <- apply(agreement_tab, 1, function(row) max(row) / sum(row))
+cat(sprintf("\nMedian per-cluster agreement: %.1f%% of cells stay grouped together\n",
+            100 * median(best_match_frac)))
+
+p_rna <- DimPlot(sobj_filt, reduction = "umap",
+                 group.by = "singler_label_top",
+                 label = TRUE, label.size = 2.5, repel = TRUE) +
+  ggtitle("RNA-only UMAP") + NoLegend()
+
+p_wnn <- DimPlot(sobj_filt, reduction = "wnn.umap",
+                 group.by = "singler_label_top",
+                 label = TRUE, label.size = 2.5, repel = TRUE) +
+  ggtitle("WNN UMAP (RNA + ADT)") + NoLegend()
+
+p_rna | p_wnn
+```
+
+:::: question
+::: {.callout-tip icon="false"}
+## PREGUNTA 6.10
+
+Si el acuerdo mediano anterior es alto (las células en su mayoría permanecen agrupadas de la misma forma) pero los dos diseños de UMAP aún se ven visualmente diferentes (rotación diferente, posiciones relativas diferentes), ¿qué te dice eso sobre leer gráficos de UMAP lado a lado versus comparar directamente la membresía de clusters?
+:::
+::::
+
+::: {.callout-tip icon="false" collapse="true"}
+### RESPUESTA
+
+Significa que la comparación visual y la comparación de membresía de clusters están respondiendo preguntas diferentes, y solo una de ellas trata realmente sobre si WNN cambió el resultado. UMAP es una proyección 2D elegida de forma independiente cada vez que se ejecuta; la rotación, el reflejo y el espaciado relativo entre grupos pueden diferir entre dos ejecuciones de UMAP incluso sobre el mismo grafo de vecindad subyacente exacto, porque la optimización del diseño de UMAP no tiene una orientación fija a la cual anclarse. Un acuerdo alto en la tabla cruzada de clusters significa que las células que estaban agrupadas juntas bajo solo-RNA todavía están agrupadas juntas bajo WNN, que es la afirmación sustantiva. Una comparación de UMAP lado a lado es útil para una primera impresión visual y para detectar diferencias groseras (una población que se divide o fusiona), pero no es una forma confiable de juzgar cambios sutiles, y dos UMAPs que se ven diferentes no son, por sí mismos, evidencia de que WNN cambió algo sobre qué células pertenecen juntas.
+
+DEMOSTRACIÓN EN VIVO:
+
+```{r}
+print(agreement_tab)
+median(best_match_frac)   # fraction of cells staying grouped together
+```
+
+GRÁFICO / SALIDA: La tabla cruzada agreement_tab y el número de acuerdo mediano, junto a los dos paneles de UMAP
+:::
+
+### Paso 6.11 - Pesos de modalidad por célula
+
+- `RNA.weight` cercano a 1 = la célula está mejor caracterizada por RNA
+- `RNA.weight` cercano a 0 = la célula está mejor caracterizada por ADT
+- `RNA.weight` y ADT.weight suman 1 para cada célula (`FindMultiModalNeighbors` los normaliza de esa forma), así que 0.5 es el punto de referencia natural: por debajo de él, ADT está contribuyendo más que RNA a la ubicación de esa célula en el grafo de WNN, no solo "alguna cantidad" de información de proteína.
+
+```{r}
+pct_below_half <- round(mean(sobj_filt$RNA.weight < 0.5) * 100, 1)
+cat(sprintf("Cells where ADT contributes more than RNA (RNA.weight < 0.5): %.1f%%\n",
+            pct_below_half))
+
+ggplot(sobj_filt@meta.data, aes(x = RNA.weight, fill = singler_label_top)) +
+  geom_histogram(bins = 40, alpha = 0.8) +
+  geom_vline(xintercept = 0.5, linetype = "dashed", color = "#2c3142") +
+  facet_wrap(~singler_label_top, scales = "free_y") +
+  labs(title    = "Per-cell RNA modality weight from WNN",
+       subtitle = "Dashed line at 0.5: left of it, ADT outweighs RNA for that cell",
+       x = "RNA weight (1 = fully RNA, 0 = fully ADT)") +
+  theme_classic(base_size = 10) +
+  theme(legend.position = "none",
+        strip.text      = element_text(size = 7))
+```
+
+:::: question
+::: {.callout-tip icon="false"}
+## PREGUNTA 6.11
+
+¿Qué tipos celulares en este conjunto de datos dependen más de ADT (RNA.weight bajo)? ¿Por qué eso coincide con lo que sabes sobre el dropout de RNA para sus marcadores definitorios?
+:::
+::::
+
+::: {.callout-tip icon="false" collapse="true"}
+### RESPUESTA
+
+Las células T CD4 y las células T CD8, por un amplio margen. Sus marcadores definitorios (CD4, CD8A) tienen el peor dropout de RNA. Las células B (MS4A1, CD79A) y los monocitos (CD14, LYZ) tienen una señal de RNA más fuerte y dependen menos de ADT. Las células NK (NKG7, GNLY, NCAM1) son intermedias. El histograma facetado de RNA.weight por tipo celular hace esto concreto, y la línea discontinua en RNA.weight = 0.5 marca el punto en el que ADT supera a RNA para esa célula, no solo contribuye con alguna cantidad de información.
+
+DEMOSTRACIÓN EN VIVO:
+
+```{r}
+mean(sobj_filt$RNA.weight < 0.5) * 100   # cells where ADT outweighs RNA
+ggplot(sobj_filt@meta.data, aes(x = RNA.weight, fill = singler_label_top)) +
+  geom_histogram(bins = 40) + geom_vline(xintercept = 0.5, linetype = "dashed") +
+  facet_wrap(~singler_label_top)
+```
+
+GRÁFICO / SALIDA: Histograma de RNA.weight facetado por tipo celular, con una línea discontinua en 0.5. Las células T alcanzan su pico a la izquierda de la línea, los monocitos a la derecha.
+:::
+
+### Paso 6.11b - Extremos de RNA.weight por cluster: ¿hay clusters impulsados por proteína?
+
+Un cluster donde la mayoría de las células tienen RNA.weight cerca de 0 se identifica casi enteramente por proteína. Eso puede ser biología (subtipos de células T, donde el dropout de RNA es severo) o un artefacto (un efecto de lote específico de proteína concentrado en un cluster).
+
+```{r}
+rna_w_by_cluster <- sobj_filt@meta.data %>%
+  group_by(seurat_clusters) %>%
+  summarise(median_rna_w = median(RNA.weight),
+            mean_rna_w   = mean(RNA.weight),
+            n_cells      = n(),
+            .groups = "drop") %>%
+  arrange(median_rna_w)
+
+cat("RNA.weight per cluster (sorted; low = protein-driven):\n")
+print(rna_w_by_cluster)
+```
+
+Marca los clusters donde la mediana de RNA.weight \< 0.3 (la proteína domina)
+
+```{r}
+protein_driven <- rna_w_by_cluster$seurat_clusters[rna_w_by_cluster$median_rna_w < 0.3]
+if (length(protein_driven) > 0) {
+  cat("\nClusters where protein dominates (median RNA.weight < 0.3):\n")
+  cat("  ", paste(protein_driven, collapse = ", "), "\n")
+  cat("Inspect these clusters: are they T-cell subsets (expected) or",
+      "something else?\n")
+}
+```
+
+:::: question
+::: {.callout-tip icon="false"}
+## PREGUNTA 6.11b
+
+Para el cluster más impulsado por proteína, ¿qué fracción de sus células fueron asignadas a una etiqueta de célula T por SingleR? El bloque de abajo calcula la respuesta y aplica la regla de decisión.
+:::
+::::
+
+::: {.callout-tip icon="false" collapse="true"}
+### RESPUESTA
+
+Calculado en el script. Umbrales de decisión: \>=70% células T -\> comportamiento esperado de dropout de RNA, sin acción; 30-70% -\> mixto, inspeccionar las proteínas de ADT que impulsan la dominancia; \<30% -\> artefacto técnico, verificar lote de ADT, margin de CLR, fondo de isotipo. El script aplica la regla automáticamente e imprime el veredicto.
+
+DEMOSTRACIÓN EN VIVO:
+
+```{r}
+md <- sobj_filt@meta.data
+cs <- aggregate(RNA.weight ~ seurat_clusters, data = md, FUN = median)
+cs[order(cs$RNA.weight), ]
+```
+
+GRÁFICO / SALIDA: Tabla de consola.
+:::
+
+Etiquetas de SingleR similares a célula T (cualquier caso)
+
+```{r}
+t_cell_pattern <- "T[._ -]?cell|CD4|CD8|Tcell|T cell"
+```
+
+Cluster más impulsado por proteína = `menor mediana de RNA.weight`
+
+```{r}
+md <- sobj_filt@meta.data
+cluster_summary <- md %>%
+  group_by(seurat_clusters) %>%
+  summarise(median_rna_w = median(RNA.weight, na.rm = TRUE),
+            n_cells      = n(),
+            t_cell_frac  = mean(grepl(t_cell_pattern, singler_label,
+                                      ignore.case = TRUE), na.rm = TRUE),
+            .groups = "drop") %>%
+  arrange(median_rna_w)
+
+cat("\nClusters sorted by median RNA.weight (lowest = most protein-driven):\n")
+print(cluster_summary)
+
+target_cluster <- cluster_summary$seurat_clusters[1]
+tfrac          <- cluster_summary$t_cell_frac[1]
+mrw            <- cluster_summary$median_rna_w[1]
+
+cat(sprintf("\nMost protein-driven cluster: %s (median RNA.weight = %.2f)\n",
+            target_cluster, mrw))
+cat(sprintf("Fraction of its cells with T-cell label: %.1f%%\n", tfrac * 100))
+
+cat("\nDecision rule (concrete thresholds):\n")
+cat("  t_cell_frac >= 70%  -> protein dominance reflects RNA dropout (expected,\n")
+cat("                         CD4/CD8 RNA drops out heavily). No action.\n")
+
+cat("  t_cell_frac 30-70%  -> mixed. Inspect ADT panel for this cluster: is one\n")
+cat("                         specific protein driving the dominance? Run:\n")
+cat("                         FeaturePlot(sobj_filt, '<protein>',\n")
+cat("                                     cells = WhichCells(sobj_filt, idents = '<cluster>'))\n")
+cat("  t_cell_frac < 30%   -> technical explanation. Check:\n")
+cat("                         1. ADT batch (Block 6.3, panel QC)\n")
+cat("                         2. CLR margin (Block 6.2; verify row means != 0)\n")
+cat("                         3. Isotype background (Block 8 Scenario 4)\n")
+
+verdict <- if (tfrac >= 0.70) {
+  "RNA dropout (expected)"
+} else if (tfrac >= 0.30) {
+  "mixed; inspect ADT panel"
+} else {
+  "technical artifact; check batch/CLR/isotype"
+}
+cat(sprintf("\nVerdict for cluster %s: %s\n", target_cluster, verdict))
+```
+
+### Paso 6.11c - Reanotación a nivel de célula: clustering WNN vs etiqueta solo-RNA
+
+Ejecuta un clustering basado en grafos sobre el grafo de WNN y compáralo con la anotación de SingleR solo-RNA, restringido a las células donde ADT dominó.
+
+```{r}
+sobj_filt <- FindClusters(sobj_filt,
+                          graph.name = "wsnn",
+                          resolution = 0.5,
+                          verbose    = FALSE)
+sobj_filt$wnn_clusters <- Idents(sobj_filt)
+```
+
+Células donde ADT dominó en WNN (RNA.weight \< 0.3)
+
+```{r}
+low_rna_mask <- sobj_filt$RNA.weight < 0.3
+n_low <- sum(low_rna_mask)
+cat("Cells where ADT dominated WNN (RNA.weight < 0.3):", n_low,
+    sprintf("(%.1f%% of total)\n", 100 * n_low / ncol(sobj_filt)))
+
+if (n_low >= 20) {
+  cat("\nCross-tab: RNA-based SingleR label vs WNN cluster (ADT-dominated cells)\n")
+  print(table(
+    SingleR_label = sobj_filt$singler_label[low_rna_mask],
+    WNN_cluster   = sobj_filt$wnn_clusters[low_rna_mask]
+  ))
+}
+```
+
+:::: question
+::: {.callout-tip icon="false"}
+## PREGUNTA 6.11c
+
+Para la fila de la tabla cruzada con el mayor desacuerdo, la etiqueta SingleR-RNA y el cluster WNN divergen. ¿En cuál confías? El código de abajo identifica esa fila automáticamente y ejecuta la verificación decisiva.
+
+```{r}
+if (n_low >= 20) {
+  ctab <- table(
+    SingleR_label = sobj_filt$singler_label[low_rna_mask],
+    WNN_cluster   = sobj_filt$wnn_clusters[low_rna_mask]
+  )
+  # Largest off-diagonal cell = biggest disagreement
+  if (length(ctab) > 1) {
+    max_cell <- arrayInd(which.max(ctab), dim(ctab))
+    src_lbl <- rownames(ctab)[max_cell[1]]
+    src_clu <- colnames(ctab)[max_cell[2]]
+    n_conf  <- ctab[max_cell[1], max_cell[2]]
+    cat(sprintf("\nLargest disagreement: %d cells labeled '%s' by SingleR-RNA\n",
+                n_conf, src_lbl))
+    cat(sprintf("but assigned to WNN cluster %s.\n", src_clu))
+
+    # Deciding check: marker expression in those cells.
+    # T-cell markers (RNA + ADT), B-cell markers, Mono markers
+    decider_markers <- list(
+      T_cell    = list(rna = c("CD3E", "CD3D"), adt = c("CD3")),
+      B_cell    = list(rna = c("MS4A1", "CD79A"), adt = c("CD19", "CD20")),
+      Monocyte  = list(rna = c("CD14", "LYZ"),   adt = c("CD14")),
+      NK_cell   = list(rna = c("NKG7", "GNLY"),  adt = c("CD56"))
+    )
+
+    conf_cells <- which(low_rna_mask &
+                        sobj_filt$singler_label == src_lbl &
+                        sobj_filt$wnn_clusters  == src_clu)
+    cat(sprintf("Marker detection in %d disputed cells:\n", length(conf_cells)))
+    for (ct in names(decider_markers)) {
+      for (mk in decider_markers[[ct]]$rna) {
+        if (mk %in% rownames(sobj_filt[["RNA"]])) {
+          v <- FetchData(sobj_filt, vars = mk)[conf_cells, 1]
+          cat(sprintf("  %s (RNA %s): %.1f%% > 0\n", ct, mk, mean(v > 0) * 100))
+        }
+      }
+      for (mk in decider_markers[[ct]]$adt) {
+        if (mk %in% rownames(sobj_filt[["ADT"]])) {
+          DefaultAssay(sobj_filt) <- "ADT"
+          v <- FetchData(sobj_filt, vars = mk)[conf_cells, 1]
+          DefaultAssay(sobj_filt) <- "RNA"
+          cat(sprintf("  %s (ADT %s): %.1f%% > 1.0 (CLR units)\n",
+                      ct, mk, mean(v > 1.0) * 100))
+        }
+      }
+    }
+
+    cat("\nDecision rule:\n")
+    cat("  The cell type whose markers fire in >= 50% of cells (RNA + ADT\n")
+    cat("  combined) wins. If two cell types tie, mark these cells as\n")
+    cat("  ambiguous (likely doublets that scDblFinder missed) and remove\n")
+    cat("  before downstream group comparison.\n")
+  }
+}
+```
+:::
+::::
+
+::: {.callout-tip icon="false" collapse="true"}
+### RESPUESTA
+
+Regla de decisión del script: verificar cruzadamente la expresión de marcadores en las células disputadas. El tipo celular cuyos marcadores (RNA + ADT) se activan en \>=50% de las células gana. Si dos tipos celulares empatan, marca las células como ambiguas (probablemente doublets no detectados) y exclúyelas de las comparaciones grupales posteriores. NO elijas la etiqueta de WNN por defecto; NO elijas la etiqueta de SingleR por defecto. Deja que los marcadores decidan.
+
+DEMOSTRACIÓN EN VIVO:
+
+```{r}
+low_rna_mask <- sobj_filt$RNA.weight < 0.3
+tab <- table(sobj_filt$singler_label[low_rna_mask],
+             sobj_filt$wnn_clusters[low_rna_mask])
+tab
+```
+
+GRÁFICO / SALIDA: Tabla cruzada de consola.
+:::
+
+### Paso 6.12 - Comparación de condiciones: Saludable vs COVID-19
+
+Este gráfico parece informativo. Pero con 3 donantes saludables y 4 con COVID-19, puede estar completamente impulsado por un donante atípico.
+
+```{r}
+group_props <- sobj_filt@meta.data %>%
+  filter(!is.na(singler_label_top), !is.na(condition)) %>%
+  group_by(condition, singler_label_top) %>%
+  summarise(n = n(), .groups = "drop") %>%
+  group_by(condition) %>%
+  mutate(prop = n / sum(n))
+
+ggplot(group_props, aes(x = condition, y = prop, fill = singler_label_top)) +
+  geom_bar(stat = "identity", width = 0.6) +
+  scale_y_continuous(labels = percent_format()) +
+  labs(title    = "Cell type proportions by condition",
+       subtitle = "Looks clear at the group level; check whether one donor drives it",
+       x = "Condition", y = "Proportion", fill = "Cell type") +
+  theme_classic(base_size = 12) +
+  theme(legend.text = element_text(size = 8))
+
+donor_props <- sobj_filt@meta.data %>%
+  filter(!is.na(singler_label_top)) %>%
+  group_by(donor_id, condition, singler_label_top) %>%
+  summarise(n = n(), .groups = "drop") %>%
+  group_by(donor_id) %>%
+  mutate(prop = n / sum(n))
+
+ggplot(donor_props, aes(x = donor_id, y = prop, fill = singler_label_top)) +
+  geom_bar(stat = "identity", width = 0.7) +
+  scale_y_continuous(labels = percent_format()) +
+  facet_wrap(~condition, scales = "free_x") +
+  labs(title    = "Cell type proportions per donor",
+       subtitle = "Consistent pattern across donors within each group; not driven by one outlier",
+       x = NULL, y = "Proportion (%)", fill = "Cell type") +
+  theme_classic(base_size = 11) +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1),
+        legend.text = element_text(size = 7),
+        strip.text  = element_text(face = "bold"))
+```
+
+### Paso 6.12b - Verificación estadística de realidad: prueba a nivel de donante con nota de potencia {#sec-step6.12b}
+
+Proporciones por donante para UN tipo celular de ejemplo, probadas entre condiciones. Ejecuta esto para la etiqueta que tu anotación produjo como la más grande en COVID-19; el script intenta elegir automáticamente.
+
+Proporciones por donante para UN tipo celular de ejemplo, probadas entre condiciones. Ejecuta esto para la etiqueta que tu anotación produjo como la más grande en COVID-19; el script intenta elegir automáticamente. Restringido a las etiquetas top-N: una etiqueta sostenida por 1-2 células podría mostrar un delta espurio del 100% entre condiciones solo por azar, lo que haría que un "hallazgo" sin sentido pareciera la señal más fuerte del conjunto de datos.
+
+```{r}
+per_donor <- sobj_filt@meta.data %>%
+  filter(!is.na(condition), !is.na(singler_label_top), condition %in% c("Healthy", "COVID19")) %>%
+  group_by(donor_id, condition, singler_label_top) %>%
+  summarise(n = n(), .groups = "drop") %>%
+  group_by(donor_id, condition) %>%
+  mutate(prop = n / sum(n)) %>%
+  ungroup()
+```
+
+Elige el tipo celular con el delta más grande entre grupos para fines de demostración
+
+```{r}
+delta_by_lbl <- per_donor %>%
+  group_by(singler_label_top, condition) %>%
+  summarise(mean_prop = mean(prop), .groups = "drop") %>%
+  tidyr::pivot_wider(names_from = condition, values_from = mean_prop) %>%
+  mutate(delta = abs(COVID19 - Healthy)) %>%
+  arrange(desc(delta))
+
+target_lbl <- delta_by_lbl$singler_label_top[1]
+cat("Largest mean-proportion delta is for label:", as.character(target_lbl), "\n")
+cat(sprintf("  Healthy mean: %.1f%%   COVID-19 mean: %.1f%%   delta: %.1f%%\n",
+            100 * delta_by_lbl$Healthy[1],
+            100 * delta_by_lbl$COVID19[1],
+            100 * delta_by_lbl$delta[1]))
+
+subset_df <- per_donor %>% filter(singler_label_top == target_lbl)
+n_h <- sum(subset_df$condition == "Healthy")
+n_c <- sum(subset_df$condition == "COVID19")
+
+if (n_h >= 2 && n_c >= 2) {
+  wt <- wilcox.test(prop ~ condition, data = subset_df, exact = FALSE)
+  cat(sprintf("\nWilcoxon rank-sum (n=%d Healthy vs n=%d COVID-19):\n", n_h, n_c))
+  cat(sprintf("  W = %g, p = %.3f\n", wt$statistic, wt$p.value))
+}
+```
+
+Piso de potencia: con `n=3 vs n=4` y `Wilcoxon` a `alpha=0.05`, el tamaño de efecto estandarizado más pequeño detectable (d de Cohen) es aproximadamente 1.5 para un 80% de potencia.
+
+**En términos simples:** solo diferencias de proporción mayores a \~1.5 desviaciones estándar de la distribución a nivel de donante son detectables. Cualquier `valor p` aquí es exploratorio, no confirmatorio.
+
+```{r}
+cat("\n--- Power note ---\n")
+cat("n=3 vs n=4 donors. Minimum detectable effect size (Cohen's d) ~1.5 for\n")
+cat("80% power at alpha=0.05. Treat any p-value here as exploratory only.\n")
+```
+
+:::: question
+::: {.callout-tip icon="false"}
+## PREGUNTA 6.12b
+
+Suponiendo que el valor p impreso está en el rango 0.05 - 0.10, ¿qué conclusión puedes SACAR de este conjunto de datos? El bloque de abajo aplica la regla de decisión explícita para comparación de grupos con muestra pequeña.
+
+```{r}
+cat("\nDecision matrix for the observed p-value:\n")
+if (exists("wt")) {
+  pv <- wt$p.value
+  cat(sprintf("  Observed p-value: %.3f\n", pv))
+  cat("\n  p < 0.01 with n=7 donors total: STRONG signal, replicate in a\n")
+  cat("                                     larger cohort before claiming.\n")
+  cat("  0.01 <= p < 0.05               : Suggestive. Report effect size +\n")
+  cat("                                     per-donor plot. Not confirmatory.\n")
+  cat("  0.05 <= p < 0.10               : Exploratory. Cannot claim difference.\n")
+  cat("                                     State the n, the direction, and the\n")
+  cat("                                     effect size; flag as hypothesis-\n")
+  cat("                                     generating only.\n")
+  cat("  p >= 0.10                      : No evidence of difference at this n.\n")
+  cat("                                     Power analysis says n>=10 per group\n")
+  cat("                                     needed for the observed effect size.\n")
+
+  # Auto-apply
+  verdict <- if (pv < 0.01) {
+    "STRONG (replicate in larger cohort)"
+  } else if (pv < 0.05) {
+    "suggestive (report with caveats)"
+  } else if (pv < 0.10) {
+    "exploratory (hypothesis-generating only)"
+  } else {
+    "no evidence of difference at this n"
+  }
+  cat(sprintf("\nAutomatic verdict at p = %.3f: %s\n", pv, verdict))
+
+  # Minimum n needed for the observed effect (Cohen's d -> n via power calc)
+  pooled_sd <- sd(subset_df$prop)
+  obs_d     <- delta_by_lbl$delta[1] / pooled_sd
+  cat(sprintf("\nObserved Cohen's d (donor-level): %.2f\n", obs_d))
+  cat("Approximate n per group needed for 80%% power at alpha=0.05:\n")
+  # Rough rule: n ~= 16 / d^2 for two-sample t-test, similar for Wilcoxon
+  if (!is.na(obs_d) && obs_d > 0) {
+    n_needed <- ceiling(16 / obs_d^2)
+    cat(sprintf("  ~%d donors per group (using rule n ~ 16/d^2)\n", n_needed))
+  }
+}
+
+saveRDS(sobj_filt, "outputs/sobj_annotated.rds")
+cat("Annotated object saved: outputs/sobj_annotated.rds\n")
+```
+:::
+::::
+
+::: {.callout-tip icon="false" collapse="true"}
+### RESPUESTA
+
+Solo exploratorio. Con n=7 donantes en total, un valor p en este rango es generador de hipótesis y no puede respaldar una afirmación publicada de diferencia. Reporta: n por grupo, dirección de la diferencia, tamaño de efecto, declaración de que el análisis confirmatorio requiere una cohorte más grande. El script estima la n necesaria para un 80% de potencia en el tamaño de efecto observado (regla práctica n \~ 16 / d\^2).
+
+DEMOSTRACIÓN EN VIVO: Ver el **Paso 6.12b** (@sec-step6.12b) en el script: aplica automáticamente la matriz de decisión.
+
+GRÁFICO / SALIDA: Salida de consola con veredicto automático.
+:::
+
+:::: question
+::: {.callout-tip icon="false"}
+## PREGUNTA 6.12
+
+¿Cómo probarías formalmente la diferencia a nivel de grupo dados solo 3 donantes sanos vs 4 con COVID-19? ¿Cuál es el estándar mínimo de reporte que aceptarías en un artículo?
+:::
+::::
+
+::: {.callout-tip icon="false" collapse="true"}
+### RESPUESTA
+
+El donante como unidad de análisis. Calcula las proporciones de tipo celular por donante (un número por donante por tipo celular), Wilcoxon de suma de rangos entre donantes. Con n=3 vs n=4, la potencia es mínima: solo son detectables tamaños de efecto cercanos a d de Cohen=1.5 a alfa=0.05. Estándar mínimo de reporte: graficar las proporciones por donante (el Paso 6.12 hace esto), indicar la n, y marcar explícitamente el análisis como exploratorio a menos que los tamaños de efecto sean muy grandes. Los gráficos de barras a nivel de grupo sin respaldo por donante no deberían aparecer en un artículo.
+
+DEMOSTRACIÓN EN VIVO:
+
+```{r}
+subset_df <- per_donor %>% filter(singler_label == target_lbl)
+wilcox.test(prop ~ condition, data = subset_df, exact = FALSE)
+print(subset_df[, c("donor_id", "condition", "prop")])
+```
+
+GRÁFICO / SALIDA: Boxplot de proporción por donante con donantes individuales como puntos, coloreados por condición.
+:::
+
+## **Bloque 7 - Cierre** {#sec-block7}
+
+::: content-box-gray
+Vista final de las proporciones anotadas y el registro de la sesión de R. La tabla de referencia de errores comunes vive en el PDF de la guía del instructor.
+:::
+
+### Paso 7.1 - Resumen de cuatro paneles
+
+Cuatro resultados que en conjunto resumen el curso, reutilizando objetos ya construidos en los Bloques 5 y 6 en lugar de recalcular nada:
+
+1.  UMAP final de WNN con anotación confiable: el estado final de la integración RNA + ADT.
+2.  Marcadores canónicos principales por tipo celular: la evidencia detrás de las etiquetas en el panel 1.
+3.  Proporciones de tipo celular por condición: la comparación biológica para la cual se construyó todo el pipeline.
+4.  CD4 en RNA vs ADT: la ilustración más clara del curso de por qué la capa de proteína se gana su lugar en el análisis.
+
+```{r}
+p_final_umap <- DimPlot(sobj_filt, reduction = "wnn.umap",
+                        group.by = "singler_label_clean",
+                        label = TRUE, label.size = 2.5, repel = TRUE) +
+  ggtitle("1. Final WNN UMAP (confident annotation)") + NoLegend()
+
+p_final_markers <- DotPlot(sobj_filt,
+                           features = unique(top_markers$gene),
+                           idents   = setdiff(levels(Idents(sobj_filt)), "Ambiguous"),
+                           group.by = "singler_label_clean") +
+  RotatedAxis() +
+  theme(axis.text.x = element_text(size = 7), legend.position = "none") +
+  ggtitle("2. Canonical markers behind the labels")
+
+if ("singler_label_top" %in% colnames(sobj_filt@meta.data)) {
+  final_props <- sobj_filt@meta.data %>%
+    filter(!is.na(condition), !is.na(singler_label_top)) %>%
+    group_by(condition, singler_label_top) %>%
+    summarise(n = n(), .groups = "drop") %>%
+    group_by(condition) %>%
+    mutate(prop = n / sum(n))
+
+  p_final_props <- ggplot(final_props, aes(condition, prop, fill = singler_label_top)) +
+    geom_bar(stat = "identity", width = 0.65) +
+    scale_y_continuous(labels = percent_format()) +
+    labs(x = "Condition", y = "Proportion", fill = NULL) +
+    theme_classic(base_size = 10) +
+    theme(legend.text = element_text(size = 6),
+          legend.position = "right",
+          axis.text.x = element_text(angle = 45, hjust = 1)) +
+    ggtitle("3. Cell type proportions by condition")
+}
+
+DefaultAssay(sobj_filt) <- "RNA"
+p_cd4_rna <- FeaturePlot(sobj_filt, "CD4", min.cutoff = "q05") +
+  ggtitle("4a. CD4 (RNA)") +
+  theme(plot.title = element_text(size = 10), legend.position = "none")
+DefaultAssay(sobj_filt) <- "ADT"
+p_cd4_adt <- FeaturePlot(sobj_filt, "CD4", min.cutoff = "q05") +
+  ggtitle("4b. CD4 (ADT)") +
+  theme(plot.title = element_text(size = 10), legend.position = "none")
+DefaultAssay(sobj_filt) <- "RNA"
+p_final_cd4 <- p_cd4_rna | p_cd4_adt
+
+(p_final_umap | p_final_markers) / (p_final_props | p_final_cd4)
+```
+
+### Paso 7.2 - Información de la sesión
+
+```{r}
+sessionInfo()
+```
