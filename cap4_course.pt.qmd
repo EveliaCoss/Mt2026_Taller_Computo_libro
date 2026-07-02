@@ -1,0 +1,2788 @@
+# scRNA‑seq — Erros e Sobrevivência
+
+::: callout-important
+## Sobre os conjuntos de dados
+
+Este conjunto de dados vem do **GSE149689**. Os dados foram **reduzidos** e [**erros deliberados**]{.text-red} foram introduzidos com fins educacionais.
+
+#### [Erros deliberados]{.text-red}
+
+Cinco etapas foram projetadas para falhar (por exemplo, acesso ao slot da **v4**, uso incorreto de `GetAssayData slot=`, limiares de filtro incorretos, dimensões maiores que o número de componentes principais, plotar um rótulo antes de adicioná-lo).
+
+Essas etapas estão envolvidas em `try()`, de modo que o erro é impresso no console sem interromper a execução completa. O objetivo é que o usuário **leia a mensagem de erro, a interprete e continue com a análise**.
+:::
+
+## Opções de diretório de trabalho
+
+Ao iniciar uma análise, você precisa garantir que o R saiba onde encontrar seus scripts e dados. Existem duas abordagens comuns:
+
+- **Definir o diretório de trabalho** Você pode definir manualmente o diretório de trabalho no RStudio por meio de: *Session \> Set Working Directory \> To Source File Location*. Essa opção faz o R rodar a partir da pasta que contém seu script e a subpasta `data/`. É rápido e útil para scripts pequenos ou pontuais, mas requer redefinição toda vez que você abre o projeto.
+
+- **Criar um Projeto R** A abordagem recomendada para reprodutibilidade e colaboração. Um arquivo `.Rproj` define automaticamente a raiz do projeto como diretório de trabalho. Isso permite usar caminhos relativos (por exemplo, `data/file.csv`) sem ajustes manuais. Também se integra perfeitamente com Git/GitHub, Quarto e RMarkdown, tornando seu fluxo de trabalho mais organizado e consistente.
+
+::: callout-tip
+## Boa prática
+
+Para projetos de longo prazo, especialmente aqueles compartilhados no GitHub ou usados no ensino, criar um **Projeto R** é a opção mais confiável.
+:::
+
+## Como usar este documento
+
+Execute o código de forma interativa, seção por seção (`Ctrl+Enter / Cmd+Enter`), do início ao fim. NÃO use `source()` para o arquivo inteiro de uma só vez: vários blocos são erros deliberados pensados para serem lidos, e o **Bloco 8** é trabalho opcional para casa que depende de um arquivo publicado separadamente após a sessão.
+
+## **Bloco 0 - Instalação de pacotes e configuração**
+
+### Etapa 0.1 - Instalar pacotes
+
+Verifica cada pacote antes de instalá-lo. Se `install.packages()` falhar, tenta novamente via `BiocManager`. É seguro executar várias vezes.
+
+```{r install_packages, eval=FALSE}
+# Install BiocManager
+if (!requireNamespace("BiocManager", quietly = TRUE))
+  install.packages("BiocManager")
+
+# All packages
+all_pkgs <- c(
+  "Seurat", "SeuratObject", "ggplot2", "patchwork",  "dplyr", "tidyr", "Matrix", "harmony", "scales", "ggrepel",
+  "SingleR", "celldex", "BiocParallel", "scDblFinder",
+  "SingleCellExperiment"
+)
+
+for (pkg in all_pkgs) {
+  if (!requireNamespace(pkg, quietly = TRUE)) {
+    message("Installing: ", pkg)
+    tryCatch(install.packages(pkg, quiet = TRUE),
+             error   = function(e) NULL,
+             warning = function(w) NULL)
+    if (!requireNamespace(pkg, quietly = TRUE)) {
+      message("  CRAN failed. Retrying via BiocManager...")
+      tryCatch(
+        BiocManager::install(pkg, ask = FALSE, update = FALSE),
+        error   = function(e) message("  FAILED: ", e$message),
+        warning = function(w) NULL
+      )
+    }
+    if (requireNamespace(pkg, quietly = TRUE))
+      message("  OK: ", pkg, " (", as.character(packageVersion(pkg)), ")")
+    else
+      message("  FAILED: ", pkg, ". Run the fallback chunk below.")
+  } else {
+    message("Already installed: ", pkg,
+            " (", as.character(packageVersion(pkg)), ")")
+  }
+}
+```
+
+``` text
+Registered S3 method overwritten by 'data.table':
+  method           from
+  print.data.table     
+Registered S3 method overwritten by 'htmlwidgets':
+  method           from         
+  print.htmlwidget tools:rstudio
+Already installed: Seurat (5.5.0)
+Already installed: SeuratObject (5.4.0)
+Already installed: ggplot2 (4.0.3)
+Already installed: patchwork (1.3.2)
+Already installed: dplyr (1.2.1)
+Already installed: tidyr (1.3.2)
+Already installed: Matrix (1.7.5)
+Already installed: harmony (2.0.4)
+Already installed: scales (1.4.0)
+Already installed: ggrepel (0.9.8)
+Installing: SingleR
+  CRAN failed. Retrying via BiocManager...
+'getOption("repos")' replaces Bioconductor standard repositories, see
+'help("repositories", package = "BiocManager")' for details.
+Replacement repositories:
+    CRAN: https://cran.rstudio.com/
+Bioconductor version 3.23 (BiocManager 1.30.27), R 4.6.0 (2026-04-24)
+Installing package(s) 'BiocVersion', 'SingleR'
+also installing the dependencies ‘XVector’, ‘MatrixGenerics’, ‘GenomicRanges’, ‘Biobase’, ‘IRanges’, ‘Seqinfo’, ‘S4Arrays’, ‘SparseArray’, ‘SummarizedExperiment’, ‘BiocGenerics’, ‘S4Vectors’, ‘DelayedArray’, ‘beachmat’, ‘assorthead’
+
+  FAILED: SingleR. Run the fallback chunk below.
+Installing: celldex
+  CRAN failed. Retrying via BiocManager...
+'getOption("repos")' replaces Bioconductor standard repositories, see
+'help("repositories", package = "BiocManager")' for details.
+Replacement repositories:
+    CRAN: https://cran.rstudio.com/
+Bioconductor version 3.23 (BiocManager 1.30.27), R 4.6.0 (2026-04-24)
+Installing package(s) 'BiocVersion', 'celldex'
+also installing the dependencies ‘dir.expiry’, ‘dbplyr’, ‘Biostrings’, ‘XVector’, ‘rhdf5filters’, ‘V8’, ‘biocmake’, ‘h5mread’, ‘MatrixGenerics’, ‘GenomicRanges’, ‘Biobase’, ‘BiocGenerics’, ‘IRanges’, ‘Seqinfo’, ‘S4Arrays’, ‘BiocFileCache’, ‘BiocBaseUtils’, ‘KEGGREST’, ‘SparseArray’, ‘sparseMatrixStats’, ‘alabaster.schemas’, ‘rhdf5’, ‘jsonvalidate’, ‘assorthead’, ‘Rhdf5lib’, ‘HDF5Array’, ‘alabaster.ranges’, ‘blob’, ‘SummarizedExperiment’, ‘ExperimentHub’, ‘AnnotationHub’, ‘AnnotationDbi’, ‘S4Vectors’, ‘DelayedArray’, ‘DelayedMatrixStats’, ‘gypsum’, ‘alabaster.base’, ‘alabaster.matrix’, ‘alabaster.se’, ‘DBI’, ‘RSQLite’
+
+  FAILED: celldex. Run the fallback chunk below.
+Installing: BiocParallel
+  CRAN failed. Retrying via BiocManager...
+'getOption("repos")' replaces Bioconductor standard repositories, see
+'help("repositories", package = "BiocManager")' for details.
+Replacement repositories:
+    CRAN: https://cran.rstudio.com/
+Bioconductor version 3.23 (BiocManager 1.30.27), R 4.6.0 (2026-04-24)
+Installing package(s) 'BiocVersion', 'BiocParallel'
+also installing the dependencies ‘formatR’, ‘lambda.r’, ‘futile.options’, ‘futile.logger’, ‘snow’
+
+  FAILED: BiocParallel. Run the fallback chunk below.
+Installing: scDblFinder
+  CRAN failed. Retrying via BiocManager...
+'getOption("repos")' replaces Bioconductor standard repositories, see
+'help("repositories", package = "BiocManager")' for details.
+Replacement repositories:
+    CRAN: https://cran.rstudio.com/
+Bioconductor version 3.23 (BiocManager 1.30.27), R 4.6.0 (2026-04-24)
+Installing package(s) 'BiocVersion', 'scDblFinder'
+also installing the dependencies ‘formatR’, ‘lambda.r’, ‘futile.options’, ‘locfit’, ‘beeswarm’, ‘vipor’, ‘Cairo’, ‘cigarillo’, ‘RCurl’, ‘rjson’, ‘futile.logger’, ‘snow’, ‘assorthead’, ‘beachmat’, ‘ScaledMatrix’, ‘rsvd’, ‘MatrixGenerics’, ‘Biobase’, ‘Seqinfo’, ‘S4Arrays’, ‘edgeR’, ‘limma’, ‘statmod’, ‘metapod’, ‘SparseArray’, ‘ggbeeswarm’, ‘viridis’, ‘RcppML’, ‘pheatmap’, ‘ggrastr’, ‘UCSC.utils’, ‘Biostrings’, ‘XVector’, ‘Rhtslib’, ‘XML’, ‘GenomicAlignments’, ‘BiocIO’, ‘restfulr’, ‘SingleCellExperiment’, ‘BiocGenerics’, ‘BiocParallel’, ‘BiocNeighbors’, ‘BiocSingular’, ‘S4Vectors’, ‘SummarizedExperiment’, ‘scran’, ‘scater’, ‘scuttle’, ‘bluster’, ‘DelayedArray’, ‘xgboost’, ‘IRanges’, ‘GenomicRanges’, ‘GenomeInfoDb’, ‘Rsamtools’, ‘rtracklayer’
+
+  FAILED: scDblFinder. Run the fallback chunk below.
+Installing: SingleCellExperiment
+  CRAN failed. Retrying via BiocManager...
+'getOption("repos")' replaces Bioconductor standard repositories, see
+'help("repositories", package = "BiocManager")' for details.
+Replacement repositories:
+    CRAN: https://cran.rstudio.com/
+Bioconductor version 3.23 (BiocManager 1.30.27), R 4.6.0 (2026-04-24)
+Installing package(s) 'BiocVersion', 'SingleCellExperiment'
+also installing the dependencies ‘XVector’, ‘MatrixGenerics’, ‘Biobase’, ‘IRanges’, ‘Seqinfo’, ‘S4Arrays’, ‘SparseArray’, ‘SummarizedExperiment’, ‘S4Vectors’, ‘BiocGenerics’, ‘GenomicRanges’, ‘DelayedArray’
+
+  FAILED: SingleCellExperiment. Run the fallback chunk below.
+```
+
+### Etapa 0.2 - Verificar e carregar todas as bibliotecas
+
+Todos os pacotes são carregados aqui. Nenhuma chamada a `library()` aparece mais adiante no script. Se você vir **"namespace `ggplot2` is imported by `Seurat`..."** isso não é um erro; o pacote já está ativo. Sempre faça `Session > Restart R` antes de abrir o script.
+
+```{r load_packages}
+pkgs <- c("Seurat", "SeuratObject", "ggplot2", "patchwork",
+          "dplyr", "tidyr", "Matrix", "SingleR", "celldex",
+          "harmony", "scales", "ggrepel", "BiocParallel",
+          "scDblFinder", "SingleCellExperiment")
+
+for (pkg in pkgs)
+  cat(sprintf("  %-18s %s\n", pkg,
+              ifelse(requireNamespace(pkg, quietly = TRUE), "OK", "MISSING")))
+
+cat("\nSeurat version:", as.character(packageVersion("Seurat")), "\n")
+
+suppressPackageStartupMessages({
+  library(Seurat);   library(SeuratObject); library(ggplot2)
+  library(patchwork); library(dplyr);     library(tidyr);       library(Matrix)
+  library(SingleR);  library(celldex);      library(BiocParallel)
+  library(harmony);  library(scales);       library(ggrepel)
+})
+cat("\nAll libraries loaded.\n")
+```
+
+#### Caso 1: `scDblFinder`
+
+O comando usado foi:
+
+```{r install_scDblFinder, eval=FALSE}
+BiocManager::install("scDblFinder", type="binary", dependencies=TRUE)
+```
+
+👉 Nesse caso, a instalação foi bem-sucedida porque o Bioconductor fornece builds binários para macOS ARM64. Ao forçar `type="binary"`, o R evitou compilar código `C++`, e todas as dependências foram instaladas sem erros.
+
+#### Caso 2: `celldex`
+
+O comando foi:
+
+```{r install_celldex, eval=FALSE}
+BiocManager::install("celldex", type="binary", dependencies=TRUE)
+```
+
+👉 Aqui o erro persistiu porque uma dependência crítica (`alabaster.base`) ainda não possui um build binário disponível. O R tentou compilá-la a partir do código-fonte, mas falhou com o seguinte erro:
+
+``` text
+ld: library 'ssl' not found
+clang++: error: linker command failed with exit code 1
+ERROR: compilation failed for package ‘alabaster.base’
+ERROR: dependency ‘alabaster.base’ is not available for package ‘celldex’
+```
+
+Isso significa que o compilador não conseguiu encontrar a biblioteca **OpenSSL** necessária para o linking. Mesmo solicitando a instalação binária, o Bioconductor ainda não publicou um binário para essa dependência, então o erro continua.
+
+### Etapa 0.3 - Estrutura de pastas e download de arquivos
+
+#### Criar e excluir arquivos
+
+```{r createFiles}
+# Helper function to recreate a folder with messages
+recreate_dir <- function(dir_name) {
+  if (dir.exists(dir_name)) {
+    cat(sprintf("The folder '%s' already exists. It will be deleted and recreated.\n", dir_name))
+    unlink(dir_name, recursive = TRUE)  # delete folder and contents
+  } else {
+    cat(sprintf("The folder '%s' does not exist. It will be created.\n", dir_name))
+  }
+  dir.create(dir_name, showWarnings = FALSE)
+}
+
+# Apply the function to your folders
+recreate_dir("data")
+recreate_dir("outputs")
+
+cat("Process completed. Folders are ready.\n")
+```
+
+#### Baixar arquivos
+
+Aqui você encontrará os arquivos reduzidos disponíveis para download no Google Drive.
+
+```{r downloadFiles}
+FILE_ID <- "1mCg4VD91qK7pg-zL1iYUUBFWBr7fmmCM"
+options(timeout = 600)
+download.file(
+  url      = paste0("https://drive.google.com/uc?export=download&confirm=t&id=",
+                    FILE_ID),
+  destfile = "data/gse149689_subset_3k.rds",
+  mode     = "wb"
+)
+cat("File exists:", file.exists("data/gse149689_subset_3k.rds"), "\n")
+cat("Size (MB)  :", round(file.size("data/gse149689_subset_3k.rds") / 1e6, 1), "\n")
+```
+
+### Etapa 0.4 - Auxiliar `reveal()` ([**uso exclusivo do instrutor**]{.text-red})
+
+Imprime a resposta + código de demonstração ao vivo para qualquer [**PERGUNTA**]{.text-purple} ou [**ENIGMA**]{.text-pink} deste script. As respostas **NÃO** estão neste arquivo. Elas ficam em um arquivo separado `instructor_answers.R` que somente o instrutor carrega com `source()` antes da aula. Os alunos que executarem `reveal()` em uma sessão nova verão apenas um breve aviso e nada mais.
+
+👉 Baixar: [`instructor_answers.R`](scripts/instructor_answers.R) e [`reveal_function.R`](scripts/reveal_function.R)
+
+```{r loadFuntions}
+#Instructor only
+source("scripts/instructor_answers.R")
+source("scripts/reveal_function.R")
+```
+
+Uso: `reveal("number")`
+
+```{r reveal_example, eval=FALSE}
+reveal("5.2")
+```
+
+### Etapa 0.5 - Wrappers de acesso seguros a namespaces
+
+Em R, nomes que começam com um ponto (`.`) geralmente são usados para funções auxiliares internas. A função `.safe_accessor` não deve ser chamada diretamente pelo usuário. Em vez disso, ela constrói as versões "seguras" das funções de acesso do Seurat: `SafeAssays, SafeLayers,` e `SafeReductions`.
+
+Esses wrappers seguros garantem que a função correta seja usada mesmo se diferentes versões do Seurat ou de outros pacotes do Bioconductor introduzirem conflitos. Sem eles, você pode receber erros confusos ao chamar diretamente `Assays(), Layers(),` ou `Reductions()`.
+
+👉 Baixar: [`safe_accessor_function.R`](scripts/safe_accessor_function.R)
+
+Carregue-o na sua sessão R com:
+
+```{r load_wrappers}
+#Instructor only
+source("scripts/safe_accessor_function.R")
+```
+
+::: {.callout-tip icon="false"}
+### Explicação de cada função
+
+Use as funções seguras na sua análise:
+
+- **`SafeAssays(seurat_object)`**
+
+  - Retorna uma lista de todos os assays presentes no objeto Seurat.
+  - Mais seguro do que chamar diretamente `Assays()` porque evita problemas se o objeto tiver slots de assay incomuns ou corrompidos.
+  - Útil para verificar quais tipos de dados (RNA, ATAC, proteína, etc.) estão disponíveis antes de executar a análise posterior.
+
+```{r, eval=FALSE}
+SafeAssays(seurat_object)
+```
+
+- **`SafeLayers(seurat_object)`**
+
+  - Lista todas as camadas (layers) dentro de um determinado assay (por exemplo, contagens brutas, dados normalizados, dados escalados).
+  - Ajuda a confirmar quais representações dos dados estão armazenadas e evita erros ao alternar entre camadas.
+  - Importante em fluxos de trabalho multimodais onde múltiplas camadas coexistem.
+
+```{r, eval=FALSE}
+SafeLayers(seurat_object)
+```
+
+- **`SafeReductions(seurat_object)`**
+
+  - Mostra todos os resultados de redução de dimensionalidade (`PCA, UMAP, t-SNE`, etc.) armazenados no objeto.
+  - Garante que você saiba quais reduções estão disponíveis antes de plotar ou agrupar (clustering).
+  - Evita erros como chamar `DimPlot()` sobre uma redução que não existe.
+
+```{r, eval=FALSE}
+SafeReductions(seurat_object)
+```
+:::
+
+## **Bloco 1 - Inspeção do objeto (RNA + ADT)** {#sec-block1}
+
+::: content-box-gray
+**Objetivo:** Inspecionar o assay de RNA, contrastá-lo com o assay ADT, e percorrer o sistema de camadas, os metadados e o slot de reduções.
+:::
+
+### Etapa 1.1 - Carregar o objeto
+
+Carrega o objeto injetado (com erros incorporados) quando presente; caso contrário, carrega o objeto limpo.
+
+```{r load_data}
+main_candidates <- c("data/gse149689_subset_3k_errors.rds",
+                     "data/gse149689_subset_3k.rds")
+main_path <- main_candidates[file.exists(main_candidates)][1]
+if (is.na(main_path)) stop("No dataset found in data/. Expected one of: ",
+                           paste(main_candidates, collapse = ", "))
+sobj <- readRDS(main_path)
+cat("Loaded:", main_path, "\n")
+print(sobj)
+```
+
+:::: question
+::: {.callout-tip icon="false"}
+## PERGUNTA 1.1
+
+- Quantas células, quantas features, quantos assays?
+- Qual é o assay ativo (`default`)? Execute a linha abaixo para obter os quatro números.
+
+```{r Question1.1, eval=FALSE}
+cat("\nAnswer to QUESTION 1.1:\n")
+cat("  Cells         :", ncol(sobj), "\n")
+cat("  Features (RNA):", nrow(sobj[["RNA"]]), "\n")
+cat("  Features (ADT):", nrow(sobj[["ADT"]]), "\n")
+cat("  Assays        :", length(SafeAssays(sobj)), "(", paste(SafeAssays(sobj), collapse = ", "), ")\n")
+cat("  Default assay :", DefaultAssay(sobj), "\n")
+```
+:::
+::::
+
+::: {.callout-tip icon="false" collapse="true"}
+### RESPOSTA
+
+3.000 células em 2 assays. O assay RNA tem 500 features, um subconjunto com fins didáticos (não o transcriptoma completo). O assay ADT tem 24 proteínas. O assay padrão é RNA. O subconjunto de 500 genes é importante: qualquer limiar de controle de qualidade (QC) copiado de um tutorial de 33.000 genes estará incorreto. Esta é a primeira oportunidade para ancorar a discussão de que 'os padrões de tutoriais não se transferem diretamente'.
+
+DEMONSTRAÇÃO AO VIVO:
+
+```{r Question1.1_answer}
+ncol(sobj)                    # cells
+nrow(sobj[["RNA"]])           # RNA features (500)
+nrow(sobj[["ADT"]])           # ADT features (24)
+Assays(sobj)                  # c("RNA", "ADT")
+DefaultAssay(sobj)            # "RNA"
+```
+:::
+
+### Etapa 1.1b - Adicionar genes mitocondriais (este painel não vem com nenhum)
+
+O painel de 500 genes usado neste curso foi curado em torno de marcadores de linhagem e ativação; ele não inclui *genes MT-*. Cada etapa de QC que depende de `percent.mt` ( @sec-block2, **Bloco 2**) precisa de um sinal real para ser útil, então adicionamos aqui **9 genes MT- sintéticos**, com contagens correlacionadas ao tamanho total da biblioteca de cada célula e um componente de estresse para um subconjunto de células.
+
+```{r Step1.1b, }
+set.seed(7)
+mt_gene_names <- c("MT-ND1", "MT-ND2", "MT-CO1", "MT-CO2", "MT-ATP8",
+                    "MT-ATP6", "MT-CO3", "MT-ND3", "MT-CYB")
+
+if (!any(grepl("^MT-", rownames(sobj[["RNA"]])))) {
+  rna_counts  <- LayerData(sobj, assay = "RNA", layer = "counts")
+  total_count <- Matrix::colSums(rna_counts)
+
+  # A log-normal draw gives a continuous, right-skewed distribution: most
+  # cells sit at a low, biologically typical fraction, with a gradual tail
+  # toward the small subset of stressed/dying cells. This mirrors real PBMC
+  # data, where percent.mt has no gap between "healthy" and "stressed"; it
+  # is one continuous distribution that QC thresholds cut into at some
+  # chosen point.
+  n_cells     <- ncol(rna_counts)
+  target_frac <- rlnorm(n_cells, meanlog = log(0.035), sdlog = 0.6)
+  target_frac <- pmin(target_frac, 0.35)  # cap at a biologically plausible ceiling
+
+  mt_total_per_cell <- round(total_count * target_frac)
+  mt_total_per_cell[mt_total_per_cell < length(mt_gene_names)] <- length(mt_gene_names)
+
+  # Spread each cell's MT total across the 9 genes with unequal weights
+  # (mirrors real data, where MT-CO1/MT-CO3/MT-CYB are usually the highest).
+  gene_weights <- c(0.10, 0.08, 0.22, 0.14, 0.03, 0.07, 0.18, 0.06, 0.12)
+  mt_mat <- sapply(seq_len(n_cells), function(i) {
+    as.integer(round(mt_total_per_cell[i] * gene_weights))
+  })
+  rownames(mt_mat) <- mt_gene_names
+  colnames(mt_mat) <- colnames(rna_counts)
+  mt_mat_sparse <- as(mt_mat, "CsparseMatrix")
+
+  rna_counts_with_mt <- rbind(rna_counts, mt_mat_sparse)
+  # The warning here ("Different cells and/or features from existing assay
+  # RNA") comes from the [[<- replacement method noticing the new assay has
+  # 509 features instead of 500, not from CreateAssay5Object itself. It is
+  # the expected, harmless side effect of adding genes to an assay; wrap the
+  # whole assignment so it does not look like an error in the console.
+  new_rna_assay <- CreateAssay5Object(counts = rna_counts_with_mt)
+  suppressWarnings(sobj[["RNA"]] <- new_rna_assay)
+  DefaultAssay(sobj) <- "RNA"
+
+  cat("Added", length(mt_gene_names), "synthetic MT- genes to the RNA assay.\n")
+  cat("RNA assay now has", nrow(sobj[["RNA"]]), "features (was 500).\n")
+} else {
+  cat("MT- genes already present; skipping synthesis.\n")
+}
+```
+
+### Etapa 1.2 - Seurat v4 vs v5: como a matriz de contagens é armazenada
+
+O `Seurat v5` mudou a forma como as matrizes de contagens vivem dentro de um assay. O código de `v4` que acessa diretamente `@counts` ou usa `slot=` produzirá um erro. Os dois padrões abaixo são falhas deliberadas: leia cada mensagem de erro.
+
+```{r Step1.2_DE1, }
+# >>> DELIBERATE ERROR - read the message, then continue. <<<
+try({
+  # In Seurat v4, this was the standard way to get the count matrix.
+  counts_old <- sobj@assays$RNA@counts
+})
+```
+
+```{r Step1.2_DE2, }
+# >>> DELIBERATE ERROR - read the message, then continue. <<<
+try({
+  counts_old2 <- GetAssayData(sobj, slot = "counts")
+})
+```
+
+::: {.callout-tip icon="false"}
+## Explicação
+
+No `Seurat v5`, o slot `@counts` não existe mais nos objetos `Assay5`. O argumento correto agora é `layer = "counts"`. Esses erros são exemplos intencionais: mostram o que acontece quando você executa scripts de pipelines antigos ou recebe objetos criados com versões mais antigas do `Seurat`. Leia a mensagem de erro, entenda por que ela ocorre, e então continue.
+
+#### Padrão 1: LayerData(). Recomendado para `Seurat v5`.
+
+```{r Pattern1}
+counts_rna <- LayerData(sobj, assay = "RNA", layer = "counts")
+cat("RNA counts matrix dimensions (genes x cells):\n")
+cat(" ", dim(counts_rna), "\n\n")
+```
+
+#### Padrão 1b: três formas equivalentes de obter as contagens de UM gene sem converter a matriz esparsa (sparse) inteira em densa.
+
+```{r Pattern1b}
+fetched <- FetchData(sobj, vars = "CD4", layer = "counts")[, 1]
+indexed <- LayerData(sobj, assay = "RNA", layer = "counts")["CD4", ]
+get_ad  <- GetAssayData(sobj, assay = "RNA", layer = "counts")["CD4", ]
+cat("Three equivalent accessors for one gene's counts:\n")
+cat("  FetchData            length:", length(fetched), " class:", class(fetched), "\n")
+cat("  LayerData[gene, ]    length:", length(indexed), " class:", class(indexed), "\n")
+cat("  GetAssayData[gene, ] length:", length(get_ad),  " class:", class(get_ad),  "\n")
+cat("  All identical        :", all(fetched == indexed) && all(indexed == get_ad), "\n\n")
+```
+
+#### Padrão 2: classe do `assay`
+
+```{r Pattern2}
+cat("RNA assay class :", class(sobj[["RNA"]]), "\n")
+cat("ADT assay class :", class(sobj[["ADT"]]), "\n\n")
+```
+
+#### Padrão 3: camadas disponíveis
+
+```{r Pattern3}
+cat("RNA layers      :", paste(SafeLayers(sobj[["RNA"]]), collapse = ", "), "\n")
+cat("ADT layers      :", paste(SafeLayers(sobj[["ADT"]]), collapse = ", "), "\n\n")
+```
+
+#### Padrão 4: versão do `objeto Seurat`
+
+```{r Pattern4}
+cat("Object version  :", as.character(sobj@version), "\n")
+```
+:::
+
+:::: question
+::: {.callout-tip icon="false"}
+## PERGUNTA 1.2
+
+- Qual é a classe do assay RNA? E do assay ADT?
+- Por que eles poderiam ser da mesma classe mesmo que os dados se comportem de forma muito diferente?
+:::
+::::
+
+::: {.callout-tip icon="false" collapse="true"}
+### RESPOSTA
+
+Ambos são da classe `Assay5`. `Assay5` é um contêiner de armazenamento, não uma especificação de normalização. O contêiner mantém um sistema de camadas (counts, data, scale.data) da mesma forma para qualquer modalidade. As diferenças entre RNA e ADT (esparso vs denso, dropout vs bimodalidade, `LogNormalize` vs CLR, escala logarítmica vs escala CLR) são propriedades dos valores armazenados nas camadas e da normalização escolhida, não da classe do assay. Uma função que opera sobre `sobj[['ANY']]` funciona mecanicamente em ambos. Isso também significa que rodar uma normalização específica de RNA em ADT não gera um erro de tipo.
+
+DEMONSTRAÇÃO AO VIVO:
+
+```{r Question1.2_answer}
+class(sobj[["RNA"]])    # "Assay5"
+class(sobj[["ADT"]])    # "Assay5"
+# Same class, different content. Confirm by inspecting layers:
+Layers(sobj[["RNA"]])   # counts (data and scale.data appear after preprocessing)
+Layers(sobj[["ADT"]])   # counts
+```
+:::
+
+:::: question
+::: {.callout-tip icon="false"}
+## PERGUNTA 1.2c
+
+`FetchData(), LayerData()[gene, ]`, e `GetAssayData()[gene, ]` são todas equivalentes aqui. Por que elas poderiam NÃO ser equivalentes para dados normalizados em vez de contagens brutas? (Pense sobre qual é o padrão de cada função para o argumento de camada/layer).
+:::
+::::
+
+::: {.callout-tip icon="false" collapse="true"}
+### RESPOSTA
+
+Na camada de contagens, as três leem valores inteiros brutos da mesma matriz esparsa subjacente, então o resultado é idêntico. Para dados normalizados, elas diferem nos valores padrão de seus argumentos: `FetchData()` usa por padrão `layer='data'` (normalizado); `LayerData()` exige `layer=` explícito; `GetAssayData()` em versões mais novas do Seurat também espera `layer=` (`slot=` está obsoleto, ver E2). Discrepâncias aparecem quando uma chamada usa por padrão data e outra counts. Sempre passe `layer=` explicitamente.
+
+DEMONSTRAÇÃO AO VIVO:
+
+```{r Question1.2c_answer, eval=FALSE}
+# After Block 4:
+fd <- FetchData(sobj_filt, vars = "CD3E")[, 1] # data layer
+lc <- LayerData(sobj_filt, assay="RNA", layer="counts")["CD3E", ] # counts
+ld <- LayerData(sobj_filt, assay="RNA", layer="data")["CD3E", ] # data
+all(fd == ld)   # TRUE
+all(fd == lc)   # FALSE (different layers)
+```
+:::
+
+### Etapa 1.2b - Mapa completo de slots de um objeto Seurat
+
+Um objeto Seurat tem mais slots do que a maioria dos tutoriais mostra. Alguns contêm dados brutos, outros contêm resultados derivados, outros são caches, e outros são metadados sobre o histórico da análise. Por design, o mesmo valor frequentemente vive em dois ou três lugares. Conhecer o mapa evita três classes de erros:
+
+1.  Ler da cópia errada depois que outra foi atualizada.
+2.  Não encontrar dados que existem sob um slot que você não conhecia.
+3.  Confiar em resultados posteriores quando um slot anterior foi sobrescrito.
+
+#### A.1 - Slots de nível superior: imprime cada nome de slot e uma descrição de 1 linha de cada um
+
+```{r Step1.2b}
+cat("\n== TOP-LEVEL SLOTS ==\n")
+top_slots <- slotNames(sobj)
+for (s in top_slots) cat(sprintf("  @%-15s class: %s\n", s, class(slot(sobj, s))[1]))
+```
+
+#### A.2 - `@assays`: lista de assays. Cada assay é um `Assay5 (v5)` ou `Assay (v4)`
+
+```{r A.2}
+cat("\n== @assays ==\n")
+cat("  Assay names              :", paste(names(sobj@assays), collapse = ", "), "\n")
+cat("  Active assay             :", DefaultAssay(sobj), "\n")
+cat("  Number of assays         :", length(sobj@assays), "\n")
+```
+
+Dentro de um `assay (v5 Assay5)`, o mapa de slots é diferente do de `v4`:
+
+```{r}
+cat("\n  [inside sobj[['RNA']] (v5 Assay5)]\n")
+rna_assay_slots <- slotNames(sobj[["RNA"]])
+for (s in rna_assay_slots) {
+  val <- slot(sobj[["RNA"]], s)
+  cat(sprintf("    @%-15s class: %-15s length/dim: %s\n",
+              s, class(val)[1],
+              if (is.list(val))    paste0("list of ", length(val))
+              else if (is.null(dim(val))) paste0("len ", length(val))
+              else paste(dim(val), collapse = " x ")))
+}
+```
+
+#### A.3 - `@meta.data`: data.frame de metadados por célula
+
+`Linhas` = células. `Colunas` = o que foi adicionado durante o pré-processamento.
+
+```{r A.3}
+cat("\n== @meta.data (cell-level) ==\n")
+cat("  Dimensions       :", dim(sobj@meta.data)[1], "cells x",
+                            dim(sobj@meta.data)[2], "columns\n")
+```
+
+```{r}
+cat("  Column names     :\n")
+print(colnames(sobj@meta.data))
+```
+
+#### A.4 - `@active.ident`: um FATOR sobre as células. A `"identidade"` atual usada pelas funções posteriores do Seurat (`FindMarkers, DimPlot group.by = NULL default`)
+
+É independente das colunas de metadados e é definido por `SetIdent / Idents()`.
+
+```{r A.4}
+cat("\n== @active.ident ==\n")
+cat("  Class            :", class(sobj@active.ident), "\n")
+cat("  Levels currently :", paste(head(levels(sobj@active.ident), 5), collapse = ", "),
+                             ifelse(length(levels(sobj@active.ident)) > 5, " ...", ""), "\n")
+cat("  First 5 cells    :\n")
+print(head(sobj@active.ident, 5))
+```
+
+#### A.5 - `@reductions:` lista de objetos DimReduc (pca, umap, harmony, etc.)
+
+Cada um tem seus PRÓPRIOS slots: `cell.embeddings` (células x dimensões), `feature.loadings` (features x dimensões), `stdev` (variância por dimensão), `key` (prefixo de coluna), `assay.used`.
+
+```{r A.5}
+cat("\n== @reductions ==\n")
+cat("  Reductions present:", paste(names(sobj@reductions), collapse = ", "), "\n")
+if (length(sobj@reductions) > 0) {
+  for (red_name in names(sobj@reductions)) {
+    red <- sobj@reductions[[red_name]]
+    cat(sprintf("  [%s]\n", red_name))
+    cat(sprintf("    cell.embeddings : %s\n", paste(dim(red@cell.embeddings), collapse = " x ")))
+    cat(sprintf("    feature.loadings: %s\n", paste(dim(red@feature.loadings), collapse = " x ")))
+    cat(sprintf("    stdev length    : %d\n", length(red@stdev)))
+    cat(sprintf("    key             : %s\n", red@key))
+    cat(sprintf("    assay.used      : %s\n", red@assay.used))
+  }
+} else {
+  cat("  (none yet; PCA/UMAP happen in Block 4)\n")
+}
+```
+
+#### A.6 - `@graphs` e `@neighbors:` caches preenchidos por `FindNeighbors`. Vazios aqui
+
+```{r A.6}
+cat("\n== @graphs and @neighbors ==\n")
+cat("  Graphs    :", ifelse(length(sobj@graphs)    == 0, "empty (filled by FindNeighbors)",
+                            paste(names(sobj@graphs), collapse = ", ")), "\n")
+cat("  Neighbors :", ifelse(length(sobj@neighbors) == 0, "empty (filled by FindNeighbors)",
+                            paste(names(sobj@neighbors), collapse = ", ")), "\n")
+```
+
+#### A.7 - `@commands:` cada chamada de função do `Seurat` já feita neste objeto, com todos os argumentos, fornecendo um histórico completo de análise. Se você já se perguntou "quais argumentos o usuário anterior passou para `NormalizeData`?", verifique aqui.
+
+```{r A.7}
+cat("\n== @commands (analysis history) ==\n")
+cat("  Commands recorded:", length(sobj@commands), "\n")
+if (length(sobj@commands) > 0) {
+  cat("  First 5 command names:\n")
+  print(head(names(sobj@commands), 5))
+  # Inspect one command in detail
+  first_cmd <- sobj@commands[[1]]
+  cat(sprintf("\n  [detail of first command: %s]\n", names(sobj@commands)[1]))
+  cat("    call.string   :", first_cmd@call.string[1], "\n")
+  cat("    time.stamp    :", as.character(first_cmd@time.stamp), "\n")
+  cat("    assay.used    :", first_cmd@assay.used, "\n")
+  cat("    params (names):", paste(names(first_cmd@params), collapse = ", "), "\n")
+}
+```
+
+#### A.8 - `@misc`, `@tools`, `@project.name`, `@version:` pequenos slots administrativos
+
+```{r A.8}
+cat("\n== Administrative slots ==\n")
+cat("  @project.name :", sobj@project.name, "\n")
+cat("  @version      :", as.character(sobj@version), "\n")
+cat("  @misc names   :", ifelse(length(sobj@misc) == 0, "empty",
+                                paste(names(sobj@misc), collapse = ", ")), "\n")
+cat("  @tools names  :", ifelse(length(sobj@tools) == 0, "empty",
+                                paste(names(sobj@tools), collapse = ", ")), "\n")
+```
+
+#### A.9 - Mesmos dados, caminhos diferentes: uma fonte comum de confusão.
+
+Os valores abaixo são IDÊNTICOS, mas são acessados por meio de diferentes `slots/acessores`.
+
+```{r A.9}
+cat("\n== Same data, different paths (sanity proofs) ==\n")
+cat("Test 1: assay access\n")
+cat("  identical(sobj@assays$RNA, sobj[['RNA']])           :",
+    identical(sobj@assays$RNA, sobj[["RNA"]]), "\n")
+```
+
+```{r}
+cat("Test 2: metadata column access (4 equivalent paths)\n")
+v1 <- sobj$nFeature_RNA
+v2 <- sobj@meta.data$nFeature_RNA
+v3 <- sobj[[]]$nFeature_RNA
+v4 <- FetchData(sobj, vars = "nFeature_RNA")[, 1]
+```
+
+`identical()` é sensível a atributos (`names, integer vs numeric storage`) que diferem entre esses quatro acessores mesmo quando cada valor é o mesmo.
+
+Remova os nomes e converta o tipo antes de comparar, já que o ponto aqui é a igualdade de valores, não a igualdade de atributos.
+
+```{r}
+all_match <- all(unname(as.numeric(v1)) == unname(as.numeric(v2))) &&
+             all(unname(as.numeric(v2)) == unname(as.numeric(v3))) &&
+             all(unname(as.numeric(v3)) == unname(as.numeric(v4)))
+cat("  all four return the same values                     :", all_match, "\n")
+cat("  (identical() can still report FALSE here; that compares attributes\n")
+cat("   like names or integer-vs-numeric storage, not the values themselves)\n")
+```
+
+```{r}
+cat("Test 3: cell name access (3 equivalent paths)\n")
+cat("  identical(Cells(sobj), colnames(sobj))              :",
+    identical(Cells(sobj), colnames(sobj)), "\n")
+cat("  identical(Cells(sobj), rownames(sobj@meta.data))    :",
+    identical(Cells(sobj), rownames(sobj@meta.data)), "\n")
+```
+
+```{r}
+cat("Test 4: feature name access (varies with default assay)\n")
+cat("  rownames(sobj) returns features of the ACTIVE assay only\n")
+cat("  default assay is", DefaultAssay(sobj), "\n")
+cat("  identical(rownames(sobj), Features(sobj))           :",
+    identical(rownames(sobj), Features(sobj)), "\n")
+cat("  identical(rownames(sobj), rownames(sobj[['RNA']])) :",
+    identical(rownames(sobj), rownames(sobj[["RNA"]])), "\n")
+cat("  identical(rownames(sobj), rownames(sobj[['ADT']])) :",
+    identical(rownames(sobj), rownames(sobj[["ADT"]])), "\n")
+cat("  >> rownames depends on DefaultAssay. Always pass assay= explicitly.\n")
+```
+
+#### A.10 - ENIGMAS DE SLOTS: onde você procuraria para encontrar cada item abaixo?
+
+Tente escrever a resposta mentalmente antes de executar.
+
+```{r A.10}
+cat("\n== SLOT PUZZLES (try before running) ==\n")
+```
+
+:::: puzzle
+::: {.callout-tip icon="false"}
+## ENIGMA 1.2b/1
+
+Onde está a versão original do `Seurat` que criou este objeto?
+
+```{r puzzle1.2b/1}
+cat("\nPUZZLE 1: original Seurat version that created this object?\n")
+cat("  Answer: sobj@version (top-level slot)\n")
+cat("  Value :", as.character(sobj@version), "\n")
+```
+:::
+::::
+
+::: {.callout-tip icon="false" collapse="true"}
+### RESPOSTA
+
+`sobj@version`. Slot de nível superior que registra a versão do Seurat que originalmente construiu o objeto, não a versão atualmente carregada. Útil ao depurar problemas de migração de `v4 para v5`.
+
+DEMONSTRAÇÃO AO VIVO:
+
+```{r puzzle1.2b/1_answer}
+sobj@version
+packageVersion("Seurat")   # version currently loaded
+```
+:::
+
+:::: question
+::: {.callout-tip icon="false"}
+## PERGUNTA 1.2b
+
+Para cada um dos 4 testes de verificação de sanidade acima (A.9), qual está GARANTIDO a ser idêntico independentemente do estado da análise, e qual DEPENDE de `DefaultAssay?` Por que essa distinção é importante ao compartilhar código?
+:::
+::::
+
+::: {.callout-tip icon="false" collapse="true"}
+### RESPOSTA
+
+Os testes 1 e 3 são garantidamente idênticos via `identical()`: o acesso ao assay (`sobj[['RNA']]` vs `sobj@assays$RNA`) sempre retorna o mesmo objeto Assay5, e os nomes das células sempre vivem em `colnames(sobj)`. O teste 2 (acesso a coluna de metadados) é mais sutil do que parece: `sobj$nFeature_RNA`, `sobj@meta.data$nFeature_RNA`, e `sobj[[]]$nFeature_RNA` retornam o mesmo vetor nomeado, mas `FetchData(sobj, vars='nFeature_RNA')[, 1]` remove o atributo de nome de célula quando a coluna do data.frame é extraída com `[, 1]`. Os VALORES são idênticos; `identical()` não é, porque também compara o atributo de nomes. Este é um bom exemplo de `identical()` sendo rigoroso demais para a pergunta que realmente está sendo feita: ao verificar a igualdade de valores entre acessores, remova os nomes (por exemplo, `unname()`) ou compare numericamente (`all(x == y)`) em vez de usar `identical()` diretamente. O teste 4 é a armadilha com consequências reais: `rownames(sobj)` retorna apenas as features do assay ATIVO. Se um colaborador escrever `marker %in% rownames(sobj)` assumindo RNA, mas o assay ativo foi definido como ADT, a verificação falha silenciosamente para qualquer gene que também não seja um nome de proteína. Regra geral ao compartilhar ou receber código: passe `assay=` explicitamente sempre que uma chamada de função puder ser resolvida de forma diferente dependendo do assay ativo, e não assuma que uma falha em `identical()` significa que os valores diferem; também pode significar que apenas um atributo difere.
+
+DEMONSTRAÇÃO AO VIVO:
+
+```{r Question1.2b_answer}
+# Run the 4 tests live:
+identical(sobj@assays$RNA, sobj[["RNA"]])                  # TRUE always
+# Test 2: identical() can be FALSE here even though values match,
+# because FetchData()[, 1] drops cell names that $ and [[]] keep:
+identical(sobj$nFeature_RNA, sobj@meta.data$nFeature_RNA)  # TRUE
+v4 <- FetchData(sobj, vars = "nFeature_RNA")[, 1]
+identical(sobj$nFeature_RNA, v4)                           # often FALSE (names)
+all(unname(sobj$nFeature_RNA) == unname(v4))               # TRUE (values match)
+identical(Cells(sobj), colnames(sobj))                     # TRUE always
+# Now the trap:
+DefaultAssay(sobj) <- "RNA"; head(rownames(sobj))          # gene symbols
+DefaultAssay(sobj) <- "ADT"; head(rownames(sobj))          # protein names (different)
+DefaultAssay(sobj) <- "RNA"                                # restore
+```
+:::
+
+### Etapa 1.3 - Inspecionando o assay `RNA` (intermediário)
+
+Três propriedades de uma matriz de contagens de RNA de célula única que orientam cada decisão posterior: esparsidade, ocupação de memória e estado das camadas. Inspecione-as agora, antes de qualquer normalização ou escalonamento. A contraparte de ADT desta etapa abre o **Bloco 6** (@sec-block6), quando o fluxo de trabalho de CITE-seq realmente precisar dela.
+
+Esparsidade = fração de entradas zero. Orienta as decisões de normalização.
+
+```{r Step1.3}
+counts_mat <- LayerData(sobj, assay = "RNA", layer = "counts")
+total_entries  <- prod(dim(counts_mat))
+nonzero        <- Matrix::nnzero(counts_mat)
+sparsity       <- 1 - nonzero / total_entries
+
+cat("RNA count matrix:\n")
+cat("  Genes   :", nrow(counts_mat), "\n")
+cat("  Cells   :", ncol(counts_mat), "\n")
+cat("  Total entries  :", format(total_entries, big.mark = ","), "\n")
+cat("  Non-zero entries:", format(nonzero, big.mark = ","), "\n")
+cat("  Sparsity        :", round(sparsity * 100, 1), "%\n\n")
+```
+
+:::: question
+::: {.callout-tip icon="false"}
+## PERGUNTA 1.3a
+
+Um conjunto de dados típico de PBMC com transcriptoma completo mostra esparsidade de RNA acima de 90%. Este painel de 500+9 genes é menor. O que o valor de esparsidade que você acabou de imprimir diz sobre o tamanho do painel de genes versus a taxa de dropout?
+:::
+::::
+
+::: {.callout-tip icon="false" collapse="true"}
+### RESPOSTA
+
+A esparsidade neste painel é menor do que em um transcriptoma completo principalmente porque os 500 genes foram curados como marcadores de linhagem e ativação, que tendem a ser expressos de forma mais alta e consistente do que o gene médio em um transcriptoma completo (a maioria dos genes em um painel completo tem baixa expressão ou é restrita a tipos celulares, o que impulsiona a esparsidade acima de 90%). Um painel menor e curado não é imune ao dropout: as mesmas ineficiências de captura e transcrição reversa se aplicam por molécula, independentemente do tamanho do painel. O que muda é o nível médio de expressão dos genes incluídos, não a biologia subjacente do dropout. Essa distinção importa ao ler um valor de esparsidade de qualquer conjunto de dados: um valor de esparsidade baixo pode significar um painel curado de genes bem expressos, não necessariamente um experimento tecnicamente superior.
+
+DEMONSTRAÇÃO AO VIVO:
+
+```{r Question1.3a_answer}
+rna <- LayerData(sobj, assay="RNA", layer="counts")
+mean(rna == 0) * 100        # RNA sparsity % for this panel
+```
+
+Compare com a expectativa de um transcriptoma completo (comumente 90%+ para 10x PBMC)
+:::
+
+::: callout-caution
+## Atenção
+
+Armazenamento denso vs esparso importa em escala. Um experimento completo de **10x** com **50.000 células e 33.000 genes** como matriz densa ultrapassa **50 GB**.
+:::
+
+### Comparar memória esparsa (`counts`) vs densa (após `scaling`)
+
+```{r}
+counts_rna_sz <- object.size(LayerData(sobj, assay = "RNA", layer = "counts"))
+cat("RNA counts layer (sparse):", format(counts_rna_sz, units = "Mb"), "\n")
+```
+
+O objeto completo:
+
+```{r}
+obj_size <- object.size(sobj)
+cat("Full Seurat object       :", format(obj_size, units = "Mb"), "\n\n")
+
+cat("\nscale.data is a DENSE genes-by-cells matrix.\n")
+cat("On full datasets, scale only the genes used in PCA to keep memory bounded.\n")
+```
+
+:::: question
+::: {.callout-tip icon="false"}
+## PERGUNTA 1.3b
+
+A camada de contagens é esparsa, a camada scale.data é densa. Projete isso para um experimento de 50.000 células e 33.000 genes: qual é a implicação de memória, e o que isso diz sobre como usar ScaleData?
+:::
+::::
+
+::: {.callout-tip icon="false" collapse="true"}
+### RESPOSTA
+
+Matriz densa de dupla precisão: 33.000 features x 50.000 células x 8 bytes = 13,2 GB. Uma representação esparsa com 90% de esparsidade armazena aproximadamente 33.000 x 50.000 x 0,10 valores não-zero x 16 bytes por valor não-zero = 2,6 GB. `ScaleData` centraliza e escala cada feature, produzindo uma matriz densa mesmo quando a entrada era esparsa. Executar `ScaleData` em todas as features nessa escala esgotará a RAM de qualquer laptop. Prática padrão: escalar apenas os genes altamente variáveis usados no PCA, tipicamente 2.000-3.000 features. A matriz escalada densa se torna 3.000 x 50.000 x 8 = 1,2 GB, gerenciável. Passe `features = VariableFeatures(sobj)` para `ScaleData`.
+
+DEMONSTRAÇÃO AO VIVO:
+
+```{r Question1.3b_answer}
+object.size(LayerData(sobj, assay="RNA", layer="counts"))   # sparse
+object.size(as.matrix(LayerData(sobj, assay="RNA", layer="counts")))  # dense
+```
+
+Boa prática (já usada na **Etapa 4.4**, @sec-step4.4):
+
+```{r, eval=FALSE}
+ScaleData(sobj, features = VariableFeatures(sobj))
+```
+:::
+
+### Etapa 1.6 - Metadados {#sec-step1.6}
+
+As reduções (`PCA, UMAP, Harmony`, etc.) são calculadas a partir do **Bloco 4** (@sec-block4) em diante. Neste ponto do script, nenhuma ainda existe. Confirme isso explicitamente em vez de assumir: é o mesmo hábito de verificar `DefaultAssay()` antes de confiar em qualquer acessor. Os padrões de acesso para `cell.embeddings` e `feature.loadings` são abordados na **Etapa 4.4** (@sec-step4.4), quando o PCA realmente existir.
+
+```{r Step1.6}
+cat("Reductions in the object:\n")
+print(SafeReductions(sobj))
+cat("(empty; PCA happens in Block 4.)\n\n")
+
+cat("Metadata columns and types:\n")
+str(sobj@meta.data)
+```
+
+Uma análise real exige constantemente subconjuntar ou consultar células por combinações de metadados. Pratique os padrões aqui.
+
+- Quantas células por doador?
+
+```{r}
+cat("Cells per donor:\n")
+print(table(sobj$donor_id))
+```
+
+- Quantas células por condição?
+
+```{r}
+cat("\nCells per condition:\n")
+print(table(sobj$condition))
+```
+
+Células de doadores com COVID-19 com mais de 40 genes detectados. O limiar é calibrado para este painel: `nFeature_RNA` fica na faixa de 27-96 aqui, não na faixa de 200+ típica de um transcriptoma completo, então um número emprestado de um tutorial de transcriptoma completo corresponderia silenciosamente a zero células.
+
+```{r}
+covid_highgene <- sobj@meta.data %>%
+  filter(condition == "COVID19", nFeature_RNA > 40)
+cat("\nCOVID-19 cells with nFeature_RNA > 40:", nrow(covid_highgene), "\n")
+```
+
+- Tabulação cruzada: condição x severidade
+
+```{r}
+cat("\nCondition x Severity:\n")
+print(table(sobj$condition, sobj$severity))
+```
+
+Mesma ideia, variável diferente: severidade por doador. A tabulação revela o desenho doador-condição (quais doadores são Saudáveis versus qual nível de severidade foi atribuído a cada doador com COVID-19).
+
+```{r}
+cat("\nSeverity by donor:\n")
+print(table(sobj$severity, sobj$donor_id, useNA = "ifany"))
+```
+
+### Etapa 1.7 - Nomenclatura das features de ADT
+
+- Os nomes das features de ADT frequentemente diferem dos nomes dos genes de RNA.
+- A proteína CD3 `!=` o gene CD3E. A proteína CD8a `!=` o gene CD8A.
+- Essa discrepância é uma fonte frequente de confusão.
+
+```{r Step1.7}
+cat("ADT protein names:\n")
+print(rownames(sobj[["ADT"]]))
+```
+
+```{r}
+cat("\nRNA marker names for comparison:\n")
+rna_markers <- c("CD3E", "CD4", "CD8A", "CD14", "CD19", "NCAM1")
+cat(rna_markers, "\n")
+```
+
+```{r}
+cat("\nImportant: 'CD8a' in ADT vs 'CD8A' in RNA.\n")
+cat("FetchData() handles this transparently, but FeaturePlot()\n")
+cat("requires you to be on the correct DefaultAssay first.\n")
+```
+
+**Demonstração:** o que acontece ao tentar acessar uma feature de ADT usando o nome do gene de RNA:
+
+```{r}
+cat("\nDoes 'CD8A' exist in ADT?\n")
+cat("'CD8A' in ADT rownames:", "CD8A" %in% rownames(sobj[["ADT"]]), "\n")
+cat("'CD8a' in ADT rownames:", "CD8a" %in% rownames(sobj[["ADT"]]), "\n")
+```
+
+### Etapa 1.8 - Marcador armazenado sob um apelido (alias) {#sec-step1.8}
+
+Símbolos de genes têm sinônimos: `NCAM1 = CD56, FCGR3A = CD16, MS4A1 = CD20`. Se um objeto armazena um gene sob seu alias, `FeaturePlot("FCGR3A")` retorna "feature not found" e o marcador é lido como ausente quando os dados na verdade estão intactos.
+
+Confirme que os marcadores canônicos existem sob o símbolo esperado antes de plotar ou anotar.
+
+```{r Step1.8}
+canonical <- c("CD3E", "CD4", "CD8A", "CD14", "CD19", "MS4A1", "NCAM1", "FCGR3A")
+present   <- canonical %in% rownames(sobj[["RNA"]])
+
+cat("Canonical RNA markers present under expected symbol:\n")
+for (i in seq_along(canonical))
+  cat(sprintf("  %-8s %s\n", canonical[i], ifelse(present[i], "OK", "MISSING")))
+```
+
+Se algo estiver `MISSING`, procure por aliases conhecidos nos rownames
+
+```{r}
+aliases <- list(FCGR3A = "CD16", NCAM1 = "CD56", MS4A1 = "CD20")
+missing <- canonical[!present]
+if (length(missing) > 0) {
+  cat("\nMISSING markers detected. Searching for aliases:\n")
+  rna_counts <- LayerData(sobj, assay = "RNA", layer = "counts")
+  rn <- rownames(rna_counts)
+  changed <- FALSE
+  for (m in missing) {
+    al <- aliases[[m]]
+    if (!is.null(al) && al %in% rn) {
+      cat(sprintf("  %s is stored as alias '%s'. Renaming back.\n", m, al))
+      rn[rn == al] <- m
+      changed <- TRUE
+    }
+  }
+  if (changed) {
+    # v5-safe rename: rebuild the RNA assay from counts with corrected names.
+    # Run before normalization (Block 4), so only the counts layer exists,
+    # matching the structure of the assay it replaces. suppressWarnings()
+    # wraps the assignment itself, since any "different features" notice
+    # would come from the [[<- replacement method, not from
+    # CreateAssay5Object().
+    rownames(rna_counts) <- rn
+    new_rna_assay <- CreateAssay5Object(counts = rna_counts)
+    suppressWarnings(sobj[["RNA"]] <- new_rna_assay)
+    DefaultAssay(sobj) <- "RNA"
+  }
+  cat("\nAfter fix, all canonical markers present:",
+      all(canonical %in% rownames(sobj[["RNA"]])), "\n")
+}
+```
+
+:::: question
+::: {.callout-tip icon="false"}
+## PERGUNTA 1.8
+
+Quais outros aliases de RNA você verificaria rotineiramente em um conjunto de dados de PBMC?
+:::
+::::
+
+::: {.callout-tip icon="false" collapse="true"}
+### RESPOSTA
+
+Pares de alias comuns: **MS4A1/CD20 (células B), NCAM1/CD56 (NK), FCGR3A/CD16 (NK e monócito não clássico), ITGAX/CD11c (DC, mono), ITGAM/CD11b (mieloide), PTPRC/CD45 (pan-imune), IL3RA/CD123 (pDC, basófilo), CD3E/CD3, CD8A/CD8a (a caixa importa: RNA em maiúsculas, ADT em minúsculas), FOXP3 (Treg), FCER1A (DC).** Hábito defensivo: mantenha uma lista de marcadores canônicos de PBMC e execute `%in% rownames(sobj[['RNA']])` no início de cada etapa de anotação.
+
+DEMONSTRAÇÃO AO VIVO:
+
+```{r Question1.8_answer}
+canonical <- c("CD3E","CD3D","CD8A","CD4","MS4A1","CD79A","NCAM1",
+               "FCGR3A","CD14","LYZ","FOXP3","FCER1A","KLRD1")
+data.frame(marker = canonical,
+           present = canonical %in% rownames(sobj[["RNA"]]))
+# Check aliases for missing ones:
+aliases <- c(MS4A1="CD20", NCAM1="CD56", FCGR3A="CD16")
+```
+:::
+
+## **Bloco 2 - Métricas de controle de qualidade (RNA)** {#sec-block2}
+
+::: content-box-gray
+**Objetivo:** Calcular métricas de controle de qualidade, observar suas distribuições entre doadores, e filtrar células usando limiares escolhidos a partir dos dados, não de um tutorial.
+:::
+
+### Etapa 2.1 - Calcular métricas de controle de qualidade
+
+- A fração mitocondrial (`percent.mt`) é um indicador de morte/estresse celular.
+- A fração ribossomal (`percent.ribo`) sinaliza células dominadas por transcritos de manutenção (housekeeping).
+
+```{r Step2.1}
+sobj[["percent.mt"]]   <- PercentageFeatureSet(sobj, pattern = "^MT-")
+sobj[["percent.ribo"]] <- PercentageFeatureSet(sobj, pattern = "^RP[SL]")
+
+summary(sobj@meta.data[, c("nFeature_RNA", "nCount_RNA", "percent.mt")])
+```
+
+```{r}
+head(sobj@meta.data, 10)
+```
+
+### Etapa 2.2 \| Verificação de sanidade: o percent.mt realmente foi calculado?
+
+- `percent.mt` depende inteiramente de o padrão '\^MT-' corresponder a nomes de genes reais.
+
+Vale a pena confirmar isso explicitamente em vez de assumir que funcionou: um prefixo `MT-` renomeado ou ausente (que é exatamente o que o objeto injetado simula) retorna `percent.mt = 0` para todas as células, e qualquer filtro baseado nisso então não faz nada ou rejeita todas as células.
+
+```{r Step2.2}
+mt_genes <- grep("^MT-", rownames(sobj), value = TRUE)
+cat("Genes matching '^MT-':", length(mt_genes), "\n")
+if (length(mt_genes) > 0) print(mt_genes)
+
+cat("\nAre rownames symbols or Ensembl IDs? First 5 rownames:\n")
+print(head(rownames(sobj), 5))
+
+cat("\nmax(percent.mt):", round(max(sobj$percent.mt), 4), "\n")
+if (max(sobj$percent.mt) == 0) {
+  cat("\nWARNING: percent.mt is 0 for all cells. The '^MT-' pattern matched\n")
+  cat("no genes. Do NOT filter on percent.mt here: it is uninformative in\n")
+  cat("this panel. Report this limitation; do not claim an mt-based QC.\n")
+} else {
+  cat("MT- pattern matched", length(mt_genes), "genes. percent.mt is usable.\n")
+}
+```
+
+:::: question
+::: {.callout-tip icon="false"}
+## PERGUNTA 2.2
+
+Se max(percent.mt) é 0 em todas as células, quais são as duas explicações possíveis, e como você as diferencia?
+:::
+::::
+
+::: {.callout-tip icon="false" collapse="true"}
+### RESPOSTA
+
+Explicação 1 (quase sempre): o padrão MT- não correspondeu a nenhum gene porque os símbolos mitocondriais usam um prefixo diferente (`mt-, Mt-, MTX, ou uma referência não humana`). Diagnóstico: `grep('^MT-', rownames(sobj))` retorna `character(0)`. Inspecione `head(rownames(sobj))` e procure o prefixo real. Explicação 2 (implausível): as células foram filtradas anteriormente de forma tão agressiva que nenhum transcrito MT permanece. A discrepância de padrão é o caso realista. O conjunto de dados injetado renomeia os genes `MT-` para `MTX-` para provocar exatamente essa falha.
+
+DEMONSTRAÇÃO AO VIVO:
+
+```{r}
+grep("^MT-", rownames(sobj), value = TRUE)
+grep("^mt-", rownames(sobj), value = TRUE)
+grep("^MTX", rownames(sobj), value = TRUE)
+head(rownames(sobj), 20)
+summary(sobj$percent.mt)
+```
+:::
+
+### Etapa 2.3 - Visualizar as distribuições de controle de qualidade {#sec-step2.3}
+
+```{r}
+VlnPlot(sobj,
+        features = c("nFeature_RNA", "nCount_RNA", "percent.mt"),
+        ncol = 3, pt.size = 0.05, alpha = 0.3)
+
+p1 <- FeatureScatter(sobj, "nCount_RNA", "nFeature_RNA") +
+  ggtitle("Counts vs genes detected") +
+  theme(plot.title = element_text(size = 10))
+p2 <- FeatureScatter(sobj, "nCount_RNA", "percent.mt") +
+  ggtitle("Counts vs mitochondrial %") +
+  theme(plot.title = element_text(size = 10))
+p1 | p2
+```
+
+### Etapa 2.4 - Detecção de valores atípicos (outliers)
+
+Células com `nFeature` alto em relação ao `nCount` podem ser doublets.
+
+- `nCount` baixo com `nFeature` baixo = gota vazia (empty droplet).
+- `percent.mt` alto sozinho = célula estressada/morrendo.
+
+Células que são potenciais outliers: `nFeature` \> 2 DP acima da média
+
+```{r}
+mean_feat <- mean(sobj$nFeature_RNA)
+sd_feat   <- sd(sobj$nFeature_RNA)
+high_feat <- sum(sobj$nFeature_RNA > mean_feat + 2 * sd_feat)
+cat("Cells with nFeature > mean + 2 SD (potential doublets):",
+    high_feat, "\n")
+```
+
+Células com mt alto: \> percentil 95
+
+```{r}
+mt_95 <- quantile(sobj$percent.mt, 0.95)
+high_mt <- sum(sobj$percent.mt > mt_95)
+cat("Cells with percent.mt > 95th percentile:", high_mt, "\n")
+```
+
+As duas contagens acima são fáceis de calcular e fáceis de interpretar mal: uma contagem por si só não mostra se as células sinalizadas formam um grupo claro e separável, ou se o limiar cortou o meio de uma distribuição contínua. Sinalize ambas as categorias nos metadados e plote-as diretamente contra os mesmos eixos usados na **Etapa 2.3** (@sec-step2.3), para que os outliers sejam visíveis como pontos, não apenas como um número.
+
+```{r}
+sobj$outlier_flag <- "normal"
+sobj$outlier_flag[sobj$nFeature_RNA > mean_feat + 2 * sd_feat] <- "high nFeature (possible doublet)"
+sobj$outlier_flag[sobj$percent.mt > mt_95]                     <- "high percent.mt (stressed/dying)"
+sobj$outlier_flag <- factor(sobj$outlier_flag,
+                            levels = c("normal", "high nFeature (possible doublet)",
+                                       "high percent.mt (stressed/dying)"))
+
+p_out1 <- FeatureScatter(sobj, "nCount_RNA", "nFeature_RNA", group.by = "outlier_flag") +
+  ggtitle("Outlier flags on counts vs genes detected") +
+  theme(legend.position = "bottom", legend.text = element_text(size = 7))
+
+p_out2 <- FeatureScatter(sobj, "nCount_RNA", "percent.mt", group.by = "outlier_flag") +
+  ggtitle("Outlier flags on counts vs mitochondrial %") +
+  theme(legend.position = "bottom", legend.text = element_text(size = 7))
+
+p_out1 | p_out2
+```
+
+:::: question
+::: {.callout-tip icon="false"}
+## PERGUNTA 2.4
+
+Olhando para os dois gráficos, as células com `nFeature` alto e as células com `percent.mt` alto ocupam regiões distintas, ou algumas células se qualificam como ambas? O que provavelmente seria uma célula sinalizada em ambos os eixos?
+:::
+::::
+
+::: {.callout-tip icon="false" collapse="true"}
+### RESPOSTA
+
+Na maioria das execuções, os dois grupos sinalizados são em grande parte distintos: os outliers de nFeature alto se agrupam em direção ao lado direito do gráfico `nCount-vs-nFeature` (mais genes detectados do que a maioria das células com uma contagem de UMI semelhante), enquanto os outliers de `percent.mt` alto se agrupam na região superior do gráfico `nCount-vs-percent.mt` independentemente do nFeature. Alguma sobreposição é esperada e é o caso mais informativo: uma célula sinalizada em ambos os eixos (`nFeature alto E percent.mt alto`) é a mais difícil de interpretar a partir de uma única métrica. Ela pode ser um doublet que também está estressado, ou pode ser dois problemas técnicos não relacionados que coincidem na mesma célula. A abordagem prática não é tentar atribuir uma única causa; sinalize a célula como de baixa confiança e deixe que as etapas posteriores (pontuação de doublets no **Bloco 3**, confiança da anotação no **Bloco 5**, @sec-block5) tomem a decisão final com mais evidências.
+
+DEMONSTRAÇÃO AO VIVO:
+
+```{r}
+table(sobj$outlier_flag)
+# Cells flagged on both definitions (recompute the masks to check overlap):
+both <- (sobj$nFeature_RNA > mean_feat + 2*sd_feat) & (sobj$percent.mt > mt_95)
+sum(both)
+```
+:::
+
+Distribuição por condição: o %mt está elevado em COVID-19?
+
+```{r}
+cat("\nMedian percent.mt by condition:\n")
+sobj@meta.data %>%
+  group_by(condition) %>%
+  summarise(median_mt = round(median(percent.mt), 2),
+            mean_mt   = round(mean(percent.mt),   2),
+            .groups   = "drop") %>%
+  print()
+```
+
+### Etapa 2.5 - Filtro incorreto: limiares de tutorial aplicados às cegas
+
+Os limiares padrão de tutorial (`nFeature > 200 & < 6000, percent.mt < 5%`) são herdados de experimentos 10x completos com \~33.000 genes. Este conjunto de dados é um subconjunto de 500 genes com fins didáticos. Aplicar os cortes do tutorial elimina todas as células.
+
+```{r}
+# >>> DELIBERATE ERROR - read the message, then continue. <<<
+try({
+  sobj_filt <- subset(
+    sobj,
+    subset = nFeature_RNA > 200 &
+             nFeature_RNA < 5000 &
+             percent.mt   < 20
+  )
+})
+```
+
+::: {.callout-important icon="false"}
+"No cells found" é o resultado canônico de copiar limiares de um tutorial sem verificar a distribuição dos seus próprios dados. O limiar `nFeature_RNA > 200` foi calibrado para um transcriptoma de \~33.000 genes onde as células tipicamente detectam 2.000-3.000 genes. Em um painel de 500 genes, a maioria das células detecta entre 50 e 150 genes. O filtro remove cada uma das células.
+:::
+
+:::: question
+::: {.callout-tip icon="false"}
+## PERGUNTA 2.5
+
+Qual dos três parâmetros de filtro acima é o mais incorreto para este conjunto de dados de 500 genes, e qual valor você tentaria primeiro? Execute `quantile(sobj$nFeature_RNA, c(0.05, 0.95))` para ver a faixa real antes de propor um número.
+:::
+::::
+
+::: {.callout-tip icon="false" collapse="true"}
+### RESPOSTA
+
+`nFeature_RNA > 200` é o mais incorreto. O valor do tutorial 200 foi calibrado para \~33.000 features onde as células detectam 2.000-3.000 genes; aqui o painel de 500 genes produz entre 50 e 150 detectados por célula, então um piso de 200 remove essencialmente todas as células. Um limiar inicial razoável aqui é o percentil 5 de `nFeature_RNA`, tipicamente próximo de 30-50. `nFeature_RNA < 6000` é tecnicamente correto porque nenhuma célula tem perto de 6000 features em um painel de 500 genes; simplesmente não faz nada. `percent.mt < 5` é limítrofe; o efeito depende de o padrão MT ter correspondido.
+
+DEMONSTRAÇÃO AO VIVO:
+
+```{r}
+quantile(sobj$nFeature_RNA, c(0.05, 0.50, 0.95))
+summary(sobj$nFeature_RNA)
+lo <- quantile(sobj$nFeature_RNA, 0.05)
+hi <- quantile(sobj$nFeature_RNA, 0.95)
+subset(sobj, subset = nFeature_RNA >= lo & nFeature_RNA <= hi)
+```
+:::
+
+Uma primeira estimativa razoável para este painel: `nFeature_RNA > 50`. Tente e veja quantas células sobrevivem, antes de passar para os limiares totalmente baseados em dados nas **Etapas 2.6 e 2.7** (@sec-step2.6, @sec-step2.7).
+
+```{r}
+n_above_50 <- sum(sobj$nFeature_RNA > 50)
+cat("Cells with nFeature_RNA > 50:", n_above_50,
+    sprintf("(%.1f%% of total)\n", 100 * n_above_50 / ncol(sobj)))
+```
+
+### Etapa 2.6 - Comparar limiares de tutorial vs baseados em dados {#sec-step2.6}
+
+```{r}
+cat("--- Published thresholds (full 10x, 33k genes) ---\n")
+cat("  nFeature_RNA > 200   removes empty droplets\n")
+cat("  nFeature_RNA < 5000  removes likely doublets\n")
+cat("  percent.mt   < 20%   removes dead/stressed cells\n\n")
+
+cat("--- This dataset (500 genes) ---\n")
+print(round(quantile(sobj$nFeature_RNA,
+      probs = c(0.01, 0.05, 0.25, 0.5, 0.75, 0.95, 0.99))))
+
+cat("\n--- Data-driven thresholds ---\n")
+min_features <- max(10, round(quantile(sobj$nFeature_RNA, 0.02)))
+max_features <- round(quantile(sobj$nFeature_RNA, 0.98))
+max_mt       <- round(quantile(sobj$percent.mt,   0.95), 1)
+
+cat("  nFeature_RNA > ", min_features, "  (same intent: empty droplets)\n")
+cat("  nFeature_RNA < ", max_features, " (same intent: doublets)\n")
+cat("  percent.mt   < ", max_mt, "%  (same intent: dead cells)\n")
+```
+
+### Etapa 2.7 - Aplicar limiares baseados em dados {#sec-step2.7}
+
+```{r}
+cat("Cells before filtering:", ncol(sobj), "\n")
+
+sobj_filt <- tryCatch(
+  subset(
+    sobj,
+    subset = nFeature_RNA > min_features &
+             nFeature_RNA < max_features &
+             percent.mt   < max_mt
+  ),
+  error = function(e) {
+    cat("\nsubset() failed:", conditionMessage(e), "\n")
+    cat("This means the three thresholds together match zero cells.\n")
+    cat("Check each threshold individually before combining them:\n")
+    cat("  > min_features:", sum(sobj$nFeature_RNA > min_features), "cells\n")
+    cat("  < max_features:", sum(sobj$nFeature_RNA < max_features), "cells\n")
+    cat("  < max_mt      :", sum(sobj$percent.mt   < max_mt),       "cells\n")
+    stop(e)
+  }
+)
+
+cat("Cells after filtering :", ncol(sobj_filt), "\n")
+cat("Cells removed         :", ncol(sobj) - ncol(sobj_filt), "\n")
+cat("Retention rate        :",
+    round(ncol(sobj_filt) / ncol(sobj) * 100, 1), "%\n")
+
+if (ncol(sobj_filt) < 500) {
+  cat("\nWARNING: fewer than 500 cells remaining.\n")
+  cat("Options: relax max_mt or lower min_features,\n")
+  cat("or request pre-filtered matrices from GEO.\n")
+} else {
+  cat("\nCell count adequate for downstream analysis.\n")
+}
+```
+
+:::: question
+::: {.callout-tip icon="false"}
+## PERGUNTA 2.7
+
+Como seus limiares mudariam se o conjunto de dados tivesse \~33.000 genes em vez de 500?
+:::
+::::
+
+::: {.callout-tip icon="false" collapse="true"}
+### RESPOSTA
+
+Limiares sobre contagens de features detectadas escalam de forma aproximadamente linear com o espaço de features, mas limiares sobre métricas de qualidade (`percent.mt, percent.ribo`) não. Para 33.000 genes: `nFeature_RNA` inferior 200-500, superior 5.000-8.000; `nCount_RNA` superior na casa das dezenas de milhares. percent.mt é independente da contagem de features (é uma fração de UMIs), então um limite superior de 10-20% é `determinado pelo tecido`, não `pelo tamanho`. Sempre inspecione a distribuição antes de fixar qualquer número.
+
+DEMONSTRAÇÃO AO VIVO:
+
+```{r}
+p1 <- VlnPlot(sobj, "nFeature_RNA", group.by="donor_id") + ggtitle("500-gene panel")
+print(p1)
+```
+:::
+
+### Etapa 2.8 - Falha silenciosa: percent.mt como fração vs como porcentagem
+
+Uma **falha silenciosa** comum: alguém copiou um limiar de um tutorial que usava percent.mt expresso como `FRAÇÃO (0 a 1)`, mas o `Seurat` retorna `percent.mt` como `PORCENTAGEM (0 a 100)`. O filtro parece correto e roda sem erro, mas remove quase todas as células.
+
+```{r}
+# >>> DELIBERATE ERROR - read the message, then continue. <<<
+try({
+  # This filter expects 5 percent (i.e. percent.mt < 5). Written as 0.05 it
+  # means "less than 0.05 percent", which removes almost everything.
+  sobj_fraction <- subset(sobj, subset = percent.mt < 0.05)
+  cat("Cells passing 'percent.mt < 0.05' filter :", ncol(sobj_fraction), "\n")
+})
+
+cat("Compare to the correct threshold (percent.mt < 5):\n")
+sobj_pct <- subset(sobj, subset = percent.mt < 5)
+cat("Cells passing 'percent.mt < 5' filter    :", ncol(sobj_pct), "\n")
+```
+
+:::: question
+::: {.callout-tip icon="false"}
+## PERGUNTA 2.8
+
+A distribuição de percent.mt do seu conjunto de dados se parece mais com uma fração ou com uma porcentagem? Execute `summary(sobj$percent.mt)` para confirmar e lembre-se dessa armadilha ao ler código de outros grupos.
+:::
+::::
+
+::: {.callout-tip icon="false" collapse="true"}
+### RESPOSTA
+
+É uma porcentagem. `PercentageFeatureSet` retorna valores em uma escala de 0-100. Um conjunto de dados PBMC real tipicamente fica entre 0 e 15 por cento mitocondrial. Se você vir valores entre 0 e 1, está vendo uma codificação de fração (alguém dividiu por 100), e qualquer limiar expresso como porcentagem estará incorreto. Diagnóstico: `summary(sobj$percent.mt)` - se o máximo for menor que 1, é uma fração; caso contrário, é uma porcentagem.
+
+DEMONSTRAÇÃO AO VIVO:
+
+```{r}
+summary(sobj$percent.mt)
+```
+:::
+
+### Etapa 2.9 - Encontre o erro
+
+Leia o código abaixo **CUIDADOSAMENTE** antes de executá-lo. O que há de errado com ele?
+
+Escreva sua resposta como um comentário na próxima linha.
+
+```{r}
+covid_cells <- subset(sobj_filt, subset = condition == "COVID")
+```
+
+Sua resposta:
+
+REVELAR: o valor de condição neste conjunto de dados é "COVID19", não "COVID". - `subset()` retorna zero células sem qualquer erro. Sempre inspecione os valores únicos de uma coluna categórica antes de subconjuntar sobre ela.
+
+```{r}
+cat("Unique values of condition in this dataset:\n")
+print(unique(sobj_filt$condition))
+```
+
+::: callout-tip
+## Dica
+
+**Hábito:** imprima `unique()` de uma coluna factor ou character antes de referenciar qualquer valor específico em `subset()` ou `filter()`.
+:::
+
+## **Bloco 3 - Detecção de doublets** {#sec-block3}
+
+::: content-box-gray
+**Objetivo:** Identificar e remover doublets técnicos que sobrevivem aos limiares de controle de qualidade. + `scDblFinder` simula doublets artificiais e pontua cada célula real contra eles. O resultado é um rótulo de classe de doublet e uma pontuação numérica por célula.
+:::
+
+### Etapa 3.1 - Executar `scDblFinder`
+
+```{r, message=FALSE, warning=FALSE}
+library(scDblFinder)
+```
+
+Ambos os pacotes já estão carregados desde o **Bloco 0**; não é necessário chamar `library()` novamente.
+
+- `scDblFinder` chama o xgboost internamente; versões recentes do xgboost emitem avisos de depreciação não relacionados à nossa análise. Envolva a chamada para manter o console focado no resultado real.
+
+```{r}
+set.seed(42)
+sce <- SingleCellExperiment(
+  assays = list(counts = LayerData(sobj_filt, assay = "RNA", layer = "counts"))
+)
+sce <- suppressWarnings(scDblFinder(sce))
+
+sobj_filt$scDblFinder.class <- sce$scDblFinder.class
+sobj_filt$scDblFinder.score <- sce$scDblFinder.score
+
+cat("Doublet classification:\n")
+print(table(sobj_filt$scDblFinder.class))
+cat("\nDoublet rate:",
+    round(mean(sobj_filt$scDblFinder.class == "doublet") * 100, 1), "%\n")
+```
+
+### Etapa 3.2 - Onde os doublets sinalizados ficam no scatter de QC?
+
+```{r}
+df <- sobj_filt@meta.data
+p1 <- ggplot(df, aes(nCount_RNA, nFeature_RNA, color = scDblFinder.class)) +
+  geom_point(alpha = 0.5, size = 0.7) +
+  scale_color_manual(values = c("singlet" = "grey70", "doublet" = "#991b1b")) +
+  labs(title = "Doublets sit on the high diagonal", color = NULL) +
+  theme_classic(base_size = 11)
+
+p2 <- ggplot(df, aes(scDblFinder.class, nFeature_RNA, fill = scDblFinder.class)) +
+  geom_violin(alpha = 0.7) +
+  scale_fill_manual(values = c("singlet" = "grey70", "doublet" = "#991b1b")) +
+  labs(title = "Genes detected per class", x = NULL) +
+  theme_classic(base_size = 11) + theme(legend.position = "none")
+
+p1 | p2
+```
+
+:::: question
+::: {.callout-tip icon="false"}
+## PERGUNTA 3.2
+
+Por que se espera que os doublets NÃO fiquem todos no topo de `nCount_RNA`? O que isso implica sobre usar apenas limiares de `nCount` para remover doublets?
+:::
+::::
+
+::: {.callout-tip icon="false" collapse="true"}
+### RESPOSTA
+
+Um doublet de duas células semelhantes (duas células T CD4, dois monócitos) tem aproximadamente o mesmo conteúdo transcricional de uma célula, apenas com maior captura; dependendo da eficiência de captura e da preparação da biblioteca, seu `nCount` pode ficar em qualquer lugar dentro da distribuição de singlets. Doublets fáceis de detectar são heterotípicos (T + monócito, B + DC) porque têm transcriptomas híbridos. Doublets difíceis de detectar são homotípicos. Limiares de `nCount` capturam apenas a cauda muito alta. `scDblFinder` captura os híbridos transcricionais que os limiares perdem. Implicação: a filtragem por nCount é necessária, mas não suficiente.
+
+DEMONSTRAÇÃO AO VIVO:
+
+```{r}
+sobj_filt$is_dbl <- sce$scDblFinder.class == "doublet"
+FeatureScatter(sobj_filt, "nCount_RNA", "nFeature_RNA", group.by = "is_dbl")
+```
+
+GRÁFICO / SAÍDA: `FeatureScatter()` colorido pela classe de doublet; doublets distribuídos por toda a nuvem, não apenas no topo
+:::
+
+### Etapa 3.3 - Remover doublets
+
+```{r}
+cat("Cells before doublet removal:", ncol(sobj_filt), "\n")
+sobj_filt <- subset(sobj_filt, subset = scDblFinder.class == "singlet")
+cat("Cells after doublet removal :", ncol(sobj_filt), "\n")
+```
+
+### Etapa 3.4 - Reinspecionar o objeto após controle de qualidade e remoção de doublets
+
+Após cada etapa que altera o objeto, confirme o que você tem agora. Erros silenciosos só aparecem quando o objeto é reinspecionado, não quando é reutilizado.
+
+```{r}
+cat("Object after QC + doublet removal:\n")
+print(sobj_filt)
+cat("\nCells lost   :", ncol(sobj) - ncol(sobj_filt), "\n")
+cat("Cells kept   :", ncol(sobj_filt), "\n")
+cat("Median genes :", median(sobj_filt$nFeature_RNA), "\n")
+cat("Median UMIs  :", median(sobj_filt$nCount_RNA), "\n")
+```
+
+Duas visões da mesma remoção: a mudança geral na distribuição, e o detalhamento por doador. Um filtro que parece razoável em agregado ainda pode remover quase completamente um doador; o gráfico de barras por doador é o que detecta isso antes que se torne uma surpresa nas etapas posteriores.
+
+```{r}
+before_after <- bind_rows(
+  data.frame(nFeature_RNA = sobj$nFeature_RNA, stage = "Before filtering"),
+  data.frame(nFeature_RNA = sobj_filt$nFeature_RNA, stage = "After filtering")
+)
+before_after$stage <- factor(before_after$stage,
+                             levels = c("Before filtering", "After filtering"))
+
+p_before_after <- ggplot(before_after, aes(x = nFeature_RNA, fill = stage)) +
+  geom_histogram(bins = 40, alpha = 0.7, position = "identity") +
+  labs(title = "nFeature_RNA distribution before vs after filtering",
+       x = "nFeature_RNA", y = "Cell count", fill = NULL) +
+  theme_classic(base_size = 11)
+
+cell_counts <- data.frame(
+  donor_id  = c(sobj$donor_id, sobj_filt$donor_id),
+  condition = c(sobj$condition, sobj_filt$condition),
+  stage     = rep(c("Before", "After"), c(ncol(sobj), ncol(sobj_filt)))
+) %>%
+  dplyr::count(donor_id, condition, stage) %>%
+  dplyr::mutate(stage = factor(stage, levels = c("Before", "After")))
+
+p_donor_counts <- ggplot(cell_counts, aes(x = donor_id, y = n, fill = stage)) +
+  geom_bar(stat = "identity", position = "dodge") +
+  facet_wrap(~condition, scales = "free_x") +
+  labs(title = "Cell count per donor, before vs after QC and doublet removal",
+       x = NULL, y = "Cells", fill = NULL) +
+  theme_classic(base_size = 11) +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+p_before_after
+p_donor_counts
+```
+
+:::: question
+::: {.callout-tip icon="false"}
+## PERGUNTA 3.4
+
+Observe o gráfico de barras por doador. Algum doador em particular perdeu uma fração de células muito maior do que os demais? Se sim, isso é variação de QC no nível de doador, ou um sinal de que os limiares de filtro foram ajustados em torno da maioria dos doadores às custas de um outlier?
+:::
+::::
+
+::: {.callout-tip icon="false" collapse="true"}
+### RESPOSTA
+
+Compare a altura antes/depois para cada doador em vez da taxa de retenção geral. Um doador que perde uma fração notavelmente maior do que o resto merece um segundo olhar antes de prosseguir: pode ser variação genuína biológica ou técnica no nível de doador (um doador com qualidade de RNA sistematicamente menor, mais células morrendo, ou um lote de processamento diferente), ou pode significar que os limiares baseados em dados da **Etapa 2.7** (@sec-step2.7), calculados com todos os doadores agrupados, caem em uma faixa que penaliza desproporcionalmente a distribuição de um doador. A solução é a mesma de qualquer forma: se a perda de um doador parece extrema, calcule os limiares por doador e compare, em vez de assumir que um único limiar global serve igualmente a todos os doadores. Perder silenciosamente a maioria das células de um doador muda o que cada comparação posterior (por condição, por severidade) realmente está medindo.
+
+DEMONSTRAÇÃO AO VIVO:
+
+```{r}
+cell_counts %>% group_by(donor_id) %>%
+  summarise(before = sum(n[stage=="Before"]),
+            after  = sum(n[stage=="After"]),
+            pct_kept = round(100*after/before, 1))
+```
+:::
+
+## **Bloco 4 - Normalização, redução de dimensionalidade, clustering (RNA)** {#sec-block4}
+
+::: content-box-gray
+**Objetivo:** Levar o assay de RNA das contagens brutas até um UMAP agrupado (clustered). A normalização de ADT propositalmente NÃO é feita aqui; ela pertence ao **Bloco 6** (@sec-block6), onde começa o fluxo de trabalho de CITE-seq. Mantenha as modalidades separadas até o WNN.
+:::
+
+### Etapa 4.1 - Confirmar que a camada de contagens contém contagens inteiras brutas
+
+Uma falha silenciosa comum: um objeto chega com a camada data copiada na camada de contagens (já normalizada logaritmicamente). `NormalizeData` então roda sobre valores já normalizados. A correção precisa acontecer aqui, antes de qualquer chamada de normalização.
+
+```{r}
+raw <- LayerData(sobj_filt, assay = "RNA", layer = "counts")
+vals <- raw@x  # non-zero values
+cat("Min non-zero count :", round(min(vals), 4), "\n")
+cat("Max count          :", round(max(vals), 2), "\n")
+cat("All integers?      :", all(vals == round(vals)), "\n")
+if (!all(vals == round(vals))) {
+  cat("\nWARNING: counts layer contains non-integer values.\n")
+  cat("This is not raw counts. Do NOT run NormalizeData on it.\n")
+  cat("Obtain the original count matrix before continuing.\n")
+} else {
+  cat("\nCounts layer looks like raw counts. Safe to normalize.\n")
+}
+```
+
+```{r}
+# >>> DELIBERATE ERROR - read the message, then continue. <<<
+# What does this check look like on a CORRUPTED counts layer?
+# Simulate: a well-meaning collaborator copied the data layer back into counts
+# "for consistency". Run the integrity check on that simulated layer and
+# compare with the real one above.
+try({
+  # Build a fake assay where counts holds log-normalized values
+  fake_data   <- LayerData(sobj_filt, assay = "RNA", layer = "counts")
+  fake_data@x <- log1p(fake_data@x / 1e4)  # roughly what LogNormalize produces
+  fake_assay  <- CreateAssay5Object(counts = fake_data)
+  fake_vals   <- LayerData(fake_assay, layer = "counts")@x
+
+  cat("\n--- Integrity check on a CORRUPTED counts layer ---\n")
+  cat("Min non-zero :", round(min(fake_vals), 4), "\n")
+  cat("Max          :", round(max(fake_vals), 4), "\n")
+  cat("All integers?:", all(fake_vals == round(fake_vals)), "\n")
+  cat("This is what a contaminated counts layer looks like.\n")
+  cat("If you see this on a real object, STOP and ask for the raw matrix.\n")
+})
+```
+
+:::: question
+::: {.callout-tip icon="false"}
+## PERGUNTA 4.1
+
+Se a verificação de integridade falhar em um objeto real herdado, o que você pede ao colaborador? Qual é o mínimo absoluto necessário para reiniciar a análise a partir de um estado limpo?
+:::
+::::
+
+::: {.callout-tip icon="false" collapse="true"}
+### RESPOSTA
+
+Peça a saída bruta de `CreateSeuratObject()`, OU a saída original do 10x Genomics (filtered_feature_bc_matrix), OU o `.rds` original salvo antes que NormalizeData fosse chamado pela primeira vez. Necessidade mínima: a matriz de contagens brutas com nomes de células e features correspondendo ao restante dos metadados. Qualquer coisa posterior (valores normalizados, PCA, UMAP, clustering, anotação) pode ser regenerada. Sem as contagens brutas, você não pode verificar nenhuma afirmação quantitativa. Deixe explícito: todo projeto voltado para publicação deve preservar um checkpoint em CreateSeuratObject, antes de qualquer normalização.
+
+DEMONSTRAÇÃO AO VIVO:
+
+```{r}
+is_integer_counts <- function(layer) {
+  v <- layer@x
+  is.numeric(v) && all(v >= 0) && all(v == round(v))
+}
+is_integer_counts(LayerData(sobj_filt, assay="RNA", layer="counts"))
+```
+:::
+
+### Etapa 4.2 - Normalização de RNA: `LogNormalize`
+
+```{r}
+sobj_filt <- NormalizeData(
+  sobj_filt,
+  normalization.method = "LogNormalize",
+  scale.factor         = 10000
+)
+cat("RNA normalized. Layer 'data' now populated.\n")
+cat("Layers present:", paste(SafeLayers(sobj_filt[["RNA"]]), collapse = ", "), "\n")
+```
+
+Verificar: valores normalizados logaritmicamente devem ser não negativos
+
+```{r}
+data_layer <- LayerData(sobj_filt, assay = "RNA", layer = "data")
+cat("Any negative values in RNA data layer:", any(data_layer < 0), "\n")
+cat("Max value in RNA data layer          :",
+    round(max(data_layer@x), 2), "\n")
+```
+
+:::: question
+::: {.callout-tip icon="false"}
+## PERGUNTA 4.2
+
+Por que LogNormalize é aplicado ao RNA, mas CLR (margin = 2) é usado para ADT? Qual propriedade de cada modalidade impulsiona a diferença?
+:::
+::::
+
+::: {.callout-tip icon="false" collapse="true"}
+### RESPOSTA
+
+RNA: tamanho de biblioteca variável por célula (dezenas a dezenas de milhares de UMIs), contagens de genes fortemente assimétricas à direita, muito esparso. `LogNormalize` divide as contagens de cada célula pelo seu total, multiplica por 10.000, e então aplica log1p. ADT: a carga de anticorpos por célula é muito mais uniforme entre as células (cada célula recebeu a mesma mistura de coloração), as proteínas não são esparsas, e o sinal significativo é a abundância relativa de uma proteína em relação a outras dentro da mesma célula. CLR (log-ratio centralizado) com margin=2 trata as contagens de proteínas de cada célula como uma composição e normaliza dentro da célula, centralizando em zero. margin=1 normalizaria entre células por proteína, o que remove o sinal biológico de quais células coram positivamente.
+
+DEMONSTRAÇÃO AO VIVO:
+
+```{r}
+summary(LayerData(sobj_filt, assay="RNA", layer="counts")@x)
+summary(LayerData(sobj_filt, assay="ADT", layer="counts")@x)
+```
+
+**Nota:** contagens de RNA tipicamente entre 0 e 200; contagens de ADT tipicamente entre 0 e 1000.
+:::
+
+### Etapa 4.3 - Genes altamente variáveis
+
+```{r}
+sobj_filt <- FindVariableFeatures(
+  sobj_filt,
+  selection.method = "vst",
+  nfeatures        = 2000
+)
+
+top10 <- head(VariableFeatures(sobj_filt), 10)
+cat("Top 10 most variable genes:\n")
+print(top10)
+cat("\nTotal variable features selected:", length(VariableFeatures(sobj_filt)), "\n")
+```
+
+- **Desafio: qual fração de todos os genes é selecionada como variável?**
+
+```{r}
+all_genes <- nrow(sobj_filt[["RNA"]])
+n_var     <- length(VariableFeatures(sobj_filt))
+cat("Variable fraction:", round(n_var / all_genes * 100, 1), "% of all genes\n")
+```
+
+### Etapa 4.4 - Escalar e executar PCA {#sec-step4.4}
+
+`vars.to.regress` remove o efeito linear do percent.mt de cada gene `antes de escalar`. Isso reduz a influência do estresse/qualidade celular sobre os componentes principais.
+
+```{r}
+sobj_filt <- ScaleData(
+  sobj_filt,
+  vars.to.regress = "percent.mt",
+  verbose         = FALSE
+)
+
+sobj_filt <- RunPCA(sobj_filt, npcs = 30, verbose = FALSE)
+```
+
+Onde vivem as coordenadas dos PC, agora que o PCA realmente existe? A **Etapa 1.6** (@sec-step1.6) confirmou que as reduções estavam vazias antes deste ponto; aqui estão os três padrões de acesso na prática.
+
+```{r}
+cat("Reductions now available:", paste(SafeReductions(sobj_filt), collapse = ", "), "\n\n")
+
+cat("Cell embeddings (cells x dims matrix), first 6 cells:\n")
+print(head(sobj_filt@reductions$pca@cell.embeddings))
+
+cat("\nSame thing via the recommended accessor:\n")
+print(head(Embeddings(sobj_filt, reduction = "pca")))
+
+cat("\nFeature loadings (genes x dims matrix), first 6 genes:\n")
+print(head(sobj_filt@reductions$pca@feature.loadings))
+```
+
+Inspecione as cargas (loadings) principais de PC1 e PC2
+
+```{r}
+cat("\nTop genes loading on PC1:\n")
+print(head(sobj_filt@reductions$pca@feature.loadings[
+  order(abs(sobj_filt@reductions$pca@feature.loadings[,1]),
+        decreasing = TRUE), 1], 10))
+```
+
+:::: question
+::: {.callout-tip icon="false"}
+## PERGUNTA 4.4c
+
+Você herda um objeto onde Reductions(sobj) lista "pca" e "umap" mas `Layers(sobj[["RNA"]])` mostra apenas "counts". A camada data está ausente. Você pode confiar no UMAP? Qual é seu próximo passo?
+:::
+::::
+
+::: {.callout-tip icon="false" collapse="true"}
+### RESPOSTA
+
+Não, você não pode confiar nele. O PCA foi calculado a partir da camada data (normalizada logaritmicamente), e o UMAP a partir do PCA. Se a camada data foi excluída, a entrada anterior ao PCA desapareceu, então você não pode verificar se o PCA usou os valores, a normalização ou as features corretas. Reduções sem sua camada de origem não são verificáveis. Dois próximos passos: (1) pedir ao colaborador o objeto antes de a camada data ser removida, OU (2) reexecutar NormalizeData, FindVariableFeatures, ScaleData, RunPCA a partir da camada de contagens e comparar seu novo PCA com o herdado. Uma discordância substancial significa que o UMAP herdado é suspeito.
+
+DEMONSTRAÇÃO AO VIVO:
+
+```{r}
+Reductions(sobj_filt)
+Layers(sobj_filt[["RNA"]])
+# Recompute and compare:
+sobj_check <- NormalizeData(sobj_filt, verbose = FALSE)
+sobj_check <- FindVariableFeatures(sobj_check, verbose = FALSE)
+sobj_check <- ScaleData(sobj_check, verbose = FALSE)
+sobj_check <- RunPCA(sobj_check, npcs = 30, verbose = FALSE)
+```
+
+GRÁFICO / SAÍDA: UMAPs lado a lado coloridos por cluster se o PCA recalculado estiver disponível.
+:::
+
+O cotovelo (elbow) é onde adicionar mais PCs explica pouca variância adicional.
+
+Use isso para definir dims em `FindNeighbors` e `RunUMAP`.
+
+```{r}
+ElbowPlot(sobj_filt, ndims = 30) +
+  geom_vline(xintercept = 20, linetype = "dashed", color = "#991b1b") +
+  annotate("text", x = 21, y = 2.5, label = "~20 PCs", hjust = 0,
+           color = "#991b1b") +
+  ggtitle("Elbow Plot: variance explained per PC")
+```
+
+:::: question
+::: {.callout-tip icon="false"}
+## PERGUNTA 4.4
+
+Como você escolheria o número de PCs em um conjunto de dados real onde o gráfico de cotovelo não tem uma dobra nítida?
+:::
+::::
+
+::: {.callout-tip icon="false" collapse="true"}
+### RESPOSTA
+
+Combine quatro sinais: (1) variância acumulada explicada, meta de 70-90%; (2) teste de permutação JackStraw, selecionar PCs significativos no alfa escolhido; (3) estabilidade do clustering entre dimensões (reexecutar FindClusters em dims=10, 15, 20, 25 e calcular o ARI entre partições); (4) coerência biológica: todas as populações esperadas se separam? Relate a escolha e a análise de sensibilidade, não um número mágico.
+
+DEMONSTRAÇÃO AO VIVO:
+
+```{r}
+# JackStraw is slow on full data; usable on subsamples for the same conclusion
+sobj_filt <- JackStraw(sobj_filt, num.replicate = 50, dims = 25, verbose = FALSE)
+sobj_filt <- ScoreJackStraw(sobj_filt, dims = 1:25)
+JackStrawPlot(sobj_filt, dims = 1:25)
+```
+
+GRÁFICO / SAÍDA: JackStrawPlot: PCs acima da diagonal são significativos
+:::
+
+### Etapa 4.4a - Verificação de sanidade: HVG e PCA fizeram o que você pediu?
+
+- **Falha silenciosa A.** `FindVariableFeatures(nfeatures = 2000)` em um painel de 500 genes retorna 500 sem qualquer aviso. A análise de HVG foi uma operação nula (no-op).
+
+```{r}
+n_features  <- nrow(sobj_filt[["RNA"]])
+n_hvg_asked <- 2000
+n_hvg_got   <- length(VariableFeatures(sobj_filt))
+cat("Features in assay  :", n_features, "\n")
+cat("HVG requested      :", n_hvg_asked, "\n")
+cat("HVG returned       :", n_hvg_got, "\n")
+if (n_hvg_got < n_hvg_asked) {
+  cat(">> nfeatures > total features. HVG is the full panel; the call",
+      "selected nothing.\n")
+}
+```
+
+- **Falha silenciosa B.** RunPCA retorna o número de PCs que você pede, mesmo quando apenas uma fração carrega sinal. Inspecione a variância da cauda para detectar PCs "mortos".
+
+```{r}
+pca_sdev <- sobj_filt@reductions$pca@stdev
+pca_var  <- pca_sdev ^ 2
+cat("\nVariance explained by last 5 PCs (out of", length(pca_var), "):\n")
+print(round(tail(pca_var / sum(pca_var) * 100, 5), 3))
+cat("If the tail is below ~0.5 percent each, those PCs are mostly noise.\n")
+```
+
+:::: question
+::: {.callout-tip icon="false"}
+## PERGUNTA 4.4a
+
+Quantos PCs carregam mais de 1 por cento da variância total?
+
+A linha abaixo calcula isso; use o resultado como um limite inferior para dims= mais adiante.
+
+```{r Question4.4a}
+n_pcs_above_1pct <- sum((pca_var / sum(pca_var)) > 0.01)
+cat("\nNumber of PCs with > 1% variance explained:", n_pcs_above_1pct, "\n")
+cat("Recommended lower bound for dims=: 1:", n_pcs_above_1pct, sep = "", "\n")
+cat("(The elbow plot above gave ~20; this floor confirms or contradicts it.)\n")
+```
+:::
+::::
+
+::: {.callout-tip icon="false" collapse="true"}
+### RESPOSTA
+
+Calculado no script. Tipicamente 10-15 PCs carregam \>1% de variância neste conjunto de dados; o cotovelo dá aproximadamente o mesmo número. Se eles discordarem por mais de um fator de 2, ou o cotovelo está sendo mal interpretado ou o conjunto de dados tem uma estrutura de variância incomum.
+
+DEMONSTRAÇÃO AO VIVO:
+
+```{r}
+pca_var <- sobj_filt@reductions$pca@stdev^2
+pct <- pca_var / sum(pca_var) * 100
+sum(pct > 1)
+plot(pct, type="b", xlab="PC", ylab="% variance")
+```
+
+GRÁFICO / SAÍDA: Gráfico de dispersão de variância por PC; o ponto de achatamento é o piso para dims
+:::
+
+### Etapa 4.4b - Decidir se deve integrar (Harmony) {#sec-step4.4b}
+
+Antes de agrupar (clustering), pergunte: os doadores se separam no PCA? Se sim, o UMAP será dominado pelo doador, não pela biologia, e o clustering codificará o *lote (batch)*.
+
+```{r}
+p_pca_donor <- DimPlot(sobj_filt, reduction = "pca", group.by = "donor_id") +
+  ggtitle("PCA by donor")
+p_pca_cond  <- DimPlot(sobj_filt, reduction = "pca", group.by = "condition") +
+  ggtitle("PCA by condition")
+p_pca_donor | p_pca_cond
+```
+
+- **Diagnóstico rápido de R\^2:** quanto de PC1 e PC2 é explicado pelo doador?
+
+```{r}
+pc_coords <- Embeddings(sobj_filt, reduction = "pca")[, 1:2]
+for (pc in 1:2) {
+  fit <- summary(lm(pc_coords[, pc] ~ sobj_filt$donor_id))
+  cat(sprintf("PC%d ~ donor_id R^2: %.3f\n", pc, fit$r.squared))
+}
+```
+
+::: callout-tip
+## Dica
+
+Regra prática de decisão: - R\^2 \< 0,10 : efeito de doador mínimo, integração não necessária - R\^2 0,10 a 0,30: limítrofe, considerar integração se os tipos celulares estiverem misturados entre doadores - R\^2 \> 0,30 : o doador domina, integração recomendada
+
+Neste conjunto de dados, o efeito de doador está entre baixo e limítrofe, então o clustering e a anotação através do **Bloco 5** (@sec-block5) prosseguem sobre o PCA/UMAP simples sem Harmony.
+:::
+
+A **Etapa 5.4e** (@sec-step5.4e) executa o Harmony de qualquer forma. Uma vez que os tipos celulares estejam anotados, para construir um painel de comparação lado a lado: ver que o Harmony quase não muda o layout em dados que você já confia é o que lhe dá confiança ao ler a mesma comparação em um novo conjunto de dados onde você ainda não sabe a resposta.
+
+Sintaxe de referência (pacote harmony atual, método de objeto Seurat):
+
+```{r, eval=FALSE, warning=FALSE}
+library(harmony)
+# NOT RUN
+sobj_harm <- RunHarmony(sobj_filt, group.by.vars = "donor_id",
+                          reduction      = "pca",
+                           reduction.save = "harmony",
+                           verbose        = FALSE)
+   DimPlot(sobj_harm, reduction = "harmony", group.by = "donor_id") +
+     ggtitle("After Harmony (donor)")
+```
+
+Nas etapas posteriores `FindNeighbors / RunUMAP`, mude `reduction = "pca"` para `reduction = "harmony"` (dims permanece o mesmo; o Harmony retorna a mesma dimensionalidade da redução de entrada).
+
+:::: question
+::: {.callout-tip icon="false"}
+## PERGUNTA 4.4b
+
+Em que R\^2 de doador você mudaria para o Harmony nos seus próprios dados? O bloco acima já imprimiu o R\^2 para PC1 e PC2; aplique esta regra diretamente:
+
+```{r Question4.4b}
+r2_pc1 <- summary(lm(pc_coords[, 1] ~ sobj_filt$donor_id))$r.squared
+verdict <- if (r2_pc1 < 0.10) {
+  "NO integration needed"
+} else if (r2_pc1 < 0.30) {
+  "BORDERLINE: integrate only if cell types are also separated by donor"
+} else {
+  "INTEGRATE (Harmony or similar)"
+}
+cat(sprintf("\nDecision for this dataset: R^2(PC1)= %.3f -> %s\n", r2_pc1, verdict))
+cat("\nTrade-off of integration:\n")
+cat("  Pro: removes technical donor variance; cell types pool across donors.\n")
+cat("  Con: may remove TRUE biological inter-donor variance (e.g., one donor\n")
+cat("       genuinely lacks a cell type). Always cross-check post-integration\n")
+cat("       that cell type proportions per donor remain plausible.\n")
+```
+:::
+::::
+
+::: {.callout-tip icon="false" collapse="true"}
+### RESPOSTA
+
+Limiares (no script): R\^2 \< 0,10 = sem integração; 0,10-0,30 = limítrofe, integrar apenas se os tipos celulares também estiverem separados por doador; \>0,30 = integrar. Compensação: a integração remove a variância técnica de doador para que os tipos celulares se agrupem entre doadores. Também remove a variância biológica VERDADEIRA entre doadores: se um doador genuinamente não tem um tipo celular, a integração pode fundir suas células com células de outros doadores que TÊM esse tipo, ocultando a diferença. Após integrar, sempre verifique se as proporções de tipo celular por doador permanecem plausíveis. O R\^2 deste conjunto de dados cai na faixa baixa a limítrofe, então o clustering e a anotação prosseguem sem Harmony através do **Bloco 5** (@sec-block5). A **Etapa 5.4e** (@sec-step5.4e) executa o Harmony de qualquer forma e a **Etapa 5.4f** (@sec-step5.4f) constrói uma comparação de 4 painéis para que os alunos vejam diretamente se a integração teria mudado algo, em vez de aceitar o limiar de R\^2 por fé.
+
+DEMONSTRAÇÃO AO VIVO:
+
+```{r}
+pc_coords <- Embeddings(sobj_filt, "pca")[, 1:5]
+sapply(1:5, function(i)
+  summary(lm(pc_coords[, i] ~ sobj_filt$donor_id))$r.squared)
+```
+
+GRÁFICO / SAÍDA: `DimPlot(sobj_filt, reduction='pca', group.by='donor_id')` lado a lado com `group.by='condition'`; veja também a comparação de 4 painéis na **Etapa 5.4f** (@sec-step5.4f).
+:::
+
+### Etapa 4.4c - Encontre o erro
+
+Leia o código abaixo cuidadosamente. Duas coisas estão erradas. Encontre ambas antes de executar qualquer coisa.
+
+```{r, eval=FALSE}
+sobj_filt <- FindNeighbors(sobj_filt, dims = 0:20, verbose = FALSE)
+sobj_filt <- RunUMAP(sobj_filt, dims = c(1, 2, 3, 5, 7, 11, 13))
+```
+
+Sua resposta:
+
+**REVELAR:**
+
+1.  `dims = 0:20` inclui o PC 0, que não existe. A indexação do PCA começa em 1. `FindNeighbors` descartará silenciosamente o 0 ou dará erro dependendo da versão do Seurat. Sempre use 1:N.
+2.  Passar `dims` como um vetor não contíguo pula PCs intermediários. O UMAP vai rodar, mas o resultado representa apenas as 7 dimensões selecionadas, não a estrutura capturada pelo cotovelo. Sempre use um intervalo contíguo começando de 1.
+
+### Etapa 4.5 - `FindNeighbors`: uma discrepância comum de dimensões
+
+RunPCA foi chamado com `npcs = 30`. Passar `dims = 1:50` para `FindNeighbors` pede 50 PCs que não existem.
+
+```{r}
+# >>> DELIBERATE ERROR - read the message, then continue. <<<
+try({
+  # npcs=30 was used in RunPCA. What happens if we request 50 dims?
+  sobj_filt <- FindNeighbors(sobj_filt, dims = 1:50, verbose = FALSE)
+})
+```
+
+O erro ocorre porque o objeto PCA contém apenas 30 componentes. - `dims = 1:50` solicita componentes que não existem. - Causa comum: `npcs` em RunPCA é alterado, mas as chamadas posteriores não são atualizadas.
+
+```{r}
+sobj_filt <- FindNeighbors(sobj_filt, dims = 1:20, verbose = FALSE)
+```
+
+### Etapa 4.6 - Sensibilidade de resolução e clustering final
+
+Quanto o clustering muda entre a resolução 0.2 e 1.2?
+
+```{r}
+res_values <- c(0.2, 0.5, 1.2)
+n_clusters <- sapply(res_values, function(r) {
+  tmp <- FindClusters(sobj_filt, resolution = r, verbose = FALSE)
+  length(unique(tmp$seurat_clusters))
+})
+
+cat("Resolution vs number of clusters:\n")
+for (i in seq_along(res_values)) {
+  cat("  resolution =", res_values[i], "->", n_clusters[i], "clusters\n")
+}
+cat("\nUsing resolution = 0.5 for the rest of the analysis.\n")
+
+sobj_filt <- FindClusters(sobj_filt, resolution = 0.5, verbose = FALSE)
+cat("Clusters found:", length(unique(sobj_filt$seurat_clusters)), "\n")
+print(table(sobj_filt$seurat_clusters))
+```
+
+:::: question
+::: {.callout-tip icon="false"}
+## PERGUNTA 4.6
+
+Resolução mais baixa gera menos clusters, maiores; resolução mais alta gera mais clusters, menores. Nenhuma é intrinsecamente correta.
+
+- Que evidência você usa para defender uma resolução escolhida?
+:::
+::::
+
+::: {.callout-tip icon="false" collapse="true"}
+### RESPOSTA
+
+Três coisas: (1) coerência biológica: cada cluster tem um perfil de marcadores distinguível, defensável em relação à literatura; (2) estabilidade entre resoluções próximas: os clusters não devem se fragmentar dramaticamente com uma pequena perturbação; o ARI entre as resoluções 0.4 e 0.6 deve ser alto; (3) sanidade posterior: a contagem de clusters corresponde às expectativas para o tecido (PBMC com 3.000 células: 8-14 clusters é razoável; 25 é demais; 4 é de menos). Mostre uma visualização estilo clustree em uma varredura de resoluções e relate qual resolução e por quê.
+
+DEMONSTRAÇÃO AO VIVO:
+
+```{r}
+for (r in c(0.3, 0.5, 0.8, 1.2)) {
+  sobj_filt <- FindClusters(sobj_filt, resolution = r, verbose = FALSE)
+  cat(sprintf("res=%.1f -> %d clusters\n", r, length(unique(Idents(sobj_filt)))))
+}
+```
+
+GRÁFICO / SAÍDA: Se o clustree estiver instalado: clustree(sobj_filt, prefix='RNA_snn_res.')
+:::
+
+### Etapa 4.7 - Visualização de UMAP
+
+Três perguntas a responder imediatamente após gerar o UMAP:
+
+1.  As células se agrupam por biologia ou por doador? (*verificação de efeito de lote*)
+2.  Os genes marcadores canônicos mapeiam para os clusters esperados?
+3.  A condição (Saudável vs COVID-19) mostra alguma estrutura espacial? `set.seed(42)`
+
+- `umap.method='uwot'` é o padrão atual, mas o `Seurat` imprime um aviso único quando isso não é declarado explicitamente. Defini-lo silencia o aviso.
+
+```{r}
+sobj_filt <- RunUMAP(
+  sobj_filt,
+  dims        = 1:20,
+  umap.method = "uwot",
+  metric      = "cosine",
+  verbose     = FALSE
+)
+
+p1 <- DimPlot(sobj_filt, group.by = "seurat_clusters",
+              label = TRUE, label.size = 4) +
+  NoLegend() + ggtitle("Clusters (resolution = 0.5)")
+
+p2 <- DimPlot(sobj_filt, group.by = "orig.ident") +
+  ggtitle("By donor: batch effect?") +
+  theme(legend.text = element_text(size = 7))
+
+p1 | p2
+```
+
+```{r}
+p_cond <- DimPlot(sobj_filt, group.by = "condition",
+                  cols = c("Healthy" = "#0d7377", "COVID19" = "#991b1b"),
+                  pt.size = 0.5) +
+  ggtitle("Healthy vs COVID-19")
+
+p_sev <- DimPlot(sobj_filt, group.by = "severity",
+                 pt.size = 0.5) +
+  ggtitle("COVID-19 severity") +
+  theme(legend.text = element_text(size = 8))
+
+p_cond | p_sev
+```
+
+:::: question
+::: {.callout-tip icon="false"}
+## PERGUNTA 4.7
+
+Se os doadores se separam visivelmente no UMAP, isso é efeito de lote ou biologia? Que informação adicional ajudaria você a decidir?
+:::
+::::
+
+::: {.callout-tip icon="false" collapse="true"}
+### RESPOSTA
+
+Não é possível saber apenas com o UMAP. Duas verificações: (1) os doadores se agrupam dentro de regiões de tipo celular compartilhadas ou formam suas próprias regiões? Os mesmos tipos celulares na mesma região do UMAP entre doadores = biologia esperada; os mesmos tipos celulares em regiões DIFERENTES do UMAP por doador = lote (batch). Colora o UMAP por tipo celular e por doador no mesmo gráfico. (2) Calcule o R\^2 de PC1 em relação a donor_id (ver 4.4b); se for alto, o lote domina o embedding.
+
+DEMONSTRAÇÃO AO VIVO:
+
+```{r}
+DimPlot(sobj_filt, reduction="umap", group.by="donor_id") 
+DimPlot(sobj_filt, reduction="umap", group.by="singler_label")
+```
+
+GRÁFICO / SAÍDA: UMAPs lado a lado tornam a decisão óbvia na maioria dos casos.
+:::
+
+### Etapa 4.8 - Marcadores canônicos de PBMC (RNA)
+
+Compare a expressão dos marcadores com as localizações dos clusters antes da anotação formal
+
+```{r}
+FeaturePlot(sobj_filt,
+            features   = c("CD3E", "CD19", "CD14", "NCAM1", "IL7R", "FCGR3A"),
+            ncol       = 3,
+            min.cutoff = "q05")
+
+DotPlot(sobj_filt,
+        features = c("CD3E", "CD4", "CD8A", "CD19", "MS4A1",
+                     "CD14", "FCGR3A", "NCAM1", "PPBP"),
+        group.by = "seurat_clusters") +
+  RotatedAxis() +
+  ggtitle("Marker expression by cluster")
+```
+
+### Etapa 4.9 - Proporções de clusters entre condições
+
+Este é um resultado preliminar. Deve ser validado após a anotação.
+
+```{r}
+props <- sobj_filt@meta.data %>%
+  group_by(condition, seurat_clusters) %>%
+  summarise(n = n(), .groups = "drop") %>%
+  group_by(condition) %>%
+  mutate(prop = n / sum(n))
+
+ggplot(props, aes(x = condition, y = prop, fill = seurat_clusters)) +
+  geom_bar(stat = "identity", width = 0.6) +
+  scale_y_continuous(labels = scales::percent_format()) +
+  labs(title    = "Cluster proportions: Healthy vs COVID-19",
+       subtitle = "Check per-donor before interpreting any group difference",
+       x = "Condition", y = "Proportion", fill = "Cluster") +
+  theme_classic(base_size = 12)
+```
+
+## **Bloco 5 - Anotação de tipos celulares (baseada em RNA)** {#sec-block5}
+
+::: content-box-gray
+**Objetivo:** atribuir rótulos de tipo celular a partir de uma referência curada (`SingleR` com o Human Primary Cell Atlas), e então verificar o objeto rotulado antes de o fluxo de trabalho de CITE-seq começar. A anotação baseada apenas em RNA tem fraquezas conhecidas para subtipos de células T; o **Bloco 6** (@sec-block6) revisitará isso com proteína.
+:::
+
+### Etapa 5.1 - Executar `SingleR` contra o Human Primary Cell Atlas
+
+#### **Opção A — Caminho de instalação padrão**
+
+👉 Este fluxo de trabalho usa a referência oficial do **Human Primary Cell Atlas** e é a abordagem confirmatória recomendada.
+
+```{r, eval=FALSE}
+cat("Loading reference (Human Primary Cell Atlas)...\n")
+ref     <- celldex::HumanPrimaryCellAtlasData()
+rna_mat <- LayerData(sobj_filt, assay = "RNA", layer = "data")
+
+cat("Running SingleR...\n")
+singler_res <- SingleR(
+  test    = rna_mat,
+  test    = rna_mat,
+  ref     = ref,
+  labels  = ref$label.main,
+  BPPARAM = BiocParallel::SerialParam()
+)
+```
+
+#### **Opção B — Alternativa com arquivo RDS pré‑salvo**
+
+Se a instalação do `celldex` ou de outras dependências falhar:
+
+1.  **Baixe o arquivo pré‑gerado** Obtenha [`singleR.rds`](checkpoints/step5.1/singleR.rds) dos materiais do curso fornecidos.
+2.  **Carregue o arquivo no R:**
+
+```{r}
+library(here) # install.packages("here")
+singler_res <- readRDS(
+  here("checkpoints", "step5.1", "singleR.rds")
+)
+```
+
+3.  **Use os rótulos diretamente** Esses rótulos podem ser integrados ao seu pipeline de análise como um **checkpoint**, permitindo que você continue sem instalar o `celldex`.
+
+👉 Este fluxo de trabalho é exploratório e garante reprodutibilidade mesmo em ambientes restritos (por exemplo, macOS ARM64 ou acesso limitado à internet).
+
+```{r}
+cat("\nCell type distribution:\n")
+print(sort(table(singler_res$labels), decreasing = TRUE))
+
+cat("\nLow-confidence cells (NA in pruned labels):",
+    sum(is.na(singler_res$pruned.labels)), "\n")
+```
+
+### Etapa 5.2 - Plotando um rótulo antes de ele estar no objeto {#sec-step5.2}
+
+Esquecer de transferir os rótulos do SingleR para o `objeto Seurat` antes de chamar `DimPlot(group.by = "singler_label")` produz um erro opaco. O rótulo só existe no objeto de resultado do `SingleR` até você copiá-lo.
+
+```{r}
+# >>> DELIBERATE ERROR - read the message, then continue. <<<
+try({
+  # singler_res is a separate object. Labels must be transferred to sobj_filt first.
+  DimPlot(sobj_filt, group.by = "singler_label")
+})
+```
+
+`singler_label` ainda não existe em `sobj_filt@meta.data`. `singler_res` é um `DataFrame` (classe do Bioconductor). Os rótulos precisam ser explicitamente adicionados aos metadados do `Seurat`.
+
+```{r}
+sobj_filt$singler_label  <- singler_res$labels
+sobj_filt$singler_pruned <- singler_res$pruned.labels
+```
+
+Verificar
+
+```{r}
+cat("singler_label in metadata:", "singler_label" %in% colnames(sobj_filt@meta.data), "\n")
+cat("Distribution:\n")
+print(sort(table(sobj_filt$singler_label), decreasing = TRUE))
+```
+
+Células com pontuações semelhantes entre múltiplos tipos são ambíguas. Dispersão `ampla = alta` confiança. Dispersão estreita = baixa confiança. `plotScoreHeatmap()` desenha uma linha por cada rótulo de referência possível: o catálogo **COMPLETO** do `HumanPrimaryCellAtlasData`, `~37 linhas`, independentemente de quantas células foram de fato atribuídas a cada um. Observe isso antes de qualquer limpeza acontecer. A maioria dessas `37 linhas` mostrará quase nenhum sinal para qualquer célula neste conjunto de dados; essa desordem visual é a evidência que motiva a consolidação na próxima etapa.
+
+```{r}
+plotScoreHeatmap(singler_res,
+                 main = "SingleR annotation scores: full reference (37 possible labels)")
+
+```
+
+:::: question
+::: {.callout-tip icon="false"}
+## PERGUNTA 5.2
+
+Quantas das linhas neste mapa de calor mostram algum sinal real (um grupo de células com uma célula claramente brilhante)? O que o restante das linhas diz sobre quantos dos rótulos impressos acima são provavelmente ruído?
+:::
+::::
+
+::: {.callout-tip icon="false" collapse="true"}
+### RESPOSTA
+
+Neste conjunto de dados, tipicamente apenas 5 a 8 das aproximadamente 37 linhas mostram um bloco brilhante claro: uma separação limpa em que um grupo-coluna de células se ilumina intensamente para aquela linha e permanece escuro para o resto. Essas linhas correspondem às populações celulares reais efetivamente presentes em PBMC: células T, células B, monócitos, células NK, e algumas outras. As linhas restantes ficam quase uniformemente fracas em todas as células. Uma linha fraca não significa que o SingleR cometeu um erro; significa que nenhuma célula neste conjunto de dados pontuou alto contra aquele rótulo de referência, o que é esperado para rótulos como Hepatócitos ou Neurônios em uma amostra de sangue. A leitura prática: se a linha de um rótulo neste mapa de calor nunca se ilumina intensamente em nenhum lugar, qualquer célula atribuída a esse rótulo pelo classificador bruto é suspeita, e é exatamente por isso que tantos valores distintos apareceram na "distribuição de tipos celulares" impressa na **Etapa 5.2** (@sec-step5.2). As linhas fracas são a evidência visual que motiva o agrupamento de rótulos de baixa frequência na **Etapa 5.2b** (@sec-step5.2b), em vez de confiar em todos eles como populações igualmente reais.
+
+DEMONSTRAÇÃO AO VIVO:
+
+Conte rótulos distintos com pelo menos uma célula atribuída com confiança:
+
+```{r}
+label_tab <- sort(table(sobj_filt$singler_label), decreasing = TRUE)
+print(label_tab)
+```
+
+Compare com quantas linhas "acendem" visualmente no mapa de calor acima.
+
+GRÁFICO / SAÍDA: O plotScoreHeatmap completo da **Etapa 5.2** (@sec-step5.2) (37 linhas); conte quantas mostram um bloco brilhante versus desvanecimento uniforme.
+:::
+
+### Etapa 5.2b - Consolidar para os N principais rótulos e verificar a plausibilidade da distribuição {#sec-step5.2b}
+
+`HumanPrimaryCellAtlasData` cobre dezenas de tipos celulares em muitos tecidos. Em um painel PBMC de 500 genes, tipicamente retorna mais de 20 rótulos distintos, a maioria suportada por apenas um punhado de células (ruído de baixa confiança, não populações reais). Plotar todos eles produz uma legenda ilegível e frustra o propósito de cada comparação posterior.
+
+`singler_label` (detalhe completo) é mantido intacto nos metadados para casos em que o rótulo exato importa. `singler_label_top` colapsa cada rótulo fora dos N mais frequentes em "Other (n small labels)" e é o que cada gráfico daqui em diante usa por padrão. A mesma passagem que constrói a consolidação também verifica se a distribuição subjacente parece uma anotação PBMC real, já que ambas as perguntas vêm da mesma tabela.
+
+O que esta etapa decide, e o que não decide: esta é uma decisão baseada em contagem sobre quais **`CATEGORIAS`** merecem sua própria cor em um gráfico. Ela nunca observa um único gene ou a expressão de uma única célula. Uma célula rotulada "T_cell" permanece "T_cell" aqui, independentemente de realmente expressar algum marcador de célula T; a única coisa que muda é se esse rótulo ganha seu próprio espaço na legenda ou é dobrado em "Other" porque poucas células o compartilham.
+
+A **Etapa 5.4a** (@sec-step5.4a), mais adiante, faz uma pergunta diferente sobre isso: dado um rótulo que sobreviveu a este filtro, a célula individual que o carrega realmente mostra a evidência de expressão que aquele rótulo implica? Essa é uma verificação por célula, baseada em marcadores, não por rótulo, baseada em contagem.
+
+A **Etapa 5.4c** (@sec-step5.4c) então constrói `singler_label_clean` diretamente a partir de `singler_label_top`, adicionando apenas as células que falharam na verificação de marcadores da **Etapa 5.4a** (@sec-step5.4a) como uma nova categoria "Ambiguous". As duas etapas não são redundantes: esta decide o que mostrar, **Etapa 5.4a/5.4c** (@sec-step5.4a / @sec-step5.4c) decide em quem confiar dentro do que é mostrado.
+
+```{r}
+TOP_N_LABELS <- 8
+
+label_tab <- sort(table(sobj_filt$singler_label), decreasing = TRUE)
+top_labels <- names(label_tab)[seq_len(min(TOP_N_LABELS, length(label_tab)))]
+n_collapsed <- length(label_tab) - length(top_labels)
+
+sobj_filt$singler_label_top <- ifelse(
+  sobj_filt$singler_label %in% top_labels,
+  sobj_filt$singler_label,
+  sprintf("Other (%d small labels)", n_collapsed)
+)
+sobj_filt$singler_label_top <- factor(
+  sobj_filt$singler_label_top,
+  levels = c(top_labels, sprintf("Other (%d small labels)", n_collapsed))
+)
+
+cat(sprintf("Kept top %d labels, collapsed %d smaller labels into 'Other':\n",
+            length(top_labels), n_collapsed))
+print(table(sobj_filt$singler_label_top))
+```
+
+Regras práticas de sanidade para PBMC, verificadas em relação à tabela completa (não colapsada) de rótulos:
+
+- Espere de 3 a 7 rótulos dominantes (células T, células B, monócitos, células NK, DC)
+- Um rótulo \> 80% de todas as células: suspeito (colapso de anotação)
+- Mais de 15 rótulos distintos em 3.000 células: referência muito granular
+- Qualquer rótulo não-imune individual \> 5% (por exemplo, hepatócitos, fibroblastos): referência incorreta
+
+```{r}
+n_labels <- length(label_tab)
+top_prop <- max(label_tab) / sum(label_tab)
+cat(sprintf("\nDistinct labels (full table): %d  |  Dominant label proportion: %.1f%%\n",
+            n_labels, top_prop * 100))
+if (n_labels > 15) cat(">> Many distinct labels. Reference may be too granular for PBMC.\n")
+if (top_prop > 0.80) cat(">> One label dominates. Check whether reference matches the tissue.\n")
+```
+
+:::: question
+::: {.callout-tip icon="false"}
+## PERGUNTA 5.2b
+
+Observe os rótulos colapsados em "Other" (as linhas de `label_tab` além do rank 8). Algum deles é biologicamente plausível para PBMC (por exemplo, "Platelets", "DC") ou todos são implausíveis (por exemplo, "Hepatocytes", "Neurons")? O que você faria diferente se um rótulo plausível fosse colapsado?
+:::
+::::
+
+::: {.callout-tip icon="false" collapse="true"}
+### RESPOSTA
+
+Neste conjunto de dados, `HumanPrimaryCellAtlasData` tipicamente retorna mais de 20 rótulos para um painel PBMC de 500 genes. A maior parte do que fica fora do top 8 é biologicamente implausível para sangue (Hepatócitos, Fibroblastos, Células_endoteliais, Neurônios, Gametócitos, Astrócitos) e reflete ruído de baixa confiança de uma referência que cobre muitos tecidos, não um sinal específico de PBMC. Alguns rótulos colapsados PODEM ser biologicamente plausíveis, mas raros nesta coorte (Plaquetas, DC, subconjuntos de Pro-B_cell) - essas são populações minoritárias reais, apenas pequenas. A consolidação top-N é um auxílio de visualização, não uma correção da anotação em si: `singler_label` (não colapsado) é preservado nos metadados exatamente por esse motivo. Se uma população rara plausível importa para sua análise (por exemplo, você está estudando especificamente plaquetas ou DCs), aumente TOP_N_LABELS, ou continue usando `singler_label` diretamente para essa análise específica em vez de `singler_label_top`.
+
+DEMONSTRAÇÃO AO VIVO:
+
+Inspecione o que caiu em "Other":
+
+```{r}
+label_tab <- sort(table(sobj_filt$singler_label), decreasing = TRUE)
+print(label_tab[-(1:8)])
+```
+
+Aumente `TOP_N_LABELS` se uma população rara plausível estiver sendo colapsada:
+
+```{r}
+TOP_N_LABELS <- 12
+```
+
+GRÁFICO / SAÍDA: Saída de console (tabela de rótulos colapsados e suas contagens).
+:::
+
+### Etapa 5.3 - UMAP anotado e o mapa de calor depurado {#sec-step5.3}
+
+```{r}
+p_ann <- DimPlot(sobj_filt, group.by = "singler_label_top",
+                 label = TRUE, label.size = 3, repel = TRUE) +
+  ggtitle("SingleR annotation (top labels)") + NoLegend()
+
+p_cond <- DimPlot(sobj_filt, group.by = "condition",
+                  cols = c("Healthy" = "#0d7377", "COVID19" = "#991b1b"),
+                  pt.size = 0.4) +
+  ggtitle("Condition")
+
+p_ann | p_cond
+```
+
+Mesmo mapa de calor da **Etapa 5.2** (@sec-step5.2), restrito aos rótulos que sobreviveram à consolidação top-N. Compare diretamente com a versão completa de 37 linhas mostrada anteriormente: é assim que se parece "legível" depois que os rótulos que não carregavam nenhum sinal real foram deixados de lado.
+
+```{r}
+cat("Labels passed to labels.use:\n")
+print(top_labels)
+
+heatmap_result <- tryCatch({
+  plotScoreHeatmap(singler_res,
+                   labels.use = top_labels,
+                   main = "SingleR annotation scores (top labels only; compare to Step 5.2)")
+  "filtered"
+}, error = function(e) {
+  message("labels.use raised an error in this SingleR version: ", conditionMessage(e))
+  message("Falling back to the full heatmap.")
+  plotScoreHeatmap(singler_res,
+                   main = "SingleR annotation scores (wider spread = more confident)")
+  "full (fallback)"
+})
+
+cat("Heatmap actually drawn:", heatmap_result, "\n")
+cat("If this says 'full (fallback)', the plot above is identical to Step 5.2\n")
+cat("by design: that is the fallback path, not the filtered version.\n")
+```
+
+### Etapa 5.4 - Verificar o objeto anotado
+
+Compare o objeto agora com seu estado em @sec-block1 (**Bloco 1**) antes de passar para o fluxo de trabalho de CITE-seq.
+
+```{r}
+cat("Object after RNA workflow + annotation:\n")
+print(sobj_filt)
+cat("\nReductions :", paste(SafeReductions(sobj_filt), collapse = ", "), "\n")
+cat("Assays     :", paste(SafeAssays(sobj_filt), collapse = ", "), "\n")
+cat("New metadata columns vs pre-QC:\n")
+print(setdiff(colnames(sobj_filt@meta.data), colnames(sobj@meta.data)))
+```
+
+:::: question
+::: {.callout-tip icon="false"}
+## PERGUNTA 5.4
+
+- Quais slots ainda estão vazios / inalterados no assay ADT?
+- O que isso diz sobre o que o **Bloco 6** (@sec-block6) precisa fazer primeiro?
+:::
+::::
+
+::: {.callout-tip icon="false" collapse="true"}
+### RESPOSTA
+
+ADT ainda tem apenas a camada de contagens. Sem camada data (sem normalização), sem `scale.data`, sem `var.features`, sem reduções referenciando ADT. O **Bloco 6** (@sec-block6) deve construir o lado ADT do zero: `normalizar (CLR margin=2)`, e então ou usá-lo diretamente para gráficos e gating (não é necessário `scale.data`) ou executar `RunPCA` nas contagens de ADT antes do WNN.
+
+DEMONSTRAÇÃO AO VIVO:
+
+```{r}
+Layers(sobj_filt[["ADT"]])
+Reductions(sobj_filt)
+```
+
+GRÁFICO / SAÍDA: Saída de console
+:::
+
+### Etapa 5.4a - Validação de marcadores canônicos por tipo celular {#sec-step5.4a}
+
+Antes de confiar em uma anotação, verifique se o marcador de RNA canônico de cada linhagem principal é detectado em uma fração razoável de células atribuídas a essa linhagem. A verificação de sanidade da distribuição de rótulos já foi executada na **Etapa 5.2b** (@sec-step5.2b), logo depois que os rótulos foram consolidados; esta etapa é um tipo diferente de verificação, sobre a evidência por marcador em vez das contagens de rótulos.
+
+A **Etapa 5.2b** (@sec-step5.2b) perguntou "quantas células compartilham este rótulo, e essa contagem é plausível para PBMC?" Essa é uma pergunta sobre rótulos como categorias: nunca inspecionou um único gene. Esta etapa faz uma pergunta diferente: "para uma célula que carrega este rótulo, seu RNA realmente mostra o marcador que esse rótulo implica?" Essa é uma verificação por célula, baseada em expressão, executada independentemente de quão comum ou raro era o rótulo. Um rótulo pode passar na verificação de frequência da **Etapa 5.2b** (@sec-step5.2b) (comum o suficiente para manter sua própria categoria) e ainda assim falhar nesta (a maioria das células que o carregam não expressa o marcador esperado), que é exatamente o que a tabela de taxas de detecção abaixo é construída para detectar. A saída desta etapa (`detection_rates`) alimenta a **Etapa 5.4c** (@sec-step5.4c), que constrói `singler_label_clean` a partir de `singler_label_top` e adiciona "Ambiguous" apenas para as células que falharam nesta verificação de marcadores, sobre as categorias que a **Etapa 5.2b** (@sec-step5.2b) já decidiu que valia a pena manter.
+
+Mapeia os padrões de rótulo do `SingleR` para marcadores canônicos
+
+```{r}
+check_markers <- list(
+  "T_cell|T cell" = c("CD3E", "CD3D"),
+  "B_cell|B cell" = c("CD79A", "MS4A1"),
+  "Monocyte"      = c("CD14", "LYZ"),
+  "NK"            = c("NKG7", "GNLY"),
+  "DC|Dendritic"  = c("FCER1A")
+)
+
+cat(sprintf("\n%-25s %-10s %-12s %s\n", "Label", "Marker", "Cells (n)", "Detection rate"))
+cat(sprintf("%-25s %-10s %-12s %s\n",   "-----", "------", "---------", "--------------"))
+
+for (lbl in unique(sobj_filt$singler_label)) {
+  for (lbl_pat in names(check_markers)) {
+    if (grepl(lbl_pat, lbl, ignore.case = TRUE)) {
+      cell_mask <- sobj_filt$singler_label == lbl
+      n_cells   <- sum(cell_mask)
+      for (mk in check_markers[[lbl_pat]]) {
+        if (mk %in% rownames(sobj_filt[["RNA"]])) {
+          rna_vec <- FetchData(sobj_filt, vars = mk)[cell_mask, 1]
+          rate    <- mean(rna_vec > 0) * 100
+          flag    <- if (rate < 25) "LOW (dropout or wrong label)" else "ok"
+          cat(sprintf("%-25s %-10s %-12d %.1f%% %s\n",
+                      substr(lbl, 1, 25), mk, n_cells, rate, flag))
+        }
+      }
+    }
+  }
+}
+```
+
+:::: question
+::: {.callout-tip icon="false"}
+## PERGUNTA 5.4a
+
+qual tipo celular anotado tem a menor taxa de detecção de seu marcador canônico? O código abaixo encontra isso explicitamente.
+
+```{r}
+detection_rates <- data.frame(label = character(0), marker = character(0),
+                              rate = numeric(0), stringsAsFactors = FALSE)
+for (lbl in unique(sobj_filt$singler_label)) {
+  for (lbl_pat in names(check_markers)) {
+    if (grepl(lbl_pat, lbl, ignore.case = TRUE)) {
+      cell_mask <- sobj_filt$singler_label == lbl
+      for (mk in check_markers[[lbl_pat]]) {
+        if (mk %in% rownames(sobj_filt[["RNA"]])) {
+          rna_vec <- FetchData(sobj_filt, vars = mk)[cell_mask, 1]
+          detection_rates <- rbind(detection_rates,
+            data.frame(label = lbl, marker = mk,
+                       rate = mean(rna_vec > 0) * 100,
+                       stringsAsFactors = FALSE))
+        }
+      }
+    }
+  }
+}
+if (nrow(detection_rates) > 0) {
+  worst <- detection_rates[which.min(detection_rates$rate), ]
+  cat(sprintf("\nLowest detection: %s expressing %s at %.1f%%\n",
+              worst$label, worst$marker, worst$rate))
+  cat("\nDecision rule:\n")
+  cat("  rate >= 50%  -> annotation consistent with RNA (no action)\n")
+  cat("  rate 25-50%  -> dropout likely (ADT in Block 6 should rescue)\n")
+  cat("  rate < 25%   -> suspect misannotation; cross-check with ADT now\n")
+}
+```
+:::
+::::
+
+::: {.callout-tip icon="false" collapse="true"}
+### RESPOSTA
+
+Calculado no script. A menor taxa geralmente aparece para um rótulo de célula T expressando CD3E ou CD3D; o dropout de RNA de CD3E em PBMC costuma ser de 30-50%, então taxas de detecção entre 25-50% indicam dropout (recuperável no **Bloco 6** (@sec-block6) via ADT CD3). Uma taxa de detecção abaixo de 25% para qualquer marcador é mais provavelmente uma anotação incorreta. Limiares de decisão: \>=50% ok; 25-50% explicado por dropout, verificar com ADT; \<25% suspeito, revisitar a anotação.
+
+DEMONSTRAÇÃO AO VIVO:
+
+```{r}
+lbl_mask <- sobj_filt$singler_label == "T_cells"
+mean(FetchData(sobj_filt, "CD3E")[lbl_mask, 1] > 0) * 100
+```
+
+GRÁFICO / SAÍDA: Saída de console
+:::
+
+### Etapa 5.4c - Marcar rótulos inconsistentes como Ambiguous {#sec-step5.4c}
+
+Células cuja taxa de detecção de marcador canônico caiu abaixo de 25% na **Etapa 5.4a** (@sec-step5.4a) são sinalizadas, não excluídas. `singler_label_clean` carrega os mesmos valores que `singler_label_top`, exceto essas células sinalizadas, que se tornam "Ambiguous". Cada coluna anterior (`singler_label`, `singler_label_top`) permanece intacta.
+
+```{r}
+low_conf_labels <- character(0)
+if (nrow(detection_rates) > 0) {
+  per_label_rate  <- aggregate(rate ~ label, data = detection_rates, FUN = min)
+  low_conf_labels <- per_label_rate$label[per_label_rate$rate < 25]
+}
+
+sobj_filt$singler_label_clean <- as.character(sobj_filt$singler_label_top)
+ambiguous_mask <- sobj_filt$singler_label %in% low_conf_labels
+sobj_filt$singler_label_clean[ambiguous_mask] <- "Ambiguous"
+sobj_filt$singler_label_clean <- factor(sobj_filt$singler_label_clean)
+
+cat(sprintf("\nLabels flagged Ambiguous (canonical marker detection < 25%%): %d\n",
+            length(low_conf_labels)))
+if (length(low_conf_labels) > 0) cat(" ", paste(low_conf_labels, collapse = ", "), "\n")
+cat(sprintf("Cells marked Ambiguous: %d (%.1f%% of total)\n",
+            sum(ambiguous_mask), 100 * mean(ambiguous_mask)))
+cat("\nFinal label distribution (singler_label_clean):\n")
+print(table(sobj_filt$singler_label_clean))
+```
+
+:::: question
+::: {.callout-tip icon="false"}
+## PERGUNTA 5.4c
+
+Células marcadas como Ambiguous continuam em sobj_filt e ainda contam para `ncol(sobj_filt)`. Por que mantê-las em vez de excluí-las diretamente? O que mudaria silenciosamente nas contagens de células relatadas em cada gráfico daqui em diante se elas fossem excluídas?
+:::
+::::
+
+::: {.callout-tip icon="false" collapse="true"}
+### RESPOSTA
+
+Mantê-las preserva um registro honesto do que o pipeline de anotação realmente produziu: uma fração real de células não pôde ser tipificada com confiança apenas com RNA, e essa fração é, em si, informativa (frequentemente diminui quando ADT é adicionado no **Bloco 6** (@sec-block6), que é todo o propósito do fluxo de trabalho de CITE-seq). Excluí-las nesta etapa reduziria silenciosamente `ncol(sobj_filt)`, o que muda cada denominador posterior: resumos de QC, proporções por condição, contagens de células por doador, e qualquer cálculo de porcentagem seriam todos calculados sobre uma população menor e não documentada. Um leitor de um gráfico posterior não teria como saber que células foram descartadas aqui, a menos que a exclusão fosse declarada explicitamente todas as vezes. Marcar e filtrar apenas na etapa de plotagem (**Etapa 5.4d**, @sec-step5.4d) mantém a contagem de células do objeto significativa durante o resto do script, e o próprio rótulo Ambiguous se torna um resultado que vale a pena relatar (por exemplo, no **Bloco 6** (@sec-block6) você pode verificar se ADT resolve algumas dessas células).
+
+DEMONSTRAÇÃO AO VIVO:
+
+```{r}
+table(sobj_filt$singler_label_clean == "Ambiguous")
+ncol(sobj_filt)  # unchanged regardless of how many cells are Ambiguous
+```
+
+GRÁFICO / SAÍDA: Saída de console
+:::
+
+### Etapa 5.4d - Replotar o UMAP apenas com rótulos confiáveis {#sec-step5.4d}
+
+Mesmo UMAP da **Etapa 5.3** (@sec-step5.3), restrito às células que NÃO foram marcadas como Ambiguous. As células não são removidas do objeto; elas são simplesmente excluídas deste gráfico específico por meio de uma filtragem estilo `cells.highlight` sobre uma cópia dos metadados usada para plotagem.
+
+```{r}
+confident_cells <- colnames(sobj_filt)[sobj_filt$singler_label_clean != "Ambiguous"]
+cat(sprintf("Plotting %d / %d cells (%.1f%%) with confident annotation.\n",
+            length(confident_cells), ncol(sobj_filt),
+            100 * length(confident_cells) / ncol(sobj_filt)))
+
+DimPlot(sobj_filt, cells = confident_cells,
+        group.by = "singler_label_clean",
+        label = TRUE, label.size = 3, repel = TRUE) +
+  ggtitle("Confident annotation only (Ambiguous cells excluded from view)") +
+  NoLegend()
+```
+
+### Etapa 5.4e - Integrar com `Harmony` {#sec-step5.4e}
+
+A **Etapa 4.4b** (@sec-step4.4b) encontrou o efeito de doador entre baixo e limítrofe neste conjunto de dados (R\^2 em PC1/PC2), então a integração não foi necessária para prosseguir. Nós a executamos aqui de qualquer forma para construir o painel de comparação na **Etapa 5.4f** (@sec-step5.4f): com vs sem `Harmony` é um hábito que vale a pena ver em dados que você já entende, antes de confiar nele em dados que não entende.
+
+```{r}
+library(harmony)
+sobj_filt <- RunHarmony(
+  sobj_filt,
+  group.by.vars  = "donor_id",
+  reduction      = "pca",
+  dims.use       = 1:20,
+  reduction.save = "harmony",
+  verbose        = FALSE
+)
+
+sobj_filt <- RunUMAP(
+  sobj_filt,
+  reduction      = "harmony",
+  dims           = 1:20,
+  reduction.name = "umap.harmony",
+  umap.method    = "uwot",
+  metric         = "cosine",
+  verbose        = FALSE
+)
+
+cat("Reductions now available:", paste(SafeReductions(sobj_filt), collapse = ", "), "\n")
+```
+
+A **Etapa 4.4b** (@sec-step4.4b) calculou o R\^2 de doador no PCA simples antes de qualquer decisão ser tomada. Agora que o Harmony foi executado, calcule o mesmo R\^2 no embedding harmonizado e compare diretamente: este é o ganho ou perda real de integrar, nas mesmas unidades usadas para tomar a decisão original, não apenas uma impressão visual de um UMAP.
+
+```{r}
+pc_coords_pca     <- Embeddings(sobj_filt, reduction = "pca")[, 1:2]
+pc_coords_harmony <- Embeddings(sobj_filt, reduction = "harmony")[, 1:2]
+
+r2_comparison <- data.frame(
+  dimension = c("PC1", "PC2"),
+  r2_before_harmony = sapply(1:2, function(pc)
+    summary(lm(pc_coords_pca[, pc] ~ sobj_filt$donor_id))$r.squared),
+  r2_after_harmony = sapply(1:2, function(pc)
+    summary(lm(pc_coords_harmony[, pc] ~ sobj_filt$donor_id))$r.squared)
+)
+r2_comparison$change <- r2_comparison$r2_after_harmony - r2_comparison$r2_before_harmony
+
+cat("\nDonor R^2 before vs after Harmony:\n")
+print(r2_comparison, row.names = FALSE)
+```
+
+Interpretação: uma grande mudança negativa significa que o Harmony removeu com sucesso a variância impulsionada pelo doador dessa dimensão. Uma mudança próxima de zero confirma a leitura da **Etapa 4.4b** (@sec-step4.4b): havia pouco efeito de doador para remover, para começar, então a integração custou variância biológica real por essencialmente nenhum ganho em correção de lote.
+
+:::: question
+::: {.callout-tip icon="false"}
+## PERGUNTA 5.4e
+
+A mudança no R\^2 de doador é grande ou próxima de zero neste conjunto de dados? Isso corresponde ao que a decisão da **Etapa 4.4b** (@sec-step4.4b) previu? Se você executasse isso em um conjunto de dados com R\^2 acima de 0,30, que mudança você esperaria ver nesta mesma tabela?
+:::
+::::
+
+::: {.callout-tip icon="false" collapse="true"}
+### RESPOSTA
+
+Neste conjunto de dados, o R\^2 de doador já era baixo a limítrofe antes do Harmony (**Etapa 4.4b**, @sec-step4.4b), então a mudança após o Harmony também deveria ser pequena: resta ao Harmony pouca variância impulsionada por doador para remover, que é exatamente o que a decisão da **Etapa 4.4b** (@sec-step4.4b) de pular a integração previu. Este é o caso confirmatório: se a mudança tivesse se mostrado grande aqui, isso significaria que a verificação original de R\^2 apenas em PC1/PC2 perdeu um efeito de doador que vivia em PCs posteriores, e a decisão de não integrar teria sido errada. Em um conjunto de dados onde o R\^2 anterior ao Harmony estava acima de 0,30 (efeito de doador dominante), o padrão esperado é uma grande queda no R\^2 após o Harmony (frequentemente caindo para 0,05-0,15) nas dimensões que o Harmony foi instruído a corrigir, junto com uma disposição de tipo celular visivelmente diferente no painel de comparação: essa combinação é como o sucesso da integração realmente se parece em números, não apenas em um UMAP que parece mais bonito.
+
+DEMONSTRAÇÃO AO VIVO:
+
+```{r}
+print(r2_comparison, row.names = FALSE)
+```
+
+- Um valor negativo grande na coluna 'change' significa que o Harmony removeu sinal de doador.
+- Uma mudança próxima de zero significa que havia pouco sinal de doador para remover.
+
+GRÁFICO / SAÍDA: A tabela `r2_comparison`; combine com a comparação de UMAP de 4 painéis na **Etapa 5.4f** (@sec-step5.4f).
+:::
+
+### Etapa 5.4f - Painel de comparação: UMAP antes/depois da anotação, com/sem `Harmony` {#sec-step5.4f}
+
+Quatro painéis respondem quatro perguntas diferentes sobre o mesmo objeto:
+
+**1. Pré-anotação:** os clusters não supervisionados parecem razoáveis? **2. Pós-anotação (sem `Harmony`):** a anotação faz sentido no embedding que você realmente usou através de @sec-block5 (**Bloco 5**, @sec-block5)? **3. Pós-anotação, `Harmony`:** a integração mudou quais células ficam perto de quais outras? **4. Cor de doador no `UMAP do Harmony`:** o Harmony realmente misturou os doadores, ou não precisou disso (consistente com a decisão da **Etapa 4.4b** (@sec-step4.4b))?
+
+```{r}
+p1_preannot <- DimPlot(sobj_filt, reduction = "umap", group.by = "seurat_clusters",
+                        label = TRUE, label.size = 3) +
+  ggtitle("1. Pre-annotation (unsupervised clusters)") + NoLegend()
+
+p2_postannot <- DimPlot(sobj_filt, reduction = "umap", group.by = "singler_label_clean",
+                         label = TRUE, label.size = 2.5, repel = TRUE) +
+  ggtitle("2. Post-annotation, no Harmony") + NoLegend()
+
+p3_harmony_annot <- DimPlot(sobj_filt, reduction = "umap.harmony", group.by = "singler_label_clean",
+                             label = TRUE, label.size = 2.5, repel = TRUE) +
+  ggtitle("3. Post-annotation, with Harmony") + NoLegend()
+
+p4_harmony_donor <- DimPlot(sobj_filt, reduction = "umap.harmony", group.by = "donor_id") +
+  ggtitle("4. Harmony UMAP by donor")
+
+(p1_preannot | p2_postannot) / (p3_harmony_annot | p4_harmony_donor)
+```
+
+:::: question
+::: {.callout-tip icon="false"}
+## PERGUNTA 5.4f
+
+Compare os painéis 2 e 3. Se a disposição do tipo celular parecer quase idêntica antes e depois do Harmony, o que isso confirma sobre a decisão da **Etapa 4.4b** (@sec-step4.4b) de não integrar? Se parecer diferente, em qual painel você confiaria para o resto da análise, e por quê?
+:::
+::::
+
+::: {.callout-tip icon="false" collapse="true"}
+### RESPOSTA
+
+Se os painéis 2 e 3 parecerem quase idênticos, isso confirma a leitura da **Etapa 4.4b** (@sec-step4.4b) sobre os dados: o efeito de doador em PC1/PC2 já era baixo (faixa de R\^2 \< 0,10-0,30), então o Harmony tem pouco trabalho a fazer e converge para essencialmente a mesma disposição de tipo celular. Esse é o resultado esperado e tranquilizador aqui, e o painel 4 (UMAP do Harmony por doador) ainda deve mostrar os doadores razoavelmente misturados dentro de cada região de tipo celular, o mesmo que antes da integração. Se os painéis 2 e 3 parecessem claramente diferentes, isso significaria que o R\^2 de PC1/PC2 da **Etapa 4.4b** (@sec-step4.4b) subestimou um efeito de doador que vivia em PCs posteriores, e a decisão certa seria confiar no painel integrado com Harmony (3) para a análise posterior, já que ele corrige ativamente o lote em vez de apenas medi-lo em duas dimensões. De qualquer forma, o painel de comparação é a verificação que valida (ou reverte) uma decisão de integração tomada anteriormente a partir de um diagnóstico parcial.
+
+DEMONSTRAÇÃO AO VIVO:
+
+Quantifique a comparação visual em vez de estimá-la a olho:
+
+```{r}
+table(sobj_filt$singler_label_clean, useNA = "ifany")
+```
+
+Compare a composição de clusters antes/depois do `Harmony` usando o índice de Rand ajustado se você quiser um número em vez de um gráfico:
+
+```{r}
+mclust::adjustedRandIndex(cluster_labels_no_harmony, cluster_labels_harmony)
+```
+
+GRÁFICO / SAÍDA: O próprio painel de comparação 2x2 (**Etapa 5.4f**, @sec-step5.4f) é a resposta; não é necessário um gráfico separado.
+:::
+
+### Etapa 5.4g - Marcadores de expressão diferencial por tipo celular anotado {#sec-step5.4g}
+
+Explícito sobre o que este teste realmente usa, já que o objeto agora carrega tanto um PCA/UMAP simples quanto um PCA/UMAP corrigido com Harmony da **Etapa 5.4e** (@sec-step5.4e):
+
+::: {.callout-tip icon="false"}
+### Explicação
+
+- **Assay**: RNA, camada "data" (contagens normalizadas logaritmicamente do **Bloco 4**, @sec-block4).
+  - O Harmony toca apenas nos embeddings de PCA/UMAP (usados para visualização e clustering); nunca modifica os valores de expressão de RNA que `FindAllMarkers` lê. Executar isso no objeto harmonizado ou no objeto anterior ao Harmony dá resultados idênticos, porque o teste de DE aqui compara a expressão diretamente entre grupos de células, não sua posição em nenhum embedding.
+- **Agrupamento**: `singler_label_clean` (**Etapa 5.4c**, @sec-step5.4c), células Ambiguous excluídas. Elas não são um grupo biológico coerente, então testá-las como seu próprio "cluster" não teria significado.
+- **Filtros**: `only.pos = TRUE` (marcadores, não anti-marcadores), `min.pct` = 0.25 (expresso em pelo menos 25% de um grupo), `logfc.threshold` = 0.5 (pelo menos uma mudança de 1,4 vezes).
+:::
+
+```{r}
+DefaultAssay(sobj_filt) <- "RNA"
+Idents(sobj_filt) <- "singler_label_clean"
+
+de_markers <- FindAllMarkers(
+  subset(sobj_filt, idents = "Ambiguous", invert = TRUE),
+  only.pos        = TRUE,
+  min.pct         = 0.25,
+  logfc.threshold = 0.5,
+  verbose         = FALSE
+)
+
+TOP_N_MARKERS <- 5
+top_markers <- de_markers %>%
+  group_by(cluster) %>%
+  slice_max(order_by = avg_log2FC, n = TOP_N_MARKERS) %>%
+  ungroup()
+
+cat(sprintf("Top %d markers per confident cell type:\n", TOP_N_MARKERS))
+print(top_markers[, c("cluster", "gene", "avg_log2FC", "pct.1", "pct.2", "p_val_adj")],
+      n = nrow(top_markers))
+
+DotPlot(sobj_filt,
+        features = unique(top_markers$gene),
+        idents   = setdiff(levels(Idents(sobj_filt)), "Ambiguous"),
+        group.by = "singler_label_clean") +
+  RotatedAxis() +
+  ggtitle(sprintf("Top %d markers per cell type (confident labels only)", TOP_N_MARKERS))
+```
+
+:::: question
+::: {.callout-tip icon="false"}
+## PERGUNTA 5.4g
+
+Escolha um tipo celular do DotPlot. Seu marcador principal corresponde a um marcador canônico que você já conhece para aquela linhagem (**Etapa 1.8**, @sec-step1.8)? Se não, isso é um sinal de alerta sobre a anotação, ou um achado fora da lista canônica que vale a pena investigar mais a fundo?
+:::
+::::
+
+::: {.callout-tip icon="false" collapse="true"}
+### RESPOSTA
+
+Para a maioria das linhagens principais neste conjunto de dados, o marcador de DE principal deve corresponder a um gene canônico da lista da **Etapa 1.8** (@sec-step1.8): CD3D/CD3E para células T, MS4A1/CD79A para células B, CD14/LYZ para monócitos, NKG7/GNLY para células NK. Uma correspondência é tranquilizadora: a evidência estatística independente (teste de DE) concorda com o conhecimento biológico prévio (marcadores canônicos), que é a forma mais forte de validação disponível sem um ensaio ortogonal. Uma discrepância é mais interessante do que alarmante por si só: primeiro descarte explicações técnicas (o gene canônico sequer está no painel de 500 genes? Verifique `rownames(sobj_filt[['RNA']]))`, depois considere se o cluster é um subtipo conhecido, mas menos de livro-texto (por exemplo, um subconjunto de Treg cujo marcador principal é FOXP3 em vez de genes CD3 genéricos) antes de tratá-lo como um sinal de alerta sobre a própria anotação.
+
+DEMONSTRAÇÃO AO VIVO:
+
+Verifique se um marcador canônico sequer existe neste painel de 500 genes:
+
+```{r}
+canonical_check <- c("CD3D","CD3E","MS4A1","CD79A","CD14","LYZ","NKG7","GNLY")
+canonical_check[!canonical_check %in% rownames(sobj_filt[["RNA"]])]
+```
+
+Depois compare com o marcador principal do DotPlot para o tipo celular em questão
+
+```{r}
+top_markers[top_markers$cluster == "T_cells", ]
+```
+
+GRÁFICO / SAÍDA: O DotPlot da **Etapa 5.4g** (@sec-step5.4g); comparar visualmente com marcadores canônicos.
+:::
+
+### Etapa 5.5 - Salvar o checkpoint anotado
+
+```{r, eval=FALSE}
+saveRDS(top_markers, "checkpoints/outputs/top_markers.rds")
+saveRDS(sobj_filt, "checkpoints/outputs/sobj_preprocessed.rds")
+```
+
+```{r}
+cat("Checkpoint saved: outputs/sobj_preprocessed.rds\n")
+cat("To reload: sobj_filt <- readRDS('outputs/sobj_preprocessed.rds')\n")
+```
+
+Observe o UMAP colorido por condição. Algum cluster aparece exclusiva ou predominantemente em doadores com COVID-19? Observe o `DotPlot`: quais clusters poderiam ser monócitos com base na expressão de *CD14* e *FCGR3A*? Depois do intervalo, adicionamos a camada de proteína para testar essas interpretações.
+
+::: callout-tip
+## 📌 Nota final para os usuários
+
+Ao final desta etapa, você pode **baixar o objeto Seurat pré-processado** para continuar com a próxima etapa da análise de CITE‑seq:
+
+👉 Este arquivo contém o **objeto Seurat pré-processado** ([`sobj_preprocessed.rds`](checkpoints/outputs/sobj_preprocessed.rds)) e serve como ponto de partida para a análise multimodal posterior. Ao salvar e compartilhar este checkpoint, todos os usuários podem continuar de forma consistente sem repetir as etapas anteriores.
+:::
+
+```{r, message=FALSE, echo=FALSE}
+rm(list = ls())
+gc()
+```

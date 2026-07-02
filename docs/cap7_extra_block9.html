@@ -381,6 +381,10 @@ ul.task-list li input[type="checkbox"] {
 <a href="#block-9---extra-optional-post-class---cascade-challenges" id="toc-block-9---extra-optional-post-class---cascade-challenges" class="nav-link active" data-scroll-target="#block-9---extra-optional-post-class---cascade-challenges"><span class="header-section-number">B.1</span> <strong>Block 9 -</strong> Extra (optional, post-class) - cascade challenges</a>
   <ul>
 <li><a href="#challenge-9.1---the-disappearing-t-cell-subset" id="toc-challenge-9.1---the-disappearing-t-cell-subset" class="nav-link" data-scroll-target="#challenge-9.1---the-disappearing-t-cell-subset"><span class="header-section-number">B.1.1</span> Challenge 9.1 - The disappearing T-cell subset</a></li>
+  <li><a href="#challenge-9.1---the-disappearing-t-cell-subset-1" id="toc-challenge-9.1---the-disappearing-t-cell-subset-1" class="nav-link" data-scroll-target="#challenge-9.1---the-disappearing-t-cell-subset-1"><span class="header-section-number">B.1.2</span> Challenge 9.1 - The disappearing T-cell subset</a></li>
+  <li><a href="#challenge-9.2---the-cluster-that-disappears-after-re-clustering" id="toc-challenge-9.2---the-cluster-that-disappears-after-re-clustering" class="nav-link" data-scroll-target="#challenge-9.2---the-cluster-that-disappears-after-re-clustering"><span class="header-section-number">B.1.3</span> Challenge 9.2 - The cluster that disappears after re-clustering</a></li>
+  <li><a href="#challenge-9.3---the-healthy-donor-that-behaves-like-covid-19" id="toc-challenge-9.3---the-healthy-donor-that-behaves-like-covid-19" class="nav-link" data-scroll-target="#challenge-9.3---the-healthy-donor-that-behaves-like-covid-19"><span class="header-section-number">B.1.4</span> Challenge 9.3 - The healthy donor that behaves like COVID-19</a></li>
+  <li><a href="#end-of-optional-extras" id="toc-end-of-optional-extras" class="nav-link" data-scroll-target="#end-of-optional-extras"><span class="header-section-number">B.1.5</span> End of optional extras</a></li>
   </ul>
 </li>
   </ul></nav>
@@ -419,6 +423,36 @@ ul.task-list li input[type="checkbox"] {
 <li>If the reference is correct, check DefaultAssay and the layer SingleR ran on (data vs counts).</li>
 </ol>
 <p>Try the diagnostic on this object. Write your prediction first.</p>
+</section><section id="challenge-9.1---the-disappearing-t-cell-subset-1" class="level3" data-number="B.1.2"><h3 data-number="B.1.2" class="anchored" data-anchor-id="challenge-9.1---the-disappearing-t-cell-subset-1">
+<span class="header-section-number">B.1.2</span> Challenge 9.1 - The disappearing T-cell subset</h3>
+<p>Symptom (downstream): SingleR returns “CD4 T cell” for less than 5 percent of cells in a PBMC dataset where flow cytometry says CD4 T cells are 25 percent. ADT panel shows CD4 protein expressed normally.</p>
+<p>Diagnostic chain (each step surfaces the next):</p>
+<ol type="1">
+<li>Compare CD4 ADT-positive cells vs CD4 RNA-positive cells.</li>
+<li>If ADT-positive cells are abundant but RNA-positive cells are rare, the cause is RNA dropout (Block 6 territory). Stop here.</li>
+<li>If RNA-positive cells are also abundant, check the SingleR reference: does it have a distinct “CD4 T cell” label, or only “T cell”?</li>
+<li>If the reference is correct, check DefaultAssay and the layer SingleR ran on (data vs counts).</li>
+</ol>
+<p>Try the diagnostic on this object. Write your prediction first.</p>
+</section><section id="challenge-9.2---the-cluster-that-disappears-after-re-clustering" class="level3" data-number="B.1.3"><h3 data-number="B.1.3" class="anchored" data-anchor-id="challenge-9.2---the-cluster-that-disappears-after-re-clustering">
+<span class="header-section-number">B.1.3</span> Challenge 9.2 - The cluster that disappears after re-clustering</h3>
+<p>Symptom: a cluster from Block 4 (RNA-only) disappears when you switch to WNN clustering in Block 6. The cells previously in that cluster are now spread across several other clusters.</p>
+<p>Diagnostic chain:</p>
+<ol type="1">
+<li>Look at RNA.weight for the cells previously in that cluster. Is ADT dominating?</li>
+<li>If ADT dominates, the cluster was held together by RNA-specific variance that WNN downweights. Was that variance biological (gene programme) or technical (a small batch effect on one gene)?</li>
+<li>Cross-tab the previous cluster against canonical lineage markers. If it splits cleanly along a lineage marker, WNN found a finer structure. If it does not, ADT was overweighted.</li>
+</ol></section><section id="challenge-9.3---the-healthy-donor-that-behaves-like-covid-19" class="level3" data-number="B.1.4"><h3 data-number="B.1.4" class="anchored" data-anchor-id="challenge-9.3---the-healthy-donor-that-behaves-like-covid-19">
+<span class="header-section-number">B.1.4</span> Challenge 9.3 - The healthy donor that behaves like COVID-19</h3>
+<p>Symptom: one Healthy donor in Step 6.12 shows a per-donor cell-type profile much closer to the COVID-19 donors than to the other Healthy donors.</p>
+<p>Diagnostic chain:</p>
+<ol type="1">
+<li>QC: is this donor’s nCount or percent.mt distribution different?</li>
+<li>Annotation: did one specific cell type get over-assigned in this donor (annotation drift, not biology)?</li>
+<li>Batch: was this donor processed in a different staining run? Check adt_batch if Block 8 Scenario 4 ran.</li>
+<li>Sample swap: are the donor metadata fields consistent (donor_id, condition, severity all aligned)? A sample swap during labelling produces this exact symptom.</li>
+</ol></section><section id="end-of-optional-extras" class="level3" data-number="B.1.5"><h3 data-number="B.1.5" class="anchored" data-anchor-id="end-of-optional-extras">
+<span class="header-section-number">B.1.5</span> End of optional extras</h3>
 
 
 </section></section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
