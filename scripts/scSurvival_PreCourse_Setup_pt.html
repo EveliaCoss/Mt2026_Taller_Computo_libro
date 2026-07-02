@@ -1,0 +1,1592 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Guia de Preparação Pré-Curso — Curso de Sobrevivência em Single-Cell</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+<style>
+
+/* ─── TOKENS ─────────────────────────────────────────────── */
+:root {
+  --white:       #ffffff;
+  --bg:          #f8f9fb;
+  --bg2:         #f1f3f7;
+  --bg3:         #e8ecf2;
+  --border:      #dde2ea;
+  --border-lt:   #edf0f5;
+
+  --ink:         #2c3142;
+  --ink-mid:     #4a5268;
+  --ink-light:   #8892a4;
+
+  --teal:        #3d7f82;
+  --teal-lt:     #eaf4f5;
+  --teal-mid:    #c8e8ea;
+
+  --sage:        #5a7d6b;
+  --sage-lt:     #edf5f0;
+  --sage-mid:    #c6dfd3;
+
+  --amber:       #8a6530;
+  --amber-lt:    #fdf5e8;
+  --amber-mid:   #f0d9a8;
+
+  --rose:        #8b4a5a;
+  --rose-lt:     #fdf0f2;
+  --rose-mid:    #f2c8d0;
+
+  --blue:        #3a5f8a;
+  --blue-lt:     #edf2fa;
+  --blue-mid:    #c2d4ec;
+
+  --code-bg:     #f0f2f7;
+  --code-border: #d8dde8;
+  --code-txt:    #374151;
+
+  --font-body:   'Plus Jakarta Sans', 'Calibri', 'Segoe UI', sans-serif;
+  --font-mono:   'Fira Code', 'Consolas', 'Courier New', monospace;
+  --radius:      8px;
+  --radius-lg:   12px;
+  --shadow-sm:   0 1px 3px rgba(44,49,66,.06);
+  --shadow:      0 2px 8px rgba(44,49,66,.08);
+}
+
+/* ─── RESET ──────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+/* ─── BASE ───────────────────────────────────────────────── */
+body {
+  font-family:  var(--font-body);
+  font-size:    16px;
+  line-height:  1.75;
+  color:        var(--ink);
+  background:   var(--bg);
+  min-height:   100vh;
+}
+
+/* ─── PROGRESS BAR ───────────────────────────────────────── */
+#pbar {
+  position:   fixed;
+  top: 0; left: 0;
+  height:     3px;
+  width:      0%;
+  background: linear-gradient(90deg, var(--teal), var(--sage));
+  z-index:    100;
+  transition: width .25s ease;
+}
+
+/* ─── HERO ───────────────────────────────────────────────── */
+.hero {
+  background:    var(--white);
+  border-bottom: 1px solid var(--border);
+  padding:       3rem 2rem 2.5rem;
+}
+.hero-inner {
+  max-width: 780px;
+  margin:    0 auto;
+}
+.hero-tag {
+  display:        inline-block;
+  font-size:      .7rem;
+  font-weight:    600;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color:          var(--teal);
+  background:     var(--teal-lt);
+  border:         1px solid var(--teal-mid);
+  padding:        .25rem .75rem;
+  border-radius:  100px;
+  margin-bottom:  1rem;
+}
+.hero h1 {
+  font-size:   2rem;
+  font-weight: 700;
+  color:       var(--ink);
+  line-height: 1.2;
+  margin-bottom: .4rem;
+}
+.hero .subtitle {
+  font-size:   1.05rem;
+  color:       var(--ink-mid);
+  font-weight: 300;
+  margin-bottom: 1.5rem;
+}
+.hero-meta {
+  display:   flex;
+  flex-wrap: wrap;
+  gap:       .5rem;
+  font-size: .78rem;
+  color:     var(--ink-light);
+  font-family: var(--font-mono);
+}
+.hero-meta span {
+  background: var(--bg2);
+  border:     1px solid var(--border);
+  padding:    .2rem .65rem;
+  border-radius: 4px;
+}
+
+/* ─── LAYOUT ─────────────────────────────────────────────── */
+.container {
+  max-width: 780px;
+  margin:    0 auto;
+  padding:   2.5rem 2rem 5rem;
+}
+
+/* ─── SECTION ────────────────────────────────────────────── */
+.section { margin-bottom: 3rem; scroll-margin-top: 80px; }
+
+.section-label {
+  font-size:      .68rem;
+  font-weight:    600;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color:          var(--ink-light);
+  margin-bottom:  .5rem;
+  display:        flex;
+  align-items:    center;
+  gap:            .5rem;
+}
+.section-label::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border-lt);
+}
+
+.section h2 {
+  font-size:     1.25rem;
+  font-weight:   700;
+  color:         var(--ink);
+  margin-bottom: .9rem;
+}
+
+p { margin-bottom: .9rem; color: var(--ink-mid); }
+strong { color: var(--ink); font-weight: 600; }
+a { color: var(--teal); text-decoration: underline; text-underline-offset: 3px; }
+
+/* ─── CHECKLIST CARD ─────────────────────────────────────── */
+.checklist-card {
+  background:    var(--white);
+  border:        1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow:    var(--shadow);
+  overflow:      hidden;
+  margin-bottom: 1.5rem;
+}
+.checklist-head {
+  background:  var(--teal-lt);
+  border-bottom: 1px solid var(--teal-mid);
+  padding:     .85rem 1.25rem;
+  font-size:   .8rem;
+  font-weight: 600;
+  color:       var(--teal);
+  letter-spacing: .05em;
+}
+.check-row {
+  display:     flex;
+  align-items: flex-start;
+  gap:         .85rem;
+  padding:     .85rem 1.25rem;
+  border-bottom: 1px solid var(--border-lt);
+  transition:  background .15s;
+  cursor:      pointer;
+}
+.check-row:last-child { border-bottom: none; }
+.check-row:hover { background: var(--bg); }
+
+.check-row input[type="checkbox"] {
+  width:  18px;
+  height: 18px;
+  accent-color: var(--teal);
+  margin-top:   3px;
+  flex-shrink:  0;
+  cursor:       pointer;
+}
+.check-label { font-size: .9rem; color: var(--ink-mid); line-height: 1.5; }
+.check-label code {
+  font-family: var(--font-mono);
+  font-size:   .83em;
+  background:  var(--code-bg);
+  border:      1px solid var(--code-border);
+  padding:     .1em .35em;
+  border-radius: 3px;
+  color:       var(--code-txt);
+}
+.check-row input:checked ~ .check-label {
+  text-decoration: line-through;
+  color:           var(--ink-light);
+}
+
+/* ─── STEP CARDS ─────────────────────────────────────────── */
+.steps { display: flex; flex-direction: column; gap: .85rem; }
+
+.step {
+  background:    var(--white);
+  border:        1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow:    var(--shadow-sm);
+  overflow:      hidden;
+}
+.step-head {
+  display:     flex;
+  align-items: center;
+  gap:         .85rem;
+  padding:     .9rem 1.25rem;
+  cursor:      pointer;
+  user-select: none;
+  border-bottom: 1px solid transparent;
+  transition:  background .15s;
+}
+.step-head:hover { background: var(--bg); }
+.step.open .step-head { border-bottom-color: var(--border-lt); }
+
+.step-num {
+  width:         32px;
+  height:        32px;
+  border-radius: 50%;
+  background:    var(--bg2);
+  border:        1px solid var(--border);
+  display:       flex;
+  align-items:   center;
+  justify-content: center;
+  font-size:     .8rem;
+  font-weight:   700;
+  color:         var(--ink-mid);
+  flex-shrink:   0;
+  transition:    background .2s, color .2s, border-color .2s;
+}
+.step.done .step-num {
+  background:    var(--sage-lt);
+  border-color:  var(--sage-mid);
+  color:         var(--sage);
+}
+.step-head-text { flex: 1; }
+.step-title {
+  font-size:   .95rem;
+  font-weight: 600;
+  color:       var(--ink);
+}
+.step-sub {
+  font-size: .78rem;
+  color:     var(--ink-light);
+  margin-top: .1rem;
+}
+.step-chevron {
+  color:      var(--ink-light);
+  font-size:  .8rem;
+  transition: transform .2s;
+}
+.step.open .step-chevron { transform: rotate(180deg); }
+
+.step-body {
+  display:  none;
+  padding:  1.25rem 1.5rem;
+}
+.step.open .step-body { display: block; }
+
+/* ─── CODE BLOCKS ────────────────────────────────────────── */
+.code-wrap {
+  position:      relative;
+  border-radius: var(--radius);
+  overflow:      hidden;
+  margin:        1rem 0;
+  border:        1px solid var(--code-border);
+}
+.code-top {
+  display:       flex;
+  align-items:   center;
+  justify-content: space-between;
+  background:    var(--bg2);
+  padding:       .4rem .85rem;
+  border-bottom: 1px solid var(--code-border);
+}
+.code-lang {
+  font-family:    var(--font-mono);
+  font-size:      .65rem;
+  color:          var(--ink-light);
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+.copy-btn {
+  font-family:    var(--font-mono);
+  font-size:      .65rem;
+  background:     var(--white);
+  border:         1px solid var(--border);
+  color:          var(--ink-light);
+  padding:        .18rem .6rem;
+  border-radius:  4px;
+  cursor:         pointer;
+  transition:     all .15s;
+  letter-spacing: .04em;
+}
+.copy-btn:hover          { border-color: var(--teal); color: var(--teal); }
+.copy-btn.copied         { border-color: var(--sage); color: var(--sage); }
+
+pre {
+  background:  var(--code-bg);
+  color:       var(--code-txt);
+  font-family: var(--font-mono);
+  font-size:   .82rem;
+  line-height: 1.7;
+  padding:     1rem 1.1rem;
+  overflow-x:  auto;
+  margin:      0;
+}
+
+code {
+  font-family: var(--font-mono);
+  font-size:   .84em;
+  background:  var(--code-bg);
+  border:      1px solid var(--code-border);
+  padding:     .1em .35em;
+  border-radius: 3px;
+  color:       var(--code-txt);
+}
+
+/* ─── CALLOUT ────────────────────────────────────────────── */
+.callout {
+  border-radius: var(--radius);
+  padding:       .85rem 1.1rem;
+  margin:        1rem 0;
+  font-size:     .88rem;
+  border-left:   3px solid;
+}
+.callout strong {
+  display:        block;
+  font-size:      .72rem;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  margin-bottom:  .3rem;
+}
+.note   { background: var(--blue-lt);  border-color: var(--blue);  color: #2d4a6b; }
+.note   strong { color: var(--blue); }
+.tip    { background: var(--sage-lt);  border-color: var(--sage);  color: #3d5649; }
+.tip    strong { color: var(--sage); }
+.warn   { background: var(--amber-lt); border-color: var(--amber); color: #6b4c1f; }
+.warn   strong { color: var(--amber); }
+.error  { background: var(--rose-lt);  border-color: var(--rose);  color: #6b3040; }
+.error  strong { color: var(--rose); }
+
+/* ─── VERIFY TABLE ───────────────────────────────────────── */
+.verify-table {
+  width:           100%;
+  border-collapse: collapse;
+  font-size:       .87rem;
+  margin:          1rem 0;
+}
+.verify-table th {
+  background:     var(--bg2);
+  color:          var(--ink-light);
+  font-size:      .7rem;
+  font-weight:    600;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  padding:        .5rem .85rem;
+  text-align:     left;
+  border-bottom:  1px solid var(--border);
+}
+.verify-table td {
+  padding:       .55rem .85rem;
+  border-bottom: 1px solid var(--border-lt);
+  color:         var(--ink-mid);
+}
+.verify-table tr:last-child td { border-bottom: none; }
+.ok   { color: var(--sage); font-family: var(--font-mono); font-size: .78rem; }
+.miss { color: var(--rose); font-family: var(--font-mono); font-size: .78rem; }
+
+/* ─── CONCEPT ROW ────────────────────────────────────────── */
+.concept-row {
+  display:               grid;
+  grid-template-columns: 1fr 1fr;
+  gap:                   .85rem;
+  margin:                1rem 0;
+}
+.concept-card {
+  background:    var(--white);
+  border:        1px solid var(--border);
+  border-radius: var(--radius);
+  padding:       .9rem 1.1rem;
+  box-shadow:    var(--shadow-sm);
+}
+.concept-card .cc-label {
+  font-size:      .68rem;
+  font-weight:    600;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color:          var(--ink-light);
+  margin-bottom:  .35rem;
+}
+.concept-card .cc-body { font-size: .87rem; color: var(--ink-mid); }
+.concept-card .cc-body strong { color: var(--ink); }
+
+/* ─── STICKY NAV ─────────────────────────────────────────── */
+.sticky-nav {
+  position:      sticky;
+  top:           0;
+  background:    rgba(248,249,251,.95);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--border);
+  z-index:       50;
+  padding:       .6rem 2rem;
+}
+.nav-inner {
+  max-width:   780px;
+  margin:      0 auto;
+  display:     flex;
+  align-items: center;
+  justify-content: space-between;
+  gap:         1rem;
+}
+.nav-brand {
+  font-size:   .78rem;
+  font-weight: 600;
+  color:       var(--ink-mid);
+  white-space: nowrap;
+}
+.nav-links {
+  display:  flex;
+  gap:      1.25rem;
+  flex-wrap: wrap;
+}
+.nav-links a {
+  font-size:      .75rem;
+  color:          var(--ink-light);
+  text-decoration: none;
+  font-weight:    500;
+  transition:     color .15s;
+}
+.nav-links a:hover { color: var(--teal); }
+
+/* ─── FOOTER ─────────────────────────────────────────────── */
+.footer {
+  text-align:  center;
+  font-size:   .75rem;
+  color:       var(--ink-light);
+  margin-top:  3rem;
+  padding-top: 1.5rem;
+  border-top:  1px solid var(--border-lt);
+}
+
+/* ─── RESPONSIVE ─────────────────────────────────────────── */
+@media (max-width: 600px) {
+  .hero h1     { font-size: 1.5rem; }
+  .concept-row { grid-template-columns: 1fr; }
+  .nav-links   { display: none; }
+  .container   { padding: 1.5rem 1rem 4rem; }
+  .hero        { padding: 2rem 1rem 1.75rem; }
+  .path-row    { grid-template-columns: 1fr; }
+}
+
+/* ─── PATH CHOICE (Step 1) ───────────────────────────────── */
+.path-row {
+  display:               grid;
+  grid-template-columns: 1fr 1fr;
+  gap:                   1rem;
+  margin:                1rem 0 1.5rem;
+}
+.path-card {
+  background:    var(--white);
+  border:        1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow:    var(--shadow-sm);
+  padding:       1.25rem 1.4rem;
+  display:       flex;
+  flex-direction: column;
+}
+.path-card.recommended { border-color: var(--teal-mid); box-shadow: var(--shadow); }
+.path-card .path-eyebrow {
+  font-size:      .68rem;
+  font-weight:    600;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color:          var(--ink-light);
+  margin-bottom:  .5rem;
+}
+.path-card.recommended .path-eyebrow { color: var(--teal); }
+.path-card .path-badge {
+  display:        inline-block;
+  font-size:      .65rem;
+  font-weight:    600;
+  letter-spacing: .07em;
+  text-transform: uppercase;
+  color:          var(--teal);
+  background:     var(--teal-lt);
+  border:         1px solid var(--teal-mid);
+  padding:        .15rem .55rem;
+  border-radius:  100px;
+  margin-left:    .5rem;
+}
+.path-card h3 {
+  font-size:   1.05rem;
+  font-weight: 700;
+  color:       var(--ink);
+  margin-bottom: .4rem;
+}
+.path-card .path-desc {
+  font-size: .87rem;
+  color:     var(--ink-mid);
+  margin-bottom: .8rem;
+  flex: 1;
+}
+.path-card .path-meta {
+  font-size: .76rem;
+  color:     var(--ink-light);
+  font-family: var(--font-mono);
+  border-top: 1px solid var(--border-lt);
+  padding-top: .65rem;
+  margin-top: .3rem;
+}
+.decision-box {
+  background:    var(--bg2);
+  border:        1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding:       1.1rem 1.3rem;
+  margin:        0 0 1.5rem;
+}
+.decision-box .db-label {
+  font-size:      .7rem;
+  font-weight:    600;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color:          var(--ink-light);
+  margin-bottom:  .6rem;
+}
+.decision-row {
+  display:        flex;
+  align-items:    flex-start;
+  gap:            .75rem;
+  padding:        .55rem 0;
+  font-size:      .88rem;
+  color:          var(--ink-mid);
+}
+.decision-row:not(:last-child) { border-bottom: 1px solid var(--border-lt); }
+.decision-row .dr-icon {
+  flex-shrink: 0;
+  width: 22px; height: 22px;
+  border-radius: 6px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: .75rem; font-weight: 700;
+  margin-top: .05rem;
+}
+.decision-row.go .dr-icon  { background: var(--sage-lt); color: var(--sage); }
+.decision-row.cau .dr-icon { background: var(--amber-lt); color: var(--amber); }
+</style>
+</head>
+<body>
+
+<div id="pbar"></div>
+
+<!-- STICKY NAV -->
+<nav class="sticky-nav">
+  <div class="nav-inner">
+    <span class="nav-brand">Curso de Sobrevivência em Single-Cell</span>
+    <div class="nav-links">
+      <a href="#checklist">Checklist</a>
+      <a href="#environment">Ambiente</a>
+      <a href="#install-r">Instalar o R</a>
+      <a href="#install-rstudio">RStudio</a>
+      <a href="#packages">Pacotes</a>
+      <a href="#dataset">Dataset</a>
+      <a href="#preview">Visão geral</a>
+      <a href="#troubleshoot">Problemas</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="hero-inner">
+    <div class="hero-tag">Guia de preparação pré-curso</div>
+    <h1>Prepare-se para o workshop</h1>
+    <p class="subtitle">Complete todas as etapas abaixo <strong>antes do dia do curso</strong>.<br>
+    Máquina virtual: 30-60 min de download. Instalação local: 20-40 min, dependendo da sua conexão.</p>
+
+    <div style="display:flex;gap:1rem;flex-wrap:wrap;margin:.75rem 0 1.25rem;align-items:center;">
+      <div style="display:flex;align-items:center;gap:.45rem;background:var(--teal-lt);border:1px solid var(--teal-mid);border-radius:var(--radius);padding:.45rem .9rem;font-size:.85rem;font-weight:600;color:var(--teal);">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        2 de julho de 2026 (quinta-feira)
+      </div>
+      <div style="display:flex;align-items:center;gap:.45rem;background:var(--teal-lt);border:1px solid var(--teal-mid);border-radius:var(--radius);padding:.45rem .9rem;font-size:.85rem;font-weight:600;color:var(--teal);">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        10h00 (horário de Brasília, BRT)
+      </div>
+      <div style="display:flex;align-items:center;gap:.45rem;background:var(--teal-lt);border:1px solid var(--teal-mid);border-radius:var(--radius);padding:.45rem .9rem;font-size:.85rem;font-weight:600;color:var(--teal);">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M15 10l4.553-2.276A1 1 0 0121 8.723v6.554a1 1 0 01-1.447.894L15 14M3 8a2 2 0 012-2h8a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2V8z"/></svg>
+        Online — link enviado por e-mail
+      </div>
+    </div>
+
+    <div class="hero-meta">
+      <span>Seurat v5</span>
+      <span>R 4.3+</span>
+      <span>GSE149689</span>
+      <span>RNA + ADT</span>
+      <span>3.000 células</span>
+    </div>
+  </div>
+</header>
+
+<!-- COURSE INFO BANNER -->
+<div style="background:var(--white);border-bottom:1px solid var(--border);padding:.75rem 2rem;">
+  <div style="max-width:780px;margin:0 auto;display:flex;flex-wrap:wrap;gap:.6rem;align-items:center;font-size:.82rem;color:var(--ink-mid);">
+    <span style="font-weight:600;color:var(--ink);margin-right:.25rem;">Links do curso:</span>
+    <a href="https://drive.google.com/drive/folders/1TsMe9Q8Zog-t7uZp5ziF5Z1Wdcgik8hR" target="_blank"
+       style="display:inline-flex;align-items:center;gap:.35rem;background:var(--sage-lt);border:1px solid var(--sage-mid);border-radius:var(--radius);padding:.3rem .7rem;color:var(--sage);font-weight:600;text-decoration:none;">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M22 19a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2h5l2 3h9a2 2 0 012 2z"/></svg>
+      Google Drive (materiais, MV, dados)
+    </a>
+    <span style="color:var(--border);font-size:.9rem;">|</span>
+    <span style="display:inline-flex;align-items:center;gap:.35rem;background:var(--blue-lt);border:1px solid var(--blue-mid);border-radius:var(--radius);padding:.3rem .7rem;color:var(--blue);font-weight:600;">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M15 10l4.553-2.276A1 1 0 0121 8.723v6.554a1 1 0 01-1.447.894L15 14M3 8a2 2 0 012-2h8a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2V8z"/></svg>
+      Link da sessão: enviado por e-mail
+    </span>
+  </div>
+</div>
+
+<!-- MAIN CONTENT -->
+<div class="container">
+
+  <!-- ── COURSE SCHEDULE ──────────────────────────────────── -->
+  <section class="section" id="schedule" style="padding-bottom:1.5rem;">
+    <div class="section-label">2 de julho de 2026 · 10h00 BRT</div>
+    <h2>Cronograma do curso</h2>
+
+    <table class="verify-table" style="font-size:.88rem;">
+      <thead>
+        <tr><th style="width:13%">Block</th><th>Topic</th><th style="width:22%;white-space:nowrap">When</th></tr>
+      </thead>
+      <tbody>
+        <tr style="background:var(--sage-lt);">
+          <td><strong>Step 0</strong><br><em style="font-size:.75rem;color:var(--ink-light)">+ Block 1</em></td>
+          <td>
+            <strong>Configuração &amp; inspeção do objeto</strong>
+            <span style="display:inline-block;margin-left:.5rem;background:var(--sage-mid);color:var(--sage);font-size:.68rem;font-weight:700;padding:.1rem .45rem;border-radius:4px;letter-spacing:.05em;text-transform:uppercase;">Antes do curso</span><br>
+            <span style="color:var(--ink-mid);font-size:.8rem;">Instalar pacotes · Carregar bibliotecas · Inspecionar objeto Seurat (RNA + ADT) · Mapa de slots · Metadados</span>
+          </td>
+          <td style="color:var(--sage);font-weight:600;">Pré-curso<br><span style="font-size:.75rem;font-weight:400;color:var(--ink-light);">~45 min em casa</span></td>
+        </tr>
+        <tr>
+          <td><strong>Block 2</strong></td>
+          <td>
+            <strong>Controle de qualidade (RNA)</strong><br>
+            <span style="color:var(--ink-mid);font-size:.8rem;">Métricas de QC · percent.mt · Detecção de outliers · Thresholds baseados nos dados · Erros deliberados</span>
+          </td>
+          <td>0:00 – 0:40</td>
+        </tr>
+        <tr>
+          <td><strong>Block 3</strong></td>
+          <td>
+            <strong>Detecção de doublets</strong><br>
+            <span style="color:var(--ink-mid);font-size:.8rem;">scDblFinder · Scatter de QC · Remover doublets · Reinspecionar objeto</span>
+          </td>
+          <td>0:40 – 1:10</td>
+        </tr>
+        <tr>
+          <td><strong>Block 4</strong></td>
+          <td>
+            <strong>Normalização, redução de dimensionalidade &amp; clusterização</strong><br>
+            <span style="color:var(--ink-mid);font-size:.8rem;">LogNormalize · HVGs · PCA · Decisão Harmony · UMAP · Clusterização · QC de clusters</span>
+          </td>
+          <td>1:10 – 2:00</td>
+        </tr>
+        <tr>
+          <td colspan="3" style="text-align:center;color:var(--ink-light);font-size:.78rem;padding:.4rem;background:var(--bg2);">☕ Intervalo — 15 min</td>
+        </tr>
+        <tr>
+          <td><strong>Block 5</strong></td>
+          <td>
+            <strong>Anotação de tipos celulares (baseada em RNA)</strong><br>
+            <span style="color:var(--ink-mid);font-size:.8rem;">SingleR · Consolidação de labels · Heatmap de scores · Validação de marcadores · Células Ambiguous · Marcadores DE</span>
+          </td>
+          <td>2:15 – 3:00</td>
+        </tr>
+        <tr>
+          <td><strong>Block 6</strong></td>
+          <td>
+            <strong>Integração CITE-seq (ADT + RNA)</strong><br>
+            <span style="color:var(--ink-mid);font-size:.8rem;">QC do ADT · Normalização CLR · Dropout · Disciplina DefaultAssay · Canais trocados · WNN · Pesos de modalidade · Comparação por condição</span>
+          </td>
+          <td>3:00 – 4:00</td>
+        </tr>
+        <tr>
+          <td><strong>Block 7</strong></td>
+          <td>
+            <strong>Encerramento</strong><br>
+            <span style="color:var(--ink-mid);font-size:.8rem;">Painel resumo (WNN UMAP · marcadores canônicos · proporções · CD4 RNA vs ADT) · Perguntas</span>
+          </td>
+          <td>4:00 – 4:30</td>
+        </tr>
+        <tr style="background:var(--amber-lt);">
+          <td><strong>Block 8</strong><br><em style="font-size:.75rem;color:var(--ink-light)">+ Block 9</em></td>
+          <td>
+            <strong>Capstone &amp; desafios extras</strong>
+            <span style="display:inline-block;margin-left:.5rem;background:var(--amber-mid);color:var(--amber);font-size:.68rem;font-weight:700;padding:.1rem .45rem;border-radius:4px;letter-spacing:.05em;text-transform:uppercase;">Lição de casa</span><br>
+            <span style="color:var(--ink-mid);font-size:.8rem;">Bloco 8: diagnosticar um objeto com erros (4 cenários) · Bloco 9: desafios em cascata (opcional)</span>
+          </td>
+          <td style="color:var(--amber);font-weight:600;">Pós-curso<br><span style="font-size:.75rem;font-weight:400;color:var(--ink-light);">no seu próprio ritmo</span></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div style="display:flex;gap:.75rem;flex-wrap:wrap;margin:1rem 0 0;font-size:.8rem;color:var(--ink-mid);">
+      <span style="display:inline-flex;align-items:center;gap:.3rem;">
+        <span style="width:10px;height:10px;border-radius:2px;background:var(--sage-mid);display:inline-block;"></span>
+        Fazer antes do curso
+      </span>
+      <span style="display:inline-flex;align-items:center;gap:.3rem;">
+        <span style="width:10px;height:10px;border-radius:2px;background:var(--border);display:inline-block;"></span>
+        Sessão ao vivo (Blocos 2–7)
+      </span>
+      <span style="display:inline-flex;align-items:center;gap:.3rem;">
+        <span style="width:10px;height:10px;border-radius:2px;background:var(--amber-mid);display:inline-block;"></span>
+        Lição de casa (Blocos 8–9)
+      </span>
+    </div>
+  </section>
+
+  <!-- ── CHECKLIST ────────────────────────────────────────── -->
+  <section class="section" id="checklist">
+    <div class="section-label">Antes do curso</div>
+    <h2>Seu checklist pré-curso</h2>
+    <p>Marque cada item ao completá-lo. Todos devem ser feitos antes do início do workshop.</p>
+
+    <div class="checklist-card">
+      <div class="checklist-head">Checklist pré-curso</div>
+
+      <label class="check-row">
+        <input type="checkbox" id="c0">
+        <span class="check-label">
+          <strong>Ambiente escolhido: máquina virtual ou instalação local</strong><br>
+          Veja a <strong>Step 1</strong> abaixo. Se o seu computador tiver menos de <strong>8 GB de RAM</strong>,
+          use a instalação local, não a máquina virtual.
+        </span>
+      </label>
+
+      <label class="check-row">
+        <input type="checkbox" id="c1">
+        <span class="check-label">
+          <strong>R 4.3 ou superior instalado</strong><br>
+          Verifique rodando <code>R.version$major</code> no console R. Deve ser 4 ou superior.
+          <em>Pule se estiver usando a máquina virtual — já está instalado.</em>
+        </span>
+      </label>
+
+      <label class="check-row">
+        <input type="checkbox" id="c2">
+        <span class="check-label">
+          <strong>RStudio instalado e pronto</strong><br>
+          Ou uma conta Posit Cloud ativa em <code>posit.cloud</code>.
+          No dia do curso, inicie com uma sessão limpa: <strong>Session > Restart R</strong>.
+          <em>Pule se estiver usando a máquina virtual.</em>
+        </span>
+      </label>
+
+      <label class="check-row">
+        <input type="checkbox" id="c3">
+        <span class="check-label">
+          <strong>Todos os pacotes instalados</strong><br>
+          Rode o bloco de instalação no Block 0 do script do curso.
+          Cada pacote deve mostrar <code>OK</code> na etapa de verificação.
+          <em>Pule se estiver usando a máquina virtual.</em>
+        </span>
+      </label>
+
+      <label class="check-row">
+        <input type="checkbox" id="c4">
+        <span class="check-label">
+          <strong>Dataset baixado e estrutura de pastas pronta</strong><br>
+          Pasta do projeto criada com uma <code>data/</code> subpasta (Etapa 4b).
+          Arquivo <code>gse149689_subset_3k.rds</code> salvo dentro de <code>data/</code>.
+          Scripts (<code>.R</code> / <code>.Rmd</code>) na raiz do projeto.
+          Teste com <code>list.files("data")</code> — deve listar o <code>.rds</code> arquivo.
+          <em>Pule se estiver usando a máquina virtual.</em>
+        </span>
+      </label>
+
+      <label class="check-row">
+        <input type="checkbox" id="c5">
+        <span class="check-label">
+          <strong>sobj_broken.rds mantido privado</strong><br>
+          Este arquivo é para o Block 5. O instrutor liberará o link durante o curso. Não compartilhe antes.
+        </span>
+      </label>
+    </div>
+
+    <div class="callout note">
+      <strong>Antes do curso day</strong>
+      Se alguma etapa falhar, entre em contato com os instrutores antes do dia 2 de julho com a mensagem de erro completa.
+      Do not leave it for the day of the workshop.
+      All materials are in the
+      <a href="https://drive.google.com/drive/folders/1TsMe9Q8Zog-t7uZp5ziF5Z1Wdcgik8hR" target="_blank">pasta do Google Drive</a>.
+    </div>
+  </section>
+
+  <!-- ── STEP 1: CHOOSE YOUR ENVIRONMENT ───────────────────── -->
+  <section class="section" id="environment">
+    <div class="section-label">Step 1</div>
+    <h2>Escolha seu ambiente</h2>
+    <p>Existem duas formas de preparar o ambiente para o curso. Escolha uma antes
+    de fazer qualquer outra coisa — o restante deste guia depende da sua escolha.</p>
+
+    <div class="path-row">
+      <div class="path-card recommended">
+        <div class="path-eyebrow">Opção A <span class="path-badge">Recomendada para a maioria</span></div>
+        <h3>Máquina virtual</h3>
+        <p class="path-desc">
+          Uma máquina virtual Ubuntu 24.04 pronta para uso com RStudio, o dataset
+          e todos os pacotes do Block 0 <strong>já instalados</strong>.
+          Melhor se você não usa R com frequência ou não quer resolver problemas de instalação no seu computador.
+        </p>
+        <div class="path-meta"><a href="https://drive.google.com/drive/folders/1TsMe9Q8Zog-t7uZp5ziF5Z1Wdcgik8hR" target="_blank">pasta do Google Drive</a><br>Disk: ~8 GB · Rodes on Windows, Mac, Linux</div>
+      </div>
+      <div class="path-card">
+        <div class="path-eyebrow">Opção B</div>
+        <h3>Instalação local</h3>
+        <p class="path-desc">
+          Instale R, RStudio e os pacotes diretamente no seu computador.
+          Mais rápido durante o curso (sem sobrecarga de virtualização) e
+          melhor se o seu computador tem pouca RAM.
+        </p>
+        <div class="path-meta">Etapas 2 a 5 abaixo · 20-40 min no total</div>
+      </div>
+    </div>
+
+    <div class="decision-box">
+      <div class="db-label">Qual devo escolher?</div>
+      <div class="decision-row go">
+        <span class="dr-icon">A</span>
+        <span>Você não conhece bem R/RStudio, ou quer que tudo funcione
+        sem configurar nada: use a <strong>máquina virtual</strong>.
+        Vá direto para a Etapa 1A abaixo e depois para o checklist.</span>
+      </div>
+      <div class="decision-row cau">
+        <span class="dr-icon">!</span>
+        <span>Seu computador tem <strong>menos de 8 GB de RAM total</strong>:
+        use a <strong>instalação local</strong> (Opção B) instead. A virtual
+        machine needs RAM set aside for the guest Ubuntu system on top of
+        whatever your own OS and other apps are using. On an 8 GB host, the
+        VM alone will struggle, and the course's single-cell steps (PCA,
+        clustering, plotting) will be slow or may run out of memory.</span>
+      </div>
+      <div class="decision-row go">
+        <span class="dr-icon">B</span>
+        <span>Você já tem R/RStudio configurado ou tem experiência com instalação:
+        use a <strong>instalação local</strong>
+        (Opção B). It will generate the course's plots faster than the VM on
+        the same hardware.</span>
+      </div>
+    </div>
+
+    <div class="steps">
+
+      <div class="step open" id="s-vm">
+        <div class="step-head" onclick="toggleStep('s-vm')">
+          <div class="step-num">1A</div>
+          <div class="step-head-text">
+            <div class="step-title">Opção A — Download and run the máquina virtual</div>
+            <div class="step-sub">Ubuntu 24.04 · RStudio + pacotes + dataset pré-instalados</div>
+          </div>
+          <span class="step-chevron">&#9660;</span>
+        </div>
+        <div class="step-body">
+
+          <p>The máquina virtual is available in the
+          <a href="https://drive.google.com/drive/folders/1TsMe9Q8Zog-t7uZp5ziF5Z1Wdcgik8hR" target="_blank">pasta do Google Drive</a>
+          — procure a pasta <strong>VirtualBox — software</strong> subpasta.
+          The file is a máquina virtual image (~8 GB). You will need virtualization
+          software installed first — VirtualBox (free) works on Windows, Mac, and Linux.</p>
+
+          <div style="display:flex;gap:.75rem;flex-wrap:wrap;margin:1rem 0;">
+            <a href="https://drive.google.com/drive/folders/1TsMe9Q8Zog-t7uZp5ziF5Z1Wdcgik8hR" target="_blank"
+               style="display:inline-flex;align-items:center;gap:.4rem;background:var(--teal-lt);border:1px solid var(--teal-mid);border-radius:var(--radius);padding:.5rem 1rem;color:var(--teal);font-weight:600;font-size:.85rem;text-decoration:none;">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              VirtualMachine.amd64 — Intel &amp; AMD
+            </a>
+            <a href="https://drive.google.com/drive/folders/1TsMe9Q8Zog-t7uZp5ziF5Z1Wdcgik8hR" target="_blank"
+               style="display:inline-flex;align-items:center;gap:.4rem;background:var(--teal-lt);border:1px solid var(--teal-mid);border-radius:var(--radius);padding:.5rem 1rem;color:var(--teal);font-weight:600;font-size:.85rem;text-decoration:none;">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              VirtualMachine.arm64 — Apple Silicon &amp; Snapdragon
+            </a>
+          </div>
+
+          <div class="callout note">
+            <strong>O que já está feito para você</strong>
+            The máquina virtual runs Ubuntu 24.04 with RStudio installed, every
+            package from Block 0 já instalados (Seurat 5.x and the rest —
+            see the package list in Step 4 below), and the course dataset already
+            saved at <code>data/gse149689_subset_3k.rds</code>. Você abre o RStudio
+            dentro da VM e o script do curso já está pronto para rodar.
+          </div>
+
+          <div class="concept-row">
+            <div class="concept-card">
+              <div class="cc-label">1. Instalar o VirtualBox</div>
+              <div class="cc-body">Baixe pelo
+              <a href="https://drive.google.com/drive/folders/1TsMe9Q8Zog-t7uZp5ziF5Z1Wdcgik8hR" target="_blank">pasta do Google Drive</a>
+              (instaladores para Apple Silicon, Apple Intel e Windows incluídos).
+              Para Linux: baixe a versão para sua distribuição em
+              <a href="https://www.virtualbox.org/wiki/Linux_Downloads" target="_blank">virtualbox.org/wiki/Linux_Downloads</a>.
+              </div>
+            </div>
+            <div class="concept-card">
+              <div class="cc-label">2. Importar a imagem da VM</div>
+              <div class="cc-body">Abra o VirtualBox, escolha <strong>File &gt; Import Appliance</strong>, selecione o arquivo baixado. Mantenha a alocação padrão de RAM/CPU, a menos que seu computador seja limitado — veja a nota abaixo.</div>
+            </div>
+          </div>
+
+          <p>Por que aparece "Ubuntu" se você não conhece Linux: o Ubuntu aqui é
+          apenas o sistema operacional onde o RStudio roda. Você interagirá
+          somente com o RStudio, da mesma forma que no Windows ou Mac.
+          Você não precisa saber nenhum comando Linux para este curso.</p>
+
+          <div class="callout tip">
+            <strong>Tudo já está instalado — então por que pode ser lento?</strong>
+            Todos os pacotes e o dataset já estão lá, então você pula a etapa de instalação.
+            Mas durante o curso, gerar gráficos (PCA, UMAP, clustering, os passos WNN
+            do Block 4) ainda roda computação real dentro da VM. A velocidade depende
+            apenas da RAM e dos núcleos de CPU que o seu computador pode ceder à VM —
+            não de nada mais a instalar. Uma máquina com mais RAM e núcleos disponíveis
+            renderizará os gráficos do curso visivelmente mais rápido.
+          </div>
+
+          <h3 style="margin: 1.5rem 0 .5rem; font-size: .95rem; font-weight: 600; color: var(--ink);">Corrigir tela com resolução baixa ou cortada</h3>
+          <p>Se a janela da VM abrir com resolução pequena ou estranhamente cortada,
+          o botão de resolução da barra de ferramentas nem sempre funciona diretamente.
+          Altere pelo menu de configurações:</p>
+
+          <div class="concept-row">
+            <div class="concept-card">
+              <div class="cc-label">Antes de iniciar a VM</div>
+              <div class="cc-body">No VirtualBox, selecione a VM, clique em <strong>Settings &gt; Display</strong>, e aumente o <strong>Video Memory</strong> se a opção de alterar resolução estiver desabilitada.</div>
+            </div>
+            <div class="concept-card">
+              <div class="cc-label">Com a VM rodando</div>
+              <div class="cc-body">Dentro do Ubuntu, vá em <strong>Settings &gt; Displays</strong> (ícone de engrenagem, não os controles do VirtualBox) e escolha uma resolução que corresponda à sua tela.</div>
+            </div>
+          </div>
+
+          <h3 style="margin: 1.5rem 0 .5rem; font-size: .95rem; font-weight: 600; color: var(--ink);">Alterar RAM e núcleos de CPU alocados para a VM</h3>
+          <p>A VM roda tão rápido quanto os recursos que você dá a ela. Para alterar
+          quanta RAM ou quantos núcleos de CPU ela pode usar:</p>
+
+          <div class="callout warn">
+            <strong>Onde alterar</strong>
+            Desligue a VM completamente primeiro (não pode ser redimensionada enquanto roda).
+            No VirtualBox, selecione a VM na lista, clique em <strong>Settings</strong>,
+            vá em <strong>System &gt; Motherboard</strong> para alterar a RAM, e em
+            <strong>System &gt; Processor</strong> para alterar o número de núcleos de CPU.
+            Como regra geral, deixe pelo menos 2-4 GB de RAM e um núcleo de CPU
+            livres para o seu sistema operacional.
+          </div>
+
+          <div class="callout error">
+            <strong>Se o seu computador tiver menos de 8 GB de RAM</strong>
+            Do not increase the VM's RAM beyond what your host can spare, and
+            consider using the instalação local (Opção B) instead — see the
+            decision box above. Rodening the VM on a tight RAM budget will make
+            every step that produces a plot noticeably slower, regardless of
+            how the allocation is tuned.
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── STEP 2: INSTALL R (Opção B) ────────────────────────── -->
+  <section class="section" id="install-r">
+    <div class="section-label">Step 2 &middot; Opção B, instalação local</div>
+    <h2>Instalar o R</h2>
+    <p>Skip this entire section if you are using the máquina virtual from Step 1A.</p>
+
+    <div class="steps">
+
+      <div class="step open" id="s-r">
+        <div class="step-head" onclick="toggleStep('s-r')">
+          <div class="step-num">2</div>
+          <div class="step-head-text">
+            <div class="step-title">Baixar e instalar o R 4.3+</div>
+            <div class="step-sub">https://cran.r-project.org</div>
+          </div>
+          <span class="step-chevron">&#9660;</span>
+        </div>
+        <div class="step-body">
+          <p>Acesse <a href="https://cran.r-project.org" target="_blank">cran.r-project.org</a> e escolha o seu sistema operacional.</p>
+
+          <div class="concept-row">
+            <div class="concept-card">
+              <div class="cc-label">Windows</div>
+              <div class="cc-body">Click <strong>Baixar R para Windows</strong>, then <strong>base</strong>, depois baixe o instalador. Execute com as configurações padrão.</div>
+            </div>
+            <div class="concept-card">
+              <div class="cc-label">Mac</div>
+              <div class="cc-body">Click <strong>Baixar R para macOS</strong>. Escolha a versão para o seu chip: <strong>Apple Silicon (M1/M2/M3)</strong> or <strong>Intel</strong>.</div>
+            </div>
+          </div>
+
+          <p>Após a instalação, abra o R e confirme a versão:</p>
+          <div class="code-wrap">
+            <div class="code-top">
+              <span class="code-lang">Console do R</span>
+              <button class="copy-btn" onclick="copyCode(this)">copy</button>
+            </div>
+            <pre>R.version$major   # should print "4" or higher
+R.version$minor   # should print "3.0" or higher</pre>
+          </div>
+
+          <div class="callout warn">
+            <strong>Mac com Apple Silicon (M1/M2/M3)</strong>
+            Baixe a versão ARM64. Usar a versão Intel no Apple Silicon causa erros de compilação ao instalar pacotes como o Seurat.
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── STEP 3: RSTUDIO (Opção B) ──────────────────────────── -->
+  <section class="section" id="install-rstudio">
+    <div class="section-label">Step 3 &middot; Opção B, instalação local</div>
+    <h2>Instalar o RStudio</h2>
+
+    <div class="steps">
+
+      <div class="step open" id="s-rs">
+        <div class="step-head" onclick="toggleStep('s-rs')">
+          <div class="step-num">3</div>
+          <div class="step-head-text">
+            <div class="step-title">Baixar o RStudio Desktop</div>
+            <div class="step-sub">https://posit.co/download/rstudio-desktop</div>
+          </div>
+          <span class="step-chevron">&#9660;</span>
+        </div>
+        <div class="step-body">
+          <p>Acesse <a href="https://posit.co/download/rstudio-desktop" target="_blank">posit.co/download/rstudio-desktop</a> e baixe a versão Desktop gratuita para o seu sistema.</p>
+
+          <div class="callout tip">
+            <strong>Alternativa: Posit Cloud (sem necessidade de instalação)</strong>
+            Se preferir não instalar localmente, crie uma conta gratuita em
+            <a href="https://posit.cloud" target="_blank">posit.cloud</a>.
+            Crie um New Project e faça upload do arquivo do curso.
+            O nível gratuito (1 GB de RAM) é suficiente para este workshop.
+          </div>
+
+          <p>Após instalar, abra o RStudio. Você deve ver quatro painéis: Source (superior esquerdo), Console (inferior esquerdo), Environment (superior direito), Files (inferior direito).</p>
+
+          <div class="callout note">
+            <strong>Sempre inicie com uma sessão limpa no dia do curso</strong>
+            Acesse <strong>Tools > Global Options > General</strong> e defina
+            "Save workspace to .RData on exit" para <strong>Never</strong>.
+            Isso evita que resultados antigos interfiram em uma nova execução.
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── STEP 4: PACKAGES (Opção B) ─────────────────────────── -->
+  <section class="section" id="packages">
+    <div class="section-label">Step 4 &middot; Opção B, instalação local</div>
+    <h2>Instalar os pacotes necessários</h2>
+    <p>Skip this entire section if you are using the máquina virtual — every
+    package below is já instalados lá.</p>
+    <p>Copie o código abaixo no console do RStudio e rode. A primeira execução pode levar <strong>15 a 30 minutos</strong> depending on your connection. Pacotes that are já instalados will be skipped automatically.</p>
+
+    <div class="steps">
+
+      <div class="step open" id="s-pkg">
+        <div class="step-head" onclick="toggleStep('s-pkg')">
+          <div class="step-num">4</div>
+          <div class="step-head-text">
+            <div class="step-title">Rodar o script de instalação</div>
+            <div class="step-sub">Instala do CRAN e Bioconductor com fallback automático</div>
+          </div>
+          <span class="step-chevron">&#9660;</span>
+        </div>
+        <div class="step-body">
+
+          <div class="callout note">
+            <strong>Esta lista corresponde exatamente ao Block 0 do script do curso</strong>
+            14 pacotes, incluindo <code>SingleCellExperiment</code>, necessário para a etapa de detecção de doublets (<code>scDblFinder</code>) in Block 2.
+            If you installed packages before from an older version of this guide,
+            re-run the script below — it skips anything já instalados and
+            only adds what is missing.
+          </div>
+
+          <div class="code-wrap">
+            <div class="code-top">
+              <span class="code-lang">R — colar no console</span>
+              <button class="copy-btn" onclick="copyCode(this)">copy</button>
+            </div>
+            <pre>if (!requireNamespace("BiocManager", quietly = TRUE))
+  install.packages("BiocManager")
+
+all_pkgs &lt;- c(
+  "Seurat", "SeuratObject", "ggplot2", "patchwork",
+  "dplyr", "Matrix", "harmony", "scales", "ggrepel",
+  "SingleR", "celldex", "BiocParallel", "scDblFinder",
+  "SingleCellExperiment"
+)
+
+for (pkg in all_pkgs) {
+  if (!requireNamespace(pkg, quietly = TRUE)) {
+    message("Installing: ", pkg)
+    tryCatch(install.packages(pkg, quiet = TRUE),
+             error = function(e) NULL, warning = function(w) NULL)
+    if (!requireNamespace(pkg, quietly = TRUE)) {
+      message("  Trying BiocManager...")
+      tryCatch(
+        BiocManager::install(pkg, ask = FALSE, update = FALSE),
+        error   = function(e) message("  FAILED: ", e$message),
+        warning = function(w) NULL
+      )
+    }
+    if (requireNamespace(pkg, quietly = TRUE))
+      message("  OK: ", pkg, " (", as.character(packageVersion(pkg)), ")")
+    else
+      message("  FAILED: ", pkg)
+  } else {
+    message("Already installed: ", pkg,
+            " (", as.character(packageVersion(pkg)), ")")
+  }
+}</pre>
+          </div>
+
+          <h3 style="margin: 1.5rem 0 .5rem; font-size: .95rem; font-weight: 600; color: var(--ink);">Verificar a instalação</h3>
+          <p>Após o script terminar, rode isto para verificar se está tudo pronto:</p>
+
+          <div class="code-wrap">
+            <div class="code-top">
+              <span class="code-lang">R — verificação</span>
+              <button class="copy-btn" onclick="copyCode(this)">copy</button>
+            </div>
+            <pre>pkgs &lt;- c("Seurat", "SeuratObject", "ggplot2", "patchwork",
+          "dplyr", "Matrix", "SingleR", "celldex",
+          "harmony", "scales", "ggrepel", "BiocParallel",
+          "scDblFinder", "SingleCellExperiment")
+
+for (pkg in pkgs) {
+  ok &lt;- requireNamespace(pkg, quietly = TRUE)
+  cat(sprintf("  %-22s %s\n", pkg, ifelse(ok, "OK", "MISSING")))
+}
+
+cat("\nSeurat version:", as.character(packageVersion("Seurat")), "\n")
+# Must start with 5</pre>
+          </div>
+
+          <p style="margin-top:.75rem">Saída esperada:</p>
+
+          <table class="verify-table">
+            <thead><tr><th>Pacote</th><th>Status esperado</th></tr></thead>
+            <tbody>
+              <tr><td>Seurat</td><td><span class="ok">OK (5.x.x)</span></td></tr>
+              <tr><td>SeuratObject</td><td><span class="ok">OK</span></td></tr>
+              <tr><td>ggplot2</td><td><span class="ok">OK</span></td></tr>
+              <tr><td>patchwork</td><td><span class="ok">OK</span></td></tr>
+              <tr><td>dplyr</td><td><span class="ok">OK</span></td></tr>
+              <tr><td>Matrix</td><td><span class="ok">OK</span></td></tr>
+              <tr><td>SingleR</td><td><span class="ok">OK</span></td></tr>
+              <tr><td>celldex</td><td><span class="ok">OK</span></td></tr>
+              <tr><td>harmony</td><td><span class="ok">OK</span></td></tr>
+              <tr><td>scales</td><td><span class="ok">OK</span></td></tr>
+              <tr><td>ggrepel</td><td><span class="ok">OK</span></td></tr>
+              <tr><td>BiocParallel</td><td><span class="ok">OK</span></td></tr>
+              <tr><td>scDblFinder</td><td><span class="ok">OK</span></td></tr>
+              <tr><td>SingleCellExperiment</td><td><span class="ok">OK</span></td></tr>
+            </tbody>
+          </table>
+
+          <div class="callout error">
+            <strong>Se um pacote aparecer como MISSING</strong>
+            Tente instalar individualmente via BiocManager, que funciona para
+            pacotes do CRAN e do Bioconductor:
+            <div class="code-wrap" style="margin:.75rem 0 0">
+              <div class="code-top">
+                <span class="code-lang">R</span>
+                <button class="copy-btn" onclick="copyCode(this)">copy</button>
+              </div>
+              <pre>BiocManager::install("PACKAGE_NAME", force = TRUE)
+# Then: Session > Restart R</pre>
+            </div>
+          </div>
+
+          <div class="callout warn">
+            <strong>Se aparecer "namespace 'ggplot2' is imported by Seurat..."</strong>
+            Não é um erro. O pacote já está carregado pelo Seurat. Aparece quando
+            <code>library(ggplot2)</code> é chamado uma segunda vez na mesma sessão.
+            Sempre faça <strong>Session > Restart R</strong> no início do curso.
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── STEP 4b: FOLDER STRUCTURE (Opção B) ──────────────── -->
+  <section class="section" id="folder-structure">
+    <div class="section-label">Step 4b &middot; Opção B, instalação local</div>
+    <h2>Criar a pasta do projeto</h2>
+    <p>Antes de baixar qualquer coisa, configure a estrutura de pastas que os scripts do curso esperam.
+    Todos os caminhos nos <code>.R</code> scripts são relativos a esta pasta.</p>
+
+    <div class="steps">
+      <div class="step open" id="s-folders">
+        <div class="step-head" onclick="toggleStep('s-folders')">
+          <div class="step-num">4b</div>
+          <div class="step-head-text">
+            <div class="step-title">Criar a pasta do curso e as subpastas</div>
+            <div class="step-sub">Uma pasta, duas subpastas — leva menos de um minuto</div>
+          </div>
+          <span class="step-chevron">&#9660;</span>
+        </div>
+        <div class="step-body">
+
+          <p>Crie uma pasta em qualquer lugar no seu computador — dê o nome que quiser,
+          por exemplo <code>scSurvival_Course</code>.
+          Dentro dela, crie uma subpasta chamada exatamente <code>data</code>.</p>
+
+          <div class="code-wrap">
+            <div class="code-top">
+              <span class="code-lang">estrutura esperada</span>
+            </div>
+            <pre>scSurvival_Course/          ← your project folder (any name)
+├── data/                   ← must be named exactly "data"
+│   └── gse149689_subset_3k.rds   (download in Step 5)
+├── scSurvival_Course.R     ← from Google Drive → Scripts &amp; html
+├── scSurvival_Course.Rmd   ← from Google Drive → Scripts &amp; html
+└── scSurvival_PreCourse_Setup.html  (this file)</pre>
+          </div>
+
+          <div class="callout note">
+            <strong>O que vai onde na pasta do Google Drive</strong>
+            <ul style="margin:.5rem 0 0 1.2rem;line-height:1.8;">
+              <li>
+                <strong>data/</strong> no Google Drive →
+                copie o conteúdo para a sua pasta local <code>data/</code> subpasta.<br>
+                <span style="color:var(--ink-light);font-size:.82rem;">Contém: <code>gse149689_subset_3k.rds</code> (o dataset do curso)</span>
+              </li>
+              <li>
+                <strong>Scripts &amp; html/</strong> no Google Drive →
+                copie os arquivos para a raiz da pasta do projeto.<br>
+                <span style="color:var(--ink-light);font-size:.82rem;">Contém: <code>scSurvival_Course.R</code>, <code>scSurvival_Course.Rmd</code>, <code>scSurvival_PreCourse_Setup.html</code>, e variantes de idioma (<code>_pt</code>, <code>_es</code>)</span>
+              </li>
+            </ul>
+          </div>
+
+          <div class="concept-row">
+            <div class="concept-card">
+              <div class="cc-label">Definir diretório de trabalho no RStudio</div>
+              <div class="cc-body">
+                Abra o arquivo <code>.R</code> or <code>.Rmd</code> no RStudio,
+                depois vá em <strong>Session &gt; Set Working Directory &gt;
+                To Source File Location</strong>. Isso faz todos os caminhos relativos
+                (como <code>data/gse149689_subset_3k.rds</code>) funcionarem corretamente.
+              </div>
+            </div>
+            <div class="concept-card">
+              <div class="cc-label">Verificar pelo R</div>
+              <div class="cc-body">
+                Rode <code>list.files("data")</code> no console R.
+                Você deve ver <code>gse149689_subset_3k.rds</code> listado.
+                Se a pasta não for encontrada, o diretório de trabalho não está correto.
+              </div>
+            </div>
+          </div>
+
+          <div class="callout warn">
+            <strong>Erro comum</strong>
+            Salvar o <code>.rds</code> arquivo diretamente dentro da pasta do projeto
+            (não dentro da <code>data/</code> subpasta) causa um erro
+            <code>cannot open file 'data/gse149689_subset_3k.rds'</code> 
+            ao rodar o script do curso. O nome da subpasta deve ser exatamente
+            <code>data</code> — minúsculas, sem espaços.
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── STEP 5: DATASET (Opção B) ──────────────────────────── -->
+  <section class="section" id="dataset">
+    <div class="section-label">Step 5 &middot; Opção B, instalação local</div>
+    <h2>Baixar o dataset</h2>
+    <p>Skip this entire section if you are using the máquina virtual — the
+    dataset is already saved at <code>data/gse149689_subset_3k.rds</code> lá.</p>
+
+    <div class="steps">
+      <div class="step open" id="s-data">
+        <div class="step-head" onclick="toggleStep('s-data')">
+          <div class="step-num">5</div>
+          <div class="step-head-text">
+            <div class="step-title">Baixar gse149689_subset_3k.rds</div>
+            <div class="step-sub">13,5 MB | Dataset CITE-seq com RNA + ADT</div>
+          </div>
+          <span class="step-chevron">&#9660;</span>
+        </div>
+        <div class="step-body">
+
+          <p>O dataset está na <strong>data/</strong> subpasta em
+          <a href="https://drive.google.com/drive/folders/1TsMe9Q8Zog-t7uZp5ziF5Z1Wdcgik8hR" target="_blank">Google Drive</a>.
+          Baixe-o e salve dentro da sua pasta local <code>data/</code> (veja a Etapa 4b),
+          ou rode o código abaixo para baixar diretamente pelo R.</p>
+
+          <div class="code-wrap">
+            <div class="code-top">
+              <span class="code-lang">R — baixar</span>
+              <button class="copy-btn" onclick="copyCode(this)">copy</button>
+            </div>
+            <pre># Rode from your project folder (Session > Set Working Directory > To Source File Location)
+# Create the data folder if it does not exist
+dir.create("data", showWarnings = FALSE)
+
+# FILE_ID for gse149689_subset_3k.rds
+FILE_ID &lt;- "1mCg4VD91qK7pg-zL1iYUUBFWBr7fmmCM"
+
+options(timeout = 600)
+download.file(
+  url      = paste0(
+    "https://drive.google.com/uc?export=download&confirm=t&id=",
+    FILE_ID
+  ),
+  destfile = "data/gse149689_subset_3k.rds",
+  mode     = "wb"
+)</pre>
+          </div>
+
+          <p>Verificar se o download funcionou:</p>
+
+          <div class="code-wrap">
+            <div class="code-top">
+              <span class="code-lang">R — verificar download</span>
+              <button class="copy-btn" onclick="copyCode(this)">copy</button>
+            </div>
+            <pre>sobj &lt;- readRDS("data/gse149689_subset_3k.rds")
+print(sobj)
+
+# Saída esperada:
+# An object of class Seurat
+# 524 features across 3000 samples within 2 assays
+# Active assay: RNA (500 features)
+#  1 other assay present: ADT</pre>
+          </div>
+
+          <div class="callout tip">
+            <strong>O que há neste dataset?</strong>
+            Um experimento CITE-seq de 3.000 células de Wilk et al., Nature Medicine 2021.
+            Sete doadores: 3 saudáveis e 4 COVID-19 (Leve, Moderado, Grave).
+            Duas camadas de medição por célula: RNA (500 genes) e ADT (24 proteínas de superfície).
+          </div>
+
+          <div class="callout warn">
+            <strong>O arquivo tem 13,5 MB. Se o download for lento:</strong>
+            Baixe manualmente do <a href="https://drive.google.com/drive/folders/1TsMe9Q8Zog-t7uZp5ziF5Z1Wdcgik8hR" target="_blank">pasta do Google Drive</a>
+            e salve como <code>data/gse149689_subset_3k.rds</code> na pasta do projeto.
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── COURSE PREVIEW ────────────────────────────────────── -->
+  <section class="section" id="preview">
+    <div class="section-label">Visão geral do Block 1</div>
+    <h2>O que o curso abrange</h2>
+    <p>Este workshop foca em diagnosticar problemas reais em análises CITE-seq de célula única. Você rodará código que produz erros propositalmente e aprenderá a diagnosticá-los e corrigi-los.</p>
+
+    <div class="concept-row">
+      <div class="concept-card">
+        <div class="cc-label">scRNA-seq</div>
+        <div class="cc-body">Um perfil de RNA por célula. Cerca de <strong>90% de zeros</strong> (dropout). Revela composição de tipos celulares, estados transcricionais e estrutura de população invisíveis ao sequenciamento bulk.</div>
+      </div>
+      <div class="concept-card">
+        <div class="cc-label">O CITE-seq adiciona</div>
+        <div class="cc-body">Medições de proteínas de superfície (ADT) sequenciadas junto com o RNA. <strong>Sinal bimodal</strong>, sem dropout. Equivalente a dados de citometria de fluxo para cada célula.</div>
+      </div>
+    </div>
+
+    <div class="concept-row">
+      <div class="concept-card">
+        <div class="cc-label">Por que o CITE-seq importa</div>
+        <div class="cc-body">O RNA de CD4 tem dropout intenso em verdadeiras células T CD4+. A proteína CD4 é limpa. Sem a camada de proteínas, a anotação de subtipos de células T depende de um sinal não confiável.</div>
+      </div>
+      <div class="concept-card">
+        <div class="cc-label">Contexto COVID-19</div>
+        <div class="cc-body">O dataset compara doadores saudáveis com pacientes COVID-19 em três níveis de gravidade. Expansão de monócitos e enriquecimento de plasmablastos são achados biológicos esperados.</div>
+      </div>
+    </div>
+
+    <div class="callout note">
+      <strong>O que esperar</strong>
+      Alguns blocos de código produzem erros intencionalmente. Ao ver um erro, pare e leia o texto abaixo do bloco antes de continuar. Os erros são momentos pedagógicos, não enganos.
+    </div>
+  </section>
+
+  <!-- ── TROUBLESHOOT ──────────────────────────────────────── -->
+  <section class="section" id="troubleshoot">
+    <div class="section-label">Problemas comuns</div>
+    <h2>Solução de problemas antes do curso</h2>
+
+    <div class="steps">
+
+      <div class="step" id="s-t1">
+        <div class="step-head" onclick="toggleStep('s-t1')">
+          <div class="step-num" style="background:var(--rose-lt);border-color:var(--rose-mid);color:var(--rose)">!</div>
+          <div class="step-head-text">
+            <div class="step-title">Seurat v4 instalado em vez do v5</div>
+            <div class="step-sub">packageVersion("Seurat") retorna 4.x.x</div>
+          </div>
+          <span class="step-chevron">&#9660;</span>
+        </div>
+        <div class="step-body">
+          <div class="code-wrap">
+            <div class="code-top"><span class="code-lang">R</span><button class="copy-btn" onclick="copyCode(this)">copy</button></div>
+            <pre>install.packages("Seurat")
+# Then Session > Restart R
+packageVersion("Seurat")  # confirm it now starts with 5</pre>
+          </div>
+        </div>
+      </div>
+
+      <div class="step" id="s-t2">
+        <div class="step-head" onclick="toggleStep('s-t2')">
+          <div class="step-num" style="background:var(--rose-lt);border-color:var(--rose-mid);color:var(--rose)">!</div>
+          <div class="step-head-text">
+            <div class="step-title">celldex falha na instalação pelo CRAN</div>
+            <div class="step-sub">celldex é um pacote Bioconductor</div>
+          </div>
+          <span class="step-chevron">&#9660;</span>
+        </div>
+        <div class="step-body">
+          <div class="code-wrap">
+            <div class="code-top"><span class="code-lang">R</span><button class="copy-btn" onclick="copyCode(this)">copy</button></div>
+            <pre>BiocManager::install("celldex", ask = FALSE)
+# Then Session > Restart R</pre>
+          </div>
+        </div>
+      </div>
+
+      <div class="step" id="s-t3">
+        <div class="step-head" onclick="toggleStep('s-t3')">
+          <div class="step-num" style="background:var(--rose-lt);border-color:var(--rose-mid);color:var(--rose)">!</div>
+          <div class="step-head-text">
+            <div class="step-title">Seurat falha na instalação no Windows</div>
+            <div class="step-sub">Erro de compilação durante a instalação</div>
+          </div>
+          <span class="step-chevron">&#9660;</span>
+        </div>
+        <div class="step-body">
+          <p>Instalar o Rtools first from <a href="https://cran.r-project.org/bin/windows/Rtools/" target="_blank">cran.r-project.org/bin/windows/Rtools</a>. Escolha a versão correspondente ao seu R. Depois tente novamente:</p>
+          <div class="code-wrap">
+            <div class="code-top"><span class="code-lang">R</span><button class="copy-btn" onclick="copyCode(this)">copy</button></div>
+            <pre>install.packages("Seurat")</pre>
+          </div>
+        </div>
+      </div>
+
+      <div class="step" id="s-t4">
+        <div class="step-head" onclick="toggleStep('s-t4')">
+          <div class="step-num" style="background:var(--rose-lt);border-color:var(--rose-mid);color:var(--rose)">!</div>
+          <div class="step-head-text">
+            <div class="step-title">Seurat falha no Mac com Apple Silicon</div>
+            <div class="step-sub">Binário não encontrado ou erro de arquitetura</div>
+          </div>
+          <span class="step-chevron">&#9660;</span>
+        </div>
+        <div class="step-body">
+          <div class="code-wrap">
+            <div class="code-top"><span class="code-lang">R</span><button class="copy-btn" onclick="copyCode(this)">copy</button></div>
+            <pre>install.packages("Seurat", type = "binary")</pre>
+          </div>
+          <p>Se isso também falhar, confirme que você baixou a versão ARM64 do R em <a href="https://cran.r-project.org/bin/macosx/" target="_blank">cran.r-project.org/bin/macosx</a>.</p>
+        </div>
+      </div>
+
+      <div class="step" id="s-t5">
+        <div class="step-head" onclick="toggleStep('s-t5')">
+          <div class="step-num" style="background:var(--rose-lt);border-color:var(--rose-mid);color:var(--rose)">!</div>
+          <div class="step-head-text">
+            <div class="step-title">Timeout no download do dataset</div>
+            <div class="step-sub">Conexão lenta ou Google Drive pede login</div>
+          </div>
+          <span class="step-chevron">&#9660;</span>
+        </div>
+        <div class="step-body">
+          <p>Baixe o arquivo manualmente do
+          <a href="https://drive.google.com/drive/folders/1TsMe9Q8Zog-t7uZp5ziF5Z1Wdcgik8hR" target="_blank">pasta do Google Drive</a>
+          (dentro da <strong>data/</strong> subpasta lá).
+          Salve na estrutura local do seu projeto:</p>
+          <div class="code-wrap">
+            <div class="code-top"><span class="code-lang">path</span></div>
+            <pre>scSurvival_Course/        ← your project folder
+└── data/
+    └── gse149689_subset_3k.rds  ← save here</pre>
+          </div>
+          <p>Se o link do Drive pedir login, entre em contato com os instrutores antes do curso.</p>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="callout tip">
+      <strong>Ainda travado?</strong>
+      Entre em contato com os instrutores antes do dia 2 de julho com: seu sistema operacional, sua versão do R
+      (<code>R.version$major</code>), and the full error message.
+      The instructor will help antes do dia do curso.
+    </div>
+  </section>
+
+  <div class="footer">
+    Curso de Sobrevivência em Single-Cell &nbsp;|&nbsp; Seurat v5 &nbsp;|&nbsp; GSE149689 &nbsp;|&nbsp; Wilk et al., Nature Medicine 2021
+  </div>
+
+</div><!-- /container -->
+
+<script>
+// Progress bar
+window.addEventListener('scroll', () => {
+  const el  = document.documentElement;
+  const pct = el.scrollTop / (el.scrollHeight - el.clientHeight) * 100;
+  document.getElementById('pbar').style.width = Math.min(pct, 100) + '%';
+});
+
+// Accordion steps
+function toggleStep(id) {
+  const el = document.getElementById(id);
+  el.classList.toggle('open');
+}
+
+// Copy buttons
+function copyCode(btn) {
+  const pre  = btn.closest('.code-wrap').querySelector('pre');
+  const text = pre.innerText;
+  navigator.clipboard.writeText(text).then(() => {
+    btn.textContent = 'copied';
+    btn.classList.add('copied');
+    setTimeout(() => {
+      btn.textContent = 'copy';
+      btn.classList.remove('copied');
+    }, 2000);
+  });
+}
+
+// Checklist persistence (session only)
+document.querySelectorAll('.check-row input').forEach(cb => {
+  cb.addEventListener('change', () => {
+    const label = cb.nextElementSibling;
+    label.style.textDecoration = cb.checked ? 'line-through' : 'none';
+    label.style.color          = cb.checked ? 'var(--ink-light)' : '';
+  });
+});
+</script>
+
+</body>
+</html>

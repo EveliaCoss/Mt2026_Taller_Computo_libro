@@ -6,6 +6,9 @@
 **Goal:** compute QC metrics, look at their distributions across donors, and filter cells using thresholds chosen from the data, not from a tutorial.
 :::
 
+### Step 6.0a - Inspecting the ADT assay (intermediate, contrast)
+
+ADT is also stored as a `v5 assay`, but the data behave differently from RNA: few features, no dropout, bimodal counts per protein, very wide dynamic range, no need for highly variable feature selection. Make these properties concrete before doing anything else with the protein layer.
 
 :::: question
 ::: {.callout-tip icon="false"}

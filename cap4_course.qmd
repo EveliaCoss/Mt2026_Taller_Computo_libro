@@ -7,7 +7,7 @@ This dataset originates from **GSE149689**. The data have been **reduced** and [
 
 #### [Deliberate errors]{.text-red}
 
-Five steps were designed to fail (e.g., v4 slot access, incorrect use of `GetAssayData slot=`, wrong filter thresholds, dimensions greater than the number of principal components, plotting a label before adding it).
+Five steps were designed to fail (e.g., **v4** slot access, incorrect use of `GetAssayData slot=`, wrong filter thresholds, dimensions greater than the number of principal components, plotting a label before adding it).
 
 These steps are wrapped in `try()`, so the error prints to the console without halting the full run. The goal is for the user to **read the error message, interpret it, and continue with the analysis**.
 :::
@@ -243,7 +243,9 @@ cat("Size (MB)  :", round(file.size("data/gse149689_subset_3k.rds") / 1e6, 1), "
 
 ### Step 0.4 - `reveal()` helper ([**instructor use only**]{.text-red})
 
-Prints the answer + live-demo code for any [**QUESTION**]{.text-purple} or [**PUZZLE**]{.text-pink} in this script. Answers are NOT in this file. They live in a separate `instructor_answers.R` that only the instructor loads with source() before class. Students running `reveal()` in a fresh session see a brief notice and nothing else.
+Prints the answer + live-demo code for any [**QUESTION**]{.text-purple} or [**PUZZLE**]{.text-pink} in this script. Answers are **NOT** in this file. They live in a separate `instructor_answers.R` that only the instructor loads with `source()` before class. Students running `reveal()` in a fresh session see a brief notice and nothing else.
+
+👉 Download: [`instructor_answers.R`](scripts/instructor_answers.R) and [`reveal_function.R`](scripts/reveal_function.R)
 
 ```{r loadFuntions}
 #Instructor only
@@ -253,16 +255,17 @@ source("scripts/reveal_function.R")
 
 Usage:`reveal("number")`
 
-```{r}
+```{r reveal_example, eval=FALSE}
 reveal("5.2")
 ```
 
-
 ### Step 0.5 - Namespace-safe accessor wrappers
 
-In R, names that start with a dot (`.`) are usually used for internal helper functions. The function `.safe_accessor` is not meant to be called directly by the user. Instead, it builds the “safe” versions of Seurat’s accessor functions: SafeAssays, SafeLayers, and SafeReductions.
+In R, names that start with a dot (`.`) are usually used for internal helper functions. The function `.safe_accessor` is not meant to be called directly by the user. Instead, it builds the “safe” versions of Seurat’s accessor functions: `SafeAssays, SafeLayers,` and `SafeReductions`.
 
 These safe wrappers make sure that the correct function is used even if different versions of Seurat or other Bioconductor packages introduce conflicts. Without them, you might get confusing errors when calling `Assays(), Layers(),` or `Reductions()` directly.
+
+👉 Download: [`safe_accessor_function.R`](scripts/safe_accessor_function.R)
 
 Load it into your R session with:
 
@@ -298,7 +301,7 @@ SafeLayers(seurat_object)
 
 - **`SafeReductions(seurat_object)`**
 
-  - Shows all dimensionality reduction results (PCA, UMAP, t-SNE, etc.) stored in the object.
+  - Shows all dimensionality reduction results (`PCA, UMAP, t-SNE`, etc.) stored in the object.
   - Ensures you know which reductions are available before plotting or clustering.
   - Prevents mistakes like calling `DimPlot()` on a reduction that doesn’t exist.
 
@@ -309,9 +312,9 @@ SafeReductions(seurat_object)
 
 ## **Block 1 - Object inspection (RNA + ADT)** {#sec-block1}
 
-<div class="content-box-gray">
-**Goal:**  Inspect the RNA assay, contrast it with the ADT assay, and walk through the layer system, the metadata, and the reductions slot.
-</div>
+::: content-box-gray
+**Goal:** Inspect the RNA assay, contrast it with the ADT assay, and walk through the layer system, the metadata, and the reductions slot.
+:::
 
 ### Step 1.1 - Load the object
 
@@ -333,7 +336,7 @@ print(sobj)
 ## QUESTION 1.1
 
 - How many cells, how many features, how many assays?
-- Which is the active (default) assay? Run the line below to get all four numbers.
+- Which is the active (`default`) assay? Run the line below to get all four numbers.
 
 ```{r Question1.1, eval=FALSE}
 cat("\nAnswer to QUESTION 1.1:\n")
@@ -364,7 +367,7 @@ DefaultAssay(sobj)            # "RNA"
 
 ### Step 1.1b - Add mitochondrial genes (this panel does not ship with any)
 
-The 500-gene panel used for this course was curated around lineage and activation markers; it does not include *MT- genes*. Every QC step that depends on `percent.mt` (**Block 2**) needs a real signal to be useful, so we add **9 synthetic MT- genes** here, with counts correlated to each cell's total library size and a stress component for a subset of cells.
+The 500-gene panel used for this course was curated around lineage and activation markers; it does not include *MT- genes*. Every QC step that depends on `percent.mt` ( @sec-block2, **Block 2**) needs a real signal to be useful, so we add **9 synthetic MT- genes** here, with counts correlated to each cell's total library size and a stress component for a subset of cells.
 
 ```{r Step1.1b, }
 set.seed(7)
@@ -437,7 +440,7 @@ try({
 ::: {.callout-tip icon="false"}
 ## Explanation
 
-In `Seurat v5`, the `@counts` slot no longer exists in `Assay5` objects. The correct argument is now `layer = "counts"`. These errors are intentional examples: they show what happens when you run old pipeline scripts or receive objects created with older Seurat versions. Read the error message, understand why it occurs, and then continue.
+In `Seurat v5`, the `@counts` slot no longer exists in `Assay5` objects. The correct argument is now `layer = "counts"`. These errors are intentional examples: they show what happens when you run old pipeline scripts or receive objects created with older `Seurat` versions. Read the error message, understand why it occurs, and then continue.
 
 #### Pattern 1: LayerData(). Recommended for `Seurat v5`.
 
@@ -573,7 +576,7 @@ for (s in rna_assay_slots) {
 
 #### A.3 - `@meta.data`: cell-level metadata data.frame
 
-Rows = cells. Columns = whatever was added during preprocessing.
+`Rows` = cells. Columns\` = whatever was added during preprocessing.
 
 ```{r A.3}
 cat("\n== @meta.data (cell-level) ==\n")
@@ -631,7 +634,7 @@ cat("  Neighbors :", ifelse(length(sobj@neighbors) == 0, "empty (filled by FindN
                             paste(names(sobj@neighbors), collapse = ", ")), "\n")
 ```
 
-#### A.7 - `@commands:` every Seurat function call ever made on this object, with all arguments, providing a full analysis history. If you ever wonder "what arguments did the previous user pass to NormalizeData?", check here.
+#### A.7 - `@commands:` every `Seurat` function call ever made on this object, with all arguments, providing a full analysis history. If you ever wonder "what arguments did the previous user pass to `NormalizeData`?", check here.
 
 ```{r A.7}
 cat("\n== @commands (analysis history) ==\n")
@@ -663,7 +666,7 @@ cat("  @tools names  :", ifelse(length(sobj@tools) == 0, "empty",
 
 #### A.9 - Same data, different paths: a common source of confusion.
 
-The values below are IDENTICAL, but accessed through different slots/accessors.
+The values below are IDENTICAL, but accessed through different `slots/accessors`.
 
 ```{r A.9}
 cat("\n== Same data, different paths (sanity proofs) ==\n")
@@ -726,7 +729,7 @@ cat("\n== SLOT PUZZLES (try before running) ==\n")
 ::: {.callout-tip icon="false"}
 ## PUZZLE 1.2b/1
 
-Where is the original Seurat version that created this object?
+Where is the original `Seurat` version that created this object?
 
 ```{r puzzle1.2b/1}
 cat("\nPUZZLE 1: original Seurat version that created this object?\n")
@@ -739,7 +742,7 @@ cat("  Value :", as.character(sobj@version), "\n")
 ::: {.callout-tip icon="false" collapse="true"}
 ### ANSWER
 
-`sobj@version`. Top-level slot that records the Seurat version that originally constructed the object, not the version currently loaded. Useful when debugging v4-to-v5 migration issues.
+`sobj@version`. Top-level slot that records the Seurat version that originally constructed the object, not the version currently loaded. Useful when debugging `v4-to-v5` migration issues.
 
 LIVE DEMO:
 
@@ -753,7 +756,7 @@ packageVersion("Seurat")   # version currently loaded
 ::: {.callout-tip icon="false"}
 ## QUESTION 1.2b
 
-For each of the 4 sanity-proof tests above (A.9), which one is GUARANTEED to be identical regardless of analysis state, and which one DEPENDS on DefaultAssay? Why is the distinction important when sharing code?
+For each of the 4 sanity-proof tests above (A.9), which one is GUARANTEED to be identical regardless of analysis state, and which one DEPENDS on `DefaultAssay?` Why is the distinction important when sharing code?
 :::
 ::::
 
@@ -781,9 +784,9 @@ DefaultAssay(sobj) <- "RNA"                                # restore
 ```
 :::
 
-### Step 1.3 - Inspecting the RNA assay (intermediate)
+### Step 1.3 - Inspecting the `RNA` assay (intermediate)
 
-Three properties of a single-cell RNA count matrix that drive every later decision: sparsity, memory footprint, and layer state. Inspect them now, before any normalization or scaling. The ADT counterpart to this step opens **Block 6**, once the CITE-seq workflow actually needs it.
+Three properties of a single-cell RNA count matrix that drive every later decision: sparsity, memory footprint, and layer state. Inspect them now, before any normalization or scaling. The ADT counterpart to this step opens **Block 6** (@sec-block6), once the CITE-seq workflow actually needs it.
 
 Sparsity = fraction of zero entries. Drives normalization decisions.
 
@@ -822,7 +825,6 @@ mean(rna == 0) * 100        # RNA sparsity % for this panel
 ```
 
 Compare to a full-transcriptome expectation (commonly 90%+ for 10x PBMC)
-
 :::
 
 ::: callout-caution
@@ -831,7 +833,7 @@ Compare to a full-transcriptome expectation (commonly 90%+ for 10x PBMC)
 Dense vs sparse storage matters at scale. A full **10x** experiment with **50,000 cells and 33,000 genes** as a dense matrix exceeds **50 GB**.
 :::
 
-### Compare sparse (counts) vs dense (after scaling) memory
+### Compare sparse (`counts`) vs dense (after `scaling`) memory
 
 ```{r}
 counts_rna_sz <- object.size(LayerData(sobj, assay = "RNA", layer = "counts"))
@@ -859,21 +861,25 @@ The counts layer is sparse, the scale.data layer is dense. Project this to a 50,
 ::: {.callout-tip icon="false" collapse="true"}
 ### ANSWER
 
-Dense double matrix: 33,000 features x 50,000 cells x 8 bytes = 13.2 GB. A sparse representation at 90% sparsity stores about 33,000 x 50,000 x 0.10 nonzeros x 16 bytes per nonzero = 2.6 GB. ScaleData centers and scales each feature, producing a dense matrix even when input was sparse. Running ScaleData on all features at this scale will exhaust RAM on any laptop. Standard practice: scale only the highly variable genes used in PCA, typically 2,000-3,000 features. The dense scaled matrix becomes 3,000 x 50,000 x 8 = 1.2 GB, manageable. Pass `features = VariableFeatures(sobj)` to ScaleData.
+Dense double matrix: 33,000 features x 50,000 cells x 8 bytes = 13.2 GB. A sparse representation at 90% sparsity stores about 33,000 x 50,000 x 0.10 nonzeros x 16 bytes per nonzero = 2.6 GB. `ScaleData` centers and scales each feature, producing a dense matrix even when input was sparse. Running `ScaleData` on all features at this scale will exhaust RAM on any laptop. Standard practice: scale only the highly variable genes used in PCA, typically 2,000-3,000 features. The dense scaled matrix becomes 3,000 x 50,000 x 8 = 1.2 GB, manageable. Pass `features = VariableFeatures(sobj)` to `ScaleData`.
 
 LIVE DEMO:
 
 ```{r Question1.3b_answer}
 object.size(LayerData(sobj, assay="RNA", layer="counts"))   # sparse
 object.size(as.matrix(LayerData(sobj, assay="RNA", layer="counts")))  # dense
-# Best practice (already used in Step 4.4):
-# ScaleData(sobj, features = VariableFeatures(sobj))
+```
+
+Best practice (already used in **Step 4.4**, @sec-step4.4):
+
+```{r, eval=FALSE}
+ScaleData(sobj, features = VariableFeatures(sobj))
 ```
 :::
 
-### Step 1.6 - Metadata
+### Step 1.6 - Metadata {#sec-step1.6}
 
-Reductions (PCA, UMAP, Harmony, etc.) are computed in **Block 4** onward. At this point in the script, none exist yet. Confirm that explicitly instead of assuming it: it is the same habit as checking `DefaultAssay()` before trusting any accessor. The access patterns for `cell.embeddings` and `feature.loadings` are covered in **Step 4.4**, once PCA actually exists.
+Reductions (`PCA, UMAP, Harmony`, etc.) are computed in **Block 4** (@sec-block4) onward. At this point in the script, none exist yet. Confirm that explicitly instead of assuming it: it is the same habit as checking `DefaultAssay()` before trusting any accessor. The access patterns for `cell.embeddings` and `feature.loadings` are covered in **Step 4.4**, (@sec-step4.4), once PCA actually exists.
 
 ```{r Step1.6}
 cat("Reductions in the object:\n")
@@ -953,7 +959,7 @@ cat("'CD8A' in ADT rownames:", "CD8A" %in% rownames(sobj[["ADT"]]), "\n")
 cat("'CD8a' in ADT rownames:", "CD8a" %in% rownames(sobj[["ADT"]]), "\n")
 ```
 
-### Step 1.8 - Marker stored under an alias
+### Step 1.8 - Marker stored under an alias {#sec-step1.8}
 
 Gene symbols have synonyms: `NCAM1 = CD56, FCGR3A = CD16, MS4A1 = CD20`. If an object stores a gene under its alias, `FeaturePlot("FCGR3A")` returns "feature not found" and the marker reads as absent when the data are intact.
 
@@ -1030,13 +1036,13 @@ aliases <- c(MS4A1="CD20", NCAM1="CD56", FCGR3A="CD16")
 
 ## **Block 2 - Quality control metrics (RNA)** {#sec-block2}
 
-<div class="content-box-gray">
+::: content-box-gray
 **Goal:** Compute QC metrics, look at their distributions across donors, and filter cells using thresholds chosen from the data, not from a tutorial.
-</div>
+:::
 
 ### Step 2.1 - Compute QC metrics
 
-- Mitochondrial fraction (`percent.mt`) is a death/stress indicator. 
+- Mitochondrial fraction (`percent.mt`) is a death/stress indicator.
 - Ribosomal fraction (`percent.ribo`) flags cells dominated by housekeeping transcripts.
 
 ```{r Step2.1}
@@ -1050,10 +1056,9 @@ summary(sobj@meta.data[, c("nFeature_RNA", "nCount_RNA", "percent.mt")])
 head(sobj@meta.data, 10)
 ```
 
-### Step 2.2 | Sanity check: did percent.mt actually compute?
+### Step 2.2 \| Sanity check: did percent.mt actually compute?
 
-
-- `percent.mt` depends entirely on the '^MT-' pattern matching real gene names.
+- `percent.mt` depends entirely on the '\^MT-' pattern matching real gene names.
 
 This is worth confirming explicitly rather than assuming it worked: a renamed or missing `MT-` prefix (which is exactly what the injected object simulates) returns `percent.mt = 0` for every cell, and any filter based on it then either does nothing or rejects every cell.
 
@@ -1080,14 +1085,13 @@ if (max(sobj$percent.mt) == 0) {
 ## QUESTION 2.2
 
 If max(percent.mt) is 0 across every cell, what are the two possible explanations, and how do you tell them apart?
-
 :::
 ::::
 
 ::: {.callout-tip icon="false" collapse="true"}
 ### ANSWER
 
-Explanation 1 (almost always): the MT- pattern matched no genes because mitochondrial symbols use a different prefix (mt-, Mt-, MTX, or a non-human reference). Diagnostic: `grep('^MT-', rownames(sobj))` returns `character(0)`. Inspect `head(rownames(sobj))` and look for the actual prefix. Explanation 2 (implausible): cells filtered upstream so aggressively that no MT transcripts remain. The pattern mismatch is the realistic case. The injected dataset renames MT- genes to MTX- to trip this exact failure.
+Explanation 1 (almost always): the MT- pattern matched no genes because mitochondrial symbols use a different prefix (`mt-, Mt-, MTX, or a non-human reference`). Diagnostic: `grep('^MT-', rownames(sobj))` returns `character(0)`. Inspect `head(rownames(sobj))` and look for the actual prefix. Explanation 2 (implausible): cells filtered upstream so aggressively that no MT transcripts remain. The pattern mismatch is the realistic case. The injected dataset renames `MT-` genes to `MTX-` to trip this exact failure.
 
 LIVE DEMO:
 
@@ -1100,7 +1104,7 @@ summary(sobj$percent.mt)
 ```
 :::
 
-### Step 2.3 - Visualize QC distributions
+### Step 2.3 - Visualize QC distributions {#sec-step2.3}
 
 ```{r}
 VlnPlot(sobj,
@@ -1118,12 +1122,12 @@ p1 | p2
 
 ### Step 2.4 - Outlier detection
 
-Cells that are high in nFeature relative to nCount might be doublets.
+Cells that are high in `nFeature` relative to `nCount` might be doublets.
 
 - Low `nCount` with low `nFeature` = empty droplet.
 - High `percent.mt` alone = stressed/dying cell.
 
-Cells that are potential outliers: nFeature > 2 SD above mean
+Cells that are potential outliers: `nFeature` \> 2 SD above mean
 
 ```{r}
 mean_feat <- mean(sobj$nFeature_RNA)
@@ -1133,7 +1137,7 @@ cat("Cells with nFeature > mean + 2 SD (potential doublets):",
     high_feat, "\n")
 ```
 
-Cells with high mt: > 95th percentile
+Cells with high mt: \> 95th percentile
 
 ```{r}
 mt_95 <- quantile(sobj$percent.mt, 0.95)
@@ -1141,7 +1145,7 @@ high_mt <- sum(sobj$percent.mt > mt_95)
 cat("Cells with percent.mt > 95th percentile:", high_mt, "\n")
 ```
 
-The two counts above are easy to compute and easy to misread: a count by itself does not show whether the flagged cells form a clear, separable group, or whether the threshold cut through the middle of a continuous distribution. Flag both categories on the metadata and plot them directly against the same axes used in **Step 2.3**, so the outliers are visible as points, not just as a number.
+The two counts above are easy to compute and easy to misread: a count by itself does not show whether the flagged cells form a clear, separable group, or whether the threshold cut through the middle of a continuous distribution. Flag both categories on the metadata and plot them directly against the same axes used in **Step 2.3** (@sec-step2.3), so the outliers are visible as points, not just as a number.
 
 ```{r}
 sobj$outlier_flag <- "normal"
@@ -1167,14 +1171,13 @@ p_out1 | p_out2
 ## QUESTION 2.4
 
 Looking at the two plots, do the `high-nFeature` cells and the `high-percent.mt` cells occupy distinct regions, or do some cells qualify as both? What would a cell flagged on both axes most likely be?
-
 :::
 ::::
 
 ::: {.callout-tip icon="false" collapse="true"}
 ### ANSWER
 
-In most runs the two flagged groups are largely distinct: high-nFeature outliers cluster toward the right side of the `nCount-vs-nFeature` plot (more genes detected than the bulk of cells at a similar UMI count), while `high-percent.mt` outliers cluster in the upper region of the `nCount-vs-percent.mt` plot regardless of nFeature. Some overlap is expected and is the informative case: a cell flagged on both axes (`high nFeature AND high percent.mt`) is the hardest to call from a single metric. It could be a doublet that happens to also be stressed, or it could be two unrelated technical issues compounding in the same cell. The practical move is not to try to assign a single cause; flag the cell as low-confidence and let downstream steps (doublet scoring in **Block 3**, annotation confidence in **Block 5**) make the final call with more evidence.
+In most runs the two flagged groups are largely distinct: high-nFeature outliers cluster toward the right side of the `nCount-vs-nFeature` plot (more genes detected than the bulk of cells at a similar UMI count), while `high-percent.mt` outliers cluster in the upper region of the `nCount-vs-percent.mt` plot regardless of nFeature. Some overlap is expected and is the informative case: a cell flagged on both axes (`high nFeature AND high percent.mt`) is the hardest to call from a single metric. It could be a doublet that happens to also be stressed, or it could be two unrelated technical issues compounding in the same cell. The practical move is not to try to assign a single cause; flag the cell as low-confidence and let downstream steps (doublet scoring in **Block 3**, annotation confidence in **Block 5**, @sec-block5) make the final call with more evidence.
 
 LIVE DEMO:
 
@@ -1200,7 +1203,7 @@ sobj@meta.data %>%
 
 ### Step 2.5 - Wrong filter: tutorial thresholds applied blindly
 
-Standard tutorial thresholds (`nFeature > 200 & < 6000, percent.mt < 5%`) are inherited from full 10x experiments with ~33,000 genes. This dataset is a 500-gene subset for teaching purposes. Applying the tutorial cutoffs deletes every cell.
+Standard tutorial thresholds (`nFeature > 200 & < 6000, percent.mt < 5%`) are inherited from full 10x experiments with \~33,000 genes. This dataset is a 500-gene subset for teaching purposes. Applying the tutorial cutoffs deletes every cell.
 
 ```{r}
 # >>> DELIBERATE ERROR - read the message, then continue. <<<
@@ -1215,25 +1218,21 @@ try({
 ```
 
 ::: {.callout-important icon="false"}
-
-"No cells found" is the canonical result of copying thresholds from a tutorial without checking your own data distribution. The threshold `nFeature_RNA > 200` was calibrated for a transcriptome of ~33,000 genes where cells typically detect 2,000-3,000 genes. In a 500-gene panel, most cells detect 50-150 genes. The filter removes every single cell.
-
+"No cells found" is the canonical result of copying thresholds from a tutorial without checking your own data distribution. The threshold `nFeature_RNA > 200` was calibrated for a transcriptome of \~33,000 genes where cells typically detect 2,000-3,000 genes. In a 500-gene panel, most cells detect 50-150 genes. The filter removes every single cell.
 :::
-
 
 :::: question
 ::: {.callout-tip icon="false"}
 ## QUESTION 2.5
 
 Which of the three filter parameters above is the most wrong for this 500-gene dataset, and what value would you try first? Run `quantile(sobj$nFeature_RNA, c(0.05, 0.95))` to see the actual range before proposing a number.
-
 :::
 ::::
 
 ::: {.callout-tip icon="false" collapse="true"}
 ### ANSWER
 
-`nFeature_RNA > 200` is the most wrong. The tutorial value 200 was calibrated for ~33,000 features where cells detect 2,000-3,000 genes; here the 500-gene panel produces 50-150 detected per cell, so a 200 floor removes essentially all cells. Reasonable starting threshold here is the 5th percentile of `nFeature_RNA`, typically near 30-50. `nFeature_RNA < 6000` is technically fine because no cell has near 6000 features in a 500-gene panel; it just does nothing. `percent.mt < 5` is borderline; effect depends on whether the MT pattern matched.
+`nFeature_RNA > 200` is the most wrong. The tutorial value 200 was calibrated for \~33,000 features where cells detect 2,000-3,000 genes; here the 500-gene panel produces 50-150 detected per cell, so a 200 floor removes essentially all cells. Reasonable starting threshold here is the 5th percentile of `nFeature_RNA`, typically near 30-50. `nFeature_RNA < 6000` is technically fine because no cell has near 6000 features in a 500-gene panel; it just does nothing. `percent.mt < 5` is borderline; effect depends on whether the MT pattern matched.
 
 LIVE DEMO:
 
@@ -1246,7 +1245,7 @@ subset(sobj, subset = nFeature_RNA >= lo & nFeature_RNA <= hi)
 ```
 :::
 
-A reasonable first guess for this panel: nFeature_RNA > 50. Try it and see how many cells survive, before moving to the fully data-driven thresholds in **Step 2.6 and 2.7**.
+A reasonable first guess for this panel: `nFeature_RNA > 50`. Try it and see how many cells survive, before moving to the fully data-driven thresholds in **Step 2.6 and 2.7** (@sec-step2.6, @sec-step2.7).
 
 ```{r}
 n_above_50 <- sum(sobj$nFeature_RNA > 50)
@@ -1254,7 +1253,7 @@ cat("Cells with nFeature_RNA > 50:", n_above_50,
     sprintf("(%.1f%% of total)\n", 100 * n_above_50 / ncol(sobj)))
 ```
 
-### Step 2.6 - Compare tutorial vs data-driven thresholds
+### Step 2.6 - Compare tutorial vs data-driven thresholds {#sec-step2.6}
 
 ```{r}
 cat("--- Published thresholds (full 10x, 33k genes) ---\n")
@@ -1276,7 +1275,7 @@ cat("  nFeature_RNA < ", max_features, " (same intent: doublets)\n")
 cat("  percent.mt   < ", max_mt, "%  (same intent: dead cells)\n")
 ```
 
-### Step 2.7 - Apply data-driven thresholds
+### Step 2.7 - Apply data-driven thresholds {#sec-step2.7}
 
 ```{r}
 cat("Cells before filtering:", ncol(sobj), "\n")
@@ -1317,8 +1316,7 @@ if (ncol(sobj_filt) < 500) {
 ::: {.callout-tip icon="false"}
 ## QUESTION 2.7
 
-How would your thresholds change if the dataset had ~33,000 genes instead of 500?
-
+How would your thresholds change if the dataset had \~33,000 genes instead of 500?
 :::
 ::::
 
@@ -1327,7 +1325,6 @@ How would your thresholds change if the dataset had ~33,000 genes instead of 500
 
 Thresholds on detected-feature counts scale roughly linearly with feature space, but thresholds on quality metrics (`percent.mt, percent.ribo`) do not. For 33,000 genes: `nFeature_RNA` lower 200-500, upper 5,000-8,000; `nCount_RNA` upper into tens of thousands. percent.mt is independent of feature count (a fraction of UMIs), so 10-20% upper bound is `tissue-driven`, not `size-driven`. Always inspect the distribution before fixing any number.
 
-
 LIVE DEMO:
 
 ```{r}
@@ -1335,7 +1332,6 @@ p1 <- VlnPlot(sobj, "nFeature_RNA", group.by="donor_id") + ggtitle("500-gene pan
 print(p1)
 ```
 :::
-
 
 ### Step 2.8 - Silent failure: percent.mt as fraction vs as percentage
 
@@ -1360,7 +1356,6 @@ cat("Cells passing 'percent.mt < 5' filter    :", ncol(sobj_pct), "\n")
 ## QUESTION 2.8
 
 Is your dataset's percent.mt distribution closer to a fraction or a percentage? Run `summary(sobj$percent.mt)` to confirm and remember this trap when reading code from other groups.
-
 :::
 ::::
 
@@ -1376,7 +1371,6 @@ summary(sobj$percent.mt)
 ```
 :::
 
-
 ### Step 2.9 - Spot the bug
 
 Read the code below **CAREFULLY** before running it. What is wrong with it?
@@ -1389,8 +1383,7 @@ covid_cells <- subset(sobj_filt, subset = condition == "COVID")
 
 Your answer:
 
-REVEAL: the condition value in this dataset is "COVID19", not "COVID".
-- `subset()` returns zero cells without any error. Always inspect the unique values of a categorical column before subsetting on it.
+REVEAL: the condition value in this dataset is "COVID19", not "COVID". - `subset()` returns zero cells without any error. Always inspect the unique values of a categorical column before subsetting on it.
 
 ```{r}
 cat("Unique values of condition in this dataset:\n")
@@ -1403,14 +1396,11 @@ print(unique(sobj_filt$condition))
 **Habit:** print `unique()` of a factor or character column before referencing any specific value in `subset()` or `filter()`.
 :::
 
-
 ## **Block 3 - Doublet detection** {#sec-block3}
 
 ::: content-box-gray
-**Goal:** Identify and remove technical doublets that survive QC thresholds.
-  + `scDblFinder` simulates artificial doublets and scores each real cell against them. The result is a doublet class label and a numeric score per cell.
+**Goal:** Identify and remove technical doublets that survive QC thresholds. + `scDblFinder` simulates artificial doublets and scores each real cell against them. The result is a doublet class label and a numeric score per cell.
 :::
-
 
 ### Step 3.1 - Run `scDblFinder`
 
@@ -1419,8 +1409,8 @@ library(scDblFinder)
 ```
 
 Both packages are already loaded from **Block 0**; no need to `library()` again.
- 
- - `scDblFinder` calls xgboost internally; recent xgboost versions emit deprecation warnings unrelated to our analysis. Wrap the call to keep the console focused on the actual result.
+
+- `scDblFinder` calls xgboost internally; recent xgboost versions emit deprecation warnings unrelated to our analysis. Wrap the call to keep the console focused on the actual result.
 
 ```{r}
 set.seed(42)
@@ -1462,7 +1452,6 @@ p1 | p2
 ## QUESTION 3.2
 
 Why is it expected that doublets do NOT all sit at the very top of `nCount_RNA`? What does that imply about using `nCount` thresholds alone to remove doublets?
-
 :::
 ::::
 
@@ -1479,9 +1468,7 @@ FeatureScatter(sobj_filt, "nCount_RNA", "nFeature_RNA", group.by = "is_dbl")
 ```
 
 PLOT / OUTPUT: `FeatureScatter()` colored by doublet class; doublets distributed across the cloud, not just the top
-
 :::
-
 
 ### Step 3.3 - Remove doublets
 
@@ -1545,14 +1532,13 @@ p_donor_counts
 ## QUESTION 3.4
 
 Look at the per-donor bar chart. Did any single donor lose a much larger fraction of cells than the others? If so, is that donor-level QC variation, or a sign the filter thresholds were tuned around the majority of donors at the expense of one outlier?
-
 :::
 ::::
 
 ::: {.callout-tip icon="false" collapse="true"}
 ### ANSWER
 
-Compare the before/after height for each donor rather than the overall retention rate. A donor that loses a noticeably larger fraction than the rest is worth a second look before proceeding: it could be genuine biological or technical donor-level variation (a donor with systematically lower RNA quality, more dying cells, or a different processing batch), or it could mean the data-driven thresholds in **Step 2.7**, which were computed across all donors pooled together, happen to fall in a range that disproportionately penalizes one donor's distribution. The fix is the same either way: if one donor's loss looks extreme, compute thresholds per donor and compare, rather than assuming a single global threshold serves every donor equally. Silently losing most of one donor's cells changes what every downstream comparison (by condition, by severity) is actually measuring.
+Compare the before/after height for each donor rather than the overall retention rate. A donor that loses a noticeably larger fraction than the rest is worth a second look before proceeding: it could be genuine biological or technical donor-level variation (a donor with systematically lower RNA quality, more dying cells, or a different processing batch), or it could mean the data-driven thresholds in **Step 2.7** (@sec-step2.7), which were computed across all donors pooled together, happen to fall in a range that disproportionately penalizes one donor's distribution. The fix is the same either way: if one donor's loss looks extreme, compute thresholds per donor and compare, rather than assuming a single global threshold serves every donor equally. Silently losing most of one donor's cells changes what every downstream comparison (by condition, by severity) is actually measuring.
 
 LIVE DEMO:
 
@@ -1564,12 +1550,11 @@ cell_counts %>% group_by(donor_id) %>%
 ```
 :::
 
-
 ## **Block 4 - Normalization, dimensionality reduction, clustering (RNA)** {#sec-block4}
 
 ::: content-box-gray
-**Goal:** Take the RNA assay from raw counts to a clustered UMAP. ADT normalization is intentionally NOT done here; it belongs to **Block 6** where the CITE-seq workflow starts. Keep the modalities separate until WNN.
-::: 
+**Goal:** Take the RNA assay from raw counts to a clustered UMAP. ADT normalization is intentionally NOT done here; it belongs to **Block 6** (@sec-block6) where the CITE-seq workflow starts. Keep the modalities separate until WNN.
+:::
 
 ### Step 4.1 - Confirm the counts layer holds raw integer counts
 
@@ -1589,7 +1574,6 @@ if (!all(vals == round(vals))) {
   cat("\nCounts layer looks like raw counts. Safe to normalize.\n")
 }
 ```
-
 
 ```{r}
 # >>> DELIBERATE ERROR - read the message, then continue. <<<
@@ -1613,13 +1597,11 @@ try({
 })
 ```
 
-
 :::: question
 ::: {.callout-tip icon="false"}
 ## QUESTION 4.1
 
 If integrity check fails on a real inherited object, what do you ask the collaborator for? What is the absolute minimum you need to restart the analysis from a clean state?
-
 :::
 ::::
 
@@ -1665,7 +1647,6 @@ cat("Max value in RNA data layer          :",
 ## QUESTION 4.2
 
 Why is LogNormalize applied to RNA but CLR (margin = 2) used for ADT? What property of each modality drives the difference?
-
 :::
 ::::
 
@@ -1682,9 +1663,7 @@ summary(LayerData(sobj_filt, assay="ADT", layer="counts")@x)
 ```
 
 **Note:** RNA counts 0-200s typical; ADT counts 0-1000s typical.
-
 :::
-
 
 ### Step 4.3 - Highly variable genes
 
@@ -1709,7 +1688,7 @@ n_var     <- length(VariableFeatures(sobj_filt))
 cat("Variable fraction:", round(n_var / all_genes * 100, 1), "% of all genes\n")
 ```
 
-### Step 4.4 - Scale and run PCA
+### Step 4.4 - Scale and run PCA {#sec-step4.4}
 
 `vars.to.regress` removes the linear effect of percent.mt from each gene `before scaling`. This reduces the influence of cell stress/quality on the principal components.
 
@@ -1723,7 +1702,7 @@ sobj_filt <- ScaleData(
 sobj_filt <- RunPCA(sobj_filt, npcs = 30, verbose = FALSE)
 ```
 
-Where do the PC coordinates live, now that PCA actually exists? **Step 1.6** confirmed reductions were empty before this point; here are the three access patterns in practice.
+Where do the PC coordinates live, now that PCA actually exists? **Step 1.6** (@sec-step1.6) confirmed reductions were empty before this point; here are the three access patterns in practice.
 
 ```{r}
 cat("Reductions now available:", paste(SafeReductions(sobj_filt), collapse = ", "), "\n\n")
@@ -1752,7 +1731,6 @@ print(head(sobj_filt@reductions$pca@feature.loadings[
 ## QUESTION 4.4c
 
 You inherit an object where Reductions(sobj) lists "pca" and "umap" but `Layers(sobj[["RNA"]])` shows only "counts". The data layer is missing. Can you trust the UMAP? What is your next move?
-
 :::
 ::::
 
@@ -1774,7 +1752,6 @@ sobj_check <- RunPCA(sobj_check, npcs = 30, verbose = FALSE)
 ```
 
 PLOT / OUTPUT: Side-by-side UMAPs colored by cluster if recomputed PCA is available.
-
 :::
 
 The elbow is where adding more PCs explains little additional variance.
@@ -1791,10 +1768,9 @@ ElbowPlot(sobj_filt, ndims = 30) +
 
 :::: question
 ::: {.callout-tip icon="false"}
-## QUESTION 4.4 
+## QUESTION 4.4
 
 How would you choose the number of PCs in a real dataset where the elbow plot does not have a sharp knee?
-
 :::
 ::::
 
@@ -1813,10 +1789,9 @@ JackStrawPlot(sobj_filt, dims = 1:25)
 ```
 
 PLOT / OUTPUT: JackStrawPlot: PCs above the diagonal are significant
-
 :::
 
-### Step 4.4a -  Sanity check: did HVG and PCA do what you asked?
+### Step 4.4a - Sanity check: did HVG and PCA do what you asked?
 
 - **Silent failure A.** `FindVariableFeatures(nfeatures = 2000)` on a 500-gene panel returns 500 without any warning. The HVG analysis was a no-op.
 
@@ -1832,7 +1807,6 @@ if (n_hvg_got < n_hvg_asked) {
       "selected nothing.\n")
 }
 ```
-
 
 - **Silent failure B.** RunPCA returns the number of PCs you ask for, even when only a fraction carry signal. Inspect tail variance to spot dead PCs.
 
@@ -1858,14 +1832,13 @@ cat("\nNumber of PCs with > 1% variance explained:", n_pcs_above_1pct, "\n")
 cat("Recommended lower bound for dims=: 1:", n_pcs_above_1pct, sep = "", "\n")
 cat("(The elbow plot above gave ~20; this floor confirms or contradicts it.)\n")
 ```
-
 :::
 ::::
 
 ::: {.callout-tip icon="false" collapse="true"}
 ### ANSWER
 
-Computed in the script. Typically 10-15 PCs carry >1% variance in this dataset; the elbow gives roughly the same number. If they disagree by more than a factor of 2, either the elbow is being misread or the dataset has unusual variance structure.
+Computed in the script. Typically 10-15 PCs carry \>1% variance in this dataset; the elbow gives roughly the same number. If they disagree by more than a factor of 2, either the elbow is being misread or the dataset has unusual variance structure.
 
 LIVE DEMO:
 
@@ -1877,11 +1850,9 @@ plot(pct, type="b", xlab="PC", ylab="% variance")
 ```
 
 PLOT / OUTPUT: Variance-per-PC scatter; flattening point is the floor for dims
-
 :::
 
-
-### Step 4.4b - Decide whether to integrate (Harmony)
+### Step 4.4b - Decide whether to integrate (Harmony) {#sec-step4.4b}
 
 Before clustering, ask: do donors separate on the PCA? If yes, the UMAP will be donor-dominated, not biology-dominated, and clustering will encode *batch*.
 
@@ -1893,7 +1864,7 @@ p_pca_cond  <- DimPlot(sobj_filt, reduction = "pca", group.by = "condition") +
 p_pca_donor | p_pca_cond
 ```
 
-- **Quick R^2 diagnostic:** how much of PC1 and PC2 is explained by donor?
+- **Quick R\^2 diagnostic:** how much of PC1 and PC2 is explained by donor?
 
 ```{r}
 pc_coords <- Embeddings(sobj_filt, reduction = "pca")[, 1:2]
@@ -1906,21 +1877,17 @@ for (pc in 1:2) {
 ::: callout-tip
 ## Tip
 
-Decision rule of thumb:
-  - R^2 < 0.10 : donor effect minimal, no integration needed
-  - R^2 0.10 to 0.30: borderline, consider integration if cell types are mixed across donors
-  - R^2 > 0.30 : donor dominates, integration recommended
+Decision rule of thumb: - R\^2 \< 0.10 : donor effect minimal, no integration needed - R\^2 0.10 to 0.30: borderline, consider integration if cell types are mixed across donors - R\^2 \> 0.30 : donor dominates, integration recommended
 
-In this dataset the donor effect is borderline-to-low, so clustering and annotation through Block 5 proceed on the plain PCA/UMAP without Harmony.
+In this dataset the donor effect is borderline-to-low, so clustering and annotation through **Block 5** (@sec-block5) proceed on the plain PCA/UMAP without Harmony.
 :::
 
-### Step 5.4e runs Harmony anyway 
-
-Once cell types are annotated, to build a side-by-side comparison panel: seeing that Harmony barely changes the layout on data you already trust is what makes you confident reading the same comparison on a new dataset where you do not yet know the answer.
+**Step 5.4e** (@sec-step5.4e) runs Harmony anyway. Once cell types are annotated, to build a side-by-side comparison panel: seeing that Harmony barely changes the layout on data you already trust is what makes you confident reading the same comparison on a new dataset where you do not yet know the answer.
 
 Reference syntax (current harmony package, Seurat object method):
 
-```{r, eval=FALSE}
+```{r, eval=FALSE, warning=FALSE}
+library(harmony)
 # NOT RUN
 sobj_harm <- RunHarmony(sobj_filt, group.by.vars = "donor_id",
                           reduction      = "pca",
@@ -1930,14 +1897,13 @@ sobj_harm <- RunHarmony(sobj_filt, group.by.vars = "donor_id",
      ggtitle("After Harmony (donor)")
 ```
 
-   
 In downstream `FindNeighbors / RunUMAP`, switch `reduction = "pca"` to `reduction = "harmony"` (dims stays the same; Harmony returns the same dimensionality as the input reduction).
 
 :::: question
 ::: {.callout-tip icon="false"}
 ## QUESTION 4.4b
 
-At what donor R^2 would you switch to Harmony in your own data? The block above already printed the R^2 for PC1 and PC2; apply this rule directly:
+At what donor R\^2 would you switch to Harmony in your own data? The block above already printed the R\^2 for PC1 and PC2; apply this rule directly:
 
 ```{r Question4.4b}
 r2_pc1 <- summary(lm(pc_coords[, 1] ~ sobj_filt$donor_id))$r.squared
@@ -1955,14 +1921,13 @@ cat("  Con: may remove TRUE biological inter-donor variance (e.g., one donor\n")
 cat("       genuinely lacks a cell type). Always cross-check post-integration\n")
 cat("       that cell type proportions per donor remain plausible.\n")
 ```
-
 :::
 ::::
 
 ::: {.callout-tip icon="false" collapse="true"}
 ### ANSWER
 
-Thresholds (in the script): R^2 < 0.10 = no integration; 0.10-0.30 = borderline, integrate only if cell types are also separated by donor; >0.30 = integrate. Trade-off: integration removes technical donor variance so cell types pool across donors. It also removes TRUE biological inter-donor variance: if one donor genuinely lacks a cell type, integration may merge their cells with cells from other donors that DO have it, hiding the difference. After integrating, always check that per-donor cell type proportions remain plausible. This dataset's R^2 falls in the low-to-borderline range, so clustering and annotation proceed without Harmony through Block 5. Step 5.4e runs Harmony anyway and Step 5.4f builds a 4-panel comparison so students see directly whether integration would have changed anything, rather than taking the R^2 threshold on faith.
+Thresholds (in the script): R\^2 \< 0.10 = no integration; 0.10-0.30 = borderline, integrate only if cell types are also separated by donor; \>0.30 = integrate. Trade-off: integration removes technical donor variance so cell types pool across donors. It also removes TRUE biological inter-donor variance: if one donor genuinely lacks a cell type, integration may merge their cells with cells from other donors that DO have it, hiding the difference. After integrating, always check that per-donor cell type proportions remain plausible. This dataset's R\^2 falls in the low-to-borderline range, so clustering and annotation proceed without Harmony through **Block 5** (@sec-block5). **Step 5.4e** (@sec-step5.4e) runs Harmony anyway and **Step 5.4f** (@sec-step5.4f) builds a 4-panel comparison so students see directly whether integration would have changed anything, rather than taking the R\^2 threshold on faith.
 
 LIVE DEMO:
 
@@ -1972,10 +1937,8 @@ sapply(1:5, function(i)
   summary(lm(pc_coords[, i] ~ sobj_filt$donor_id))$r.squared)
 ```
 
-PLOT / OUTPUT: `DimPlot(sobj_filt, reduction='pca', group.by='donor_id')` side by side with `group.by='condition'`; see also the 4-panel comparison in **Step 5.4f**.
-
+PLOT / OUTPUT: `DimPlot(sobj_filt, reduction='pca', group.by='donor_id')` side by side with `group.by='condition'`; see also the 4-panel comparison in **Step 5.4f** (@sec-step5.4f).
 :::
-
 
 ### Step 4.4c - Spot the bug
 
@@ -1988,11 +1951,10 @@ sobj_filt <- RunUMAP(sobj_filt, dims = c(1, 2, 3, 5, 7, 11, 13))
 
 Your answer:
 
-- **REVEAL:**
+**REVEAL:**
 
-1. `dims = 0:20` includes PC 0, which does not exist. PCA indexing starts at 1. `FindNeighbors` will silently drop the 0 or error depending on the Seurat version. Always use 1:N.
-2. `dims` passed as a non-contiguous vector skips intermediate PCs. UMAP will run but the result represents only the 7 selected dimensions, not the structure captured by the elbow. Always use a contiguous range starting from 1.
-
+1.  `dims = 0:20` includes PC 0, which does not exist. PCA indexing starts at 1. `FindNeighbors` will silently drop the 0 or error depending on the Seurat version. Always use 1:N.
+2.  `dims` passed as a non-contiguous vector skips intermediate PCs. UMAP will run but the result represents only the 7 selected dimensions, not the structure captured by the elbow. Always use a contiguous range starting from 1.
 
 ### Step 4.5 - `FindNeighbors`: a common dimension mismatch
 
@@ -2006,9 +1968,7 @@ try({
 })
 ```
 
-The error occurs because the PCA object contains only 30 components.
-- `dims = 1:50` requests components that do not exist.
-- Common cause: `npcs` in RunPCA is changed but downstream calls are not updated.
+The error occurs because the PCA object contains only 30 components. - `dims = 1:50` requests components that do not exist. - Common cause: `npcs` in RunPCA is changed but downstream calls are not updated.
 
 ```{r}
 sobj_filt <- FindNeighbors(sobj_filt, dims = 1:20, verbose = FALSE)
@@ -2043,7 +2003,6 @@ print(table(sobj_filt$seurat_clusters))
 Lower resolution gives fewer, larger clusters; higher resolution gives more, smaller ones. Neither is intrinsically right.
 
 - What evidence do you use to defend a chosen resolution?
-
 :::
 ::::
 
@@ -2062,17 +2021,15 @@ for (r in c(0.3, 0.5, 0.8, 1.2)) {
 ```
 
 PLOT / OUTPUT: If clustree is installed: clustree(sobj_filt, prefix='RNA_snn_res.')
-
 :::
-
 
 ### Step 4.7 - UMAP visualization
 
 Three questions to answer immediately after generating the UMAP:
 
-1. Do cells cluster by biology or by donor? (*batch effect check*)
-2. Do canonical marker genes map to expected clusters?
-3. Does condition (Healthy vs COVID-19) show any spatial structure? `set.seed(42)` 
+1.  Do cells cluster by biology or by donor? (*batch effect check*)
+2.  Do canonical marker genes map to expected clusters?
+3.  Does condition (Healthy vs COVID-19) show any spatial structure? `set.seed(42)`
 
 - `umap.method='uwot'` is the current default but `Seurat` prints a one-time notice when not stated explicitly. Setting it silences the notice.
 
@@ -2110,20 +2067,18 @@ p_sev <- DimPlot(sobj_filt, group.by = "severity",
 p_cond | p_sev
 ```
 
-
 :::: question
 ::: {.callout-tip icon="false"}
 ## QUESTION 4.7
 
 If donors visibly separate on the UMAP, is that batch effect or biology? What additional information would help you decide?
-
 :::
 ::::
 
 ::: {.callout-tip icon="false" collapse="true"}
 ### ANSWER
 
-Cannot tell from UMAP alone. Two checks: (1) do donors cluster within shared cell-type regions or do they form their own regions? Same cell types in same UMAP region across donors = expected biology; same cell types in DIFFERENT UMAP regions per donor = batch. Color UMAP by cell type and by donor on the same plot. (2) Compute the PC1 R^2 against donor_id (see 4.4b); if high, batch dominates the embedding.
+Cannot tell from UMAP alone. Two checks: (1) do donors cluster within shared cell-type regions or do they form their own regions? Same cell types in same UMAP region across donors = expected biology; same cell types in DIFFERENT UMAP regions per donor = batch. Color UMAP by cell type and by donor on the same plot. (2) Compute the PC1 R\^2 against donor_id (see 4.4b); if high, batch dominates the embedding.
 
 LIVE DEMO:
 
@@ -2133,9 +2088,7 @@ DimPlot(sobj_filt, reduction="umap", group.by="singler_label")
 ```
 
 PLOT / OUTPUT: Side-by-side UMAPs make the call obvious in most cases.
-
 :::
-
 
 ### Step 4.8 - Canonical PBMC markers (RNA)
 
@@ -2178,12 +2131,16 @@ ggplot(props, aes(x = condition, y = prop, fill = seurat_clusters)) +
 ## **Block 5 - Cell type annotation (RNA-based)** {#sec-block5}
 
 ::: content-box-gray
-**Goal:** assign cell type labels from a curated reference (SingleR with the Human Primary Cell Atlas), then verify the labelled object before the CITE-seq workflow begins. RNA-only annotation has known weaknesses for T cell subsets; Block 6 will revisit those with protein.
-::: 
+**Goal:** assign cell type labels from a curated reference (`SingleR` with the Human Primary Cell Atlas), then verify the labelled object before the CITE-seq workflow begins. RNA-only annotation has known weaknesses for T cell subsets; **Block 6** (@sec-block6) will revisit those with protein.
+:::
 
-### Step 5.1 - Run SingleR against Human Primary Cell Atlas
+### Step 5.1 - Run `SingleR` against Human Primary Cell Atlas
 
-```{r}
+#### **Option A — Standard Installation Path**
+
+👉 This workflow uses the official **Human Primary Cell Atlas** reference and is the recommended confirmatory approach.
+
+```{r, eval=FALSE}
 cat("Loading reference (Human Primary Cell Atlas)...\n")
 ref     <- celldex::HumanPrimaryCellAtlasData()
 rna_mat <- LayerData(sobj_filt, assay = "RNA", layer = "data")
@@ -2195,7 +2152,27 @@ singler_res <- SingleR(
   labels  = ref$label.main,
   BPPARAM = BiocParallel::SerialParam()
 )
+```
 
+#### **Option B — Alternative with Pre‑saved RDS File**
+
+If installation of `celldex` or other dependencies fails:
+
+1.  **Download the pre‑generated file** Obtain [`singleR.rds`](checkpoints/step5.1/singleR.rds) from the provided course materials.
+2.  **Load file in R:**
+
+```{r}
+library(here) # install.packages("here")
+singler_res <- readRDS(
+  here("checkpoints", "step5.1", "singleR.rds")
+)
+```
+
+3.  **Use the labels directly** These labels can be integrated into your analysis pipeline as a **checkpoint**, allowing you to continue without installing `celldex`.
+
+👉 This workflow is exploratory and ensures reproducibility even in restricted environments (e.g., macOS ARM64 or limited internet access).
+
+```{r}
 cat("\nCell type distribution:\n")
 print(sort(table(singler_res$labels), decreasing = TRUE))
 
@@ -2203,7 +2180,7 @@ cat("\nLow-confidence cells (NA in pruned labels):",
     sum(is.na(singler_res$pruned.labels)), "\n")
 ```
 
-### Step 5.2 - Plotting a label before it is in the object
+### Step 5.2 - Plotting a label before it is in the object {#sec-step5.2}
 
 Forgetting to transfer SingleR's labels into the `Seurat object` before calling `DimPlot(group.by = "singler_label")` produces an opaque error. The label only exists in the `SingleR` result object until you copy it over.
 
@@ -2230,7 +2207,7 @@ cat("Distribution:\n")
 print(sort(table(sobj_filt$singler_label), decreasing = TRUE))
 ```
 
-Cells with similar scores across multiple types are ambiguous. Wide `spread = high` confidence. Narrow spread = low confidence. `plotScoreHeatmap()` draws one row per possible reference label: the FULL HumanPrimaryCellAtlasData catalog, `~37 rows`, regardless of how many cells were actually assigned to each. Look at this before any cleanup happens. Most of those `37 rows` will show almost no signal for any cell in this dataset; that visual clutter is the evidence that motivates the consolidation in the next step.
+Cells with similar scores across multiple types are ambiguous. Wide `spread = high` confidence. Narrow spread = low confidence. `plotScoreHeatmap()` draws one row per possible reference label: the **FULL** `HumanPrimaryCellAtlasData` catalog, `~37 rows`, regardless of how many cells were actually assigned to each. Look at this before any cleanup happens. Most of those `37 rows` will show almost no signal for any cell in this dataset; that visual clutter is the evidence that motivates the consolidation in the next step.
 
 ```{r}
 plotScoreHeatmap(singler_res,
@@ -2238,20 +2215,18 @@ plotScoreHeatmap(singler_res,
 
 ```
 
-
 :::: question
 ::: {.callout-tip icon="false"}
-## QUESTION 5.2 
+## QUESTION 5.2
 
 How many of the rows in this heatmap show any real signal (a cluster of cells with a clearly bright cell)? What does the rest of the rows tell you about how many of the labels printed above are likely noise?
-
 :::
 ::::
 
 ::: {.callout-tip icon="false" collapse="true"}
 ### ANSWER
 
-On this dataset, typically only 5 to 8 of the roughly 37 rows show a clear bright block: a clean separation where one column-group of cells lights up brightly for that row and stays dark for the rest. Those rows correspond to the real cell populations actually present in PBMC: T cells, B cells, monocytes, NK cells, and a few others. The remaining rows are close to uniformly dim across every cell. A dim row does not mean SingleR made an error; it means no cell in this dataset scored highly against that reference label, which is expected for labels like Hepatocytes or Neurons in a blood sample. The practical reading: if a label's row in this heatmap never lights up brightly anywhere, any cell assigned that label by the raw classifier is suspect, and that is exactly why so many distinct values appeared in the 'Cell type distribution' printed in **Step 5.2**. The dim rows are the visual evidence that motivates collapsing low-frequency labels together in **Step 5.2b**, rather than trusting all of them as equally real populations.
+On this dataset, typically only 5 to 8 of the roughly 37 rows show a clear bright block: a clean separation where one column-group of cells lights up brightly for that row and stays dark for the rest. Those rows correspond to the real cell populations actually present in PBMC: T cells, B cells, monocytes, NK cells, and a few others. The remaining rows are close to uniformly dim across every cell. A dim row does not mean SingleR made an error; it means no cell in this dataset scored highly against that reference label, which is expected for labels like Hepatocytes or Neurons in a blood sample. The practical reading: if a label's row in this heatmap never lights up brightly anywhere, any cell assigned that label by the raw classifier is suspect, and that is exactly why so many distinct values appeared in the 'Cell type distribution' printed in **Step 5.2** (@sec-step5.2). The dim rows are the visual evidence that motivates collapsing low-frequency labels together in **Step 5.2b** (@sec-step5.2b), rather than trusting all of them as equally real populations.
 
 LIVE DEMO:
 
@@ -2264,23 +2239,20 @@ print(label_tab)
 
 Compare to how many rows visually 'light up' in the heatmap above.
 
-PLOT / OUTPUT: The full plotScoreHeatmap from Step 5.2 (37 rows); count how many show a bright block versus uniform dimness.
+PLOT / OUTPUT: The full plotScoreHeatmap from **Step 5.2** (@sec-step5.2) (37 rows); count how many show a bright block versus uniform dimness.
 :::
 
-
-### Step 5.2b - Consolidate to top-N labels and check distribution plausibility
+### Step 5.2b - Consolidate to top-N labels and check distribution plausibility {#sec-step5.2b}
 
 `HumanPrimaryCellAtlasData` covers dozens of cell types across many tissues. On a 500-gene PBMC panel it typically returns 20+ distinct labels, most supported by only a handful of cells (low-confidence noise, not real populations). Plotting all of them produces an unreadable legend and defeats the purpose of every downstream comparison.
 
-`singler_label` (full detail) is kept untouched in the metadata for cases where the exact label matters. `singler_label_top` collapses every label outside the top N most frequent into "Other (n small labels)" and is what every plot from here on uses by default. The same pass that builds the consolidation also checks whether the underlying distribution looks like a
-real PBMC annotation, since both questions come from the same table.
+`singler_label` (full detail) is kept untouched in the metadata for cases where the exact label matters. `singler_label_top` collapses every label outside the top N most frequent into "Other (n small labels)" and is what every plot from here on uses by default. The same pass that builds the consolidation also checks whether the underlying distribution looks like a real PBMC annotation, since both questions come from the same table.
 
 What this step decides, and what it does not: this is a count-based decision about which **`CATEGORIES`** are worth their own color in a plot. It never looks at a single gene or a single cell's expression. A cell labeled "T_cell" stays "T_cell" here regardless of whether it actually expresses any T cell marker; the only thing that changes is whether that label gets its own slot in the legend or gets folded into "Other" because too few cells share it.
 
-**Step 5.4a**, later, asks a different question on top of this one: given a label that survived this filter, does the individual cell carrying it actually show the expression evidence that label implies? That is a per-cell, marker-based check, not a per-label, count-based one. 
+**Step 5.4a** (@sec-step5.4a), later, asks a different question on top of this one: given a label that survived this filter, does the individual cell carrying it actually show the expression evidence that label implies? That is a per-cell, marker-based check, not a per-label, count-based one.
 
-**Step 5.4c** then builds `singler_label_clean` directly from `singler_label_top`, adding only the cells that failed the **Step 5.4a** marker check as a new "Ambiguous" category. The two steps are not redundant: this one decides
-what to show, **Step 5.4a/5.4c** decides who to trust within what is shown.
+**Step 5.4c** (@sec-step5.4c) then builds `singler_label_clean` directly from `singler_label_top`, adding only the cells that failed the **Step 5.4a** (@sec-step5.4a) marker check as a new "Ambiguous" category. The two steps are not redundant: this one decides what to show, **Step 5.4a/5.4c** (@sec-step5.4a / @sec-step5.4c) decides who to trust within what is shown.
 
 ```{r}
 TOP_N_LABELS <- 8
@@ -2303,12 +2275,13 @@ cat(sprintf("Kept top %d labels, collapsed %d smaller labels into 'Other':\n",
             length(top_labels), n_collapsed))
 print(table(sobj_filt$singler_label_top))
 ```
+
 Sanity rules of thumb for PBMC, checked against the full (uncollapsed) label table:
 
 - Expect 3 to 7 dominant labels (T cells, B cells, monocytes, NK cells, DC)
-- One label > 80% of all cells: suspicious (annotation collapse)
+- One label \> 80% of all cells: suspicious (annotation collapse)
 - More than 15 distinct labels in 3,000 cells: reference too granular
-- Any single non-immune label > 5% (e.g. hepatocytes, fibroblasts): wrong reference
+- Any single non-immune label \> 5% (e.g. hepatocytes, fibroblasts): wrong reference
 
 ```{r}
 n_labels <- length(label_tab)
@@ -2324,14 +2297,13 @@ if (top_prop > 0.80) cat(">> One label dominates. Check whether reference matche
 ## QUESTION 5.2b
 
 Look at the labels collapsed into "Other" (the rows of `label_tab` beyond rank 8). Are any of them biologically plausible for PBMC (e.g. "Platelets", "DC") or all implausible (e.g. "Hepatocytes", "Neurons")? What would you do differently if a plausible label got collapsed away?
-
 :::
 ::::
 
 ::: {.callout-tip icon="false" collapse="true"}
 ### ANSWER
 
-On this dataset, HumanPrimaryCellAtlasData typically returns 20+ labels for a 500-gene PBMC panel. Most of what falls outside the top 8 is biologically implausible for blood (Hepatocytes, Fibroblasts, Endothelial_cells, Neurons, Gametocytes, Astrocytes) and reflects low-confidence noise from a reference that covers many tissues, not a PBMC-specific signal. A few collapsed labels CAN be biologically plausible but rare in this cohort (Platelets, DC, Pro-B_cell subsets) - those are real minority populations, just small ones. The top-N consolidation is a visualization aid, not a correction to the annotation itself: `singler_label` (uncollapsed) is preserved in the metadata for exactly this reason. If a plausible rare population matters to your analysis (e.g. you are specifically studying platelets or DCs), raise TOP_N_LABELS, or keep using `singler_label` directly for that one analysis instead of `singler_label_top`.
+On this dataset, `HumanPrimaryCellAtlasData` typically returns 20+ labels for a 500-gene PBMC panel. Most of what falls outside the top 8 is biologically implausible for blood (Hepatocytes, Fibroblasts, Endothelial_cells, Neurons, Gametocytes, Astrocytes) and reflects low-confidence noise from a reference that covers many tissues, not a PBMC-specific signal. A few collapsed labels CAN be biologically plausible but rare in this cohort (Platelets, DC, Pro-B_cell subsets) - those are real minority populations, just small ones. The top-N consolidation is a visualization aid, not a correction to the annotation itself: `singler_label` (uncollapsed) is preserved in the metadata for exactly this reason. If a plausible rare population matters to your analysis (e.g. you are specifically studying platelets or DCs), raise TOP_N_LABELS, or keep using `singler_label` directly for that one analysis instead of `singler_label_top`.
 
 LIVE DEMO:
 
@@ -2349,10 +2321,9 @@ TOP_N_LABELS <- 12
 ```
 
 PLOT / OUTPUT: Console output (table of collapsed labels and their counts).
-
 :::
 
-### Step 5.3 - Annotated UMAP and the cleaned-up heatmap
+### Step 5.3 - Annotated UMAP and the cleaned-up heatmap {#sec-step5.3}
 
 ```{r}
 p_ann <- DimPlot(sobj_filt, group.by = "singler_label_top",
@@ -2367,7 +2338,7 @@ p_cond <- DimPlot(sobj_filt, group.by = "condition",
 p_ann | p_cond
 ```
 
-Same heatmap as **Step 5.2**, restricted to the labels that survived the top-N consolidation. Compare directly against the full 37-row version shown earlier: this is what "readable" looks like once the labels that carried no real signal have been set aside.
+Same heatmap as **Step 5.2** (@sec-step5.2), restricted to the labels that survived the top-N consolidation. Compare directly against the full 37-row version shown earlier: this is what "readable" looks like once the labels that carried no real signal have been set aside.
 
 ```{r}
 cat("Labels passed to labels.use:\n")
@@ -2407,16 +2378,16 @@ print(setdiff(colnames(sobj_filt@meta.data), colnames(sobj@meta.data)))
 :::: question
 ::: {.callout-tip icon="false"}
 ## QUESTION 5.4
-- Which slots are still empty / unchanged in the ADT assay?
-- What does that tell you about what Block 6 needs to do first?
 
+- Which slots are still empty / unchanged in the ADT assay?
+- What does that tell you about what **Block 6** (@sec-block6) needs to do first?
 :::
 ::::
 
 ::: {.callout-tip icon="false" collapse="true"}
 ### ANSWER
 
-ADT still has only the counts layer. No data layer (no normalization), no `scale.data`, no `var.features`, no reductions referencing ADT. Block 6 must build the ADT side from scratch:` normalize (CLR margin=2)`, then either use it directly for plots and gating (no `scale.data` needed) or run `RunPCA` on the ADT counts before WNN.
+ADT still has only the counts layer. No data layer (no normalization), no `scale.data`, no `var.features`, no reductions referencing ADT. **Block 6** (@sec-block6) must build the ADT side from scratch:`normalize (CLR margin=2)`, then either use it directly for plots and gating (no `scale.data` needed) or run `RunPCA` on the ADT counts before WNN.
 
 LIVE DEMO:
 
@@ -2426,26 +2397,13 @@ Reductions(sobj_filt)
 ```
 
 PLOT / OUTPUT: Console output
-
 :::
 
-### Step 5.4a - Canonical-marker validation per cell type
+### Step 5.4a - Canonical-marker validation per cell type {#sec-step5.4a}
 
-Before trusting an annotation, verify the canonical RNA marker of each major lineage is detected in a reasonable fraction of cells assigned to that lineage. The label-distribution sanity check already ran in **Step 5.2b**, right after the labels were consolidated; this step is a different kind of check, on the per-marker evidence rather than the label counts.
+Before trusting an annotation, verify the canonical RNA marker of each major lineage is detected in a reasonable fraction of cells assigned to that lineage. The label-distribution sanity check already ran in **Step 5.2b** (@sec-step5.2b), right after the labels were consolidated; this step is a different kind of check, on the per-marker evidence rather than the label counts.
 
-**Step 5.2b** asked "how many cells share this label, and is that count
-plausible for PBMC?" That is a question about labels as categories: it
-never inspected a single gene. This step asks a different question: "for
-a cell that carries this label, does its RNA actually show the marker
-that label implies?" That is a per-cell, expression-based check, run
-independently of how common or rare the label was. A label can pass the
-**Step 5.2b** frequency check (common enough to keep its own category) and
-still fail this one (most cells carrying it do not express the expected
-marker), which is exactly what the detection-rate table below is built to
-catch. The output of this step (`detection_rates`) feeds **Step 5.4c**, which
-builds `singler_label_clean` from `singler_label_top` and adds "Ambiguous"
-only for the cells that failed this marker check, on top of the
-categories **Step 5.2b** already decided were worth keeping.
+**Step 5.2b** (@sec-step5.2b) asked "how many cells share this label, and is that count plausible for PBMC?" That is a question about labels as categories: it never inspected a single gene. This step asks a different question: "for a cell that carries this label, does its RNA actually show the marker that label implies?" That is a per-cell, expression-based check, run independently of how common or rare the label was. A label can pass the **Step 5.2b** (@sec-step5.2b) frequency check (common enough to keep its own category) and still fail this one (most cells carrying it do not express the expected marker), which is exactly what the detection-rate table below is built to catch. The output of this step (`detection_rates`) feeds **Step 5.4c** (@sec-step5.4c), which builds `singler_label_clean` from `singler_label_top` and adds "Ambiguous" only for the cells that failed this marker check, on top of the categories **Step 5.2b** (@sec-step5.2b) already decided were worth keeping.
 
 Map `SingleR` label patterns to canonical markers
 
@@ -2515,15 +2473,13 @@ if (nrow(detection_rates) > 0) {
   cat("  rate < 25%   -> suspect misannotation; cross-check with ADT now\n")
 }
 ```
-
-
 :::
 ::::
 
 ::: {.callout-tip icon="false" collapse="true"}
 ### ANSWER
 
-Computed in the script. The lowest rate usually appears for a T-cell label expressing CD3E or CD3D; CD3E RNA dropout in PBMC is often 30-50%, so detection rates between 25-50% indicate dropout (recoverable in Block 6 via ADT CD3). A detection rate below 25% for any marker is more likely misannotation. Decision thresholds: >=50% ok; 25-50% dropout-explained, verify with ADT; <25% suspect, revisit annotation.
+Computed in the script. The lowest rate usually appears for a T-cell label expressing CD3E or CD3D; CD3E RNA dropout in PBMC is often 30-50%, so detection rates between 25-50% indicate dropout (recoverable in **Block 6** (@sec-block6) via ADT CD3). A detection rate below 25% for any marker is more likely misannotation. Decision thresholds: \>=50% ok; 25-50% dropout-explained, verify with ADT; \<25% suspect, revisit annotation.
 
 LIVE DEMO:
 
@@ -2535,9 +2491,9 @@ mean(FetchData(sobj_filt, "CD3E")[lbl_mask, 1] > 0) * 100
 PLOT / OUTPUT: Console output
 :::
 
-### Step 5.4c - Mark inconsistent labels as Ambiguous
+### Step 5.4c - Mark inconsistent labels as Ambiguous {#sec-step5.4c}
 
-Cells whose canonical marker detection rate fell below 25% in **Step 5.4a** are flagged, not deleted. `singler_label_clean` carries the same values as `singler_label_top` except those flagged cells, which become "Ambiguous". Every prior column (`singler_label`, `singler_label_top`) stays untouched.
+Cells whose canonical marker detection rate fell below 25% in **Step 5.4a** (@sec-step5.4a) are flagged, not deleted. `singler_label_clean` carries the same values as `singler_label_top` except those flagged cells, which become "Ambiguous". Every prior column (`singler_label`, `singler_label_top`) stays untouched.
 
 ```{r}
 low_conf_labels <- character(0)
@@ -2560,20 +2516,18 @@ cat("\nFinal label distribution (singler_label_clean):\n")
 print(table(sobj_filt$singler_label_clean))
 ```
 
-
 :::: question
 ::: {.callout-tip icon="false"}
 ## QUESTION 5.4c
 
 Cells marked Ambiguous are still in sobj_filt and still count toward `ncol(sobj_filt)`. Why keep them instead of deleting them outright? What would deleting them silently change about cell counts reported in every plot from here on?
-
 :::
 ::::
 
 ::: {.callout-tip icon="false" collapse="true"}
 ### ANSWER
 
-Keeping them preserves an honest record of what the annotation pipeline actually produced: a real fraction of cells could not be confidently typed by RNA alone, and that fraction is itself informative (it often shrinks once ADT is added in **Block 6**, which is the whole point of the CITE-seq workflow). Deleting them at this stage would silently shrink `ncol(sobj_filt)`, which changes every downstream denominator: QC summaries, per-condition proportions, per-donor cell counts, and any percentage calculation would all be computed over a smaller, undocumented population. A reader of a later plot would have no way to know cells were dropped here unless the deletion were stated explicitly every time. Marking and filtering only at the plotting step (**Step 5.4d**) keeps the object's cell count meaningful throughout the rest of the script, and the Ambiguous label itself becomes a result worth reporting (for example, in **Block 6** you can check whether ADT resolves some of these cells).
+Keeping them preserves an honest record of what the annotation pipeline actually produced: a real fraction of cells could not be confidently typed by RNA alone, and that fraction is itself informative (it often shrinks once ADT is added in **Block 6** (@sec-block6), which is the whole point of the CITE-seq workflow). Deleting them at this stage would silently shrink `ncol(sobj_filt)`, which changes every downstream denominator: QC summaries, per-condition proportions, per-donor cell counts, and any percentage calculation would all be computed over a smaller, undocumented population. A reader of a later plot would have no way to know cells were dropped here unless the deletion were stated explicitly every time. Marking and filtering only at the plotting step (**Step 5.4d**, @sec-step5.4d) keeps the object's cell count meaningful throughout the rest of the script, and the Ambiguous label itself becomes a result worth reporting (for example, in **Block 6** (@sec-block6) you can check whether ADT resolves some of these cells).
 
 LIVE DEMO:
 
@@ -2585,9 +2539,9 @@ ncol(sobj_filt)  # unchanged regardless of how many cells are Ambiguous
 PLOT / OUTPUT: Console output
 :::
 
-### Step 5.4d - Re-plot the UMAP with only confident labels
+### Step 5.4d - Re-plot the UMAP with only confident labels {#sec-step5.4d}
 
-Same UMAP as **Step 5.3**, restricted to cells that were NOT flagged Ambiguous. Cells are not removed from the object; they are simply excluded from this specific plot via `cells.highlight` style filtering on a copy of the metadata used for plotting.
+Same UMAP as **Step 5.3** (@sec-step5.3), restricted to cells that were NOT flagged Ambiguous. Cells are not removed from the object; they are simply excluded from this specific plot via `cells.highlight` style filtering on a copy of the metadata used for plotting.
 
 ```{r}
 confident_cells <- colnames(sobj_filt)[sobj_filt$singler_label_clean != "Ambiguous"]
@@ -2602,12 +2556,12 @@ DimPlot(sobj_filt, cells = confident_cells,
   NoLegend()
 ```
 
-### Step 5.4e - Integrate with `Harmony`
+### Step 5.4e - Integrate with `Harmony` {#sec-step5.4e}
 
-**Step 4.4b** found the donor effect borderline-to-low in this dataset (R^2 on
-PC1/PC2), so integration was not required to proceed. We run it anyway here to build the comparison panel in **Step 5.4f**: with vs without `Harmony` is a habit worth seeing on data you already understand, before relying on it on data you do not.
+**Step 4.4b** (@sec-step4.4b) found the donor effect borderline-to-low in this dataset (R\^2 on PC1/PC2), so integration was not required to proceed. We run it anyway here to build the comparison panel in **Step 5.4f** (@sec-step5.4f): with vs without `Harmony` is a habit worth seeing on data you already understand, before relying on it on data you do not.
 
 ```{r}
+library(harmony)
 sobj_filt <- RunHarmony(
   sobj_filt,
   group.by.vars  = "donor_id",
@@ -2630,7 +2584,7 @@ sobj_filt <- RunUMAP(
 cat("Reductions now available:", paste(SafeReductions(sobj_filt), collapse = ", "), "\n")
 ```
 
-**Step 4.4b** computed donor R^2 on the plain PCA before any decision was made. Now that Harmony has run, compute the same R^2 on the harmonized embedding and compare directly: this is the actual gain or loss from integrating, in the same units used to make the original decision, not just a visual impression from a UMAP.
+**Step 4.4b** (@sec-step4.4b) computed donor R\^2 on the plain PCA before any decision was made. Now that Harmony has run, compute the same R\^2 on the harmonized embedding and compare directly: this is the actual gain or loss from integrating, in the same units used to make the original decision, not just a visual impression from a UMAP.
 
 ```{r}
 pc_coords_pca     <- Embeddings(sobj_filt, reduction = "pca")[, 1:2]
@@ -2647,27 +2601,22 @@ r2_comparison$change <- r2_comparison$r2_after_harmony - r2_comparison$r2_before
 
 cat("\nDonor R^2 before vs after Harmony:\n")
 print(r2_comparison, row.names = FALSE)
-
-cat("\nInterpretation: a large negative change means Harmony successfully\n")
-cat("removed donor-driven variance from that dimension. A change near zero\n")
-cat("confirms the Step 4.4b read: there was little donor effect to remove\n")
-cat("in the first place, so integration cost real biological variance for\n")
-cat("essentially no batch-correction gain.\n")
 ```
+
+Interpretation: a large negative change means Harmony successfully removed donor-driven variance from that dimension. A change near zero confirms the **Step 4.4b** (@sec-step4.4b) read: there was little donor effect to remove in the first place, so integration cost real biological variance for essentially no batch-correction gain.
 
 :::: question
 ::: {.callout-tip icon="false"}
 ## QUESTION 5.4e
 
-Is the change in donor R^2 large or close to zero in this dataset? Does that match what the Step 4.4b decision predicted? If you ran this on a dataset with R^2 above 0.30, what change would you expect to see in this same table?
-
+Is the change in donor R\^2 large or close to zero in this dataset? Does that match what the **Step 4.4b** (@sec-step4.4b) decision predicted? If you ran this on a dataset with R\^2 above 0.30, what change would you expect to see in this same table?
 :::
 ::::
 
 ::: {.callout-tip icon="false" collapse="true"}
 ### ANSWER
 
-On this dataset the donor R^2 was already low to borderline before Harmony (Step 4.4b), so the change after Harmony should also be small: Harmony has little donor-driven variance left to remove, which is exactly what the Step 4.4b decision to skip integration predicted. This is the confirming case: if the change had turned out large here, it would mean the original PC1/PC2-only R^2 check missed a donor effect living in later PCs, and the decision not to integrate would have been wrong. On a dataset where the pre-Harmony R^2 was above 0.30 (donor effect dominant), the expected pattern is a large drop in R^2 after Harmony (often falling toward 0.05-0.15) on the dimensions Harmony was told to correct, paired with a visibly different cell-type layout in the comparison panel: that combination is what integration succeeding actually looks like in numbers, not just in a UMAP that looks nicer.
+On this dataset the donor R\^2 was already low to borderline before Harmony (**Step 4.4b**, @sec-step4.4b), so the change after Harmony should also be small: Harmony has little donor-driven variance left to remove, which is exactly what the **Step 4.4b** (@sec-step4.4b) decision to skip integration predicted. This is the confirming case: if the change had turned out large here, it would mean the original PC1/PC2-only R\^2 check missed a donor effect living in later PCs, and the decision not to integrate would have been wrong. On a dataset where the pre-Harmony R\^2 was above 0.30 (donor effect dominant), the expected pattern is a large drop in R\^2 after Harmony (often falling toward 0.05-0.15) on the dimensions Harmony was told to correct, paired with a visibly different cell-type layout in the comparison panel: that combination is what integration succeeding actually looks like in numbers, not just in a UMAP that looks nicer.
 
 LIVE DEMO:
 
@@ -2678,17 +2627,14 @@ print(r2_comparison, row.names = FALSE)
 - A large negative 'change' column value means Harmony removed donor signal.
 - A change near zero means there was little donor signal to remove.
 
-PLOT / OUTPUT: The `r2_comparison` table; pair with the 4-panel UMAP comparison in **Step 5.4f**.
+PLOT / OUTPUT: The `r2_comparison` table; pair with the 4-panel UMAP comparison in **Step 5.4f** (@sec-step5.4f).
 :::
 
-### Step 5.4f - Comparison panel: UMAP before/after annotation, with/without `Harmony`
+### Step 5.4f - Comparison panel: UMAP before/after annotation, with/without `Harmony` {#sec-step5.4f}
 
 Four panels answer four different questions about the same object:
 
-**1. Pre-annotation:** do the unsupervised clusters look reasonable at all?
-**2. Post-annotation (no `Harmony`):** does the annotation make sense on the embedding you actually used through @sec-block5 (**Block 5**)?
-**3. Post-annotation, `Harmony`:** did integration change which cells sit near which others?
-**4. Donor color on the `Harmony UMAP`:** did Harmony actually mix donors together, or did it not need to (consistent with the **Step 4.4b** call)?
+**1. Pre-annotation:** do the unsupervised clusters look reasonable at all? **2. Post-annotation (no `Harmony`):** does the annotation make sense on the embedding you actually used through @sec-block5 (**Block 5**, @sec-block5)? **3. Post-annotation, `Harmony`:** did integration change which cells sit near which others? **4. Donor color on the `Harmony UMAP`:** did Harmony actually mix donors together, or did it not need to (consistent with the **Step 4.4b** (@sec-step4.4b) call)?
 
 ```{r}
 p1_preannot <- DimPlot(sobj_filt, reduction = "umap", group.by = "seurat_clusters",
@@ -2709,20 +2655,18 @@ p4_harmony_donor <- DimPlot(sobj_filt, reduction = "umap.harmony", group.by = "d
 (p1_preannot | p2_postannot) / (p3_harmony_annot | p4_harmony_donor)
 ```
 
-
 :::: question
 ::: {.callout-tip icon="false"}
 ## QUESTION 5.4f
 
-Compare panels 2 and 3. If the cell-type layout looks nearly identical before and after Harmony, what does that confirm about the **Step 4.4b** decision not to integrate? If it looks different, which panel would you trust for the rest of the analysis, and why?
-
+Compare panels 2 and 3. If the cell-type layout looks nearly identical before and after Harmony, what does that confirm about the **Step 4.4b** (@sec-step4.4b) decision not to integrate? If it looks different, which panel would you trust for the rest of the analysis, and why?
 :::
 ::::
 
 ::: {.callout-tip icon="false" collapse="true"}
 ### ANSWER
 
-If panels 2 and 3 look nearly identical, that confirms the Step 4.4b read of the data: the donor effect on PC1/PC2 was already low (R^2 < 0.10-0.30 range), so Harmony has little work to do and converges to essentially the same cell-type layout. That is the expected, reassuring outcome here, and panel 4 (Harmony UMAP by donor) should still show donors reasonably mixed within each cell-type region, the same as before integration. If panels 2 and 3 looked clearly different instead, that would mean the PC1/PC2 R^2 from Step 4.4b under-estimated a donor effect living in later PCs, and the right move is to trust the Harmony-integrated panel (3) for downstream analysis, since it actively corrects for batch rather than just measuring it on two dimensions. Either way, the comparison panel is the check that validates (or overturns) an integration decision made earlier from a partial diagnostic.
+If panels 2 and 3 look nearly identical, that confirms the **Step 4.4b** (@sec-step4.4b) read of the data: the donor effect on PC1/PC2 was already low (R\^2 \< 0.10-0.30 range), so Harmony has little work to do and converges to essentially the same cell-type layout. That is the expected, reassuring outcome here, and panel 4 (Harmony UMAP by donor) should still show donors reasonably mixed within each cell-type region, the same as before integration. If panels 2 and 3 looked clearly different instead, that would mean the PC1/PC2 R\^2 from **Step 4.4b** (@sec-step4.4b) under-estimated a donor effect living in later PCs, and the right move is to trust the Harmony-integrated panel (3) for downstream analysis, since it actively corrects for batch rather than just measuring it on two dimensions. Either way, the comparison panel is the check that validates (or overturns) an integration decision made earlier from a partial diagnostic.
 
 LIVE DEMO:
 
@@ -2732,28 +2676,25 @@ Quantify the visual comparison instead of eyeballing it:
 table(sobj_filt$singler_label_clean, useNA = "ifany")
 ```
 
-Compare cluster composition before/after Harmony using adjusted Rand index if you want a number instead of a plot:
+Compare cluster composition before/after `Harmony` using adjusted Rand index if you want a number instead of a plot:
 
 ```{r}
 mclust::adjustedRandIndex(cluster_labels_no_harmony, cluster_labels_harmony)
 ```
 
-PLOT / OUTPUT: The 2x2 comparison panel itself (**Step 5.4f**) is the answer; no separate plot needed.
-
+PLOT / OUTPUT: The 2x2 comparison panel itself (**Step 5.4f**, @sec-step5.4f) is the answer; no separate plot needed.
 :::
 
-### Step 5.4g - Differential expression markers per annotated cell type
+### Step 5.4g - Differential expression markers per annotated cell type {#sec-step5.4g}
 
-Explicit about what this test actually uses, since the object now carries
-both a plain PCA/UMAP and a Harmony-corrected PCA/UMAP from **Step 5.4e**:
-
+Explicit about what this test actually uses, since the object now carries both a plain PCA/UMAP and a Harmony-corrected PCA/UMAP from **Step 5.4e** (@sec-step5.4e):
 
 ::: {.callout-tip icon="false"}
 ### Explanation
 
-- **Assay**: RNA, "data" layer (log-normalized counts from @sec-block4, **Block 4**).
-  + Harmony only touches the PCA/UMAP embeddings (used for visualization and clustering); it never modifies the RNA expression values that `FindAllMarkers` reads. Running this on the harmonized object or the pre-Harmony object gives identical results, because DE testing here compares expression directly between groups of cells, not their position on any embedding.
-- **Grouping**: `singler_label_clean` (**Step 5.4c**), Ambiguous cells excluded. They are not a coherent biological group, so testing them as their own "cluster" would not mean anything.
+- **Assay**: RNA, "data" layer (log-normalized counts from **Block 4**, @sec-block4).
+  - Harmony only touches the PCA/UMAP embeddings (used for visualization and clustering); it never modifies the RNA expression values that `FindAllMarkers` reads. Running this on the harmonized object or the pre-Harmony object gives identical results, because DE testing here compares expression directly between groups of cells, not their position on any embedding.
+- **Grouping**: `singler_label_clean` (**Step 5.4c**, @sec-step5.4c), Ambiguous cells excluded. They are not a coherent biological group, so testing them as their own "cluster" would not mean anything.
 - **Filters**: `only.pos = TRUE` (markers, not anti-markers), `min.pct` = 0.25 (expressed in at least 25% of one group), `logfc.threshold` = 0.5 (at least 1.4-fold change).
 :::
 
@@ -2791,15 +2732,14 @@ DotPlot(sobj_filt,
 ::: {.callout-tip icon="false"}
 ## QUESTION 5.4g
 
-Pick one cell type from the DotPlot. Does its top marker match a canonical marker you already know for that lineage (**Step 1.8**)? If not, is that a red flag about the annotation, or a finding outside the canonical list that is worth investigating further?
-
+Pick one cell type from the DotPlot. Does its top marker match a canonical marker you already know for that lineage (**Step 1.8**, @sec-step1.8)? If not, is that a red flag about the annotation, or a finding outside the canonical list that is worth investigating further?
 :::
 ::::
 
 ::: {.callout-tip icon="false" collapse="true"}
 ### ANSWER
 
-For most major lineages in this dataset the top DE marker should match a canonical gene from the **Step 1.8** list: CD3D/CD3E for T cells, MS4A1/CD79A for B cells, CD14/LYZ for monocytes, NKG7/GNLY for NK cells. A match is reassuring: independent statistical evidence (DE testing) agrees with prior biological knowledge (canonical markers), which is the strongest form of validation available without an orthogonal assay. A mismatch is more interesting than alarming by itself: first rule out technical explanations (is the canonical gene even in the 500-gene panel? Check `rownames(sobj_filt[['RNA']]))`, then consider whether the cluster is a known but less-textbook subtype (e.g. a Treg subset whose top marker is FOXP3 rather than generic CD3 genes) before treating it as a red flag about the annotation itself.
+For most major lineages in this dataset the top DE marker should match a canonical gene from the **Step 1.8** (@sec-step1.8) list: CD3D/CD3E for T cells, MS4A1/CD79A for B cells, CD14/LYZ for monocytes, NKG7/GNLY for NK cells. A match is reassuring: independent statistical evidence (DE testing) agrees with prior biological knowledge (canonical markers), which is the strongest form of validation available without an orthogonal assay. A mismatch is more interesting than alarming by itself: first rule out technical explanations (is the canonical gene even in the 500-gene panel? Check `rownames(sobj_filt[['RNA']]))`, then consider whether the cluster is a known but less-textbook subtype (e.g. a Treg subset whose top marker is FOXP3 rather than generic CD3 genes) before treating it as a red flag about the annotation itself.
 
 LIVE DEMO:
 
@@ -2816,19 +2756,32 @@ Then compare against the DotPlot's top marker for the cell type in question
 top_markers[top_markers$cluster == "T_cells", ]
 ```
 
-PLOT / OUTPUT: The DotPlot from **Step 5.4g**; cross-reference visually against canonical markers.
-
+PLOT / OUTPUT: The DotPlot from **Step 5.4g** (@sec-step5.4g); cross-reference visually against canonical markers.
 :::
 
 ### Step 5.5 - Save the annotated checkpoint
 
+```{r, eval=FALSE}
+saveRDS(top_markers, "checkpoints/outputs/top_markers.rds")
+saveRDS(sobj_filt, "checkpoints/outputs/sobj_preprocessed.rds")
+```
+
 ```{r}
-saveRDS(sobj_filt, "outputs/sobj_preprocessed.rds")
 cat("Checkpoint saved: outputs/sobj_preprocessed.rds\n")
 cat("To reload: sobj_filt <- readRDS('outputs/sobj_preprocessed.rds')\n")
 ```
 
 Look at the UMAP colored by condition. Does any cluster appear exclusively or predominantly in COVID-19 donors? Look at the `DotPlot`: which clusters could be monocytes based on *CD14* and *FCGR3A* expression? After the break, we add the protein layer to test these interpretations.
 
+::: callout-tip
+## 📌 Final Note for Users
 
+At the end of this step, you may **download the preprocessed Seurat object** to continue with the next stage of the CITE‑seq analysis:
 
+👉 This file contains the **preprocessed Seurat object** ([`sobj_preprocessed.rds`](checkpoints/outputs/sobj_preprocessed.rds)) and serves as the starting point for downstream multimodal analysis. By saving and sharing this checkpoint, all users can proceed consistently without repeating earlier steps.
+:::
+
+```{r, message=FALSE, echo=FALSE}
+rm(list = ls())
+gc()
+```
