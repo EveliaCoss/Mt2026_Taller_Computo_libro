@@ -40,8 +40,7 @@ book:
         - cap5_course.qmd
   appendices: 
     - cap6_extra.qmd
-    - resources.qmd 
-    - notas.qmd
+    - cap7_extra_block9.qmd
   # Information
   repo-url: https://github.com/EveliaCoss/Workshop2026_scRNAseq_CITEseq_libro # link de Github
   sharing: [twitter, facebook, linkedin]

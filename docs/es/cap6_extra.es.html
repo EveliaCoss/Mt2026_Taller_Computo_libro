@@ -1,0 +1,1471 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es" xml:lang="es">
+<head>
+<link rel="alternate" hreflang="en" href="https://eveliacoss.github.io/Workshop2026_scRNAseq_CITEseq_libro/cap6_extra.html" />
+<link rel="alternate" hreflang="es" href="https://eveliacoss.github.io/Workshop2026_scRNAseq_CITEseq_libro/es/cap6_extra.es.html" />
+<link rel="alternate" hreflang="pt" href="https://eveliacoss.github.io/Workshop2026_scRNAseq_CITEseq_libro/pt/cap6_extra.pt.html" />
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.37">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>Apéndice A — Extra – Curso de supervivencia: scRNA-seq + CITE-seq</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+<script src="site_libs/quarto-nav/quarto-nav.js"></script><script src="site_libs/quarto-nav/headroom.min.js"></script><script src="site_libs/clipboard/clipboard.min.js"></script><script src="site_libs/quarto-search/autocomplete.umd.js"></script><script src="site_libs/quarto-search/fuse.min.js"></script><script src="site_libs/quarto-search/quarto-search.js"></script><meta name="quarto:offset" content="./">
+<link href="./cap7_extra_block9.es.html" rel="next">
+<link href="./cap5_course.es.html" rel="prev">
+<link href="./enesLogo.png" rel="icon" type="image/png">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script><script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script><script src="site_libs/quarto-html/popper.min.js"></script><script src="site_libs/quarto-html/tippy.umd.min.js"></script><script src="site_libs/quarto-html/anchor.min.js"></script><link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-d0ae9245876894da5ac7e18953ecc5cc.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script><link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-6f5e339e910af865eb2cfbba9cbcf7d6.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-8a99b70e60639ec84de21ff0ca486063.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-6f5e339e910af865eb2cfbba9cbcf7d6.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No se han encontrado resultados",
+    "search-matching-documents-text": "documentos encontrados",
+    "search-copy-link-title": "Copiar el enlace en la búsqueda",
+    "search-hide-matches-text": "Ocultar resultados adicionales",
+    "search-more-match-text": "resultado adicional en este documento",
+    "search-more-matches-text": "resultados adicionales en este documento",
+    "search-clear-button-title": "Borrar",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancelar",
+    "search-submit-button-title": "Enviar",
+    "search-label": "Buscar"
+  }
+}</script><link rel="stylesheet" href="styles.css">
+</head>
+<body class="nav-sidebar floating quarto-light">
+<script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script><div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb">
+<li class="breadcrumb-item"><a href="./cap6_extra.es.html">Apéndices</a></li>
+<li class="breadcrumb-item"><a href="./cap6_extra.es.html"><span class="chapter-number">A</span>  <span class="chapter-title">Extra</span></a></li>
+</ol></nav><a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Buscar" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Curso de supervivencia: scRNA-seq + CITE-seq</a> 
+        <div class="sidebar-tools-main tools-wide">
+    <a href="https://github.com/EveliaCoss/Workshop2026_scRNAseq_CITEseq_libro" title="Ejecutar el código" class="quarto-navigation-tool px-1" aria-label="Ejecutar el código"><i class="bi bi-github"></i></a>
+    <div class="dropdown">
+      <a href="" title="Compartir" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" role="link" aria-label="Compartir"><i class="bi bi-share"></i></a>
+      <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-0">
+<li>
+            <a class="dropdown-item sidebar-tools-main-item" href="https://twitter.com/intent/tweet?url=|url|">
+              <i class="bi bi-twitter pe-1"></i>
+            Twitter
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item sidebar-tools-main-item" href="https://www.facebook.com/sharer/sharer.php?u=|url|">
+              <i class="bi bi-facebook pe-1"></i>
+            Facebook
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item sidebar-tools-main-item" href="https://www.linkedin.com/sharing/share-offsite/?url=|url|">
+              <i class="bi bi-linkedin pe-1"></i>
+            LinkedIn
+            </a>
+          </li>
+      </ul>
+</div>
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Alternar modo oscuro"><i class="bi"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Buscar"></div>
+        </div>
+        </div>
+    <div class="dropdown" id="languages-links-parent">
+<button class="btn btn-primary dropdown-toggle babelquarto-languages-button" type="button" data-bs-toggle="dropdown" aria-expanded="false" id="languages-button"><i class="bi bi-globe2"></i> Español</button><ul class="dropdown-menu" id="languages-links">
+<li><a class="dropdown-item" href="https://eveliacoss.github.io/Workshop2026_scRNAseq_CITEseq_libro/pt/cap6_extra.pt.html" id="language-link-pt">Português</a></li>
+<li><a class="dropdown-item" href="https://eveliacoss.github.io/Workshop2026_scRNAseq_CITEseq_libro/cap6_extra.html" id="language-link-en">English</a></li>
+</ul>
+</div>
+<div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.es.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Información general</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cap1_repaso.es.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>  <span class="chapter-title">Repaso: scRNA-seq vs bulk-RNA-seq</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cap2_resources.es.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>  <span class="chapter-title">Configuración y uso de VirtualBox</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cap3_aboutDataset.es.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>  <span class="chapter-title">Acerca del conjunto de datos (GSE149689)</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text"><strong>scRNA‑seq — Errors &amp; Survival</strong></span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Alternar sección">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cap4_course.es.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>  <span class="chapter-title">scRNA‑seq — Errors &amp; Survival</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text"><strong>CITE‑seq — Errors &amp; Survival</strong></span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Alternar sección">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cap5_course.es.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>  <span class="chapter-title">CITE‑seq — Errors &amp; Survival</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">Apéndices</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Alternar sección">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cap6_extra.es.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">A</span>  <span class="chapter-title">Extra</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cap7_extra_block9.es.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">B</span>  <span class="chapter-title">Extra related to biological Questions</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
+    </ul>
+</div>
+</nav><div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Tabla de contenidos</h2>
+   
+  <ul>
+<li>
+<a href="#block-8---capstone-optional-post-class-an-unknown-broken-object" id="toc-block-8---capstone-optional-post-class-an-unknown-broken-object" class="nav-link active" data-scroll-target="#block-8---capstone-optional-post-class-an-unknown-broken-object"><span class="header-section-number">A.1</span> <strong>Block 8 - Capstone (optional, post-class): an unknown broken object</strong></a>
+  <ul>
+<li><a href="#scenario-1---wrong-default-assay" id="toc-scenario-1---wrong-default-assay" class="nav-link" data-scroll-target="#scenario-1---wrong-default-assay"><span class="header-section-number">A.1.1</span> Scenario 1 - Wrong default assay</a></li>
+  <li><a href="#scenario-2---metadata-inconsistencies" id="toc-scenario-2---metadata-inconsistencies" class="nav-link" data-scroll-target="#scenario-2---metadata-inconsistencies"><span class="header-section-number">A.1.2</span> Scenario 2 - Metadata inconsistencies</a></li>
+  <li><a href="#scenario-3---normalization-failure-and-batch-effect" id="toc-scenario-3---normalization-failure-and-batch-effect" class="nav-link" data-scroll-target="#scenario-3---normalization-failure-and-batch-effect"><span class="header-section-number">A.1.3</span> Scenario 3 - Normalization failure and batch effect</a></li>
+  <li><a href="#scenario-4-adt-staining-batch-and-isotype-background-cite-seq-25-min" id="toc-scenario-4-adt-staining-batch-and-isotype-background-cite-seq-25-min" class="nav-link" data-scroll-target="#scenario-4-adt-staining-batch-and-isotype-background-cite-seq-25-min"><span class="header-section-number">A.1.4</span> Scenario 4 | ADT staining batch and isotype background (CITE-seq, 25 min)</a></li>
+  </ul>
+</li>
+  </ul></nav>
+</div>
+<!-- main -->
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb">
+<li class="breadcrumb-item"><a href="./cap6_extra.es.html">Apéndices</a></li>
+<li class="breadcrumb-item"><a href="./cap6_extra.es.html"><span class="chapter-number">A</span>  <span class="chapter-title">Extra</span></a></li>
+</ol></nav><div class="quarto-title">
+<h1 class="title">Apéndice A — Extra</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header><section id="block-8---capstone-optional-post-class-an-unknown-broken-object" class="level2" data-number="A.1"><h2 data-number="A.1" class="anchored" data-anchor-id="block-8---capstone-optional-post-class-an-unknown-broken-object">
+<span class="header-section-number">A.1</span> <strong>Block 8 - Capstone (optional, post-class): an unknown broken object</strong>
+</h2>
+<div class="content-box-gray">
+<p><strong>Goal:</strong> Apply the diagnostic habits from the previous blocks to a single object that contains four independent problems. For each scenario, run the diagnostic code, write your hypothesis as a comment in the block below, then run the fix to confirm.</p>
+</div>
+<p>This is the capstone: the rest of the course taught you to spot specific failures one at a time. Here they all arrive in the same object, in no particular order, with no labels.</p>
+<p>This block comes after Closing on purpose. The live session ends at Block 7; this is take-home work for whoever wants more practice before the next session, not something to rush through in the room. Run it on your own time, ideally a day or two after the course, once the diagnostic habits from Blocks 1-6 have had a chance to settle.</p>
+<p>The instructor will release sobj_broken.rds separately. If the file is not present, this block is skipped (have_broken = FALSE) and the rest of the script still runs.</p>
+<p>Tries the injected object first (needed for Scenario 4), then the base. If neither exists, Block 8 is skipped gracefully (have_broken = FALSE) so the rest of the report still renders.</p>
+<div class="cell">
+<details open="" class="code-fold"><summary>Código</summary><div class="code-copy-outer-scaffold">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>broken_candidates <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"checkpoints/sobj_broken_errors.rds"</span>, <span class="st">"checkpoints/sobj_broken.rds"</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>broken_path <span class="ot">&lt;-</span> broken_candidates[<span class="fu">file.exists</span>(broken_candidates)][<span class="dv">1</span>]</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>have_broken <span class="ot">&lt;-</span> <span class="sc">!</span><span class="fu">is.na</span>(broken_path)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (have_broken) {</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  sobj_broken <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(broken_path)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="st">"Loaded broken object from:"</span>, broken_path, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(sobj_broken)</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(sobj_broken<span class="sc">@</span>meta.data, <span class="dv">3</span>)</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> {</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="st">"Broken object not found in data/. Block 8 will be skipped.</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="st">"To enable Block 8, place one of these files (paths relative to this .R script):</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="st">"  "</span>, <span class="fu">paste</span>(broken_candidates, <span class="at">collapse =</span> <span class="st">"  or  "</span>), <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="st">"Scenario 4 (ADT batch / isotype) requires the *_errors.rds from</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="st">"inject_course_errors.R.</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button>
+</div>
+</details><div class="cell-output cell-output-stdout">
+<pre><code>Loaded broken object from: checkpoints/sobj_broken_errors.rds 
+An object of class Seurat 
+526 features across 3000 samples within 2 assays 
+Active assay: ADT (26 features, 0 variable features)
+ 1 layer present: counts
+ 1 other assay present: RNA
+ 2 dimensional reductions calculated: pca, umap</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>           orig.ident nCount_RNA nFeature_RNA percent.mt donor_id condition
+CELL000001    Donor01        336           36   18.15476  Donor01   Healthy
+CELL000011    Donor01        344           40   15.11628  DONOR01   Healthy
+CELL000021    Donor01        426           39    0.00000  DONOR01   Healthy
+           severity age cell_type nCount_ADT nFeature_ADT percent.ribo
+CELL000001           35    NKcell        267           25     46.13095
+CELL000011           35        DC        300           25     64.53488
+CELL000021           35     Bcell        472           26     66.66667
+           RNA_snn_res.0.5 seurat_clusters adt_batch donor_num
+CELL000001               8               8    batchA         1
+CELL000011               9               9    batchB         1
+CELL000021              10              10    batchB         1</code></pre>
+</div>
+</div>
+<section id="scenario-1---wrong-default-assay" class="level3" data-number="A.1.1"><h3 data-number="A.1.1" class="anchored" data-anchor-id="scenario-1---wrong-default-assay">
+<span class="header-section-number">A.1.1</span> Scenario 1 - Wrong default assay</h3>
+<p>Context: You received this object from a collaborator. You run the standard RNA preprocessing workflow. Everything executes without errors but the results are completely wrong: <code>FindVariableFeatures</code> returns fewer features than expected, PCA explains almost all variance in PC1, and the UMAP is a single blob.</p>
+<div class="cell">
+<details open="" class="code-fold"><summary>Código</summary><div class="code-copy-outer-scaffold">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (have_broken) {</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="st">"Default assay        :"</span>, <span class="fu">DefaultAssay</span>(sobj_broken), <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="st">"Features active assay:"</span>, <span class="fu">nrow</span>(sobj_broken), <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="st">"All assays           :"</span>, <span class="fu">paste</span>(<span class="fu">SafeAssays</span>(sobj_broken), <span class="at">collapse =</span> <span class="st">", "</span>), <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button>
+</div>
+</details><div class="cell-output cell-output-stdout">
+<pre><code>Default assay        : ADT 
+Features active assay: 26 
+All assays           : RNA, ADT </code></pre>
+</div>
+<details open="" class="code-fold"><summary>Código</summary><div class="code-copy-outer-scaffold">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (have_broken) {</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># What does FindVariableFeatures return on this object?</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  test_hvg <span class="ot">&lt;-</span> <span class="fu">FindVariableFeatures</span>(sobj_broken, <span class="at">nfeatures =</span> <span class="dv">2000</span>, <span class="at">verbose =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="st">"Variable features found:"</span>, <span class="fu">length</span>(<span class="fu">VariableFeatures</span>(test_hvg)), <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="st">"Feature names:</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="fu">head</span>(<span class="fu">VariableFeatures</span>(test_hvg), <span class="dv">15</span>))</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button>
+</div>
+</details><div class="cell-output cell-output-stdout">
+<pre><code>Variable features found: 26 
+Feature names:
+ [1] "CD27"          "CD4"           "CD86"          "CD8a"         
+ [5] "CD56"          "CD38"          "CD20"          "CD25"         
+ [9] "PD1"           "CD62L"         "LAG3"          "IgG1-isotype" 
+[13] "IgG2a-isotype" "TIGIT"         "CD69"         </code></pre>
+</div>
+<details open="" class="code-fold"><summary>Código</summary><div class="code-copy-outer-scaffold">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (have_broken) {</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Compare RNA and ADT feature counts</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="st">"Features in RNA assay:"</span>, <span class="fu">nrow</span>(sobj_broken[[<span class="st">"RNA"</span>]]), <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="st">"Features in ADT assay:"</span>, <span class="fu">nrow</span>(sobj_broken[[<span class="st">"ADT"</span>]]), <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button>
+</div>
+</details><div class="cell-output cell-output-stdout">
+<pre><code>Features in RNA assay: 500 
+Features in ADT assay: 26 </code></pre>
+</div>
+</div>
+<blockquote class="blockquote">
+<p>📝 Write your hypothesis as a comment below, then run the fix to confirm. What is the DefaultAssay? Why does FindVariableFeatures return so few features? What would happen if you ran RunPCA and RunUMAP on this object without fixing it? How would you detect this problem in a published Seurat object you downloaded?</p>
+</blockquote>
+<div class="cell">
+<details open="" class="code-fold"><summary>Código</summary><div class="code-copy-outer-scaffold">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (have_broken) {</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="st">"Before fix:"</span>, <span class="fu">DefaultAssay</span>(sobj_broken), <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  <span class="co"># The DefaultAssay is set to "ADT" (24 proteins).</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>  <span class="co"># All RNA functions are running silently on 24 protein features instead</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>  <span class="co"># of 500 RNA genes. FindVariableFeatures returns 24 features because that</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>  <span class="co"># is all that exists in the active assay.</span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">DefaultAssay</span>(sobj_broken) <span class="ot">&lt;-</span> <span class="st">"RNA"</span></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="st">"After fix :"</span>, <span class="fu">DefaultAssay</span>(sobj_broken), <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="st">"Features  :"</span>, <span class="fu">nrow</span>(sobj_broken), <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>  test_fixed <span class="ot">&lt;-</span> <span class="fu">FindVariableFeatures</span>(sobj_broken, <span class="at">nfeatures =</span> <span class="dv">2000</span>, <span class="at">verbose =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="st">"Variable features now:"</span>, <span class="fu">length</span>(<span class="fu">VariableFeatures</span>(test_fixed)), <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button>
+</div>
+</details><div class="cell-output cell-output-stdout">
+<pre><code>Before fix: ADT 
+After fix : RNA 
+Features  : 500 
+Variable features now: 500 </code></pre>
+</div>
+</div>
+<p>Lessons learned:</p>
+<ol type="1">
+<li>
+<code>DefaultAssay()</code> is the first line to run on any received object.</li>
+<li>This error is completely silent. No warning. No error. Just wrong results.</li>
+<li>
+<code>FindVariableFeatures</code>, <code>ScaleData</code>, <code>RunPCA</code>, <code>FindMarkers</code> all operate on the active assay. A PCA run on 24 ADT features is not a transcriptomic PCA.</li>
+<li>Always check <code>DefaultAssay()</code> after any assay switch to confirm it reset.</li>
+</ol></section><section id="scenario-2---metadata-inconsistencies" class="level3" data-number="A.1.2"><h3 data-number="A.1.2" class="anchored" data-anchor-id="scenario-2---metadata-inconsistencies">
+<span class="header-section-number">A.1.2</span> Scenario 2 - Metadata inconsistencies</h3>
+<p>Context: This object was assembled from samples processed at multiple sites. Grouping by <code>condition</code> and <code>donor_id</code> produces unexpected results. Some samples are missing from plots and certain donors appear duplicated.</p>
+<div class="cell">
+<details open="" class="code-fold"><summary>Código</summary><div class="code-copy-outer-scaffold">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (have_broken) {</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="st">"Metadata columns:</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="fu">colnames</span>(sobj_broken<span class="sc">@</span>meta.data))</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="st">"</span><span class="sc">\n</span><span class="st">NAs per column:</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="fu">colSums</span>(<span class="fu">is.na</span>(sobj_broken<span class="sc">@</span>meta.data)))</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button>
+</div>
+</details><div class="cell-output cell-output-stdout">
+<pre><code>Metadata columns:
+ [1] "orig.ident"      "nCount_RNA"      "nFeature_RNA"    "percent.mt"     
+ [5] "donor_id"        "condition"       "severity"        "age"            
+ [9] "cell_type"       "nCount_ADT"      "nFeature_ADT"    "percent.ribo"   
+[13] "RNA_snn_res.0.5" "seurat_clusters" "adt_batch"       "donor_num"      
+
+NAs per column:
+     orig.ident      nCount_RNA    nFeature_RNA      percent.mt        donor_id 
+              0               0               0               0               0 
+      condition        severity             age       cell_type      nCount_ADT 
+             30               0               0             200               0 
+   nFeature_ADT    percent.ribo RNA_snn_res.0.5 seurat_clusters       adt_batch 
+              0               0               0               0               0 
+      donor_num 
+              0 </code></pre>
+</div>
+<details open="" class="code-fold"><summary>Código</summary><div class="code-copy-outer-scaffold">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (have_broken) {</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Inspect the problematic columns</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="st">"Unique donor_id values:</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="fu">sort</span>(<span class="fu">unique</span>(sobj_broken<span class="sc">$</span>donor_id)))</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="st">"</span><span class="sc">\n</span><span class="st">Condition table (including NAs):</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="fu">table</span>(sobj_broken<span class="sc">$</span>condition, <span class="at">useNA =</span> <span class="st">"always"</span>))</span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="st">"</span><span class="sc">\n</span><span class="st">Cell type NAs:"</span>, <span class="fu">sum</span>(<span class="fu">is.na</span>(sobj_broken<span class="sc">$</span>cell_type)), <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button>
+</div>
+</details><div class="cell-output cell-output-stdout">
+<pre><code>Unique donor_id values:
+ [1] "Donor01" "DONOR01" "Donor02" "DONOR02" "Donor03" "DONOR03" "Donor04"
+ [8] "DONOR04" "Donor05" "DONOR05" "Donor06" "DONOR06" "Donor07" "DONOR07"
+[15] "donor1"  "donor2"  "donor3"  "donor4"  "donor5"  "donor6"  "donor7" 
+
+Condition table (including NAs):
+
+Covid-19  covid19  COVID19       HC  Healthy     &lt;NA&gt; 
+      60       79     1840       50      941       30 
+
+Cell type NAs: 200 </code></pre>
+</div>
+<details open="" class="code-fold"><summary>Código</summary><div class="code-copy-outer-scaffold">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (have_broken) {</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># What does a DimPlot by condition look like?</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">DimPlot</span>(sobj_broken, <span class="at">group.by =</span> <span class="st">"condition"</span>) <span class="sc">+</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggtitle</span>(<span class="st">"Condition plot: how many groups appear?"</span>)</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button>
+</div>
+</details><div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="cap6_extra.es_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<blockquote class="blockquote">
+<p>📝 Write your hypothesis as a comment below, then run the fix to confirm. How many distinct problems did you find? What would the biological consequence be if each went unfixed? For example: if condition labels are inconsistent, what happens to a Healthy vs COVID-19 comparison?</p>
+</blockquote>
+<div class="cell">
+<details open="" class="code-fold"><summary>Código</summary><div class="code-copy-outer-scaffold">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (have_broken) {</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  sobj_meta <span class="ot">&lt;-</span> sobj_broken</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>  <span class="co"># PROBLEM 1: donor_id has three different formats for the same donors</span></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>  <span class="co"># e.g. "Donor01", "donor1", "DONOR01" all mean the same donor</span></span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="st">"=== FIX 1: donor_id ===</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>  sobj_meta<span class="sc">$</span>donor_id <span class="ot">&lt;-</span> <span class="fu">toupper</span>(<span class="fu">gsub</span>(<span class="st">"[^A-Z0-9a-z]"</span>, <span class="st">""</span>, sobj_meta<span class="sc">$</span>donor_id))</span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="fu">table</span>(sobj_meta<span class="sc">$</span>donor_id))</span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>  <span class="co"># PROBLEM 2: condition has 4 variants of 2 values</span></span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>  <span class="co"># "COVID19", "covid19", "Covid-19", "HC", NA</span></span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="st">"</span><span class="sc">\n</span><span class="st">=== FIX 2: condition ===</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a>  sobj_meta<span class="sc">$</span>condition_clean <span class="ot">&lt;-</span> dplyr<span class="sc">::</span><span class="fu">case_when</span>(</span>
+<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a>    <span class="fu">grepl</span>(<span class="st">"covid"</span>, sobj_meta<span class="sc">$</span>condition, <span class="at">ignore.case =</span> <span class="cn">TRUE</span>) <span class="sc">~</span> <span class="st">"COVID-19"</span>,</span>
+<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a>    <span class="fu">grepl</span>(<span class="st">"healthy|HC|control"</span>, sobj_meta<span class="sc">$</span>condition,</span>
+<span id="cb17-16"><a href="#cb17-16" aria-hidden="true" tabindex="-1"></a>          <span class="at">ignore.case =</span> <span class="cn">TRUE</span>)                               <span class="sc">~</span> <span class="st">"Healthy"</span>,</span>
+<span id="cb17-17"><a href="#cb17-17" aria-hidden="true" tabindex="-1"></a>    <span class="cn">TRUE</span>                                                    <span class="sc">~</span> <span class="cn">NA_character_</span></span>
+<span id="cb17-18"><a href="#cb17-18" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb17-19"><a href="#cb17-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="fu">table</span>(sobj_meta<span class="sc">$</span>condition_clean, <span class="at">useNA =</span> <span class="st">"always"</span>))</span>
+<span id="cb17-20"><a href="#cb17-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-21"><a href="#cb17-21" aria-hidden="true" tabindex="-1"></a>  <span class="co"># PROBLEM 3: 200 cells have NA in cell_type</span></span>
+<span id="cb17-22"><a href="#cb17-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="st">"</span><span class="sc">\n</span><span class="st">=== FIX 3: cell_type NAs ===</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb17-23"><a href="#cb17-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="st">"NAs before:"</span>, <span class="fu">sum</span>(<span class="fu">is.na</span>(sobj_meta<span class="sc">$</span>cell_type)), <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb17-24"><a href="#cb17-24" aria-hidden="true" tabindex="-1"></a>  sobj_meta<span class="sc">$</span>cell_type[<span class="fu">is.na</span>(sobj_meta<span class="sc">$</span>cell_type)] <span class="ot">&lt;-</span> <span class="st">"Unknown"</span></span>
+<span id="cb17-25"><a href="#cb17-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="st">"NAs after :"</span>, <span class="fu">sum</span>(<span class="fu">is.na</span>(sobj_meta<span class="sc">$</span>cell_type)), <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb17-26"><a href="#cb17-26" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button>
+</div>
+</details><div class="cell-output cell-output-stdout">
+<pre><code>=== FIX 1: donor_id ===
+
+DONOR01 DONOR02 DONOR03 DONOR04 DONOR05 DONOR06 DONOR07  DONOR1  DONOR2  DONOR3 
+    247     218     244     306     304     392     389     103      82     106 
+ DONOR4  DONOR5  DONOR6  DONOR7 
+    144     146     158     161 
+
+=== FIX 2: condition ===
+
+COVID-19  Healthy     &lt;NA&gt; 
+    1979      991       30 
+
+=== FIX 3: cell_type NAs ===
+NAs before: 200 
+NAs after : 0 </code></pre>
+</div>
+</div>
+<p>Lessons learned:</p>
+<ol type="1">
+<li>
+<code>table(col, useNA = "always")</code> and <code>str(meta.data)</code> before every analysis.</li>
+<li>Multi-site data almost always has formatting inconsistencies.</li>
+<li>NA in condition: that cell is excluded from any Healthy vs COVID-19 comparison. With 30 NAs, you are silently dropping 1% of cells from all group comparisons.</li>
+<li>Case-sensitivity matters: <code>"COVID19" == "covid19"</code> is <code>FALSE</code> in R.</li>
+</ol></section><section id="scenario-3---normalization-failure-and-batch-effect" class="level3" data-number="A.1.3"><h3 data-number="A.1.3" class="anchored" data-anchor-id="scenario-3---normalization-failure-and-batch-effect">
+<span class="header-section-number">A.1.3</span> Scenario 3 - Normalization failure and batch effect</h3>
+<p><strong>Context:</strong> The UMAP shows clear separation by donor rather than by cell type. The ADT data also appears distorted. Identify both problems and fix them.</p>
+<div class="cell">
+<details open="" class="code-fold"><summary>Código</summary><div class="code-copy-outer-scaffold">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (have_broken) {</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">DimPlot</span>(sobj_broken, <span class="at">group.by =</span> <span class="st">"orig.ident"</span>) <span class="sc">+</span></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggtitle</span>(<span class="st">"Donors separate in UMAP: batch effect or biology?"</span>)</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button>
+</div>
+</details><div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="cap6_extra.es_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<details open="" class="code-fold"><summary>Código</summary><div class="code-copy-outer-scaffold">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (have_broken) {</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">DefaultAssay</span>(sobj_broken) <span class="ot">&lt;-</span> <span class="st">"ADT"</span></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>  adt_data <span class="ot">&lt;-</span> <span class="fu">LayerData</span>(sobj_broken, <span class="at">layer =</span> <span class="st">"data"</span>)</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="st">"Row means (per protein); near 0 means margin=1 was used (wrong):</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="fu">round</span>(<span class="fu">rowMeans</span>(adt_data), <span class="dv">4</span>))</span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="st">"</span><span class="sc">\n</span><span class="st">Column means (per cell, first 10); near 0 means margin=2 (correct):</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="fu">round</span>(<span class="fu">colMeans</span>(adt_data)[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>], <span class="dv">4</span>))</span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">DefaultAssay</span>(sobj_broken) <span class="ot">&lt;-</span> <span class="st">"RNA"</span></span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button>
+</div>
+</details><div class="cell-output cell-output-stderr">
+<pre><code>Warning: Layer 'data' is empty</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Row means (per protein); near 0 means margin=1 was used (wrong):
+numeric(0)
+
+Column means (per cell, first 10); near 0 means margin=2 (correct):
+ [1] NA NA NA NA NA NA NA NA NA NA</code></pre>
+</div>
+<details open="" class="code-fold"><summary>Código</summary><div class="code-copy-outer-scaffold">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (have_broken) {</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>  rna_data <span class="ot">&lt;-</span> <span class="fu">LayerData</span>(sobj_broken, <span class="at">assay =</span> <span class="st">"RNA"</span>, <span class="at">layer =</span> <span class="st">"data"</span>)</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="st">"Any negative values in RNA data layer?"</span>,</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>      <span class="fu">any</span>(rna_data <span class="sc">&lt;</span> <span class="dv">0</span>), <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="st">"(TRUE would indicate SCTransform residuals stored as 'data')</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="st">"</span><span class="sc">\n</span><span class="st">Range of non-zero values in RNA data:</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="fu">summary</span>(rna_data<span class="sc">@</span>x))</span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button>
+</div>
+</details><div class="cell-output cell-output-stdout">
+<pre><code>Any negative values in RNA data layer? FALSE 
+(TRUE would indicate SCTransform residuals stored as 'data')
+
+Range of non-zero values in RNA data:
+   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+  2.553   3.392   4.530   4.620   5.715   8.034 </code></pre>
+</div>
+</div>
+<blockquote class="blockquote">
+<p>📝 Write your hypothesis as a comment below, then run the fix to confirm. How did you determine which margin was used? What is the consequence of the batch effect for any condition-level comparison? If you published the original UMAP as a figure, what scientific claim would be invalidated?</p>
+</blockquote>
+<div class="cell">
+<details open="" class="code-fold"><summary>Código</summary><div class="code-copy-outer-scaffold">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (have_broken) {</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>  sobj_renorm <span class="ot">&lt;-</span> sobj_broken</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>  <span class="co"># STEP 1: Re-normalize RNA from counts (counts layer is untouched)</span></span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">DefaultAssay</span>(sobj_renorm) <span class="ot">&lt;-</span> <span class="st">"RNA"</span></span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>  sobj_renorm <span class="ot">&lt;-</span> <span class="fu">NormalizeData</span>(sobj_renorm,</span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">normalization.method =</span> <span class="st">"LogNormalize"</span>,</span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">scale.factor         =</span> <span class="dv">10000</span>,</span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">verbose              =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="st">"RNA re-normalized from counts.</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a>  <span class="co"># STEP 2: Re-normalize ADT with correct margin</span></span>
+<span id="cb25-13"><a href="#cb25-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">DefaultAssay</span>(sobj_renorm) <span class="ot">&lt;-</span> <span class="st">"ADT"</span></span>
+<span id="cb25-14"><a href="#cb25-14" aria-hidden="true" tabindex="-1"></a>  sobj_renorm <span class="ot">&lt;-</span> <span class="fu">NormalizeData</span>(sobj_renorm,</span>
+<span id="cb25-15"><a href="#cb25-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">normalization.method =</span> <span class="st">"CLR"</span>,</span>
+<span id="cb25-16"><a href="#cb25-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">margin               =</span> <span class="dv">2</span>,</span>
+<span id="cb25-17"><a href="#cb25-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">verbose              =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb25-18"><a href="#cb25-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="st">"ADT re-normalized (CLR, margin=2).</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb25-19"><a href="#cb25-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-20"><a href="#cb25-20" aria-hidden="true" tabindex="-1"></a>  <span class="co"># STEP 3: Rerun preprocessing</span></span>
+<span id="cb25-21"><a href="#cb25-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">DefaultAssay</span>(sobj_renorm) <span class="ot">&lt;-</span> <span class="st">"RNA"</span></span>
+<span id="cb25-22"><a href="#cb25-22" aria-hidden="true" tabindex="-1"></a>  sobj_renorm <span class="ot">&lt;-</span> <span class="fu">FindVariableFeatures</span>(sobj_renorm, <span class="at">verbose =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb25-23"><a href="#cb25-23" aria-hidden="true" tabindex="-1"></a>  sobj_renorm <span class="ot">&lt;-</span> <span class="fu">ScaleData</span>(sobj_renorm, <span class="at">verbose =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb25-24"><a href="#cb25-24" aria-hidden="true" tabindex="-1"></a>  sobj_renorm <span class="ot">&lt;-</span> <span class="fu">RunPCA</span>(sobj_renorm, <span class="at">npcs =</span> <span class="dv">30</span>, <span class="at">verbose =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb25-25"><a href="#cb25-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-26"><a href="#cb25-26" aria-hidden="true" tabindex="-1"></a>  <span class="co"># STEP 4: Harmony batch correction</span></span>
+<span id="cb25-27"><a href="#cb25-27" aria-hidden="true" tabindex="-1"></a>  sobj_renorm <span class="ot">&lt;-</span> <span class="fu">RunHarmony</span>(</span>
+<span id="cb25-28"><a href="#cb25-28" aria-hidden="true" tabindex="-1"></a>    sobj_renorm,</span>
+<span id="cb25-29"><a href="#cb25-29" aria-hidden="true" tabindex="-1"></a>    <span class="at">group.by.vars  =</span> <span class="st">"orig.ident"</span>,</span>
+<span id="cb25-30"><a href="#cb25-30" aria-hidden="true" tabindex="-1"></a>    <span class="at">reduction      =</span> <span class="st">"pca"</span>,</span>
+<span id="cb25-31"><a href="#cb25-31" aria-hidden="true" tabindex="-1"></a>    <span class="at">reduction.save =</span> <span class="st">"harmony"</span>,</span>
+<span id="cb25-32"><a href="#cb25-32" aria-hidden="true" tabindex="-1"></a>    <span class="at">verbose        =</span> <span class="cn">FALSE</span></span>
+<span id="cb25-33"><a href="#cb25-33" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb25-34"><a href="#cb25-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-35"><a href="#cb25-35" aria-hidden="true" tabindex="-1"></a>  sobj_renorm <span class="ot">&lt;-</span> <span class="fu">RunUMAP</span>(sobj_renorm,</span>
+<span id="cb25-36"><a href="#cb25-36" aria-hidden="true" tabindex="-1"></a>    <span class="at">reduction      =</span> <span class="st">"harmony"</span>,</span>
+<span id="cb25-37"><a href="#cb25-37" aria-hidden="true" tabindex="-1"></a>    <span class="at">dims           =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">20</span>,</span>
+<span id="cb25-38"><a href="#cb25-38" aria-hidden="true" tabindex="-1"></a>    <span class="at">reduction.name =</span> <span class="st">"umap.harmony"</span>,</span>
+<span id="cb25-39"><a href="#cb25-39" aria-hidden="true" tabindex="-1"></a>    <span class="at">verbose        =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb25-40"><a href="#cb25-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-41"><a href="#cb25-41" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="st">"Harmony applied.</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb25-42"><a href="#cb25-42" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button>
+</div>
+</details><div class="cell-output cell-output-stdout">
+<pre><code>RNA re-normalized from counts.
+ADT re-normalized (CLR, margin=2).</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: The default method for RunUMAP has changed from calling Python UMAP via reticulate to the R-native UWOT using the cosine metric
+To use Python UMAP via reticulate, set umap.method to 'umap-learn' and metric to 'correlation'
+This message will be shown once per session</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Harmony applied.</code></pre>
+</div>
+<details open="" class="code-fold"><summary>Código</summary><div class="code-copy-outer-scaffold">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (have_broken) {</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>  p_before <span class="ot">&lt;-</span> <span class="fu">DimPlot</span>(sobj_renorm, <span class="at">reduction =</span> <span class="st">"umap"</span>,</span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>                      <span class="at">group.by =</span> <span class="st">"orig.ident"</span>) <span class="sc">+</span></span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggtitle</span>(<span class="st">"Before Harmony"</span>) <span class="sc">+</span> <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>)</span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>  p_after  <span class="ot">&lt;-</span> <span class="fu">DimPlot</span>(sobj_renorm, <span class="at">reduction =</span> <span class="st">"umap.harmony"</span>,</span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a>                      <span class="at">group.by =</span> <span class="st">"orig.ident"</span>) <span class="sc">+</span></span>
+<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggtitle</span>(<span class="st">"After Harmony"</span>) <span class="sc">+</span> <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>)</span>
+<span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-10"><a href="#cb29-10" aria-hidden="true" tabindex="-1"></a>  p_before <span class="sc">|</span> p_after</span>
+<span id="cb29-11"><a href="#cb29-11" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button>
+</div>
+</details><div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="cap6_extra.es_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Lessons learned:</p>
+<ol type="1">
+<li>Row means ~0 in ADT data is the diagnostic signature of <code>margin=1</code>. Wrong.</li>
+<li>Column means ~0 in ADT data is the signature of <code>margin=2</code>. Correct.</li>
+<li>The counts layer is the ground truth. Re-normalize from it; never overwrite it.</li>
+<li>Donor separation in UMAP = batch effect. Run <code>DimPlot(group.by="orig.ident")</code> before interpreting any UMAP biologically.</li>
+<li>Harmony corrects for donor-level batch effects while preserving biological variation. It requires at least 3 donors per group to be reliable.</li>
+</ol></section><section id="scenario-4-adt-staining-batch-and-isotype-background-cite-seq-25-min" class="level3" data-number="A.1.4"><h3 data-number="A.1.4" class="anchored" data-anchor-id="scenario-4-adt-staining-batch-and-isotype-background-cite-seq-25-min">
+<span class="header-section-number">A.1.4</span> Scenario 4 | ADT staining batch and isotype background (CITE-seq, 25 min)</h3>
+<p><strong>Context:</strong> The protein data looks technically fine: it normalizes, it plots, gating runs. But the ADT PCA separates cells by processing batch, not by cell type, and one donor shows inflated signal across every protein. Two distinct CITE-seq problems are present: a staining batch effect and high non-specific background. Neither is an RNA problem and neither throws an error.</p>
+<div class="cell">
+<details open="" class="code-fold"><summary>Código</summary><div class="code-copy-outer-scaffold">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (have_broken) {</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="st">"adt_batch"</span> <span class="sc">%in%</span> <span class="fu">colnames</span>(sobj_broken<span class="sc">@</span>meta.data)) {</span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">cat</span>(<span class="st">"This broken object has no 'adt_batch' column.</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">cat</span>(<span class="st">"Scenario 4 needs the injected object (data/sobj_broken_errors.rds</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">cat</span>(<span class="st">"from inject_course_errors.R). Skipping Scenario 4 diagnostics.</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> {</span>
+<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">DefaultAssay</span>(sobj_broken) <span class="ot">&lt;-</span> <span class="st">"ADT"</span></span>
+<span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a>    adt_feats <span class="ot">&lt;-</span> <span class="fu">rownames</span>(sobj_broken[[<span class="st">"ADT"</span>]])</span>
+<span id="cb30-9"><a href="#cb30-9" aria-hidden="true" tabindex="-1"></a>    sobj_broken <span class="ot">&lt;-</span> <span class="fu">ScaleData</span>(sobj_broken, <span class="at">features =</span> adt_feats, <span class="at">verbose =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb30-10"><a href="#cb30-10" aria-hidden="true" tabindex="-1"></a>    sobj_broken <span class="ot">&lt;-</span> <span class="fu">RunPCA</span>(sobj_broken, <span class="at">features =</span> adt_feats,</span>
+<span id="cb30-11"><a href="#cb30-11" aria-hidden="true" tabindex="-1"></a>                          <span class="at">npcs =</span> <span class="dv">15</span>, <span class="at">reduction.name =</span> <span class="st">"pca.adt.broken"</span>,</span>
+<span id="cb30-12"><a href="#cb30-12" aria-hidden="true" tabindex="-1"></a>                          <span class="at">reduction.key =</span> <span class="st">"pcaADTb_"</span>, <span class="at">verbose =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb30-13"><a href="#cb30-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">print</span>(</span>
+<span id="cb30-14"><a href="#cb30-14" aria-hidden="true" tabindex="-1"></a>      <span class="fu">DimPlot</span>(sobj_broken, <span class="at">reduction =</span> <span class="st">"pca.adt.broken"</span>, <span class="at">group.by =</span> <span class="st">"adt_batch"</span>) <span class="sc">+</span></span>
+<span id="cb30-15"><a href="#cb30-15" aria-hidden="true" tabindex="-1"></a>        <span class="fu">ggtitle</span>(<span class="st">"ADT PCA colored by staining batch: should NOT separate"</span>)</span>
+<span id="cb30-16"><a href="#cb30-16" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb30-17"><a href="#cb30-17" aria-hidden="true" tabindex="-1"></a>    <span class="fu">DefaultAssay</span>(sobj_broken) <span class="ot">&lt;-</span> <span class="st">"RNA"</span></span>
+<span id="cb30-18"><a href="#cb30-18" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb30-19"><a href="#cb30-19" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button>
+</div>
+</details><div class="cell-output cell-output-stderr">
+<pre><code>Warning: No layers found matching search pattern provided</code></pre>
+</div>
+<div class="cell-output cell-output-error">
+<pre><code>Error in `ScaleData()`:
+! No layer matching pattern 'data' found. Please run NormalizeData and retry</code></pre>
+</div>
+<details open="" class="code-fold"><summary>Código</summary><div class="code-copy-outer-scaffold">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (have_broken) {</span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Isotype antibodies bind nothing specific. High isotype = high background</span></span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>  <span class="co"># (sticky/dying cells, over-staining). Per-cell total ADT correlated with</span></span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>  <span class="co"># isotype signal is the fingerprint.</span></span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">DefaultAssay</span>(sobj_broken) <span class="ot">&lt;-</span> <span class="st">"ADT"</span></span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a>  adt_counts <span class="ot">&lt;-</span> <span class="fu">LayerData</span>(sobj_broken, <span class="at">layer =</span> <span class="st">"counts"</span>)</span>
+<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a>  isotypes <span class="ot">&lt;-</span> <span class="fu">grep</span>(<span class="st">"[Ii]sotype|IgG"</span>, <span class="fu">rownames</span>(adt_counts), <span class="at">value =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb33-9"><a href="#cb33-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="st">"Isotype control channels found:"</span>, <span class="fu">paste</span>(isotypes, <span class="at">collapse =</span> <span class="st">", "</span>), <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb33-10"><a href="#cb33-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-11"><a href="#cb33-11" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="fu">length</span>(isotypes) <span class="sc">&gt;</span> <span class="dv">0</span>) {</span>
+<span id="cb33-12"><a href="#cb33-12" aria-hidden="true" tabindex="-1"></a>    iso_total  <span class="ot">&lt;-</span> Matrix<span class="sc">::</span><span class="fu">colSums</span>(adt_counts[isotypes, , <span class="at">drop =</span> <span class="cn">FALSE</span>])</span>
+<span id="cb33-13"><a href="#cb33-13" aria-hidden="true" tabindex="-1"></a>    adt_total  <span class="ot">&lt;-</span> Matrix<span class="sc">::</span><span class="fu">colSums</span>(adt_counts)</span>
+<span id="cb33-14"><a href="#cb33-14" aria-hidden="true" tabindex="-1"></a>    <span class="fu">cat</span>(<span class="st">"Spearman(total ADT, isotype signal):"</span>,</span>
+<span id="cb33-15"><a href="#cb33-15" aria-hidden="true" tabindex="-1"></a>        <span class="fu">round</span>(<span class="fu">cor</span>(adt_total, iso_total, <span class="at">method =</span> <span class="st">"spearman"</span>), <span class="dv">3</span>), <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb33-16"><a href="#cb33-16" aria-hidden="true" tabindex="-1"></a>    <span class="co"># donor_id is inconsistent in this object; use a clean donor number</span></span>
+<span id="cb33-17"><a href="#cb33-17" aria-hidden="true" tabindex="-1"></a>    dn <span class="ot">&lt;-</span> sobj_broken<span class="sc">$</span>donor_num</span>
+<span id="cb33-18"><a href="#cb33-18" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (<span class="fu">is.null</span>(dn))</span>
+<span id="cb33-19"><a href="#cb33-19" aria-hidden="true" tabindex="-1"></a>      dn <span class="ot">&lt;-</span> <span class="fu">suppressWarnings</span>(<span class="fu">as.integer</span>(<span class="fu">gsub</span>(<span class="st">"</span><span class="sc">\\</span><span class="st">D"</span>, <span class="st">""</span>,</span>
+<span id="cb33-20"><a href="#cb33-20" aria-hidden="true" tabindex="-1"></a>                             <span class="fu">as.character</span>(sobj_broken<span class="sc">$</span>donor_id))))</span>
+<span id="cb33-21"><a href="#cb33-21" aria-hidden="true" tabindex="-1"></a>    <span class="fu">cat</span>(<span class="st">"Median isotype signal by donor number:</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb33-22"><a href="#cb33-22" aria-hidden="true" tabindex="-1"></a>    <span class="fu">print</span>(<span class="fu">round</span>(<span class="fu">tapply</span>(iso_total, dn, median), <span class="dv">2</span>))</span>
+<span id="cb33-23"><a href="#cb33-23" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb33-24"><a href="#cb33-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">DefaultAssay</span>(sobj_broken) <span class="ot">&lt;-</span> <span class="st">"RNA"</span></span>
+<span id="cb33-25"><a href="#cb33-25" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button>
+</div>
+</details><div class="cell-output cell-output-stdout">
+<pre><code>Isotype control channels found: IgG1-isotype, IgG2a-isotype 
+Spearman(total ADT, isotype signal): 0.215 
+Median isotype signal by donor number:
+   1    2    3    4    5    6    7 
+16.5  0.0  0.0  0.0  0.0  0.0  0.0 </code></pre>
+</div>
+</div>
+<blockquote class="blockquote">
+<p>📝 Write your hypothesis as a comment below, then run the fix to confirm. Which donor has the highest background? Would CLR alone remove a staining batch effect? If you gated CD4+ cells with one fixed threshold across both batches, what would happen to the per-batch counts?</p>
+</blockquote>
+<div class="cell">
+<details open="" class="code-fold"><summary>Código</summary><div class="code-copy-outer-scaffold">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (have_broken) {</span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="st">"adt_batch"</span> <span class="sc">%in%</span> <span class="fu">colnames</span>(sobj_broken<span class="sc">@</span>meta.data)) {</span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">cat</span>(<span class="st">"No 'adt_batch' column; Scenario 4 solution requires the injected object.</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> {</span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a>  <span class="co"># STEP 1: Flag and optionally remove high-background cells using isotypes.</span></span>
+<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">DefaultAssay</span>(sobj_broken) <span class="ot">&lt;-</span> <span class="st">"ADT"</span></span>
+<span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a>  adt_counts <span class="ot">&lt;-</span> <span class="fu">LayerData</span>(sobj_broken, <span class="at">layer =</span> <span class="st">"counts"</span>)</span>
+<span id="cb35-8"><a href="#cb35-8" aria-hidden="true" tabindex="-1"></a>  isotypes   <span class="ot">&lt;-</span> <span class="fu">grep</span>(<span class="st">"[Ii]sotype|IgG"</span>, <span class="fu">rownames</span>(adt_counts), <span class="at">value =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb35-9"><a href="#cb35-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-10"><a href="#cb35-10" aria-hidden="true" tabindex="-1"></a>  sobj_clean <span class="ot">&lt;-</span> sobj_broken</span>
+<span id="cb35-11"><a href="#cb35-11" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="fu">length</span>(isotypes) <span class="sc">&gt;</span> <span class="dv">0</span>) {</span>
+<span id="cb35-12"><a href="#cb35-12" aria-hidden="true" tabindex="-1"></a>    iso_total <span class="ot">&lt;-</span> Matrix<span class="sc">::</span><span class="fu">colSums</span>(adt_counts[isotypes, , <span class="at">drop =</span> <span class="cn">FALSE</span>])</span>
+<span id="cb35-13"><a href="#cb35-13" aria-hidden="true" tabindex="-1"></a>    cut_hi    <span class="ot">&lt;-</span> <span class="fu">quantile</span>(iso_total, <span class="fl">0.95</span>)</span>
+<span id="cb35-14"><a href="#cb35-14" aria-hidden="true" tabindex="-1"></a>    keep      <span class="ot">&lt;-</span> iso_total <span class="sc">&lt;=</span> cut_hi</span>
+<span id="cb35-15"><a href="#cb35-15" aria-hidden="true" tabindex="-1"></a>    <span class="fu">cat</span>(<span class="st">"High-background cells removed (top 5% isotype):"</span>, <span class="fu">sum</span>(<span class="sc">!</span>keep), <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb35-16"><a href="#cb35-16" aria-hidden="true" tabindex="-1"></a>    sobj_clean <span class="ot">&lt;-</span> <span class="fu">subset</span>(sobj_clean, <span class="at">cells =</span> <span class="fu">colnames</span>(sobj_clean)[keep])</span>
+<span id="cb35-17"><a href="#cb35-17" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb35-18"><a href="#cb35-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-19"><a href="#cb35-19" aria-hidden="true" tabindex="-1"></a>  <span class="co"># STEP 2: Re-normalize ADT (CLR margin=2) from counts.</span></span>
+<span id="cb35-20"><a href="#cb35-20" aria-hidden="true" tabindex="-1"></a>  sobj_clean <span class="ot">&lt;-</span> <span class="fu">NormalizeData</span>(sobj_clean, <span class="at">normalization.method =</span> <span class="st">"CLR"</span>,</span>
+<span id="cb35-21"><a href="#cb35-21" aria-hidden="true" tabindex="-1"></a>                              <span class="at">margin =</span> <span class="dv">2</span>, <span class="at">verbose =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb35-22"><a href="#cb35-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-23"><a href="#cb35-23" aria-hidden="true" tabindex="-1"></a>  <span class="co"># STEP 3: Correct the ADT staining batch with Harmony in protein space.</span></span>
+<span id="cb35-24"><a href="#cb35-24" aria-hidden="true" tabindex="-1"></a>  adt_feats  <span class="ot">&lt;-</span> <span class="fu">rownames</span>(sobj_clean[[<span class="st">"ADT"</span>]])</span>
+<span id="cb35-25"><a href="#cb35-25" aria-hidden="true" tabindex="-1"></a>  sobj_clean <span class="ot">&lt;-</span> <span class="fu">ScaleData</span>(sobj_clean, <span class="at">features =</span> adt_feats, <span class="at">verbose =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb35-26"><a href="#cb35-26" aria-hidden="true" tabindex="-1"></a>  sobj_clean <span class="ot">&lt;-</span> <span class="fu">RunPCA</span>(sobj_clean, <span class="at">features =</span> adt_feats, <span class="at">npcs =</span> <span class="dv">15</span>,</span>
+<span id="cb35-27"><a href="#cb35-27" aria-hidden="true" tabindex="-1"></a>                       <span class="at">reduction.name =</span> <span class="st">"pca.adt"</span>, <span class="at">reduction.key =</span> <span class="st">"pcaADT_"</span>,</span>
+<span id="cb35-28"><a href="#cb35-28" aria-hidden="true" tabindex="-1"></a>                       <span class="at">verbose =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb35-29"><a href="#cb35-29" aria-hidden="true" tabindex="-1"></a>  sobj_clean <span class="ot">&lt;-</span> <span class="fu">RunHarmony</span>(sobj_clean, <span class="at">group.by.vars =</span> <span class="st">"adt_batch"</span>,</span>
+<span id="cb35-30"><a href="#cb35-30" aria-hidden="true" tabindex="-1"></a>                           <span class="at">reduction =</span> <span class="st">"pca.adt"</span>,</span>
+<span id="cb35-31"><a href="#cb35-31" aria-hidden="true" tabindex="-1"></a>                           <span class="at">reduction.save =</span> <span class="st">"harmony.adt"</span>, <span class="at">verbose =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb35-32"><a href="#cb35-32" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="st">"ADT batch corrected in protein space (harmony.adt).</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb35-33"><a href="#cb35-33" aria-hidden="true" tabindex="-1"></a>  <span class="fu">DefaultAssay</span>(sobj_clean) <span class="ot">&lt;-</span> <span class="st">"RNA"</span></span>
+<span id="cb35-34"><a href="#cb35-34" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb35-35"><a href="#cb35-35" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button>
+</div>
+</details><div class="cell-output cell-output-stdout">
+<pre><code>High-background cells removed (top 5% isotype): 138 </code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in svd.function(A = t(x = object), nv = npcs, ...): You're computing
+too large a percentage of total singular values, use a standard svd instead.</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>ADT batch corrected in protein space (harmony.adt).</code></pre>
+</div>
+</div>
+<p>Lessons learned:</p>
+<ol type="1">
+<li>A clean-looking ADT layer can still be dominated by technical structure. Always run an ADT PCA and color it by batch before trusting protein space.</li>
+<li>Isotype controls are the ground truth for background. If total ADT tracks isotype signal, the high cells are background, not biology.</li>
+<li>CLR per cell does not remove a between-batch staining effect. <em>Batch correction</em> (Harmony on the ADT PCA) is needed, separate from the RNA batch.</li>
+<li>A single gating threshold across batches misclassifies cells. Gate per <em>batch</em> or correct the batch first.</li>
+</ol></section></section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copiado");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copiado");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/eveliacoss\.github\.io\/Workshop2026_scRNAseq_CITEseq_libro\/es");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        const annoteTargets = window.document.querySelectorAll('.code-annotation-anchor');
+        for (let i=0; i<annoteTargets.length; i++) {
+          const annoteTarget = annoteTargets[i];
+          const targetCell = annoteTarget.getAttribute("data-target-cell");
+          const targetAnnotation = annoteTarget.getAttribute("data-target-annotation");
+          const contentFn = () => {
+            const content = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+            if (content) {
+              const tipContent = content.cloneNode(true);
+              tipContent.classList.add("code-annotation-tip-content");
+              return tipContent.outerHTML;
+            }
+          }
+          const config = {
+            allowHTML: true,
+            content: contentFn,
+            onShow: (instance) => {
+              selectCodeLines(instance.reference);
+              instance.reference.classList.add('code-annotation-active');
+              window.tippy.hideAll();
+            },
+            onHide: (instance) => {
+              unselectCodeLines();
+              instance.reference.classList.remove('code-annotation-active');
+            },
+            maxWidth: 300,
+            delay: [50, 0],
+            duration: [200, 0],
+            offset: [5, 10],
+            arrow: true,
+            appendTo: function(el) {
+              return el.parentElement.parentElement.parentElement;
+            },
+            interactive: true,
+            interactiveBorder: 10,
+            theme: 'quarto',
+            placement: 'right',
+            popperOptions: {
+              modifiers: [
+              {
+                name: 'flip',
+                options: {
+                  flipVariations: false, // true by default
+                  allowedAutoPlacements: ['right'],
+                  fallbackPlacements: ['right', 'top', 'top-start', 'top-end', 'bottom', 'bottom-start', 'bottom-end', 'left'],
+                },
+              },
+              {
+                name: 'preventOverflow',
+                options: {
+                  mainAxis: false,
+                  altAxis: false
+                }
+              }
+              ]        
+            }      
+          };
+          window.tippy(annoteTarget, config); 
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
+      <a href="./cap5_course.es.html" class="pagination-link" aria-label="CITE‑seq — Errors &amp; Survival">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">5</span>  <span class="chapter-title">CITE‑seq — Errors &amp; Survival</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./cap7_extra_block9.es.html" class="pagination-link" aria-label="Extra related to biological Questions">
+        <span class="nav-page-text"><span class="chapter-number">B</span>  <span class="chapter-title">Extra related to biological Questions</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer"><div class="nav-footer">
+    <div class="nav-footer-left">
+       
+    </div>   
+    <div class="nav-footer-center">
+<p>Survival Course: Evelia Coss and Thais Crippa</p>
+</div>
+    <div class="nav-footer-right">
+       
+    </div>
+  </div>
+</footer>
+</body>
+</html>

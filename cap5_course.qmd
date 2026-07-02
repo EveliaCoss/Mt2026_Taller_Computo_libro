@@ -1,6 +1,6 @@
 # CITE‑seq — Errors & Survival
 
-## **Block 6 -  CITE-seq integration (ADT + RNA)** {#sec-block6}
+## **Block 6 - CITE-seq integration (ADT + RNA)** {#sec-block6}
 
 ::: content-box-gray
 **Goal:** Bring the protein layer into the analysis. The RNA workflow up to **Block 5** ignored ADT entirely. The CITE-seq value-add is the ability to resolve dropout, validate annotation, and weight modalities per cell.
@@ -78,10 +78,9 @@ DefaultAssay(sobj_filt) <- "RNA"
 
 :::: question
 ::: {.callout-tip icon="false"}
-## QUESTION 6.0a 
+## QUESTION 6.0a
 
-An ADT protein with median ~0 but max in the high hundreds is typical bimodality (background cells vs stained cells). A protein with mean below 1 in every cell is something else. Which is which in the table above?
-
+An ADT protein with median \~0 but max in the high hundreds is typical bimodality (background cells vs stained cells). A protein with mean below 1 in every cell is something else. Which is which in the table above?
 :::
 ::::
 
@@ -105,14 +104,14 @@ qc <- data.frame(
 qc[order(qc$mean), ]
 DefaultAssay(sobj_filt) <- "RNA"
 ```
-PLOT / OUTPUT: 
+
+PLOT / OUTPUT:
 
 Could also use:
 
 ```{r}
 RidgePlot(sobj_filt, features=rownames(sobj_filt[['ADT']])[1:6], assay='ADT')
 ```
-
 :::
 
 ### Step 6.0b - RNA sparsity vs ADT sparsity
@@ -127,7 +126,6 @@ adt_sparsity  <- 1 - Matrix::nnzero(adt_counts)     / prod(dim(adt_counts))
 cat("RNA sparsity:", round(rna_sparsity * 100, 1), "%\n")
 cat("ADT sparsity:", round(adt_sparsity * 100, 1), "%\n")
 ```
-
 
 :::: question
 ::: {.callout-tip icon="false"}
@@ -153,8 +151,8 @@ mean(adt == 0) * 100        # ADT sparsity %
 sum(rna["CD4", ] == 0) / ncol(rna) * 100
 sum(adt["CD4", ] == 0) / ncol(adt) * 100
 ```
-PLOT / OUTPUT: Console; histograms of *per-cell* zero rate also work for visual impact
 
+PLOT / OUTPUT: Console; histograms of *per-cell* zero rate also work for visual impact
 :::
 
 ### Step 6.1 - Re-inspect the ADT layer
@@ -184,7 +182,6 @@ adt_var <- apply(adt_counts, 1, var)
 cat("\nTop 5 ADT proteins by raw-count variance:\n")
 print(round(sort(adt_var, decreasing = TRUE)[1:5], 1))
 ```
-
 :::
 ::::
 
@@ -202,12 +199,11 @@ sort(var_per_prot, decreasing = TRUE)[1:5]
 ```
 :::
 
-
 :::: puzzle
 ::: {.callout-tip icon="false"}
 ## PUZZLE 6.1/B (ADT)
 
-How many cells are positive for BOTH CD4 and CD8a in the `raw counts` (> 5 counts each)? In healthy PBMC this should be near zero; anything substantial is a doublet or a contamination signal.
+How many cells are positive for BOTH CD4 and CD8a in the `raw counts` (\> 5 counts each)? In healthy PBMC this should be near zero; anything substantial is a doublet or a contamination signal.
 
 ```{r}
 cd4_pos <- adt_counts["CD4", ] > 5
@@ -216,8 +212,6 @@ cat("\nADT CD4+ cells              :", sum(cd4_pos), "\n")
 cat("ADT CD8a+ cells             :", sum(cd8_pos), "\n")
 cat("Double-positive (suspicious):", sum(cd4_pos & cd8_pos), "  (~0 expected)\n")
 ```
-
-
 :::
 ::::
 
@@ -234,17 +228,15 @@ cd8 <- adt["CD8a", ] > 5
 sum(cd4 & cd8)
 table(cd4 & cd8, sobj_filt$is_dbl)
 ```
+
 PLOT / OUTPUT: Console output
-
 :::
-
 
 :::: question
 ::: {.callout-tip icon="false"}
 ## QUESTION 6.1
 
 Does the double-positive count match what you expect biologically, or does it indicate doublets that survived scDblFinder? What would you do about it before annotating T cell subsets?
-
 :::
 ::::
 
@@ -263,20 +255,13 @@ table(double_pos = cd4 & cd8, scDbl = sobj_filt$is_dbl)
 ```
 
 PLOT / OUTPUT: Console table; small counts in (TRUE, FALSE) cell are the suspicious cases
-
 :::
 
 ### Step 6.2 - ADT normalization (CLR, margin = 2)
 
-CLR (Centered Log-Ratio) normalization. The margin argument sets the
-direction:
-  + `margin = 1`: normalizes each protein across all cells (row means ~0)
-  + `margin = 2`: normalizes each cell across all proteins (column means ~0)
+CLR (Centered Log-Ratio) normalization. The margin argument sets the direction: + `margin = 1`: normalizes each protein across all cells (row means \~0) + `margin = 2`: normalizes each cell across all proteins (column means \~0)
 
-`margin = 2` is correct for CITE-seq. It removes per-cell variation in total
-antibody capture, analogous to library size normalization in RNA. `margin = 1`
-runs without error but destroys biological signal. You will diagnose a real
-object normalized the wrong way in **Block 8, Scenario 3**.
+`margin = 2` is correct for CITE-seq. It removes per-cell variation in total antibody capture, analogous to library size normalization in RNA. `margin = 1` runs without error but destroys biological signal. You will diagnose a real object normalized the wrong way in **Block 8, Scenario 3**.
 
 ```{r}
 DefaultAssay(sobj_filt) <- "ADT"
@@ -302,14 +287,13 @@ cat("\nADT normalized correctly.\n")
 ## QUESTION 6.2
 
 Why is the row mean a useful diagnostic? What would the row means look like if margin had been set to 1?
-
 :::
 ::::
 
 ::: {.callout-tip icon="false" collapse="true"}
 ### ANSWER
 
-After CLR with margin=2 (per cell across proteins), column means are ~0 by construction (each cell's protein values were centered). Row means (per protein across cells) carry the biological signal of which proteins are abundant and should NOT be near zero. They reflect dataset-wide protein abundance differences. If margin=1 was used instead (per protein across cells), row means would be near zero. That is the wrong-margin fingerprint. Cenario 3 of Block 7 contains exactly this failure.
+After CLR with margin=2 (per cell across proteins), column means are \~0 by construction (each cell's protein values were centered). Row means (per protein across cells) carry the biological signal of which proteins are abundant and should NOT be near zero. They reflect dataset-wide protein abundance differences. If margin=1 was used instead (per protein across cells), row means would be near zero. That is the wrong-margin fingerprint. Cenario 3 of Block 7 contains exactly this failure.
 
 LIVE DEMO:
 
@@ -322,7 +306,6 @@ round(colMeans(d), 3)[1:5]
 ```
 
 PLOT / OUTPUT: Console output; `row means != 0, col means ~ 0`.
-
 :::
 
 ### Step 6.3 - ADT panel QC: detect dead / failed antibodies
@@ -352,7 +335,6 @@ DefaultAssay(sobj_filt) <- "RNA"
 ## QUESTION 6.3
 
 One protein has near-zero counts in essentially every cell while its RNA counterpart is clearly expressed in a defined cluster. Which protein, and which cell type does it mark?
-
 :::
 ::::
 
@@ -368,9 +350,7 @@ FeaturePlot(sobj_filt, c("CD56", "NCAM1"), reduction = "umap")
 ```
 
 PLOT / OUTPUT: FeaturePlot panel: CD56 ADT (flat) next to NCAM1 RNA (positive in a cluster)
-
 :::
-
 
 Compare the suspect protein (ADT) against its RNA gene side by side.
 
@@ -462,7 +442,7 @@ DefaultAssay(sobj_filt) <- "RNA"
 
 ### Step 6.6 - Quantify dropout: ADT-positive but RNA-zero cells
 
-For each marker, find cells that are clearly protein-positive (ADT > threshold) but have zero RNA counts. These are the cells that would be misannotated by RNA-only analysis.
+For each marker, find cells that are clearly protein-positive (ADT \> threshold) but have zero RNA counts. These are the cells that would be misannotated by RNA-only analysis.
 
 ```{r}
 DefaultAssay(sobj_filt) <- "ADT"
@@ -507,14 +487,13 @@ for (n in c(1, 2, 3, 5)) {
 cat("Rule of thumb: with 80% per-marker dropout, you need >= 3 independent\n")
 cat("markers in the panel to reduce misannotation below 50%.\n")
 ```
-
 :::
 ::::
 
 ::: {.callout-tip icon="false" collapse="true"}
 ### ANSWER
 
-Single-marker decisions: up to 80% misannotated for cells whose RNA dropped out. The script prints the arithmetic for 1, 2, 3, 5 independent markers (each with 80% dropout): rule P(all drop) = 0.8^N. So 64%, 51%, 33% with 2, 3, 5 markers respectively. Annotation should never depend on a single marker for a high-dropout gene. ADT rescues because protein dropout is near zero.
+Single-marker decisions: up to 80% misannotated for cells whose RNA dropped out. The script prints the arithmetic for 1, 2, 3, 5 independent markers (each with 80% dropout): rule P(all drop) = 0.8\^N. So 64%, 51%, 33% with 2, 3, 5 markers respectively. Annotation should never depend on a single marker for a high-dropout gene. ADT rescues because protein dropout is near zero.
 
 LIVE DEMO:
 
@@ -523,7 +502,6 @@ for (n in 1:5) cat(sprintf("N=%d -> %.1f%% still miss\n", n, 0.8^n*100))
 ```
 
 PLOT / OUTPUT: Console output
-
 :::
 
 ### Step 6.7 - Digital gating
@@ -561,7 +539,7 @@ DefaultAssay(sobj_filt) <- "RNA"
 
 ### Step 6.7b - Silent failure: DefaultAssay forgotten between calls
 
-A function call that "works" on the wrong assay produces a silent error. 
+A function call that "works" on the wrong assay produces a silent error.
 
 - `FeaturePlot("CD4")` with `DefaultAssay = "RNA"` plots the CD4 RNA gene.
 - `FeaturePlot("CD4")` with `DefaultAssay = "ADT"` plots the CD4 protein.
@@ -599,12 +577,12 @@ p_as_adt <- FeaturePlot(sobj_filt, "CD4", min.cutoff = "q05") +
 p_as_rna | p_as_adt
 DefaultAssay(sobj_filt) <- "RNA"
 ```
+
 :::: question
 ::: {.callout-tip icon="false"}
-## QUESTION 6.7b 
+## QUESTION 6.7b
 
 Both plots rendered, and at a glance they can look almost the same. The zero-rate numbers printed above tell a different story. If you saved one of these plots as a figure for a paper without checking `DefaultAssay` first, which one would you have, and would a reader be able to tell from the figure alone that 'CD4' meant something different in each panel?
-
 :::
 ::::
 
@@ -626,7 +604,6 @@ FeaturePlot(sobj_filt, "CD4") + ggtitle("CD4 mRNA (RNA)")
 ```
 
 PLOT / OUTPUT: Two `FeaturePlots` side by side, one per assay, distinct titles; the zero-rate numbers explain what the plots alone do not show.
-
 :::
 
 ### Step 6.7c - Spot the bug
@@ -642,18 +619,13 @@ adt_markers <- FindMarkers(sobj_filt, ident.1 = "CD4Tcell",
 
 Your answer:
 
-**REVEAL:** the call asks for markers of CD4 T cells but DefaultAssay is RNA.
-It returns RNA markers, not ADT markers. The output is correct for RNA but
-does not answer the question "which proteins distinguish CD4 T cells".
-Either set `DefaultAssay = "ADT"` first, or pass `assay = "ADT"` inside the
-`FindMarkers` call. The `min.pct = 0.25` is also wrong for ADT (designed for
-sparse RNA); for ADT use a value like 0.5 or 0.0 with `logfc.threshold`.
+**REVEAL:** the call asks for markers of CD4 T cells but DefaultAssay is RNA. It returns RNA markers, not ADT markers. The output is correct for RNA but does not answer the question "which proteins distinguish CD4 T cells". Either set `DefaultAssay = "ADT"` first, or pass `assay = "ADT"` inside the `FindMarkers` call. The `min.pct = 0.25` is also wrong for ADT (designed for sparse RNA); for ADT use a value like 0.5 or 0.0 with `logfc.threshold`.
 
 ### Step 6.8 - When gating makes no biological sense: a swapped channel
 
 A swapped or mislabeled channel runs perfectly. CLR normalizes it, `FeaturePlot` draws it, gating gates it. Nothing errors. The only signal is that the biology is impossible. The defense is to cross-check each protein against an independent label (its RNA marker).
 
-Each protein should correlate with its own RNA gene across cells. 
+Each protein should correlate with its own RNA gene across cells.
 
 A canonical marker with rho near 0 is a mislabeled channel.
 
@@ -680,7 +652,7 @@ for (a in names(check_pairs)) {
 
 :::: question
 ::: {.callout-tip icon="false"}
-## QUESTION 6.8: 
+## QUESTION 6.8:
 
 Two ADT channels show rho near 0 against their own RNA gene, while the cross pair is high. Confirm the swap with the visual below.
 
@@ -717,7 +689,6 @@ FeatureScatter(sobj_filt, "CD14", "CD19") + ggtitle("RNA CD14 vs RNA CD19")
 ```
 
 PLOT / OUTPUT: Two scatter plots side by side. Healthy: ADT and RNA scatters match. With a swap: they diverge
-
 :::
 
 - `v5-safe`: rebuild the ADT assay from its count matrix with corrected names.
@@ -784,8 +755,13 @@ sobj_filt <- ScaleData(
 
 With 24 proteins, requesting 20 PCs triggers a Seurat warning about computing too many singular values via truncated SVD. Two fixes both work:
 
-- (a) reduce npcs to 15 (still captures the structure), or
-- (b) pass approx = FALSE to use exact SVD.
+- 
+
+  (a) reduce npcs to 15 (still captures the structure), or
+
+- 
+
+  (b) pass approx = FALSE to use exact SVD.
 
 We use (a) because 15 PCs is enough signal for 24 proteins.
 
@@ -827,7 +803,7 @@ cat("WNN complete. New reduction: wnn.umap\n")
 
 ### Step 6.10 - RNA-only UMAP vs WNN UMAP
 
-WNN does not necessarily move every cell type to a visually different region; UMAP layouts can rotate or mirror between runs even when the underlying neighborhoods barely change. The two panels below can look similar at first glance. What actually matters is whether the set of cells grouped together changed, not whether the picture looks different. 
+WNN does not necessarily move every cell type to a visually different region; UMAP layouts can rotate or mirror between runs even when the underlying neighborhoods barely change. The two panels below can look similar at first glance. What actually matters is whether the set of cells grouped together changed, not whether the picture looks different.
 
 **Step 6.11c** (later) checks this directly per cell-type via a cross-table; here, a quick clustering comparison gives a first read before that.
 
@@ -872,7 +848,6 @@ p_rna | p_wnn
 ## QUESTION 6.10
 
 If the median agreement above is high (cells mostly stay grouped the same way) but the two UMAP layouts still look visually different (different rotation, different relative positions), what does that tell you about reading UMAP plots side by side versus comparing cluster membership directly?
-
 :::
 ::::
 
@@ -889,7 +864,6 @@ median(best_match_frac)   # fraction of cells staying grouped together
 ```
 
 PLOT / OUTPUT: The agreement_tab cross-table and the median agreement number, alongside the two UMAP panels
-
 :::
 
 ### Step 6.11 - Per-cell modality weights
@@ -917,10 +891,9 @@ ggplot(sobj_filt@meta.data, aes(x = RNA.weight, fill = singler_label_top)) +
 
 :::: question
 ::: {.callout-tip icon="false"}
-## QUESTION 6.11 
+## QUESTION 6.11
 
 Which cell types in this dataset rely most on ADT (low RNA weight)? Why does that match what you know about RNA dropout for their defining markers?
-
 :::
 ::::
 
@@ -938,8 +911,7 @@ ggplot(sobj_filt@meta.data, aes(x = RNA.weight, fill = singler_label_top)) +
   facet_wrap(~singler_label_top)
 ```
 
-PLOT / OUTPUT: Histogram of RNA.weight faceted by cell type, with a dashed line at 0.5. T cells peak left of the line, monocytes peak right of it. 
-
+PLOT / OUTPUT: Histogram of RNA.weight faceted by cell type, with a dashed line at 0.5. T cells peak left of the line, monocytes peak right of it.
 :::
 
 ### Step 6.11b - RNA.weight extremes per cluster: are any clusters protein-driven?
@@ -959,7 +931,7 @@ cat("RNA.weight per cluster (sorted; low = protein-driven):\n")
 print(rna_w_by_cluster)
 ```
 
-Flag clusters where median RNA.weight < 0.3 (protein dominates)
+Flag clusters where median RNA.weight \< 0.3 (protein dominates)
 
 ```{r}
 protein_driven <- rna_w_by_cluster$seurat_clusters[rna_w_by_cluster$median_rna_w < 0.3]
@@ -973,17 +945,16 @@ if (length(protein_driven) > 0) {
 
 :::: question
 ::: {.callout-tip icon="false"}
-## QUESTION 6.11b 
+## QUESTION 6.11b
 
 For the most protein-driven cluster, what fraction of its cells were assigned to a T-cell label by SingleR? The block below computes the answer and applies the decision rule.
-
 :::
 ::::
 
 ::: {.callout-tip icon="false" collapse="true"}
 ### ANSWER
 
-Computed in the script. Decision thresholds: >=70% T-cell -> expected RNA-dropout behavior, no action; 30-70% -> mixed, inspect ADT proteins driving the dominance; <30% -> technical artifact, check ADT batch, CLR margin, isotype background. The script applies the rule automatically and prints the verdict.
+Computed in the script. Decision thresholds: \>=70% T-cell -\> expected RNA-dropout behavior, no action; 30-70% -\> mixed, inspect ADT proteins driving the dominance; \<30% -\> technical artifact, check ADT batch, CLR margin, isotype background. The script applies the rule automatically and prints the verdict.
 
 LIVE DEMO:
 
@@ -1061,7 +1032,7 @@ sobj_filt <- FindClusters(sobj_filt,
 sobj_filt$wnn_clusters <- Idents(sobj_filt)
 ```
 
-Cells where ADT dominated WNN (RNA.weight < 0.3)
+Cells where ADT dominated WNN (RNA.weight \< 0.3)
 
 ```{r}
 low_rna_mask <- sobj_filt$RNA.weight < 0.3
@@ -1077,7 +1048,6 @@ if (n_low >= 20) {
   ))
 }
 ```
-
 
 :::: question
 ::: {.callout-tip icon="false"}
@@ -1140,15 +1110,13 @@ if (n_low >= 20) {
   }
 }
 ```
-
-
 :::
 ::::
 
 ::: {.callout-tip icon="false" collapse="true"}
 ### ANSWER
 
-Decision rule from the script: cross-check marker expression in the disputed cells. The cell type whose markers (RNA + ADT) fire in >=50% of cells wins. If two cell types tie, mark the cells as ambiguous (likely undetected doublets) and exclude them from downstream group comparisons. Do NOT pick the WNN label by default; do NOT pick the SingleR label by default. Let the markers adjudicate.
+Decision rule from the script: cross-check marker expression in the disputed cells. The cell type whose markers (RNA + ADT) fire in \>=50% of cells wins. If two cell types tie, mark the cells as ambiguous (likely undetected doublets) and exclude them from downstream group comparisons. Do NOT pick the WNN label by default; do NOT pick the SingleR label by default. Let the markers adjudicate.
 
 LIVE DEMO:
 
@@ -1160,7 +1128,6 @@ tab
 ```
 
 PLOT / OUTPUT: Console cross-table.
-
 :::
 
 ### Step 6.12 - Condition comparison: Healthy vs COVID-19
@@ -1250,7 +1217,7 @@ if (n_h >= 2 && n_c >= 2) {
 
 Power floor: with `n=3 vs n=4` and `Wilcoxon` at `alpha=0.05`, the smallest detectable standardized effect size (Cohen's d) is roughly 1.5 for 80% power.
 
-**In plain terms:** only proportion differences larger than ~1.5 standard deviations of the donor-level distribution are detectable. Any `p-value` here is exploratory, not confirmatory.
+**In plain terms:** only proportion differences larger than \~1.5 standard deviations of the donor-level distribution are detectable. Any `p-value` here is exploratory, not confirmatory.
 
 ```{r}
 cat("\n--- Power note ---\n")
@@ -1308,29 +1275,24 @@ if (exists("wt")) {
 saveRDS(sobj_filt, "outputs/sobj_annotated.rds")
 cat("Annotated object saved: outputs/sobj_annotated.rds\n")
 ```
-
-
 :::
 ::::
 
 ::: {.callout-tip icon="false" collapse="true"}
 ### ANSWER
 
-Exploratory only. With n=7 donors total, a p-value in this range is hypothesis-generating and cannot support a published claim of difference. Report: n per group, direction of the difference, effect size, statement that confirmatory analysis requires a larger cohort. The script estimates the n needed for 80% power at the observed effect size (rule of thumb n ~ 16 / d^2).
+Exploratory only. With n=7 donors total, a p-value in this range is hypothesis-generating and cannot support a published claim of difference. Report: n per group, direction of the difference, effect size, statement that confirmatory analysis requires a larger cohort. The script estimates the n needed for 80% power at the observed effect size (rule of thumb n \~ 16 / d\^2).
 
 LIVE DEMO: See **Step 6.12b** (@sec-step6.12b) in the script: it auto-applies the decision matrix.
 
 PLOT / OUTPUT: Console output with automatic verdict.
-
 :::
-
 
 :::: question
 ::: {.callout-tip icon="false"}
 ## QUESTION 6.12
 
 How would you formally test the group-level difference given only 3 healthy vs 4 COVID-19 donors? What is the minimum reporting standard you would accept in a paper?
-
 :::
 ::::
 
@@ -1346,26 +1308,25 @@ subset_df <- per_donor %>% filter(singler_label == target_lbl)
 wilcox.test(prop ~ condition, data = subset_df, exact = FALSE)
 print(subset_df[, c("donor_id", "condition", "prop")])
 ```
+
 PLOT / OUTPUT: Per-donor proportion boxplot with individual donors as points, colored by condition.
-
 :::
-
 
 ## **Block 7 - Closing** {#sec-block7}
 
 ::: content-box-gray
 Final view of the annotated proportions and the R session record. The pitfalls reference table lives in the instructor's guide PDF.
-::: 
+:::
 
 ### Step 7.1 - Four-panel summary
 
 Four results that together summarize the course, reusing objects already built in Blocks 5 and 6 rather than recomputing anything:
-  
-1. Final WNN UMAP with confident annotation: the end state of the RNA + ADT integration.
-2. Top canonical markers per cell type: the evidence behind the labels in panel 1.
-3. Cell type proportions by condition: the biological comparison the whole pipeline was built to support.
-4. CD4 in RNA vs ADT: the single clearest illustration from the course of why the protein layer earns its place in the analysis.
-     
+
+1.  Final WNN UMAP with confident annotation: the end state of the RNA + ADT integration.
+2.  Top canonical markers per cell type: the evidence behind the labels in panel 1.
+3.  Cell type proportions by condition: the biological comparison the whole pipeline was built to support.
+4.  CD4 in RNA vs ADT: the single clearest illustration from the course of why the protein layer earns its place in the analysis.
+
 ```{r}
 p_final_umap <- DimPlot(sobj_filt, reduction = "wnn.umap",
                         group.by = "singler_label_clean",
@@ -1412,10 +1373,9 @@ p_final_cd4 <- p_cd4_rna | p_cd4_adt
 
 (p_final_umap | p_final_markers) / (p_final_props | p_final_cd4)
 ```
-     
+
 ### Step 7.2 - Session info
 
 ```{r}
 sessionInfo()
 ```
-

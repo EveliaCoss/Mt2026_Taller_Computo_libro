@@ -1,0 +1,20 @@
+# Extra related to biological Questions
+
+## **Block 9 -** Extra (optional, post-class) - cascade challenges
+
+Optional self-study. Each challenge below describes a chain of two or three linked bugs, where fixing one surfaces the next. The goal is to practise climbing the chain: when a downstream output is wrong, what upstream check would have caught it?
+
+Treat each challenge as a thought exercise. Try to write the diagnostic and fix as comments BEFORE running any code. The reveal at the end of each challenge explains the chain.
+
+### Challenge 9.1 - The disappearing T-cell subset
+
+Symptom (downstream): SingleR returns "CD4 T cell" for less than 5 percent of cells in a PBMC dataset where flow cytometry says CD4 T cells are 25 percent. ADT panel shows CD4 protein expressed normally.
+
+Diagnostic chain (each step surfaces the next):
+
+1. Compare CD4 ADT-positive cells vs CD4 RNA-positive cells.
+2. If ADT-positive cells are abundant but RNA-positive cells are rare, the cause is RNA dropout (Block 6 territory). Stop here.
+3. If RNA-positive cells are also abundant, check the SingleR reference: does it have a distinct "CD4 T cell" label, or only "T cell"?
+4. If the reference is correct, check DefaultAssay and the layer SingleR ran on (data vs counts).
+
+Try the diagnostic on this object. Write your prediction first.
