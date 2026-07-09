@@ -1,69 +1,88 @@
-# General information {.unnumbered}
+# Información general {.unnumbered}
 
 :::: {.panel-tabset group="globalInfo"}
-## About the course 📌
+## Contenido del curso 📌
 
 ::: {style="text-align: center;"}
-**PRACTICAL MULTILINGUAL ONLINE COURSE**
+**PLAN DE CLASES**
 
-[**Solving problems focused**]{.text-blue}
+[**Taller de Cómputo**]{.text-blue}
 :::
 
-- **Date:** 2nd July, 2026 (Thursday)
-- **Meeting Time Conversion:**
-  - **Mexico City, Mexico**
-    - Time zone: GMT‑6
-    - Time: 10:00 AM
-  - **Brasília, Brazil**
-    - Time zone: GMT‑3
-    - Equivalent time: 01:00 PM
-- **Duration:** 3 hours
-- **Level:** Intermediate
-- **Register to receive the pre-course instructions:** [Google form](https://docs.google.com/forms/d/e/1FAIpQLSefUomOjP_j8vjOcPbGMwq9MNDOYB0zIHfEV_WMBqhmFxTelQ/viewform)
+- **Duración:** 10 de agosto, 2026 - 27 de noviembre, 2026 (15 semanas)
+- **Semestre:** 1ero
+- **Periodo:** 2027-1
+- **Días:** martes y jueves
+- **Horario:** 3 a 5 pm
+- **Créditos:** 4
+- **Nivel:** Básico
+- **Aula:** V304
+- **Día inhábil:** martes 15 de septiembre, 2026
+- **Aula:** V304
+- **Link de registro:** Google form
 
-#### **Instructors:**
+#### **Instructora:**
 
-- **Thais Crippa de Oliveira, PhD** - Posdoctoral Researcher at UNICAMP, Brazil
-- **Evelia Lorena Coss-Navarrete, PhD** - Associate Professor at ENES, Juriquilla-UNAM, México. [Web page](https://eveliacoss.github.io/)
+- **Dra. Evelia Lorena Coss-Navarrete** - Profesora de asignatura de la ENES, Juriquilla-UNAM, México. [Web page](https://eveliacoss.github.io/)  ([ecossnav\@gmail.com](mailto:ecossnav@gmail.com))
 
-Assistance:
+### 🎯 Objetivo principal
 
-- **Juliana Pinto** - PhD student, UFPA, Brazil
-- **Adriana da Silva, PhD** - Post-doc, UNIFESP, Brazil
+- Identificar y examinar los lenguajes Linux/Unix.
+- Resolver problemas básicos de forma general mediante un lenguaje de programación.
 
-### 🎯 General Goal
+### ✅ Objetivos particulares
 
-Enable participants to navigate a multimodal dataset (RNA + ADT), perform essential preprocessing, and interpret basic results without getting lost in technical details.
+- Definir y utilizar el ambiente Linux/Unix.
+- Utilizar los conceptos básicos de programación.
+- Implementar y computar algunos programas básicos de interés en algún lenguaje de programación libre.
 
-### ✅ Expected Outcomes
+### **Citar y reutilizar el material del curso**
 
-- Confidence to open and explore multimodal data.
-- Ability to run a basic Seurat pipeline.
-- Understanding of how ADT complements RNA.
-- Awareness of research questions and limitations in CITE‑seq.
+Los datos del curso pueden reutilizarse y adaptarse libremente con la debida atribución. Todos los datos de estos repositorios están sujetos a la licencia [Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)](https://creativecommons.org/licenses/by-nc-sa/4.0/).
 
-![](flyer/Survival%20Course_ENG.png){fig-align="center" width="405"}
+## Requisitos y Código de conducta
 
-### Cite and reuse course material
+### Previos para el curso 
 
-Course data may be freely reused and adapted with proper attribution. All course data from these repositories is subject to the [Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)](https://creativecommons.org/licenses/by-nc-sa/4.0/).
+- Ninguno
+- Completar el registro
 
-## Prerequisites for the Course
+### Para presentar examen
 
-- Verify that all required R packages are installed, following the instructions provided in [Get ready for the workshop](scripts/scSurvival_PreCourse_Setup.html).
-- Ensure you have Git, R, RStudio, and Bash properly installed and working on your computer.
-- Confirm you have access to a stable internet connection for repository synchronization and package downloads.
+Tendrán derecho a presentar exámenes parciales aquellos estudiantes que hayan cubierto por lo menos el 80% de asistencia.
+
+### Código de conducta
+
+La conducta del profesorado y alumnado del curso será acorde con los principios y valores especificados en el Código de Ética de la Universidad Nacional Autónoma de México aprobado el 1 de julio del 2015 por el Consejo Universitario, en especial en lo referente a la integridad y honestidad académica. “La integridad y la honestidad académica implican: Citar las fuentes de ideas, textos, imágenes, gráficos u obras artı́sticas que se empleen en el trabajo universitario, y no sustraer o tomar la información generada por otros o por sı́ mismo sin señalar la cita correspondiente u obtener su consentimiento y acuerdo. No falsificar, alterar, manipular, fabricar, inventar o fingir la autenticidad de datos, resultados, imágenes o información en los trabajos académicos, proyectos de investigación, exámenes, ensayos, informes, reportes, tesis, audiencias, procedimientos de orden disciplinario o en cualquier documento inherente a la vida académica universitaria” (**Gaceta UNAM, 30 de julio 2015**).
 
 ## Agenda 📆
 
-| Topic                                             | Duration | Instructor   |
-|---------------------------------------------------|----------|--------------|
-| Quick Recap: Introduction to scRNA‑seq + CITE-seq | 20 min   | Evelia Coss  |
-| VirtualBox setup and usage                        | 20 min   | Thais Crippa |
-| 🎮 Kahoot Quiz: Introduction + Setup              | 10 min   | Both         |
-| About Dataset                                     | 10 min   | Evelia Coss  |
-| **scRNA‑seq — Errors & Survival**                 | 50 min   | Thais Crippa |
-| 🎮 Kahoot Quiz: scRNA‑seq Basics                  | 10 min   | Thais Crippa |
-| **CITE‑seq — Errors & Survival**                  | 50 min   | Evelia Coss  |
-| 🎮 Kahoot Quiz: CITE‑seq Basics                   | 10 min   | Evelia Coss  |
+| Temas | Duración | Instructora |
+|-------|----------|-------------|
+|       |          |             |
+|       |          |             |
+|       |          |             |
+|       |          |             |
+|       |          |             |
+|       |          |             |
+|       |          |             |
+|       |          |             |
+
+## Referencias
+
+### Bibliografía básica
+
+- Wang, K. C. (2018). Systems Programming in Unix/Linux (pp. 1-452). Springer.
+- Jain, M. (2018). Beginning Modern Unix: Learn to Live Comfortably in a Modern Unix Environment. Apress.
+- Wang, P. S. (2018). Mastering Modern Linux. Chapman and Hall/CRC.
+- Pine, D. J. (2019). Introduction to Python for science and engineering. CRC press.
+- Johansson, R. (2015). Numerical Python: A Practical Techniques Approach for Industry. Apress.
+- Mehta, H. K. (2015). Mastering Python scientific computing. Packt Publishing Ltd.
+
+### Libros de apoyo
+
+- Cannon, J. (2014). Linux para principiantes: Una introducción al sistema operativo Linux y la línea de comandos. CreateSpace Independent Publishing Platform
+- Belmar, A. (2020). Consola GNU/Linux - Vol.1: Gestión de archivos, aplicaciones y procesos. Creative Andina Corp.
+- Solsona, F. (2007). Manual de supervivencia en Linux. UNAM.
+
 ::::
