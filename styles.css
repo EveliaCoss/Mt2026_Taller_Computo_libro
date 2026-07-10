@@ -14,11 +14,12 @@
   text-decoration: underline; /* opcional */
 }
 
-
+/* Enlaces dentro del title block, cuando se coloca el mouse encima */
 .quarto-title-block a:hover {
   color: #ff3fc8; /* color al pasar el mouse */
 }
 
+/* Enlaces dentro del title block, al visitar el link */
 .quarto-title-block a:visited {
   color: #7c3aed; /* color cuando ya fue visitado */
 }
@@ -29,6 +30,7 @@
 .quarto-title-block .quarto-title-authors .affiliation {
   color: #071322; /* texto principal */
 }
+
 
 /* Text */
 
@@ -55,6 +57,53 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: bold;   /* fuerza negritas */
   letter-spacing: 0.5px;
 }
+
+/* ----------- bloques emergentes -------------  */
+/* Personalizar el bloque emergente */
+.tippy-box {
+  background-color: #f9f9ff !important;
+  color: #4b0082 !important;
+  border: 1px solid #aaa !important;
+  padding: 0.8em;
+  font-size: 0.9em;
+  max-width: 400px;
+  border-radius: 8px;
+  box-shadow: 0px 4px 8px rgba(0,0,0,0.2);
+}
+
+/* ----------- Marcatexto -------------  */
+
+/* Marcatexto amarillo */
+.highlight-yellow {
+  background-color: #ffff66;   /* color de marcatexto */
+  padding: 0.2em;             /* espacio interno */
+}
+
+/* Marcatexto rosa */
+.highlight-pink {
+  background-color: #ff99cc;   /* color de marcatexto */
+  padding: 0.2em;             /* espacio interno */
+}
+
+/* Marcatexto verde */
+.highlight-green {
+  background-color: #99ff99;   /* color de marcatexto */
+  padding: 0.2em;             /* espacio interno */
+}
+
+/* Marcatexto azul */
+.highlight-blue {
+  background-color: #99ccff;   /* color de marcatexto */
+  padding: 0.2em;             /* espacio interno */
+}
+
+/* ----------- Texto justificado -------------  */
+
+.justificado {
+  text-align: justify;
+  word-spacing: 0.05em;  /* ajusta espacio entre palabras */
+}
+
 
 /* ----------- Callout -------------  */
 

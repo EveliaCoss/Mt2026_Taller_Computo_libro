@@ -4,8 +4,7 @@ author: "Gapminder Analytics Group"
 format: html
 ---
 
-**Instalar Plotly directamente desde R**
-Usa el comando de reticulate:
+**Instalar Plotly directamente desde R** Usa el comando de reticulate:
 
 ```{r, eval=FALSE, echo=TRUE}
 reticulate::py_install("plotly")
@@ -14,8 +13,7 @@ reticulate::py_install("pandas")
 
 Esto instala Plotly en el mismo Python que viste en `repl_python`.
 
-**Verificar instalación**
-Vuelve a entrar al REPL:
+**Verificar instalación** Vuelve a entrar al REPL:
 
 ```{r, echo=TRUE}
 reticulate::repl_python()
