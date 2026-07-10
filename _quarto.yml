@@ -40,11 +40,13 @@ book:
   # Information
   repo-url: https://github.com/EveliaCoss/Workshop2026_scRNAseq_CITEseq_libro # link de Github
   sharing: [twitter, facebook, linkedin]
-  favicon: "enesLogo.png" # icono de la pagina en pestana
+  favicon: "flyer/logo.png" # icono de la pagina en pestana
 
 
 format:
   html:
+    crossrefs-hover: true
+    footnotes-hover: true
     toc-depth: 4
     number-depth: 3
     # css
@@ -65,6 +67,8 @@ format:
     freeze: false  # Desactivar congelamiento
 
 editor: visual
+
+bibliography: references.bib
 
 lang: es
 

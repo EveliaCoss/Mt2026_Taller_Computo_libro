@@ -61,7 +61,26 @@ div.sourceCode
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -73,7 +92,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <meta name="quarto:offset" content="./">
 <link href="./notas.html" rel="next">
 <link href="./cap7.html" rel="prev">
-<link href="./enesLogo.png" rel="icon" type="image/png">
+<link href="./flyer/logo.png" rel="icon" type="image/png">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -285,9 +304,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Tabla de contenidos</h2>
    
   <ul>
-  <li><a href="#code" id="toc-code" class="nav-link active" data-scroll-target="#code"><span class="header-section-number">D</span> Code</a></li>
+  <li><a href="#code" id="toc-code" class="nav-link active" data-scroll-target="#code"><span class="header-section-number">D</span> Code</a>
+  <ul>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references"><span class="header-section-number">D.0.1</span> References</a></li>
+  </ul></li>
   </ul>
-</nav>
+<div class="quarto-other-links"><h2>Otros Enlaces</h2><ul><li><a href="https://data.nasa.gov/"><i class="bi bi-link-45deg"></i>NASA Open Data</a></li></ul></div><div class="quarto-code-links"><h2>Enlaces de código</h2><ul><li><a href="scripts/data-import.py"><i class="bi bi-file-code"></i>Data Import Code</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -335,9 +357,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
+<p><strong>Texto con nota al pie:</strong> Este es un ejemplo de nota<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> que aparecerá como popup.</p>
 <section id="code" class="level1" data-number="D">
 <h1 data-number="D"><span class="header-section-number">D</span> Code</h1>
-<p>When you can work on your computer and when you need to work on the cluster .. source , RAM, etc. - number of samples?</p>
+<p>When you can work <span class="citation" data-cites="Cannon2014">Cannon (<a href="resources.html#ref-Cannon2014" role="doc-biblioref">2014</a>)</span> on your computer and when you need to work on the cluster .. source , RAM, etc. - number of samples?</p>
 <div class="cell">
 <details open="" class="code-fold">
 <summary>Código</summary>
@@ -383,6 +406,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </dl>
 </div>
 </div>
+<p>Comodo de texto</p>
 <pre class="text"><code>video-game-sales-r/
 ├── data/
 │   └── vgsales.csv
@@ -394,8 +418,112 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 │   └── grafica_final.png
 ├── ejercicio_videojuegos.qmd
 └── README.md</code></pre>
+<p>Python código</p>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Código</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>r <span class="op">=</span> np.arange(<span class="dv">0</span>, <span class="dv">2</span>, <span class="fl">0.01</span>)</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>theta <span class="op">=</span> <span class="dv">2</span> <span class="op">*</span> np.pi <span class="op">*</span> r</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(subplot_kw<span class="op">=</span>{<span class="st">'projection'</span>: <span class="st">'polar'</span>})</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>ax.plot(theta, r)</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>ax.set_rticks([<span class="fl">0.5</span>, <span class="dv">1</span>, <span class="fl">1.5</span>, <span class="dv">2</span>])</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>ax.grid(<span class="va">True</span>)</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="resources_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Código</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>plt.plot([<span class="dv">1</span>,<span class="dv">23</span>,<span class="dv">2</span>,<span class="dv">4</span>])</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div id="fig-plot" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-plot-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="resources_files/figure-html/fig-plot-3.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-plot-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;D.1: Plot
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<details open="" class="code-fold">
+<summary>Código</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>plt.plot([<span class="dv">1</span>,<span class="dv">23</span>,<span class="dv">2</span>,<span class="dv">4</span>])</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>plt.plot([<span class="dv">8</span>,<span class="dv">65</span>,<span class="dv">23</span>,<span class="dv">90</span>])</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div id="fig-plots" class="quarto-layout-panel">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-plots-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-layout-row">
+<div class="cell-output-display quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-plots" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div id="fig-plots-1" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-subfloat-fig figure">
+<div aria-describedby="fig-plots-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="resources_files/figure-html/fig-plots-5.png" class="img-fluid figure-img" data-ref-parent="fig-plots" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-plots-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(a) Plot 1
+</figcaption>
+</figure>
+</div>
+</div>
+<div class="cell-output-display quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-plots" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div id="fig-plots-2" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-subfloat-fig figure">
+<div aria-describedby="fig-plots-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="resources_files/figure-html/fig-plots-6.png" class="img-fluid figure-img" data-ref-parent="fig-plots" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-plots-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(b) Plot 2
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-plots-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;D.2: Plots
+</figcaption>
+</figure>
+</div>
+<p>For example, see <a href="#fig-plot" class="quarto-xref">Figura&nbsp;<span>D.1</span></a>.</p>
+<p>See <a href="#fig-plots" class="quarto-xref">Figura&nbsp;<span>D.2</span></a> for examples. In particular, <a href="#fig-plots-2" class="quarto-xref">Figura&nbsp;<span>D.2 (b)</span></a>.</p>
+<section id="references" class="level3" data-number="D.0.1">
+<h3 data-number="D.0.1" class="anchored" data-anchor-id="references"><span class="header-section-number">D.0.1</span> References</h3>
+<div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="ref-Cannon2014" class="csl-entry" role="listitem">
+Cannon, J. 2014. <em>Linux Para Principiantes: Una Introducción Al
+Sistema Operativo Linux y La Línea de Comandos</em>. CreateSpace
+Independent Publishing Platform.
+</div>
+</div>
 
 
+</section>
+</section>
+<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn1"><p>Aquí va el contenido de la nota al pie.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
 </section>
 
 </main> <!-- /main -->

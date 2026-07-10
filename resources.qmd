@@ -6,11 +6,25 @@ date: today
 categories: ["Semestre 2026-2", "Materia: Bioestadística", "Institución: UNAM"]
 keywords: ["probabilidad", "estadística", "transcriptómica", "curso UNAM"]
 description: "Curso intensivo con enfoque en análisis transcriptómico y reproducibilidad"
+format:
+  html:
+    other-links:
+      - text: NASA Open Data
+        href: https://data.nasa.gov/
+    code-links:
+      - text: Data Import Code
+        icon: file-code
+        href: "scripts/data-import.py"
 ---
+
+
+**Texto con nota al pie:** Este es un ejemplo de nota[^resources-1] que aparecerá como popup.
+
+[^resources-1]: Aquí va el contenido de la nota al pie.
 
 # Code
 
-When you can work on your computer and when you need to work on the cluster .. source , RAM, etc. - number of samples?
+When you can work @Cannon2014 on your computer and when you need to work on the cluster .. source , RAM, etc. - number of samples?
 
 ```{r}
 # Notas
@@ -39,6 +53,8 @@ penguins |>                                      # <1>
 1.  Take `penguins`, and then,
 2.  add new columns for the bill ratio and bill area.
 
+Comodo de texto
+
 ``` text
 video-game-sales-r/
 ├── data/
@@ -52,3 +68,55 @@ video-game-sales-r/
 ├── ejercicio_videojuegos.qmd
 └── README.md
 ```
+
+Python código
+
+``` {python}
+import numpy as np
+import matplotlib.pyplot as plt
+
+r = np.arange(0, 2, 0.01)
+theta = 2 * np.pi * r
+fig, ax = plt.subplots(subplot_kw={'projection': 'polar'})
+ax.plot(theta, r)
+ax.set_rticks([0.5, 1, 1.5, 2])
+ax.grid(True)
+plt.show()
+```
+
+
+```{python}
+#| label: fig-plot
+#| fig-cap: "Plot"
+
+import matplotlib.pyplot as plt
+plt.plot([1,23,2,4])
+plt.show()
+```
+
+```{python}
+#| label: fig-plots
+#| fig-cap: "Plots" 
+#| fig-subcap:
+#|   - "Plot 1"
+#|   - "Plot 2" 
+#| layout-ncol: 2
+
+import matplotlib.pyplot as plt
+plt.plot([1,23,2,4])
+plt.show()
+
+plt.plot([8,65,23,90])
+plt.show()
+```
+
+For example, see @fig-plot.
+
+See @fig-plots for examples. In particular, @fig-plots-2.
+
+
+
+### References
+
+::: {#refs}
+:::
