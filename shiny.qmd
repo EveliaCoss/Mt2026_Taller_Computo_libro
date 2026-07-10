@@ -1,0 +1,42 @@
+---
+title: "Indicadores de Desarrollo"
+author: "Gapminder Analytics Group"
+runtime: shiny
+format: html
+---
+
+```{r}
+library(shiny)
+library(plotly)
+
+# Datos de ejemplo
+df <- data.frame(
+  year = rep(2000:2010, 5),
+  continent = rep(c("Asia","Europe","Africa","Americas","Oceania"), each=11),
+  lifeExp = runif(55, 40, 80)
+)
+
+ui <- fluidPage(
+  titlePanel("Life Expectancy Dashboard"),
+  sidebarLayout(
+    sidebarPanel(
+      selectInput("continent", "Selecciona continente:",
+                  choices = unique(df$continent))
+    ),
+    mainPanel(
+      plotlyOutput("plot")
+    )
+  )
+)
+
+server <- function(input, output) {
+  output$plot <- renderPlotly({
+    d <- subset(df, continent == input$continent)
+    plot_ly(d, x = ~year, y = ~lifeExp, type = 'scatter', mode = 'lines+markers')
+  })
+}
+
+shinyApp(ui, server)
+
+```
+

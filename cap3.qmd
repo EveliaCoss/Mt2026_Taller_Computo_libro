@@ -1,0 +1,62 @@
+# Introducción a Linux/Unix
+
+::: content-box-gray
+**Objetivos:**
+
+1.  Comprender la historia y filosofía de Linux/Unix
+2.  Entender qué es GNU y su importancia en el software libre
+3.  Diferenciar entre Linux, GNU y GNU/Linux
+4.  Reconocer las principales versiones y distribuciones de GNU/Linux
+5.  Valorar la importancia del software libre y de código abierto
+6.  Aplicar este conocimiento en la selección de sistemas operativos
+:::
+
+## ¿Qué es UNIX?
+
+- Sistema operativo (SO) creado por **Ken Thompson y Dennis Ritchie** de la empresa *Bell Laboratories* en 1969.
+- SO multitarea y multiusuario.
+
+## GNU/Linux
+
+- En 1983 **Richard Stallman** lideró la iniciativa [GNU](https://www.gnu.org/) (GNU's Not Unix), SO compatible con UNIX de libre distribución y acceso sin restricciones al código fuente.
+- En 1991 **Linus Torvalds** creó su propio [kernel](https://linuxjourney.com/lesson/kernel-overview) (Linux), que es la parte del SO que permite la comunicación con los componentes de Hardware. Este kernel fue distribuido de forma libre y gratuita.
+- Ambos proyectos se juntaron y se creó **GNU/Linux**
+
+[![](figures/GNU_LIN1.png){fig-align="center"}](https://rsg-ecuador.github.io/unix.bioinfo.rsgecuador/content/Curso_basico/01_Unix_GNU-Linux/1_Conceptos_Unix_GNU_Linux.html)
+
+## Filosofía GNU/Linux
+
+- Los usuarios son libres de **ejecutar, copiar, distribuir, estudiar, cambiar y mejorar** el software.
+- El [software libre](https://www.gnu.org/philosophy/free-sw.html) se refiere a las libertades mencionadas, no al precio.
+- ["open source"](https://opensource.org/) vs ["free software"](https://www.gnu.org/philosophy/free-sw.html).
+
+## Ubuntu
+
+- Una de las distribuciones de GNU/Linux más populares.
+- Está basada en [Debian](https://www.debian.org/) y fue desarrollada por la empresa [*Canonical*](https://canonical.com/)
+- Facilidad de uso e instalación.
+- Interfaz de usuario amigable.
+
+[![](figures/ubuntu.png){fig-align="center" width="205"}](https://rsg-ecuador.github.io/unix.bioinfo.rsgecuador/content/Curso_basico/01_Unix_GNU-Linux/1_Conceptos_Unix_GNU_Linux.html)
+
+## Shell / Bash / Bash Shell
+
+- La [*shell*](https://en.wikipedia.org/wiki/Unix_shell) es el programa que provee una **interfaz de línea de comandos (CLI)**, que permite la comunicación entre el usuario y el SO.
+- La mayoría de distribuciones de Linux tienen por defecto [*bash*](https://www.gnu.org/software/bash/) ("Bourne Again SHell") como *shell*. Hay [otros tipos de shell](https://www.educba.com/types-of-shells-in-linux/) como **sh, csh, tcsh, ksh, zsh**, entre otras.
+
+![](figures/bash.png){fig-align="center" width="363"}
+
+::: callout-note
+Bash es un intérprete de comandos que te da el poder de hacer tareas simples rápidamente.
+:::
+
+## Material suplementario
+
+Si quieren aprender temas más sobre UNIX, GNU/Linux, bash, emulador de terminal y otros tema, pueden explorar los siguientes recursos, que son de acceso libre:
+
+- Kross, S. (2017). *The unix workbench*. Leanpub. <https://leanpub.com/unix>
+- Ross, A. (2019). *The Ultimate Linux Newbie Guide*. <https://linuxnewbieguide.org/>
+- Shotts, W. (2019). *The Linux command line: a complete introduction*. No Starch Press. <http://www.linuxcommand.org/tlcl.php/index.php>
+- Linux Journey. (2020). Linux Journey. <https://linuxjourney.com/>
+- GNU. (2020). GNU. <https://www.gnu.org/>
+- [GNU/Linux para bioinformatica](https://rsg-ecuador.github.io/unix.bioinfo.rsgecuador/content/Curso_basico/01_Unix_GNU-Linux/1_Conceptos_Unix_GNU_Linux.html)

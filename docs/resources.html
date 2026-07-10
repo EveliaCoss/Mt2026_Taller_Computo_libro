@@ -7,8 +7,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Evelia Coss">
+<meta name="keywords" content="probabilidad, estadística, transcriptómica, curso UNAM">
+<meta name="description" content="Curso intensivo con enfoque en análisis transcriptómico y reproducibilidad">
 
-<title>Taller de Cómputo</title>
+<title>Apéndice C — Bioinformática y Estadística 2 – Taller de Cómputo</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -24,6 +26,41 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -34,7 +71,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./temario.html" rel="next">
+<link href="./notas.html" rel="next">
+<link href="./cap7.html" rel="prev">
 <link href="./enesLogo.png" rel="icon" type="image/png">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
@@ -87,7 +125,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">Información general</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./cap6.html">Apéndices</a></li><li class="breadcrumb-item"><a href="./resources.html"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">Bioinformática y Estadística 2</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Buscar" onclick="window.quartoOpenSearch();">
@@ -140,7 +178,7 @@ ul.task-list li input[type="checkbox"] {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link active">
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Información general</span></a>
   </div>
 </li>
@@ -225,7 +263,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./resources.html" class="sidebar-item-text sidebar-link">
+  <a href="./resources.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">Bioinformática y Estadística 2</span></span></a>
   </div>
 </li>
@@ -247,42 +285,39 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Tabla de contenidos</h2>
    
   <ul>
-  <li><a href="#información-general" id="toc-información-general" class="nav-link active" data-scroll-target="#información-general">Información general</a></li>
+  <li><a href="#code" id="toc-code" class="nav-link active" data-scroll-target="#code"><span class="header-section-number">D</span> Code</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default">
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./cap6.html">Apéndices</a></li><li class="breadcrumb-item"><a href="./resources.html"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">Bioinformática y Estadística 2</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Taller de Cómputo</h1>
-</div>
+<h1 class="title">Apéndice C — Bioinformática y Estadística 2</h1>
+<p class="subtitle lead">Aplicaciones aeroespaciales</p>
+  <div class="quarto-categories">
+    <div class="quarto-category">Semestre 2026-2</div>
+    <div class="quarto-category">Materia: Bioestadística</div>
+    <div class="quarto-category">Institución: UNAM</div>
+  </div>
+  </div>
 
 
-<div class="quarto-title-meta-author">
-  <div class="quarto-title-meta-heading">Autor/a</div>
-  <div class="quarto-title-meta-heading">Afiliación</div>
-  
-    <div class="quarto-title-meta-contents">
-    <p class="author"><a href="https://eveliacoss.github.io/">Evelia Coss, PhD</a> <a href="mailto:ecosnav@gmail.com" class="quarto-title-author-email"><i class="bi bi-envelope"></i></a> <a href="https://orcid.org/https://orcid.org/0000-0002-7087-2977" class="quarto-title-author-orcid"> <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg=="></a></p>
-  </div>
-  <div class="quarto-title-meta-contents">
-        <p class="affiliation">
-            <a href="https://www.enesjuriquilla.unam.mx/">
-            ENES, Juriquilla - UNAM
-            </a>
-          </p>
-      </div>
-  </div>
 
 <div class="quarto-title-meta">
 
-      
+    <div>
+    <div class="quarto-title-meta-heading">Autor/a</div>
+    <div class="quarto-title-meta-contents">
+             <p>Evelia Coss </p>
+          </div>
+  </div>
+    
     <div>
     <div class="quarto-title-meta-heading">Fecha de publicación</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">8 de julio de 2026</p>
+      <p class="date">9 de julio de 2026</p>
     </div>
   </div>
   
@@ -290,152 +325,75 @@ ul.task-list li input[type="checkbox"] {
   </div>
   
 
+<div>
+  <div class="keywords">
+    <div class="block-title">Palabras clave</div>
+    <p>probabilidad, estadística, transcriptómica, curso UNAM</p>
+  </div>
+</div>
 
 </header>
 
 
-<section id="información-general" class="level1 unnumbered">
-<h1 class="unnumbered">Información general</h1>
-<div class="tabset-margin-container"></div><div class="panel-tabset" data-group="globalInfo">
-<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true" href="" aria-current="page">Contenido del curso 📌</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false" href="">Requisitos y Código de conducta</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-3" role="tab" aria-controls="tabset-1-3" aria-selected="false" href="">Agenda 📆</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-4-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-4" role="tab" aria-controls="tabset-1-4" aria-selected="false" href="">Referencias</a></li></ul>
-<div class="tab-content" data-group="globalInfo">
-<div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
-<div style="text-align: center;">
-<p><strong>PLAN DE CLASES</strong></p>
-<p><span class="text-blue"><strong>Taller de Cómputo</strong></span></p>
-</div>
-<ul>
-<li><strong>Duración:</strong> 10 de agosto, 2026 - 27 de noviembre, 2026 (15 semanas)</li>
-<li><strong>Semestre:</strong> 1ero</li>
-<li><strong>Periodo:</strong> 2027-1</li>
-<li><strong>Días:</strong> martes y jueves</li>
-<li><strong>Día inhábil:</strong> martes 15 de septiembre, 2026</li>
-<li><strong>Horario:</strong> 3 a 5 pm</li>
-<li><strong>Créditos:</strong> 4</li>
-<li><strong>Nivel:</strong> Básico</li>
-<li><strong>Aula:</strong> V304</li>
-<li><strong>Link de registro:</strong> Google form</li>
-<li><strong>Plan de clases:</strong> Documento compartido</li>
-</ul>
-<section id="instructora" class="level4">
-<h4 class="anchored" data-anchor-id="instructora"><strong>Instructora:</strong></h4>
-<ul>
-<li><strong>Dra. Evelia Lorena Coss-Navarrete</strong> - Profesora de asignatura de la ENES, Juriquilla-UNAM, México. <a href="https://eveliacoss.github.io/">Web page</a> (<a href="mailto:ecossnav@gmail.com">ecossnav@gmail.com</a>)</li>
-</ul>
-</section>
-<section id="objetivo-principal-pendiente" class="level3">
-<h3 class="anchored" data-anchor-id="objetivo-principal-pendiente">🎯 Objetivo principal (PENDIENTE)</h3>
-<ul>
-<li>Identificar y examinar los lenguajes Linux/Unix.</li>
-<li>Resolver problemas básicos de forma general mediante un lenguaje de programación.</li>
-</ul>
-</section>
-<section id="objetivos-particulares-pendiente" class="level3">
-<h3 class="anchored" data-anchor-id="objetivos-particulares-pendiente">✅ Objetivos particulares (PENDIENTE)</h3>
-<ul>
-<li>Definir y utilizar el ambiente Linux/Unix.</li>
-<li>Utilizar los conceptos básicos de programación.</li>
-<li>Implementar y computar algunos programas básicos de interés en algún lenguaje de programación libre.</li>
-</ul>
-</section>
-<section id="citar-y-reutilizar-el-material-del-curso" class="level3">
-<h3 class="anchored" data-anchor-id="citar-y-reutilizar-el-material-del-curso"><strong>Citar y reutilizar el material del curso</strong></h3>
-<p>Los datos del curso pueden reutilizarse y adaptarse libremente con la debida atribución. Todos los datos de estos repositorios están sujetos a la licencia <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)</a>.</p>
-</section>
-</div>
-<div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
-<section id="previos-para-el-curso" class="level3">
-<h3 class="anchored" data-anchor-id="previos-para-el-curso">Previos para el curso</h3>
-<ul>
-<li>Ninguno</li>
-<li>Completar el registro</li>
-</ul>
-</section>
-<section id="para-presentar-examen" class="level3">
-<h3 class="anchored" data-anchor-id="para-presentar-examen">Para presentar examen</h3>
-<p>Tendrán derecho a presentar exámenes parciales aquellos estudiantes que hayan cubierto por lo menos el 80% de asistencia.</p>
-</section>
-<section id="código-de-conducta" class="level3">
-<h3 class="anchored" data-anchor-id="código-de-conducta">Código de conducta</h3>
-<p>La conducta del profesorado y alumnado del curso será acorde con los principios y valores especificados en el Código de Ética de la Universidad Nacional Autónoma de México aprobado el 1 de julio del 2015 por el Consejo Universitario, en especial en lo referente a la integridad y honestidad académica. “La integridad y la honestidad académica implican: Citar las fuentes de ideas, textos, imágenes, gráficos u obras artı́sticas que se empleen en el trabajo universitario, y no sustraer o tomar la información generada por otros o por sı́ mismo sin señalar la cita correspondiente u obtener su consentimiento y acuerdo. No falsificar, alterar, manipular, fabricar, inventar o fingir la autenticidad de datos, resultados, imágenes o información en los trabajos académicos, proyectos de investigación, exámenes, ensayos, informes, reportes, tesis, audiencias, procedimientos de orden disciplinario o en cualquier documento inherente a la vida académica universitaria” (<strong>Gaceta UNAM, 30 de julio 2015</strong>).</p>
-</section>
-</div>
-<div id="tabset-1-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-3-tab">
-<table class="caption-top table">
-<thead>
-<tr class="header">
-<th>Temas</th>
-<th>Duración</th>
-<th>Instructora</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr class="even">
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr class="even">
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr class="even">
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr class="even">
-<td></td>
-<td></td>
-<td></td>
-</tr>
-</tbody>
-</table>
-</div>
-<div id="tabset-1-4" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-4-tab">
-<section id="bibliografía-básica" class="level3">
-<h3 class="anchored" data-anchor-id="bibliografía-básica">Bibliografía básica</h3>
-<ul>
-<li>Wang, K. C. (2018). Systems Programming in Unix/Linux (pp.&nbsp;1-452). Springer.</li>
-<li>Jain, M. (2018). Beginning Modern Unix: Learn to Live Comfortably in a Modern Unix Environment. Apress.</li>
-<li>Wang, P. S. (2018). Mastering Modern Linux. Chapman and Hall/CRC.</li>
-<li>Pine, D. J. (2019). Introduction to Python for science and engineering. CRC press.</li>
-<li>Johansson, R. (2015). Numerical Python: A Practical Techniques Approach for Industry. Apress.</li>
-<li>Mehta, H. K. (2015). Mastering Python scientific computing. Packt Publishing Ltd.</li>
-</ul>
-</section>
-<section id="libros-de-apoyo" class="level3">
-<h3 class="anchored" data-anchor-id="libros-de-apoyo">Libros de apoyo</h3>
-<ul>
-<li>Cannon, J. (2014). Linux para principiantes: Una introducción al sistema operativo Linux y la línea de comandos. CreateSpace Independent Publishing Platform</li>
-<li>Belmar, A. (2020). Consola GNU/Linux - Vol.1: Gestión de archivos, aplicaciones y procesos. Creative Andina Corp.</li>
-<li>Solsona, F. (2007). Manual de supervivencia en Linux. UNAM.</li>
-</ul>
-</section>
+<section id="code" class="level1" data-number="D">
+<h1 data-number="D"><span class="header-section-number">D</span> Code</h1>
+<p>When you can work on your computer and when you need to work on the cluster .. source , RAM, etc. - number of samples?</p>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Código</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Notas</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="dv">3</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>b <span class="ot">&lt;-</span> <span class="dv">2</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>suma <span class="ot">&lt;-</span> a <span class="sc">+</span> b</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>suma </span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 5</code></pre>
 </div>
 </div>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Código</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">InstallData</span>(<span class="st">"pbmc3k"</span>)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">"pbmc3k"</span>)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>pbmc3k</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
 </div>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Código</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="annotated-cell-3"><pre class="sourceCode r code-annotation-code code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-3-1"><a href="#annotated-cell-3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="annotated-cell-3-2"><a href="#annotated-cell-3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(palmerpenguins)</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="1">1</button><span id="annotated-cell-3-3" class="code-annotation-target"><a href="#annotated-cell-3-3" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">|&gt;</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="2">2</button><span id="annotated-cell-3-4" class="code-annotation-target"><a href="#annotated-cell-3-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="annotated-cell-3-5"><a href="#annotated-cell-3-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">bill_ratio =</span> bill_depth_mm <span class="sc">/</span> bill_length_mm,</span>
+<span id="annotated-cell-3-6"><a href="#annotated-cell-3-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">bill_area  =</span> bill_depth_mm <span class="sc">*</span> bill_length_mm</span>
+<span id="annotated-cell-3-7"><a href="#annotated-cell-3-7" aria-hidden="true" tabindex="-1"></a>  )</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-annotation">
+<dl class="code-annotation-container-hidden code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-3" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-3" data-code-lines="3" data-code-annotation="1">Take <code>penguins</code>, and then,</span>
+</dd>
+<dt data-target-cell="annotated-cell-3" data-target-annotation="2">2</dt>
+<dd>
+<span data-code-cell="annotated-cell-3" data-code-lines="4,5,6,7" data-code-annotation="2">add new columns for the bill ratio and bill area.</span>
+</dd>
+</dl>
+</div>
+</div>
+<pre class="text"><code>video-game-sales-r/
+├── data/
+│   └── vgsales.csv
+├── scripts/
+│   └── 01_analisis_videojuegos.R
+├── figures/
+│   ├── grafica_01.png
+│   ├── grafica_02.png
+│   └── grafica_final.png
+├── ejercicio_videojuegos.qmd
+└── README.md</code></pre>
 
 
 </section>
@@ -882,10 +840,13 @@ ul.task-list li input[type="checkbox"] {
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
+      <a href="./cap7.html" class="pagination-link" aria-label="Extra related to biological Questions">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Extra related to biological Questions</span></span>
+      </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./temario.html" class="pagination-link" aria-label="Temario">
-        <span class="nav-page-text">Temario</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./notas.html" class="pagination-link" aria-label="Notas">
+        <span class="nav-page-text"><span class="chapter-number">D</span>&nbsp; <span class="chapter-title">Notas</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

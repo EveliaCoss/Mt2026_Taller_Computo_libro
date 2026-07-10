@@ -5,7 +5,7 @@ project:
 book:
   title: "Taller de Cómputo"
   site-url: https://eveliacoss.github.io/Workshop2026_scRNAseq_CITEseq_libro/
-  page-footer:  "Taller de Cómputo: Evelia Coss" 
+  page-footer:  "Taller de Cómputo, 1er semestre: Dra. Evelia Coss" 
   author: 
     - name: Evelia Coss
       degrees: PhD
@@ -18,21 +18,25 @@ book:
           url: https://www.enesjuriquilla.unam.mx/
   
   date: "07/08/2026"
-  page-navigation: true
+  page-navigation: true        # Provide next and previous article links in footer
+  back-to-top-navigation: true # Provide a ‘back to top’ navigation button
   chapters:
     - index.qmd
-    - cap1_repaso.qmd
-    - cap2_resources.qmd
-    - cap3_aboutDataset.qmd
-    - part: "**scRNA‑seq — Errors & Survival**"
+    - temario.qmd
+    - cap1.qmd
+    - cap2.qmd
+    - part: "**Introducción a Bash**"
       chapters: 
-        - cap4_course.qmd
-    - part: "**CITE‑seq — Errors & Survival**"
+        - cap3.qmd
+        - cap4.qmd
+    - part: "**Introducción a Python**"
       chapters: 
-        - cap5_course.qmd
+        - cap5.qmd
   appendices: 
-    - cap6_extra.qmd
-    - cap7_extra_block9.qmd
+    - cap6.qmd
+    - cap7.qmd
+    - resources.qmd
+    - notas.qmd
   # Information
   repo-url: https://github.com/EveliaCoss/Workshop2026_scRNAseq_CITEseq_libro # link de Github
   sharing: [twitter, facebook, linkedin]
@@ -50,7 +54,7 @@ format:
   # Boton para cambiar tema de oscuro a claro
     theme:
       light: cosmo
-      dark: darkly
+      # dark: darkly
     code-fold: show # Ocultar codigo
     code-copy: true # Copy button
     code-line-numbers: false #Numero de lineas
@@ -67,4 +71,5 @@ lang: es
 execute:
   error: true # Se aceptan errores
   message: false # Silenciar mensajes de salida
+  echo: true
 

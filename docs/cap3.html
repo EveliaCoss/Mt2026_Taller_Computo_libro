@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>1&nbsp; Quick Recap: Introduction to scRNA‑seq + CITE-seq – Taller de Cómputo</title>
+<title>3&nbsp; Introducción a Linux/Unix – Taller de Cómputo</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -33,8 +33,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./cap2_resources.html" rel="next">
-<link href="./index.html" rel="prev">
+<link href="./cap4.html" rel="next">
+<link href="./cap2.html" rel="prev">
 <link href="./enesLogo.png" rel="icon" type="image/png">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
@@ -42,14 +42,10 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-d0ae9245876894da5ac7e18953ecc5cc.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-6f5e339e910af865eb2cfbba9cbcf7d6.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark-8a99b70e60639ec84de21ff0ca486063.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="site_libs/bootstrap/bootstrap-6f5e339e910af865eb2cfbba9cbcf7d6.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-6f5e339e910af865eb2cfbba9cbcf7d6.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -82,169 +78,7 @@ ul.task-list li input[type="checkbox"] {
 <link rel="stylesheet" href="styles.css">
 </head>
 
-<body class="nav-sidebar floating quarto-light"><script id="quarto-html-before-body" type="application/javascript">
-    const toggleBodyColorMode = (bsSheetEl) => {
-      const mode = bsSheetEl.getAttribute("data-mode");
-      const bodyEl = window.document.querySelector("body");
-      if (mode === "dark") {
-        bodyEl.classList.add("quarto-dark");
-        bodyEl.classList.remove("quarto-light");
-      } else {
-        bodyEl.classList.add("quarto-light");
-        bodyEl.classList.remove("quarto-dark");
-      }
-    }
-    const toggleBodyColorPrimary = () => {
-      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
-      if (bsSheetEl) {
-        toggleBodyColorMode(bsSheetEl);
-      }
-    }
-    const setColorSchemeToggle = (alternate) => {
-      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
-      for (let i=0; i < toggles.length; i++) {
-        const toggle = toggles[i];
-        if (toggle) {
-          if (alternate) {
-            toggle.classList.add("alternate");
-          } else {
-            toggle.classList.remove("alternate");
-          }
-        }
-      }
-    };
-    const toggleColorMode = (alternate) => {
-      // Switch the stylesheets
-      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
-      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
-      manageTransitions('#quarto-margin-sidebar .nav-link', false);
-      if (alternate) {
-        // note: dark is layered on light, we don't disable primary!
-        enableStylesheet(alternateStylesheets);
-        for (const sheetNode of alternateStylesheets) {
-          if (sheetNode.id === "quarto-bootstrap") {
-            toggleBodyColorMode(sheetNode);
-          }
-        }
-      } else {
-        disableStylesheet(alternateStylesheets);
-        enableStylesheet(primaryStylesheets)
-        toggleBodyColorPrimary();
-      }
-      manageTransitions('#quarto-margin-sidebar .nav-link', true);
-      // Switch the toggles
-      setColorSchemeToggle(alternate)
-      // Hack to workaround the fact that safari doesn't
-      // properly recolor the scrollbar when toggling (#1455)
-      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
-        manageTransitions("body", false);
-        window.scrollTo(0, 1);
-        setTimeout(() => {
-          window.scrollTo(0, 0);
-          manageTransitions("body", true);
-        }, 40);
-      }
-    }
-    const disableStylesheet = (stylesheets) => {
-      for (let i=0; i < stylesheets.length; i++) {
-        const stylesheet = stylesheets[i];
-        stylesheet.rel = 'disabled-stylesheet';
-      }
-    }
-    const enableStylesheet = (stylesheets) => {
-      for (let i=0; i < stylesheets.length; i++) {
-        const stylesheet = stylesheets[i];
-        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
-          stylesheet.rel = 'stylesheet';
-        }
-      }
-    }
-    const manageTransitions = (selector, allowTransitions) => {
-      const els = window.document.querySelectorAll(selector);
-      for (let i=0; i < els.length; i++) {
-        const el = els[i];
-        if (allowTransitions) {
-          el.classList.remove('notransition');
-        } else {
-          el.classList.add('notransition');
-        }
-      }
-    }
-    const isFileUrl = () => {
-      return window.location.protocol === 'file:';
-    }
-    const hasAlternateSentinel = () => {
-      let styleSentinel = getColorSchemeSentinel();
-      if (styleSentinel !== null) {
-        return styleSentinel === "alternate";
-      } else {
-        return false;
-      }
-    }
-    const setStyleSentinel = (alternate) => {
-      const value = alternate ? "alternate" : "default";
-      if (!isFileUrl()) {
-        window.localStorage.setItem("quarto-color-scheme", value);
-      } else {
-        localAlternateSentinel = value;
-      }
-    }
-    const getColorSchemeSentinel = () => {
-      if (!isFileUrl()) {
-        const storageValue = window.localStorage.getItem("quarto-color-scheme");
-        return storageValue != null ? storageValue : localAlternateSentinel;
-      } else {
-        return localAlternateSentinel;
-      }
-    }
-    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
-      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
-      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
-      let newTheme = '';
-      if(authorPrefersDark) {
-        newTheme = isAlternate ? baseTheme : alternateTheme;
-      } else {
-        newTheme = isAlternate ? alternateTheme : baseTheme;
-      }
-      const changeGiscusTheme = () => {
-        // From: https://github.com/giscus/giscus/issues/336
-        const sendMessage = (message) => {
-          const iframe = document.querySelector('iframe.giscus-frame');
-          if (!iframe) return;
-          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
-        }
-        sendMessage({
-          setConfig: {
-            theme: newTheme
-          }
-        });
-      }
-      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
-      if (isGiscussLoaded) {
-        changeGiscusTheme();
-      }
-    };
-    const authorPrefersDark = false;
-    const darkModeDefault = authorPrefersDark;
-      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
-      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
-    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
-    // Dark / light mode switch
-    window.quartoToggleColorScheme = () => {
-      // Read the current dark / light value
-      let toAlternate = !hasAlternateSentinel();
-      toggleColorMode(toAlternate);
-      setStyleSentinel(toAlternate);
-      toggleGiscusIfUsed(toAlternate, darkModeDefault);
-      window.dispatchEvent(new Event('resize'));
-    };
-    // Switch to dark mode if need be
-    if (hasAlternateSentinel()) {
-      toggleColorMode(true);
-    } else {
-      toggleColorMode(false);
-    }
-  </script>
+<body class="nav-sidebar floating quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -253,7 +87,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./cap1_repaso.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Quick Recap: Introduction to scRNA‑seq + CITE-seq</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./cap3.html"><strong>Introducción a Bash</strong></a></li><li class="breadcrumb-item"><a href="./cap3.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Introducción a Linux/Unix</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Buscar" onclick="window.quartoOpenSearch();">
@@ -269,7 +103,7 @@ ul.task-list li input[type="checkbox"] {
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="./">Taller de Cómputo</a> 
-        <div class="sidebar-tools-main tools-wide">
+        <div class="sidebar-tools-main">
     <a href="https://github.com/EveliaCoss/Workshop2026_scRNAseq_CITEseq_libro" title="Ejecutar el código" class="quarto-navigation-tool px-1" aria-label="Ejecutar el código"><i class="bi bi-github"></i></a>
     <div class="dropdown">
       <a href="" title="Compartir" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" role="link" aria-label="Compartir"><i class="bi bi-share"></i></a>
@@ -294,7 +128,6 @@ ul.task-list li input[type="checkbox"] {
           </li>
       </ul>
     </div>
-  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Alternar modo oscuro"><i class="bi"></i></a>
 </div>
     </div>
       </div>
@@ -313,26 +146,26 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./cap1_repaso.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Quick Recap: Introduction to scRNA‑seq + CITE-seq</span></span></a>
+  <a href="./temario.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Temario</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./cap2_resources.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">VirtualBox Setup and Usage</span></span></a>
+  <a href="./cap1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introducción e integración</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./cap3_aboutDataset.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">About Dataset (GSE149689)</span></span></a>
+  <a href="./cap2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Componentes de una Computadora</span></span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
- <span class="menu-text"><strong>scRNA‑seq — Errors &amp; Survival</strong></span></a>
+ <span class="menu-text"><strong>Introducción a Bash</strong></span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Alternar sección">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -340,8 +173,14 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./cap4_course.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">scRNA‑seq — Errors &amp; Survival</span></span></a>
+  <a href="./cap3.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Introducción a Linux/Unix</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cap4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">X definir</span></span></a>
   </div>
 </li>
       </ul>
@@ -349,7 +188,7 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
- <span class="menu-text"><strong>CITE‑seq — Errors &amp; Survival</strong></span></a>
+ <span class="menu-text"><strong>Introducción a Python</strong></span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Alternar sección">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -357,8 +196,8 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./cap5_course.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">CITE‑seq — Errors &amp; Survival</span></span></a>
+  <a href="./cap5.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">X definir</span></span></a>
   </div>
 </li>
       </ul>
@@ -374,14 +213,26 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./cap6_extra.html" class="sidebar-item-text sidebar-link">
+  <a href="./cap6.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Extra</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./cap7_extra_block9.html" class="sidebar-item-text sidebar-link">
+  <a href="./cap7.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Extra related to biological Questions</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./resources.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">Bioinformática y Estadística 2</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./notas.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">D</span>&nbsp; <span class="chapter-title">Notas</span></span></a>
   </div>
 </li>
       </ul>
@@ -396,17 +247,21 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Tabla de contenidos</h2>
    
   <ul>
-  <li><a href="#references" id="toc-references" class="nav-link active" data-scroll-target="#references"><span class="header-section-number">1.1</span> References</a></li>
+  <li><a href="#qué-es-unix" id="toc-qué-es-unix" class="nav-link active" data-scroll-target="#qué-es-unix"><span class="header-section-number">3.1</span> ¿Qué es UNIX?</a></li>
+  <li><a href="#gnulinux" id="toc-gnulinux" class="nav-link" data-scroll-target="#gnulinux"><span class="header-section-number">3.2</span> GNU/Linux</a></li>
+  <li><a href="#filosofía-gnulinux" id="toc-filosofía-gnulinux" class="nav-link" data-scroll-target="#filosofía-gnulinux"><span class="header-section-number">3.3</span> Filosofía GNU/Linux</a></li>
+  <li><a href="#ubuntu" id="toc-ubuntu" class="nav-link" data-scroll-target="#ubuntu"><span class="header-section-number">3.4</span> Ubuntu</a></li>
+  <li><a href="#shell-bash-bash-shell" id="toc-shell-bash-bash-shell" class="nav-link" data-scroll-target="#shell-bash-bash-shell"><span class="header-section-number">3.5</span> Shell / Bash / Bash Shell</a></li>
+  <li><a href="#material-suplementario" id="toc-material-suplementario" class="nav-link" data-scroll-target="#material-suplementario"><span class="header-section-number">3.6</span> Material suplementario</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-
-<header id="title-block-header" class="quarto-title-block default">
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./cap3.html"><strong>Introducción a Bash</strong></a></li><li class="breadcrumb-item"><a href="./cap3.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Introducción a Linux/Unix</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Quick Recap: Introduction to scRNA‑seq + CITE-seq</span></h1>
+<h1 class="title"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Introducción a Linux/Unix</span></h1>
 </div>
 
 
@@ -423,16 +278,94 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="references" class="level2" data-number="1.1">
-<h2 data-number="1.1" class="anchored" data-anchor-id="references"><span class="header-section-number">1.1</span> References</h2>
+<div class="content-box-gray">
+<p><strong>Objetivos:</strong></p>
+<ol type="1">
+<li>Comprender la historia y filosofía de Linux/Unix</li>
+<li>Entender qué es GNU y su importancia en el software libre</li>
+<li>Diferenciar entre Linux, GNU y GNU/Linux</li>
+<li>Reconocer las principales versiones y distribuciones de GNU/Linux</li>
+<li>Valorar la importancia del software libre y de código abierto</li>
+<li>Aplicar este conocimiento en la selección de sistemas operativos</li>
+</ol>
+</div>
+<section id="qué-es-unix" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="qué-es-unix"><span class="header-section-number">3.1</span> ¿Qué es UNIX?</h2>
 <ul>
-<li><a href="https://hoohm.github.io/CITE-seq-Count/">Cite-seq-Count</a></li>
-<li><a href="https://broadinstitute.github.io/2020_scWorkshop/cite-seq.html">CITE-Seq tutorial</a></li>
-<li><a href="https://cran.r-project.org/web/packages/dsb/vignettes/end_to_end_workflow.html">End-to-end CITE-seq analysis workflow using dsb for ADT normalization and Seurat for multimodal clustering</a></li>
-<li><a href="https://satijalab.org/seurat/articles/multimodal_vignette">Using Seurat with multimodal data</a></li>
-<li><a href="https://www.nature.com/articles/nmeth.4380">Simultaneous epitope and transcriptome measurement in single cells</a></li>
-<li><a href="https://eveliacoss.github.io/Workshop_scRNAseq_presentacion/Clase1_Intro_QC.html#1">Introducción a scRNA-seq y control de calidad</a></li>
-<li><a href="https://github.com/EveliaCoss/Workshop_scRNAseq_presentacion">Workshop de scRNA-seq</a></li>
+<li>Sistema operativo (SO) creado por <strong>Ken Thompson y Dennis Ritchie</strong> de la empresa <em>Bell Laboratories</em> en 1969.</li>
+<li>SO multitarea y multiusuario.</li>
+</ul>
+</section>
+<section id="gnulinux" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="gnulinux"><span class="header-section-number">3.2</span> GNU/Linux</h2>
+<ul>
+<li>En 1983 <strong>Richard Stallman</strong> lideró la iniciativa <a href="https://www.gnu.org/">GNU</a> (GNU’s Not Unix), SO compatible con UNIX de libre distribución y acceso sin restricciones al código fuente.</li>
+<li>En 1991 <strong>Linus Torvalds</strong> creó su propio <a href="https://linuxjourney.com/lesson/kernel-overview">kernel</a> (Linux), que es la parte del SO que permite la comunicación con los componentes de Hardware. Este kernel fue distribuido de forma libre y gratuita.</li>
+<li>Ambos proyectos se juntaron y se creó <strong>GNU/Linux</strong></li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="https://rsg-ecuador.github.io/unix.bioinfo.rsgecuador/content/Curso_basico/01_Unix_GNU-Linux/1_Conceptos_Unix_GNU_Linux.html"><img src="figures/GNU_LIN1.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></a></p>
+</figure>
+</div>
+</section>
+<section id="filosofía-gnulinux" class="level2" data-number="3.3">
+<h2 data-number="3.3" class="anchored" data-anchor-id="filosofía-gnulinux"><span class="header-section-number">3.3</span> Filosofía GNU/Linux</h2>
+<ul>
+<li>Los usuarios son libres de <strong>ejecutar, copiar, distribuir, estudiar, cambiar y mejorar</strong> el software.</li>
+<li>El <a href="https://www.gnu.org/philosophy/free-sw.html">software libre</a> se refiere a las libertades mencionadas, no al precio.</li>
+<li><a href="https://opensource.org/">“open source”</a> vs <a href="https://www.gnu.org/philosophy/free-sw.html">“free software”</a>.</li>
+</ul>
+</section>
+<section id="ubuntu" class="level2" data-number="3.4">
+<h2 data-number="3.4" class="anchored" data-anchor-id="ubuntu"><span class="header-section-number">3.4</span> Ubuntu</h2>
+<ul>
+<li>Una de las distribuciones de GNU/Linux más populares.</li>
+<li>Está basada en <a href="https://www.debian.org/">Debian</a> y fue desarrollada por la empresa <a href="https://canonical.com/"><em>Canonical</em></a></li>
+<li>Facilidad de uso e instalación.</li>
+<li>Interfaz de usuario amigable.</li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="https://rsg-ecuador.github.io/unix.bioinfo.rsgecuador/content/Curso_basico/01_Unix_GNU-Linux/1_Conceptos_Unix_GNU_Linux.html"><img src="figures/ubuntu.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="205"></a></p>
+</figure>
+</div>
+</section>
+<section id="shell-bash-bash-shell" class="level2" data-number="3.5">
+<h2 data-number="3.5" class="anchored" data-anchor-id="shell-bash-bash-shell"><span class="header-section-number">3.5</span> Shell / Bash / Bash Shell</h2>
+<ul>
+<li>La <a href="https://en.wikipedia.org/wiki/Unix_shell"><em>shell</em></a> es el programa que provee una <strong>interfaz de línea de comandos (CLI)</strong>, que permite la comunicación entre el usuario y el SO.</li>
+<li>La mayoría de distribuciones de Linux tienen por defecto <a href="https://www.gnu.org/software/bash/"><em>bash</em></a> (“Bourne Again SHell”) como <em>shell</em>. Hay <a href="https://www.educba.com/types-of-shells-in-linux/">otros tipos de shell</a> como <strong>sh, csh, tcsh, ksh, zsh</strong>, entre otras.</li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="figures/bash.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="363"></p>
+</figure>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Nota
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Bash es un intérprete de comandos que te da el poder de hacer tareas simples rápidamente.</p>
+</div>
+</div>
+</section>
+<section id="material-suplementario" class="level2" data-number="3.6">
+<h2 data-number="3.6" class="anchored" data-anchor-id="material-suplementario"><span class="header-section-number">3.6</span> Material suplementario</h2>
+<p>Si quieren aprender temas más sobre UNIX, GNU/Linux, bash, emulador de terminal y otros tema, pueden explorar los siguientes recursos, que son de acceso libre:</p>
+<ul>
+<li>Kross, S. (2017). <em>The unix workbench</em>. Leanpub. <a href="https://leanpub.com/unix" class="uri">https://leanpub.com/unix</a></li>
+<li>Ross, A. (2019). <em>The Ultimate Linux Newbie Guide</em>. <a href="https://linuxnewbieguide.org/" class="uri">https://linuxnewbieguide.org/</a></li>
+<li>Shotts, W. (2019). <em>The Linux command line: a complete introduction</em>. No Starch Press. <a href="http://www.linuxcommand.org/tlcl.php/index.php" class="uri">http://www.linuxcommand.org/tlcl.php/index.php</a></li>
+<li>Linux Journey. (2020). Linux Journey. <a href="https://linuxjourney.com/" class="uri">https://linuxjourney.com/</a></li>
+<li>GNU. (2020). GNU. <a href="https://www.gnu.org/" class="uri">https://www.gnu.org/</a></li>
+<li><a href="https://rsg-ecuador.github.io/unix.bioinfo.rsgecuador/content/Curso_basico/01_Unix_GNU-Linux/1_Conceptos_Unix_GNU_Linux.html">GNU/Linux para bioinformatica</a></li>
 </ul>
 
 
@@ -441,19 +374,6 @@ ul.task-list li input[type="checkbox"] {
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
-    // Ensure there is a toggle, if there isn't float one in the top right
-    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
-      const a = window.document.createElement('a');
-      a.classList.add('top-right');
-      a.classList.add('quarto-color-scheme-toggle');
-      a.href = "";
-      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
-      const i = window.document.createElement("i");
-      i.classList.add('bi');
-      a.appendChild(i);
-      window.document.body.appendChild(a);
-    }
-    setColorSchemeToggle(hasAlternateSentinel())
     const icon = "";
     const anchorJS = new window.AnchorJS();
     anchorJS.options = {
@@ -893,13 +813,13 @@ ul.task-list li input[type="checkbox"] {
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./index.html" class="pagination-link" aria-label="Información general">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Información general</span>
+      <a href="./cap2.html" class="pagination-link" aria-label="Componentes de una Computadora">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Componentes de una Computadora</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./cap2_resources.html" class="pagination-link" aria-label="VirtualBox Setup and Usage">
-        <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">VirtualBox Setup and Usage</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./cap4.html" class="pagination-link" aria-label="X definir">
+        <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">X definir</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
@@ -910,7 +830,7 @@ ul.task-list li input[type="checkbox"] {
       &nbsp;
     </div>   
     <div class="nav-footer-center">
-<p>Taller de Cómputo: Evelia Coss</p>
+<p>Taller de Cómputo, 1er semestre: Dra. Evelia Coss</p>
 </div>
     <div class="nav-footer-right">
       &nbsp;
