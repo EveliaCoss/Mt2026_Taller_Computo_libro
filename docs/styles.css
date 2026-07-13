@@ -35,9 +35,10 @@
 /* Text */
 
 .text-blue { color: #007f99; }   /* azul */
+.text-blueblack { color: #08519c; }   /* azul fuerte */
 .text-red { color: #ff3c3c; }    /* rojo */
-.text-green { color: #10c970; }  /* verde */
-.text-purple  { color: #49006a; }  /* morado, question */
+.text-green { color: #238443; }  /* verde */
+.text-purple  { color: #54278f; }  /* morado, question */
 .text-pink  { color: #ae017e; }  /* rosa, puzzle */
 
 /* center Text */
@@ -281,3 +282,40 @@ color: var(--Black);}
 }
 
 
+/* ----- Tab navegacion- Obtenido de https://ddotta.github.io/cookbook-rpolars/ ---- */
+
+/* Estilo general de las pestañas */
+.nav-tabs .nav-item .nav-link {
+  background-color: #e9e9e9; /* Fondo gris */
+  color: #585858;           /* Texto gris oscuro */
+  border-radius: 25% 10%;  /* Bordes redondeados, con un radio distinto en horizontal y vertical (más ovalado que circular) */
+}
+
+/* Pestaña activa */
+.nav-tabs .nav-item .nav-link.active {
+  background-color: black;   /* Fondo activo */
+  color: #f0eded;              /* Color de la letra */
+}
+
+/* Efecto hover */
+.nav-tabs .nav-link:hover {
+   border-color: white;       /* Borde blanco de 2px. */
+   border-width: 2px;         
+   background-color: #5f7ba7; /* Fondo azul grisáceo (#5f7ba7). */
+   color: #f0eded;            /* texto */
+} 
+
+
+/* -----  Decoración sidebar ------ */
+
+/* Fondo de la sidebar 
+.sidebar {
+  background-color: #F5F5F5; 
+}
+
+.sidebar .logo img {  Logo dentro de la sidebar 
+  max-width: 180px;    ajusta tamaño 
+  margin: 10px auto; centrado 
+  display: block;
+}
+*/

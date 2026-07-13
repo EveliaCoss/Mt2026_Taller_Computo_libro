@@ -6,6 +6,10 @@ book:
   title: "Taller de Cómputo"
   site-url: https://eveliacoss.github.io/Workshop2026_scRNAseq_CITEseq_libro/
   page-footer:  "Taller de Cómputo, 1er semestre: Dra. Evelia Coss" 
+  sidebar: 
+    # background: "#ffcccc"
+    logo: "flyer/logo_enes.png" # Logo ENES
+    search: true
   author: 
     - name: Evelia Coss
       degrees: PhD
@@ -23,18 +27,59 @@ book:
   chapters:
     - index.qmd
     - temario.qmd
-    - cap1.qmd
+    - cap1A.qmd
+    - cap1B.qmd
     - cap2.qmd
-    - part: "**Introducción a Bash**"
+    - cap3.qmd  # Buenas practicas en programacion    
+    - part: "**Pre-requisitos**"
       chapters: 
-        - cap3.qmd
-        - cap4.qmd
-    - part: "**Introducción a Python**"
+        - install_B.qmd # Instalación de Git y Bash
+        - install_R.qmd # Instalación de R y RStudio    
+        - install_git.qmd # Instalación Git y Bash
+    - part: "**Sección 1** - Introducción a Bash"
       chapters: 
-        - cap5.qmd
+        - cap4.qmd  # Introducción a Linux/Unix
+        - cap5.qmd  # Mis primeros pasos en Bash   
+        - cap6.qmd  # Wildcards y Streams
+    - part: "**Sección 2** - Edición de archivos con Bash"
+      chapters:     
+        - cap7.qmd  # Operadores de redirección de datos I/O
+        - cap8.qmd  # Edición de archivos con los editores de texto (nano y vim)
+        - cap9.qmd  # Edición de archivos con el editor de flujo sed
+        - cap10.qmd # Enlaces simbólicos (symlinks)
+        - cap11.qmd # Filtrado de texto (grep, cut, sort, uniq, wc)
+        - cap12.qmd # Condicionales
+        - cap13.qmd # Scripts en Bash
+        - cap14.qmd # Bucles (for loops)
+    - part: "**Sección 3** - Introducción a Git/GitHub"
+      chapters:  
+        - cap15.qmd # Intro a Git
+        - cap16.qmd # Configurar git
+        - cap17.qmd # Crear e inicializar repos
+        - cap18.qmd # Rastrear cambios
+        - cap19.qmd # Explorando el historial
+        - cap20.qmd # Restore y reset
+        - cap21.qmd # Ignorar archivos
+    - part: "**Sección 4** - Conexión con Github"
+      chapters:
+        - cap22.qmd # Conexión con Github
+        - cap23.qmd # Trabajando con colaboradores
+        - cap24.qmd # Resolviendo conflictos
+        - cap25.qmd # Trabajando con ramas
+        - cap26.qmd # Conexión RStudio con Git 
+        - cap27.qmd # Resumen y practica final        
+    - part: "**Sección 5** - Introducción a R y Rstudio"
+      chapters: 
+        - cap28.qmd             # Introducción a R y Rstudio, paquetes
+        - s5_actividades1y2.qmd # Actividad: Miniresumen personal + foto para tu repositorio
+        - cap29.qmd             # Introducción a Markdown
+        - s5_actividades3.qmd   # Actividad: Crear tu página web
+        - cap30.qmd             # introducción en Quarto
+        - s5_actividades4y5.qmd # Actividad: Primer libro de quarto
+    - part: "**Sección 6** - Introducción a Python"
+      chapters: 
+        - cap28.qmd
   appendices: 
-    - cap6.qmd
-    - cap7.qmd
     - resources.qmd
     - notas.qmd
   # Information

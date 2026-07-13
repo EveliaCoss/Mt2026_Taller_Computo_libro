@@ -1,1 +1,139 @@
-# Extra
+# Wildcards y Streams
+
+``` {.bash code-copy="true" eval="false"}
+wc _files/secuencias_bash.fastq
+# 300   600 12934 secuencias_bash.fastq
+```
+
+Esto nos dice que el archivo cuenta con 300 lineas, 600 palabras y 12,934 caracteres.
+
+## Caracteres y strings
+
+Los `caracteres` son unidades de información que se representan con símbolos. Pueden ser de varios tipos como alfanuméricos, números enteros, signos de puntuación. Varios caracteres son interpretados por la shell de manera especial. Estos se llaman `caracteres especiales`, claro, y permiten desarrollar alguna lógica, dependiendo del contexto. Por ejemplo, algunos caracteres: `@` `#` `.` `?` `!` `,` `/` `\` `>` `~` `a` `µ` `g` `§` `R` `|(pipe)`.
+
+Cada caracter se asocia a una combinación diferente de teclas en el teclado del computador.
+
+Los `strings` son arreglos de caracteres. Esto quiere decir que son caracteres en conjunto y con un orden en particular. Por ejemplo el string `pizza` tiene 4 diferentes caracteres: `i`, `p`, `z`, `a`. Diferentes combinaciones de caracteres pueden formar diferentes strings.
+
+Creemos un string y luego imprimámoslo en la pantalla del Terminal. Escribe los siguientes comandos:
+
+``` {.bash code-copy="true" eval="false"}
+mi_primer_string="Taller de bioinformática"
+echo $mi_primer_string
+```
+
+## Wildcards
+
+Los `wildcards` o `wild characters` son símbolos utilizados para representar uno o más caracteres. Se pueden utilizar con otros comandos para facilitar el procesamiento o búsqueda de archivos, directorios y datos en general.
+
+| **Wildcard** | **Función** |
+|----|----|
+| `*` | Asocia **uno o más** caracteres especificados por el usuario, con caracteres en un string con el que se opera. |
+| `?` | Asocia **solo un** caracter a la vez en un string. |
+| `[ ]` | Asocia **cuaquiera** de los caracteres dentro en un string. |
+
+::: callout-important
+El wildcard más usado es `*` porque es muy versátil.
+:::
+
+## Ejercicio 4
+
+El wildcard `*` me permitiría encontrar todos los archivos en una carpeta que tengan la palabra `TESIS` en ellos. Primero crea la carpeta:
+
+``` bash
+taller_unix
+```
+
+Después, debemos generar estos archivos:
+
+``` {.bash code-copy="true" eval="false"}
+cd taller_unix/
+touch MI_TESIS.tex MI_TESIS_tutor2.tex TESIS.tex TESIS_YA_ACABATE.tex TESIS_finaaaaal.tex TESIS_final.tex TESIS_tutor1.tex TESIS_tutor2.tex a_reporte_01.txt b_reporte_02.txt c_reporte_03.txt z_reporte_30.txt 
+```
+
+1.  Enlista todos los archivos que comiencen con "`TESIS`".
+2.  Enlista todos los archivos que terminen con el string "`.tex`"
+3.  Buscar todos los archivos contengan la palabra "`TESIS"` pero con 3 caracteres desconocidos antes.
+4.  Buscar los archivos que terminen con el número 1 o 2 en su nombre antes de la extensión del archivo (`.tex`).
+5.  Encontrar los archivos que terminen en dos números del 1 al 3 y del 0 al 2 antes del formato del archivo (`.txt`).
+6.  Encontrar todos los archivos con este formato `?_reporte_[0-3][0-3].txt`
+7.  Encontrar todos los archivos que contengan por `a` o. `z`.
+8.  Borramos todos estor archivos que terminen en ".txt" y ".tex"
+
+::: {.callout-tip collapse="true" icon="false"}
+## Solución
+
+```         
+1. ls -l TESIS*
+2. ls -l *.tex
+3. ls -l ???TESIS*
+4. ls -l *[1-2].tex
+5. ls -l *[1-3][0-2].txt
+6. ls -l ?_reporte_[0-3][0-3].txt
+7. ls -l *[az]* o ls -l *[a,z]*
+8. rm *.tex *.txt
+```
+:::
+
+## Ejercicios de repaso
+
+Puedes seguir repasando y aprendiendo de las expresiones regulares en la pagina de [RegexOne](https://regexone.com/).
+
+## Operadores de redirección de datos I/O
+
+Usualmente cuando trabajamos con datos, es necesario pasar el resultado de un comando a otro para hacer un procesamiento de datos apilado, como en un algortimo. Un `stream` o `corriente` esta hecha de datos. Es una corriente de datos. Un ejemplo muy familiar es el teclado y la pantalla. El teclado tiene una interfaz en donde por cada tecla presionada, un caracter se guarda en un archivo. Se dice entonces que es una `corriente de  entrada`. Cuando la pantalla nos muestra lo que estamos escribiendo entonces la data sale hacia nosotros y eso convierte a la pantalla en una `corriente de salida`. Los dispositivos que hacen este tipo de transmisión de datos se llaman dispositivos `I/O` (input y output). Los operadores que se encargan de esto se conocen como `operadores de redirección`. Tres importantes son:
+
+| **Comando** | **Función** |
+|----|----|
+| `>` | Stream de **salida de datos**. Sobre escribre sobre un archivo. |
+| `>>` | Stream de salida de datos. Adjunta **nueva salida a datos preexistentes en un archivo.** |
+| `<` | Stream de **entrada de datos.** Recibe datos para procesamiento con algun comando. |
+
+## Ejercicio 5
+
+1.  Crea el archivo `bacterias_generos.txt` e imprime su contenido empleando los siguientes comandos:
+
+    ``` {.bash code-copy="true" eval="false"}
+    echo -e "\nRickettsia\nOrientia\nWolbachia\nAegyptianella\nAnaplasma\nCowdria\nEhrlichia\nNeorickettsia\nCaedibacter\nHolospora\nLyticum\nOdyssella\nSymbiotes\nTectibacter" > bacterias_generos.txt
+    cat bacterias_generos.txt
+    ```
+
+2.  Agrega una nueva especie en la última fila empleando "\>\>".
+
+    ``` {.bash code-copy="true" eval="false"}
+    echo -e "\nEscherichia\n:D" >> bacterias_generos.txt
+    cat bacterias_generos.txt
+    ```
+
+3.  Ahora usaremos el comando `sort` para reordenar todos los géneros. Sin embargo notamos que el archivo original no cambia nunca.
+
+    ``` {.bash code-copy="true" eval="false"}
+    sort < bacterias_generos.txt
+    ```
+
+4.  Para hacer un cambio en el archivo `bacterias_generos.txt`, usamos este comando. Notamos que ahora no usamos `>>` sino solo `>`. Esto va a borrar el contenido previo con géneros desordenados y ahora los va a ordenar. El cambio no se puede deshacer, así que ten cuidado con el operador `>` para que no pierdas datos.
+
+    ``` {.bash code-copy="true" eval="false"}
+    (sort < bacterias_generos.txt) > bacterias_generos_sorted.txt
+    cat bacterias_generos_sorted.txt
+    ```
+
+::: callout-warning
+## Advertencia
+
+El operador `>` sobre escribe archivos. Ten cuidado al usarlo para que no pierdas datos.
+:::
+
+![](figures/nac35ntlfg831.webp)
+
+## Material suplementario
+
+- RSG Ecuador. [Scripts en Bash](https://rsg-ecuador.github.io/unix.bioinfo.rsgecuador/content/Curso_avanzado/02_Bash/1_bash.html)
+
+- RSG Ecuador. [Wildcards y Streams](https://rsg-ecuador.github.io/unix.bioinfo.rsgecuador/content/Curso_basico/03_Manejo_terminal/5_wildcards.html)
+
+- RSG Ecuador. [Expresiones regulares (*regex*)](https://rsg-ecuador.github.io/unix.bioinfo.rsgecuador/content/Curso_basico/04_Procesamiento_ficheros_regex_pipes/3_Expresiones_regulares.html)
+
+- [Wildcard Selection in Bash](https://pressbooks.senecapolytechnic.ca/uli101/chapter/wildcard-selection-in-bash/)
+
+- [Expresiones regulares](https://twiki.org/cgi-bin/view/Codev/TWikiPresentation2017x06x01Regex)

@@ -1,0 +1,63 @@
+# Configurar Git
+
+Usar control de versiones es una forma de manejar proyectos, todo a lo que se hace `commit` no se pierde, se queda un registro de todos los cambios y siempre es posible regresar a una versión anterior. Nos evitamos estar enviando y enviando correos con versiones finales para después comparar versiones. Se guarda el usuario que hizo el cambio y automáticamente obtenemos una notificación de si intentamos modificar lo mismo que un colaborador para revisar cual cambio guardar.
+
+Pueden pensar en versión de control como una forma de `undo` ilimitado y de trabajar paralelamente con sus colaboradores.
+
+Lo primero que vamos a hacer es configurar `Git` en nuestra computadora.
+
+Vamos a abrir `Git bash` y configurar nuestro usuario y correo con la que vamos a enlazar más adelante Github.
+
+``` bash
+git config --global user.name "Usuario"
+git config --global user.email "email@domain.com"
+```
+
+Ahora, vamos a configurar los saltos de línea para no tener conflicto según el sistema operativo.
+
+``` bash
+# Mac o Linux
+git config --global core.autocrlf input
+# Windows
+git config --global core.autocrlf true
+```
+
+Para configurar el editor de texto por default:
+
+``` bash
+git config --global core.editor "nano -w"
+```
+
+Por default, Git inicializa un repositorio con una rama llamada `master`, a partir del 2020, la mayoría de los servidores de Git cambiaron esto a que la rama principal fuera `main`, para configurar esto usaremos lo siguiente:
+
+``` bash
+git config --global init.defaultBranch main
+```
+
+Los comandos anteriores solo se necesitan configurar una sola vez. Para ver la configuración que acabamos de realizar y probar cual es nuestro editor de texto usamos lo siguiente:
+
+``` bash
+git config --global --edit
+```
+
+Y para revisar esta configuración sin entrar al editor:
+
+``` bash
+git config --list
+```
+
+Si debieran hacer cambios en su usuario o correo o cualquier otra configuración lo pueden hacer ilimitadas veces con los comandos anteriores.
+
+Para pedir ayuda nos sirve aún `git comando -h` o `git comando --help`, por ejemplo:
+
+``` bash
+git config -h
+```
+
+La siguiente nos abre en un navegador el manual completo:
+
+``` bash
+git config --help
+```
+
+O para ayuda general de Git: `git help`.

@@ -1,0 +1,84 @@
+# Edición de archivos con los editores de texto (`nano` y `vim`)
+
+Los editores de texto nos permiten hacer desde ligeros hasta cambios u operaciones masivas en el contenido de nuestros archivos. Existen varias herramientas para esto pero las más populares son "nano" y "vim".
+
+### Nano
+
+Para utilizar nano, debemos de seguir una serie de comandos. Primero creamos/leemos nuestro archivo.
+
+``` {.bash code-copy="true" eval="false"}
+nano mi-archivo-nano.txt
+```
+
+Esto nos creará un archivo de texto al que podemos ingresar información y además nos va desplegar un menú de opciones en la parte inferior de nuestra terminal.
+
+![](figures/terminal_example.png){fig-align="center"}
+
+Para utilizar estas opciones se usan shorchuts o atajos en el teclado, en las que el símbolo `^` significa la tecla `Control` o `Command` y la `M` es la tecla `Alt`. En nuestro caso donde queremos agregar texto, simplemente escribimos:
+
+::: {.callout-note icon="false"}
+## Ejercicio 6. Edición de archivos con nano
+
+1.  Crea un archivo nano con el nombre "mi-archivo-nano.txt". `nano mi-archivo-nano.txt`
+2.  Agrega la siguiente información a tu archivo. `Hola mi nombre es NOMBRE y este es mi primer archivo nano.`
+3.  Utiliza `ctrl + x` para salir y guardar la información, presiona `Enter` para cerrar el editor.
+:::
+
+Para guardar los cambios en el archivo presionamos `control + x`, el programa nos desplegará un mensaje para guardar el archivo. Presionamos **enter** y ahora podemos verificar el contenido.
+
+``` {.bash code-copy="true" eval="false"}
+cat mi-archivo-nano.txt
+```
+
+### Vim
+
+Vim tiene ligeros cambios en su modo de uso:
+
+``` {.bash code-copy="true" eval="false"}
+vim mi-archivo-vim.txt 
+```
+
+A diferencia de `nano`, no podemos ingresar texto directamente en el archivo y hay algo que se conoce como modos. En este primer modo normal puedes accesar a distintas otras funcionalidades, para cambiar a modo escritura o modo inserción de texto, debemos presionar `i`.
+
+Una vez dentro del modo inserción, escribimos el siguiente texto:
+
+::: {.callout-note icon="false"}
+## Ejercicio 7. Edición de archivos con vim
+
+1.  Crea un archivo nano con el nombre "mi-archivo-vim.txt". `vim mi-archivo-vim.txt`
+2.  Agrega la siguiente información a tu archivo. `Hola mi nombre es NOMBRE y este es mi primer archivo vim.`
+3.  Utiliza `ctrl + x` para salir y guardar la información, presiona `Enter` para cerrar el editor.
+:::
+
+para guardar los cambios debemos presionar la tecla `Esc`, para salir del modo inserción y teclear:
+
+``` {.bash code-copy="true" eval="false"}
+:wq
+```
+
+En donde:
+
+::: {.callout-note icon="false"}
+## Explicación
+
+- `w` = write, indica a la terminal guardar los cambios
+- `q` = quit, indica salir de la edición del archivo.
+:::
+
+Para ambos editores puedes accesar al manual del usuario proporcionados dentro de la terminal usando cualquiera de los siguientes comandos:
+
+- Para ver el manual completo de `vim` escribe:
+
+``` {.bash code-copy="true" eval="false"}
+man vim
+```
+
+- Para ver el manual completo de `nano` escribe:
+
+``` {.bash code-copy="true" eval="false"}
+man nano
+```
+
+## Referencias
+
+- [Aprende vim](https://victorhck.gitbook.io/aprende-vim)

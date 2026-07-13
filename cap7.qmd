@@ -1,1 +1,53 @@
-# Extra related to biological Questions
+# Operadores de redirección de datos I/O
+
+Usualmente cuando trabajamos con datos, es necesario pasar el resultado de un comando a otro para hacer un procesamiento de datos apilado, como en un algortimo. Un `stream` o `corriente` esta hecha de datos. Es una corriente de datos. Un ejemplo muy familiar es el teclado y la pantalla. El teclado tiene una interfaz en donde por cada tecla presionada, un caracter se guarda en un archivo. Se dice entonces que es una `corriente de entrada`. Cuando la pantalla nos muestra lo que estamos escribiendo entonces la data sale hacia nosotros y eso convierte a la pantalla en una `corriente de salida`. Los dispositivos que hacen este tipo de transmisión de datos se llaman dispositivos `I/O` (input y output). Los operadores que se encargan de esto se conocen como `operadores de redirección`. Tres importantes son:
+
+| **Comando** | **Función** |
+|----|----|
+| `>` | Stream de **salida de datos**. Sobre escribre sobre un archivo. |
+| `>>` | Stream de salida de datos. Adjunta **nueva salida a datos preexistentes en un archivo.** |
+| `<` | Stream de **entrada de datos.** Recibe datos para procesamiento con algun comando. |
+
+::: callout-note
+## Ejercicio 5
+
+1.  Crea el archivo `bacterias_generos.txt` e imprime su contenido empleando los siguientes comandos:
+
+``` {.bash code-copy="true" eval="false"}
+echo -e "\nRickettsia\nOrientia\nWolbachia\nAegyptianella\nAnaplasma\nCowdria\nEhrlichia\nNeorickettsia\nCaedibacter\nHolospora\nLyticum\nOdyssella\nSymbiotes\nTectibacter" > bacterias_generos.txt
+cat bacterias_generos.txt
+```
+
+2.  Agrega una nueva especie en la ultima fila empleando "\>\>".
+
+    ``` {.bash code-copy="true" eval="false"}
+    echo -e "\nEscherichia\n:D" >> bacterias_generos.txt
+    cat bacterias_generos.txt
+    ```
+
+3.  Ahora usaremos el comando `sort` para reordenar todos los géneros. Sin embargo notamos que el archivo original no cambia nunca.
+
+    ``` {.bash code-copy="true" eval="false"}
+    sort < bacterias_generos.txt
+    ```
+
+4.  Para hacer un cambio sobre `bacterias_generos.txt`, usamos este comando. Notamos que ahora no usamos `>>` sino solo `>`. Esto va a borrar el contenido previo con géneros desordenados y ahora los va a ordenar. El cambio no se puede deshacer, así que ten cuidado con el operador `>` para que no pierdas datos.
+
+    ``` {.bash code-copy="true" eval="false"}
+    (sort < bacterias_generos.txt) > bacterias_generos_sorted.txt
+    cat bacterias_generos_sorted.txt
+    ```
+:::
+
+::: callout-warning
+## Advertencia
+
+El operador `>` sobre escribe archivos. Ten cuidado al usarlo para que no pierdas datos.
+:::
+
+## Material suplementario
+
+- RSG Ecuador. [Scripts en Bash](https://rsg-ecuador.github.io/unix.bioinfo.rsgecuador/content/Curso_avanzado/02_Bash/1_bash.html)
+- RSG Ecuador. [Wildcards y Streams](https://rsg-ecuador.github.io/unix.bioinfo.rsgecuador/content/Curso_basico/03_Manejo_terminal/5_wildcards.html)
+- RSG Ecuador. [Expresiones regulares (*regex*)](https://rsg-ecuador.github.io/unix.bioinfo.rsgecuador/content/Curso_basico/04_Procesamiento_ficheros_regex_pipes/3_Expresiones_regulares.html)
+- [Wildcard Selection in Bash](https://pressbooks.senecapolytechnic.ca/uli101/chapter/wildcard-selection-in-bash/)

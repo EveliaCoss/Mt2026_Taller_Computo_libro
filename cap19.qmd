@@ -1,0 +1,273 @@
+# Explorando el historial
+
+A los commits nos podemos referir a ellos con sus identificadores. Al último commit también nos podemos referir como `HEAD`. Añadamos una línea más al archivo `prueba.txt`.
+
+``` bash
+nano prueba.txt
+cat prueba.txt
+```
+
+Ahora, para ver el último cambio con el último commit:
+
+``` bash
+git diff HEAD prueba.txt
+```
+
+En este caso, `HEAD` hace referencia al commit más reciente. Si omitimos `HEAD`, obtenemos el mismo resultado:
+
+``` bash
+git diff prueba.txt
+```
+
+También podemos comparar el archivo actual con versiones más antiguas del repositorio. La expresión `HEAD~n` hace referencia al ancestro que se encuentra `n` commits antes del último. Por ejemplo,
+
+``` bash
+$ git diff HEAD~1 prueba.txt
+```
+
+compara la versión actual de `prueba.txt` con la versión almacenada en el commit inmediatamente anterior al último.
+
+De manera similar,
+
+``` bash
+git diff HEAD~2 prueba.txt
+```
+
+compara la versión actual con la de hace dos commits, y así sucesivamente.
+
+Con `git show` vamos a ver los cambios con respecto a un commit anterior.
+
+``` bash
+git show HEAD~1 prueba.txt
+```
+
+También podemos referirnos a los commit por su identificador de números y letras enorme o por los primeros 7 números o letras (**cambiar por sus identificadores de commits**):
+
+``` bash
+git diff 451b2ad469b96e13547e13dc0e718613acdc987c prueba.txt
+git diff 451b2ad prueba.txt
+```
+
+Revisemos el estado:
+
+``` bash
+$ git status
+```
+
+Con la siguiente instrucción podemos regresar las cosas a como estaban antes de hacer el último cambio.
+
+``` bash
+$ git checkout HEAD prueba.txt
+$ cat prueba.txt
+```
+
+O podríamos usar uno de los identificadores de commits:
+
+``` bash
+git checkout 451b2ad prueba.txt
+cat prueba.txt
+git status
+```
+
+Y para regresar al último commit de nuevo, es decir, volver a regresar a la versión antes de esos cambios, la última almacenada en el commit:
+
+``` bash
+git checkout HEAD prueba.txt
+cat prueba.txt
+```
+
+::: callout-note
+## Nota
+
+El comando
+
+``` bash
+git checkout <commit> prueba.txt
+```
+
+reemplaza el contenido actual de `prueba.txt` por la versión almacenada en el commit indicado, pero **no cambia de rama ni mueve `HEAD`**. Del mismo modo,
+
+``` bash
+git checkout HEAD prueba.txt
+```
+
+restaura el archivo a la versión del último commit.
+
+En versiones recientes de Git se recomienda utilizar:
+
+``` bash
+git restore prueba.txt
+```
+
+para recuperar la versión del último commit, o
+
+``` bash
+git restore --source=<commit> prueba.txt
+```
+
+para restaurar la versión almacenada en un commit específico. El comando `git restore` deja más claro que estamos recuperando archivos y evita confusiones con `git checkout`, que también se utiliza para cambiar entre ramas.
+:::
+
+::: text-center
+[![git checkout \<ID commit\> \<archivo\>, Basado en ASPP-Latam](https://haydeeperuyero.github.io/Computo_Cientifico/img/git-checkout.png){width="120%"}](https://github.com/aspp-latam/2023-mexico-git-and-github/blob/main/git-commands-visualizations.pdf)
+:::
+
+El comando `git checkout` revierte los archivos a alguna versión anterior siempre que no lo hayamos añadido al staging área. Para revertir un commit usamos la instrucción `git revert [ID commit]`. Supongamos que tenemos un error en el archivo `prueba.txt` y que ya hicimos commit y queremos revertir al último cambio. Los pasos que haríamos serían los siguientes:
+
+1)  `git log` para identificar el ID del commit.
+
+2)  Copiar el ID del commit
+
+3)  `git revert [ID del commit]` para revertir a ese cambio.
+
+4)  Teclear el nuevo mensaje de commit.
+
+5)  Guardar y cerrar
+
+::: text-center
+[![git revert , Basado en ASPP-Latam](https://haydeeperuyero.github.io/Computo_Cientifico/img/revert-commit.png){width="120%"}](https://github.com/aspp-latam/2023-mexico-git-and-github/blob/main/git-commands-visualizations.pdf)
+:::
+
+Si ya añadimos los cambios al área de preparación, ya no podemos usar git checkout simplemente.
+
+:::: callout-note
+## Ejercicio 1
+
+Realiza las siguientes instrucciones:
+
+1)  Crea una carpeta llamada `learn_revert`.
+
+2)  Muévete a la carpeta `learn_revert`
+
+3)  Inicializa el repositorio.
+
+4)  Crea un archivo llamado `first.txt` y añade una línea de texto.
+
+5)  Agrégalo al área de preparación y realiza el primer commit.
+
+6)  Crea el archivo `wrong.txt` y agrega una línea de texto.
+
+7)  Agrégalo al área de preparación y realiza un commit.
+
+8)  Agrega una segunda línea de texto al archivo `first.txt`, guárdalo, agrégalo al área de preparación y realiza un commit.
+
+9)  Agrega una tercera línea de texto al archivo `first.txt`, guárdalo, agrégalo al área de preparación y realiza un commit.
+
+10) Queremos deshacer el commit realizado cuando se añadió el archivo `wrong.txt`. Como este commit fue el segundo de donde no estamos, podemos usar `git revert HEAD~2` (o podemos usar `git log` y encontrar el ID de ese commit).
+
+¿Está el archivo `wrong.txt`? ¿Qué sucede con el historial de commits?
+
+::: {.callout-tip collapse="true" icon="false"}
+## Solución
+
+Creamos la carpeta, entramos a ella e inicializamos el repositorio:
+
+``` bash
+mkdir learn_revert
+cd learn_revert
+git init
+```
+
+Creamos el archivo `first.txt` con una línea de texto:
+
+``` bash
+echo "Primera línea de texto." > first.txt
+```
+
+Lo agregamos al área de preparación y hacemos el primer commit:
+
+``` bash
+git add first.txt
+git commit -m "Agrega first.txt"
+```
+
+Ahora creamos el archivo `wrong.txt`:
+
+``` bash
+echo "Este archivo no debería estar aquí." > wrong.txt
+```
+
+Lo agregamos al área de preparación y hacemos un commit:
+
+``` bash
+git add wrong.txt
+git commit -m "Agrega wrong.txt"
+```
+
+Después agregamos una segunda línea a `first.txt`:
+
+``` bash
+echo "Segunda línea de texto." >> first.txt
+git add first.txt
+git commit -m "Agrega segunda línea a first.txt"
+```
+
+Agregamos una tercera línea a `first.txt`:
+
+``` bash
+echo "Tercera línea de texto." >> first.txt
+git add first.txt
+git commit -m "Agrega tercera línea a first.txt"
+```
+
+Podemos revisar el historial con:
+
+``` bash
+git log --oneline
+```
+
+El commit donde agregamos `wrong.txt` quedó dos commits atrás, por lo que podemos deshacerlo con:
+
+``` bash
+git revert HEAD~2
+```
+
+Git abrirá un editor para confirmar el mensaje del nuevo commit. Guardamos y cerramos el editor.
+
+Después revisamos los archivos:
+
+``` bash
+ls
+```
+
+El archivo `wrong.txt` ya no aparece, porque `git revert` creó un nuevo commit que deshace los cambios introducidos por el commit donde se agregó ese archivo.
+
+Podemos revisar el historial:
+
+``` bash
+git log --oneline
+```
+
+Observaremos que el commit original donde se agregó `wrong.txt` sigue apareciendo en el historial, pero ahora también aparece un nuevo commit que revierte esos cambios.
+
+Por lo tanto, `git revert` **no borra commits anteriores**, sino que crea un nuevo commit que deshace los cambios de un commit previo.
+:::
+::::
+
+Otras opciones del historial del commit:
+
+1)  Para ver tanto las diferencias entre los archivos y los ID de los commits. Se puede colocar solo el nombre de un archivo y solo mostrara los commit que afectaban ese archivo o si no se coloca el nombre del archivo aplica sobre todo el historial de commits.
+
+``` bash
+git log --patch prueba.txt
+```
+
+2)  Para mostrar las descripciones detalladas de las modificaciones y archivos.
+
+``` bash
+git log -p
+```
+
+3)  Para mostrar los nombres de los archivos afectados en cada commit.
+
+``` bash
+git log --name-only
+```
+
+4)  Para mostrar los archivos afectados en cada commit con la leyenda de si fueron modificados (M) o añadidos (A) o eliminados.
+
+``` bash
+git log --name-status
+```
+
+Consultar el siguiente [link](https://git-scm.com/book/es/v2/Fundamentos-de-Git-Ver-el-Historial-de-Confirmaciones) para ver más opciones y ejemplos.

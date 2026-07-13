@@ -1,0 +1,106 @@
+# Repaso: Introducción a Markdown
+
+## ¿Qué es Markdown?
+
+Markdown es un **lenguaje de marcado ligero** que permite añadir elementos de formato a documentos de *texto plano*. Creado por John Gruber en 2004, Markdown es actualmente uno de los lenguajes más populares del mundo.
+
+-   Sencillo y legible, sin necesidad de usar editores complicados o HTML.
+-   **lenguaje de marcado ligero:** Escribir texto que incluye instrucciones simples para darle formato.
+
+::: callout-note
+### 🧩 ¿Por qué se llama “ligero”?
+
+Porque:
+
+-   Usa símbolos sencillos como `*, #,` o `-` para indicar formato.
+-   No requiere cerrar etiquetas como `<strong> o <div>` (como en HTML).
+-   Es minimalista y limpio, ideal para escribir rápido sin distracciones.
+:::
+
+## 🧠 ¿Para qué se usa?
+
+-   Crear documentación técnica o científica
+-   Escribir **README.md** en proyectos de GitHub
+-   Generar contenido para sitios web
+-   Crear [tesis](https://quarto.org/docs/get-started/hello/rstudio.html), notas, [libros](https://bookdown.org/yihui/rmarkdown-cookbook/), [presentaciones](https://bookdown.org/yihui/rmarkdown/xaringan.html) y posters
+
+**En R**
+
+| Paquete / Programa | Uso principal |
+|------------------------------------|------------------------------------|
+| [`rmarkdown`](https://github.com/EveliaCoss/RmarkdownGraphs_notes) | Crear documentos reproducibles con texto, código y resultados |
+| `knitr` | Ejecutar chunks de código en RMarkdown |
+| [`Quarto`](https://quarto.org/docs/get-started/hello/vscode.html) | Plataforma moderna para documentos con R, Python, etc. |
+| `bookdown` | Crear libros técnicos con Markdown + RMarkdown |
+| `blogdown` | Generar blogs científicos usando Markdown y Hugo |
+| `flexdashboard` | Dashboards interactivos escritos en Markdown |
+
+**En Python**
+
+| Paquete / Programa | Uso principal |
+|------------------------------------|------------------------------------|
+| Jupyter Notebooks | Celdas Markdown para explicar y documentar junto con código |
+| `Quarto` | Igual que en R, permite combinar Markdown con código Python |
+| `mkdocs` | Generar sitios web de documentación técnica desde archivos Markdown |
+| `Sphinx + MyST` | Documentación avanzada con soporte para Markdown |
+| `markdown`, `mistune` | Librerías para convertir Markdown a HTML |
+| `nbconvert` | Exportar notebooks con Markdown a PDF, HTML, LaTeX, etc. |
+
+## ¿Cómo funciona?
+
+Pasos generales:
+
+1.  Crear un archivo Markdown con un editor de texto o una aplicación específica. El archivo debe tener la extensión `.md o .markdown`.
+2.  Se abre el archivo Markdown en una aplicación Markdown.
+3.  Se utiliza la aplicación Markdown para convertir el archivo Markdown en un documento HTML.
+4.  Visualización del archivo HTML en un navegador web o use la aplicación Markdown para convertirlo a otro formato de archivo, como PDF.
+
+::: callout-note
+La aplicación y el procesador de Markdown son dos componentes independientes. Para simplificar, los he combinado en un solo elemento ("aplicación de Markdown") en la figura a continuación.
+:::
+
+[![Imagen tomada de: https://www.markdownguide.org/getting-started/](reproducible/figures/markdown-flowchart.png)](https://www.markdownguide.org/getting-started/)
+
+## **Sintaxis de escritura y formato básicos**
+
+Revisar la [documentación de GitHub](https://docs.github.com/es/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax)
+
+## Tablas con datatable
+
+```{r, message=FALSE}
+#| label: tbl-bonita
+#| tbl-cap: "Tabla decorativa"
+
+library(dplyr)
+
+iris %>%
+  head(3) %>%
+  DT::datatable()
+```
+
+## [`library(gt)`](https://gt.rstudio.com/index.html)
+
+```{r, message=FALSE, warning=FALSE}
+iris %>% 
+  head() %>%
+  gt::gt() %>%
+  gt::tab_spanner(label = "Petalo", columns = vars(Petal.Length,Petal.Width)) %>%
+  gt::tab_spanner(label = "Sepalo", columns = vars(Sepal.Length,Sepal.Width))
+```
+
+::: callout-note
+Si gustas repasar podemos hacerlo con el script [Sesion_Rmarkdown_13Oct2023.Rmd](https://github.com/EveliaCoss/RmarkdownGraphs_notes/blob/main/Sesion_Rmarkdown_13Oct2023.Rmd) del repositorio [RmarkdownGraphs_notes](https://github.com/EveliaCoss/RmarkdownGraphs_notes/tree/main)**.**
+:::
+
+## Referencias
+
+-   [Documentación de GitHub](https://docs.github.com/es/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax)
+-   [Libro de Rmarkdown](https://michael-franke.github.io/intro-data-analysis/ch-01-01-Rmarkdown.html)
+-   [Ejercicios con Markdown](https://www.markdowntutorial.com/es/lesson/1/)
+-   [Curso de Heladia Salgado](https://lcg-cursos.github.io/material/introbioinfo/)
+-   Curso de [Git y GitHub Evelia Coss](https://eveliacoss.github.io/Workshop_GitGithub2025/Parte2.html)
+-   [Markdown and rmarkdown](https://faculty.washington.edu/otoomet/info201-book/markdown.html)
+-   [Galeria de Markdown](https://rmarkdown.rstudio.com/gallery.html)
+-   [Lesson 3: Basic Syntax](https://zsmith27.github.io/rmarkdown_crash-course/lesson-3-basic-syntax.html)
+-   [Introduction to Open Data Science with R](https://carpentries-incubator.github.io/open-science-with-r/aio/index.html)
+-   [Data Science for Psychologists](https://bookdown.org/hneth/ds4psy/)

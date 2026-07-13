@@ -1,0 +1,91 @@
+# Repositorios
+
+Un repositorio es donde se va a almacenar toda la información de nuestro proyecto, es donde vamos a tener toda la historia y registro de cambios y usuarios. Es recomendable tener un repositorio por proyecto y no multiples proyectos en un solo repositorio.
+
+Vamos a hacer una carpeta para trabajar con git.
+
+``` bash
+mkdir Mi_primer_repo
+cd Mi_primer_repo
+```
+
+Para inicializar un repositorio usamos lo siguiente (**dentro de la carpeta**).
+
+``` bash
+git init
+```
+
+Al inicializar el repositorio, cualquier carpeta y archivo que se cree dentro de la carpeta quedará su registro, no es necesario inicializar las carpetas anidadas.
+
+Si revisamos que tiene la carpeta solo con `ls` no vamos a notar ningún cambio pero si listamos con la opción `-a` veremos que contiene archivos ocultos.
+
+::: callout-important
+En el archivo `.git` se almacena **TODA** la información de nuestro repositorio, así que si lo borramos perderemos todo el historial del repositorio.
+:::
+
+``` bash
+ls -a
+```
+
+::: callout-warning
+Para cambiar manualmente la rama de nuestro repositorio si no es la main, lo podemos hacer como sigue.
+
+``` bash
+git checkout -b main
+```
+:::
+
+Para preguntarle a git el estado de nuestro proyecto:
+
+``` bash
+git status
+```
+
+Si dentro de una carpeta preguntamos `git status` y obtenemos el siguiente mensaje:
+
+``` output
+fatal: not a git repository (or any of the parent directories): .git
+```
+
+significa que si podemos inicializarlo como un repositorio.
+
+:::: callout-note
+## Ejercicio 1
+
+Dentro de la carpeta `Mi_primer_repo` crea una carpeta llamada `subproyecto1`. Si quieres llevar un registro de lo que hagas en ese subproyecto: ¿debes inicializarla? Inicializala. Ahora, ¿cómo borras el archivo `.git`?
+
+::: {.callout-tip collapse="true" icon="false"}
+## Solución
+
+No es necesario inicializar `subproyecto1` si forma parte del proyecto `Mi_primer_repo`, ya que todos los archivos y subcarpetas son rastreados por el repositorio ubicado en la carpeta principal. Sin embargo, si `subproyecto1` fuera un proyecto independiente, podríamos inicializarlo con:
+
+``` bash
+cd subproyecto1
+git init
+```
+
+Esto crea una carpeta oculta llamada `.git`, que contiene toda la información del repositorio.
+
+Si decidimos que ya no queremos que `subproyecto1` sea un repositorio Git, basta con eliminar la carpeta `.git`:
+
+En Mac/Linux:
+
+``` bash
+rm -rf .git
+```
+
+En Windows (PowerShell):
+
+``` powershell
+Remove-Item -Recurse -Force .git
+```
+
+o desde Git Bash:
+
+``` bash
+rm -rf .git
+```
+
+Después de eliminar `.git`, la carpeta seguirá existiendo, pero dejará de ser un repositorio Git.
+:::
+::::

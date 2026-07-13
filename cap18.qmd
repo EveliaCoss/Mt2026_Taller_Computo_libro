@@ -1,0 +1,399 @@
+# Rastrear cambios
+
+Vamos a crear un archivo de texto dentro de la carpeta `Mi_primer_repo`.
+
+``` bash
+nano prueba.txt
+```
+
+Y escribamos algo en el archivo y guardemoslo.
+
+``` bash
+Primer archivo en el que rastrearemos cambios.
+```
+
+Ahora, si preguntamos por el estado de nuestro proyecto vamos a obtener un mensaje de que hay algo nuevo:
+
+``` bash
+git status
+```
+
+El mensaje que dice `untracked files` nos indica que hay cambios y que a Git no se le ha indicado que debe registrarlos. Para añadir estos cambios hacemos lo siguiente:
+
+``` bash
+git add prueba.txt
+```
+
+Si revisamos el estado del proyecto vemos que ahora un mensaje diferente, ahora solo nos indica que no se ha realizado ningún commit pero que si se tiene registro de algo que cambio.
+
+``` bash
+git status
+```
+
+Para hacer un commit:
+
+``` bash
+git commit -m "Comenzando archivo de prueba y registro de cambios"
+```
+
+Este comando le dice a Git que tome todo lo que se añadió y que guarde una copia permanente dentro del directorio `.git`. Cada commit tiene un identificador único. Si no especificamos el mensaje, Git abrirá un editor de texto para colocar el mensaje. Los mensajes deben de reflejar lo que se está guardando para que sean útiles en el futuro.
+
+Si ahora verificamos el estado del proyecto veremos que nos dice que no hay nada a lo que hacer commit ya que en el paso anterior añadimos todo y no hemos realizado ningún cambio.
+
+``` bash
+git status
+```
+
+Para mostrar el historial del proyecto:
+
+``` bash
+git log
+```
+
+Ahora, añadamos una línea nueva al archivo `prueba.txt`
+
+``` bash
+nano prueba.txt
+```
+
+``` output
+Primer archivo en el que rastrearemos cambios.
+Segunda línea de cambios para continuar con el ejemplo.
+```
+
+Si revisamos el estado veremos de nuevo que nos devuelve el mensaje de que hay archivos sin rastrear. Para comparar las diferencias del archivo usamos:
+
+``` bash
+git diff
+```
+
+El signo `+` nos está indicando cuales son los cambios en el archivo nuevo.
+
+::: {.callout-note}
+## ¿Cómo interpretar la salida de `git diff`?
+
+Git muestra las diferencias entre la versión actual de los archivos y la última versión guardada en el repositorio.
+
+Regla rápida para interpretar un *diff*:
+
+- `+` : línea agregada.
+- `-` : línea eliminada.
+- Sin símbolo : línea sin cambios.
+- `---` : versión anterior del archivo.
+- `+++` : versión actual del archivo.
+- `@@ ... @@` : ubicación de los cambios dentro del archivo.
+
+Por ejemplo, si obtenemos:
+
+```diff
+--- a/prueba.txt
++++ b/prueba.txt
+@@ -1 +1,2 @@
+ Primer archivo en el que rastrearemos cambios.
++Segunda línea de cambios para continuar con el ejemplo.
+```
+
+Esto significa que la primera línea no cambió y se agregó una nueva línea al final del archivo.
+
+De manera análoga a un procesador de textos, podemos pensar que:
+
+- Las líneas con `+` (generalmente en verde) son texto agregado.
+- Las líneas con `-` (generalmente en rojo) son texto eliminado.
+- Las líneas sin símbolo se muestran únicamente para dar contexto a los cambios.
+:::
+
+Vamos a hacer un commit de este cambio.
+
+``` bash
+git commit -m "Añadimos la segunda linea al archivo"
+```
+
+¿Qué paso? Nos esta diciendo que no hemos añadido nada al `staged area` a lo que le podamos hacer un commit, recuerden añadir todo antes de hacer commit.
+
+``` bash
+git add prueba.txt
+git commit -m "Añadimos la segunda linea al archivo"
+```
+
+Añadir todo primero al área de preparación nos permite tener un mejor control de a que le estamos haciendo commit, por ejemplo podemos añadir y hacerle commit solo al archivo donde tenemos la bibliografía y no a todo el proyecto donde hay partes no completas.
+
+[!["Software Carpentry - Version Control with Git](https://swcarpentry.github.io/git-novice-es/fig/git-staging-area.svg){width="700"}](https://swcarpentry.github.io/git-novice-es/04-changes.html)
+
+:::: callout-note
+## Ejercicio 1
+
+Añadamos una tercera línea al archivo y verifiquemos las diferencias en los archivos, después añadanlo al área de preparación y revisen las diferencias. ¿Qué sucede?
+
+::: {.callout-tip collapse="true" icon="false"}
+## Solución
+
+``` bash
+nano prueba.txt
+git diff
+git add prueba.txt
+git diff
+```
+:::
+::::
+
+Al añadirlo al área de preparación lo estamos añadiendo permanentemente, entonces no hay ninguna diferencia. Si queremos las diferencias con lo último a lo que se le hizo commit podemos hacer lo siguiente:
+
+``` bash
+git diff --staged
+```
+
+Ahora hagamos el commit.
+
+``` bash
+git commit -m "Tercera línea para probar que pasa cuando se añade al área de preparación"
+```
+
+Si revisamos el historial, veremos ahora 3 commit diferentes:
+
+``` bash
+git log
+```
+
+Cuando el historial es muy grande no nos va a mostrar todo el historial nuestra terminal, para ir avanzando debemos presionar <kbd>Spacebar</kbd> y para salir la letra <kbd>Q</kbd>. Al presionar <kbd>/</kbd> se puede buscar alguna palabra en los mensajes de los commits. Para limitar la cantidad de información que nos regresa `log` podemos especificar con la opción `-n` la cantidad de commits desde el más reciente. Para ver por ejemplo el último utilizaríamos lo siguiente:
+
+``` bash
+git log -1
+```
+
+Si queremos ver los mensajes en una sola línea usamos:
+
+``` bash
+git log --oneline
+```
+
+Git no guarda información de directorios vacíos. Por ejemplo:
+
+``` bash
+mkdir dic_prueba
+git status
+git add dic_prueba
+git status
+```
+
+Si creamos un directorio con archivos, entonces si podemos añadir todos los archivos a la vez y si quedará el registro del directorio también.
+
+``` bash
+touch dic_prueba/prueba1.txt dic_prueba/prueba2.txt dic_prueba/prueba3.txt
+git status
+git add dic_prueba
+git status
+git commit -m "Ejemplo de como realizar un registro de directorios con archivos"
+```
+
+En algunas ocasiones verán directorios vacíos con un archivo `.gitkeep`, este archivo es solo para que podamos añadir el repo a Git.
+
+:::: callout-note
+## Ejercicio 2
+
+Crea un archivo `mi_archivo.txt`, escribe algo en el y guárdalo en la ruta `Mi_primer_repo`. Añádelo a la historia de tu repo. ¿Cuáles son los pasos que debes realizar?
+
+::: {.callout-tip collapse="true" icon="false"}
+## Solución
+
+Primero nos aseguramos de estar dentro de la carpeta `Mi_primer_repo`:
+
+```bash
+cd Mi_primer_repo
+```
+
+Creamos el archivo `mi_archivo.txt`, escribimos algo en él y lo guardamos. Por ejemplo:
+
+```text
+Mi primer archivo bajo control de versiones.
+```
+
+Verificamos el estado del repositorio:
+
+```bash
+git status
+```
+
+La salida mostrará que Git detectó un nuevo archivo sin rastrear (*untracked file*):
+
+```text
+Untracked files:
+  mi_archivo.txt
+```
+
+Para comenzar a rastrearlo, lo añadimos al área de preparación (*staging area*):
+
+```bash
+git add mi_archivo.txt
+```
+
+Podemos comprobar nuevamente el estado:
+
+```bash
+git status
+```
+
+Ahora Git indicará que el archivo está listo para ser incluido en el siguiente commit.
+
+Finalmente, guardamos estos cambios en la historia del repositorio con:
+
+```bash
+git commit -m "Agrega mi_archivo.txt"
+```
+
+Podemos verificar que el commit se realizó correctamente con:
+
+```bash
+git log
+```
+:::
+::::
+
+:::: callout-note
+## Ejercicio 3
+
+Modifica el archivo `prueba.txt` añadiéndole una línea, ahora en el archivo `mi_archivo.txt` agrega algo y guárdalo. ¿Cómo añadirías los dos archivos al staging área? Añádelos y realiza el commit correspondiente.
+
+::: {.callout-tip collapse="true" icon="false"}
+## Solución
+
+Primero modificamos ambos archivos y los guardamos. Por ejemplo, podemos añadir una línea más a `prueba.txt` y escribir algo adicional en `mi_archivo.txt`.
+
+Para verificar que Git detectó las modificaciones, ejecutamos:
+
+```bash
+git status
+```
+
+La salida mostrará algo similar a:
+
+```text
+Changes not staged for commit:
+  modified: prueba.txt
+  modified: mi_archivo.txt
+```
+
+Podemos añadir ambos archivos al área de preparación (*staging area*) especificando cada uno:
+
+```bash
+git add prueba.txt mi_archivo.txt
+```
+
+Alternativamente, como ambos archivos están en el directorio actual, podríamos añadir todos los cambios con:
+
+```bash
+git add .
+```
+
+Verificamos nuevamente el estado del repositorio:
+
+```bash
+git status
+```
+
+Ahora Git mostrará que ambos archivos están listos para ser incluidos en el siguiente commit:
+
+```text
+Changes to be committed:
+  modified: prueba.txt
+  modified: mi_archivo.txt
+```
+
+Finalmente, guardamos los cambios en la historia del repositorio:
+
+```bash
+git commit -m "Actualiza prueba.txt y mi_archivo.txt"
+```
+
+Podemos comprobar que el commit fue realizado con:
+
+```bash
+git log
+```
+:::
+::::
+
+:::: callout-note
+## Ejercicio 4
+
+Crea un repositorio llamado `bio`. Escribe en un archivo llamado `me.txt` tres líneas de tu biografía, has un commit con tus cambios. Modifica una línea y agrega una cuarta línea. Muestra las diferencias entre el archivo en el staging área y el actual.
+
+::: {.callout-tip collapse="true" icon="false"}
+## Solución
+
+Primero creamos un nuevo directorio y lo inicializamos como repositorio Git:
+
+```bash
+mkdir bio
+cd bio
+git init
+```
+
+Creamos el archivo `me.txt` con tres líneas, por ejemplo:
+
+```text
+Soy estudiante de matemáticas.
+Me interesa la programación.
+Estoy aprendiendo Git.
+```
+
+Añadimos el archivo al área de preparación y realizamos un commit:
+
+```bash
+git add me.txt
+git commit -m "Agrega biografía inicial"
+```
+
+Ahora modificamos el archivo, cambiando una línea y agregando una cuarta. Por ejemplo:
+
+```text
+Soy estudiante de matemáticas.
+Me interesa el análisis de datos.
+Estoy aprendiendo Git.
+También me gusta la bioinformática.
+```
+
+Verificamos el estado del repositorio:
+
+```bash
+git status
+```
+
+y añadimos los cambios al *staging area*:
+
+```bash
+git add me.txt
+```
+
+Supongamos que después de hacer `git add me.txt` volvemos a modificar el archivo, agregando una quinta línea:
+
+```text
+Soy estudiante de matemáticas.
+Me interesa el análisis de datos.
+Estoy aprendiendo Git.
+También me gusta la bioinformática.
+Me interesa la ciencia de datos.
+```
+
+Ahora tenemos una versión en el *staging area* y otra diferente en el directorio de trabajo.
+
+Para mostrar las diferencias entre ambas versiones utilizamos:
+
+```bash
+git diff
+```
+
+La salida será similar a:
+
+```diff
+@@ -2,3 +2,4 @@
+ Me interesa el análisis de datos.
+ Estoy aprendiendo Git.
+ También me gusta la bioinformática.
++Me interesa la ciencia de datos.
+```
+
+La línea con `+` indica que fue agregada después de ejecutar `git add`, por lo que aún no forma parte del *staging area*.
+
+
+:::
+::::

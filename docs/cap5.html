@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>5&nbsp; X definir – Taller de Cómputo</title>
+<title>9&nbsp; Mis primeros pasos en Bash – Taller de Cómputo</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -22,6 +22,41 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -87,7 +122,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./cap5.html"><strong>Introducción a Python</strong></a></li><li class="breadcrumb-item"><a href="./cap5.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">X definir</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./cap4.html"><strong>Sección 1</strong> - Introducción a Bash</a></li><li class="breadcrumb-item"><a href="./cap5.html"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Mis primeros pasos en Bash</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Buscar" onclick="window.quartoOpenSearch();">
@@ -100,7 +135,11 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
-    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
+      <a href="./index.html" class="sidebar-logo-link">
+      <img src="./flyer/logo_enes.png" alt="" class="sidebar-logo light-content py-0 d-lg-inline d-none">
+      <img src="./flyer/logo_enes.png" alt="" class="sidebar-logo dark-content py-0 d-lg-inline d-none">
+      </a>
     <div class="sidebar-title mb-0 py-0">
       <a href="./">Taller de Cómputo</a> 
         <div class="sidebar-tools-main">
@@ -152,20 +191,32 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./cap1.html" class="sidebar-item-text sidebar-link">
+  <a href="./cap1A.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introducción e integración</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./cap1B.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Doc (uDocz) como Agente de AI en este curso <strong>🤖</strong></span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./cap2.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Componentes de una Computadora</span></span></a>
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Componentes de una Computadora</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cap3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Buenas prácticas en bioinformática</span></span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
- <span class="menu-text"><strong>Introducción a Bash</strong></span></a>
+ <span class="menu-text"><strong>Pre-requisitos</strong></span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Alternar sección">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -173,14 +224,20 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./cap3.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Introducción a Linux/Unix</span></span></a>
+  <a href="./install_B.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Instalación de Git y Bash</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./cap4.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">X definir</span></span></a>
+  <a href="./install_R.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Instalación de R y RStudio</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./install_git.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Instalar Git Bash en Windows</span></span></a>
   </div>
 </li>
       </ul>
@@ -188,7 +245,7 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
- <span class="menu-text"><strong>Introducción a Python</strong></span></a>
+ <span class="menu-text"><strong>Sección 1</strong> - Introducción a Bash</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Alternar sección">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -196,8 +253,20 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./cap4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Introducción a Linux/Unix</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./cap5.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">X definir</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Mis primeros pasos en Bash</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cap6.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Wildcards y Streams</span></span></a>
   </div>
 </li>
       </ul>
@@ -205,7 +274,7 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
- <span class="menu-text">Apéndices</span></a>
+ <span class="menu-text"><strong>Sección 2</strong> - Edición de archivos con Bash</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Alternar sección">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -213,26 +282,237 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./cap6.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Extra</span></span></a>
+  <a href="./cap7.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Operadores de redirección de datos I/O</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./cap7.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Extra related to biological Questions</span></span></a>
+  <a href="./cap8.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Edición de archivos con los editores de texto (<code>nano</code> y <code>vim</code>)</span></span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cap9.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Edición de archivos con el editor de flujo <code>sed</code></span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cap10.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Enlaces simbólicos (symlinks)</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cap11.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Filtrado de texto (<code>grep, cut, sort, uniq, wc</code>)</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cap12.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Condicionales</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cap13.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Scripts en Bash</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cap14.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Bucles (for loops)</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
+ <span class="menu-text"><strong>Sección 3</strong> - Introducción a Git/GitHub</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Alternar sección">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cap15.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Introducción a Git / GitHub</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cap16.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Configurar Git</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cap17.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Repositorios</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cap18.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Rastrear cambios</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cap19.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Explorando el historial</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cap20.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Restore y reset</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cap21.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Ignorar archivos/carpetas</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
+ <span class="menu-text"><strong>Sección 4</strong> - Conexión con Github</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Alternar sección">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cap22.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Github</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cap23.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Colaboradores</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cap24.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Conflictos</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cap25.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">Trabajando con Ramas</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cap26.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">Conectar a GitHub con SSH</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cap27.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">Resumen y Práctica Final</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true">
+ <span class="menu-text"><strong>Sección 5</strong> - Introducción a R y Rstudio</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true" aria-label="Alternar sección">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cap28.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">32</span>&nbsp; <span class="chapter-title">Introducción a R y Rstudio</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./s5_actividades1y2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">33</span>&nbsp; <span class="chapter-title"><strong>📚</strong> Actividad 1 y 2</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cap29.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">34</span>&nbsp; <span class="chapter-title">Repaso: Introducción a Markdown</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./s5_actividades3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">35</span>&nbsp; <span class="chapter-title"><strong>📚</strong> Actividad 3: Página web con Rmarkdown</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cap30.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">36</span>&nbsp; <span class="chapter-title">Introducción a Quarto</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./s5_actividades4y5.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">37</span>&nbsp; <span class="chapter-title"><strong>📚</strong> Actividad 4 y 5</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true">
+ <span class="menu-text"><strong>Sección 6</strong> - Introducción a Python</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true" aria-label="Alternar sección">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cap28.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">32</span>&nbsp; <span class="chapter-title">Introducción a R y Rstudio</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="true">
+ <span class="menu-text">Apéndices</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="true" aria-label="Alternar sección">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./resources.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">Bioinformática y Estadística 2</span></span></a>
+ <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Bioinformática y Estadística 2</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./notas.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">D</span>&nbsp; <span class="chapter-title">Notas</span></span></a>
+ <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Notas</span></span></a>
   </div>
 </li>
       </ul>
@@ -247,16 +527,27 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Tabla de contenidos</h2>
    
   <ul>
-  <li><a href="#references" id="toc-references" class="nav-link active" data-scroll-target="#references"><span class="header-section-number">5.1</span> References</a></li>
+  <li><a href="#entorno-de-bash" id="toc-entorno-de-bash" class="nav-link active" data-scroll-target="#entorno-de-bash"><span class="header-section-number">9.1</span> Entorno de Bash</a></li>
+  <li><a href="#preparación-del-directorio-de-trabajo" id="toc-preparación-del-directorio-de-trabajo" class="nav-link" data-scroll-target="#preparación-del-directorio-de-trabajo"><span class="header-section-number">9.2</span> Preparación del directorio de trabajo</a></li>
+  <li><a href="#conocer-mi-dirección-ubicación" id="toc-conocer-mi-dirección-ubicación" class="nav-link" data-scroll-target="#conocer-mi-dirección-ubicación"><span class="header-section-number">9.3</span> Conocer mi dirección / ubicación</a></li>
+  <li><a href="#comandos-básicos" id="toc-comandos-básicos" class="nav-link" data-scroll-target="#comandos-básicos"><span class="header-section-number">9.4</span> <strong>Comandos básicos</strong></a></li>
+  <li><a href="#consultar-información-sobre-archivos-y-directorios" id="toc-consultar-información-sobre-archivos-y-directorios" class="nav-link" data-scroll-target="#consultar-información-sobre-archivos-y-directorios"><span class="header-section-number">9.5</span> Consultar información sobre archivos y directorios</a>
+  <ul>
+  <li><a href="#información-contenida" id="toc-información-contenida" class="nav-link" data-scroll-target="#información-contenida"><span class="header-section-number">9.5.1</span> <strong>Información contenida</strong></a></li>
+  <li><a href="#permisos" id="toc-permisos" class="nav-link" data-scroll-target="#permisos"><span class="header-section-number">9.5.2</span> <strong>Permisos</strong></a></li>
+  </ul></li>
+  <li><a href="#chmod-cambiar-permisos" id="toc-chmod-cambiar-permisos" class="nav-link" data-scroll-target="#chmod-cambiar-permisos"><span class="header-section-number">9.6</span> <strong><code>chmod</code>:</strong> Cambiar permisos</a></li>
+  <li><a href="#comprimir-y-descomprimir-archivos" id="toc-comprimir-y-descomprimir-archivos" class="nav-link" data-scroll-target="#comprimir-y-descomprimir-archivos"><span class="header-section-number">9.7</span> Comprimir y descomprimir archivos</a></li>
+  <li><a href="#material-suplementario" id="toc-material-suplementario" class="nav-link" data-scroll-target="#material-suplementario"><span class="header-section-number">9.8</span> Material suplementario</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./cap5.html"><strong>Introducción a Python</strong></a></li><li class="breadcrumb-item"><a href="./cap5.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">X definir</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./cap4.html"><strong>Sección 1</strong> - Introducción a Bash</a></li><li class="breadcrumb-item"><a href="./cap5.html"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Mis primeros pasos en Bash</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">X definir</span></h1>
+<h1 class="title"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Mis primeros pasos en Bash</span></h1>
 </div>
 
 
@@ -276,8 +567,407 @@ ul.task-list li input[type="checkbox"] {
 <div class="content-box-gray">
 <p><strong>Objetivos:</strong></p>
 </div>
-<section id="references" class="level2" data-number="5.1">
-<h2 data-number="5.1" class="anchored" data-anchor-id="references"><span class="header-section-number">5.1</span> References</h2>
+<section id="entorno-de-bash" class="level2" data-number="9.1">
+<h2 data-number="9.1" class="anchored" data-anchor-id="entorno-de-bash"><span class="header-section-number">9.1</span> Entorno de Bash</h2>
+<p><img src="figures/entornoBash.png" class="img-fluid"></p>
+<p>El signo <code>$</code> es un <strong>prompt</strong>, que nos muestra que la terminal está esperando una entrada; tu terminal puede usar un carácter diferente como prompt y puede agregar información antes de él. Al teclear comandos, ya sea a partir de estas lecciones o de otras fuentes, no escribas el prompt (<em>$</em>), sólo los comandos que le siguen.</p>
+</section>
+<section id="preparación-del-directorio-de-trabajo" class="level2" data-number="9.2">
+<h2 data-number="9.2" class="anchored" data-anchor-id="preparación-del-directorio-de-trabajo"><span class="header-section-number">9.2</span> Preparación del directorio de trabajo</h2>
+<ul>
+<li><p>Ruta / Camino absoluto</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1" data-code-copy="true" data-eval="false"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> /home/usuario/data/</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div></li>
+<li><p>Ruta / Camino relativo</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2" data-code-copy="true" data-eval="false"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ../ <span class="co"># Ir a la carpeta anterior</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div></li>
+</ul>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Nota
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>NOTA 1:</strong> Si das <code>cd</code> y no indicas una ruta absoluta, te llevara al Directorio Raiz (~).</p>
+<p><strong>NOTA 2:</strong> Puedes usar la tecla TAB para completar el nombre de la carpeta. En caso de que tengas más de dos carpetas que inicien igual, tendrás que terminar de completar el nombre.</p>
+</div>
+</div>
+</section>
+<section id="conocer-mi-dirección-ubicación" class="level2" data-number="9.3">
+<h2 data-number="9.3" class="anchored" data-anchor-id="conocer-mi-dirección-ubicación"><span class="header-section-number">9.3</span> Conocer mi dirección / ubicación</h2>
+<p>Averiguemos dónde estamos, ejecutando el comando&nbsp;<code>pwd</code>&nbsp;(que significa “imprime directorio de trabajo” - “print working directory”). En cualquier momento, nuestro&nbsp;<strong>directorio actual</strong>&nbsp;es nuestro directorio predeterminado, es decir, el directorio que la computadora supone queremos ejecutar comandos a menos que especifiquemos explícitamente otra cosa. En este caso la respuesta de la computadora es&nbsp;<code>/Users/nelle</code>, el cual es el directorio de inicio de Nelle, también conocido como su directorio&nbsp;<strong>home</strong>:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3" data-code-copy="true" data-eval="false"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="bu">pwd</span> <span class="co"># /c/Users/ecoss</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<p>En la computadora de Evelia, el sistema de archivos se ve así:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="https://swcarpentry.github.io/shell-novice-es/02-filedir.html"><img src="https://swcarpentry.github.io/shell-novice-es/fig/filesystem.svg" class="img-fluid quarto-figure quarto-figure-center figure-img"></a></p>
+</figure>
+</div>
+<p>En la parte superior está el <strong>directorio raíz</strong> o <strong>root</strong> que contiene todo lo demás. Nos referimos a este directorio usando un caracter de barra <code>/</code> por si solo; esta es la barra al inicio de <code>/Users/ecoss</code>.</p>
+<p>Dentro de ese directorio hay otros directorios: <code>bin</code> (que es donde se almacenan algunos programas preinstalados), <code>data</code> (para archivos de datos diversos), <code>Users</code> (donde se encuentran los directorios personales de los usuarios), <code>tmp</code> (para archivos temporales que no necesitan ser almacenados a largo plazo), etcétera.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Nota</span>Ejercicio 1
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>A partir de&nbsp;<code>/Users/ecoss/data/</code>, ¿Cuál de los siguientes comandos podría Amanda usar para navegar a su directorio de inicio, que es&nbsp;<code>/Users/ecoss</code>?</p>
+<ol type="1">
+<li><p><code>cd .</code></p></li>
+<li><p><code>cd /</code></p></li>
+<li><p><code>cd /home/amanda</code></p></li>
+<li><p><code>cd ../..</code></p></li>
+<li><p><code>cd ~</code></p></li>
+<li><p><code>cd home</code></p></li>
+<li><p><code>cd ~/data/..</code></p></li>
+<li><p><code>cd</code></p></li>
+<li><p><code>cd ..</code></p>
+<div class="callout callout-style-default callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Solución
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li><p>No: <code>.</code> significa el directorio actual.</p></li>
+<li><p>No: <code>/</code> significa el directorio raíz.</p></li>
+<li><p>No: El directorio <strong>home</strong> de Evelia es <code>/Users/amanda</code>.</p></li>
+<li><p>No: sube dos niveles, es decir termina en <code>/Users</code>.</p></li>
+<li><p>Sí: <code>~</code> significa el directorio <strong>home</strong> del usuario, en este caso <code>/Users/amanda</code>.</p></li>
+<li><p>No: esto navegaría a un directorio <code>home</code> en el directorio actual, si existe.</p></li>
+<li><p>Sí: innecesariamente complicado, pero correcto.</p></li>
+<li><p>Sí: un atajo para volver al directorio <strong>home</strong> del usuario.</p></li>
+<li><p>Sí: sube un nivel.</p></li>
+</ol>
+</div>
+</div>
+</div></li>
+</ol>
+</div>
+</div>
+<p>Ejemplo de rutas:</p>
+<p><a href="https://github.com/raynamharris/Shell_Intro_for_Transcriptomics/blob/master/lessons/02_Navigating_Dirs.md"><img src="https://github.com/raynamharris/Shell_Intro_for_Transcriptomics/raw/master/lessons/figures/nav_dirs.png" class="img-fluid"></a></p>
+</section>
+<section id="comandos-básicos" class="level2" data-number="9.4">
+<h2 data-number="9.4" class="anchored" data-anchor-id="comandos-básicos"><span class="header-section-number">9.4</span> <strong>Comandos básicos</strong></h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Comandos</th>
+<th>Información</th>
+<th>Argumentos</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>ssh</code></td>
+<td>Conexión a servidores</td>
+<td>ssh usuario@servidor.mx</td>
+</tr>
+<tr class="even">
+<td><code>ls</code></td>
+<td>Observar el contenido de los archivos en una carpeta</td>
+<td>ls directorio/</td>
+</tr>
+<tr class="odd">
+<td><code>cd</code></td>
+<td>Moverse de directorios</td>
+<td>cd /home/usuario/data/</td>
+</tr>
+<tr class="even">
+<td><code>mkdir</code></td>
+<td>Crear un nuevo directorio</td>
+<td>mkdir data</td>
+</tr>
+<tr class="odd">
+<td><code>rmdir</code></td>
+<td>Eliminar el directorio</td>
+<td>rmkdir -rf data</td>
+</tr>
+<tr class="even">
+<td><code>nano</code>&nbsp;/&nbsp;<code>vim</code></td>
+<td>Editores de texto plano</td>
+<td>nano Archivo.txt / vim Archivo.txt</td>
+</tr>
+<tr class="odd">
+<td><code>cp</code></td>
+<td>Copiar archivos</td>
+<td>cp Archivo1.txt /home/usuario/data/</td>
+</tr>
+<tr class="even">
+<td><code>mv</code></td>
+<td>Mover un archivo o carpeta</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td><code>echo</code></td>
+<td>Para llamar y/o declarar variables</td>
+<td>echo “Hello world”</td>
+</tr>
+<tr class="even">
+<td><code>chmod</code></td>
+<td>Cambiar permisos del usuario</td>
+<td>chmod 777 data/</td>
+</tr>
+<tr class="odd">
+<td><code>rsync</code></td>
+<td>Descargar o subir archivos</td>
+<td></td>
+</tr>
+<tr class="even">
+<td><code>scp</code></td>
+<td>Descargar o subir archivos</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td><code>cat</code></td>
+<td>Visualizar contenido de un archivo. Escribe el contenido del archivo de manera secuencial a la salida estándar, a la ventana de Terminal.</td>
+<td></td>
+</tr>
+<tr class="even">
+<td><code>less</code></td>
+<td>Leer contenido de un archivo sin interrumpir la pantalla de Terminal. Similar a&nbsp;<code>Vim</code>&nbsp;pero sin opción para escribir.&nbsp;<strong>Se sale del modo visualización con</strong>&nbsp;q.</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td><code>find</code></td>
+<td>Busca archivos en un directorio específico.</td>
+<td></td>
+</tr>
+<tr class="even">
+<td><code>head</code></td>
+<td>Visualizar primeras líneas de un archivo.</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td><code>tail</code></td>
+<td>Visualizar últimas líneas de un archivo.</td>
+<td></td>
+</tr>
+<tr class="even">
+<td><code>which</code></td>
+<td>Indica el directorio donde se encuentra un particular comando o programa que se haya podido encontrar usando los directorios guardados en la variable de estado&nbsp;<code>PATH</code>.</td>
+<td>which bash</td>
+</tr>
+</tbody>
+</table>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Nota</span>Ayuda de funciones
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Puedes consultar mas información usando <code>ls --help</code></p>
+</div>
+</div>
+</section>
+<section id="consultar-información-sobre-archivos-y-directorios" class="level2" data-number="9.5">
+<h2 data-number="9.5" class="anchored" data-anchor-id="consultar-información-sobre-archivos-y-directorios"><span class="header-section-number">9.5</span> Consultar información sobre archivos y directorios</h2>
+<section id="información-contenida" class="level3" data-number="9.5.1">
+<h3 data-number="9.5.1" class="anchored" data-anchor-id="información-contenida"><span class="header-section-number">9.5.1</span> <strong>Información contenida</strong></h3>
+<p>Cada columna en la salida anterior tiene un significado:</p>
+<p><a href="https://eveliacoss.github.io/RNAseq_classFEB2024/Presentaciones/Dia1_AspectosGenerales.html#74"><img src="figures/ejemplo_datos.png" class="img-fluid"></a></p>
+</section>
+<section id="permisos" class="level3" data-number="9.5.2">
+<h3 data-number="9.5.2" class="anchored" data-anchor-id="permisos"><span class="header-section-number">9.5.2</span> <strong>Permisos</strong></h3>
+<p>Cada usuario tiene permisos diferentes cuando crea un archivo. Los permisos pueden modificarse con <code>chmod</code>.</p>
+<p>Los caracteres atribuidos a los permisos son:</p>
+<ul>
+<li><p><code>r</code> : escritura (Read)</p></li>
+<li><p><code>w</code> : lectura (Write)</p></li>
+<li><p><code>x</code> : ejecución (eXecute)</p></li>
+</ul>
+<p>En el siguiente ejemplo, el usuario cuenta con todos los permisos activos, mientras que el grupo y otros tienen solo permisos de lectura y ejecución.</p>
+<p><a href="https://eveliacoss.github.io/RNAseq_classFEB2024/Presentaciones/Dia1_AspectosGenerales.html#75"><img src="figures/permisos.png" class="img-fluid"></a></p>
+</section>
+</section>
+<section id="chmod-cambiar-permisos" class="level2" data-number="9.6">
+<h2 data-number="9.6" class="anchored" data-anchor-id="chmod-cambiar-permisos"><span class="header-section-number">9.6</span> <strong><code>chmod</code>:</strong> Cambiar permisos</h2>
+<p>La representación octal de chmod es muy sencilla</p>
+<ul>
+<li><p><code>r</code> = Lectura tiene el valor de 4</p></li>
+<li><p><code>w</code> = Escritura tiene el valor de 2</p></li>
+<li><p><code>x</code> = Ejecución tiene el valor de 1</p></li>
+</ul>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: center;">Permisos</th>
+<th style="text-align: center;">Valor</th>
+<th style="text-align: left;">Significado</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">rwx</td>
+<td style="text-align: center;">7</td>
+<td style="text-align: left;">Lectura, escritura y ejecución</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">rw-</td>
+<td style="text-align: center;">6</td>
+<td style="text-align: left;">Lectura, escritura</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">r-x</td>
+<td style="text-align: center;">5</td>
+<td style="text-align: left;">Lectura y ejecución</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">r–</td>
+<td style="text-align: center;">4</td>
+<td style="text-align: left;">Lectura</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">-wx</td>
+<td style="text-align: center;">3</td>
+<td style="text-align: left;">Escritura y ejecución</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">-w-</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: left;">Escritura</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">–x</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: left;">Ejecución</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">—</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: left;">Sin permisos</td>
+</tr>
+</tbody>
+</table>
+<p>Por lo tanto:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: left;">Forma larga</th>
+<th>Forma Octal</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><code>chmod u=rwx,g=rwx,o=rx</code></td>
+<td><code>chmod 775</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>chmod u=rwx,g=rx,o=</code></td>
+<td><code>chmod 760</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>chmod u=rw,g=r,o=r</code></td>
+<td><code>chmod 644</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>chmod u=rw,g=r,o=</code></td>
+<td><code>chmod 640</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>chmod u=rw,go=</code></td>
+<td><code>chmod 600</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>chmod u=rwx,go=</code></td>
+<td><code>chmod 700</code></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="comprimir-y-descomprimir-archivos" class="level2" data-number="9.7">
+<h2 data-number="9.7" class="anchored" data-anchor-id="comprimir-y-descomprimir-archivos"><span class="header-section-number">9.7</span> Comprimir y descomprimir archivos</h2>
+<p>Los archivos pueden contener diversos tipos de extensiones, dependiendo del objetivo será necesario descomprimirlos y en otros dejarlos comprimidos para no abarcar tanto espacio en tu espacio de trabajo.&nbsp;</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Tipo de archivo</th>
+<th>Comprimir</th>
+<th>Descomprimir</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Carpeta.tar</td>
+<td><code>tar -cvf carpeta.tar /dir/a/comprimir/carpeta</code></td>
+<td><code>tar -xvf carpeta.tar</code></td>
+</tr>
+<tr class="even">
+<td>Carpeta.tar.gz</td>
+<td><code>tar -czvf carpeta.tar.gz /carpeta/a/empaquetar/carpeta</code></td>
+<td><code>tar -zxvf carpeta.tar.gz</code></td>
+</tr>
+<tr class="odd">
+<td>Carpeta.gz</td>
+<td><code>gzip -9 carpeta.gz carpeta/a/empaquetar/carpeta</code></td>
+<td><code>gunzip -kd carpeta.gz</code></td>
+</tr>
+<tr class="even">
+<td>Carpeta.zip</td>
+<td><code>zip -r carpeta.zip carpeta</code></td>
+<td><code>unzip carpeta.zip</code></td>
+</tr>
+</tbody>
+</table>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Nota</span>Ejercicio 2
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li>Visita este enlace 👉 <a href="https://github.com/RSG-Ecuador/unix.bioinfo.rsgecuador/tree/gh-pages">unix.bioinfo.rsgecuador</a> .</li>
+<li>Haz clic en el botón verde que dice <strong>“CODE”</strong>.</li>
+<li>Selecciona la opción <strong>“Download ZIP”</strong>.</li>
+<li>Elige la carpeta donde deseas guardar el archivo en tu computadora. El archivo se almacena con la extension <code>.zip</code>.</li>
+<li>Ve a la carpeta donde se guardó el archivo desde la <strong>terminal</strong>. Ejemplo en mi computadora:</li>
+</ol>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> <span class="st">"C:/Users/ecoss/Documents/Respaldos/Github_notes/Workshop_Bash2024/data"</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<ol start="6" type="1">
+<li>Descomprime el archivo <code>.zip</code>.</li>
+</ol>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">unzip</span> unix.bioinfo.rsgecuador-gh-pages.zip</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</section>
+<section id="material-suplementario" class="level2" data-number="9.8">
+<h2 data-number="9.8" class="anchored" data-anchor-id="material-suplementario"><span class="header-section-number">9.8</span> Material suplementario</h2>
+<ul>
+<li>Software Carpentry. <a href="https://swcarpentry.github.io/shell-novice-es/02-filedir.html">La terminal de Unix</a></li>
+<li>RSG Ecuador.<a href="https://rsg-ecuador.github.io/unix.bioinfo.rsgecuador/content/Curso_avanzado/02_Bash/1_bash.html">GNU/Linux para bioinfomatica</a></li>
+<li><a href="https://github.com/raynamharris/Shell_Intro_for_Transcriptomics/tree/master">Introduction to the Unix Shell for Transcriptomics</a>Tutorial.</li>
+</ul>
 
 
 </section>
@@ -724,13 +1414,13 @@ ul.task-list li input[type="checkbox"] {
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./cap4.html" class="pagination-link" aria-label="X definir">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">X definir</span></span>
+      <a href="./cap4.html" class="pagination-link" aria-label="Introducción a Linux/Unix">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Introducción a Linux/Unix</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./cap6.html" class="pagination-link" aria-label="Extra">
-        <span class="nav-page-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Extra</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./cap6.html" class="pagination-link" aria-label="Wildcards y Streams">
+        <span class="nav-page-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Wildcards y Streams</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

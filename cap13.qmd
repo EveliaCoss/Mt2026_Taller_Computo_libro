@@ -1,0 +1,109 @@
+# Scripts en Bash
+
+Los `scripts` son archivos de texto que contienen instrucciones ejecutables por un intérprete de un lenguaje de programación para la ejecución de tareas. El formato `.sh` se utiliza para escribir `scripts ejecutables` por un intérprete como **Bash**. En esta sección crearemos varios scripts de Bash y usaremos varios comandos y operadores.
+
+::: callout-note
+Los script de Bash contiene al inicio esta descripción `#!bin/bash` y la extensión `.sh`
+:::
+
+## Actividad grupal
+
+**Paso 1.** Crear un script en Bash con el nombre demo.sh empleando nano.
+
+``` {.bash code-copy="true" eval="false"}
+nano demo.sh
+```
+
+**Paso 2.** Copia el siguiente código dentro del script `demo.sh` y guarda los cambios.
+
+``` {.bash code-copy="true" eval="false"}
+
+#!/bin/bash
+# File: demo.sh
+
+# Input de archivo
+# 2. Mostrar el archivo y número de argumentos
+echo "Archivo a procesar > $@"
+echo "Numero de argumentos: $#"
+
+# 3. Conteo de secuencias y separación de malas lecturas
+numero_secuencias=$(grep -c '^@SRR098026' $@)
+grep -B1 -A2 NNNNNNNNNN $@ > malas_lecturas.fastq
+malas=$(cat malas_lecturas.fastq | wc -l)
+echo "Número de malas lecturas: $malas"
+
+# 4. Búsqueda de patrones
+echo "Desea buscar patrones (y/n): "
+read d
+
+if [[ $d == "y" ]]; then
+    echo "Los patrones se guardarán en: patrones.txt"
+    echo -e 'ACTG\nCCCCC\nNNNCNNN\nNNNGNNN\nTTTT\nTATA\nAAA' > patrones.txt
+    grep -f patrones.txt $@ > busqueda.txt
+    echo "Búsqueda de patrones guardada en: busqueda.txt"
+else
+    echo "ok :P"
+fi
+
+# Mensaje final
+echo "Fin :)"
+```
+
+::: {.callout-note collapse="true"}
+## Explicación del código
+
+- 1\. **Comentarios y declaración de archivo**
+- `#!/bin/bash`: Indica que el script se ejecutará usando el intérprete de Bash.
+- `# File: demo.sh`: Un comentario que indica el nombre del archivo del script.
+- 2\. **Mostrar el archivo y número de argumentos**
+- `echo "Archivo a procesar > $@"`: Muestra el nombre del archivo que se pasará como argumento al script. `$@` representa todos los argumentos pasados al script.
+- `echo "Numero de argumentos: $#"`: Muestra cuántos argumentos ha recibido el script. `$#` indica el número de argumentos.
+- 3\. **Contar secuencias y separar malas lecturas**
+- `numero_secuencias=$(grep -c '^@SRR098026' $@)`: Usa `grep` para contar cuántas secuencias empiezan con `@SRR098026` en el archivo (probablemente sea un prefijo en un archivo FASTQ que identifica secuencias de interés). `-c` cuenta las coincidencias.
+- `grep -B1 -A2 NNNNNNNNNN $@ > malas_lecturas.fastq`: Busca secuencias de calidad baja o problemáticas (que contengan 10 nucleótidos seguidos de `N`, que representan bases no determinadas).
+  - `-B1`: Muestra 1 línea antes de cada coincidencia de `NNNNNNNNNN`.
+
+  - `-A2`: Muestra 2 líneas después de la coincidencia.
+
+  - El resultado se guarda en un archivo llamado `malas_lecturas.fastq`.
+- `malas=$(cat malas_lecturas.fastq | wc -l)`: Cuenta el número total de líneas en `malas_lecturas.fastq` (esto indica la cantidad de malas lecturas encontradas).
+- `echo "Número de malas lecturas: $malas"`: Muestra la cantidad de malas lecturas encontradas
+- `echo "Numero de argumentos: $#"`: Muestra cuántos argumentos ha recibido el script. `$#` indica el número de argumentos.
+- 4\. **Búsqueda de patrones**
+- `echo "Desea buscar patrones (y/n): "`: Pregunta al usuario si desea buscar patrones específicos en el archivo.
+- `read d`: Lee la respuesta del usuario y la guarda en la variable `d`.
+- `if [[ $d == "y" ]]; then`: Si la respuesta es "y" (sí), el script procede a buscar los patrones.
+  - `echo -e 'ACTG\nCCCCC\nNNNCNNN\nNNNGNNN\nTTTT\nTATA\nAAA' > patrones.txt`: Crea un archivo `patrones.txt` que contiene una lista de secuencias de interés (patrones a buscar).
+
+  - `grep -f patrones.txt $@ > busqueda.txt`: Busca los patrones contenidos en `patrones.txt` dentro del archivo de entrada. El resultado de la búsqueda se guarda en `busqueda.txt`.
+
+  - `echo "Búsqueda de patrones guardada en: busqueda.txt"`: Informa al usuario que los resultados de la búsqueda se guardaron en el archivo `busqueda.txt`.
+- `else`: Si la respuesta es "n" (no), simplemente muestra un mensaje.
+:::
+
+Este código realizará las siguientes instrucciones:
+
+1.  Tomará como input el nombre del archivo `./_files/secuencias_bash.fastq` de secuencias fastq para analizar.
+
+2.  Buscará dentro del archivo provisto por el usuario las secuencias con el string \@SRR098026 y las contará.
+
+3.  Exportará las malas secuencias a un archivo llamado `malas_lecturas.fastq`, usando el string "NNNNNNNNNN" como plantilla.
+
+4.  Reportará el número de malas secuencias.
+
+5.  Luego buscaremos patrones en el archivo `buenas_lecturas.fastq`, si es que el usuario lo desea.
+
+**Paso 3.** Deberías correr el script así, una vez que hayas descargado el archivo `secuencias_bash.fastq`:
+
+``` {.bash code-copy="true" eval="false"}
+bash demo.sh secuencias_bash.fastq
+```
+
+[![](https://rsg-ecuador.github.io/unix.bioinfo.rsgecuador/_images/b5.png)](https://rsg-ecuador.github.io/unix.bioinfo.rsgecuador/content/Curso_avanzado/02_Bash/1_bash.html)
+
+## Material suplementario
+
+- RSG Ecuador. [Scripts en Bash](https://rsg-ecuador.github.io/unix.bioinfo.rsgecuador/content/Curso_avanzado/02_Bash/1_bash.html)
+- RSG Ecuador. [Wildcards y Streams](https://rsg-ecuador.github.io/unix.bioinfo.rsgecuador/content/Curso_basico/03_Manejo_terminal/5_wildcards.html)
+- RSG Ecuador. [Expresiones regulares (*regex*)](https://rsg-ecuador.github.io/unix.bioinfo.rsgecuador/content/Curso_basico/04_Procesamiento_ficheros_regex_pipes/3_Expresiones_regulares.html)
+- [Wildcard Selection in Bash](https://pressbooks.senecapolytechnic.ca/uli101/chapter/wildcard-selection-in-bash/)

@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>3&nbsp; Introducción a Linux/Unix – Taller de Cómputo</title>
+<title>4&nbsp; Buenas prácticas en bioinformática – Taller de Cómputo</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -33,7 +33,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./cap4.html" rel="next">
+<link href="./install_B.html" rel="next">
 <link href="./cap2.html" rel="prev">
 <link href="./flyer/logo.png" rel="icon" type="image/png">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
@@ -87,7 +87,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./cap3.html"><strong>Introducción a Bash</strong></a></li><li class="breadcrumb-item"><a href="./cap3.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Introducción a Linux/Unix</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./cap3.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Buenas prácticas en bioinformática</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Buscar" onclick="window.quartoOpenSearch();">
@@ -100,7 +100,11 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
-    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
+      <a href="./index.html" class="sidebar-logo-link">
+      <img src="./flyer/logo_enes.png" alt="" class="sidebar-logo light-content py-0 d-lg-inline d-none">
+      <img src="./flyer/logo_enes.png" alt="" class="sidebar-logo dark-content py-0 d-lg-inline d-none">
+      </a>
     <div class="sidebar-title mb-0 py-0">
       <a href="./">Taller de Cómputo</a> 
         <div class="sidebar-tools-main">
@@ -152,20 +156,32 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./cap1.html" class="sidebar-item-text sidebar-link">
+  <a href="./cap1A.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introducción e integración</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./cap1B.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Doc (uDocz) como Agente de AI en este curso <strong>🤖</strong></span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./cap2.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Componentes de una Computadora</span></span></a>
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Componentes de una Computadora</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cap3.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Buenas prácticas en bioinformática</span></span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
- <span class="menu-text"><strong>Introducción a Bash</strong></span></a>
+ <span class="menu-text"><strong>Pre-requisitos</strong></span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Alternar sección">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -173,14 +189,20 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./cap3.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Introducción a Linux/Unix</span></span></a>
+  <a href="./install_B.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Instalación de Git y Bash</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./cap4.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">X definir</span></span></a>
+  <a href="./install_R.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Instalación de R y RStudio</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./install_git.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Instalar Git Bash en Windows</span></span></a>
   </div>
 </li>
       </ul>
@@ -188,7 +210,7 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
- <span class="menu-text"><strong>Introducción a Python</strong></span></a>
+ <span class="menu-text"><strong>Sección 1</strong> - Introducción a Bash</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Alternar sección">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -196,8 +218,20 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./cap4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Introducción a Linux/Unix</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./cap5.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">X definir</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Mis primeros pasos en Bash</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cap6.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Wildcards y Streams</span></span></a>
   </div>
 </li>
       </ul>
@@ -205,7 +239,7 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
- <span class="menu-text">Apéndices</span></a>
+ <span class="menu-text"><strong>Sección 2</strong> - Edición de archivos con Bash</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Alternar sección">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -213,26 +247,237 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./cap6.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Extra</span></span></a>
+  <a href="./cap7.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Operadores de redirección de datos I/O</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./cap7.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Extra related to biological Questions</span></span></a>
+  <a href="./cap8.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Edición de archivos con los editores de texto (<code>nano</code> y <code>vim</code>)</span></span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cap9.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Edición de archivos con el editor de flujo <code>sed</code></span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cap10.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Enlaces simbólicos (symlinks)</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cap11.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Filtrado de texto (<code>grep, cut, sort, uniq, wc</code>)</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cap12.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Condicionales</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cap13.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Scripts en Bash</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cap14.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Bucles (for loops)</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
+ <span class="menu-text"><strong>Sección 3</strong> - Introducción a Git/GitHub</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Alternar sección">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cap15.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Introducción a Git / GitHub</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cap16.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Configurar Git</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cap17.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Repositorios</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cap18.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Rastrear cambios</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cap19.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Explorando el historial</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cap20.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Restore y reset</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cap21.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Ignorar archivos/carpetas</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
+ <span class="menu-text"><strong>Sección 4</strong> - Conexión con Github</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Alternar sección">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cap22.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Github</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cap23.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Colaboradores</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cap24.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Conflictos</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cap25.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">Trabajando con Ramas</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cap26.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">Conectar a GitHub con SSH</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cap27.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">Resumen y Práctica Final</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true">
+ <span class="menu-text"><strong>Sección 5</strong> - Introducción a R y Rstudio</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true" aria-label="Alternar sección">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cap28.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">32</span>&nbsp; <span class="chapter-title">Introducción a R y Rstudio</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./s5_actividades1y2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">33</span>&nbsp; <span class="chapter-title"><strong>📚</strong> Actividad 1 y 2</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cap29.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">34</span>&nbsp; <span class="chapter-title">Repaso: Introducción a Markdown</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./s5_actividades3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">35</span>&nbsp; <span class="chapter-title"><strong>📚</strong> Actividad 3: Página web con Rmarkdown</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cap30.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">36</span>&nbsp; <span class="chapter-title">Introducción a Quarto</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./s5_actividades4y5.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">37</span>&nbsp; <span class="chapter-title"><strong>📚</strong> Actividad 4 y 5</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true">
+ <span class="menu-text"><strong>Sección 6</strong> - Introducción a Python</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true" aria-label="Alternar sección">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cap28.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">32</span>&nbsp; <span class="chapter-title">Introducción a R y Rstudio</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="true">
+ <span class="menu-text">Apéndices</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="true" aria-label="Alternar sección">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./resources.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">Bioinformática y Estadística 2</span></span></a>
+ <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Bioinformática y Estadística 2</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./notas.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">D</span>&nbsp; <span class="chapter-title">Notas</span></span></a>
+ <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Notas</span></span></a>
   </div>
 </li>
       </ul>
@@ -247,21 +492,21 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Tabla de contenidos</h2>
    
   <ul>
-  <li><a href="#qué-es-unix" id="toc-qué-es-unix" class="nav-link active" data-scroll-target="#qué-es-unix"><span class="header-section-number">3.1</span> ¿Qué es UNIX?</a></li>
-  <li><a href="#gnulinux" id="toc-gnulinux" class="nav-link" data-scroll-target="#gnulinux"><span class="header-section-number">3.2</span> GNU/Linux</a></li>
-  <li><a href="#filosofía-gnulinux" id="toc-filosofía-gnulinux" class="nav-link" data-scroll-target="#filosofía-gnulinux"><span class="header-section-number">3.3</span> Filosofía GNU/Linux</a></li>
-  <li><a href="#ubuntu" id="toc-ubuntu" class="nav-link" data-scroll-target="#ubuntu"><span class="header-section-number">3.4</span> Ubuntu</a></li>
-  <li><a href="#shell-bash-bash-shell" id="toc-shell-bash-bash-shell" class="nav-link" data-scroll-target="#shell-bash-bash-shell"><span class="header-section-number">3.5</span> Shell / Bash / Bash Shell</a></li>
-  <li><a href="#material-suplementario" id="toc-material-suplementario" class="nav-link" data-scroll-target="#material-suplementario"><span class="header-section-number">3.6</span> Material suplementario</a></li>
+  <li><a href="#materiales-informativos" id="toc-materiales-informativos" class="nav-link active" data-scroll-target="#materiales-informativos"><span class="header-section-number">4.1</span> Materiales informativos</a></li>
+  <li><a href="#un-algoritmo-nos-permite-resolver-un-problema" id="toc-un-algoritmo-nos-permite-resolver-un-problema" class="nav-link" data-scroll-target="#un-algoritmo-nos-permite-resolver-un-problema"><span class="header-section-number">4.2</span> <strong>Un algoritmo nos permite resolver un problema ⭐</strong></a></li>
+  <li><a href="#para-escribir-un-buen-software-necesitas" id="toc-para-escribir-un-buen-software-necesitas" class="nav-link" data-scroll-target="#para-escribir-un-buen-software-necesitas"><span class="header-section-number">4.3</span> <strong>Para escribir un buen software necesitas:</strong></a></li>
+  <li><a href="#paso-7-documentación" id="toc-paso-7-documentación" class="nav-link" data-scroll-target="#paso-7-documentación"><span class="header-section-number">4.4</span> <strong>Paso 7: Documentación</strong></a></li>
+  <li><a href="#puntos-claves-para-buenas-prácticas-en-bioinfo" id="toc-puntos-claves-para-buenas-prácticas-en-bioinfo" class="nav-link" data-scroll-target="#puntos-claves-para-buenas-prácticas-en-bioinfo"><span class="header-section-number">4.5</span> Puntos claves para buenas prácticas en bioinfo ⭐</a></li>
+  <li><a href="#referencias" id="toc-referencias" class="nav-link" data-scroll-target="#referencias"><span class="header-section-number">4.6</span> Referencias</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./cap3.html"><strong>Introducción a Bash</strong></a></li><li class="breadcrumb-item"><a href="./cap3.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Introducción a Linux/Unix</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Introducción a Linux/Unix</span></h1>
+<h1 class="title"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Buenas prácticas en bioinformática</span></h1>
 </div>
 
 
@@ -289,59 +534,7 @@ ul.task-list li input[type="checkbox"] {
 <li>Aplicar este conocimiento en la selección de sistemas operativos</li>
 </ol>
 </div>
-<section id="qué-es-unix" class="level2" data-number="3.1">
-<h2 data-number="3.1" class="anchored" data-anchor-id="qué-es-unix"><span class="header-section-number">3.1</span> ¿Qué es UNIX?</h2>
-<ul>
-<li>Sistema operativo (SO) creado por <strong>Ken Thompson y Dennis Ritchie</strong> de la empresa <em>Bell Laboratories</em> en 1969.</li>
-<li>SO multitarea y multiusuario.</li>
-</ul>
-</section>
-<section id="gnulinux" class="level2" data-number="3.2">
-<h2 data-number="3.2" class="anchored" data-anchor-id="gnulinux"><span class="header-section-number">3.2</span> GNU/Linux</h2>
-<ul>
-<li>En 1983 <strong>Richard Stallman</strong> lideró la iniciativa <a href="https://www.gnu.org/">GNU</a> (GNU’s Not Unix), SO compatible con UNIX de libre distribución y acceso sin restricciones al código fuente.</li>
-<li>En 1991 <strong>Linus Torvalds</strong> creó su propio <a href="https://linuxjourney.com/lesson/kernel-overview">kernel</a> (Linux), que es la parte del SO que permite la comunicación con los componentes de Hardware. Este kernel fue distribuido de forma libre y gratuita.</li>
-<li>Ambos proyectos se juntaron y se creó <strong>GNU/Linux</strong></li>
-</ul>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><a href="https://rsg-ecuador.github.io/unix.bioinfo.rsgecuador/content/Curso_basico/01_Unix_GNU-Linux/1_Conceptos_Unix_GNU_Linux.html"><img src="figures/GNU_LIN1.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></a></p>
-</figure>
-</div>
-</section>
-<section id="filosofía-gnulinux" class="level2" data-number="3.3">
-<h2 data-number="3.3" class="anchored" data-anchor-id="filosofía-gnulinux"><span class="header-section-number">3.3</span> Filosofía GNU/Linux</h2>
-<ul>
-<li>Los usuarios son libres de <strong>ejecutar, copiar, distribuir, estudiar, cambiar y mejorar</strong> el software.</li>
-<li>El <a href="https://www.gnu.org/philosophy/free-sw.html">software libre</a> se refiere a las libertades mencionadas, no al precio.</li>
-<li><a href="https://opensource.org/">“open source”</a> vs <a href="https://www.gnu.org/philosophy/free-sw.html">“free software”</a>.</li>
-</ul>
-</section>
-<section id="ubuntu" class="level2" data-number="3.4">
-<h2 data-number="3.4" class="anchored" data-anchor-id="ubuntu"><span class="header-section-number">3.4</span> Ubuntu</h2>
-<ul>
-<li>Una de las distribuciones de GNU/Linux más populares.</li>
-<li>Está basada en <a href="https://www.debian.org/">Debian</a> y fue desarrollada por la empresa <a href="https://canonical.com/"><em>Canonical</em></a></li>
-<li>Facilidad de uso e instalación.</li>
-<li>Interfaz de usuario amigable.</li>
-</ul>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><a href="https://rsg-ecuador.github.io/unix.bioinfo.rsgecuador/content/Curso_basico/01_Unix_GNU-Linux/1_Conceptos_Unix_GNU_Linux.html"><img src="figures/ubuntu.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="205"></a></p>
-</figure>
-</div>
-</section>
-<section id="shell-bash-bash-shell" class="level2" data-number="3.5">
-<h2 data-number="3.5" class="anchored" data-anchor-id="shell-bash-bash-shell"><span class="header-section-number">3.5</span> Shell / Bash / Bash Shell</h2>
-<ul>
-<li>La <a href="https://en.wikipedia.org/wiki/Unix_shell"><em>shell</em></a> es el programa que provee una <strong>interfaz de línea de comandos (CLI)</strong>, que permite la comunicación entre el usuario y el SO.</li>
-<li>La mayoría de distribuciones de Linux tienen por defecto <a href="https://www.gnu.org/software/bash/"><em>bash</em></a> (“Bourne Again SHell”) como <em>shell</em>. Hay <a href="https://www.educba.com/types-of-shells-in-linux/">otros tipos de shell</a> como <strong>sh, csh, tcsh, ksh, zsh</strong>, entre otras.</li>
-</ul>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="figures/bash.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="363"></p>
-</figure>
-</div>
+<p>Notas personales recabadas a partir de los tutoriales y ejemplos 😊. Espero que les funcione 💜</p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -352,20 +545,157 @@ Nota
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Bash es un intérprete de comandos que te da el poder de hacer tareas simples rápidamente.</p>
+<p><a href="https://eveliacoss.github.io/LCG2025_S1_Buenaspracticas_presentacion/Dia1_BuenasPracticas.html#1">Presentación completa</a> empleando Rmarkdown</p>
+</div>
+</div>
+<section id="materiales-informativos" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="materiales-informativos"><span class="header-section-number">4.1</span> Materiales informativos</h2>
+<ul>
+<li><a href="https://comunidadbioinfo.github.io/cdsb2023/creaci%C3%B3n-de-vi%C3%B1etas.html">Curso de Joselyn Cristina Chávez Fuentes</a></li>
+<li>Me ayudo mucho este <a href="https://www.youtube.com/watch?v=7ZgZ6qUKZvE&amp;ab_channel=DaniMedi">Video</a></li>
+<li><a href="https://comunidadbioinfo.github.io/cdsb2023/documentaci%C3%B3n-de-funciones.html">Documentación de funciones de Andrés Arredondo Cruz</a></li>
+</ul>
+<p>💪 Estuve muy intensa viendo su codigo. Muchas gracias por tenerlos publico.</p>
+</section>
+<section id="un-algoritmo-nos-permite-resolver-un-problema" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="un-algoritmo-nos-permite-resolver-un-problema"><span class="header-section-number">4.2</span> <strong>Un algoritmo nos permite resolver un problema ⭐</strong></h2>
+<p>Un <strong>algoritmo</strong> es un método para resolver un problema mediante una serie de pasos <strong>definidos, precisos</strong> y <strong>finitos</strong>.</p>
+<ul>
+<li><strong>Definido</strong>: si se sigue dos veces, se obtiene el mismo resultado. Es reproducible.</li>
+<li><strong>Preciso</strong>: implica el orden de realización de cada uno de los pasos.</li>
+<li><strong>Finito</strong>: Tiene un numero determinado de pasos, implica que tiene un fin.</li>
+</ul>
+<blockquote class="blockquote">
+<p>Un algoritmo podemos definirlo como un <strong>programa o software</strong>.</p>
+</blockquote>
+<p><a href="https://allisonhorst.com/allison-horst"><img src="figures/allison-horst-code-kitchen.png" class="img-fluid"></a></p>
+</section>
+<section id="para-escribir-un-buen-software-necesitas" class="level2" data-number="4.3">
+<h2 data-number="4.3" class="anchored" data-anchor-id="para-escribir-un-buen-software-necesitas"><span class="header-section-number">4.3</span> <strong>Para escribir un buen software necesitas:</strong></h2>
+<blockquote class="blockquote">
+<p>Escribir <strong>código mantenible (maintainable code), usar control de versiones (version control) y rastreadores de problemas (issue trackers), revisiones de código (code reviews), pruebas unitarias (unit testing) y automatización de tareas (task automation)</strong>.</p>
+<p><a href="https://journals.plos.org/plosbiology/article?id=10.1371/journal.pbio.1001745">Wilson, <em>et al.</em> 2014. <em>PLOS Biology</em></a></p>
+</blockquote>
+<p>En bioinformática, es fundamental garantizar el uso <strong>ético y responsable de datos sensibles</strong>, como los genomas humanos, respetando la privacidad y los marcos legales vigentes. Al mismo tiempo, se debe fomentar la ciencia abierta <strong>mediante prácticas transparentes y reproducibles</strong>, sin comprometer la integridad de la información. Estas acciones no solo fortalecen la <strong>confianza en los resultados</strong>, sino que también previenen errores graves que podrían derivar en la <strong>retracción de artículos científicos</strong>.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="https://devcom.com/tech-blog/code-quality-definition-how-to-improve-code-quality/"><img src="figures/what-code-quality-1.jpg" class="img-fluid quarto-figure quarto-figure-center figure-img"></a></p>
+</figure>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Nota</span>Pasos para escribir un buen software
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li><p>Análisis del problema / Definir el problema</p></li>
+<li><p>Diseño del algoritmo / Diseño del programa</p></li>
+<li><p>Codificación / Escribir el código</p></li>
+<li><p>Compilación y ejecución del programa</p></li>
+<li><p>Verificación / Realizar pruebas</p></li>
+<li><p>Depuración / Detectar los errores y corregirlos</p></li>
+</ol>
+<blockquote class="blockquote">
+<p>Programacion defensiva</p>
+</blockquote>
+<ol start="7" type="1">
+<li>Documentación</li>
+</ol>
+</div>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://eveliacoss.github.io/Buenaspracticas_R_Mayo2024/BestPractices/figures/homersapien.jpg" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+</section>
+<section id="paso-7-documentación" class="level2" data-number="4.4">
+<h2 data-number="4.4" class="anchored" data-anchor-id="paso-7-documentación"><span class="header-section-number">4.4</span> <strong>Paso 7: Documentación</strong></h2>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Nota
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li><p><em>Título</em> (opcional)</p></li>
+<li><p><em>Autor (author)</em>: Su nombre</p></li>
+<li><p><em>Dia (date)</em>: Fecha de creación</p></li>
+<li><p><em>Paquetes (packages)</em></p></li>
+<li><p><em>Directorio de trabajo (Working directory)</em>: En que carpeta se encuentra tu datos y programa.</p></li>
+<li><p><em>Información descriptiva del programa (Description)</em>: ¿Para qué sirve el programa? Ej: El siguiente programa realiza la suma de dos numeros enteros a partir de la entrada del usuario y posteriormente la imprime en pantalla.</p></li>
+<li><p><em>Usage</em> ¿Cómo se utiliza?</p></li>
+<li><p><em>Argumentos (Arguments)</em></p>
+<ul>
+<li><p><em>Información de entrada (Data Inputs)</em>: Ej: Solo numeros enteros (sin decimales).</p></li>
+<li><p><em>Información de salida (Outpus)</em>: Graficas, figuras, tablas, etc.</p></li>
+</ul></li>
+</ul>
+</div>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://eveliacoss.github.io/Buenaspracticas_R_Mayo2024/BestPractices/figures/meme_documentacion.jpg" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+</section>
+<section id="puntos-claves-para-buenas-prácticas-en-bioinfo" class="level2" data-number="4.5">
+<h2 data-number="4.5" class="anchored" data-anchor-id="puntos-claves-para-buenas-prácticas-en-bioinfo"><span class="header-section-number">4.5</span> Puntos claves para buenas prácticas en bioinfo ⭐</h2>
+<ol type="1">
+<li><p>Escriba <strong>programas para personas, no para computadoras</strong> (Documenta qué hace y por qué). - Se coherente en la nomenclatura, indentación y otros aspectos del estilo.</p></li>
+<li><p>Modularidad: Divide los programas en <em>funciones cortas de un solo propósito.</em> 💻 📚</p></li>
+<li><p><strong>No repitas tu código</strong>. Crea pasos reproducibles o que se repitan por si solas. ➰</p></li>
+<li><p>Planifique los errores (<strong>Programacion defensiva</strong>) 🚩</p></li>
+<li><p>Optimice el software sólo después de que funcione correctamente. - Si funciona no lo modifiques, simplificalo.</p></li>
+<li><p>Colaborar - Busque siempre bibliotecas de software bien mantenidas que hagan lo que necesita. 👥</p></li>
+</ol>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Nota</span>Ejemplo de como realizo mis documentos 💜
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Aqui les dejo el script que les doy a mis alumnos <a href="https://github.com/EveliaCoss/RNAseq_classFEB2024/blob/main/Practica_Dia3/scripts/VisualizacionDatos.R">VisualizacionDatos.R</a> del curso de <a href="https://github.com/EveliaCoss/RNAseq_classFEB2024">Análisis de datos de RNA-Seq</a>.</p>
 </div>
 </div>
 </section>
-<section id="material-suplementario" class="level2" data-number="3.6">
-<h2 data-number="3.6" class="anchored" data-anchor-id="material-suplementario"><span class="header-section-number">3.6</span> Material suplementario</h2>
-<p>Si quieren aprender temas más sobre UNIX, GNU/Linux, bash, emulador de terminal y otros tema, pueden explorar los siguientes recursos, que son de acceso libre:</p>
+<section id="referencias" class="level2" data-number="4.6">
+<h2 data-number="4.6" class="anchored" data-anchor-id="referencias"><span class="header-section-number">4.6</span> Referencias</h2>
 <ul>
-<li>Kross, S. (2017). <em>The unix workbench</em>. Leanpub. <a href="https://leanpub.com/unix" class="uri">https://leanpub.com/unix</a></li>
-<li>Ross, A. (2019). <em>The Ultimate Linux Newbie Guide</em>. <a href="https://linuxnewbieguide.org/" class="uri">https://linuxnewbieguide.org/</a></li>
-<li>Shotts, W. (2019). <em>The Linux command line: a complete introduction</em>. No Starch Press. <a href="http://www.linuxcommand.org/tlcl.php/index.php" class="uri">http://www.linuxcommand.org/tlcl.php/index.php</a></li>
-<li>Linux Journey. (2020). Linux Journey. <a href="https://linuxjourney.com/" class="uri">https://linuxjourney.com/</a></li>
-<li>GNU. (2020). GNU. <a href="https://www.gnu.org/" class="uri">https://www.gnu.org/</a></li>
-<li><a href="https://rsg-ecuador.github.io/unix.bioinfo.rsgecuador/content/Curso_basico/01_Unix_GNU-Linux/1_Conceptos_Unix_GNU_Linux.html">GNU/Linux para bioinformatica</a></li>
+<li>Presentación de <a href="https://miriamll.github.io/teaching_R_Rmd/Repro#1">Reproducibilidad de Miriam Lerma</a></li>
+<li>Presentación <a href="https://miriamll.github.io/teaching_R_Rmd/GitGithubZenodo#1">introducción a Git, GitHub y Zenodo de Miriam Lerma</a></li>
+<li><a href="https://lcg-cursos.github.io/material/introbioinfo/L2-buenas-practicas.html#1">Presentación de Introducción a la Bioinformática - Heladia Salgado</a></li>
+<li><a href="https://flor14.github.io/rladies-jujuy/presentacion.html?panelset=compendio&amp;panelset1=bibliograf%25C3%25ADa#3">Mi próximo artículo científico en R de Florencia D´Andrea</a></li>
+<li><a href="https://github.com/WhitakerLab/ReproducibleResearch">Kristie Reproducible Research</a></li>
+<li><a href="https://figshare.com/articles/journal_contribution/Showing_your_working_a_how_to_guide_to_reproducible_research/5443201/1?file=9410686">Presentación de Kristie</a></li>
+<li><a href="https://ifb-elixirfr.github.io/IFB-FAIR-bioinfo-training/assets/pdf/Session2020/01_introduction.pdf">FAIR- bioinformatic</a></li>
+<li><a href="https://github.com/AliciaMstt/BioinfInvRepro2016-II/blob/master/Unidad1/Unidad1_Bioinf_e_Investigaci%C3%B3n_Reproducible.md">Unidad 1 Bioinformática e investigación reproducible</a></li>
+<li><a href="https://academic.oup.com/bib/article/24/6/bbad375/7326135">The five pillars of computational reproducibility: bioinformatics and beyond</a></li>
+<li><a href="https://open-science-training-handbook.github.io/Open-Science-Training-Handbook_ES/02OpenScienceBasics/04ReproducibleResearchAndDataAnalysis.html">Investigación reproducible y análisis de datos</a></li>
+<li>Haydee tutorial: <a href="https://haydeeperuyero.github.io/Computo_Cientifico/">Temas Selectos de Análisis Numérico y Computación Científica: Computo científico para el análisis de datos</a></li>
+<li>Alejandra Medina tutorial: <a href="https://comunidadbioinfo.github.io/cdsb2023/control-de-versiones-con-github-y-rstudio.html">Control de versiones con GitHub y RStudio</a></li>
+<li>Wilson, et al.&nbsp;2014. <a href="https://journals.plos.org/plosbiology/article?id=10.1371/journal.pbio.1001745">Best Practices for Scientific Computing</a>. PLOS Biology</li>
+<li>Evelia Coss - tutorial <a href="https://github.com/EveliaCoss/Buenaspracticas_R_Mayo2024">Buenas practicas en R</a></li>
+<li>Evelia Coss - <a href="https://github.com/EveliaCoss/Make_yourCV">Make your CV tutorial</a></li>
+<li>Markdwn Guide - <a href="https://www.markdownguide.org/getting-started/">Getting Started</a></li>
+<li>Allison Horst - <a href="https://allisonhorst.com/allison-horst">Imagenes</a></li>
+<li><a href="https://srvanderplas.github.io/stat-computing-r-python/">Statistical Computing using R and Python</a></li>
+<li><a href="https://learning.nceas.ucsb.edu/2024-10-coreR/">Training Materials</a></li>
+<li><a href="https://damiandeluca.com.ar/como-comenzar-con-visual-studio-code-una-guia-para-principiantes">Visual Studio Code</a></li>
+<li><a href="https://blog.ml.cmu.edu/2020/08/31/5-reproducibility/">Articulo reproducibilidad</a></li>
 </ul>
 
 
@@ -814,12 +1144,12 @@ Nota
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="./cap2.html" class="pagination-link" aria-label="Componentes de una Computadora">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Componentes de una Computadora</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Componentes de una Computadora</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./cap4.html" class="pagination-link" aria-label="X definir">
-        <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">X definir</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./install_B.html" class="pagination-link" aria-label="Instalación de Git y Bash">
+        <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Instalación de Git y Bash</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
