@@ -18,34 +18,41 @@
 - **Créditos:** 4
 - **Nivel:** Básico
 - **Aula:** V304
-- **Link de registro:** Google form
-- **Plan de clases:** [Documento compartido]{.highlight-yellow}
+- **Cuestionario diagnóstico:** [[Google form](https://forms.gle/xxpcC6z4UhiV9iER8)]{.highlight-yellow}
+- **Plan de clases:** [[Clase de Taller de Cómputo](https://docs.google.com/document/d/17rDksWqGWQqDFUMFqzgVF_BXnBDP3KMUrysgxIPGv9U/edit?usp=sharing)]{.highlight-yellow}
 
 #### **Instructora:**
 
 - **Dra. Evelia Lorena Coss-Navarrete** - Profesora de asignatura de la ENES, Juriquilla-UNAM, México. [Web page](https://eveliacoss.github.io/) ([ecossnav\@gmail.com](mailto:ecossnav@gmail.com))
 
-### 🎯 Objetivo principal ([PENDIENTE]{.highlight-yellow})
+### 🎯 Objetivo principal
 
-- Identificar y examinar los lenguajes Linux/Unix.
-- Resolver problemas básicos de forma general mediante un lenguaje de programación.
+Formar estudiantes capaces de comprender el funcionamiento básico de una computadora y de utilizar herramientas fundamentales de programación y documentación —**Bash, Python, Markdown y Git/GitHub**— para automatizar tareas, analizar datos, documentar proyectos y trabajar de manera colaborativa, incorporando además el uso de agentes de AI como apoyo en matemáticas y programación.
 
-#### ✅ Objetivos particulares ([PENDIENTE]{.highlight-yellow})
+#### Objetivos particulares
 
-- Definir y utilizar el ambiente Linux/Unix.
-- Utilizar los conceptos básicos de programación.
-- Implementar y computar algunos programas básicos de interés en algún lenguaje de programación libre.
+- Identificar componentes de una computadora y comprender su función básica.
+- Aprender a usar la terminal para ejecutar comandos y gestionar archivos.
+- Desarrollar scripts en **Bash** que automaticen tareas sencillas.
+- Aplicar conceptos básicos de programación en **Python** (variables, condicionales, bucles, funciones).
+- Analizar datos con Python utilizando bibliotecas iniciales.
+- Escribir documentos en **Markdown** para reportes y documentación técnica.
+- Usar **Git y GitHub** para control de versiones y trabajo colaborativo.
+- Integrar **Bash, Python, Markdown y GitHub** en flujos de trabajo reproducibles.
+- Explorar el uso de **agentes de AI** como apoyo en programación y matemáticas.
 
 ### **Citar y reutilizar el material del curso**
 
 Los datos del curso pueden reutilizarse y adaptarse libremente con la debida atribución. Todos los datos de estos repositorios están sujetos a la licencia [Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)](https://creativecommons.org/licenses/by-nc-sa/4.0/).
 
-## Requisitos y Código de conducta
+## Requisitos y Código de conducta 💻
 
 ### Previos para el curso
 
-- Ninguno
-- Completar el registro
+- No se requiere experiencia previa en programación.
+- Se comenzará desde cero, por lo que cualquier estudiante interesado puede participar.
+- Se recomienda traer laptop propia (Windows, macOS o Linux). El aula de cómputo estará equipada para quienes no cuenten con equipo.
+- Completar el cuestionario diagnóstico de [[Google form](https://forms.gle/xxpcC6z4UhiV9iER8)]{.highlight-yellow}
 
 ### Para presentar examen
 
@@ -53,25 +60,67 @@ Tendrán derecho a presentar exámenes parciales aquellos estudiantes que hayan 
 
 ### Código de conducta
 
-La conducta del profesorado y alumnado del curso será acorde con los principios y valores especificados en el **Código de Ética de la Universidad Nacional Autónoma de México** aprobado el **1 de julio del 2015** por el Consejo Universitario, en especial en lo referente a la integridad y honestidad académica. “La integridad y la honestidad académica implican: [Citar las fuentes de ideas, textos, imágenes, gráficos u obras artı́sticas que se empleen en el trabajo universitario, y no sustraer o tomar la información generada por otros o por sı́ mismo sin señalar la cita correspondiente u obtener su consentimiento y acuerdo. No falsificar, alterar, manipular, fabricar, inventar o fingir la autenticidad de datos, resultados, imágenes o información en los trabajos académicos, proyectos de investigación, exámenes, ensayos, informes, reportes, tesis, audiencias, procedimientos de orden disciplinario o en cualquier documento inherente a la vida académica universitaria]{.highlight-yellow}” (**Gaceta UNAM, 30 de julio 2015**).
+La conducta del profesorado y alumnado del curso será acorde con los principios y valores especificados en el [**Código de Ética de la Universidad Nacional Autónoma de México**](https://www.enesjuriquilla.unam.mx/?page_id=10507) aprobado el [**1 de julio del 2015**](https://www.enesjuriquilla.unam.mx/wp-content/uploads/2022/04/codigo-etica-unam.pdf) por el Consejo Universitario, en especial en lo referente a la integridad y honestidad académica ([**Gaceta UNAM, 30 de julio 2015**]{.text-blue}).
 
+1.  **Respetar la diversidad**
+    - No discriminar por **género, edad, religión, origen étnico, condición social, orientación sexual, discapacidad o estado de salud**.
+2.  **Promover convivencia pacífica**
+    - Evitar *violencia, acoso, hostigamiento o cualquier forma de agresión*. Resolver conflictos mediante el **diálogo**.
+3.  **Ejercer libertad de pensamiento**
+    - Expresar ideas y opiniones con **respeto**, ejerciendo la libertad de pensamiento sin censura ni imposición, y asegurando siempre que la forma de comunicar no afecte la dignidad, integridad ni derechos de los demás.
 
+> La libertad de cada persona encuentra su límite cuando comienza a afectar la libertad y el respeto que corresponde a otros.
 
+4.  **Mantener laicidad**
+    - Todas las actividades académicas, científicas y administrativas deben realizarse libres de imposiciones religiosas, garantizando la neutralidad institucional y el **respeto a la diversidad de creencias**. La Universidad asegura que cada persona pueda ejercer su libertad de conciencia sin que ninguna fe o dogma interfiera en la vida universitaria.
+5.  **Actuar con integridad académica**
+    - No plagiar, falsificar ni manipular datos en investigaciones, exámenes o publicaciones.
+    - No falsificar, alterar, manipular, fabricar, inventar o fingir la autenticidad de datos, resultados, imágenes o información en los trabajos académicos, proyectos de investigación, exámenes, ensayos, informes, reportes, tesis, audiencias, procedimientos de orden disciplinario o en cualquier documento inherente a la vida académica universitaria.
+6.  **Reconocer autoría intelectual**
+    - Citar correctamente fuentes y respetar derechos de autor en trabajos académicos.
+    - Citar las fuentes de ideas, textos, imágenes, gráficos u obras artı́sticas que se empleen en el trabajo universitario, y no sustraer o tomar la información generada por otros o por sı́ mismo sin señalar la cita correspondiente u obtener su consentimiento y acuerdo.
+7.  **Cuidar el patrimonio universitario**
+    - Usar instalaciones, equipos y recursos de la UNAM solo para fines académicos o institucionales, nunca para beneficio personal.
+8.  **Evaluar con objetividad**
+    - Los docentes deben aplicar criterios claros y justos en exámenes y calificaciones, evitando favoritismos o conflictos de interés.
+9.  **Administrar con transparencia**
+    - Manejar recursos públicos con honestidad, rendición de cuentas y máxima publicidad.
+10. **Respetar la privacidad**
+    - No divulgar datos personales ni información privada de estudiantes, profesores o trabajadores **sin consentimiento**.
+11. **Asumir responsabilidad social**
+    - Orientar proyectos de investigación y docencia hacia el bienestar social y el cuidado ambiental.
 
 ## Agenda 📆
 
-| Temas | Duración | Instructora |
-|-------|----------|-------------|
-|       |          |             |
-|       |          |             |
-|       |          |             |
-|       |          |             |
-|       |          |             |
-|       |          |             |
-|       |          |             |
-|       |          |             |
+Las clases/sesiones tienen una duración de **2 horas, con 10 min de descanso** cada hora. Para más información visita el Temario.
 
-## Referencias
++----------+-------------------------------------------------------------------+----------------------------------------------------------------------+---------------+
+| Fecha    | Módulo                                                            | Temas                                                                | Instructor(a) |
++==========+===================================================================+======================================================================+===============+
+| 11/08/26 | **Introducción e integración**                                    | - Descripción del curso (objetivos, requisitos y código de conducta) | Evelia Coss   |
+|          |                                                                   | - Dinámica de trabajo                                                |               |
+|          |                                                                   | - Actividad rompe hielo                                              |               |
+|          |                                                                   | - Sistema Operativo (SO) y sus funciones                             |               |
++----------+-------------------------------------------------------------------+----------------------------------------------------------------------+---------------+
+| 13/08/26 | **Componentes de una Computadora**                                | - Componentes internos principales y complementarios                 | Evelia Coss   |
+|          |                                                                   | - Especificaciones técnicas básicas                                  |               |
++----------+-------------------------------------------------------------------+----------------------------------------------------------------------+---------------+
+| 18/08/26 | **Fundamentos de Programación y Buenas Prácticas - Sesión 1**     | - Introducción a programación                                        | Evelia Coss   |
+|          |                                                                   | - Algoritmos, pseudocódigo, lenguaje natural y diagramas de flujo    |               |
++----------+-------------------------------------------------------------------+----------------------------------------------------------------------+---------------+
+| 20/08/26 | **Fundamentos de Programación y Buenas Prácticas** **- Sesión 2** | - Introducción a buenas prácticas en programación                    | Evelia Coss   |
+|          |                                                                   | - Herramientas para escribir buen código                             |               |
++----------+-------------------------------------------------------------------+----------------------------------------------------------------------+---------------+
+|          |                                                                   |                                                                      |               |
++----------+-------------------------------------------------------------------+----------------------------------------------------------------------+---------------+
+|          |                                                                   |                                                                      |               |
++----------+-------------------------------------------------------------------+----------------------------------------------------------------------+---------------+
+|          |                                                                   |                                                                      |               |
++----------+-------------------------------------------------------------------+----------------------------------------------------------------------+---------------+
+|          |                                                                   |                                                                      |               |
++----------+-------------------------------------------------------------------+----------------------------------------------------------------------+---------------+
+
+## Referencias 📎
 
 ### Bibliografía básica
 

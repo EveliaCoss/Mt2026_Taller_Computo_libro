@@ -1,0 +1,222 @@
+# Introducción a Quarto
+
+**Fecha:** 19 de febrero, 2026
+
+**Quarto** es una versión multilingüe y [de última generación](https://quarto.org/docs/faq/rmarkdown.html) de R Markdown de Posit que incluye docenas de nuevas características y capacidades y al mismo tiempo puede renderizar la mayoría de los archivos Rmd existentes sin modificaciones.
+
+-   Extensión `.qmd`
+-   Sintaxis de Markdown para el texto
+-   Tipos de archivos puede ser [HTML](#0) , [PDF](#0) , documento [de MS Word , presentación](#0) , [sitio web](#0) , [libro](#0) , [documento interactivo](#0) u [otro formato](#0) .
+
+![](images/clipboard-2661750054.png){fig-align="center"}
+
+## ¿Cómo funciona?
+
+Utiliza el botón ![](https://quarto.org/docs/get-started/hello/images/rstudio-render-button.png){width="20" height="17"} **Render** en el IDE de RStudio para renderizar el archivo y obtener una vista previa de la salida con un solo clic o un atajo de teclado (⇧⌘K).
+
+![](images/clipboard-3479006155.png)
+
+Si prefiere renderizar automáticamente al guardar, puede activar la opción "Renderizar al guardar" en la barra de herramientas del editor. La vista previa se actualizará al volver a renderizar el documento. La vista previa en paralelo funciona tanto con HTML como con PDF.
+
+![](images/clipboard-2728400971.png)
+
+Al renderizar un documento de Quarto, [knitr](http://yihui.name/knitr/) ejecuta primero todos los fragmentos de código y crea un nuevo documento Markdown (.md), que incluye el código y su salida. El archivo Markdown generado es procesado por [pandoc](http://pandoc.org/) , que crea el formato final. El botón Renderizar encapsula estas acciones y las ejecuta en el orden correcto.
+
+![](images/clipboard-318997387.png)
+
+## ¿Cómo se compone?
+
+El archivo contiene tres tipos de contenido: **un encabezado YAML, fragmentos de código** y **texto Markdown**.
+
+### **encabezado YAML**
+
+Un encabezado YAML (opcional) delimitado por tres guiones ( `---`) en cada extremo.
+
+```         
+---
+title: "Hello, Quarto"
+format: html
+editor: visual
+---
+```
+
+Al renderizar, el símbolo `title`, `"Hello, Quarto"`, aparecerá en la parte superior del documento renderizado con un tamaño de fuente mayor que el resto del documento. Los otros dos campos YAML indican que la salida debe estar en formato `html` `format`y que el documento debe abrirse en formato `visual` `editor`predeterminado.
+
+Puedes consultar todos los campos YAML disponibles para documentos: HTML [aquí](https://quarto.org/docs/reference/formats/html.html) . Los campos YAML disponibles varían según el formato del documento; por ejemplo, consulte [aquí](https://quarto.org/docs/reference/formats/pdf.html) los campos YAML para documentos PDF y [aquí](https://quarto.org/docs/reference/formats/docx.html) para MS Word.
+
+::: callout-important
+Para crear archivos PDF, se necesitará instalar una distribución reciente de [LaTeX](https://www.latex-project.org/). Recomendamos usar TinyTeX (basado en TexLive), que se puede instalar con el siguiente comando:
+
+``` bash
+quarto install tinytex
+```
+:::
+
+## Renderizar a varios tipos de archivos
+
+Si desea renderizar en todos los formatos, puede hacerlo con el paquete [**quarto**](https://github.com/quarto-dev/quarto-r) , que proporciona una interfaz de R para la CLI de Quarto. Por ejemplo, para renderizar el documento actual, utilice `quarto::quarto_render()`. También puede especificar el nombre del documento que desea renderizar, así como los formatos de salida.
+
+``` bash
+quarto::quarto_render(
+  "authoring.qmd", 
+  output_format = c("pdf", "html", "docx")
+)
+```
+
+Como resultado, verá aparecer tres nuevos archivos en el panel Archivos:
+
+-   `authoring.docx`
+-   `authoring.html`
+-   `authoring.pdf`
+
+![](images/clipboard-365079727.png)
+
+## Callout / notas
+
+Da clic en Insert/callout.
+
+Puede seleccionar uno de los cinco tipos de callout (nota, sugerencia, importante, precaución o advertencia), personalizar su apariencia (predeterminada, simple o mínima) y decidir si desea mostrar el ícono.
+
+![](images/clipboard-3099889024.png)
+
+Luego, intente insertar el texto dentro del cuadro de callout.
+
+::: callout-note
+Nota
+:::
+
+::: callout-tip
+Sugerencia
+:::
+
+::: callout-important
+Importante
+:::
+
+::: callout-caution
+Precaución
+:::
+
+::: callout-warning
+Advertencia
+:::
+
+## Cross reference / Referencias cruzadas
+
+Las **cross references** en Quarto son una forma de enlazar automáticamente figuras, tablas, secciones, ecuaciones y otros elementos dentro de tu documento, de manera que se numeran y se convierten en hipervínculos navegables. Esto evita tener que actualizar manualmente la numeración si agregas o quitas elementos.
+
+1.  **Etiqueta (label)** Cada elemento que quieras referenciar necesita una etiqueta única.
+
+    -   Para figuras: `{#fig-nombre}`
+    -   Para tablas: `{#tbl-nombre}`
+    -   Para secciones: `{#sec-nombre}`
+    -   Para ecuaciones: `{#eq-nombre}`
+
+2.  **Referencia en el texto** Para referenciar, se usa `@` seguido del identificador:
+
+    -   `@fig-nombre` → referencia a una figura.
+    -   `@tbl-nombre` → referencia a una tabla.
+    -   `@sec-nombre` → referencia a una sección.
+    -   `@eq-nombre` → referencia a una ecuación.
+
+Quarto asigna números consecutivos a las entidades (Figura 1, Tabla 2, etc.) y actualiza todo si cambias el orden o agregas nuevos elementos.
+
+Ejemplo:
+
++-----------+-----------------+------------------------------------------------------------------------------+
+| Entidad   | Referencia      | Etiqueta / Título                                                            |
++===========+=================+==============================================================================+
+| Sección   | `@sec-eda`      | ID añadido al encabezado:                                                    |
+|           |                 |                                                                              |
+|           |                 | ```                                                                          |
+|           |                 | # Análisis exploratorio de datos {#sec-eda}                                  |
+|           |                 | ```                                                                          |
++-----------+-----------------+------------------------------------------------------------------------------+
+| Figura    | `@fig-pressure` | Opciones YAML en la celda de código:                                         |
+|           |                 |                                                                              |
+|           |                 | ```                                                                          |
+|           |                 | #| label: fig-scatterplot                                                    |
+|           |                 | #| fig-cap: "Pressure"                                                       |
+|           |                 | ```                                                                          |
++-----------+-----------------+------------------------------------------------------------------------------+
+| Tabla     | `@tbl-stats`    | Opciones YAML en la celda de código:                                         |
+|           |                 |                                                                              |
+|           |                 | ```                                                                          |
+|           |                 | #| label: tbl-stats                                                          |
+|           |                 | #| tbl-cap: "Summary statistics for price and area of houses in Duke Forest" |
+|           |                 | ```                                                                          |
++-----------+-----------------+------------------------------------------------------------------------------+
+| Ecuación  | `@eq-slr`       | Al final de la ecuación de visualización:                                    |
+|           |                 |                                                                              |
+|           |                 | ```                                                                          |
+|           |                 | $$ {#eq-slr}                                                                 |
+|           |                 | ```                                                                          |
++-----------+-----------------+------------------------------------------------------------------------------+
+
+# Análisis exploratorio de datos {#sec-eda}
+
+Aquí se describe el análisis exploratorio de los datos.
+
+```{r}
+#| label: fig-pressure
+#| fig-cap: "Pressure"
+#| code-fold: true # Ocultar codigo
+
+library(ggplot2)
+dat <- data.frame(cond = rep(c("A", "B"), each=10),
+                  xvar = 1:20 + rnorm(20,sd=3),
+                  yvar = 1:20 + rnorm(20,sd=3))
+
+ggplot(dat, aes(x=xvar, y=yvar)) +
+    geom_point(shape=1) + 
+    geom_smooth() 
+```
+
+## Estadísticas descriptivas {#sec-stats}
+
+```{r}
+#| label: tbl-stats
+#| tbl-cap: "Summary statistics for price and area of houses in Duke Forest"
+
+knitr::kable(head(ggplot2::diamonds))
+```
+
+### Modelo de regresión
+
+El modelo lineal simple se expresa como:
+
+$$
+Y = \beta_0 + \beta_1 X + \epsilon
+$$ {#eq-slr}
+
+Ejemplo en el texto:
+
+Presentamos los resultados del análisis exploratorio de datos en @sec-eda y la estadística descriptiva en @sec-stats .
+
+La @fig-pressure muestra la relación entre estas dos variables en un diagrama de dispersión.
+
+La @tbl-stats presenta estadísticas descriptivas básicas de estas dos variables.
+
+Podemos ajustar un modelo de regresión lineal simple de la forma mostrada en @eq-slr.
+
+## **Aprendiendo más**
+
+¡Ya has aprendido los conceptos básicos de Quarto! Una vez que te sientas cómodo creando y personalizando documentos, aquí tienes algunas cosas más que puedes explorar:
+
+-   [Presentaciones](https://quarto.org/docs/presentations/) : cree presentaciones de PowerPoint, Beamer y Revealjs utilizando la misma sintaxis que aprendió para crear documentos.
+
+-   [Sitios web](https://quarto.org/docs/websites/) : publique colecciones de documentos como un sitio web. Los sitios web admiten múltiples formas de navegación y búsqueda de texto completo.
+
+-   [Blogs](https://quarto.org/docs/websites/website-blog.html) : crea un blog con una página acerca de, listas de publicaciones flexibles, categorías, feeds RSS y más de veinte temas.
+
+-   [Libros](https://quarto.org/docs/books/) : cree libros y manuscritos en formatos impresos (PDF, MS Word) y en línea (HTML, ePub).
+
+-   [Interactividad](https://quarto.org/docs/interactive/) : incluya componentes interactivos para ayudar a los lectores a explorar los conceptos y los datos que está presentando más profundamente.
+
+![](images/clipboard-1192798489.png)
+
+Imagen tomada de: [Allison Horst](https://allisonhorst.com/horst-hill-collaborations)
+
+## Referencias
+
+-   [Tutorial: Hello, Quarto](https://quarto.org/docs/get-started/hello/rstudio.html)

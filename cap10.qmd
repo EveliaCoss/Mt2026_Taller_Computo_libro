@@ -1,0 +1,77 @@
+# Enlaces simbólicos (symlinks)
+
+Es mejor crear **enlaces simbólicos (symlinks)** en vez de copiar cada archivo, ya que permite ahorrar mucho espacio en el disco al evitar la multiplicación de copias fisicas en el disco duro del mismo archivo.
+
+Una modificación realizada utilizando este enlace se reflejará en el original; pero, por el contrario, si se elimina el enlace, no se eliminará el auténtico.
+
+## Diferencias entre enlaces simbólicos (symlinks) y enlaces duros (hard links)
+
++--------------------------------------+------------------------------------------------------------------------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------+
+| Características                      | Symlinks                                                                                                                     | Hard links                                                                                                                                      |
++======================================+==============================================================================================================================+=================================================================================================================================================+
+| **Almacenamiento**                   | - Actúa como un puntero o referencia a otro archivo o directorio.                                                            | - Apunta directamente a los datos del archivo original.                                                                                         |
+|                                      | - No contiene los datos reales del archivo, sino una tuta que apunta al archivo original.                                    |                                                                                                                                                 |
+|                                      |                                                                                                                              | <!-- -->                                                                                                                                        |
+|                                      |                                                                                                                              |                                                                                                                                                 |
+|                                      |                                                                                                                              | - Comparte el mismo contenido que el archivo enlazado, no solo una referencia.                                                                  |
++--------------------------------------+------------------------------------------------------------------------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------+
+| **Número de inodo**                  | Cuenta con un número de inodo (nodo indice) diferente del archivo original. Se identifica como un tipo de archivo diferente. | Comparte el mismo número de inodo con el destino. Elimina el concepto de "archivo original"; todos los hard links al mismo archivo son iguales. |
++--------------------------------------+------------------------------------------------------------------------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------+
+| **Eliminación del archivo original** | Si el archivo original se elimina, el symlink queda roto (es decir, apunta a algo inexistente).                              | Si un hard link se elimina, los datos del archivo permanecen accesibles mientras existan otros hard links.                                      |
++--------------------------------------+------------------------------------------------------------------------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------+
+| **Sistema de archivos.**             | Puede apuntar a archivos o directorios, incluso en diferentes sistemas de archivos.                                          | Deben residir en el mismo sistema de archivos.                                                                                                  |
++--------------------------------------+------------------------------------------------------------------------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------+
+| **Rutas**                            | Se pueden usar rutas absolutas o relativas para la referencia.                                                               | No puede enlazar directorios (en la mayoría de los sistemas modernos) ni cruzar sistemas de archivos diferentes.                                |
++--------------------------------------+------------------------------------------------------------------------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------+
+| **Uso común**                        | - Crear accesos directos a archivos o carpetas.                                                                              | - Garantizar accesibilidad a datos independientemente de qué enlace se elimine.                                                                 |
+|                                      | - Facilitar la gestión de rutas en aplicaciones.                                                                             | - Compartir archivos de forma eficiente sin duplicar espacio en disco.                                                                          |
++--------------------------------------+------------------------------------------------------------------------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------+
+| **Comando para crear**               | ``` {.bash eval="FALSE"}                                                                                                     | ``` {.bash eval="FALSE"}                                                                                                                        |
+|                                      | ln -s archivo_original enlace_simbolico                                                                                      | ln archivo_original enlace_simbolico                                                                                                            |
+|                                      | ```                                                                                                                          | ```                                                                                                                                             |
++--------------------------------------+------------------------------------------------------------------------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------+
+
+::: callout-caution
+Debes tener cuidado al elegir cuál utilizar. Los **enlaces simbólicos** son más convenientes cuando trabajamos con datos importantes que están almacenados en un respaldo, ya que permiten acceder fácilmente a los archivos originales sin duplicarlos y facilitan la gestión de rutas, sin eliminar o afectar los archivos originales.
+:::
+
+## Orden de los archivos
+
+El **sistema de archivos de GNU/Linux** tiene una estructura jerárquica de directorios y subdirectorios que penden del **directorio raíz** `/`. Esta estructura puede ser visualizada convenientemente con el comando `tree` (Nota: `tree` tal vez no esté instalado en tu sistema).
+
+Organizar tu entorno de trabajo en **Bash** siguiendo buenas prácticas te permitirá gestionar tus archivos y scripts de manera eficiente. Aquí tienes una sugerencia de carpetas clave y nombres que puedes utilizar:
+
+```         
+~/workspace/
+├── bin/           # Scripts ejecutables
+├── src/           # Código fuente
+├── logs/          # Archivos de registro
+├── config/        # Configuración
+├── data/
+│   ├── raw/       # Datos crudos
+│   └── processed/ # Datos procesados
+├── backup/        # Copias de seguridad
+├── tmp/           # Archivos temporales
+├── projects/
+│   └── project_name/
+├── git/           # Repositorios locales
+└── docs/          # Documentación
+```
+
+### **Consejos adicionales**
+
+1.  **Usa nombres descriptivos:** Los nombres de las carpetas y archivos deben reflejar su contenido claramente.
+
+2.  **Mantén consistencia:** Usa un esquema de nombres uniforme (por ejemplo, todo en minúsculas o con guiones bajos).
+
+3.  **Automatiza la limpieza:** Utiliza scripts en Bash para eliminar archivos temporales o rotar logs antiguos.
+
+4.  **Usa control de versiones:** Integra Git en tus proyectos para mantener un historial de cambios en tus scripts.
+
+Esta estructura es flexible y se puede ajustar según tus necesidades específicas.
+
+## Referencias
+
+- [How to create and remove Linux symlinks for files and directories](https://www.hostinger.com/tutorials/how-to-create-symbolic-links-in-linux/?utm_campaign=Generic-Tutorials-DSA%7CNT:Se%7CLO:MX-EN&utm_medium=ppc&gad_source=1&gclid=Cj0KCQiAu8W6BhC-ARIsACEQoDBS5S76IeOtxlAtbyI5wPmsI72ILku8waMvXKlUo0X-ZzddJpjvKSAaAuAiEALw_wcB)
+
+- [Generación de ligas simbólicas a archivos: comando **ln -s /ruta/al/archivo/fuente nombre_liga**](https://vinuesa.github.io/intro2linux/index.html#generaci%C3%B3n-de-ligas-simb%C3%B3licas-a-archivos-comando-ln--s-rutaalarchivofuente-nombre_liga)

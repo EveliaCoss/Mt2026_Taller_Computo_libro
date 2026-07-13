@@ -1,0 +1,92 @@
+# Condicionales
+
+Las condicionales son estructuras de programación que nos permiten tomar decisiones basadas en el resultado de una **expresión**. En otras palabras, nos permiten ejecutar diferentes bloques de código dependiendo de **si una condición se cumple o no**. Los condicionales son fundamentales para automatizar tareas y crear scripts fléxibles.
+
+La sintáxis básica de un condicional simple en formato de una línea es :
+
+``` {.bash code-copy="true" eval="false"}
+if [ condición ]; then orden1; orden2 …; fi
+```
+
+de igual manera pero en bloque identado:
+
+``` {.bash code-copy="true" eval="false"}
+if [ condición ]; then      orden1     orden2  fi
+```
+
+::: {.callout-note icon="false"}
+## Ejemplo
+
+Si queremos verificar si existe el archivo **secuencias1.fastq** antes de realizar alguna operación sobre él. Puedes usar el siguiente condicional:
+:::
+
+``` {.bash code-copy="true" eval="false"}
+if [ -f secuencias1.fastq ]; then
+  echo "El archivo existe."
+else
+  echo "El archivo no existe."
+fi
+```
+
+::: {.callout-note icon="false"}
+## Explicación
+
+- **`if [ -f secuencias1.fastq ]`:** Verifica si **secuencias1.fastq** es un archivo regular.
+- **`then`:** Si la condición es verdadera, se ejecuta el código siguiente.
+- **`else`:** Si la condición es falsa, se ejecuta el código siguiente.
+- **`fi`:** Indica el final de la estructura `if`.
+:::
+
+Los condicionales pueden ser tan complejos como lo imagines. Por ejemplo:
+
+``` {.bash code-copy="true" eval="false"}
+for archivo in $file*.fastq; do 
+  if [ -f "$archivo" ]; then 
+    echo "Procesando archivo: $archivo"
+    wc -l "$archivo" 
+  else 
+    echo "No tienes archivos fastq"
+  fi 
+done
+```
+
+::: {.callout-note icon="false"}
+## Explicación del código
+
+En donde:
+
+``` {.bash code-copy="true" eval="false"}
+for archivo in $file*.fastq; do
+```
+
+- **`$file*.fastq`**: Expande a todos los archivos que comienzan con el valor de la variable `$file` y terminan con la extensión `.fastq`.
+
+- **`archivo`**: Variable que almacena el nombre de cada archivo encontrado.
+
+``` bash
+echo "Procesando archivo: $archivo"
+wc -l "$archivo"
+```
+
+- **`echo`**: Imprime el mensaje indicando que se está procesando el archivo actual.
+
+- **`wc -l "$archivo"`**: Cuenta el número de líneas en el archivo usando `wc -l` y muestra el resultado en la terminal.
+
+``` bash
+else
+  echo "No tienes archivos fastq"
+fi
+```
+
+- Si el archivo no existe o no es un archivo regular, muestra un mensaje de error indicando el problema.
+
+``` bash
+done
+```
+
+- Fin del bucle
+:::
+
+## Referencias
+
+- [DataCarpentry For Loops](https://datacarpentry.github.io/semester-biology/materials/for-loops-indexing/)

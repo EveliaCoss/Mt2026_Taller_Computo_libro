@@ -1,0 +1,95 @@
+# Bucles (for loops)
+
+Imagina que quieres realizar una misma tarea para 3 archivos distintos, ¿no sería nada molesto escribir el mismo código 3 veces, cierto?
+
+¿Y qué pasa si tengo que analizar y procesar docenas o cientos de archivos? Para ello puedes escribir bucles. Un bucle es una **estructura de control** que permite ejecutar un bloque de código rápidamente mientras se cumpla una **determinada condición**. En bash los bucles más comunes son `for` y `while.`
+
+::: {.callout-note icon="false"}
+## For
+
+`for` es ideal cuando sabes cuántas veces quieres que se repita ese bloque de código. Por ejemplo:
+:::
+
+``` {.bash code-copy="true" eval="false"}
+for variable in lista_de_valores; do
+  # Comandos a ejecutar para cada valor en la lista
+done
+```
+
+::: {.callout-note icon="false"}
+## while
+
+`while`, por su parte, se utiliza cuando quieres que un bloque de código se ejecute mientras se cumpla una determinada condición. Por ejemplo:
+:::
+
+``` {.bash code-copy="true" eval="false"}
+while [ condición ]; do
+  # Comandos a ejecutar mientras la condición sea verdadera
+done
+```
+
+## Actividad grupal
+
+Retomando el ejercicio anterior, modifiquemos el código para crear un bucle para procesar los tres archivos fastq (**secuencias1.fastq, secuencias2.fastq, secuencias3.fastq** ) que tenemos.
+
+**Paso 1.** Crear un script en Bash con el nombre bucles.sh empleando nano.
+
+``` {.bash code-copy="true" eval="false"}
+nano bucles.sh
+```
+
+**Paso 2.** Copia el siguiente código dentro del script `bucle.sh` y guarda los cambios.
+
+``` {.bash code-copy="true" eval="false"}
+#!/bin/bash
+# Script para analizar múltiples archivos FASTA
+
+# Archivos a procesar
+archivos=("archivo1.fasta" "archivo2.fasta" "archivo3.fasta")
+
+# Loop para analizar cada archivo
+for archivo in "${archivos[@]}"; do
+  echo "Archivo a procesar: $archivo"
+  
+  # Verifica si el archivo existe
+  if [ ! -f "$archivo" ]; then
+    echo "El archivo $archivo no existe. Saltando..."
+    continue
+  fi
+
+  # 1. Conteo de secuencias
+  numero_secuencias=$(grep -c '^@SRR098026' "$archivo")
+  echo "Número de secuencias en $archivo: $numero_secuencias"
+
+  # 2. Separación de malas lecturas
+  grep -B1 -A2 'NNNNNNNNNN' "$archivo" > "malas_lecturas_$archivo"
+  malas=$(wc -l < "malas_lecturas_$archivo")
+  echo "Número de malas lecturas en $archivo: $malas"
+
+  # 3. Búsqueda de patrones
+  echo "Desea buscar patrones en $archivo? (y/n):"
+  read -r respuesta
+
+  if [[ "$respuesta" == "y" ]]; then
+    patrones_file="patrones_$archivo.txt"
+    busqueda_file="busqueda_$archivo.txt"
+
+    echo -e 'ACTG\nCCCCC\nNNNCNNN\nNNNGNNN\nTTTT\nTATA\nAAA' > "$patrones_file"
+    grep -f "$patrones_file" "$archivo" > "$busqueda_file"
+
+    echo "Búsqueda de patrones guardada en: $busqueda_file"
+  else
+    echo "Patrones no buscados en $archivo."
+  fi
+
+  echo "Procesamiento de $archivo completado."
+  echo "---------------------------------------"
+done
+
+# Mensaje final
+echo "Metaanálisis finalizado para todos los archivos."
+```
+
+## Referencias
+
+-   [SWCarpentry: Loops](https://swcarpentry.github.io/shell-novice/05-loop.html)

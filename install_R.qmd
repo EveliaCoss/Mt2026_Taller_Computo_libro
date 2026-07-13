@@ -1,0 +1,150 @@
+# Instalación de R y RStudio {#descarga-R}
+
+Para participar en este taller necesitas acceso a los siguientes software y acceso a un navegador como chrome o firefox.
+
+## Windows - R
+
+**Nota:** Para obtener más detalles sobre cómo instalar y configurar R y Rstudio, puedes ver este video tutorial: [Cómo instalar R y RStudio en Windows 11](https://www.youtube.com/watch?v=H9EBlFDGG4k).
+
+1.  Entra a la siguiente [página](https://cloud.r-project.org/)
+
+2.  Haz click en [**Download R for Windows**]{.underline}
+
+3.  Haz click en [**install R for the first time**]{.underline}
+
+4.  Haz click en [**Download R-4.5.2 for Windows**]{.underline}
+
+5.  Ejecuta el instalador y sigue los siguientes pasos:
+
+    -   Selecciona el lenguaje de preferencia durante el proceso y haz click en "**OK**"
+
+    -   Haz clic en "**Next**"
+
+    -   Haz clic en "**Next**" (Si deseas cambiar el sitio de instalación, haz clic en "**Browse**" y selecciona tu carpeta deseada).
+
+    -   Haz click en "**Next**" en las siguientes cuatro ventanas
+
+    -   Espera unos minutos a que finalice la instalación y haz click en "**Finish**"
+
+## Windows - Rstudio
+
+1.  Entra en la siguiente [página](https://posit.co/download/rstudio-desktop/#download)
+2.  Haz click en **Download RStudio Desktop for Windows**
+3.  Ejecuta el instalador y sigue los siguientes pasos:
+    -   Haz clic en "**Next**"
+    -   Haz clic en "**Next**" (Si deseas cambiar el sitio de instalación, haz clic en "**Browse**" y selecciona tu carpeta deseada).
+    -   Haz clic en "**Install**" y espera unos minutos a que acabe el proceso
+    -   Haz clic en "**Finish**"
+4.  Abre la aplicación de RStudio
+5.  Haz clic en "**OK**"
+
+## MacOS - R
+
+**Nota:** Para obtener más detalles sobre cómo instalar y configurar Git Bash, puedes ver este video tutorial: [Cómo instalar R y R Studio en MacOS](https://www.youtube.com/watch?v=_k8seoE6b-E)
+
+1.  Entra a la siguiente [página](https://cloud.r-project.org/)
+
+2.  Haz click en [**Download R for macOS**]{.underline}
+
+3.  Existen dos versiones de R que dependen del procesador de tu computadora. Para ver la versión de tu procesador, haz click en el ícono de apple en la parte superior izquierda de tu pantalla y selecciona "acerca de esta mac". En la ventana emergente, la versión de tu procesador aparecerá junto a la palabra "Chip", por ejemplo: **Chip Apple M1 Pro**
+
+    -   Para Mac con **Apple Silicon** (M1,2,...) haz clic en [R-4.5.2-arm64.pkg]{.underline}
+
+    -   Para Mac con procesador **Intel** haz clic en [R-4.5.2-x86_64.pkg]{.underline}
+
+4.  Ejecuta el instalador y sigue los siguientes pasos:
+
+    -   Haz clic en "**Continuar**" tres veces
+
+    -   Haz clic en "**De acuerdo**"
+
+    -   Haz click en "**Instalar**"
+
+    -   Espera unos minutos a que finalice la instalación y haz click en "**Cerrar**"
+
+## MacOS- Rstudio
+
+1.  Entra en la siguiente [página](https://posit.co/download/rstudio-desktop/#download)
+2.  Haz click en **Download RStudio Desktop for macOS 13+**
+    -   Para ver la versión de tu procesador, haz click en el ícono de apple en la parte superior izquierda de tu pantalla y selecciona "acerca de esta mac". En la ventana emergente, la versión de tu sistema operativo aparecerá junto a la palabra "macOS", por ejemplo: **macOS Sequola** 15.1.1.
+    -   Si la versión de tu sistema operativo está por debajo de la versión 13, haz clic en [**download a previous version**]{.underline}.
+3.  Ejecuta el instalador
+4.  Arrastra el ícono de RStudio a la carpeta de aplicaciones y espera a que finalice la instalación
+
+## Linux - R
+
+1.  Entra a la siguiente [página](https://cloud.r-project.org/)
+
+2.  Junto a [**Download R for Linux**]{.underline} existen tres opciones, selecciona la que se ajusta a tu distribución de Linux
+
+    -   [**Debian**]{.underline}
+
+    -   [**Fedora/Redhat**]{.underline}
+
+    -   [**Ubuntu**]{.underline}
+
+3.  Para instalar Linux en **Debian** y ejecuta las siguientes líneas de código (presiona **Enter** después de cada línea de código):
+
+    -   `sudo apt update`
+
+    -   `sudo apt install r-base r-base-dev`
+
+4.  Para instalar Linux en **Fedora/Redhat** y ejecuta la siguiente línea de código:
+
+    -   `sudo dnf install R`
+
+    -   Presiona **Enter**
+
+5.  Para instalar Linux en **Ubuntu** y ejecuta las siguientes líneas de código (presiona **Enter** después de cada línea de código):
+
+    -   `sudo apt update -qq`
+
+    -   `sudo apt install --no-install-recommends software-properties-common dirmngr`
+
+    -   `wget -qO- https://cloud.r-project.org/bin/linux/ubuntu/marutter_pubkey.asc | sudo tee -a /etc/apt/trusted.gpg.d/cran_ubuntu_key.asc`
+
+    -   `sudo add-apt-repository "deb https://cloud.r-project.org/bin/linux/ubuntu $(lsb_release -cs)-cran40/"`
+
+    -   `sudo apt install --no-install-recommends r-base`
+
+## Linux - RStudio
+
+1.  Entra en la siguiente [página](https://posit.co/download/rstudio-desktop/#download)
+2.  Desliza la página hasta llegar a la tabla de opciones de instalación
+3.  Selecciona tu opción de accuerdo con la distribución y versión de tu sistema operativo ([**Debian, Fedora/Redhat, Ubuntu**]{.underline}).
+4.  Ejecuta el instalador
+
+## Actualizar R - Windows y MacOS
+
+Si ya tienes R instalado en tu computadora, asegúrate de tener la versión más actualizada de R
+
+Existen diferentes formas de actualizar R, la manera más sencilla es a través de **Rgui,** la interfaz gráfica que viene con R base, no con RStudio.
+
+**Windows y MacOS**:
+
+1.  Escribe **Rgui** en el explorador de archivos/aplicaciones de tu computadora para abrir la aplicación de R.
+
+2.  Para actualizar R necesitamos de la paquetería **installr**. Para instalarla ejecuta el siguiente código:
+
+```         
+-   `install.packages(installr)`
+-   Presiona **Enter**
+```
+
+3.  Carga la paquetería con la función `library()`
+
+    -   library`(installr)`
+    -   Presiona **Enter**
+
+4.  Para revisar si tienes la versión de R más actualizada ejecuta el siguiente código:
+
+    -   `installr(GUI = TRUE)`
+    -   Presiona **Enter**
+    -   En la ventana emergente asegúrate de tener seleccionada la opción "R (updateR)" y haz clic en "OK"
+
+5.  Aparecerá otra ventana con información sobre la versión de R que estás usando y si existe una versión más reciente.
+
+    -   Si **ya tienes la versión más actual**, simplemente haz clic en **"OK"** para cerrar.
+    -   Si **hay una versión nueva disponible**, haz clic en **"Yes"** para comenzar la actualización.
+
+6.  Si durante el proceso aparece una ventana preguntando si deseas copiar paquetes o configuraciones anteriores, puedes hacer clic en **"No"** (no es obligatorio copiarlos; puedes reinstalarlos después si lo prefieres).

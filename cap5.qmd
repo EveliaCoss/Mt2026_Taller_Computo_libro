@@ -1,8 +1,219 @@
-# X definir
+# Mis primeros pasos en Bash
 
 ::: content-box-gray
 **Objetivos:**
-
 :::
 
-## References
+## Entorno de Bash
+
+![](figures/entornoBash.png)
+
+El signo `$` es un **prompt**, que nos muestra que la terminal está esperando una entrada; tu terminal puede usar un carácter diferente como prompt y puede agregar información antes de él. Al teclear comandos, ya sea a partir de estas lecciones o de otras fuentes, no escribas el prompt (*\$*), sólo los comandos que le siguen.
+
+## Preparación del directorio de trabajo
+
+- Ruta / Camino absoluto
+
+  ``` {.bash code-copy="true" eval="false"}
+  cd /home/usuario/data/
+  ```
+
+- Ruta / Camino relativo
+
+  ``` {.bash code-copy="true" eval="false"}
+  cd ../ # Ir a la carpeta anterior
+  ```
+
+::: callout-note
+**NOTA 1:** Si das `cd` y no indicas una ruta absoluta, te llevara al Directorio Raiz (\~).
+
+**NOTA 2:** Puedes usar la tecla TAB para completar el nombre de la carpeta. En caso de que tengas más de dos carpetas que inicien igual, tendrás que terminar de completar el nombre.
+:::
+
+## Conocer mi dirección / ubicación
+
+Averiguemos dónde estamos, ejecutando el comando `pwd` (que significa "imprime directorio de trabajo" - "print working directory"). En cualquier momento, nuestro **directorio actual** es nuestro directorio predeterminado, es decir, el directorio que la computadora supone queremos ejecutar comandos a menos que especifiquemos explícitamente otra cosa. En este caso la respuesta de la computadora es `/Users/nelle`, el cual es el directorio de inicio de Nelle, también conocido como su directorio **home**:
+
+``` {.bash code-copy="true" eval="false"}
+pwd # /c/Users/ecoss
+```
+
+En la computadora de Evelia, el sistema de archivos se ve así:
+
+[![](https://swcarpentry.github.io/shell-novice-es/fig/filesystem.svg){fig-align="center"}](https://swcarpentry.github.io/shell-novice-es/02-filedir.html)
+
+En la parte superior está el **directorio raíz** o **root** que contiene todo lo demás. Nos referimos a este directorio usando un caracter de barra `/` por si solo; esta es la barra al inicio de `/Users/ecoss`.
+
+Dentro de ese directorio hay otros directorios: `bin` (que es donde se almacenan algunos programas preinstalados), `data` (para archivos de datos diversos), `Users` (donde se encuentran los directorios personales de los usuarios), `tmp` (para archivos temporales que no necesitan ser almacenados a largo plazo), etcétera.
+
+::: callout-note
+## Ejercicio 1
+
+A partir de `/Users/ecoss/data/`, ¿Cuál de los siguientes comandos podría Amanda usar para navegar a su directorio de inicio, que es `/Users/ecoss`?
+
+1.  `cd .`
+
+2.  `cd /`
+
+3.  `cd /home/amanda`
+
+4.  `cd ../..`
+
+5.  `cd ~`
+
+6.  `cd home`
+
+7.  `cd ~/data/..`
+
+8.  `cd`
+
+9.  `cd ..`
+
+    ::: {.callout-tip collapse="true" icon="false"}
+    ## Solución
+
+    1.  No: `.` significa el directorio actual.
+
+    2.  No: `/` significa el directorio raíz.
+
+    3.  No: El directorio **home** de Evelia es `/Users/amanda`.
+
+    4.  No: sube dos niveles, es decir termina en `/Users`.
+
+    5.  Sí: `~` significa el directorio **home** del usuario, en este caso `/Users/amanda`.
+
+    6.  No: esto navegaría a un directorio `home` en el directorio actual, si existe.
+
+    7.  Sí: innecesariamente complicado, pero correcto.
+
+    8.  Sí: un atajo para volver al directorio **home** del usuario.
+
+    9.  Sí: sube un nivel.
+    :::
+:::
+
+Ejemplo de rutas:
+
+[![](https://github.com/raynamharris/Shell_Intro_for_Transcriptomics/raw/master/lessons/figures/nav_dirs.png)](https://github.com/raynamharris/Shell_Intro_for_Transcriptomics/blob/master/lessons/02_Navigating_Dirs.md)
+
+## **Comandos básicos**
+
+| Comandos | Información | Argumentos |
+|----|----|----|
+| `ssh` | Conexión a servidores | ssh usuario\@servidor.mx |
+| `ls` | Observar el contenido de los archivos en una carpeta | ls directorio/ |
+| `cd` | Moverse de directorios | cd /home/usuario/data/ |
+| `mkdir` | Crear un nuevo directorio | mkdir data |
+| `rmdir` | Eliminar el directorio | rmkdir -rf data |
+| `nano` / `vim` | Editores de texto plano | nano Archivo.txt / vim Archivo.txt |
+| `cp` | Copiar archivos | cp Archivo1.txt /home/usuario/data/ |
+| `mv` | Mover un archivo o carpeta |  |
+| `echo` | Para llamar y/o declarar variables | echo "Hello world" |
+| `chmod` | Cambiar permisos del usuario | chmod 777 data/ |
+| `rsync` | Descargar o subir archivos |  |
+| `scp` | Descargar o subir archivos |  |
+| `cat` | Visualizar contenido de un archivo. Escribe el contenido del archivo de manera secuencial a la salida estándar, a la ventana de Terminal. |  |
+| `less` | Leer contenido de un archivo sin interrumpir la pantalla de Terminal. Similar a `Vim` pero sin opción para escribir. **Se sale del modo visualización con** q. |  |
+| `find` | Busca archivos en un directorio específico. |  |
+| `head` | Visualizar primeras líneas de un archivo. |  |
+| `tail` | Visualizar últimas líneas de un archivo. |  |
+| `which` | Indica el directorio donde se encuentra un particular comando o programa que se haya podido encontrar usando los directorios guardados en la variable de estado `PATH`. | which bash |
+
+::: callout-note
+## Ayuda de funciones
+
+Puedes consultar mas información usando `ls --help`
+:::
+
+## Consultar información sobre archivos y directorios
+
+### **Información contenida**
+
+Cada columna en la salida anterior tiene un significado:
+
+[![](figures/ejemplo_datos.png)](https://eveliacoss.github.io/RNAseq_classFEB2024/Presentaciones/Dia1_AspectosGenerales.html#74)
+
+### **Permisos**
+
+Cada usuario tiene permisos diferentes cuando crea un archivo. Los permisos pueden modificarse con `chmod`.
+
+Los caracteres atribuidos a los permisos son:
+
+- `r` : escritura (Read)
+
+- `w` : lectura (Write)
+
+- `x` : ejecución (eXecute)
+
+En el siguiente ejemplo, el usuario cuenta con todos los permisos activos, mientras que el grupo y otros tienen solo permisos de lectura y ejecución.
+
+[![](figures/permisos.png)](https://eveliacoss.github.io/RNAseq_classFEB2024/Presentaciones/Dia1_AspectosGenerales.html#75)
+
+## **`chmod`:** Cambiar permisos
+
+La representación octal de chmod es muy sencilla
+
+- `r` = Lectura tiene el valor de 4
+
+- `w` = Escritura tiene el valor de 2
+
+- `x` = Ejecución tiene el valor de 1
+
+| Permisos | Valor | Significado                    |
+|:--------:|:-----:|:-------------------------------|
+|   rwx    |   7   | Lectura, escritura y ejecución |
+|   rw-    |   6   | Lectura, escritura             |
+|   r-x    |   5   | Lectura y ejecución            |
+|   r--    |   4   | Lectura                        |
+|   -wx    |   3   | Escritura y ejecución          |
+|   -w-    |   2   | Escritura                      |
+|   --x    |   1   | Ejecución                      |
+|   ---    |   0   | Sin permisos                   |
+
+Por lo tanto:
+
+| Forma larga              | Forma Octal |
+|:-------------------------|-------------|
+| `chmod u=rwx,g=rwx,o=rx` | `chmod 775` |
+| `chmod u=rwx,g=rx,o=`    | `chmod 760` |
+| `chmod u=rw,g=r,o=r`     | `chmod 644` |
+| `chmod u=rw,g=r,o=`      | `chmod 640` |
+| `chmod u=rw,go=`         | `chmod 600` |
+| `chmod u=rwx,go=`        | `chmod 700` |
+
+## Comprimir y descomprimir archivos
+
+Los archivos pueden contener diversos tipos de extensiones, dependiendo del objetivo será necesario descomprimirlos y en otros dejarlos comprimidos para no abarcar tanto espacio en tu espacio de trabajo. 
+
+| Tipo de archivo | Comprimir | Descomprimir |
+|----|----|----|
+| Carpeta.tar | `tar -cvf carpeta.tar /dir/a/comprimir/carpeta` | `tar -xvf carpeta.tar` |
+| Carpeta.tar.gz | `tar -czvf carpeta.tar.gz /carpeta/a/empaquetar/carpeta` | `tar -zxvf carpeta.tar.gz` |
+| Carpeta.gz | `gzip -9 carpeta.gz carpeta/a/empaquetar/carpeta` | `gunzip -kd carpeta.gz` |
+| Carpeta.zip | `zip -r carpeta.zip carpeta` | `unzip carpeta.zip` |
+
+::: callout-note
+## Ejercicio 2
+
+1.  Visita este enlace 👉 [unix.bioinfo.rsgecuador](https://github.com/RSG-Ecuador/unix.bioinfo.rsgecuador/tree/gh-pages) .
+2.  Haz clic en el botón verde que dice **"CODE"**.
+3.  Selecciona la opción **"Download ZIP"**.
+4.  Elige la carpeta donde deseas guardar el archivo en tu computadora. El archivo se almacena con la extension `.zip`.
+5.  Ve a la carpeta donde se guardó el archivo desde la **terminal**. Ejemplo en mi computadora:
+
+``` bash
+cd "C:/Users/ecoss/Documents/Respaldos/Github_notes/Workshop_Bash2024/data"
+```
+
+6.  Descomprime el archivo `.zip`.
+
+``` bash
+unzip unix.bioinfo.rsgecuador-gh-pages.zip
+```
+:::
+
+## Material suplementario
+
+- Software Carpentry. [La terminal de Unix](https://swcarpentry.github.io/shell-novice-es/02-filedir.html)
+- RSG Ecuador.[GNU/Linux para bioinfomatica](https://rsg-ecuador.github.io/unix.bioinfo.rsgecuador/content/Curso_avanzado/02_Bash/1_bash.html)
+- [Introduction to the Unix Shell for Transcriptomics](https://github.com/raynamharris/Shell_Intro_for_Transcriptomics/tree/master)Tutorial.
