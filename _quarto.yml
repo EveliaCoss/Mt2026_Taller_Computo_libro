@@ -4,7 +4,7 @@ project:
 
 book:
   title: "Taller de Cómputo"
-  site-url: https://eveliacoss.github.io/Workshop2026_scRNAseq_CITEseq_libro/
+  site-url: https://github.com/EveliaCoss/Mt2026_Taller_Computo_libro
   page-footer:  "Taller de Cómputo, 1er semestre: Dra. Evelia Coss" 
   sidebar: 
     # background: "#ffcccc"
@@ -83,7 +83,7 @@ book:
     - resources.qmd
     - notas.qmd
   # Information
-  repo-url: https://github.com/EveliaCoss/Workshop2026_scRNAseq_CITEseq_libro # link de Github
+  repo-url: https://github.com/EveliaCoss/Mt2026_Taller_Computo_libro # link de Github
   sharing: [twitter, facebook, linkedin]
   favicon: "flyer/logo.png" # icono de la pagina en pestana
 
