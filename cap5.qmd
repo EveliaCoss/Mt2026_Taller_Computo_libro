@@ -1,9 +1,5 @@
 # Mis primeros pasos en Bash
 
-::: content-box-gray
-**Objetivos:**
-:::
-
 ## Entorno de Bash
 
 ![](figures/entornoBash.png)
@@ -49,13 +45,13 @@ Dentro de ese directorio hay otros directorios: `bin` (que es donde se almacenan
 ::: callout-note
 ## Ejercicio 1
 
-A partir de `/Users/ecoss/data/`, ¿Cuál de los siguientes comandos podría Amanda usar para navegar a su directorio de inicio, que es `/Users/ecoss`?
+A partir de `/Users/ecoss/data/`, ¿Cuál de los siguientes comandos podría Evelia usar para navegar a su directorio de inicio, que es `/Users/ecoss`?
 
 1.  `cd .`
 
 2.  `cd /`
 
-3.  `cd /home/amanda`
+3.  `cd /home/ecoss`
 
 4.  `cd ../..`
 
@@ -76,7 +72,7 @@ A partir de `/Users/ecoss/data/`, ¿Cuál de los siguientes comandos podría Am
 
     2.  No: `/` significa el directorio raíz.
 
-    3.  No: El directorio **home** de Evelia es `/Users/amanda`.
+    3.  No: El directorio **home** de Evelia es `/Users/ecoss`.
 
     4.  No: sube dos niveles, es decir termina en `/Users`.
 
@@ -94,12 +90,12 @@ A partir de `/Users/ecoss/data/`, ¿Cuál de los siguientes comandos podría Am
 
 Ejemplo de rutas:
 
-[![](https://github.com/raynamharris/Shell_Intro_for_Transcriptomics/raw/master/lessons/figures/nav_dirs.png)](https://github.com/raynamharris/Shell_Intro_for_Transcriptomics/blob/master/lessons/02_Navigating_Dirs.md)
+![Imagen creada con Gemini.](figures/rutas.png){fig-align="center"}
 
-## **Comandos básicos**
+## Comandos básicos
 
 | Comandos | Información | Argumentos |
-|----|----|----|
+|-------------------|---------------------------|---------------------------|
 | `ssh` | Conexión a servidores | ssh usuario\@servidor.mx |
 | `ls` | Observar el contenido de los archivos en una carpeta | ls directorio/ |
 | `cd` | Moverse de directorios | cd /home/usuario/data/ |
@@ -122,7 +118,7 @@ Ejemplo de rutas:
 ::: callout-note
 ## Ayuda de funciones
 
-Puedes consultar mas información usando `ls --help`
+Puedes consultar mas información usando `man ls`
 :::
 
 ## Consultar información sobre archivos y directorios
@@ -186,7 +182,7 @@ Por lo tanto:
 Los archivos pueden contener diversos tipos de extensiones, dependiendo del objetivo será necesario descomprimirlos y en otros dejarlos comprimidos para no abarcar tanto espacio en tu espacio de trabajo. 
 
 | Tipo de archivo | Comprimir | Descomprimir |
-|----|----|----|
+|------------------------|------------------------|------------------------|
 | Carpeta.tar | `tar -cvf carpeta.tar /dir/a/comprimir/carpeta` | `tar -xvf carpeta.tar` |
 | Carpeta.tar.gz | `tar -czvf carpeta.tar.gz /carpeta/a/empaquetar/carpeta` | `tar -zxvf carpeta.tar.gz` |
 | Carpeta.gz | `gzip -9 carpeta.gz carpeta/a/empaquetar/carpeta` | `gunzip -kd carpeta.gz` |

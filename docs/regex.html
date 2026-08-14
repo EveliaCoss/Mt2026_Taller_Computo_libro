@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>26&nbsp; Ignorar archivos/carpetas – Taller de Cómputo</title>
+<title>11&nbsp; Expresiones regulares (REGEX) – Taller de Cómputo</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -68,8 +68,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./cap22.html" rel="next">
-<link href="./cap20.html" rel="prev">
+<link href="./cap7.html" rel="next">
+<link href="./cap6.html" rel="prev">
 <link href="./flyer/logo.png" rel="icon" type="image/png">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
@@ -122,7 +122,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./cap15.html"><strong>Sección 3</strong> - Introducción a Git/GitHub</a></li><li class="breadcrumb-item"><a href="./cap21.html"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Ignorar archivos/carpetas</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./cap4.html"><strong>Sección 1</strong> - Introducción a Bash</a></li><li class="breadcrumb-item"><a href="./regex.html"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Expresiones regulares (REGEX)</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Buscar" onclick="window.quartoOpenSearch();">
@@ -271,7 +271,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./regex.html" class="sidebar-item-text sidebar-link">
+  <a href="./regex.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Expresiones regulares (REGEX)</span></span></a>
   </div>
 </li>
@@ -383,7 +383,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./cap21.html" class="sidebar-item-text sidebar-link active">
+  <a href="./cap21.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Ignorar archivos/carpetas</span></span></a>
   </div>
 </li>
@@ -528,15 +528,32 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Tabla de contenidos</h2>
+   
+  <ul>
+  <li><a href="#diferencia-wildcards-vs-regex" id="toc-diferencia-wildcards-vs-regex" class="nav-link active" data-scroll-target="#diferencia-wildcards-vs-regex"><span class="header-section-number">11.1</span> Diferencia: Wildcards vs REGEX 🔄</a>
+  <ul>
+  <li><a href="#wildcards-en-bash" id="toc-wildcards-en-bash" class="nav-link" data-scroll-target="#wildcards-en-bash">Wildcards (en bash)</a></li>
+  <li><a href="#regex-en-comandos" id="toc-regex-en-comandos" class="nav-link" data-scroll-target="#regex-en-comandos">REGEX (en comandos)</a></li>
+  </ul></li>
+  <li><a href="#operadores-de-redirección-de-datos-io" id="toc-operadores-de-redirección-de-datos-io" class="nav-link" data-scroll-target="#operadores-de-redirección-de-datos-io"><span class="header-section-number">11.2</span> Operadores de redirección de datos I/O</a>
+  <ul>
+  <li><a href="#tabla-resumen-de-metacaracteres" id="toc-tabla-resumen-de-metacaracteres" class="nav-link" data-scroll-target="#tabla-resumen-de-metacaracteres"><span class="header-section-number">11.2.1</span> Tabla resumen de metacaracteres 📊</a></li>
+  </ul></li>
+  <li><a href="#opciones-principales-de-grep" id="toc-opciones-principales-de-grep" class="nav-link" data-scroll-target="#opciones-principales-de-grep"><span class="header-section-number">11.3</span> Opciones principales de grep</a></li>
+  <li><a href="#ejercicios-de-repaso" id="toc-ejercicios-de-repaso" class="nav-link" data-scroll-target="#ejercicios-de-repaso"><span class="header-section-number">11.4</span> Ejercicios de repaso</a></li>
+  <li><a href="#material-suplementario" id="toc-material-suplementario" class="nav-link" data-scroll-target="#material-suplementario"><span class="header-section-number">11.5</span> Material suplementario</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./cap15.html"><strong>Sección 3</strong> - Introducción a Git/GitHub</a></li><li class="breadcrumb-item"><a href="./cap21.html"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Ignorar archivos/carpetas</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./cap4.html"><strong>Sección 1</strong> - Introducción a Bash</a></li><li class="breadcrumb-item"><a href="./regex.html"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Expresiones regulares (REGEX)</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Ignorar archivos/carpetas</span></h1>
+<h1 class="title"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Expresiones regulares (REGEX)</span></h1>
 </div>
 
 
@@ -553,175 +570,87 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<p>Es muy usual tener un archivo llamado <code>.gitignore</code> donde se pueden colocar los nombres de archivos o carpetas que no queremos llevar registro.</p>
-<p>Creemos unos archivos de prueba.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> Mi_primer_repo</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> resultados</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">touch</span> a.csv b.csv c.csv resultados/a.out resultados/b.out</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Si preguntamos el estado veremos los cambios no registrados en el historial.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> status</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Estos archivos por el momento no nos sirven de nada y guardarlos o registrarlos sería una perdida de tiempo/espacio. Para ignorarlos, creamos el archivo <code>.gitignore</code> y añadimos los nombres a ese archivo:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">nano</span> .gitignore</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">*.csv</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="ex">resultados/</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> .gitignore</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Estos patrones le están diciendo a Git que ignore todos los archivos <code>.csv</code> y todo lo que hay en la carpeta <code>resultados</code>, si después añadimos algo a la carpeta lo seguirá ignorando. Y si alguno de esos archivos ya se le dijo a Git que llevará su registro lo seguirá registrando.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> status</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Si nos fijamos, el único documento que ahora nos menciona <code>Git</code> es el archivo <code>.gitignore</code>. Lo que nos falta es añadirlo y hacer el commit.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> add .gitignore</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"Creamos el archivo gitignore e ignoramos todo lo que hay en resultados y archivos csv"</span></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> status</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
-<p>El archivo <code>.gitignore</code> nos ayuda a no cometer el error de accidentalmente tratar de registrar y rastrear algo que se le dijo que no lo hiciera.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> add a.csv</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Si realmente queremos agregarlo, tendríamos que usar la opción <code>-f</code>:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> add <span class="at">-f</span> a.csv</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Para ver el estado de los archivos ignorados usamos la siguiente instrucción:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> status <span class="at">--ignored</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Nota</span>Ejercicio 1
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Supongamos que tenemos las siguientes subcarpetas:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="ex">resultados/plots</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="ex">resultados/datos</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
-<p>¿Qué tenemos que hacer si queremos ignorar solamente lo que hay en <code>datos</code> y no lo que hay en <code>plots</code>?</p>
-<div class="callout callout-style-default callout-tip no-icon callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<p>Las <strong>expresiones regulares</strong> (o <strong>REGEX</strong>) son <strong>patrones de texto que describen un conjunto de strings</strong> (cadenas de caracteres). Te permiten buscar, validar y procesar texto de manera flexible y poderosa.</p>
+<div class="callout callout-style-simple callout-tip no-icon">
+<div class="callout-body d-flex">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>Solución
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-1" class="callout-1-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>Si queremos ignorar únicamente el contenido de la carpeta <code>datos</code>, pero seguir rastreando los archivos de <code>plots</code>, podemos crear (o modificar) un archivo <code>.gitignore</code> y agregar la siguiente línea:</p>
-<pre class="text"><code>resultados/datos/</code></pre>
-<p>La barra <code>/</code> al final indica que queremos ignorar todo el contenido del directorio <code>datos</code>.</p>
-<p>El archivo <code>.gitignore</code> podría verse así:</p>
-<pre class="text"><code>resultados/datos/</code></pre>
-<p>Con esta configuración, Git ignorará archivos como</p>
-<pre class="text"><code>resultados/datos/datos1.csv
-resultados/datos/salida.txt</code></pre>
-<p>pero seguirá rastreando normalmente archivos como</p>
-<pre class="text"><code>resultados/plots/figura1.png
-resultados/plots/heatmap.pdf</code></pre>
-<p>Podemos comprobar qué archivos están siendo rastreados con:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> status</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
-<p>y observaremos que los archivos dentro de <code>resultados/datos/</code> no aparecen, mientras que los archivos dentro de <code>resultados/plots/</code> sí.</p>
+<div class="callout-body-container">
+<p><strong>Idea principal 🎯:</strong></p>
+<p>Una expresión regular es como un <strong>patrón de búsqueda avanzado</strong> que te permite encontrar texto que coincida con reglas específicas, sin necesidad de escribir el texto exacto.</p>
 </div>
 </div>
 </div>
-</div>
-</div>
-<p>Para ignorar por ejemplo todos los archivos que terminan en <code>.csv</code> excepto uno en específico (<code>b.csv</code>) podemos indicarlo en el archivo <code>.gitignore</code> como:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="ex">*.csv</span>  <span class="co"># ignoramos todos los csv</span></span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="ex">!b.csv</span> <span class="co"># exepto el que se llama b.csv</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Nota</span>Ejercicio 2
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Supongamos ahora que tenemos la siguiente estructura de carpetas:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb18"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="ex">resultados/plots</span></span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="ex">resultados/datos</span></span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="ex">resultados/img</span></span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="ex">resultados/analisis</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Y que queremos ignorar todo excepto lo que hay en datos. ¿Cómo lo harían?</p>
-<div class="callout callout-style-default callout-tip no-icon callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>Solución
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-3" class="callout-3-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>Una forma de hacerlo es ignorar primero todo el contenido de <code>resultados</code> y después excluir de esa regla a la carpeta <code>datos</code>.</p>
-<p>Para ello, en el archivo <code>.gitignore</code> podemos escribir:</p>
-<pre class="text"><code>resultados/*
-!resultados/datos/</code></pre>
-<p>Sin embargo, para que Git también considere los archivos dentro de <code>datos</code>, debemos añadir:</p>
-<pre class="text"><code>resultados/*
-!resultados/datos/
-!resultados/datos/**</code></pre>
-<p>Con esto, Git ignorará archivos como</p>
-<pre class="text"><code>resultados/plots/figura1.png
-resultados/img/logo.jpg
-resultados/analisis/salida.txt</code></pre>
-<p>pero seguirá rastreando archivos dentro de</p>
-<pre class="text"><code>resultados/datos/</code></pre>
-<p>Por ejemplo,</p>
-<pre class="text"><code>resultados/datos/datos1.csv
-resultados/datos/mediciones.txt</code></pre>
-<p>Podemos verificarlo con:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb24"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> status</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
-<p>y observaremos que solamente aparecen los archivos contenidos en <code>resultados/datos</code>.</p>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Nota</span>Ejercicio 3
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Supongamos que tenemos la siguiente estructura de archivos:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb25"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="ex">resultados/rdatos/a.csv</span></span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="ex">resultados/rdatos/b.csv</span></span>
-<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="ex">resultados/rdatos/c.csv</span></span>
-<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a><span class="ex">resultados/rdatos/info.txt</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
-<p>¿Cómo le indicas a Git que ignore todos los <code>csv</code> de la carpeta <code>rdatos</code> menos el que se llama <code>info.txt</code>?</p>
-<div class="callout callout-style-default callout-tip no-icon callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>Solución
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-5" class="callout-5-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>Como únicamente queremos ignorar los archivos con extensión <code>.csv</code> dentro de la carpeta <code>rdatos</code>, podemos añadir al archivo <code>.gitignore</code> la siguiente línea:</p>
-<pre class="text"><code>resultados/rdatos/*.csv</code></pre>
-<p>Con esta regla, Git ignorará</p>
-<pre class="text"><code>resultados/rdatos/a.csv
-resultados/rdatos/b.csv
-resultados/rdatos/c.csv</code></pre>
-<p>pero seguirá rastreando cualquier archivo cuya extensión no sea <code>.csv</code>, por ejemplo</p>
-<pre class="text"><code>resultados/rdatos/info.txt</code></pre>
-<p>Podemos verificarlo con:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb29"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> status</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
-<p>y observaremos que únicamente aparecerá <code>info.txt</code>, mientras que los archivos <code>.csv</code> serán ignorados.</p>
-</div>
-</div>
-</div>
-</div>
-</div>
+<p><strong>Estructura de una expresión regular</strong></p>
+<pre><code>patrón = [caracteres] [metacaracteres] [cuantificadores]</code></pre>
+<p>Estructura básica de grep</p>
+<pre><code>grep [opciones] "patrón" archivo.txt</code></pre>
+<p>Componentes:</p>
+<ul>
+<li><code>grep</code> = Comando</li>
+<li><code>[opciones]</code> = Modificadores del comportamiento (opcional)</li>
+<li><code>"patrón"</code> = La expresión regular a buscar</li>
+<li><code>archivo.txt</code> = El archivo donde buscar</li>
+</ul>
+<p><strong>1. Caracteres literales</strong></p>
+<p>Son caracteres normales que se buscan tal cual.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span> <span class="st">"hola"</span> archivo.txt</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Busca la palabra "hola" exactamente</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>2. Metacaracteres en REGEX</strong></p>
+<p>Son caracteres especiales que tienen significado especial.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span> <span class="st">"h.la"</span> archivo.txt</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Busca "hala", "hila", "hola", "hula", etc.</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>3. Cuantificadores</strong></p>
+<p>Especifican cuántas veces debe repetirse un patrón.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span> <span class="st">"ho*la"</span> archivo.txt</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Busca "hla", "hola", "hoola", "hooola", etc.</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<section id="diferencia-wildcards-vs-regex" class="level2" data-number="11.1">
+<h2 data-number="11.1" class="anchored" data-anchor-id="diferencia-wildcards-vs-regex"><span class="header-section-number">11.1</span> Diferencia: Wildcards vs REGEX 🔄</h2>
+<section id="wildcards-en-bash" class="level4">
+<h4 class="anchored" data-anchor-id="wildcards-en-bash">Wildcards (en bash)</h4>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Buscar archivos</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="pp">*</span>.txt           <span class="co"># Expande a archivos reales</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="pp">[</span><span class="ss">abc</span><span class="pp">]*</span>          <span class="co"># Expande a archivos que comienzan con a, b o c</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Contexto</strong>: Sistema de archivos</p>
+</section>
+<section id="regex-en-comandos" class="level4">
+<h4 class="anchored" data-anchor-id="regex-en-comandos">REGEX (en comandos)</h4>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Buscar en contenido de archivos</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span> <span class="st">".*\.txt$"</span> archivo.txt    <span class="co"># Busca líneas que terminan en .txt</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span> <span class="st">"[abc]"</span> archivo.txt       <span class="co"># Busca líneas que contienen a, b o c</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Contexto</strong>: Contenido de texto</p>
+</section>
+</section>
+<section id="operadores-de-redirección-de-datos-io" class="level2" data-number="11.2">
+<h2 data-number="11.2" class="anchored" data-anchor-id="operadores-de-redirección-de-datos-io"><span class="header-section-number">11.2</span> Operadores de redirección de datos I/O</h2>
+<p>Usualmente cuando trabajamos con datos, es necesario pasar el resultado de un comando a otro para hacer un procesamiento de datos apilado, como en un algortimo. Un <code>stream</code> o <code>corriente</code> esta hecha de datos. Es una corriente de datos. Un ejemplo muy familiar es el teclado y la pantalla. El teclado tiene una interfaz en donde por cada tecla presionada, un caracter se guarda en un archivo. Se dice entonces que es una <code>corriente de  entrada</code>. Cuando la pantalla nos muestra lo que estamos escribiendo entonces la data sale hacia nosotros y eso convierte a la pantalla en una <code>corriente de salida</code>. Los dispositivos que hacen este tipo de transmisión de datos se llaman dispositivos <code>I/O</code> (input y output). Los operadores que se encargan de esto se conocen como <code>operadores de redirección</code>. Tres importantes son:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th><strong>Comando</strong></th>
+<th><strong>Función</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>&gt;</code></td>
+<td>Stream de <strong>salida de datos</strong>. Sobre escribre sobre un archivo.</td>
+</tr>
+<tr class="even">
+<td><code>&gt;&gt;</code></td>
+<td>Stream de salida de datos. Adjunta <strong>nueva salida a datos preexistentes en un archivo.</strong></td>
+</tr>
+<tr class="odd">
+<td><code>&lt;</code></td>
+<td>Stream de <strong>entrada de datos.</strong> Recibe datos para procesamiento con algun comando.</td>
+</tr>
+</tbody>
+</table>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -732,59 +661,196 @@ resultados/rdatos/c.csv</code></pre>
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Supongamos que tenemos la siguiente estructura de datos:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb30"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="ex">resultados/a.csv</span></span>
-<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="ex">resultados/analisis1/b.csv</span></span>
-<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a><span class="ex">resultados/analisis2/c.csv</span></span>
-<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a><span class="ex">resultados/analisis2/sub_1/d.csv</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
-<p>¿Cómo le indicamos a Git que ignore todos los archivos <code>.csv</code> sin indicar manualmente todos los directorios?</p>
-<div class="callout callout-style-default callout-tip no-icon callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>Solución
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-7" class="callout-7-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>Si queremos ignorar todos los archivos con extensión <code>.csv</code>, independientemente del directorio en el que se encuentren, podemos añadir al archivo <code>.gitignore</code> la siguiente línea:</p>
-<pre class="text"><code>*.csv</code></pre>
-<p>Con esta regla, Git ignorará automáticamente archivos como</p>
-<pre class="text"><code>resultados/a.csv
-resultados/analisis1/b.csv
-resultados/analisis2/c.csv
-resultados/analisis2/sub_1/d.csv</code></pre>
-<p>sin necesidad de especificar manualmente cada carpeta.</p>
-<p>Podemos verificar qué archivos están siendo ignorados mediante:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb33"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> status</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
-<p>y observaremos que los archivos con extensión <code>.csv</code> no aparecerán.</p>
-<p>Alternativamente, podríamos usar:</p>
-<pre class="text"><code>**/*.csv</code></pre>
-<p>que explícitamente indica que se ignoren todos los archivos <code>.csv</code> en cualquier subdirectorio, aunque en la mayoría de los casos basta con escribir simplemente:</p>
-<pre class="text"><code>*.csv</code></pre>
+<ol type="1">
+<li><p>Crea el archivo <code>bacterias_generos.txt</code> e imprime su contenido empleando los siguientes comandos:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8" data-code-copy="true" data-eval="false"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="at">-e</span> <span class="st">"\nRickettsia\nOrientia\nWolbachia\nAegyptianella\nAnaplasma\nCowdria\nEhrlichia\nNeorickettsia\nCaedibacter\nHolospora\nLyticum\nOdyssella\nSymbiotes\nTectibacter"</span> <span class="op">&gt;</span> bacterias_generos.txt</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> bacterias_generos.txt</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div></li>
+<li><p>Agrega una nueva especie en la última fila empleando “&gt;&gt;”.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9" data-code-copy="true" data-eval="false"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="at">-e</span> <span class="st">"\nEscherichia\n:D"</span> <span class="op">&gt;&gt;</span> bacterias_generos.txt</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> bacterias_generos.txt</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div></li>
+<li><p>Ahora usaremos el comando <code>sort</code> para reordenar todos los géneros. Sin embargo notamos que el archivo original no cambia nunca.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10" data-code-copy="true" data-eval="false"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sort</span> <span class="op">&lt;</span> bacterias_generos.txt</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div></li>
+<li><p>Para hacer un cambio en el archivo <code>bacterias_generos.txt</code>, usamos este comando. Notamos que ahora no usamos <code>&gt;&gt;</code> sino solo <code>&gt;</code>. Esto va a borrar el contenido previo con géneros desordenados y ahora los va a ordenar. El cambio no se puede deshacer, así que ten cuidado con el operador <code>&gt;</code> para que no pierdas datos.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11" data-code-copy="true" data-eval="false"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="kw">(</span><span class="fu">sort</span> <span class="op">&lt;</span> bacterias_generos.txt<span class="kw">)</span> <span class="op">&gt;</span> bacterias_generos_sorted.txt</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> bacterias_generos_sorted.txt</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div></li>
+</ol>
 </div>
 </div>
-</div>
-</div>
-</div>
+<section id="tabla-resumen-de-metacaracteres" class="level3" data-number="11.2.1">
+<h3 data-number="11.2.1" class="anchored" data-anchor-id="tabla-resumen-de-metacaracteres"><span class="header-section-number">11.2.1</span> Tabla resumen de metacaracteres 📊</h3>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Metacarácter</th>
+<th>Significado</th>
+<th>Ejemplo</th>
+<th>Coincide con</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>.</code></td>
+<td>Cualquier carácter</td>
+<td><code>a.o</code></td>
+<td>ato, amo, ano</td>
+</tr>
+<tr class="even">
+<td><code>*</code></td>
+<td>Cero o más</td>
+<td><code>ab*c</code></td>
+<td>ac, abc, abbc</td>
+</tr>
+<tr class="odd">
+<td><code>+</code></td>
+<td>Una o más</td>
+<td><code>ab+c</code></td>
+<td>abc, abbc</td>
+</tr>
+<tr class="even">
+<td><code>?</code></td>
+<td>Cero o una</td>
+<td><code>ab?c</code></td>
+<td>ac, abc</td>
+</tr>
+<tr class="odd">
+<td><code>[ ]</code></td>
+<td>Conjunto</td>
+<td><code>a[123]o</code></td>
+<td>a1o, a2o, a3o</td>
+</tr>
+<tr class="even">
+<td><code>[^...]</code></td>
+<td>Negación</td>
+<td><code>a[^0-9]o</code></td>
+<td>ato, amo</td>
+</tr>
+<tr class="odd">
+<td><code>-</code></td>
+<td>Rango</td>
+<td><code>[a-z]</code></td>
+<td>a, b, c, …, z</td>
+</tr>
+<tr class="even">
+<td><code>^</code></td>
+<td>Inicio línea</td>
+<td><code>^Hola</code></td>
+<td>Hola mundo</td>
+</tr>
+<tr class="odd">
+<td><code>$</code></td>
+<td>Fin línea</td>
+<td><code>mundo$</code></td>
+<td>Hola mundo</td>
+</tr>
+<tr class="even">
+<td><code>\</code></td>
+<td>Escape</td>
+<td><code>\.</code></td>
+<td>. (punto literal)</td>
+</tr>
+<tr class="odd">
+<td><code>( )</code></td>
+<td>Agrupación</td>
+<td><code>(ab)+</code></td>
+<td>ab, abab</td>
+</tr>
+<tr class="even">
+<td><code>|</code></td>
+<td>Alternancia</td>
+<td><code>gato|perro</code></td>
+<td>gato, perro</td>
+</tr>
+<tr class="odd">
+<td><code>{ }</code></td>
+<td>Repetición exacta</td>
+<td><code>a{2}</code></td>
+<td>aa</td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="opciones-principales-de-grep" class="level2" data-number="11.3">
+<h2 data-number="11.3" class="anchored" data-anchor-id="opciones-principales-de-grep"><span class="header-section-number">11.3</span> Opciones principales de grep</h2>
+<p><strong>1. <code>-E</code> - Expresiones regulares extendidas</strong></p>
+<p>Permite usar metacaracteres avanzados como <code>+</code>, <code>?</code>, <code>|</code>, <code>{ }</code>.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Sin -E: no funciona</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span> <span class="st">"a+b"</span> archivo.txt      <span class="co"># Busca "a+b" literal</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Con -E: funciona</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span> <span class="at">-E</span> <span class="st">"a+b"</span> archivo.txt   <span class="co"># Busca "a", "ab", "aab", "aaab", etc.</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>2. <code>-i</code> - Ignorar mayúsculas/minúsculas</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span> <span class="at">-i</span> <span class="st">"hola"</span> archivo.txt</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Encuentra: "Hola", "HOLA", "hola", "HoLa"</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>3. <code>-v</code> - Invertir búsqueda (líneas que NO coinciden)</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span> <span class="at">-v</span> <span class="st">"error"</span> archivo.log</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Imprime todas las líneas que NO contienen "error"</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>4. <code>-c</code> - Contar coincidencias</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span> <span class="at">-c</span> <span class="st">"error"</span> archivo.log</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Output: 5 (número de líneas con "error")</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>5. <code>-n</code> - Mostrar número de línea</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span> <span class="at">-n</span> <span class="st">"error"</span> archivo.log</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Output: 5:Error en línea 5</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="co">#         12:Error en línea 12</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>6. <code>-l</code> - Mostrar solo nombres de archivos</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span> <span class="at">-l</span> <span class="st">"error"</span> <span class="pp">*</span>.log</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Output: archivo1.log</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="co">#         archivo3.log</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>7. <code>-r</code> - Buscar recursivamente en directorios</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb18"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span> <span class="at">-r</span> <span class="st">"error"</span> /var/log/</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Busca en todos los archivos del directorio /var/log/</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>8. <code>-o</code> - Mostrar solo la parte que coincide</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb19"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span> <span class="at">-o</span> <span class="st">"[0-9]\{3\}-[0-9]\{3\}-[0-9]\{4\}"</span> archivo.txt</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Output: 123-456-7890</span></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="co">#         987-654-3210</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Nota</span>Ejercicio 5
+<span class="screen-reader-only">Nota</span>Ejercicio 5 - <strong>Dominar <code>grep</code> (con <code>echo -e</code>)</strong>
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Si en el archivo <code>.gitignore</code> escribimos lo siguiente, ¿qué está ignorando?</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb36"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="ex">*.csv</span></span>
-<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a><span class="ex">!*.csv</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<ol type="1">
+<li>Crea los archivos que usaremos y verificar su contenido en este ejercicio:</li>
+</ol>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb20"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Crear directorio de trabajo</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> ejercicio_grep</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ejercicio_grep</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Crear archivo de usuarios</span></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="at">-e</span> <span class="st">"juan@ejemplo.com 25 activo\nmaria@empresa.es 30 inactivo\ncarlos123 28 activo\nana@dominio.org 22 activo\npedro@test 35 inactivo\nsofia@dominio.com 27 activo\nluis@empresa.es 40 inactivo"</span> <span class="op">&gt;</span> usuarios.txt</span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> usuarios.txt</span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Crear archivo de log</span></span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="at">-e</span> <span class="st">"[2024-01-15 10:30:45] [INFO] Sistema iniciado\n[2024-01-15 10:31:12] [ERROR] Conexión fallida a base de datos\n[2024-01-15 10:32:00] [WARNING] Memoria disponible baja\n[2024-01-15 10:33:45] [ERROR] Archivo no encontrado: config.ini\n[2024-01-15 10:34:20] [INFO] Proceso de sincronización completado\n[2024-01-15 10:35:10] [ERROR] Timeout en conexión remota\n[2024-01-15 10:36:00] [WARNING] Espacio en disco bajo\n[2024-01-15 10:37:30] [INFO] Backup completado exitosamente"</span> <span class="op">&gt;</span> sistema.log</span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> sistema.log</span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Crear archivo de productos</span></span>
+<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="at">-e</span> <span class="st">"001 Laptop Dell 1200.50 disponible\n002 Mouse Logitech 25.99 disponible\n003 Teclado Mecánico 89.99 agotado\n004 Monitor LG 350.00 disponible\n005 Webcam HD 45.50 disponible\n006 Auriculares Sony 150.00 agotado\n007 Cable HDMI 12.99 disponible\n008 Hub USB 35.75 disponible"</span> <span class="op">&gt;</span> productos.txt</span>
+<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> productos.txt</span>
+<span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-17"><a href="#cb20-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Crear archivo de emails</span></span>
+<span id="cb20-18"><a href="#cb20-18" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="at">-e</span> <span class="st">"juan.perez@ejemplo.com\nmaria_lopez@empresa.es\ncarlos.garcia@test.com\nana.martinez@dominio.org\npedro123@invalid\nsofia.rodriguez@empresa.es\nluis_fernandez@test.org\ncontacto@empresa.es"</span> <span class="op">&gt;</span> emails.txt</span>
+<span id="cb20-19"><a href="#cb20-19" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> emails.txt</span>
+<span id="cb20-20"><a href="#cb20-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-21"><a href="#cb20-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Crear archivo de géneros bacterianos</span></span>
+<span id="cb20-22"><a href="#cb20-22" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="at">-e</span> <span class="st">"Rickettsia\nOrientia\nWolbachia\nAegyptianella\nAnaplasma\nCowdria\nEhrlichia\nNeorickettsia\nCaedibacter\nHolospora\nLyticum\nOdyssella\nSymbiotes\nTectibacter"</span> <span class="op">&gt;</span> bacterias_generos.txt</span>
+<span id="cb20-23"><a href="#cb20-23" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> bacterias_generos.txt</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<ol start="2" type="1">
+<li><p>Buscar los usuarios activos dentro del archivo <code>usuarios.txt</code>. NOTA: <code>\b</code> no representa un carácter real, sino una <strong>posición</strong> en el texto donde termina o comienza una palabra.</p></li>
+<li><p>Buscar los errores en el archivo log <code>sistema.log</code>.</p></li>
+<li><p>Buscar productos disponibles en el archivo <code>productos.txt</code>.</p></li>
+<li><p>Ignorar las mayúsculas/minúsculas (<code>-i</code>) de <code>sistema.log</code>.</p></li>
+<li><p>Contar el número (<code>grep -c</code>) de usuarios activos en el archivo <code>usuarios.txt</code>.</p></li>
+<li><p>Dime en que líneas (<code>grep -n</code>) aparece la palabra ERROR en <code>sistema.log</code>.</p></li>
+<li><p>Mostrar solo las coincidencias (<code>grep -o</code>) con la palabra ERROR en <code>sistema.log</code>.</p></li>
+<li><p>Buscar las especies que comienzan con A en el archivo <code>bacterias_generos.txt</code>.</p></li>
+<li><p>Buscar las especies que comienzan con R o W en el archivo <code>bacterias_generos.txt</code>.</p>
 <div class="callout callout-style-default callout-tip no-icon callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
@@ -793,31 +859,74 @@ resultados/analisis2/sub_1/d.csv</code></pre>
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-9" class="callout-9-contents callout-collapse collapse">
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>La primera línea</p>
-<pre class="text"><code>*.csv</code></pre>
-<p>le indica a Git que ignore todos los archivos con extensión <code>.csv</code>.</p>
-<p>Sin embargo, la segunda línea</p>
-<pre class="text"><code>!*.csv</code></pre>
-<p>niega la regla anterior y vuelve a incluir todos los archivos <code>.csv</code>.</p>
-<p>Por lo tanto, el efecto neto es que <strong>ningún archivo <code>.csv</code> será ignorado</strong>.</p>
-<p>Recordemos que en un archivo <code>.gitignore</code>, las reglas se procesan de arriba hacia abajo y las reglas posteriores tienen prioridad sobre las anteriores.</p>
-<p>Por ejemplo, si tenemos los archivos</p>
-<pre class="text"><code>a.csv
-b.csv
-datos/c.csv</code></pre>
-<p>ninguno de ellos será ignorado.</p>
-<p>Podemos comprobarlo con:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb40"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> status</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
-<p>y observaremos que todos los archivos <code>.csv</code> aparecerán normalmente.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb21"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="ex">2.</span> grep <span class="at">-E</span> <span class="st">"\bactivo\b"</span> usuarios.txt o grep <span class="st">" activo"</span> usuarios.txt</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="ex">3.</span> grep <span class="st">"ERROR"</span> sistema.log</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="ex">4.</span> grep <span class="st">"disponible"</span> productos.txt</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a><span class="ex">5.</span> grep <span class="at">-i</span> <span class="st">"error"</span> sistema.log</span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a><span class="ex">6.</span> grep <span class="st">" activo"</span> usuarios.txt <span class="kw">|</span> <span class="fu">wc</span> <span class="at">-l</span> o grep <span class="at">-c</span> <span class="st">" activo"</span> usuarios.txt </span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a><span class="ex">7.</span> grep <span class="at">-n</span> <span class="st">"ERROR"</span> sistema.log</span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a><span class="ex">8.</span> grep <span class="at">-o</span> <span class="st">"ERROR"</span> sistema.log</span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a><span class="ex">9.</span> grep <span class="st">"^A"</span> bacterias_generos.txt</span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a><span class="ex">10.</span> grep <span class="at">-E</span> <span class="st">"^(R|W)"</span> bacterias_generos.txt</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div>
+</div></li>
+</ol>
 </div>
 </div>
+</section>
+<section id="ejercicios-de-repaso" class="level2" data-number="11.4">
+<h2 data-number="11.4" class="anchored" data-anchor-id="ejercicios-de-repaso"><span class="header-section-number">11.4</span> Ejercicios de repaso</h2>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
 </div>
+<div class="callout-title-container flex-fill">
+Nota
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Puedes seguir repasando y aprendiendo de las expresiones regulares en la pagina de <a href="https://regexone.com/">RegexOne</a>.</p>
+</div>
+</div>
+<p><strong>Rangos comunes</strong>:</p>
+<ul>
+<li><code>[a-z]</code> = letras minúsculas</li>
+<li><code>[A-Z]</code> = letras mayúsculas</li>
+<li><code>[0-9]</code> = dígitos</li>
+<li><code>[a-zA-Z]</code> = letras (mayúsculas y minúsculas)</li>
+<li><code>[a-zA-Z0-9]</code> = letras y dígitos</li>
+</ul>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Advertencia</span>Advertencia
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>El operador <code>&gt;</code> sobre escribe archivos. Ten cuidado al usarlo para que no pierdas datos.</p>
+</div>
+</div>
+<p><img src="figures/nac35ntlfg831.webp" class="img-fluid"></p>
+</section>
+<section id="material-suplementario" class="level2" data-number="11.5">
+<h2 data-number="11.5" class="anchored" data-anchor-id="material-suplementario"><span class="header-section-number">11.5</span> Material suplementario</h2>
+<ul>
+<li>RSG Ecuador. <a href="https://rsg-ecuador.github.io/unix.bioinfo.rsgecuador/content/Curso_avanzado/02_Bash/1_bash.html">Scripts en Bash</a></li>
+<li>RSG Ecuador. <a href="https://rsg-ecuador.github.io/unix.bioinfo.rsgecuador/content/Curso_basico/03_Manejo_terminal/5_wildcards.html">Wildcards y Streams</a></li>
+<li>RSG Ecuador. <a href="https://rsg-ecuador.github.io/unix.bioinfo.rsgecuador/content/Curso_basico/04_Procesamiento_ficheros_regex_pipes/3_Expresiones_regulares.html">Expresiones regulares (<em>regex</em>)</a></li>
+<li><a href="https://pressbooks.senecapolytechnic.ca/uli101/chapter/wildcard-selection-in-bash/">Wildcard Selection in Bash</a></li>
+<li><a href="https://twiki.org/cgi-bin/view/Codev/TWikiPresentation2017x06x01Regex">Expresiones regulares</a></li>
+</ul>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -1261,13 +1370,13 @@ datos/c.csv</code></pre>
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./cap20.html" class="pagination-link" aria-label="Restore y reset">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Restore y reset</span></span>
+      <a href="./cap6.html" class="pagination-link" aria-label="Wildcards y Streams">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Wildcards y Streams</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./cap22.html" class="pagination-link" aria-label="Github">
-        <span class="nav-page-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Github</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./cap7.html" class="pagination-link" aria-label="Operadores de redirección de datos I/O">
+        <span class="nav-page-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Operadores de redirección de datos I/O</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

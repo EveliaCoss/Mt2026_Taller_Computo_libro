@@ -1,47 +1,451 @@
 # Wildcards y Streams
 
-``` {.bash code-copy="true" eval="false"}
-wc _files/secuencias_bash.fastq
-# 300   600 12934 secuencias_bash.fastq
+## Estructura de declaración de variables en bash
+
+La estructura básica para declarar una variable en `bash` es:
+
+```         
+nombre_variable=valor
 ```
 
-Esto nos dice que el archivo cuenta con 300 lineas, 600 palabras y 12,934 caracteres.
+### Reglas importantes para nombres de variables
 
-## Caracteres y strings
+- **Deben comenzar con una letra o guion bajo** (`_`)
+- **Pueden contener letras, números y guiones bajos**
+- **No pueden contener espacios** alrededor del signo `=`
+- **Son sensibles a mayúsculas y minúsculas** (edad ≠ EDAD)
+- **No se usan espacios** entre el nombre, el `=` y el valor
+
+### Ejemplos de declaración correcta e incorrecta
+
+**✅ Correcto:**
+
+``` bash
+nombre="Juan"
+edad=25
+_variable="valor"
+mi_nombre="Carlos"
+```
+
+**❌ Incorrecto:**
+
+``` bash
+nombre = "Juan"        # Espacios alrededor del =
+2nombre="Juan"         # Comienza con número
+mi-nombre="Juan"       # Guion en lugar de guion bajo
+```
+
+## Acceder a variables con \$
+
+Para **usar o acceder** al valor de una variable, debes anteponer el símbolo `$` al nombre:
+
+``` bash
+nombre="Juan"
+echo $nombre           # Output: Juan
+echo "Hola $nombre"    # Output: Hola Juan
+```
+
+## Tipos de comillas y su comportamiento
+
+### Comillas dobles `"..."` - Expansión de variables
+
+Las comillas dobles **permiten la expansión de variables**. Esto significa que el `$` se interpreta como inicio de una variable:
+
+``` bash
+nombre="Juan"
+echo "Hola $nombre"    # Output: Hola Juan
+```
+
+Aquí, `$nombre` se reemplaza por su valor `Juan`.
+
+### Comillas simples `'...'` - Sin expansión
+
+Las comillas simples **tratan todo literalmente**. El `$` no se interpreta como variable:
+
+``` bash
+nombre="Juan"
+echo 'Hola $nombre'    # Output: Hola $nombre
+```
+
+Aquí, `$nombre` se imprime tal cual, sin reemplazarse.
+
+### Sin comillas - Expansión directa
+
+Sin comillas, también se expanden las variables:
+
+``` bash
+nombre="Juan"
+echo Hola $nombre      # Output: Hola Juan
+```
+
+## **Caracteres**
 
 Los `caracteres` son unidades de información que se representan con símbolos. Pueden ser de varios tipos como alfanuméricos, números enteros, signos de puntuación. Varios caracteres son interpretados por la shell de manera especial. Estos se llaman `caracteres especiales`, claro, y permiten desarrollar alguna lógica, dependiendo del contexto. Por ejemplo, algunos caracteres: `@` `#` `.` `?` `!` `,` `/` `\` `>` `~` `a` `µ` `g` `§` `R` `|(pipe)`.
 
-Cada caracter se asocia a una combinación diferente de teclas en el teclado del computador.
+Cada carácter se asocia a una combinación diferente de teclas en el teclado del computador. Representa un símbolo individual que puede ser:
 
-Los `strings` son arreglos de caracteres. Esto quiere decir que son caracteres en conjunto y con un orden en particular. Por ejemplo el string `pizza` tiene 4 diferentes caracteres: `i`, `p`, `z`, `a`. Diferentes combinaciones de caracteres pueden formar diferentes strings.
+- **Letras**: a, b, c, A, B, C, etc.
+- **Dígitos**: 0, 1, 2, 3, 4, 5, 6, 7, 8, 9
+- **Símbolos especiales**: `!, @, #, $, %, &, *, (, ), -, _, +, =`, etc.
+- **Espacios en blanco**: espacios, tabulaciones, saltos de línea
+- **Caracteres de control**: caracteres invisibles que controlan el comportamiento (como el salto de línea)
 
-Creemos un string y luego imprimámoslo en la pantalla del Terminal. Escribe los siguientes comandos:
+## Metacaracteres
 
-``` {.bash code-copy="true" eval="false"}
-mi_primer_string="Taller de bioinformática"
-echo $mi_primer_string
+### ¿Qué son los metacaracteres?
+
+Los **metacaracteres** son **caracteres especiales que tienen un significado especial en bash**, en lugar de representar su valor literal. `Bash` los interpreta como instrucciones o comandos, no como texto normal.
+
+## **Strings**
+
+Los `strings` (o **cadena de texto**) son arreglos de caracteres. Es decir, es una combinación de uno o más caracteres que forman un texto.
+
+```         
+"Hola"              → string de 4 caracteres
+"Bash es genial"    → string de 14 caracteres (incluyendo espacios)
+"12345"             → string de 5 caracteres
+"!@#$%"             → string de 5 caracteres especiales
+""                  → string vacío (0 caracteres)
 ```
 
-## Wildcards
+### Características de los strings en bash
 
-Los `wildcards` o `wild characters` son símbolos utilizados para representar uno o más caracteres. Se pueden utilizar con otros comandos para facilitar el procesamiento o búsqueda de archivos, directorios y datos en general.
+### Inmutabilidad en contexto de asignación
 
-| **Wildcard** | **Función** |
-|----|----|
-| `*` | Asocia **uno o más** caracteres especificados por el usuario, con caracteres en un string con el que se opera. |
-| `?` | Asocia **solo un** caracter a la vez en un string. |
-| `[ ]` | Asocia **cuaquiera** de los caracteres dentro en un string. |
+Los strings en bash son **inmutables** en el sentido de que no puedes modificar un carácter individual directamente. Debes reasignar todo el string:
+
+``` bash
+nombre="Juan"
+nombre="Carlos"    # Reasignación completa del string
+echo $nombre       # Output: Carlos
+```
+
+### Sensibilidad a mayúsculas y minúsculas
+
+Los strings **distinguen entre mayúsculas y minúsculas**. Dos strings con diferente capitalización se consideran diferentes:
+
+``` bash
+nombre="juan"
+NOMBRE="JUAN"
+echo $nombre       # Output: juan
+echo $NOMBRE       # Output: JUAN
+# Son variables diferentes
+```
+
+### Pueden contener espacios en blanco
+
+Los strings pueden incluir espacios, tabulaciones y saltos de línea. Para preservarlos, debes usar comillas:
+
+``` bash
+# Con comillas (preserva espacios)
+frase="Hola mundo desde bash"
+echo "$frase"      # Output: Hola mundo desde bash
+
+# Sin comillas (los espacios se interpretan como separadores)
+echo Hola mundo    # Output: Hola mundo (pero se trata como 2 argumentos)
+```
+
+::: {.callout-important icon="false"}
+## ¿Qué son los argumentos?
+
+Un **argumento** es un **valor o dato que se pasa a un comando o programa** para que lo procese. Los argumentos son la forma en que le das información a un comando sobre qué debe hacer.
+
+### Estructura básica
+
+```         
+comando argumento1 argumento2 argumento3
+```
+
+### Ejemplo sin comillas
+
+```         
+echo Hola mundo
+```
+
+En este caso:
+
+- **Comando**: `echo`
+- **Argumento 1**: `Hola`
+- **Argumento 2**: `mundo`
+
+Bash pasa **dos argumentos** al comando `echo`, y `echo` los imprime separados por un espacio.
+
+### Ejemplo con comillas
+
+```         
+echo "Hola mundo"
+```
+
+En este caso:
+
+- **Comando**: `echo`
+- **Argumento 1**: `Hola mundo` (un solo argumento)
+:::
+
+### Pueden estar vacíos
+
+Un string puede no contener ningún carácter (string vacío):
+
+``` bash
+variable=""
+echo "La variable está vacía: '$variable'"  # Output: La variable está vacía: ''
+```
+
+### Concatenación automática / Unión
+
+Bash permite concatenar strings simplemente colocándolos uno al lado del otro:
+
+``` bash
+nombre="Juan"
+apellido="Pérez"
+
+# Concatenación sin espacios
+completo=$nombre$apellido
+echo $completo     # Output: JuanPérez
+
+# Concatenación con espacios
+completo="$nombre $apellido"
+echo $completo     # Output: Juan Pérez
+
+# Concatenación con variables y texto literal
+mensaje="Hola, $nombre"
+echo $mensaje      # Output: Hola, Juan
+```
+
+### Longitud de strings
+
+Puedes obtener la longitud de un string usando `${#variable}`:
+
+::: {.callout-important icon="false"}
+## Desglose de la sintaxis `${#variable}`
+
+- `${ }` → Delimitadores para expansión de variables en bash
+- `#` → Operador que significa "obtener la longitud"
+- `variable` → El nombre de la variable cuya longitud quieres obtener
+:::
+
+Ejemplos:
+
+``` bash
+nombre="Juan"
+longitud=${#nombre}
+echo "La longitud es: $longitud"  # Output: La longitud es: 4
+
+# Ejemplo con string más largo
+frase="Bash es genial"
+echo ${#frase}     # Output: 14 (incluyendo espacios)
+```
+
+### Extracción de subcadenas
+
+Puedes extraer una parte de un string usando `${variable:inicio:longitud}`:
+
+::: {.callout-important icon="false"}
+## Desglose de la sintaxis `${variable:inicio:longitud}`
+
+- `${ }` → Delimitadores para expansión de variables en bash
+- `variable` → El nombre de la variable de la cual extraerás caracteres
+- `:inicio` → La posición donde comienza la extracción (comienza en 0)
+- `:longitud` → Cuántos caracteres quieres extraer
+:::
+
+Ejemplos:
+
+``` bash
+nombre="Juan"
+
+# Extraer desde posición 0, 2 caracteres
+echo ${nombre:0:2}    # Output: Ju
+
+# Extraer desde posición 1, 2 caracteres
+echo ${nombre:1:2}    # Output: ua
+
+# Extraer desde posición 2 hasta el final
+echo ${nombre:2}      # Output: an
+```
+
+### Sustitución de patrones
+
+Puedes reemplazar partes de un string usando `${variable/patron/reemplazo}`:
+
+``` bash
+frase="Hola mundo mundo"
+
+# Reemplazar la primera ocurrencia
+echo ${frase/mundo/bash}      # Output: Hola bash mundo
+
+# Reemplazar todas las ocurrencias (con //)
+echo ${frase//mundo/bash}     # Output: Hola bash bash
+```
+
+### Eliminación de patrones
+
+Puedes eliminar partes de un string:
+
+``` bash
+nombre="Juan.txt"
+
+# Eliminar desde el final hasta el patrón
+echo ${nombre%.txt}           # Output: Juan
+
+# Eliminar desde el inicio hasta el patrón
+echo ${nombre#Juan.}          # Output: txt
+```
+
+### Conversión a mayúsculas y minúsculas
+
+Bash permite convertir strings a mayúsculas o minúsculas (en versiones 4.0+):
+
+``` bash
+nombre="Juan"
+
+# Convertir a mayúsculas
+echo ${nombre^^}              # Output: JUAN
+
+# Convertir a minúsculas
+echo ${nombre,,}              # Output: juan
+
+# Convertir solo el primer carácter a mayúscula
+echo ${nombre^}               # Output: Juan
+```
+
+### Comparación de strings
+
+Puedes comparar strings usando operadores:
+
+``` bash
+nombre1="Juan"
+nombre2="Juan"
+nombre3="Carlos"
+
+# Igualdad
+echo "$nombre1 = $nombre2"    # Output: Juan = Juan
+
+# Desigualdad
+echo "$nombre1 != $nombre3"   # Output: Juan != Carlos
+```
+
+### Expansión de variables dentro de strings
+
+La expansión de variables ocurre dentro de comillas dobles pero no en comillas simples:
+
+``` bash
+nombre="Juan"
+
+# Con comillas dobles (expansión)
+echo "Hola $nombre"           # Output: Hola Juan
+
+# Con comillas simples (sin expansión)
+echo 'Hola $nombre'           # Output: Hola $nombre
+
+# Sin comillas (expansión)
+echo Hola $nombre             # Output: Hola Juan
+```
+
+### Caracteres especiales y escape
+
+Algunos caracteres tienen significado especial en bash. Puedes escaparlos con `\`:
+
+``` bash
+# Caracteres especiales
+echo "Precio: \$100"          # Output: Precio: $100
+echo "Comilla: \"Hola\""      # Output: Comilla: "Hola"
+echo "Barra invertida: \\"    # Output: Barra invertida: \
+
+# Saltos de línea
+echo -e "Línea 1\nLínea 2"    # Output: Línea 1
+                              #         Línea 2
+```
+
+::: {.callout-tip icon="false"}
+## **¿Qué es `\n`?**
+
+`\n` es una **secuencia de escape** que representa un **salto de línea o enter**. Es decir, le dice al programa que cree una nueva línea.
+
+- `\` → Carácter de escape (indica que lo siguiente tiene un significado especial)
+- `n` → Significa "newline" (nueva línea en inglés)
+:::
+
+::: {.callout-important icon="false"}
+## ¿Por qué necesitas `-e` en `echo` al usar `\n`?
+
+El comando `echo` **no interpreta** `\n` por defecto. Necesitas la opción `-e` para que bash entienda que `\n` significa un salto de línea:
+
+``` bash
+# Sin -e: imprime \n literalmente
+echo "Línea 1\nLínea 2"
+# Output: Línea 1\nLínea 2
+
+# Con -e: interpreta \n como salto de línea
+echo -e "Línea 1\nLínea 2"
+# Output: Línea 1
+#         Línea 2
+```
+:::
+
+#### Otras secuencias de escape comunes 📌
+
+Además de `\n`, existen otras secuencias de escape útiles:
+
+``` bash
+# \t = tabulación (espacios)
+echo -e "Nombre:\tJuan"
+# Output: Nombre:    Juan
+
+# \\ = barra invertida literal
+echo -e "Ruta: C:\\Users\\Juan"
+# Output: Ruta: C:\Users\Juan
+
+# \" = comilla doble literal
+echo -e "Dice: \"Hola\""
+# Output: Dice: "Hola"
+```
+
+### Strings multilínea
+
+Puedes crear strings que abarquen múltiples líneas:
+
+``` bash
+# Usando comillas dobles
+texto="Primera línea
+Segunda línea
+Tercera línea"
+echo "$texto"
+
+# Usando $'...' (permite secuencias de escape)
+texto=$'Primera línea\nSegunda línea\nTercera línea'
+echo "$texto"
+```
+
+**Resumen 🎯**
+
+- **Saltos de línea literales** (Enter real en el código): No necesitan `-e` ni `\n`
+- **Secuencias de escape `\n`**: Necesitan `-e` o `$'...'` para interpretarse
+
+## **Wildcards**
+
+Los `wildcards` (comodines) o `wild characters` son símbolos utilizados para representar uno o más caracteres. Se pueden utilizar con otros comandos para facilitar el procesamiento o búsqueda de archivos, directorios y datos en general.
+
+| Wildcard | Significa | Ejemplo | Coincide con |
+|----|----|----|----|
+| `*` | Cero o más caracteres | `*.txt` | archivo.txt, doc.txt, a.txt |
+| `?` | Exactamente 1 carácter | `archivo?.txt` | archivo1.txt, archivo2.txt |
+| `[ ]` | Un carácter del conjunto | `[abc]*` | archivo.txt, buscador.log, carpeta |
+| `[!...]` | Un carácter NO en el conjunto | `[!0-9]*` | archivo.txt (NO comienza con número) |
+| `[a-z]` | Rango de caracteres | `[a-z]*` | archivo.txt (comienza con minúscula) |
+| `[0-9]` | Rango de números | `*[0-9]` | archivo1, test2 |
 
 ::: callout-important
 El wildcard más usado es `*` porque es muy versátil.
 :::
 
-## Ejercicio 4
+::: callout-note
+### Ejercicio 3
 
-El wildcard `*` me permitiría encontrar todos los archivos en una carpeta que tengan la palabra `TESIS` en ellos. Primero crea la carpeta:
+El wildcard `*` me permitiría encontrar todos los archivos en una carpeta que tengan la palabra `TESIS` en ellos. Primero crea la carpeta:
 
 ``` bash
-taller_unix
+mkdir taller_unix
 ```
 
 Después, debemos generar estos archivos:
@@ -52,88 +456,41 @@ touch MI_TESIS.tex MI_TESIS_tutor2.tex TESIS.tex TESIS_YA_ACABATE.tex TESIS_fina
 ```
 
 1.  Enlista todos los archivos que comiencen con "`TESIS`".
+
 2.  Enlista todos los archivos que terminen con el string "`.tex`"
+
 3.  Buscar todos los archivos contengan la palabra "`TESIS"` pero con 3 caracteres desconocidos antes.
+
 4.  Buscar los archivos que terminen con el número 1 o 2 en su nombre antes de la extensión del archivo (`.tex`).
+
 5.  Encontrar los archivos que terminen en dos números del 1 al 3 y del 0 al 2 antes del formato del archivo (`.txt`).
+
 6.  Encontrar todos los archivos con este formato `?_reporte_[0-3][0-3].txt`
-7.  Encontrar todos los archivos que contengan por `a` o. `z`.
+
+7.  Encontrar todos los archivos que contengan por `a` o `z`.
+
 8.  Borramos todos estor archivos que terminen en ".txt" y ".tex"
 
-::: {.callout-tip collapse="true" icon="false"}
-## Solución
+    ::: {.callout-tip collapse="true" icon="false"}
+    ## Solución
 
-```         
-1. ls -l TESIS*
-2. ls -l *.tex
-3. ls -l ???TESIS*
-4. ls -l *[1-2].tex
-5. ls -l *[1-3][0-2].txt
-6. ls -l ?_reporte_[0-3][0-3].txt
-7. ls -l *[az]* o ls -l *[a,z]*
-8. rm *.tex *.txt
-```
+    ``` bash
+    1. ls -l TESIS*
+    2. ls -l *.tex
+    3. ls -l ???TESIS*
+    4. ls -l *[1-2].tex
+    5. ls -l *[1-3][0-2].txt
+    6. ls -l ?_reporte_[0-3][0-3].txt
+    7. ls -l *[az]*
+    8. rm *.tex *.txt
+    ```
+    :::
 :::
-
-## Ejercicios de repaso
-
-Puedes seguir repasando y aprendiendo de las expresiones regulares en la pagina de [RegexOne](https://regexone.com/).
-
-## Operadores de redirección de datos I/O
-
-Usualmente cuando trabajamos con datos, es necesario pasar el resultado de un comando a otro para hacer un procesamiento de datos apilado, como en un algortimo. Un `stream` o `corriente` esta hecha de datos. Es una corriente de datos. Un ejemplo muy familiar es el teclado y la pantalla. El teclado tiene una interfaz en donde por cada tecla presionada, un caracter se guarda en un archivo. Se dice entonces que es una `corriente de  entrada`. Cuando la pantalla nos muestra lo que estamos escribiendo entonces la data sale hacia nosotros y eso convierte a la pantalla en una `corriente de salida`. Los dispositivos que hacen este tipo de transmisión de datos se llaman dispositivos `I/O` (input y output). Los operadores que se encargan de esto se conocen como `operadores de redirección`. Tres importantes son:
-
-| **Comando** | **Función** |
-|----|----|
-| `>` | Stream de **salida de datos**. Sobre escribre sobre un archivo. |
-| `>>` | Stream de salida de datos. Adjunta **nueva salida a datos preexistentes en un archivo.** |
-| `<` | Stream de **entrada de datos.** Recibe datos para procesamiento con algun comando. |
-
-## Ejercicio 5
-
-1.  Crea el archivo `bacterias_generos.txt` e imprime su contenido empleando los siguientes comandos:
-
-    ``` {.bash code-copy="true" eval="false"}
-    echo -e "\nRickettsia\nOrientia\nWolbachia\nAegyptianella\nAnaplasma\nCowdria\nEhrlichia\nNeorickettsia\nCaedibacter\nHolospora\nLyticum\nOdyssella\nSymbiotes\nTectibacter" > bacterias_generos.txt
-    cat bacterias_generos.txt
-    ```
-
-2.  Agrega una nueva especie en la última fila empleando "\>\>".
-
-    ``` {.bash code-copy="true" eval="false"}
-    echo -e "\nEscherichia\n:D" >> bacterias_generos.txt
-    cat bacterias_generos.txt
-    ```
-
-3.  Ahora usaremos el comando `sort` para reordenar todos los géneros. Sin embargo notamos que el archivo original no cambia nunca.
-
-    ``` {.bash code-copy="true" eval="false"}
-    sort < bacterias_generos.txt
-    ```
-
-4.  Para hacer un cambio en el archivo `bacterias_generos.txt`, usamos este comando. Notamos que ahora no usamos `>>` sino solo `>`. Esto va a borrar el contenido previo con géneros desordenados y ahora los va a ordenar. El cambio no se puede deshacer, así que ten cuidado con el operador `>` para que no pierdas datos.
-
-    ``` {.bash code-copy="true" eval="false"}
-    (sort < bacterias_generos.txt) > bacterias_generos_sorted.txt
-    cat bacterias_generos_sorted.txt
-    ```
-
-::: callout-warning
-## Advertencia
-
-El operador `>` sobre escribe archivos. Ten cuidado al usarlo para que no pierdas datos.
-:::
-
-![](figures/nac35ntlfg831.webp)
 
 ## Material suplementario
 
 - RSG Ecuador. [Scripts en Bash](https://rsg-ecuador.github.io/unix.bioinfo.rsgecuador/content/Curso_avanzado/02_Bash/1_bash.html)
-
 - RSG Ecuador. [Wildcards y Streams](https://rsg-ecuador.github.io/unix.bioinfo.rsgecuador/content/Curso_basico/03_Manejo_terminal/5_wildcards.html)
-
 - RSG Ecuador. [Expresiones regulares (*regex*)](https://rsg-ecuador.github.io/unix.bioinfo.rsgecuador/content/Curso_basico/04_Procesamiento_ficheros_regex_pipes/3_Expresiones_regulares.html)
-
 - [Wildcard Selection in Bash](https://pressbooks.senecapolytechnic.ca/uli101/chapter/wildcard-selection-in-bash/)
-
 - [Expresiones regulares](https://twiki.org/cgi-bin/view/Codev/TWikiPresentation2017x06x01Regex)
