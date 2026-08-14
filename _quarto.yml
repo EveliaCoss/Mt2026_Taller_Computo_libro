@@ -41,6 +41,7 @@ book:
         - cap4.qmd  # Introducción a Linux/Unix
         - cap5.qmd  # Mis primeros pasos en Bash   
         - cap6.qmd  # Wildcards y Streams
+        - regex.qmd
     - part: "**Sección 2** - Edición de archivos con Bash"
       chapters:     
         - cap7.qmd  # Operadores de redirección de datos I/O

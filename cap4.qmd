@@ -13,22 +13,44 @@
 
 ## ¿Qué es UNIX?
 
-- Sistema operativo (SO) creado por **Ken Thompson y Dennis Ritchie** de la empresa *Bell Laboratories* en 1969.
-- SO multitarea y multiusuario.
+- Sistema operativo (SO) creado por **Ken Thompson y Dennis Ritchie** de la empresa *Bell Laboratories* de AT&T en 1969.
+- Es uno de los sistemas operativos **más influyentes en la historia** de la computación y ha servido como base para muchos sistemas operativos modernos.
+
+### **Características principales de Unix:**
+
+- **Portabilidad**: Fue diseñado para funcionar en diferentes tipos de hardware, lo que permitió su adopción generalizada.
+- **Modularidad**: Sigue la filosofía "hacer una cosa y hacerla bien", donde cada programa tiene una función específica.
+- **Multitarea y multiusuario**: Permite que múltiples usuarios trabajen simultáneamente en el mismo sistema, y que múltiples procesos se ejecuten al mismo tiempo.
+- **Interfaz de línea de comandos (CLI)**: Utiliza un shell (intérprete de comandos) para que los usuarios interactúen con el sistema.
+- **Seguridad**: Implementa un sistema de permisos y usuarios para proteger los archivos y recursos del sistema.
+
+![Imagen creada con Gemini.](figures/Conociendo_unix.png){fig-align="center"}
 
 ## GNU/Linux
 
+::::: columns
+::: {.column width="60%"}
 - En 1983 **Richard Stallman** lideró la iniciativa [GNU](https://www.gnu.org/) (GNU's Not Unix), SO compatible con UNIX de libre distribución y acceso sin restricciones al código fuente.
 - En 1991 **Linus Torvalds** creó su propio [kernel](https://linuxjourney.com/lesson/kernel-overview) (Linux), que es la parte del SO que permite la comunicación con los componentes de Hardware. Este kernel fue distribuido de forma libre y gratuita.
 - Ambos proyectos se juntaron y se creó **GNU/Linux**
+:::
 
-![](figures/GNU_LIN1.png){fig-align="center"}
+::: {.column width="40%"}
+![](figures/GNU_LIN1.png){fig-align="right"}
+:::
+:::::
+
+En resumen ...
+
+![Imagen generada con Gemini.](figures/GNU:linux_flyer.png){fig-align="center"}
 
 ## Filosofía GNU/Linux
 
 - Los usuarios son libres de **ejecutar, copiar, distribuir, estudiar, cambiar y mejorar** el software.
 - El [software libre](https://www.gnu.org/philosophy/free-sw.html) se refiere a las libertades mencionadas, no al precio.
 - ["open source"](https://opensource.org/) vs ["free software"](https://www.gnu.org/philosophy/free-sw.html).
+
+![Imagen creada con Gemini.](figures/Opensorce.png){fig-align="center"}
 
 ## Ubuntu
 
@@ -42,7 +64,7 @@
 ## Shell / Bash / Bash Shell
 
 - La [*shell*](https://en.wikipedia.org/wiki/Unix_shell) es el programa que provee una **interfaz de línea de comandos (CLI)**, que permite la comunicación entre el usuario y el SO.
-- La mayoría de distribuciones de Linux tienen por defecto [*bash*](https://www.gnu.org/software/bash/) ("Bourne Again SHell") como *shell*. Hay [otros tipos de shell](https://www.educba.com/types-of-shells-in-linux/) como **sh, csh, tcsh, ksh, zsh**, entre otras.
+- La mayoría de distribuciones de Linux tienen por defecto [*bash*](https://www.gnu.org/software/bash/) ("Bourne Again SHell") como *shell*. Hay [otros tipos de shell](https://www.educba.com/types-of-shells-in-linux/) como `sh, csh, tcsh, ksh, zsh`, entre otras.
 
 ![](figures/bash.png){fig-align="center" width="363"}
 
