@@ -368,40 +368,18 @@
     "href": "cap2A.html",
     "title": "7  Introducción a los Componentes de una Computadora",
     "section": "",
-    "text": "7.1 BLOQUE 1 — Componentes Internos Principales",
+    "text": "7.1 BLOQUE 1 — Hardware vs Software\nTabla de las diferencias:",
     "crumbs": [
       "**Sección 1** - Componentes de una computadora",
       "<span class='chapter-number'>7</span>  <span class='chapter-title'>Introducción a los Componentes de una Computadora</span>"
     ]
   },
   {
-    "objectID": "cap2A.html#bloque-1-componentes-internos-principales",
-    "href": "cap2A.html#bloque-1-componentes-internos-principales",
+    "objectID": "cap2A.html#bloque-1-hardware-vs-software",
+    "href": "cap2A.html#bloque-1-hardware-vs-software",
     "title": "7  Introducción a los Componentes de una Computadora",
     "section": "",
-    "text": "CPU — Procesador\n\n🧠 El “cerebro” de la computadora\nEjecuta instrucciones: fetch → decode → execute\nCaracterísticas clave:\n\nNúcleos (cores): más núcleos = más tareas simultáneas\nVelocidad en GigaHertz (GHz)\nCaché L1, L2, L3\n\nMarcas: Intel (Core i3/i5/i7/i9) y AMD (Ryzen)\nAnalogía: “Es como el chef de un restaurante: recibe pedidos, los procesa y entrega resultados” 👨🍳\n\n\n\n\n\n\n\nNota¿Qué es GHz?\n\n\n\nEs la unidad que mide la velocidad del reloj de un procesador, es decir, cuántas veces por segundo puede ejecutar un ciclo de instrucciones.\n1 Hz   = 1 ciclo por segundo \n1 KHz  = 1,000 ciclos por segundo\n1 MHz  = 1,000,000 ciclos por segundo\n1 GHz  = 1,000,000,000 ciclos por segundo\n                  ⬆️\n         ¡MIL MILLONES de ciclos por segundo!\nUn ciclo es el latido del procesador, marcado por un reloj interno llamado Clock\n\n\n\n\nRAM — Memoria de Acceso Aleatorio\n\n📋 Memoria de trabajo temporal\nAlmacena lo que está en uso en este momento\nSe borra al apagar la computadora\nMedida en gigabyte (GB) (8GB, 16GB, 32GB…)\nTipos: DDR4, DDR5\nAnalogía: “Es el escritorio donde tienes todo lo que estás usando ahora” 🗂️\n\n\n\n\nImagen generada con Gemini.\n\n\n\n\nAlmacenamiento — HDD y SSD\n\n💾 Memoria permanente de la computadora\nHDD (Disco Duro):\n\nMecánico, con platos giratorios\nMayor capacidad, menor precio\nMás lento y frágil\n\nSSD (Unidad de Estado Sólido):\n\nSin partes móviles\nMucho más rápido\nMayor durabilidad\n\nAnalogía: “Es el cajón donde guardas todo aunque apagues la luz” 🗄️\n\n\n\n\nImagen creada con Gemini.\n\n\n\n\nTarjeta Madre — Motherboard\n\n🔌 El “esqueleto” que conecta todo\nContiene los buses de datos que comunican componentes\nIncluye: slots para RAM, CPU, GPU, almacenamiento\nTiene el BIOS/UEFI: primer software que corre al encender\nFabricantes: ASUS, MSI, Gigabyte\n\n\n\nGPU — Tarjeta Gráfica\n\n🎮 Procesa imágenes, video y gráficos 3D\nTiene su propio procesador (miles de núcleos pequeños)\nPuede ser:\n\nIntegrada: dentro del CPU (uso básico)\nDedicada: tarjeta independiente (gaming, diseño, IA)\n\nMarcas: NVIDIA (GeForce), AMD (Radeon)\nHoy en día: clave para Machine Learning e IA 🤖\n\n\n\nFuente de Poder — PSU\n\n⚡ Convierte la corriente alterna (CA) en corriente directa (CD)\nAlimenta todos los componentes\nSe mide en Watts (500W, 750W, 1000W…)\nCertificaciones de eficiencia: 80 Plus Bronze/Gold/Platinum\nUn componente subestimado pero crítico para la estabilidad",
-    "crumbs": [
-      "**Sección 1** - Componentes de una computadora",
-      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Introducción a los Componentes de una Computadora</span>"
-    ]
-  },
-  {
-    "objectID": "cap2A.html#bloque-2-componentes-complementarios-periféricos-y-accesorios",
-    "href": "cap2A.html#bloque-2-componentes-complementarios-periféricos-y-accesorios",
-    "title": "7  Introducción a los Componentes de una Computadora",
-    "section": "7.2 BLOQUE 2 — Componentes Complementarios (Periféricos y Accesorios)",
-    "text": "7.2 BLOQUE 2 — Componentes Complementarios (Periféricos y Accesorios)\nSon aquellos dispositivos que se conectan a la computadora para interactuar con ella, introducir o recibir datos, o mejorar sus funciones, pero que no impiden que el sistema interno funcione.\n\n7.2.1 Periféricos de Entrada\nPermiten al usuario enviar datos o instrucciones a la computadora:\n\nTeclado y Ratón (Mouse): Los medios principales para interactuar con el sistema.\nMicrófono y Cámara Web: Para videollamadas, grabación de audio y conferencias.\nEscáner / Lectores de códigos: Para digitalizar documentos físicos.\n\n\n\n7.2.2 Periféricos de Salida\nMuestran o entregan los resultados procesados por la computadora:\n\nMonitor / Pantalla: Muestra la interfaz gráfica y la información visual (esencial para la interacción humana, aunque técnicamente el equipo puede encender sin él).\nBocinas o Audífonos: Para la reproducción de audio.\nImpresora: Para trasladar información digital a formato físico.\n\n\n\n7.2.3 C. Complementos Internos y Unidades de Expansión\n\nSistemas de Enfriamiento Extra (Líquido o Ventiladores adicionales): Mantienen las temperaturas óptimas en equipos de alto rendimiento.\nTarjetas de Red / Wi-Fi o Bluetooth: Añaden o mejoran la conectividad inalámbrica.\nLectores de discos (CD/DVD/Blu-ray): Cada vez menos comunes, útiles para leer formatos físicos antiguos.\n\n\n\n\nImagen generada con Gemini.",
-    "crumbs": [
-      "**Sección 1** - Componentes de una computadora",
-      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Introducción a los Componentes de una Computadora</span>"
-    ]
-  },
-  {
-    "objectID": "cap2A.html#bloque-3-hardware-vs-software",
-    "href": "cap2A.html#bloque-3-hardware-vs-software",
-    "title": "7  Introducción a los Componentes de una Computadora",
-    "section": "7.3 BLOQUE 3 — Hardware vs Software",
-    "text": "7.3 BLOQUE 3 — Hardware vs Software\n\n\n\n\n\n\n\n\nCaracterística\nHardware\nSoftware\n\n\nDefinición\nComponentes físicos y materiales.\nConjunto de programas, instrucciones y datos.\n\n\nTangibilidad\nEs tangible (se puede tocar, ver y sostener).\nEs intangible (código digital, no se puede tocar).\n\n\nFunción\nEjecutar las tareas físicas y almacenar/procesar datos electrónicamente.\nDar órdenes al hardware y permitir la interacción con el usuario.\n\n\nDurabilidad / Desgaste\nSe desgasta con el tiempo y el uso (fallas mecánicas o térmicas).\nNo se desgasta físicamente, aunque puede volverse obsoleto o presentar bugs.\n\n\nMantenimiento\nSe repara limpiando o reemplazando piezas físicas.\nSe actualiza, se corrigen errores mediante parches o se reinstala.\n\n\nInfección por Virus\nNo puede ser infectado directamente por virus informáticos.\nPuede ser infectado por malware o virus.\n\n\nEjemplos\nProcesador (CPU), Tarjeta Madre, Monitor, Teclado, Disco SSD.\nSistema Operativo (Windows, Linux), Navegador Web, Python, R, Office.",
+    "text": "Imagen creada con ChatGPT.\n\n\n\n\n\n\n\n\n\n\n\nCaracterística\nHardware\nSoftware\n\n\nDefinición\nComponentes físicos y materiales.\nConjunto de programas, instrucciones y datos.\n\n\nTangibilidad\nEs tangible (se puede tocar, ver y sostener).\nEs intangible (código digital, no se puede tocar).\n\n\nFunción\nEjecutar las tareas físicas y almacenar/procesar datos electrónicamente.\nDar órdenes al hardware y permitir la interacción con el usuario.\n\n\nDurabilidad / Desgaste\nSe desgasta con el tiempo y el uso (fallas mecánicas o térmicas).\nNo se desgasta físicamente, aunque puede volverse obsoleto o presentar bugs.\n\n\nMantenimiento\nSe repara limpiando o reemplazando piezas físicas.\nSe actualiza, se corrigen errores mediante parches o se reinstala.\n\n\nInfección por Virus\nNo puede ser infectado directamente por virus informáticos.\nPuede ser infectado por malware o virus.\n\n\nEjemplos\nProcesador (CPU), Tarjeta Madre, Monitor, Teclado, Disco SSD.\nSistema Operativo (Windows, Linux), Navegador Web, Python, R, Office.",
     "crumbs": [
       "**Sección 1** - Componentes de una computadora",
       "<span class='chapter-number'>7</span>  <span class='chapter-title'>Introducción a los Componentes de una Computadora</span>"
@@ -411,19 +389,63 @@
     "objectID": "cap2A.html#cómo-interactúan-entre-sí",
     "href": "cap2A.html#cómo-interactúan-entre-sí",
     "title": "7  Introducción a los Componentes de una Computadora",
-    "section": "7.4 ¿Cómo interactúan entre sí?",
-    "text": "7.4 ¿Cómo interactúan entre sí?\nEl hardware y el software no pueden funcionar de manera independiente:\n\nEl Hardware necesita al Software: Sin un sistema operativo o programas, una computadora es solo una estructura de metal y silicio sin capacidad de realizar tareas útiles.\nEl Software necesita al Hardware: Las instrucciones del código no pueden ejecutarse ni procesarse si no existe un procesador, memoria o pantalla donde mostrar los resultados.",
+    "section": "7.2 ¿Cómo interactúan entre sí?",
+    "text": "7.2 ¿Cómo interactúan entre sí?\nEl hardware y el software no pueden funcionar de manera independiente:\n\nEl Hardware necesita al Software: Sin un sistema operativo o programas, una computadora es solo una estructura de metal y silicio sin capacidad de realizar tareas útiles.\nEl Software necesita al Hardware: Las instrucciones del código no pueden ejecutarse ni procesarse si no existe un procesador, memoria o pantalla donde mostrar los resultados.",
     "crumbs": [
       "**Sección 1** - Componentes de una computadora",
       "<span class='chapter-number'>7</span>  <span class='chapter-title'>Introducción a los Componentes de una Computadora</span>"
     ]
   },
   {
-    "objectID": "cap2A.html#references",
-    "href": "cap2A.html#references",
+    "objectID": "cap2A.html#bloque-2-componentes-internos-principales",
+    "href": "cap2A.html#bloque-2-componentes-internos-principales",
     "title": "7  Introducción a los Componentes de una Computadora",
-    "section": "7.5 References",
-    "text": "7.5 References",
+    "section": "7.3 BLOQUE 2 — Componentes Internos Principales",
+    "text": "7.3 BLOQUE 2 — Componentes Internos Principales\n\nCPU — Procesador\n\n🧠 El “cerebro” de la computadora\nEjecuta instrucciones: fetch → decode → execute\nCaracterísticas clave:\n\nNúcleos (cores): más núcleos = más tareas simultáneas\nVelocidad en GigaHertz (GHz)\nMemoria Caché (L1, L2, L3)\n\nMarcas: Intel (Core i3/i5/i7/i9) y AMD (Ryzen)\nAnalogía: “Es como el chef de un restaurante: recibe pedidos, los procesa y entrega resultados” 👨🍳\n\n\n\n\nImagen creada con ChatGPT.\n\n\n\n\n\n\n\n\nNota¿Qué es GHz?\n\n\n\nEs la unidad que mide la velocidad del reloj de un procesador, es decir, cuántas veces por segundo puede ejecutar un ciclo de instrucciones.\n1 Hz   = 1 ciclo por segundo \n1 KHz  = 1,000 ciclos por segundo\n1 MHz  = 1,000,000 ciclos por segundo\n1 GHz  = 1,000,000,000 ciclos por segundo\n                  ⬆️\n         ¡MIL MILLONES de ciclos por segundo!\nUn ciclo es el latido del procesador, marcado por un reloj interno llamado Clock\n\n\n\n\nRAM — Memoria de Acceso Aleatorio\n\n\n\n\n\n\n\nImagen modificada y creada con ChatGPT. Producto real: Memoria RAM DDR4 8GB 3200MHz SODIMM 260 Pines Monkle para Laptop\n\n\n\n📋 Memoria de trabajo temporal\nAlmacena lo que está en uso en este momento\nSe borra al apagar la computadora\nMedida en gigabyte (GB) (8GB, 16GB, 32GB…)\nTipos: DDR4, DDR5\nAnalogía: “Es el escritorio donde tienes todo lo que estás usando ahora” 🗂️\n\n\n\n\nImagen generada con Gemini y ChatGPT.\n\n\n\n\nAlmacenamiento — HDD y SSD\n\n\n\n\n\n\n\nComparación entre HDD vs SSD\n\n\n\n💾 Memoria permanente de la computadora\n\n\nHDD (Disco Duro):\n\nMecánico, con platos giratorios\nMayor capacidad, menor precio\nMás lento y frágil\n\nSSD (Unidad de Estado Sólido):\n\nSin partes móviles\nMucho más rápido\nMayor durabilidad\n\nAnalogía: “Es el cajón donde guardas todo aunque apagues la luz” 🗄️\n\n\n\n\nImagen creada con ChatGPT y Gemini.\n\n\n\n\n\n\n\n\nNota¿Qué es la Memoria Caché?\n\n\n\nEs una memoria ultrarrápida y pequeña que vive dentro del CPU y guarda temporalmente los datos que usa con más frecuencia, para no tener que ir a buscarlos a la RAM cada vez.\nPrimero entendamos por qué existe:\nVelocidad de los componentes:\n\n🧠 CPU        →  opera a    4 GHz    (ultrarrápido)\n💾 RAM        →  opera a    ~50 GHz  (rápido)\n💿 SSD        →  opera a    ~500 MB/s (lento)\n📀 HDD        →  opera a    ~100 MB/s (muy lento)\n\n⚠️ El problema:\nEl CPU es TAN rápido que si tuviera que esperar a que la RAM le diera datos... perdería el 99% de su tiempo ESPERANDO 😴\n\n💡 “La caché existe para que el CPU nunca tenga que esperar”\n\n\n7.3.1 Analogía\n\n\n\nImagen creada con ChatGPT, Gemini y uDocz.\n\n\nEscala de tiempo:\n1 segundo    =  1 s\n1 milisegundo = 0.001 s        (ms) → parpadeo de un ojo\n1 microsegundo = 0.000001 s    (µs) → cámara de alta velocidad\n1 nanosegundo = 0.000000001 s  (ns) → velocidad del CPU ⚡\n\n🔑 “Mientras más cerca está la información del CPU, más rápido puede trabajar”\n\n\n\n\n\n\nTarjeta Madre — Motherboard\n\n🔌 El “esqueleto” que conecta todo\nContiene los buses de datos que comunican componentes\nIncluye: slots para RAM, CPU, GPU, almacenamiento\nTiene el BIOS/UEFI: primer software que corre al encender\nFabricantes: ASUS, MSI, Gigabyte\n\n\n\n\nPlaca Madre Gaming creada por ASUS, contiene el chip B450, modelo GA15DH con procesador Ryzen 7 1700 3700x.\n\n\n\n\nGPU (Graphics Processing Unit) - unidad de procesamiento gráfico\n\nEs el CHIP procesador gráfico; Solo el cerebro, el procesador en sí.\n\nEjemplo: el chip “AD102” de NVIDIA → RTX 4090.\n\n\n\n\nTarjeta Gráfica\n\nEs el PRODUCTO COMPLETO:\n\nGPU (chip procesador)\nPCB (Placa de Circuito Impreso): es donde van soldados todos los componentes\nGRAM (Graphics Random Access Memory): módulos de memoria, también conocida como VRAM (Video RAM) → texturas\n🔵 Condensadores: Estabilizan y filtran la energía eléctrica\n🟡 Inductores: Regulan el voltaje que llega al GPU\n🔴 MOSFETs: Controlan el flujo de corriente\n⚫ Resistencias: Limitan y controlan la corriente\n🟢 VRM (Voltage Regulator Module): Convierte y regula el voltaje para el GPU\nTuberías de calor: Son tubos de cobre huecos rellenos de líquido especial\nVentiladores (o blower)\nCarcasa\n\n🎮 Procesa imágenes, video y gráficos 3D\nTiene su propio procesador (miles de núcleos pequeños)\nPuede ser:\n\nIntegrada: dentro del CPU (uso básico)\nDedicada: tarjeta independiente (gaming, diseño, IA)\n\nMarcas: NVIDIA (GeForce), AMD (Radeon)\nHoy en día: clave para Machine Learning e IA 🤖\n\n\n\n\nEjemplo de una tarjeta Gráfica.\n\n\n\n\nFuente de Poder — PSU\n\n⚡ Convierte la corriente alterna (CA) en corriente directa (CD)\nAlimenta todos los componentes\nSe mide en Watts (500W, 750W, 1000W…)\nCertificaciones de eficiencia: 80 Plus Bronze/Gold/Platinum\nUn componente subestimado pero crítico para la estabilidad",
+    "crumbs": [
+      "**Sección 1** - Componentes de una computadora",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Introducción a los Componentes de una Computadora</span>"
+    ]
+  },
+  {
+    "objectID": "cap2A.html#bloque-3-componentes-complementarios-periféricos-y-accesorios",
+    "href": "cap2A.html#bloque-3-componentes-complementarios-periféricos-y-accesorios",
+    "title": "7  Introducción a los Componentes de una Computadora",
+    "section": "7.4 BLOQUE 3 — Componentes Complementarios (Periféricos y Accesorios)",
+    "text": "7.4 BLOQUE 3 — Componentes Complementarios (Periféricos y Accesorios)\nSon aquellos dispositivos que se conectan a la computadora para interactuar con ella, introducir o recibir datos, o mejorar sus funciones, pero que no impiden que el sistema interno funcione.\n\n7.4.1 Periféricos de Entrada\nPermiten al usuario enviar datos o instrucciones a la computadora:\n\nTeclado y Ratón (Mouse): Los medios principales para interactuar con el sistema.\nMicrófono y Cámara Web: Para videollamadas, grabación de audio y conferencias.\nEscáner / Lectores de códigos: Para digitalizar documentos físicos.\n\n\n\n7.4.2 Periféricos de Salida\nMuestran o entregan los resultados procesados por la computadora:\n\nMonitor / Pantalla: Muestra la interfaz gráfica y la información visual (esencial para la interacción humana, aunque técnicamente el equipo puede encender sin él).\nBocinas o Audífonos: Para la reproducción de audio.\nImpresora: Para trasladar información digital a formato físico.\n\n\n\n7.4.3 C. Complementos Internos y Unidades de Expansión\n\nSistemas de Enfriamiento Extra (Líquido o Ventiladores adicionales): Mantienen las temperaturas óptimas en equipos de alto rendimiento.\nTarjetas de Red / Wi-Fi o Bluetooth: Añaden o mejoran la conectividad inalámbrica.\nLectores de discos (CD/DVD/Blu-ray): Cada vez menos comunes, útiles para leer formatos físicos antiguos.\n\n\n\n\nImagen generada con ChatGPT y Gemini.",
+    "crumbs": [
+      "**Sección 1** - Componentes de una computadora",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Introducción a los Componentes de una Computadora</span>"
+    ]
+  },
+  {
+    "objectID": "cap2A.html#bloque-4-firmware",
+    "href": "cap2A.html#bloque-4-firmware",
+    "title": "7  Introducción a los Componentes de una Computadora",
+    "section": "7.5 BLOQUE 4 — Firmware",
+    "text": "7.5 BLOQUE 4 — Firmware\nEs un software permanente grabado dentro de un chip de hardware que controla cómo funciona ese dispositivo.\n\n7.5.1 ¿Qué es el BIOS?\nBIOS = Basic Input Output System Sistema Básico de Entrada y Salida\n\n“Es el primer programa que se ejecuta cuando enciendes tu computadora, ANTES que cualquier sistema operativo”\n\n\n¿Dónde vive el BIOS?\n\nNo está en el disco duro\nNo está en la RAM\nNo está en el CPU\nVive en un chip especial de la Tarjeta Madre llamado ROM (Read Only Memory)\n\n\n“Al estar en ROM, el BIOS no se borra aunque apagues la computadora”\n\nSu trabajo principal es POST:\nPower On Self Test  = Prueba de Autodiagnóstico al Encender\n\n\n\nImagen generada con ChatGPT, Gemini y uDocz. W/L/M: signfiica Windows, Linux, MacOS; OS: Operating System (Sistema Operativo).\n\n\n\n\n\n7.5.2 ¿Sabías que la Motherboard tiene una pequeña batería?\nEsta batería mantiene:\n\n⏰ La fecha y hora\n⚙️ La configuración del BIOS\n🔌 Los ajustes guardados\n\nSi se agota → la computadora pierde la hora y configuración cada vez que se apaga 😱.\n\n\n\nMisma imagen que arriba pero con clasificación de componentes realizada por ChatGPT.\n\n\n\n\n\n\n\n\nImportanteBIOS (antes) vs UEFI (ahora)\n\n\n\n“El BIOS clásico fue reemplazado por UEFI en computadoras modernas”\n\n\n\nCaracterística\nBIOS (antiguo)\nUEFI (moderno)\n\n\n\n\n📅 Año\n1975\n2005 - presente\n\n\n🖥️ Interfaz\nSolo texto\nGráfica con mouse\n\n\n💾 Disco máximo\n2 TB\n9 ZB (sin límite práctico)\n\n\n⚡ Velocidad arranque\nLento\nMuy rápido\n\n\n🔐 Seguridad\nBásica\nSecure Boot\n\n\n🖱️ Mouse\n❌ No\n✅ Sí\n\n\n\n\n\n\nImagen generada con ChatGPT, Gemini y uDocz.\n\n\n\n\nEn resumen …\n\n\n\nImagen creada con ChatGPT.",
+    "crumbs": [
+      "**Sección 1** - Componentes de una computadora",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Introducción a los Componentes de una Computadora</span>"
+    ]
+  },
+  {
+    "objectID": "cap2A.html#manos-a-la-obra",
+    "href": "cap2A.html#manos-a-la-obra",
+    "title": "7  Introducción a los Componentes de una Computadora",
+    "section": "7.6 Manos a la obra",
+    "text": "7.6 Manos a la obra\n\n\n\n\n\n\nTipAhaSlides Actividad\n\n\n\nPon a prueba lo que has aprendido y acumula tus victorias para alcanzar el punto final. Además, si logras quedar entre los tres primeros lugares en 10 ocasiones, obtendrás un punto extra como recompensa:\n\n 🎮 Unirse como jugador \n Ver la dinámica en AhaSlides \n 👩 Editar sesión (Profesora)",
+    "crumbs": [
+      "**Sección 1** - Componentes de una computadora",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Introducción a los Componentes de una Computadora</span>"
+    ]
+  },
+  {
+    "objectID": "cap2A.html#referencias",
+    "href": "cap2A.html#referencias",
+    "title": "7  Introducción a los Componentes de una Computadora",
+    "section": "7.7 Referencias",
+    "text": "7.7 Referencias\n\n¿Qué es una tarjeta gráfica? Características y tipos\nHDD vs SSD: What Does the Future for Storage Hold?",
     "crumbs": [
       "**Sección 1** - Componentes de una computadora",
       "<span class='chapter-number'>7</span>  <span class='chapter-title'>Introducción a los Componentes de una Computadora</span>"
@@ -474,11 +496,22 @@
     ]
   },
   {
+    "objectID": "cap2B.html#manos-a-la-obra",
+    "href": "cap2B.html#manos-a-la-obra",
+    "title": "8  Sistema Operativo (SO) y sus funciones",
+    "section": "8.4 Manos a la obra",
+    "text": "8.4 Manos a la obra\n\n\n\n\n\n\nTipAhaSlides Actividad\n\n\n\nPon a prueba lo que has aprendido y acumula tus victorias para alcanzar el punto final. Además, si logras quedar entre los tres primeros lugares en 10 ocasiones, obtendrás un punto extra como recompensa:\n\n 🎮 Unirse como jugador \n Ver la dinámica en AhaSlides \n 👩 Editar sesión (Profesora)",
+    "crumbs": [
+      "**Sección 1** - Componentes de una computadora",
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Sistema Operativo (SO) y sus funciones</span>"
+    ]
+  },
+  {
     "objectID": "cap2B.html#references",
     "href": "cap2B.html#references",
     "title": "8  Sistema Operativo (SO) y sus funciones",
-    "section": "8.4 References",
-    "text": "8.4 References\n\nPlan de estudio de la materia",
+    "section": "8.5 References",
+    "text": "8.5 References\n\nPlan de estudio de la materia",
     "crumbs": [
       "**Sección 1** - Componentes de una computadora",
       "<span class='chapter-number'>8</span>  <span class='chapter-title'>Sistema Operativo (SO) y sus funciones</span>"
