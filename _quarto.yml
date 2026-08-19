@@ -29,14 +29,18 @@ book:
     - temario.qmd
     - cap1A.qmd
     - cap1B.qmd
-    - cap2.qmd
-    - cap3.qmd  # Buenas practicas en programacion    
+    - cap1C.qmd
     - part: "**Pre-requisitos**"
       chapters: 
         - install_B.qmd # Instalación de Git y Bash
         - install_R.qmd # Instalación de R y RStudio    
-        - install_git.qmd # Instalación Git y Bash
-    - part: "**Sección 1** - Introducción a Bash"
+        - install_git.qmd # Instalación Git y Bash    
+    - part: "**Sección 1** - Componentes de una computadora"
+      chapters:   
+        - cap2A.qmd # Introducción - Componentes de una Computadora
+        - cap2B.qmd # Sistema Operativo (SO) y sus funciones
+        - cap3.qmd  # Buenas practicas en programacion    
+    - part: "**Sección 2** - Introducción a Bash"
       chapters: 
         - cap4.qmd  # Introducción a Linux/Unix
         - cap5.qmd  # Mis primeros pasos en Bash   
@@ -83,6 +87,7 @@ book:
   appendices: 
     - resources.qmd
     - notas.qmd
+    - docente.qmd
   # Information
   repo-url: https://github.com/EveliaCoss/Mt2026_Taller_Computo_libro # link de Github
   sharing: [twitter, facebook, linkedin]
