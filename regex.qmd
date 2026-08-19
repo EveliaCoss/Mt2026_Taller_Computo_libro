@@ -81,7 +81,7 @@ grep "[abc]" archivo.txt       # Busca líneas que contienen a, b o c
 Usualmente cuando trabajamos con datos, es necesario pasar el resultado de un comando a otro para hacer un procesamiento de datos apilado, como en un algortimo. Un `stream` o `corriente` esta hecha de datos. Es una corriente de datos. Un ejemplo muy familiar es el teclado y la pantalla. El teclado tiene una interfaz en donde por cada tecla presionada, un caracter se guarda en un archivo. Se dice entonces que es una `corriente de  entrada`. Cuando la pantalla nos muestra lo que estamos escribiendo entonces la data sale hacia nosotros y eso convierte a la pantalla en una `corriente de salida`. Los dispositivos que hacen este tipo de transmisión de datos se llaman dispositivos `I/O` (input y output). Los operadores que se encargan de esto se conocen como `operadores de redirección`. Tres importantes son:
 
 | **Comando** | **Función** |
-|------------------------------------|------------------------------------|
+|----|----|
 | `>` | Stream de **salida de datos**. Sobre escribre sobre un archivo. |
 | `>>` | Stream de salida de datos. Adjunta **nueva salida a datos preexistentes en un archivo.** |
 | `<` | Stream de **entrada de datos.** Recibe datos para procesamiento con algun comando. |
