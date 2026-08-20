@@ -1,8 +1,10 @@
-## Crear un R Project
+# Crear un R Project
+
+> **Fecha:** 10 de septiembre, 2026
 
 Al comenzar a trabajar con R y RStudio, ya sea para crear un programa para un proyecto, crear una aplicación, presentación, blog, paquete, etc, es recomendado crear un **R project**.
 
-### **¿Qué es un R Project y por qué usarlo?**
+## **¿Qué es un R Project y por qué usarlo?**
 
 - **Carpeta de trabajo dedicada**: al crear un R Project, RStudio genera automáticamente una carpeta que contiene todos los archivos y configuraciones necesarias para tu proyecto.
 
@@ -12,7 +14,7 @@ Al comenzar a trabajar con R y RStudio, ya sea para crear un programa para un pr
 
 - **Integración con Git/GitHub**: al tener el mismo nombre que tu repositorio, se asegura una sincronización más clara y ordenada entre tu proyecto local y el repositorio remoto.
 
-### **¿Cómo iniciamos un R project?**
+## **¿Cómo iniciamos un R project?**
 
 1.  Vayamos en la parte superior al menú **Archivos \> Nuevo Proyecto**.
 
@@ -88,7 +90,7 @@ Existen distintas formas de instalar librerías.
 La primera, desde consola con el siguiente comando:
 
 ```{r, eval=FALSE}
-install.packages("tidyverse")
+install.packages("reticulate")
 ```
 
 La segunda, desde el menú **Herramientas \> Instalar paqueterías**. En la ventana, ingresamos el nombre de la librería y click en **Instalar**.
@@ -106,7 +108,7 @@ Alternativamente, podemos instalar paqueterías de Bioconductor, que es otro rep
 Hay muchas librerías que están tanto en CRAN como en Bioconductor, pero también hay librerías específicas para uno de ellos. Para poder instalar desde bioconductor, necesitamos primero instalar el "instalador de bioconductor":
 
 ```{r, eval=FALSE}
-install.packages("BiocManager") # Esto es necesario solo 1 vez
+install.packages("reticulate") # Esto es necesario solo 1 vez
 ```
 
 ### ¿Cómo podemos verificar que paquetes tenemos?
@@ -134,26 +136,9 @@ remove.packages("package-to-remove")
 - **Opción A:** Emplear la función `library` para cargar en el ambiente el paquete.
 
 ```{r, eval=FALSE}
-library(ggplot2)
+library(reticulate)
 ```
 
 - **Opción B:** Dando click a la *casilla que indica el paquete*. Para dejar de usarlo da de nuevo click en esa casilla para que deje de estar marcada.
 
 ![](figures/paquete_cargado.png){fig-align="center"}
-
-::: callout-note
-## Actividad
-
-Copia y pega el siguiente código en tu consola dentro de Rstudio:
-
-```{r, eval=FALSE}
-install.packages("palmerpenguins")
-install.packages("ggplot2")
-install.packages("dplyr")
-install.packages("DT")
-```
-:::
-
-Debes poder ver algo como esto:
-
-![](figures/rlibrerias_output.png)

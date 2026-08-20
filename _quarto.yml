@@ -50,6 +50,7 @@ book:
       chapters: 
         - cap4.qmd  # Introducción a Linux/Unix
         - cap5.qmd  # Mis primeros pasos en Bash   
+        - cap5_crearRproject.qmd # Crear Rproject
         - cap6.qmd  # Wildcards y Streams
         - regex.qmd
     - part: "**Sección 4** - Edición de archivos con Bash"
@@ -81,7 +82,6 @@ book:
         - cap27.qmd # Resumen y practica final        
     - part: "**Sección 7** - Introducción a R y Rstudio"
       chapters: 
-        - cap28.qmd             # Introducción a R y Rstudio, paquetes
         - s5_actividades1y2.qmd # Actividad: Miniresumen personal + foto para tu repositorio
         - cap29.qmd             # Introducción a Markdown
         - s5_actividades3.qmd   # Actividad: Crear tu página web
@@ -89,7 +89,7 @@ book:
         - s5_actividades4y5.qmd # Actividad: Primer libro de quarto
     - part: "**Sección 8** - Introducción a Python"
       chapters: 
-        - cap28.qmd
+        - s5_actividades4y5.qmd 
   appendices: 
     - resources.qmd
     - notas.qmd

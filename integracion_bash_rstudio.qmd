@@ -1,5 +1,7 @@
 # Integración de Bash en la terminal de Rstudio
 
+> **Fecha:** 08 de septiembre, 2026
+
 En RStudio puedes abrir una terminal desde el menú: **Tools → Global options → Terminal →** Elegir en **New terminals open with → BASH**
 
 ![](figures/rstudio_bash.png)
