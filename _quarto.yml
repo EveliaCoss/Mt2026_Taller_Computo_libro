@@ -30,23 +30,29 @@ book:
     - cap1A.qmd
     - cap1B.qmd
     - cap1C.qmd
-    - part: "**Pre-requisitos**"
-      chapters: 
-        - install_B.qmd # Instalación de Git y Bash
-        - install_R.qmd # Instalación de R y RStudio    
-        - install_git.qmd # Instalación Git y Bash    
     - part: "**Sección 1** - Componentes de una computadora"
       chapters:   
         - cap2A.qmd # Introducción - Componentes de una Computadora
+        - game1.qmd
         - cap2B.qmd # Sistema Operativo (SO) y sus funciones
-        - cap3.qmd  # Buenas practicas en programacion    
-    - part: "**Sección 2** - Introducción a Bash"
+        - Tarea1.qmd # Tarea 1. Mi sistema operativo
+        - cap3.qmd  # Buenas practicas en programacion 
+        - s1_actividad1.qmd # Actividad:
+    - part: "**Sección 2** - Instalación de programas"
+      chapters: 
+        - TodoLits.qmd # Lista de todas las aplicaciones      
+        - install_B.qmd # Instalación de Git y Bash
+        - install_R.qmd # Instalación de R, RStudio, Rtools /xcode
+        - intro_R.qmd  # Introducción a R y Rstudio
+        - install_python.qmd # python
+        - integracion_bash_rstudio.qmd # Bash en terminal de Rstudio
+    - part: "**Sección 3** - Introducción a Bash"
       chapters: 
         - cap4.qmd  # Introducción a Linux/Unix
         - cap5.qmd  # Mis primeros pasos en Bash   
         - cap6.qmd  # Wildcards y Streams
         - regex.qmd
-    - part: "**Sección 2** - Edición de archivos con Bash"
+    - part: "**Sección 4** - Edición de archivos con Bash"
       chapters:     
         - cap7.qmd  # Operadores de redirección de datos I/O
         - cap8.qmd  # Edición de archivos con los editores de texto (nano y vim)
@@ -56,7 +62,7 @@ book:
         - cap12.qmd # Condicionales
         - cap13.qmd # Scripts en Bash
         - cap14.qmd # Bucles (for loops)
-    - part: "**Sección 3** - Introducción a Git/GitHub"
+    - part: "**Sección 5** - Introducción a Git/GitHub"
       chapters:  
         - cap15.qmd # Intro a Git
         - cap16.qmd # Configurar git
@@ -65,7 +71,7 @@ book:
         - cap19.qmd # Explorando el historial
         - cap20.qmd # Restore y reset
         - cap21.qmd # Ignorar archivos
-    - part: "**Sección 4** - Conexión con Github"
+    - part: "**Sección 6** - Conexión con Github"
       chapters:
         - cap22.qmd # Conexión con Github
         - cap23.qmd # Trabajando con colaboradores
@@ -73,7 +79,7 @@ book:
         - cap25.qmd # Trabajando con ramas
         - cap26.qmd # Conexión RStudio con Git 
         - cap27.qmd # Resumen y practica final        
-    - part: "**Sección 5** - Introducción a R y Rstudio"
+    - part: "**Sección 7** - Introducción a R y Rstudio"
       chapters: 
         - cap28.qmd             # Introducción a R y Rstudio, paquetes
         - s5_actividades1y2.qmd # Actividad: Miniresumen personal + foto para tu repositorio
@@ -81,7 +87,7 @@ book:
         - s5_actividades3.qmd   # Actividad: Crear tu página web
         - cap30.qmd             # introducción en Quarto
         - s5_actividades4y5.qmd # Actividad: Primer libro de quarto
-    - part: "**Sección 6** - Introducción a Python"
+    - part: "**Sección 8** - Introducción a Python"
       chapters: 
         - cap28.qmd
   appendices: 

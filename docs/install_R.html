@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>5&nbsp; Instalación de R y RStudio – Taller de Cómputo</title>
+<title>12&nbsp; Instalación de R y RStudio – Taller de Cómputo</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -23,6 +23,41 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -33,7 +68,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./install_git.html" rel="next">
+<link href="./intro_R.html" rel="next">
 <link href="./install_B.html" rel="prev">
 <link href="./flyer/logo.png" rel="icon" type="image/png">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
@@ -87,7 +122,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./install_B.html"><strong>Pre-requisitos</strong></a></li><li class="breadcrumb-item"><a href="./install_R.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Instalación de R y RStudio</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./TodoLits.html"><strong>Sección 2</strong> - Instalación de programas</a></li><li class="breadcrumb-item"><a href="./install_R.html"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Instalación de R y RStudio</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Buscar" onclick="window.quartoOpenSearch();">
@@ -175,7 +210,7 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
- <span class="menu-text"><strong>Pre-requisitos</strong></span></a>
+ <span class="menu-text"><strong>Sección 1</strong> - Componentes de una computadora</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Alternar sección">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -183,20 +218,38 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./install_B.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Instalación de Git y Bash</span></span></a>
+  <a href="./cap2A.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Introducción a los Componentes de una Computadora</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./install_R.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Instalación de R y RStudio</span></span></a>
+  <a href="./game1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title"><strong>🎮 AhaSlides -Manos a la obra</strong></span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./install_git.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Instalar Git Bash en Windows</span></span></a>
+  <a href="./cap2B.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Sistema Operativo (SO) y sus funciones</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Tarea1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title"><strong>✏️ Tarea 1</strong></span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cap3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Buenas prácticas en bioinformática</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./s1_actividad1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title"><strong>📚</strong> <strong>Actividad 1 en equipo</strong></span></span></a>
   </div>
 </li>
       </ul>
@@ -204,7 +257,7 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
- <span class="menu-text"><strong>Sección 1</strong> - Componentes de una computadora</span></a>
+ <span class="menu-text"><strong>Sección 2</strong> - Instalación de programas</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Alternar sección">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -212,20 +265,38 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./cap2A.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Introducción a los Componentes de una Computadora</span></span></a>
+  <a href="./TodoLits.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">📌 <strong>To do list -</strong> Instalación de programas</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./cap2B.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Sistema Operativo (SO) y sus funciones</span></span></a>
+  <a href="./install_B.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Instalación de Git y Bash</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./cap3.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Buenas prácticas en bioinformática</span></span></a>
+  <a href="./install_R.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Instalación de R y RStudio</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./intro_R.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Introducción a R y Rstudio</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./install_python.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Instalación de Python y reticulate en Rstudio</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./integracion_bash_rstudio.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Integración de Bash en la terminal de Rstudio</span></span></a>
   </div>
 </li>
       </ul>
@@ -233,7 +304,7 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
- <span class="menu-text"><strong>Sección 2</strong> - Introducción a Bash</span></a>
+ <span class="menu-text"><strong>Sección 3</strong> - Introducción a Bash</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Alternar sección">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -242,25 +313,25 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./cap4.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Introducción a Linux/Unix</span></span></a>
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Introducción a Linux/Unix</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./cap5.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Mis primeros pasos en Bash</span></span></a>
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Mis primeros pasos en Bash</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./cap6.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Wildcards y Streams</span></span></a>
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Wildcards y Streams</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./regex.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Expresiones regulares (REGEX)</span></span></a>
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Expresiones regulares (REGEX)</span></span></a>
   </div>
 </li>
       </ul>
@@ -268,7 +339,7 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
- <span class="menu-text"><strong>Sección 2</strong> - Edición de archivos con Bash</span></a>
+ <span class="menu-text"><strong>Sección 4</strong> - Edición de archivos con Bash</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Alternar sección">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -277,49 +348,49 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./cap7.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Operadores de redirección de datos I/O</span></span></a>
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Operadores de redirección de datos I/O</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./cap8.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Edición de archivos con los editores de texto (<code>nano</code> y <code>vim</code>)</span></span></a>
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Edición de archivos con los editores de texto (<code>nano</code> y <code>vim</code>)</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./cap9.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Edición de archivos con el editor de flujo <code>sed</code></span></span></a>
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Edición de archivos con el editor de flujo <code>sed</code></span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./cap10.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Enlaces simbólicos (symlinks)</span></span></a>
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Enlaces simbólicos (symlinks)</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./cap11.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Filtrado de texto (<code>grep, cut, sort, uniq, wc</code>)</span></span></a>
+ <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Filtrado de texto (<code>grep, cut, sort, uniq, wc</code>)</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./cap12.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Condicionales</span></span></a>
+ <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Condicionales</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./cap13.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Scripts en Bash</span></span></a>
+ <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Scripts en Bash</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./cap14.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Bucles (for loops)</span></span></a>
+ <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Bucles (for loops)</span></span></a>
   </div>
 </li>
       </ul>
@@ -327,7 +398,7 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
- <span class="menu-text"><strong>Sección 3</strong> - Introducción a Git/GitHub</span></a>
+ <span class="menu-text"><strong>Sección 5</strong> - Introducción a Git/GitHub</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Alternar sección">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -336,43 +407,43 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./cap15.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Introducción a Git / GitHub</span></span></a>
+ <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Introducción a Git / GitHub</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./cap16.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Configurar Git</span></span></a>
+ <span class="menu-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">Configurar Git</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./cap17.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Repositorios</span></span></a>
+ <span class="menu-text"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">Repositorios</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./cap18.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Rastrear cambios</span></span></a>
+ <span class="menu-text"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">Rastrear cambios</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./cap19.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Explorando el historial</span></span></a>
+ <span class="menu-text"><span class="chapter-number">32</span>&nbsp; <span class="chapter-title">Explorando el historial</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./cap20.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Restore y reset</span></span></a>
+ <span class="menu-text"><span class="chapter-number">33</span>&nbsp; <span class="chapter-title">Restore y reset</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./cap21.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Ignorar archivos/carpetas</span></span></a>
+ <span class="menu-text"><span class="chapter-number">34</span>&nbsp; <span class="chapter-title">Ignorar archivos/carpetas</span></span></a>
   </div>
 </li>
       </ul>
@@ -380,7 +451,7 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true">
- <span class="menu-text"><strong>Sección 4</strong> - Conexión con Github</span></a>
+ <span class="menu-text"><strong>Sección 6</strong> - Conexión con Github</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true" aria-label="Alternar sección">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -389,37 +460,37 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./cap22.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">Github</span></span></a>
+ <span class="menu-text"><span class="chapter-number">35</span>&nbsp; <span class="chapter-title">Github</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./cap23.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">Colaboradores</span></span></a>
+ <span class="menu-text"><span class="chapter-number">36</span>&nbsp; <span class="chapter-title">Colaboradores</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./cap24.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">Conflictos</span></span></a>
+ <span class="menu-text"><span class="chapter-number">37</span>&nbsp; <span class="chapter-title">Conflictos</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./cap25.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">32</span>&nbsp; <span class="chapter-title">Trabajando con Ramas</span></span></a>
+ <span class="menu-text"><span class="chapter-number">38</span>&nbsp; <span class="chapter-title">Trabajando con Ramas</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./cap26.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">33</span>&nbsp; <span class="chapter-title">Conectar a GitHub con SSH</span></span></a>
+ <span class="menu-text"><span class="chapter-number">39</span>&nbsp; <span class="chapter-title">Conectar a GitHub con SSH</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./cap27.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">34</span>&nbsp; <span class="chapter-title">Resumen y Práctica Final</span></span></a>
+ <span class="menu-text"><span class="chapter-number">40</span>&nbsp; <span class="chapter-title">Resumen y Práctica Final</span></span></a>
   </div>
 </li>
       </ul>
@@ -427,7 +498,7 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true">
- <span class="menu-text"><strong>Sección 5</strong> - Introducción a R y Rstudio</span></a>
+ <span class="menu-text"><strong>Sección 7</strong> - Introducción a R y Rstudio</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true" aria-label="Alternar sección">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -436,37 +507,37 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./cap28.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">35</span>&nbsp; <span class="chapter-title">Introducción a R y Rstudio</span></span></a>
+ <span class="menu-text"><span class="chapter-number">41</span>&nbsp; <span class="chapter-title">Crear un R Project</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./s5_actividades1y2.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">36</span>&nbsp; <span class="chapter-title"><strong>📚</strong> Actividad 1 y 2</span></span></a>
+ <span class="menu-text"><span class="chapter-number">42</span>&nbsp; <span class="chapter-title"><strong>📚</strong> Actividad 1 y 2</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./cap29.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">37</span>&nbsp; <span class="chapter-title">Repaso: Introducción a Markdown</span></span></a>
+ <span class="menu-text"><span class="chapter-number">43</span>&nbsp; <span class="chapter-title">Repaso: Introducción a Markdown</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./s5_actividades3.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">38</span>&nbsp; <span class="chapter-title"><strong>📚</strong> Actividad 3: Página web con Rmarkdown</span></span></a>
+ <span class="menu-text"><span class="chapter-number">44</span>&nbsp; <span class="chapter-title"><strong>📚</strong> Actividad 3: Página web con Rmarkdown</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./cap30.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">39</span>&nbsp; <span class="chapter-title">Introducción a Quarto</span></span></a>
+ <span class="menu-text"><span class="chapter-number">45</span>&nbsp; <span class="chapter-title">Introducción a Quarto</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./s5_actividades4y5.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">40</span>&nbsp; <span class="chapter-title"><strong>📚</strong> Actividad 4 y 5</span></span></a>
+ <span class="menu-text"><span class="chapter-number">46</span>&nbsp; <span class="chapter-title"><strong>📚</strong> Actividad 4 y 5</span></span></a>
   </div>
 </li>
       </ul>
@@ -474,7 +545,7 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="true">
- <span class="menu-text"><strong>Sección 6</strong> - Introducción a Python</span></a>
+ <span class="menu-text"><strong>Sección 8</strong> - Introducción a Python</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="true" aria-label="Alternar sección">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -483,7 +554,7 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./cap28.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">35</span>&nbsp; <span class="chapter-title">Introducción a R y Rstudio</span></span></a>
+ <span class="menu-text"><span class="chapter-number">41</span>&nbsp; <span class="chapter-title">Crear un R Project</span></span></a>
   </div>
 </li>
       </ul>
@@ -527,22 +598,27 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Tabla de contenidos</h2>
    
   <ul>
-  <li><a href="#windows---r" id="toc-windows---r" class="nav-link active" data-scroll-target="#windows---r"><span class="header-section-number">5.1</span> Windows - R</a></li>
-  <li><a href="#windows---rstudio" id="toc-windows---rstudio" class="nav-link" data-scroll-target="#windows---rstudio"><span class="header-section-number">5.2</span> Windows - Rstudio</a></li>
-  <li><a href="#macos---r" id="toc-macos---r" class="nav-link" data-scroll-target="#macos---r"><span class="header-section-number">5.3</span> MacOS - R</a></li>
-  <li><a href="#macos--rstudio" id="toc-macos--rstudio" class="nav-link" data-scroll-target="#macos--rstudio"><span class="header-section-number">5.4</span> MacOS- Rstudio</a></li>
-  <li><a href="#linux---r" id="toc-linux---r" class="nav-link" data-scroll-target="#linux---r"><span class="header-section-number">5.5</span> Linux - R</a></li>
-  <li><a href="#linux---rstudio" id="toc-linux---rstudio" class="nav-link" data-scroll-target="#linux---rstudio"><span class="header-section-number">5.6</span> Linux - RStudio</a></li>
-  <li><a href="#actualizar-r---windows-y-macos" id="toc-actualizar-r---windows-y-macos" class="nav-link" data-scroll-target="#actualizar-r---windows-y-macos"><span class="header-section-number">5.7</span> Actualizar R - Windows y MacOS</a></li>
+  <li><a href="#windows---r" id="toc-windows---r" class="nav-link active" data-scroll-target="#windows---r"><span class="header-section-number">12.1</span> Windows - R</a></li>
+  <li><a href="#windows---rstudio" id="toc-windows---rstudio" class="nav-link" data-scroll-target="#windows---rstudio"><span class="header-section-number">12.2</span> Windows - Rstudio</a></li>
+  <li><a href="#macos---r" id="toc-macos---r" class="nav-link" data-scroll-target="#macos---r"><span class="header-section-number">12.3</span> macOS - R</a></li>
+  <li><a href="#macos--rstudio" id="toc-macos--rstudio" class="nav-link" data-scroll-target="#macos--rstudio"><span class="header-section-number">12.4</span> macOS- Rstudio</a></li>
+  <li><a href="#linux---r" id="toc-linux---r" class="nav-link" data-scroll-target="#linux---r"><span class="header-section-number">12.5</span> Linux - R</a></li>
+  <li><a href="#linux---rstudio" id="toc-linux---rstudio" class="nav-link" data-scroll-target="#linux---rstudio"><span class="header-section-number">12.6</span> Linux - RStudio</a></li>
+  <li><a href="#actualizar-r---windows-y-macos" id="toc-actualizar-r---windows-y-macos" class="nav-link" data-scroll-target="#actualizar-r---windows-y-macos"><span class="header-section-number">12.7</span> Actualizar R - Windows y MacOS</a></li>
+  <li><a href="#evitar-conflictos-para-la-instalación-de-paquetes-en-r" id="toc-evitar-conflictos-para-la-instalación-de-paquetes-en-r" class="nav-link" data-scroll-target="#evitar-conflictos-para-la-instalación-de-paquetes-en-r"><span class="header-section-number">12.8</span> Evitar conflictos para la instalación de paquetes en R</a>
+  <ul>
+  <li><a href="#si-usamos-windows-debemos-instalar-rtools" id="toc-si-usamos-windows-debemos-instalar-rtools" class="nav-link" data-scroll-target="#si-usamos-windows-debemos-instalar-rtools"><span class="header-section-number">12.8.1</span> Si usamos Windows debemos instalar Rtools</a></li>
+  <li><a href="#si-usamos-macos-debemos-instalar-xcode" id="toc-si-usamos-macos-debemos-instalar-xcode" class="nav-link" data-scroll-target="#si-usamos-macos-debemos-instalar-xcode"><span class="header-section-number">12.8.2</span> Si usamos MacOs debemos instalar Xcode</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./install_B.html"><strong>Pre-requisitos</strong></a></li><li class="breadcrumb-item"><a href="./install_R.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Instalación de R y RStudio</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./TodoLits.html"><strong>Sección 2</strong> - Instalación de programas</a></li><li class="breadcrumb-item"><a href="./install_R.html"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Instalación de R y RStudio</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span id="descarga-R" class="quarto-section-identifier"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Instalación de R y RStudio</span></span></h1>
+<h1 class="title"><span id="descarga-R" class="quarto-section-identifier"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Instalación de R y RStudio</span></span></h1>
 </div>
 
 
@@ -560,8 +636,22 @@ ul.task-list li input[type="checkbox"] {
 
 
 <p>Para participar en este taller necesitas acceso a los siguientes software y acceso a un navegador como chrome o firefox.</p>
-<section id="windows---r" class="level2" data-number="5.1">
-<h2 data-number="5.1" class="anchored" data-anchor-id="windows---r"><span class="header-section-number">5.1</span> Windows - R</h2>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Importante</span>Orden de instalación
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>El orden importa, primero instala R -&gt; Rstudio -&gt; Rtools.</p>
+<p>Nuncia instales primero Rstudio antes que R</p>
+</div>
+</div>
+<section id="windows---r" class="level2" data-number="12.1">
+<h2 data-number="12.1" class="anchored" data-anchor-id="windows---r"><span class="header-section-number">12.1</span> Windows - R</h2>
 <p><strong>Nota:</strong> Para obtener más detalles sobre cómo instalar y configurar R y Rstudio, puedes ver este video tutorial: <a href="https://www.youtube.com/watch?v=H9EBlFDGG4k">Cómo instalar R y RStudio en Windows 11</a>.</p>
 <ol type="1">
 <li><p>Entra a la siguiente <a href="https://cloud.r-project.org/">página</a></p></li>
@@ -578,8 +668,8 @@ ul.task-list li input[type="checkbox"] {
 </ul></li>
 </ol>
 </section>
-<section id="windows---rstudio" class="level2" data-number="5.2">
-<h2 data-number="5.2" class="anchored" data-anchor-id="windows---rstudio"><span class="header-section-number">5.2</span> Windows - Rstudio</h2>
+<section id="windows---rstudio" class="level2" data-number="12.2">
+<h2 data-number="12.2" class="anchored" data-anchor-id="windows---rstudio"><span class="header-section-number">12.2</span> Windows - Rstudio</h2>
 <ol type="1">
 <li>Entra en la siguiente <a href="https://posit.co/download/rstudio-desktop/#download">página</a></li>
 <li>Haz click en <strong>Download RStudio Desktop for Windows</strong></li>
@@ -594,8 +684,8 @@ ul.task-list li input[type="checkbox"] {
 <li>Haz clic en “<strong>OK</strong>”</li>
 </ol>
 </section>
-<section id="macos---r" class="level2" data-number="5.3">
-<h2 data-number="5.3" class="anchored" data-anchor-id="macos---r"><span class="header-section-number">5.3</span> MacOS - R</h2>
+<section id="macos---r" class="level2" data-number="12.3">
+<h2 data-number="12.3" class="anchored" data-anchor-id="macos---r"><span class="header-section-number">12.3</span> macOS - R</h2>
 <p><strong>Nota:</strong> Para obtener más detalles sobre cómo instalar y configurar Git Bash, puedes ver este video tutorial: <a href="https://www.youtube.com/watch?v=_k8seoE6b-E">Cómo instalar R y R Studio en MacOS</a></p>
 <ol type="1">
 <li><p>Entra a la siguiente <a href="https://cloud.r-project.org/">página</a></p></li>
@@ -614,8 +704,8 @@ ul.task-list li input[type="checkbox"] {
 </ul></li>
 </ol>
 </section>
-<section id="macos--rstudio" class="level2" data-number="5.4">
-<h2 data-number="5.4" class="anchored" data-anchor-id="macos--rstudio"><span class="header-section-number">5.4</span> MacOS- Rstudio</h2>
+<section id="macos--rstudio" class="level2" data-number="12.4">
+<h2 data-number="12.4" class="anchored" data-anchor-id="macos--rstudio"><span class="header-section-number">12.4</span> macOS- Rstudio</h2>
 <ol type="1">
 <li>Entra en la siguiente <a href="https://posit.co/download/rstudio-desktop/#download">página</a></li>
 <li>Haz click en <strong>Download RStudio Desktop for macOS 13+</strong>
@@ -627,8 +717,8 @@ ul.task-list li input[type="checkbox"] {
 <li>Arrastra el ícono de RStudio a la carpeta de aplicaciones y espera a que finalice la instalación</li>
 </ol>
 </section>
-<section id="linux---r" class="level2" data-number="5.5">
-<h2 data-number="5.5" class="anchored" data-anchor-id="linux---r"><span class="header-section-number">5.5</span> Linux - R</h2>
+<section id="linux---r" class="level2" data-number="12.5">
+<h2 data-number="12.5" class="anchored" data-anchor-id="linux---r"><span class="header-section-number">12.5</span> Linux - R</h2>
 <ol type="1">
 <li><p>Entra a la siguiente <a href="https://cloud.r-project.org/">página</a></p></li>
 <li><p>Junto a <u><strong>Download R for Linux</strong></u> existen tres opciones, selecciona la que se ajusta a tu distribución de Linux</p>
@@ -657,8 +747,8 @@ ul.task-list li input[type="checkbox"] {
 </ul></li>
 </ol>
 </section>
-<section id="linux---rstudio" class="level2" data-number="5.6">
-<h2 data-number="5.6" class="anchored" data-anchor-id="linux---rstudio"><span class="header-section-number">5.6</span> Linux - RStudio</h2>
+<section id="linux---rstudio" class="level2" data-number="12.6">
+<h2 data-number="12.6" class="anchored" data-anchor-id="linux---rstudio"><span class="header-section-number">12.6</span> Linux - RStudio</h2>
 <ol type="1">
 <li>Entra en la siguiente <a href="https://posit.co/download/rstudio-desktop/#download">página</a></li>
 <li>Desliza la página hasta llegar a la tabla de opciones de instalación</li>
@@ -666,8 +756,8 @@ ul.task-list li input[type="checkbox"] {
 <li>Ejecuta el instalador</li>
 </ol>
 </section>
-<section id="actualizar-r---windows-y-macos" class="level2" data-number="5.7">
-<h2 data-number="5.7" class="anchored" data-anchor-id="actualizar-r---windows-y-macos"><span class="header-section-number">5.7</span> Actualizar R - Windows y MacOS</h2>
+<section id="actualizar-r---windows-y-macos" class="level2" data-number="12.7">
+<h2 data-number="12.7" class="anchored" data-anchor-id="actualizar-r---windows-y-macos"><span class="header-section-number">12.7</span> Actualizar R - Windows y MacOS</h2>
 <p>Si ya tienes R instalado en tu computadora, asegúrate de tener la versión más actualizada de R</p>
 <p>Existen diferentes formas de actualizar R, la manera más sencilla es a través de <strong>Rgui,</strong> la interfaz gráfica que viene con R base, no con RStudio.</p>
 <p><strong>Windows y MacOS</strong>:</p>
@@ -696,8 +786,39 @@ ul.task-list li input[type="checkbox"] {
 </ul></li>
 <li><p>Si durante el proceso aparece una ventana preguntando si deseas copiar paquetes o configuraciones anteriores, puedes hacer clic en <strong>“No”</strong> (no es obligatorio copiarlos; puedes reinstalarlos después si lo prefieres).</p></li>
 </ol>
+</section>
+<section id="evitar-conflictos-para-la-instalación-de-paquetes-en-r" class="level2" data-number="12.8">
+<h2 data-number="12.8" class="anchored" data-anchor-id="evitar-conflictos-para-la-instalación-de-paquetes-en-r"><span class="header-section-number">12.8</span> Evitar conflictos para la instalación de paquetes en R</h2>
+<section id="si-usamos-windows-debemos-instalar-rtools" class="level3" data-number="12.8.1">
+<h3 data-number="12.8.1" class="anchored" data-anchor-id="si-usamos-windows-debemos-instalar-rtools"><span class="header-section-number">12.8.1</span> Si usamos Windows debemos instalar Rtools</h3>
+<p>En <strong>Windows</strong> utilizamos <strong>Rtools</strong> para evitar problemas al instalar paquetes desde código fuente en RStudio. Selecciona la versión que se adapta a tu versión de R.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="figures/rtools_windows.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+<p>Yo seleccioné la versión Rtools 4.5 y me aparece la siguiente página web, después di clic en donde aparece el instalador, descargue el archivo y lo ejecute.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="figures/rtools_installer.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+</section>
+<section id="si-usamos-macos-debemos-instalar-xcode" class="level3" data-number="12.8.2">
+<h3 data-number="12.8.2" class="anchored" data-anchor-id="si-usamos-macos-debemos-instalar-xcode"><span class="header-section-number">12.8.2</span> Si usamos MacOs debemos instalar Xcode</h3>
+<p>En <strong>macOS</strong>, no existe un equivalente directo a Rtools. En su lugar, se emplean las <a href="https://mac.r-project.org/tools/"><strong>Xcode Command Line Tools</strong></a> (que incluyen <code>clang</code> y <code>make</code>) junto con <strong>GNU Fortran</strong> para compilar paquetes que requieren código en C/C++ o Fortran.</p>
+<p><img src="figures/xcode_mac.png" class="img-fluid"></p>
+<p>Esto significa que, si trabajan en Mac, deben asegurarse de tener instaladas estas herramientas para evitar errores al instalar ciertos paquetes de R. Abre una terminal de Bash y coloca este código:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> xcode-select <span class="at">--install</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="figures/colina_rinstall.png" class="img-fluid figure-img"></p>
+<figcaption>Imagen creada con ChatGPT.</figcaption>
+</figure>
+</div>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
@@ -1143,12 +1264,12 @@ ul.task-list li input[type="checkbox"] {
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="./install_B.html" class="pagination-link" aria-label="Instalación de Git y Bash">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Instalación de Git y Bash</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Instalación de Git y Bash</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./install_git.html" class="pagination-link" aria-label="Instalar Git Bash en Windows">
-        <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Instalar Git Bash en Windows</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./intro_R.html" class="pagination-link" aria-label="Introducción a R y Rstudio">
+        <span class="nav-page-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Introducción a R y Rstudio</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

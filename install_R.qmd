@@ -2,6 +2,14 @@
 
 Para participar en este taller necesitas acceso a los siguientes software y acceso a un navegador como chrome o firefox.
 
+::: callout-important
+## Orden de instalación
+
+El orden importa, primero instala R -\> Rstudio -\> Rtools.
+
+Nuncia instales primero Rstudio antes que R
+:::
+
 ## Windows - R
 
 **Nota:** Para obtener más detalles sobre cómo instalar y configurar R y Rstudio, puedes ver este video tutorial: [Cómo instalar R y RStudio en Windows 11](https://www.youtube.com/watch?v=H9EBlFDGG4k).
@@ -16,29 +24,29 @@ Para participar en este taller necesitas acceso a los siguientes software y acce
 
 5.  Ejecuta el instalador y sigue los siguientes pasos:
 
-    -   Selecciona el lenguaje de preferencia durante el proceso y haz click en "**OK**"
+    - Selecciona el lenguaje de preferencia durante el proceso y haz click en "**OK**"
 
-    -   Haz clic en "**Next**"
+    - Haz clic en "**Next**"
 
-    -   Haz clic en "**Next**" (Si deseas cambiar el sitio de instalación, haz clic en "**Browse**" y selecciona tu carpeta deseada).
+    - Haz clic en "**Next**" (Si deseas cambiar el sitio de instalación, haz clic en "**Browse**" y selecciona tu carpeta deseada).
 
-    -   Haz click en "**Next**" en las siguientes cuatro ventanas
+    - Haz click en "**Next**" en las siguientes cuatro ventanas
 
-    -   Espera unos minutos a que finalice la instalación y haz click en "**Finish**"
+    - Espera unos minutos a que finalice la instalación y haz click en "**Finish**"
 
 ## Windows - Rstudio
 
 1.  Entra en la siguiente [página](https://posit.co/download/rstudio-desktop/#download)
 2.  Haz click en **Download RStudio Desktop for Windows**
 3.  Ejecuta el instalador y sigue los siguientes pasos:
-    -   Haz clic en "**Next**"
-    -   Haz clic en "**Next**" (Si deseas cambiar el sitio de instalación, haz clic en "**Browse**" y selecciona tu carpeta deseada).
-    -   Haz clic en "**Install**" y espera unos minutos a que acabe el proceso
-    -   Haz clic en "**Finish**"
+    - Haz clic en "**Next**"
+    - Haz clic en "**Next**" (Si deseas cambiar el sitio de instalación, haz clic en "**Browse**" y selecciona tu carpeta deseada).
+    - Haz clic en "**Install**" y espera unos minutos a que acabe el proceso
+    - Haz clic en "**Finish**"
 4.  Abre la aplicación de RStudio
 5.  Haz clic en "**OK**"
 
-## MacOS - R
+## macOS - R
 
 **Nota:** Para obtener más detalles sobre cómo instalar y configurar Git Bash, puedes ver este video tutorial: [Cómo instalar R y R Studio en MacOS](https://www.youtube.com/watch?v=_k8seoE6b-E)
 
@@ -48,26 +56,26 @@ Para participar en este taller necesitas acceso a los siguientes software y acce
 
 3.  Existen dos versiones de R que dependen del procesador de tu computadora. Para ver la versión de tu procesador, haz click en el ícono de apple en la parte superior izquierda de tu pantalla y selecciona "acerca de esta mac". En la ventana emergente, la versión de tu procesador aparecerá junto a la palabra "Chip", por ejemplo: **Chip Apple M1 Pro**
 
-    -   Para Mac con **Apple Silicon** (M1,2,...) haz clic en [R-4.5.2-arm64.pkg]{.underline}
+    - Para Mac con **Apple Silicon** (M1,2,...) haz clic en [R-4.5.2-arm64.pkg]{.underline}
 
-    -   Para Mac con procesador **Intel** haz clic en [R-4.5.2-x86_64.pkg]{.underline}
+    - Para Mac con procesador **Intel** haz clic en [R-4.5.2-x86_64.pkg]{.underline}
 
 4.  Ejecuta el instalador y sigue los siguientes pasos:
 
-    -   Haz clic en "**Continuar**" tres veces
+    - Haz clic en "**Continuar**" tres veces
 
-    -   Haz clic en "**De acuerdo**"
+    - Haz clic en "**De acuerdo**"
 
-    -   Haz click en "**Instalar**"
+    - Haz click en "**Instalar**"
 
-    -   Espera unos minutos a que finalice la instalación y haz click en "**Cerrar**"
+    - Espera unos minutos a que finalice la instalación y haz click en "**Cerrar**"
 
-## MacOS- Rstudio
+## macOS- Rstudio
 
 1.  Entra en la siguiente [página](https://posit.co/download/rstudio-desktop/#download)
 2.  Haz click en **Download RStudio Desktop for macOS 13+**
-    -   Para ver la versión de tu procesador, haz click en el ícono de apple en la parte superior izquierda de tu pantalla y selecciona "acerca de esta mac". En la ventana emergente, la versión de tu sistema operativo aparecerá junto a la palabra "macOS", por ejemplo: **macOS Sequola** 15.1.1.
-    -   Si la versión de tu sistema operativo está por debajo de la versión 13, haz clic en [**download a previous version**]{.underline}.
+    - Para ver la versión de tu procesador, haz click en el ícono de apple en la parte superior izquierda de tu pantalla y selecciona "acerca de esta mac". En la ventana emergente, la versión de tu sistema operativo aparecerá junto a la palabra "macOS", por ejemplo: **macOS Sequola** 15.1.1.
+    - Si la versión de tu sistema operativo está por debajo de la versión 13, haz clic en [**download a previous version**]{.underline}.
 3.  Ejecuta el instalador
 4.  Arrastra el ícono de RStudio a la carpeta de aplicaciones y espera a que finalice la instalación
 
@@ -77,35 +85,35 @@ Para participar en este taller necesitas acceso a los siguientes software y acce
 
 2.  Junto a [**Download R for Linux**]{.underline} existen tres opciones, selecciona la que se ajusta a tu distribución de Linux
 
-    -   [**Debian**]{.underline}
+    - [**Debian**]{.underline}
 
-    -   [**Fedora/Redhat**]{.underline}
+    - [**Fedora/Redhat**]{.underline}
 
-    -   [**Ubuntu**]{.underline}
+    - [**Ubuntu**]{.underline}
 
 3.  Para instalar Linux en **Debian** y ejecuta las siguientes líneas de código (presiona **Enter** después de cada línea de código):
 
-    -   `sudo apt update`
+    - `sudo apt update`
 
-    -   `sudo apt install r-base r-base-dev`
+    - `sudo apt install r-base r-base-dev`
 
 4.  Para instalar Linux en **Fedora/Redhat** y ejecuta la siguiente línea de código:
 
-    -   `sudo dnf install R`
+    - `sudo dnf install R`
 
-    -   Presiona **Enter**
+    - Presiona **Enter**
 
 5.  Para instalar Linux en **Ubuntu** y ejecuta las siguientes líneas de código (presiona **Enter** después de cada línea de código):
 
-    -   `sudo apt update -qq`
+    - `sudo apt update -qq`
 
-    -   `sudo apt install --no-install-recommends software-properties-common dirmngr`
+    - `sudo apt install --no-install-recommends software-properties-common dirmngr`
 
-    -   `wget -qO- https://cloud.r-project.org/bin/linux/ubuntu/marutter_pubkey.asc | sudo tee -a /etc/apt/trusted.gpg.d/cran_ubuntu_key.asc`
+    - `wget -qO- https://cloud.r-project.org/bin/linux/ubuntu/marutter_pubkey.asc | sudo tee -a /etc/apt/trusted.gpg.d/cran_ubuntu_key.asc`
 
-    -   `sudo add-apt-repository "deb https://cloud.r-project.org/bin/linux/ubuntu $(lsb_release -cs)-cran40/"`
+    - `sudo add-apt-repository "deb https://cloud.r-project.org/bin/linux/ubuntu $(lsb_release -cs)-cran40/"`
 
-    -   `sudo apt install --no-install-recommends r-base`
+    - `sudo apt install --no-install-recommends r-base`
 
 ## Linux - RStudio
 
@@ -133,18 +141,44 @@ Existen diferentes formas de actualizar R, la manera más sencilla es a través 
 
 3.  Carga la paquetería con la función `library()`
 
-    -   library`(installr)`
-    -   Presiona **Enter**
+    - library`(installr)`
+    - Presiona **Enter**
 
 4.  Para revisar si tienes la versión de R más actualizada ejecuta el siguiente código:
 
-    -   `installr(GUI = TRUE)`
-    -   Presiona **Enter**
-    -   En la ventana emergente asegúrate de tener seleccionada la opción "R (updateR)" y haz clic en "OK"
+    - `installr(GUI = TRUE)`
+    - Presiona **Enter**
+    - En la ventana emergente asegúrate de tener seleccionada la opción "R (updateR)" y haz clic en "OK"
 
 5.  Aparecerá otra ventana con información sobre la versión de R que estás usando y si existe una versión más reciente.
 
-    -   Si **ya tienes la versión más actual**, simplemente haz clic en **"OK"** para cerrar.
-    -   Si **hay una versión nueva disponible**, haz clic en **"Yes"** para comenzar la actualización.
+    - Si **ya tienes la versión más actual**, simplemente haz clic en **"OK"** para cerrar.
+    - Si **hay una versión nueva disponible**, haz clic en **"Yes"** para comenzar la actualización.
 
 6.  Si durante el proceso aparece una ventana preguntando si deseas copiar paquetes o configuraciones anteriores, puedes hacer clic en **"No"** (no es obligatorio copiarlos; puedes reinstalarlos después si lo prefieres).
+
+## Evitar conflictos para la instalación de paquetes en R
+
+### Si usamos Windows debemos instalar Rtools
+
+En **Windows** utilizamos **Rtools** para evitar problemas al instalar paquetes desde código fuente en RStudio. Selecciona la versión que se adapta a tu versión de R.
+
+![](figures/rtools_windows.png){fig-align="center"}
+
+Yo seleccioné la versión Rtools 4.5 y me aparece la siguiente página web, después di clic en donde aparece el instalador, descargue el archivo y lo ejecute.
+
+![](figures/rtools_installer.png){fig-align="center"}
+
+### Si usamos MacOs debemos instalar Xcode
+
+En **macOS**, no existe un equivalente directo a Rtools. En su lugar, se emplean las [**Xcode Command Line Tools**](https://mac.r-project.org/tools/) (que incluyen `clang` y `make`) junto con **GNU Fortran** para compilar paquetes que requieren código en C/C++ o Fortran.
+
+![](figures/xcode_mac.png)
+
+Esto significa que, si trabajan en Mac, deben asegurarse de tener instaladas estas herramientas para evitar errores al instalar ciertos paquetes de R. Abre una terminal de Bash y coloca este código:
+
+``` bash
+sudo xcode-select --install
+```
+
+![Imagen creada con ChatGPT.](figures/colina_rinstall.png){fig-align="center"}
