@@ -1,5 +1,7 @@
 # Wildcards y Streams
 
+> **Fecha:** 10 de septiembre, 2026
+
 ## Estructura de declaración de variables en bash
 
 La estructura básica para declarar una variable en `bash` es:
@@ -427,7 +429,7 @@ echo "$texto"
 Los `wildcards` (comodines) o `wild characters` son símbolos utilizados para representar uno o más caracteres. Se pueden utilizar con otros comandos para facilitar el procesamiento o búsqueda de archivos, directorios y datos en general.
 
 | Wildcard | Significa | Ejemplo | Coincide con |
-|----|----|----|----|
+|------------------|------------------|------------------|------------------|
 | `*` | Cero o más caracteres | `*.txt` | archivo.txt, doc.txt, a.txt |
 | `?` | Exactamente 1 carácter | `archivo?.txt` | archivo1.txt, archivo2.txt |
 | `[ ]` | Un carácter del conjunto | `[abc]*` | archivo.txt, buscador.log, carpeta |

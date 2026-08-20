@@ -1,10 +1,22 @@
 # Mis primeros pasos en Bash
 
+> **Fecha:** 10 de septiembre, 2026
+
 ## Entorno de Bash
 
 ![](figures/entornoBash.png)
 
 El signo `$` es un **prompt**, que nos muestra que la terminal está esperando una entrada; tu terminal puede usar un carácter diferente como prompt y puede agregar información antes de él. Al teclear comandos, ya sea a partir de estas lecciones o de otras fuentes, no escribas el prompt (*\$*), sólo los comandos que le siguen.
+
+## Entorno de zsh en macOs
+
+![Captura de mi entorno de Bash en mi mac.](figures/entorno_bash.png){fig-align="center"}
+
+::: callout-note
+## Decoración de terminal
+
+Puedes decorar tu terminal con [oh my zsh](https://ohmyz.sh/) si tienes macOS.
+:::
 
 ## Preparación del directorio de trabajo
 
@@ -90,7 +102,7 @@ A partir de `/Users/ecoss/data/`, ¿Cuál de los siguientes comandos podría Eve
 
 Ejemplo de rutas:
 
-![Imagen creada con Gemini.](figures/rutas.png){fig-align="center"}
+![Imagen creada con Gemini.](figures/bash_rutas.png){fig-align="center"}
 
 ## Comandos básicos
 
