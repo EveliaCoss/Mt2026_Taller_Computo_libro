@@ -46,6 +46,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="site_libs/bootstrap/bootstrap-6f5e339e910af865eb2cfbba9cbcf7d6.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="site_libs/quarto-contrib/focus-mode-1.0.0/focus-mode.js"></script>
+<link href="site_libs/quarto-contrib/focus-mode-1.0.0/focus-mode.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -73,6 +75,19 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Buscar"
   }
 }</script>
+<script>
+(function () {
+  try {
+    if (!window.matchMedia("(hover: hover) and (pointer: fine)").matches) return;
+    if (window.localStorage.getItem("quarto-focus-mode") === "1") {
+      document.documentElement.classList.add("focus-mode-persisted");
+    }
+    if (window.localStorage.getItem("quarto-presentation-mode") === "1") {
+      document.documentElement.classList.add("presentation-mode-preload");
+    }
+  } catch (e) {}
+})();
+</script>
 
 
 <link rel="stylesheet" href="styles.css">
@@ -243,7 +258,7 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./install_R.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Instalación de R y RStudio</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Instalación de R, RStudio y Rtools/XCode</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -595,6 +610,26 @@ ul.task-list li input[type="checkbox"] {
 <figcaption>Imagen creada con ChatGPT.</figcaption>
 </figure>
 </div>
+<p>El día de hoy nos enfocaremos en la instalación de estos programas, para ello debes seguir las instrucciones que te he dado:</p>
+<div class="callout callout-style-simple callout-tip no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>Descargar e instalar:</p>
+<ul class="task-list">
+<li><label><input type="checkbox">Git y Bash</label></li>
+<li><label><input type="checkbox">R y Rstudio</label></li>
+<li><label><input type="checkbox">Rtools (Windows) o Xcode (Mac)</label></li>
+<li><label><input type="checkbox">Introducción a R (aquí los veo)</label></li>
+<li><label><input type="checkbox">Python</label></li>
+<li><label><input type="checkbox">Integración de Python en Rstudio con reticulate</label></li>
+<li><label><input type="checkbox">Integración de Bash en Rstudio</label></li>
+</ul>
+</div>
+</div>
+</div>
 <section id="información-importante-sobre-los-equipos" class="level2" data-number="10.1">
 <h2 data-number="10.1" class="anchored" data-anchor-id="información-importante-sobre-los-equipos"><span class="header-section-number">10.1</span> ¡ Información importante sobre los equipos !</h2>
 <div class="callout callout-style-default callout-important callout-titled">
@@ -628,26 +663,6 @@ Importante
 </figure>
 </div>
 </div>
-</div>
-</div>
-</div>
-<p>El día de hoy nos enfocaremos en la instalación de estos programas, para ello debes seguir las instrucciones que te he dado:</p>
-<div class="callout callout-style-simple callout-tip no-icon">
-<div class="callout-body d-flex">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-body-container">
-<p>Descargar e instalar:</p>
-<ul class="task-list">
-<li><label><input type="checkbox">Git y Bash</label></li>
-<li><label><input type="checkbox">R y Rstudio</label></li>
-<li><label><input type="checkbox">Rtools (Windows) o Xcode (Mac)</label></li>
-<li><label><input type="checkbox">Introducción a R (aquí los veo)</label></li>
-<li><label><input type="checkbox">Python</label></li>
-<li><label><input type="checkbox">Integración de Python en Rstudio con reticulate</label></li>
-<li><label><input type="checkbox">Integración de Bash en Rstudio</label></li>
-</ul>
 </div>
 </div>
 </div>

@@ -1,5 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=News+Cycle:wght@400;700&display=swap');
 
+/* Focus mode - https://lsbjordao.github.io/quarto-book-focus-mode-example/chapter-01.html */
+:root {
+  --book-focus-content-width: 960px;
+}
+
 /* Fondo del bloque de título */
 .quarto-title-block {
   background-image: url("flyer/portada_programacion.jpeg"); /* Banner */

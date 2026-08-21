@@ -1,0 +1,193 @@
+/* ── Focus Mode button ── */
+#focus-toggle {
+  position: fixed;
+  left: 1rem;
+  bottom: 1rem;
+  z-index: 9999;
+
+  height: 44px;
+  min-width: 44px;
+  width: 44px;
+
+  border-radius: 999px;
+  border: 1px solid var(--bs-border-color);
+  background: var(--bs-body-bg);
+  color: var(--bs-body-color);
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-start;
+
+  overflow: hidden;
+  white-space: nowrap;
+  cursor: pointer;
+
+  font-size: 0.95rem;
+  box-shadow: 0 2px 12px rgba(0,0,0,.18);
+  padding: 0;
+
+  transition: padding .22s ease, transform .15s ease, box-shadow .2s ease;
+}
+
+#focus-toggle:hover {
+  width: auto;
+  padding-right: .9rem;
+  box-shadow: 0 3px 14px rgba(0,0,0,.25);
+  transform: scale(1.03);
+}
+
+#focus-icon {
+  width: 44px;
+  height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  flex-shrink: 0;
+}
+
+#focus-label {
+  opacity: 0;
+  margin-left: .15rem;
+  transition: opacity .18s ease;
+}
+
+#focus-toggle:hover #focus-label {
+  opacity: 1;
+}
+
+/* ── Focus mode: hide navigation panels ── */
+body.focus-mode #quarto-sidebar,
+body.focus-mode #quarto-margin-sidebar,
+body.focus-mode nav#TOC,
+body.focus-mode #quarto-header,
+html.focus-mode-persisted #quarto-sidebar,
+html.focus-mode-persisted #quarto-margin-sidebar,
+html.focus-mode-persisted nav#TOC,
+html.focus-mode-persisted #quarto-header {
+  display: none !important;
+}
+
+body.focus-mode #quarto-content,
+html.focus-mode-persisted #quarto-content {
+  display: block !important;
+}
+
+body.focus-mode main.content,
+html.focus-mode-persisted main.content {
+  max-width: var(--focus-content-width, 920px);
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+/* Prevent initial flash of non-active sections while presentation state is restored. */
+html.presentation-mode-preload #quarto-document-content {
+  visibility: hidden;
+}
+
+/* Reading comfort */
+#quarto-document-content {
+  line-height: 1.65;
+  font-size: 1.03rem;
+}
+
+/* ── Presentation mode ── */
+
+/* Non-prelude: hide everything not on the current section path */
+body.presentation-mode:not(.pres-prelude) #quarto-document-content > *:not(.pres-current):not(.pres-ancestor) {
+  display: none !important;
+}
+
+/* Prelude: hide all sections, keep title/intro visible */
+body.presentation-mode.pres-prelude #quarto-document-content > section[class*="level"] {
+  display: none !important;
+}
+
+/* Show current section and ancestor sections */
+body.presentation-mode .pres-current,
+body.presentation-mode .pres-ancestor {
+  display: block !important;
+}
+
+/* Inside ancestor sections: hide non-section children (headings, paragraphs, etc.)
+   so only the path to the current section is visible */
+body.presentation-mode .pres-ancestor > :not(section) {
+  display: none !important;
+}
+
+/* Inside ancestor sections: hide sibling sections that are not on the path */
+body.presentation-mode .pres-ancestor > section[class*="level"]:not(.pres-current):not(.pres-ancestor) {
+  display: none !important;
+}
+
+/* For level2+ current sections: hide their nested subsections */
+body.presentation-mode .pres-current:not(.level1) > section[class*="level"] {
+  display: none !important;
+}
+
+/* ── Presentation progress bar (bottom, full width) ── */
+#pres-progress {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  height: 3px;
+  width: 0%;
+  background: var(--bs-primary, #0d6efd);
+  background-image: linear-gradient(90deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0.35) 100%);
+  box-shadow: 0 0 10px rgba(13,110,253,0.35);
+  z-index: 10000;
+  display: none;
+  transition: width 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: width;
+  pointer-events: none;
+}
+
+body.presentation-mode #pres-progress {
+  display: block;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #pres-progress {
+    transition: none;
+  }
+}
+
+/* ── Presentation indicator (bottom-right, visible only when active) ── */
+#pres-indicator {
+  position: fixed;
+  bottom: 1rem;
+  right: 1rem;
+  z-index: 9999;
+
+  display: none;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0 0.65rem 0 0.5rem;
+  height: 28px;
+
+  border-radius: 999px;
+  border: 1px solid var(--bs-border-color);
+  background: var(--bs-body-bg);
+  color: var(--bs-body-color);
+  box-shadow: 0 2px 8px rgba(0,0,0,.15);
+
+  font-size: 0.72rem;
+  font-family: monospace;
+  opacity: 0.75;
+  -webkit-user-select: none;
+  user-select: none;
+  pointer-events: none;
+}
+
+body.presentation-mode #pres-indicator {
+  display: inline-flex;
+}
+
+/* ── Desktop-only: hide all UI on touch/mobile devices ── */
+@media not all and (hover: hover) and (pointer: fine) {
+  #focus-toggle,
+  #pres-progress,
+  #pres-indicator {
+    display: none !important;
+  }
+}

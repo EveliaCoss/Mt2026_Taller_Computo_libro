@@ -44,7 +44,7 @@
     "href": "cap1A.html#ronda-de-presentaciones",
     "title": "1  Introducción e integración",
     "section": "1.2 Ronda de Presentaciones",
-    "text": "1.2 Ronda de Presentaciones\n\n\n\n\n\n\nNotaActividad: ¡Preséntate!\n\n\n\nPara comenzar, haremos una breve ronda de presentaciones. Cada persona deberá compartir la siguiente información en voz alta, en 3 min:\n\nNombre y apellido\nPreparatoria de procedencia\nTu comida favorita 🍕🍜🍫\n\n👉 Ejemplo:\n“Hola, soy Evelia Coss, trabajo en uDocz (como programadora de agentes de AI) y soy profesora de la ENES Juriquilla-UNAM en el área de bioinformática, y mi comida favorita es el ceviche.”\n¡La idea es romper el hielo y conocernos un poco mejor! 😊",
+    "text": "1.2 Ronda de Presentaciones\n\n\n\n\n\n\nNotaActividad: ¡Preséntate!\n\n\n\nPara comenzar, haremos una breve ronda de presentaciones. Cada persona deberá compartir la siguiente información en voz alta, en 3 min:\n\nNombre y apellido\nCiudad de procedencia\nTu comida favorita 🍕🍜🍫\n\n👉 Ejemplo:\n“Hola, soy Evelia Coss, trabajo en uDocz (como programadora de agentes de AI) y soy profesora de la ENES Juriquilla-UNAM en el área de bioinformática, y mi comida favorita es el ceviche.”\n¡La idea es romper el hielo y conocernos un poco mejor! 😊",
     "crumbs": [
       "<span class='chapter-number'>1</span>  <span class='chapter-title'>Introducción e integración</span>"
     ]
@@ -554,7 +554,7 @@
     "href": "TodoLits.html#información-importante-sobre-los-equipos",
     "title": "10  📌 To do list - Instalación de programas",
     "section": "",
-    "text": "Importante\n\n\n\n\n\n\nAsignación de equipos\n\nDeberás trabajar en la misma computadora durante todo el semestre.\nRecuerda que, al finalizar el tiempo de uso, todo lo que hayas instalado o guardado en la máquina se reinicia y se borra automáticamente.\n\nUso de cuentas personales\n\nNo debes iniciar sesión con tus cuentas personales en los navegadores de las computadoras institucionales.\nEvita dejar cuentas abiertas, ya que podrían quedar guardadas y otra persona podría hacer mal uso de ellas.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nDescargar e instalar:\n\nGit y Bash\nR y Rstudio\nRtools (Windows) o Xcode (Mac)\nIntroducción a R (aquí los veo)\nPython\nIntegración de Python en Rstudio con reticulate\nIntegración de Bash en Rstudio",
+    "text": "Importante\n\n\n\n\n\n\nAsignación de equipos\n\nDeberás trabajar en la misma computadora durante todo el semestre.\nRecuerda que, al finalizar el tiempo de uso, todo lo que hayas instalado o guardado en la máquina se reinicia y se borra automáticamente.\n\nUso de cuentas personales\n\nNo debes iniciar sesión con tus cuentas personales en los navegadores de las computadoras institucionales.\nEvita dejar cuentas abiertas, ya que podrían quedar guardadas y otra persona podría hacer mal uso de ellas.",
     "crumbs": [
       "**Sección 2** - Instalación de programas",
       "<span class='chapter-number'>10</span>  <span class='chapter-title'>📌 **To do list -** Instalación de programas</span>"
@@ -607,100 +607,100 @@
   {
     "objectID": "install_R.html",
     "href": "install_R.html",
-    "title": "12  Instalación de R y RStudio",
+    "title": "12  Instalación de R, RStudio y Rtools/XCode",
     "section": "",
     "text": "12.1 Windows - R\nPara participar en este taller necesitas acceso a los siguientes software y acceso a un navegador como chrome o firefox.\nNota: Para obtener más detalles sobre cómo instalar y configurar R y Rstudio, puedes ver este video tutorial: Cómo instalar R y RStudio en Windows 11.",
     "crumbs": [
       "**Sección 2** - Instalación de programas",
-      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Instalación de R y RStudio</span>"
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Instalación de R, RStudio y Rtools/XCode</span>"
     ]
   },
   {
     "objectID": "install_R.html#windows---r",
     "href": "install_R.html#windows---r",
-    "title": "12  Instalación de R y RStudio",
+    "title": "12  Instalación de R, RStudio y Rtools/XCode",
     "section": "",
     "text": "Entra a la siguiente página\nHaz click en Download R for Windows\nHaz click en install R for the first time\nHaz click en Download R-4.5.2 for Windows\nEjecuta el instalador y sigue los siguientes pasos:\n\nSelecciona el lenguaje de preferencia durante el proceso y haz click en “OK”\nHaz clic en “Next”\nHaz clic en “Next” (Si deseas cambiar el sitio de instalación, haz clic en “Browse” y selecciona tu carpeta deseada).\nHaz click en “Next” en las siguientes cuatro ventanas\nEspera unos minutos a que finalice la instalación y haz click en “Finish”",
     "crumbs": [
       "**Sección 2** - Instalación de programas",
-      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Instalación de R y RStudio</span>"
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Instalación de R, RStudio y Rtools/XCode</span>"
     ]
   },
   {
     "objectID": "install_R.html#windows---rstudio",
     "href": "install_R.html#windows---rstudio",
-    "title": "12  Instalación de R y RStudio",
+    "title": "12  Instalación de R, RStudio y Rtools/XCode",
     "section": "12.2 Windows - Rstudio",
     "text": "12.2 Windows - Rstudio\n\nEntra en la siguiente página\nHaz click en Download RStudio Desktop for Windows\nEjecuta el instalador y sigue los siguientes pasos:\n\nHaz clic en “Next”\nHaz clic en “Next” (Si deseas cambiar el sitio de instalación, haz clic en “Browse” y selecciona tu carpeta deseada).\nHaz clic en “Install” y espera unos minutos a que acabe el proceso\nHaz clic en “Finish”\n\nAbre la aplicación de RStudio\nHaz clic en “OK”",
     "crumbs": [
       "**Sección 2** - Instalación de programas",
-      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Instalación de R y RStudio</span>"
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Instalación de R, RStudio y Rtools/XCode</span>"
     ]
   },
   {
     "objectID": "install_R.html#macos---r",
     "href": "install_R.html#macos---r",
-    "title": "12  Instalación de R y RStudio",
+    "title": "12  Instalación de R, RStudio y Rtools/XCode",
     "section": "12.3 macOS - R",
     "text": "12.3 macOS - R\nNota: Para obtener más detalles sobre cómo instalar y configurar Git Bash, puedes ver este video tutorial: Cómo instalar R y R Studio en MacOS\n\nEntra a la siguiente página\nHaz click en Download R for macOS\nExisten dos versiones de R que dependen del procesador de tu computadora. Para ver la versión de tu procesador, haz click en el ícono de apple en la parte superior izquierda de tu pantalla y selecciona “acerca de esta mac”. En la ventana emergente, la versión de tu procesador aparecerá junto a la palabra “Chip”, por ejemplo: Chip Apple M1 Pro\n\nPara Mac con Apple Silicon (M1,2,…) haz clic en R-4.5.2-arm64.pkg\nPara Mac con procesador Intel haz clic en R-4.5.2-x86_64.pkg\n\nEjecuta el instalador y sigue los siguientes pasos:\n\nHaz clic en “Continuar” tres veces\nHaz clic en “De acuerdo”\nHaz click en “Instalar”\nEspera unos minutos a que finalice la instalación y haz click en “Cerrar”",
     "crumbs": [
       "**Sección 2** - Instalación de programas",
-      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Instalación de R y RStudio</span>"
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Instalación de R, RStudio y Rtools/XCode</span>"
     ]
   },
   {
     "objectID": "install_R.html#macos--rstudio",
     "href": "install_R.html#macos--rstudio",
-    "title": "12  Instalación de R y RStudio",
+    "title": "12  Instalación de R, RStudio y Rtools/XCode",
     "section": "12.4 macOS- Rstudio",
     "text": "12.4 macOS- Rstudio\n\nEntra en la siguiente página\nHaz click en Download RStudio Desktop for macOS 13+\n\nPara ver la versión de tu procesador, haz click en el ícono de apple en la parte superior izquierda de tu pantalla y selecciona “acerca de esta mac”. En la ventana emergente, la versión de tu sistema operativo aparecerá junto a la palabra “macOS”, por ejemplo: macOS Sequola 15.1.1.\nSi la versión de tu sistema operativo está por debajo de la versión 13, haz clic en download a previous version.\n\nEjecuta el instalador\nArrastra el ícono de RStudio a la carpeta de aplicaciones y espera a que finalice la instalación",
     "crumbs": [
       "**Sección 2** - Instalación de programas",
-      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Instalación de R y RStudio</span>"
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Instalación de R, RStudio y Rtools/XCode</span>"
     ]
   },
   {
     "objectID": "install_R.html#linux---r",
     "href": "install_R.html#linux---r",
-    "title": "12  Instalación de R y RStudio",
+    "title": "12  Instalación de R, RStudio y Rtools/XCode",
     "section": "12.5 Linux - R",
     "text": "12.5 Linux - R\n\nEntra a la siguiente página\nJunto a Download R for Linux existen tres opciones, selecciona la que se ajusta a tu distribución de Linux\n\nDebian\nFedora/Redhat\nUbuntu\n\nPara instalar Linux en Debian y ejecuta las siguientes líneas de código (presiona Enter después de cada línea de código):\n\nsudo apt update\nsudo apt install r-base r-base-dev\n\nPara instalar Linux en Fedora/Redhat y ejecuta la siguiente línea de código:\n\nsudo dnf install R\nPresiona Enter\n\nPara instalar Linux en Ubuntu y ejecuta las siguientes líneas de código (presiona Enter después de cada línea de código):\n\nsudo apt update -qq\nsudo apt install --no-install-recommends software-properties-common dirmngr\nwget -qO- https://cloud.r-project.org/bin/linux/ubuntu/marutter_pubkey.asc | sudo tee -a /etc/apt/trusted.gpg.d/cran_ubuntu_key.asc\nsudo add-apt-repository \"deb https://cloud.r-project.org/bin/linux/ubuntu $(lsb_release -cs)-cran40/\"\nsudo apt install --no-install-recommends r-base",
     "crumbs": [
       "**Sección 2** - Instalación de programas",
-      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Instalación de R y RStudio</span>"
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Instalación de R, RStudio y Rtools/XCode</span>"
     ]
   },
   {
     "objectID": "install_R.html#linux---rstudio",
     "href": "install_R.html#linux---rstudio",
-    "title": "12  Instalación de R y RStudio",
+    "title": "12  Instalación de R, RStudio y Rtools/XCode",
     "section": "12.6 Linux - RStudio",
     "text": "12.6 Linux - RStudio\n\nEntra en la siguiente página\nDesliza la página hasta llegar a la tabla de opciones de instalación\nSelecciona tu opción de accuerdo con la distribución y versión de tu sistema operativo (Debian, Fedora/Redhat, Ubuntu).\nEjecuta el instalador",
     "crumbs": [
       "**Sección 2** - Instalación de programas",
-      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Instalación de R y RStudio</span>"
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Instalación de R, RStudio y Rtools/XCode</span>"
     ]
   },
   {
     "objectID": "install_R.html#actualizar-r---windows-y-macos",
     "href": "install_R.html#actualizar-r---windows-y-macos",
-    "title": "12  Instalación de R y RStudio",
+    "title": "12  Instalación de R, RStudio y Rtools/XCode",
     "section": "12.7 Actualizar R - Windows y MacOS",
     "text": "12.7 Actualizar R - Windows y MacOS\nSi ya tienes R instalado en tu computadora, asegúrate de tener la versión más actualizada de R\nExisten diferentes formas de actualizar R, la manera más sencilla es a través de Rgui, la interfaz gráfica que viene con R base, no con RStudio.\nWindows y MacOS:\n\nEscribe Rgui en el explorador de archivos/aplicaciones de tu computadora para abrir la aplicación de R.\nPara actualizar R necesitamos de la paquetería installr. Para instalarla ejecuta el siguiente código:\n\n-   `install.packages(installr)`\n-   Presiona **Enter**\n\nCarga la paquetería con la función library()\n\nlibrary(installr)\nPresiona Enter\n\nPara revisar si tienes la versión de R más actualizada ejecuta el siguiente código:\n\ninstallr(GUI = TRUE)\nPresiona Enter\nEn la ventana emergente asegúrate de tener seleccionada la opción “R (updateR)” y haz clic en “OK”\n\nAparecerá otra ventana con información sobre la versión de R que estás usando y si existe una versión más reciente.\n\nSi ya tienes la versión más actual, simplemente haz clic en “OK” para cerrar.\nSi hay una versión nueva disponible, haz clic en “Yes” para comenzar la actualización.\n\nSi durante el proceso aparece una ventana preguntando si deseas copiar paquetes o configuraciones anteriores, puedes hacer clic en “No” (no es obligatorio copiarlos; puedes reinstalarlos después si lo prefieres).",
     "crumbs": [
       "**Sección 2** - Instalación de programas",
-      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Instalación de R y RStudio</span>"
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Instalación de R, RStudio y Rtools/XCode</span>"
     ]
   },
   {
     "objectID": "install_R.html#evitar-conflictos-para-la-instalación-de-paquetes-en-r",
     "href": "install_R.html#evitar-conflictos-para-la-instalación-de-paquetes-en-r",
-    "title": "12  Instalación de R y RStudio",
+    "title": "12  Instalación de R, RStudio y Rtools/XCode",
     "section": "12.8 Evitar conflictos para la instalación de paquetes en R",
     "text": "12.8 Evitar conflictos para la instalación de paquetes en R\n\n12.8.1 Si usamos Windows debemos instalar Rtools\nEn Windows utilizamos Rtools para evitar problemas al instalar paquetes desde código fuente en RStudio. Selecciona la versión que se adapta a tu versión de R.\n\n\n\n\n\nYo seleccioné la versión Rtools 4.5 y me aparece la siguiente página web, después di clic en donde aparece el instalador, descargue el archivo y lo ejecute.\n\n\n\n\n\n\n\n12.8.2 Si usamos MacOs debemos instalar Xcode\nEn macOS, no existe un equivalente directo a Rtools. En su lugar, se emplean las Xcode Command Line Tools (que incluyen clang y make) junto con GNU Fortran para compilar paquetes que requieren código en C/C++ o Fortran.\n\nEsto significa que, si trabajan en Mac, deben asegurarse de tener instaladas estas herramientas para evitar errores al instalar ciertos paquetes de R. Abre una terminal de Bash y coloca este código:\nsudo xcode-select --install\n\n\n\nImagen creada con ChatGPT.",
     "crumbs": [
       "**Sección 2** - Instalación de programas",
-      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Instalación de R y RStudio</span>"
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Instalación de R, RStudio y Rtools/XCode</span>"
     ]
   },
   {
@@ -829,7 +829,7 @@
     "href": "install_python.html#integración-con-rstudio-con-reticulate",
     "title": "14  Instalación de Python y reticulate en Rstudio",
     "section": "14.4 Integración con RStudio con Reticulate",
-    "text": "14.4 Integración con RStudio con Reticulate\n\nInstalar el paquete reticulate en R, coloca en la consola el siguiente código:\n\n\n\nCódigo\ninstall.packages(\"reticulate\")\n\n\n\nEn la terminal de Bash busca la ubicación de Python3\n\nwhich python3\nEn mi caso se encuentra en: /Users/ecoss/.cache/uv/archive-v0/cb_IldkfR46NZ8HFdegcN/bin/python3\n\nConfigurar la versión de Python en RStudio: Menú: Tools &gt; Global Options &gt; Python → pega la ubicación que obtuviste.\nReinicia la Sesión de Rstudio y revisa la configuración:\n\n\n\nCódigo\nlibrary(reticulate)\npy_config()\n\n\npython:         /Users/ecoss/.cache/uv/archive-v0/cb_IldkfR46NZ8HFdegcN/bin/python\nlibpython:      /Users/ecoss/.local/share/uv/python/cpython-3.12.13-macos-aarch64-none/lib/libpython3.12.dylib\npythonhome:     /Users/ecoss/.cache/uv/archive-v0/cb_IldkfR46NZ8HFdegcN:/Users/ecoss/.cache/uv/archive-v0/cb_IldkfR46NZ8HFdegcN\nvirtualenv:     /Users/ecoss/.cache/uv/archive-v0/cb_IldkfR46NZ8HFdegcN/bin/activate_this.py\nversion:        3.12.13 (main, Apr 14 2026, 14:33:40) [Clang 22.1.3 ]\nnumpy:          /Users/ecoss/.cache/uv/archive-v0/cb_IldkfR46NZ8HFdegcN/lib/python3.12/site-packages/numpy\nnumpy_version:  2.5.1\n\nNOTE: Python version was forced by VIRTUAL_ENV\n\n\nEn la consola debe aparecerte algo así:\n\n\n\n\n\nVisualización del uso de Python en Rstudio con Reticulate.\n\n\n\n\n\n\n\nImagen tomada de POSIT Reticulate",
+    "text": "14.4 Integración con RStudio con Reticulate\n\nInstalar el paquete reticulate en R, coloca en la consola el siguiente código:\n\n\n\nCódigo\ninstall.packages(\"reticulate\")\n\n\n\nEn la terminal de Bash busca la ubicación de Python3\n\nwhich python3\nEn mi caso se encuentra en: /Users/ecoss/.cache/uv/archive-v0/cb_IldkfR46NZ8HFdegcN/bin/python3\n\nConfigurar la versión de Python en RStudio: Menú: Tools &gt; Global Options &gt; Python → pega la ubicación que obtuviste.\nReinicia la Sesión de Rstudio y revisa la configuración:\n\n\n\nCódigo\nlibrary(reticulate)\npy_config()\n\n\npython:         /Users/ecoss/.cache/uv/archive-v0/cb_IldkfR46NZ8HFdegcN/bin/python\nlibpython:      /Users/ecoss/.local/share/uv/python/cpython-3.12.13-macos-aarch64-none/lib/libpython3.12.dylib\npythonhome:     /Users/ecoss/.cache/uv/archive-v0/cb_IldkfR46NZ8HFdegcN:/Users/ecoss/.cache/uv/archive-v0/cb_IldkfR46NZ8HFdegcN\nvirtualenv:     /Users/ecoss/.cache/uv/archive-v0/cb_IldkfR46NZ8HFdegcN/bin/activate_this.py\nversion:        3.12.13 (main, Apr 14 2026, 14:33:40) [Clang 22.1.3 ]\nnumpy:          /Users/ecoss/.cache/uv/archive-v0/cb_IldkfR46NZ8HFdegcN/lib/python3.12/site-packages/numpy\nnumpy_version:  2.5.1\n\nNOTE: Python version was forced by VIRTUAL_ENV\n\n\nEn la consola debe aparecerte algo así:\n\n\n\n\n\nVisualización del uso de Python en Rstudio con Reticulate.\n\n\n\n\n\n\n\nImagen tomada de POSIT Reticulate\n\n\n\n\n\nImagen creada con ChatGPT.",
     "crumbs": [
       "**Sección 2** - Instalación de programas",
       "<span class='chapter-number'>14</span>  <span class='chapter-title'>Instalación de Python y reticulate en Rstudio</span>"

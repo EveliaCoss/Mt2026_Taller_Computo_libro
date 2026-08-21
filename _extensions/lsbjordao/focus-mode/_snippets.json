@@ -1,0 +1,13 @@
+{
+  "Enable Focus Mode": {
+    "prefix": "focus-mode",
+    "body": [
+      "format:",
+      "  html:",
+      "    filters:",
+      "      - focus-mode",
+      "$0"
+    ],
+    "description": "Enable Focus Mode for an HTML document or project."
+  }
+}
