@@ -81,6 +81,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="site_libs/bootstrap/bootstrap-6f5e339e910af865eb2cfbba9cbcf7d6.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="site_libs/quarto-contrib/focus-mode-1.0.0/focus-mode.js"></script>
+<link href="site_libs/quarto-contrib/focus-mode-1.0.0/focus-mode.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -107,8 +109,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-submit-button-title": "Enviar",
     "search-label": "Buscar"
   }
-}</script>
-<link href="site_libs/htmltools-fill-0.5.9/fill.css" rel="stylesheet">
+}</script><link href="site_libs/htmltools-fill-0.5.9/fill.css" rel="stylesheet">
 <script src="site_libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
 <link href="site_libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet">
 <script src="site_libs/datatables-binding-0.34.0/datatables.js"></script>
@@ -118,6 +119,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/dt-core-1.13.6/js/jquery.dataTables.min.js"></script>
 <link href="site_libs/crosstalk-1.2.2/css/crosstalk.min.css" rel="stylesheet">
 <script src="site_libs/crosstalk-1.2.2/js/crosstalk.min.js"></script>
+<script>
+(function () {
+  try {
+    if (!window.matchMedia("(hover: hover) and (pointer: fine)").matches) return;
+    if (window.localStorage.getItem("quarto-focus-mode") === "1") {
+      document.documentElement.classList.add("focus-mode-persisted");
+    }
+    if (window.localStorage.getItem("quarto-presentation-mode") === "1") {
+      document.documentElement.classList.add("presentation-mode-preload");
+    }
+  } catch (e) {}
+})();
+</script>
 
 
 <link rel="stylesheet" href="styles.css">
@@ -288,7 +302,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./install_R.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Instalación de R y RStudio</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Instalación de R, RStudio y Rtools/XCode</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -800,8 +814,8 @@ Tabla&nbsp;43.1: Tabla decorativa
 </figcaption>
 <div aria-describedby="tbl-bonita-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
-<div class="datatables html-widget html-fill-item" id="htmlwidget-7a635290cb0ed14da530" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-7a635290cb0ed14da530">{"x":{"filter":"none","vertical":false,"data":[["1","2","3"],[5.1,4.9,4.7],[3.5,3,3.2],[1.4,1.4,1.3],[0.2,0.2,0.2],["setosa","setosa","setosa"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>Sepal.Length<\/th>\n      <th>Sepal.Width<\/th>\n      <th>Petal.Length<\/th>\n      <th>Petal.Width<\/th>\n      <th>Species<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":[1,2,3,4]},{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"Sepal.Length","targets":1},{"name":"Sepal.Width","targets":2},{"name":"Petal.Length","targets":3},{"name":"Petal.Width","targets":4},{"name":"Species","targets":5}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div class="datatables html-widget html-fill-item" id="htmlwidget-b82dc0ec4be14a6fc69b" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-b82dc0ec4be14a6fc69b">{"x":{"filter":"none","vertical":false,"data":[["1","2","3"],[5.1,4.9,4.7],[3.5,3,3.2],[1.4,1.4,1.3],[0.2,0.2,0.2],["setosa","setosa","setosa"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>Sepal.Length<\/th>\n      <th>Sepal.Width<\/th>\n      <th>Petal.Length<\/th>\n      <th>Petal.Width<\/th>\n      <th>Species<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":[1,2,3,4]},{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"Sepal.Length","targets":1},{"name":"Sepal.Width","targets":2},{"name":"Petal.Length","targets":3},{"name":"Petal.Width","targets":4},{"name":"Species","targets":5}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 </figure>
@@ -820,23 +834,23 @@ Tabla&nbsp;43.1: Tabla decorativa
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  gt<span class="sc">::</span><span class="fu">tab_spanner</span>(<span class="at">label =</span> <span class="st">"Sepalo"</span>, <span class="at">columns =</span> <span class="fu">vars</span>(Sepal.Length,Sepal.Width))</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output-display">
-<div id="xaeoxyinml" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#xaeoxyinml table {
+<div id="ruzsrbyhpb" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#ruzsrbyhpb table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#xaeoxyinml thead, #xaeoxyinml tbody, #xaeoxyinml tfoot, #xaeoxyinml tr, #xaeoxyinml td, #xaeoxyinml th {
+#ruzsrbyhpb thead, #ruzsrbyhpb tbody, #ruzsrbyhpb tfoot, #ruzsrbyhpb tr, #ruzsrbyhpb td, #ruzsrbyhpb th {
   border-style: none;
 }
 
-#xaeoxyinml p {
+#ruzsrbyhpb p {
   margin: 0;
   padding: 0;
 }
 
-#xaeoxyinml .gt_table {
+#ruzsrbyhpb .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -862,12 +876,12 @@ Tabla&nbsp;43.1: Tabla decorativa
   border-left-color: #D3D3D3;
 }
 
-#xaeoxyinml .gt_caption {
+#ruzsrbyhpb .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#xaeoxyinml .gt_title {
+#ruzsrbyhpb .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -879,7 +893,7 @@ Tabla&nbsp;43.1: Tabla decorativa
   border-bottom-width: 0;
 }
 
-#xaeoxyinml .gt_subtitle {
+#ruzsrbyhpb .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -891,7 +905,7 @@ Tabla&nbsp;43.1: Tabla decorativa
   border-top-width: 0;
 }
 
-#xaeoxyinml .gt_heading {
+#ruzsrbyhpb .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -903,13 +917,13 @@ Tabla&nbsp;43.1: Tabla decorativa
   border-right-color: #D3D3D3;
 }
 
-#xaeoxyinml .gt_bottom_border {
+#ruzsrbyhpb .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#xaeoxyinml .gt_col_headings {
+#ruzsrbyhpb .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -924,7 +938,7 @@ Tabla&nbsp;43.1: Tabla decorativa
   border-right-color: #D3D3D3;
 }
 
-#xaeoxyinml .gt_col_heading {
+#ruzsrbyhpb .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -944,7 +958,7 @@ Tabla&nbsp;43.1: Tabla decorativa
   overflow-x: hidden;
 }
 
-#xaeoxyinml .gt_column_spanner_outer {
+#ruzsrbyhpb .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -956,15 +970,15 @@ Tabla&nbsp;43.1: Tabla decorativa
   padding-right: 4px;
 }
 
-#xaeoxyinml .gt_column_spanner_outer:first-child {
+#ruzsrbyhpb .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#xaeoxyinml .gt_column_spanner_outer:last-child {
+#ruzsrbyhpb .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#xaeoxyinml .gt_column_spanner {
+#ruzsrbyhpb .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -976,11 +990,11 @@ Tabla&nbsp;43.1: Tabla decorativa
   width: 100%;
 }
 
-#xaeoxyinml .gt_spanner_row {
+#ruzsrbyhpb .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#xaeoxyinml .gt_group_heading {
+#ruzsrbyhpb .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1006,7 +1020,7 @@ Tabla&nbsp;43.1: Tabla decorativa
   text-align: left;
 }
 
-#xaeoxyinml .gt_empty_group_heading {
+#ruzsrbyhpb .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1021,15 +1035,15 @@ Tabla&nbsp;43.1: Tabla decorativa
   vertical-align: middle;
 }
 
-#xaeoxyinml .gt_from_md > :first-child {
+#ruzsrbyhpb .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#xaeoxyinml .gt_from_md > :last-child {
+#ruzsrbyhpb .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#xaeoxyinml .gt_row {
+#ruzsrbyhpb .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1048,7 +1062,7 @@ Tabla&nbsp;43.1: Tabla decorativa
   overflow-x: hidden;
 }
 
-#xaeoxyinml .gt_stub {
+#ruzsrbyhpb .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1061,7 +1075,7 @@ Tabla&nbsp;43.1: Tabla decorativa
   padding-right: 5px;
 }
 
-#xaeoxyinml .gt_stub_row_group {
+#ruzsrbyhpb .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1075,15 +1089,15 @@ Tabla&nbsp;43.1: Tabla decorativa
   vertical-align: top;
 }
 
-#xaeoxyinml .gt_row_group_first td {
+#ruzsrbyhpb .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#xaeoxyinml .gt_row_group_first th {
+#ruzsrbyhpb .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#xaeoxyinml .gt_summary_row {
+#ruzsrbyhpb .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1093,16 +1107,16 @@ Tabla&nbsp;43.1: Tabla decorativa
   padding-right: 5px;
 }
 
-#xaeoxyinml .gt_first_summary_row {
+#ruzsrbyhpb .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#xaeoxyinml .gt_first_summary_row.thick {
+#ruzsrbyhpb .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#xaeoxyinml .gt_last_summary_row {
+#ruzsrbyhpb .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1112,7 +1126,7 @@ Tabla&nbsp;43.1: Tabla decorativa
   border-bottom-color: #D3D3D3;
 }
 
-#xaeoxyinml .gt_grand_summary_row {
+#ruzsrbyhpb .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1122,7 +1136,7 @@ Tabla&nbsp;43.1: Tabla decorativa
   padding-right: 5px;
 }
 
-#xaeoxyinml .gt_first_grand_summary_row {
+#ruzsrbyhpb .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1132,7 +1146,7 @@ Tabla&nbsp;43.1: Tabla decorativa
   border-top-color: #D3D3D3;
 }
 
-#xaeoxyinml .gt_last_grand_summary_row_top {
+#ruzsrbyhpb .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1142,11 +1156,11 @@ Tabla&nbsp;43.1: Tabla decorativa
   border-bottom-color: #D3D3D3;
 }
 
-#xaeoxyinml .gt_striped {
+#ruzsrbyhpb .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#xaeoxyinml .gt_table_body {
+#ruzsrbyhpb .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1155,7 +1169,7 @@ Tabla&nbsp;43.1: Tabla decorativa
   border-bottom-color: #D3D3D3;
 }
 
-#xaeoxyinml .gt_footnotes {
+#ruzsrbyhpb .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1169,7 +1183,7 @@ Tabla&nbsp;43.1: Tabla decorativa
   border-right-color: #D3D3D3;
 }
 
-#xaeoxyinml .gt_footnote {
+#ruzsrbyhpb .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1178,7 +1192,7 @@ Tabla&nbsp;43.1: Tabla decorativa
   padding-right: 5px;
 }
 
-#xaeoxyinml .gt_sourcenotes {
+#ruzsrbyhpb .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1192,7 +1206,7 @@ Tabla&nbsp;43.1: Tabla decorativa
   border-right-color: #D3D3D3;
 }
 
-#xaeoxyinml .gt_sourcenote {
+#ruzsrbyhpb .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1200,72 +1214,72 @@ Tabla&nbsp;43.1: Tabla decorativa
   padding-right: 5px;
 }
 
-#xaeoxyinml .gt_left {
+#ruzsrbyhpb .gt_left {
   text-align: left;
 }
 
-#xaeoxyinml .gt_center {
+#ruzsrbyhpb .gt_center {
   text-align: center;
 }
 
-#xaeoxyinml .gt_right {
+#ruzsrbyhpb .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#xaeoxyinml .gt_font_normal {
+#ruzsrbyhpb .gt_font_normal {
   font-weight: normal;
 }
 
-#xaeoxyinml .gt_font_bold {
+#ruzsrbyhpb .gt_font_bold {
   font-weight: bold;
 }
 
-#xaeoxyinml .gt_font_italic {
+#ruzsrbyhpb .gt_font_italic {
   font-style: italic;
 }
 
-#xaeoxyinml .gt_super {
+#ruzsrbyhpb .gt_super {
   font-size: 65%;
 }
 
-#xaeoxyinml .gt_footnote_marks {
+#ruzsrbyhpb .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#xaeoxyinml .gt_asterisk {
+#ruzsrbyhpb .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#xaeoxyinml .gt_indent_1 {
+#ruzsrbyhpb .gt_indent_1 {
   text-indent: 5px;
 }
 
-#xaeoxyinml .gt_indent_2 {
+#ruzsrbyhpb .gt_indent_2 {
   text-indent: 10px;
 }
 
-#xaeoxyinml .gt_indent_3 {
+#ruzsrbyhpb .gt_indent_3 {
   text-indent: 15px;
 }
 
-#xaeoxyinml .gt_indent_4 {
+#ruzsrbyhpb .gt_indent_4 {
   text-indent: 20px;
 }
 
-#xaeoxyinml .gt_indent_5 {
+#ruzsrbyhpb .gt_indent_5 {
   text-indent: 25px;
 }
 
-#xaeoxyinml .katex-display {
+#ruzsrbyhpb .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#xaeoxyinml div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#ruzsrbyhpb div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>

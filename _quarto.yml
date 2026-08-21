@@ -21,7 +21,7 @@ book:
           country: Mexico
           url: https://www.enesjuriquilla.unam.mx/
   
-  date: "07/08/2026"
+  date: "09/01/2026"
   page-navigation: true        # Provide next and previous article links in footer
   back-to-top-navigation: true # Provide a ‘back to top’ navigation button
   chapters:
@@ -106,6 +106,8 @@ format:
     footnotes-hover: true
     toc-depth: 4
     number-depth: 3
+    filters:
+      - focus-mode # https://lsbjordao.github.io/quarto-book-focus-mode-example/chapter-03.html
     # css
     css: styles.css
     linkcolor: "#007f99"
