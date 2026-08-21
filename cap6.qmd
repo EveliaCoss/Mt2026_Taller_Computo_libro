@@ -1,6 +1,6 @@
-# Wildcards y Streams
+# Caracteres, Strings y Wildcards
 
-> **Fecha:** 10 de septiembre, 2026
+> **Fecha:** 17 de septiembre, 2026
 
 ## Estructura de declaración de variables en bash
 
@@ -12,11 +12,17 @@ nombre_variable=valor
 
 ### Reglas importantes para nombres de variables
 
+::: {.callout-important appearance="simple" icon="false"}
 - **Deben comenzar con una letra o guion bajo** (`_`)
+
 - **Pueden contener letras, números y guiones bajos**
+
 - **No pueden contener espacios** alrededor del signo `=`
+
 - **Son sensibles a mayúsculas y minúsculas** (edad ≠ EDAD)
+
 - **No se usan espacios** entre el nombre, el `=` y el valor
+:::
 
 ### Ejemplos de declaración correcta e incorrecta
 
@@ -429,7 +435,7 @@ echo "$texto"
 Los `wildcards` (comodines) o `wild characters` son símbolos utilizados para representar uno o más caracteres. Se pueden utilizar con otros comandos para facilitar el procesamiento o búsqueda de archivos, directorios y datos en general.
 
 | Wildcard | Significa | Ejemplo | Coincide con |
-|------------------|------------------|------------------|------------------|
+|----|----|----|----|
 | `*` | Cero o más caracteres | `*.txt` | archivo.txt, doc.txt, a.txt |
 | `?` | Exactamente 1 carácter | `archivo?.txt` | archivo1.txt, archivo2.txt |
 | `[ ]` | Un carácter del conjunto | `[abc]*` | archivo.txt, buscador.log, carpeta |

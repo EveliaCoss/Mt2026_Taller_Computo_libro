@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>21&nbsp; Operadores de redirección de datos I/O – Taller de Cómputo</title>
+<title>20&nbsp; Opciones principales de grep – Taller de Cómputo</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -137,7 +137,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./cap7.html"><strong>Sección 4</strong> - Edición de archivos con Bash</a></li><li class="breadcrumb-item"><a href="./cap7.html"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Operadores de redirección de datos I/O</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./cap4.html"><strong>Sección 3</strong> - Introducción a Bash</a></li><li class="breadcrumb-item"><a href="./cap7.html"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Opciones principales de grep</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Buscar" onclick="window.quartoOpenSearch();">
@@ -258,7 +258,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./cap3.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Buenas prácticas en bioinformática</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Buenas prácticas en programación</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -339,20 +339,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./cap5_crearRproject.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Crear un R Project</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
   <a href="./cap6.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Wildcards y Streams</span></span></a>
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Caracteres, Strings y Wildcards</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./regex.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Expresiones regulares (REGEX)</span></span></a>
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Expresiones regulares (REGEX)</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cap7.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Opciones principales de grep</span></span></a>
   </div>
 </li>
       </ul>
@@ -368,14 +368,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./cap7.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Operadores de redirección de datos I/O</span></span></a>
+  <a href="./cap8.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Edición de archivos con los editores de texto (<code>nano</code> y <code>vim</code>)</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./cap8.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Edición de archivos con los editores de texto (<code>nano</code> y <code>vim</code>)</span></span></a>
+  <a href="./cap8_crearRproject.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Crear un R Project</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -613,16 +613,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Tabla de contenidos</h2>
    
   <ul>
-  <li><a href="#material-suplementario" id="toc-material-suplementario" class="nav-link active" data-scroll-target="#material-suplementario"><span class="header-section-number">21.1</span> Material suplementario</a></li>
+  <li><a href="#ejercicio-5---dominar-grep-con-echo--e" id="toc-ejercicio-5---dominar-grep-con-echo--e" class="nav-link active" data-scroll-target="#ejercicio-5---dominar-grep-con-echo--e"><span class="header-section-number">20.0.1</span> Ejercicio 5 - <strong>Dominar <code>grep</code> (con <code>echo -e</code>)</strong></a></li>
+  <li><a href="#ejercicios-de-repaso" id="toc-ejercicios-de-repaso" class="nav-link" data-scroll-target="#ejercicios-de-repaso"><span class="header-section-number">20.1</span> Ejercicios de repaso</a></li>
+  <li><a href="#material-suplementario" id="toc-material-suplementario" class="nav-link" data-scroll-target="#material-suplementario"><span class="header-section-number">20.2</span> Material suplementario</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./cap7.html"><strong>Sección 4</strong> - Edición de archivos con Bash</a></li><li class="breadcrumb-item"><a href="./cap7.html"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Operadores de redirección de datos I/O</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./cap4.html"><strong>Sección 3</strong> - Introducción a Bash</a></li><li class="breadcrumb-item"><a href="./cap7.html"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Opciones principales de grep</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Operadores de redirección de datos I/O</span></h1>
+<h1 class="title"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Opciones principales de grep</span></h1>
 </div>
 
 
@@ -639,60 +641,115 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<p>Usualmente cuando trabajamos con datos, es necesario pasar el resultado de un comando a otro para hacer un procesamiento de datos apilado, como en un algortimo. Un <code>stream</code> o <code>corriente</code> esta hecha de datos. Es una corriente de datos. Un ejemplo muy familiar es el teclado y la pantalla. El teclado tiene una interfaz en donde por cada tecla presionada, un caracter se guarda en un archivo. Se dice entonces que es una <code>corriente de entrada</code>. Cuando la pantalla nos muestra lo que estamos escribiendo entonces la data sale hacia nosotros y eso convierte a la pantalla en una <code>corriente de salida</code>. Los dispositivos que hacen este tipo de transmisión de datos se llaman dispositivos <code>I/O</code> (input y output). Los operadores que se encargan de esto se conocen como <code>operadores de redirección</code>. Tres importantes son:</p>
-<table class="caption-top table">
-<colgroup>
-<col style="width: 50%">
-<col style="width: 50%">
-</colgroup>
-<thead>
-<tr class="header">
-<th><strong>Comando</strong></th>
-<th><strong>Función</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code>&gt;</code></td>
-<td>Stream de <strong>salida de datos</strong>. Sobre escribre sobre un archivo.</td>
-</tr>
-<tr class="even">
-<td><code>&gt;&gt;</code></td>
-<td>Stream de salida de datos. Adjunta <strong>nueva salida a datos preexistentes en un archivo.</strong></td>
-</tr>
-<tr class="odd">
-<td><code>&lt;</code></td>
-<td>Stream de <strong>entrada de datos.</strong> Recibe datos para procesamiento con algun comando.</td>
-</tr>
-</tbody>
-</table>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center">
+<blockquote class="blockquote">
+<p><strong>Fecha:</strong> 22 de septiembre, 2026</p>
+</blockquote>
+<p><strong>1. <code>-E</code> - Expresiones regulares extendidas</strong></p>
+<p>Permite usar metacaracteres avanzados como <code>+</code>, <code>?</code>, <code>|</code>, <code>{ }</code>.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Sin -E: no funciona</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span> <span class="st">"a+b"</span> archivo.txt      <span class="co"># Busca "a+b" literal</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Con -E: funciona</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span> <span class="at">-E</span> <span class="st">"a+b"</span> archivo.txt   <span class="co"># Busca "a", "ab", "aab", "aaab", etc.</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>2. <code>-i</code> - Ignorar mayúsculas/minúsculas</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span> <span class="at">-i</span> <span class="st">"hola"</span> archivo.txt</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Encuentra: "Hola", "HOLA", "hola", "HoLa"</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>3. <code>-v</code> - Invertir búsqueda (líneas que NO coinciden)</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span> <span class="at">-v</span> <span class="st">"error"</span> archivo.log</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Imprime todas las líneas que NO contienen "error"</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>4. <code>-c</code> - Contar coincidencias</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span> <span class="at">-c</span> <span class="st">"error"</span> archivo.log</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Output: 5 (número de líneas con "error")</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>5. <code>-n</code> - Mostrar número de línea</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span> <span class="at">-n</span> <span class="st">"error"</span> archivo.log</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Output: 5:Error en línea 5</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co">#         12:Error en línea 12</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>6. <code>-l</code> - Mostrar solo nombres de archivos</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span> <span class="at">-l</span> <span class="st">"error"</span> <span class="pp">*</span>.log</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Output: archivo1.log</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co">#         archivo3.log</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>7. <code>-r</code> - Buscar recursivamente en directorios</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span> <span class="at">-r</span> <span class="st">"error"</span> /var/log/</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Busca en todos los archivos del directorio /var/log/</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>8. <code>-o</code> - Mostrar solo la parte que coincide</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span> <span class="at">-o</span> <span class="st">"[0-9]\{3\}-[0-9]\{3\}-[0-9]\{4\}"</span> archivo.txt</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Output: 123-456-7890</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="co">#         987-654-3210</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<section id="ejercicio-5---dominar-grep-con-echo--e" class="level3" data-number="20.0.1">
+<h3 data-number="20.0.1" class="anchored" data-anchor-id="ejercicio-5---dominar-grep-con-echo--e"><span class="header-section-number">20.0.1</span> Ejercicio 5 - <strong>Dominar <code>grep</code> (con <code>echo -e</code>)</strong></h3>
+<ol type="1">
+<li>Crea los archivos que usaremos y verificar su contenido en este ejercicio:</li>
+</ol>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Crear directorio de trabajo</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> ejercicio_grep</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ejercicio_grep</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Crear archivo de usuarios</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="at">-e</span> <span class="st">"juan@ejemplo.com 25 activo\nmaria@empresa.es 30 inactivo\ncarlos123 28 activo\nana@dominio.org 22 activo\npedro@test 35 inactivo\nsofia@dominio.com 27 activo\nluis@empresa.es 40 inactivo"</span> <span class="op">&gt;</span> usuarios.txt</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> usuarios.txt</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Crear archivo de log</span></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="at">-e</span> <span class="st">"[2024-01-15 10:30:45] [INFO] Sistema iniciado\n[2024-01-15 10:31:12] [ERROR] Conexión fallida a base de datos\n[2024-01-15 10:32:00] [WARNING] Memoria disponible baja\n[2024-01-15 10:33:45] [ERROR] Archivo no encontrado: config.ini\n[2024-01-15 10:34:20] [INFO] Proceso de sincronización completado\n[2024-01-15 10:35:10] [ERROR] Timeout en conexión remota\n[2024-01-15 10:36:00] [WARNING] Espacio en disco bajo\n[2024-01-15 10:37:30] [INFO] Backup completado exitosamente"</span> <span class="op">&gt;</span> sistema.log</span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> sistema.log</span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Crear archivo de productos</span></span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="at">-e</span> <span class="st">"001 Laptop Dell 1200.50 disponible\n002 Mouse Logitech 25.99 disponible\n003 Teclado Mecánico 89.99 agotado\n004 Monitor LG 350.00 disponible\n005 Webcam HD 45.50 disponible\n006 Auriculares Sony 150.00 agotado\n007 Cable HDMI 12.99 disponible\n008 Hub USB 35.75 disponible"</span> <span class="op">&gt;</span> productos.txt</span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> productos.txt</span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Crear archivo de emails</span></span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="at">-e</span> <span class="st">"juan.perez@ejemplo.com\nmaria_lopez@empresa.es\ncarlos.garcia@test.com\nana.martinez@dominio.org\npedro123@invalid\nsofia.rodriguez@empresa.es\nluis_fernandez@test.org\ncontacto@empresa.es"</span> <span class="op">&gt;</span> emails.txt</span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> emails.txt</span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Crear archivo de géneros bacterianos</span></span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="at">-e</span> <span class="st">"Rickettsia\nOrientia\nWolbachia\nAegyptianella\nAnaplasma\nCowdria\nEhrlichia\nNeorickettsia\nCaedibacter\nHolospora\nLyticum\nOdyssella\nSymbiotes\nTectibacter"</span> <span class="op">&gt;</span> bacterias_generos.txt</span>
+<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> bacterias_generos.txt</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<ol start="2" type="1">
+<li><p>Buscar los usuarios activos dentro del archivo <code>usuarios.txt</code>. NOTA: <code>\b</code> no representa un carácter real, sino una <strong>posición</strong> en el texto donde termina o comienza una palabra.</p></li>
+<li><p>Buscar los errores en el archivo log <code>sistema.log</code>.</p></li>
+<li><p>Buscar productos disponibles en el archivo <code>productos.txt</code>.</p></li>
+<li><p>Ignorar las mayúsculas/minúsculas (<code>-i</code>) de <code>sistema.log</code>.</p></li>
+<li><p>Contar el número (<code>grep -c</code>) de usuarios activos en el archivo <code>usuarios.txt</code>.</p></li>
+<li><p>Dime en que líneas (<code>grep -n</code>) aparece la palabra ERROR en <code>sistema.log</code>.</p></li>
+<li><p>Mostrar solo las coincidencias (<code>grep -o</code>) con la palabra ERROR en <code>sistema.log</code>.</p></li>
+<li><p>Buscar las especies que comienzan con A en el archivo <code>bacterias_generos.txt</code>.</p></li>
+<li><p>Buscar las especies que comienzan con R o W en el archivo <code>bacterias_generos.txt</code>.</p>
+<div class="callout callout-style-default callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
-<i class="callout-icon"></i>
+<i class="callout-icon no-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Nota</span>Ejercicio 5
+<span class="screen-reader-only">Tip</span>Solución
 </div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<ol type="1">
-<li>Crea el archivo <code>bacterias_generos.txt</code> e imprime su contenido empleando los siguientes comandos:</li>
-</ol>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1" data-code-copy="true" data-eval="false"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="at">-e</span> <span class="st">"\nRickettsia\nOrientia\nWolbachia\nAegyptianella\nAnaplasma\nCowdria\nEhrlichia\nNeorickettsia\nCaedibacter\nHolospora\nLyticum\nOdyssella\nSymbiotes\nTectibacter"</span> <span class="op">&gt;</span> bacterias_generos.txt</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> bacterias_generos.txt</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
-<ol start="2" type="1">
-<li><p>Agrega una nueva especie en la ultima fila empleando “&gt;&gt;”.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2" data-code-copy="true" data-eval="false"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="at">-e</span> <span class="st">"\nEscherichia\n:D"</span> <span class="op">&gt;&gt;</span> bacterias_generos.txt</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> bacterias_generos.txt</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div></li>
-<li><p>Ahora usaremos el comando <code>sort</code> para reordenar todos los géneros. Sin embargo notamos que el archivo original no cambia nunca.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3" data-code-copy="true" data-eval="false"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sort</span> <span class="op">&lt;</span> bacterias_generos.txt</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div></li>
-<li><p>Para hacer un cambio sobre <code>bacterias_generos.txt</code>, usamos este comando. Notamos que ahora no usamos <code>&gt;&gt;</code> sino solo <code>&gt;</code>. Esto va a borrar el contenido previo con géneros desordenados y ahora los va a ordenar. El cambio no se puede deshacer, así que ten cuidado con el operador <code>&gt;</code> para que no pierdas datos.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4" data-code-copy="true" data-eval="false"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">(</span><span class="fu">sort</span> <span class="op">&lt;</span> bacterias_generos.txt<span class="kw">)</span> <span class="op">&gt;</span> bacterias_generos_sorted.txt</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> bacterias_generos_sorted.txt</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div></li>
-</ol>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="ex">2.</span> grep <span class="at">-E</span> <span class="st">"\bactivo\b"</span> usuarios.txt o grep <span class="st">" activo"</span> usuarios.txt</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="ex">3.</span> grep <span class="st">"ERROR"</span> sistema.log</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="ex">4.</span> grep <span class="st">"disponible"</span> productos.txt</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="ex">5.</span> grep <span class="at">-i</span> <span class="st">"error"</span> sistema.log</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="ex">6.</span> grep <span class="st">" activo"</span> usuarios.txt <span class="kw">|</span> <span class="fu">wc</span> <span class="at">-l</span> o grep <span class="at">-c</span> <span class="st">" activo"</span> usuarios.txt </span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="ex">7.</span> grep <span class="at">-n</span> <span class="st">"ERROR"</span> sistema.log</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="ex">8.</span> grep <span class="at">-o</span> <span class="st">"ERROR"</span> sistema.log</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="ex">9.</span> grep <span class="st">"^A"</span> bacterias_generos.txt</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a><span class="ex">10.</span> grep <span class="at">-E</span> <span class="st">"^(R|W)"</span> bacterias_generos.txt</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div>
+</div></li>
+</ol>
+</section>
+<section id="ejercicios-de-repaso" class="level2" data-number="20.1">
+<h2 data-number="20.1" class="anchored" data-anchor-id="ejercicios-de-repaso"><span class="header-section-number">20.1</span> Ejercicios de repaso</h2>
+<p>Puedes seguir repasando y aprendiendo de las expresiones regulares en la pagina de <a href="https://regexone.com/">RegexOne</a>.</p>
+<p><strong>Rangos comunes</strong>:</p>
+<ul>
+<li><code>[a-z]</code> = letras minúsculas</li>
+<li><code>[A-Z]</code> = letras mayúsculas</li>
+<li><code>[0-9]</code> = dígitos</li>
+<li><code>[a-zA-Z]</code> = letras (mayúsculas y minúsculas)</li>
+<li><code>[a-zA-Z0-9]</code> = letras y dígitos</li>
+</ul>
 <div class="callout callout-style-default callout-warning callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -706,13 +763,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>El operador <code>&gt;</code> sobre escribe archivos. Ten cuidado al usarlo para que no pierdas datos.</p>
 </div>
 </div>
-<section id="material-suplementario" class="level2" data-number="21.1">
-<h2 data-number="21.1" class="anchored" data-anchor-id="material-suplementario"><span class="header-section-number">21.1</span> Material suplementario</h2>
+<p><img src="figures/nac35ntlfg831.webp" class="img-fluid"></p>
+</section>
+<section id="material-suplementario" class="level2" data-number="20.2">
+<h2 data-number="20.2" class="anchored" data-anchor-id="material-suplementario"><span class="header-section-number">20.2</span> Material suplementario</h2>
 <ul>
 <li>RSG Ecuador. <a href="https://rsg-ecuador.github.io/unix.bioinfo.rsgecuador/content/Curso_avanzado/02_Bash/1_bash.html">Scripts en Bash</a></li>
 <li>RSG Ecuador. <a href="https://rsg-ecuador.github.io/unix.bioinfo.rsgecuador/content/Curso_basico/03_Manejo_terminal/5_wildcards.html">Wildcards y Streams</a></li>
 <li>RSG Ecuador. <a href="https://rsg-ecuador.github.io/unix.bioinfo.rsgecuador/content/Curso_basico/04_Procesamiento_ficheros_regex_pipes/3_Expresiones_regulares.html">Expresiones regulares (<em>regex</em>)</a></li>
 <li><a href="https://pressbooks.senecapolytechnic.ca/uli101/chapter/wildcard-selection-in-bash/">Wildcard Selection in Bash</a></li>
+<li><a href="https://twiki.org/cgi-bin/view/Codev/TWikiPresentation2017x06x01Regex">Expresiones regulares</a></li>
 </ul>
 
 
@@ -1161,12 +1221,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="./regex.html" class="pagination-link" aria-label="Expresiones regulares (REGEX)">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Expresiones regulares (REGEX)</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Expresiones regulares (REGEX)</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="./cap8.html" class="pagination-link" aria-label="Edición de archivos con los editores de texto (`nano` y `vim`)">
-        <span class="nav-page-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Edición de archivos con los editores de texto (<code>nano</code> y <code>vim</code>)</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Edición de archivos con los editores de texto (<code>nano</code> y <code>vim</code>)</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

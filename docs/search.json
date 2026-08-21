@@ -387,133 +387,133 @@
   {
     "objectID": "cap3.html",
     "href": "cap3.html",
-    "title": "8  Buenas prácticas en bioinformática",
+    "title": "8  Buenas prácticas en programación",
     "section": "",
     "text": "8.1 Un algoritmo nos permite resolver un problema ⭐\nNotas personales recabadas a partir de los tutoriales y ejemplos 😊. Espero que les funcione 💜\nUn algoritmo es un conjunto de pasos lógicos y ordenados que describe cómo resolver un problema específico. Es una secuencia de instrucciones abstractas e independientes del lenguaje de programación.\nCaracterísticas:",
     "crumbs": [
       "**Sección 1** - Componentes de una computadora",
-      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Buenas prácticas en bioinformática</span>"
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Buenas prácticas en programación</span>"
     ]
   },
   {
     "objectID": "cap3.html#un-algoritmo-nos-permite-resolver-un-problema",
     "href": "cap3.html#un-algoritmo-nos-permite-resolver-un-problema",
-    "title": "8  Buenas prácticas en bioinformática",
+    "title": "8  Buenas prácticas en programación",
     "section": "",
     "text": "Definido (Determinístico): Un algoritmo es definido si al seguirlo dos veces con los mismos datos de entrada, siempre se obtiene el mismo resultado. Es reproducible y predecible.\n\nImplicaciones:\n\nNo hay ambigüedad en los pasos\nNo depende del azar o de factores externos\nCualquier persona que siga el algoritmo llegará al mismo resultado\n\n\nPreciso (Orden Específico): implica el orden de realización de cada uno de los pasos. No puedes cambiar el orden arbitrariamente sin afectar el resultado.\n\nImplicaciones:\n\nCada paso debe ejecutarse en el orden correcto\nEl orden es fundamental para obtener el resultado esperado\nLas instrucciones deben ser claras y sin ambigüedad\n\n\nFinito (Tiene un Fin): Tiene un numero determinado de pasos y siempre termina en algún momento. No puede ejecutarse indefinidamente.\n\nImplicaciones:\n\nDebe haber un punto de salida o conclusión\nNo puede entrar en bucles infinitos\nDebe producir un resultado en tiempo finito\n\n\n\n\n\nAlgoritmo = La idea y el plan (abstracto)\nPrograma/Software = La implementación concreta (código ejecutable)\n\n\n\n\n\nImagen obtenida de sitio web de Allison Horst.\n\n\n\n\n\n\n\n\nImportante\n\n\n\nLos algoritmos son conceptuales y puede expresarse en lenguaje natural, pseudocódigo o diagramas de flujo.",
     "crumbs": [
       "**Sección 1** - Componentes de una computadora",
-      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Buenas prácticas en bioinformática</span>"
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Buenas prácticas en programación</span>"
     ]
   },
   {
     "objectID": "cap3.html#lenguaje-natural",
     "href": "cap3.html#lenguaje-natural",
-    "title": "8  Buenas prácticas en bioinformática",
+    "title": "8  Buenas prácticas en programación",
     "section": "8.2 🗣️ Lenguaje Natural",
     "text": "8.2 🗣️ Lenguaje Natural\n\n8.2.1 En el contexto de algoritmos y programación\n\nUtiliza palabras comunes y cotidianas para describir procesos o instrucciones.\nEs intuitivo y accesible, ideal para explicar algoritmos sin tecnicismos.\nNo requiere conocimientos previos de programación.\nPuede ser ambiguo o impreciso, por lo que no siempre es adecuado para implementación directa.\nSe usa frecuentemente como primer paso antes de escribir pseudocódigo o código real.\n\n\n\n\n\n\n\nNotaEjemplo de Lenguaje natural\n\n\n\nEl programa solicita al usuario que ingrese su edad. Luego compara ese valor con 18. Si la edad es mayor o igual a 18, se muestra el mensaje “Eres mayor de edad”. Si no lo es, se muestra “Eres menor de edad”.",
     "crumbs": [
       "**Sección 1** - Componentes de una computadora",
-      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Buenas prácticas en bioinformática</span>"
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Buenas prácticas en programación</span>"
     ]
   },
   {
     "objectID": "cap3.html#pseudocódigo",
     "href": "cap3.html#pseudocódigo",
-    "title": "8  Buenas prácticas en bioinformática",
+    "title": "8  Buenas prácticas en programación",
     "section": "8.3 Pseudocódigo",
     "text": "8.3 Pseudocódigo\n\n\n\nEl pseudocódigo permite escribir algoritmos con sintaxis relajada, sin seguir reglas estrictas de un lenguaje de programación.\nOrganiza los pasos lógicos necesarios para construir un algoritmo, sin detallar estructuras de datos complejas.\nUsa un lenguaje sencillo y legible, accesible para personas sin experiencia técnica.\n🔄 Los pasos escritos en pseudocódigo pueden traducirse fácilmente a cualquier lenguaje de programación.\n\n\nINICIO\n  DEFINIR edad COMO ENTERO\n  LEER edad\n  SI edad &gt;= 18 ENTONCES\n    MOSTRAR \"Eres mayor de edad\"\n  SINO\n    MOSTRAR \"Eres menor de edad\"\nFIN",
     "crumbs": [
       "**Sección 1** - Componentes de una computadora",
-      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Buenas prácticas en bioinformática</span>"
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Buenas prácticas en programación</span>"
     ]
   },
   {
     "objectID": "cap3.html#diagrama-de-flujo",
     "href": "cap3.html#diagrama-de-flujo",
-    "title": "8  Buenas prácticas en bioinformática",
+    "title": "8  Buenas prácticas en programación",
     "section": "8.4 Diagrama de Flujo",
     "text": "8.4 Diagrama de Flujo\n\n\n\nRepresenta visualmente un algoritmo mediante símbolos gráficos (óvalos, rectángulos, rombos, etc.).\nMuestra el flujo lógico de decisiones, procesos y entradas/salidas.\nFacilita la comprensión rápida de la estructura del algoritmo.\nAyuda a identificar errores o redundancias en la lógica.\nEs útil tanto para documentación técnica como para enseñanza.",
     "crumbs": [
       "**Sección 1** - Componentes de una computadora",
-      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Buenas prácticas en bioinformática</span>"
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Buenas prácticas en programación</span>"
     ]
   },
   {
     "objectID": "cap3.html#qué-es-un-código",
     "href": "cap3.html#qué-es-un-código",
-    "title": "8  Buenas prácticas en bioinformática",
+    "title": "8  Buenas prácticas en programación",
     "section": "8.5 ¿Qué es un código?",
     "text": "8.5 ¿Qué es un código?\nSe refiere a los scripts, programas/software o fragmentos de instrucciones escritas en lenguajes de programación (como Python, R, Bash, entre otros) que le indica a una computadora qué tareas realizar.\nEs la forma en que los humanos comunicamos con las máquinas para resolver problemas, procesar información y automatizar tareas.\n\n\nAplicaciones prácticas:\n\nProcesar y analizar datos\nCrear visualizaciones\nResolver problemas matemáticos\nCrear herramientas y aplicaciones\nDocumentar procesos\n\n\n\n\n\nImagen obtenida de Allison Horst.",
     "crumbs": [
       "**Sección 1** - Componentes de una computadora",
-      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Buenas prácticas en bioinformática</span>"
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Buenas prácticas en programación</span>"
     ]
   },
   {
     "objectID": "cap3.html#para-escribir-un-buen-software-necesitas",
     "href": "cap3.html#para-escribir-un-buen-software-necesitas",
-    "title": "8  Buenas prácticas en bioinformática",
+    "title": "8  Buenas prácticas en programación",
     "section": "8.6 Para escribir un buen software necesitas:",
     "text": "8.6 Para escribir un buen software necesitas:\n\nEscribir código mantenible (maintainable code), usar control de versiones (version control) y rastreadores de problemas (issue trackers), revisiones de código (code reviews), pruebas unitarias (unit testing) y automatización de tareas (task automation).\nWilson, et al. 2014. PLOS Biology\n\n\n\n\nImagen creada con ChatGPT a partir del artículo de Wilson, et al. 2014. PLOS Biology.",
     "crumbs": [
       "**Sección 1** - Componentes de una computadora",
-      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Buenas prácticas en bioinformática</span>"
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Buenas prácticas en programación</span>"
     ]
   },
   {
     "objectID": "cap3.html#pasos-para-escribir-un-buen-software",
     "href": "cap3.html#pasos-para-escribir-un-buen-software",
-    "title": "8  Buenas prácticas en bioinformática",
+    "title": "8  Buenas prácticas en programación",
     "section": "8.7 Pasos para escribir un buen software",
     "text": "8.7 Pasos para escribir un buen software\n\n\n\nImagen creada con ChatGPT.\n\n\n\n8.7.1 Mini historia de los bugs\nEl término “bug” (insecto en inglés) para referirse a errores en programas tiene una historia curiosa y bien documentada que se remonta a los primeros días de la computación.\nEn los años 1940s, las computadoras eran máquinas enormes que ocupaban habitaciones completas, como la ENIAC (Electronic Numerical Integrator and Computer). Estos equipos utilizaban miles de tubos de vacío, relés y componentes electrónicos que generaban mucho calor.\nEl problema: Los insectos reales (polillas (moth), cucarachas y otros bichos) eran atraídos por el calor de las máquinas y se metían dentro de ellas, causando cortocircuitos y fallos en el funcionamiento. 🦗\nCuando los operadores encontraban estos insectos dentro de la máquina, decían que había un “bug” (bicho) en el sistema. Así nació el término de forma literal.\n\n\n\n\n\n\nNota¿Quién fue Grace Hopper?\n\n\n\nGrace Brewster Murray Hopper (1906-1992) fue una matemática, física y pionera de la programación estadounidense que revolucionó la forma en que escribimos software.\n\n\n\n\n\nImagen creada con ChatGPT.\n\n\n\n\n\n\n\n\nNota¿Qué es “Admiral”?\n\n\n\nEs un rango militar en la Marina de los Estados Unidos. Grace Hopper alcanzó el rango de contraalmirante (Rear Admiral), uno de los más altos para una mujer en esa época.",
     "crumbs": [
       "**Sección 1** - Componentes de una computadora",
-      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Buenas prácticas en bioinformática</span>"
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Buenas prácticas en programación</span>"
     ]
   },
   {
     "objectID": "cap3.html#lenguajes-de-programación-comunes",
     "href": "cap3.html#lenguajes-de-programación-comunes",
-    "title": "8  Buenas prácticas en bioinformática",
+    "title": "8  Buenas prácticas en programación",
     "section": "8.8 Lenguajes de programación Comunes",
     "text": "8.8 Lenguajes de programación Comunes\n\n\n\n\n\n\n\n\nLenguaje\nUso Principal\nEjemplo\n\n\n\n\nBash\nAutomatización en sistemas Unix/Linux\nScripts de sistema\n\n\nPython\nCiencia de datos, automatización, educación\nAnálisis de datos, machine learning\n\n\nR\nAnálisis estadístico y visualización\nGráficos científicos, estadística\n\n\nJavaScript\nDesarrollo web, aplicaciones interactivas\nSitios web dinámicos\n\n\nJava\nAplicaciones empresariales, sistemas grandes\nSoftware corporativo\n\n\nC++\nSistemas de alto rendimiento\nVideojuegos, software de sistema\n\n\nSQL\nGestión de bases de datos\nConsultas de datos\n\n\n\n\n8.8.1 Componentes Básicos\n\n\n\nComponente\nDescripción\n\n\n\n\nVariables\nEspacios de memoria que almacenan datos\n\n\nFunciones\nBloques de código reutilizables\n\n\nCondicionales\nDecisiones lógicas (si/entonces)\n\n\nBucles\nRepetición de acciones\n\n\nOperadores\nSímbolos para realizar operaciones\n\n\nComentarios\nExplicaciones para humanos\n\n\n\nEn este semestre veremos programación con Bash, Python y un poco de R. Aquí es donde entra lo que aprendimos con pseudocódigo, ya que nos permite comprender y trasladar ideas a través de los tres lenguajes.\n\n\n\nImagen relaciona con los componentes básicos en los lenguajes de programación que veremos, creada con ChatGPT.",
     "crumbs": [
       "**Sección 1** - Componentes de una computadora",
-      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Buenas prácticas en bioinformática</span>"
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Buenas prácticas en programación</span>"
     ]
   },
   {
     "objectID": "cap3.html#plantilla-para-la-documentación-de-nuestro-código",
     "href": "cap3.html#plantilla-para-la-documentación-de-nuestro-código",
-    "title": "8  Buenas prácticas en bioinformática",
+    "title": "8  Buenas prácticas en programación",
     "section": "8.9 Plantilla para la documentación de nuestro código",
     "text": "8.9 Plantilla para la documentación de nuestro código\n\n\n\n\n\n\nTipDocumentación de nuestro código\n\n\n\n\nTítulo (opcional)\nAutor (author): Su nombre\nDia (date): Fecha de creación\nPaquetes (packages)\nDirectorio de trabajo (Working directory): En que carpeta se encuentra tu datos y programa.\nInformación descriptiva del programa (Description): ¿Para qué sirve el programa? Ej: El siguiente programa realiza la suma de dos numeros enteros a partir de la entrada del usuario y posteriormente la imprime en pantalla.\nUsage ¿Cómo se utiliza?\nArgumentos (Arguments)\n\nInformación de entrada (Data Inputs): Ej: Solo numeros enteros (sin decimales).\nInformación de salida (Outpus): Graficas, figuras, tablas, etc.",
     "crumbs": [
       "**Sección 1** - Componentes de una computadora",
-      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Buenas prácticas en bioinformática</span>"
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Buenas prácticas en programación</span>"
     ]
   },
   {
     "objectID": "cap3.html#puntos-claves-para-buenas-prácticas-en-informática",
     "href": "cap3.html#puntos-claves-para-buenas-prácticas-en-informática",
-    "title": "8  Buenas prácticas en bioinformática",
+    "title": "8  Buenas prácticas en programación",
     "section": "8.10 Puntos claves para buenas prácticas en informática ⭐",
     "text": "8.10 Puntos claves para buenas prácticas en informática ⭐\n\n\n\nImagen creada con ChatGPT.",
     "crumbs": [
       "**Sección 1** - Componentes de una computadora",
-      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Buenas prácticas en bioinformática</span>"
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Buenas prácticas en programación</span>"
     ]
   },
   {
     "objectID": "cap3.html#referencias",
     "href": "cap3.html#referencias",
-    "title": "8  Buenas prácticas en bioinformática",
+    "title": "8  Buenas prácticas en programación",
     "section": "8.11 Referencias",
     "text": "8.11 Referencias\n\nPresentación de Reproducibilidad de Miriam Lerma\nPresentación introducción a Git, GitHub y Zenodo de Miriam Lerma\nPresentación de Introducción a la Bioinformática - Heladia Salgado\nMi próximo artículo científico en R de Florencia D´Andrea\nKristie Reproducible Research\nPresentación de Kristie\nFAIR- bioinformatic\nUnidad 1 Bioinformática e investigación reproducible\nThe five pillars of computational reproducibility: bioinformatics and beyond\nInvestigación reproducible y análisis de datos\nHaydee tutorial: Temas Selectos de Análisis Numérico y Computación Científica: Computo científico para el análisis de datos\nAlejandra Medina tutorial: Control de versiones con GitHub y RStudio\nWilson, et al. 2014. Best Practices for Scientific Computing. PLOS Biology\nEvelia Coss - tutorial Buenas practicas en R\nEvelia Coss - Make your CV tutorial\nMarkdwn Guide - Getting Started\nAllison Horst - Imagenes\nStatistical Computing using R and Python\nTraining Materials\nVisual Studio Code\nArticulo reproducibilidad\nCurso de Joselyn Cristina Chávez Fuentes\nMe ayudo mucho este Video\nDocumentación de funciones de Andrés Arredondo Cruz",
     "crumbs": [
       "**Sección 1** - Componentes de una computadora",
-      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Buenas prácticas en bioinformática</span>"
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Buenas prácticas en programación</span>"
     ]
   },
   {
@@ -1034,267 +1034,278 @@
     ]
   },
   {
-    "objectID": "cap5_crearRproject.html",
-    "href": "cap5_crearRproject.html",
-    "title": "18  Crear un R Project",
-    "section": "",
-    "text": "18.1 ¿Qué es un R Project y por qué usarlo?\nAl comenzar a trabajar con R y RStudio, ya sea para crear un programa para un proyecto, crear una aplicación, presentación, blog, paquete, etc, es recomendado crear un R project.",
-    "crumbs": [
-      "**Sección 3** - Introducción a Bash",
-      "<span class='chapter-number'>18</span>  <span class='chapter-title'>Crear un R Project</span>"
-    ]
-  },
-  {
-    "objectID": "cap5_crearRproject.html#qué-es-un-r-project-y-por-qué-usarlo",
-    "href": "cap5_crearRproject.html#qué-es-un-r-project-y-por-qué-usarlo",
-    "title": "18  Crear un R Project",
-    "section": "",
-    "text": "Carpeta de trabajo dedicada: al crear un R Project, RStudio genera automáticamente una carpeta que contiene todos los archivos y configuraciones necesarias para tu proyecto.\nOrganización: te permite mantener en un solo lugar tus scripts, datos, variables y documentos relacionados.\nReproducibilidad: facilita que cualquier persona (incluido tú en el futuro) pueda abrir el proyecto y trabajar con el mismo entorno.\nIntegración con Git/GitHub: al tener el mismo nombre que tu repositorio, se asegura una sincronización más clara y ordenada entre tu proyecto local y el repositorio remoto.",
-    "crumbs": [
-      "**Sección 3** - Introducción a Bash",
-      "<span class='chapter-number'>18</span>  <span class='chapter-title'>Crear un R Project</span>"
-    ]
-  },
-  {
-    "objectID": "cap5_crearRproject.html#cómo-iniciamos-un-r-project",
-    "href": "cap5_crearRproject.html#cómo-iniciamos-un-r-project",
-    "title": "18  Crear un R Project",
-    "section": "18.2 ¿Cómo iniciamos un R project?",
-    "text": "18.2 ¿Cómo iniciamos un R project?\n\nVayamos en la parte superior al menú Archivos &gt; Nuevo Proyecto.\n\n\n\nSeleccionamos la opción de Nuevo directorio.\n\n\n\nSeleccionamos el tipo de projecto que vamos a iniciar, en nuestro caso Nuevo proyecto.\n\n\n\nNombramos el folder que crearemos y seleccionamos en dónde queremos que se almacene.\n\n\n¡Felicidades, acabas de crear un R project! Si vamos al folder en donde creamos nuestro proyecto, podemos observar que se creó un archivo con terminación Rproj, este es un archivo que contiene la configuración específica para nuestro proyecto.\n\n\n\n\n\nImagen tomada de: Allison Horst\n\n18.2.1 Directorio de trabajo\nEste archivo (Rproj) también establece como directorio de trabajo el folder en donde iniciamos el proyecto (puedes comprobarlo desde la consola de RStudio, escribiendo el comando getwd()). Esto es muy conveniente puesto que así podemos asegurarnos de que vamos a acceder a los archivos que estén exclusivamente en nuestro entorno de trabajo.\nColoca en la consola dentro de Rstudio:\n\n\nCódigo\ngetwd()\n\n\n[1] \"/Users/ecoss/Documents/Mt2026_Taller_Computo_libro\"",
-    "crumbs": [
-      "**Sección 3** - Introducción a Bash",
-      "<span class='chapter-number'>18</span>  <span class='chapter-title'>Crear un R Project</span>"
-    ]
-  },
-  {
-    "objectID": "cap5_crearRproject.html#crear-un-rscript",
-    "href": "cap5_crearRproject.html#crear-un-rscript",
-    "title": "18  Crear un R Project",
-    "section": "18.3 Crear un Rscript",
-    "text": "18.3 Crear un Rscript\nPara comenzar a trabajar en un proyecto, necesitamos crear un archivo para escribir nuestro programa. Entra en Archivo &gt; Nuevo Archivo.\nPodemos ver que tenemos distintas opciones de archivos que podemos crear, en este caso vamos a crear nuestro primer Rscript.\n\n\n18.3.1 ¿Qué es un Rscript?\nEs simplemente un archivo de texto con las instrucciones de nuestro algoritmo escritas en el lenguaje de R. También contiene nuestros comentarios escritos con #.\nIntenta escribir tu primer Rscript en el editor, copiando el siguiente algoritmo para realizar una suma:\n\n\nCódigo\na &lt;- 2\nb &lt;- 3\nsuma = a + b\nsuma\n\n\n[1] 5\n\n\n\n\n18.3.2 ¿Cómo ejecutamos el código?\nSelecciona todo el código, después ve a la parte superior de la ventana del editor y da click en el botón Run. También pueden ejecutar tu código línea por línea, poniendo tu cursor al principio o al final de la linea y presionando las teclas Control + Enter o Command + Enter.",
-    "crumbs": [
-      "**Sección 3** - Introducción a Bash",
-      "<span class='chapter-number'>18</span>  <span class='chapter-title'>Crear un R Project</span>"
-    ]
-  },
-  {
-    "objectID": "cap5_crearRproject.html#descargar-y-cargar-librerías",
-    "href": "cap5_crearRproject.html#descargar-y-cargar-librerías",
-    "title": "18  Crear un R Project",
-    "section": "18.4 Descargar y cargar Librerías",
-    "text": "18.4 Descargar y cargar Librerías\n\n18.4.1 ¿Qué es una librería?\nEn programación, una librería es una colección de código pre-escrito. Una librería contiene una “paquete” o “librería” de funciones que podemos utilizar si descargamos e importamos esa librería a nuestro programa.\nComo mencioné anteriormente, al descargar R, también descargamos una serie de librerías, llamadas base R packages. Sin embargo, dependiendo del problema que queramos resolver con nuestro programa, necesitaremos librerías que nos permitan hacer otras cosas.\nExisten distintas formas de instalar librerías.\n\n\n18.4.2 Instalar librerías: CRAN\n\nInstalación desde el repositorio de CRAN: podemos descargar paqueterías de CRAN de dos formas:\n\nLa primera, desde consola con el siguiente comando:\n\n\nCódigo\ninstall.packages(\"reticulate\")\n\n\nLa segunda, desde el menú Herramientas &gt; Instalar paqueterías. En la ventana, ingresamos el nombre de la librería y click en Instalar.\n\n\n\n\n\nLa tercera opción es usar el botón “install” dentro de la pestaña de Packages.\n\n\n\n18.4.3 Instalar librerías: Bioconductor\nAlternativamente, podemos instalar paqueterías de Bioconductor, que es otro repositorio de paquetes diseñados para el análisis de datos genómicos, por ejemplo para hacer análisis estadísticos, anotación, acceso a bases de datos públicas, etc.\nHay muchas librerías que están tanto en CRAN como en Bioconductor, pero también hay librerías específicas para uno de ellos. Para poder instalar desde bioconductor, necesitamos primero instalar el “instalador de bioconductor”:\n\n\nCódigo\ninstall.packages(\"reticulate\") # Esto es necesario solo 1 vez\n\n\n\n\n18.4.4 ¿Cómo podemos verificar que paquetes tenemos?\nEn la ventana inferior derecha, existe una pestaña que se llama “Packages” que contendra la lista de paquetes instalados en tu computadora, su descripción corta y su versión.\nTambien en esta pestaña podemos instalar paquetes dandado click en INSTALL.\n\n\n\n\n\n\n\n18.4.5 Eliminación de paquetes\nEn algunas ocasiones vamos a tener que actualizar las versiones de los paquetes, pero primero dedes eliminar la versión anterior. Dando click en el botón que contiene una X que esta al final de la fila en cada programa.\n\n\n\n\n\nTambién puedes usar codigo para eliminar el paquete:\n\n\nCódigo\nremove.packages(\"package-to-remove\")\n\n\n\n\n18.4.6 Cargar paquetes en el ambiente de R\n\nOpción A: Emplear la función library para cargar en el ambiente el paquete.\n\n\n\nCódigo\nlibrary(reticulate)\n\n\n\nOpción B: Dando click a la casilla que indica el paquete. Para dejar de usarlo da de nuevo click en esa casilla para que deje de estar marcada.",
-    "crumbs": [
-      "**Sección 3** - Introducción a Bash",
-      "<span class='chapter-number'>18</span>  <span class='chapter-title'>Crear un R Project</span>"
-    ]
-  },
-  {
     "objectID": "cap6.html",
     "href": "cap6.html",
-    "title": "19  Wildcards y Streams",
+    "title": "18  Caracteres, Strings y Wildcards",
     "section": "",
-    "text": "19.1 Estructura de declaración de variables en bash\nLa estructura básica para declarar una variable en bash es:",
+    "text": "18.1 Estructura de declaración de variables en bash\nLa estructura básica para declarar una variable en bash es:",
     "crumbs": [
       "**Sección 3** - Introducción a Bash",
-      "<span class='chapter-number'>19</span>  <span class='chapter-title'>Wildcards y Streams</span>"
+      "<span class='chapter-number'>18</span>  <span class='chapter-title'>Caracteres, Strings y Wildcards</span>"
     ]
   },
   {
     "objectID": "cap6.html#estructura-de-declaración-de-variables-en-bash",
     "href": "cap6.html#estructura-de-declaración-de-variables-en-bash",
-    "title": "19  Wildcards y Streams",
+    "title": "18  Caracteres, Strings y Wildcards",
     "section": "",
-    "text": "nombre_variable=valor\n\n19.1.1 Reglas importantes para nombres de variables\n\nDeben comenzar con una letra o guion bajo (_)\nPueden contener letras, números y guiones bajos\nNo pueden contener espacios alrededor del signo =\nSon sensibles a mayúsculas y minúsculas (edad ≠ EDAD)\nNo se usan espacios entre el nombre, el = y el valor\n\n\n\n19.1.2 Ejemplos de declaración correcta e incorrecta\n✅ Correcto:\nnombre=\"Juan\"\nedad=25\n_variable=\"valor\"\nmi_nombre=\"Carlos\"\n❌ Incorrecto:\nnombre = \"Juan\"        # Espacios alrededor del =\n2nombre=\"Juan\"         # Comienza con número\nmi-nombre=\"Juan\"       # Guion en lugar de guion bajo",
+    "text": "nombre_variable=valor\n\n18.1.1 Reglas importantes para nombres de variables\n\n\n\n\n\n\n\nDeben comenzar con una letra o guion bajo (_)\nPueden contener letras, números y guiones bajos\nNo pueden contener espacios alrededor del signo =\nSon sensibles a mayúsculas y minúsculas (edad ≠ EDAD)\nNo se usan espacios entre el nombre, el = y el valor\n\n\n\n\n\n\n18.1.2 Ejemplos de declaración correcta e incorrecta\n✅ Correcto:\nnombre=\"Juan\"\nedad=25\n_variable=\"valor\"\nmi_nombre=\"Carlos\"\n❌ Incorrecto:\nnombre = \"Juan\"        # Espacios alrededor del =\n2nombre=\"Juan\"         # Comienza con número\nmi-nombre=\"Juan\"       # Guion en lugar de guion bajo",
     "crumbs": [
       "**Sección 3** - Introducción a Bash",
-      "<span class='chapter-number'>19</span>  <span class='chapter-title'>Wildcards y Streams</span>"
+      "<span class='chapter-number'>18</span>  <span class='chapter-title'>Caracteres, Strings y Wildcards</span>"
     ]
   },
   {
     "objectID": "cap6.html#acceder-a-variables-con",
     "href": "cap6.html#acceder-a-variables-con",
-    "title": "19  Wildcards y Streams",
-    "section": "19.2 Acceder a variables con $",
-    "text": "19.2 Acceder a variables con $\nPara usar o acceder al valor de una variable, debes anteponer el símbolo $ al nombre:\nnombre=\"Juan\"\necho $nombre           # Output: Juan\necho \"Hola $nombre\"    # Output: Hola Juan",
+    "title": "18  Caracteres, Strings y Wildcards",
+    "section": "18.2 Acceder a variables con $",
+    "text": "18.2 Acceder a variables con $\nPara usar o acceder al valor de una variable, debes anteponer el símbolo $ al nombre:\nnombre=\"Juan\"\necho $nombre           # Output: Juan\necho \"Hola $nombre\"    # Output: Hola Juan",
     "crumbs": [
       "**Sección 3** - Introducción a Bash",
-      "<span class='chapter-number'>19</span>  <span class='chapter-title'>Wildcards y Streams</span>"
+      "<span class='chapter-number'>18</span>  <span class='chapter-title'>Caracteres, Strings y Wildcards</span>"
     ]
   },
   {
     "objectID": "cap6.html#tipos-de-comillas-y-su-comportamiento",
     "href": "cap6.html#tipos-de-comillas-y-su-comportamiento",
-    "title": "19  Wildcards y Streams",
-    "section": "19.3 Tipos de comillas y su comportamiento",
-    "text": "19.3 Tipos de comillas y su comportamiento\n\n19.3.1 Comillas dobles \"...\" - Expansión de variables\nLas comillas dobles permiten la expansión de variables. Esto significa que el $ se interpreta como inicio de una variable:\nnombre=\"Juan\"\necho \"Hola $nombre\"    # Output: Hola Juan\nAquí, $nombre se reemplaza por su valor Juan.\n\n\n19.3.2 Comillas simples '...' - Sin expansión\nLas comillas simples tratan todo literalmente. El $ no se interpreta como variable:\nnombre=\"Juan\"\necho 'Hola $nombre'    # Output: Hola $nombre\nAquí, $nombre se imprime tal cual, sin reemplazarse.\n\n\n19.3.3 Sin comillas - Expansión directa\nSin comillas, también se expanden las variables:\nnombre=\"Juan\"\necho Hola $nombre      # Output: Hola Juan",
+    "title": "18  Caracteres, Strings y Wildcards",
+    "section": "18.3 Tipos de comillas y su comportamiento",
+    "text": "18.3 Tipos de comillas y su comportamiento\n\n18.3.1 Comillas dobles \"...\" - Expansión de variables\nLas comillas dobles permiten la expansión de variables. Esto significa que el $ se interpreta como inicio de una variable:\nnombre=\"Juan\"\necho \"Hola $nombre\"    # Output: Hola Juan\nAquí, $nombre se reemplaza por su valor Juan.\n\n\n18.3.2 Comillas simples '...' - Sin expansión\nLas comillas simples tratan todo literalmente. El $ no se interpreta como variable:\nnombre=\"Juan\"\necho 'Hola $nombre'    # Output: Hola $nombre\nAquí, $nombre se imprime tal cual, sin reemplazarse.\n\n\n18.3.3 Sin comillas - Expansión directa\nSin comillas, también se expanden las variables:\nnombre=\"Juan\"\necho Hola $nombre      # Output: Hola Juan",
     "crumbs": [
       "**Sección 3** - Introducción a Bash",
-      "<span class='chapter-number'>19</span>  <span class='chapter-title'>Wildcards y Streams</span>"
+      "<span class='chapter-number'>18</span>  <span class='chapter-title'>Caracteres, Strings y Wildcards</span>"
     ]
   },
   {
     "objectID": "cap6.html#caracteres",
     "href": "cap6.html#caracteres",
-    "title": "19  Wildcards y Streams",
-    "section": "19.4 Caracteres",
-    "text": "19.4 Caracteres\nLos caracteres son unidades de información que se representan con símbolos. Pueden ser de varios tipos como alfanuméricos, números enteros, signos de puntuación. Varios caracteres son interpretados por la shell de manera especial. Estos se llaman caracteres especiales, claro, y permiten desarrollar alguna lógica, dependiendo del contexto. Por ejemplo, algunos caracteres: @ # . ? ! , / \\ &gt; ~ a µ g § R |(pipe).\nCada carácter se asocia a una combinación diferente de teclas en el teclado del computador. Representa un símbolo individual que puede ser:\n\nLetras: a, b, c, A, B, C, etc.\nDígitos: 0, 1, 2, 3, 4, 5, 6, 7, 8, 9\nSímbolos especiales: !, @, #, $, %, &, *, (, ), -, _, +, =, etc.\nEspacios en blanco: espacios, tabulaciones, saltos de línea\nCaracteres de control: caracteres invisibles que controlan el comportamiento (como el salto de línea)",
+    "title": "18  Caracteres, Strings y Wildcards",
+    "section": "18.4 Caracteres",
+    "text": "18.4 Caracteres\nLos caracteres son unidades de información que se representan con símbolos. Pueden ser de varios tipos como alfanuméricos, números enteros, signos de puntuación. Varios caracteres son interpretados por la shell de manera especial. Estos se llaman caracteres especiales, claro, y permiten desarrollar alguna lógica, dependiendo del contexto. Por ejemplo, algunos caracteres: @ # . ? ! , / \\ &gt; ~ a µ g § R |(pipe).\nCada carácter se asocia a una combinación diferente de teclas en el teclado del computador. Representa un símbolo individual que puede ser:\n\nLetras: a, b, c, A, B, C, etc.\nDígitos: 0, 1, 2, 3, 4, 5, 6, 7, 8, 9\nSímbolos especiales: !, @, #, $, %, &, *, (, ), -, _, +, =, etc.\nEspacios en blanco: espacios, tabulaciones, saltos de línea\nCaracteres de control: caracteres invisibles que controlan el comportamiento (como el salto de línea)",
     "crumbs": [
       "**Sección 3** - Introducción a Bash",
-      "<span class='chapter-number'>19</span>  <span class='chapter-title'>Wildcards y Streams</span>"
+      "<span class='chapter-number'>18</span>  <span class='chapter-title'>Caracteres, Strings y Wildcards</span>"
     ]
   },
   {
     "objectID": "cap6.html#metacaracteres",
     "href": "cap6.html#metacaracteres",
-    "title": "19  Wildcards y Streams",
-    "section": "19.5 Metacaracteres",
-    "text": "19.5 Metacaracteres\n\n19.5.1 ¿Qué son los metacaracteres?\nLos metacaracteres son caracteres especiales que tienen un significado especial en bash, en lugar de representar su valor literal. Bash los interpreta como instrucciones o comandos, no como texto normal.",
+    "title": "18  Caracteres, Strings y Wildcards",
+    "section": "18.5 Metacaracteres",
+    "text": "18.5 Metacaracteres\n\n18.5.1 ¿Qué son los metacaracteres?\nLos metacaracteres son caracteres especiales que tienen un significado especial en bash, en lugar de representar su valor literal. Bash los interpreta como instrucciones o comandos, no como texto normal.",
     "crumbs": [
       "**Sección 3** - Introducción a Bash",
-      "<span class='chapter-number'>19</span>  <span class='chapter-title'>Wildcards y Streams</span>"
+      "<span class='chapter-number'>18</span>  <span class='chapter-title'>Caracteres, Strings y Wildcards</span>"
     ]
   },
   {
     "objectID": "cap6.html#strings",
     "href": "cap6.html#strings",
-    "title": "19  Wildcards y Streams",
-    "section": "19.6 Strings",
-    "text": "19.6 Strings\nLos strings (o cadena de texto) son arreglos de caracteres. Es decir, es una combinación de uno o más caracteres que forman un texto.\n\"Hola\"              → string de 4 caracteres\n\"Bash es genial\"    → string de 14 caracteres (incluyendo espacios)\n\"12345\"             → string de 5 caracteres\n\"!@#$%\"             → string de 5 caracteres especiales\n\"\"                  → string vacío (0 caracteres)\n\n19.6.1 Características de los strings en bash\n\n\n19.6.2 Inmutabilidad en contexto de asignación\nLos strings en bash son inmutables en el sentido de que no puedes modificar un carácter individual directamente. Debes reasignar todo el string:\nnombre=\"Juan\"\nnombre=\"Carlos\"    # Reasignación completa del string\necho $nombre       # Output: Carlos\n\n\n19.6.3 Sensibilidad a mayúsculas y minúsculas\nLos strings distinguen entre mayúsculas y minúsculas. Dos strings con diferente capitalización se consideran diferentes:\nnombre=\"juan\"\nNOMBRE=\"JUAN\"\necho $nombre       # Output: juan\necho $NOMBRE       # Output: JUAN\n# Son variables diferentes\n\n\n19.6.4 Pueden contener espacios en blanco\nLos strings pueden incluir espacios, tabulaciones y saltos de línea. Para preservarlos, debes usar comillas:\n# Con comillas (preserva espacios)\nfrase=\"Hola mundo desde bash\"\necho \"$frase\"      # Output: Hola mundo desde bash\n\n# Sin comillas (los espacios se interpretan como separadores)\necho Hola mundo    # Output: Hola mundo (pero se trata como 2 argumentos)\n\n\n\n\n\n\nImportante¿Qué son los argumentos?\n\n\n\nUn argumento es un valor o dato que se pasa a un comando o programa para que lo procese. Los argumentos son la forma en que le das información a un comando sobre qué debe hacer.\n\n19.6.5 Estructura básica\ncomando argumento1 argumento2 argumento3\n\n\n19.6.6 Ejemplo sin comillas\necho Hola mundo\nEn este caso:\n\nComando: echo\nArgumento 1: Hola\nArgumento 2: mundo\n\nBash pasa dos argumentos al comando echo, y echo los imprime separados por un espacio.\n\n\n19.6.7 Ejemplo con comillas\necho \"Hola mundo\"\nEn este caso:\n\nComando: echo\nArgumento 1: Hola mundo (un solo argumento)\n\n\n\n\n\n\n19.6.8 Pueden estar vacíos\nUn string puede no contener ningún carácter (string vacío):\nvariable=\"\"\necho \"La variable está vacía: '$variable'\"  # Output: La variable está vacía: ''\n\n\n19.6.9 Concatenación automática / Unión\nBash permite concatenar strings simplemente colocándolos uno al lado del otro:\nnombre=\"Juan\"\napellido=\"Pérez\"\n\n# Concatenación sin espacios\ncompleto=$nombre$apellido\necho $completo     # Output: JuanPérez\n\n# Concatenación con espacios\ncompleto=\"$nombre $apellido\"\necho $completo     # Output: Juan Pérez\n\n# Concatenación con variables y texto literal\nmensaje=\"Hola, $nombre\"\necho $mensaje      # Output: Hola, Juan\n\n\n19.6.10 Longitud de strings\nPuedes obtener la longitud de un string usando ${#variable}:\n\n\n\n\n\n\nImportanteDesglose de la sintaxis ${#variable}\n\n\n\n\n${ } → Delimitadores para expansión de variables en bash\n# → Operador que significa “obtener la longitud”\nvariable → El nombre de la variable cuya longitud quieres obtener\n\n\n\nEjemplos:\nnombre=\"Juan\"\nlongitud=${#nombre}\necho \"La longitud es: $longitud\"  # Output: La longitud es: 4\n\n# Ejemplo con string más largo\nfrase=\"Bash es genial\"\necho ${#frase}     # Output: 14 (incluyendo espacios)\n\n\n19.6.11 Extracción de subcadenas\nPuedes extraer una parte de un string usando ${variable:inicio:longitud}:\n\n\n\n\n\n\nImportanteDesglose de la sintaxis ${variable:inicio:longitud}\n\n\n\n\n${ } → Delimitadores para expansión de variables en bash\nvariable → El nombre de la variable de la cual extraerás caracteres\n:inicio → La posición donde comienza la extracción (comienza en 0)\n:longitud → Cuántos caracteres quieres extraer\n\n\n\nEjemplos:\nnombre=\"Juan\"\n\n# Extraer desde posición 0, 2 caracteres\necho ${nombre:0:2}    # Output: Ju\n\n# Extraer desde posición 1, 2 caracteres\necho ${nombre:1:2}    # Output: ua\n\n# Extraer desde posición 2 hasta el final\necho ${nombre:2}      # Output: an\n\n\n19.6.12 Sustitución de patrones\nPuedes reemplazar partes de un string usando ${variable/patron/reemplazo}:\nfrase=\"Hola mundo mundo\"\n\n# Reemplazar la primera ocurrencia\necho ${frase/mundo/bash}      # Output: Hola bash mundo\n\n# Reemplazar todas las ocurrencias (con //)\necho ${frase//mundo/bash}     # Output: Hola bash bash\n\n\n19.6.13 Eliminación de patrones\nPuedes eliminar partes de un string:\nnombre=\"Juan.txt\"\n\n# Eliminar desde el final hasta el patrón\necho ${nombre%.txt}           # Output: Juan\n\n# Eliminar desde el inicio hasta el patrón\necho ${nombre#Juan.}          # Output: txt\n\n\n19.6.14 Conversión a mayúsculas y minúsculas\nBash permite convertir strings a mayúsculas o minúsculas (en versiones 4.0+):\nnombre=\"Juan\"\n\n# Convertir a mayúsculas\necho ${nombre^^}              # Output: JUAN\n\n# Convertir a minúsculas\necho ${nombre,,}              # Output: juan\n\n# Convertir solo el primer carácter a mayúscula\necho ${nombre^}               # Output: Juan\n\n\n19.6.15 Comparación de strings\nPuedes comparar strings usando operadores:\nnombre1=\"Juan\"\nnombre2=\"Juan\"\nnombre3=\"Carlos\"\n\n# Igualdad\necho \"$nombre1 = $nombre2\"    # Output: Juan = Juan\n\n# Desigualdad\necho \"$nombre1 != $nombre3\"   # Output: Juan != Carlos\n\n\n19.6.16 Expansión de variables dentro de strings\nLa expansión de variables ocurre dentro de comillas dobles pero no en comillas simples:\nnombre=\"Juan\"\n\n# Con comillas dobles (expansión)\necho \"Hola $nombre\"           # Output: Hola Juan\n\n# Con comillas simples (sin expansión)\necho 'Hola $nombre'           # Output: Hola $nombre\n\n# Sin comillas (expansión)\necho Hola $nombre             # Output: Hola Juan\n\n\n19.6.17 Caracteres especiales y escape\nAlgunos caracteres tienen significado especial en bash. Puedes escaparlos con \\:\n# Caracteres especiales\necho \"Precio: \\$100\"          # Output: Precio: $100\necho \"Comilla: \\\"Hola\\\"\"      # Output: Comilla: \"Hola\"\necho \"Barra invertida: \\\\\"    # Output: Barra invertida: \\\n\n# Saltos de línea\necho -e \"Línea 1\\nLínea 2\"    # Output: Línea 1\n                              #         Línea 2\n\n\n\n\n\n\nTip¿Qué es \\n?\n\n\n\n\\n es una secuencia de escape que representa un salto de línea o enter. Es decir, le dice al programa que cree una nueva línea.\n\n\\ → Carácter de escape (indica que lo siguiente tiene un significado especial)\nn → Significa “newline” (nueva línea en inglés)\n\n\n\n\n\n\n\n\n\nImportante¿Por qué necesitas -e en echo al usar \\n?\n\n\n\nEl comando echo no interpreta \\n por defecto. Necesitas la opción -e para que bash entienda que \\n significa un salto de línea:\n# Sin -e: imprime \\n literalmente\necho \"Línea 1\\nLínea 2\"\n# Output: Línea 1\\nLínea 2\n\n# Con -e: interpreta \\n como salto de línea\necho -e \"Línea 1\\nLínea 2\"\n# Output: Línea 1\n#         Línea 2\n\n\n\nOtras secuencias de escape comunes 📌\nAdemás de \\n, existen otras secuencias de escape útiles:\n# \\t = tabulación (espacios)\necho -e \"Nombre:\\tJuan\"\n# Output: Nombre:    Juan\n\n# \\\\ = barra invertida literal\necho -e \"Ruta: C:\\\\Users\\\\Juan\"\n# Output: Ruta: C:\\Users\\Juan\n\n# \\\" = comilla doble literal\necho -e \"Dice: \\\"Hola\\\"\"\n# Output: Dice: \"Hola\"\n\n\n\n19.6.18 Strings multilínea\nPuedes crear strings que abarquen múltiples líneas:\n# Usando comillas dobles\ntexto=\"Primera línea\nSegunda línea\nTercera línea\"\necho \"$texto\"\n\n# Usando $'...' (permite secuencias de escape)\ntexto=$'Primera línea\\nSegunda línea\\nTercera línea'\necho \"$texto\"\nResumen 🎯\n\nSaltos de línea literales (Enter real en el código): No necesitan -e ni \\n\nSecuencias de escape \\n: Necesitan -e o $'...' para interpretarse",
+    "title": "18  Caracteres, Strings y Wildcards",
+    "section": "18.6 Strings",
+    "text": "18.6 Strings\nLos strings (o cadena de texto) son arreglos de caracteres. Es decir, es una combinación de uno o más caracteres que forman un texto.\n\"Hola\"              → string de 4 caracteres\n\"Bash es genial\"    → string de 14 caracteres (incluyendo espacios)\n\"12345\"             → string de 5 caracteres\n\"!@#$%\"             → string de 5 caracteres especiales\n\"\"                  → string vacío (0 caracteres)\n\n18.6.1 Características de los strings en bash\n\n\n18.6.2 Inmutabilidad en contexto de asignación\nLos strings en bash son inmutables en el sentido de que no puedes modificar un carácter individual directamente. Debes reasignar todo el string:\nnombre=\"Juan\"\nnombre=\"Carlos\"    # Reasignación completa del string\necho $nombre       # Output: Carlos\n\n\n18.6.3 Sensibilidad a mayúsculas y minúsculas\nLos strings distinguen entre mayúsculas y minúsculas. Dos strings con diferente capitalización se consideran diferentes:\nnombre=\"juan\"\nNOMBRE=\"JUAN\"\necho $nombre       # Output: juan\necho $NOMBRE       # Output: JUAN\n# Son variables diferentes\n\n\n18.6.4 Pueden contener espacios en blanco\nLos strings pueden incluir espacios, tabulaciones y saltos de línea. Para preservarlos, debes usar comillas:\n# Con comillas (preserva espacios)\nfrase=\"Hola mundo desde bash\"\necho \"$frase\"      # Output: Hola mundo desde bash\n\n# Sin comillas (los espacios se interpretan como separadores)\necho Hola mundo    # Output: Hola mundo (pero se trata como 2 argumentos)\n\n\n\n\n\n\nImportante¿Qué son los argumentos?\n\n\n\nUn argumento es un valor o dato que se pasa a un comando o programa para que lo procese. Los argumentos son la forma en que le das información a un comando sobre qué debe hacer.\n\n18.6.5 Estructura básica\ncomando argumento1 argumento2 argumento3\n\n\n18.6.6 Ejemplo sin comillas\necho Hola mundo\nEn este caso:\n\nComando: echo\nArgumento 1: Hola\nArgumento 2: mundo\n\nBash pasa dos argumentos al comando echo, y echo los imprime separados por un espacio.\n\n\n18.6.7 Ejemplo con comillas\necho \"Hola mundo\"\nEn este caso:\n\nComando: echo\nArgumento 1: Hola mundo (un solo argumento)\n\n\n\n\n\n\n18.6.8 Pueden estar vacíos\nUn string puede no contener ningún carácter (string vacío):\nvariable=\"\"\necho \"La variable está vacía: '$variable'\"  # Output: La variable está vacía: ''\n\n\n18.6.9 Concatenación automática / Unión\nBash permite concatenar strings simplemente colocándolos uno al lado del otro:\nnombre=\"Juan\"\napellido=\"Pérez\"\n\n# Concatenación sin espacios\ncompleto=$nombre$apellido\necho $completo     # Output: JuanPérez\n\n# Concatenación con espacios\ncompleto=\"$nombre $apellido\"\necho $completo     # Output: Juan Pérez\n\n# Concatenación con variables y texto literal\nmensaje=\"Hola, $nombre\"\necho $mensaje      # Output: Hola, Juan\n\n\n18.6.10 Longitud de strings\nPuedes obtener la longitud de un string usando ${#variable}:\n\n\n\n\n\n\nImportanteDesglose de la sintaxis ${#variable}\n\n\n\n\n${ } → Delimitadores para expansión de variables en bash\n# → Operador que significa “obtener la longitud”\nvariable → El nombre de la variable cuya longitud quieres obtener\n\n\n\nEjemplos:\nnombre=\"Juan\"\nlongitud=${#nombre}\necho \"La longitud es: $longitud\"  # Output: La longitud es: 4\n\n# Ejemplo con string más largo\nfrase=\"Bash es genial\"\necho ${#frase}     # Output: 14 (incluyendo espacios)\n\n\n18.6.11 Extracción de subcadenas\nPuedes extraer una parte de un string usando ${variable:inicio:longitud}:\n\n\n\n\n\n\nImportanteDesglose de la sintaxis ${variable:inicio:longitud}\n\n\n\n\n${ } → Delimitadores para expansión de variables en bash\nvariable → El nombre de la variable de la cual extraerás caracteres\n:inicio → La posición donde comienza la extracción (comienza en 0)\n:longitud → Cuántos caracteres quieres extraer\n\n\n\nEjemplos:\nnombre=\"Juan\"\n\n# Extraer desde posición 0, 2 caracteres\necho ${nombre:0:2}    # Output: Ju\n\n# Extraer desde posición 1, 2 caracteres\necho ${nombre:1:2}    # Output: ua\n\n# Extraer desde posición 2 hasta el final\necho ${nombre:2}      # Output: an\n\n\n18.6.12 Sustitución de patrones\nPuedes reemplazar partes de un string usando ${variable/patron/reemplazo}:\nfrase=\"Hola mundo mundo\"\n\n# Reemplazar la primera ocurrencia\necho ${frase/mundo/bash}      # Output: Hola bash mundo\n\n# Reemplazar todas las ocurrencias (con //)\necho ${frase//mundo/bash}     # Output: Hola bash bash\n\n\n18.6.13 Eliminación de patrones\nPuedes eliminar partes de un string:\nnombre=\"Juan.txt\"\n\n# Eliminar desde el final hasta el patrón\necho ${nombre%.txt}           # Output: Juan\n\n# Eliminar desde el inicio hasta el patrón\necho ${nombre#Juan.}          # Output: txt\n\n\n18.6.14 Conversión a mayúsculas y minúsculas\nBash permite convertir strings a mayúsculas o minúsculas (en versiones 4.0+):\nnombre=\"Juan\"\n\n# Convertir a mayúsculas\necho ${nombre^^}              # Output: JUAN\n\n# Convertir a minúsculas\necho ${nombre,,}              # Output: juan\n\n# Convertir solo el primer carácter a mayúscula\necho ${nombre^}               # Output: Juan\n\n\n18.6.15 Comparación de strings\nPuedes comparar strings usando operadores:\nnombre1=\"Juan\"\nnombre2=\"Juan\"\nnombre3=\"Carlos\"\n\n# Igualdad\necho \"$nombre1 = $nombre2\"    # Output: Juan = Juan\n\n# Desigualdad\necho \"$nombre1 != $nombre3\"   # Output: Juan != Carlos\n\n\n18.6.16 Expansión de variables dentro de strings\nLa expansión de variables ocurre dentro de comillas dobles pero no en comillas simples:\nnombre=\"Juan\"\n\n# Con comillas dobles (expansión)\necho \"Hola $nombre\"           # Output: Hola Juan\n\n# Con comillas simples (sin expansión)\necho 'Hola $nombre'           # Output: Hola $nombre\n\n# Sin comillas (expansión)\necho Hola $nombre             # Output: Hola Juan\n\n\n18.6.17 Caracteres especiales y escape\nAlgunos caracteres tienen significado especial en bash. Puedes escaparlos con \\:\n# Caracteres especiales\necho \"Precio: \\$100\"          # Output: Precio: $100\necho \"Comilla: \\\"Hola\\\"\"      # Output: Comilla: \"Hola\"\necho \"Barra invertida: \\\\\"    # Output: Barra invertida: \\\n\n# Saltos de línea\necho -e \"Línea 1\\nLínea 2\"    # Output: Línea 1\n                              #         Línea 2\n\n\n\n\n\n\nTip¿Qué es \\n?\n\n\n\n\\n es una secuencia de escape que representa un salto de línea o enter. Es decir, le dice al programa que cree una nueva línea.\n\n\\ → Carácter de escape (indica que lo siguiente tiene un significado especial)\nn → Significa “newline” (nueva línea en inglés)\n\n\n\n\n\n\n\n\n\nImportante¿Por qué necesitas -e en echo al usar \\n?\n\n\n\nEl comando echo no interpreta \\n por defecto. Necesitas la opción -e para que bash entienda que \\n significa un salto de línea:\n# Sin -e: imprime \\n literalmente\necho \"Línea 1\\nLínea 2\"\n# Output: Línea 1\\nLínea 2\n\n# Con -e: interpreta \\n como salto de línea\necho -e \"Línea 1\\nLínea 2\"\n# Output: Línea 1\n#         Línea 2\n\n\n\nOtras secuencias de escape comunes 📌\nAdemás de \\n, existen otras secuencias de escape útiles:\n# \\t = tabulación (espacios)\necho -e \"Nombre:\\tJuan\"\n# Output: Nombre:    Juan\n\n# \\\\ = barra invertida literal\necho -e \"Ruta: C:\\\\Users\\\\Juan\"\n# Output: Ruta: C:\\Users\\Juan\n\n# \\\" = comilla doble literal\necho -e \"Dice: \\\"Hola\\\"\"\n# Output: Dice: \"Hola\"\n\n\n\n18.6.18 Strings multilínea\nPuedes crear strings que abarquen múltiples líneas:\n# Usando comillas dobles\ntexto=\"Primera línea\nSegunda línea\nTercera línea\"\necho \"$texto\"\n\n# Usando $'...' (permite secuencias de escape)\ntexto=$'Primera línea\\nSegunda línea\\nTercera línea'\necho \"$texto\"\nResumen 🎯\n\nSaltos de línea literales (Enter real en el código): No necesitan -e ni \\n\nSecuencias de escape \\n: Necesitan -e o $'...' para interpretarse",
     "crumbs": [
       "**Sección 3** - Introducción a Bash",
-      "<span class='chapter-number'>19</span>  <span class='chapter-title'>Wildcards y Streams</span>"
+      "<span class='chapter-number'>18</span>  <span class='chapter-title'>Caracteres, Strings y Wildcards</span>"
     ]
   },
   {
     "objectID": "cap6.html#wildcards",
     "href": "cap6.html#wildcards",
-    "title": "19  Wildcards y Streams",
-    "section": "19.7 Wildcards",
-    "text": "19.7 Wildcards\nLos wildcards (comodines) o wild characters son símbolos utilizados para representar uno o más caracteres. Se pueden utilizar con otros comandos para facilitar el procesamiento o búsqueda de archivos, directorios y datos en general.\n\n\n\n\n\n\n\n\n\nWildcard\nSignifica\nEjemplo\nCoincide con\n\n\n\n\n*\nCero o más caracteres\n*.txt\narchivo.txt, doc.txt, a.txt\n\n\n?\nExactamente 1 carácter\narchivo?.txt\narchivo1.txt, archivo2.txt\n\n\n[ ]\nUn carácter del conjunto\n[abc]*\narchivo.txt, buscador.log, carpeta\n\n\n[!...]\nUn carácter NO en el conjunto\n[!0-9]*\narchivo.txt (NO comienza con número)\n\n\n[a-z]\nRango de caracteres\n[a-z]*\narchivo.txt (comienza con minúscula)\n\n\n[0-9]\nRango de números\n*[0-9]\narchivo1, test2\n\n\n\n\n\n\n\n\n\nImportante\n\n\n\nEl wildcard más usado es * porque es muy versátil.\n\n\n\n\n\n\n\n\nNotaEjercicio 3\n\n\n\nEl wildcard * me permitiría encontrar todos los archivos en una carpeta que tengan la palabra TESIS en ellos. Primero crea la carpeta:\nmkdir taller_unix\nDespués, debemos generar estos archivos:\ncd taller_unix/\ntouch MI_TESIS.tex MI_TESIS_tutor2.tex TESIS.tex TESIS_YA_ACABATE.tex TESIS_finaaaaal.tex TESIS_final.tex TESIS_tutor1.tex TESIS_tutor2.tex a_reporte_01.txt b_reporte_02.txt c_reporte_03.txt z_reporte_30.txt \n\nEnlista todos los archivos que comiencen con “TESIS”.\nEnlista todos los archivos que terminen con el string “.tex”\nBuscar todos los archivos contengan la palabra “TESIS\" pero con 3 caracteres desconocidos antes.\nBuscar los archivos que terminen con el número 1 o 2 en su nombre antes de la extensión del archivo (.tex).\nEncontrar los archivos que terminen en dos números del 1 al 3 y del 0 al 2 antes del formato del archivo (.txt).\nEncontrar todos los archivos con este formato ?_reporte_[0-3][0-3].txt\nEncontrar todos los archivos que contengan por a o z.\nBorramos todos estor archivos que terminen en “.txt” y “.tex”\n\n\n\n\n\n\nTipSolución\n\n\n\n\n\n1. ls -l TESIS*\n2. ls -l *.tex\n3. ls -l ???TESIS*\n4. ls -l *[1-2].tex\n5. ls -l *[1-3][0-2].txt\n6. ls -l ?_reporte_[0-3][0-3].txt\n7. ls -l *[az]*\n8. rm *.tex *.txt",
+    "title": "18  Caracteres, Strings y Wildcards",
+    "section": "18.7 Wildcards",
+    "text": "18.7 Wildcards\nLos wildcards (comodines) o wild characters son símbolos utilizados para representar uno o más caracteres. Se pueden utilizar con otros comandos para facilitar el procesamiento o búsqueda de archivos, directorios y datos en general.\n\n\n\n\n\n\n\n\n\nWildcard\nSignifica\nEjemplo\nCoincide con\n\n\n\n\n*\nCero o más caracteres\n*.txt\narchivo.txt, doc.txt, a.txt\n\n\n?\nExactamente 1 carácter\narchivo?.txt\narchivo1.txt, archivo2.txt\n\n\n[ ]\nUn carácter del conjunto\n[abc]*\narchivo.txt, buscador.log, carpeta\n\n\n[!...]\nUn carácter NO en el conjunto\n[!0-9]*\narchivo.txt (NO comienza con número)\n\n\n[a-z]\nRango de caracteres\n[a-z]*\narchivo.txt (comienza con minúscula)\n\n\n[0-9]\nRango de números\n*[0-9]\narchivo1, test2\n\n\n\n\n\n\n\n\n\nImportante\n\n\n\nEl wildcard más usado es * porque es muy versátil.\n\n\n\n\n\n\n\n\nNotaEjercicio 3\n\n\n\nEl wildcard * me permitiría encontrar todos los archivos en una carpeta que tengan la palabra TESIS en ellos. Primero crea la carpeta:\nmkdir taller_unix\nDespués, debemos generar estos archivos:\ncd taller_unix/\ntouch MI_TESIS.tex MI_TESIS_tutor2.tex TESIS.tex TESIS_YA_ACABATE.tex TESIS_finaaaaal.tex TESIS_final.tex TESIS_tutor1.tex TESIS_tutor2.tex a_reporte_01.txt b_reporte_02.txt c_reporte_03.txt z_reporte_30.txt \n\nEnlista todos los archivos que comiencen con “TESIS”.\nEnlista todos los archivos que terminen con el string “.tex”\nBuscar todos los archivos contengan la palabra “TESIS\" pero con 3 caracteres desconocidos antes.\nBuscar los archivos que terminen con el número 1 o 2 en su nombre antes de la extensión del archivo (.tex).\nEncontrar los archivos que terminen en dos números del 1 al 3 y del 0 al 2 antes del formato del archivo (.txt).\nEncontrar todos los archivos con este formato ?_reporte_[0-3][0-3].txt\nEncontrar todos los archivos que contengan por a o z.\nBorramos todos estor archivos que terminen en “.txt” y “.tex”\n\n\n\n\n\n\nTipSolución\n\n\n\n\n\n1. ls -l TESIS*\n2. ls -l *.tex\n3. ls -l ???TESIS*\n4. ls -l *[1-2].tex\n5. ls -l *[1-3][0-2].txt\n6. ls -l ?_reporte_[0-3][0-3].txt\n7. ls -l *[az]*\n8. rm *.tex *.txt",
     "crumbs": [
       "**Sección 3** - Introducción a Bash",
-      "<span class='chapter-number'>19</span>  <span class='chapter-title'>Wildcards y Streams</span>"
+      "<span class='chapter-number'>18</span>  <span class='chapter-title'>Caracteres, Strings y Wildcards</span>"
     ]
   },
   {
     "objectID": "cap6.html#material-suplementario",
     "href": "cap6.html#material-suplementario",
-    "title": "19  Wildcards y Streams",
-    "section": "19.8 Material suplementario",
-    "text": "19.8 Material suplementario\n\nRSG Ecuador. Scripts en Bash\nRSG Ecuador. Wildcards y Streams\nRSG Ecuador. Expresiones regulares (regex)\nWildcard Selection in Bash\nExpresiones regulares",
+    "title": "18  Caracteres, Strings y Wildcards",
+    "section": "18.8 Material suplementario",
+    "text": "18.8 Material suplementario\n\nRSG Ecuador. Scripts en Bash\nRSG Ecuador. Wildcards y Streams\nRSG Ecuador. Expresiones regulares (regex)\nWildcard Selection in Bash\nExpresiones regulares",
     "crumbs": [
       "**Sección 3** - Introducción a Bash",
-      "<span class='chapter-number'>19</span>  <span class='chapter-title'>Wildcards y Streams</span>"
+      "<span class='chapter-number'>18</span>  <span class='chapter-title'>Caracteres, Strings y Wildcards</span>"
     ]
   },
   {
     "objectID": "regex.html",
     "href": "regex.html",
-    "title": "20  Expresiones regulares (REGEX)",
+    "title": "19  Expresiones regulares (REGEX)",
     "section": "",
-    "text": "20.1 Diferencia: Wildcards vs REGEX 🔄\nLas expresiones regulares (o REGEX) son patrones de texto que describen un conjunto de strings (cadenas de caracteres). Te permiten buscar, validar y procesar texto de manera flexible y poderosa.\nEstructura de una expresión regular\nEstructura básica de grep\nComponentes:\n1. Caracteres literales\nSon caracteres normales que se buscan tal cual.\n2. Metacaracteres en REGEX\nSon caracteres especiales que tienen significado especial.\n3. Cuantificadores\nEspecifican cuántas veces debe repetirse un patrón.",
+    "text": "19.1 Diferencia: Wildcards vs REGEX 🔄\nLas expresiones regulares (o REGEX) son patrones de texto que describen un conjunto de strings (cadenas de caracteres). Te permiten buscar, validar y procesar texto de manera flexible y poderosa.\nEstructura de una expresión regular\nEstructura básica de grep\nComponentes:\n1. Caracteres literales\nSon caracteres normales que se buscan tal cual.\n2. Metacaracteres en REGEX\nSon caracteres especiales que tienen significado especial.\n3. Cuantificadores\nEspecifican cuántas veces debe repetirse un patrón.",
     "crumbs": [
       "**Sección 3** - Introducción a Bash",
-      "<span class='chapter-number'>20</span>  <span class='chapter-title'>Expresiones regulares (REGEX)</span>"
+      "<span class='chapter-number'>19</span>  <span class='chapter-title'>Expresiones regulares (REGEX)</span>"
     ]
   },
   {
     "objectID": "regex.html#diferencia-wildcards-vs-regex",
     "href": "regex.html#diferencia-wildcards-vs-regex",
-    "title": "20  Expresiones regulares (REGEX)",
+    "title": "19  Expresiones regulares (REGEX)",
     "section": "",
     "text": "Wildcards (en bash)\n# Buscar archivos\nls *.txt           # Expande a archivos reales\nls [abc]*          # Expande a archivos que comienzan con a, b o c\nContexto: Sistema de archivos\n\n\nREGEX (en comandos)\n# Buscar en contenido de archivos\ngrep \".*\\.txt$\" archivo.txt    # Busca líneas que terminan en .txt\ngrep \"[abc]\" archivo.txt       # Busca líneas que contienen a, b o c\nContexto: Contenido de texto",
     "crumbs": [
       "**Sección 3** - Introducción a Bash",
-      "<span class='chapter-number'>20</span>  <span class='chapter-title'>Expresiones regulares (REGEX)</span>"
+      "<span class='chapter-number'>19</span>  <span class='chapter-title'>Expresiones regulares (REGEX)</span>"
     ]
   },
   {
     "objectID": "regex.html#operadores-de-redirección-de-datos-io",
     "href": "regex.html#operadores-de-redirección-de-datos-io",
-    "title": "20  Expresiones regulares (REGEX)",
-    "section": "20.2 Operadores de redirección de datos I/O",
-    "text": "20.2 Operadores de redirección de datos I/O\nUsualmente cuando trabajamos con datos, es necesario pasar el resultado de un comando a otro para hacer un procesamiento de datos apilado, como en un algortimo. Un stream o corriente esta hecha de datos. Es una corriente de datos. Un ejemplo muy familiar es el teclado y la pantalla. El teclado tiene una interfaz en donde por cada tecla presionada, un caracter se guarda en un archivo. Se dice entonces que es una corriente de  entrada. Cuando la pantalla nos muestra lo que estamos escribiendo entonces la data sale hacia nosotros y eso convierte a la pantalla en una corriente de salida. Los dispositivos que hacen este tipo de transmisión de datos se llaman dispositivos I/O (input y output). Los operadores que se encargan de esto se conocen como operadores de redirección. Tres importantes son:\n\n\n\n\n\n\n\nComando\nFunción\n\n\n\n\n&gt;\nStream de salida de datos. Sobre escribre sobre un archivo.\n\n\n&gt;&gt;\nStream de salida de datos. Adjunta nueva salida a datos preexistentes en un archivo.\n\n\n&lt;\nStream de entrada de datos. Recibe datos para procesamiento con algun comando.\n\n\n\n\n\n\n\n\n\nNotaEjercicio 4\n\n\n\n\nCrea el archivo bacterias_generos.txt e imprime su contenido empleando los siguientes comandos:\necho -e \"\\nRickettsia\\nOrientia\\nWolbachia\\nAegyptianella\\nAnaplasma\\nCowdria\\nEhrlichia\\nNeorickettsia\\nCaedibacter\\nHolospora\\nLyticum\\nOdyssella\\nSymbiotes\\nTectibacter\" &gt; bacterias_generos.txt\ncat bacterias_generos.txt\nAgrega una nueva especie en la última fila empleando “&gt;&gt;”.\necho -e \"\\nEscherichia\\n:D\" &gt;&gt; bacterias_generos.txt\ncat bacterias_generos.txt\nAhora usaremos el comando sort para reordenar todos los géneros. Sin embargo notamos que el archivo original no cambia nunca.\nsort &lt; bacterias_generos.txt\nPara hacer un cambio en el archivo bacterias_generos.txt, usamos este comando. Notamos que ahora no usamos &gt;&gt; sino solo &gt;. Esto va a borrar el contenido previo con géneros desordenados y ahora los va a ordenar. El cambio no se puede deshacer, así que ten cuidado con el operador &gt; para que no pierdas datos.\n(sort &lt; bacterias_generos.txt) &gt; bacterias_generos_sorted.txt\ncat bacterias_generos_sorted.txt\n\n\n\n\n20.2.1 Tabla resumen de metacaracteres 📊\n\n\n\nMetacarácter\nSignificado\nEjemplo\nCoincide con\n\n\n\n\n.\nCualquier carácter\na.o\nato, amo, ano\n\n\n*\nCero o más\nab*c\nac, abc, abbc\n\n\n+\nUna o más\nab+c\nabc, abbc\n\n\n?\nCero o una\nab?c\nac, abc\n\n\n[ ]\nConjunto\na[123]o\na1o, a2o, a3o\n\n\n[^...]\nNegación\na[^0-9]o\nato, amo\n\n\n-\nRango\n[a-z]\na, b, c, …, z\n\n\n^\nInicio línea\n^Hola\nHola mundo\n\n\n$\nFin línea\nmundo$\nHola mundo\n\n\n\\\nEscape\n\\.\n. (punto literal)\n\n\n( )\nAgrupación\n(ab)+\nab, abab\n\n\n|\nAlternancia\ngato|perro\ngato, perro\n\n\n{ }\nRepetición exacta\na{2}\naa",
+    "title": "19  Expresiones regulares (REGEX)",
+    "section": "19.2 Operadores de redirección de datos I/O",
+    "text": "19.2 Operadores de redirección de datos I/O\nUsualmente cuando trabajamos con datos, es necesario pasar el resultado de un comando a otro para hacer un procesamiento de datos apilado, como en un algortimo. Un stream o corriente esta hecha de datos. Es una corriente de datos. Un ejemplo muy familiar es el teclado y la pantalla. El teclado tiene una interfaz en donde por cada tecla presionada, un caracter se guarda en un archivo. Se dice entonces que es una corriente de  entrada. Cuando la pantalla nos muestra lo que estamos escribiendo entonces la data sale hacia nosotros y eso convierte a la pantalla en una corriente de salida. Los dispositivos que hacen este tipo de transmisión de datos se llaman dispositivos I/O (input y output). Los operadores que se encargan de esto se conocen como operadores de redirección. Tres importantes son:\n\n\n\n\n\n\n\nComando\nFunción\n\n\n\n\n&gt;\nStream de salida de datos. Sobre escribre sobre un archivo.\n\n\n&gt;&gt;\nStream de salida de datos. Adjunta nueva salida a datos preexistentes en un archivo.\n\n\n&lt;\nStream de entrada de datos. Recibe datos para procesamiento con algun comando.\n\n\n\n\n\n\n\n\n\nNotaEjercicio 4\n\n\n\n\nCrea el archivo bacterias_generos.txt e imprime su contenido empleando los siguientes comandos:\necho -e \"\\nRickettsia\\nOrientia\\nWolbachia\\nAegyptianella\\nAnaplasma\\nCowdria\\nEhrlichia\\nNeorickettsia\\nCaedibacter\\nHolospora\\nLyticum\\nOdyssella\\nSymbiotes\\nTectibacter\" &gt; bacterias_generos.txt\ncat bacterias_generos.txt\nAgrega una nueva especie en la última fila empleando “&gt;&gt;”.\necho -e \"\\nEscherichia\\n:D\" &gt;&gt; bacterias_generos.txt\ncat bacterias_generos.txt\nAhora usaremos el comando sort para reordenar todos los géneros. Sin embargo notamos que el archivo original no cambia nunca.\nsort &lt; bacterias_generos.txt\nPara hacer un cambio en el archivo bacterias_generos.txt, usamos este comando. Notamos que ahora no usamos &gt;&gt; sino solo &gt;. Esto va a borrar el contenido previo con géneros desordenados y ahora los va a ordenar. El cambio no se puede deshacer, así que ten cuidado con el operador &gt; para que no pierdas datos.\n(sort &lt; bacterias_generos.txt) &gt; bacterias_generos_sorted.txt\ncat bacterias_generos_sorted.txt\n\n\n\n\n19.2.1 Tabla resumen de metacaracteres 📊\n\n\n\nMetacarácter\nSignificado\nEjemplo\nCoincide con\n\n\n\n\n.\nCualquier carácter\na.o\nato, amo, ano\n\n\n*\nCero o más\nab*c\nac, abc, abbc\n\n\n+\nUna o más\nab+c\nabc, abbc\n\n\n?\nCero o una\nab?c\nac, abc\n\n\n[ ]\nConjunto\na[123]o\na1o, a2o, a3o\n\n\n[^...]\nNegación\na[^0-9]o\nato, amo\n\n\n-\nRango\n[a-z]\na, b, c, …, z\n\n\n^\nInicio línea\n^Hola\nHola mundo\n\n\n$\nFin línea\nmundo$\nHola mundo\n\n\n\\\nEscape\n\\.\n. (punto literal)\n\n\n( )\nAgrupación\n(ab)+\nab, abab\n\n\n|\nAlternancia\ngato|perro\ngato, perro\n\n\n{ }\nRepetición exacta\na{2}\naa",
     "crumbs": [
       "**Sección 3** - Introducción a Bash",
-      "<span class='chapter-number'>20</span>  <span class='chapter-title'>Expresiones regulares (REGEX)</span>"
-    ]
-  },
-  {
-    "objectID": "regex.html#opciones-principales-de-grep",
-    "href": "regex.html#opciones-principales-de-grep",
-    "title": "20  Expresiones regulares (REGEX)",
-    "section": "20.3 Opciones principales de grep",
-    "text": "20.3 Opciones principales de grep\n1. -E - Expresiones regulares extendidas\nPermite usar metacaracteres avanzados como +, ?, |, { }.\n# Sin -E: no funciona\ngrep \"a+b\" archivo.txt      # Busca \"a+b\" literal\n\n# Con -E: funciona\ngrep -E \"a+b\" archivo.txt   # Busca \"a\", \"ab\", \"aab\", \"aaab\", etc.\n2. -i - Ignorar mayúsculas/minúsculas\ngrep -i \"hola\" archivo.txt\n# Encuentra: \"Hola\", \"HOLA\", \"hola\", \"HoLa\"\n3. -v - Invertir búsqueda (líneas que NO coinciden)\ngrep -v \"error\" archivo.log\n# Imprime todas las líneas que NO contienen \"error\"\n4. -c - Contar coincidencias\ngrep -c \"error\" archivo.log\n# Output: 5 (número de líneas con \"error\")\n5. -n - Mostrar número de línea\ngrep -n \"error\" archivo.log\n# Output: 5:Error en línea 5\n#         12:Error en línea 12\n6. -l - Mostrar solo nombres de archivos\ngrep -l \"error\" *.log\n# Output: archivo1.log\n#         archivo3.log\n7. -r - Buscar recursivamente en directorios\ngrep -r \"error\" /var/log/\n# Busca en todos los archivos del directorio /var/log/\n8. -o - Mostrar solo la parte que coincide\ngrep -o \"[0-9]\\{3\\}-[0-9]\\{3\\}-[0-9]\\{4\\}\" archivo.txt\n# Output: 123-456-7890\n#         987-654-3210\n\n\n\n\n\n\nNotaEjercicio 5 - Dominar grep (con echo -e)\n\n\n\n\nCrea los archivos que usaremos y verificar su contenido en este ejercicio:\n\n# Crear directorio de trabajo\nmkdir ejercicio_grep\ncd ejercicio_grep\n\n# Crear archivo de usuarios\necho -e \"juan@ejemplo.com 25 activo\\nmaria@empresa.es 30 inactivo\\ncarlos123 28 activo\\nana@dominio.org 22 activo\\npedro@test 35 inactivo\\nsofia@dominio.com 27 activo\\nluis@empresa.es 40 inactivo\" &gt; usuarios.txt\ncat usuarios.txt\n\n# Crear archivo de log\necho -e \"[2024-01-15 10:30:45] [INFO] Sistema iniciado\\n[2024-01-15 10:31:12] [ERROR] Conexión fallida a base de datos\\n[2024-01-15 10:32:00] [WARNING] Memoria disponible baja\\n[2024-01-15 10:33:45] [ERROR] Archivo no encontrado: config.ini\\n[2024-01-15 10:34:20] [INFO] Proceso de sincronización completado\\n[2024-01-15 10:35:10] [ERROR] Timeout en conexión remota\\n[2024-01-15 10:36:00] [WARNING] Espacio en disco bajo\\n[2024-01-15 10:37:30] [INFO] Backup completado exitosamente\" &gt; sistema.log\ncat sistema.log\n\n# Crear archivo de productos\necho -e \"001 Laptop Dell 1200.50 disponible\\n002 Mouse Logitech 25.99 disponible\\n003 Teclado Mecánico 89.99 agotado\\n004 Monitor LG 350.00 disponible\\n005 Webcam HD 45.50 disponible\\n006 Auriculares Sony 150.00 agotado\\n007 Cable HDMI 12.99 disponible\\n008 Hub USB 35.75 disponible\" &gt; productos.txt\ncat productos.txt\n\n# Crear archivo de emails\necho -e \"juan.perez@ejemplo.com\\nmaria_lopez@empresa.es\\ncarlos.garcia@test.com\\nana.martinez@dominio.org\\npedro123@invalid\\nsofia.rodriguez@empresa.es\\nluis_fernandez@test.org\\ncontacto@empresa.es\" &gt; emails.txt\ncat emails.txt\n\n# Crear archivo de géneros bacterianos\necho -e \"Rickettsia\\nOrientia\\nWolbachia\\nAegyptianella\\nAnaplasma\\nCowdria\\nEhrlichia\\nNeorickettsia\\nCaedibacter\\nHolospora\\nLyticum\\nOdyssella\\nSymbiotes\\nTectibacter\" &gt; bacterias_generos.txt\ncat bacterias_generos.txt\n\nBuscar los usuarios activos dentro del archivo usuarios.txt. NOTA: \\b no representa un carácter real, sino una posición en el texto donde termina o comienza una palabra.\nBuscar los errores en el archivo log sistema.log.\nBuscar productos disponibles en el archivo productos.txt.\nIgnorar las mayúsculas/minúsculas (-i) de sistema.log.\nContar el número (grep -c) de usuarios activos en el archivo usuarios.txt.\nDime en que líneas (grep -n) aparece la palabra ERROR en sistema.log.\nMostrar solo las coincidencias (grep -o) con la palabra ERROR en sistema.log.\nBuscar las especies que comienzan con A en el archivo bacterias_generos.txt.\nBuscar las especies que comienzan con R o W en el archivo bacterias_generos.txt.\n\n\n\n\n\n\nTipSolución\n\n\n\n\n\n2. grep -E \"\\bactivo\\b\" usuarios.txt o grep \" activo\" usuarios.txt\n3. grep \"ERROR\" sistema.log\n4. grep \"disponible\" productos.txt\n5. grep -i \"error\" sistema.log\n6. grep \" activo\" usuarios.txt | wc -l o grep -c \" activo\" usuarios.txt \n7. grep -n \"ERROR\" sistema.log\n8. grep -o \"ERROR\" sistema.log\n9. grep \"^A\" bacterias_generos.txt\n10. grep -E \"^(R|W)\" bacterias_generos.txt",
-    "crumbs": [
-      "**Sección 3** - Introducción a Bash",
-      "<span class='chapter-number'>20</span>  <span class='chapter-title'>Expresiones regulares (REGEX)</span>"
-    ]
-  },
-  {
-    "objectID": "regex.html#ejercicios-de-repaso",
-    "href": "regex.html#ejercicios-de-repaso",
-    "title": "20  Expresiones regulares (REGEX)",
-    "section": "20.4 Ejercicios de repaso",
-    "text": "20.4 Ejercicios de repaso\n\n\n\n\n\n\nNota\n\n\n\nPuedes seguir repasando y aprendiendo de las expresiones regulares en la pagina de RegexOne.\n\n\nRangos comunes:\n\n[a-z] = letras minúsculas\n[A-Z] = letras mayúsculas\n[0-9] = dígitos\n[a-zA-Z] = letras (mayúsculas y minúsculas)\n[a-zA-Z0-9] = letras y dígitos\n\n\n\n\n\n\n\nAdvertenciaAdvertencia\n\n\n\nEl operador &gt; sobre escribe archivos. Ten cuidado al usarlo para que no pierdas datos.",
-    "crumbs": [
-      "**Sección 3** - Introducción a Bash",
-      "<span class='chapter-number'>20</span>  <span class='chapter-title'>Expresiones regulares (REGEX)</span>"
+      "<span class='chapter-number'>19</span>  <span class='chapter-title'>Expresiones regulares (REGEX)</span>"
     ]
   },
   {
     "objectID": "regex.html#material-suplementario",
     "href": "regex.html#material-suplementario",
-    "title": "20  Expresiones regulares (REGEX)",
-    "section": "20.5 Material suplementario",
-    "text": "20.5 Material suplementario\n\nRSG Ecuador. Scripts en Bash\nRSG Ecuador. Wildcards y Streams\nRSG Ecuador. Expresiones regulares (regex)\nWildcard Selection in Bash\nExpresiones regulares",
+    "title": "19  Expresiones regulares (REGEX)",
+    "section": "19.3 Material suplementario",
+    "text": "19.3 Material suplementario\n\nRSG Ecuador. Scripts en Bash\nRSG Ecuador. Wildcards y Streams\nRSG Ecuador. Expresiones regulares (regex)\nWildcard Selection in Bash\nExpresiones regulares",
     "crumbs": [
       "**Sección 3** - Introducción a Bash",
-      "<span class='chapter-number'>20</span>  <span class='chapter-title'>Expresiones regulares (REGEX)</span>"
+      "<span class='chapter-number'>19</span>  <span class='chapter-title'>Expresiones regulares (REGEX)</span>"
     ]
   },
   {
     "objectID": "cap7.html",
     "href": "cap7.html",
-    "title": "21  Operadores de redirección de datos I/O",
+    "title": "20  Opciones principales de grep",
     "section": "",
-    "text": "21.1 Material suplementario\nUsualmente cuando trabajamos con datos, es necesario pasar el resultado de un comando a otro para hacer un procesamiento de datos apilado, como en un algortimo. Un stream o corriente esta hecha de datos. Es una corriente de datos. Un ejemplo muy familiar es el teclado y la pantalla. El teclado tiene una interfaz en donde por cada tecla presionada, un caracter se guarda en un archivo. Se dice entonces que es una corriente de entrada. Cuando la pantalla nos muestra lo que estamos escribiendo entonces la data sale hacia nosotros y eso convierte a la pantalla en una corriente de salida. Los dispositivos que hacen este tipo de transmisión de datos se llaman dispositivos I/O (input y output). Los operadores que se encargan de esto se conocen como operadores de redirección. Tres importantes son:",
+    "text": "20.0.1 Ejercicio 5 - Dominar grep (con echo -e)\n1. -E - Expresiones regulares extendidas\nPermite usar metacaracteres avanzados como +, ?, |, { }.\n2. -i - Ignorar mayúsculas/minúsculas\n3. -v - Invertir búsqueda (líneas que NO coinciden)\n4. -c - Contar coincidencias\n5. -n - Mostrar número de línea\n6. -l - Mostrar solo nombres de archivos\n7. -r - Buscar recursivamente en directorios\n8. -o - Mostrar solo la parte que coincide",
     "crumbs": [
-      "**Sección 4** - Edición de archivos con Bash",
-      "<span class='chapter-number'>21</span>  <span class='chapter-title'>Operadores de redirección de datos I/O</span>"
+      "**Sección 3** - Introducción a Bash",
+      "<span class='chapter-number'>20</span>  <span class='chapter-title'>Opciones principales de grep</span>"
+    ]
+  },
+  {
+    "objectID": "cap7.html#ejercicios-de-repaso",
+    "href": "cap7.html#ejercicios-de-repaso",
+    "title": "20  Opciones principales de grep",
+    "section": "20.1 Ejercicios de repaso",
+    "text": "20.1 Ejercicios de repaso\nPuedes seguir repasando y aprendiendo de las expresiones regulares en la pagina de RegexOne.\nRangos comunes:\n\n[a-z] = letras minúsculas\n[A-Z] = letras mayúsculas\n[0-9] = dígitos\n[a-zA-Z] = letras (mayúsculas y minúsculas)\n[a-zA-Z0-9] = letras y dígitos\n\n\n\n\n\n\n\nAdvertenciaAdvertencia\n\n\n\nEl operador &gt; sobre escribe archivos. Ten cuidado al usarlo para que no pierdas datos.",
+    "crumbs": [
+      "**Sección 3** - Introducción a Bash",
+      "<span class='chapter-number'>20</span>  <span class='chapter-title'>Opciones principales de grep</span>"
     ]
   },
   {
     "objectID": "cap7.html#material-suplementario",
     "href": "cap7.html#material-suplementario",
-    "title": "21  Operadores de redirección de datos I/O",
-    "section": "",
-    "text": "RSG Ecuador. Scripts en Bash\nRSG Ecuador. Wildcards y Streams\nRSG Ecuador. Expresiones regulares (regex)\nWildcard Selection in Bash",
+    "title": "20  Opciones principales de grep",
+    "section": "20.2 Material suplementario",
+    "text": "20.2 Material suplementario\n\nRSG Ecuador. Scripts en Bash\nRSG Ecuador. Wildcards y Streams\nRSG Ecuador. Expresiones regulares (regex)\nWildcard Selection in Bash\nExpresiones regulares",
     "crumbs": [
-      "**Sección 4** - Edición de archivos con Bash",
-      "<span class='chapter-number'>21</span>  <span class='chapter-title'>Operadores de redirección de datos I/O</span>"
+      "**Sección 3** - Introducción a Bash",
+      "<span class='chapter-number'>20</span>  <span class='chapter-title'>Opciones principales de grep</span>"
     ]
   },
   {
     "objectID": "cap8.html",
     "href": "cap8.html",
-    "title": "22  Edición de archivos con los editores de texto (nano y vim)",
+    "title": "21  Edición de archivos con los editores de texto (nano y vim)",
     "section": "",
-    "text": "22.0.1 Nano\nLos editores de texto nos permiten hacer desde ligeros hasta cambios u operaciones masivas en el contenido de nuestros archivos. Existen varias herramientas para esto pero las más populares son “nano” y “vim”.\nPara utilizar nano, debemos de seguir una serie de comandos. Primero creamos/leemos nuestro archivo.\nEsto nos creará un archivo de texto al que podemos ingresar información y además nos va desplegar un menú de opciones en la parte inferior de nuestra terminal.\nPara utilizar estas opciones se usan shorchuts o atajos en el teclado, en las que el símbolo ^ significa la tecla Control o Command y la M es la tecla Alt. En nuestro caso donde queremos agregar texto, simplemente escribimos:\nPara guardar los cambios en el archivo presionamos control + x, el programa nos desplegará un mensaje para guardar el archivo. Presionamos enter y ahora podemos verificar el contenido.",
+    "text": "21.0.1 Nano\nLos editores de texto nos permiten hacer desde ligeros hasta cambios u operaciones masivas en el contenido de nuestros archivos. Existen varias herramientas para esto pero las más populares son “nano” y “vim”.\nPara utilizar nano, debemos de seguir una serie de comandos. Primero creamos/leemos nuestro archivo.\nEsto nos creará un archivo de texto al que podemos ingresar información y además nos va desplegar un menú de opciones en la parte inferior de nuestra terminal.\nPara utilizar estas opciones se usan shorchuts o atajos en el teclado, en las que el símbolo ^ significa la tecla Control o Command y la M es la tecla Alt. En nuestro caso donde queremos agregar texto, simplemente escribimos:\nPara guardar los cambios en el archivo presionamos control + x, el programa nos desplegará un mensaje para guardar el archivo. Presionamos enter y ahora podemos verificar el contenido.",
     "crumbs": [
       "**Sección 4** - Edición de archivos con Bash",
-      "<span class='chapter-number'>22</span>  <span class='chapter-title'>Edición de archivos con los editores de texto (`nano` y `vim`)</span>"
+      "<span class='chapter-number'>21</span>  <span class='chapter-title'>Edición de archivos con los editores de texto (`nano` y `vim`)</span>"
     ]
   },
   {
     "objectID": "cap8.html#referencias",
     "href": "cap8.html#referencias",
-    "title": "22  Edición de archivos con los editores de texto (nano y vim)",
-    "section": "22.1 Referencias",
-    "text": "22.1 Referencias\n\nAprende vim",
+    "title": "21  Edición de archivos con los editores de texto (nano y vim)",
+    "section": "21.1 Referencias",
+    "text": "21.1 Referencias\n\nAprende vim",
     "crumbs": [
       "**Sección 4** - Edición de archivos con Bash",
-      "<span class='chapter-number'>22</span>  <span class='chapter-title'>Edición de archivos con los editores de texto (`nano` y `vim`)</span>"
+      "<span class='chapter-number'>21</span>  <span class='chapter-title'>Edición de archivos con los editores de texto (`nano` y `vim`)</span>"
+    ]
+  },
+  {
+    "objectID": "cap5_crearRproject.html",
+    "href": "cap5_crearRproject.html",
+    "title": "22  Crear un R Project",
+    "section": "",
+    "text": "22.1 ¿Qué es un R Project y por qué usarlo?\nAl comenzar a trabajar con R y RStudio, ya sea para crear un programa para un proyecto, crear una aplicación, presentación, blog, paquete, etc, es recomendado crear un R project.",
+    "crumbs": [
+      "**Sección 4** - Edición de archivos con Bash",
+      "<span class='chapter-number'>22</span>  <span class='chapter-title'>Crear un R Project</span>"
+    ]
+  },
+  {
+    "objectID": "cap5_crearRproject.html#qué-es-un-r-project-y-por-qué-usarlo",
+    "href": "cap5_crearRproject.html#qué-es-un-r-project-y-por-qué-usarlo",
+    "title": "22  Crear un R Project",
+    "section": "",
+    "text": "Carpeta de trabajo dedicada: al crear un R Project, RStudio genera automáticamente una carpeta que contiene todos los archivos y configuraciones necesarias para tu proyecto.\nOrganización: te permite mantener en un solo lugar tus scripts, datos, variables y documentos relacionados.\nReproducibilidad: facilita que cualquier persona (incluido tú en el futuro) pueda abrir el proyecto y trabajar con el mismo entorno.\nIntegración con Git/GitHub: al tener el mismo nombre que tu repositorio, se asegura una sincronización más clara y ordenada entre tu proyecto local y el repositorio remoto.",
+    "crumbs": [
+      "**Sección 4** - Edición de archivos con Bash",
+      "<span class='chapter-number'>22</span>  <span class='chapter-title'>Crear un R Project</span>"
+    ]
+  },
+  {
+    "objectID": "cap5_crearRproject.html#cómo-iniciamos-un-r-project",
+    "href": "cap5_crearRproject.html#cómo-iniciamos-un-r-project",
+    "title": "22  Crear un R Project",
+    "section": "22.2 ¿Cómo iniciamos un R project?",
+    "text": "22.2 ¿Cómo iniciamos un R project?\n\nVayamos en la parte superior al menú Archivos &gt; Nuevo Proyecto.\n\n\n\nSeleccionamos la opción de Nuevo directorio.\n\n\n\nSeleccionamos el tipo de projecto que vamos a iniciar, en nuestro caso Nuevo proyecto.\n\n\n\nNombramos el folder que crearemos y seleccionamos en dónde queremos que se almacene.\n\n\n¡Felicidades, acabas de crear un R project! Si vamos al folder en donde creamos nuestro proyecto, podemos observar que se creó un archivo con terminación Rproj, este es un archivo que contiene la configuración específica para nuestro proyecto.\n\n\n\n\n\n\n\nImagen tomada de: Allison Horst\n\n\n\n22.2.1 Directorio de trabajo\nEste archivo (Rproj) también establece como directorio de trabajo el folder en donde iniciamos el proyecto (puedes comprobarlo desde la consola de RStudio, escribiendo el comando getwd()). Esto es muy conveniente puesto que así podemos asegurarnos de que vamos a acceder a los archivos que estén exclusivamente en nuestro entorno de trabajo.\nColoca en la consola dentro de Rstudio:\n\n\nCódigo\ngetwd()\n\n\n[1] \"/Users/ecoss/Documents/Mt2026_Taller_Computo_libro\"",
+    "crumbs": [
+      "**Sección 4** - Edición de archivos con Bash",
+      "<span class='chapter-number'>22</span>  <span class='chapter-title'>Crear un R Project</span>"
+    ]
+  },
+  {
+    "objectID": "cap5_crearRproject.html#crear-un-rscript",
+    "href": "cap5_crearRproject.html#crear-un-rscript",
+    "title": "22  Crear un R Project",
+    "section": "22.3 Crear un Rscript",
+    "text": "22.3 Crear un Rscript\nPara comenzar a trabajar en un proyecto, necesitamos crear un archivo para escribir nuestro programa. Entra en Archivo &gt; Nuevo Archivo.\nPodemos ver que tenemos distintas opciones de archivos que podemos crear, en este caso vamos a crear nuestro primer Rscript.\n\n\n22.3.1 ¿Qué es un Rscript?\nEs simplemente un archivo de texto con las instrucciones de nuestro algoritmo escritas en el lenguaje de R. También contiene nuestros comentarios escritos con #.\nIntenta escribir tu primer Rscript en el editor, copiando el siguiente algoritmo para realizar una suma:\n\n\nCódigo\na &lt;- 2\nb &lt;- 3\nsuma = a + b\nsuma\n\n\n[1] 5",
+    "crumbs": [
+      "**Sección 4** - Edición de archivos con Bash",
+      "<span class='chapter-number'>22</span>  <span class='chapter-title'>Crear un R Project</span>"
+    ]
+  },
+  {
+    "objectID": "cap5_crearRproject.html#cómo-ejecutamos-el-código",
+    "href": "cap5_crearRproject.html#cómo-ejecutamos-el-código",
+    "title": "22  Crear un R Project",
+    "section": "22.4 ¿Cómo ejecutamos el código?",
+    "text": "22.4 ¿Cómo ejecutamos el código?\nSelecciona todo el código, después ve a la parte superior de la ventana del editor y da click en el botón Run. También pueden ejecutar tu código línea por línea, poniendo tu cursor al principio o al final de la linea y presionando las teclas Control + Enter o Command + Enter.\n\n\n\nImagen creada con ChatGPT.",
+    "crumbs": [
+      "**Sección 4** - Edición de archivos con Bash",
+      "<span class='chapter-number'>22</span>  <span class='chapter-title'>Crear un R Project</span>"
+    ]
+  },
+  {
+    "objectID": "cap5_crearRproject.html#hay-más-que-solo-rscripts",
+    "href": "cap5_crearRproject.html#hay-más-que-solo-rscripts",
+    "title": "22  Crear un R Project",
+    "section": "22.5 Hay más que solo Rscripts",
+    "text": "22.5 Hay más que solo Rscripts\n\n\n\nImagen creada con ChatGPT.",
+    "crumbs": [
+      "**Sección 4** - Edición de archivos con Bash",
+      "<span class='chapter-number'>22</span>  <span class='chapter-title'>Crear un R Project</span>"
+    ]
+  },
+  {
+    "objectID": "cap5_crearRproject.html#descargar-y-cargar-librerías-en-rstudio",
+    "href": "cap5_crearRproject.html#descargar-y-cargar-librerías-en-rstudio",
+    "title": "22  Crear un R Project",
+    "section": "22.6 Descargar y cargar Librerías en Rstudio",
+    "text": "22.6 Descargar y cargar Librerías en Rstudio\n\n22.6.1 ¿Qué es una librería?\nEn programación, una librería es una colección de código pre-escrito. Una librería contiene una “paquete” o “librería” de funciones que podemos utilizar si descargamos e importamos esa librería a nuestro programa.\nComo mencioné anteriormente, al descargar R, también descargamos una serie de librerías, llamadas base R packages. Sin embargo, dependiendo del problema que queramos resolver con nuestro programa, necesitaremos librerías que nos permitan hacer otras cosas.\nExisten distintas formas de instalar librerías.\n\n\n22.6.2 Instalar librerías: CRAN\n\nInstalación desde el repositorio de CRAN: podemos descargar paqueterías de CRAN de dos formas:\n\nLa primera, desde consola con el siguiente comando:\n\n\nCódigo\ninstall.packages(\"reticulate\")\n\n\nLa segunda, desde el menú Herramientas &gt; Instalar paqueterías. En la ventana, ingresamos el nombre de la librería y click en Instalar.\n\n\n\n\n\nLa tercera opción es usar el botón “Install” dentro de la pestaña de Packages.\n\n\n\n22.6.3 ¿Cómo podemos verificar que paquetes tenemos?\nEn la ventana inferior derecha, existe una pestaña que se llama “Packages” que contendra la lista de paquetes instalados en tu computadora, su descripción corta y su versión.\nTambien en esta pestaña podemos instalar paquetes dandado click en INSTALL.\n\n\n\n\n\n\n\n22.6.4 Eliminación de paquetes\nEn algunas ocasiones vamos a tener que actualizar las versiones de los paquetes, pero primero dedes eliminar la versión anterior. Dando click en el botón que contiene una X que esta al final de la fila en cada programa.\n\n\n\n\n\nTambién puedes usar codigo para eliminar el paquete:\n\n\nCódigo\nremove.packages(\"package-to-remove\")\n\n\n\n\n22.6.5 Cargar paquetes en el ambiente de R\n\nOpción A: Emplear la función library para cargar en el ambiente el paquete.\n\n\n\nCódigo\nlibrary(reticulate)\n\n\n\nOpción B: Dando click a la casilla que indica el paquete. Para dejar de usarlo da de nuevo click en esa casilla para que deje de estar marcada.",
+    "crumbs": [
+      "**Sección 4** - Edición de archivos con Bash",
+      "<span class='chapter-number'>22</span>  <span class='chapter-title'>Crear un R Project</span>"
     ]
   },
   {
@@ -1302,7 +1313,7 @@
     "href": "cap9.html",
     "title": "23  Edición de archivos con el editor de flujo sed",
     "section": "",
-    "text": "sed (stream editor) es un editor de flujo, una potente herramienta de tratamiento de texto para el sistema operativo UNIX que acepta como entrada un archivo, lo lee y modifica línea a línea de acuerdo a un script. sed permite manipular flujos de datos, como por ejemplo cortar líneas, buscar y reemplazar texto (con soporte de expresiones regulares), entre otras cosas.\nAlgunas de las operaciones más primordiales de sed son el cambio de saltos de líneas, la sustitución de espacios por comas o tabulaciones, la deleción o adición de strings, etc.\nLa sintaxis general de la orden sed es:\nsed [-n] [-e'script'] [-f archivo] archivo1 archivo2 ...\ndonde:\n\n\n\n\n\n\nNotaExplicación\n\n\n\n\n-n indica que se suprima la salida estándar.\n-e indica que se ejecute el script que viene a continuación.\n-f indica que las órdenes se tomarán de un archivo.\n\n\n\n\nEjemplo de sustitución con sed\nSustituciones s/// de palabras: s/esto/aquello/\necho \"Windows es lo máximo\" | sed -e 's/Windows/Linux/'\nEn el ejemplo anterior, la modificación se hace solamente en la primer instancia que el comando encuentra. Esto no nos funciona si tenemos 400 repeticiones de Windows que queremos cambiar a Linux. Para que funcione debemos hacer un cambio de la siquiente manera:\necho \"Windows es un sistema operativo ampliamente utilizado.\" &gt; archivo.txt\ncat archivo.txt\nsed 's/Windows/Linux/g' archivo.txt\nEsta letra g que agregamos, indica hacer las sustituciones de manera global, es decir en todas las ocurrencias o repeticiones dentro de un archivo.\n\n\n\n\n\n\nNotaEjercicio 8: Práctica de sustituciones\n\n\n\n\nVerifica que te encuentres en la carpeta “~/unix.bioinfo.rsgecuador-gh-pages/_files” pwd\nCámbiate de carpeta si es necesario cd  ~/unix.bioinfo.rsgecuador-gh-pages/_files\nEn esta carpeta podrás encontrar el archivo “notas.txt”, explora este archivo cat notas.txt ó less notas.txt ó head notas.txt\nSustituye la palabra “Notas” de cada una de las columnas por la palabra “Columna” y una vez hecho el cambio redirige el resultado a un archivo llamado “columnas.txt”. sed 's/Notas/Columnas/g' notas.txt &gt;&gt; columnas.txt\nCorrobora tus resultados y discute posibles soluciones alternas.\n\nComo pudiste darte cuenta, el archivo está separado por tabulaciones entre columna y columna. Si quisieras además, cambiar el formato del archivo de separación por tabulaciones a separación por comas, ¿qué pasos extra agregarías a tu código? Discute qué hace cada parte del código.\n\n\n\n\n\n\nTipSolución 2\n\n\n\n\n\nsed 's/Notas/Columnas/' -e 's/\\t/,/g' notas.txt &gt;&gt; columnas.txt\n\n\n\n\n\n\n\n23.0.1 Referencias\n\nRegEx\nWikipedia: Expresiones Regulares\nYouTube: Expresiones regulares con Notepad++",
+    "text": "Fecha: 24 de septiembre, 2026\n\nsed (stream editor) es un editor de flujo, una potente herramienta de tratamiento de texto para el sistema operativo UNIX que acepta como entrada un archivo, lo lee y modifica línea a línea de acuerdo a un script. sed permite manipular flujos de datos, como por ejemplo cortar líneas, buscar y reemplazar texto (con soporte de expresiones regulares), entre otras cosas.\nAlgunas de las operaciones más primordiales de sed son el cambio de saltos de líneas, la sustitución de espacios por comas o tabulaciones, la deleción o adición de strings, etc.\nLa sintaxis general de la orden sed es:\nsed [-n] [-e'script'] [-f archivo] archivo1 archivo2 ...\ndonde:\n\n\n\n\n\n\nNotaExplicación\n\n\n\n\n-n indica que se suprima la salida estándar.\n-e indica que se ejecute el script que viene a continuación.\n-f indica que las órdenes se tomarán de un archivo.\n\n\n\n\nEjemplo de sustitución con sed\nSustituciones s/// de palabras: s/esto/aquello/\necho \"Windows es lo máximo\" | sed 's/Windows/Linux/'\nEn el ejemplo anterior, la modificación se hace solamente en la primer instancia que el comando encuentra. Pero esto no nos funciona si tenemos 400 repeticiones de Windows que queremos cambiar a Linux. Para que funcione debemos hacer un cambio de la siquiente manera:\necho \"Windows es un sistema operativo ampliamente utilizado.\" &gt; archivo.txt\ncat archivo.txt\nsed 's/Windows/Linux/g' archivo.txt\nEsta letra g que agregamos, indica hacer las sustituciones de manera global, es decir en todas las ocurrencias o repeticiones dentro de un archivo.\n\n\n\nImagen creada con ChatGPT.\n\n\n\n\n\n\n\n\nNotaEjercicio 8: Práctica de sustituciones\n\n\n\n\nVerifica que te encuentres en la carpeta con el comando: pwd\nCámbiate de carpeta si es necesario con el comando cd\nDescarga el archivo libro.txt de mi Github.\nExplora este archivo con cat libro.txt ó less libro.txt ó head libro.txt\nSustituye la palabra “perro” de cada una de las filas por la palabra “gato” y una vez hecho el cambio redirige el resultado a un archivo llamado “libro_gato.txt”.\nCorrobora tus resultados y discute posibles soluciones alternas.\n\nComo pudiste darte cuenta, el archivo está separado por tabulaciones entre columna y columna. Si quisieras además, cambiar el formato del archivo de separación por tabulaciones a separación por comas, ¿qué pasos extra agregarías a tu código? Discute qué hace cada parte del código.\n\n\n\n\n\n\nTipSolución\n\n\n\n\n\nsed 's/perro/gato/g' notas.txt &gt;&gt; libro_gato.txt\n\n\n\n\n\n\n\n23.0.1 Referencias\n\nRegEx\nWikipedia: Expresiones Regulares\nYouTube: Expresiones regulares con Notepad++",
     "crumbs": [
       "**Sección 4** - Edición de archivos con Bash",
       "<span class='chapter-number'>23</span>  <span class='chapter-title'>Edición de archivos con el editor de flujo `sed`</span>"
@@ -2351,6 +2362,83 @@
     "crumbs": [
       "Apéndices",
       "<span class='chapter-number'>C</span>  <span class='chapter-title'>**Cronograma Sugerido para un Semestre (15-16 semanas)**</span>"
+    ]
+  },
+  {
+    "objectID": "cap8_crearRproject.html",
+    "href": "cap8_crearRproject.html",
+    "title": "22  Crear un R Project",
+    "section": "",
+    "text": "22.1 ¿Qué es un R Project y por qué usarlo?\nAl comenzar a trabajar con R y RStudio, ya sea para crear un programa para un proyecto, crear una aplicación, presentación, blog, paquete, etc, es recomendado crear un R project.",
+    "crumbs": [
+      "**Sección 4** - Edición de archivos con Bash",
+      "<span class='chapter-number'>22</span>  <span class='chapter-title'>Crear un R Project</span>"
+    ]
+  },
+  {
+    "objectID": "cap8_crearRproject.html#qué-es-un-r-project-y-por-qué-usarlo",
+    "href": "cap8_crearRproject.html#qué-es-un-r-project-y-por-qué-usarlo",
+    "title": "22  Crear un R Project",
+    "section": "",
+    "text": "Carpeta de trabajo dedicada: al crear un R Project, RStudio genera automáticamente una carpeta que contiene todos los archivos y configuraciones necesarias para tu proyecto.\nOrganización: te permite mantener en un solo lugar tus scripts, datos, variables y documentos relacionados.\nReproducibilidad: facilita que cualquier persona (incluido tú en el futuro) pueda abrir el proyecto y trabajar con el mismo entorno.\nIntegración con Git/GitHub: al tener el mismo nombre que tu repositorio, se asegura una sincronización más clara y ordenada entre tu proyecto local y el repositorio remoto.",
+    "crumbs": [
+      "**Sección 4** - Edición de archivos con Bash",
+      "<span class='chapter-number'>22</span>  <span class='chapter-title'>Crear un R Project</span>"
+    ]
+  },
+  {
+    "objectID": "cap8_crearRproject.html#cómo-iniciamos-un-r-project",
+    "href": "cap8_crearRproject.html#cómo-iniciamos-un-r-project",
+    "title": "22  Crear un R Project",
+    "section": "22.2 ¿Cómo iniciamos un R project?",
+    "text": "22.2 ¿Cómo iniciamos un R project?\n\nVayamos en la parte superior al menú Archivos &gt; Nuevo Proyecto.\n\n\n\nSeleccionamos la opción de Nuevo directorio.\n\n\n\nSeleccionamos el tipo de projecto que vamos a iniciar, en nuestro caso Nuevo proyecto.\n\n\n\nNombramos el folder que crearemos y seleccionamos en dónde queremos que se almacene.\n\n\n¡Felicidades, acabas de crear un R project! Si vamos al folder en donde creamos nuestro proyecto, podemos observar que se creó un archivo con terminación Rproj, este es un archivo que contiene la configuración específica para nuestro proyecto.\n\n\n\n\n\n\n\nImagen tomada de: Allison Horst\n\n\n\n22.2.1 Directorio de trabajo\nEste archivo (Rproj) también establece como directorio de trabajo el folder en donde iniciamos el proyecto (puedes comprobarlo desde la consola de RStudio, escribiendo el comando getwd()). Esto es muy conveniente puesto que así podemos asegurarnos de que vamos a acceder a los archivos que estén exclusivamente en nuestro entorno de trabajo.\nColoca en la consola dentro de Rstudio:\n\n\nCódigo\ngetwd()\n\n\n[1] \"/Users/ecoss/Documents/Mt2026_Taller_Computo_libro\"",
+    "crumbs": [
+      "**Sección 4** - Edición de archivos con Bash",
+      "<span class='chapter-number'>22</span>  <span class='chapter-title'>Crear un R Project</span>"
+    ]
+  },
+  {
+    "objectID": "cap8_crearRproject.html#crear-un-rscript",
+    "href": "cap8_crearRproject.html#crear-un-rscript",
+    "title": "22  Crear un R Project",
+    "section": "22.3 Crear un Rscript",
+    "text": "22.3 Crear un Rscript\nPara comenzar a trabajar en un proyecto, necesitamos crear un archivo para escribir nuestro programa. Entra en Archivo &gt; Nuevo Archivo.\nPodemos ver que tenemos distintas opciones de archivos que podemos crear, en este caso vamos a crear nuestro primer Rscript.\n\n\n22.3.1 ¿Qué es un Rscript?\nEs simplemente un archivo de texto con las instrucciones de nuestro algoritmo escritas en el lenguaje de R. También contiene nuestros comentarios escritos con #.\nIntenta escribir tu primer Rscript en el editor, copiando el siguiente algoritmo para realizar una suma:\n\n\nCódigo\na &lt;- 2\nb &lt;- 3\nsuma = a + b\nsuma\n\n\n[1] 5",
+    "crumbs": [
+      "**Sección 4** - Edición de archivos con Bash",
+      "<span class='chapter-number'>22</span>  <span class='chapter-title'>Crear un R Project</span>"
+    ]
+  },
+  {
+    "objectID": "cap8_crearRproject.html#cómo-ejecutamos-el-código",
+    "href": "cap8_crearRproject.html#cómo-ejecutamos-el-código",
+    "title": "22  Crear un R Project",
+    "section": "22.4 ¿Cómo ejecutamos el código?",
+    "text": "22.4 ¿Cómo ejecutamos el código?\nSelecciona todo el código, después ve a la parte superior de la ventana del editor y da click en el botón Run. También pueden ejecutar tu código línea por línea, poniendo tu cursor al principio o al final de la linea y presionando las teclas Control + Enter o Command + Enter.\n\n\n\nImagen creada con ChatGPT.",
+    "crumbs": [
+      "**Sección 4** - Edición de archivos con Bash",
+      "<span class='chapter-number'>22</span>  <span class='chapter-title'>Crear un R Project</span>"
+    ]
+  },
+  {
+    "objectID": "cap8_crearRproject.html#hay-más-que-solo-rscripts",
+    "href": "cap8_crearRproject.html#hay-más-que-solo-rscripts",
+    "title": "22  Crear un R Project",
+    "section": "22.5 Hay más que solo Rscripts",
+    "text": "22.5 Hay más que solo Rscripts\n\n\n\nImagen creada con ChatGPT.",
+    "crumbs": [
+      "**Sección 4** - Edición de archivos con Bash",
+      "<span class='chapter-number'>22</span>  <span class='chapter-title'>Crear un R Project</span>"
+    ]
+  },
+  {
+    "objectID": "cap8_crearRproject.html#descargar-y-cargar-librerías-en-rstudio",
+    "href": "cap8_crearRproject.html#descargar-y-cargar-librerías-en-rstudio",
+    "title": "22  Crear un R Project",
+    "section": "22.6 Descargar y cargar Librerías en Rstudio",
+    "text": "22.6 Descargar y cargar Librerías en Rstudio\n\n22.6.1 ¿Qué es una librería?\nEn programación, una librería es una colección de código pre-escrito. Una librería contiene una “paquete” o “librería” de funciones que podemos utilizar si descargamos e importamos esa librería a nuestro programa.\nComo mencioné anteriormente, al descargar R, también descargamos una serie de librerías, llamadas base R packages. Sin embargo, dependiendo del problema que queramos resolver con nuestro programa, necesitaremos librerías que nos permitan hacer otras cosas.\nExisten distintas formas de instalar librerías.\n\n\n22.6.2 Instalar librerías: CRAN\n\nInstalación desde el repositorio de CRAN: podemos descargar paqueterías de CRAN de dos formas:\n\nLa primera, desde consola con el siguiente comando:\n\n\nCódigo\ninstall.packages(\"reticulate\")\n\n\nLa segunda, desde el menú Herramientas &gt; Instalar paqueterías. En la ventana, ingresamos el nombre de la librería y click en Instalar.\n\n\n\n\n\nLa tercera opción es usar el botón “Install” dentro de la pestaña de Packages.\n\n\n\n22.6.3 ¿Cómo podemos verificar que paquetes tenemos?\nEn la ventana inferior derecha, existe una pestaña que se llama “Packages” que contendra la lista de paquetes instalados en tu computadora, su descripción corta y su versión.\nTambien en esta pestaña podemos instalar paquetes dandado click en INSTALL.\n\n\n\n\n\n\n\n22.6.4 Eliminación de paquetes\nEn algunas ocasiones vamos a tener que actualizar las versiones de los paquetes, pero primero dedes eliminar la versión anterior. Dando click en el botón que contiene una X que esta al final de la fila en cada programa.\n\n\n\n\n\nTambién puedes usar codigo para eliminar el paquete:\n\n\nCódigo\nremove.packages(\"package-to-remove\")\n\n\n\n\n22.6.5 Cargar paquetes en el ambiente de R\n\nOpción A: Emplear la función library para cargar en el ambiente el paquete.\n\n\n\nCódigo\nlibrary(reticulate)\n\n\n\nOpción B: Dando click a la casilla que indica el paquete. Para dejar de usarlo da de nuevo click en esa casilla para que deje de estar marcada.",
+    "crumbs": [
+      "**Sección 4** - Edición de archivos con Bash",
+      "<span class='chapter-number'>22</span>  <span class='chapter-title'>Crear un R Project</span>"
     ]
   }
 ]

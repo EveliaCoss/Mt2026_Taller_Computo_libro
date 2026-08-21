@@ -50,13 +50,13 @@ book:
       chapters: 
         - cap4.qmd  # Introducción a Linux/Unix
         - cap5.qmd  # Mis primeros pasos en Bash   
-        - cap5_crearRproject.qmd # Crear Rproject
         - cap6.qmd  # Wildcards y Streams
-        - regex.qmd
+        - regex.qmd # REGEX
+        - cap7.qmd  # Empleo de grep con REGEX
     - part: "**Sección 4** - Edición de archivos con Bash"
       chapters:     
-        - cap7.qmd  # Operadores de redirección de datos I/O
         - cap8.qmd  # Edición de archivos con los editores de texto (nano y vim)
+        - cap8_crearRproject.qmd # Crear Rproject e instalación de paquetes       
         - cap9.qmd  # Edición de archivos con el editor de flujo sed
         - cap10.qmd # Enlaces simbólicos (symlinks)
         - cap11.qmd # Filtrado de texto (grep, cut, sort, uniq, wc)
