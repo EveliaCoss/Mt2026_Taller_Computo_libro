@@ -63,6 +63,8 @@ sed 's/perro/gato/g' libro.txt >> libro_gato.txt
 :::
 ::::
 
+### `sed` y las combinaciones especiales
+
 ![Imagen creada con ChatGPT.](figures/bash_sed_v2.png){fig-align="center"}
 
 :::: {.callout-note icon="false"}
