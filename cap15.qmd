@@ -1,5 +1,7 @@
 # Introducción a Git / GitHub
 
+> **Fecha:** 06 de octubre, 2026
+
 ## ¿Por qué hacer control de versiones de nuestros proyectos?
 
 1.  ✅ Los proyectos suelen cambiar y crecer.
@@ -17,9 +19,9 @@ Git es fácil de aprender y ocupa poco espacio con un **rendimiento rapidísimo*
 
 En resumen:
 
--   Git es un sistema de control de versiones
+- Git es un sistema de control de versiones
 
--   Git funciona con GitHub, Bitbucket o GitLab
+- Git funciona con GitHub, Bitbucket o GitLab
 
 ## **Git vs controles de versión a mano**
 
@@ -29,25 +31,25 @@ Con Git cada contribuidor tiene una copia del repositorio central, con todos los
 
 ## Recomendaciones para sus proyectos
 
--   Dedicar un directorio exclusivo por proyecto.
+- Dedicar un directorio exclusivo por proyecto.
 
--   Es mejor organizarlo en un RStudio Project.
+- Es mejor organizarlo en un RStudio Project.
 
--   Hacer un repositorio de Git.
+- Hacer un repositorio de Git.
 
--   Trabajen como siempre, solo además de guardar, recuerden hacer `commit`
+- Trabajen como siempre, solo además de guardar, recuerden hacer `commit`
 
--   De vez en vez hagan `push` de sus cambios cuando los hayan **verificado**.
+- De vez en vez hagan `push` de sus cambios cuando los hayan **verificado**.
 
 ## 10.5 Proyectos colaborativos
 
--   GitHub se parece más a un GoogleDoc que a un Word Document.
+- GitHub se parece más a un GoogleDoc que a un Word Document.
 
--   Es fácil que los colaboradores hagan cambios y también es fácil saber quién hizo que.
+- Es fácil que los colaboradores hagan cambios y también es fácil saber quién hizo que.
 
--   El owner del proyecto puede dar permisos a los diferentes colaboradores.
+- El owner del proyecto puede dar permisos a los diferentes colaboradores.
 
--   También existen organizaciones, esto puede ser útil para manejar los permisos de grupos grandes de colaboración.
+- También existen organizaciones, esto puede ser útil para manejar los permisos de grupos grandes de colaboración.
 
 ## GitHub
 
@@ -57,36 +59,36 @@ También existen otras plataformas como [Bitbucked](https://bitbucket.org/produc
 
 ## Manual de sobreviviencia con Git Y GitHub en RStudio (en caso de ser necesario)
 
--   Por cualquier problema con la conexión entre RStudio y Git, siempre ten en cuenta la ubicación de dónde se instaló Git.
+- Por cualquier problema con la conexión entre RStudio y Git, siempre ten en cuenta la ubicación de dónde se instaló Git.
 
-    -   Puedes usar en la terminal `which git` (Mac y Linux)
+  - Puedes usar en la terminal `which git` (Mac y Linux)
 
-    -   O bien usar en la terminal `where git` (Windows)
+  - O bien usar en la terminal `where git` (Windows)
 
--   Recuerda que la terminal (línea de comandos, consola, shell o bash) es un programa en tu computadora que funciona para correr otros programas. Desde RStudio puedes abrir la **terminal**, lo cual es muy conveniente si estás trabajando en un proyecto. Puedes abrir una terminal con:
+- Recuerda que la terminal (línea de comandos, consola, shell o bash) es un programa en tu computadora que funciona para correr otros programas. Desde RStudio puedes abrir la **terminal**, lo cual es muy conveniente si estás trabajando en un proyecto. Puedes abrir una terminal con:
 
-    -   *Tools \> Terminal* (abre la terminal dentro del IDE de RStudio)
+  - *Tools \> Terminal* (abre la terminal dentro del IDE de RStudio)
 
-    -   *Tools \> Shell* (abre una terminal externa a RStudio) \> Apply \> OK
+  - *Tools \> Shell* (abre una terminal externa a RStudio) \> Apply \> OK
 
 ## Clonar un repositorio y tener conexión/permisos para modificarlo
 
--   Git puede comunicarse con un servidor remoto usando uno de dos protocolos, HTTPS o SSH, y cada protocolo usa credenciales diferentes.
+- Git puede comunicarse con un servidor remoto usando uno de dos protocolos, HTTPS o SSH, y cada protocolo usa credenciales diferentes.
 
--   La recomendación actual de **GitHub** es usar HTTPS porque es la manera más fácil de configurar y tiene operatividad en múltiples redes y plataformas.
+- La recomendación actual de **GitHub** es usar HTTPS porque es la manera más fácil de configurar y tiene operatividad en múltiples redes y plataformas.
 
-    -   Es menos probable que HTTPS sea bloqueado por un firewall.
+  - Es menos probable que HTTPS sea bloqueado por un firewall.
 
-    -   Una conexión HTTPS permite que credential.helper almacene en caché su contraseña. (por tanto puedes configurar tu usuario y contraseña en tu equipo de uso).
+  - Una conexión HTTPS permite que credential.helper almacene en caché su contraseña. (por tanto puedes configurar tu usuario y contraseña en tu equipo de uso).
 
-    -   Es más sencillo acceder a un repositorio desde cualquier lugar, ya que solo necesitas los detalles de tu cuenta (no se requieren claves **SSH**) para escribir en el repositorio.
+  - Es más sencillo acceder a un repositorio desde cualquier lugar, ya que solo necesitas los detalles de tu cuenta (no se requieren claves **SSH**) para escribir en el repositorio.
 
--   Usualmente cuando inicies un proyecto colaborativo con GitHub inicializa el repositorio con un README. Copia el HTTPS URL para clonar el repositorio en la terminal `git clone` `https://github.com/TU-USUARIO/TU-REPOSITORIO.git`.
+- Usualmente cuando inicies un proyecto colaborativo con GitHub inicializa el repositorio con un README. Copia el HTTPS URL para clonar el repositorio en la terminal `git clone` `https://github.com/TU-USUARIO/TU-REPOSITORIO.git`.
 
 ## Referencias
 
--   Evelia tutorial:[Workshop sobre Git / Github 2025](https://eveliacoss.github.io/Workshop_GitGithub2025/)
--   Haydee tutorial: [Temas Selectos de Análisis Numérico y Computación Científica: Computo científico para el análisis de datos](https://haydeeperuyero.github.io/Computo_Cientifico/)
--   Github tutorial: [Trabajar con contraseñas de clave SSH](https://docs.github.com/es/authentication/connecting-to-github-with-ssh/working-with-ssh-key-passphrases)
--   Alejandra Medina tutorial: [Control de versiones con GitHub y RStudio](https://comunidadbioinfo.github.io/cdsb2023/control-de-versiones-con-github-y-rstudio.html)
--   [Hacia una biología computacional más reproducible, transparente y colaborativa](https://ellipse.prbb.org/es/hacia-una-biologia-computacional-mas-reproducible-transparente-y-colaborativa/)
+- Evelia tutorial:[Workshop sobre Git / Github 2025](https://eveliacoss.github.io/Workshop_GitGithub2025/)
+- Haydee tutorial: [Temas Selectos de Análisis Numérico y Computación Científica: Computo científico para el análisis de datos](https://haydeeperuyero.github.io/Computo_Cientifico/)
+- Github tutorial: [Trabajar con contraseñas de clave SSH](https://docs.github.com/es/authentication/connecting-to-github-with-ssh/working-with-ssh-key-passphrases)
+- Alejandra Medina tutorial: [Control de versiones con GitHub y RStudio](https://comunidadbioinfo.github.io/cdsb2023/control-de-versiones-con-github-y-rstudio.html)
+- [Hacia una biología computacional más reproducible, transparente y colaborativa](https://ellipse.prbb.org/es/hacia-una-biologia-computacional-mas-reproducible-transparente-y-colaborativa/)

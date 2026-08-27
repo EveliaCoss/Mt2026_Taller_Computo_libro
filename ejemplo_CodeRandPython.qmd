@@ -1,0 +1,39 @@
+---
+engine: knitr
+format: live-html
+---
+
+## Codigo en R
+
+{{< include ./_extensions/r-wasm/live/_knitr.qmd >}}
+
+```{webr}
+#| completion: true
+fit = lm(mpg ~ am, data = mtcars)
+summary(fit)
+plot(fit)
+```
+
+## Codigo en Python
+
+```{pyodide}
+#| completion: true
+for x in range(5):
+  print(x ** 2)
+```
+
+::: {#lst-ref}
+```{webr}
+mod <- lm(mpg ~ cyl, data = mtcars)
+summary(mod)
+```
+
+An interactive R code block, with an example of fitting a linear model.
+:::
+
+See @lst-ref for details.
+
+Referencias
+
+- webr - [**Execute without output**](https://r-wasm.github.io/quarto-live/getting_started/editor.html)
+- [**Interactive Code Blocks**](https://r-wasm.github.io/quarto-live/getting_started/editor.html)

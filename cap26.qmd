@@ -1,5 +1,7 @@
 # Conectar a GitHub con SSH
 
+> **Fecha:** 06 de octubre, 2026
+
 Puedes conectarte a GitHub utilizando el **protocolo Secure Shell (SSH)**, lo cual proporciona un canal seguro sobre una red insegura.
 
 También puedes asegurar tus claves SSH y configurar un agente de autenticación para no tener que ingresar tu contraseña cada vez que utilices tus claves SSH.
@@ -36,9 +38,9 @@ Cuando ejecutes el programa, te va a preguntar si quieres generar una frase, ide
 
 Posteriormente, tendras una carpeta llamada `.ssh/`, entra en esa carpeta y tendras dos archivos, si no los renombraste tendran el nombre de `id_ed25519`.
 
--   `id_ed25519`: llave local, no la vamos a usar. Tampoco la compartas.
+- `id_ed25519`: llave local, no la vamos a usar. Tampoco la compartas.
 
--   `id_ed25519.pub` : llave publica. La usaremos para copiarla en los servidores que usaremos.
+- `id_ed25519.pub` : llave publica. La usaremos para copiarla en los servidores que usaremos.
 
 Vamos a abrir la terminal y vamos a ver el contenido de la carpeta `.ssh/`:
 
@@ -97,9 +99,9 @@ Este comando mostrará tu clave pública en la terminal.
 
 Ahora, para abrir la terminal de **Git Bash dentro de RStudio**, solo tienes que:
 
--   Ir al **Tools** , hacer clic en **Terminal** y en abrir **New terminal**.
+- Ir al **Tools** , hacer clic en **Terminal** y en abrir **New terminal**.
 
--   Deberías ver que se abre una nueva sesión con **Git Bash** como la terminal predeterminada.
+- Deberías ver que se abre una nueva sesión con **Git Bash** como la terminal predeterminada.
 
 ## Paso 6. Verificar la conexión
 
@@ -203,5 +205,5 @@ Este comando establece tu nombre de usuario, que también se asociará con los c
 
 ## Referencias
 
--   Haydee tutorial: [Temas Selectos de Análisis Numérico y Computación Científica: Computo científico para el análisis de datos](https://haydeeperuyero.github.io/Computo_Cientifico/)
--   Alejandra Medina tutorial: [Control de versiones con GitHub y RStudio](https://comunidadbioinfo.github.io/cdsb2023/control-de-versiones-con-github-y-rstudio.html)
+- Haydee tutorial: [Temas Selectos de Análisis Numérico y Computación Científica: Computo científico para el análisis de datos](https://haydeeperuyero.github.io/Computo_Cientifico/)
+- Alejandra Medina tutorial: [Control de versiones con GitHub y RStudio](https://comunidadbioinfo.github.io/cdsb2023/control-de-versiones-con-github-y-rstudio.html)

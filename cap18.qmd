@@ -1,399 +1,347 @@
-# Rastrear cambios
+# Ignorar archivos/carpetas
 
-Vamos a crear un archivo de texto dentro de la carpeta `Mi_primer_repo`.
+> **Fecha:** 06 de octubre, 2026
 
-``` bash
-nano prueba.txt
-```
+Es muy usual tener un archivo llamado `.gitignore` donde se pueden colocar los nombres de archivos o carpetas que no queremos llevar registro.
 
-Y escribamos algo en el archivo y guardemoslo.
+Creemos unos archivos de prueba.
 
 ``` bash
-Primer archivo en el que rastrearemos cambios.
+cd Mi_primer_repo
+mkdir resultados
+touch a.csv b.csv c.csv resultados/a.out resultados/b.out
 ```
 
-Ahora, si preguntamos por el estado de nuestro proyecto vamos a obtener un mensaje de que hay algo nuevo:
-
-``` bash
-git status
-```
-
-El mensaje que dice `untracked files` nos indica que hay cambios y que a Git no se le ha indicado que debe registrarlos. Para añadir estos cambios hacemos lo siguiente:
-
-``` bash
-git add prueba.txt
-```
-
-Si revisamos el estado del proyecto vemos que ahora un mensaje diferente, ahora solo nos indica que no se ha realizado ningún commit pero que si se tiene registro de algo que cambio.
+Si preguntamos el estado veremos los cambios no registrados en el historial.
 
 ``` bash
 git status
 ```
 
-Para hacer un commit:
+Estos archivos por el momento no nos sirven de nada y guardarlos o registrarlos sería una perdida de tiempo/espacio. Para ignorarlos, creamos el archivo `.gitignore` y añadimos los nombres a ese archivo:
 
 ``` bash
-git commit -m "Comenzando archivo de prueba y registro de cambios"
+nano .gitignore
 ```
 
-Este comando le dice a Git que tome todo lo que se añadió y que guarde una copia permanente dentro del directorio `.git`. Cada commit tiene un identificador único. Si no especificamos el mensaje, Git abrirá un editor de texto para colocar el mensaje. Los mensajes deben de reflejar lo que se está guardando para que sean útiles en el futuro.
+``` bash
+*.csv
+resultados/
+```
 
-Si ahora verificamos el estado del proyecto veremos que nos dice que no hay nada a lo que hacer commit ya que en el paso anterior añadimos todo y no hemos realizado ningún cambio.
+``` bash
+cat .gitignore
+```
+
+Estos patrones le están diciendo a Git que ignore todos los archivos `.csv` y todo lo que hay en la carpeta `resultados`, si después añadimos algo a la carpeta lo seguirá ignorando. Y si alguno de esos archivos ya se le dijo a Git que llevará su registro lo seguirá registrando.
 
 ``` bash
 git status
 ```
 
-Para mostrar el historial del proyecto:
+Si nos fijamos, el único documento que ahora nos menciona `Git` es el archivo `.gitignore`. Lo que nos falta es añadirlo y hacer el commit.
 
 ``` bash
-git log
+git add .gitignore
+git commit -m "Creamos el archivo gitignore e ignoramos todo lo que hay en resultados y archivos csv"
+git status
 ```
 
-Ahora, añadamos una línea nueva al archivo `prueba.txt`
+El archivo `.gitignore` nos ayuda a no cometer el error de accidentalmente tratar de registrar y rastrear algo que se le dijo que no lo hiciera.
 
 ``` bash
-nano prueba.txt
+git add a.csv
 ```
 
-``` output
-Primer archivo en el que rastrearemos cambios.
-Segunda línea de cambios para continuar con el ejemplo.
-```
-
-Si revisamos el estado veremos de nuevo que nos devuelve el mensaje de que hay archivos sin rastrear. Para comparar las diferencias del archivo usamos:
+Si realmente queremos agregarlo, tendríamos que usar la opción `-f`:
 
 ``` bash
-git diff
+git add -f a.csv
 ```
 
-El signo `+` nos está indicando cuales son los cambios en el archivo nuevo.
-
-::: {.callout-note}
-## ¿Cómo interpretar la salida de `git diff`?
-
-Git muestra las diferencias entre la versión actual de los archivos y la última versión guardada en el repositorio.
-
-Regla rápida para interpretar un *diff*:
-
-- `+` : línea agregada.
-- `-` : línea eliminada.
-- Sin símbolo : línea sin cambios.
-- `---` : versión anterior del archivo.
-- `+++` : versión actual del archivo.
-- `@@ ... @@` : ubicación de los cambios dentro del archivo.
-
-Por ejemplo, si obtenemos:
-
-```diff
---- a/prueba.txt
-+++ b/prueba.txt
-@@ -1 +1,2 @@
- Primer archivo en el que rastrearemos cambios.
-+Segunda línea de cambios para continuar con el ejemplo.
-```
-
-Esto significa que la primera línea no cambió y se agregó una nueva línea al final del archivo.
-
-De manera análoga a un procesador de textos, podemos pensar que:
-
-- Las líneas con `+` (generalmente en verde) son texto agregado.
-- Las líneas con `-` (generalmente en rojo) son texto eliminado.
-- Las líneas sin símbolo se muestran únicamente para dar contexto a los cambios.
-:::
-
-Vamos a hacer un commit de este cambio.
+Para ver el estado de los archivos ignorados usamos la siguiente instrucción:
 
 ``` bash
-git commit -m "Añadimos la segunda linea al archivo"
+git status --ignored
 ```
-
-¿Qué paso? Nos esta diciendo que no hemos añadido nada al `staged area` a lo que le podamos hacer un commit, recuerden añadir todo antes de hacer commit.
-
-``` bash
-git add prueba.txt
-git commit -m "Añadimos la segunda linea al archivo"
-```
-
-Añadir todo primero al área de preparación nos permite tener un mejor control de a que le estamos haciendo commit, por ejemplo podemos añadir y hacerle commit solo al archivo donde tenemos la bibliografía y no a todo el proyecto donde hay partes no completas.
-
-[!["Software Carpentry - Version Control with Git](https://swcarpentry.github.io/git-novice-es/fig/git-staging-area.svg){width="700"}](https://swcarpentry.github.io/git-novice-es/04-changes.html)
 
 :::: callout-note
 ## Ejercicio 1
 
-Añadamos una tercera línea al archivo y verifiquemos las diferencias en los archivos, después añadanlo al área de preparación y revisen las diferencias. ¿Qué sucede?
+Supongamos que tenemos las siguientes subcarpetas:
+
+``` bash
+resultados/plots
+resultados/datos
+```
+
+¿Qué tenemos que hacer si queremos ignorar solamente lo que hay en `datos` y no lo que hay en `plots`?
 
 ::: {.callout-tip collapse="true" icon="false"}
 ## Solución
 
-``` bash
-nano prueba.txt
-git diff
-git add prueba.txt
-git diff
+Si queremos ignorar únicamente el contenido de la carpeta `datos`, pero seguir rastreando los archivos de `plots`, podemos crear (o modificar) un archivo `.gitignore` y agregar la siguiente línea:
+
+``` text
+resultados/datos/
 ```
+
+La barra `/` al final indica que queremos ignorar todo el contenido del directorio `datos`.
+
+El archivo `.gitignore` podría verse así:
+
+``` text
+resultados/datos/
+```
+
+Con esta configuración, Git ignorará archivos como
+
+``` text
+resultados/datos/datos1.csv
+resultados/datos/salida.txt
+```
+
+pero seguirá rastreando normalmente archivos como
+
+``` text
+resultados/plots/figura1.png
+resultados/plots/heatmap.pdf
+```
+
+Podemos comprobar qué archivos están siendo rastreados con:
+
+``` bash
+git status
+```
+
+y observaremos que los archivos dentro de `resultados/datos/` no aparecen, mientras que los archivos dentro de `resultados/plots/` sí.
 :::
 ::::
 
-Al añadirlo al área de preparación lo estamos añadiendo permanentemente, entonces no hay ninguna diferencia. Si queremos las diferencias con lo último a lo que se le hizo commit podemos hacer lo siguiente:
+Para ignorar por ejemplo todos los archivos que terminan en `.csv` excepto uno en específico (`b.csv`) podemos indicarlo en el archivo `.gitignore` como:
 
 ``` bash
-git diff --staged
+*.csv  # ignoramos todos los csv
+!b.csv # exepto el que se llama b.csv
 ```
-
-Ahora hagamos el commit.
-
-``` bash
-git commit -m "Tercera línea para probar que pasa cuando se añade al área de preparación"
-```
-
-Si revisamos el historial, veremos ahora 3 commit diferentes:
-
-``` bash
-git log
-```
-
-Cuando el historial es muy grande no nos va a mostrar todo el historial nuestra terminal, para ir avanzando debemos presionar <kbd>Spacebar</kbd> y para salir la letra <kbd>Q</kbd>. Al presionar <kbd>/</kbd> se puede buscar alguna palabra en los mensajes de los commits. Para limitar la cantidad de información que nos regresa `log` podemos especificar con la opción `-n` la cantidad de commits desde el más reciente. Para ver por ejemplo el último utilizaríamos lo siguiente:
-
-``` bash
-git log -1
-```
-
-Si queremos ver los mensajes en una sola línea usamos:
-
-``` bash
-git log --oneline
-```
-
-Git no guarda información de directorios vacíos. Por ejemplo:
-
-``` bash
-mkdir dic_prueba
-git status
-git add dic_prueba
-git status
-```
-
-Si creamos un directorio con archivos, entonces si podemos añadir todos los archivos a la vez y si quedará el registro del directorio también.
-
-``` bash
-touch dic_prueba/prueba1.txt dic_prueba/prueba2.txt dic_prueba/prueba3.txt
-git status
-git add dic_prueba
-git status
-git commit -m "Ejemplo de como realizar un registro de directorios con archivos"
-```
-
-En algunas ocasiones verán directorios vacíos con un archivo `.gitkeep`, este archivo es solo para que podamos añadir el repo a Git.
 
 :::: callout-note
 ## Ejercicio 2
 
-Crea un archivo `mi_archivo.txt`, escribe algo en el y guárdalo en la ruta `Mi_primer_repo`. Añádelo a la historia de tu repo. ¿Cuáles son los pasos que debes realizar?
+Supongamos ahora que tenemos la siguiente estructura de carpetas:
+
+``` bash
+resultados/plots
+resultados/datos
+resultados/img
+resultados/analisis
+```
+
+Y que queremos ignorar todo excepto lo que hay en datos. ¿Cómo lo harían?
 
 ::: {.callout-tip collapse="true" icon="false"}
 ## Solución
 
-Primero nos aseguramos de estar dentro de la carpeta `Mi_primer_repo`:
+Una forma de hacerlo es ignorar primero todo el contenido de `resultados` y después excluir de esa regla a la carpeta `datos`.
 
-```bash
-cd Mi_primer_repo
+Para ello, en el archivo `.gitignore` podemos escribir:
+
+``` text
+resultados/*
+!resultados/datos/
 ```
 
-Creamos el archivo `mi_archivo.txt`, escribimos algo en él y lo guardamos. Por ejemplo:
+Sin embargo, para que Git también considere los archivos dentro de `datos`, debemos añadir:
 
-```text
-Mi primer archivo bajo control de versiones.
+``` text
+resultados/*
+!resultados/datos/
+!resultados/datos/**
 ```
 
-Verificamos el estado del repositorio:
+Con esto, Git ignorará archivos como
 
-```bash
+``` text
+resultados/plots/figura1.png
+resultados/img/logo.jpg
+resultados/analisis/salida.txt
+```
+
+pero seguirá rastreando archivos dentro de
+
+``` text
+resultados/datos/
+```
+
+Por ejemplo,
+
+``` text
+resultados/datos/datos1.csv
+resultados/datos/mediciones.txt
+```
+
+Podemos verificarlo con:
+
+``` bash
 git status
 ```
 
-La salida mostrará que Git detectó un nuevo archivo sin rastrear (*untracked file*):
-
-```text
-Untracked files:
-  mi_archivo.txt
-```
-
-Para comenzar a rastrearlo, lo añadimos al área de preparación (*staging area*):
-
-```bash
-git add mi_archivo.txt
-```
-
-Podemos comprobar nuevamente el estado:
-
-```bash
-git status
-```
-
-Ahora Git indicará que el archivo está listo para ser incluido en el siguiente commit.
-
-Finalmente, guardamos estos cambios en la historia del repositorio con:
-
-```bash
-git commit -m "Agrega mi_archivo.txt"
-```
-
-Podemos verificar que el commit se realizó correctamente con:
-
-```bash
-git log
-```
+y observaremos que solamente aparecen los archivos contenidos en `resultados/datos`.
 :::
 ::::
 
 :::: callout-note
 ## Ejercicio 3
 
-Modifica el archivo `prueba.txt` añadiéndole una línea, ahora en el archivo `mi_archivo.txt` agrega algo y guárdalo. ¿Cómo añadirías los dos archivos al staging área? Añádelos y realiza el commit correspondiente.
+Supongamos que tenemos la siguiente estructura de archivos:
+
+``` bash
+resultados/rdatos/a.csv
+resultados/rdatos/b.csv
+resultados/rdatos/c.csv
+resultados/rdatos/info.txt
+```
+
+¿Cómo le indicas a Git que ignore todos los `csv` de la carpeta `rdatos` menos el que se llama `info.txt`?
 
 ::: {.callout-tip collapse="true" icon="false"}
 ## Solución
 
-Primero modificamos ambos archivos y los guardamos. Por ejemplo, podemos añadir una línea más a `prueba.txt` y escribir algo adicional en `mi_archivo.txt`.
+Como únicamente queremos ignorar los archivos con extensión `.csv` dentro de la carpeta `rdatos`, podemos añadir al archivo `.gitignore` la siguiente línea:
 
-Para verificar que Git detectó las modificaciones, ejecutamos:
+``` text
+resultados/rdatos/*.csv
+```
 
-```bash
+Con esta regla, Git ignorará
+
+``` text
+resultados/rdatos/a.csv
+resultados/rdatos/b.csv
+resultados/rdatos/c.csv
+```
+
+pero seguirá rastreando cualquier archivo cuya extensión no sea `.csv`, por ejemplo
+
+``` text
+resultados/rdatos/info.txt
+```
+
+Podemos verificarlo con:
+
+``` bash
 git status
 ```
 
-La salida mostrará algo similar a:
-
-```text
-Changes not staged for commit:
-  modified: prueba.txt
-  modified: mi_archivo.txt
-```
-
-Podemos añadir ambos archivos al área de preparación (*staging area*) especificando cada uno:
-
-```bash
-git add prueba.txt mi_archivo.txt
-```
-
-Alternativamente, como ambos archivos están en el directorio actual, podríamos añadir todos los cambios con:
-
-```bash
-git add .
-```
-
-Verificamos nuevamente el estado del repositorio:
-
-```bash
-git status
-```
-
-Ahora Git mostrará que ambos archivos están listos para ser incluidos en el siguiente commit:
-
-```text
-Changes to be committed:
-  modified: prueba.txt
-  modified: mi_archivo.txt
-```
-
-Finalmente, guardamos los cambios en la historia del repositorio:
-
-```bash
-git commit -m "Actualiza prueba.txt y mi_archivo.txt"
-```
-
-Podemos comprobar que el commit fue realizado con:
-
-```bash
-git log
-```
+y observaremos que únicamente aparecerá `info.txt`, mientras que los archivos `.csv` serán ignorados.
 :::
 ::::
 
 :::: callout-note
 ## Ejercicio 4
 
-Crea un repositorio llamado `bio`. Escribe en un archivo llamado `me.txt` tres líneas de tu biografía, has un commit con tus cambios. Modifica una línea y agrega una cuarta línea. Muestra las diferencias entre el archivo en el staging área y el actual.
+Supongamos que tenemos la siguiente estructura de datos:
+
+``` bash
+resultados/a.csv
+resultados/analisis1/b.csv
+resultados/analisis2/c.csv
+resultados/analisis2/sub_1/d.csv
+```
+
+¿Cómo le indicamos a Git que ignore todos los archivos `.csv` sin indicar manualmente todos los directorios?
 
 ::: {.callout-tip collapse="true" icon="false"}
 ## Solución
 
-Primero creamos un nuevo directorio y lo inicializamos como repositorio Git:
+Si queremos ignorar todos los archivos con extensión `.csv`, independientemente del directorio en el que se encuentren, podemos añadir al archivo `.gitignore` la siguiente línea:
 
-```bash
-mkdir bio
-cd bio
-git init
+``` text
+*.csv
 ```
 
-Creamos el archivo `me.txt` con tres líneas, por ejemplo:
+Con esta regla, Git ignorará automáticamente archivos como
 
-```text
-Soy estudiante de matemáticas.
-Me interesa la programación.
-Estoy aprendiendo Git.
+``` text
+resultados/a.csv
+resultados/analisis1/b.csv
+resultados/analisis2/c.csv
+resultados/analisis2/sub_1/d.csv
 ```
 
-Añadimos el archivo al área de preparación y realizamos un commit:
+sin necesidad de especificar manualmente cada carpeta.
 
-```bash
-git add me.txt
-git commit -m "Agrega biografía inicial"
-```
+Podemos verificar qué archivos están siendo ignorados mediante:
 
-Ahora modificamos el archivo, cambiando una línea y agregando una cuarta. Por ejemplo:
-
-```text
-Soy estudiante de matemáticas.
-Me interesa el análisis de datos.
-Estoy aprendiendo Git.
-También me gusta la bioinformática.
-```
-
-Verificamos el estado del repositorio:
-
-```bash
+``` bash
 git status
 ```
 
-y añadimos los cambios al *staging area*:
+y observaremos que los archivos con extensión `.csv` no aparecerán.
 
-```bash
-git add me.txt
+Alternativamente, podríamos usar:
+
+``` text
+**/*.csv
 ```
 
-Supongamos que después de hacer `git add me.txt` volvemos a modificar el archivo, agregando una quinta línea:
+que explícitamente indica que se ignoren todos los archivos `.csv` en cualquier subdirectorio, aunque en la mayoría de los casos basta con escribir simplemente:
 
-```text
-Soy estudiante de matemáticas.
-Me interesa el análisis de datos.
-Estoy aprendiendo Git.
-También me gusta la bioinformática.
-Me interesa la ciencia de datos.
+``` text
+*.csv
+```
+:::
+::::
+
+:::: callout-note
+## Ejercicio 5
+
+Si en el archivo `.gitignore` escribimos lo siguiente, ¿qué está ignorando?
+
+``` bash
+*.csv
+!*.csv
 ```
 
-Ahora tenemos una versión en el *staging area* y otra diferente en el directorio de trabajo.
+::: {.callout-tip collapse="true" icon="false"}
+## Solución
 
-Para mostrar las diferencias entre ambas versiones utilizamos:
+La primera línea
 
-```bash
-git diff
+``` text
+*.csv
 ```
 
-La salida será similar a:
+le indica a Git que ignore todos los archivos con extensión `.csv`.
 
-```diff
-@@ -2,3 +2,4 @@
- Me interesa el análisis de datos.
- Estoy aprendiendo Git.
- También me gusta la bioinformática.
-+Me interesa la ciencia de datos.
+Sin embargo, la segunda línea
+
+``` text
+!*.csv
 ```
 
-La línea con `+` indica que fue agregada después de ejecutar `git add`, por lo que aún no forma parte del *staging area*.
+niega la regla anterior y vuelve a incluir todos los archivos `.csv`.
 
+Por lo tanto, el efecto neto es que **ningún archivo `.csv` será ignorado**.
 
+Recordemos que en un archivo `.gitignore`, las reglas se procesan de arriba hacia abajo y las reglas posteriores tienen prioridad sobre las anteriores.
+
+Por ejemplo, si tenemos los archivos
+
+``` text
+a.csv
+b.csv
+datos/c.csv
+```
+
+ninguno de ellos será ignorado.
+
+Podemos comprobarlo con:
+
+``` bash
+git status
+```
+
+y observaremos que todos los archivos `.csv` aparecerán normalmente.
 :::
 ::::

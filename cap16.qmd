@@ -1,5 +1,7 @@
 # Configurar Git
 
+> **Fecha:** 06 de octubre, 2026
+
 Usar control de versiones es una forma de manejar proyectos, todo a lo que se hace `commit` no se pierde, se queda un registro de todos los cambios y siempre es posible regresar a una versión anterior. Nos evitamos estar enviando y enviando correos con versiones finales para después comparar versiones. Se guarda el usuario que hizo el cambio y automáticamente obtenemos una notificación de si intentamos modificar lo mismo que un colaborador para revisar cual cambio guardar.
 
 Pueden pensar en versión de control como una forma de `undo` ilimitado y de trabajar paralelamente con sus colaboradores.

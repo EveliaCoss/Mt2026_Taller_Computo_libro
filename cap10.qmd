@@ -1,4 +1,6 @@
-# Enlaces simbólicos (symlinks)
+# Tipos de enlaces - symlinks, hard links e hipervínculos
+
+> **Fecha:** 24 de septiembre, 2026
 
 Es mejor crear **enlaces simbólicos (symlinks)** en vez de copiar cada archivo, ya que permite ahorrar mucho espacio en el disco al evitar la multiplicación de copias fisicas en el disco duro del mismo archivo.
 
@@ -34,6 +36,8 @@ Una modificación realizada utilizando este enlace se reflejará en el original;
 ::: callout-caution
 Debes tener cuidado al elegir cuál utilizar. Los **enlaces simbólicos** son más convenientes cuando trabajamos con datos importantes que están almacenados en un respaldo, ya que permiten acceder fácilmente a los archivos originales sin duplicarlos y facilitan la gestión de rutas, sin eliminar o afectar los archivos originales.
 :::
+
+![Imagen creada con ChatGPT.](figures/bash_enlaces.png){fig-align="center"}
 
 ## Orden de los archivos
 

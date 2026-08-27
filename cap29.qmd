@@ -1,28 +1,28 @@
-# Repaso: Introducción a Markdown
+# Introducción a Markdown
 
 ## ¿Qué es Markdown?
 
 Markdown es un **lenguaje de marcado ligero** que permite añadir elementos de formato a documentos de *texto plano*. Creado por John Gruber en 2004, Markdown es actualmente uno de los lenguajes más populares del mundo.
 
--   Sencillo y legible, sin necesidad de usar editores complicados o HTML.
--   **lenguaje de marcado ligero:** Escribir texto que incluye instrucciones simples para darle formato.
+- Sencillo y legible, sin necesidad de usar editores complicados o HTML.
+- **lenguaje de marcado ligero:** Escribir texto que incluye instrucciones simples para darle formato.
 
 ::: callout-note
 ### 🧩 ¿Por qué se llama “ligero”?
 
 Porque:
 
--   Usa símbolos sencillos como `*, #,` o `-` para indicar formato.
--   No requiere cerrar etiquetas como `<strong> o <div>` (como en HTML).
--   Es minimalista y limpio, ideal para escribir rápido sin distracciones.
+- Usa símbolos sencillos como `*, #,` o `-` para indicar formato.
+- No requiere cerrar etiquetas como `<strong> o <div>` (como en HTML).
+- Es minimalista y limpio, ideal para escribir rápido sin distracciones.
 :::
 
 ## 🧠 ¿Para qué se usa?
 
--   Crear documentación técnica o científica
--   Escribir **README.md** en proyectos de GitHub
--   Generar contenido para sitios web
--   Crear [tesis](https://quarto.org/docs/get-started/hello/rstudio.html), notas, [libros](https://bookdown.org/yihui/rmarkdown-cookbook/), [presentaciones](https://bookdown.org/yihui/rmarkdown/xaringan.html) y posters
+- Crear documentación técnica o científica
+- Escribir **README.md** en proyectos de GitHub
+- Generar contenido para sitios web
+- Crear [tesis](https://quarto.org/docs/get-started/hello/rstudio.html), notas, [libros](https://bookdown.org/yihui/rmarkdown-cookbook/), [presentaciones](https://bookdown.org/yihui/rmarkdown/xaringan.html) y posters
 
 **En R**
 
@@ -94,13 +94,13 @@ Si gustas repasar podemos hacerlo con el script [Sesion_Rmarkdown_13Oct2023.Rmd]
 
 ## Referencias
 
--   [Documentación de GitHub](https://docs.github.com/es/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax)
--   [Libro de Rmarkdown](https://michael-franke.github.io/intro-data-analysis/ch-01-01-Rmarkdown.html)
--   [Ejercicios con Markdown](https://www.markdowntutorial.com/es/lesson/1/)
--   [Curso de Heladia Salgado](https://lcg-cursos.github.io/material/introbioinfo/)
--   Curso de [Git y GitHub Evelia Coss](https://eveliacoss.github.io/Workshop_GitGithub2025/Parte2.html)
--   [Markdown and rmarkdown](https://faculty.washington.edu/otoomet/info201-book/markdown.html)
--   [Galeria de Markdown](https://rmarkdown.rstudio.com/gallery.html)
--   [Lesson 3: Basic Syntax](https://zsmith27.github.io/rmarkdown_crash-course/lesson-3-basic-syntax.html)
--   [Introduction to Open Data Science with R](https://carpentries-incubator.github.io/open-science-with-r/aio/index.html)
--   [Data Science for Psychologists](https://bookdown.org/hneth/ds4psy/)
+- [Documentación de GitHub](https://docs.github.com/es/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax)
+- [Libro de Rmarkdown](https://michael-franke.github.io/intro-data-analysis/ch-01-01-Rmarkdown.html)
+- [Ejercicios con Markdown](https://www.markdowntutorial.com/es/lesson/1/)
+- [Curso de Heladia Salgado](https://lcg-cursos.github.io/material/introbioinfo/)
+- Curso de [Git y GitHub Evelia Coss](https://eveliacoss.github.io/Workshop_GitGithub2025/Parte2.html)
+- [Markdown and rmarkdown](https://faculty.washington.edu/otoomet/info201-book/markdown.html)
+- [Galeria de Markdown](https://rmarkdown.rstudio.com/gallery.html)
+- [Lesson 3: Basic Syntax](https://zsmith27.github.io/rmarkdown_crash-course/lesson-3-basic-syntax.html)
+- [Introduction to Open Data Science with R](https://carpentries-incubator.github.io/open-science-with-r/aio/index.html)
+- [Data Science for Psychologists](https://bookdown.org/hneth/ds4psy/)
