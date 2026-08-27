@@ -595,7 +595,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#uniq---identifica-y-filtra-líneas-repetidas" id="toc-uniq---identifica-y-filtra-líneas-repetidas" class="nav-link" data-scroll-target="#uniq---identifica-y-filtra-líneas-repetidas"><span class="header-section-number">25.3</span> <code>uniq</code> - Identifica y filtra líneas repetidas</a></li>
   <li><a href="#wc---cuenta-líneas-palabras-y-caracteres" id="toc-wc---cuenta-líneas-palabras-y-caracteres" class="nav-link" data-scroll-target="#wc---cuenta-líneas-palabras-y-caracteres"><span class="header-section-number">25.4</span> <code>wc</code> - Cuenta líneas, palabras y caracteres</a></li>
   <li><a href="#cut---buscar-patrones-en-texto" id="toc-cut---buscar-patrones-en-texto" class="nav-link" data-scroll-target="#cut---buscar-patrones-en-texto"><span class="header-section-number">25.5</span> <code>cut</code> - Buscar patrones en texto</a></li>
-  <li><a href="#referencias" id="toc-referencias" class="nav-link" data-scroll-target="#referencias"><span class="header-section-number">25.6</span> Referencias</a></li>
+  <li><a href="#ejercicio-integrador-grep-cut-sort-uniq-y-wc" id="toc-ejercicio-integrador-grep-cut-sort-uniq-y-wc" class="nav-link" data-scroll-target="#ejercicio-integrador-grep-cut-sort-uniq-y-wc"><span class="header-section-number">25.6</span> Ejercicio integrador: <code>grep</code>, <code>cut</code>, <code>sort</code>, <code>uniq</code> y <code>wc</code></a></li>
+  <li><a href="#referencias" id="toc-referencias" class="nav-link" data-scroll-target="#referencias"><span class="header-section-number">25.7</span> Referencias</a></li>
   </ul>
 </nav>
     </div>
@@ -648,13 +649,17 @@ Importante
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>La filosofía de un <strong>pipeline o tubería</strong> en Bash es que <strong>la salida de un comando se convierte en la entrada del siguiente mediante <code>| (pipe)</code></strong>.</p>
+<p>La filosofía de un <strong>pipeline o tubería</strong> en Bash es que <strong>la salida de un comando se convierte en la entrada del siguiente mediante <code>|</code> (pipe)</strong>.</p>
 </div>
 </div>
 <p>Al final de esta clase podrás leer comandos como estos:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span> <span class="st">"Aprobado"</span> calificaciones.txt <span class="kw">|</span> <span class="fu">cut</span> <span class="at">-d</span><span class="st">','</span> <span class="at">-f2</span> <span class="kw">|</span> <span class="fu">sort</span> <span class="kw">|</span> <span class="fu">uniq</span> <span class="at">-c</span> <span class="kw">|</span> <span class="fu">sort</span> <span class="at">-nr</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <p>No necesariamente memorizarlo de golpe, sino entender <strong>qué aporta cada etapa</strong>:</p>
 <table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 65%">
+</colgroup>
 <thead>
 <tr class="header">
 <th>Comando</th>
@@ -684,14 +689,36 @@ Importante
 </tr>
 </tbody>
 </table>
+<p>Podemos crear 3 archivos:</p>
+<ol type="1">
+<li>El archivo <code>nombres.txt</code>:</li>
+</ol>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="at">-e</span> <span class="st">"Sofía\nCarlos\nAna\nMiguel\nElena\nDiego\nBeatriz\nFernando\nLaura\nJorge"</span> <span class="op">&gt;</span> ejercicios/BASH/nombres.txt</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<ol start="2" type="1">
+<li>El archivo <code>numeros.txt</code>:</li>
+</ol>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="at">-e</span> <span class="st">"42\n7\n100\n23\n5\n81\n16\n3\n55\n12"</span> <span class="op">&gt;</span> ejercicios/BASH/numeros.txt</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<ol start="3" type="1">
+<li>El archivo <code>datos.txt</code>:</li>
+</ol>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="at">-e</span> <span class="st">"Ana 85\nLuis 72\nMaría 94\nCarlos 68\nSofía 91\nDiego 77\nElena 88\nPablo 63"</span> <span class="op">&gt;</span> ejercicios/BASH/datos.txt</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<ol start="4" type="1">
+<li>El archivo <code>temas.txt</code>:</li>
+</ol>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="at">-e</span> <span class="st">"Álgebra\nCálculo\nÁlgebra\nGeometría\nCálculo\nÁlgebra\nEstadística"</span> <span class="op">&gt;</span> ejercicios/BASH/temas.txt</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<ol start="5" type="1">
+<li>El archivo <code>alumnos.txt</code>:</li>
+</ol>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="at">-e</span> <span class="st">"Ana:85:Álgebra\nLuis:72:Cálculo\nMaría:94:Estadística\nCarlos:68:Geometría\nSofía:91:Cálculo"</span> <span class="op">&gt;</span> ejercicios/BASH/alumnos.txt</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <section id="repaso-de-grep---buscar-patrones-en-texto" class="level2" data-number="25.1">
 <h2 data-number="25.1" class="anchored" data-anchor-id="repaso-de-grep---buscar-patrones-en-texto"><span class="header-section-number">25.1</span> Repaso de <code>grep</code> - Buscar patrones en texto</h2>
-<p><strong>Sintaxis:</strong> <code>grep [opciones] "patrón" archivo</code></p>
+<p><strong>Sintaxis:</strong></p>
+<pre><code>grep [opciones] "patrón" archivo</code></pre>
 <table class="caption-top table">
 <colgroup>
-<col style="width: 17%">
-<col style="width: 41%">
-<col style="width: 41%">
+<col style="width: 16%">
+<col style="width: 45%">
+<col style="width: 36%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -702,54 +729,40 @@ Importante
 </thead>
 <tbody>
 <tr class="odd">
+<td></td>
+<td></td>
+<td><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span> <span class="st">":[9][0-9]:"</span> alumnos.txt</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div></td>
+</tr>
+<tr class="even">
 <td><code>-i</code></td>
 <td>Ignora mayúsculas y minúsculas</td>
-<td><code>grep -i "error" log.txt</code></td>
+<td><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span> <span class="at">-i</span> <span class="st">"carlos"</span> nombres.txt</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><code>-n</code></td>
 <td>Muestra el número de línea</td>
-<td><code>grep -n "error" log.txt</code></td>
+<td><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span> <span class="at">-n</span> <span class="st">"Miguel"</span> nombres.txt</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><code>-c</code></td>
 <td>Cuenta las líneas que coinciden</td>
-<td><code>grep -c "error" log.txt</code></td>
+<td><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span> <span class="at">-c</span> <span class="st">"Cálculo"</span>alumnos.txt</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><code>-v</code></td>
 <td>Muestra líneas que <strong>NO</strong> coinciden</td>
-<td><code>grep -v "error" log.txt</code></td>
-</tr>
-<tr class="odd">
-<td><code>-r</code></td>
-<td>Búsqueda recursiva en directorios</td>
-<td><code>grep -r "error" /var/logs/</code></td>
+<td><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span> <span class="at">-v</span> <span class="st">"a"</span> nombres.txt</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span> <span class="at">-v</span> <span class="st">"Cálculo"</span> alumnos.txt</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div></td>
 </tr>
 <tr class="even">
-<td><code>-l</code></td>
-<td>Muestra solo el nombre del archivo</td>
-<td><code>grep -l "error" *.txt</code></td>
-</tr>
-<tr class="odd">
 <td><code>-w</code></td>
 <td>Coincidencia de palabra completa</td>
-<td><code>grep -w "error" log.txt</code></td>
-</tr>
-<tr class="even">
-<td><code>-A n</code></td>
-<td>Muestra <code>n</code> líneas <strong>después</strong> del match</td>
-<td><code>grep -A 2 "error" log.txt</code></td>
+<td><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span> <span class="at">-w</span> <span class="st">"Cálculo"</span> alumnos.txt</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div></td>
 </tr>
 <tr class="odd">
-<td><code>-B n</code></td>
-<td>Muestra <code>n</code> líneas <strong>antes</strong> del match</td>
-<td><code>grep -B 2 "error" log.txt</code></td>
-</tr>
-<tr class="even">
-<td><code>-E</code></td>
-<td>Usa expresiones regulares extendidas</td>
-<td><code>grep -E "error|warning" log.txt</code></td>
+<td><code>-A n</code></td>
+<td>Muestra <code>n</code> líneas <strong>después</strong> del match</td>
+<td><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span> <span class="at">-A</span> 2 <span class="st">"Álgebra"</span> alumnos.txt</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div></td>
 </tr>
 </tbody>
 </table>
@@ -767,6 +780,57 @@ Importante
 </section>
 <section id="sort---ordenar-líneas-de-texto" class="level2" data-number="25.2">
 <h2 data-number="25.2" class="anchored" data-anchor-id="sort---ordenar-líneas-de-texto"><span class="header-section-number">25.2</span> <code>sort</code> - Ordenar líneas de texto</h2>
+<p><strong>Sintaxis:</strong></p>
+<pre><code>sort [opciones] archivo.txt</code></pre>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 15%">
+<col style="width: 46%">
+<col style="width: 36%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Argumento</th>
+<th>Descripción</th>
+<th>Ejemplo</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td></td>
+<td>Orden alfabético</td>
+<td><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sort</span> nombres.txt</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sort</span> temas.txt</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div></td>
+</tr>
+<tr class="even">
+<td><code>-n</code></td>
+<td>Ordena numéricamente</td>
+<td><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sort</span> <span class="at">-n</span> numeros.txt</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div></td>
+</tr>
+<tr class="odd">
+<td><code>-r</code></td>
+<td>Orden inverso (descendente)</td>
+<td><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb18"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sort</span> <span class="at">-r</span> numeros.txt</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div></td>
+</tr>
+<tr class="even">
+<td><code>-k</code></td>
+<td>Ordena por columna específica</td>
+<td><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb19"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sort</span> <span class="at">-k2</span> datos.txt</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sort</span> <span class="at">-k2nr</span> datos.txt</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div></td>
+</tr>
+<tr class="odd">
+<td><code>-u</code></td>
+<td>Elimina duplicados mientras ordena</td>
+<td><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb20"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sort</span> <span class="at">-u</span> temas.txt</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div></td>
+</tr>
+<tr class="even">
+<td><code>-t</code></td>
+<td>Define separador de campos/columnas</td>
+<td><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb21"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sort</span> <span class="at">-t</span><span class="st">":"</span> <span class="at">-k2n</span> alumnos.txt</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sort</span> <span class="at">-t</span><span class="st">":"</span> <span class="at">-k3</span> alumnos.txt</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div></td>
+</tr>
+</tbody>
+</table>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="figures/bash_sort.png" class="img-fluid figure-img"></p>
@@ -776,6 +840,44 @@ Importante
 </section>
 <section id="uniq---identifica-y-filtra-líneas-repetidas" class="level2" data-number="25.3">
 <h2 data-number="25.3" class="anchored" data-anchor-id="uniq---identifica-y-filtra-líneas-repetidas"><span class="header-section-number">25.3</span> <code>uniq</code> - Identifica y filtra líneas repetidas</h2>
+<p><strong>Sintaxis:</strong></p>
+<pre><code>uniq [opciones] archivo.txt</code></pre>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 17%">
+<col style="width: 46%">
+<col style="width: 35%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Argumento</th>
+<th>Descripción</th>
+<th>Ejemplo</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td></td>
+<td>Ordena y elimina duplicado</td>
+<td><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb23"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sort</span> temas.txt <span class="kw">|</span> <span class="fu">uniq</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div></td>
+</tr>
+<tr class="even">
+<td><code>-c</code></td>
+<td>Cuenta ocurrencias de cada línea</td>
+<td><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb24"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sort</span> datos.txt <span class="kw">|</span> <span class="fu">uniq</span> <span class="at">-c</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div></td>
+</tr>
+<tr class="odd">
+<td><code>-d</code></td>
+<td>Muestra solo líneas duplicadas</td>
+<td><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb25"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sort</span> datos.txt <span class="kw">|</span> <span class="fu">uniq</span> <span class="at">-d</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div></td>
+</tr>
+<tr class="even">
+<td><code>-u</code></td>
+<td>Muestra solo líneas únicas</td>
+<td><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb26"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sort</span> datos.txt <span class="kw">|</span> <span class="fu">uniq</span> <span class="at">-u</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div></td>
+</tr>
+</tbody>
+</table>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="figures/bash_uniq.png" class="img-fluid figure-img"></p>
@@ -785,6 +887,50 @@ Importante
 </section>
 <section id="wc---cuenta-líneas-palabras-y-caracteres" class="level2" data-number="25.4">
 <h2 data-number="25.4" class="anchored" data-anchor-id="wc---cuenta-líneas-palabras-y-caracteres"><span class="header-section-number">25.4</span> <code>wc</code> - Cuenta líneas, palabras y caracteres</h2>
+<p><strong>Sintaxis:</strong></p>
+<pre><code>wc [opciones] archivo.txt</code></pre>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 21%">
+<col style="width: 44%">
+<col style="width: 32%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Argumento</th>
+<th>Descripción</th>
+<th>Ejemplo</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td></td>
+<td>Muestra líneas, palabras, bytes</td>
+<td><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb28"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">wc</span> archivo.txt</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div></td>
+</tr>
+<tr class="even">
+<td><code>-l</code></td>
+<td>Cuenta líneas</td>
+<td><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb29"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">wc</span> <span class="at">-l</span> archivo.txt</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="fu">wc</span> <span class="at">-l</span> <span class="pp">*</span>.txt</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div></td>
+</tr>
+<tr class="odd">
+<td><code>-w</code></td>
+<td>Cuenta palabras</td>
+<td><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb30"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">wc</span> <span class="at">-w</span> archivo.txt</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div></td>
+</tr>
+<tr class="even">
+<td><code>-c</code></td>
+<td>Cuenta bytes</td>
+<td><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb31"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">wc</span> <span class="at">-c</span> archivo.txt</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div></td>
+</tr>
+<tr class="odd">
+<td><code>-w</code></td>
+<td>Cuenta caracteres</td>
+<td><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb32"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">wc</span> <span class="at">-w</span> archivo.txt</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div></td>
+</tr>
+</tbody>
+</table>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="figures/bash_wc.png" class="img-fluid figure-img"></p>
@@ -795,12 +941,48 @@ Importante
 <section id="cut---buscar-patrones-en-texto" class="level2" data-number="25.5">
 <h2 data-number="25.5" class="anchored" data-anchor-id="cut---buscar-patrones-en-texto"><span class="header-section-number">25.5</span> <code>cut</code> - Buscar patrones en texto</h2>
 <p>Aquí vamos a partir de <strong>¿Qué hago si no quiero toda la línea, sino solamente una columna de un archivo?</strong></p>
+<p><strong>Sintaxis:</strong></p>
+<pre><code>cut [opciones] archivo.txt</code></pre>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 16%">
+<col style="width: 53%">
+<col style="width: 29%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Argumento</th>
+<th>Descripción</th>
+<th>Ejemplo</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>-c</code></td>
+<td>Extrae caracteres por posición (ej: <code>-c1-5</code>)</td>
+<td><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb34"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cut</span> <span class="at">-c1-2</span> archivo.txt</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div></td>
+</tr>
+<tr class="even">
+<td><code>-f</code></td>
+<td>Extrae campos específicos (ej: <code>-f1,3</code>)</td>
+<td><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb35"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cut</span> <span class="at">-f1,3</span> <span class="at">-d:</span> alumnos.txt</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div></td>
+</tr>
+<tr class="odd">
+<td><code>-d</code></td>
+<td>Define separador de campos (default: tabulación)</td>
+<td><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb36"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cut</span> <span class="at">-f2</span> <span class="at">-d</span><span class="st">" "</span> datos.txt</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div></td>
+</tr>
+</tbody>
+</table>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="figures/bash_cut.png" class="img-fluid figure-img"></p>
 <figcaption>Imagen creada con ChatGPT.</figcaption>
 </figure>
 </div>
+</section>
+<section id="ejercicio-integrador-grep-cut-sort-uniq-y-wc" class="level2" data-number="25.6">
+<h2 data-number="25.6" class="anchored" data-anchor-id="ejercicio-integrador-grep-cut-sort-uniq-y-wc"><span class="header-section-number">25.6</span> Ejercicio integrador: <code>grep</code>, <code>cut</code>, <code>sort</code>, <code>uniq</code> y <code>wc</code></h2>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -811,7 +993,22 @@ Importante
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>instrucciones</p>
+<p>Instrucciones</p>
+<ol type="1">
+<li><p>Crea el archivo <code>materias.txt</code> ejercutando el siguiente comando:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb37"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="at">-e</span> <span class="st">"Álgebra Lineal:8:1\nCálculo Diferencial:10:1\nGeometría Analítica:8:1\nProbabilidad:6:3\nEstadística:6:3\nEcuaciones Diferenciales:8:4\nÁlgebra Abstracta:8:5\nTopología:6:6\nAnálisis Real:8:6\nProbabilidad:6:3"</span> <span class="op">&gt;</span> ejercicios/BASH/materias.txt</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div></li>
+<li><p>Mostrar todas las materias que contienen la palabra Álgebra (Columna 1).</p></li>
+<li><p>Mostrar todas las materias de sexto semestre (Columna 3).</p></li>
+<li><p>Contar cuántas materias tienen 8 créditos (Columna 2).</p></li>
+<li><p>Mostrar únicamente los nombres de las materias (Columna 1).</p></li>
+<li><p>Mostrar únicamente los créditos (Columna 2).</p></li>
+<li><p>Ordenar las materias alfabéticamente.</p></li>
+<li><p>Ordenar los créditos de menor a mayor.</p></li>
+<li><p>Mostrar los semestres sin repetir.</p></li>
+<li><p>Contar cuántas materias hay por semestre.</p></li>
+<li><p>¿Cuántas materias hay por número de créditos?</p></li>
+<li><p>¿Cuál es el número de créditos más frecuente?</p></li>
+</ol>
 <div class="callout callout-style-default callout-tip no-icon callout-titled">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -824,15 +1021,25 @@ Importante
 </div>
 <div id="callout-3" class="callout-3-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2" data-eval="FALSE"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">1.</span> soluciones</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb38" data-eval="FALSE"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="ex">2.</span> grep <span class="st">"Álgebra"</span> ejercicios/BASH/materias.txt</span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a><span class="ex">3.</span> grep <span class="st">":6$"</span> ejercicios/BASH/materias.txt</span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a><span class="ex">4.</span> grep <span class="st">":8:"</span> ejercicios/BASH/materias.txt <span class="kw">|</span> <span class="fu">wc</span> <span class="at">-l</span></span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a><span class="ex">5.</span> cut <span class="at">-d</span><span class="st">":"</span> <span class="at">-f1</span> ejercicios/BASH/materias.txt</span>
+<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a><span class="ex">6.</span> cut <span class="at">-d</span><span class="st">":"</span> <span class="at">-f2</span> ejercicios/BASH/materias.txt</span>
+<span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a><span class="ex">7.</span> cut <span class="at">-d</span><span class="st">":"</span> <span class="at">-f1</span> ejercicios/BASH/materias.txt <span class="kw">|</span> <span class="fu">sort</span></span>
+<span id="cb38-7"><a href="#cb38-7" aria-hidden="true" tabindex="-1"></a><span class="ex">8.</span> cut <span class="at">-d</span><span class="st">":"</span> <span class="at">-f2</span> ejercicios/BASH/materias.txt <span class="kw">|</span> <span class="fu">sort</span> <span class="at">-n</span></span>
+<span id="cb38-8"><a href="#cb38-8" aria-hidden="true" tabindex="-1"></a><span class="ex">9.</span> cut <span class="at">-d</span><span class="st">":"</span> <span class="at">-f3</span> ejercicios/BASH/materias.txt <span class="kw">|</span> <span class="fu">sort</span> <span class="kw">|</span> <span class="fu">uniq</span></span>
+<span id="cb38-9"><a href="#cb38-9" aria-hidden="true" tabindex="-1"></a><span class="ex">10.</span> cut <span class="at">-d</span><span class="st">":"</span> <span class="at">-f3</span> ejercicios/BASH/materias.txt <span class="kw">|</span> <span class="fu">sort</span> <span class="kw">|</span> <span class="fu">uniq</span> <span class="at">-c</span></span>
+<span id="cb38-10"><a href="#cb38-10" aria-hidden="true" tabindex="-1"></a><span class="ex">11.</span> cut <span class="at">-d</span><span class="st">":"</span> <span class="at">-f2</span> ejercicios/BASH/materias.txt <span class="kw">|</span> <span class="fu">sort</span> <span class="kw">|</span> <span class="fu">uniq</span> <span class="at">-c</span></span>
+<span id="cb38-11"><a href="#cb38-11" aria-hidden="true" tabindex="-1"></a><span class="ex">12.</span> cut <span class="at">-d</span><span class="st">":"</span> <span class="at">-f2</span> ejercicios/BASH/materias.txt <span class="kw">|</span> <span class="fu">sort</span> <span class="kw">|</span> <span class="fu">uniq</span> <span class="at">-c</span> <span class="kw">|</span> <span class="fu">sort</span> <span class="at">-nr</span> <span class="kw">|</span> <span class="fu">head</span> <span class="at">-1</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div>
 </div>
 </div>
 </div>
 </section>
-<section id="referencias" class="level2" data-number="25.6">
-<h2 data-number="25.6" class="anchored" data-anchor-id="referencias"><span class="header-section-number">25.6</span> Referencias</h2>
+<section id="referencias" class="level2" data-number="25.7">
+<h2 data-number="25.7" class="anchored" data-anchor-id="referencias"><span class="header-section-number">25.7</span> Referencias</h2>
 <ul>
 <li><a href="https://vinuesa.github.io/intro2linux/index.html#ejemplos-de-herramientas-de-filtrado-de-texto-pipelines-con-grep-cut-sort-uniq-wc-en-acci%C3%B3n">Ejemplos de herramientas de filtrado de texto: <em>pipelines</em> con <strong>grep</strong>, <strong>cut</strong>, <strong>sort</strong>, <strong>uniq</strong>, <strong>wc</strong> en acción</a></li>
 </ul>
