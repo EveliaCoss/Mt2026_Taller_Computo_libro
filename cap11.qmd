@@ -1,11 +1,74 @@
-# Filtrado de texto (`grep, cut, sort, uniq, wc`)
+# Filtrado de texto (`grep, cut, sort, uniq, wc`) 
 
 > **Fecha:** 29 de septiembre, 2026
 
-Veamos ahora los comandos más usados en tuberías de filtrado de texto en acción, haciendo uso de sólo algunas de las opciones más frecuentes listados en la sección anterior.
+::: callout-warning
+## En proceso de desarrollo
+:::
+
+Veamos ahora los comandos más usados en **pipelines o tuberías** de filtrado de texto en acción, haciendo uso de sólo algunas de las opciones más frecuentes listados en la sección anterior.
+
+::: callout-important
+La filosofía de un **pipeline o tubería** en Bash es que **la salida de un comando se convierte en la entrada del siguiente mediante `| (pipe)`**.
+:::
+
+Al final de esta clase podrás leer comandos como estos:
+
+``` bash
+grep "Aprobado" calificaciones.txt | cut -d',' -f2 | sort | uniq -c | sort -nr
+```
+
+No necesariamente memorizarlo de golpe, sino entender **qué aporta cada etapa**:
+
+| Comando | ¿Para qué sirve?                     |
+|---------|--------------------------------------|
+| `grep`  | Buscar patrones en texto             |
+| `cut`   | Extraer columnas o campos            |
+| `sort`  | Ordenar líneas                       |
+| `uniq`  | Eliminar/contar duplicados           |
+| `wc`    | Contar líneas, palabras y caracteres |
+
+## Repaso de `grep` -  Buscar patrones en texto
+
+**Sintaxis:** `grep [opciones] "patrón" archivo`
+
+| Argumento | Descripción | Ejemplo |
+|-------------|------------------------------|------------------------------|
+| `-i` | Ignora mayúsculas y minúsculas | `grep -i "error" log.txt` |
+| `-n` | Muestra el número de línea | `grep -n "error" log.txt` |
+| `-c` | Cuenta las líneas que coinciden | `grep -c "error" log.txt` |
+| `-v` | Muestra líneas que **NO** coinciden | `grep -v "error" log.txt` |
+| `-r` | Búsqueda recursiva en directorios | `grep -r "error" /var/logs/` |
+| `-l` | Muestra solo el nombre del archivo | `grep -l "error" *.txt` |
+| `-w` | Coincidencia de palabra completa | `grep -w "error" log.txt` |
+| `-A n` | Muestra `n` líneas **después** del match | `grep -A 2 "error" log.txt` |
+| `-B n` | Muestra `n` líneas **antes** del match | `grep -B 2 "error" log.txt` |
+| `-E` | Usa expresiones regulares extendidas | `grep -E "error|warning" log.txt` |
+
+Durante la clase de ["Encontrar patrones con grep"](https://eveliacoss.github.io/Mt2026_Taller_Computo_libro/cap7.html) repasamos la siguiente infografía y realizamos algunos ejercicios.
+
+[![Infografía de grep - creada con ChatGPT](figures/bash_grep.png){fig-align="center"}](https://eveliacoss.github.io/Mt2026_Taller_Computo_libro/cap7.html)
+
+## `sort` - Ordenar líneas de texto
+
+![Imagen creada con ChatGPT.](figures/bash_sort.png){fig-align="center"}
+
+## `uniq` - Identifica y filtra líneas repetidas
+
+![Imagen creada con ChatGPT.](figures/bash_uniq.png){fig-align="center"}
+
+## `wc` - Cuenta líneas, palabras y caracteres
+
+![Imagen creada con ChatGPT](figures/bash_wc.png){fig-align="center"}
+
+## `cut` -  Buscar patrones en texto
+
+Aquí vamos a partir de **¿Qué hago si no quiero toda la línea, sino solamente una columna de un archivo?**
+
+![Imagen creada con ChatGPT.](figures/bash_cut.png){fig-align="center"}
 
 :::: callout-note
-## Ejercicio 9
+## Ejercicio 10
 
 instrucciones
 
