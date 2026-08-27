@@ -36,14 +36,12 @@ echo "El primer argumento es: $1"
 # Variable especial
 ls /noexiste
 echo "El código de salida del último comando fue: $?"
-
 ```
 
 ::: {.callout-note collapse="true"}
 ## Explicación del código
 
-- **Variables posicionales**
-  Se usan en scripts para referirse a argumentos pasados al ejecutar.
+- **Variables posicionales** Se usan en scripts para referirse a argumentos pasados al ejecutar.
 
   - `$0` → nombre del script.
 
@@ -53,8 +51,7 @@ echo "El código de salida del último comando fue: $?"
 
   - `$@` → todos los argumentos.
 
-- **Variables especiales**
-  Bash tiene variables internas con significados específicos:
+- **Variables especiales** Bash tiene variables internas con significados específicos:
 
   - `$?` → código de salida del último comando.
 

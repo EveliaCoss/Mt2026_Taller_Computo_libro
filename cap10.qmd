@@ -13,8 +13,6 @@ Una modificación realizada utilizando este enlace se reflejará en el original;
 +======================================+==============================================================================================================================+=================================================================================================================================================+
 | **Almacenamiento**                   | - Actúa como un puntero o referencia a otro archivo o directorio.                                                            | - Apunta directamente a los datos del archivo original.                                                                                         |
 |                                      | - No contiene los datos reales del archivo, sino una tuta que apunta al archivo original.                                    |                                                                                                                                                 |
-|                                      |                                                                                                                              | <!-- -->                                                                                                                                        |
-|                                      |                                                                                                                              |                                                                                                                                                 |
 |                                      |                                                                                                                              | - Comparte el mismo contenido que el archivo enlazado, no solo una referencia.                                                                  |
 +--------------------------------------+------------------------------------------------------------------------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------+
 | **Número de inodo**                  | Cuenta con un número de inodo (nodo indice) diferente del archivo original. Se identifica como un tipo de archivo diferente. | Comparte el mismo número de inodo con el destino. Elimina el concepto de "archivo original"; todos los hard links al mismo archivo son iguales. |
@@ -41,7 +39,7 @@ Debes tener cuidado al elegir cuál utilizar. Los **enlaces simbólicos** son m�
 
 ## Orden de los archivos
 
-El **sistema de archivos de GNU/Linux** tiene una estructura jerárquica de directorios y subdirectorios que penden del **directorio raíz** `/`. Esta estructura puede ser visualizada convenientemente con el comando `tree` (Nota: `tree` tal vez no esté instalado en tu sistema).
+El **sistema de archivos de GNU/Linux** tiene una estructura jerárquica de directorios y subdirectorios que penden del **directorio raíz** `/`. Esta estructura puede ser visualizada convenientemente con el comando `tree` (Nota: `tree` tal vez no esté instalado en tu sistema).
 
 Organizar tu entorno de trabajo en **Bash** siguiendo buenas prácticas te permitirá gestionar tus archivos y scripts de manera eficiente. Aquí tienes una sugerencia de carpetas clave y nombres que puedes utilizar:
 
@@ -78,4 +76,4 @@ Esta estructura es flexible y se puede ajustar según tus necesidades específic
 
 - [How to create and remove Linux symlinks for files and directories](https://www.hostinger.com/tutorials/how-to-create-symbolic-links-in-linux/?utm_campaign=Generic-Tutorials-DSA%7CNT:Se%7CLO:MX-EN&utm_medium=ppc&gad_source=1&gclid=Cj0KCQiAu8W6BhC-ARIsACEQoDBS5S76IeOtxlAtbyI5wPmsI72ILku8waMvXKlUo0X-ZzddJpjvKSAaAuAiEALw_wcB)
 
-- [Generación de ligas simbólicas a archivos: comando **ln -s /ruta/al/archivo/fuente nombre_liga**](https://vinuesa.github.io/intro2linux/index.html#generaci%C3%B3n-de-ligas-simb%C3%B3licas-a-archivos-comando-ln--s-rutaalarchivofuente-nombre_liga)
+- [Generación de ligas simbólicas a archivos: comando **ln -s /ruta/al/archivo/fuente nombre_liga**](https://vinuesa.github.io/intro2linux/index.html#generaci%C3%B3n-de-ligas-simb%C3%B3licas-a-archivos-comando-ln--s-rutaalarchivofuente-nombre_liga)

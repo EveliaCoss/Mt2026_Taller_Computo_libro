@@ -590,7 +590,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Tabla de contenidos</h2>
    
   <ul>
-  <li><a href="#referencias" id="toc-referencias" class="nav-link active" data-scroll-target="#referencias"><span class="header-section-number">25.1</span> Referencias</a></li>
+  <li><a href="#repaso-de-grep---buscar-patrones-en-texto" id="toc-repaso-de-grep---buscar-patrones-en-texto" class="nav-link active" data-scroll-target="#repaso-de-grep---buscar-patrones-en-texto"><span class="header-section-number">25.1</span> Repaso de <code>grep</code> - Buscar patrones en texto</a></li>
+  <li><a href="#sort---ordenar-líneas-de-texto" id="toc-sort---ordenar-líneas-de-texto" class="nav-link" data-scroll-target="#sort---ordenar-líneas-de-texto"><span class="header-section-number">25.2</span> <code>sort</code> - Ordenar líneas de texto</a></li>
+  <li><a href="#uniq---identifica-y-filtra-líneas-repetidas" id="toc-uniq---identifica-y-filtra-líneas-repetidas" class="nav-link" data-scroll-target="#uniq---identifica-y-filtra-líneas-repetidas"><span class="header-section-number">25.3</span> <code>uniq</code> - Identifica y filtra líneas repetidas</a></li>
+  <li><a href="#wc---cuenta-líneas-palabras-y-caracteres" id="toc-wc---cuenta-líneas-palabras-y-caracteres" class="nav-link" data-scroll-target="#wc---cuenta-líneas-palabras-y-caracteres"><span class="header-section-number">25.4</span> <code>wc</code> - Cuenta líneas, palabras y caracteres</a></li>
+  <li><a href="#cut---buscar-patrones-en-texto" id="toc-cut---buscar-patrones-en-texto" class="nav-link" data-scroll-target="#cut---buscar-patrones-en-texto"><span class="header-section-number">25.5</span> <code>cut</code> - Buscar patrones en texto</a></li>
+  <li><a href="#referencias" id="toc-referencias" class="nav-link" data-scroll-target="#referencias"><span class="header-section-number">25.6</span> Referencias</a></li>
   </ul>
 </nav>
     </div>
@@ -619,20 +624,196 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <blockquote class="blockquote">
 <p><strong>Fecha:</strong> 29 de septiembre, 2026</p>
 </blockquote>
-<p>Veamos ahora los comandos más usados en tuberías de filtrado de texto en acción, haciendo uso de sólo algunas de las opciones más frecuentes listados en la sección anterior.</p>
+<div class="callout callout-style-default callout-warning callout-empty-content callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Advertencia</span>En proceso de desarrollo
+</div>
+</div>
+<div class="callout-body-container callout-body">
+
+</div>
+</div>
+<p>Veamos ahora los comandos más usados en <strong>pipelines o tuberías</strong> de filtrado de texto en acción, haciendo uso de sólo algunas de las opciones más frecuentes listados en la sección anterior.</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Importante
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>La filosofía de un <strong>pipeline o tubería</strong> en Bash es que <strong>la salida de un comando se convierte en la entrada del siguiente mediante <code>| (pipe)</code></strong>.</p>
+</div>
+</div>
+<p>Al final de esta clase podrás leer comandos como estos:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span> <span class="st">"Aprobado"</span> calificaciones.txt <span class="kw">|</span> <span class="fu">cut</span> <span class="at">-d</span><span class="st">','</span> <span class="at">-f2</span> <span class="kw">|</span> <span class="fu">sort</span> <span class="kw">|</span> <span class="fu">uniq</span> <span class="at">-c</span> <span class="kw">|</span> <span class="fu">sort</span> <span class="at">-nr</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<p>No necesariamente memorizarlo de golpe, sino entender <strong>qué aporta cada etapa</strong>:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Comando</th>
+<th>¿Para qué sirve?</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>grep</code></td>
+<td>Buscar patrones en texto</td>
+</tr>
+<tr class="even">
+<td><code>cut</code></td>
+<td>Extraer columnas o campos</td>
+</tr>
+<tr class="odd">
+<td><code>sort</code></td>
+<td>Ordenar líneas</td>
+</tr>
+<tr class="even">
+<td><code>uniq</code></td>
+<td>Eliminar/contar duplicados</td>
+</tr>
+<tr class="odd">
+<td><code>wc</code></td>
+<td>Contar líneas, palabras y caracteres</td>
+</tr>
+</tbody>
+</table>
+<section id="repaso-de-grep---buscar-patrones-en-texto" class="level2" data-number="25.1">
+<h2 data-number="25.1" class="anchored" data-anchor-id="repaso-de-grep---buscar-patrones-en-texto"><span class="header-section-number">25.1</span> Repaso de <code>grep</code> - Buscar patrones en texto</h2>
+<p><strong>Sintaxis:</strong> <code>grep [opciones] "patrón" archivo</code></p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 17%">
+<col style="width: 41%">
+<col style="width: 41%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Argumento</th>
+<th>Descripción</th>
+<th>Ejemplo</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>-i</code></td>
+<td>Ignora mayúsculas y minúsculas</td>
+<td><code>grep -i "error" log.txt</code></td>
+</tr>
+<tr class="even">
+<td><code>-n</code></td>
+<td>Muestra el número de línea</td>
+<td><code>grep -n "error" log.txt</code></td>
+</tr>
+<tr class="odd">
+<td><code>-c</code></td>
+<td>Cuenta las líneas que coinciden</td>
+<td><code>grep -c "error" log.txt</code></td>
+</tr>
+<tr class="even">
+<td><code>-v</code></td>
+<td>Muestra líneas que <strong>NO</strong> coinciden</td>
+<td><code>grep -v "error" log.txt</code></td>
+</tr>
+<tr class="odd">
+<td><code>-r</code></td>
+<td>Búsqueda recursiva en directorios</td>
+<td><code>grep -r "error" /var/logs/</code></td>
+</tr>
+<tr class="even">
+<td><code>-l</code></td>
+<td>Muestra solo el nombre del archivo</td>
+<td><code>grep -l "error" *.txt</code></td>
+</tr>
+<tr class="odd">
+<td><code>-w</code></td>
+<td>Coincidencia de palabra completa</td>
+<td><code>grep -w "error" log.txt</code></td>
+</tr>
+<tr class="even">
+<td><code>-A n</code></td>
+<td>Muestra <code>n</code> líneas <strong>después</strong> del match</td>
+<td><code>grep -A 2 "error" log.txt</code></td>
+</tr>
+<tr class="odd">
+<td><code>-B n</code></td>
+<td>Muestra <code>n</code> líneas <strong>antes</strong> del match</td>
+<td><code>grep -B 2 "error" log.txt</code></td>
+</tr>
+<tr class="even">
+<td><code>-E</code></td>
+<td>Usa expresiones regulares extendidas</td>
+<td><code>grep -E "error|warning" log.txt</code></td>
+</tr>
+</tbody>
+</table>
+<p>Durante la clase de <a href="https://eveliacoss.github.io/Mt2026_Taller_Computo_libro/cap7.html">“Encontrar patrones con grep”</a> repasamos la siguiente infografía y realizamos algunos ejercicios.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="https://eveliacoss.github.io/Mt2026_Taller_Computo_libro/cap7.html"><img src="figures/bash_grep.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></a></p>
+</figure>
+</div>
+<figcaption>Infografía de grep - creada con ChatGPT</figcaption>
+</figure>
+</div>
+</section>
+<section id="sort---ordenar-líneas-de-texto" class="level2" data-number="25.2">
+<h2 data-number="25.2" class="anchored" data-anchor-id="sort---ordenar-líneas-de-texto"><span class="header-section-number">25.2</span> <code>sort</code> - Ordenar líneas de texto</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="figures/bash_sort.png" class="img-fluid figure-img"></p>
+<figcaption>Imagen creada con ChatGPT.</figcaption>
+</figure>
+</div>
+</section>
+<section id="uniq---identifica-y-filtra-líneas-repetidas" class="level2" data-number="25.3">
+<h2 data-number="25.3" class="anchored" data-anchor-id="uniq---identifica-y-filtra-líneas-repetidas"><span class="header-section-number">25.3</span> <code>uniq</code> - Identifica y filtra líneas repetidas</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="figures/bash_uniq.png" class="img-fluid figure-img"></p>
+<figcaption>Imagen creada con ChatGPT.</figcaption>
+</figure>
+</div>
+</section>
+<section id="wc---cuenta-líneas-palabras-y-caracteres" class="level2" data-number="25.4">
+<h2 data-number="25.4" class="anchored" data-anchor-id="wc---cuenta-líneas-palabras-y-caracteres"><span class="header-section-number">25.4</span> <code>wc</code> - Cuenta líneas, palabras y caracteres</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="figures/bash_wc.png" class="img-fluid figure-img"></p>
+<figcaption>Imagen creada con ChatGPT</figcaption>
+</figure>
+</div>
+</section>
+<section id="cut---buscar-patrones-en-texto" class="level2" data-number="25.5">
+<h2 data-number="25.5" class="anchored" data-anchor-id="cut---buscar-patrones-en-texto"><span class="header-section-number">25.5</span> <code>cut</code> - Buscar patrones en texto</h2>
+<p>Aquí vamos a partir de <strong>¿Qué hago si no quiero toda la línea, sino solamente una columna de un archivo?</strong></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="figures/bash_cut.png" class="img-fluid figure-img"></p>
+<figcaption>Imagen creada con ChatGPT.</figcaption>
+</figure>
+</div>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Nota</span>Ejercicio 9
+<span class="screen-reader-only">Nota</span>Ejercicio 10
 </div>
 </div>
 <div class="callout-body-container callout-body">
 <p>instrucciones</p>
 <div class="callout callout-style-default callout-tip no-icon callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
@@ -641,16 +822,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1" data-eval="FALSE"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">1.</span> soluciones</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2" data-eval="FALSE"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">1.</span> soluciones</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div>
 </div>
 </div>
 </div>
-<section id="referencias" class="level2" data-number="25.1">
-<h2 data-number="25.1" class="anchored" data-anchor-id="referencias"><span class="header-section-number">25.1</span> Referencias</h2>
+</section>
+<section id="referencias" class="level2" data-number="25.6">
+<h2 data-number="25.6" class="anchored" data-anchor-id="referencias"><span class="header-section-number">25.6</span> Referencias</h2>
 <ul>
 <li><a href="https://vinuesa.github.io/intro2linux/index.html#ejemplos-de-herramientas-de-filtrado-de-texto-pipelines-con-grep-cut-sort-uniq-wc-en-acci%C3%B3n">Ejemplos de herramientas de filtrado de texto: <em>pipelines</em> con <strong>grep</strong>, <strong>cut</strong>, <strong>sort</strong>, <strong>uniq</strong>, <strong>wc</strong> en acción</a></li>
 </ul>
