@@ -1379,7 +1379,7 @@
     "href": "cap11.html",
     "title": "25  Filtrado de texto (grep, cut, sort, uniq, wc)",
     "section": "",
-    "text": "25.1 Repaso de grep - Buscar patrones en texto\nVeamos ahora los comandos más usados en pipelines o tuberías de filtrado de texto en acción, haciendo uso de sólo algunas de las opciones más frecuentes listados en la sección anterior.\nAl final de esta clase podrás leer comandos como estos:\nNo necesariamente memorizarlo de golpe, sino entender qué aporta cada etapa:\nSintaxis: grep [opciones] \"patrón\" archivo\nDurante la clase de “Encontrar patrones con grep” repasamos la siguiente infografía y realizamos algunos ejercicios.",
+    "text": "25.1 Repaso de grep - Buscar patrones en texto\nVeamos ahora los comandos más usados en pipelines o tuberías de filtrado de texto en acción, haciendo uso de sólo algunas de las opciones más frecuentes listados en la sección anterior.\nAl final de esta clase podrás leer comandos como estos:\nNo necesariamente memorizarlo de golpe, sino entender qué aporta cada etapa:\nPodemos crear 3 archivos:\nSintaxis:\nDurante la clase de “Encontrar patrones con grep” repasamos la siguiente infografía y realizamos algunos ejercicios.",
     "crumbs": [
       "**Sección 4** - Edición de archivos con Bash",
       "<span class='chapter-number'>25</span>  <span class='chapter-title'>Filtrado de texto (`grep, cut, sort, uniq, wc`)</span>"
@@ -1390,7 +1390,7 @@
     "href": "cap11.html#repaso-de-grep---buscar-patrones-en-texto",
     "title": "25  Filtrado de texto (grep, cut, sort, uniq, wc)",
     "section": "",
-    "text": "Argumento\nDescripción\nEjemplo\n\n\n\n\n-i\nIgnora mayúsculas y minúsculas\ngrep -i \"error\" log.txt\n\n\n-n\nMuestra el número de línea\ngrep -n \"error\" log.txt\n\n\n-c\nCuenta las líneas que coinciden\ngrep -c \"error\" log.txt\n\n\n-v\nMuestra líneas que NO coinciden\ngrep -v \"error\" log.txt\n\n\n-r\nBúsqueda recursiva en directorios\ngrep -r \"error\" /var/logs/\n\n\n-l\nMuestra solo el nombre del archivo\ngrep -l \"error\" *.txt\n\n\n-w\nCoincidencia de palabra completa\ngrep -w \"error\" log.txt\n\n\n-A n\nMuestra n líneas después del match\ngrep -A 2 \"error\" log.txt\n\n\n-B n\nMuestra n líneas antes del match\ngrep -B 2 \"error\" log.txt\n\n\n-E\nUsa expresiones regulares extendidas\ngrep -E \"error|warning\" log.txt\n\n\n\n\n\n\n\n\n\n\n\nInfografía de grep - creada con ChatGPT",
+    "text": "grep [opciones] \"patrón\" archivo\n\n\n\n\n\n\n\n\nArgumento\nDescripción\nEjemplo\n\n\n\n\n\n\ngrep \":[9][0-9]:\" alumnos.txt\n\n\n-i\nIgnora mayúsculas y minúsculas\ngrep -i \"carlos\" nombres.txt\n\n\n-n\nMuestra el número de línea\ngrep -n \"Miguel\" nombres.txt\n\n\n-c\nCuenta las líneas que coinciden\ngrep -c \"Cálculo\"alumnos.txt\n\n\n-v\nMuestra líneas que NO coinciden\ngrep -v \"a\" nombres.txt\ngrep -v \"Cálculo\" alumnos.txt\n\n\n-w\nCoincidencia de palabra completa\ngrep -w \"Cálculo\" alumnos.txt\n\n\n-A n\nMuestra n líneas después del match\ngrep -A 2 \"Álgebra\" alumnos.txt\n\n\n\n\n\n\n\n\n\n\n\nInfografía de grep - creada con ChatGPT",
     "crumbs": [
       "**Sección 4** - Edición de archivos con Bash",
       "<span class='chapter-number'>25</span>  <span class='chapter-title'>Filtrado de texto (`grep, cut, sort, uniq, wc`)</span>"
@@ -1401,7 +1401,7 @@
     "href": "cap11.html#sort---ordenar-líneas-de-texto",
     "title": "25  Filtrado de texto (grep, cut, sort, uniq, wc)",
     "section": "25.2 sort - Ordenar líneas de texto",
-    "text": "25.2 sort - Ordenar líneas de texto\n\n\n\nImagen creada con ChatGPT.",
+    "text": "25.2 sort - Ordenar líneas de texto\nSintaxis:\nsort [opciones] archivo.txt\n\n\n\n\n\n\n\n\nArgumento\nDescripción\nEjemplo\n\n\n\n\n\nOrden alfabético\nsort nombres.txt\nsort temas.txt\n\n\n-n\nOrdena numéricamente\nsort -n numeros.txt\n\n\n-r\nOrden inverso (descendente)\nsort -r numeros.txt\n\n\n-k\nOrdena por columna específica\nsort -k2 datos.txt\nsort -k2nr datos.txt\n\n\n-u\nElimina duplicados mientras ordena\nsort -u temas.txt\n\n\n-t\nDefine separador de campos/columnas\nsort -t\":\" -k2n alumnos.txt\nsort -t\":\" -k3 alumnos.txt\n\n\n\n\n\n\nImagen creada con ChatGPT.",
     "crumbs": [
       "**Sección 4** - Edición de archivos con Bash",
       "<span class='chapter-number'>25</span>  <span class='chapter-title'>Filtrado de texto (`grep, cut, sort, uniq, wc`)</span>"
@@ -1412,7 +1412,7 @@
     "href": "cap11.html#uniq---identifica-y-filtra-líneas-repetidas",
     "title": "25  Filtrado de texto (grep, cut, sort, uniq, wc)",
     "section": "25.3 uniq - Identifica y filtra líneas repetidas",
-    "text": "25.3 uniq - Identifica y filtra líneas repetidas\n\n\n\nImagen creada con ChatGPT.",
+    "text": "25.3 uniq - Identifica y filtra líneas repetidas\nSintaxis:\nuniq [opciones] archivo.txt\n\n\n\n\n\n\n\n\nArgumento\nDescripción\nEjemplo\n\n\n\n\n\nOrdena y elimina duplicado\nsort temas.txt | uniq\n\n\n-c\nCuenta ocurrencias de cada línea\nsort datos.txt | uniq -c\n\n\n-d\nMuestra solo líneas duplicadas\nsort datos.txt | uniq -d\n\n\n-u\nMuestra solo líneas únicas\nsort datos.txt | uniq -u\n\n\n\n\n\n\nImagen creada con ChatGPT.",
     "crumbs": [
       "**Sección 4** - Edición de archivos con Bash",
       "<span class='chapter-number'>25</span>  <span class='chapter-title'>Filtrado de texto (`grep, cut, sort, uniq, wc`)</span>"
@@ -1423,7 +1423,7 @@
     "href": "cap11.html#wc---cuenta-líneas-palabras-y-caracteres",
     "title": "25  Filtrado de texto (grep, cut, sort, uniq, wc)",
     "section": "25.4 wc - Cuenta líneas, palabras y caracteres",
-    "text": "25.4 wc - Cuenta líneas, palabras y caracteres\n\n\n\nImagen creada con ChatGPT",
+    "text": "25.4 wc - Cuenta líneas, palabras y caracteres\nSintaxis:\nwc [opciones] archivo.txt\n\n\n\n\n\n\n\n\nArgumento\nDescripción\nEjemplo\n\n\n\n\n\nMuestra líneas, palabras, bytes\nwc archivo.txt\n\n\n-l\nCuenta líneas\nwc -l archivo.txt\nwc -l *.txt\n\n\n-w\nCuenta palabras\nwc -w archivo.txt\n\n\n-c\nCuenta bytes\nwc -c archivo.txt\n\n\n-w\nCuenta caracteres\nwc -w archivo.txt\n\n\n\n\n\n\nImagen creada con ChatGPT",
     "crumbs": [
       "**Sección 4** - Edición de archivos con Bash",
       "<span class='chapter-number'>25</span>  <span class='chapter-title'>Filtrado de texto (`grep, cut, sort, uniq, wc`)</span>"
@@ -1434,7 +1434,18 @@
     "href": "cap11.html#cut---buscar-patrones-en-texto",
     "title": "25  Filtrado de texto (grep, cut, sort, uniq, wc)",
     "section": "25.5 cut - Buscar patrones en texto",
-    "text": "25.5 cut - Buscar patrones en texto\nAquí vamos a partir de ¿Qué hago si no quiero toda la línea, sino solamente una columna de un archivo?\n\n\n\nImagen creada con ChatGPT.\n\n\n\n\n\n\n\n\nNotaEjercicio 10\n\n\n\ninstrucciones\n\n\n\n\n\n\nTipSolucion\n\n\n\n\n\n1. soluciones",
+    "text": "25.5 cut - Buscar patrones en texto\nAquí vamos a partir de ¿Qué hago si no quiero toda la línea, sino solamente una columna de un archivo?\nSintaxis:\ncut [opciones] archivo.txt\n\n\n\n\n\n\n\n\nArgumento\nDescripción\nEjemplo\n\n\n\n\n-c\nExtrae caracteres por posición (ej: -c1-5)\ncut -c1-2 archivo.txt\n\n\n-f\nExtrae campos específicos (ej: -f1,3)\ncut -f1,3 -d: alumnos.txt\n\n\n-d\nDefine separador de campos (default: tabulación)\ncut -f2 -d\" \" datos.txt\n\n\n\n\n\n\nImagen creada con ChatGPT.",
+    "crumbs": [
+      "**Sección 4** - Edición de archivos con Bash",
+      "<span class='chapter-number'>25</span>  <span class='chapter-title'>Filtrado de texto (`grep, cut, sort, uniq, wc`)</span>"
+    ]
+  },
+  {
+    "objectID": "cap11.html#ejercicio-integrador-grep-cut-sort-uniq-y-wc",
+    "href": "cap11.html#ejercicio-integrador-grep-cut-sort-uniq-y-wc",
+    "title": "25  Filtrado de texto (grep, cut, sort, uniq, wc)",
+    "section": "25.6 Ejercicio integrador: grep, cut, sort, uniq y wc",
+    "text": "25.6 Ejercicio integrador: grep, cut, sort, uniq y wc\n\n\n\n\n\n\nNotaEjercicio 10\n\n\n\nInstrucciones\n\nCrea el archivo materias.txt ejercutando el siguiente comando:\necho -e \"Álgebra Lineal:8:1\\nCálculo Diferencial:10:1\\nGeometría Analítica:8:1\\nProbabilidad:6:3\\nEstadística:6:3\\nEcuaciones Diferenciales:8:4\\nÁlgebra Abstracta:8:5\\nTopología:6:6\\nAnálisis Real:8:6\\nProbabilidad:6:3\" &gt; ejercicios/BASH/materias.txt\nMostrar todas las materias que contienen la palabra Álgebra (Columna 1).\nMostrar todas las materias de sexto semestre (Columna 3).\nContar cuántas materias tienen 8 créditos (Columna 2).\nMostrar únicamente los nombres de las materias (Columna 1).\nMostrar únicamente los créditos (Columna 2).\nOrdenar las materias alfabéticamente.\nOrdenar los créditos de menor a mayor.\nMostrar los semestres sin repetir.\nContar cuántas materias hay por semestre.\n¿Cuántas materias hay por número de créditos?\n¿Cuál es el número de créditos más frecuente?\n\n\n\n\n\n\n\nTipSolucion\n\n\n\n\n\n2. grep \"Álgebra\" ejercicios/BASH/materias.txt\n3. grep \":6$\" ejercicios/BASH/materias.txt\n4. grep \":8:\" ejercicios/BASH/materias.txt | wc -l\n5. cut -d\":\" -f1 ejercicios/BASH/materias.txt\n6. cut -d\":\" -f2 ejercicios/BASH/materias.txt\n7. cut -d\":\" -f1 ejercicios/BASH/materias.txt | sort\n8. cut -d\":\" -f2 ejercicios/BASH/materias.txt | sort -n\n9. cut -d\":\" -f3 ejercicios/BASH/materias.txt | sort | uniq\n10. cut -d\":\" -f3 ejercicios/BASH/materias.txt | sort | uniq -c\n11. cut -d\":\" -f2 ejercicios/BASH/materias.txt | sort | uniq -c\n12. cut -d\":\" -f2 ejercicios/BASH/materias.txt | sort | uniq -c | sort -nr | head -1",
     "crumbs": [
       "**Sección 4** - Edición de archivos con Bash",
       "<span class='chapter-number'>25</span>  <span class='chapter-title'>Filtrado de texto (`grep, cut, sort, uniq, wc`)</span>"
@@ -1444,8 +1455,8 @@
     "objectID": "cap11.html#referencias",
     "href": "cap11.html#referencias",
     "title": "25  Filtrado de texto (grep, cut, sort, uniq, wc)",
-    "section": "25.6 Referencias",
-    "text": "25.6 Referencias\n\nEjemplos de herramientas de filtrado de texto: pipelines con grep, cut, sort, uniq, wc en acción",
+    "section": "25.7 Referencias",
+    "text": "25.7 Referencias\n\nEjemplos de herramientas de filtrado de texto: pipelines con grep, cut, sort, uniq, wc en acción",
     "crumbs": [
       "**Sección 4** - Edición de archivos con Bash",
       "<span class='chapter-number'>25</span>  <span class='chapter-title'>Filtrado de texto (`grep, cut, sort, uniq, wc`)</span>"
