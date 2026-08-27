@@ -91,31 +91,31 @@ Usualmente cuando trabajamos con datos, es necesario pasar el resultado de un co
 ::: callout-note
 ### Ejercicio 4
 
-1.  Crea el archivo `bacterias_generos.txt` e imprime su contenido empleando los siguientes comandos:
+1.  Crea el archivo `temas_matematicas.txt` e imprime su contenido empleando los siguientes comandos:
 
     ``` {.bash code-copy="true" eval="false"}
-    echo -e "\nRickettsia\nOrientia\nWolbachia\nAegyptianella\nAnaplasma\nCowdria\nEhrlichia\nNeorickettsia\nCaedibacter\nHolospora\nLyticum\nOdyssella\nSymbiotes\nTectibacter" > bacterias_generos.txt
-    cat bacterias_generos.txt
+    echo -e "Álgebra\nGeometría\nCálculo\nEstadística\nProbabilidad\nTopología\nTrigonometría\nAritmética\nCombinatoria\nLógica\nAnálisis\nEcuaciones\nVectores\nMatrices" > temas_matematicas.txt
+    cat temas_matematicas.txt
     ```
 
-2.  Agrega una nueva especie en la última fila empleando "\>\>".
+2.  Agrega el tema "Teoría de números" en la última fila empleando "\>\>".
 
     ``` {.bash code-copy="true" eval="false"}
-    echo -e "\nEscherichia\n:D" >> bacterias_generos.txt
-    cat bacterias_generos.txt
+    echo "Teoría de números" >> temas_matematicas.txt
+    cat temas_matematicas.txt
     ```
 
-3.  Ahora usaremos el comando `sort` para reordenar todos los géneros. Sin embargo notamos que el archivo original no cambia nunca.
+3.  Ordena alfabéticamente el contenido de `temas_matematicas.txt`.
 
     ``` {.bash code-copy="true" eval="false"}
-    sort < bacterias_generos.txt
+    sort temas_matematicas.txt
     ```
 
-4.  Para hacer un cambio en el archivo `bacterias_generos.txt`, usamos este comando. Notamos que ahora no usamos `>>` sino solo `>`. Esto va a borrar el contenido previo con géneros desordenados y ahora los va a ordenar. El cambio no se puede deshacer, así que ten cuidado con el operador `>` para que no pierdas datos.
+4.  Guarda los temas ordenados en un nuevo archivo llamado `temas_ordenados.txt`.
 
     ``` {.bash code-copy="true" eval="false"}
-    (sort < bacterias_generos.txt) > bacterias_generos_sorted.txt
-    cat bacterias_generos_sorted.txt
+    sort temas_matematicas.txt > temas_ordenados.txt
+    cat temas_ordenados.txt
     ```
 :::
 

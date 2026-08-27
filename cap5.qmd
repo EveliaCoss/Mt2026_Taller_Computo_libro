@@ -203,20 +203,72 @@ Los archivos pueden contener diversos tipos de extensiones, dependiendo del obje
 ::: callout-note
 ## Ejercicio 2
 
-1.  Visita este enlace 👉 [unix.bioinfo.rsgecuador](https://github.com/RSG-Ecuador/unix.bioinfo.rsgecuador/tree/gh-pages) .
-2.  Haz clic en el botón verde que dice **"CODE"**.
-3.  Selecciona la opción **"Download ZIP"**.
-4.  Elige la carpeta donde deseas guardar el archivo en tu computadora. El archivo se almacena con la extension `.zip`.
-5.  Ve a la carpeta donde se guardó el archivo desde la **terminal**. Ejemplo en mi computadora:
+1.  Crea una carpeta llamada `respaldo`.
 
 ``` bash
-cd "C:/Users/ecoss/Documents/Respaldos/Github_notes/Workshop_Bash2024/data"
+mkdir respaldo
 ```
 
-6.  Descomprime el archivo `.zip`.
+2.  Crea dentro de ella los archivos uno.txt, dos.txt y tres.txt. Usa el comando
 
 ``` bash
-unzip unix.bioinfo.rsgecuador-gh-pages.zip
+touch respaldo/uno.txt respaldo/dos.txt respaldo/tres.txt
+```
+
+3.  Configura los tres archivos con permisos `rw-r-----`.
+
+Recuerda que:
+
+- rw- = 6
+- r-- = 4
+- --- = 0
+
+``` bash
+chmod 640 respaldo/*.txt
+```
+
+Y comprueba que si se cambiaron los permisos con `l`s -l respaldo\`.
+
+3.  Comprime la carpeta completa en un archivo llamado `respaldo.zip`
+
+``` bash
+zip -r respaldo.zip respaldo/
+```
+
+La opción:
+
+- `-r` → comprime de forma recursiva la carpeta y su contenido
+
+4.  Elimina la carpeta `respaldo` (la que no esta comprimida).
+
+``` bash
+rm -r respaldo
+```
+
+5.  Comprueba que la carpeta ya no existe.
+
+``` bash
+ls
+```
+
+La carpeta respaldo ya no deberá aparecer, pero sí: `respaldo.zip`.
+
+6.  Recupera la carpeta utilizando `respaldo.zip`. Es decir, descomprime la carpeta `respaldo.zip`.
+
+``` bash
+unzip respaldo.zip
+```
+
+7.  Comprueba que los tres archivos fueron recuperados.
+
+``` bash
+ls respaldo
+```
+
+8.  Revisa sus permisos.
+
+``` bash
+ls -l respaldo
 ```
 :::
 

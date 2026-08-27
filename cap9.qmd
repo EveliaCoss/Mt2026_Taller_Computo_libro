@@ -47,7 +47,7 @@ Esta letra **g** que agregamos, indica hacer las sustituciones de manera **globa
 
 1.  Verifica que te encuentres en la carpeta con el comando: `pwd`
 2.  Cámbiate de carpeta si es necesario con el comando `cd`
-3.  Descarga el archivo `libro.txt` de mi Github.
+3.  Descarga el archivo [`libro.txt`](https://github.com/EveliaCoss/Mt2026_Taller_Computo_libro/blob/main/ejercicios/BASH/libro.txt) de mi Github.
 4.  Explora este archivo con `cat libro.txt` ó `less libro.txt` ó `head libro.txt`
 5.  Sustituye la palabra "perro" de cada una de las filas por la palabra "gato" y una vez hecho el cambio redirige el resultado a un archivo llamado "`libro_gato.txt`".
 6.  Corrobora tus resultados y discute posibles soluciones alternas.
@@ -68,7 +68,7 @@ sed 's/perro/gato/g' libro.txt >> libro_gato.txt
 :::: {.callout-note icon="false"}
 ## Ejercicio 9: Más sobre `sed`
 
-Seguiremos usando el contenido del archivo `libro.txt` para revisar las siguientes sustituciones:
+Seguiremos usando el contenido del archivo [`libro.txt`](https://github.com/EveliaCoss/Mt2026_Taller_Computo_libro/blob/main/ejercicios/BASH/libro.txt) para revisar las siguientes sustituciones:
 
 1.  Reemplaza la primera aparición de `perro` por `gato` en cada línea.
 2.  Sustituir todas las apariciones de `rojo` por `azul` en todo el archivo.
