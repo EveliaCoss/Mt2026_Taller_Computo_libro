@@ -1038,17 +1038,53 @@ Nota
 </div>
 <div class="callout-body-container callout-body">
 <ol type="1">
-<li>Visita este enlace 👉 <a href="https://github.com/RSG-Ecuador/unix.bioinfo.rsgecuador/tree/gh-pages">unix.bioinfo.rsgecuador</a> .</li>
-<li>Haz clic en el botón verde que dice <strong>“CODE”</strong>.</li>
-<li>Selecciona la opción <strong>“Download ZIP”</strong>.</li>
-<li>Elige la carpeta donde deseas guardar el archivo en tu computadora. El archivo se almacena con la extension <code>.zip</code>.</li>
-<li>Ve a la carpeta donde se guardó el archivo desde la <strong>terminal</strong>. Ejemplo en mi computadora:</li>
+<li>Crea una carpeta llamada <code>respaldo</code>.</li>
 </ol>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> <span class="st">"C:/Users/ecoss/Documents/Respaldos/Github_notes/Workshop_Bash2024/data"</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> respaldo</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<ol start="2" type="1">
+<li>Crea dentro de ella los archivos uno.txt, dos.txt y tres.txt. Usa el comando</li>
+</ol>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">touch</span> respaldo/uno.txt respaldo/dos.txt respaldo/tres.txt</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<ol start="3" type="1">
+<li>Configura los tres archivos con permisos <code>rw-r-----</code>.</li>
+</ol>
+<p>Recuerda que:</p>
+<ul>
+<li>rw- = 6</li>
+<li>r– = 4</li>
+<li>— = 0</li>
+</ul>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">chmod</span> 640 respaldo/<span class="pp">*</span>.txt</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Y comprueba que si se cambiaron los permisos con <code>l</code>s -l respaldo`.</p>
+<ol start="3" type="1">
+<li>Comprime la carpeta completa en un archivo llamado <code>respaldo.zip</code></li>
+</ol>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">zip</span> <span class="at">-r</span> respaldo.zip respaldo/</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<p>La opción:</p>
+<ul>
+<li><code>-r</code> → comprime de forma recursiva la carpeta y su contenido</li>
+</ul>
+<ol start="4" type="1">
+<li>Elimina la carpeta <code>respaldo</code> (la que no esta comprimida).</li>
+</ol>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span> <span class="at">-r</span> respaldo</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<ol start="5" type="1">
+<li>Comprueba que la carpeta ya no existe.</li>
+</ol>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<p>La carpeta respaldo ya no deberá aparecer, pero sí: <code>respaldo.zip</code>.</p>
 <ol start="6" type="1">
-<li>Descomprime el archivo <code>.zip</code>.</li>
+<li>Recupera la carpeta utilizando <code>respaldo.zip</code>. Es decir, descomprime la carpeta <code>respaldo.zip</code>.</li>
 </ol>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">unzip</span> unix.bioinfo.rsgecuador-gh-pages.zip</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">unzip</span> respaldo.zip</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<ol start="7" type="1">
+<li>Comprueba que los tres archivos fueron recuperados.</li>
+</ol>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> respaldo</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<ol start="8" type="1">
+<li>Revisa sus permisos.</li>
+</ol>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-l</span> respaldo</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div>
 </section>
