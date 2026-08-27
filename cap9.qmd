@@ -58,15 +58,45 @@ Como pudiste darte cuenta, el archivo está separado por tabulaciones entre colu
 ## Solución
 
 ``` bash
-sed 's/perro/gato/g' notas.txt >> libro_gato.txt
+sed 's/perro/gato/g' libro.txt >> libro_gato.txt
 ```
 :::
 ::::
 
+![Imagen creada con ChatGPT.](figures/bash_sed_v2.png){fig-align="center"}
+
+:::: {.callout-note icon="false"}
+## Ejercicio 9: Más sobre `sed`
+
+Seguiremos usando el contenido del archivo `libro.txt` para revisar las siguientes sustituciones:
+
+1.  Reemplaza la primera aparición de `perro` por `gato` en cada línea.
+2.  Sustituir todas las apariciones de `rojo` por `azul` en todo el archivo.
+3.  Cambiar `Hola` por `Adiós` solo en la sexta línea.
+4.  Modificar `http://` por `https://` usando `|` como delimitador.
+5.  Sustituir cualquier número por la palabra `NUM`. NOTA: En **sed clásico (POSIX básico)**, el `+` no es reconocido como cuantificador a menos que uses la opción `-E` (o `-r` en GNU sed).
+6.  Intercambiar nombre y apellido (ejemplo: "Juan Pérez" → "Pérez, Juan").
+7.  Solo en las líneas que contienen la palabra `coche`, cambiar `rojo` por `verde.`
+
+::: {.callout-tip collapse="true" icon="false"}
+## Solución
+
+``` bash
+1. sed 's/perro/gato/' libro.txt
+2. sed 's/rojo/azul/g' libro.txt
+3. sed '6s/Hola/Adiós/' libro.txt
+4. sed 's|http://|https://|g' libro.txt
+5. sed -E 's/[0-9]+/NUM/g' libro.txt o sed 's/[0-9]\{1,\}/NUM/g' libro.txt # La sintaxis \{n,m\} indica cuántas veces debe repetirse el patrón anterior.
+6. sed -E '7s/([[:alpha:]]+) ([[:alpha:]]+)/\2, \1/' libro.txt 
+7. sed '/coche/s/rojo/verde/' libro.txt
+```
+:::
+::::
+
+![](figures/nac35ntlfg831.webp)
+
 ### Referencias
 
 - [RegEx](https://www.rexegg.com/regex-quickstart.php)
-
 - [Wikipedia: Expresiones Regulares](https://es.wikipedia.org/wiki/Expresi%C3%B3n_regular)
-
 - [YouTube: Expresiones regulares con Notepad++](https://www.youtube.com/watch?v=OIxDMnBp-2g)

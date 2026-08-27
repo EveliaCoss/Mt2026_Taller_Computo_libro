@@ -60,40 +60,36 @@ book:
         - cap9.qmd  # Edición de archivos con el editor de flujo sed
         - cap10.qmd # Enlaces simbólicos (symlinks)
         - cap11.qmd # Filtrado de texto (grep, cut, sort, uniq, wc)
+        - Bash_script.qmd # Mi primer bash script
         - cap12.qmd # Condicionales
-        - cap13.qmd # Scripts en Bash
         - cap14.qmd # Bucles (for loops)
     - part: "**Sección 5** - Introducción a Git/GitHub"
-      chapters:  
-        - cap15.qmd # Intro a Git
-        - cap16.qmd # Configurar git
-        - cap17.qmd # Crear e inicializar repos
-        - cap18.qmd # Rastrear cambios
-        - cap19.qmd # Explorando el historial
-        - cap20.qmd # Restore y reset
-        - cap21.qmd # Ignorar archivos
-    - part: "**Sección 6** - Conexión con Github"
       chapters:
+        - Rstudio_paquetes.qmd # Instalar paquetes      
+        - cap15.qmd # Intro a Git
         - cap22.qmd # Conexión con Github
-        - cap23.qmd # Trabajando con colaboradores
-        - cap24.qmd # Resolviendo conflictos
-        - cap25.qmd # Trabajando con ramas
-        - cap26.qmd # Conexión RStudio con Git 
-        - cap27.qmd # Resumen y practica final        
-    - part: "**Sección 7** - Introducción a R y Rstudio"
-      chapters: 
+        - cap26.qmd # Conexión RStudio con Git         
+        - cap16.qmd # Configurar git
+        - Intro_Quarto.qmd
+        - cap17.qmd # Crear e inicializar repos
+        - cap18.qmd # Ignorar archivos
         - s5_actividades1y2.qmd # Actividad: Miniresumen personal + foto para tu repositorio
-        - cap29.qmd             # Introducción a Markdown
+        - cap27.qmd # Resumen y practica final          
+    - part: "**Sección 6** - Introducción a R y Rstudio"
+      chapters: 
+        - cap29.qmd             # Introducción a Markdown 
         - s5_actividades3.qmd   # Actividad: Crear tu página web
-        - cap30.qmd             # introducción en Quarto
+        - Intro_Quarto.qmd             # introducción en Quarto
         - s5_actividades4y5.qmd # Actividad: Primer libro de quarto
-    - part: "**Sección 8** - Introducción a Python"
+    - part: "**Sección 7** - Introducción a Python"
       chapters: 
         - s5_actividades4y5.qmd 
   appendices: 
     - resources.qmd
     - notas.qmd
     - docente.qmd
+    - ejemplo_quizdown.qmd
+    - ejemplo_CodeRandPython.qmd
   # Information
   repo-url: https://github.com/EveliaCoss/Mt2026_Taller_Computo_libro # link de Github
   sharing: [twitter, facebook, linkedin]
@@ -102,15 +98,18 @@ book:
 
 format:
   html:
-    crossrefs-hover: true
-    footnotes-hover: true
-    toc-depth: 4
+    crossrefs-hover: true # activa los popups al pasar el mouse sobre referencias cruzadas (secciones, figuras, tablas).
+    footnotes-hover: true # muestra notas al pie como tooltip emergente.
+    toc-depth: 4          # incluye encabezados hasta nivel ####.
     number-depth: 3
     filters:
       - focus-mode # https://lsbjordao.github.io/quarto-book-focus-mode-example/chapter-03.html
     # css
     css: styles.css
     linkcolor: "#007f99"
+    # code
+    engine: knitr
+    live: true
     
   # Boton para cambiar tema de oscuro a claro
     theme:

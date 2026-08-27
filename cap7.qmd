@@ -1,6 +1,35 @@
-# Opciones principales de grep
+# Encontrar patrones con `grep`
 
-> **Fecha:** 22 de septiembre, 2026
+> Fecha: 22 de septiembre, 2026
+
+`grep` es un comando de Linux/Unix que sirve para buscar patrones de texto dentro de archivos o en la salida de otros comandos. Su nombre viene de “Global Regular Expression Print” y es una de las herramientas más usadas para filtrar información rápidamente.
+
+## ¿Qué hace `grep`?
+
+- **Buscar cadenas**: encuentra líneas que contienen una palabra o frase específica.
+- **Usar expresiones regulares**: permite patrones avanzados como `a+b`, `^inicio`, `fin$`.
+- **Filtrar resultados**: se puede combinar con otros comandos usando `|` (pipe).
+- **Opciones comunes**:
+  - `-i` → ignora mayúsculas/minúsculas.
+
+  - `-v` → excluye coincidencias.
+
+  - `-r` → busca recursivamente en directorios.
+
+  - `-n` → muestra el número de línea.
+
+  - `-E` → activa expresiones regulares extendidas.
+
+![Imagen creada con ChatGPT.](figures/bash_grep_overview.png){fig-align="center"}
+
+## Opciones principales de `grep`
+
+Genera este primer archivo para los ejercicios:
+
+``` bash
+echo -e "ab\na+b\nab\naab\nAnaplasma\naaab\nHola mundo\nhola estudiantes\nHOLA UNIVERSO" > archivo.txt
+cat archivo.txt
+```
 
 **1. `-E` - Expresiones regulares extendidas**
 
@@ -21,50 +50,61 @@ grep -i "hola" archivo.txt
 # Encuentra: "Hola", "HOLA", "hola", "HoLa"
 ```
 
+Ahora genera este otro archivo:
+
+``` bash
+echo -e "INFO: El sistema inició correctamente.\nERROR: No se pudo abrir el archivo.\nINFO: Conexión establecida.\nWARNING: Memoria baja.\nERROR: Fallo en la base de datos.\nINFO: Proceso terminado." > archivo.log
+cat archivo.log
+```
+
 **3. `-v` - Invertir búsqueda (líneas que NO coinciden)**
 
 ``` bash
-grep -v "error" archivo.log
-# Imprime todas las líneas que NO contienen "error"
+grep -v "ERROR" archivo.log
+# Imprime todas las líneas que NO contienen "ERROR"
 ```
 
 **4. `-c` - Contar coincidencias**
 
 ``` bash
-grep -c "error" archivo.log
-# Output: 5 (número de líneas con "error")
+grep -c "ERROR" archivo.log
+# Output: 2 (número de líneas con "ERROR")
 ```
 
 **5. `-n` - Mostrar número de línea**
 
 ``` bash
-grep -n "error" archivo.log
-# Output: 5:Error en línea 5
-#         12:Error en línea 12
+grep -n "ERROR" archivo.log
+# Output: 
+# 2:ERROR: No se pudo abrir el archivo.
+# 5:ERROR: Fallo en la base de datos.
 ```
 
-**6. `-l` - Mostrar solo nombres de archivos**
+**6. `-l` - Mostrar solo nombres de archivos que contienen la palabra**
 
 ``` bash
-grep -l "error" *.log
-# Output: archivo1.log
-#         archivo3.log
+grep -l "ERROR" *.log
+# Output: archivo.log
 ```
 
 **7. `-r` - Buscar recursivamente en directorios**
 
 ``` bash
-grep -r "error" /var/log/
+grep -r "ERROR" /var/log/
 # Busca en todos los archivos del directorio /var/log/
 ```
 
-**8. `-o` - Mostrar solo la parte que coincide**
+**8. `-o` -** Mostrar solo la parte que coincide **+ `-i`** para ignorar las mayúsculas
 
 ``` bash
-grep -o "[0-9]\{3\}-[0-9]\{3\}-[0-9]\{4\}" archivo.txt
-# Output: 123-456-7890
-#         987-654-3210
+grep -oi "hola" archivo.txt
+# Output: 
+# Hola
+# hola
+#HOLA
 ```
+
+![Imagen creada con ChatGPT.](figures/bash_grep.png){fig-align="center"}
 
 ### Ejercicio 5 - **Dominar `grep` (con `echo -e`)**
 
@@ -147,8 +187,6 @@ Puedes seguir repasando y aprendiendo de las expresiones regulares en la pagina 
 
 El operador `>` sobre escribe archivos. Ten cuidado al usarlo para que no pierdas datos.
 :::
-
-![](figures/nac35ntlfg831.webp)
 
 ## Material suplementario
 

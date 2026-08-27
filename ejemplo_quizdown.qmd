@@ -1,0 +1,68 @@
+---
+filters: 
+    - quizdown
+---
+
+## Quizzes
+
+``` quizdown
+---
+primaryColor: blue
+secondaryColor: '#e8e8e8'
+textColor: black
+shuffleQuestions: false
+shuffleAnswers: true
+locale: en
+---
+
+# Python Lists (multiple choice)
+
+What is the value of `x[2]`?
+
+> Python lists are mutable!
+
+~~~python
+x = [2, 3, 4]
+x[2] = 4
+print(x[2])
+~~~
+
+- [ ] 1
+- [ ] 2
+- [ ] 3
+- [x] 4
+
+# What is the capital of Germany (single choice)? 
+
+![](https://upload.wikimedia.org/wikipedia/commons/thumb/3/3b/Siegessaeule_Aussicht_10-13_img4_Tiergarten.jpg/405px-Siegessaeule_Aussicht_10-13_img4_Tiergarten.jpg)
+
+> It's the largest city in Germany!         
+
+1. [ ] Frankfurt
+1. [x] Berlin
+1. [ ] Hamburg
+1. [ ] Munich
+
+
+# Put the [days](https://en.wikipedia.org/wiki/Day) in order (sequence)!
+
+Quizdown also renders formulas:
+
+$$
+x = \frac{a+b^2}{\sqrt{b+c}}
+$$
+
+> Monday is the *first* day of the week.
+
+1. Monday
+2. Tuesday
+3. Wednesday
+4. Friday
+5. Saturday
+```
+
+## Referencias
+
+- [Quizdown](https://github.com/parmsam/quarto-quizdown)
+- [Example Quizdown](https://parmsam.github.io/quarto-quizdown/)
+- [**Quizdown Editor**](https://bonartm.github.io/quizdown-live-editor/?code=---%0AprimaryColor%3A%20steelblue%0AsecondaryColor%3A%20%27%23e8e8e8%27%0AtextColor%3A%20black%0AshuffleQuestions%3A%20false%0AshuffleAnswers%3A%20true%0Alocale%3A%20en%0A---%0A%0A%23%20Python%20Lists%0A%0AWhat%20is%20the%20value%20of%20%60x%5B2%5D%60%3F%0A%0A%3E%20Python%20lists%20are%20mutable!%0A%0A%60%60%60python%0Ax%20%3D%20%5B2%2C%203%2C%204%5D%0Ax%5B2%5D%20%3D%204%0Aprint(x%5B2%5D)%0A%60%60%60%0A%0A-%20%5B%20%5D%201%0A-%20%5B%20%5D%202%0A-%20%5B%20%5D%203%0A-%20%5Bx%5D%204%0A%0A%0A%23%20What%20is%20the%20capital%20of%20Germany%3F%20%0A%0A!%5B%5D(https%3A%2F%2Fupload.wikimedia.org%2Fwikipedia%2Fcommons%2Fthumb%2F3%2F3b%2FSiegessaeule_Aussicht_10-13_img4_Tiergarten.jpg%2F405px-Siegessaeule_Aussicht_10-13_img4_Tiergarten.jpg)%0A%0A%3E%20It%27s%20the%20largest%20city%20in%20Germany!%20%20%20%20%20%20%20%20%20%0A%0A1.%20%5B%20%5D%20Frankfurt%0A1.%20%5Bx%5D%20Berlin%0A1.%20%5B%20%5D%20Hamburg%0A1.%20%5B%20%5D%20Munich%0A%0A%0A%23%20Put%20the%20%5Bdays%5D(https%3A%2F%2Fen.wikipedia.org%2Fwiki%2FDay)%20in%20order!%0A%0AQuizdown%20also%20renders%20formulas%3A%0A%0A%24%24%0Ax%20%3D%20%5Cfrac%7Ba%2Bb%5E2%7D%7B%5Csqrt%7Bb%2Bc%7D%7D%0A%24%24%0A%0A%3E%20Monday%20is%20the%20first%20day%20of%20the%20week.%0A%0A1.%20Monday%0A2.%20Tuesday%0A3.%20Wednesday%0A4.%20Friday%0A5.%20Saturday%0A%0A%0A%23%20Python%20Lists%0A%0AWhat%20is%20the%20value%20of%20%60x%5B2%5D%60%3F%0A%0A%3E%20Python%20lists%20are%20mutable!%0A%0A%60%60%60python%0Ax%20%3D%20%5B2%2C%203%2C%204%5D%0Ax%5B2%5D%20%3D%204%0Aprint(x%5B2%5D)%0A%60%60%60%0A%0A-%20%5B%20%5D%201%0A-%20%5B%20%5D%202%0A-%20%5B%20%5D%203%0A-%20%5Bx%5D%204)
