@@ -28,7 +28,7 @@ book:
     - index.qmd
     - temario.qmd
     - cap1A.qmd
-    - cap1C.qmd
+    - evaluacion.qmd
     - part: "**Sección 1** - Componentes de una computadora"
       chapters:   
         - cap2A.qmd # Introducción - Componentes de una Computadora
