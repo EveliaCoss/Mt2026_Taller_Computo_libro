@@ -20,19 +20,13 @@ grep "Aprobado" calificaciones.txt | cut -d',' -f2 | sort | uniq -c | sort -nr
 
 No necesariamente memorizarlo de golpe, sino entender **qué aporta cada etapa**:
 
-+-----------------------+----------------------------------------------+
-| Comando               | ¿Para qué sirve?                             |
-+=======================+==============================================+
-| `grep`                | Buscar patrones en texto                     |
-+-----------------------+----------------------------------------------+
-| `cut`                 | Extraer columnas o campos                    |
-+-----------------------+----------------------------------------------+
-| `sort`                | Ordenar líneas                               |
-+-----------------------+----------------------------------------------+
-| `uniq`                | Eliminar/contar duplicados                   |
-+-----------------------+----------------------------------------------+
-| `wc`                  | Contar líneas, palabras y caracteres         |
-+-----------------------+----------------------------------------------+
+| Comando | ¿Para qué sirve?                     |
+|---------|--------------------------------------|
+| `grep`  | Buscar patrones en texto             |
+| `cut`   | Extraer columnas o campos            |
+| `sort`  | Ordenar líneas                       |
+| `uniq`  | Eliminar/contar duplicados           |
+| `wc`    | Contar líneas, palabras y caracteres |
 
 Podemos crear 3 archivos:
 
@@ -74,38 +68,38 @@ echo -e "Ana:85:Álgebra\nLuis:72:Cálculo\nMaría:94:Estadística\nCarlos:68:Ge
 grep [opciones] "patrón" archivo
 ```
 
-+---------------+------------------------------------------+----------------------------------+
-| Argumento     | Descripción                              | Ejemplo                          |
-+===============+==========================================+==================================+
-|               |                                          | ``` bash                         |
-|               |                                          | grep ":[9][0-9]:" alumnos.txt    |
-|               |                                          | ```                              |
-+---------------+------------------------------------------+----------------------------------+
-| `-i`          | Ignora mayúsculas y minúsculas           | ``` bash                         |
-|               |                                          | grep -i "carlos" nombres.txt     |
-|               |                                          | ```                              |
-+---------------+------------------------------------------+----------------------------------+
-| `-n`          | Muestra el número de línea               | ``` bash                         |
-|               |                                          | grep -n "Miguel" nombres.txt     |
-|               |                                          | ```                              |
-+---------------+------------------------------------------+----------------------------------+
-| `-c`          | Cuenta las líneas que coinciden          | ``` bash                         |
-|               |                                          | grep -c "Cálculo"alumnos.txt     |
-|               |                                          | ```                              |
-+---------------+------------------------------------------+----------------------------------+
-| `-v`          | Muestra líneas que **NO** coinciden      | ``` bash                         |
-|               |                                          | grep -v "a" nombres.txt          |
-|               |                                          | grep -v "Cálculo" alumnos.txt    |
-|               |                                          | ```                              |
-+---------------+------------------------------------------+----------------------------------+
-| `-w`          | Coincidencia de palabra completa         | ``` bash                         |
-|               |                                          | grep -w "Cálculo" alumnos.txt    |
-|               |                                          | ```                              |
-+---------------+------------------------------------------+----------------------------------+
-| `-A n`        | Muestra `n` líneas **después** del match | ``` bash                         |
-|               |                                          | grep -A 2 "Álgebra" alumnos.txt  |
-|               |                                          | ```                              |
-+---------------+------------------------------------------+----------------------------------+
++-----------+------------------------------------------+---------------------------------+
+| Argumento | Descripción                              | Ejemplo                         |
++===========+==========================================+=================================+
+|           |                                          | ``` bash                        |
+|           |                                          | grep ":[9][0-9]:" alumnos.txt   |
+|           |                                          | ```                             |
++-----------+------------------------------------------+---------------------------------+
+| `-i`      | Ignora mayúsculas y minúsculas           | ``` bash                        |
+|           |                                          | grep -i "carlos" nombres.txt    |
+|           |                                          | ```                             |
++-----------+------------------------------------------+---------------------------------+
+| `-n`      | Muestra el número de línea               | ``` bash                        |
+|           |                                          | grep -n "Miguel" nombres.txt    |
+|           |                                          | ```                             |
++-----------+------------------------------------------+---------------------------------+
+| `-c`      | Cuenta las líneas que coinciden          | ``` bash                        |
+|           |                                          | grep -c "Cálculo"alumnos.txt    |
+|           |                                          | ```                             |
++-----------+------------------------------------------+---------------------------------+
+| `-v`      | Muestra líneas que **NO** coinciden      | ``` bash                        |
+|           |                                          | grep -v "a" nombres.txt         |
+|           |                                          | grep -v "Cálculo" alumnos.txt   |
+|           |                                          | ```                             |
++-----------+------------------------------------------+---------------------------------+
+| `-w`      | Coincidencia de palabra completa         | ``` bash                        |
+|           |                                          | grep -w "Cálculo" alumnos.txt   |
+|           |                                          | ```                             |
++-----------+------------------------------------------+---------------------------------+
+| `-A n`    | Muestra `n` líneas **después** del match | ``` bash                        |
+|           |                                          | grep -A 2 "Álgebra" alumnos.txt |
+|           |                                          | ```                             |
++-----------+------------------------------------------+---------------------------------+
 
 Durante la clase de ["Encontrar patrones con grep"](https://eveliacoss.github.io/Mt2026_Taller_Computo_libro/cap7.html) repasamos la siguiente infografía y realizamos algunos ejercicios.
 
@@ -119,36 +113,36 @@ Durante la clase de ["Encontrar patrones con grep"](https://eveliacoss.github.io
 sort [opciones] archivo.txt
 ```
 
-+------------+-------------------------------------+-----------------------------+
-| Argumento  | Descripción                         | Ejemplo                     |
-+============+=====================================+=============================+
-|            | Orden alfabético                    | ``` bash                    |
-|            |                                     | sort nombres.txt            |
-|            |                                     | sort temas.txt              |
-|            |                                     | ```                         |
-+------------+-------------------------------------+-----------------------------+
-| `-n`       | Ordena numéricamente                | ``` bash                    |
-|            |                                     | sort -n numeros.txt         |
-|            |                                     | ```                         |
-+------------+-------------------------------------+-----------------------------+
-| `-r`       | Orden inverso (descendente)         | ``` bash                    |
-|            |                                     | sort -r numeros.txt         |
-|            |                                     | ```                         |
-+------------+-------------------------------------+-----------------------------+
-| `-k`       | Ordena por columna específica       | ``` bash                    |
-|            |                                     | sort -k2 datos.txt          |
-|            |                                     | sort -k2nr datos.txt        |
-|            |                                     | ```                         |
-+------------+-------------------------------------+-----------------------------+
-| `-u`       | Elimina duplicados mientras ordena  | ``` bash                    |
-|            |                                     | sort -u temas.txt           |
-|            |                                     | ```                         |
-+------------+-------------------------------------+-----------------------------+
-| `-t`       | Define separador de campos/columnas | ``` bash                    |
-|            |                                     | sort -t":" -k2n alumnos.txt |
-|            |                                     | sort -t":" -k3 alumnos.txt  |
-|            |                                     | ```                         |
-+------------+-------------------------------------+-----------------------------+
++-----------+-------------------------------------+-----------------------------+
+| Argumento | Descripción                         | Ejemplo                     |
++===========+=====================================+=============================+
+|           | Orden alfabético                    | ``` bash                    |
+|           |                                     | sort nombres.txt            |
+|           |                                     | sort temas.txt              |
+|           |                                     | ```                         |
++-----------+-------------------------------------+-----------------------------+
+| `-n`      | Ordena numéricamente                | ``` bash                    |
+|           |                                     | sort -n numeros.txt         |
+|           |                                     | ```                         |
++-----------+-------------------------------------+-----------------------------+
+| `-r`      | Orden inverso (descendente)         | ``` bash                    |
+|           |                                     | sort -r numeros.txt         |
+|           |                                     | ```                         |
++-----------+-------------------------------------+-----------------------------+
+| `-k`      | Ordena por columna específica       | ``` bash                    |
+|           |                                     | sort -k2 datos.txt          |
+|           |                                     | sort -k2nr datos.txt        |
+|           |                                     | ```                         |
++-----------+-------------------------------------+-----------------------------+
+| `-u`      | Elimina duplicados mientras ordena  | ``` bash                    |
+|           |                                     | sort -u temas.txt           |
+|           |                                     | ```                         |
++-----------+-------------------------------------+-----------------------------+
+| `-t`      | Define separador de campos/columnas | ``` bash                    |
+|           |                                     | sort -t":" -k2n alumnos.txt |
+|           |                                     | sort -t":" -k3 alumnos.txt  |
+|           |                                     | ```                         |
++-----------+-------------------------------------+-----------------------------+
 
 ![Imagen creada con ChatGPT.](figures/bash_sort.png){fig-align="center"}
 
@@ -160,25 +154,25 @@ sort [opciones] archivo.txt
 uniq [opciones] archivo.txt
 ```
 
-+------------+----------------------------------+--------------------------+
-| Argumento  | Descripción                      | Ejemplo                  |
-+============+==================================+==========================+
-|            | Ordena y elimina duplicado       | ``` bash                 |
-|            |                                  | sort temas.txt | uniq    |
-|            |                                  | ```                      |
-+------------+----------------------------------+--------------------------+
-| `-c`       | Cuenta ocurrencias de cada línea | ``` bash                 |
-|            |                                  | sort datos.txt | uniq -c |
-|            |                                  | ```                      |
-+------------+----------------------------------+--------------------------+
-| `-d`       | Muestra solo líneas duplicadas   | ``` bash                 |
-|            |                                  | sort datos.txt | uniq -d |
-|            |                                  | ```                      |
-+------------+----------------------------------+--------------------------+
-| `-u`       | Muestra solo líneas únicas       | ``` bash                 |
-|            |                                  | sort datos.txt | uniq -u |
-|            |                                  | ```                      |
-+------------+----------------------------------+--------------------------+
++-----------+----------------------------------+----------------------------+
+| Argumento | Descripción                      | Ejemplo                    |
++===========+==================================+============================+
+|           | Ordena y elimina duplicado       | ``` bash                   |
+|           |                                  | sort temas.txt | uniq      |
+|           |                                  | ```                        |
++-----------+----------------------------------+----------------------------+
+| `-c`      | Cuenta ocurrencias de cada línea | ``` bash                   |
+|           |                                  | sort datos.txt | uniq -c   |
+|           |                                  | ```                        |
++-----------+----------------------------------+----------------------------+
+| `-d`      | Muestra solo líneas duplicadas   | ``` bash                   |
+|           |                                  | sort datos.txt | uniq -d   |
+|           |                                  | ```                        |
++-----------+----------------------------------+----------------------------+
+| `-u`      | Muestra solo líneas únicas       | ``` bash                   |
+|           |                                  | sort datos.txt | uniq -u   |
+|           |                                  | ```                        |
++-----------+----------------------------------+----------------------------+
 
 ![Imagen creada con ChatGPT.](figures/bash_uniq.png){fig-align="center"}
 
@@ -190,30 +184,30 @@ uniq [opciones] archivo.txt
 wc [opciones] archivo.txt
 ```
 
-+---------------+---------------------------------+------------------------+
-| Argumento     | Descripción                     | Ejemplo                |
-+===============+=================================+========================+
-|               | Muestra líneas, palabras, bytes | ``` bash               |
-|               |                                 | wc archivo.txt         |
-|               |                                 | ```                    |
-+---------------+---------------------------------+------------------------+
-| `-l`          | Cuenta líneas                   | ``` bash               |
-|               |                                 | wc -l archivo.txt      |
-|               |                                 | wc -l *.txt            |
-|               |                                 | ```                    |
-+---------------+---------------------------------+------------------------+
-| `-w`          | Cuenta palabras                 | ``` bash               |
-|               |                                 | wc -w archivo.txt      |
-|               |                                 | ```                    |
-+---------------+---------------------------------+------------------------+
-| `-c`          | Cuenta bytes                    | ``` bash               |
-|               |                                 | wc -c archivo.txt      |
-|               |                                 | ```                    |
-+---------------+---------------------------------+------------------------+
-| `-w`          | Cuenta caracteres               | ``` bash               |
-|               |                                 | wc -w archivo.txt      |
-|               |                                 | ```                    |
-+---------------+---------------------------------+------------------------+
++-----------+---------------------------------+-------------------+
+| Argumento | Descripción                     | Ejemplo           |
++===========+=================================+===================+
+|           | Muestra líneas, palabras, bytes | ``` bash          |
+|           |                                 | wc archivo.txt    |
+|           |                                 | ```               |
++-----------+---------------------------------+-------------------+
+| `-l`      | Cuenta líneas                   | ``` bash          |
+|           |                                 | wc -l archivo.txt |
+|           |                                 | wc -l *.txt       |
+|           |                                 | ```               |
++-----------+---------------------------------+-------------------+
+| `-w`      | Cuenta palabras                 | ``` bash          |
+|           |                                 | wc -w archivo.txt |
+|           |                                 | ```               |
++-----------+---------------------------------+-------------------+
+| `-c`      | Cuenta bytes                    | ``` bash          |
+|           |                                 | wc -c archivo.txt |
+|           |                                 | ```               |
++-----------+---------------------------------+-------------------+
+| `-w`      | Cuenta caracteres               | ``` bash          |
+|           |                                 | wc -w archivo.txt |
+|           |                                 | ```               |
++-----------+---------------------------------+-------------------+
 
 ![Imagen creada con ChatGPT](figures/bash_wc.png){fig-align="center"}
 
@@ -227,21 +221,21 @@ Aquí vamos a partir de **¿Qué hago si no quiero toda la línea, sino solament
 cut [opciones] archivo.txt
 ```
 
-+---------------+--------------------------------------------------+---------------------------+
-| Argumento     | Descripción                                      | Ejemplo                   |
-+===============+==================================================+===========================+
-| `-c`          | Extrae caracteres por posición (ej: `-c1-5`)     | ``` bash                  |
-|               |                                                  | cut -c1-2 archivo.txt     |
-|               |                                                  | ```                       |
-+---------------+--------------------------------------------------+---------------------------+
-| `-f`          | Extrae campos específicos (ej: `-f1,3`)          | ``` bash                  |
-|               |                                                  | cut -f1,3 -d: alumnos.txt |
-|               |                                                  | ```                       |
-+---------------+--------------------------------------------------+---------------------------+
-| `-d`          | Define separador de campos (default: tabulación) | ``` bash                  |
-|               |                                                  | cut -f2 -d" " datos.txt   |
-|               |                                                  | ```                       |
-+---------------+--------------------------------------------------+---------------------------+
++-----------+--------------------------------------------------+----------------------------+
+| Argumento | Descripción                                      | Ejemplo                    |
++===========+==================================================+============================+
+| `-c`      | Extrae caracteres por posición (ej: `-c1-5`)     | ``` bash                   |
+|           |                                                  | cut -c1-2 archivo.txt      |
+|           |                                                  | ```                        |
++-----------+--------------------------------------------------+----------------------------+
+| `-f`      | Extrae campos específicos (ej: `-f1,3`)          | ``` bash                   |
+|           |                                                  | cut -f1,3 -d: alumnos.txt  |
+|           |                                                  | ```                        |
++-----------+--------------------------------------------------+----------------------------+
+| `-d`      | Define separador de campos (default: tabulación) | ``` bash                   |
+|           |                                                  | cut -f2 -d" " datos.txt    |
+|           |                                                  | ```                        |
++-----------+--------------------------------------------------+----------------------------+
 
 ![Imagen creada con ChatGPT.](figures/bash_cut.png){fig-align="center"}
 
@@ -258,15 +252,17 @@ Instrucciones
     echo -e "Álgebra Lineal:8:1\nCálculo Diferencial:10:1\nGeometría Analítica:8:1\nProbabilidad:6:3\nEstadística:6:3\nEcuaciones Diferenciales:8:4\nÁlgebra Abstracta:8:5\nTopología:6:6\nAnálisis Real:8:6\nProbabilidad:6:3" > ejercicios/BASH/materias.txt
     ```
 
-2.  Mostrar todas las materias que contienen la palabra Álgebra (Columna 1).
+    **Columna 1:** materias, **Columna 2:** créditos, **Columna 3:** semestre.
 
-3.  Mostrar todas las materias de sexto semestre (Columna 3).
+2.  Mostrar todas las materias que contienen la palabra Álgebra.
 
-4.  Contar cuántas materias tienen 8 créditos (Columna 2).
+3.  Mostrar todas las materias de sexto semestre.
 
-5.  Mostrar únicamente los nombres de las materias (Columna 1).
+4.  Contar cuántas materias tienen 8 créditos.
 
-6.  Mostrar únicamente los créditos (Columna 2).
+5.  Mostrar únicamente los nombres de las materias.
+
+6.  Mostrar únicamente los créditos.
 
 7.  Ordenar las materias alfabéticamente.
 

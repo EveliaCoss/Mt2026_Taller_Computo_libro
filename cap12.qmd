@@ -97,6 +97,21 @@ done
 - Fin del bucle
 :::
 
+Archivo: `saludar.sh`
+
+``` bash
+#!/bin/bash
+
+if [ $# -eq 0 ]; then
+    echo "Error: Debes proporcionar un nombre"
+    echo "Uso: ./saludar.sh <nombre>"
+    exit 1
+fi
+
+nombre=$1
+echo "¡Hola, $nombre!"
+```
+
 ## Referencias
 
 - [DataCarpentry For Loops](https://datacarpentry.github.io/semester-biology/materials/for-loops-indexing/)
