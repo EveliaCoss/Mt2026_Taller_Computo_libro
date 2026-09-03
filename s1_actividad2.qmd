@@ -1,0 +1,74 @@
+# **📚 Actividad 2 en equipo -** Script Bash
+
+> **Fecha de entrega:** Martes 01 de octubre, 2026 a las 11:59 pm.
+
+## Instrucciones
+
+En equipos de **2 a 3** **personas**, seleccionar uno de los siguientes temas y realizar un proyecto aplicando **buenas prácticas de programación**. El proceso debe estar completamente documentado y entregarse en **Google Classroom:**
+
+1.  Carpeta a entregar comprimida (`.zip`).
+2.  **Documentación del proyecto:** Documento explicativo del desarrollo del programa en Google docs. Agregar en la tarea *solo el link del documento*.
+3.  Subir en Youtube un video de aproximadamente 5 minutos describiendo el proceso y resultados. Agregar en la tarea *solo el link del video*.
+
+### Estructura de la carpeta a entregar
+
+```         
+Proyecto_[NombreEquipo]_[NombreProyecto].zip
+│
+├── script.sh                          # Script principal
+├── datos_entrada.txt                  # Archivo de datos (txt, csv o tsv)
+├── salida_procesada.txt               # Resultado de ejecutar el script
+```
+
+### ARCHIVO: script.sh 🔧
+
+Checklist de buenas prácticas:
+
+- [ ] Nombre descriptivo para el script.
+- [ ] Shebang en la primera línea (`#!/bin/bash`)
+- [ ] Encabezado con información del script (nombre, descripción, autor, fecha)
+- [ ] Comentarios explicativos en cada sección.
+- [ ] Variables bien nombradas (descriptivas)
+- [ ] Validación de argumentos
+- [ ] Validación de archivos
+- [ ] Código indentado y organizado
+
+```         
+#!/bin/bash
+
+################################################################################
+# NOMBRE DEL SCRIPT: Título
+# DESCRIPCIÓN: Procesa un archivo de calificaciones y genera reportes
+# AUTORES: Nombre de los estudiantes
+# FECHA: Día/Mes/Año
+# VERSIÓN: 1.0
+# USO: ./script.sh archivo_entrada.txt
+# ARGUMENTOS (opcional)
+################################################################################
+```
+
+### ARCHIVO: datos_entrada.txt (o .csv, .tsv) 📊
+
+Requisitos:
+
+- [ ] Mínimo 10 registros
+- [ ] Datos realistas y variados
+- [ ] Encabezado descriptivo (si aplica)
+- [ ] Nombre descriptivo del archivo
+
+### ARCHIVO: salida_procesada.txt 📤
+
+Requisitos:
+
+- [ ] Generado automáticamente por el script
+- [ ] Contiene toda la salida del programa
+- [ ] Formato legible y organizado
+- [ ] Incluye encabezados y separadores
+
+### Documentación del proyecto
+
+Requisitos:
+
+- [ ] Información general: Título del proyecto, Nombre de los integrantes del equipo, Fecha de entrega, Versión del script: 1.0.
+- [ ] Descripción del proyecto (200 palabras máximo)
+- \[ \]

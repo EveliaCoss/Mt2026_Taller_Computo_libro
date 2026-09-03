@@ -28,7 +28,6 @@ book:
     - index.qmd
     - temario.qmd
     - cap1A.qmd
-    - cap1B.qmd
     - cap1C.qmd
     - part: "**Sección 1** - Componentes de una computadora"
       chapters:   
@@ -37,7 +36,8 @@ book:
         - cap2B.qmd # Sistema Operativo (SO) y sus funciones
         - Tarea1.qmd # Tarea 1. Mi sistema operativo
         - cap3.qmd  # Buenas practicas en programacion 
-        - s1_actividad1.qmd # Actividad:
+        - udocz.qmd # Introducción del uso de Doc
+        - s1_actividad1.qmd # Actividad 1 en equipo
     - part: "**Sección 2** - Instalación de programas"
       chapters: 
         - TodoLits.qmd # Lista de todas las aplicaciones      
@@ -61,6 +61,7 @@ book:
         - cap10.qmd # Enlaces simbólicos (symlinks)
         - cap11.qmd # Filtrado de texto (grep, cut, sort, uniq, wc)
         - Bash_script.qmd # Mi primer bash script
+        - s1_actividad2.qmd # Actividad 2 en equipo
         - cap12.qmd # Condicionales
         - cap14.qmd # Bucles (for loops)
     - part: "**Sección 5** - Introducción a Git/GitHub"
