@@ -36,8 +36,8 @@ book:
         - cap2B.qmd # Sistema Operativo (SO) y sus funciones
         - Tarea1.qmd # Tarea 1. Mi sistema operativo
         - cap3.qmd  # Buenas practicas en programacion 
-        - udocz.qmd # Introducción del uso de Doc
         - s1_actividad1.qmd # Actividad 1 en equipo
+        - udocz.qmd # Introducción del uso de Doc        
     - part: "**Sección 2** - Instalación de programas"
       chapters: 
         - TodoLits.qmd # Lista de todas las aplicaciones      
