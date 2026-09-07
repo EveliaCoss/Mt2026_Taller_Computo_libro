@@ -27,7 +27,7 @@ Porque:
 **En R**
 
 | Paquete / Programa | Uso principal |
-|------------------------------------|------------------------------------|
+|----|----|
 | [`rmarkdown`](https://github.com/EveliaCoss/RmarkdownGraphs_notes) | Crear documentos reproducibles con texto, código y resultados |
 | `knitr` | Ejecutar chunks de código en RMarkdown |
 | [`Quarto`](https://quarto.org/docs/get-started/hello/vscode.html) | Plataforma moderna para documentos con R, Python, etc. |
@@ -38,7 +38,7 @@ Porque:
 **En Python**
 
 | Paquete / Programa | Uso principal |
-|------------------------------------|------------------------------------|
+|----|----|
 | Jupyter Notebooks | Celdas Markdown para explicar y documentar junto con código |
 | `Quarto` | Igual que en R, permite combinar Markdown con código Python |
 | `mkdocs` | Generar sitios web de documentación técnica desde archivos Markdown |
