@@ -1,6 +1,6 @@
 # Mis primeros pasos en Bash
 
-> **Fecha:** 10 de septiembre, 2026
+> **Fecha:** 17 de septiembre, 2026
 
 ## Entorno de Bash
 
@@ -104,20 +104,47 @@ Ejemplo de rutas:
 
 ![Imagen creada con Gemini.](figures/bash_rutas.png){fig-align="center"}
 
-## Comandos básicos
+## Comandos propios de Bash = *builtins*
+
+Un **builtin** (*comando interno*) es un comando que **forma parte del propio shell**. En Bash, significa que Bash puede ejecutarlo directamente, sin tener que buscar un programa externo dentro de las carpetas de `/bin` o `/usr/bin`.
+
+| Builtin | ¿Qué hace? |  Argumentos |
+|---------------|----------------------------|------------------------------|
+| `cd` | Cambia de directorio | `cd /home/usuario/data/` |
+| `pwd` | Muestra el directorio actual\* | `pwd` |
+| `echo` | Imprime texto\* | `echo "Hello world"` |
+| `read` | Lee datos del usuario | `read nombre` |
+| `export` | Exporta variables | `export CURSO="Bash"` |
+| `alias` | Crea alias | `alias ll="ls -la"` |
+| `history` | Muestra el historial | `history` |
+| `source` | Ejecuta comandos de un archivo en el shell actual | `source ~/.zshrc` |
+| `type` | Indica qué tipo de comando es | `type cd` |
+| `help` | Ayuda de los builtins de Bash | `help cd` |
+
+\* `pwd` y `echo` son casos interesantes porque Bash tiene versiones builtin, aunque también pueden existir ejecutables externos con esos nombres.
+
+Coloca en la terminal lo siguiente y Bash les dirá que son *shell builtins*.
+
+``` bash
+type cd
+type read
+type echo
+```
+
+> Bash puede interpretar lo que escribes y, dependiendo del comando, **ejecutarlo él mismo o buscar un programa externo** dentro de las carpetas de `/bin` o `/usr/bin`.
+
+## Comandos externos
 
 | Comandos | Información | Argumentos |
-|----|----|----|
-| `ssh` | Conexión a servidores | ssh usuario\@servidor.mx |
-| `ls` | Observar el contenido de los archivos en una carpeta | ls directorio/ |
-| `cd` | Moverse de directorios | cd /home/usuario/data/ |
-| `mkdir` | Crear un nuevo directorio | mkdir data |
-| `rmdir` | Eliminar el directorio | rmkdir -rf data |
+|----------------|------------------------|----------------------------|
+| `ssh` | Conexión a servidores | `ssh usuario@servidor.mx` |
+| `ls` | Observar el contenido de los archivos en una carpeta | `ls directorio/` |
+| `mkdir` | Crear un nuevo directorio | `mkdir data` |
+| `rmdir` | Eliminar el directorio | `rmkdir -rf data` |
 | `nano` / `vim` | Editores de texto plano | nano Archivo.txt / vim Archivo.txt |
-| `cp` | Copiar archivos | cp Archivo1.txt /home/usuario/data/ |
-| `mv` | Mover un archivo o carpeta |  |
-| `echo` | Para llamar y/o declarar variables | echo "Hello world" |
-| `chmod` | Cambiar permisos del usuario | chmod 777 data/ |
+| `cp` | Copiar archivos | `cp Archivo1.txt /home/usuario/data/` |
+| `mv` | Mover un archivo o carpeta / renombrar archivo o capeta |  |
+| `chmod` | Cambiar permisos del usuario | `chmod 777 data/` |
 | `rsync` | Descargar o subir archivos |  |
 | `scp` | Descargar o subir archivos |  |
 | `cat` | Visualizar contenido de un archivo. Escribe el contenido del archivo de manera secuencial a la salida estándar, a la ventana de Terminal. |  |
@@ -125,13 +152,111 @@ Ejemplo de rutas:
 | `find` | Busca archivos en un directorio específico. |  |
 | `head` | Visualizar primeras líneas de un archivo. |  |
 | `tail` | Visualizar últimas líneas de un archivo. |  |
-| `which` | Indica el directorio donde se encuentra un particular comando o programa que se haya podido encontrar usando los directorios guardados en la variable de estado `PATH`. | which bash |
+| `which` | Indica el directorio donde se encuentra un particular comando o programa que se haya podido encontrar usando los directorios guardados en la variable de estado `PATH`. | `which bash` |
 
 ::: callout-note
 ## Ayuda de funciones
 
 Puedes consultar mas información usando `man ls`
 :::
+
+## ¿Cómo encuentra Bash los programas externos?
+
+Contamos con una variable llamada `$PATH`. Siendo la lista de lugares donde Bash busca programas ejecutables.
+
+En la terminal escriban y ejecuten:
+
+``` bash
+echo $PATH
+```
+
+Eso conecta directamente con la filosofía Unix de **herramientas pequeñas que hacen tareas específicas y pueden combinarse**.
+
+> **🐚 Bash no “contiene” todos los comandos que usamos. Algunos son internos (*builtins*) y otros son programas externos que Bash busca y ejecuta.**
+
+## Vamos a crear un alias
+
+El archivo de configuración personal (Windows y linux: `~/.bashrc`; macOs = `~/.zshrc`) guarda instrucciones que permiten decidir **cómo queremos que se comporte y se vea nuestro shell** cada vez que iniciamos una sesión interactiva.
+
+1.  Dentro del **HOME**, vamos a ejecutar el siguiente comando para ver los archivos ocultos en listas:
+
+``` bash
+ls -la
+```
+
+![Mi distribución](figures/ecoss_zsh.png){fig-align="center"}
+
+Cada uno de estos archivos contiene información importante para nuestro sistema:
+
+| Archivo | ¿Qué es? | Ejemplo de lo que contiene |
+|---------------|-----------------------------|-----------------------------|
+| `~/.zprofile` | 🚀 **Configuración al iniciar sesión.** Se lee al iniciar una sesión de Zsh tipo *login*. | Variables de entorno, `$PATH` |
+| `~/.zshrc` | ⚙️ **Configuración de Zsh interactivo.** Personaliza cómo trabajas en la terminal. | Alias, prompt, plugins, funciones, `$PATH` |
+| `~/.zsh_history` | 🕒 **Historial de comandos.** Guarda los comandos que has ejecutado. | `cd`, `ls`, `grep`, `git status` |
+
+2.  Vamos a abrir nuestro archivo de configuración personal (Windows y linux: `~/.bashrc`; macOs = `~/.zshrc`) con el editor de texto `nano`.
+
+**Para Windows/Linux usar `~/.bashrc`**
+
+Si no aparece el archivo `~/.bashrc` en Windows, vas a tener que crearlo con:
+
+``` bash
+nano ~/.bashrc
+```
+
+**Para macOS**
+
+``` bash
+nano ~/.zshrc
+```
+
+::: callout-note
+En Git Bash para Windows, `~/.bashrc` puede no existir inicialmente. Esto no significa que Bash esté mal instalado; simplemente podemos crearlo si lo necesitamos.
+:::
+
+3.  Cuando el archivo este abierto vamos a buscar un renglón hasta abajo que este libre. No vamos a cambiar nada arriba.
+
+``` bash
+alias ll="ls -la"
+```
+
+Tu archivo debe verse como este:
+
+![Alias en mi archivo de configuración .zshrc](figures/bash_alias.png){fig-align="center"}
+
+4.  Para guardar el archivo y salir debes dar **Ctrl+X.**
+
+![Para guardar debes teclear CTRL + X](figures/bash1_modificacion.png){fig-align="center"}
+
+5.  Después aparecerá un mensaje para confirma si quieres guardar los cambios y tecleamos Y. Con esto estaremos confirmando el cambio en el archivo.
+
+![Cuando aparezca esta pregunta solo escribe Y](figures/bash2_yes.png){fig-align="center"}
+
+6.  Para salir de ediciones da ENTER.
+
+![Pasa salir de ediciones da ENTER](figures/bash3_salir.png){fig-align="center"}
+
+7.  Vamos a cargar el archivo de configuración personalmente con el comando `source:`
+
+**En Windows y Linux:**
+
+``` bash
+source ~/.bashrc
+```
+
+**En macOs:**
+
+``` bash
+source ~/.zshrc
+```
+
+8.  Ahora vamos a probar nuestro nuevo alias en la terminal. Copia y ejecuta:
+
+``` bash
+ll
+```
+
+Verás que hace lo mismo que `ls -la.`
 
 ## Consultar información sobre archivos y directorios
 
@@ -194,7 +319,7 @@ Por lo tanto:
 Los archivos pueden contener diversos tipos de extensiones, dependiendo del objetivo será necesario descomprimirlos y en otros dejarlos comprimidos para no abarcar tanto espacio en tu espacio de trabajo. 
 
 | Tipo de archivo | Comprimir | Descomprimir |
-|----|----|----|
+|------------------------|------------------------|------------------------|
 | Carpeta.tar | `tar -cvf carpeta.tar /dir/a/comprimir/carpeta` | `tar -xvf carpeta.tar` |
 | Carpeta.tar.gz | `tar -czvf carpeta.tar.gz /carpeta/a/empaquetar/carpeta` | `tar -zxvf carpeta.tar.gz` |
 | Carpeta.gz | `gzip -9 carpeta.gz carpeta/a/empaquetar/carpeta` | `gunzip -kd carpeta.gz` |

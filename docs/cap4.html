@@ -571,11 +571,22 @@ ul.task-list li input[type="checkbox"] {
   <ul>
   <li><a href="#características-principales-de-unix" id="toc-características-principales-de-unix" class="nav-link" data-scroll-target="#características-principales-de-unix"><span class="header-section-number">17.1.1</span> <strong>Características principales de Unix:</strong></a></li>
   </ul></li>
-  <li><a href="#gnulinux" id="toc-gnulinux" class="nav-link" data-scroll-target="#gnulinux"><span class="header-section-number">17.2</span> GNU/Linux</a></li>
-  <li><a href="#filosofía-gnulinux" id="toc-filosofía-gnulinux" class="nav-link" data-scroll-target="#filosofía-gnulinux"><span class="header-section-number">17.3</span> Filosofía GNU/Linux</a></li>
-  <li><a href="#ubuntu" id="toc-ubuntu" class="nav-link" data-scroll-target="#ubuntu"><span class="header-section-number">17.4</span> Ubuntu</a></li>
-  <li><a href="#shell-bash-bash-shell" id="toc-shell-bash-bash-shell" class="nav-link" data-scroll-target="#shell-bash-bash-shell"><span class="header-section-number">17.5</span> Shell / Bash / Bash Shell</a></li>
-  <li><a href="#material-suplementario" id="toc-material-suplementario" class="nav-link" data-scroll-target="#material-suplementario"><span class="header-section-number">17.6</span> Material suplementario</a></li>
+  <li><a href="#unix-comienza-a-tener-descendientes" id="toc-unix-comienza-a-tener-descendientes" class="nav-link" data-scroll-target="#unix-comienza-a-tener-descendientes"><span class="header-section-number">18</span> 🌿 UNIX comienza a tener descendientes</a>
+  <ul>
+  <li><a href="#gnulinux" id="toc-gnulinux" class="nav-link" data-scroll-target="#gnulinux"><span class="header-section-number">18.1</span> GNU/Linux</a>
+  <ul class="collapse">
+  <li><a href="#pero-hay-un-matiz-importante" id="toc-pero-hay-un-matiz-importante" class="nav-link" data-scroll-target="#pero-hay-un-matiz-importante"><span class="header-section-number">18.1.1</span> Pero hay un matiz importante</a></li>
+  </ul></li>
+  <li><a href="#ubuntu-no-es-linux" id="toc-ubuntu-no-es-linux" class="nav-link" data-scroll-target="#ubuntu-no-es-linux"><span class="header-section-number">18.2</span> Ubuntu no es LINUX</a></li>
+  <li><a href="#filosofía-software-libre-y-código-abierto" id="toc-filosofía-software-libre-y-código-abierto" class="nav-link" data-scroll-target="#filosofía-software-libre-y-código-abierto"><span class="header-section-number">18.3</span> Filosofía “Software Libre y Código abierto”</a></li>
+  <li><a href="#y-gnulinux-dónde-queda" id="toc-y-gnulinux-dónde-queda" class="nav-link" data-scroll-target="#y-gnulinux-dónde-queda"><span class="header-section-number">18.4</span> 🐧 ¿Y GNU/Linux dónde queda?</a></li>
+  <li><a href="#shell-intérprete-de-línea-de-comandos" id="toc-shell-intérprete-de-línea-de-comandos" class="nav-link" data-scroll-target="#shell-intérprete-de-línea-de-comandos"><span class="header-section-number">18.5</span> Shell = Intérprete de línea de comandos</a>
+  <ul class="collapse">
+  <li><a href="#bash-bash-shell" id="toc-bash-bash-shell" class="nav-link" data-scroll-target="#bash-bash-shell"><span class="header-section-number">18.5.1</span> Bash / Bash Shell</a></li>
+  </ul></li>
+  <li><a href="#tabla-comparativa-de-lo-que-usaremos" id="toc-tabla-comparativa-de-lo-que-usaremos" class="nav-link" data-scroll-target="#tabla-comparativa-de-lo-que-usaremos"><span class="header-section-number">18.6</span> Tabla comparativa de lo que usaremos</a></li>
+  <li><a href="#material-suplementario" id="toc-material-suplementario" class="nav-link" data-scroll-target="#material-suplementario"><span class="header-section-number">18.7</span> Material suplementario</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -602,7 +613,7 @@ ul.task-list li input[type="checkbox"] {
 
 
 <blockquote class="blockquote">
-<p><strong>Fecha:</strong> 10 de septiembre, 2026</p>
+<p><strong>Fecha:</strong> 17 de septiembre, 2026</p>
 </blockquote>
 <div class="content-box-gray">
 <p><strong>Objetivos:</strong></p>
@@ -627,25 +638,70 @@ ul.task-list li input[type="checkbox"] {
 <li><strong>Portabilidad</strong>: Fue diseñado para funcionar en diferentes tipos de hardware, lo que permitió su adopción generalizada.</li>
 <li><strong>Modularidad</strong>: Sigue la filosofía “hacer una cosa y hacerla bien”, donde cada programa tiene una función específica.</li>
 <li><strong>Multitarea y multiusuario</strong>: Permite que múltiples usuarios trabajen simultáneamente en el mismo sistema, y que múltiples procesos se ejecuten al mismo tiempo.</li>
-<li><strong>Interfaz de línea de comandos (CLI)</strong>: Utiliza un shell (intérprete de comandos) para que los usuarios interactúen con el sistema.</li>
+<li><strong>Interfaz de línea de comandos (CLI,</strong> <em>Command-Line Interface</em><strong>)</strong>: Utiliza un shell (intérprete de comandos) para que los usuarios interactúen con el sistema.</li>
 <li><strong>Seguridad</strong>: Implementa un sistema de permisos y usuarios para proteger los archivos y recursos del sistema.</li>
 </ul>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="figures/Conociendo_unix.png" class="img-fluid figure-img"></p>
-<figcaption>Imagen creada con Gemini.</figcaption>
+<figcaption>Imagen creada con ChatGPT.</figcaption>
 </figure>
 </div>
 </section>
 </section>
-<section id="gnulinux" class="level2" data-number="17.2">
-<h2 data-number="17.2" class="anchored" data-anchor-id="gnulinux"><span class="header-section-number">17.2</span> GNU/Linux</h2>
+<section id="unix-comienza-a-tener-descendientes" class="level1" data-number="18">
+<h1 data-number="18"><span class="header-section-number">18</span> 🌿 UNIX comienza a tener descendientes</h1>
+<p>Con el tiempo aparecieron distintas versiones de UNIX.</p>
+<p><strong>🌱 Surgen dos rama:</strong></p>
+<ul>
+<li>Una de las ramas importantes fue <a href="https://es.wikipedia.org/wiki/System_V"><strong>System V</strong></a>, desarrollada por AT&amp;T.</li>
+</ul>
+<p>Pero otra rama tendría una historia especialmente interesante.</p>
+<ul>
+<li><strong>En 1977 - Aparece BSD:</strong> En la Universidad de California, Berkeley, investigadores comenzaron a trabajar con UNIX y desarrollaron <a href="https://en.wikipedia.org/wiki/Berkeley_Software_Distribution"><strong>BSD (Berkeley Software Distribution, Berkeley Unix)</strong></a>.</li>
+</ul>
+<p>📖 <strong>1988 — POSIX pone reglas comunes</strong></p>
+<ul>
+<li>Con tantos sistemas diferentes, era necesario establecer estándares.</li>
+<li><strong>POSIX no es un sistema operativo.</strong></li>
+<li>Es un conjunto de estándares que define interfaces y comportamientos comunes.</li>
+<li>Su objetivo es facilitar la <strong>compatibilidad entre sistemas tipo Unix</strong>.</li>
+</ul>
+<blockquote class="blockquote">
+<p>“Si seguimos ciertas interfaces y comportamientos comunes, será más fácil que programas y herramientas funcionen en diferentes sistemas.”</p>
+</blockquote>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="figures/unix_family.png" class="img-fluid figure-img"></p>
+<figcaption>Imagen creada con ChatGPT.</figcaption>
+</figure>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Nota
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>macOs</strong> es considerado el <strong>hijo directo</strong>; mientras <strong>Linux</strong> es el <strong>hijo</strong> <strong>adoptado</strong>; y <strong>Windows</strong> es el <strong>vecino</strong> con otra familia construyendo su propia casa.<br>
+<br>
+Aquí hay más contexto: <strong>macOS</strong> puede verse como un descendiente más directo porque su base, <strong>Darwin</strong>, incorpora código y tecnología de la familia <strong>BSD</strong>, y BSD sí desciende históricamente de UNIX. En cambio, <strong>Linux fue escrito desde cero por Linus Torvalds</strong>: no deriva del código fuente de UNIX, aunque fue diseñado siguiendo muchos de sus conceptos y convenciones. Por eso se le llama <strong>Unix-like</strong>.</p>
+</div>
+</div>
+<section id="gnulinux" class="level2" data-number="18.1">
+<h2 data-number="18.1" class="anchored" data-anchor-id="gnulinux"><span class="header-section-number">18.1</span> GNU/Linux</h2>
 <div class="columns">
 <div class="column" style="width:60%;">
 <ul>
-<li>En 1983 <strong>Richard Stallman</strong> lideró la iniciativa <a href="https://www.gnu.org/">GNU</a> (GNU’s Not Unix), SO compatible con UNIX de libre distribución y acceso sin restricciones al código fuente.</li>
-<li>En 1991 <strong>Linus Torvalds</strong> creó su propio <a href="https://linuxjourney.com/lesson/kernel-overview">kernel</a> (Linux), que es la parte del SO que permite la comunicación con los componentes de Hardware. Este kernel fue distribuido de forma libre y gratuita.</li>
-<li>Ambos proyectos se juntaron y se creó <strong>GNU/Linux</strong></li>
+<li><p>En 1983 <strong>Richard Stallman</strong> lideró la iniciativa <a href="https://www.gnu.org/">GNU</a> (GNU’s Not Unix), SO compatible con UNIX de libre distribución y acceso sin restricciones al código fuente.</p></li>
+<li><p>En 1991 <strong>Linus Torvalds</strong> creó su propio <a href="https://linuxjourney.com/lesson/kernel-overview">kernel</a> (Linux), que es la parte del SO que permite la comunicación con los componentes de Hardware. Este <strong>kernel</strong> fue distribuido de forma libre y gratuita.</p></li>
+<li><p>Linux decía algo así:</p>
+<blockquote class="blockquote">
+<p>🐧 “No nací de tu código (UNIX), pero me gustan muchas de tus ideas.”</p>
+</blockquote></li>
 </ul>
 </div><div class="column" style="width:40%;">
 <div class="quarto-figure quarto-figure-right">
@@ -655,32 +711,60 @@ ul.task-list li input[type="checkbox"] {
 </div>
 </div>
 </div>
-<p>En resumen …</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Nota
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Un <strong>kernel</strong> es el <strong>núcleo del sistema operativo</strong>. Es el software que actúa como intermediario entre los programas y el hardware de la computadora.</p>
+<p>El kernel se encarga principalmente de <strong>administrar los recursos de la computadora</strong>: decide qué procesos utilizan el CPU y cuándo, administra la memoria RAM, permite acceder a discos y otros dispositivos, controla procesos y facilita que los programas se comuniquen con el hardware.</p>
+</div>
+</div>
+<p>Ambos proyectos se juntaron y se creó <strong>GNU/Linux …</strong></p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="figures/GNU:linux_flyer.png" class="img-fluid figure-img"></p>
-<figcaption>Imagen generada con Gemini.</figcaption>
+<p><img src="figures/GNU-Linux_juntos.png" class="img-fluid figure-img"></p>
+<figcaption>Imagen generada con ChatGPT.</figcaption>
 </figure>
 </div>
-</section>
-<section id="filosofía-gnulinux" class="level2" data-number="17.3">
-<h2 data-number="17.3" class="anchored" data-anchor-id="filosofía-gnulinux"><span class="header-section-number">17.3</span> Filosofía GNU/Linux</h2>
-<ul>
-<li>Los usuarios son libres de <strong>ejecutar, copiar, distribuir, estudiar, cambiar y mejorar</strong> el software.</li>
-<li>El <a href="https://www.gnu.org/philosophy/free-sw.html">software libre</a> se refiere a las libertades mencionadas, no al precio.</li>
-<li><a href="https://opensource.org/">“open source”</a> vs <a href="https://www.gnu.org/philosophy/free-sw.html">“free software”</a>.</li>
-</ul>
+<section id="pero-hay-un-matiz-importante" class="level3" data-number="18.1.1">
+<h3 data-number="18.1.1" class="anchored" data-anchor-id="pero-hay-un-matiz-importante"><span class="header-section-number">18.1.1</span> Pero hay un matiz importante</h3>
+<p>No fue que Linus dijera en 1991: <strong>«voy a crear GNU/Linux»</strong>.</p>
+<p>Linux era su propio proyecto. La comunidad comenzó a combinar el <strong>kernel Linux con el software del proyecto GNU</strong> y otros componentes para construir sistemas completos.</p>
+<p>De ahí surgieron muy pronto distribuciones de Linux y posteriormente distribuciones conocidas como Debian, Red Hat, Ubuntu, etc.</p>
+<p>Y esto explica algo que suele confundir mucho:</p>
+<p><strong>Linux ≠ GNU ≠ GNU/Linux</strong></p>
+<p>Además, Linux <strong>no está obligado a utilizar GNU</strong>. El mejor ejemplo es <strong>Android</strong>: utiliza el <strong>kernel Linux</strong>, pero no es una distribución GNU/Linux convencional.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="figures/Opensorce.png" class="img-fluid figure-img"></p>
-<figcaption>Imagen creada con Gemini.</figcaption>
+<p><a href="Imagen creada con ChatGPT."><img src="figures/linux_android.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></a></p>
 </figure>
 </div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Nota
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Entonces decir <strong>“Linux es un sistema operativo”</strong> es común en el lenguaje cotidiano, pero técnicamente, cuando hablamos específicamente de <strong>Linux</strong>, estamos hablando del <strong>kernel</strong>. Cuando alguien dice “uso Linux”, normalmente quiere decir que utiliza <strong>una distribución basada en el kernel Linux</strong>, como Ubuntu, Debian o Fedora.</p>
+</div>
+</div>
 </section>
-<section id="ubuntu" class="level2" data-number="17.4">
-<h2 data-number="17.4" class="anchored" data-anchor-id="ubuntu"><span class="header-section-number">17.4</span> Ubuntu</h2>
+</section>
+<section id="ubuntu-no-es-linux" class="level2" data-number="18.2">
+<h2 data-number="18.2" class="anchored" data-anchor-id="ubuntu-no-es-linux"><span class="header-section-number">18.2</span> Ubuntu no es LINUX</h2>
 <ul>
 <li>Una de las distribuciones de GNU/Linux más populares.</li>
+<li>Combina: kernel Linux + herramientas GNU + bibliotecas + gestor de paquetes + software + entorno de escritorio + muchos otros componentes.</li>
 <li>Está basada en <a href="https://www.debian.org/">Debian</a> y fue desarrollada por la empresa <a href="https://canonical.com/"><em>Canonical</em></a></li>
 <li>Facilidad de uso e instalación.</li>
 <li>Interfaz de usuario amigable.</li>
@@ -690,19 +774,188 @@ ul.task-list li input[type="checkbox"] {
 <p><img src="figures/ubuntu.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="205"></p>
 </figure>
 </div>
+<div class="callout callout-style-default callout-caution no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Precaución
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>🐧 Linux = kernel</strong><br>
+</p>
+<p><strong>🟠 Ubuntu =</strong> sistema operativo que usa el kernel Linux + GNU + muchos otros componentes.<br>
+</p>
+<p><strong>🤖 Android =</strong> otro sistema operativo que también usa el kernel Linux, pero construye un entorno diferente alrededor de él.</p>
+</div>
+</div>
 </section>
-<section id="shell-bash-bash-shell" class="level2" data-number="17.5">
-<h2 data-number="17.5" class="anchored" data-anchor-id="shell-bash-bash-shell"><span class="header-section-number">17.5</span> Shell / Bash / Bash Shell</h2>
+<section id="filosofía-software-libre-y-código-abierto" class="level2" data-number="18.3">
+<h2 data-number="18.3" class="anchored" data-anchor-id="filosofía-software-libre-y-código-abierto"><span class="header-section-number">18.3</span> Filosofía “Software Libre y Código abierto”</h2>
 <ul>
-<li>La <a href="https://en.wikipedia.org/wiki/Unix_shell"><em>shell</em></a> es el programa que provee una <strong>interfaz de línea de comandos (CLI)</strong>, que permite la comunicación entre el usuario y el SO.</li>
-<li>La mayoría de distribuciones de Linux tienen por defecto <a href="https://www.gnu.org/software/bash/"><em>bash</em></a> (“Bourne Again SHell”) como <em>shell</em>. Hay <a href="https://www.educba.com/types-of-shells-in-linux/">otros tipos de shell</a> como <code>sh, csh, tcsh, ksh, zsh</code>, entre otras.</li>
+<li>El <a href="https://www.gnu.org/philosophy/free-sw.html">software libre</a> se refiere a las libertades mencionadas, no al precio.</li>
+<li><a href="https://opensource.org/">“open source”</a> vs <a href="https://www.gnu.org/philosophy/free-sw.html">“free software”</a>.</li>
+</ul>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th></th>
+<th>🕊️ Free Software</th>
+<th>💻 Open Source</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Traducción</td>
+<td>Software libre</td>
+<td>Código abierto</td>
+</tr>
+<tr class="even">
+<td>Énfasis</td>
+<td><strong>Libertad del usuario</strong></td>
+<td><strong>Modelo de desarrollo y acceso al código</strong></td>
+</tr>
+<tr class="odd">
+<td>Pregunta central</td>
+<td>“¿Qué libertades tengo?”</td>
+<td>“¿Cómo podemos desarrollar y mejorar este software?”</td>
+</tr>
+<tr class="even">
+<td>Movimiento asociado</td>
+<td><a href="https://www.fsf.org/">Free Software Foundation</a></td>
+<td><a href="https://opensource.org/">Open Source Initiative</a></td>
+</tr>
+<tr class="odd">
+<td>Figura histórica</td>
+<td>Richard Stallman</td>
+<td>Eric Raymond, Bruce Perens y otros</td>
+</tr>
+<tr class="even">
+<td>Código fuente disponible</td>
+<td>✅</td>
+<td>✅</td>
+</tr>
+<tr class="odd">
+<td>Modificar</td>
+<td>✅</td>
+<td>✅ según licencia</td>
+</tr>
+<tr class="even">
+<td>Redistribuir</td>
+<td>✅</td>
+<td>✅ según licencia</td>
+</tr>
+<tr class="odd">
+<td>Motivación característica</td>
+<td>Ética y libertad</td>
+<td>Colaboración, calidad, transparencia, desarrollo</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="y-gnulinux-dónde-queda" class="level2" data-number="18.4">
+<h2 data-number="18.4" class="anchored" data-anchor-id="y-gnulinux-dónde-queda"><span class="header-section-number">18.4</span> 🐧 ¿Y GNU/Linux dónde queda?</h2>
+<ul>
+<li>Los usuarios son libres de <strong>ejecutar, copiar, distribuir, estudiar, cambiar y mejorar</strong> el software.</li>
+<li>El kernel Linux, por ejemplo, utiliza la licencia <strong>GPLv2</strong>, por lo que cumple criterios tanto de <strong>software libre como de código abierto</strong>. Muchas herramientas GNU también son ambas cosas.</li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="figures/GNU_linnux_filosofia.png" class="img-fluid figure-img"></p>
+<figcaption>Imagen creada con ChatGPT.</figcaption>
+</figure>
+</div>
+</section>
+<section id="shell-intérprete-de-línea-de-comandos" class="level2" data-number="18.5">
+<h2 data-number="18.5" class="anchored" data-anchor-id="shell-intérprete-de-línea-de-comandos"><span class="header-section-number">18.5</span> Shell = Intérprete de línea de comandos</h2>
+<ul>
+<li><p><strong>Shell</strong> es la categoría general. Es un programa que interpreta comandos <strong>(CLI)</strong> y permite la comunicación entre el usuario y el SO.</p></li>
+<li><p>La mayoría de distribuciones de Linux tienen por defecto <a href="https://www.gnu.org/software/bash/"><em>bash</em></a> (“Bourne Again SHell”) como <em>shell</em>. Hay <a href="https://www.educba.com/types-of-shells-in-linux/">otros tipos de shell</a> como <code>sh, csh, tcsh, ksh, zsh</code>, entre otras.</p></li>
+<li><p>Shell es la categoría/interfaz; No es una lenguaje de programación.</p></li>
+</ul>
+<section id="bash-bash-shell" class="level3" data-number="18.5.1">
+<h3 data-number="18.5.1" class="anchored" data-anchor-id="bash-bash-shell"><span class="header-section-number">18.5.1</span> Bash / Bash Shell</h3>
+<ul>
+<li>Lenguaje de programación; más específicamente un <strong>lenguaje de programación/scripting y un shell.</strong></li>
+<li>Bash es un intérprete de comandos que te permite realizar tareas de forma rápida y sencilla, además de automatizarlas mediante scripts.</li>
 </ul>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="figures/bash.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="363"></p>
 </figure>
 </div>
-<p>Bash es un intérprete de comandos que te da el poder de hacer tareas simples rápidamente.</p>
+</section>
+</section>
+<section id="tabla-comparativa-de-lo-que-usaremos" class="level2" data-number="18.6">
+<h2 data-number="18.6" class="anchored" data-anchor-id="tabla-comparativa-de-lo-que-usaremos"><span class="header-section-number">18.6</span> Tabla comparativa de lo que usaremos</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th><code>Git Bash</code> (Windows)</th>
+<th><code>Bash</code> (Linux)</th>
+<th><code>Zsh (Z Shell)</code> (macOS)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>¿Qué es?</td>
+<td>Bash adaptado para Windows</td>
+<td>Bash ejecutándose de forma nativa</td>
+<td>Otro shell compatible en gran parte con Bash</td>
+</tr>
+<tr class="even">
+<td>Sistema</td>
+<td>Windows</td>
+<td>Linux</td>
+<td>macOS</td>
+</tr>
+<tr class="odd">
+<td>Shell</td>
+<td><code>bash</code></td>
+<td><code>bash</code></td>
+<td><code>zsh</code></td>
+</tr>
+<tr class="even">
+<td>Entorno Unix real</td>
+<td>❌ No completamente</td>
+<td>✅ Sí</td>
+<td>✅ Sí, macOS es Unix</td>
+</tr>
+<tr class="odd">
+<td><code>grep</code>, <code>sed</code>, <code>cut</code>, <code>sort</code>…</td>
+<td>✅ incluidos por Git for Windows</td>
+<td>✅ herramientas GNU normalmente</td>
+<td>✅ herramientas Unix/BSD</td>
+</tr>
+<tr class="even">
+<td>Rutas</td>
+<td><code>/c/Users/Evelia/</code></td>
+<td><code>/home/evelia/</code></td>
+<td><code>/Users/evelia/</code></td>
+</tr>
+<tr class="odd">
+<td>Configuración típica</td>
+<td><code>~/.bashrc</code></td>
+<td><code>~/.bashrc</code></td>
+<td><code>~/.zshrc</code></td>
+</tr>
+<tr class="even">
+<td>Compatibilidad entre comandos básicos</td>
+<td>Muy alta</td>
+<td>—</td>
+<td>Muy alta</td>
+</tr>
+</tbody>
+</table>
 <p>En resumen …</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -711,8 +964,8 @@ ul.task-list li input[type="checkbox"] {
 </figure>
 </div>
 </section>
-<section id="material-suplementario" class="level2" data-number="17.6">
-<h2 data-number="17.6" class="anchored" data-anchor-id="material-suplementario"><span class="header-section-number">17.6</span> Material suplementario</h2>
+<section id="material-suplementario" class="level2" data-number="18.7">
+<h2 data-number="18.7" class="anchored" data-anchor-id="material-suplementario"><span class="header-section-number">18.7</span> Material suplementario</h2>
 <p>Si quieren aprender temas más sobre UNIX, GNU/Linux, bash, emulador de terminal y otros tema, pueden explorar los siguientes recursos, que son de acceso libre:</p>
 <ul>
 <li>Kross, S. (2017). <em>The unix workbench</em>. Leanpub. <a href="https://leanpub.com/unix" class="uri">https://leanpub.com/unix</a></li>
@@ -721,9 +974,11 @@ ul.task-list li input[type="checkbox"] {
 <li>Linux Journey. (2020). Linux Journey. <a href="https://linuxjourney.com/" class="uri">https://linuxjourney.com/</a></li>
 <li>GNU. (2020). GNU. <a href="https://www.gnu.org/" class="uri">https://www.gnu.org/</a></li>
 <li><a href="https://rsg-ecuador.github.io/unix.bioinfo.rsgecuador/content/Curso_basico/01_Unix_GNU-Linux/1_Conceptos_Unix_GNU_Linux.html">GNU/Linux para bioinformatica</a></li>
+<li><a href="https://medium.com/@rajamanii/the-story-of-unix-posix-linux-macos-and-windows-f8252c091be0">The Story of Unix, POSIX, Linux, macOS, and Windows</a></li>
 </ul>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
