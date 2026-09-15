@@ -606,15 +606,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#entorno-de-zsh-en-macos" id="toc-entorno-de-zsh-en-macos" class="nav-link" data-scroll-target="#entorno-de-zsh-en-macos"><span class="header-section-number">18.2</span> Entorno de zsh en macOs</a></li>
   <li><a href="#preparación-del-directorio-de-trabajo" id="toc-preparación-del-directorio-de-trabajo" class="nav-link" data-scroll-target="#preparación-del-directorio-de-trabajo"><span class="header-section-number">18.3</span> Preparación del directorio de trabajo</a></li>
   <li><a href="#conocer-mi-dirección-ubicación" id="toc-conocer-mi-dirección-ubicación" class="nav-link" data-scroll-target="#conocer-mi-dirección-ubicación"><span class="header-section-number">18.4</span> Conocer mi dirección / ubicación</a></li>
-  <li><a href="#comandos-básicos" id="toc-comandos-básicos" class="nav-link" data-scroll-target="#comandos-básicos"><span class="header-section-number">18.5</span> Comandos básicos</a></li>
-  <li><a href="#consultar-información-sobre-archivos-y-directorios" id="toc-consultar-información-sobre-archivos-y-directorios" class="nav-link" data-scroll-target="#consultar-información-sobre-archivos-y-directorios"><span class="header-section-number">18.6</span> Consultar información sobre archivos y directorios</a>
+  <li><a href="#comandos-propios-de-bash-builtins" id="toc-comandos-propios-de-bash-builtins" class="nav-link" data-scroll-target="#comandos-propios-de-bash-builtins"><span class="header-section-number">18.5</span> Comandos propios de Bash = <em>builtins</em></a></li>
+  <li><a href="#comandos-externos" id="toc-comandos-externos" class="nav-link" data-scroll-target="#comandos-externos"><span class="header-section-number">18.6</span> Comandos externos</a></li>
+  <li><a href="#cómo-encuentra-bash-los-programas-externos" id="toc-cómo-encuentra-bash-los-programas-externos" class="nav-link" data-scroll-target="#cómo-encuentra-bash-los-programas-externos"><span class="header-section-number">18.7</span> ¿Cómo encuentra Bash los programas externos?</a></li>
+  <li><a href="#vamos-a-crear-un-alias" id="toc-vamos-a-crear-un-alias" class="nav-link" data-scroll-target="#vamos-a-crear-un-alias"><span class="header-section-number">18.8</span> Vamos a crear un alias</a></li>
+  <li><a href="#consultar-información-sobre-archivos-y-directorios" id="toc-consultar-información-sobre-archivos-y-directorios" class="nav-link" data-scroll-target="#consultar-información-sobre-archivos-y-directorios"><span class="header-section-number">18.9</span> Consultar información sobre archivos y directorios</a>
   <ul>
-  <li><a href="#información-contenida" id="toc-información-contenida" class="nav-link" data-scroll-target="#información-contenida"><span class="header-section-number">18.6.1</span> <strong>Información contenida</strong></a></li>
-  <li><a href="#permisos" id="toc-permisos" class="nav-link" data-scroll-target="#permisos"><span class="header-section-number">18.6.2</span> <strong>Permisos</strong></a></li>
+  <li><a href="#información-contenida" id="toc-información-contenida" class="nav-link" data-scroll-target="#información-contenida"><span class="header-section-number">18.9.1</span> <strong>Información contenida</strong></a></li>
+  <li><a href="#permisos" id="toc-permisos" class="nav-link" data-scroll-target="#permisos"><span class="header-section-number">18.9.2</span> <strong>Permisos</strong></a></li>
   </ul></li>
-  <li><a href="#chmod-cambiar-permisos" id="toc-chmod-cambiar-permisos" class="nav-link" data-scroll-target="#chmod-cambiar-permisos"><span class="header-section-number">18.7</span> <strong><code>chmod</code>:</strong> Cambiar permisos</a></li>
-  <li><a href="#comprimir-y-descomprimir-archivos" id="toc-comprimir-y-descomprimir-archivos" class="nav-link" data-scroll-target="#comprimir-y-descomprimir-archivos"><span class="header-section-number">18.8</span> Comprimir y descomprimir archivos</a></li>
-  <li><a href="#material-suplementario" id="toc-material-suplementario" class="nav-link" data-scroll-target="#material-suplementario"><span class="header-section-number">18.9</span> Material suplementario</a></li>
+  <li><a href="#chmod-cambiar-permisos" id="toc-chmod-cambiar-permisos" class="nav-link" data-scroll-target="#chmod-cambiar-permisos"><span class="header-section-number">18.10</span> <strong><code>chmod</code>:</strong> Cambiar permisos</a></li>
+  <li><a href="#comprimir-y-descomprimir-archivos" id="toc-comprimir-y-descomprimir-archivos" class="nav-link" data-scroll-target="#comprimir-y-descomprimir-archivos"><span class="header-section-number">18.11</span> Comprimir y descomprimir archivos</a></li>
+  <li><a href="#material-suplementario" id="toc-material-suplementario" class="nav-link" data-scroll-target="#material-suplementario"><span class="header-section-number">18.12</span> Material suplementario</a></li>
   </ul>
 </nav>
     </div>
@@ -641,7 +644,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <blockquote class="blockquote">
-<p><strong>Fecha:</strong> 10 de septiembre, 2026</p>
+<p><strong>Fecha:</strong> 17 de septiembre, 2026</p>
 </blockquote>
 <section id="entorno-de-bash" class="level2" data-number="18.1">
 <h2 data-number="18.1" class="anchored" data-anchor-id="entorno-de-bash"><span class="header-section-number">18.1</span> Entorno de Bash</h2>
@@ -763,13 +766,91 @@ Nota
 </figure>
 </div>
 </section>
-<section id="comandos-básicos" class="level2" data-number="18.5">
-<h2 data-number="18.5" class="anchored" data-anchor-id="comandos-básicos"><span class="header-section-number">18.5</span> Comandos básicos</h2>
+<section id="comandos-propios-de-bash-builtins" class="level2" data-number="18.5">
+<h2 data-number="18.5" class="anchored" data-anchor-id="comandos-propios-de-bash-builtins"><span class="header-section-number">18.5</span> Comandos propios de Bash = <em>builtins</em></h2>
+<p>Un <strong>builtin</strong> (<em>comando interno</em>) es un comando que <strong>forma parte del propio shell</strong>. En Bash, significa que Bash puede ejecutarlo directamente, sin tener que buscar un programa externo dentro de las carpetas de <code>/bin</code> o <code>/usr/bin</code>.</p>
 <table class="caption-top table">
 <colgroup>
-<col style="width: 33%">
-<col style="width: 33%">
-<col style="width: 33%">
+<col style="width: 20%">
+<col style="width: 38%">
+<col style="width: 41%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Builtin</th>
+<th>¿Qué hace?</th>
+<th>Argumentos</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>cd</code></td>
+<td>Cambia de directorio</td>
+<td><code>cd /home/usuario/data/</code></td>
+</tr>
+<tr class="even">
+<td><code>pwd</code></td>
+<td>Muestra el directorio actual*</td>
+<td><code>pwd</code></td>
+</tr>
+<tr class="odd">
+<td><code>echo</code></td>
+<td>Imprime texto*</td>
+<td><code>echo "Hello world"</code></td>
+</tr>
+<tr class="even">
+<td><code>read</code></td>
+<td>Lee datos del usuario</td>
+<td><code>read nombre</code></td>
+</tr>
+<tr class="odd">
+<td><code>export</code></td>
+<td>Exporta variables</td>
+<td><code>export CURSO="Bash"</code></td>
+</tr>
+<tr class="even">
+<td><code>alias</code></td>
+<td>Crea alias</td>
+<td><code>alias ll="ls -la"</code></td>
+</tr>
+<tr class="odd">
+<td><code>history</code></td>
+<td>Muestra el historial</td>
+<td><code>history</code></td>
+</tr>
+<tr class="even">
+<td><code>source</code></td>
+<td>Ejecuta comandos de un archivo en el shell actual</td>
+<td><code>source ~/.zshrc</code></td>
+</tr>
+<tr class="odd">
+<td><code>type</code></td>
+<td>Indica qué tipo de comando es</td>
+<td><code>type cd</code></td>
+</tr>
+<tr class="even">
+<td><code>help</code></td>
+<td>Ayuda de los builtins de Bash</td>
+<td><code>help cd</code></td>
+</tr>
+</tbody>
+</table>
+<p>* <code>pwd</code> y <code>echo</code> son casos interesantes porque Bash tiene versiones builtin, aunque también pueden existir ejecutables externos con esos nombres.</p>
+<p>Coloca en la terminal lo siguiente y Bash les dirá que son <em>shell builtins</em>.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="bu">type</span> cd</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="bu">type</span> read</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="bu">type</span> echo</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<blockquote class="blockquote">
+<p>Bash puede interpretar lo que escribes y, dependiendo del comando, <strong>ejecutarlo él mismo o buscar un programa externo</strong> dentro de las carpetas de <code>/bin</code> o <code>/usr/bin</code>.</p>
+</blockquote>
+</section>
+<section id="comandos-externos" class="level2" data-number="18.6">
+<h2 data-number="18.6" class="anchored" data-anchor-id="comandos-externos"><span class="header-section-number">18.6</span> Comandos externos</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 23%">
+<col style="width: 35%">
+<col style="width: 41%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -782,52 +863,42 @@ Nota
 <tr class="odd">
 <td><code>ssh</code></td>
 <td>Conexión a servidores</td>
-<td>ssh usuario@servidor.mx</td>
+<td><code>ssh usuario@servidor.mx</code></td>
 </tr>
 <tr class="even">
 <td><code>ls</code></td>
 <td>Observar el contenido de los archivos en una carpeta</td>
-<td>ls directorio/</td>
+<td><code>ls directorio/</code></td>
 </tr>
 <tr class="odd">
-<td><code>cd</code></td>
-<td>Moverse de directorios</td>
-<td>cd /home/usuario/data/</td>
-</tr>
-<tr class="even">
 <td><code>mkdir</code></td>
 <td>Crear un nuevo directorio</td>
-<td>mkdir data</td>
-</tr>
-<tr class="odd">
-<td><code>rmdir</code></td>
-<td>Eliminar el directorio</td>
-<td>rmkdir -rf data</td>
+<td><code>mkdir data</code></td>
 </tr>
 <tr class="even">
+<td><code>rmdir</code></td>
+<td>Eliminar el directorio</td>
+<td><code>rmkdir -rf data</code></td>
+</tr>
+<tr class="odd">
 <td><code>nano</code>&nbsp;/&nbsp;<code>vim</code></td>
 <td>Editores de texto plano</td>
 <td>nano Archivo.txt / vim Archivo.txt</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><code>cp</code></td>
 <td>Copiar archivos</td>
-<td>cp Archivo1.txt /home/usuario/data/</td>
-</tr>
-<tr class="even">
-<td><code>mv</code></td>
-<td>Mover un archivo o carpeta</td>
-<td></td>
+<td><code>cp Archivo1.txt /home/usuario/data/</code></td>
 </tr>
 <tr class="odd">
-<td><code>echo</code></td>
-<td>Para llamar y/o declarar variables</td>
-<td>echo “Hello world”</td>
+<td><code>mv</code></td>
+<td>Mover un archivo o carpeta / renombrar archivo o capeta</td>
+<td></td>
 </tr>
 <tr class="even">
 <td><code>chmod</code></td>
 <td>Cambiar permisos del usuario</td>
-<td>chmod 777 data/</td>
+<td><code>chmod 777 data/</code></td>
 </tr>
 <tr class="odd">
 <td><code>rsync</code></td>
@@ -867,7 +938,7 @@ Nota
 <tr class="even">
 <td><code>which</code></td>
 <td>Indica el directorio donde se encuentra un particular comando o programa que se haya podido encontrar usando los directorios guardados en la variable de estado&nbsp;<code>PATH</code>.</td>
-<td>which bash</td>
+<td><code>which bash</code></td>
 </tr>
 </tbody>
 </table>
@@ -885,15 +956,142 @@ Nota
 </div>
 </div>
 </section>
-<section id="consultar-información-sobre-archivos-y-directorios" class="level2" data-number="18.6">
-<h2 data-number="18.6" class="anchored" data-anchor-id="consultar-información-sobre-archivos-y-directorios"><span class="header-section-number">18.6</span> Consultar información sobre archivos y directorios</h2>
-<section id="información-contenida" class="level3" data-number="18.6.1">
-<h3 data-number="18.6.1" class="anchored" data-anchor-id="información-contenida"><span class="header-section-number">18.6.1</span> <strong>Información contenida</strong></h3>
+<section id="cómo-encuentra-bash-los-programas-externos" class="level2" data-number="18.7">
+<h2 data-number="18.7" class="anchored" data-anchor-id="cómo-encuentra-bash-los-programas-externos"><span class="header-section-number">18.7</span> ¿Cómo encuentra Bash los programas externos?</h2>
+<p>Contamos con una variable llamada <code>$PATH</code>. Siendo la lista de lugares donde Bash busca programas ejecutables.</p>
+<p>En la terminal escriban y ejecuten:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="va">$PATH</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Eso conecta directamente con la filosofía Unix de <strong>herramientas pequeñas que hacen tareas específicas y pueden combinarse</strong>.</p>
+<blockquote class="blockquote">
+<p><strong>🐚 Bash no “contiene” todos los comandos que usamos. Algunos son internos (<em>builtins</em>) y otros son programas externos que Bash busca y ejecuta.</strong></p>
+</blockquote>
+</section>
+<section id="vamos-a-crear-un-alias" class="level2" data-number="18.8">
+<h2 data-number="18.8" class="anchored" data-anchor-id="vamos-a-crear-un-alias"><span class="header-section-number">18.8</span> Vamos a crear un alias</h2>
+<p>El archivo de configuración personal (Windows y linux: <code>~/.bashrc</code>; macOs = <code>~/.zshrc</code>) guarda instrucciones que permiten decidir <strong>cómo queremos que se comporte y se vea nuestro shell</strong> cada vez que iniciamos una sesión interactiva.</p>
+<ol type="1">
+<li>Dentro del <strong>HOME</strong>, vamos a ejecutar el siguiente comando para ver los archivos ocultos en listas:</li>
+</ol>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-la</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="figures/ecoss_zsh.png" class="img-fluid figure-img"></p>
+<figcaption>Mi distribución</figcaption>
+</figure>
+</div>
+<p>Cada uno de estos archivos contiene información importante para nuestro sistema:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 20%">
+<col style="width: 39%">
+<col style="width: 39%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Archivo</th>
+<th>¿Qué es?</th>
+<th>Ejemplo de lo que contiene</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>~/.zprofile</code></td>
+<td>🚀 <strong>Configuración al iniciar sesión.</strong> Se lee al iniciar una sesión de Zsh tipo <em>login</em>.</td>
+<td>Variables de entorno, <code>$PATH</code></td>
+</tr>
+<tr class="even">
+<td><code>~/.zshrc</code></td>
+<td>⚙️ <strong>Configuración de Zsh interactivo.</strong> Personaliza cómo trabajas en la terminal.</td>
+<td>Alias, prompt, plugins, funciones, <code>$PATH</code></td>
+</tr>
+<tr class="odd">
+<td><code>~/.zsh_history</code></td>
+<td>🕒 <strong>Historial de comandos.</strong> Guarda los comandos que has ejecutado.</td>
+<td><code>cd</code>, <code>ls</code>, <code>grep</code>, <code>git status</code></td>
+</tr>
+</tbody>
+</table>
+<ol start="2" type="1">
+<li>Vamos a abrir nuestro archivo de configuración personal (Windows y linux: <code>~/.bashrc</code>; macOs = <code>~/.zshrc</code>) con el editor de texto <code>nano</code>.</li>
+</ol>
+<p><strong>Para Windows/Linux usar <code>~/.bashrc</code></strong></p>
+<p>Si no aparece el archivo <code>~/.bashrc</code> en Windows, vas a tener que crearlo con:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">nano</span> ~/.bashrc</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Para macOS</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">nano</span> ~/.zshrc</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Nota
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>En Git Bash para Windows, <code>~/.bashrc</code> puede no existir inicialmente. Esto no significa que Bash esté mal instalado; simplemente podemos crearlo si lo necesitamos.</p>
+</div>
+</div>
+<ol start="3" type="1">
+<li>Cuando el archivo este abierto vamos a buscar un renglón hasta abajo que este libre. No vamos a cambiar nada arriba.</li>
+</ol>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="bu">alias</span> ll=<span class="st">"ls -la"</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Tu archivo debe verse como este:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="figures/bash_alias.png" class="img-fluid figure-img"></p>
+<figcaption>Alias en mi archivo de configuración .zshrc</figcaption>
+</figure>
+</div>
+<ol start="4" type="1">
+<li>Para guardar el archivo y salir debes dar <strong>Ctrl+X.</strong></li>
+</ol>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="figures/bash1_modificacion.png" class="img-fluid figure-img"></p>
+<figcaption>Para guardar debes teclear CTRL + X</figcaption>
+</figure>
+</div>
+<ol start="5" type="1">
+<li>Después aparecerá un mensaje para confirma si quieres guardar los cambios y tecleamos Y. Con esto estaremos confirmando el cambio en el archivo.</li>
+</ol>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="figures/bash2_yes.png" class="img-fluid figure-img"></p>
+<figcaption>Cuando aparezca esta pregunta solo escribe Y</figcaption>
+</figure>
+</div>
+<ol start="6" type="1">
+<li>Para salir de ediciones da ENTER.</li>
+</ol>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="figures/bash3_salir.png" class="img-fluid figure-img"></p>
+<figcaption>Pasa salir de ediciones da ENTER</figcaption>
+</figure>
+</div>
+<ol start="7" type="1">
+<li>Vamos a cargar el archivo de configuración personalmente con el comando <code>source:</code></li>
+</ol>
+<p><strong>En Windows y Linux:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="bu">source</span> ~/.bashrc</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>En macOs:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="bu">source</span> ~/.zshrc</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<ol start="8" type="1">
+<li>Ahora vamos a probar nuestro nuevo alias en la terminal. Copia y ejecuta:</li>
+</ol>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="ex">ll</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Verás que hace lo mismo que <code>ls -la.</code></p>
+</section>
+<section id="consultar-información-sobre-archivos-y-directorios" class="level2" data-number="18.9">
+<h2 data-number="18.9" class="anchored" data-anchor-id="consultar-información-sobre-archivos-y-directorios"><span class="header-section-number">18.9</span> Consultar información sobre archivos y directorios</h2>
+<section id="información-contenida" class="level3" data-number="18.9.1">
+<h3 data-number="18.9.1" class="anchored" data-anchor-id="información-contenida"><span class="header-section-number">18.9.1</span> <strong>Información contenida</strong></h3>
 <p>Cada columna en la salida anterior tiene un significado:</p>
 <p><a href="https://eveliacoss.github.io/RNAseq_classFEB2024/Presentaciones/Dia1_AspectosGenerales.html#74"><img src="figures/ejemplo_datos.png" class="img-fluid"></a></p>
 </section>
-<section id="permisos" class="level3" data-number="18.6.2">
-<h3 data-number="18.6.2" class="anchored" data-anchor-id="permisos"><span class="header-section-number">18.6.2</span> <strong>Permisos</strong></h3>
+<section id="permisos" class="level3" data-number="18.9.2">
+<h3 data-number="18.9.2" class="anchored" data-anchor-id="permisos"><span class="header-section-number">18.9.2</span> <strong>Permisos</strong></h3>
 <p>Cada usuario tiene permisos diferentes cuando crea un archivo. Los permisos pueden modificarse con <code>chmod</code>.</p>
 <p>Los caracteres atribuidos a los permisos son:</p>
 <ul>
@@ -905,8 +1103,8 @@ Nota
 <p><a href="https://eveliacoss.github.io/RNAseq_classFEB2024/Presentaciones/Dia1_AspectosGenerales.html#75"><img src="figures/permisos.png" class="img-fluid"></a></p>
 </section>
 </section>
-<section id="chmod-cambiar-permisos" class="level2" data-number="18.7">
-<h2 data-number="18.7" class="anchored" data-anchor-id="chmod-cambiar-permisos"><span class="header-section-number">18.7</span> <strong><code>chmod</code>:</strong> Cambiar permisos</h2>
+<section id="chmod-cambiar-permisos" class="level2" data-number="18.10">
+<h2 data-number="18.10" class="anchored" data-anchor-id="chmod-cambiar-permisos"><span class="header-section-number">18.10</span> <strong><code>chmod</code>:</strong> Cambiar permisos</h2>
 <p>La representación octal de chmod es muy sencilla</p>
 <ul>
 <li><p><code>r</code> = Lectura tiene el valor de 4</p></li>
@@ -1000,8 +1198,8 @@ Nota
 </tbody>
 </table>
 </section>
-<section id="comprimir-y-descomprimir-archivos" class="level2" data-number="18.8">
-<h2 data-number="18.8" class="anchored" data-anchor-id="comprimir-y-descomprimir-archivos"><span class="header-section-number">18.8</span> Comprimir y descomprimir archivos</h2>
+<section id="comprimir-y-descomprimir-archivos" class="level2" data-number="18.11">
+<h2 data-number="18.11" class="anchored" data-anchor-id="comprimir-y-descomprimir-archivos"><span class="header-section-number">18.11</span> Comprimir y descomprimir archivos</h2>
 <p>Los archivos pueden contener diversos tipos de extensiones, dependiendo del objetivo será necesario descomprimirlos y en otros dejarlos comprimidos para no abarcar tanto espacio en tu espacio de trabajo.&nbsp;</p>
 <table class="caption-top table">
 <colgroup>
@@ -1052,11 +1250,11 @@ Nota
 <ol type="1">
 <li>Crea una carpeta llamada <code>respaldo</code>.</li>
 </ol>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> respaldo</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> respaldo</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <ol start="2" type="1">
 <li>Crea dentro de ella los archivos uno.txt, dos.txt y tres.txt. Usa el comando</li>
 </ol>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">touch</span> respaldo/uno.txt respaldo/dos.txt respaldo/tres.txt</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">touch</span> respaldo/uno.txt respaldo/dos.txt respaldo/tres.txt</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <ol start="3" type="1">
 <li>Configura los tres archivos con permisos <code>rw-r-----</code>.</li>
 </ol>
@@ -1066,12 +1264,12 @@ Nota
 <li>r– = 4</li>
 <li>— = 0</li>
 </ul>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">chmod</span> 640 respaldo/<span class="pp">*</span>.txt</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">chmod</span> 640 respaldo/<span class="pp">*</span>.txt</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Y comprueba que si se cambiaron los permisos con <code>l</code>s -l respaldo`.</p>
 <ol start="3" type="1">
 <li>Comprime la carpeta completa en un archivo llamado <code>respaldo.zip</code></li>
 </ol>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">zip</span> <span class="at">-r</span> respaldo.zip respaldo/</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">zip</span> <span class="at">-r</span> respaldo.zip respaldo/</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <p>La opción:</p>
 <ul>
 <li><code>-r</code> → comprime de forma recursiva la carpeta y su contenido</li>
@@ -1079,29 +1277,29 @@ Nota
 <ol start="4" type="1">
 <li>Elimina la carpeta <code>respaldo</code> (la que no esta comprimida).</li>
 </ol>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span> <span class="at">-r</span> respaldo</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span> <span class="at">-r</span> respaldo</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <ol start="5" type="1">
 <li>Comprueba que la carpeta ya no existe.</li>
 </ol>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb18"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <p>La carpeta respaldo ya no deberá aparecer, pero sí: <code>respaldo.zip</code>.</p>
 <ol start="6" type="1">
 <li>Recupera la carpeta utilizando <code>respaldo.zip</code>. Es decir, descomprime la carpeta <code>respaldo.zip</code>.</li>
 </ol>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">unzip</span> respaldo.zip</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb19"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">unzip</span> respaldo.zip</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <ol start="7" type="1">
 <li>Comprueba que los tres archivos fueron recuperados.</li>
 </ol>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> respaldo</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb20"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> respaldo</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <ol start="8" type="1">
 <li>Revisa sus permisos.</li>
 </ol>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-l</span> respaldo</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb21"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-l</span> respaldo</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div>
 </section>
-<section id="material-suplementario" class="level2" data-number="18.9">
-<h2 data-number="18.9" class="anchored" data-anchor-id="material-suplementario"><span class="header-section-number">18.9</span> Material suplementario</h2>
+<section id="material-suplementario" class="level2" data-number="18.12">
+<h2 data-number="18.12" class="anchored" data-anchor-id="material-suplementario"><span class="header-section-number">18.12</span> Material suplementario</h2>
 <ul>
 <li>Software Carpentry. <a href="https://swcarpentry.github.io/shell-novice-es/02-filedir.html">La terminal de Unix</a></li>
 <li>RSG Ecuador.<a href="https://rsg-ecuador.github.io/unix.bioinfo.rsgecuador/content/Curso_avanzado/02_Bash/1_bash.html">GNU/Linux para bioinfomatica</a></li>

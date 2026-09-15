@@ -852,7 +852,7 @@
     "href": "install_python.html#integración-con-rstudio-con-reticulate",
     "title": "15  Instalación de Python y reticulate en Rstudio",
     "section": "15.4 Integración con RStudio con Reticulate",
-    "text": "15.4 Integración con RStudio con Reticulate\n\nInstalar el paquete reticulate en R, coloca en la consola el siguiente código:\n\n\n\nCódigo\ninstall.packages(\"reticulate\")\n\n\n\nEn la terminal de Bash busca la ubicación de Python3\n\nwhich python3\nEn mi caso se encuentra en: /Users/ecoss/.cache/uv/archive-v0/cb_IldkfR46NZ8HFdegcN/bin/python3\n\nConfigurar la versión de Python en RStudio: Menú: Tools &gt; Global Options &gt; Python → pega la ubicación que obtuviste.\nReinicia la Sesión de Rstudio y revisa la configuración:\n\n\n\nCódigo\nlibrary(reticulate)\npy_config()\n\n\npython:         /Users/ecoss/.cache/uv/archive-v0/cb_IldkfR46NZ8HFdegcN/bin/python\nlibpython:      /Users/ecoss/.local/share/uv/python/cpython-3.12.13-macos-aarch64-none/lib/libpython3.12.dylib\npythonhome:     /Users/ecoss/.cache/uv/archive-v0/cb_IldkfR46NZ8HFdegcN:/Users/ecoss/.cache/uv/archive-v0/cb_IldkfR46NZ8HFdegcN\nvirtualenv:     /Users/ecoss/.cache/uv/archive-v0/cb_IldkfR46NZ8HFdegcN/bin/activate_this.py\nversion:        3.12.13 (main, Apr 14 2026, 14:33:40) [Clang 22.1.3 ]\nnumpy:          /Users/ecoss/.cache/uv/archive-v0/cb_IldkfR46NZ8HFdegcN/lib/python3.12/site-packages/numpy\nnumpy_version:  2.5.1\n\nNOTE: Python version was forced by VIRTUAL_ENV\n\n\nEn la consola debe aparecerte algo así:\n\n\n\n\n\nVisualización del uso de Python en Rstudio con Reticulate.\n\n\n\n\n\n\n\nImagen tomada de POSIT Reticulate\n\n\n\n\n\nImagen creada con ChatGPT.",
+    "text": "15.4 Integración con RStudio con Reticulate\n\nInstalar el paquete reticulate en R, coloca en la consola el siguiente código:\n\n\n\nCódigo\ninstall.packages(\"reticulate\")\n\n\n\nEn la terminal de Bash busca la ubicación de Python3\n\nwhich python3\nEn mi caso se encuentra en: /Users/ecoss/.cache/uv/archive-v0/cb_IldkfR46NZ8HFdegcN/bin/python3\n\nConfigurar la versión de Python en RStudio: Menú: Tools &gt; Global Options &gt; Python → pega la ubicación que obtuviste.\nReinicia la Sesión de Rstudio y revisa la configuración:\n\n\n\nCódigo\nlibrary(reticulate)\n\n\nWarning: package 'reticulate' was built under R version 4.6.1\n\n\nCódigo\npy_config()\n\n\npython:         /Users/ecoss/.cache/uv/archive-v0/cb_IldkfR46NZ8HFdegcN/bin/python\nlibpython:      /Users/ecoss/.local/share/uv/python/cpython-3.12.13-macos-aarch64-none/lib/libpython3.12.dylib\npythonhome:     /Users/ecoss/.cache/uv/archive-v0/cb_IldkfR46NZ8HFdegcN:/Users/ecoss/.cache/uv/archive-v0/cb_IldkfR46NZ8HFdegcN\nvirtualenv:     /Users/ecoss/.cache/uv/archive-v0/cb_IldkfR46NZ8HFdegcN/bin/activate_this.py\nversion:        3.12.13 (main, Apr 14 2026, 14:33:40) [Clang 22.1.3 ]\nnumpy:          /Users/ecoss/.cache/uv/archive-v0/cb_IldkfR46NZ8HFdegcN/lib/python3.12/site-packages/numpy\nnumpy_version:  2.5.1\n\nNOTE: Python version was forced by VIRTUAL_ENV\n\n\nEn la consola debe aparecerte algo así:\n\n\n\n\n\nVisualización del uso de Python en Rstudio con Reticulate.\n\n\n\n\n\n\n\nImagen tomada de POSIT Reticulate\n\n\n\n\n\nImagen creada con ChatGPT.",
     "crumbs": [
       "**Sección 2** - Instalación de programas",
       "<span class='chapter-number'>15</span>  <span class='chapter-title'>Instalación de Python y reticulate en Rstudio</span>"
@@ -896,7 +896,7 @@
     "href": "cap4.html#qué-es-unix",
     "title": "17  Introducción a Linux/Unix",
     "section": "",
-    "text": "Sistema operativo (SO) creado por Ken Thompson y Dennis Ritchie de la empresa Bell Laboratories de AT&T en 1969.\nEs uno de los sistemas operativos más influyentes en la historia de la computación y ha servido como base para muchos sistemas operativos modernos.\n\n\n17.1.1 Características principales de Unix:\n\nPortabilidad: Fue diseñado para funcionar en diferentes tipos de hardware, lo que permitió su adopción generalizada.\nModularidad: Sigue la filosofía “hacer una cosa y hacerla bien”, donde cada programa tiene una función específica.\nMultitarea y multiusuario: Permite que múltiples usuarios trabajen simultáneamente en el mismo sistema, y que múltiples procesos se ejecuten al mismo tiempo.\nInterfaz de línea de comandos (CLI): Utiliza un shell (intérprete de comandos) para que los usuarios interactúen con el sistema.\nSeguridad: Implementa un sistema de permisos y usuarios para proteger los archivos y recursos del sistema.\n\n\n\n\nImagen creada con Gemini.",
+    "text": "Sistema operativo (SO) creado por Ken Thompson y Dennis Ritchie de la empresa Bell Laboratories de AT&T en 1969.\nEs uno de los sistemas operativos más influyentes en la historia de la computación y ha servido como base para muchos sistemas operativos modernos.\n\n\n17.1.1 Características principales de Unix:\n\nPortabilidad: Fue diseñado para funcionar en diferentes tipos de hardware, lo que permitió su adopción generalizada.\nModularidad: Sigue la filosofía “hacer una cosa y hacerla bien”, donde cada programa tiene una función específica.\nMultitarea y multiusuario: Permite que múltiples usuarios trabajen simultáneamente en el mismo sistema, y que múltiples procesos se ejecuten al mismo tiempo.\nInterfaz de línea de comandos (CLI, Command-Line Interface): Utiliza un shell (intérprete de comandos) para que los usuarios interactúen con el sistema.\nSeguridad: Implementa un sistema de permisos y usuarios para proteger los archivos y recursos del sistema.\n\n\n\n\nImagen creada con ChatGPT.",
     "crumbs": [
       "**Sección 3** - Introducción a Bash",
       "<span class='chapter-number'>17</span>  <span class='chapter-title'>Introducción a Linux/Unix</span>"
@@ -906,41 +906,63 @@
     "objectID": "cap4.html#gnulinux",
     "href": "cap4.html#gnulinux",
     "title": "17  Introducción a Linux/Unix",
-    "section": "17.2 GNU/Linux",
-    "text": "17.2 GNU/Linux\n\n\n\nEn 1983 Richard Stallman lideró la iniciativa GNU (GNU’s Not Unix), SO compatible con UNIX de libre distribución y acceso sin restricciones al código fuente.\nEn 1991 Linus Torvalds creó su propio kernel (Linux), que es la parte del SO que permite la comunicación con los componentes de Hardware. Este kernel fue distribuido de forma libre y gratuita.\nAmbos proyectos se juntaron y se creó GNU/Linux\n\n\n\n\n\n\n\n\n\nEn resumen …\n\n\n\nImagen generada con Gemini.",
+    "section": "18.1 GNU/Linux",
+    "text": "18.1 GNU/Linux\n\n\n\nEn 1983 Richard Stallman lideró la iniciativa GNU (GNU’s Not Unix), SO compatible con UNIX de libre distribución y acceso sin restricciones al código fuente.\nEn 1991 Linus Torvalds creó su propio kernel (Linux), que es la parte del SO que permite la comunicación con los componentes de Hardware. Este kernel fue distribuido de forma libre y gratuita.\nLinux decía algo así:\n\n🐧 “No nací de tu código (UNIX), pero me gustan muchas de tus ideas.”\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nNota\n\n\n\nUn kernel es el núcleo del sistema operativo. Es el software que actúa como intermediario entre los programas y el hardware de la computadora.\nEl kernel se encarga principalmente de administrar los recursos de la computadora: decide qué procesos utilizan el CPU y cuándo, administra la memoria RAM, permite acceder a discos y otros dispositivos, controla procesos y facilita que los programas se comuniquen con el hardware.\n\n\nAmbos proyectos se juntaron y se creó GNU/Linux …\n\n\n\nImagen generada con ChatGPT.\n\n\n\n18.1.1 Pero hay un matiz importante\nNo fue que Linus dijera en 1991: «voy a crear GNU/Linux».\nLinux era su propio proyecto. La comunidad comenzó a combinar el kernel Linux con el software del proyecto GNU y otros componentes para construir sistemas completos.\nDe ahí surgieron muy pronto distribuciones de Linux y posteriormente distribuciones conocidas como Debian, Red Hat, Ubuntu, etc.\nY esto explica algo que suele confundir mucho:\nLinux ≠ GNU ≠ GNU/Linux\nAdemás, Linux no está obligado a utilizar GNU. El mejor ejemplo es Android: utiliza el kernel Linux, pero no es una distribución GNU/Linux convencional.\n\n\n\n\n\n\n\n\n\n\n\nNota\n\n\n\nEntonces decir “Linux es un sistema operativo” es común en el lenguaje cotidiano, pero técnicamente, cuando hablamos específicamente de Linux, estamos hablando del kernel. Cuando alguien dice “uso Linux”, normalmente quiere decir que utiliza una distribución basada en el kernel Linux, como Ubuntu, Debian o Fedora.",
     "crumbs": [
       "**Sección 3** - Introducción a Bash",
       "<span class='chapter-number'>17</span>  <span class='chapter-title'>Introducción a Linux/Unix</span>"
     ]
   },
   {
-    "objectID": "cap4.html#filosofía-gnulinux",
-    "href": "cap4.html#filosofía-gnulinux",
+    "objectID": "cap4.html#ubuntu-no-es-linux",
+    "href": "cap4.html#ubuntu-no-es-linux",
     "title": "17  Introducción a Linux/Unix",
-    "section": "17.3 Filosofía GNU/Linux",
-    "text": "17.3 Filosofía GNU/Linux\n\nLos usuarios son libres de ejecutar, copiar, distribuir, estudiar, cambiar y mejorar el software.\nEl software libre se refiere a las libertades mencionadas, no al precio.\n“open source” vs “free software”.\n\n\n\n\nImagen creada con Gemini.",
+    "section": "18.2 Ubuntu no es LINUX",
+    "text": "18.2 Ubuntu no es LINUX\n\nUna de las distribuciones de GNU/Linux más populares.\nCombina: kernel Linux + herramientas GNU + bibliotecas + gestor de paquetes + software + entorno de escritorio + muchos otros componentes.\nEstá basada en Debian y fue desarrollada por la empresa Canonical\nFacilidad de uso e instalación.\nInterfaz de usuario amigable.\n\n\n\n\n\n\n\n\n\n\n\n\nPrecaución\n\n\n\n🐧 Linux = kernel\n\n🟠 Ubuntu = sistema operativo que usa el kernel Linux + GNU + muchos otros componentes.\n\n🤖 Android = otro sistema operativo que también usa el kernel Linux, pero construye un entorno diferente alrededor de él.",
     "crumbs": [
       "**Sección 3** - Introducción a Bash",
       "<span class='chapter-number'>17</span>  <span class='chapter-title'>Introducción a Linux/Unix</span>"
     ]
   },
   {
-    "objectID": "cap4.html#ubuntu",
-    "href": "cap4.html#ubuntu",
+    "objectID": "cap4.html#filosofía-software-libre-y-código-abierto",
+    "href": "cap4.html#filosofía-software-libre-y-código-abierto",
     "title": "17  Introducción a Linux/Unix",
-    "section": "17.4 Ubuntu",
-    "text": "17.4 Ubuntu\n\nUna de las distribuciones de GNU/Linux más populares.\nEstá basada en Debian y fue desarrollada por la empresa Canonical\nFacilidad de uso e instalación.\nInterfaz de usuario amigable.",
+    "section": "18.3 Filosofía “Software Libre y Código abierto”",
+    "text": "18.3 Filosofía “Software Libre y Código abierto”\n\nEl software libre se refiere a las libertades mencionadas, no al precio.\n“open source” vs “free software”.\n\n\n\n\n\n🕊️ Free Software\n💻 Open Source\n\n\n\n\nTraducción\nSoftware libre\nCódigo abierto\n\n\nÉnfasis\nLibertad del usuario\nModelo de desarrollo y acceso al código\n\n\nPregunta central\n“¿Qué libertades tengo?”\n“¿Cómo podemos desarrollar y mejorar este software?”\n\n\nMovimiento asociado\nFree Software Foundation\nOpen Source Initiative\n\n\nFigura histórica\nRichard Stallman\nEric Raymond, Bruce Perens y otros\n\n\nCódigo fuente disponible\n✅\n✅\n\n\nModificar\n✅\n✅ según licencia\n\n\nRedistribuir\n✅\n✅ según licencia\n\n\nMotivación característica\nÉtica y libertad\nColaboración, calidad, transparencia, desarrollo",
     "crumbs": [
       "**Sección 3** - Introducción a Bash",
       "<span class='chapter-number'>17</span>  <span class='chapter-title'>Introducción a Linux/Unix</span>"
     ]
   },
   {
-    "objectID": "cap4.html#shell-bash-bash-shell",
-    "href": "cap4.html#shell-bash-bash-shell",
+    "objectID": "cap4.html#y-gnulinux-dónde-queda",
+    "href": "cap4.html#y-gnulinux-dónde-queda",
     "title": "17  Introducción a Linux/Unix",
-    "section": "17.5 Shell / Bash / Bash Shell",
-    "text": "17.5 Shell / Bash / Bash Shell\n\nLa shell es el programa que provee una interfaz de línea de comandos (CLI), que permite la comunicación entre el usuario y el SO.\nLa mayoría de distribuciones de Linux tienen por defecto bash (“Bourne Again SHell”) como shell. Hay otros tipos de shell como sh, csh, tcsh, ksh, zsh, entre otras.\n\n\n\n\n\n\nBash es un intérprete de comandos que te da el poder de hacer tareas simples rápidamente.\nEn resumen …\n\n\n\nImagen creada con ChatGPT.",
+    "section": "18.4 🐧 ¿Y GNU/Linux dónde queda?",
+    "text": "18.4 🐧 ¿Y GNU/Linux dónde queda?\n\nLos usuarios son libres de ejecutar, copiar, distribuir, estudiar, cambiar y mejorar el software.\nEl kernel Linux, por ejemplo, utiliza la licencia GPLv2, por lo que cumple criterios tanto de software libre como de código abierto. Muchas herramientas GNU también son ambas cosas.\n\n\n\n\nImagen creada con ChatGPT.",
+    "crumbs": [
+      "**Sección 3** - Introducción a Bash",
+      "<span class='chapter-number'>17</span>  <span class='chapter-title'>Introducción a Linux/Unix</span>"
+    ]
+  },
+  {
+    "objectID": "cap4.html#shell-intérprete-de-línea-de-comandos",
+    "href": "cap4.html#shell-intérprete-de-línea-de-comandos",
+    "title": "17  Introducción a Linux/Unix",
+    "section": "18.5 Shell = Intérprete de línea de comandos",
+    "text": "18.5 Shell = Intérprete de línea de comandos\n\nShell es la categoría general. Es un programa que interpreta comandos (CLI) y permite la comunicación entre el usuario y el SO.\nLa mayoría de distribuciones de Linux tienen por defecto bash (“Bourne Again SHell”) como shell. Hay otros tipos de shell como sh, csh, tcsh, ksh, zsh, entre otras.\nShell es la categoría/interfaz; No es una lenguaje de programación.\n\n\n18.5.1 Bash / Bash Shell\n\nLenguaje de programación; más específicamente un lenguaje de programación/scripting y un shell.\nBash es un intérprete de comandos que te permite realizar tareas de forma rápida y sencilla, además de automatizarlas mediante scripts.",
+    "crumbs": [
+      "**Sección 3** - Introducción a Bash",
+      "<span class='chapter-number'>17</span>  <span class='chapter-title'>Introducción a Linux/Unix</span>"
+    ]
+  },
+  {
+    "objectID": "cap4.html#tabla-comparativa-de-lo-que-usaremos",
+    "href": "cap4.html#tabla-comparativa-de-lo-que-usaremos",
+    "title": "17  Introducción a Linux/Unix",
+    "section": "18.6 Tabla comparativa de lo que usaremos",
+    "text": "18.6 Tabla comparativa de lo que usaremos\n\n\n\n\n\n\n\n\n\n\nGit Bash (Windows)\nBash (Linux)\nZsh (Z Shell) (macOS)\n\n\n\n\n¿Qué es?\nBash adaptado para Windows\nBash ejecutándose de forma nativa\nOtro shell compatible en gran parte con Bash\n\n\nSistema\nWindows\nLinux\nmacOS\n\n\nShell\nbash\nbash\nzsh\n\n\nEntorno Unix real\n❌ No completamente\n✅ Sí\n✅ Sí, macOS es Unix\n\n\ngrep, sed, cut, sort…\n✅ incluidos por Git for Windows\n✅ herramientas GNU normalmente\n✅ herramientas Unix/BSD\n\n\nRutas\n/c/Users/Evelia/\n/home/evelia/\n/Users/evelia/\n\n\nConfiguración típica\n~/.bashrc\n~/.bashrc\n~/.zshrc\n\n\nCompatibilidad entre comandos básicos\nMuy alta\n—\nMuy alta\n\n\n\nEn resumen …\n\n\n\nImagen creada con ChatGPT.",
     "crumbs": [
       "**Sección 3** - Introducción a Bash",
       "<span class='chapter-number'>17</span>  <span class='chapter-title'>Introducción a Linux/Unix</span>"
@@ -950,8 +972,8 @@
     "objectID": "cap4.html#material-suplementario",
     "href": "cap4.html#material-suplementario",
     "title": "17  Introducción a Linux/Unix",
-    "section": "17.6 Material suplementario",
-    "text": "17.6 Material suplementario\nSi quieren aprender temas más sobre UNIX, GNU/Linux, bash, emulador de terminal y otros tema, pueden explorar los siguientes recursos, que son de acceso libre:\n\nKross, S. (2017). The unix workbench. Leanpub. https://leanpub.com/unix\nRoss, A. (2019). The Ultimate Linux Newbie Guide. https://linuxnewbieguide.org/\nShotts, W. (2019). The Linux command line: a complete introduction. No Starch Press. http://www.linuxcommand.org/tlcl.php/index.php\nLinux Journey. (2020). Linux Journey. https://linuxjourney.com/\nGNU. (2020). GNU. https://www.gnu.org/\nGNU/Linux para bioinformatica",
+    "section": "18.7 Material suplementario",
+    "text": "18.7 Material suplementario\nSi quieren aprender temas más sobre UNIX, GNU/Linux, bash, emulador de terminal y otros tema, pueden explorar los siguientes recursos, que son de acceso libre:\n\nKross, S. (2017). The unix workbench. Leanpub. https://leanpub.com/unix\nRoss, A. (2019). The Ultimate Linux Newbie Guide. https://linuxnewbieguide.org/\nShotts, W. (2019). The Linux command line: a complete introduction. No Starch Press. http://www.linuxcommand.org/tlcl.php/index.php\nLinux Journey. (2020). Linux Journey. https://linuxjourney.com/\nGNU. (2020). GNU. https://www.gnu.org/\nGNU/Linux para bioinformatica\nThe Story of Unix, POSIX, Linux, macOS, and Windows",
     "crumbs": [
       "**Sección 3** - Introducción a Bash",
       "<span class='chapter-number'>17</span>  <span class='chapter-title'>Introducción a Linux/Unix</span>"
@@ -1002,11 +1024,44 @@
     ]
   },
   {
-    "objectID": "cap5.html#comandos-básicos",
-    "href": "cap5.html#comandos-básicos",
+    "objectID": "cap5.html#comandos-propios-de-bash-builtins",
+    "href": "cap5.html#comandos-propios-de-bash-builtins",
     "title": "18  Mis primeros pasos en Bash",
-    "section": "18.5 Comandos básicos",
-    "text": "18.5 Comandos básicos\n\n\n\n\n\n\n\n\nComandos\nInformación\nArgumentos\n\n\n\n\nssh\nConexión a servidores\nssh usuario@servidor.mx\n\n\nls\nObservar el contenido de los archivos en una carpeta\nls directorio/\n\n\ncd\nMoverse de directorios\ncd /home/usuario/data/\n\n\nmkdir\nCrear un nuevo directorio\nmkdir data\n\n\nrmdir\nEliminar el directorio\nrmkdir -rf data\n\n\nnano / vim\nEditores de texto plano\nnano Archivo.txt / vim Archivo.txt\n\n\ncp\nCopiar archivos\ncp Archivo1.txt /home/usuario/data/\n\n\nmv\nMover un archivo o carpeta\n\n\n\necho\nPara llamar y/o declarar variables\necho “Hello world”\n\n\nchmod\nCambiar permisos del usuario\nchmod 777 data/\n\n\nrsync\nDescargar o subir archivos\n\n\n\nscp\nDescargar o subir archivos\n\n\n\ncat\nVisualizar contenido de un archivo. Escribe el contenido del archivo de manera secuencial a la salida estándar, a la ventana de Terminal.\n\n\n\nless\nLeer contenido de un archivo sin interrumpir la pantalla de Terminal. Similar a Vim pero sin opción para escribir. Se sale del modo visualización con q.\n\n\n\nfind\nBusca archivos en un directorio específico.\n\n\n\nhead\nVisualizar primeras líneas de un archivo.\n\n\n\ntail\nVisualizar últimas líneas de un archivo.\n\n\n\nwhich\nIndica el directorio donde se encuentra un particular comando o programa que se haya podido encontrar usando los directorios guardados en la variable de estado PATH.\nwhich bash\n\n\n\n\n\n\n\n\n\nNotaAyuda de funciones\n\n\n\nPuedes consultar mas información usando man ls",
+    "section": "18.5 Comandos propios de Bash = builtins",
+    "text": "18.5 Comandos propios de Bash = builtins\nUn builtin (comando interno) es un comando que forma parte del propio shell. En Bash, significa que Bash puede ejecutarlo directamente, sin tener que buscar un programa externo dentro de las carpetas de /bin o /usr/bin.\n\n\n\n\n\n\n\n\nBuiltin\n¿Qué hace?\nArgumentos\n\n\n\n\ncd\nCambia de directorio\ncd /home/usuario/data/\n\n\npwd\nMuestra el directorio actual*\npwd\n\n\necho\nImprime texto*\necho \"Hello world\"\n\n\nread\nLee datos del usuario\nread nombre\n\n\nexport\nExporta variables\nexport CURSO=\"Bash\"\n\n\nalias\nCrea alias\nalias ll=\"ls -la\"\n\n\nhistory\nMuestra el historial\nhistory\n\n\nsource\nEjecuta comandos de un archivo en el shell actual\nsource ~/.zshrc\n\n\ntype\nIndica qué tipo de comando es\ntype cd\n\n\nhelp\nAyuda de los builtins de Bash\nhelp cd\n\n\n\n* pwd y echo son casos interesantes porque Bash tiene versiones builtin, aunque también pueden existir ejecutables externos con esos nombres.\nColoca en la terminal lo siguiente y Bash les dirá que son shell builtins.\ntype cd\ntype read\ntype echo\n\nBash puede interpretar lo que escribes y, dependiendo del comando, ejecutarlo él mismo o buscar un programa externo dentro de las carpetas de /bin o /usr/bin.",
+    "crumbs": [
+      "**Sección 3** - Introducción a Bash",
+      "<span class='chapter-number'>18</span>  <span class='chapter-title'>Mis primeros pasos en Bash</span>"
+    ]
+  },
+  {
+    "objectID": "cap5.html#comandos-externos",
+    "href": "cap5.html#comandos-externos",
+    "title": "18  Mis primeros pasos en Bash",
+    "section": "18.6 Comandos externos",
+    "text": "18.6 Comandos externos\n\n\n\n\n\n\n\n\nComandos\nInformación\nArgumentos\n\n\n\n\nssh\nConexión a servidores\nssh usuario@servidor.mx\n\n\nls\nObservar el contenido de los archivos en una carpeta\nls directorio/\n\n\nmkdir\nCrear un nuevo directorio\nmkdir data\n\n\nrmdir\nEliminar el directorio\nrmkdir -rf data\n\n\nnano / vim\nEditores de texto plano\nnano Archivo.txt / vim Archivo.txt\n\n\ncp\nCopiar archivos\ncp Archivo1.txt /home/usuario/data/\n\n\nmv\nMover un archivo o carpeta / renombrar archivo o capeta\n\n\n\nchmod\nCambiar permisos del usuario\nchmod 777 data/\n\n\nrsync\nDescargar o subir archivos\n\n\n\nscp\nDescargar o subir archivos\n\n\n\ncat\nVisualizar contenido de un archivo. Escribe el contenido del archivo de manera secuencial a la salida estándar, a la ventana de Terminal.\n\n\n\nless\nLeer contenido de un archivo sin interrumpir la pantalla de Terminal. Similar a Vim pero sin opción para escribir. Se sale del modo visualización con q.\n\n\n\nfind\nBusca archivos en un directorio específico.\n\n\n\nhead\nVisualizar primeras líneas de un archivo.\n\n\n\ntail\nVisualizar últimas líneas de un archivo.\n\n\n\nwhich\nIndica el directorio donde se encuentra un particular comando o programa que se haya podido encontrar usando los directorios guardados en la variable de estado PATH.\nwhich bash\n\n\n\n\n\n\n\n\n\nNotaAyuda de funciones\n\n\n\nPuedes consultar mas información usando man ls",
+    "crumbs": [
+      "**Sección 3** - Introducción a Bash",
+      "<span class='chapter-number'>18</span>  <span class='chapter-title'>Mis primeros pasos en Bash</span>"
+    ]
+  },
+  {
+    "objectID": "cap5.html#cómo-encuentra-bash-los-programas-externos",
+    "href": "cap5.html#cómo-encuentra-bash-los-programas-externos",
+    "title": "18  Mis primeros pasos en Bash",
+    "section": "18.7 ¿Cómo encuentra Bash los programas externos?",
+    "text": "18.7 ¿Cómo encuentra Bash los programas externos?\nContamos con una variable llamada $PATH. Siendo la lista de lugares donde Bash busca programas ejecutables.\nEn la terminal escriban y ejecuten:\necho $PATH\nEso conecta directamente con la filosofía Unix de herramientas pequeñas que hacen tareas específicas y pueden combinarse.\n\n🐚 Bash no “contiene” todos los comandos que usamos. Algunos son internos (builtins) y otros son programas externos que Bash busca y ejecuta.",
+    "crumbs": [
+      "**Sección 3** - Introducción a Bash",
+      "<span class='chapter-number'>18</span>  <span class='chapter-title'>Mis primeros pasos en Bash</span>"
+    ]
+  },
+  {
+    "objectID": "cap5.html#vamos-a-crear-un-alias",
+    "href": "cap5.html#vamos-a-crear-un-alias",
+    "title": "18  Mis primeros pasos en Bash",
+    "section": "18.8 Vamos a crear un alias",
+    "text": "18.8 Vamos a crear un alias\nEl archivo de configuración personal (Windows y linux: ~/.bashrc; macOs = ~/.zshrc) guarda instrucciones que permiten decidir cómo queremos que se comporte y se vea nuestro shell cada vez que iniciamos una sesión interactiva.\n\nDentro del HOME, vamos a ejecutar el siguiente comando para ver los archivos ocultos en listas:\n\nls -la\n\n\n\nMi distribución\n\n\nCada uno de estos archivos contiene información importante para nuestro sistema:\n\n\n\n\n\n\n\n\nArchivo\n¿Qué es?\nEjemplo de lo que contiene\n\n\n\n\n~/.zprofile\n🚀 Configuración al iniciar sesión. Se lee al iniciar una sesión de Zsh tipo login.\nVariables de entorno, $PATH\n\n\n~/.zshrc\n⚙️ Configuración de Zsh interactivo. Personaliza cómo trabajas en la terminal.\nAlias, prompt, plugins, funciones, $PATH\n\n\n~/.zsh_history\n🕒 Historial de comandos. Guarda los comandos que has ejecutado.\ncd, ls, grep, git status\n\n\n\n\nVamos a abrir nuestro archivo de configuración personal (Windows y linux: ~/.bashrc; macOs = ~/.zshrc) con el editor de texto nano.\n\nPara Windows/Linux usar ~/.bashrc\nSi no aparece el archivo ~/.bashrc en Windows, vas a tener que crearlo con:\nnano ~/.bashrc\nPara macOS\nnano ~/.zshrc\n\n\n\n\n\n\nNota\n\n\n\nEn Git Bash para Windows, ~/.bashrc puede no existir inicialmente. Esto no significa que Bash esté mal instalado; simplemente podemos crearlo si lo necesitamos.\n\n\n\nCuando el archivo este abierto vamos a buscar un renglón hasta abajo que este libre. No vamos a cambiar nada arriba.\n\nalias ll=\"ls -la\"\nTu archivo debe verse como este:\n\n\n\nAlias en mi archivo de configuración .zshrc\n\n\n\nPara guardar el archivo y salir debes dar Ctrl+X.\n\n\n\n\nPara guardar debes teclear CTRL + X\n\n\n\nDespués aparecerá un mensaje para confirma si quieres guardar los cambios y tecleamos Y. Con esto estaremos confirmando el cambio en el archivo.\n\n\n\n\nCuando aparezca esta pregunta solo escribe Y\n\n\n\nPara salir de ediciones da ENTER.\n\n\n\n\nPasa salir de ediciones da ENTER\n\n\n\nVamos a cargar el archivo de configuración personalmente con el comando source:\n\nEn Windows y Linux:\nsource ~/.bashrc\nEn macOs:\nsource ~/.zshrc\n\nAhora vamos a probar nuestro nuevo alias en la terminal. Copia y ejecuta:\n\nll\nVerás que hace lo mismo que ls -la.",
     "crumbs": [
       "**Sección 3** - Introducción a Bash",
       "<span class='chapter-number'>18</span>  <span class='chapter-title'>Mis primeros pasos en Bash</span>"
@@ -1016,8 +1071,8 @@
     "objectID": "cap5.html#consultar-información-sobre-archivos-y-directorios",
     "href": "cap5.html#consultar-información-sobre-archivos-y-directorios",
     "title": "18  Mis primeros pasos en Bash",
-    "section": "18.6 Consultar información sobre archivos y directorios",
-    "text": "18.6 Consultar información sobre archivos y directorios\n\n18.6.1 Información contenida\nCada columna en la salida anterior tiene un significado:\n\n\n\n18.6.2 Permisos\nCada usuario tiene permisos diferentes cuando crea un archivo. Los permisos pueden modificarse con chmod.\nLos caracteres atribuidos a los permisos son:\n\nr : escritura (Read)\nw : lectura (Write)\nx : ejecución (eXecute)\n\nEn el siguiente ejemplo, el usuario cuenta con todos los permisos activos, mientras que el grupo y otros tienen solo permisos de lectura y ejecución.",
+    "section": "18.9 Consultar información sobre archivos y directorios",
+    "text": "18.9 Consultar información sobre archivos y directorios\n\n18.9.1 Información contenida\nCada columna en la salida anterior tiene un significado:\n\n\n\n18.9.2 Permisos\nCada usuario tiene permisos diferentes cuando crea un archivo. Los permisos pueden modificarse con chmod.\nLos caracteres atribuidos a los permisos son:\n\nr : escritura (Read)\nw : lectura (Write)\nx : ejecución (eXecute)\n\nEn el siguiente ejemplo, el usuario cuenta con todos los permisos activos, mientras que el grupo y otros tienen solo permisos de lectura y ejecución.",
     "crumbs": [
       "**Sección 3** - Introducción a Bash",
       "<span class='chapter-number'>18</span>  <span class='chapter-title'>Mis primeros pasos en Bash</span>"
@@ -1027,8 +1082,8 @@
     "objectID": "cap5.html#chmod-cambiar-permisos",
     "href": "cap5.html#chmod-cambiar-permisos",
     "title": "18  Mis primeros pasos en Bash",
-    "section": "18.7 chmod: Cambiar permisos",
-    "text": "18.7 chmod: Cambiar permisos\nLa representación octal de chmod es muy sencilla\n\nr = Lectura tiene el valor de 4\nw = Escritura tiene el valor de 2\nx = Ejecución tiene el valor de 1\n\n\n\n\nPermisos\nValor\nSignificado\n\n\n\n\nrwx\n7\nLectura, escritura y ejecución\n\n\nrw-\n6\nLectura, escritura\n\n\nr-x\n5\nLectura y ejecución\n\n\nr–\n4\nLectura\n\n\n-wx\n3\nEscritura y ejecución\n\n\n-w-\n2\nEscritura\n\n\n–x\n1\nEjecución\n\n\n—\n0\nSin permisos\n\n\n\nPor lo tanto:\n\n\n\nForma larga\nForma Octal\n\n\n\n\nchmod u=rwx,g=rwx,o=rx\nchmod 775\n\n\nchmod u=rwx,g=rx,o=\nchmod 760\n\n\nchmod u=rw,g=r,o=r\nchmod 644\n\n\nchmod u=rw,g=r,o=\nchmod 640\n\n\nchmod u=rw,go=\nchmod 600\n\n\nchmod u=rwx,go=\nchmod 700",
+    "section": "18.10 chmod: Cambiar permisos",
+    "text": "18.10 chmod: Cambiar permisos\nLa representación octal de chmod es muy sencilla\n\nr = Lectura tiene el valor de 4\nw = Escritura tiene el valor de 2\nx = Ejecución tiene el valor de 1\n\n\n\n\nPermisos\nValor\nSignificado\n\n\n\n\nrwx\n7\nLectura, escritura y ejecución\n\n\nrw-\n6\nLectura, escritura\n\n\nr-x\n5\nLectura y ejecución\n\n\nr–\n4\nLectura\n\n\n-wx\n3\nEscritura y ejecución\n\n\n-w-\n2\nEscritura\n\n\n–x\n1\nEjecución\n\n\n—\n0\nSin permisos\n\n\n\nPor lo tanto:\n\n\n\nForma larga\nForma Octal\n\n\n\n\nchmod u=rwx,g=rwx,o=rx\nchmod 775\n\n\nchmod u=rwx,g=rx,o=\nchmod 760\n\n\nchmod u=rw,g=r,o=r\nchmod 644\n\n\nchmod u=rw,g=r,o=\nchmod 640\n\n\nchmod u=rw,go=\nchmod 600\n\n\nchmod u=rwx,go=\nchmod 700",
     "crumbs": [
       "**Sección 3** - Introducción a Bash",
       "<span class='chapter-number'>18</span>  <span class='chapter-title'>Mis primeros pasos en Bash</span>"
@@ -1038,8 +1093,8 @@
     "objectID": "cap5.html#comprimir-y-descomprimir-archivos",
     "href": "cap5.html#comprimir-y-descomprimir-archivos",
     "title": "18  Mis primeros pasos en Bash",
-    "section": "18.8 Comprimir y descomprimir archivos",
-    "text": "18.8 Comprimir y descomprimir archivos\nLos archivos pueden contener diversos tipos de extensiones, dependiendo del objetivo será necesario descomprimirlos y en otros dejarlos comprimidos para no abarcar tanto espacio en tu espacio de trabajo. \n\n\n\n\n\n\n\n\nTipo de archivo\nComprimir\nDescomprimir\n\n\n\n\nCarpeta.tar\ntar -cvf carpeta.tar /dir/a/comprimir/carpeta\ntar -xvf carpeta.tar\n\n\nCarpeta.tar.gz\ntar -czvf carpeta.tar.gz /carpeta/a/empaquetar/carpeta\ntar -zxvf carpeta.tar.gz\n\n\nCarpeta.gz\ngzip -9 carpeta.gz carpeta/a/empaquetar/carpeta\ngunzip -kd carpeta.gz\n\n\nCarpeta.zip\nzip -r carpeta.zip carpeta\nunzip carpeta.zip\n\n\n\n\n\n\n\n\n\nNotaEjercicio 2\n\n\n\n\nCrea una carpeta llamada respaldo.\n\nmkdir respaldo\n\nCrea dentro de ella los archivos uno.txt, dos.txt y tres.txt. Usa el comando\n\ntouch respaldo/uno.txt respaldo/dos.txt respaldo/tres.txt\n\nConfigura los tres archivos con permisos rw-r-----.\n\nRecuerda que:\n\nrw- = 6\nr– = 4\n— = 0\n\nchmod 640 respaldo/*.txt\nY comprueba que si se cambiaron los permisos con ls -l respaldo`.\n\nComprime la carpeta completa en un archivo llamado respaldo.zip\n\nzip -r respaldo.zip respaldo/\nLa opción:\n\n-r → comprime de forma recursiva la carpeta y su contenido\n\n\nElimina la carpeta respaldo (la que no esta comprimida).\n\nrm -r respaldo\n\nComprueba que la carpeta ya no existe.\n\nls\nLa carpeta respaldo ya no deberá aparecer, pero sí: respaldo.zip.\n\nRecupera la carpeta utilizando respaldo.zip. Es decir, descomprime la carpeta respaldo.zip.\n\nunzip respaldo.zip\n\nComprueba que los tres archivos fueron recuperados.\n\nls respaldo\n\nRevisa sus permisos.\n\nls -l respaldo",
+    "section": "18.11 Comprimir y descomprimir archivos",
+    "text": "18.11 Comprimir y descomprimir archivos\nLos archivos pueden contener diversos tipos de extensiones, dependiendo del objetivo será necesario descomprimirlos y en otros dejarlos comprimidos para no abarcar tanto espacio en tu espacio de trabajo. \n\n\n\n\n\n\n\n\nTipo de archivo\nComprimir\nDescomprimir\n\n\n\n\nCarpeta.tar\ntar -cvf carpeta.tar /dir/a/comprimir/carpeta\ntar -xvf carpeta.tar\n\n\nCarpeta.tar.gz\ntar -czvf carpeta.tar.gz /carpeta/a/empaquetar/carpeta\ntar -zxvf carpeta.tar.gz\n\n\nCarpeta.gz\ngzip -9 carpeta.gz carpeta/a/empaquetar/carpeta\ngunzip -kd carpeta.gz\n\n\nCarpeta.zip\nzip -r carpeta.zip carpeta\nunzip carpeta.zip\n\n\n\n\n\n\n\n\n\nNotaEjercicio 2\n\n\n\n\nCrea una carpeta llamada respaldo.\n\nmkdir respaldo\n\nCrea dentro de ella los archivos uno.txt, dos.txt y tres.txt. Usa el comando\n\ntouch respaldo/uno.txt respaldo/dos.txt respaldo/tres.txt\n\nConfigura los tres archivos con permisos rw-r-----.\n\nRecuerda que:\n\nrw- = 6\nr– = 4\n— = 0\n\nchmod 640 respaldo/*.txt\nY comprueba que si se cambiaron los permisos con ls -l respaldo`.\n\nComprime la carpeta completa en un archivo llamado respaldo.zip\n\nzip -r respaldo.zip respaldo/\nLa opción:\n\n-r → comprime de forma recursiva la carpeta y su contenido\n\n\nElimina la carpeta respaldo (la que no esta comprimida).\n\nrm -r respaldo\n\nComprueba que la carpeta ya no existe.\n\nls\nLa carpeta respaldo ya no deberá aparecer, pero sí: respaldo.zip.\n\nRecupera la carpeta utilizando respaldo.zip. Es decir, descomprime la carpeta respaldo.zip.\n\nunzip respaldo.zip\n\nComprueba que los tres archivos fueron recuperados.\n\nls respaldo\n\nRevisa sus permisos.\n\nls -l respaldo",
     "crumbs": [
       "**Sección 3** - Introducción a Bash",
       "<span class='chapter-number'>18</span>  <span class='chapter-title'>Mis primeros pasos en Bash</span>"
@@ -1049,8 +1104,8 @@
     "objectID": "cap5.html#material-suplementario",
     "href": "cap5.html#material-suplementario",
     "title": "18  Mis primeros pasos en Bash",
-    "section": "18.9 Material suplementario",
-    "text": "18.9 Material suplementario\n\nSoftware Carpentry. La terminal de Unix\nRSG Ecuador.GNU/Linux para bioinfomatica\nIntroduction to the Unix Shell for TranscriptomicsTutorial.",
+    "section": "18.12 Material suplementario",
+    "text": "18.12 Material suplementario\n\nSoftware Carpentry. La terminal de Unix\nRSG Ecuador.GNU/Linux para bioinfomatica\nIntroduction to the Unix Shell for TranscriptomicsTutorial.",
     "crumbs": [
       "**Sección 3** - Introducción a Bash",
       "<span class='chapter-number'>18</span>  <span class='chapter-title'>Mis primeros pasos en Bash</span>"
