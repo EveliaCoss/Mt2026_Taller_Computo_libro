@@ -108,8 +108,8 @@ Ejemplo de rutas:
 
 Un **builtin** (*comando interno*) es un comando que **forma parte del propio shell**. En Bash, significa que Bash puede ejecutarlo directamente, sin tener que buscar un programa externo dentro de las carpetas de `/bin` o `/usr/bin`.
 
-| Builtin | ¿Qué hace? |  Argumentos |
-|---------------|----------------------------|------------------------------|
+| Builtin | ¿Qué hace? | Argumentos |
+|----|----|----|
 | `cd` | Cambia de directorio | `cd /home/usuario/data/` |
 | `pwd` | Muestra el directorio actual\* | `pwd` |
 | `echo` | Imprime texto\* | `echo "Hello world"` |
@@ -136,7 +136,7 @@ type echo
 ## Comandos externos
 
 | Comandos | Información | Argumentos |
-|----------------|------------------------|----------------------------|
+|----|----|----|
 | `ssh` | Conexión a servidores | `ssh usuario@servidor.mx` |
 | `ls` | Observar el contenido de los archivos en una carpeta | `ls directorio/` |
 | `mkdir` | Crear un nuevo directorio | `mkdir data` |
@@ -189,7 +189,7 @@ ls -la
 Cada uno de estos archivos contiene información importante para nuestro sistema:
 
 | Archivo | ¿Qué es? | Ejemplo de lo que contiene |
-|---------------|-----------------------------|-----------------------------|
+|----|----|----|
 | `~/.zprofile` | 🚀 **Configuración al iniciar sesión.** Se lee al iniciar una sesión de Zsh tipo *login*. | Variables de entorno, `$PATH` |
 | `~/.zshrc` | ⚙️ **Configuración de Zsh interactivo.** Personaliza cómo trabajas en la terminal. | Alias, prompt, plugins, funciones, `$PATH` |
 | `~/.zsh_history` | 🕒 **Historial de comandos.** Guarda los comandos que has ejecutado. | `cd`, `ls`, `grep`, `git status` |
@@ -319,7 +319,7 @@ Por lo tanto:
 Los archivos pueden contener diversos tipos de extensiones, dependiendo del objetivo será necesario descomprimirlos y en otros dejarlos comprimidos para no abarcar tanto espacio en tu espacio de trabajo. 
 
 | Tipo de archivo | Comprimir | Descomprimir |
-|------------------------|------------------------|------------------------|
+|----|----|----|
 | Carpeta.tar | `tar -cvf carpeta.tar /dir/a/comprimir/carpeta` | `tar -xvf carpeta.tar` |
 | Carpeta.tar.gz | `tar -czvf carpeta.tar.gz /carpeta/a/empaquetar/carpeta` | `tar -zxvf carpeta.tar.gz` |
 | Carpeta.gz | `gzip -9 carpeta.gz carpeta/a/empaquetar/carpeta` | `gunzip -kd carpeta.gz` |

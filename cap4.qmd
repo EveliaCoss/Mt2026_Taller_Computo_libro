@@ -49,7 +49,7 @@ Pero otra rama tendría una historia especialmente interesante.
 
 > “Si seguimos ciertas interfaces y comportamientos comunes, será más fácil que programas y herramientas funcionen en diferentes sistemas.”
 
-![Imagen creada con ChatGPT.](figures/unix_family.png){alt="Imagen creada con ChatGPT." fig-align="center"}
+![Imagen creada con ChatGPT.](figures/unix_family.png){fig-align="center"}
 
 ::: callout-note
 **macOs** es considerado el **hijo directo**; mientras **Linux** es el **hijo** **adoptado**; y **Windows** es el **vecino** con otra familia construyendo su propia casa.\
@@ -83,7 +83,7 @@ El kernel se encarga principalmente de **administrar los recursos de la computad
 
 Ambos proyectos se juntaron y se creó **GNU/Linux ...**
 
-![Imagen generada con ChatGPT.](figures/GNU-Linux_juntos.png){alt="Imagen generada con Gemini." fig-align="center"}
+![Imagen generada con Gemini.](figures/GNU-Linux_juntos.png){fig-align="center"}
 
 ### Pero hay un matiz importante
 
@@ -99,7 +99,7 @@ Y esto explica algo que suele confundir mucho:
 
 Además, Linux **no está obligado a utilizar GNU**. El mejor ejemplo es **Android**: utiliza el **kernel Linux**, pero no es una distribución GNU/Linux convencional.
 
-[![](figures/linux_android.png){fig-align="center"}](Imagen creada con ChatGPT.)
+[![](figures/linux_android.png){fig-align="center"}](Imagen%20creada%20con%20ChatGPT.)
 
 ::: callout-note
 Entonces decir **“Linux es un sistema operativo”** es común en el lenguaje cotidiano, pero técnicamente, cuando hablamos específicamente de **Linux**, estamos hablando del **kernel**. Cuando alguien dice “uso Linux”, normalmente quiere decir que utiliza **una distribución basada en el kernel Linux**, como Ubuntu, Debian o Fedora.
@@ -129,7 +129,7 @@ Entonces decir **“Linux es un sistema operativo”** es común en el lenguaje 
 - ["open source"](https://opensource.org/) vs ["free software"](https://www.gnu.org/philosophy/free-sw.html).
 
 |   | 🕊️ Free Software | 💻 Open Source |
-|---------------------|--------------------------|--------------------------|
+|----|----|----|
 | Traducción | Software libre | Código abierto |
 | Énfasis | **Libertad del usuario** | **Modelo de desarrollo y acceso al código** |
 | Pregunta central | “¿Qué libertades tengo?” | “¿Cómo podemos desarrollar y mejorar este software?” |
@@ -145,7 +145,7 @@ Entonces decir **“Linux es un sistema operativo”** es común en el lenguaje 
 - Los usuarios son libres de **ejecutar, copiar, distribuir, estudiar, cambiar y mejorar** el software.
 - El kernel Linux, por ejemplo, utiliza la licencia **GPLv2**, por lo que cumple criterios tanto de **software libre como de código abierto**. Muchas herramientas GNU también son ambas cosas.
 
-![Imagen creada con ChatGPT.](figures/GNU_linnux_filosofia.png){alt="Imagen creada con Gemini." fig-align="center"}
+![Imagen creada con Gemini.](figures/GNU_linnux_filosofia.png){fig-align="center"}
 
 ## Shell = Intérprete de línea de comandos
 
