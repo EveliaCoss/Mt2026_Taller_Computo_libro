@@ -1072,7 +1072,7 @@
     "href": "cap5.html#consultar-información-sobre-archivos-y-directorios",
     "title": "18  Mis primeros pasos en Bash",
     "section": "18.9 Consultar información sobre archivos y directorios",
-    "text": "18.9 Consultar información sobre archivos y directorios\n\n18.9.1 Información contenida\nCada columna en la salida anterior tiene un significado:\n\n\n\n18.9.2 Permisos\nCada usuario tiene permisos diferentes cuando crea un archivo. Los permisos pueden modificarse con chmod.\nLos caracteres atribuidos a los permisos son:\n\nr : escritura (Read)\nw : lectura (Write)\nx : ejecución (eXecute)\n\nEn el siguiente ejemplo, el usuario cuenta con todos los permisos activos, mientras que el grupo y otros tienen solo permisos de lectura y ejecución.",
+    "text": "18.9 Consultar información sobre archivos y directorios\n\n18.9.1 Información contenida\nCada columna en la salida anterior tiene un significado:\n\n\n\n18.9.2 Permisos\nCada usuario tiene permisos diferentes cuando crea un archivo. Los permisos pueden modificarse con chmod.\nLos caracteres atribuidos a los permisos son:\n\nr : lectura (Read)\nw : escritura (Write)\nx : ejecución (eXecute)\n\nEn el siguiente ejemplo, el usuario cuenta con todos los permisos activos, mientras que el grupo y otros tienen solo permisos de lectura y ejecución.",
     "crumbs": [
       "**Sección 3** - Introducción a Bash",
       "<span class='chapter-number'>18</span>  <span class='chapter-title'>Mis primeros pasos en Bash</span>"
@@ -1303,7 +1303,7 @@
     "href": "cap7.html#opciones-principales-de-grep",
     "title": "23  Encontrar patrones con grep",
     "section": "23.2 Opciones principales de grep",
-    "text": "23.2 Opciones principales de grep\nGenera este primer archivo para los ejercicios:\necho -e \"ab\\na+b\\nab\\naab\\nAnaplasma\\naaab\\nHola mundo\\nhola estudiantes\\nHOLA UNIVERSO\" &gt; archivo.txt\ncat archivo.txt\n1. -E - Expresiones regulares extendidas\nPermite usar metacaracteres avanzados como +, ?, |, { }.\n# Sin -E: no funciona\ngrep \"a+b\" archivo.txt      # Busca \"a+b\" literal\n\n# Con -E: funciona\ngrep -E \"a+b\" archivo.txt   # Busca \"a\", \"ab\", \"aab\", \"aaab\", etc.\n2. -i - Ignorar mayúsculas/minúsculas\ngrep -i \"hola\" archivo.txt\n# Encuentra: \"Hola\", \"HOLA\", \"hola\", \"HoLa\"\nAhora genera este otro archivo:\necho -e \"INFO: El sistema inició correctamente.\\nERROR: No se pudo abrir el archivo.\\nINFO: Conexión establecida.\\nWARNING: Memoria baja.\\nERROR: Fallo en la base de datos.\\nINFO: Proceso terminado.\" &gt; archivo.log\ncat archivo.log\n3. -v - Invertir búsqueda (líneas que NO coinciden)\ngrep -v \"ERROR\" archivo.log\n# Imprime todas las líneas que NO contienen \"ERROR\"\n4. -c - Contar coincidencias\ngrep -c \"ERROR\" archivo.log\n# Output: 2 (número de líneas con \"ERROR\")\n5. -n - Mostrar número de línea\ngrep -n \"ERROR\" archivo.log\n# Output: \n# 2:ERROR: No se pudo abrir el archivo.\n# 5:ERROR: Fallo en la base de datos.\n6. -l - Mostrar solo nombres de archivos que contienen la palabra\ngrep -l \"ERROR\" *.log\n# Output: archivo.log\n7. -r - Buscar recursivamente en directorios\ngrep -r \"ERROR\" /var/log/\n# Busca en todos los archivos del directorio /var/log/\n8. -o - Mostrar solo la parte que coincide + -i para ignorar las mayúsculas\ngrep -oi \"hola\" archivo.txt\n# Output: \n# Hola\n# hola\n#HOLA\n\n\n\nImagen creada con ChatGPT.\n\n\n\n23.2.1 Ejercicio 5 - Dominar grep (con echo -e)\n\nCrea los archivos que usaremos y verificar su contenido en este ejercicio:\n\n# Crear directorio de trabajo\nmkdir ejercicio_grep\ncd ejercicio_grep\n\n# Crear archivo de usuarios\necho -e \"juan@ejemplo.com 25 activo\\nmaria@empresa.es 30 inactivo\\ncarlos123 28 activo\\nana@dominio.org 22 activo\\npedro@test 35 inactivo\\nsofia@dominio.com 27 activo\\nluis@empresa.es 40 inactivo\" &gt; usuarios.txt\ncat usuarios.txt\n\n# Crear archivo de log\necho -e \"[2024-01-15 10:30:45] [INFO] Sistema iniciado\\n[2024-01-15 10:31:12] [ERROR] Conexión fallida a base de datos\\n[2024-01-15 10:32:00] [WARNING] Memoria disponible baja\\n[2024-01-15 10:33:45] [ERROR] Archivo no encontrado: config.ini\\n[2024-01-15 10:34:20] [INFO] Proceso de sincronización completado\\n[2024-01-15 10:35:10] [ERROR] Timeout en conexión remota\\n[2024-01-15 10:36:00] [WARNING] Espacio en disco bajo\\n[2024-01-15 10:37:30] [INFO] Backup completado exitosamente\" &gt; sistema.log\ncat sistema.log\n\n# Crear archivo de productos\necho -e \"001 Laptop Dell 1200.50 disponible\\n002 Mouse Logitech 25.99 disponible\\n003 Teclado Mecánico 89.99 agotado\\n004 Monitor LG 350.00 disponible\\n005 Webcam HD 45.50 disponible\\n006 Auriculares Sony 150.00 agotado\\n007 Cable HDMI 12.99 disponible\\n008 Hub USB 35.75 disponible\" &gt; productos.txt\ncat productos.txt\n\n# Crear archivo de emails\necho -e \"juan.perez@ejemplo.com\\nmaria_lopez@empresa.es\\ncarlos.garcia@test.com\\nana.martinez@dominio.org\\npedro123@invalid\\nsofia.rodriguez@empresa.es\\nluis_fernandez@test.org\\ncontacto@empresa.es\" &gt; emails.txt\ncat emails.txt\n\n# Crear archivo de géneros bacterianos\necho -e \"Rickettsia\\nOrientia\\nWolbachia\\nAegyptianella\\nAnaplasma\\nCowdria\\nEhrlichia\\nNeorickettsia\\nCaedibacter\\nHolospora\\nLyticum\\nOdyssella\\nSymbiotes\\nTectibacter\" &gt; bacterias_generos.txt\ncat bacterias_generos.txt\n\nBuscar los usuarios activos dentro del archivo usuarios.txt. NOTA: \\b no representa un carácter real, sino una posición en el texto donde termina o comienza una palabra.\nBuscar los errores en el archivo log sistema.log.\nBuscar productos disponibles en el archivo productos.txt.\nIgnorar las mayúsculas/minúsculas (-i) de sistema.log.\nContar el número (grep -c) de usuarios activos en el archivo usuarios.txt.\nDime en que líneas (grep -n) aparece la palabra ERROR en sistema.log.\nMostrar solo las coincidencias (grep -o) con la palabra ERROR en sistema.log.\nBuscar las especies que comienzan con A en el archivo bacterias_generos.txt.\nBuscar las especies que comienzan con R o W en el archivo bacterias_generos.txt.\n\n\n\n\n\n\nTipSolución\n\n\n\n\n\n2. grep -E \"\\bactivo\\b\" usuarios.txt o grep \" activo\" usuarios.txt\n3. grep \"ERROR\" sistema.log\n4. grep \"disponible\" productos.txt\n5. grep -i \"error\" sistema.log\n6. grep \" activo\" usuarios.txt | wc -l o grep -c \" activo\" usuarios.txt \n7. grep -n \"ERROR\" sistema.log\n8. grep -o \"ERROR\" sistema.log\n9. grep \"^A\" bacterias_generos.txt\n10. grep -E \"^(R|W)\" bacterias_generos.txt",
+    "text": "23.2 Opciones principales de grep\nGenera este primer archivo para los ejercicios:\necho -e \"ab\\na+b\\nab\\naab\\nAnaplasma\\naaab\\nHola mundo\\nhola estudiantes\\nHOLA UNIVERSO\" &gt; archivo.txt\ncat archivo.txt\n1. -E - Expresiones regulares extendidas\nPermite usar metacaracteres avanzados como +, ?, |, { }, *.\n# Sin -E: no funciona\ngrep \"a+b\" archivo.txt      # Busca \"a+b\" literal\n\n# Con -E: funciona\ngrep -E \"a+b\" archivo.txt   # Busca \"a\", \"ab\", \"aab\", \"aaab\", etc.\nGenera este archivo:\necho -e \"ac\\nabc\\nabbc\\nabbbc\\nabbbbc\\nadc\\nabdc\\nab\\nbc\" &gt; regex.txt\nPregunta primero: ¿Qué líneas creen que coincidirán con ab*c?\ngrep -E \"ab*c\" regex.txt # Significa a + cero o más \"b\" + c\ngrep -E \"ab+c\" regex.txt # + exige al menos una b\ngrep -E \"ab?c\" regex.txt # cero o una \"b\"\ngrep -E \"ab{2}c\" regex.txt # a seguido de 2 \"b\" y 1 c\ngrep -E \"ab{2,}c\" regex.txt # 2 \"b\" o más\ngrep -E \"ab{2,4}c\" regex.txt # De 2 a 4 \"b\"\ngrep -E \"(ab)+\" regex.txt #Agrupamiento, que aparezca ab juntas\ngrep -E \"a.{3}\" regex.txt # a seguido de 3 caracteres cualesquiera\ngrep -E \"[abc]{3}\" regex.txt # Quiero 3 caracteres, que pueden ser a,b, o c\n\n\n\nREGEX\n0 b\n1 b\n2 b\n3+ b\n\n\n\n\nab*c\n✅\n✅\n✅\n✅\n\n\nab+c\n❌\n✅\n✅\n✅\n\n\nab?c\n✅\n✅\n❌\n❌\n\n\n\n2. -i - Ignorar mayúsculas/minúsculas\ngrep -i \"hola\" archivo.txt\n# Encuentra: \"Hola\", \"HOLA\", \"hola\", \"HoLa\"\nAhora genera este otro archivo:\necho -e \"INFO: El sistema inició correctamente.\\nERROR: No se pudo abrir el archivo.\\nINFO: Conexión establecida.\\nWARNING: Memoria baja.\\nERROR: Fallo en la base de datos.\\nINFO: Proceso terminado.\" &gt; archivo.log\ncat archivo.log\n3. -v - Invertir búsqueda (líneas que NO coinciden)\ngrep -v \"ERROR\" archivo.log\n# Imprime todas las líneas que NO contienen \"ERROR\"\n4. -c - Contar coincidencias\ngrep -c \"ERROR\" archivo.log\n# Output: 2 (número de líneas con \"ERROR\")\n5. -n - Mostrar número de línea\ngrep -n \"ERROR\" archivo.log\n# Output: \n# 2:ERROR: No se pudo abrir el archivo.\n# 5:ERROR: Fallo en la base de datos.\n6. -l - Mostrar solo nombres de archivos que contienen la palabra\ngrep -l \"ERROR\" *.log\n# Output: archivo.log\n7. -r - Buscar recursivamente en directorios\ngrep -r \"ERROR\" /var/log/\n# Busca en todos los archivos del directorio /var/log/\n8. -o - Mostrar solo la parte que coincide + -i para ignorar las mayúsculas\ngrep -oi \"hola\" archivo.txt\n# Output: \n# Hola\n# hola\n#HOLA\n\n\n\nImagen creada con ChatGPT.\n\n\n\n23.2.1 Ejercicio 5 - Dominar grep (con echo -e)\n\nCrea los archivos que usaremos y verificar su contenido en este ejercicio:\n\n# Crear directorio de trabajo\nmkdir ejercicio_grep\ncd ejercicio_grep\n\n# Crear archivo de usuarios\necho -e \"juan@ejemplo.com 25 activo\\nmaria@empresa.es 30 inactivo\\ncarlos123 28 activo\\nana@dominio.org 22 activo\\npedro@test 35 inactivo\\nsofia@dominio.com 27 activo\\nluis@empresa.es 40 inactivo\" &gt; usuarios.txt\ncat usuarios.txt\n\n# Crear archivo de log\necho -e \"[2024-01-15 10:30:45] [INFO] Sistema iniciado\\n[2024-01-15 10:31:12] [ERROR] Conexión fallida a base de datos\\n[2024-01-15 10:32:00] [WARNING] Memoria disponible baja\\n[2024-01-15 10:33:45] [ERROR] Archivo no encontrado: config.ini\\n[2024-01-15 10:34:20] [INFO] Proceso de sincronización completado\\n[2024-01-15 10:35:10] [ERROR] Timeout en conexión remota\\n[2024-01-15 10:36:00] [WARNING] Espacio en disco bajo\\n[2024-01-15 10:37:30] [INFO] Backup completado exitosamente\" &gt; sistema.log\ncat sistema.log\n\n# Crear archivo de productos\necho -e \"001 Laptop Dell 1200.50 disponible\\n002 Mouse Logitech 25.99 disponible\\n003 Teclado Mecánico 89.99 agotado\\n004 Monitor LG 350.00 disponible\\n005 Webcam HD 45.50 disponible\\n006 Auriculares Sony 150.00 agotado\\n007 Cable HDMI 12.99 disponible\\n008 Hub USB 35.75 disponible\" &gt; productos.txt\ncat productos.txt\n\n# Crear archivo de emails\necho -e \"juan.perez@ejemplo.com\\nmaria_lopez@empresa.es\\ncarlos.garcia@test.com\\nana.martinez@dominio.org\\npedro123@invalid\\nsofia.rodriguez@empresa.es\\nluis_fernandez@test.org\\ncontacto@empresa.es\" &gt; emails.txt\ncat emails.txt\n\n# Crear archivo de géneros bacterianos\necho -e \"Rickettsia\\nOrientia\\nWolbachia\\nAegyptianella\\nAnaplasma\\nCowdria\\nEhrlichia\\nNeorickettsia\\nCaedibacter\\nHolospora\\nLyticum\\nOdyssella\\nSymbiotes\\nTectibacter\" &gt; bacterias_generos.txt\ncat bacterias_generos.txt\n\nBuscar los usuarios activos dentro del archivo usuarios.txt. NOTA: \\b no representa un carácter real, sino una posición en el texto donde termina o comienza una palabra.\nBuscar los errores en el archivo log sistema.log.\nBuscar productos disponibles en el archivo productos.txt.\nIgnorar las mayúsculas/minúsculas (-i) de sistema.log.\nContar el número (grep -c) de usuarios activos en el archivo usuarios.txt.\nDime en que líneas (grep -n) aparece la palabra ERROR en sistema.log.\nMostrar solo las coincidencias (grep -o) con la palabra ERROR en sistema.log.\nBuscar las especies que comienzan con A en el archivo bacterias_generos.txt.\nBuscar las especies que comienzan con R o W en el archivo bacterias_generos.txt.\n\n\n\n\n\n\nTipSolución\n\n\n\n\n\n2. grep -E \"\\bactivo\\b\" usuarios.txt o grep \" activo\" usuarios.txt\n3. grep \"ERROR\" sistema.log\n4. grep \"disponible\" productos.txt\n5. grep -i \"error\" sistema.log\n6. grep \" activo\" usuarios.txt | wc -l o grep -c \" activo\" usuarios.txt \n7. grep -n \"ERROR\" sistema.log\n8. grep -o \"ERROR\" sistema.log\n9. grep \"^A\" bacterias_generos.txt\n10. grep -E \"^(R|W)\" bacterias_generos.txt",
     "crumbs": [
       "**Sección 3** - Introducción a Bash",
       "<span class='chapter-number'>23</span>  <span class='chapter-title'>Encontrar patrones con `grep`</span>"
@@ -1420,245 +1420,245 @@
     ]
   },
   {
-    "objectID": "cap9.html",
-    "href": "cap9.html",
-    "title": "26  Edición de archivos con el editor de flujo sed",
-    "section": "",
-    "text": "Fecha: 24 de septiembre, 2026\n\nsed (stream editor) es un editor de flujo, una potente herramienta de tratamiento de texto para el sistema operativo UNIX que acepta como entrada un archivo, lo lee y modifica línea a línea de acuerdo a un script. sed permite manipular flujos de datos, como por ejemplo cortar líneas, buscar y reemplazar texto (con soporte de expresiones regulares), entre otras cosas.\nAlgunas de las operaciones más primordiales de sed son el cambio de saltos de líneas, la sustitución de espacios por comas o tabulaciones, la deleción o adición de strings, etc.\nLa sintaxis general de la orden sed es:\nsed [-n] [-e'script'] [-f archivo] archivo1 archivo2 ...\ndonde:\n\n\n\n\n\n\nNotaExplicación\n\n\n\n\n-n indica que se suprima la salida estándar.\n-e indica que se ejecute el script que viene a continuación.\n-f indica que las órdenes se tomarán de un archivo.\n\n\n\n\nEjemplo de sustitución con sed\nSustituciones s/// de palabras: s/esto/aquello/\necho \"Windows es lo máximo\" | sed 's/Windows/Linux/'\nEn el ejemplo anterior, la modificación se hace solamente en la primer instancia que el comando encuentra. Pero esto no nos funciona si tenemos 400 repeticiones de Windows que queremos cambiar a Linux. Para que funcione debemos hacer un cambio de la siquiente manera:\necho \"Windows es un sistema operativo ampliamente utilizado.\" &gt; archivo.txt\ncat archivo.txt\nsed 's/Windows/Linux/g' archivo.txt\nEsta letra g que agregamos, indica hacer las sustituciones de manera global, es decir en todas las ocurrencias o repeticiones dentro de un archivo.\n\n\n\nImagen creada con ChatGPT.\n\n\n\n\n\n\n\n\nNotaEjercicio 8: Práctica de sustituciones\n\n\n\n\nVerifica que te encuentres en la carpeta con el comando: pwd\nCámbiate de carpeta si es necesario con el comando cd\nDescarga el archivo libro.txt de mi Github.\nExplora este archivo con cat libro.txt ó less libro.txt ó head libro.txt\nSustituye la palabra “perro” de cada una de las filas por la palabra “gato” y una vez hecho el cambio redirige el resultado a un archivo llamado “libro_gato.txt”.\nCorrobora tus resultados y discute posibles soluciones alternas.\n\nComo pudiste darte cuenta, el archivo está separado por tabulaciones entre columna y columna. Si quisieras además, cambiar el formato del archivo de separación por tabulaciones a separación por comas, ¿qué pasos extra agregarías a tu código? Discute qué hace cada parte del código.\n\n\n\n\n\n\nTipSolución\n\n\n\n\n\nsed 's/perro/gato/g' libro.txt &gt;&gt; libro_gato.txt\n\n\n\n\n\n\n\n26.0.1 sed y las combinaciones especiales\n\n\n\nImagen creada con ChatGPT.\n\n\n\n\n\n\n\n\nNotaEjercicio 9: Más sobre sed\n\n\n\nSeguiremos usando el contenido del archivo libro.txt para revisar las siguientes sustituciones:\n\nReemplaza la primera aparición de perro por gato en cada línea.\nSustituir todas las apariciones de rojo por azul en todo el archivo.\nCambiar Hola por Adiós solo en la sexta línea.\nModificar http:// por https:// usando | como delimitador.\nSustituir cualquier número por la palabra NUM. NOTA: En sed clásico (POSIX básico), el + no es reconocido como cuantificador a menos que uses la opción -E (o -r en GNU sed).\nIntercambiar nombre y apellido (ejemplo: “Juan Pérez” → “Pérez, Juan”).\nSolo en las líneas que contienen la palabra coche, cambiar rojo por verde.\n\n\n\n\n\n\n\nTipSolución\n\n\n\n\n\n1. sed 's/perro/gato/' libro.txt\n2. sed 's/rojo/azul/g' libro.txt\n3. sed '6s/Hola/Adiós/' libro.txt\n4. sed 's|http://|https://|g' libro.txt\n5. sed -E 's/[0-9]+/NUM/g' libro.txt o sed 's/[0-9]\\{1,\\}/NUM/g' libro.txt # La sintaxis \\{n,m\\} indica cuántas veces debe repetirse el patrón anterior.\n6. sed -E '7s/([[:alpha:]]+) ([[:alpha:]]+)/\\2, \\1/' libro.txt \n7. sed '/coche/s/rojo/verde/' libro.txt\n\n\n\n\n\n\n\n\n26.0.2 Referencias\n\nRegEx\nWikipedia: Expresiones Regulares\nYouTube: Expresiones regulares con Notepad++",
-    "crumbs": [
-      "**Sección 4** - Edición de archivos con Bash",
-      "<span class='chapter-number'>26</span>  <span class='chapter-title'>Edición de archivos con el editor de flujo `sed`</span>"
-    ]
-  },
-  {
-    "objectID": "cap10.html",
-    "href": "cap10.html",
-    "title": "27  Tipos de enlaces - symlinks, hard links e hipervínculos",
-    "section": "",
-    "text": "27.1 Diferencias entre enlaces simbólicos (symlinks) y enlaces duros (hard links)\nEs mejor crear enlaces simbólicos (symlinks) en vez de copiar cada archivo, ya que permite ahorrar mucho espacio en el disco al evitar la multiplicación de copias fisicas en el disco duro del mismo archivo.\nUna modificación realizada utilizando este enlace se reflejará en el original; pero, por el contrario, si se elimina el enlace, no se eliminará el auténtico.",
-    "crumbs": [
-      "**Sección 4** - Edición de archivos con Bash",
-      "<span class='chapter-number'>27</span>  <span class='chapter-title'>Tipos de enlaces - symlinks, hard links e hipervínculos</span>"
-    ]
-  },
-  {
-    "objectID": "cap10.html#diferencias-entre-enlaces-simbólicos-symlinks-y-enlaces-duros-hard-links",
-    "href": "cap10.html#diferencias-entre-enlaces-simbólicos-symlinks-y-enlaces-duros-hard-links",
-    "title": "27  Tipos de enlaces - symlinks, hard links e hipervínculos",
-    "section": "",
-    "text": "Características\nSymlinks\nHard links\n\n\n\n\nAlmacenamiento\n\nActúa como un puntero o referencia a otro archivo o directorio.\nNo contiene los datos reales del archivo, sino una tuta que apunta al archivo original.\n\n\nApunta directamente a los datos del archivo original.\nComparte el mismo contenido que el archivo enlazado, no solo una referencia.\n\n\n\nNúmero de inodo\nCuenta con un número de inodo (nodo indice) diferente del archivo original. Se identifica como un tipo de archivo diferente.\nComparte el mismo número de inodo con el destino. Elimina el concepto de “archivo original”; todos los hard links al mismo archivo son iguales.\n\n\nEliminación del archivo original\nSi el archivo original se elimina, el symlink queda roto (es decir, apunta a algo inexistente).\nSi un hard link se elimina, los datos del archivo permanecen accesibles mientras existan otros hard links.\n\n\nSistema de archivos.\nPuede apuntar a archivos o directorios, incluso en diferentes sistemas de archivos.\nDeben residir en el mismo sistema de archivos.\n\n\nRutas\nSe pueden usar rutas absolutas o relativas para la referencia.\nNo puede enlazar directorios (en la mayoría de los sistemas modernos) ni cruzar sistemas de archivos diferentes.\n\n\nUso común\n\nCrear accesos directos a archivos o carpetas.\nFacilitar la gestión de rutas en aplicaciones.\n\n\nGarantizar accesibilidad a datos independientemente de qué enlace se elimine.\nCompartir archivos de forma eficiente sin duplicar espacio en disco.\n\n\n\nComando para crear\nln -s archivo_original enlace_simbolico\nln archivo_original enlace_simbolico\n\n\n\n\n\n\n\n\n\nPrecaución\n\n\n\nDebes tener cuidado al elegir cuál utilizar. Los enlaces simbólicos son más convenientes cuando trabajamos con datos importantes que están almacenados en un respaldo, ya que permiten acceder fácilmente a los archivos originales sin duplicarlos y facilitan la gestión de rutas, sin eliminar o afectar los archivos originales.\n\n\n\n\n\nImagen creada con ChatGPT.",
-    "crumbs": [
-      "**Sección 4** - Edición de archivos con Bash",
-      "<span class='chapter-number'>27</span>  <span class='chapter-title'>Tipos de enlaces - symlinks, hard links e hipervínculos</span>"
-    ]
-  },
-  {
-    "objectID": "cap10.html#orden-de-los-archivos",
-    "href": "cap10.html#orden-de-los-archivos",
-    "title": "27  Tipos de enlaces - symlinks, hard links e hipervínculos",
-    "section": "27.2 Orden de los archivos",
-    "text": "27.2 Orden de los archivos\nEl sistema de archivos de GNU/Linux tiene una estructura jerárquica de directorios y subdirectorios que penden del directorio raíz /. Esta estructura puede ser visualizada convenientemente con el comando tree (Nota: tree tal vez no esté instalado en tu sistema).\nOrganizar tu entorno de trabajo en Bash siguiendo buenas prácticas te permitirá gestionar tus archivos y scripts de manera eficiente. Aquí tienes una sugerencia de carpetas clave y nombres que puedes utilizar:\n~/workspace/\n├── bin/           # Scripts ejecutables\n├── src/           # Código fuente\n├── logs/          # Archivos de registro\n├── config/        # Configuración\n├── data/\n│   ├── raw/       # Datos crudos\n│   └── processed/ # Datos procesados\n├── backup/        # Copias de seguridad\n├── tmp/           # Archivos temporales\n├── projects/\n│   └── project_name/\n├── git/           # Repositorios locales\n└── docs/          # Documentación\n\n27.2.1 Consejos adicionales\n\nUsa nombres descriptivos: Los nombres de las carpetas y archivos deben reflejar su contenido claramente.\nMantén consistencia: Usa un esquema de nombres uniforme (por ejemplo, todo en minúsculas o con guiones bajos).\nAutomatiza la limpieza: Utiliza scripts en Bash para eliminar archivos temporales o rotar logs antiguos.\nUsa control de versiones: Integra Git en tus proyectos para mantener un historial de cambios en tus scripts.\n\nEsta estructura es flexible y se puede ajustar según tus necesidades específicas.",
-    "crumbs": [
-      "**Sección 4** - Edición de archivos con Bash",
-      "<span class='chapter-number'>27</span>  <span class='chapter-title'>Tipos de enlaces - symlinks, hard links e hipervínculos</span>"
-    ]
-  },
-  {
-    "objectID": "cap10.html#referencias",
-    "href": "cap10.html#referencias",
-    "title": "27  Tipos de enlaces - symlinks, hard links e hipervínculos",
-    "section": "27.3 Referencias",
-    "text": "27.3 Referencias\n\nHow to create and remove Linux symlinks for files and directories\nGeneración de ligas simbólicas a archivos: comando ln -s /ruta/al/archivo/fuente nombre_liga",
-    "crumbs": [
-      "**Sección 4** - Edición de archivos con Bash",
-      "<span class='chapter-number'>27</span>  <span class='chapter-title'>Tipos de enlaces - symlinks, hard links e hipervínculos</span>"
-    ]
-  },
-  {
-    "objectID": "cap11.html",
-    "href": "cap11.html",
-    "title": "28  Filtrado de texto (grep, cut, sort, uniq, wc)",
-    "section": "",
-    "text": "28.1 Repaso de grep - Buscar patrones en texto\nVeamos ahora los comandos más usados en pipelines o tuberías de filtrado de texto en acción, haciendo uso de sólo algunas de las opciones más frecuentes listados en la sección anterior.\nAl final de esta clase podrás leer comandos como estos:\nNo necesariamente memorizarlo de golpe, sino entender qué aporta cada etapa:\nPodemos crear 3 archivos:\nSintaxis:\nDurante la clase de “Encontrar patrones con grep” repasamos la siguiente infografía y realizamos algunos ejercicios.",
-    "crumbs": [
-      "**Sección 4** - Edición de archivos con Bash",
-      "<span class='chapter-number'>28</span>  <span class='chapter-title'>Filtrado de texto (`grep, cut, sort, uniq, wc`)</span>"
-    ]
-  },
-  {
-    "objectID": "cap11.html#repaso-de-grep---buscar-patrones-en-texto",
-    "href": "cap11.html#repaso-de-grep---buscar-patrones-en-texto",
-    "title": "28  Filtrado de texto (grep, cut, sort, uniq, wc)",
-    "section": "",
-    "text": "grep [opciones] \"patrón\" archivo\n\n\n\n\n\n\n\n\nArgumento\nDescripción\nEjemplo\n\n\n\n\n\n\ngrep \":[9][0-9]:\" alumnos.txt\n\n\n-i\nIgnora mayúsculas y minúsculas\ngrep -i \"carlos\" nombres.txt\n\n\n-n\nMuestra el número de línea\ngrep -n \"Miguel\" nombres.txt\n\n\n-c\nCuenta las líneas que coinciden\ngrep -c \"Cálculo\"alumnos.txt\n\n\n-v\nMuestra líneas que NO coinciden\ngrep -v \"a\" nombres.txt\ngrep -v \"Cálculo\" alumnos.txt\n\n\n-w\nCoincidencia de palabra completa\ngrep -w \"Cálculo\" alumnos.txt\n\n\n-A n\nMuestra n líneas después del match\ngrep -A 2 \"Álgebra\" alumnos.txt\n\n\n\n\n\n\n\n\n\n\n\nInfografía de grep - creada con ChatGPT",
-    "crumbs": [
-      "**Sección 4** - Edición de archivos con Bash",
-      "<span class='chapter-number'>28</span>  <span class='chapter-title'>Filtrado de texto (`grep, cut, sort, uniq, wc`)</span>"
-    ]
-  },
-  {
-    "objectID": "cap11.html#sort---ordenar-líneas-de-texto",
-    "href": "cap11.html#sort---ordenar-líneas-de-texto",
-    "title": "28  Filtrado de texto (grep, cut, sort, uniq, wc)",
-    "section": "28.2 sort - Ordenar líneas de texto",
-    "text": "28.2 sort - Ordenar líneas de texto\nSintaxis:\nsort [opciones] archivo.txt\n\n\n\n\n\n\n\n\nArgumento\nDescripción\nEjemplo\n\n\n\n\n\nOrden alfabético\nsort nombres.txt\nsort temas.txt\n\n\n-n\nOrdena numéricamente\nsort -n numeros.txt\n\n\n-r\nOrden inverso (descendente)\nsort -r numeros.txt\n\n\n-k\nOrdena por columna específica\nsort -k2 datos.txt\nsort -k2nr datos.txt\n\n\n-u\nElimina duplicados mientras ordena\nsort -u temas.txt\n\n\n-t\nDefine separador de campos/columnas\nsort -t\":\" -k2n alumnos.txt\nsort -t\":\" -k3 alumnos.txt\n\n\n\n\n\n\nImagen creada con ChatGPT.",
-    "crumbs": [
-      "**Sección 4** - Edición de archivos con Bash",
-      "<span class='chapter-number'>28</span>  <span class='chapter-title'>Filtrado de texto (`grep, cut, sort, uniq, wc`)</span>"
-    ]
-  },
-  {
-    "objectID": "cap11.html#uniq---identifica-y-filtra-líneas-repetidas",
-    "href": "cap11.html#uniq---identifica-y-filtra-líneas-repetidas",
-    "title": "28  Filtrado de texto (grep, cut, sort, uniq, wc)",
-    "section": "28.3 uniq - Identifica y filtra líneas repetidas",
-    "text": "28.3 uniq - Identifica y filtra líneas repetidas\nSintaxis:\nuniq [opciones] archivo.txt\n\n\n\n\n\n\n\n\nArgumento\nDescripción\nEjemplo\n\n\n\n\n\nOrdena y elimina duplicado\nsort temas.txt | uniq\n\n\n-c\nCuenta ocurrencias de cada línea\nsort datos.txt | uniq -c\n\n\n-d\nMuestra solo líneas duplicadas\nsort datos.txt | uniq -d\n\n\n-u\nMuestra solo líneas únicas\nsort datos.txt | uniq -u\n\n\n\n\n\n\nImagen creada con ChatGPT.",
-    "crumbs": [
-      "**Sección 4** - Edición de archivos con Bash",
-      "<span class='chapter-number'>28</span>  <span class='chapter-title'>Filtrado de texto (`grep, cut, sort, uniq, wc`)</span>"
-    ]
-  },
-  {
-    "objectID": "cap11.html#wc---cuenta-líneas-palabras-y-caracteres",
-    "href": "cap11.html#wc---cuenta-líneas-palabras-y-caracteres",
-    "title": "28  Filtrado de texto (grep, cut, sort, uniq, wc)",
-    "section": "28.4 wc - Cuenta líneas, palabras y caracteres",
-    "text": "28.4 wc - Cuenta líneas, palabras y caracteres\nSintaxis:\nwc [opciones] archivo.txt\n\n\n\n\n\n\n\n\nArgumento\nDescripción\nEjemplo\n\n\n\n\n\nMuestra líneas, palabras, bytes\nwc archivo.txt\n\n\n-l\nCuenta líneas\nwc -l archivo.txt\nwc -l *.txt\n\n\n-w\nCuenta palabras\nwc -w archivo.txt\n\n\n-c\nCuenta bytes\nwc -c archivo.txt\n\n\n-w\nCuenta caracteres\nwc -w archivo.txt\n\n\n\n\n\n\nImagen creada con ChatGPT",
-    "crumbs": [
-      "**Sección 4** - Edición de archivos con Bash",
-      "<span class='chapter-number'>28</span>  <span class='chapter-title'>Filtrado de texto (`grep, cut, sort, uniq, wc`)</span>"
-    ]
-  },
-  {
-    "objectID": "cap11.html#cut---buscar-patrones-en-texto",
-    "href": "cap11.html#cut---buscar-patrones-en-texto",
-    "title": "28  Filtrado de texto (grep, cut, sort, uniq, wc)",
-    "section": "28.5 cut - Buscar patrones en texto",
-    "text": "28.5 cut - Buscar patrones en texto\nAquí vamos a partir de ¿Qué hago si no quiero toda la línea, sino solamente una columna de un archivo?\nSintaxis:\ncut [opciones] archivo.txt\n\n\n\n\n\n\n\n\nArgumento\nDescripción\nEjemplo\n\n\n\n\n-c\nExtrae caracteres por posición (ej: -c1-5)\ncut -c1-2 archivo.txt\n\n\n-f\nExtrae campos específicos (ej: -f1,3)\ncut -f1,3 -d: alumnos.txt\n\n\n-d\nDefine separador de campos (default: tabulación)\ncut -f2 -d\" \" datos.txt\n\n\n\n\n\n\nImagen creada con ChatGPT.",
-    "crumbs": [
-      "**Sección 4** - Edición de archivos con Bash",
-      "<span class='chapter-number'>28</span>  <span class='chapter-title'>Filtrado de texto (`grep, cut, sort, uniq, wc`)</span>"
-    ]
-  },
-  {
-    "objectID": "cap11.html#ejercicio-integrador-grep-cut-sort-uniq-y-wc",
-    "href": "cap11.html#ejercicio-integrador-grep-cut-sort-uniq-y-wc",
-    "title": "28  Filtrado de texto (grep, cut, sort, uniq, wc)",
-    "section": "28.6 Ejercicio integrador: grep, cut, sort, uniq y wc",
-    "text": "28.6 Ejercicio integrador: grep, cut, sort, uniq y wc\n\n\n\n\n\n\nNotaEjercicio 10\n\n\n\nInstrucciones\n\nCrea el archivo materias.txt ejercutando el siguiente comando:\necho -e \"Álgebra Lineal:8:1\\nCálculo Diferencial:10:1\\nGeometría Analítica:8:1\\nProbabilidad:6:3\\nEstadística:6:3\\nEcuaciones Diferenciales:8:4\\nÁlgebra Abstracta:8:5\\nTopología:6:6\\nAnálisis Real:8:6\\nProbabilidad:6:3\" &gt; ejercicios/BASH/materias.txt\nColumna 1: materias, Columna 2: créditos, Columna 3: semestre.\nMostrar todas las materias que contienen la palabra Álgebra.\nMostrar todas las materias de sexto semestre.\nContar cuántas materias tienen 8 créditos.\nMostrar únicamente los nombres de las materias.\nMostrar únicamente los créditos.\nOrdenar las materias alfabéticamente.\nOrdenar los créditos de menor a mayor.\nMostrar los semestres sin repetir.\nContar cuántas materias hay por semestre.\n¿Cuántas materias hay por número de créditos?\n¿Cuál es el número de créditos más frecuente?\n\n\n\n\n\n\n\nTipSolucion\n\n\n\n\n\n2. grep \"Álgebra\" ejercicios/BASH/materias.txt\n3. grep \":6$\" ejercicios/BASH/materias.txt\n4. grep \":8:\" ejercicios/BASH/materias.txt | wc -l\n5. cut -d\":\" -f1 ejercicios/BASH/materias.txt\n6. cut -d\":\" -f2 ejercicios/BASH/materias.txt\n7. cut -d\":\" -f1 ejercicios/BASH/materias.txt | sort\n8. cut -d\":\" -f2 ejercicios/BASH/materias.txt | sort -n\n9. cut -d\":\" -f3 ejercicios/BASH/materias.txt | sort | uniq\n10. cut -d\":\" -f3 ejercicios/BASH/materias.txt | sort | uniq -c\n11. cut -d\":\" -f2 ejercicios/BASH/materias.txt | sort | uniq -c\n12. cut -d\":\" -f2 ejercicios/BASH/materias.txt | sort | uniq -c | sort -nr | head -1",
-    "crumbs": [
-      "**Sección 4** - Edición de archivos con Bash",
-      "<span class='chapter-number'>28</span>  <span class='chapter-title'>Filtrado de texto (`grep, cut, sort, uniq, wc`)</span>"
-    ]
-  },
-  {
-    "objectID": "cap11.html#referencias",
-    "href": "cap11.html#referencias",
-    "title": "28  Filtrado de texto (grep, cut, sort, uniq, wc)",
-    "section": "28.7 Referencias",
-    "text": "28.7 Referencias\n\nEjemplos de herramientas de filtrado de texto: pipelines con grep, cut, sort, uniq, wc en acción",
-    "crumbs": [
-      "**Sección 4** - Edición de archivos con Bash",
-      "<span class='chapter-number'>28</span>  <span class='chapter-title'>Filtrado de texto (`grep, cut, sort, uniq, wc`)</span>"
-    ]
-  },
-  {
     "objectID": "Bash_script.html",
     "href": "Bash_script.html",
-    "title": "29  Scripts en Bash",
+    "title": "26  Scripts en Bash",
     "section": "",
-    "text": "29.1 ¿Qué es un script de Bash?\nLos scripts son archivos de texto que contienen instrucciones ejecutables por un intérprete de un lenguaje de programación para la ejecución de tareas. El formato .sh se utiliza para escribir scripts ejecutables por un intérprete como Bash.\nEn esta sección crearemos varios scripts de Bash y usaremos varios comandos y operadores.",
+    "text": "26.1 ¿Qué es un script de Bash?\nLos scripts son archivos de texto que contienen instrucciones ejecutables por un intérprete de un lenguaje de programación para la ejecución de tareas. El formato .sh se utiliza para escribir scripts ejecutables por un intérprete como Bash.\nEn esta sección crearemos varios scripts de Bash y usaremos varios comandos y operadores.",
     "crumbs": [
       "**Sección 4** - Edición de archivos con Bash",
-      "<span class='chapter-number'>29</span>  <span class='chapter-title'>Scripts en Bash</span>"
+      "<span class='chapter-number'>26</span>  <span class='chapter-title'>Scripts en Bash</span>"
     ]
   },
   {
     "objectID": "Bash_script.html#qué-es-un-script-de-bash",
     "href": "Bash_script.html#qué-es-un-script-de-bash",
-    "title": "29  Scripts en Bash",
+    "title": "26  Scripts en Bash",
     "section": "",
-    "text": "NotaEstructura básica de un script\n\n\n\nLos script de Bash contiene al inicio esta descripción #!bin/bash y la extensión .sh\n#!/bin/bash\n# Comentario: esto es un script básico\n\necho \"Hola, mundo\"\n\n\n\n29.1.1 Componentes clave\nShebang (#!/bin/bash)\n\nPrimera línea del script\nIndica al sistema que use Bash para ejecutar el archivo\nDebe estar en la primera línea, sin espacios antes\n\nComentarios (#)\n\nLíneas que comienzan con # son ignoradas\nÚtiles para documentar el código\n\nComandos\n\nInstrucciones que se ejecutan línea por línea\n\n\n\n29.1.2 Crear y ejecutar un script\n# 1. Crear el archivo\nnano mi_script.sh\n\n# 2. Hacer el archivo ejecutable\nchmod +x mi_script.sh\n\n# 3. Ejecutar el script\n./mi_script.sh\n\n# O ejecutar sin permisos de ejecución\nbash mi_script.sh\n\n\n\nImagen creada con ChatGPT.",
+    "text": "NotaEstructura básica de un script\n\n\n\nLos script de Bash contiene al inicio esta descripción #!bin/bash y la extensión .sh\n#!/bin/bash\n# Comentario: esto es un script básico\n\necho \"Hola, mundo\"\n\n\n\n26.1.1 Componentes clave\nShebang (#!/bin/bash)\n\nPrimera línea del script\nIndica al sistema que use Bash para ejecutar el archivo\nDebe estar en la primera línea, sin espacios antes\n\nComentarios (#)\n\nLíneas que comienzan con # son ignoradas\nÚtiles para documentar el código\n\nComandos\n\nInstrucciones que se ejecutan línea por línea\n\n\n\n26.1.2 Crear y ejecutar un script\n# 1. Crear el archivo\nnano mi_script.sh\n\n# 2. Hacer el archivo ejecutable\nchmod +x mi_script.sh\n\n# 3. Ejecutar el script\n./mi_script.sh\n\n# O ejecutar sin permisos de ejecución\nbash mi_script.sh\n\n\n\nImagen creada con ChatGPT.",
     "crumbs": [
       "**Sección 4** - Edición de archivos con Bash",
-      "<span class='chapter-number'>29</span>  <span class='chapter-title'>Scripts en Bash</span>"
+      "<span class='chapter-number'>26</span>  <span class='chapter-title'>Scripts en Bash</span>"
     ]
   },
   {
     "objectID": "Bash_script.html#variables-en-bash",
     "href": "Bash_script.html#variables-en-bash",
-    "title": "29  Scripts en Bash",
-    "section": "29.2 Variables en Bash",
-    "text": "29.2 Variables en Bash\n\n29.2.1 ¿Qué es una variable?\nUn contenedor que almacena un valor (texto, números, etc.) que puede cambiar durante la ejecución del script.\n\n\n29.2.2 Declaración y asignación\nnombre=\"Juan\"\nedad=25\nciudad=\"Madrid\"\nReglas importantes:\n\n✅ Sin espacios alrededor del =\n✅ Nombres en minúsculas (por convención)\n✅ Pueden contener letras, números y guiones bajos\n❌ No pueden comenzar con números\n\n\n\n29.2.3 Acceder a variables\necho $nombre           # Imprime el valor\necho ${nombre}         # Forma alternativa (más segura)\necho \"Hola, $nombre\"   # Dentro de comillas dobles\n\n\n29.2.4 Tipos de variables\n\nVariables de cadena (string)\nnombre=\"María\"\nmensaje=\"Bienvenido a Bash\"\n\n\nVariables numéricas\nedad=30\ncantidad=100\n\n\nVariables vacías\nvariable=\"\"\n\n\n\n29.2.5 Comillas simples vs. dobles\nnombre=\"Juan\"\necho \"Hola, $nombre\"      # Hola, Juan (interpreta variables)\necho 'Hola, $nombre'      # Hola, $nombre (literal)\n\n\n29.2.6 Variables especiales\n$0      # Nombre del script\n$1, $2  # Argumentos pasados al script\n$#      # Número de argumentos\n$?      # Código de salida del último comando\n$$      # ID del proceso actual\n\n\n\nImagen creada con ChatGPT.",
+    "title": "26  Scripts en Bash",
+    "section": "26.2 Variables en Bash",
+    "text": "26.2 Variables en Bash\n\n26.2.1 ¿Qué es una variable?\nUn contenedor que almacena un valor (texto, números, etc.) que puede cambiar durante la ejecución del script.\n\n\n26.2.2 Declaración y asignación\nnombre=\"Juan\"\nedad=25\nciudad=\"Madrid\"\nReglas importantes:\n\n✅ Sin espacios alrededor del =\n✅ Nombres en minúsculas (por convención)\n✅ Pueden contener letras, números y guiones bajos\n❌ No pueden comenzar con números\n\n\n\n26.2.3 Acceder a variables\necho $nombre           # Imprime el valor\necho ${nombre}         # Forma alternativa (más segura)\necho \"Hola, $nombre\"   # Dentro de comillas dobles\n\n\n26.2.4 Tipos de variables\n\nVariables de cadena (string)\nnombre=\"María\"\nmensaje=\"Bienvenido a Bash\"\n\n\nVariables numéricas\nedad=30\ncantidad=100\n\n\nVariables vacías\nvariable=\"\"\n\n\n\n26.2.5 Comillas simples vs. dobles\nnombre=\"Juan\"\necho \"Hola, $nombre\"      # Hola, Juan (interpreta variables)\necho 'Hola, $nombre'      # Hola, $nombre (literal)\n\n\n26.2.6 Variables especiales\n$0      # Nombre del script\n$1, $2  # Argumentos pasados al script\n$#      # Número de argumentos\n$?      # Código de salida del último comando\n$$      # ID del proceso actual\n\n\n\nImagen creada con ChatGPT.",
     "crumbs": [
       "**Sección 4** - Edición de archivos con Bash",
-      "<span class='chapter-number'>29</span>  <span class='chapter-title'>Scripts en Bash</span>"
+      "<span class='chapter-number'>26</span>  <span class='chapter-title'>Scripts en Bash</span>"
     ]
   },
   {
     "objectID": "Bash_script.html#nivel-1-scripts-básicos",
     "href": "Bash_script.html#nivel-1-scripts-básicos",
-    "title": "29  Scripts en Bash",
-    "section": "29.3 Nivel 1: Scripts básicos",
-    "text": "29.3 Nivel 1: Scripts básicos\n\n29.3.1 Primer script\nArchivo: saludo.sh\n#!/bin/bash\n\necho \"¡Bienvenido a Bash!\"\necho \"Este es mi primer script\"\nEjecución:\nchmod +x saludo.sh\n./saludo.sh\nEsperando una salida como esta:\n¡Bienvenido a Bash!\nEste es mi primer script\n\n\n29.3.2 Script con variables simples\nArchivo: presentacion.sh\n#!/bin/bash\n\nnombre=\"Carlos\"\nedad=28\nciudad=\"Barcelona\"\n\necho \"Mi nombre es $nombre\"\necho \"Tengo $edad años\"\necho \"Vivo en $ciudad\"\nEjecución:\nchmod +x presentacion.sh\n./presentacion.sh\nEsperando una salida como esta:\nMi nombre es Carlos\nTengo 28 años\nVivo en Barcelona\n\n\n29.3.3 Concatenación de variables\nArchivo: concatenar.sh\n#!/bin/bash\n\nnombre=\"Evelia\"\napellido=\"Coss\"\nedad=32\n\necho \"Nombre completo: $nombre $apellido\"\necho \"Información: $nombre tiene $edad años\"\nEjecución:\nchmod +x concatenar.sh\n./concatenar.sh\nEsperando una salida como esta:\nNombre completo: Evelia Coss\nInformación: Evelia tiene 32 años",
+    "title": "26  Scripts en Bash",
+    "section": "26.3 Nivel 1: Scripts básicos",
+    "text": "26.3 Nivel 1: Scripts básicos\n\n26.3.1 Primer script\nArchivo: saludo.sh\n#!/bin/bash\n\necho \"¡Bienvenido a Bash!\"\necho \"Este es mi primer script\"\nEjecución:\nchmod +x saludo.sh\n./saludo.sh\nEsperando una salida como esta:\n¡Bienvenido a Bash!\nEste es mi primer script\n\n\n26.3.2 Script con variables simples\nArchivo: presentacion.sh\n#!/bin/bash\n\nnombre=\"Carlos\"\nedad=28\nciudad=\"Barcelona\"\n\necho \"Mi nombre es $nombre\"\necho \"Tengo $edad años\"\necho \"Vivo en $ciudad\"\nEjecución:\nchmod +x presentacion.sh\n./presentacion.sh\nEsperando una salida como esta:\nMi nombre es Carlos\nTengo 28 años\nVivo en Barcelona\n\n\n26.3.3 Concatenación de variables\nArchivo: concatenar.sh\n#!/bin/bash\n\nnombre=\"Evelia\"\napellido=\"Coss\"\nedad=32\n\necho \"Nombre completo: $nombre $apellido\"\necho \"Información: $nombre tiene $edad años\"\nEjecución:\nchmod +x concatenar.sh\n./concatenar.sh\nEsperando una salida como esta:\nNombre completo: Evelia Coss\nInformación: Evelia tiene 32 años",
     "crumbs": [
       "**Sección 4** - Edición de archivos con Bash",
-      "<span class='chapter-number'>29</span>  <span class='chapter-title'>Scripts en Bash</span>"
+      "<span class='chapter-number'>26</span>  <span class='chapter-title'>Scripts en Bash</span>"
     ]
   },
   {
     "objectID": "Bash_script.html#nivel-2-entrada-de-datos",
     "href": "Bash_script.html#nivel-2-entrada-de-datos",
-    "title": "29  Scripts en Bash",
-    "section": "29.4 Nivel 2: Entrada de datos",
-    "text": "29.4 Nivel 2: Entrada de datos\n\n29.4.1 Leer entrada del usuario\nArchivo: leer_entrada.sh\n#!/bin/bash\n\necho \"¿Cuál es tu nombre?\"\nread nombre\n\necho \"¿Cuál es tu edad?\"\nread edad\n\necho \"Hola $nombre, tienes $edad años\"\nEjecución:\nchmod +x leer_entrada.sh\n./leer_entrada.sh\nEsperando una salida como esta:\n¿Cuál es tu nombre? # Te va a preguntar \nEvelia\n¿Cuál es tu edad?  # Te va a preguntar \n32\nHola Evelia, tienes 32 años\n\n\n29.4.2 Múltiples variables con read\nArchivo: datos_personales.sh\n#!/bin/bash\n\necho \"Ingresa tu nombre, edad y ciudad (separados por espacio):\"\nread nombre edad ciudad\n\necho \"Datos ingresados:\"\necho \"Nombre: $nombre\"\necho \"Edad: $edad\"\necho \"Ciudad: $ciudad\"\nEjecución:\nchmod +x datos_personales.sh\n./datos_personales.sh\nEsperando una salida como esta:\nIngresa tu nombre, edad y ciudad (separados por espacio):\nEvelia 32 Queretaro\nDatos ingresados:\nNombre: Evelia\nEdad: 32\nCiudad: Queretaro\n\n\n29.4.3 Leer con mensaje personalizado\nArchivo: leer_con_prompt.sh\n#!/bin/bash\n\nread -p \"¿Cuál es tu nombre? \" nombre\nread -p \"¿Cuál es tu email? \" email\n\necho \"Nombre: $nombre\"\necho \"Email: $email\"\nEjecución:\nchmod +x leer_con_prompt.sh\n./leer_con_prompt.sh\nEsperando una salida como esta:\n¿Cuál es tu nombre? Evelia\n¿Cuál es tu email? ecossnav@gmail.com\nNombre: Evelia\nEmail: ecossnav@gmail.com",
+    "title": "26  Scripts en Bash",
+    "section": "26.4 Nivel 2: Entrada de datos",
+    "text": "26.4 Nivel 2: Entrada de datos\n\n26.4.1 Leer entrada del usuario\nArchivo: leer_entrada.sh\n#!/bin/bash\n\necho \"¿Cuál es tu nombre?\"\nread nombre\n\necho \"¿Cuál es tu edad?\"\nread edad\n\necho \"Hola $nombre, tienes $edad años\"\nEjecución:\nchmod +x leer_entrada.sh\n./leer_entrada.sh\nEsperando una salida como esta:\n¿Cuál es tu nombre? # Te va a preguntar \nEvelia\n¿Cuál es tu edad?  # Te va a preguntar \n32\nHola Evelia, tienes 32 años\n\n\n26.4.2 Múltiples variables con read\nArchivo: datos_personales.sh\n#!/bin/bash\n\necho \"Ingresa tu nombre, edad y ciudad (separados por espacio):\"\nread nombre edad ciudad\n\necho \"Datos ingresados:\"\necho \"Nombre: $nombre\"\necho \"Edad: $edad\"\necho \"Ciudad: $ciudad\"\nEjecución:\nchmod +x datos_personales.sh\n./datos_personales.sh\nEsperando una salida como esta:\nIngresa tu nombre, edad y ciudad (separados por espacio):\nEvelia 32 Queretaro\nDatos ingresados:\nNombre: Evelia\nEdad: 32\nCiudad: Queretaro\n\n\n26.4.3 Leer con mensaje personalizado\nArchivo: leer_con_prompt.sh\n#!/bin/bash\n\nread -p \"¿Cuál es tu nombre? \" nombre\nread -p \"¿Cuál es tu email? \" email\n\necho \"Nombre: $nombre\"\necho \"Email: $email\"\nEjecución:\nchmod +x leer_con_prompt.sh\n./leer_con_prompt.sh\nEsperando una salida como esta:\n¿Cuál es tu nombre? Evelia\n¿Cuál es tu email? ecossnav@gmail.com\nNombre: Evelia\nEmail: ecossnav@gmail.com",
     "crumbs": [
       "**Sección 4** - Edición de archivos con Bash",
-      "<span class='chapter-number'>29</span>  <span class='chapter-title'>Scripts en Bash</span>"
+      "<span class='chapter-number'>26</span>  <span class='chapter-title'>Scripts en Bash</span>"
     ]
   },
   {
     "objectID": "Bash_script.html#nivel-3-argumentos-del-script",
     "href": "Bash_script.html#nivel-3-argumentos-del-script",
-    "title": "29  Scripts en Bash",
-    "section": "29.5 Nivel 3: Argumentos del script",
-    "text": "29.5 Nivel 3: Argumentos del script\n\n29.5.1 Usar argumentos\nArchivo: argumentos.sh\n#!/bin/bash\n\necho \"Primer argumento: $1\"\necho \"Segundo argumento: $2\"\necho \"Tercer argumento: $3\"\necho \"Total de argumentos: $#\"\nEjecución:\nchmod +x argumentos.sh\n./argumentos.sh Juan 25 Madrid\nEsperando una salida como esta:\nPrimer argumento: Juan\nSegundo argumento: 25\nTercer argumento: Madrid\nTotal de argumentos: 3\n\n\n29.5.2 Script con argumentos obligatorios\n\n\n\n\n\n\nImportante\n\n\n\nDobles paréntesis (( )) indican que lo que está dentro es una expresión aritmética.\n\n\nArchivo: sumar_argumentos.sh\n#!/bin/bash\n\nnum1=$1\nnum2=$2\n\nsuma=$((num1 + num2))\n\necho \"$num1 + $num2 = $suma\"\nEjecución:\nchmod +x sumar_argumentos.sh\n./sumar_argumentos.sh 10 20\nEsperando una salida como esta:\n10 + 20 = 30",
+    "title": "26  Scripts en Bash",
+    "section": "26.5 Nivel 3: Argumentos del script",
+    "text": "26.5 Nivel 3: Argumentos del script\n\n26.5.1 Usar argumentos\nArchivo: argumentos.sh\n#!/bin/bash\n\necho \"Primer argumento: $1\"\necho \"Segundo argumento: $2\"\necho \"Tercer argumento: $3\"\necho \"Total de argumentos: $#\"\nEjecución:\nchmod +x argumentos.sh\n./argumentos.sh Juan 25 Madrid\nEsperando una salida como esta:\nPrimer argumento: Juan\nSegundo argumento: 25\nTercer argumento: Madrid\nTotal de argumentos: 3\n\n\n26.5.2 Script con argumentos obligatorios\n\n\n\n\n\n\nImportante\n\n\n\nDobles paréntesis (( )) indican que lo que está dentro es una expresión aritmética.\n\n\nArchivo: sumar_argumentos.sh\n#!/bin/bash\n\nnum1=$1\nnum2=$2\n\nsuma=$((num1 + num2))\n\necho \"$num1 + $num2 = $suma\"\nEjecución:\nchmod +x sumar_argumentos.sh\n./sumar_argumentos.sh 10 20\nEsperando una salida como esta:\n10 + 20 = 30",
     "crumbs": [
       "**Sección 4** - Edición de archivos con Bash",
-      "<span class='chapter-number'>29</span>  <span class='chapter-title'>Scripts en Bash</span>"
+      "<span class='chapter-number'>26</span>  <span class='chapter-title'>Scripts en Bash</span>"
     ]
   },
   {
     "objectID": "Bash_script.html#nivel-4-operaciones-con-variables",
     "href": "Bash_script.html#nivel-4-operaciones-con-variables",
-    "title": "29  Scripts en Bash",
-    "section": "29.6 Nivel 4: Operaciones con variables",
-    "text": "29.6 Nivel 4: Operaciones con variables\n\n29.6.1 Operaciones aritméticas\nArchivo: operaciones.sh\n#!/bin/bash\n\na=10\nb=5\n\nsuma=$((a + b))\nresta=$((a - b))\nmultiplicacion=$((a * b))\ndivision=$((a / b))\n\necho \"Suma: $suma\"\necho \"Resta: $resta\"\necho \"Multiplicación: $multiplicacion\"\necho \"División: $division\"\nEjecución:\nchmod +x operaciones.sh\n./operaciones.sh\nEsperando una salida como esta:\nSuma: 15\nResta: 5\nMultiplicación: 50\nDivisión: 2\n\n\n29.6.2 Incremento y decremento\nArchivo: incremento.sh\n#!/bin/bash\n\ncontador=0\n\necho \"Contador inicial: $contador\"\n\ncontador=$((contador + 1))\necho \"Después de incrementar: $contador\"\n\ncontador=$((contador - 1))\necho \"Después de decrementar: $contador\"\nEjecución:\nchmod +x incremento.sh\n./incremento.sh\nEsperando una salida como esta:\nDespués de incrementar: 1\nDespués de decrementar: 0\n\n\n29.6.3 Longitud de una cadena\nArchivo: longitud.sh\n#!/bin/bash\n\ntexto=\"Hola Bash\"\nlongitud=${#texto} # obtener la cantidad de caracteres que tiene una variable\n\necho \"Texto: $texto\"\necho \"Longitud: $longitud caracteres\"\nEjecución:\nchmod +x longitud.sh\n./longitud.sh\nEsperando una salida como esta:\nTexto: Hola Bash\nLongitud: 9 caracteres",
+    "title": "26  Scripts en Bash",
+    "section": "26.6 Nivel 4: Operaciones con variables",
+    "text": "26.6 Nivel 4: Operaciones con variables\n\n26.6.1 Operaciones aritméticas\nArchivo: operaciones.sh\n#!/bin/bash\n\na=10\nb=5\n\nsuma=$((a + b))\nresta=$((a - b))\nmultiplicacion=$((a * b))\ndivision=$((a / b))\n\necho \"Suma: $suma\"\necho \"Resta: $resta\"\necho \"Multiplicación: $multiplicacion\"\necho \"División: $division\"\nEjecución:\nchmod +x operaciones.sh\n./operaciones.sh\nEsperando una salida como esta:\nSuma: 15\nResta: 5\nMultiplicación: 50\nDivisión: 2\n\n\n26.6.2 Incremento y decremento\nArchivo: incremento.sh\n#!/bin/bash\n\ncontador=0\n\necho \"Contador inicial: $contador\"\n\ncontador=$((contador + 1))\necho \"Después de incrementar: $contador\"\n\ncontador=$((contador - 1))\necho \"Después de decrementar: $contador\"\nEjecución:\nchmod +x incremento.sh\n./incremento.sh\nEsperando una salida como esta:\nDespués de incrementar: 1\nDespués de decrementar: 0\n\n\n26.6.3 Longitud de una cadena\nArchivo: longitud.sh\n#!/bin/bash\n\ntexto=\"Hola Bash\"\nlongitud=${#texto} # obtener la cantidad de caracteres que tiene una variable\n\necho \"Texto: $texto\"\necho \"Longitud: $longitud caracteres\"\nEjecución:\nchmod +x longitud.sh\n./longitud.sh\nEsperando una salida como esta:\nTexto: Hola Bash\nLongitud: 9 caracteres",
     "crumbs": [
       "**Sección 4** - Edición de archivos con Bash",
-      "<span class='chapter-number'>29</span>  <span class='chapter-title'>Scripts en Bash</span>"
+      "<span class='chapter-number'>26</span>  <span class='chapter-title'>Scripts en Bash</span>"
     ]
   },
   {
     "objectID": "Bash_script.html#nivel-5.-variables-de-entorno",
     "href": "Bash_script.html#nivel-5.-variables-de-entorno",
-    "title": "29  Scripts en Bash",
-    "section": "29.7 Nivel 5. Variables de entorno",
-    "text": "29.7 Nivel 5. Variables de entorno\n\n29.7.1 Usar variables de entorno\nArchivo: variables_entorno.sh\n#!/bin/bash\n\necho \"Usuario actual: $USER\"\necho \"Directorio home: $HOME\"\necho \"Directorio actual: $PWD\"\necho \"Sistema operativo: $OSTYPE\"\nEjecución:\nchmod +x variables_entorno.sh\n./variables_entorno.sh\nEsperando una salida como esta:\nUsuario actual: ecoss\nDirectorio home: /Users/ecoss\nDirectorio actual: /Users/ecoss/Documents/Mt_TallerComputo_ClaseBash\nSistema operativo: darwin25\n\n\n29.7.2 Crear y usar variables de entorno\nArchivo: crear_entorno.sh\n#!/bin/bash\n\nexport MI_VARIABLE=\"Valor importante\"\n\necho \"Mi variable: $MI_VARIABLE\"\nEjecución:\nchmod +x crear_entorno.sh\n./crear_entorno.sh\nEsperando una salida como esta:\nMi variable: Valor importante",
+    "title": "26  Scripts en Bash",
+    "section": "26.7 Nivel 5. Variables de entorno",
+    "text": "26.7 Nivel 5. Variables de entorno\n\n26.7.1 Usar variables de entorno\nArchivo: variables_entorno.sh\n#!/bin/bash\n\necho \"Usuario actual: $USER\"\necho \"Directorio home: $HOME\"\necho \"Directorio actual: $PWD\"\necho \"Sistema operativo: $OSTYPE\"\nEjecución:\nchmod +x variables_entorno.sh\n./variables_entorno.sh\nEsperando una salida como esta:\nUsuario actual: ecoss\nDirectorio home: /Users/ecoss\nDirectorio actual: /Users/ecoss/Documents/Mt_TallerComputo_ClaseBash\nSistema operativo: darwin25\n\n\n26.7.2 Crear y usar variables de entorno\nArchivo: crear_entorno.sh\n#!/bin/bash\n\nexport MI_VARIABLE=\"Valor importante\"\n\necho \"Mi variable: $MI_VARIABLE\"\nEjecución:\nchmod +x crear_entorno.sh\n./crear_entorno.sh\nEsperando una salida como esta:\nMi variable: Valor importante",
     "crumbs": [
       "**Sección 4** - Edición de archivos con Bash",
-      "<span class='chapter-number'>29</span>  <span class='chapter-title'>Scripts en Bash</span>"
+      "<span class='chapter-number'>26</span>  <span class='chapter-title'>Scripts en Bash</span>"
     ]
   },
   {
     "objectID": "Bash_script.html#material-suplementario",
     "href": "Bash_script.html#material-suplementario",
-    "title": "29  Scripts en Bash",
-    "section": "29.8 Material suplementario",
-    "text": "29.8 Material suplementario\n\nRSG Ecuador. Scripts en Bash\nRSG Ecuador. Wildcards y Streams\nRSG Ecuador. Expresiones regulares (regex)\nWildcard Selection in Bash",
+    "title": "26  Scripts en Bash",
+    "section": "26.8 Material suplementario",
+    "text": "26.8 Material suplementario\n\nRSG Ecuador. Scripts en Bash\nRSG Ecuador. Wildcards y Streams\nRSG Ecuador. Expresiones regulares (regex)\nWildcard Selection in Bash",
     "crumbs": [
       "**Sección 4** - Edición de archivos con Bash",
-      "<span class='chapter-number'>29</span>  <span class='chapter-title'>Scripts en Bash</span>"
+      "<span class='chapter-number'>26</span>  <span class='chapter-title'>Scripts en Bash</span>"
+    ]
+  },
+  {
+    "objectID": "cap9.html",
+    "href": "cap9.html",
+    "title": "27  Edición de archivos con el editor de flujo sed",
+    "section": "",
+    "text": "Fecha: 24 de septiembre, 2026\n\nsed (stream editor) es un editor de flujo, una potente herramienta de tratamiento de texto para el sistema operativo UNIX que acepta como entrada un archivo, lo lee y modifica línea a línea de acuerdo a un script. sed permite manipular flujos de datos, como por ejemplo cortar líneas, buscar y reemplazar texto (con soporte de expresiones regulares), entre otras cosas.\nAlgunas de las operaciones más primordiales de sed son el cambio de saltos de líneas, la sustitución de espacios por comas o tabulaciones, la deleción o adición de strings, etc.\nLa sintaxis general de la orden sed es:\nsed [-n] [-e'script'] [-f archivo] archivo1 archivo2 ...\ndonde:\n\n\n\n\n\n\nNotaExplicación\n\n\n\n\n-n indica que se suprima la salida estándar.\n-e indica que se ejecute el script que viene a continuación.\n-f indica que las órdenes se tomarán de un archivo.\n\n\n\n\nEjemplo de sustitución con sed\nSustituciones s/// de palabras: s/esto/aquello/\necho \"Windows es lo máximo\" | sed 's/Windows/Linux/'\nEn el ejemplo anterior, la modificación se hace solamente en la primer instancia que el comando encuentra. Pero esto no nos funciona si tenemos 400 repeticiones de Windows que queremos cambiar a Linux. Para que funcione debemos hacer un cambio de la siquiente manera:\necho \"Windows es un sistema operativo ampliamente utilizado.\" &gt; archivo.txt\ncat archivo.txt\nsed 's/Windows/Linux/g' archivo.txt\nEsta letra g que agregamos, indica hacer las sustituciones de manera global, es decir en todas las ocurrencias o repeticiones dentro de un archivo.\n\n\n\nImagen creada con ChatGPT.\n\n\n\n\n\n\n\n\nNotaEjercicio 8: Práctica de sustituciones\n\n\n\n\nVerifica que te encuentres en la carpeta con el comando: pwd\nCámbiate de carpeta si es necesario con el comando cd\nDescarga el archivo libro.txt de mi Github.\nExplora este archivo con cat libro.txt ó less libro.txt ó head libro.txt\nSustituye la palabra “perro” de cada una de las filas por la palabra “gato” y una vez hecho el cambio redirige el resultado a un archivo llamado “libro_gato.txt”.\nCorrobora tus resultados y discute posibles soluciones alternas.\n\nComo pudiste darte cuenta, el archivo está separado por tabulaciones entre columna y columna. Si quisieras además, cambiar el formato del archivo de separación por tabulaciones a separación por comas, ¿qué pasos extra agregarías a tu código? Discute qué hace cada parte del código.\n\n\n\n\n\n\nTipSolución\n\n\n\n\n\nsed 's/perro/gato/g' libro.txt &gt;&gt; libro_gato.txt\n\n\n\n\n\n\n\n27.0.1 sed y las combinaciones especiales\n\n\n\nImagen creada con ChatGPT.\n\n\n\n\n\n\n\n\nNotaEjercicio 9: Más sobre sed\n\n\n\nSeguiremos usando el contenido del archivo libro.txt para revisar las siguientes sustituciones:\n\nReemplaza la primera aparición de perro por gato en cada línea.\nSustituir todas las apariciones de rojo por azul en todo el archivo.\nCambiar Hola por Adiós solo en la sexta línea.\nModificar http:// por https:// usando | como delimitador.\nSustituir cualquier número por la palabra NUM. NOTA: En sed clásico (POSIX básico), el + no es reconocido como cuantificador a menos que uses la opción -E (o -r en GNU sed).\nIntercambiar nombre y apellido (ejemplo: “Juan Pérez” → “Pérez, Juan”).\nSolo en las líneas que contienen la palabra coche, cambiar rojo por verde.\n\n\n\n\n\n\n\nTipSolución\n\n\n\n\n\n1. sed 's/perro/gato/' libro.txt\n2. sed 's/rojo/azul/g' libro.txt\n3. sed '6s/Hola/Adiós/' libro.txt\n4. sed 's|http://|https://|g' libro.txt\n5. sed -E 's/[0-9]+/NUM/g' libro.txt o sed 's/[0-9]\\{1,\\}/NUM/g' libro.txt # La sintaxis \\{n,m\\} indica cuántas veces debe repetirse el patrón anterior.\n6. sed -E '7s/([[:alpha:]]+) ([[:alpha:]]+)/\\2, \\1/' libro.txt \n7. sed '/coche/s/rojo/verde/' libro.txt\n\n\n\n\n\n\n\n\n27.0.2 Referencias\n\nRegEx\nWikipedia: Expresiones Regulares\nYouTube: Expresiones regulares con Notepad++",
+    "crumbs": [
+      "**Sección 4** - Edición de archivos con Bash",
+      "<span class='chapter-number'>27</span>  <span class='chapter-title'>Edición de archivos con el editor de flujo `sed`</span>"
+    ]
+  },
+  {
+    "objectID": "cap10.html",
+    "href": "cap10.html",
+    "title": "28  Tipos de enlaces - symlinks, hard links e hipervínculos",
+    "section": "",
+    "text": "28.1 Diferencias entre enlaces simbólicos (symlinks) y enlaces duros (hard links)\nEs mejor crear enlaces simbólicos (symlinks) en vez de copiar cada archivo, ya que permite ahorrar mucho espacio en el disco al evitar la multiplicación de copias fisicas en el disco duro del mismo archivo.\nUna modificación realizada utilizando este enlace se reflejará en el original; pero, por el contrario, si se elimina el enlace, no se eliminará el auténtico.",
+    "crumbs": [
+      "**Sección 4** - Edición de archivos con Bash",
+      "<span class='chapter-number'>28</span>  <span class='chapter-title'>Tipos de enlaces - symlinks, hard links e hipervínculos</span>"
+    ]
+  },
+  {
+    "objectID": "cap10.html#diferencias-entre-enlaces-simbólicos-symlinks-y-enlaces-duros-hard-links",
+    "href": "cap10.html#diferencias-entre-enlaces-simbólicos-symlinks-y-enlaces-duros-hard-links",
+    "title": "28  Tipos de enlaces - symlinks, hard links e hipervínculos",
+    "section": "",
+    "text": "Características\nSymlinks\nHard links\n\n\n\n\nAlmacenamiento\n\nActúa como un puntero o referencia a otro archivo o directorio.\nNo contiene los datos reales del archivo, sino una tuta que apunta al archivo original.\n\n\nApunta directamente a los datos del archivo original.\nComparte el mismo contenido que el archivo enlazado, no solo una referencia.\n\n\n\nNúmero de inodo\nCuenta con un número de inodo (nodo indice) diferente del archivo original. Se identifica como un tipo de archivo diferente.\nComparte el mismo número de inodo con el destino. Elimina el concepto de “archivo original”; todos los hard links al mismo archivo son iguales.\n\n\nEliminación del archivo original\nSi el archivo original se elimina, el symlink queda roto (es decir, apunta a algo inexistente).\nSi un hard link se elimina, los datos del archivo permanecen accesibles mientras existan otros hard links.\n\n\nSistema de archivos.\nPuede apuntar a archivos o directorios, incluso en diferentes sistemas de archivos.\nDeben residir en el mismo sistema de archivos.\n\n\nRutas\nSe pueden usar rutas absolutas o relativas para la referencia.\nNo puede enlazar directorios (en la mayoría de los sistemas modernos) ni cruzar sistemas de archivos diferentes.\n\n\nUso común\n\nCrear accesos directos a archivos o carpetas.\nFacilitar la gestión de rutas en aplicaciones.\n\n\nGarantizar accesibilidad a datos independientemente de qué enlace se elimine.\nCompartir archivos de forma eficiente sin duplicar espacio en disco.\n\n\n\nComando para crear\nln -s archivo_original enlace_simbolico\nln archivo_original enlace_simbolico\n\n\n\n\n\n\n\n\n\nPrecaución\n\n\n\nDebes tener cuidado al elegir cuál utilizar. Los enlaces simbólicos son más convenientes cuando trabajamos con datos importantes que están almacenados en un respaldo, ya que permiten acceder fácilmente a los archivos originales sin duplicarlos y facilitan la gestión de rutas, sin eliminar o afectar los archivos originales.\n\n\n\n\n\nImagen creada con ChatGPT.",
+    "crumbs": [
+      "**Sección 4** - Edición de archivos con Bash",
+      "<span class='chapter-number'>28</span>  <span class='chapter-title'>Tipos de enlaces - symlinks, hard links e hipervínculos</span>"
+    ]
+  },
+  {
+    "objectID": "cap10.html#orden-de-los-archivos",
+    "href": "cap10.html#orden-de-los-archivos",
+    "title": "28  Tipos de enlaces - symlinks, hard links e hipervínculos",
+    "section": "28.2 Orden de los archivos",
+    "text": "28.2 Orden de los archivos\nEl sistema de archivos de GNU/Linux tiene una estructura jerárquica de directorios y subdirectorios que penden del directorio raíz /. Esta estructura puede ser visualizada convenientemente con el comando tree (Nota: tree tal vez no esté instalado en tu sistema).\nOrganizar tu entorno de trabajo en Bash siguiendo buenas prácticas te permitirá gestionar tus archivos y scripts de manera eficiente. Aquí tienes una sugerencia de carpetas clave y nombres que puedes utilizar:\n~/workspace/\n├── bin/           # Scripts ejecutables\n├── src/           # Código fuente\n├── logs/          # Archivos de registro\n├── config/        # Configuración\n├── data/\n│   ├── raw/       # Datos crudos\n│   └── processed/ # Datos procesados\n├── backup/        # Copias de seguridad\n├── tmp/           # Archivos temporales\n├── projects/\n│   └── project_name/\n├── git/           # Repositorios locales\n└── docs/          # Documentación\n\n28.2.1 Consejos adicionales\n\nUsa nombres descriptivos: Los nombres de las carpetas y archivos deben reflejar su contenido claramente.\nMantén consistencia: Usa un esquema de nombres uniforme (por ejemplo, todo en minúsculas o con guiones bajos).\nAutomatiza la limpieza: Utiliza scripts en Bash para eliminar archivos temporales o rotar logs antiguos.\nUsa control de versiones: Integra Git en tus proyectos para mantener un historial de cambios en tus scripts.\n\nEsta estructura es flexible y se puede ajustar según tus necesidades específicas.",
+    "crumbs": [
+      "**Sección 4** - Edición de archivos con Bash",
+      "<span class='chapter-number'>28</span>  <span class='chapter-title'>Tipos de enlaces - symlinks, hard links e hipervínculos</span>"
+    ]
+  },
+  {
+    "objectID": "cap10.html#referencias",
+    "href": "cap10.html#referencias",
+    "title": "28  Tipos de enlaces - symlinks, hard links e hipervínculos",
+    "section": "28.3 Referencias",
+    "text": "28.3 Referencias\n\nHow to create and remove Linux symlinks for files and directories\nGeneración de ligas simbólicas a archivos: comando ln -s /ruta/al/archivo/fuente nombre_liga",
+    "crumbs": [
+      "**Sección 4** - Edición de archivos con Bash",
+      "<span class='chapter-number'>28</span>  <span class='chapter-title'>Tipos de enlaces - symlinks, hard links e hipervínculos</span>"
+    ]
+  },
+  {
+    "objectID": "cap11.html",
+    "href": "cap11.html",
+    "title": "29  Filtrado de texto (grep, cut, sort, uniq, wc)",
+    "section": "",
+    "text": "29.1 Repaso de grep - Buscar patrones en texto\nVeamos ahora los comandos más usados en pipelines o tuberías de filtrado de texto en acción, haciendo uso de sólo algunas de las opciones más frecuentes listados en la sección anterior.\nAl final de esta clase podrás leer comandos como estos:\nNo necesariamente memorizarlo de golpe, sino entender qué aporta cada etapa:\nPodemos crear 3 archivos:\nSintaxis:\nDurante la clase de “Encontrar patrones con grep” repasamos la siguiente infografía y realizamos algunos ejercicios.",
+    "crumbs": [
+      "**Sección 4** - Edición de archivos con Bash",
+      "<span class='chapter-number'>29</span>  <span class='chapter-title'>Filtrado de texto (`grep, cut, sort, uniq, wc`)</span>"
+    ]
+  },
+  {
+    "objectID": "cap11.html#repaso-de-grep---buscar-patrones-en-texto",
+    "href": "cap11.html#repaso-de-grep---buscar-patrones-en-texto",
+    "title": "29  Filtrado de texto (grep, cut, sort, uniq, wc)",
+    "section": "",
+    "text": "grep [opciones] \"patrón\" archivo\n\n\n\n\n\n\n\n\nArgumento\nDescripción\nEjemplo\n\n\n\n\n\n\ngrep \":[9][0-9]:\" alumnos.txt\n\n\n-i\nIgnora mayúsculas y minúsculas\ngrep -i \"carlos\" nombres.txt\n\n\n-n\nMuestra el número de línea\ngrep -n \"Miguel\" nombres.txt\n\n\n-c\nCuenta las líneas que coinciden\ngrep -c \"Cálculo\"alumnos.txt\n\n\n-v\nMuestra líneas que NO coinciden\ngrep -v \"a\" nombres.txt\ngrep -v \"Cálculo\" alumnos.txt\n\n\n-w\nCoincidencia de palabra completa\ngrep -w \"Cálculo\" alumnos.txt\n\n\n-A n\nMuestra n líneas después del match\ngrep -A 2 \"Álgebra\" alumnos.txt\n\n\n\n\n\n\n\n\n\n\n\nInfografía de grep - creada con ChatGPT",
+    "crumbs": [
+      "**Sección 4** - Edición de archivos con Bash",
+      "<span class='chapter-number'>29</span>  <span class='chapter-title'>Filtrado de texto (`grep, cut, sort, uniq, wc`)</span>"
+    ]
+  },
+  {
+    "objectID": "cap11.html#sort---ordenar-líneas-de-texto",
+    "href": "cap11.html#sort---ordenar-líneas-de-texto",
+    "title": "29  Filtrado de texto (grep, cut, sort, uniq, wc)",
+    "section": "29.2 sort - Ordenar líneas de texto",
+    "text": "29.2 sort - Ordenar líneas de texto\nSintaxis:\nsort [opciones] archivo.txt\n\n\n\n\n\n\n\n\nArgumento\nDescripción\nEjemplo\n\n\n\n\n\nOrden alfabético\nsort nombres.txt\nsort temas.txt\n\n\n-n\nOrdena numéricamente\nsort -n numeros.txt\n\n\n-r\nOrden inverso (descendente)\nsort -r numeros.txt\n\n\n-k\nOrdena por columna específica\nsort -k2 datos.txt\nsort -k2nr datos.txt\n\n\n-u\nElimina duplicados mientras ordena\nsort -u temas.txt\n\n\n-t\nDefine separador de campos/columnas\nsort -t\":\" -k2n alumnos.txt\nsort -t\":\" -k3 alumnos.txt\n\n\n\n\n\n\nImagen creada con ChatGPT.",
+    "crumbs": [
+      "**Sección 4** - Edición de archivos con Bash",
+      "<span class='chapter-number'>29</span>  <span class='chapter-title'>Filtrado de texto (`grep, cut, sort, uniq, wc`)</span>"
+    ]
+  },
+  {
+    "objectID": "cap11.html#uniq---identifica-y-filtra-líneas-repetidas",
+    "href": "cap11.html#uniq---identifica-y-filtra-líneas-repetidas",
+    "title": "29  Filtrado de texto (grep, cut, sort, uniq, wc)",
+    "section": "29.3 uniq - Identifica y filtra líneas repetidas",
+    "text": "29.3 uniq - Identifica y filtra líneas repetidas\nSintaxis:\nuniq [opciones] archivo.txt\n\n\n\n\n\n\n\n\nArgumento\nDescripción\nEjemplo\n\n\n\n\n\nOrdena y elimina duplicado\nsort temas.txt | uniq\n\n\n-c\nCuenta ocurrencias de cada línea\nsort datos.txt | uniq -c\n\n\n-d\nMuestra solo líneas duplicadas\nsort datos.txt | uniq -d\n\n\n-u\nMuestra solo líneas únicas\nsort datos.txt | uniq -u\n\n\n\n\n\n\nImagen creada con ChatGPT.",
+    "crumbs": [
+      "**Sección 4** - Edición de archivos con Bash",
+      "<span class='chapter-number'>29</span>  <span class='chapter-title'>Filtrado de texto (`grep, cut, sort, uniq, wc`)</span>"
+    ]
+  },
+  {
+    "objectID": "cap11.html#wc---cuenta-líneas-palabras-y-caracteres",
+    "href": "cap11.html#wc---cuenta-líneas-palabras-y-caracteres",
+    "title": "29  Filtrado de texto (grep, cut, sort, uniq, wc)",
+    "section": "29.4 wc - Cuenta líneas, palabras y caracteres",
+    "text": "29.4 wc - Cuenta líneas, palabras y caracteres\nSintaxis:\nwc [opciones] archivo.txt\n\n\n\n\n\n\n\n\nArgumento\nDescripción\nEjemplo\n\n\n\n\n\nMuestra líneas, palabras, bytes\nwc archivo.txt\n\n\n-l\nCuenta líneas\nwc -l archivo.txt\nwc -l *.txt\n\n\n-w\nCuenta palabras\nwc -w archivo.txt\n\n\n-c\nCuenta bytes\nwc -c archivo.txt\n\n\n-w\nCuenta caracteres\nwc -w archivo.txt\n\n\n\n\n\n\nImagen creada con ChatGPT",
+    "crumbs": [
+      "**Sección 4** - Edición de archivos con Bash",
+      "<span class='chapter-number'>29</span>  <span class='chapter-title'>Filtrado de texto (`grep, cut, sort, uniq, wc`)</span>"
+    ]
+  },
+  {
+    "objectID": "cap11.html#cut---buscar-patrones-en-texto",
+    "href": "cap11.html#cut---buscar-patrones-en-texto",
+    "title": "29  Filtrado de texto (grep, cut, sort, uniq, wc)",
+    "section": "29.5 cut - Buscar patrones en texto",
+    "text": "29.5 cut - Buscar patrones en texto\nAquí vamos a partir de ¿Qué hago si no quiero toda la línea, sino solamente una columna de un archivo?\nSintaxis:\ncut [opciones] archivo.txt\n\n\n\n\n\n\n\n\nArgumento\nDescripción\nEjemplo\n\n\n\n\n-c\nExtrae caracteres por posición (ej: -c1-5)\ncut -c1-2 archivo.txt\n\n\n-f\nExtrae campos específicos (ej: -f1,3)\ncut -f1,3 -d: alumnos.txt\n\n\n-d\nDefine separador de campos (default: tabulación)\ncut -f2 -d\" \" datos.txt\n\n\n\n\n\n\nImagen creada con ChatGPT.",
+    "crumbs": [
+      "**Sección 4** - Edición de archivos con Bash",
+      "<span class='chapter-number'>29</span>  <span class='chapter-title'>Filtrado de texto (`grep, cut, sort, uniq, wc`)</span>"
+    ]
+  },
+  {
+    "objectID": "cap11.html#ejercicio-integrador-grep-cut-sort-uniq-y-wc",
+    "href": "cap11.html#ejercicio-integrador-grep-cut-sort-uniq-y-wc",
+    "title": "29  Filtrado de texto (grep, cut, sort, uniq, wc)",
+    "section": "29.6 Ejercicio integrador: grep, cut, sort, uniq y wc",
+    "text": "29.6 Ejercicio integrador: grep, cut, sort, uniq y wc\n\n\n\n\n\n\nNotaEjercicio 10\n\n\n\nInstrucciones\n\nCrea el archivo materias.txt ejercutando el siguiente comando:\necho -e \"Álgebra Lineal:8:1\\nCálculo Diferencial:10:1\\nGeometría Analítica:8:1\\nProbabilidad:6:3\\nEstadística:6:3\\nEcuaciones Diferenciales:8:4\\nÁlgebra Abstracta:8:5\\nTopología:6:6\\nAnálisis Real:8:6\\nProbabilidad:6:3\" &gt; ejercicios/BASH/materias.txt\nColumna 1: materias, Columna 2: créditos, Columna 3: semestre.\nMostrar todas las materias que contienen la palabra Álgebra.\nMostrar todas las materias de sexto semestre.\nContar cuántas materias tienen 8 créditos.\nMostrar únicamente los nombres de las materias.\nMostrar únicamente los créditos.\nOrdenar las materias alfabéticamente.\nOrdenar los créditos de menor a mayor.\nMostrar los semestres sin repetir.\nContar cuántas materias hay por semestre.\n¿Cuántas materias hay por número de créditos?\n¿Cuál es el número de créditos más frecuente?\n\n\n\n\n\n\n\nTipSolucion\n\n\n\n\n\n2. grep \"Álgebra\" ejercicios/BASH/materias.txt\n3. grep \":6$\" ejercicios/BASH/materias.txt\n4. grep \":8:\" ejercicios/BASH/materias.txt | wc -l\n5. cut -d\":\" -f1 ejercicios/BASH/materias.txt\n6. cut -d\":\" -f2 ejercicios/BASH/materias.txt\n7. cut -d\":\" -f1 ejercicios/BASH/materias.txt | sort\n8. cut -d\":\" -f2 ejercicios/BASH/materias.txt | sort -n\n9. cut -d\":\" -f3 ejercicios/BASH/materias.txt | sort | uniq\n10. cut -d\":\" -f3 ejercicios/BASH/materias.txt | sort | uniq -c\n11. cut -d\":\" -f2 ejercicios/BASH/materias.txt | sort | uniq -c\n12. cut -d\":\" -f2 ejercicios/BASH/materias.txt | sort | uniq -c | sort -nr | head -1",
+    "crumbs": [
+      "**Sección 4** - Edición de archivos con Bash",
+      "<span class='chapter-number'>29</span>  <span class='chapter-title'>Filtrado de texto (`grep, cut, sort, uniq, wc`)</span>"
+    ]
+  },
+  {
+    "objectID": "cap11.html#referencias",
+    "href": "cap11.html#referencias",
+    "title": "29  Filtrado de texto (grep, cut, sort, uniq, wc)",
+    "section": "29.7 Referencias",
+    "text": "29.7 Referencias\n\nEjemplos de herramientas de filtrado de texto: pipelines con grep, cut, sort, uniq, wc en acción",
+    "crumbs": [
+      "**Sección 4** - Edición de archivos con Bash",
+      "<span class='chapter-number'>29</span>  <span class='chapter-title'>Filtrado de texto (`grep, cut, sort, uniq, wc`)</span>"
     ]
   },
   {
