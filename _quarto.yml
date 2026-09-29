@@ -59,11 +59,11 @@ book:
     - part: "**Sección 4** - Edición de archivos con Bash"
       chapters:     
         - cap8.qmd  # Edición de archivos con los editores de texto (nano y vim)
-        - cap8_crearRproject.qmd # Crear Rproject e instalación de paquetes       
+        - cap8_crearRproject.qmd # Crear Rproject e instalación de paquetes 
+        - Bash_script.qmd # Mi primer bash script
         - cap9.qmd  # Edición de archivos con el editor de flujo sed
         - cap10.qmd # Enlaces simbólicos (symlinks)
         - cap11.qmd # Filtrado de texto (grep, cut, sort, uniq, wc)
-        - Bash_script.qmd # Mi primer bash script
         - s1_actividad2.qmd # Actividad 2 en equipo
         - cap12.qmd # Condicionales
         - cap14.qmd # Bucles (for loops)

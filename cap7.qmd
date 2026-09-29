@@ -1,6 +1,6 @@
 # Encontrar patrones con `grep`
 
-> Fecha: 22 de septiembre, 2026
+> Fecha: 29 de septiembre, 2026
 
 `grep` es un comando de Linux/Unix que sirve para buscar patrones de texto dentro de archivos o en la salida de otros comandos. Su nombre viene de “Global Regular Expression Print” y es una de las herramientas más usadas para filtrar información rápidamente.
 
@@ -33,7 +33,7 @@ cat archivo.txt
 
 **1. `-E` - Expresiones regulares extendidas**
 
-Permite usar metacaracteres avanzados como `+`, `?`, `|`, `{ }`.
+Permite usar metacaracteres avanzados como `+`, `?`, `|`, `{ }, *`.
 
 ``` bash
 # Sin -E: no funciona
@@ -42,6 +42,32 @@ grep "a+b" archivo.txt      # Busca "a+b" literal
 # Con -E: funciona
 grep -E "a+b" archivo.txt   # Busca "a", "ab", "aab", "aaab", etc.
 ```
+
+Genera este archivo:
+
+``` bash
+echo -e "ac\nabc\nabbc\nabbbc\nabbbbc\nadc\nabdc\nab\nbc" > regex.txt
+```
+
+Pregunta primero: **¿Qué líneas creen que coincidirán con `ab*c`?**
+
+``` bash
+grep -E "ab*c" regex.txt # Significa a + cero o más "b" + c
+grep -E "ab+c" regex.txt # + exige al menos una b
+grep -E "ab?c" regex.txt # cero o una "b"
+grep -E "ab{2}c" regex.txt # a seguido de 2 "b" y 1 c
+grep -E "ab{2,}c" regex.txt # 2 "b" o más
+grep -E "ab{2,4}c" regex.txt # De 2 a 4 "b"
+grep -E "(ab)+" regex.txt #Agrupamiento, que aparezca ab juntas
+grep -E "a.{3}" regex.txt # a seguido de 3 caracteres cualesquiera
+grep -E "[abc]{3}" regex.txt # Quiero 3 caracteres, que pueden ser a,b, o c
+```
+
+| REGEX  | 0 `b` | 1 `b` | 2 `b` | 3+ `b` |
+|--------|-------|-------|-------|--------|
+| `ab*c` | ✅    | ✅    | ✅    | ✅     |
+| `ab+c` | ❌    | ✅    | ✅    | ✅     |
+| `ab?c` | ✅    | ✅    | ❌    | ❌     |
 
 **2. `-i` - Ignorar mayúsculas/minúsculas**
 
