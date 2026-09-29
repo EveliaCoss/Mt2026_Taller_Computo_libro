@@ -1,6 +1,6 @@
 # Tipos de enlaces - symlinks, hard links e hipervínculos
 
-> **Fecha:** 24 de septiembre, 2026
+> **Fecha:** 01 de octubre, 2026
 
 Es mejor crear **enlaces simbólicos (symlinks)** en vez de copiar cada archivo, ya que permite ahorrar mucho espacio en el disco al evitar la multiplicación de copias fisicas en el disco duro del mismo archivo.
 
