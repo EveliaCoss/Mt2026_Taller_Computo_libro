@@ -66,7 +66,7 @@ book:
         - cap11.qmd # Filtrado de texto (grep, cut, sort, uniq, wc)
         - s1_actividad2.qmd # Actividad 2 en equipo
         - cap12.qmd # Condicionales
-        - cap14.qmd # Bucles (for loops)
+        - cap13.qmd # Bucles (for loops)
     - part: "**Sección 5** - Introducción a Git/GitHub"
       chapters:
         - Rstudio_paquetes.qmd # Instalar paquetes      

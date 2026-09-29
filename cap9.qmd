@@ -1,6 +1,6 @@
 # Edición de archivos con el editor de flujo `sed`
 
-> **Fecha:** 24 de septiembre, 2026
+> **Fecha:** 02 de octubre, 2026
 
 `sed` (stream editor) es un **editor de flujo**, una potente herramienta de tratamiento de texto para el sistema operativo UNIX que acepta como entrada un archivo, lo lee y modifica línea a línea de acuerdo a un script. `sed` permite manipular flujos de datos, como por ejemplo cortar líneas, buscar y reemplazar texto (con soporte de **expresiones regulares**), entre otras cosas.
 
