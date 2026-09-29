@@ -168,7 +168,7 @@ cat bacterias_generos.txt
 
 4.  Buscar productos disponibles en el archivo `productos.txt`.
 
-5.  Ignorar las mayúsculas/minúsculas (`-i`) de `sistema.log`.
+5.  Ignorar las mayúsculas/minúsculas (`-i`) de la palabra error del archivo `sistema.log`.
 
 6.  Contar el número (`grep -c`) de usuarios activos en el archivo `usuarios.txt`.
 

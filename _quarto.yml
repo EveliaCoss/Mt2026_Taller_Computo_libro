@@ -56,6 +56,7 @@ book:
         - game4.qmd
         - regex.qmd # REGEX
         - cap7.qmd  # Empleo de grep con REGEX
+        - game5.qmd
     - part: "**Sección 4** - Edición de archivos con Bash"
       chapters:     
         - cap8.qmd  # Edición de archivos con los editores de texto (nano y vim)
