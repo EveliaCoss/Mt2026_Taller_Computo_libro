@@ -748,6 +748,19 @@ chmod +x mi_script.sh
 
 # O ejecutar sin permisos de ejecución
 bash mi_script.sh</code></pre>
+<div class="callout callout-style-default callout-important no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Importante
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Al ejecutar el script con <code>bash mi_script.sh</code>, lo que pasa internamente es que: Bash abre y ejecuta el contenido del archivo; <strong><code>script.sh</code> no necesita tener el permiso <code>x</code></strong> (aunque sí debe ser legible para Bash).</p>
+</div>
+</div>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="figures/bash_script_overview.png" class="img-fluid figure-img"></p>

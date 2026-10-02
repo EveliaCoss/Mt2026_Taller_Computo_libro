@@ -54,6 +54,10 @@ chmod +x mi_script.sh
 bash mi_script.sh
 ```
 
+::: {.callout-important icon="false"}
+Al ejecutar el script con `bash mi_script.sh`, lo que pasa internamente es que: Bash abre y ejecuta el contenido del archivo; **`script.sh` no necesita tener el permiso `x`** (aunque sí debe ser legible para Bash).
+:::
+
 ![Imagen creada con ChatGPT.](figures/bash_script_overview.png){fig-align="center"}
 
 ## Variables en Bash
