@@ -64,9 +64,11 @@ book:
         - Bash_script.qmd # Mi primer bash script
         - cap9.qmd  # Edición de archivos con el editor de flujo sed
         - cap10.qmd # Enlaces simbólicos (symlinks)
+        - s1_actividad2.qmd # Proyecto integrador
+        - game6.qmd
         - cap11.qmd # Filtrado de texto (grep, cut, sort, uniq, wc)
         - cap12.qmd # printf vs echo
-        - s1_actividad2.qmd # Actividad 2 en equipo
+        - s3_actividad2.qmd # Actividad en equipo 2
         - cap13.qmd # Condicionales       
         - cap14.qmd # Bucles (for loops)
     - part: "**Sección 5** - Introducción a Git/GitHub"
