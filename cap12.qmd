@@ -1,117 +1,197 @@
-# Condicionales
+# printf vs echo
 
 > **Fecha:** 08 de octubre, 2026
 
-::: content-box-gray
-**Objetivos:**
+En Bash, `printf` permite imprimir texto en la terminal con un formato específico, parecido a `echo`, pero con mayor control sobre cómo se muestra la información.
 
-- **Comprender la lógica de condicionales** → Identificar cuándo y cómo aplicar `if`, `else` y `elif` para tomar decisiones en un script.
+## 1. Diferencia entre `echo` y `printf`
 
-- **Aplicar condicionales en scripts** → Resolver problemas prácticos mediante condiciones (ej. verificar existencia de archivos, validar entradas).
-:::
-
-Las condicionales son estructuras de programación que nos permiten tomar decisiones basadas en el resultado de una **expresión**. En otras palabras, nos permiten ejecutar diferentes bloques de código dependiendo de **si una condición se cumple o no**. Los condicionales son fundamentales para automatizar tareas y crear scripts fléxibles.
-
-La sintáxis básica de un condicional simple en formato de una línea es :
-
-``` {.bash code-copy="true" eval="false"}
-if [ condición ]; then orden1; orden2 …; fi
-```
-
-de igual manera pero en bloque identado:
-
-``` {.bash code-copy="true" eval="false"}
-if [ condición ]; then      orden1     orden2  fi
-```
-
-::: {.callout-note icon="false"}
-## Ejemplo
-
-Si queremos verificar si existe el archivo **secuencias1.fastq** antes de realizar alguna operación sobre él. Puedes usar el siguiente condicional:
-:::
-
-``` {.bash code-copy="true" eval="false"}
-if [ -f secuencias1.fastq ]; then
-  echo "El archivo existe."
-else
-  echo "El archivo no existe."
-fi
-```
-
-::: {.callout-note icon="false"}
-## Explicación
-
-- **`if [ -f secuencias1.fastq ]`:** Verifica si **secuencias1.fastq** es un archivo regular.
-- **`then`:** Si la condición es verdadera, se ejecuta el código siguiente.
-- **`else`:** Si la condición es falsa, se ejecuta el código siguiente.
-- **`fi`:** Indica el final de la estructura `if`.
-:::
-
-Los condicionales pueden ser tan complejos como lo imagines. Por ejemplo:
-
-``` {.bash code-copy="true" eval="false"}
-for archivo in $file*.fastq; do 
-  if [ -f "$archivo" ]; then 
-    echo "Procesando archivo: $archivo"
-    wc -l "$archivo" 
-  else 
-    echo "No tienes archivos fastq"
-  fi 
-done
-```
-
-::: {.callout-note icon="false"}
-## Explicación del código
-
-En donde:
-
-``` {.bash code-copy="true" eval="false"}
-for archivo in $file*.fastq; do
-```
-
-- **`$file*.fastq`**: Expande a todos los archivos que comienzan con el valor de la variable `$file` y terminan con la extensión `.fastq`.
-
-- **`archivo`**: Variable que almacena el nombre de cada archivo encontrado.
+Con `echo`:
 
 ``` bash
-echo "Procesando archivo: $archivo"
-wc -l "$archivo"
+echo "Hola mundo"
 ```
 
-- **`echo`**: Imprime el mensaje indicando que se está procesando el archivo actual.
-
-- **`wc -l "$archivo"`**: Cuenta el número de líneas en el archivo usando `wc -l` y muestra el resultado en la terminal.
+Con `printf`:
 
 ``` bash
-else
-  echo "No tienes archivos fastq"
-fi
+printf "Hola mundo\n"
 ```
 
-- Si el archivo no existe o no es un archivo regular, muestra un mensaje de error indicando el problema.
+Ambos producen:
 
 ``` bash
-done
+Hola mundo
 ```
 
-- Fin del bucle
-:::
+La diferencia es que `echo` agrega automáticamente un salto de línea, mientras que `printf` no lo hace. Por eso utilizamos `\n` en el segundo ejemplo.
 
-Archivo: `saludar.sh`
+## Componentes de `printf`
+
+Tomemos esta instrucción:
+
+``` bash
+calificacion=10
+printf "Calificación: %.2f\n" "$calificacion"
+printf "Calificación: %.2f\n" $calificacion
+```
+
+| Elemento          | Significado                             |
+|-------------------|-----------------------------------------|
+| `printf`          | Comando para imprimir texto con formato |
+| `Calificación:`   | Texto que se mostrará                   |
+| `%.2f`            | Número decimal con dos cifras decimales |
+| `\n`              | Salto de línea                          |
+| `"$calificacion"` | Variable cuyo valor se insertará        |
+
+## 2. Imprimir varias líneas
+
+Con `echo -e`:
+
+``` bash
+echo -e "Ana\nLuis\nMaría"
+```
+
+Con `printf`:
+
+``` bash
+printf "Ana\nLuis\nMaría\n"
+```
+
+Ambos muestran:
+
+```         
+Ana
+Luis
+María
+```
+
+## 3. Utilizar formatos
+
+Una ventaja de `printf` es que permite insertar valores dentro de un texto.
+
+``` bash
+nombre="Ana"
+edad=20
+
+printf "Nombre: %s, Edad: %d\n" "$nombre" "$edad"
+```
+
+Los especificadores más comunes son:
+
+| Símbolo | Función                                             |
+|---------|-----------------------------------------------------|
+| `%s`    | Insertar texto                                      |
+| `%d`    | Insertar un número entero                           |
+| `%f`    | Insertar un número decimal                          |
+| `%.2f`  | Mostrar un decimal con dos cifras después del punto |
+| `\n`    | Salto de línea                                      |
+| `\t`    | Tabulación                                          |
+
+## 4. Una característica muy útil para Bash
+
+Podemos utilizar `printf` para imprimir varios elementos, uno por línea:
+
+``` bash
+printf '%s\n' Ana Luis María Carlos
+```
+
+Resultado:
+
+``` bash
+Ana
+Luis
+María
+Carlos
+```
+
+Aquí ocurre algo interesante: `printf` reutiliza automáticamente el formato `%s\n` para cada argumento.
+
+Con `echo -e` tendríamos que escribir:
+
+``` bash
+echo -e "Ana\nLuis\nMaría\nCarlos"
+```
+
+## 5. ¿Por qué se utiliza `printf` en scripts?
+
+Porque su comportamiento es más predecible que el de `echo`, especialmente cuando trabajamos con caracteres especiales, opciones y formatos.
+
+Por ejemplo, para mostrar dos decimales:
+
+``` bash
+printf "%.2f\n" 3.14159
+```
+
+Resultado:
+
+```         
+3.14
+```
+
+## Ejemplo: Generar una ficha de estudiante
+
+Objetivo: Crear un script que muestre la información de un estudiante de manera organizada, utilizando `printf` para controlar el formato.
+
+1\. Crear el script
+
+``` bash
+nano estudiante.sh
+```
+
+2\. Escribir el código
 
 ``` bash
 #!/bin/bash
 
-if [ $# -eq 0 ]; then
-    echo "Error: Debes proporcionar un nombre"
-    echo "Uso: ./saludar.sh <nombre>"
-    exit 1
-fi
+# Información del estudiante
+nombre="Ana"
+materia="Matemáticas"
+calificacion=9.567
+grupo="A"
 
-nombre=$1
-echo "¡Hola, $nombre!"
+# Mostrar información con echo
+echo "=== INFORMACIÓN DEL ESTUDIANTE ==="
+echo "Nombre: $nombre"
+echo "Materia: $materia"
+echo "Calificación: $calificacion"
+echo "Grupo: $grupo"
+
+echo ""
+
+# Mostrar información con printf
+printf "=== INFORMACIÓN DEL ESTUDIANTE ===\n"
+printf "Nombre: %s\n" "$nombre"
+printf "Materia: %s\n" "$materia"
+printf "Calificación: %.2f\n" "$calificacion"
+printf "Grupo: %s\n" "$grupo"
 ```
 
-## Referencias
+3\. Ejecutar el script
 
-- [DataCarpentry For Loops](https://datacarpentry.github.io/semester-biology/materials/for-loops-indexing/)
+``` bash
+chmod u+x estudiante.sh
+./estudiante.sh
+```
+
+### 4. Comparar los resultados
+
+```         
+Con echo
+       
+=== INFORMACIÓN ===
+Nombre: Ana
+Materia: Matemáticas
+Calificación: 9.567
+Grupo: A
+       
+Con printf
+     
+=== INFORMACIÓN ===
+Nombre: Ana
+Materia: Matemáticas
+Calificación: 9.57
+Grupo: A
+```
+
+La diferencia principal es que `printf` permite controlar cómo se presenta la información. Por ejemplo, `%.2f` muestra la calificación con dos decimales.

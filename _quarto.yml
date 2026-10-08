@@ -65,9 +65,10 @@ book:
         - cap9.qmd  # Edición de archivos con el editor de flujo sed
         - cap10.qmd # Enlaces simbólicos (symlinks)
         - cap11.qmd # Filtrado de texto (grep, cut, sort, uniq, wc)
+        - cap12.qmd # printf vs echo
         - s1_actividad2.qmd # Actividad 2 en equipo
-        - cap12.qmd # Condicionales
-        - cap13.qmd # Bucles (for loops)
+        - cap13.qmd # Condicionales       
+        - cap14.qmd # Bucles (for loops)
     - part: "**Sección 5** - Introducción a Git/GitHub"
       chapters:
         - Rstudio_paquetes.qmd # Instalar paquetes      

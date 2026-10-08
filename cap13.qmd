@@ -1,106 +1,117 @@
-# Bucles (for loops)
+# Condicionales
 
-> **Fecha:** 08 de octubre, 2026
+> **Fecha:** 13 de octubre, 2026
 
 ::: content-box-gray
 **Objetivos:**
 
-- **Introducir bucles for** → Reconocer la estructura de un `for loop` y su utilidad para repetir tareas sobre listas o rangos.
-- **Ejecutar bucles for en ejercicios** → Implementar iteraciones simples (ej. recorrer archivos, imprimir secuencias).
-- **Explorar bucles while y until** → Diferenciar entre `while` (condición verdadera) y `until` (condición falsa) para controlar la repetición.
-- **Controlar la ejecución de bucles** → Usar instrucciones como `break` y `continue` para modificar el flujo dentro de un ciclo.
+- **Comprender la lógica de condicionales** → Identificar cuándo y cómo aplicar `if`, `else` y `elif` para tomar decisiones en un script.
+
+- **Aplicar condicionales en scripts** → Resolver problemas prácticos mediante condiciones (ej. verificar existencia de archivos, validar entradas).
 :::
 
-Imagina que quieres realizar una misma tarea para 3 archivos distintos, ¿no sería nada molesto escribir el mismo código 3 veces, cierto?
+Las condicionales son estructuras de programación que nos permiten tomar decisiones basadas en el resultado de una **expresión**. En otras palabras, nos permiten ejecutar diferentes bloques de código dependiendo de **si una condición se cumple o no**. Los condicionales son fundamentales para automatizar tareas y crear scripts fléxibles.
 
-¿Y qué pasa si tengo que analizar y procesar docenas o cientos de archivos? Para ello puedes escribir bucles. Un bucle es una **estructura de control** que permite ejecutar un bloque de código rápidamente mientras se cumpla una **determinada condición**. En bash los bucles más comunes son `for` y `while.`
+La sintáxis básica de un condicional simple en formato de una línea es :
+
+``` {.bash code-copy="true" eval="false"}
+if [ condición ]; then orden1; orden2 …; fi
+```
+
+de igual manera pero en bloque identado:
+
+``` {.bash code-copy="true" eval="false"}
+if [ condición ]; then      orden1     orden2  fi
+```
 
 ::: {.callout-note icon="false"}
-## For
+## Ejemplo
 
-`for` es ideal cuando sabes cuántas veces quieres que se repita ese bloque de código. Por ejemplo:
+Si queremos verificar si existe el archivo **secuencias1.fastq** antes de realizar alguna operación sobre él. Puedes usar el siguiente condicional:
 :::
 
 ``` {.bash code-copy="true" eval="false"}
-for variable in lista_de_valores; do
-  # Comandos a ejecutar para cada valor en la lista
+if [ -f secuencias1.fastq ]; then
+  echo "El archivo existe."
+else
+  echo "El archivo no existe."
+fi
+```
+
+::: {.callout-note icon="false"}
+## Explicación
+
+- **`if [ -f secuencias1.fastq ]`:** Verifica si **secuencias1.fastq** es un archivo regular.
+- **`then`:** Si la condición es verdadera, se ejecuta el código siguiente.
+- **`else`:** Si la condición es falsa, se ejecuta el código siguiente.
+- **`fi`:** Indica el final de la estructura `if`.
+:::
+
+Los condicionales pueden ser tan complejos como lo imagines. Por ejemplo:
+
+``` {.bash code-copy="true" eval="false"}
+for archivo in $file*.fastq; do 
+  if [ -f "$archivo" ]; then 
+    echo "Procesando archivo: $archivo"
+    wc -l "$archivo" 
+  else 
+    echo "No tienes archivos fastq"
+  fi 
 done
 ```
 
 ::: {.callout-note icon="false"}
-## while
+## Explicación del código
 
-`while`, por su parte, se utiliza cuando quieres que un bloque de código se ejecute mientras se cumpla una determinada condición. Por ejemplo:
-:::
+En donde:
 
 ``` {.bash code-copy="true" eval="false"}
-while [ condición ]; do
-  # Comandos a ejecutar mientras la condición sea verdadera
+for archivo in $file*.fastq; do
+```
+
+- **`$file*.fastq`**: Expande a todos los archivos que comienzan con el valor de la variable `$file` y terminan con la extensión `.fastq`.
+
+- **`archivo`**: Variable que almacena el nombre de cada archivo encontrado.
+
+``` bash
+echo "Procesando archivo: $archivo"
+wc -l "$archivo"
+```
+
+- **`echo`**: Imprime el mensaje indicando que se está procesando el archivo actual.
+
+- **`wc -l "$archivo"`**: Cuenta el número de líneas en el archivo usando `wc -l` y muestra el resultado en la terminal.
+
+``` bash
+else
+  echo "No tienes archivos fastq"
+fi
+```
+
+- Si el archivo no existe o no es un archivo regular, muestra un mensaje de error indicando el problema.
+
+``` bash
 done
 ```
 
-## Actividad grupal
+- Fin del bucle
+:::
 
-Retomando el ejercicio anterior, modifiquemos el código para crear un bucle para procesar los tres archivos fastq (**secuencias1.fastq, secuencias2.fastq, secuencias3.fastq** ) que tenemos.
+Archivo: `saludar.sh`
 
-**Paso 1.** Crear un script en Bash con el nombre bucles.sh empleando nano.
-
-``` {.bash code-copy="true" eval="false"}
-nano bucles.sh
-```
-
-**Paso 2.** Copia el siguiente código dentro del script `bucle.sh` y guarda los cambios.
-
-``` {.bash code-copy="true" eval="false"}
+``` bash
 #!/bin/bash
-# Script para analizar múltiples archivos FASTA
 
-# Archivos a procesar
-archivos=("archivo1.fasta" "archivo2.fasta" "archivo3.fasta")
+if [ $# -eq 0 ]; then
+    echo "Error: Debes proporcionar un nombre"
+    echo "Uso: ./saludar.sh <nombre>"
+    exit 1
+fi
 
-# Loop para analizar cada archivo
-for archivo in "${archivos[@]}"; do
-  echo "Archivo a procesar: $archivo"
-  
-  # Verifica si el archivo existe
-  if [ ! -f "$archivo" ]; then
-    echo "El archivo $archivo no existe. Saltando..."
-    continue
-  fi
-
-  # 1. Conteo de secuencias
-  numero_secuencias=$(grep -c '^@SRR098026' "$archivo")
-  echo "Número de secuencias en $archivo: $numero_secuencias"
-
-  # 2. Separación de malas lecturas
-  grep -B1 -A2 'NNNNNNNNNN' "$archivo" > "malas_lecturas_$archivo"
-  malas=$(wc -l < "malas_lecturas_$archivo")
-  echo "Número de malas lecturas en $archivo: $malas"
-
-  # 3. Búsqueda de patrones
-  echo "Desea buscar patrones en $archivo? (y/n):"
-  read -r respuesta
-
-  if [[ "$respuesta" == "y" ]]; then
-    patrones_file="patrones_$archivo.txt"
-    busqueda_file="busqueda_$archivo.txt"
-
-    echo -e 'ACTG\nCCCCC\nNNNCNNN\nNNNGNNN\nTTTT\nTATA\nAAA' > "$patrones_file"
-    grep -f "$patrones_file" "$archivo" > "$busqueda_file"
-
-    echo "Búsqueda de patrones guardada en: $busqueda_file"
-  else
-    echo "Patrones no buscados en $archivo."
-  fi
-
-  echo "Procesamiento de $archivo completado."
-  echo "---------------------------------------"
-done
-
-# Mensaje final
-echo "Metaanálisis finalizado para todos los archivos."
+nombre=$1
+echo "¡Hola, $nombre!"
 ```
 
 ## Referencias
 
-- [SWCarpentry: Loops](https://swcarpentry.github.io/shell-novice/05-loop.html)
+- [DataCarpentry For Loops](https://datacarpentry.github.io/semester-biology/materials/for-loops-indexing/)
