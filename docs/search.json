@@ -1585,938 +1585,960 @@
     ]
   },
   {
-    "objectID": "cap11.html",
-    "href": "cap11.html",
-    "title": "30  Filtrado de texto (grep, cut, sort, uniq, wc)",
-    "section": "",
-    "text": "30.1 Repaso de grep - Buscar patrones en texto\nVeamos ahora los comandos más usados en pipelines o tuberías de filtrado de texto en acción, haciendo uso de sólo algunas de las opciones más frecuentes listados en la sección anterior.\nAl final de esta clase podrás leer comandos como estos:\nNo necesariamente memorizarlo de golpe, sino entender qué aporta cada etapa:\nPodemos crear 3 archivos:\nUbicate en la carpeta matematicos y crea una carpeta llamada ejercicios\nSintaxis:\nDurante la clase de “Encontrar patrones con grep” repasamos la siguiente infografía y realizamos algunos ejercicios.",
-    "crumbs": [
-      "**Sección 4** - Edición de archivos con Bash",
-      "<span class='chapter-number'>30</span>  <span class='chapter-title'>Filtrado de texto (`grep, cut, sort, uniq, wc`)</span>"
-    ]
-  },
-  {
-    "objectID": "cap11.html#repaso-de-grep---buscar-patrones-en-texto",
-    "href": "cap11.html#repaso-de-grep---buscar-patrones-en-texto",
-    "title": "30  Filtrado de texto (grep, cut, sort, uniq, wc)",
-    "section": "",
-    "text": "grep [opciones] \"patrón\" archivo\n\n\n\n\n\n\n\n\nArgumento\nDescripción\nEjemplo\n\n\n\n\n\n\ngrep \":[9][0-9]:\" alumnos.txt\n\n\n-i\nIgnora mayúsculas y minúsculas\ngrep -i \"carlos\" nombres.txt\n\n\n-n\nMuestra el número de línea\ngrep -n \"Miguel\" nombres.txt\n\n\n-c\nCuenta las líneas que coinciden\ngrep -c \"Cálculo\"alumnos.txt\n\n\n-v\nMuestra líneas que NO coinciden\ngrep -v \"a\" nombres.txt\ngrep -v \"Cálculo\" alumnos.txt\n\n\n-w\nCoincidencia de palabra completa\ngrep -w \"Cálculo\" alumnos.txt\n\n\n-A n\nMuestra n líneas después del match\ngrep -A 2 \"Álgebra\" alumnos.txt\n\n\n\n\n\n\n\n\n\n\n\nInfografía de grep - creada con ChatGPT",
-    "crumbs": [
-      "**Sección 4** - Edición de archivos con Bash",
-      "<span class='chapter-number'>30</span>  <span class='chapter-title'>Filtrado de texto (`grep, cut, sort, uniq, wc`)</span>"
-    ]
-  },
-  {
-    "objectID": "cap11.html#sort---ordenar-líneas-de-texto",
-    "href": "cap11.html#sort---ordenar-líneas-de-texto",
-    "title": "30  Filtrado de texto (grep, cut, sort, uniq, wc)",
-    "section": "30.2 sort - Ordenar líneas de texto",
-    "text": "30.2 sort - Ordenar líneas de texto\nSintaxis:\nsort [opciones] archivo.txt\n\n\n\n\n\n\n\n\nArgumento\nDescripción\nEjemplo\n\n\n\n\n\nOrden alfabético\nsort nombres.txt\nsort temas.txt\n\n\n-n\nOrdena numéricamente\nsort -n numeros.txt\n\n\n-r\nOrden inverso (descendente)\nsort -r numeros.txt\n\n\n-k\nOrdena por columna específica\nsort -k2 datos.txt\nsort -k2nr datos.txt\n\n\n-u\nElimina duplicados mientras ordena\nsort -u temas.txt\n\n\n-t\nDefine separador de campos/columnas\nsort -t\":\" -k2n alumnos.txt\nsort -t\":\" -k3 alumnos.txt\n\n\n\n\n\n\nImagen creada con ChatGPT.",
-    "crumbs": [
-      "**Sección 4** - Edición de archivos con Bash",
-      "<span class='chapter-number'>30</span>  <span class='chapter-title'>Filtrado de texto (`grep, cut, sort, uniq, wc`)</span>"
-    ]
-  },
-  {
-    "objectID": "cap11.html#uniq---identifica-y-filtra-líneas-repetidas",
-    "href": "cap11.html#uniq---identifica-y-filtra-líneas-repetidas",
-    "title": "30  Filtrado de texto (grep, cut, sort, uniq, wc)",
-    "section": "30.3 uniq - Identifica y filtra líneas repetidas",
-    "text": "30.3 uniq - Identifica y filtra líneas repetidas\nSintaxis:\nuniq [opciones] archivo.txt\n\n\n\n\n\n\n\n\nArgumento\nDescripción\nEjemplo\n\n\n\n\n\nOrdena y elimina duplicado\nsort temas.txt | uniq\n\n\n-c\nCuenta ocurrencias de cada línea\nsort datos.txt | uniq -c\n\n\n-d\nMuestra solo líneas duplicadas\nsort datos.txt | uniq -d\n\n\n-u\nMuestra solo líneas únicas\nsort datos.txt | uniq -u\n\n\n\n\n\n\nImagen creada con ChatGPT.",
-    "crumbs": [
-      "**Sección 4** - Edición de archivos con Bash",
-      "<span class='chapter-number'>30</span>  <span class='chapter-title'>Filtrado de texto (`grep, cut, sort, uniq, wc`)</span>"
-    ]
-  },
-  {
-    "objectID": "cap11.html#wc---cuenta-líneas-palabras-y-caracteres",
-    "href": "cap11.html#wc---cuenta-líneas-palabras-y-caracteres",
-    "title": "30  Filtrado de texto (grep, cut, sort, uniq, wc)",
-    "section": "30.4 wc - Cuenta líneas, palabras y caracteres",
-    "text": "30.4 wc - Cuenta líneas, palabras y caracteres\nSintaxis:\nwc [opciones] archivo.txt\n\n\n\n\n\n\n\n\nArgumento\nDescripción\nEjemplo\n\n\n\n\n\nMuestra líneas, palabras, bytes\nwc archivo.txt\n\n\n-l\nCuenta líneas\nwc -l archivo.txt\nwc -l *.txt\n\n\n-w\nCuenta palabras\nwc -w archivo.txt\n\n\n-c\nCuenta bytes\nwc -c archivo.txt\n\n\n-w\nCuenta caracteres\nwc -w archivo.txt\n\n\n\n\n\n\nImagen creada con ChatGPT",
-    "crumbs": [
-      "**Sección 4** - Edición de archivos con Bash",
-      "<span class='chapter-number'>30</span>  <span class='chapter-title'>Filtrado de texto (`grep, cut, sort, uniq, wc`)</span>"
-    ]
-  },
-  {
-    "objectID": "cap11.html#cut---buscar-patrones-en-texto",
-    "href": "cap11.html#cut---buscar-patrones-en-texto",
-    "title": "30  Filtrado de texto (grep, cut, sort, uniq, wc)",
-    "section": "30.5 cut - Buscar patrones en texto",
-    "text": "30.5 cut - Buscar patrones en texto\nAquí vamos a partir de ¿Qué hago si no quiero toda la línea, sino solamente una columna de un archivo?\nSintaxis:\ncut [opciones] archivo.txt\n\n\n\n\n\n\n\n\nArgumento\nDescripción\nEjemplo\n\n\n\n\n-c\nExtrae caracteres por posición (ej: -c1-5)\ncut -c1-2 archivo.txt\n\n\n-f\nExtrae campos específicos (ej: -f1,3)\ncut -f1,3 -d: alumnos.txt\n\n\n-d\nDefine separador de campos (default: tabulación)\ncut -f2 -d\" \" datos.txt\n\n\n\n\n\n\nImagen creada con ChatGPT.",
-    "crumbs": [
-      "**Sección 4** - Edición de archivos con Bash",
-      "<span class='chapter-number'>30</span>  <span class='chapter-title'>Filtrado de texto (`grep, cut, sort, uniq, wc`)</span>"
-    ]
-  },
-  {
-    "objectID": "cap11.html#ejercicio-integrador-grep-cut-sort-uniq-y-wc",
-    "href": "cap11.html#ejercicio-integrador-grep-cut-sort-uniq-y-wc",
-    "title": "30  Filtrado de texto (grep, cut, sort, uniq, wc)",
-    "section": "30.6 Ejercicio integrador: grep, cut, sort, uniq y wc",
-    "text": "30.6 Ejercicio integrador: grep, cut, sort, uniq y wc\n\n\n\n\n\n\nNotaEjercicio 10\n\n\n\nInstrucciones\n\nCrea el archivo materias.txt ejercutando el siguiente comando:\necho -e \"Álgebra Lineal:8:1\\nCálculo Diferencial:10:1\\nGeometría Analítica:8:1\\nProbabilidad:6:3\\nEstadística:6:3\\nEcuaciones Diferenciales:8:4\\nÁlgebra Abstracta:8:5\\nTopología:6:6\\nAnálisis Real:8:6\\nProbabilidad:6:3\" &gt; ejercicios/BASH/materias.txt\nColumna 1: materias, Columna 2: créditos, Columna 3: semestre.\nMostrar todas las materias que contienen la palabra Álgebra.\nMostrar todas las materias de sexto semestre.\nContar cuántas materias tienen 8 créditos.\nMostrar únicamente los nombres de las materias.\nMostrar únicamente los créditos.\nOrdenar las materias alfabéticamente.\nOrdenar los créditos de menor a mayor.\nMostrar los semestres sin repetir.\nContar cuántas materias hay por semestre.\n¿Cuántas materias hay por número de créditos?\n¿Cuál es el número de créditos más frecuente?\n\n\n\n\n\n\n\nTipSolucion\n\n\n\n\n\n2. grep \"Álgebra\" ejercicios/BASH/materias.txt\n3. grep \":6$\" ejercicios/BASH/materias.txt\n4. grep \":8:\" ejercicios/BASH/materias.txt | wc -l\n5. cut -d\":\" -f1 ejercicios/BASH/materias.txt\n6. cut -d\":\" -f2 ejercicios/BASH/materias.txt\n7. cut -d\":\" -f1 ejercicios/BASH/materias.txt | sort\n8. cut -d\":\" -f2 ejercicios/BASH/materias.txt | sort -n\n9. cut -d\":\" -f3 ejercicios/BASH/materias.txt | sort | uniq\n10. cut -d\":\" -f3 ejercicios/BASH/materias.txt | sort | uniq -c\n11. cut -d\":\" -f2 ejercicios/BASH/materias.txt | sort | uniq -c\n12. cut -d\":\" -f2 ejercicios/BASH/materias.txt | sort | uniq -c | sort -nr | head -1",
-    "crumbs": [
-      "**Sección 4** - Edición de archivos con Bash",
-      "<span class='chapter-number'>30</span>  <span class='chapter-title'>Filtrado de texto (`grep, cut, sort, uniq, wc`)</span>"
-    ]
-  },
-  {
-    "objectID": "cap11.html#referencias",
-    "href": "cap11.html#referencias",
-    "title": "30  Filtrado de texto (grep, cut, sort, uniq, wc)",
-    "section": "30.7 Referencias",
-    "text": "30.7 Referencias\n\nEjemplos de herramientas de filtrado de texto: pipelines con grep, cut, sort, uniq, wc en acción",
-    "crumbs": [
-      "**Sección 4** - Edición de archivos con Bash",
-      "<span class='chapter-number'>30</span>  <span class='chapter-title'>Filtrado de texto (`grep, cut, sort, uniq, wc`)</span>"
-    ]
-  },
-  {
-    "objectID": "cap12.html",
-    "href": "cap12.html",
-    "title": "31  printf vs echo",
-    "section": "",
-    "text": "31.1 1. Diferencia entre echo y printf\nEn Bash, printf permite imprimir texto en la terminal con un formato específico, parecido a echo, pero con mayor control sobre cómo se muestra la información.\nCon echo:\nCon printf:\nAmbos producen:\nLa diferencia es que echo agrega automáticamente un salto de línea, mientras que printf no lo hace. Por eso utilizamos \\n en el segundo ejemplo.",
-    "crumbs": [
-      "**Sección 4** - Edición de archivos con Bash",
-      "<span class='chapter-number'>31</span>  <span class='chapter-title'>printf vs echo</span>"
-    ]
-  },
-  {
-    "objectID": "cap12.html#diferencia-entre-echo-y-printf",
-    "href": "cap12.html#diferencia-entre-echo-y-printf",
-    "title": "31  printf vs echo",
-    "section": "",
-    "text": "echo \"Hola mundo\"\n\nprintf \"Hola mundo\\n\"\n\nHola mundo",
-    "crumbs": [
-      "**Sección 4** - Edición de archivos con Bash",
-      "<span class='chapter-number'>31</span>  <span class='chapter-title'>printf vs echo</span>"
-    ]
-  },
-  {
-    "objectID": "cap12.html#componentes-de-printf",
-    "href": "cap12.html#componentes-de-printf",
-    "title": "31  printf vs echo",
-    "section": "31.2 Componentes de printf",
-    "text": "31.2 Componentes de printf\nTomemos esta instrucción:\ncalificacion=10\nprintf \"Calificación: %.2f\\n\" \"$calificacion\"\nprintf \"Calificación: %.2f\\n\" $calificacion\n\n\n\nElemento\nSignificado\n\n\n\n\nprintf\nComando para imprimir texto con formato\n\n\nCalificación:\nTexto que se mostrará\n\n\n%.2f\nNúmero decimal con dos cifras decimales\n\n\n\\n\nSalto de línea\n\n\n\"$calificacion\"\nVariable cuyo valor se insertará",
-    "crumbs": [
-      "**Sección 4** - Edición de archivos con Bash",
-      "<span class='chapter-number'>31</span>  <span class='chapter-title'>printf vs echo</span>"
-    ]
-  },
-  {
-    "objectID": "cap12.html#imprimir-varias-líneas",
-    "href": "cap12.html#imprimir-varias-líneas",
-    "title": "31  printf vs echo",
-    "section": "31.3 2. Imprimir varias líneas",
-    "text": "31.3 2. Imprimir varias líneas\nCon echo -e:\necho -e \"Ana\\nLuis\\nMaría\"\nCon printf:\nprintf \"Ana\\nLuis\\nMaría\\n\"\nAmbos muestran:\nAna\nLuis\nMaría",
-    "crumbs": [
-      "**Sección 4** - Edición de archivos con Bash",
-      "<span class='chapter-number'>31</span>  <span class='chapter-title'>printf vs echo</span>"
-    ]
-  },
-  {
-    "objectID": "cap12.html#utilizar-formatos",
-    "href": "cap12.html#utilizar-formatos",
-    "title": "31  printf vs echo",
-    "section": "31.4 3. Utilizar formatos",
-    "text": "31.4 3. Utilizar formatos\nUna ventaja de printf es que permite insertar valores dentro de un texto.\nnombre=\"Ana\"\nedad=20\n\nprintf \"Nombre: %s, Edad: %d\\n\" \"$nombre\" \"$edad\"\nLos especificadores más comunes son:\n\n\n\nSímbolo\nFunción\n\n\n\n\n%s\nInsertar texto\n\n\n%d\nInsertar un número entero\n\n\n%f\nInsertar un número decimal\n\n\n%.2f\nMostrar un decimal con dos cifras después del punto\n\n\n\\n\nSalto de línea\n\n\n\\t\nTabulación",
-    "crumbs": [
-      "**Sección 4** - Edición de archivos con Bash",
-      "<span class='chapter-number'>31</span>  <span class='chapter-title'>printf vs echo</span>"
-    ]
-  },
-  {
-    "objectID": "cap12.html#una-característica-muy-útil-para-bash",
-    "href": "cap12.html#una-característica-muy-útil-para-bash",
-    "title": "31  printf vs echo",
-    "section": "31.5 4. Una característica muy útil para Bash",
-    "text": "31.5 4. Una característica muy útil para Bash\nPodemos utilizar printf para imprimir varios elementos, uno por línea:\nprintf '%s\\n' Ana Luis María Carlos\nResultado:\nAna\nLuis\nMaría\nCarlos\nAquí ocurre algo interesante: printf reutiliza automáticamente el formato %s\\n para cada argumento.\nCon echo -e tendríamos que escribir:\necho -e \"Ana\\nLuis\\nMaría\\nCarlos\"",
-    "crumbs": [
-      "**Sección 4** - Edición de archivos con Bash",
-      "<span class='chapter-number'>31</span>  <span class='chapter-title'>printf vs echo</span>"
-    ]
-  },
-  {
-    "objectID": "cap12.html#por-qué-se-utiliza-printf-en-scripts",
-    "href": "cap12.html#por-qué-se-utiliza-printf-en-scripts",
-    "title": "31  printf vs echo",
-    "section": "31.6 5. ¿Por qué se utiliza printf en scripts?",
-    "text": "31.6 5. ¿Por qué se utiliza printf en scripts?\nPorque su comportamiento es más predecible que el de echo, especialmente cuando trabajamos con caracteres especiales, opciones y formatos.\nPor ejemplo, para mostrar dos decimales:\nprintf \"%.2f\\n\" 3.14159\nResultado:\n3.14",
-    "crumbs": [
-      "**Sección 4** - Edición de archivos con Bash",
-      "<span class='chapter-number'>31</span>  <span class='chapter-title'>printf vs echo</span>"
-    ]
-  },
-  {
-    "objectID": "cap12.html#ejemplo-generar-una-ficha-de-estudiante",
-    "href": "cap12.html#ejemplo-generar-una-ficha-de-estudiante",
-    "title": "31  printf vs echo",
-    "section": "31.7 Ejemplo: Generar una ficha de estudiante",
-    "text": "31.7 Ejemplo: Generar una ficha de estudiante\nObjetivo: Crear un script que muestre la información de un estudiante de manera organizada, utilizando printf para controlar el formato.\n1. Crear el script\nnano estudiante.sh\n2. Escribir el código\n#!/bin/bash\n\n# Información del estudiante\nnombre=\"Ana\"\nmateria=\"Matemáticas\"\ncalificacion=9.567\ngrupo=\"A\"\n\n# Mostrar información con echo\necho \"=== INFORMACIÓN DEL ESTUDIANTE ===\"\necho \"Nombre: $nombre\"\necho \"Materia: $materia\"\necho \"Calificación: $calificacion\"\necho \"Grupo: $grupo\"\n\necho \"\"\n\n# Mostrar información con printf\nprintf \"=== INFORMACIÓN DEL ESTUDIANTE ===\\n\"\nprintf \"Nombre: %s\\n\" \"$nombre\"\nprintf \"Materia: %s\\n\" \"$materia\"\nprintf \"Calificación: %.2f\\n\" \"$calificacion\"\nprintf \"Grupo: %s\\n\" \"$grupo\"\n3. Ejecutar el script\nchmod u+x estudiante.sh\n./estudiante.sh\n\n31.7.1 4. Comparar los resultados\nCon echo\n       \n=== INFORMACIÓN ===\nNombre: Ana\nMateria: Matemáticas\nCalificación: 9.567\nGrupo: A\n       \nCon printf\n     \n=== INFORMACIÓN ===\nNombre: Ana\nMateria: Matemáticas\nCalificación: 9.57\nGrupo: A\nLa diferencia principal es que printf permite controlar cómo se presenta la información. Por ejemplo, %.2f muestra la calificación con dos decimales.",
-    "crumbs": [
-      "**Sección 4** - Edición de archivos con Bash",
-      "<span class='chapter-number'>31</span>  <span class='chapter-title'>printf vs echo</span>"
-    ]
-  },
-  {
     "objectID": "s1_actividad2.html",
     "href": "s1_actividad2.html",
-    "title": "32  📚 Proyecto integrador en equipo - Script Bash",
+    "title": "30  📚 Proyecto integrador en equipo - Script Bash",
     "section": "",
-    "text": "32.1 Instrucciones\nEn equipos de 2 a 3 personas, seleccionar uno de los siguientes temas y realizar un proyecto aplicando buenas prácticas de programación. El proceso debe estar completamente documentado y entregarse en Google Classroom:",
+    "text": "30.1 Instrucciones\nEn equipos de 2 a 3 personas, seleccionar uno de los siguientes temas y realizar un proyecto aplicando buenas prácticas de programación. El proceso debe estar completamente documentado y entregarse en Google Classroom:",
     "crumbs": [
       "**Sección 4** - Edición de archivos con Bash",
-      "<span class='chapter-number'>32</span>  <span class='chapter-title'>**📚 Proyecto integrador en equipo -** Script Bash</span>"
+      "<span class='chapter-number'>30</span>  <span class='chapter-title'>**📚 Proyecto integrador en equipo -** Script Bash</span>"
     ]
   },
   {
     "objectID": "s1_actividad2.html#instrucciones",
     "href": "s1_actividad2.html#instrucciones",
-    "title": "32  📚 Proyecto integrador en equipo - Script Bash",
+    "title": "30  📚 Proyecto integrador en equipo - Script Bash",
     "section": "",
-    "text": "Carpeta a entregar comprimida (.zip).\nDocumentación del proyecto: Documento explicativo del desarrollo del programa en Google docs. Agregar en la tarea solo el link del documento.\nSubir en Youtube un video de aproximadamente 5 minutos describiendo el proceso y resultados. Agregar en la tarea solo el link del video.\n\n\n32.1.1 Estructura de la carpeta a entregar\nProyecto_[NombreEquipo]_[NombreProyecto].zip\n│\n├── script.sh                          # Script principal\n├── datos_entrada.txt                  # Archivo de datos (txt, csv o tsv)\n├── salida_procesada.txt               # Resultado de ejecutar el script\n\n\n32.1.2 ARCHIVO: script.sh 🔧\nChecklist de buenas prácticas:\n\nNombre descriptivo para el script.\nShebang en la primera línea (#!/bin/bash)\nEncabezado con información del script (nombre, descripción, autor, fecha)\nComentarios explicativos en cada sección.\nVariables bien nombradas (descriptivas)\nValidación de argumentos\nValidación de archivos\nCódigo indentado y organizado\n\n#!/bin/bash\n\n################################################################################\n# NOMBRE DEL SCRIPT: Título\n# DESCRIPCIÓN: Procesa un archivo de calificaciones y genera reportes\n# AUTORES: Nombre de los estudiantes\n# FECHA: Día/Mes/Año\n# VERSIÓN: 1.0\n# USO: ./script.sh archivo_entrada.txt\n# ARGUMENTOS (opcional)\n################################################################################\n\n\n32.1.3 ARCHIVO: datos_entrada.txt (o .csv, .tsv) 📊\nRequisitos:\n\nMínimo 10 registros\nDatos realistas y variados\nEncabezado descriptivo (si aplica)\nNombre descriptivo del archivo\n\n\n\n32.1.4 ARCHIVO: salida_procesada.txt 📤\nRequisitos:\n\nGenerado automáticamente por el script\nContiene toda la salida del programa\nFormato legible y organizado\nIncluye encabezados y separadores\n\n\n\n32.1.5 Documentación del proyecto\nRequisitos:\n\nInformación general: Título del proyecto, Nombre de los integrantes del equipo, Fecha de entrega, Versión del script: 1.0.\nDescripción del proyecto (200 palabras máximo)\n\nTema seleccionado: ¿Cuál es?\nProblema a resolver: ¿Qué necesidad cubre?\nAlcance: ¿Qué incluye y qué no incluye?\nUsuarios finales: ¿Quién usará el programa?\n\nNombre de los miembros del equipo y correos de gmail registrados en Google Classroom.",
+    "text": "Carpeta a entregar comprimida (.zip).\nDocumentación del proyecto: Documento explicativo del desarrollo del programa en Google docs. Agregar en la tarea solo el link del documento.\nSubir en Youtube un video de aproximadamente 5 minutos describiendo el proceso y resultados. Agregar en la tarea solo el link del video.\n\n\n30.1.1 Estructura de la carpeta a entregar\nProyecto_[NombreEquipo]_[NombreProyecto].zip\n│\n├── script.sh                          # Script principal\n├── datos_entrada.txt                  # Archivo de datos (txt, csv o tsv)\n├── salida_procesada.txt               # Resultado de ejecutar el script\n\n\n30.1.2 ARCHIVO: script.sh 🔧\nChecklist de buenas prácticas:\n\nNombre descriptivo para el script.\nShebang en la primera línea (#!/bin/bash)\nEncabezado con información del script (nombre, descripción, autor, fecha)\nComentarios explicativos en cada sección.\nVariables bien nombradas (descriptivas)\nValidación de argumentos\nValidación de archivos\nCódigo indentado y organizado\n\n#!/bin/bash\n\n################################################################################\n# NOMBRE DEL SCRIPT: Título\n# DESCRIPCIÓN: Procesa un archivo de calificaciones y genera reportes\n# AUTORES: Nombre de los estudiantes\n# FECHA: Día/Mes/Año\n# VERSIÓN: 1.0\n# USO: ./script.sh archivo_entrada.txt\n# ARGUMENTOS (opcional)\n################################################################################\n\n\n30.1.3 ARCHIVO: datos_entrada.txt (o .csv, .tsv) 📊\nRequisitos:\n\nMínimo 10 registros\nDatos realistas y variados\nEncabezado descriptivo (si aplica)\nNombre descriptivo del archivo\n\n\n\n30.1.4 ARCHIVO: salida_procesada.txt 📤\nRequisitos:\n\nGenerado automáticamente por el script\nContiene toda la salida del programa\nFormato legible y organizado\nIncluye encabezados y separadores\n\n\n\n30.1.5 Documentación del proyecto\nRequisitos:\n\nInformación general: Título del proyecto, Nombre de los integrantes del equipo, Fecha de entrega, Versión del script: 1.0.\nDescripción del proyecto (200 palabras máximo)\n\nTema seleccionado: ¿Cuál es?\nProblema a resolver: ¿Qué necesidad cubre?\nAlcance: ¿Qué incluye y qué no incluye?\nUsuarios finales: ¿Quién usará el programa?\n\nNombre de los miembros del equipo y correos de gmail registrados en Google Classroom.",
     "crumbs": [
       "**Sección 4** - Edición de archivos con Bash",
-      "<span class='chapter-number'>32</span>  <span class='chapter-title'>**📚 Proyecto integrador en equipo -** Script Bash</span>"
+      "<span class='chapter-number'>30</span>  <span class='chapter-title'>**📚 Proyecto integrador en equipo -** Script Bash</span>"
+    ]
+  },
+  {
+    "objectID": "game6.html",
+    "href": "game6.html",
+    "title": "31  🎮 AhaSlides 6 -Manos a la obra",
+    "section": "",
+    "text": "Martes 08 de octubre, 2026\n\n\n\n\n\n\n\nTipAhaSlides Actividad\n\n\n\nPon a prueba lo que has aprendido y acumula tus victorias para alcanzar el punto final. Además, si logras quedar entre los tres primeros lugares en 10 ocasiones, obtendrás un punto extra como recompensa:\n\n 🎮 Unirse como jugador \n 👩 Iniciar sesión (Profesora)",
+    "crumbs": [
+      "**Sección 4** - Edición de archivos con Bash",
+      "<span class='chapter-number'>31</span>  <span class='chapter-title'>**🎮 AhaSlides 6 -Manos a la obra**</span>"
+    ]
+  },
+  {
+    "objectID": "cap11.html",
+    "href": "cap11.html",
+    "title": "32  Filtrado de texto (grep, cut, sort, uniq, wc)",
+    "section": "",
+    "text": "32.1 Repaso de grep - Buscar patrones en texto\nVeamos ahora los comandos más usados en pipelines o tuberías de filtrado de texto en acción, haciendo uso de sólo algunas de las opciones más frecuentes listados en la sección anterior.\nAl final de esta clase podrás leer comandos como estos:\nNo necesariamente memorizarlo de golpe, sino entender qué aporta cada etapa:\nPodemos crear 3 archivos:\nUbicate en la carpeta matematicos y crea una carpeta llamada ejercicios\nSintaxis:\nDurante la clase de “Encontrar patrones con grep” repasamos la siguiente infografía y realizamos algunos ejercicios.",
+    "crumbs": [
+      "**Sección 4** - Edición de archivos con Bash",
+      "<span class='chapter-number'>32</span>  <span class='chapter-title'>Filtrado de texto (`grep, cut, sort, uniq, wc`)</span>"
+    ]
+  },
+  {
+    "objectID": "cap11.html#repaso-de-grep---buscar-patrones-en-texto",
+    "href": "cap11.html#repaso-de-grep---buscar-patrones-en-texto",
+    "title": "32  Filtrado de texto (grep, cut, sort, uniq, wc)",
+    "section": "",
+    "text": "grep [opciones] \"patrón\" archivo\n\n\n\n\n\n\n\n\nArgumento\nDescripción\nEjemplo\n\n\n\n\n\n\ngrep \":[9][0-9]:\" alumnos.txt\n\n\n-i\nIgnora mayúsculas y minúsculas\ngrep -i \"carlos\" nombres.txt\n\n\n-n\nMuestra el número de línea\ngrep -n \"Miguel\" nombres.txt\n\n\n-c\nCuenta las líneas que coinciden\ngrep -c \"Cálculo\"alumnos.txt\n\n\n-v\nMuestra líneas que NO coinciden\ngrep -v \"a\" nombres.txt\ngrep -v \"Cálculo\" alumnos.txt\n\n\n-w\nCoincidencia de palabra completa\ngrep -w \"Cálculo\" alumnos.txt\n\n\n-A n\nMuestra n líneas después del match\ngrep -A 2 \"Álgebra\" alumnos.txt\n\n\n\n\n\n\n\n\n\n\n\nInfografía de grep - creada con ChatGPT",
+    "crumbs": [
+      "**Sección 4** - Edición de archivos con Bash",
+      "<span class='chapter-number'>32</span>  <span class='chapter-title'>Filtrado de texto (`grep, cut, sort, uniq, wc`)</span>"
+    ]
+  },
+  {
+    "objectID": "cap11.html#sort---ordenar-líneas-de-texto",
+    "href": "cap11.html#sort---ordenar-líneas-de-texto",
+    "title": "32  Filtrado de texto (grep, cut, sort, uniq, wc)",
+    "section": "32.2 sort - Ordenar líneas de texto",
+    "text": "32.2 sort - Ordenar líneas de texto\nSintaxis:\nsort [opciones] archivo.txt\n\n\n\n\n\n\n\n\nArgumento\nDescripción\nEjemplo\n\n\n\n\n\nOrden alfabético\nsort nombres.txt\nsort temas.txt\n\n\n-n\nOrdena numéricamente\nsort -n numeros.txt\n\n\n-r\nOrden inverso (descendente)\nsort -r numeros.txt\n\n\n-k\nOrdena por columna específica\nsort -k2 datos.txt\nsort -k2nr datos.txt\n\n\n-u\nElimina duplicados mientras ordena\nsort -u temas.txt\n\n\n-t\nDefine separador de campos/columnas\nsort -t\":\" -k2n alumnos.txt\nsort -t\":\" -k3 alumnos.txt\n\n\n\n\n\n\nImagen creada con ChatGPT.",
+    "crumbs": [
+      "**Sección 4** - Edición de archivos con Bash",
+      "<span class='chapter-number'>32</span>  <span class='chapter-title'>Filtrado de texto (`grep, cut, sort, uniq, wc`)</span>"
+    ]
+  },
+  {
+    "objectID": "cap11.html#uniq---identifica-y-filtra-líneas-repetidas",
+    "href": "cap11.html#uniq---identifica-y-filtra-líneas-repetidas",
+    "title": "32  Filtrado de texto (grep, cut, sort, uniq, wc)",
+    "section": "32.3 uniq - Identifica y filtra líneas repetidas",
+    "text": "32.3 uniq - Identifica y filtra líneas repetidas\nSintaxis:\nuniq [opciones] archivo.txt\n\n\n\n\n\n\n\n\nArgumento\nDescripción\nEjemplo\n\n\n\n\n\nOrdena y elimina duplicado\nsort temas.txt | uniq\n\n\n-c\nCuenta ocurrencias de cada línea\nsort datos.txt | uniq -c\n\n\n-d\nMuestra solo líneas duplicadas\nsort datos.txt | uniq -d\n\n\n-u\nMuestra solo líneas únicas\nsort datos.txt | uniq -u\n\n\n\n\n\n\nImagen creada con ChatGPT.",
+    "crumbs": [
+      "**Sección 4** - Edición de archivos con Bash",
+      "<span class='chapter-number'>32</span>  <span class='chapter-title'>Filtrado de texto (`grep, cut, sort, uniq, wc`)</span>"
+    ]
+  },
+  {
+    "objectID": "cap11.html#wc---cuenta-líneas-palabras-y-caracteres",
+    "href": "cap11.html#wc---cuenta-líneas-palabras-y-caracteres",
+    "title": "32  Filtrado de texto (grep, cut, sort, uniq, wc)",
+    "section": "32.4 wc - Cuenta líneas, palabras y caracteres",
+    "text": "32.4 wc - Cuenta líneas, palabras y caracteres\nSintaxis:\nwc [opciones] archivo.txt\n\n\n\n\n\n\n\n\nArgumento\nDescripción\nEjemplo\n\n\n\n\n\nMuestra líneas, palabras, bytes\nwc archivo.txt\n\n\n-l\nCuenta líneas\nwc -l archivo.txt\nwc -l *.txt\n\n\n-w\nCuenta palabras\nwc -w archivo.txt\n\n\n-c\nCuenta bytes\nwc -c archivo.txt\n\n\n-w\nCuenta caracteres\nwc -w archivo.txt\n\n\n\n\n\n\nImagen creada con ChatGPT",
+    "crumbs": [
+      "**Sección 4** - Edición de archivos con Bash",
+      "<span class='chapter-number'>32</span>  <span class='chapter-title'>Filtrado de texto (`grep, cut, sort, uniq, wc`)</span>"
+    ]
+  },
+  {
+    "objectID": "cap11.html#cut---buscar-patrones-en-texto",
+    "href": "cap11.html#cut---buscar-patrones-en-texto",
+    "title": "32  Filtrado de texto (grep, cut, sort, uniq, wc)",
+    "section": "32.5 cut - Buscar patrones en texto",
+    "text": "32.5 cut - Buscar patrones en texto\nAquí vamos a partir de ¿Qué hago si no quiero toda la línea, sino solamente una columna de un archivo?\nSintaxis:\ncut [opciones] archivo.txt\n\n\n\n\n\n\n\n\nArgumento\nDescripción\nEjemplo\n\n\n\n\n-c\nExtrae caracteres por posición (ej: -c1-5)\ncut -c1-2 archivo.txt\n\n\n-f\nExtrae campos específicos (ej: -f1,3)\ncut -f1,3 -d: alumnos.txt\n\n\n-d\nDefine separador de campos (default: tabulación)\ncut -f2 -d\" \" datos.txt\n\n\n\n\n\n\nImagen creada con ChatGPT.",
+    "crumbs": [
+      "**Sección 4** - Edición de archivos con Bash",
+      "<span class='chapter-number'>32</span>  <span class='chapter-title'>Filtrado de texto (`grep, cut, sort, uniq, wc`)</span>"
+    ]
+  },
+  {
+    "objectID": "cap11.html#ejercicio-integrador-grep-cut-sort-uniq-y-wc",
+    "href": "cap11.html#ejercicio-integrador-grep-cut-sort-uniq-y-wc",
+    "title": "32  Filtrado de texto (grep, cut, sort, uniq, wc)",
+    "section": "32.6 Ejercicio integrador: grep, cut, sort, uniq y wc",
+    "text": "32.6 Ejercicio integrador: grep, cut, sort, uniq y wc\n\n\n\n\n\n\nNotaEjercicio 10\n\n\n\nInstrucciones\n\nCrea el archivo materias.txt ejercutando el siguiente comando:\necho -e \"Álgebra Lineal:8:1\\nCálculo Diferencial:10:1\\nGeometría Analítica:8:1\\nProbabilidad:6:3\\nEstadística:6:3\\nEcuaciones Diferenciales:8:4\\nÁlgebra Abstracta:8:5\\nTopología:6:6\\nAnálisis Real:8:6\\nProbabilidad:6:3\" &gt; ejercicios/BASH/materias.txt\nColumna 1: materias, Columna 2: créditos, Columna 3: semestre.\nMostrar todas las materias que contienen la palabra Álgebra.\nMostrar todas las materias de sexto semestre.\nContar cuántas materias tienen 8 créditos.\nMostrar únicamente los nombres de las materias.\nMostrar únicamente los créditos.\nOrdenar las materias alfabéticamente.\nOrdenar los créditos de menor a mayor.\nMostrar los semestres sin repetir.\nContar cuántas materias hay por semestre.\n¿Cuántas materias hay por número de créditos?\n¿Cuál es el número de créditos más frecuente?\n\n\n\n\n\n\n\nTipSolucion\n\n\n\n\n\n2. grep \"Álgebra\" ejercicios/BASH/materias.txt\n3. grep \":6$\" ejercicios/BASH/materias.txt\n4. grep \":8:\" ejercicios/BASH/materias.txt | wc -l\n5. cut -d\":\" -f1 ejercicios/BASH/materias.txt\n6. cut -d\":\" -f2 ejercicios/BASH/materias.txt\n7. cut -d\":\" -f1 ejercicios/BASH/materias.txt | sort\n8. cut -d\":\" -f2 ejercicios/BASH/materias.txt | sort -n\n9. cut -d\":\" -f3 ejercicios/BASH/materias.txt | sort | uniq\n10. cut -d\":\" -f3 ejercicios/BASH/materias.txt | sort | uniq -c\n11. cut -d\":\" -f2 ejercicios/BASH/materias.txt | sort | uniq -c\n12. cut -d\":\" -f2 ejercicios/BASH/materias.txt | sort | uniq -c | sort -nr | head -1",
+    "crumbs": [
+      "**Sección 4** - Edición de archivos con Bash",
+      "<span class='chapter-number'>32</span>  <span class='chapter-title'>Filtrado de texto (`grep, cut, sort, uniq, wc`)</span>"
+    ]
+  },
+  {
+    "objectID": "cap11.html#referencias",
+    "href": "cap11.html#referencias",
+    "title": "32  Filtrado de texto (grep, cut, sort, uniq, wc)",
+    "section": "32.7 Referencias",
+    "text": "32.7 Referencias\n\nEjemplos de herramientas de filtrado de texto: pipelines con grep, cut, sort, uniq, wc en acción",
+    "crumbs": [
+      "**Sección 4** - Edición de archivos con Bash",
+      "<span class='chapter-number'>32</span>  <span class='chapter-title'>Filtrado de texto (`grep, cut, sort, uniq, wc`)</span>"
+    ]
+  },
+  {
+    "objectID": "cap12.html",
+    "href": "cap12.html",
+    "title": "33  printf vs echo",
+    "section": "",
+    "text": "33.1 1. Diferencia entre echo y printf\nEn Bash, printf permite imprimir texto en la terminal con un formato específico, parecido a echo, pero con mayor control sobre cómo se muestra la información.\nCon echo:\nCon printf:\nAmbos producen:\nLa diferencia es que echo agrega automáticamente un salto de línea, mientras que printf no lo hace. Por eso utilizamos \\n en el segundo ejemplo.",
+    "crumbs": [
+      "**Sección 4** - Edición de archivos con Bash",
+      "<span class='chapter-number'>33</span>  <span class='chapter-title'>printf vs echo</span>"
+    ]
+  },
+  {
+    "objectID": "cap12.html#diferencia-entre-echo-y-printf",
+    "href": "cap12.html#diferencia-entre-echo-y-printf",
+    "title": "33  printf vs echo",
+    "section": "",
+    "text": "echo \"Hola mundo\"\n\nprintf \"Hola mundo\\n\"\n\nHola mundo",
+    "crumbs": [
+      "**Sección 4** - Edición de archivos con Bash",
+      "<span class='chapter-number'>33</span>  <span class='chapter-title'>printf vs echo</span>"
+    ]
+  },
+  {
+    "objectID": "cap12.html#componentes-de-printf",
+    "href": "cap12.html#componentes-de-printf",
+    "title": "33  printf vs echo",
+    "section": "33.2 Componentes de printf",
+    "text": "33.2 Componentes de printf\nTomemos esta instrucción:\ncalificacion=10\nprintf \"Calificación: %.2f\\n\" \"$calificacion\"\nprintf \"Calificación: %.2f\\n\" $calificacion\n\n\n\nElemento\nSignificado\n\n\n\n\nprintf\nComando para imprimir texto con formato\n\n\nCalificación:\nTexto que se mostrará\n\n\n%.2f\nNúmero decimal con dos cifras decimales\n\n\n\\n\nSalto de línea\n\n\n\"$calificacion\"\nVariable cuyo valor se insertará",
+    "crumbs": [
+      "**Sección 4** - Edición de archivos con Bash",
+      "<span class='chapter-number'>33</span>  <span class='chapter-title'>printf vs echo</span>"
+    ]
+  },
+  {
+    "objectID": "cap12.html#imprimir-varias-líneas",
+    "href": "cap12.html#imprimir-varias-líneas",
+    "title": "33  printf vs echo",
+    "section": "33.3 2. Imprimir varias líneas",
+    "text": "33.3 2. Imprimir varias líneas\nCon echo -e:\necho -e \"Ana\\nLuis\\nMaría\"\nCon printf:\nprintf \"Ana\\nLuis\\nMaría\\n\"\nAmbos muestran:\nAna\nLuis\nMaría",
+    "crumbs": [
+      "**Sección 4** - Edición de archivos con Bash",
+      "<span class='chapter-number'>33</span>  <span class='chapter-title'>printf vs echo</span>"
+    ]
+  },
+  {
+    "objectID": "cap12.html#utilizar-formatos",
+    "href": "cap12.html#utilizar-formatos",
+    "title": "33  printf vs echo",
+    "section": "33.4 3. Utilizar formatos",
+    "text": "33.4 3. Utilizar formatos\nUna ventaja de printf es que permite insertar valores dentro de un texto.\nnombre=\"Ana\"\nedad=20\n\nprintf \"Nombre: %s, Edad: %d\\n\" \"$nombre\" \"$edad\"\nLos especificadores más comunes son:\n\n\n\nSímbolo\nFunción\n\n\n\n\n%s\nInsertar texto\n\n\n%d\nInsertar un número entero\n\n\n%f\nInsertar un número decimal\n\n\n%.2f\nMostrar un decimal con dos cifras después del punto\n\n\n\\n\nSalto de línea\n\n\n\\t\nTabulación",
+    "crumbs": [
+      "**Sección 4** - Edición de archivos con Bash",
+      "<span class='chapter-number'>33</span>  <span class='chapter-title'>printf vs echo</span>"
+    ]
+  },
+  {
+    "objectID": "cap12.html#una-característica-muy-útil-para-bash",
+    "href": "cap12.html#una-característica-muy-útil-para-bash",
+    "title": "33  printf vs echo",
+    "section": "33.5 4. Una característica muy útil para Bash",
+    "text": "33.5 4. Una característica muy útil para Bash\nPodemos utilizar printf para imprimir varios elementos, uno por línea:\nprintf '%s\\n' Ana Luis María Carlos\nResultado:\nAna\nLuis\nMaría\nCarlos\nAquí ocurre algo interesante: printf reutiliza automáticamente el formato %s\\n para cada argumento.\nCon echo -e tendríamos que escribir:\necho -e \"Ana\\nLuis\\nMaría\\nCarlos\"",
+    "crumbs": [
+      "**Sección 4** - Edición de archivos con Bash",
+      "<span class='chapter-number'>33</span>  <span class='chapter-title'>printf vs echo</span>"
+    ]
+  },
+  {
+    "objectID": "cap12.html#por-qué-se-utiliza-printf-en-scripts",
+    "href": "cap12.html#por-qué-se-utiliza-printf-en-scripts",
+    "title": "33  printf vs echo",
+    "section": "33.6 5. ¿Por qué se utiliza printf en scripts?",
+    "text": "33.6 5. ¿Por qué se utiliza printf en scripts?\nPorque su comportamiento es más predecible que el de echo, especialmente cuando trabajamos con caracteres especiales, opciones y formatos.\nPor ejemplo, para mostrar dos decimales:\nprintf \"%.2f\\n\" 3.14159\nResultado:\n3.14",
+    "crumbs": [
+      "**Sección 4** - Edición de archivos con Bash",
+      "<span class='chapter-number'>33</span>  <span class='chapter-title'>printf vs echo</span>"
+    ]
+  },
+  {
+    "objectID": "cap12.html#ejemplo-generar-una-ficha-de-estudiante",
+    "href": "cap12.html#ejemplo-generar-una-ficha-de-estudiante",
+    "title": "33  printf vs echo",
+    "section": "33.7 Ejemplo: Generar una ficha de estudiante",
+    "text": "33.7 Ejemplo: Generar una ficha de estudiante\nObjetivo: Crear un script que muestre la información de un estudiante de manera organizada, utilizando printf para controlar el formato.\n1. Crear el script\nnano estudiante.sh\n2. Escribir el código\n#!/bin/bash\n\n# Información del estudiante\nnombre=\"Ana\"\nmateria=\"Matemáticas\"\ncalificacion=9.567\ngrupo=\"A\"\n\n# Mostrar información con echo\necho \"=== INFORMACIÓN DEL ESTUDIANTE ===\"\necho \"Nombre: $nombre\"\necho \"Materia: $materia\"\necho \"Calificación: $calificacion\"\necho \"Grupo: $grupo\"\n\necho \"\"\n\n# Mostrar información con printf\nprintf \"=== INFORMACIÓN DEL ESTUDIANTE ===\\n\"\nprintf \"Nombre: %s\\n\" \"$nombre\"\nprintf \"Materia: %s\\n\" \"$materia\"\nprintf \"Calificación: %.2f\\n\" \"$calificacion\"\nprintf \"Grupo: %s\\n\" \"$grupo\"\n3. Ejecutar el script\nchmod u+x estudiante.sh\n./estudiante.sh\n\n33.7.1 4. Comparar los resultados\nCon echo\n       \n=== INFORMACIÓN ===\nNombre: Ana\nMateria: Matemáticas\nCalificación: 9.567\nGrupo: A\n       \nCon printf\n     \n=== INFORMACIÓN ===\nNombre: Ana\nMateria: Matemáticas\nCalificación: 9.57\nGrupo: A\nLa diferencia principal es que printf permite controlar cómo se presenta la información. Por ejemplo, %.2f muestra la calificación con dos decimales.",
+    "crumbs": [
+      "**Sección 4** - Edición de archivos con Bash",
+      "<span class='chapter-number'>33</span>  <span class='chapter-title'>printf vs echo</span>"
+    ]
+  },
+  {
+    "objectID": "s3_actividad2.html",
+    "href": "s3_actividad2.html",
+    "title": "34  📚 Actividad 2 en equipo - ¡REDUCE EL CÓDIGO BASH!",
+    "section": "",
+    "text": "Fecha: 08 de octubre, 2026\n\nObjetivo Optimizar fragmentos de código Bash eliminando instrucciones redundantes y archivos temporales innecesarios, utilizando los comandos vistos en clase.\nTiempo: 40 min\nInstrucciones\n\nReescribe cada fragmento con la menor cantidad de comandos posible.\nConserva el resultado final mostrado en la terminal.\nNo utilices condicionales, ciclos ni printf.\nPuedes utilizar tuberías (|), expresiones regulares y opciones de los comandos estudiados.\nComprueba tus resultados.\n\nNota: Se busca conservar la salida final, no los archivos intermedios.\nTabla de división de los equipos\n\n\n\n\n\n\n\nIntegrantes\nFolio de actividad\n\n\n\n\n\nUri Alfonso GD\nPaulina NC\nYahir PR\n\nE-01\n\n\n\nGael BM\nArantza CL\nXochitl S\n\nE-02\n\n\n\nAdan AS\nCitlalli BS\nJuan Pablo VB\n\nE-03\n\n\n\nDamian CL\nFernanda FJ\nIxchel SP\n\nE-04\n\n\n\nLuisa Paulina BR\nEvelyn CL\nXimena VP\n\nE-05\n\n\n\nFátima RZ\nGonzalo TG\n\nE-06\n\n\n\nMartín MB\nDavid Israel NC\n\nE-07\n\n\n\nEmiliano RS\nHannah TA\n\nE-08\n\n\n\nSabina MC\nEmiliano MS\n\nE-09\n\n\n\nAlonso RR\nAlexander RR\n\nE-10\n\n\n\nSaid BC\nLeonel PS\n\nE-11\n\n\n\nJose Marti SJ\nConstanza SL\n\nE-12",
+    "crumbs": [
+      "**Sección 4** - Edición de archivos con Bash",
+      "<span class='chapter-number'>34</span>  <span class='chapter-title'>**📚** **Actividad 2 en equipo -** ¡REDUCE EL CÓDIGO BASH!</span>"
     ]
   },
   {
     "objectID": "cap13.html",
     "href": "cap13.html",
-    "title": "33  Condicionales",
+    "title": "35  Condicionales",
     "section": "",
-    "text": "33.1 Referencias\nLas condicionales son estructuras de programación que nos permiten tomar decisiones basadas en el resultado de una expresión. En otras palabras, nos permiten ejecutar diferentes bloques de código dependiendo de si una condición se cumple o no. Los condicionales son fundamentales para automatizar tareas y crear scripts fléxibles.\nLa sintáxis básica de un condicional simple en formato de una línea es :\nde igual manera pero en bloque identado:\nLos condicionales pueden ser tan complejos como lo imagines. Por ejemplo:\nArchivo: saludar.sh",
+    "text": "35.1 Referencias\nLas condicionales son estructuras de programación que nos permiten tomar decisiones basadas en el resultado de una expresión. En otras palabras, nos permiten ejecutar diferentes bloques de código dependiendo de si una condición se cumple o no. Los condicionales son fundamentales para automatizar tareas y crear scripts fléxibles.\nLa sintáxis básica de un condicional simple en formato de una línea es :\nde igual manera pero en bloque identado:\nLos condicionales pueden ser tan complejos como lo imagines. Por ejemplo:\nArchivo: saludar.sh",
     "crumbs": [
       "**Sección 4** - Edición de archivos con Bash",
-      "<span class='chapter-number'>33</span>  <span class='chapter-title'>Condicionales</span>"
+      "<span class='chapter-number'>35</span>  <span class='chapter-title'>Condicionales</span>"
     ]
   },
   {
     "objectID": "cap13.html#referencias",
     "href": "cap13.html#referencias",
-    "title": "33  Condicionales",
+    "title": "35  Condicionales",
     "section": "",
     "text": "DataCarpentry For Loops",
     "crumbs": [
       "**Sección 4** - Edición de archivos con Bash",
-      "<span class='chapter-number'>33</span>  <span class='chapter-title'>Condicionales</span>"
+      "<span class='chapter-number'>35</span>  <span class='chapter-title'>Condicionales</span>"
     ]
   },
   {
     "objectID": "cap14.html",
     "href": "cap14.html",
-    "title": "34  Bucles (for loops)",
+    "title": "36  Bucles (for loops)",
     "section": "",
-    "text": "34.1 Actividad grupal\nImagina que quieres realizar una misma tarea para 3 archivos distintos, ¿no sería nada molesto escribir el mismo código 3 veces, cierto?\n¿Y qué pasa si tengo que analizar y procesar docenas o cientos de archivos? Para ello puedes escribir bucles. Un bucle es una estructura de control que permite ejecutar un bloque de código rápidamente mientras se cumpla una determinada condición. En bash los bucles más comunes son for y while.\nRetomando el ejercicio anterior, modifiquemos el código para crear un bucle para procesar los tres archivos fastq (secuencias1.fastq, secuencias2.fastq, secuencias3.fastq ) que tenemos.\nPaso 1. Crear un script en Bash con el nombre bucles.sh empleando nano.\nPaso 2. Copia el siguiente código dentro del script bucle.sh y guarda los cambios.",
+    "text": "36.1 Actividad grupal\nImagina que quieres realizar una misma tarea para 3 archivos distintos, ¿no sería nada molesto escribir el mismo código 3 veces, cierto?\n¿Y qué pasa si tengo que analizar y procesar docenas o cientos de archivos? Para ello puedes escribir bucles. Un bucle es una estructura de control que permite ejecutar un bloque de código rápidamente mientras se cumpla una determinada condición. En bash los bucles más comunes son for y while.\nRetomando el ejercicio anterior, modifiquemos el código para crear un bucle para procesar los tres archivos fastq (secuencias1.fastq, secuencias2.fastq, secuencias3.fastq ) que tenemos.\nPaso 1. Crear un script en Bash con el nombre bucles.sh empleando nano.\nPaso 2. Copia el siguiente código dentro del script bucle.sh y guarda los cambios.",
     "crumbs": [
       "**Sección 4** - Edición de archivos con Bash",
-      "<span class='chapter-number'>34</span>  <span class='chapter-title'>Bucles (for loops)</span>"
+      "<span class='chapter-number'>36</span>  <span class='chapter-title'>Bucles (for loops)</span>"
     ]
   },
   {
     "objectID": "cap14.html#actividad-grupal",
     "href": "cap14.html#actividad-grupal",
-    "title": "34  Bucles (for loops)",
+    "title": "36  Bucles (for loops)",
     "section": "",
     "text": "nano bucles.sh\n\n#!/bin/bash\n# Script para analizar múltiples archivos FASTA\n\n# Archivos a procesar\narchivos=(\"archivo1.fasta\" \"archivo2.fasta\" \"archivo3.fasta\")\n\n# Loop para analizar cada archivo\nfor archivo in \"${archivos[@]}\"; do\n  echo \"Archivo a procesar: $archivo\"\n  \n  # Verifica si el archivo existe\n  if [ ! -f \"$archivo\" ]; then\n    echo \"El archivo $archivo no existe. Saltando...\"\n    continue\n  fi\n\n  # 1. Conteo de secuencias\n  numero_secuencias=$(grep -c '^@SRR098026' \"$archivo\")\n  echo \"Número de secuencias en $archivo: $numero_secuencias\"\n\n  # 2. Separación de malas lecturas\n  grep -B1 -A2 'NNNNNNNNNN' \"$archivo\" &gt; \"malas_lecturas_$archivo\"\n  malas=$(wc -l &lt; \"malas_lecturas_$archivo\")\n  echo \"Número de malas lecturas en $archivo: $malas\"\n\n  # 3. Búsqueda de patrones\n  echo \"Desea buscar patrones en $archivo? (y/n):\"\n  read -r respuesta\n\n  if [[ \"$respuesta\" == \"y\" ]]; then\n    patrones_file=\"patrones_$archivo.txt\"\n    busqueda_file=\"busqueda_$archivo.txt\"\n\n    echo -e 'ACTG\\nCCCCC\\nNNNCNNN\\nNNNGNNN\\nTTTT\\nTATA\\nAAA' &gt; \"$patrones_file\"\n    grep -f \"$patrones_file\" \"$archivo\" &gt; \"$busqueda_file\"\n\n    echo \"Búsqueda de patrones guardada en: $busqueda_file\"\n  else\n    echo \"Patrones no buscados en $archivo.\"\n  fi\n\n  echo \"Procesamiento de $archivo completado.\"\n  echo \"---------------------------------------\"\ndone\n\n# Mensaje final\necho \"Metaanálisis finalizado para todos los archivos.\"",
     "crumbs": [
       "**Sección 4** - Edición de archivos con Bash",
-      "<span class='chapter-number'>34</span>  <span class='chapter-title'>Bucles (for loops)</span>"
+      "<span class='chapter-number'>36</span>  <span class='chapter-title'>Bucles (for loops)</span>"
     ]
   },
   {
     "objectID": "cap14.html#referencias",
     "href": "cap14.html#referencias",
-    "title": "34  Bucles (for loops)",
-    "section": "34.2 Referencias",
-    "text": "34.2 Referencias\n\nSWCarpentry: Loops",
+    "title": "36  Bucles (for loops)",
+    "section": "36.2 Referencias",
+    "text": "36.2 Referencias\n\nSWCarpentry: Loops",
     "crumbs": [
       "**Sección 4** - Edición de archivos con Bash",
-      "<span class='chapter-number'>34</span>  <span class='chapter-title'>Bucles (for loops)</span>"
+      "<span class='chapter-number'>36</span>  <span class='chapter-title'>Bucles (for loops)</span>"
     ]
   },
   {
     "objectID": "Rstudio_paquetes.html",
     "href": "Rstudio_paquetes.html",
-    "title": "35  Descargar y cargar Librerías en Rstudio",
+    "title": "37  Descargar y cargar Librerías en Rstudio",
     "section": "",
-    "text": "Fecha: 06 de octubre, 2026\n\n\n35.0.1 ¿Qué es una librería?\nEn programación, una librería es una colección de código pre-escrito. Una librería contiene una “paquete” o “librería” de funciones que podemos utilizar si descargamos e importamos esa librería a nuestro programa.\nComo mencioné anteriormente, al descargar R, también descargamos una serie de librerías, llamadas base R packages. Sin embargo, dependiendo del problema que queramos resolver con nuestro programa, necesitaremos librerías que nos permitan hacer otras cosas.\nExisten distintas formas de instalar librerías.\n\n\n35.0.2 Instalar librerías: CRAN\n\nInstalación desde el repositorio de CRAN: podemos descargar paqueterías de CRAN de dos formas:\n\nLa primera, desde consola con el siguiente comando:\n\n\nCódigo\ninstall.packages(\"reticulate\")\n\n\nLa segunda, desde el menú Herramientas &gt; Instalar paqueterías. En la ventana, ingresamos el nombre de la librería y click en Instalar.\n\n\n\n\n\nLa tercera opción es usar el botón “Install” dentro de la pestaña de Packages.\n\n\n\n35.0.3 ¿Cómo podemos verificar que paquetes tenemos?\nEn la ventana inferior derecha, existe una pestaña que se llama “Packages” que contendra la lista de paquetes instalados en tu computadora, su descripción corta y su versión.\nTambien en esta pestaña podemos instalar paquetes dandado click en INSTALL.\n\n\n\n\n\n\n\n35.0.4 Eliminación de paquetes\nEn algunas ocasiones vamos a tener que actualizar las versiones de los paquetes, pero primero dedes eliminar la versión anterior. Dando click en el botón que contiene una X que esta al final de la fila en cada programa.\n\n\n\n\n\nTambién puedes usar codigo para eliminar el paquete:\n\n\nCódigo\nremove.packages(\"package-to-remove\")\n\n\n\n\n35.0.5 Cargar paquetes en el ambiente de R\n\nOpción A: Emplear la función library para cargar en el ambiente el paquete.\n\n\n\nCódigo\nlibrary(reticulate)\n\n\n\nOpción B: Dando click a la casilla que indica el paquete. Para dejar de usarlo da de nuevo click en esa casilla para que deje de estar marcada.",
+    "text": "Fecha: 06 de octubre, 2026\n\n\n37.0.1 ¿Qué es una librería?\nEn programación, una librería es una colección de código pre-escrito. Una librería contiene una “paquete” o “librería” de funciones que podemos utilizar si descargamos e importamos esa librería a nuestro programa.\nComo mencioné anteriormente, al descargar R, también descargamos una serie de librerías, llamadas base R packages. Sin embargo, dependiendo del problema que queramos resolver con nuestro programa, necesitaremos librerías que nos permitan hacer otras cosas.\nExisten distintas formas de instalar librerías.\n\n\n37.0.2 Instalar librerías: CRAN\n\nInstalación desde el repositorio de CRAN: podemos descargar paqueterías de CRAN de dos formas:\n\nLa primera, desde consola con el siguiente comando:\n\n\nCódigo\ninstall.packages(\"reticulate\")\n\n\nLa segunda, desde el menú Herramientas &gt; Instalar paqueterías. En la ventana, ingresamos el nombre de la librería y click en Instalar.\n\n\n\n\n\nLa tercera opción es usar el botón “Install” dentro de la pestaña de Packages.\n\n\n\n37.0.3 ¿Cómo podemos verificar que paquetes tenemos?\nEn la ventana inferior derecha, existe una pestaña que se llama “Packages” que contendra la lista de paquetes instalados en tu computadora, su descripción corta y su versión.\nTambien en esta pestaña podemos instalar paquetes dandado click en INSTALL.\n\n\n\n\n\n\n\n37.0.4 Eliminación de paquetes\nEn algunas ocasiones vamos a tener que actualizar las versiones de los paquetes, pero primero dedes eliminar la versión anterior. Dando click en el botón que contiene una X que esta al final de la fila en cada programa.\n\n\n\n\n\nTambién puedes usar codigo para eliminar el paquete:\n\n\nCódigo\nremove.packages(\"package-to-remove\")\n\n\n\n\n37.0.5 Cargar paquetes en el ambiente de R\n\nOpción A: Emplear la función library para cargar en el ambiente el paquete.\n\n\n\nCódigo\nlibrary(reticulate)\n\n\n\nOpción B: Dando click a la casilla que indica el paquete. Para dejar de usarlo da de nuevo click en esa casilla para que deje de estar marcada.",
     "crumbs": [
       "**Sección 5** - Introducción a Git/GitHub",
-      "<span class='chapter-number'>35</span>  <span class='chapter-title'>Descargar y cargar Librerías en Rstudio</span>"
+      "<span class='chapter-number'>37</span>  <span class='chapter-title'>Descargar y cargar Librerías en Rstudio</span>"
     ]
   },
   {
     "objectID": "cap15.html",
     "href": "cap15.html",
-    "title": "36  Introducción a Git / GitHub",
+    "title": "38  Introducción a Git / GitHub",
     "section": "",
-    "text": "36.1 ¿Por qué hacer control de versiones de nuestros proyectos?",
+    "text": "38.1 ¿Por qué hacer control de versiones de nuestros proyectos?",
     "crumbs": [
       "**Sección 5** - Introducción a Git/GitHub",
-      "<span class='chapter-number'>36</span>  <span class='chapter-title'>Introducción a Git / GitHub</span>"
+      "<span class='chapter-number'>38</span>  <span class='chapter-title'>Introducción a Git / GitHub</span>"
     ]
   },
   {
     "objectID": "cap15.html#por-qué-hacer-control-de-versiones-de-nuestros-proyectos",
     "href": "cap15.html#por-qué-hacer-control-de-versiones-de-nuestros-proyectos",
-    "title": "36  Introducción a Git / GitHub",
+    "title": "38  Introducción a Git / GitHub",
     "section": "",
     "text": "✅ Los proyectos suelen cambiar y crecer.\n💾 Es díficil saber cuáles fueron todos los cambios a lo largo del tiempo (en especial tiempos largos, hazlo por tu yo del futuro!).\n🤔 Las colaboraciones se pueden complicar sin un buen control de versiones.\n🔐 Seguridad.\n\n\n\n\n“notFinal.doc” by Jorge Cham, https://www.phdcomics.com",
     "crumbs": [
       "**Sección 5** - Introducción a Git/GitHub",
-      "<span class='chapter-number'>36</span>  <span class='chapter-title'>Introducción a Git / GitHub</span>"
+      "<span class='chapter-number'>38</span>  <span class='chapter-title'>Introducción a Git / GitHub</span>"
     ]
   },
   {
     "objectID": "cap15.html#git",
     "href": "cap15.html#git",
-    "title": "36  Introducción a Git / GitHub",
-    "section": "36.2 Git",
-    "text": "36.2 Git\nGit es un sistema de control de versiones distribuido, gratuito y de código abierto, diseñado para manejar todo tipo de proyectos, desde los más pequeños hasta los más grandes, con rapidez y eficiencia.\nGit es fácil de aprender y ocupa poco espacio con un rendimiento rapidísimo. Supera a las herramientas SCM como Subversion, CVS, Perforce y ClearCase con características como la ramificación local barata, las cómodas áreas de preparación y los múltiples flujos de trabajo.\nEn resumen:\n\nGit es un sistema de control de versiones\nGit funciona con GitHub, Bitbucket o GitLab",
+    "title": "38  Introducción a Git / GitHub",
+    "section": "38.2 Git",
+    "text": "38.2 Git\nGit es un sistema de control de versiones distribuido, gratuito y de código abierto, diseñado para manejar todo tipo de proyectos, desde los más pequeños hasta los más grandes, con rapidez y eficiencia.\nGit es fácil de aprender y ocupa poco espacio con un rendimiento rapidísimo. Supera a las herramientas SCM como Subversion, CVS, Perforce y ClearCase con características como la ramificación local barata, las cómodas áreas de preparación y los múltiples flujos de trabajo.\nEn resumen:\n\nGit es un sistema de control de versiones\nGit funciona con GitHub, Bitbucket o GitLab",
     "crumbs": [
       "**Sección 5** - Introducción a Git/GitHub",
-      "<span class='chapter-number'>36</span>  <span class='chapter-title'>Introducción a Git / GitHub</span>"
+      "<span class='chapter-number'>38</span>  <span class='chapter-title'>Introducción a Git / GitHub</span>"
     ]
   },
   {
     "objectID": "cap15.html#git-vs-controles-de-versión-a-mano",
     "href": "cap15.html#git-vs-controles-de-versión-a-mano",
-    "title": "36  Introducción a Git / GitHub",
-    "section": "36.3 Git vs controles de versión a mano",
-    "text": "36.3 Git vs controles de versión a mano\n\nCon Git cada contribuidor tiene una copia del repositorio central, con todos los archivos y la historia de los cambios por los que han pasado.",
+    "title": "38  Introducción a Git / GitHub",
+    "section": "38.3 Git vs controles de versión a mano",
+    "text": "38.3 Git vs controles de versión a mano\n\nCon Git cada contribuidor tiene una copia del repositorio central, con todos los archivos y la historia de los cambios por los que han pasado.",
     "crumbs": [
       "**Sección 5** - Introducción a Git/GitHub",
-      "<span class='chapter-number'>36</span>  <span class='chapter-title'>Introducción a Git / GitHub</span>"
+      "<span class='chapter-number'>38</span>  <span class='chapter-title'>Introducción a Git / GitHub</span>"
     ]
   },
   {
     "objectID": "cap15.html#recomendaciones-para-sus-proyectos",
     "href": "cap15.html#recomendaciones-para-sus-proyectos",
-    "title": "36  Introducción a Git / GitHub",
-    "section": "36.4 Recomendaciones para sus proyectos",
-    "text": "36.4 Recomendaciones para sus proyectos\n\nDedicar un directorio exclusivo por proyecto.\nEs mejor organizarlo en un RStudio Project.\nHacer un repositorio de Git.\nTrabajen como siempre, solo además de guardar, recuerden hacer commit\nDe vez en vez hagan push de sus cambios cuando los hayan verificado.",
+    "title": "38  Introducción a Git / GitHub",
+    "section": "38.4 Recomendaciones para sus proyectos",
+    "text": "38.4 Recomendaciones para sus proyectos\n\nDedicar un directorio exclusivo por proyecto.\nEs mejor organizarlo en un RStudio Project.\nHacer un repositorio de Git.\nTrabajen como siempre, solo además de guardar, recuerden hacer commit\nDe vez en vez hagan push de sus cambios cuando los hayan verificado.",
     "crumbs": [
       "**Sección 5** - Introducción a Git/GitHub",
-      "<span class='chapter-number'>36</span>  <span class='chapter-title'>Introducción a Git / GitHub</span>"
+      "<span class='chapter-number'>38</span>  <span class='chapter-title'>Introducción a Git / GitHub</span>"
     ]
   },
   {
     "objectID": "cap15.html#proyectos-colaborativos",
     "href": "cap15.html#proyectos-colaborativos",
-    "title": "36  Introducción a Git / GitHub",
-    "section": "36.5 10.5 Proyectos colaborativos",
-    "text": "36.5 10.5 Proyectos colaborativos\n\nGitHub se parece más a un GoogleDoc que a un Word Document.\nEs fácil que los colaboradores hagan cambios y también es fácil saber quién hizo que.\nEl owner del proyecto puede dar permisos a los diferentes colaboradores.\nTambién existen organizaciones, esto puede ser útil para manejar los permisos de grupos grandes de colaboración.",
+    "title": "38  Introducción a Git / GitHub",
+    "section": "38.5 10.5 Proyectos colaborativos",
+    "text": "38.5 10.5 Proyectos colaborativos\n\nGitHub se parece más a un GoogleDoc que a un Word Document.\nEs fácil que los colaboradores hagan cambios y también es fácil saber quién hizo que.\nEl owner del proyecto puede dar permisos a los diferentes colaboradores.\nTambién existen organizaciones, esto puede ser útil para manejar los permisos de grupos grandes de colaboración.",
     "crumbs": [
       "**Sección 5** - Introducción a Git/GitHub",
-      "<span class='chapter-number'>36</span>  <span class='chapter-title'>Introducción a Git / GitHub</span>"
+      "<span class='chapter-number'>38</span>  <span class='chapter-title'>Introducción a Git / GitHub</span>"
     ]
   },
   {
     "objectID": "cap15.html#github",
     "href": "cap15.html#github",
-    "title": "36  Introducción a Git / GitHub",
-    "section": "36.6 GitHub",
-    "text": "36.6 GitHub\nGitHub es una plataforma para guardar proyectos, hace uso de Git. Su principal utilidad es para generar código fuente de programas.\nTambién existen otras plataformas como Bitbucked y GitLab, las cuales funcionan de manera similar a GitHub.",
+    "title": "38  Introducción a Git / GitHub",
+    "section": "38.6 GitHub",
+    "text": "38.6 GitHub\nGitHub es una plataforma para guardar proyectos, hace uso de Git. Su principal utilidad es para generar código fuente de programas.\nTambién existen otras plataformas como Bitbucked y GitLab, las cuales funcionan de manera similar a GitHub.",
     "crumbs": [
       "**Sección 5** - Introducción a Git/GitHub",
-      "<span class='chapter-number'>36</span>  <span class='chapter-title'>Introducción a Git / GitHub</span>"
+      "<span class='chapter-number'>38</span>  <span class='chapter-title'>Introducción a Git / GitHub</span>"
     ]
   },
   {
     "objectID": "cap15.html#manual-de-sobreviviencia-con-git-y-github-en-rstudio-en-caso-de-ser-necesario",
     "href": "cap15.html#manual-de-sobreviviencia-con-git-y-github-en-rstudio-en-caso-de-ser-necesario",
-    "title": "36  Introducción a Git / GitHub",
-    "section": "36.7 Manual de sobreviviencia con Git Y GitHub en RStudio (en caso de ser necesario)",
-    "text": "36.7 Manual de sobreviviencia con Git Y GitHub en RStudio (en caso de ser necesario)\n\nPor cualquier problema con la conexión entre RStudio y Git, siempre ten en cuenta la ubicación de dónde se instaló Git.\n\nPuedes usar en la terminal which git (Mac y Linux)\nO bien usar en la terminal where git (Windows)\n\nRecuerda que la terminal (línea de comandos, consola, shell o bash) es un programa en tu computadora que funciona para correr otros programas. Desde RStudio puedes abrir la terminal, lo cual es muy conveniente si estás trabajando en un proyecto. Puedes abrir una terminal con:\n\nTools &gt; Terminal (abre la terminal dentro del IDE de RStudio)\nTools &gt; Shell (abre una terminal externa a RStudio) &gt; Apply &gt; OK",
+    "title": "38  Introducción a Git / GitHub",
+    "section": "38.7 Manual de sobreviviencia con Git Y GitHub en RStudio (en caso de ser necesario)",
+    "text": "38.7 Manual de sobreviviencia con Git Y GitHub en RStudio (en caso de ser necesario)\n\nPor cualquier problema con la conexión entre RStudio y Git, siempre ten en cuenta la ubicación de dónde se instaló Git.\n\nPuedes usar en la terminal which git (Mac y Linux)\nO bien usar en la terminal where git (Windows)\n\nRecuerda que la terminal (línea de comandos, consola, shell o bash) es un programa en tu computadora que funciona para correr otros programas. Desde RStudio puedes abrir la terminal, lo cual es muy conveniente si estás trabajando en un proyecto. Puedes abrir una terminal con:\n\nTools &gt; Terminal (abre la terminal dentro del IDE de RStudio)\nTools &gt; Shell (abre una terminal externa a RStudio) &gt; Apply &gt; OK",
     "crumbs": [
       "**Sección 5** - Introducción a Git/GitHub",
-      "<span class='chapter-number'>36</span>  <span class='chapter-title'>Introducción a Git / GitHub</span>"
+      "<span class='chapter-number'>38</span>  <span class='chapter-title'>Introducción a Git / GitHub</span>"
     ]
   },
   {
     "objectID": "cap15.html#clonar-un-repositorio-y-tener-conexiónpermisos-para-modificarlo",
     "href": "cap15.html#clonar-un-repositorio-y-tener-conexiónpermisos-para-modificarlo",
-    "title": "36  Introducción a Git / GitHub",
-    "section": "36.8 Clonar un repositorio y tener conexión/permisos para modificarlo",
-    "text": "36.8 Clonar un repositorio y tener conexión/permisos para modificarlo\n\nGit puede comunicarse con un servidor remoto usando uno de dos protocolos, HTTPS o SSH, y cada protocolo usa credenciales diferentes.\nLa recomendación actual de GitHub es usar HTTPS porque es la manera más fácil de configurar y tiene operatividad en múltiples redes y plataformas.\n\nEs menos probable que HTTPS sea bloqueado por un firewall.\nUna conexión HTTPS permite que credential.helper almacene en caché su contraseña. (por tanto puedes configurar tu usuario y contraseña en tu equipo de uso).\nEs más sencillo acceder a un repositorio desde cualquier lugar, ya que solo necesitas los detalles de tu cuenta (no se requieren claves SSH) para escribir en el repositorio.\n\nUsualmente cuando inicies un proyecto colaborativo con GitHub inicializa el repositorio con un README. Copia el HTTPS URL para clonar el repositorio en la terminal git clone https://github.com/TU-USUARIO/TU-REPOSITORIO.git.",
+    "title": "38  Introducción a Git / GitHub",
+    "section": "38.8 Clonar un repositorio y tener conexión/permisos para modificarlo",
+    "text": "38.8 Clonar un repositorio y tener conexión/permisos para modificarlo\n\nGit puede comunicarse con un servidor remoto usando uno de dos protocolos, HTTPS o SSH, y cada protocolo usa credenciales diferentes.\nLa recomendación actual de GitHub es usar HTTPS porque es la manera más fácil de configurar y tiene operatividad en múltiples redes y plataformas.\n\nEs menos probable que HTTPS sea bloqueado por un firewall.\nUna conexión HTTPS permite que credential.helper almacene en caché su contraseña. (por tanto puedes configurar tu usuario y contraseña en tu equipo de uso).\nEs más sencillo acceder a un repositorio desde cualquier lugar, ya que solo necesitas los detalles de tu cuenta (no se requieren claves SSH) para escribir en el repositorio.\n\nUsualmente cuando inicies un proyecto colaborativo con GitHub inicializa el repositorio con un README. Copia el HTTPS URL para clonar el repositorio en la terminal git clone https://github.com/TU-USUARIO/TU-REPOSITORIO.git.",
     "crumbs": [
       "**Sección 5** - Introducción a Git/GitHub",
-      "<span class='chapter-number'>36</span>  <span class='chapter-title'>Introducción a Git / GitHub</span>"
+      "<span class='chapter-number'>38</span>  <span class='chapter-title'>Introducción a Git / GitHub</span>"
     ]
   },
   {
     "objectID": "cap15.html#referencias",
     "href": "cap15.html#referencias",
-    "title": "36  Introducción a Git / GitHub",
-    "section": "36.9 Referencias",
-    "text": "36.9 Referencias\n\nEvelia tutorial:Workshop sobre Git / Github 2025\nHaydee tutorial: Temas Selectos de Análisis Numérico y Computación Científica: Computo científico para el análisis de datos\nGithub tutorial: Trabajar con contraseñas de clave SSH\nAlejandra Medina tutorial: Control de versiones con GitHub y RStudio\nHacia una biología computacional más reproducible, transparente y colaborativa",
+    "title": "38  Introducción a Git / GitHub",
+    "section": "38.9 Referencias",
+    "text": "38.9 Referencias\n\nEvelia tutorial:Workshop sobre Git / Github 2025\nHaydee tutorial: Temas Selectos de Análisis Numérico y Computación Científica: Computo científico para el análisis de datos\nGithub tutorial: Trabajar con contraseñas de clave SSH\nAlejandra Medina tutorial: Control de versiones con GitHub y RStudio\nHacia una biología computacional más reproducible, transparente y colaborativa",
     "crumbs": [
       "**Sección 5** - Introducción a Git/GitHub",
-      "<span class='chapter-number'>36</span>  <span class='chapter-title'>Introducción a Git / GitHub</span>"
+      "<span class='chapter-number'>38</span>  <span class='chapter-title'>Introducción a Git / GitHub</span>"
     ]
   },
   {
     "objectID": "cap22.html",
     "href": "cap22.html",
-    "title": "37  Github",
+    "title": "39  Github",
     "section": "",
-    "text": "37.1 Paso 1: Crear un repositorio remoto\nEl valor del control de versiones se hace evidente al comenzar a colaborar con otros. Contamos con la mayor parte de las herramientas necesarias para ello; lo único que resta es transferir cambios de un repositorio a otro.\nSistemas como Git posibilitan el traslado de trabajo entre cualquier par de repositorios. No obstante, en la práctica, resulta más conveniente utilizar una copia como punto central y mantenerla en la web en lugar de en la computadora portátil de alguien.\nVamos a comenzar por crear un repositorio remoto, pero para eso necesitamos configurar nuestra cuenta de Github también.\nLo primero que vamos a hacer es crear un repositorio remoto. Entra a tu cuenta de Github y dale click en Nuevo.\nPonle de nombre Mi_primer_repo (o el nombre que hayas usado en las secciones anteriores). Deja marcada la opción de público y no añadas un README ni una licencia.\nAl darle click en crear repositorio, la página nos mostrará la siguiente información que es la que usaremos para configurar nuestro local con el remoto.\nLo que acabamos de hacer es como si en nuestra terminal hubiéramos realizado lo siguiente:",
+    "text": "39.1 Paso 1: Crear un repositorio remoto\nEl valor del control de versiones se hace evidente al comenzar a colaborar con otros. Contamos con la mayor parte de las herramientas necesarias para ello; lo único que resta es transferir cambios de un repositorio a otro.\nSistemas como Git posibilitan el traslado de trabajo entre cualquier par de repositorios. No obstante, en la práctica, resulta más conveniente utilizar una copia como punto central y mantenerla en la web en lugar de en la computadora portátil de alguien.\nVamos a comenzar por crear un repositorio remoto, pero para eso necesitamos configurar nuestra cuenta de Github también.\nLo primero que vamos a hacer es crear un repositorio remoto. Entra a tu cuenta de Github y dale click en Nuevo.\nPonle de nombre Mi_primer_repo (o el nombre que hayas usado en las secciones anteriores). Deja marcada la opción de público y no añadas un README ni una licencia.\nAl darle click en crear repositorio, la página nos mostrará la siguiente información que es la que usaremos para configurar nuestro local con el remoto.\nLo que acabamos de hacer es como si en nuestra terminal hubiéramos realizado lo siguiente:",
     "crumbs": [
       "**Sección 5** - Introducción a Git/GitHub",
-      "<span class='chapter-number'>37</span>  <span class='chapter-title'>Github</span>"
+      "<span class='chapter-number'>39</span>  <span class='chapter-title'>Github</span>"
     ]
   },
   {
     "objectID": "cap22.html#paso-1-crear-un-repositorio-remoto",
     "href": "cap22.html#paso-1-crear-un-repositorio-remoto",
-    "title": "37  Github",
+    "title": "39  Github",
     "section": "",
     "text": "Crear repositorio nuevo\n\n\n\n\n\n\nCrear repositorio vacío\n\n\n\n\n\n\nInformación del repositorio remoto para configurar con nuestro local\n\n\n\nmkdir Mi_primer_repo\ncd Mi_primer_repo\ngit init",
     "crumbs": [
       "**Sección 5** - Introducción a Git/GitHub",
-      "<span class='chapter-number'>37</span>  <span class='chapter-title'>Github</span>"
+      "<span class='chapter-number'>39</span>  <span class='chapter-title'>Github</span>"
     ]
   },
   {
     "objectID": "cap22.html#paso-2-conectar-local-a-remoto",
     "href": "cap22.html#paso-2-conectar-local-a-remoto",
-    "title": "37  Github",
-    "section": "37.2 Paso 2: Conectar local a remoto",
-    "text": "37.2 Paso 2: Conectar local a remoto\nLa página principal del repositorio remoto muestra una serie de información que necesitamos usar para conectar el repositorio remoto en Github con el repositorio local de nuestra computadora. Vamos a usar el protocolo de conexión SSH, da click en donde dice SSH y a continuación en el icono de copiar.\n\n\n\nSSH link para clonar el repositorio\n\n\nAhora, dentro de nuestra carpeta del repositorio local, abrir una terminal y correr lo siguiente:\ngit remote add origin git@github.com:User/Mi_primer_repo.git\nPara revisar que si se haya realizado correctamente procedemos a usar lo siguiente:\ngit remote -v",
+    "title": "39  Github",
+    "section": "39.2 Paso 2: Conectar local a remoto",
+    "text": "39.2 Paso 2: Conectar local a remoto\nLa página principal del repositorio remoto muestra una serie de información que necesitamos usar para conectar el repositorio remoto en Github con el repositorio local de nuestra computadora. Vamos a usar el protocolo de conexión SSH, da click en donde dice SSH y a continuación en el icono de copiar.\n\n\n\nSSH link para clonar el repositorio\n\n\nAhora, dentro de nuestra carpeta del repositorio local, abrir una terminal y correr lo siguiente:\ngit remote add origin git@github.com:User/Mi_primer_repo.git\nPara revisar que si se haya realizado correctamente procedemos a usar lo siguiente:\ngit remote -v",
     "crumbs": [
       "**Sección 5** - Introducción a Git/GitHub",
-      "<span class='chapter-number'>37</span>  <span class='chapter-title'>Github</span>"
+      "<span class='chapter-number'>39</span>  <span class='chapter-title'>Github</span>"
     ]
   },
   {
     "objectID": "cap22.html#paso-3-conexión-mediante-ssh",
     "href": "cap22.html#paso-3-conexión-mediante-ssh",
-    "title": "37  Github",
-    "section": "37.3 Paso 3: Conexión mediante SSH",
-    "text": "37.3 Paso 3: Conexión mediante SSH\nPrimero verificamos si ya tenemos algún par de llaves:\nls -al ~/.ssh\nSi ya tienen algún par de llaves configuradas las van a ver listadas, si no tiene ninguna les saldrá una leyenda como la siguiente:\nls: cannot access '/c/Users/User/.ssh': No such file or directory\n\n37.3.1 Paso 3.1: Crear un par de llaves SSH\nPara crear el par de llaves usamos el siguiente comando, la opción -t se refiere al tipo de algoritmo usado y la opción -C indica un comentario para la llave, en este caso el comentario es nuestro correo.\nssh-keygen -t ed25519 -C \"email@dominio.com\"\nSi tu sistema operativo no lo permite, usa ssh-keygen -t rsa -b 4096 -C \"your_email@example.com\".\nNota: Si no cuentas con ssh-keygen instalado, primero corre el código:\nsudo apt-get install ssh-keygen\nComo queremos usar el archivo default, solo damos Enter. Ahora nos pedirá una contraseña, tecleala, no vas a ver nada en la pantalla. Una vez creada verás en pantalla algo como lo siguiente:\nYour identification has been saved in /c/Users/user/.ssh/id_ed25519\nYour public key has been saved in /c/Users/user/.ssh/id_ed25519.pub\nThe key fingerprint is:\nSHA256:SMSPIStNyA10KPxuYu94KpZg9AYjgt9g46A4kFy3g1o user@domain\nThe keys randomart image is:\n+--[ED25519 256]--+\n|^B== o.          |\n|%*= *.+          |\n|+=.E =.+         |\n| .=.+.o..        |\n|...   . S        |\n|.+ o             |\n|+ =              |\n|.o.o             |\n|oo+.             |\n+----[SHA256]-----+\nLo que dice identification ser refiere a la llave privada la cual no debes compartir nunca y la cadena de caracteres que dice fingerprint se refiere a parte de tu llave pública.\nSi repetimos el comando siguiente, verán ahora ya sus dos claves pública y privada.\nls -al ~/.ssh\n\n\n37.3.2 Paso 3.2 Generar una llave pública exclusiva para Github (opcional)\nEn caso de que ya cuentes con una llave con ese nombre, puedes crear una nueva llave con otro nombre especifico para Github:\nssh-keygen -t ed25519 -C \"your_email@example.com\" -f ~/.ssh/id_ed25519_github\n\n\n\nClave exclusiva de github\n\n\nAhora que ya tenemos las claves, debemos decirle a GitHub cuales son.\ncat ~/.ssh/id_ed25519.pub\nCopia la cadena de caracteres, ve a la configuración de tu perfil de GitHub y da clic en “SSH and GPG Keys”.\n\n\n\nSSH and GPG Keys\n\n\nUna vez ahí da clic en “Nueva llave SSH”.\n\n\n\nNueva llave SSH\n\n\nDespués coloca un título que te permita identificar que será la clave con la que usarás la computadora y pega tu llave pública.\n\n\n\nLlave pública\n\n\nAhora solo falta revisar la conexión desde la terminal.\nssh -T git@github.com\nSi vez un mensaje similar al siguiente, significa que quedo completa la autenticación.\nHi Name! Youve successfully authenticated, but GitHub does not provide shell access.\n\n\n37.3.3 Paso 3.3 Solución a Error con la llave\nA mi paso que la llave esta bien pero no tenia acceso a usar github, mostrando este mensaje:\nssh -i .ssh/id_ed25519 -T git@github.com\nHi HaydeePeruyero! You've successfully authenticated, but GitHub does not provide shell access.\n\nAgregar configuración\nPor lo que decidí configurar el archivo ~/.ssh/config.\nnano ~/.ssh/config\nagrega esto:\nHost github.com\n  HostName github.com\n  User git\n  IdentityFile ~/.ssh/id_ed25519\n  IdentitiesOnly yes\nGuarda y cierra las modificaciones del archivo.\n\n\nVerifica que los permisos estén correctos\nchmod 600 ~/.ssh/id_ed25519\nchmod 644 ~/.ssh/id_ed25519.pub\nchmod 600 ~/.ssh/config\n\n\nAgrega tu clave al ssh-agent\nEsto asegura que la clave esté disponible durante tus sesiones:\nssh-add ~/.ssh/id_ed25519\n\n\nPrueba conexión otra vez\nssh -T git@github.com\nDebe decir:\nHi HaydeePeruyero! You've successfully authenticated, but GitHub does not provide shell access.",
+    "title": "39  Github",
+    "section": "39.3 Paso 3: Conexión mediante SSH",
+    "text": "39.3 Paso 3: Conexión mediante SSH\nPrimero verificamos si ya tenemos algún par de llaves:\nls -al ~/.ssh\nSi ya tienen algún par de llaves configuradas las van a ver listadas, si no tiene ninguna les saldrá una leyenda como la siguiente:\nls: cannot access '/c/Users/User/.ssh': No such file or directory\n\n39.3.1 Paso 3.1: Crear un par de llaves SSH\nPara crear el par de llaves usamos el siguiente comando, la opción -t se refiere al tipo de algoritmo usado y la opción -C indica un comentario para la llave, en este caso el comentario es nuestro correo.\nssh-keygen -t ed25519 -C \"email@dominio.com\"\nSi tu sistema operativo no lo permite, usa ssh-keygen -t rsa -b 4096 -C \"your_email@example.com\".\nNota: Si no cuentas con ssh-keygen instalado, primero corre el código:\nsudo apt-get install ssh-keygen\nComo queremos usar el archivo default, solo damos Enter. Ahora nos pedirá una contraseña, tecleala, no vas a ver nada en la pantalla. Una vez creada verás en pantalla algo como lo siguiente:\nYour identification has been saved in /c/Users/user/.ssh/id_ed25519\nYour public key has been saved in /c/Users/user/.ssh/id_ed25519.pub\nThe key fingerprint is:\nSHA256:SMSPIStNyA10KPxuYu94KpZg9AYjgt9g46A4kFy3g1o user@domain\nThe keys randomart image is:\n+--[ED25519 256]--+\n|^B== o.          |\n|%*= *.+          |\n|+=.E =.+         |\n| .=.+.o..        |\n|...   . S        |\n|.+ o             |\n|+ =              |\n|.o.o             |\n|oo+.             |\n+----[SHA256]-----+\nLo que dice identification ser refiere a la llave privada la cual no debes compartir nunca y la cadena de caracteres que dice fingerprint se refiere a parte de tu llave pública.\nSi repetimos el comando siguiente, verán ahora ya sus dos claves pública y privada.\nls -al ~/.ssh\n\n\n39.3.2 Paso 3.2 Generar una llave pública exclusiva para Github (opcional)\nEn caso de que ya cuentes con una llave con ese nombre, puedes crear una nueva llave con otro nombre especifico para Github:\nssh-keygen -t ed25519 -C \"your_email@example.com\" -f ~/.ssh/id_ed25519_github\n\n\n\nClave exclusiva de github\n\n\nAhora que ya tenemos las claves, debemos decirle a GitHub cuales son.\ncat ~/.ssh/id_ed25519.pub\nCopia la cadena de caracteres, ve a la configuración de tu perfil de GitHub y da clic en “SSH and GPG Keys”.\n\n\n\nSSH and GPG Keys\n\n\nUna vez ahí da clic en “Nueva llave SSH”.\n\n\n\nNueva llave SSH\n\n\nDespués coloca un título que te permita identificar que será la clave con la que usarás la computadora y pega tu llave pública.\n\n\n\nLlave pública\n\n\nAhora solo falta revisar la conexión desde la terminal.\nssh -T git@github.com\nSi vez un mensaje similar al siguiente, significa que quedo completa la autenticación.\nHi Name! Youve successfully authenticated, but GitHub does not provide shell access.\n\n\n39.3.3 Paso 3.3 Solución a Error con la llave\nA mi paso que la llave esta bien pero no tenia acceso a usar github, mostrando este mensaje:\nssh -i .ssh/id_ed25519 -T git@github.com\nHi HaydeePeruyero! You've successfully authenticated, but GitHub does not provide shell access.\n\nAgregar configuración\nPor lo que decidí configurar el archivo ~/.ssh/config.\nnano ~/.ssh/config\nagrega esto:\nHost github.com\n  HostName github.com\n  User git\n  IdentityFile ~/.ssh/id_ed25519\n  IdentitiesOnly yes\nGuarda y cierra las modificaciones del archivo.\n\n\nVerifica que los permisos estén correctos\nchmod 600 ~/.ssh/id_ed25519\nchmod 644 ~/.ssh/id_ed25519.pub\nchmod 600 ~/.ssh/config\n\n\nAgrega tu clave al ssh-agent\nEsto asegura que la clave esté disponible durante tus sesiones:\nssh-add ~/.ssh/id_ed25519\n\n\nPrueba conexión otra vez\nssh -T git@github.com\nDebe decir:\nHi HaydeePeruyero! You've successfully authenticated, but GitHub does not provide shell access.",
     "crumbs": [
       "**Sección 5** - Introducción a Git/GitHub",
-      "<span class='chapter-number'>37</span>  <span class='chapter-title'>Github</span>"
+      "<span class='chapter-number'>39</span>  <span class='chapter-title'>Github</span>"
     ]
   },
   {
     "objectID": "cap22.html#paso-4-push-and-pull",
     "href": "cap22.html#paso-4-push-and-pull",
-    "title": "37  Github",
-    "section": "37.4 Paso 4: Push and pull",
-    "text": "37.4 Paso 4: Push and pull\nUna vez que ya tenemos configurado todo, solo falta enviar todo lo que tenemos en el repo local al remoto. Si se establecio la contraseña nos la va a pedir en la terminal o una ventana aparte.\ngit push origin main\nEn esa instrucción, origin se refiere al repositorio remoto y main al local (las ramas que estamos intentando poner en el mismo contenido).\nLa situación en la que estamos es la siguiente:\n\n\n\ngit push origin main\n\n\nPara actualizar nuestro repositorio local, lo que debemos hacer es lo siguiente:\ngit pull origin main\nComo no hemos realizado ningún cambio en el remoto, no veremos nada nuevo en el local. En el remoto también podemos añadir archivos directamente.\n\n\n\n\n\n\nNotaEjercicio\n\n\n\nAñade un archivo nuevo desde el repositorio remoto y actualiza tus cambios en el local.\n\n\n\n\n\n\nTipSolución\n\n\n\n\n\nDesde el repositorio remoto, podemos crear un nuevo archivo, por ejemplo nuevo_archivo.txt, escribir algo en él y guardar los cambios. GitHub realizará automáticamente un commit en el repositorio remoto.\nAhora, en nuestra copia local, verificamos el estado del repositorio:\ngit status\ny descargamos los cambios del repositorio remoto con:\ngit pull origin main\n(En caso de que la rama principal tenga otro nombre, reemplazar main por el nombre correspondiente.)\nGit descargará e integrará automáticamente el nuevo commit en nuestro repositorio local.\nPodemos comprobar que el archivo se ha añadido con:\nls\no revisar el historial con:\ngit log --oneline\nObservaremos que ahora el commit realizado desde GitHub también aparece en el historial local.",
+    "title": "39  Github",
+    "section": "39.4 Paso 4: Push and pull",
+    "text": "39.4 Paso 4: Push and pull\nUna vez que ya tenemos configurado todo, solo falta enviar todo lo que tenemos en el repo local al remoto. Si se establecio la contraseña nos la va a pedir en la terminal o una ventana aparte.\ngit push origin main\nEn esa instrucción, origin se refiere al repositorio remoto y main al local (las ramas que estamos intentando poner en el mismo contenido).\nLa situación en la que estamos es la siguiente:\n\n\n\ngit push origin main\n\n\nPara actualizar nuestro repositorio local, lo que debemos hacer es lo siguiente:\ngit pull origin main\nComo no hemos realizado ningún cambio en el remoto, no veremos nada nuevo en el local. En el remoto también podemos añadir archivos directamente.\n\n\n\n\n\n\nNotaEjercicio\n\n\n\nAñade un archivo nuevo desde el repositorio remoto y actualiza tus cambios en el local.\n\n\n\n\n\n\nTipSolución\n\n\n\n\n\nDesde el repositorio remoto, podemos crear un nuevo archivo, por ejemplo nuevo_archivo.txt, escribir algo en él y guardar los cambios. GitHub realizará automáticamente un commit en el repositorio remoto.\nAhora, en nuestra copia local, verificamos el estado del repositorio:\ngit status\ny descargamos los cambios del repositorio remoto con:\ngit pull origin main\n(En caso de que la rama principal tenga otro nombre, reemplazar main por el nombre correspondiente.)\nGit descargará e integrará automáticamente el nuevo commit en nuestro repositorio local.\nPodemos comprobar que el archivo se ha añadido con:\nls\no revisar el historial con:\ngit log --oneline\nObservaremos que ahora el commit realizado desde GitHub también aparece en el historial local.",
     "crumbs": [
       "**Sección 5** - Introducción a Git/GitHub",
-      "<span class='chapter-number'>37</span>  <span class='chapter-title'>Github</span>"
+      "<span class='chapter-number'>39</span>  <span class='chapter-title'>Github</span>"
     ]
   },
   {
     "objectID": "cap26.html",
     "href": "cap26.html",
-    "title": "38  Conectar a GitHub con SSH",
+    "title": "40  Conectar a GitHub con SSH",
     "section": "",
-    "text": "38.1 Paso 1. Generar una llave pública\nPuedes conectarte a GitHub utilizando el protocolo Secure Shell (SSH), lo cual proporciona un canal seguro sobre una red insegura.\nTambién puedes asegurar tus claves SSH y configurar un agente de autenticación para no tener que ingresar tu contraseña cada vez que utilices tus claves SSH.\nCuando ejecutes el programa, te va a preguntar si quieres generar una frase, identificar y como quieres nombrar la llave. Si no quieres complicarte presiona 3 veces ENTER, hasta que te parezca una pantalla como al siguiente:\nPosteriormente, tendras una carpeta llamada .ssh/, entra en esa carpeta y tendras dos archivos, si no los renombraste tendran el nombre de id_ed25519.\nVamos a abrir la terminal y vamos a ver el contenido de la carpeta .ssh/:",
+    "text": "40.1 Paso 1. Generar una llave pública\nPuedes conectarte a GitHub utilizando el protocolo Secure Shell (SSH), lo cual proporciona un canal seguro sobre una red insegura.\nTambién puedes asegurar tus claves SSH y configurar un agente de autenticación para no tener que ingresar tu contraseña cada vez que utilices tus claves SSH.\nCuando ejecutes el programa, te va a preguntar si quieres generar una frase, identificar y como quieres nombrar la llave. Si no quieres complicarte presiona 3 veces ENTER, hasta que te parezca una pantalla como al siguiente:\nPosteriormente, tendras una carpeta llamada .ssh/, entra en esa carpeta y tendras dos archivos, si no los renombraste tendran el nombre de id_ed25519.\nVamos a abrir la terminal y vamos a ver el contenido de la carpeta .ssh/:",
     "crumbs": [
       "**Sección 5** - Introducción a Git/GitHub",
-      "<span class='chapter-number'>38</span>  <span class='chapter-title'>Conectar a GitHub con SSH</span>"
+      "<span class='chapter-number'>40</span>  <span class='chapter-title'>Conectar a GitHub con SSH</span>"
     ]
   },
   {
     "objectID": "cap26.html#paso-1.-generar-una-llave-pública",
     "href": "cap26.html#paso-1.-generar-una-llave-pública",
-    "title": "38  Conectar a GitHub con SSH",
+    "title": "40  Conectar a GitHub con SSH",
     "section": "",
     "text": "NotaActividad (15 min)\n\n\n\nDeberan contar con:\n\nUna cuenta en GitHub\nR y RStudio actualizados\nGit instalado\nColoca en la terminal la siguiente información para generar una clave con el mismo correo que usaste para registrar tu cuenta en GitHub.\nssh-keygen -t ed25519 -C \"your_email@example.com\"\nNOTA: Si no cuentas con ssh-keygen instalado, primero corre este código.\nsudo apt-get install ssh-keygen\n\n\n\n\n\n\n\nid_ed25519: llave local, no la vamos a usar. Tampoco la compartas.\nid_ed25519.pub : llave publica. La usaremos para copiarla en los servidores que usaremos.\n\n\nls .ssh/",
     "crumbs": [
       "**Sección 5** - Introducción a Git/GitHub",
-      "<span class='chapter-number'>38</span>  <span class='chapter-title'>Conectar a GitHub con SSH</span>"
+      "<span class='chapter-number'>40</span>  <span class='chapter-title'>Conectar a GitHub con SSH</span>"
     ]
   },
   {
     "objectID": "cap26.html#paso-1.-generar-una-llave-pública-exclusiva-para-github-opcional",
     "href": "cap26.html#paso-1.-generar-una-llave-pública-exclusiva-para-github-opcional",
-    "title": "38  Conectar a GitHub con SSH",
-    "section": "38.2 Paso 1. Generar una llave pública exclusiva para Github (opcional)",
-    "text": "38.2 Paso 1. Generar una llave pública exclusiva para Github (opcional)\nEn caso de que ya cuentes con una clase con ese nombre, puedes crear una nueva llave con otro nombre especifico para Github:\nssh-keygen -t ed25519 -C \"your_email@example.com\" -f ~/.ssh/id_ed25519_github",
+    "title": "40  Conectar a GitHub con SSH",
+    "section": "40.2 Paso 1. Generar una llave pública exclusiva para Github (opcional)",
+    "text": "40.2 Paso 1. Generar una llave pública exclusiva para Github (opcional)\nEn caso de que ya cuentes con una clase con ese nombre, puedes crear una nueva llave con otro nombre especifico para Github:\nssh-keygen -t ed25519 -C \"your_email@example.com\" -f ~/.ssh/id_ed25519_github",
     "crumbs": [
       "**Sección 5** - Introducción a Git/GitHub",
-      "<span class='chapter-number'>38</span>  <span class='chapter-title'>Conectar a GitHub con SSH</span>"
+      "<span class='chapter-number'>40</span>  <span class='chapter-title'>Conectar a GitHub con SSH</span>"
     ]
   },
   {
     "objectID": "cap26.html#paso-2.-copiar-la-clave-ssh-pública",
     "href": "cap26.html#paso-2.-copiar-la-clave-ssh-pública",
-    "title": "38  Conectar a GitHub con SSH",
-    "section": "38.3 Paso 2. Copiar la clave SSH pública",
-    "text": "38.3 Paso 2. Copiar la clave SSH pública\n\nAccede a la terminal en tu computadora.\nCopia la clave SSH generada anteriormente usando el siguiente comando:\n\ncat ~/.ssh/id_ed25519.pub\nEste comando mostrará tu clave pública en la terminal.\n\nSelecciona y copia toda la clave que aparece en la terminal. Asegúrate de copiar desde ssh-rsa hasta el final de tu correo electrónico.",
+    "title": "40  Conectar a GitHub con SSH",
+    "section": "40.3 Paso 2. Copiar la clave SSH pública",
+    "text": "40.3 Paso 2. Copiar la clave SSH pública\n\nAccede a la terminal en tu computadora.\nCopia la clave SSH generada anteriormente usando el siguiente comando:\n\ncat ~/.ssh/id_ed25519.pub\nEste comando mostrará tu clave pública en la terminal.\n\nSelecciona y copia toda la clave que aparece en la terminal. Asegúrate de copiar desde ssh-rsa hasta el final de tu correo electrónico.",
     "crumbs": [
       "**Sección 5** - Introducción a Git/GitHub",
-      "<span class='chapter-number'>38</span>  <span class='chapter-title'>Conectar a GitHub con SSH</span>"
+      "<span class='chapter-number'>40</span>  <span class='chapter-title'>Conectar a GitHub con SSH</span>"
     ]
   },
   {
     "objectID": "cap26.html#paso-3.-agregar-la-clave-ssh-a-tu-cuenta-de-github",
     "href": "cap26.html#paso-3.-agregar-la-clave-ssh-a-tu-cuenta-de-github",
-    "title": "38  Conectar a GitHub con SSH",
-    "section": "38.4 Paso 3. Agregar la clave SSH a tu cuenta de GitHub",
-    "text": "38.4 Paso 3. Agregar la clave SSH a tu cuenta de GitHub\n\nInicia sesión en GitHub en tu navegador.\nHaz clic en tu foto de perfil en la esquina superior derecha y selecciona “Settings” (Configuración).\nEn el menú lateral izquierdo, selecciona “SSH and GPG keys”.\nHaz clic en el botón verde “New SSH key”.\nEn el campo “Title”, ingresa un nombre descriptivo para tu clave (por ejemplo, “Mi computadora personal”).\nEn el campo “Key”, pega la clave SSH que copiaste previamente de la terminal.\nHaz clic en “Add SSH key” para guardar la clave.",
+    "title": "40  Conectar a GitHub con SSH",
+    "section": "40.4 Paso 3. Agregar la clave SSH a tu cuenta de GitHub",
+    "text": "40.4 Paso 3. Agregar la clave SSH a tu cuenta de GitHub\n\nInicia sesión en GitHub en tu navegador.\nHaz clic en tu foto de perfil en la esquina superior derecha y selecciona “Settings” (Configuración).\nEn el menú lateral izquierdo, selecciona “SSH and GPG keys”.\nHaz clic en el botón verde “New SSH key”.\nEn el campo “Title”, ingresa un nombre descriptivo para tu clave (por ejemplo, “Mi computadora personal”).\nEn el campo “Key”, pega la clave SSH que copiaste previamente de la terminal.\nHaz clic en “Add SSH key” para guardar la clave.",
     "crumbs": [
       "**Sección 5** - Introducción a Git/GitHub",
-      "<span class='chapter-number'>38</span>  <span class='chapter-title'>Conectar a GitHub con SSH</span>"
+      "<span class='chapter-number'>40</span>  <span class='chapter-title'>Conectar a GitHub con SSH</span>"
     ]
   },
   {
     "objectID": "cap26.html#paso-4.-configurar-rstudio-para-usar-git-bash-como-terminal",
     "href": "cap26.html#paso-4.-configurar-rstudio-para-usar-git-bash-como-terminal",
-    "title": "38  Conectar a GitHub con SSH",
-    "section": "38.5 Paso 4. Configurar RStudio para usar Git Bash como terminal",
-    "text": "38.5 Paso 4. Configurar RStudio para usar Git Bash como terminal\n\nAbre RStudio.\nDirígete a Tools (Herramientas) en la barra superior y selecciona Global Options (Opciones globales).\nEn el menú de opciones globales, selecciona la pestaña Terminal.\nEn el campo New terminal open with, selecciona Git Bash.\n\nHaz clic en Apply y luego en OK.",
+    "title": "40  Conectar a GitHub con SSH",
+    "section": "40.5 Paso 4. Configurar RStudio para usar Git Bash como terminal",
+    "text": "40.5 Paso 4. Configurar RStudio para usar Git Bash como terminal\n\nAbre RStudio.\nDirígete a Tools (Herramientas) en la barra superior y selecciona Global Options (Opciones globales).\nEn el menú de opciones globales, selecciona la pestaña Terminal.\nEn el campo New terminal open with, selecciona Git Bash.\n\nHaz clic en Apply y luego en OK.",
     "crumbs": [
       "**Sección 5** - Introducción a Git/GitHub",
-      "<span class='chapter-number'>38</span>  <span class='chapter-title'>Conectar a GitHub con SSH</span>"
+      "<span class='chapter-number'>40</span>  <span class='chapter-title'>Conectar a GitHub con SSH</span>"
     ]
   },
   {
     "objectID": "cap26.html#paso-5.-abrir-la-terminal-de-git-bash-en-rstudio",
     "href": "cap26.html#paso-5.-abrir-la-terminal-de-git-bash-en-rstudio",
-    "title": "38  Conectar a GitHub con SSH",
-    "section": "38.6 Paso 5. Abrir la terminal de Git Bash en RStudio",
-    "text": "38.6 Paso 5. Abrir la terminal de Git Bash en RStudio\nAhora, para abrir la terminal de Git Bash dentro de RStudio, solo tienes que:\n\nIr al Tools , hacer clic en Terminal y en abrir New terminal.\nDeberías ver que se abre una nueva sesión con Git Bash como la terminal predeterminada.",
+    "title": "40  Conectar a GitHub con SSH",
+    "section": "40.6 Paso 5. Abrir la terminal de Git Bash en RStudio",
+    "text": "40.6 Paso 5. Abrir la terminal de Git Bash en RStudio\nAhora, para abrir la terminal de Git Bash dentro de RStudio, solo tienes que:\n\nIr al Tools , hacer clic en Terminal y en abrir New terminal.\nDeberías ver que se abre una nueva sesión con Git Bash como la terminal predeterminada.",
     "crumbs": [
       "**Sección 5** - Introducción a Git/GitHub",
-      "<span class='chapter-number'>38</span>  <span class='chapter-title'>Conectar a GitHub con SSH</span>"
+      "<span class='chapter-number'>40</span>  <span class='chapter-title'>Conectar a GitHub con SSH</span>"
     ]
   },
   {
     "objectID": "cap26.html#paso-6.-verificar-la-conexión",
     "href": "cap26.html#paso-6.-verificar-la-conexión",
-    "title": "38  Conectar a GitHub con SSH",
-    "section": "38.7 Paso 6. Verificar la conexión",
-    "text": "38.7 Paso 6. Verificar la conexión\nVuelve a la terminal y ejecuta el siguiente comando para verificar que tu clave SSH está correctamente configurada con GitHub:\nssh -T git@github.com\nEn caso de que se necesite, puedes especificar la llave que usaste:\nssh -i ~/.ssh/id_ed25519 -T git@github.com\nEl comando ssh -T git@github.com simplemente verifica que tu clave privada se está usando correctamente y que tu clave pública ha sido registrada en GitHub.\nSi es la primera vez que te conectas a GitHub con SSH, puede que veas un mensaje que te pregunte si deseas continuar conectándote. Escribe “yes”.\nSi todo está bien configurado, deberías ver un mensaje similar a este:\nHi username! You've successfully authenticated, but GitHub does not provide shell access.\nEsto confirmará que tu clave SSH se ha agregado correctamente a tu cuenta de GitHub y que la conexión es exitosa.\n\n38.7.1 Solución a Error con la llave\nA mi paso que la llave esta bien pero no tenia acceso a usar github, mostrando este mensaje:\nssh -i .ssh/id_ed25519_github -T git@github.com\nHi EveliaCoss! You've successfully authenticated, but GitHub does not provide shell access.\n\nAgregar configuración\nPor lo que decidi configurar el archivo ~/.ssh/config.\nnano ~/.ssh/config\nagrega esto:\nHost github.com\n  HostName github.com\n  User git\n  IdentityFile ~/.ssh/id_ed25519_github\n  IdentitiesOnly yes\nGuarda y cierra las modificaciones del archivo.\n\n\nVerifica que los permisos estén correctos\nchmod 600 ~/.ssh/id_ed25519_github\nchmod 644 ~/.ssh/id_ed25519_github.pub\nchmod 600 ~/.ssh/config\n\n\nAgrega tu clave al ssh-agent\nEsto asegura que la clave esté disponible durante tus sesiones:\nssh-add ~/.ssh/id_ed25519_github\n\n\nPrueba conexión otra vez\nssh -T git@github.com\nDebe decir:\nHi EveliaCoss! You've successfully authenticated, but GitHub does not provide shell access.\n\n\n\n38.7.2 Solución a Error con la Configuración del Usuario en Git\nEl comando git config se utiliza para configurar opciones en Git, y los siguientes comandos en particular se usan para establecer tu nombre y correo electrónico globalmente en tu configuración de Git:\ngit config --global user.email \"you@example.com\"\ngit config --global user.name \"Your Name\"\n\ngit config --global user.email \"you@example.com\"\n\nEste comando configura tu dirección de correo electrónico, la cual será utilizada en todos tus commits de Git. El correo electrónico asociado con los commits es importante porque ayuda a identificar quién realizó qué cambios en el repositorio. –global significa que esta configuración se aplicará a todos los repositorios en tu máquina.\n\ngit config --global user.name \"Your Name\"\n\nEste comando establece tu nombre de usuario, que también se asociará con los commits que realices. Al igual que el correo electrónico, se utilizará en todos tus commits en cualquier repositorio de Git en tu máquina.",
+    "title": "40  Conectar a GitHub con SSH",
+    "section": "40.7 Paso 6. Verificar la conexión",
+    "text": "40.7 Paso 6. Verificar la conexión\nVuelve a la terminal y ejecuta el siguiente comando para verificar que tu clave SSH está correctamente configurada con GitHub:\nssh -T git@github.com\nEn caso de que se necesite, puedes especificar la llave que usaste:\nssh -i ~/.ssh/id_ed25519 -T git@github.com\nEl comando ssh -T git@github.com simplemente verifica que tu clave privada se está usando correctamente y que tu clave pública ha sido registrada en GitHub.\nSi es la primera vez que te conectas a GitHub con SSH, puede que veas un mensaje que te pregunte si deseas continuar conectándote. Escribe “yes”.\nSi todo está bien configurado, deberías ver un mensaje similar a este:\nHi username! You've successfully authenticated, but GitHub does not provide shell access.\nEsto confirmará que tu clave SSH se ha agregado correctamente a tu cuenta de GitHub y que la conexión es exitosa.\n\n40.7.1 Solución a Error con la llave\nA mi paso que la llave esta bien pero no tenia acceso a usar github, mostrando este mensaje:\nssh -i .ssh/id_ed25519_github -T git@github.com\nHi EveliaCoss! You've successfully authenticated, but GitHub does not provide shell access.\n\nAgregar configuración\nPor lo que decidi configurar el archivo ~/.ssh/config.\nnano ~/.ssh/config\nagrega esto:\nHost github.com\n  HostName github.com\n  User git\n  IdentityFile ~/.ssh/id_ed25519_github\n  IdentitiesOnly yes\nGuarda y cierra las modificaciones del archivo.\n\n\nVerifica que los permisos estén correctos\nchmod 600 ~/.ssh/id_ed25519_github\nchmod 644 ~/.ssh/id_ed25519_github.pub\nchmod 600 ~/.ssh/config\n\n\nAgrega tu clave al ssh-agent\nEsto asegura que la clave esté disponible durante tus sesiones:\nssh-add ~/.ssh/id_ed25519_github\n\n\nPrueba conexión otra vez\nssh -T git@github.com\nDebe decir:\nHi EveliaCoss! You've successfully authenticated, but GitHub does not provide shell access.\n\n\n\n40.7.2 Solución a Error con la Configuración del Usuario en Git\nEl comando git config se utiliza para configurar opciones en Git, y los siguientes comandos en particular se usan para establecer tu nombre y correo electrónico globalmente en tu configuración de Git:\ngit config --global user.email \"you@example.com\"\ngit config --global user.name \"Your Name\"\n\ngit config --global user.email \"you@example.com\"\n\nEste comando configura tu dirección de correo electrónico, la cual será utilizada en todos tus commits de Git. El correo electrónico asociado con los commits es importante porque ayuda a identificar quién realizó qué cambios en el repositorio. –global significa que esta configuración se aplicará a todos los repositorios en tu máquina.\n\ngit config --global user.name \"Your Name\"\n\nEste comando establece tu nombre de usuario, que también se asociará con los commits que realices. Al igual que el correo electrónico, se utilizará en todos tus commits en cualquier repositorio de Git en tu máquina.",
     "crumbs": [
       "**Sección 5** - Introducción a Git/GitHub",
-      "<span class='chapter-number'>38</span>  <span class='chapter-title'>Conectar a GitHub con SSH</span>"
+      "<span class='chapter-number'>40</span>  <span class='chapter-title'>Conectar a GitHub con SSH</span>"
     ]
   },
   {
     "objectID": "cap26.html#referencias",
     "href": "cap26.html#referencias",
-    "title": "38  Conectar a GitHub con SSH",
-    "section": "38.8 Referencias",
-    "text": "38.8 Referencias\n\nHaydee tutorial: Temas Selectos de Análisis Numérico y Computación Científica: Computo científico para el análisis de datos\nAlejandra Medina tutorial: Control de versiones con GitHub y RStudio",
+    "title": "40  Conectar a GitHub con SSH",
+    "section": "40.8 Referencias",
+    "text": "40.8 Referencias\n\nHaydee tutorial: Temas Selectos de Análisis Numérico y Computación Científica: Computo científico para el análisis de datos\nAlejandra Medina tutorial: Control de versiones con GitHub y RStudio",
     "crumbs": [
       "**Sección 5** - Introducción a Git/GitHub",
-      "<span class='chapter-number'>38</span>  <span class='chapter-title'>Conectar a GitHub con SSH</span>"
+      "<span class='chapter-number'>40</span>  <span class='chapter-title'>Conectar a GitHub con SSH</span>"
     ]
   },
   {
     "objectID": "cap16.html",
     "href": "cap16.html",
-    "title": "39  Configurar Git",
+    "title": "41  Configurar Git",
     "section": "",
     "text": "Fecha: 06 de octubre, 2026\n\nUsar control de versiones es una forma de manejar proyectos, todo a lo que se hace commit no se pierde, se queda un registro de todos los cambios y siempre es posible regresar a una versión anterior. Nos evitamos estar enviando y enviando correos con versiones finales para después comparar versiones. Se guarda el usuario que hizo el cambio y automáticamente obtenemos una notificación de si intentamos modificar lo mismo que un colaborador para revisar cual cambio guardar.\nPueden pensar en versión de control como una forma de undo ilimitado y de trabajar paralelamente con sus colaboradores.\nLo primero que vamos a hacer es configurar Git en nuestra computadora.\nVamos a abrir Git bash y configurar nuestro usuario y correo con la que vamos a enlazar más adelante Github.\ngit config --global user.name \"Usuario\"\ngit config --global user.email \"email@domain.com\"\nAhora, vamos a configurar los saltos de línea para no tener conflicto según el sistema operativo.\n# Mac o Linux\ngit config --global core.autocrlf input\n# Windows\ngit config --global core.autocrlf true\nPara configurar el editor de texto por default:\ngit config --global core.editor \"nano -w\"\nPor default, Git inicializa un repositorio con una rama llamada master, a partir del 2020, la mayoría de los servidores de Git cambiaron esto a que la rama principal fuera main, para configurar esto usaremos lo siguiente:\ngit config --global init.defaultBranch main\nLos comandos anteriores solo se necesitan configurar una sola vez. Para ver la configuración que acabamos de realizar y probar cual es nuestro editor de texto usamos lo siguiente:\ngit config --global --edit\nY para revisar esta configuración sin entrar al editor:\ngit config --list\nSi debieran hacer cambios en su usuario o correo o cualquier otra configuración lo pueden hacer ilimitadas veces con los comandos anteriores.\nPara pedir ayuda nos sirve aún git comando -h o git comando --help, por ejemplo:\ngit config -h\nLa siguiente nos abre en un navegador el manual completo:\ngit config --help\nO para ayuda general de Git: git help.",
     "crumbs": [
       "**Sección 5** - Introducción a Git/GitHub",
-      "<span class='chapter-number'>39</span>  <span class='chapter-title'>Configurar Git</span>"
+      "<span class='chapter-number'>41</span>  <span class='chapter-title'>Configurar Git</span>"
     ]
   },
   {
     "objectID": "Intro_Quarto.html",
     "href": "Intro_Quarto.html",
-    "title": "40  Introducción a Quarto",
+    "title": "42  Introducción a Quarto",
     "section": "",
-    "text": "40.1 ¿Cómo funciona?\nQuarto es una versión multilingüe y de última generación de R Markdown de Posit que incluye docenas de nuevas características y capacidades y al mismo tiempo puede renderizar la mayoría de los archivos Rmd existentes sin modificaciones.\nUtiliza el botón  Render en el IDE de RStudio para renderizar el archivo y obtener una vista previa de la salida con un solo clic o un atajo de teclado (⇧⌘K).\nSi prefiere renderizar automáticamente al guardar, puede activar la opción “Renderizar al guardar” en la barra de herramientas del editor. La vista previa se actualizará al volver a renderizar el documento. La vista previa en paralelo funciona tanto con HTML como con PDF.\nAl renderizar un documento de Quarto, knitr ejecuta primero todos los fragmentos de código y crea un nuevo documento Markdown (.md), que incluye el código y su salida. El archivo Markdown generado es procesado por pandoc , que crea el formato final. El botón Renderizar encapsula estas acciones y las ejecuta en el orden correcto.",
+    "text": "42.1 ¿Cómo funciona?\nQuarto es una versión multilingüe y de última generación de R Markdown de Posit que incluye docenas de nuevas características y capacidades y al mismo tiempo puede renderizar la mayoría de los archivos Rmd existentes sin modificaciones.\nUtiliza el botón  Render en el IDE de RStudio para renderizar el archivo y obtener una vista previa de la salida con un solo clic o un atajo de teclado (⇧⌘K).\nSi prefiere renderizar automáticamente al guardar, puede activar la opción “Renderizar al guardar” en la barra de herramientas del editor. La vista previa se actualizará al volver a renderizar el documento. La vista previa en paralelo funciona tanto con HTML como con PDF.\nAl renderizar un documento de Quarto, knitr ejecuta primero todos los fragmentos de código y crea un nuevo documento Markdown (.md), que incluye el código y su salida. El archivo Markdown generado es procesado por pandoc , que crea el formato final. El botón Renderizar encapsula estas acciones y las ejecuta en el orden correcto.",
     "crumbs": [
       "**Sección 5** - Introducción a Git/GitHub",
-      "<span class='chapter-number'>40</span>  <span class='chapter-title'>Introducción a Quarto</span>"
+      "<span class='chapter-number'>42</span>  <span class='chapter-title'>Introducción a Quarto</span>"
     ]
   },
   {
     "objectID": "Intro_Quarto.html#cómo-se-compone",
     "href": "Intro_Quarto.html#cómo-se-compone",
-    "title": "40  Introducción a Quarto",
-    "section": "40.2 ¿Cómo se compone?",
-    "text": "40.2 ¿Cómo se compone?\nEl archivo contiene tres tipos de contenido: un encabezado YAML, fragmentos de código y texto Markdown.\n\n40.2.1 encabezado YAML\nUn encabezado YAML (opcional) delimitado por tres guiones ( ---) en cada extremo.\n---\ntitle: \"Hello, Quarto\"\nformat: html\neditor: visual\n---\nAl renderizar, el símbolo title, \"Hello, Quarto\", aparecerá en la parte superior del documento renderizado con un tamaño de fuente mayor que el resto del documento. Los otros dos campos YAML indican que la salida debe estar en formato html formaty que el documento debe abrirse en formato visual editorpredeterminado.\nPuedes consultar todos los campos YAML disponibles para documentos: HTML aquí . Los campos YAML disponibles varían según el formato del documento; por ejemplo, consulte aquí los campos YAML para documentos PDF y aquí para MS Word.\n\n\n\n\n\n\nImportante\n\n\n\nPara crear archivos PDF, se necesitará instalar una distribución reciente de LaTeX. Recomendamos usar TinyTeX (basado en TexLive), que se puede instalar con el siguiente comando:\nquarto install tinytex",
+    "title": "42  Introducción a Quarto",
+    "section": "42.2 ¿Cómo se compone?",
+    "text": "42.2 ¿Cómo se compone?\nEl archivo contiene tres tipos de contenido: un encabezado YAML, fragmentos de código y texto Markdown.\n\n42.2.1 encabezado YAML\nUn encabezado YAML (opcional) delimitado por tres guiones ( ---) en cada extremo.\n---\ntitle: \"Hello, Quarto\"\nformat: html\neditor: visual\n---\nAl renderizar, el símbolo title, \"Hello, Quarto\", aparecerá en la parte superior del documento renderizado con un tamaño de fuente mayor que el resto del documento. Los otros dos campos YAML indican que la salida debe estar en formato html formaty que el documento debe abrirse en formato visual editorpredeterminado.\nPuedes consultar todos los campos YAML disponibles para documentos: HTML aquí . Los campos YAML disponibles varían según el formato del documento; por ejemplo, consulte aquí los campos YAML para documentos PDF y aquí para MS Word.\n\n\n\n\n\n\nImportante\n\n\n\nPara crear archivos PDF, se necesitará instalar una distribución reciente de LaTeX. Recomendamos usar TinyTeX (basado en TexLive), que se puede instalar con el siguiente comando:\nquarto install tinytex",
     "crumbs": [
       "**Sección 5** - Introducción a Git/GitHub",
-      "<span class='chapter-number'>40</span>  <span class='chapter-title'>Introducción a Quarto</span>"
+      "<span class='chapter-number'>42</span>  <span class='chapter-title'>Introducción a Quarto</span>"
     ]
   },
   {
     "objectID": "Intro_Quarto.html#renderizar-a-varios-tipos-de-archivos",
     "href": "Intro_Quarto.html#renderizar-a-varios-tipos-de-archivos",
-    "title": "40  Introducción a Quarto",
-    "section": "40.3 Renderizar a varios tipos de archivos",
-    "text": "40.3 Renderizar a varios tipos de archivos\nSi desea renderizar en todos los formatos, puede hacerlo con el paquete quarto , que proporciona una interfaz de R para la CLI de Quarto. Por ejemplo, para renderizar el documento actual, utilice quarto::quarto_render(). También puede especificar el nombre del documento que desea renderizar, así como los formatos de salida.\nquarto::quarto_render(\n  \"authoring.qmd\", \n  output_format = c(\"pdf\", \"html\", \"docx\")\n)\nComo resultado, verá aparecer tres nuevos archivos en el panel Archivos:\n\nauthoring.docx\nauthoring.html\nauthoring.pdf",
+    "title": "42  Introducción a Quarto",
+    "section": "42.3 Renderizar a varios tipos de archivos",
+    "text": "42.3 Renderizar a varios tipos de archivos\nSi desea renderizar en todos los formatos, puede hacerlo con el paquete quarto , que proporciona una interfaz de R para la CLI de Quarto. Por ejemplo, para renderizar el documento actual, utilice quarto::quarto_render(). También puede especificar el nombre del documento que desea renderizar, así como los formatos de salida.\nquarto::quarto_render(\n  \"authoring.qmd\", \n  output_format = c(\"pdf\", \"html\", \"docx\")\n)\nComo resultado, verá aparecer tres nuevos archivos en el panel Archivos:\n\nauthoring.docx\nauthoring.html\nauthoring.pdf",
     "crumbs": [
       "**Sección 5** - Introducción a Git/GitHub",
-      "<span class='chapter-number'>40</span>  <span class='chapter-title'>Introducción a Quarto</span>"
+      "<span class='chapter-number'>42</span>  <span class='chapter-title'>Introducción a Quarto</span>"
     ]
   },
   {
     "objectID": "Intro_Quarto.html#callout-notas",
     "href": "Intro_Quarto.html#callout-notas",
-    "title": "40  Introducción a Quarto",
-    "section": "40.4 Callout / notas",
-    "text": "40.4 Callout / notas\nDa clic en Insert/callout.\nPuede seleccionar uno de los cinco tipos de callout (nota, sugerencia, importante, precaución o advertencia), personalizar su apariencia (predeterminada, simple o mínima) y decidir si desea mostrar el ícono.\n\nLuego, intente insertar el texto dentro del cuadro de callout.\n\n\n\n\n\n\nNota\n\n\n\nNota\n\n\n\n\n\n\n\n\nTip\n\n\n\nSugerencia\n\n\n\n\n\n\n\n\nImportante\n\n\n\nImportante\n\n\n\n\n\n\n\n\nPrecaución\n\n\n\nPrecaución\n\n\n\n\n\n\n\n\nAdvertencia\n\n\n\nAdvertencia",
+    "title": "42  Introducción a Quarto",
+    "section": "42.4 Callout / notas",
+    "text": "42.4 Callout / notas\nDa clic en Insert/callout.\nPuede seleccionar uno de los cinco tipos de callout (nota, sugerencia, importante, precaución o advertencia), personalizar su apariencia (predeterminada, simple o mínima) y decidir si desea mostrar el ícono.\n\nLuego, intente insertar el texto dentro del cuadro de callout.\n\n\n\n\n\n\nNota\n\n\n\nNota\n\n\n\n\n\n\n\n\nTip\n\n\n\nSugerencia\n\n\n\n\n\n\n\n\nImportante\n\n\n\nImportante\n\n\n\n\n\n\n\n\nPrecaución\n\n\n\nPrecaución\n\n\n\n\n\n\n\n\nAdvertencia\n\n\n\nAdvertencia",
     "crumbs": [
       "**Sección 5** - Introducción a Git/GitHub",
-      "<span class='chapter-number'>40</span>  <span class='chapter-title'>Introducción a Quarto</span>"
+      "<span class='chapter-number'>42</span>  <span class='chapter-title'>Introducción a Quarto</span>"
     ]
   },
   {
     "objectID": "Intro_Quarto.html#cross-reference-referencias-cruzadas",
     "href": "Intro_Quarto.html#cross-reference-referencias-cruzadas",
-    "title": "40  Introducción a Quarto",
-    "section": "40.5 Cross reference / Referencias cruzadas",
-    "text": "40.5 Cross reference / Referencias cruzadas\nLas cross references en Quarto son una forma de enlazar automáticamente figuras, tablas, secciones, ecuaciones y otros elementos dentro de tu documento, de manera que se numeran y se convierten en hipervínculos navegables. Esto evita tener que actualizar manualmente la numeración si agregas o quitas elementos.\n\nEtiqueta (label) Cada elemento que quieras referenciar necesita una etiqueta única.\n\nPara figuras: {#fig-nombre}\nPara tablas: {#tbl-nombre}\nPara secciones: {#sec-nombre}\nPara ecuaciones: {#eq-nombre}\n\nReferencia en el texto Para referenciar, se usa @ seguido del identificador:\n\n@fig-nombre → referencia a una figura.\n@tbl-nombre → referencia a una tabla.\n@sec-nombre → referencia a una sección.\n@eq-nombre → referencia a una ecuación.\n\n\nQuarto asigna números consecutivos a las entidades (Figura 1, Tabla 2, etc.) y actualiza todo si cambias el orden o agregas nuevos elementos.\nEjemplo:\n\n\n\n\n\n\n\n\nEntidad\nReferencia\nEtiqueta / Título\n\n\n\n\nSección\n@sec-eda\nID añadido al encabezado:\n# Análisis exploratorio de datos {#sec-eda}\n\n\nFigura\n@fig-pressure\nOpciones YAML en la celda de código:\n#| label: fig-scatterplot\n#| fig-cap: \"Pressure\"\n\n\nTabla\n@tbl-stats\nOpciones YAML en la celda de código:\n#| label: tbl-stats\n#| tbl-cap: \"Summary statistics for price and area of houses in Duke Forest\"\n\n\nEcuación\n@eq-slr\nAl final de la ecuación de visualización:\n$$ {#eq-slr}",
+    "title": "42  Introducción a Quarto",
+    "section": "42.5 Cross reference / Referencias cruzadas",
+    "text": "42.5 Cross reference / Referencias cruzadas\nLas cross references en Quarto son una forma de enlazar automáticamente figuras, tablas, secciones, ecuaciones y otros elementos dentro de tu documento, de manera que se numeran y se convierten en hipervínculos navegables. Esto evita tener que actualizar manualmente la numeración si agregas o quitas elementos.\n\nEtiqueta (label) Cada elemento que quieras referenciar necesita una etiqueta única.\n\nPara figuras: {#fig-nombre}\nPara tablas: {#tbl-nombre}\nPara secciones: {#sec-nombre}\nPara ecuaciones: {#eq-nombre}\n\nReferencia en el texto Para referenciar, se usa @ seguido del identificador:\n\n@fig-nombre → referencia a una figura.\n@tbl-nombre → referencia a una tabla.\n@sec-nombre → referencia a una sección.\n@eq-nombre → referencia a una ecuación.\n\n\nQuarto asigna números consecutivos a las entidades (Figura 1, Tabla 2, etc.) y actualiza todo si cambias el orden o agregas nuevos elementos.\nEjemplo:\n\n\n\n\n\n\n\n\nEntidad\nReferencia\nEtiqueta / Título\n\n\n\n\nSección\n@sec-eda\nID añadido al encabezado:\n# Análisis exploratorio de datos {#sec-eda}\n\n\nFigura\n@fig-pressure\nOpciones YAML en la celda de código:\n#| label: fig-scatterplot\n#| fig-cap: \"Pressure\"\n\n\nTabla\n@tbl-stats\nOpciones YAML en la celda de código:\n#| label: tbl-stats\n#| tbl-cap: \"Summary statistics for price and area of houses in Duke Forest\"\n\n\nEcuación\n@eq-slr\nAl final de la ecuación de visualización:\n$$ {#eq-slr}",
     "crumbs": [
       "**Sección 5** - Introducción a Git/GitHub",
-      "<span class='chapter-number'>40</span>  <span class='chapter-title'>Introducción a Quarto</span>"
+      "<span class='chapter-number'>42</span>  <span class='chapter-title'>Introducción a Quarto</span>"
     ]
   },
   {
     "objectID": "Intro_Quarto.html#sec-stats",
     "href": "Intro_Quarto.html#sec-stats",
-    "title": "40  Introducción a Quarto",
-    "section": "41.1 Estadísticas descriptivas",
-    "text": "41.1 Estadísticas descriptivas\n\n\nCódigo\nknitr::kable(head(ggplot2::diamonds))\n\n\n\n\nTabla 41.1: Summary statistics for price and area of houses in Duke Forest\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\ncarat\ncut\ncolor\nclarity\ndepth\ntable\nprice\nx\ny\nz\n\n\n\n\n0.23\nIdeal\nE\nSI2\n61.5\n55\n326\n3.95\n3.98\n2.43\n\n\n0.21\nPremium\nE\nSI1\n59.8\n61\n326\n3.89\n3.84\n2.31\n\n\n0.23\nGood\nE\nVS1\n56.9\n65\n327\n4.05\n4.07\n2.31\n\n\n0.29\nPremium\nI\nVS2\n62.4\n58\n334\n4.20\n4.23\n2.63\n\n\n0.31\nGood\nJ\nSI2\n63.3\n58\n335\n4.34\n4.35\n2.75\n\n\n0.24\nVery Good\nJ\nVVS2\n62.8\n57\n336\n3.94\n3.96\n2.48\n\n\n\n\n\n\n\n\n\n41.1.1 Modelo de regresión\nEl modelo lineal simple se expresa como:\n\\[Y = \\beta_0 + \\beta_1 X + \\epsilon\\] {#eq-slr}\nEjemplo en el texto:\nPresentamos los resultados del análisis exploratorio de datos en Capítulo 41 y la estadística descriptiva en Sección 41.1 .\nLa Figura 41.1 muestra la relación entre estas dos variables en un diagrama de dispersión.\nLa Tabla 41.1 presenta estadísticas descriptivas básicas de estas dos variables.\nPodemos ajustar un modelo de regresión lineal simple de la forma mostrada en ?eq-slr.",
+    "title": "42  Introducción a Quarto",
+    "section": "43.1 Estadísticas descriptivas",
+    "text": "43.1 Estadísticas descriptivas\n\n\nCódigo\nknitr::kable(head(ggplot2::diamonds))\n\n\n\n\nTabla 43.1: Summary statistics for price and area of houses in Duke Forest\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\ncarat\ncut\ncolor\nclarity\ndepth\ntable\nprice\nx\ny\nz\n\n\n\n\n0.23\nIdeal\nE\nSI2\n61.5\n55\n326\n3.95\n3.98\n2.43\n\n\n0.21\nPremium\nE\nSI1\n59.8\n61\n326\n3.89\n3.84\n2.31\n\n\n0.23\nGood\nE\nVS1\n56.9\n65\n327\n4.05\n4.07\n2.31\n\n\n0.29\nPremium\nI\nVS2\n62.4\n58\n334\n4.20\n4.23\n2.63\n\n\n0.31\nGood\nJ\nSI2\n63.3\n58\n335\n4.34\n4.35\n2.75\n\n\n0.24\nVery Good\nJ\nVVS2\n62.8\n57\n336\n3.94\n3.96\n2.48\n\n\n\n\n\n\n\n\n\n43.1.1 Modelo de regresión\nEl modelo lineal simple se expresa como:\n\\[Y = \\beta_0 + \\beta_1 X + \\epsilon\\] {#eq-slr}\nEjemplo en el texto:\nPresentamos los resultados del análisis exploratorio de datos en Capítulo 43 y la estadística descriptiva en Sección 43.1 .\nLa Figura 43.1 muestra la relación entre estas dos variables en un diagrama de dispersión.\nLa Tabla 43.1 presenta estadísticas descriptivas básicas de estas dos variables.\nPodemos ajustar un modelo de regresión lineal simple de la forma mostrada en ?eq-slr.",
     "crumbs": [
       "**Sección 5** - Introducción a Git/GitHub",
-      "<span class='chapter-number'>40</span>  <span class='chapter-title'>Introducción a Quarto</span>"
+      "<span class='chapter-number'>42</span>  <span class='chapter-title'>Introducción a Quarto</span>"
     ]
   },
   {
     "objectID": "Intro_Quarto.html#aprendiendo-más",
     "href": "Intro_Quarto.html#aprendiendo-más",
-    "title": "40  Introducción a Quarto",
-    "section": "41.2 Aprendiendo más",
-    "text": "41.2 Aprendiendo más\n¡Ya has aprendido los conceptos básicos de Quarto! Una vez que te sientas cómodo creando y personalizando documentos, aquí tienes algunas cosas más que puedes explorar:\n\nPresentaciones : cree presentaciones de PowerPoint, Beamer y Revealjs utilizando la misma sintaxis que aprendió para crear documentos.\nSitios web : publique colecciones de documentos como un sitio web. Los sitios web admiten múltiples formas de navegación y búsqueda de texto completo.\nBlogs : crea un blog con una página acerca de, listas de publicaciones flexibles, categorías, feeds RSS y más de veinte temas.\nLibros : cree libros y manuscritos en formatos impresos (PDF, MS Word) y en línea (HTML, ePub).\nInteractividad : incluya componentes interactivos para ayudar a los lectores a explorar los conceptos y los datos que está presentando más profundamente.\n\n\nImagen tomada de: Allison Horst",
+    "title": "42  Introducción a Quarto",
+    "section": "43.2 Aprendiendo más",
+    "text": "43.2 Aprendiendo más\n¡Ya has aprendido los conceptos básicos de Quarto! Una vez que te sientas cómodo creando y personalizando documentos, aquí tienes algunas cosas más que puedes explorar:\n\nPresentaciones : cree presentaciones de PowerPoint, Beamer y Revealjs utilizando la misma sintaxis que aprendió para crear documentos.\nSitios web : publique colecciones de documentos como un sitio web. Los sitios web admiten múltiples formas de navegación y búsqueda de texto completo.\nBlogs : crea un blog con una página acerca de, listas de publicaciones flexibles, categorías, feeds RSS y más de veinte temas.\nLibros : cree libros y manuscritos en formatos impresos (PDF, MS Word) y en línea (HTML, ePub).\nInteractividad : incluya componentes interactivos para ayudar a los lectores a explorar los conceptos y los datos que está presentando más profundamente.\n\n\nImagen tomada de: Allison Horst",
     "crumbs": [
       "**Sección 5** - Introducción a Git/GitHub",
-      "<span class='chapter-number'>40</span>  <span class='chapter-title'>Introducción a Quarto</span>"
+      "<span class='chapter-number'>42</span>  <span class='chapter-title'>Introducción a Quarto</span>"
     ]
   },
   {
     "objectID": "Intro_Quarto.html#referencias",
     "href": "Intro_Quarto.html#referencias",
-    "title": "40  Introducción a Quarto",
-    "section": "41.3 Referencias",
-    "text": "41.3 Referencias\n\nTutorial: Hello, Quarto",
+    "title": "42  Introducción a Quarto",
+    "section": "43.3 Referencias",
+    "text": "43.3 Referencias\n\nTutorial: Hello, Quarto",
     "crumbs": [
       "**Sección 5** - Introducción a Git/GitHub",
-      "<span class='chapter-number'>40</span>  <span class='chapter-title'>Introducción a Quarto</span>"
+      "<span class='chapter-number'>42</span>  <span class='chapter-title'>Introducción a Quarto</span>"
     ]
   },
   {
     "objectID": "cap17.html",
     "href": "cap17.html",
-    "title": "41  Repositorios",
+    "title": "43  Repositorios",
     "section": "",
     "text": "Fecha: 13 de octubre, 2026\n\nUn repositorio es donde se va a almacenar toda la información de nuestro proyecto, es donde vamos a tener toda la historia y registro de cambios y usuarios. Es recomendable tener un repositorio por proyecto y no multiples proyectos en un solo repositorio.\nVamos a hacer una carpeta para trabajar con git.\nmkdir Mi_primer_repo\ncd Mi_primer_repo\nPara inicializar un repositorio usamos lo siguiente (dentro de la carpeta).\ngit init\nAl inicializar el repositorio, cualquier carpeta y archivo que se cree dentro de la carpeta quedará su registro, no es necesario inicializar las carpetas anidadas.\nSi revisamos que tiene la carpeta solo con ls no vamos a notar ningún cambio pero si listamos con la opción -a veremos que contiene archivos ocultos.\n\n\n\n\n\n\nImportante\n\n\n\nEn el archivo .git se almacena TODA la información de nuestro repositorio, así que si lo borramos perderemos todo el historial del repositorio.\n\n\nls -a\n\n\n\n\n\n\nAdvertencia\n\n\n\nPara cambiar manualmente la rama de nuestro repositorio si no es la main, lo podemos hacer como sigue.\ngit checkout -b main\n\n\nPara preguntarle a git el estado de nuestro proyecto:\ngit status\nSi dentro de una carpeta preguntamos git status y obtenemos el siguiente mensaje:\nfatal: not a git repository (or any of the parent directories): .git\nsignifica que si podemos inicializarlo como un repositorio.\n\n\n\n\n\n\nNotaEjercicio 1\n\n\n\nDentro de la carpeta Mi_primer_repo crea una carpeta llamada subproyecto1. Si quieres llevar un registro de lo que hagas en ese subproyecto: ¿debes inicializarla? Inicializala. Ahora, ¿cómo borras el archivo .git?\n\n\n\n\n\n\nTipSolución\n\n\n\n\n\nNo es necesario inicializar subproyecto1 si forma parte del proyecto Mi_primer_repo, ya que todos los archivos y subcarpetas son rastreados por el repositorio ubicado en la carpeta principal. Sin embargo, si subproyecto1 fuera un proyecto independiente, podríamos inicializarlo con:\ncd subproyecto1\ngit init\nEsto crea una carpeta oculta llamada .git, que contiene toda la información del repositorio.\nSi decidimos que ya no queremos que subproyecto1 sea un repositorio Git, basta con eliminar la carpeta .git:\nEn Mac/Linux:\nrm -rf .git\nEn Windows (PowerShell):\nRemove-Item -Recurse -Force .git\no desde Git Bash:\nrm -rf .git\nDespués de eliminar .git, la carpeta seguirá existiendo, pero dejará de ser un repositorio Git.",
     "crumbs": [
       "**Sección 5** - Introducción a Git/GitHub",
-      "<span class='chapter-number'>41</span>  <span class='chapter-title'>Repositorios</span>"
+      "<span class='chapter-number'>43</span>  <span class='chapter-title'>Repositorios</span>"
     ]
   },
   {
     "objectID": "cap18.html",
     "href": "cap18.html",
-    "title": "42  Ignorar archivos/carpetas",
+    "title": "44  Ignorar archivos/carpetas",
     "section": "",
     "text": "Fecha: 13 de octubre, 2026\n\nEs muy usual tener un archivo llamado .gitignore donde se pueden colocar los nombres de archivos o carpetas que no queremos llevar registro.\nCreemos unos archivos de prueba.\ncd Mi_primer_repo\nmkdir resultados\ntouch a.csv b.csv c.csv resultados/a.out resultados/b.out\nSi preguntamos el estado veremos los cambios no registrados en el historial.\ngit status\nEstos archivos por el momento no nos sirven de nada y guardarlos o registrarlos sería una perdida de tiempo/espacio. Para ignorarlos, creamos el archivo .gitignore y añadimos los nombres a ese archivo:\nnano .gitignore\n*.csv\nresultados/\ncat .gitignore\nEstos patrones le están diciendo a Git que ignore todos los archivos .csv y todo lo que hay en la carpeta resultados, si después añadimos algo a la carpeta lo seguirá ignorando. Y si alguno de esos archivos ya se le dijo a Git que llevará su registro lo seguirá registrando.\ngit status\nSi nos fijamos, el único documento que ahora nos menciona Git es el archivo .gitignore. Lo que nos falta es añadirlo y hacer el commit.\ngit add .gitignore\ngit commit -m \"Creamos el archivo gitignore e ignoramos todo lo que hay en resultados y archivos csv\"\ngit status\nEl archivo .gitignore nos ayuda a no cometer el error de accidentalmente tratar de registrar y rastrear algo que se le dijo que no lo hiciera.\ngit add a.csv\nSi realmente queremos agregarlo, tendríamos que usar la opción -f:\ngit add -f a.csv\nPara ver el estado de los archivos ignorados usamos la siguiente instrucción:\ngit status --ignored\n\n\n\n\n\n\nNotaEjercicio 1\n\n\n\nSupongamos que tenemos las siguientes subcarpetas:\nresultados/plots\nresultados/datos\n¿Qué tenemos que hacer si queremos ignorar solamente lo que hay en datos y no lo que hay en plots?\n\n\n\n\n\n\nTipSolución\n\n\n\n\n\nSi queremos ignorar únicamente el contenido de la carpeta datos, pero seguir rastreando los archivos de plots, podemos crear (o modificar) un archivo .gitignore y agregar la siguiente línea:\nresultados/datos/\nLa barra / al final indica que queremos ignorar todo el contenido del directorio datos.\nEl archivo .gitignore podría verse así:\nresultados/datos/\nCon esta configuración, Git ignorará archivos como\nresultados/datos/datos1.csv\nresultados/datos/salida.txt\npero seguirá rastreando normalmente archivos como\nresultados/plots/figura1.png\nresultados/plots/heatmap.pdf\nPodemos comprobar qué archivos están siendo rastreados con:\ngit status\ny observaremos que los archivos dentro de resultados/datos/ no aparecen, mientras que los archivos dentro de resultados/plots/ sí.\n\n\n\n\n\nPara ignorar por ejemplo todos los archivos que terminan en .csv excepto uno en específico (b.csv) podemos indicarlo en el archivo .gitignore como:\n*.csv  # ignoramos todos los csv\n!b.csv # exepto el que se llama b.csv\n\n\n\n\n\n\nNotaEjercicio 2\n\n\n\nSupongamos ahora que tenemos la siguiente estructura de carpetas:\nresultados/plots\nresultados/datos\nresultados/img\nresultados/analisis\nY que queremos ignorar todo excepto lo que hay en datos. ¿Cómo lo harían?\n\n\n\n\n\n\nTipSolución\n\n\n\n\n\nUna forma de hacerlo es ignorar primero todo el contenido de resultados y después excluir de esa regla a la carpeta datos.\nPara ello, en el archivo .gitignore podemos escribir:\nresultados/*\n!resultados/datos/\nSin embargo, para que Git también considere los archivos dentro de datos, debemos añadir:\nresultados/*\n!resultados/datos/\n!resultados/datos/**\nCon esto, Git ignorará archivos como\nresultados/plots/figura1.png\nresultados/img/logo.jpg\nresultados/analisis/salida.txt\npero seguirá rastreando archivos dentro de\nresultados/datos/\nPor ejemplo,\nresultados/datos/datos1.csv\nresultados/datos/mediciones.txt\nPodemos verificarlo con:\ngit status\ny observaremos que solamente aparecen los archivos contenidos en resultados/datos.\n\n\n\n\n\n\n\n\n\n\n\nNotaEjercicio 3\n\n\n\nSupongamos que tenemos la siguiente estructura de archivos:\nresultados/rdatos/a.csv\nresultados/rdatos/b.csv\nresultados/rdatos/c.csv\nresultados/rdatos/info.txt\n¿Cómo le indicas a Git que ignore todos los csv de la carpeta rdatos menos el que se llama info.txt?\n\n\n\n\n\n\nTipSolución\n\n\n\n\n\nComo únicamente queremos ignorar los archivos con extensión .csv dentro de la carpeta rdatos, podemos añadir al archivo .gitignore la siguiente línea:\nresultados/rdatos/*.csv\nCon esta regla, Git ignorará\nresultados/rdatos/a.csv\nresultados/rdatos/b.csv\nresultados/rdatos/c.csv\npero seguirá rastreando cualquier archivo cuya extensión no sea .csv, por ejemplo\nresultados/rdatos/info.txt\nPodemos verificarlo con:\ngit status\ny observaremos que únicamente aparecerá info.txt, mientras que los archivos .csv serán ignorados.\n\n\n\n\n\n\n\n\n\n\n\nNotaEjercicio 4\n\n\n\nSupongamos que tenemos la siguiente estructura de datos:\nresultados/a.csv\nresultados/analisis1/b.csv\nresultados/analisis2/c.csv\nresultados/analisis2/sub_1/d.csv\n¿Cómo le indicamos a Git que ignore todos los archivos .csv sin indicar manualmente todos los directorios?\n\n\n\n\n\n\nTipSolución\n\n\n\n\n\nSi queremos ignorar todos los archivos con extensión .csv, independientemente del directorio en el que se encuentren, podemos añadir al archivo .gitignore la siguiente línea:\n*.csv\nCon esta regla, Git ignorará automáticamente archivos como\nresultados/a.csv\nresultados/analisis1/b.csv\nresultados/analisis2/c.csv\nresultados/analisis2/sub_1/d.csv\nsin necesidad de especificar manualmente cada carpeta.\nPodemos verificar qué archivos están siendo ignorados mediante:\ngit status\ny observaremos que los archivos con extensión .csv no aparecerán.\nAlternativamente, podríamos usar:\n**/*.csv\nque explícitamente indica que se ignoren todos los archivos .csv en cualquier subdirectorio, aunque en la mayoría de los casos basta con escribir simplemente:\n*.csv\n\n\n\n\n\n\n\n\n\n\n\nNotaEjercicio 5\n\n\n\nSi en el archivo .gitignore escribimos lo siguiente, ¿qué está ignorando?\n*.csv\n!*.csv\n\n\n\n\n\n\nTipSolución\n\n\n\n\n\nLa primera línea\n*.csv\nle indica a Git que ignore todos los archivos con extensión .csv.\nSin embargo, la segunda línea\n!*.csv\nniega la regla anterior y vuelve a incluir todos los archivos .csv.\nPor lo tanto, el efecto neto es que ningún archivo .csv será ignorado.\nRecordemos que en un archivo .gitignore, las reglas se procesan de arriba hacia abajo y las reglas posteriores tienen prioridad sobre las anteriores.\nPor ejemplo, si tenemos los archivos\na.csv\nb.csv\ndatos/c.csv\nninguno de ellos será ignorado.\nPodemos comprobarlo con:\ngit status\ny observaremos que todos los archivos .csv aparecerán normalmente.",
     "crumbs": [
       "**Sección 5** - Introducción a Git/GitHub",
-      "<span class='chapter-number'>42</span>  <span class='chapter-title'>Ignorar archivos/carpetas</span>"
+      "<span class='chapter-number'>44</span>  <span class='chapter-title'>Ignorar archivos/carpetas</span>"
     ]
   },
   {
     "objectID": "s5_actividades1y2.html",
     "href": "s5_actividades1y2.html",
-    "title": "43  📚 Actividad 1 y 2",
+    "title": "45  📚 Actividad 1 y 2",
     "section": "",
-    "text": "43.1 📚 Actividad 1: Miniresumen personal + foto para tu repositorio\nFecha: 17 de febrero, 2026",
+    "text": "45.1 📚 Actividad 1: Miniresumen personal + foto para tu repositorio\nFecha: 17 de febrero, 2026",
     "crumbs": [
       "**Sección 5** - Introducción a Git/GitHub",
-      "<span class='chapter-number'>43</span>  <span class='chapter-title'>**📚** Actividad 1 y 2</span>"
+      "<span class='chapter-number'>45</span>  <span class='chapter-title'>**📚** Actividad 1 y 2</span>"
     ]
   },
   {
     "objectID": "s5_actividades1y2.html#actividad-1-miniresumen-personal-foto-para-tu-repositorio",
     "href": "s5_actividades1y2.html#actividad-1-miniresumen-personal-foto-para-tu-repositorio",
-    "title": "43  📚 Actividad 1 y 2",
+    "title": "45  📚 Actividad 1 y 2",
     "section": "",
     "text": "Escribe un miniresumen en texto plano sobre ti. Debe tener entre 5 y 10 líneas.\nPuedes usar emojis para representar tus gustos, intereses o personalidad\nEl texto debe incluir:\n\nTus intereses académicos o personales\nQué te gusta hacer en tu tiempo libre\nQué te motiva a aprender ciencia o programación\nAlgún dato curioso o divertido sobre ti\n\n\n\n\n\n\n\n\nNotaActividad paso a paso\n\n\n\nPuedes aprender a realizar esta actividad paso a paso, siguiendo este tutorial.",
     "crumbs": [
       "**Sección 5** - Introducción a Git/GitHub",
-      "<span class='chapter-number'>43</span>  <span class='chapter-title'>**📚** Actividad 1 y 2</span>"
+      "<span class='chapter-number'>45</span>  <span class='chapter-title'>**📚** Actividad 1 y 2</span>"
     ]
   },
   {
     "objectID": "s5_actividades1y2.html#actividad-2-crear-un-sitio-de-páginas-de-github-nuestro-dominio",
     "href": "s5_actividades1y2.html#actividad-2-crear-un-sitio-de-páginas-de-github-nuestro-dominio",
-    "title": "43  📚 Actividad 1 y 2",
-    "section": "43.2 📚 Actividad 2: Crear un sitio de Páginas de GitHub (nuestro dominio)",
-    "text": "43.2 📚 Actividad 2: Crear un sitio de Páginas de GitHub (nuestro dominio)\n\nCrear un repositorio con el mismo nombre de usuario colocando: usuario.github.io.\n\n\n\nConfigura el repositorio como Público.\nAgrega un README (opcional).\nHaz clic en Create repository (Crear repositorio).\nPosteriormente ir a Settings del repositorio &gt; Pages. Y aquí encontraremos el URL de nuestro sitio web.\n\n\n\n\n\n\n\n\nNota\n\n\n\nEn este punto de la clase debemos tener dos repositorios con los siguientes nombres:\n\nEveliaCoss/EveliaCoss: Que va a contener el README de inicio de nuestro perfil.\nEveliaCoss/EveliaCoss.github.io: Contendra nuestro dominio para los sitios web.",
+    "title": "45  📚 Actividad 1 y 2",
+    "section": "45.2 📚 Actividad 2: Crear un sitio de Páginas de GitHub (nuestro dominio)",
+    "text": "45.2 📚 Actividad 2: Crear un sitio de Páginas de GitHub (nuestro dominio)\n\nCrear un repositorio con el mismo nombre de usuario colocando: usuario.github.io.\n\n\n\nConfigura el repositorio como Público.\nAgrega un README (opcional).\nHaz clic en Create repository (Crear repositorio).\nPosteriormente ir a Settings del repositorio &gt; Pages. Y aquí encontraremos el URL de nuestro sitio web.\n\n\n\n\n\n\n\n\nNota\n\n\n\nEn este punto de la clase debemos tener dos repositorios con los siguientes nombres:\n\nEveliaCoss/EveliaCoss: Que va a contener el README de inicio de nuestro perfil.\nEveliaCoss/EveliaCoss.github.io: Contendra nuestro dominio para los sitios web.",
     "crumbs": [
       "**Sección 5** - Introducción a Git/GitHub",
-      "<span class='chapter-number'>43</span>  <span class='chapter-title'>**📚** Actividad 1 y 2</span>"
+      "<span class='chapter-number'>45</span>  <span class='chapter-title'>**📚** Actividad 1 y 2</span>"
     ]
   },
   {
     "objectID": "s5_actividades1y2.html#tareas",
     "href": "s5_actividades1y2.html#tareas",
-    "title": "43  📚 Actividad 1 y 2",
-    "section": "43.3 📌 Tareas",
-    "text": "43.3 📌 Tareas\nTraer para la Próxima clase: 19 de febrero, 2026, vamos a crear nuestra página web empleando GitHub pages, por lo que deben traer:\n\nSincronizar su GitHub con Rstudio, revisar el material de Conectar a GitHub con SSH.\nTraer una foto y su miniresumen para crear su página web con GitHub pages\n\nEjemplo del Sitio Web que haremos en la siguiente clase:",
+    "title": "45  📚 Actividad 1 y 2",
+    "section": "45.3 📌 Tareas",
+    "text": "45.3 📌 Tareas\nTraer para la Próxima clase: 19 de febrero, 2026, vamos a crear nuestra página web empleando GitHub pages, por lo que deben traer:\n\nSincronizar su GitHub con Rstudio, revisar el material de Conectar a GitHub con SSH.\nTraer una foto y su miniresumen para crear su página web con GitHub pages\n\nEjemplo del Sitio Web que haremos en la siguiente clase:",
     "crumbs": [
       "**Sección 5** - Introducción a Git/GitHub",
-      "<span class='chapter-number'>43</span>  <span class='chapter-title'>**📚** Actividad 1 y 2</span>"
+      "<span class='chapter-number'>45</span>  <span class='chapter-title'>**📚** Actividad 1 y 2</span>"
     ]
   },
   {
     "objectID": "s5_actividades1y2.html#referencias",
     "href": "s5_actividades1y2.html#referencias",
-    "title": "43  📚 Actividad 1 y 2",
-    "section": "43.4 Referencias",
-    "text": "43.4 Referencias\n\nGitHub pages\nGitHub Profile README Generator",
+    "title": "45  📚 Actividad 1 y 2",
+    "section": "45.4 Referencias",
+    "text": "45.4 Referencias\n\nGitHub pages\nGitHub Profile README Generator",
     "crumbs": [
       "**Sección 5** - Introducción a Git/GitHub",
-      "<span class='chapter-number'>43</span>  <span class='chapter-title'>**📚** Actividad 1 y 2</span>"
+      "<span class='chapter-number'>45</span>  <span class='chapter-title'>**📚** Actividad 1 y 2</span>"
     ]
   },
   {
     "objectID": "cap27.html",
     "href": "cap27.html",
-    "title": "44  Resumen y Práctica Final",
+    "title": "46  Resumen y Práctica Final",
     "section": "",
-    "text": "44.1 Comandos usados en Github y RStudio",
+    "text": "46.1 Comandos usados en Github y RStudio",
     "crumbs": [
       "**Sección 5** - Introducción a Git/GitHub",
-      "<span class='chapter-number'>44</span>  <span class='chapter-title'>Resumen y Práctica Final</span>"
+      "<span class='chapter-number'>46</span>  <span class='chapter-title'>Resumen y Práctica Final</span>"
     ]
   },
   {
     "objectID": "cap27.html#comandos-usados-en-github-y-rstudio",
     "href": "cap27.html#comandos-usados-en-github-y-rstudio",
-    "title": "44  Resumen y Práctica Final",
+    "title": "46  Resumen y Práctica Final",
     "section": "",
     "text": "Importante\n\n\n\n\ngit add: Agregar cambios\ngit status: Revisamos el estado del proyecto\ngit commit: comentar los cambios\ngit checkout: Pordemos regresar cambios o cambiar de rama.\n\nEn Git, los comandos git pull y git push son utilizados para sincronizar y actualizar el contenido de un repositorio: \n\ngit pull: Actualiza la versión local de un repositorio desde otro remoto (en R studio flecha azul).\ngit push: Carga contenido en un repositorio remoto (en R studio flecha verde)",
     "crumbs": [
       "**Sección 5** - Introducción a Git/GitHub",
-      "<span class='chapter-number'>44</span>  <span class='chapter-title'>Resumen y Práctica Final</span>"
+      "<span class='chapter-number'>46</span>  <span class='chapter-title'>Resumen y Práctica Final</span>"
     ]
   },
   {
     "objectID": "cap27.html#página-de-inicio-en-github",
     "href": "cap27.html#página-de-inicio-en-github",
-    "title": "44  Resumen y Práctica Final",
-    "section": "44.2 Página de inicio en GitHub",
-    "text": "44.2 Página de inicio en GitHub\n\n\n\n\n\n\nNotaActividad\n\n\n\n\nEn GitHub, crea un repositorio con el mismo nombre de usuario. Ejemplo: Si el usuario es EveliaCoss y entonces el repositorio se llama EveliaCoss, dandonos la siguiente liga https://github.com/EveliaCoss/EveliaCoss\nAgrega un README al repositorio con tu informacion. Por Default ya trae una plantilla, modificala y adaptala a tu gusto.\nVisualiza como cambia tu inicio en el Github.\n\nPuedes aprender a realizar esta actividad paso a paso, siguiendo este tutorial.",
+    "title": "46  Resumen y Práctica Final",
+    "section": "46.2 Página de inicio en GitHub",
+    "text": "46.2 Página de inicio en GitHub\n\n\n\n\n\n\nNotaActividad\n\n\n\n\nEn GitHub, crea un repositorio con el mismo nombre de usuario. Ejemplo: Si el usuario es EveliaCoss y entonces el repositorio se llama EveliaCoss, dandonos la siguiente liga https://github.com/EveliaCoss/EveliaCoss\nAgrega un README al repositorio con tu informacion. Por Default ya trae una plantilla, modificala y adaptala a tu gusto.\nVisualiza como cambia tu inicio en el Github.\n\nPuedes aprender a realizar esta actividad paso a paso, siguiendo este tutorial.",
     "crumbs": [
       "**Sección 5** - Introducción a Git/GitHub",
-      "<span class='chapter-number'>44</span>  <span class='chapter-title'>Resumen y Práctica Final</span>"
+      "<span class='chapter-number'>46</span>  <span class='chapter-title'>Resumen y Práctica Final</span>"
     ]
   },
   {
     "objectID": "cap27.html#github-primero-rstudio-después",
     "href": "cap27.html#github-primero-rstudio-después",
-    "title": "44  Resumen y Práctica Final",
-    "section": "44.3 GitHub primero, RStudio después…",
-    "text": "44.3 GitHub primero, RStudio después…\n\nEn RStudio crea un nuevo proyecto: File &gt; New Project &gt; Version Control &gt; Git. Ahi pega el URL del repositorio https://github.com/mi_usuario/mi_repositorio.git. Da click en Create Project.\n\nEsto nos generará los siguientes elementos:\n\nUn directorio nuevo\nUn repositorio Git enlazado a al repositorio de GitHub\nUn proyecto en RStudio\n\nCon este procedimiento ya no es necesario preocuparse por configurar controles remotos Git y rastrear ramas en la línea de comandos.",
+    "title": "46  Resumen y Práctica Final",
+    "section": "46.3 GitHub primero, RStudio después…",
+    "text": "46.3 GitHub primero, RStudio después…\n\nEn RStudio crea un nuevo proyecto: File &gt; New Project &gt; Version Control &gt; Git. Ahi pega el URL del repositorio https://github.com/mi_usuario/mi_repositorio.git. Da click en Create Project.\n\nEsto nos generará los siguientes elementos:\n\nUn directorio nuevo\nUn repositorio Git enlazado a al repositorio de GitHub\nUn proyecto en RStudio\n\nCon este procedimiento ya no es necesario preocuparse por configurar controles remotos Git y rastrear ramas en la línea de comandos.",
     "crumbs": [
       "**Sección 5** - Introducción a Git/GitHub",
-      "<span class='chapter-number'>44</span>  <span class='chapter-title'>Resumen y Práctica Final</span>"
+      "<span class='chapter-number'>46</span>  <span class='chapter-title'>Resumen y Práctica Final</span>"
     ]
   },
   {
     "objectID": "cap27.html#comentar-pull-y-push-en-rstudio",
     "href": "cap27.html#comentar-pull-y-push-en-rstudio",
-    "title": "44  Resumen y Práctica Final",
-    "section": "44.4 Comentar, pull y push en Rstudio",
-    "text": "44.4 Comentar, pull y push en Rstudio\n\nCon la flecha azul podemos hacer pull (RECUERDA HACERLO ANTES DE HACER UN PUSH), y con la flecha verde un push. Para poder comentar y hacer push debemos marcar con una palomita mediante un click en las pequeñas cajas blancas de la columna Staged, damos click en commit lo cual nos abre la siguiente ventana.\n\nVolvemos a dar click en commit, y finalizamos con push (flecha verde).",
+    "title": "46  Resumen y Práctica Final",
+    "section": "46.4 Comentar, pull y push en Rstudio",
+    "text": "46.4 Comentar, pull y push en Rstudio\n\nCon la flecha azul podemos hacer pull (RECUERDA HACERLO ANTES DE HACER UN PUSH), y con la flecha verde un push. Para poder comentar y hacer push debemos marcar con una palomita mediante un click en las pequeñas cajas blancas de la columna Staged, damos click en commit lo cual nos abre la siguiente ventana.\n\nVolvemos a dar click en commit, y finalizamos con push (flecha verde).",
     "crumbs": [
       "**Sección 5** - Introducción a Git/GitHub",
-      "<span class='chapter-number'>44</span>  <span class='chapter-title'>Resumen y Práctica Final</span>"
+      "<span class='chapter-number'>46</span>  <span class='chapter-title'>Resumen y Práctica Final</span>"
     ]
   },
   {
     "objectID": "cap27.html#ediciones-desde-r-de-la-página-de-inicio-en-github",
     "href": "cap27.html#ediciones-desde-r-de-la-página-de-inicio-en-github",
-    "title": "44  Resumen y Práctica Final",
-    "section": "44.5 Ediciones desde R de la página de inicio en GitHub",
-    "text": "44.5 Ediciones desde R de la página de inicio en GitHub\n\n\n\n\n\n\nNotaActividad\n\n\n\n\nSincroniza el repositorio con el nombre de tu usuario en GitHub (ejemplo: EveliaCoss/EveliaCoss) con RStudio\nRealiza los cambios desde R y subelos a GitHub.\nVisualiza como cambia tu inicio en el Github.\n\n\n\n\n\n\n\n\n\nTipOh Shit, Git!?!\n\n\n\nTambién existe esta página llamada Oh Shit, Git!?!. En donde puedes aprender sobre los errores comunes en GitHub.\n\n\n\nImagen tomada de Allison Horst.",
+    "title": "46  Resumen y Práctica Final",
+    "section": "46.5 Ediciones desde R de la página de inicio en GitHub",
+    "text": "46.5 Ediciones desde R de la página de inicio en GitHub\n\n\n\n\n\n\nNotaActividad\n\n\n\n\nSincroniza el repositorio con el nombre de tu usuario en GitHub (ejemplo: EveliaCoss/EveliaCoss) con RStudio\nRealiza los cambios desde R y subelos a GitHub.\nVisualiza como cambia tu inicio en el Github.\n\n\n\n\n\n\n\n\n\nTipOh Shit, Git!?!\n\n\n\nTambién existe esta página llamada Oh Shit, Git!?!. En donde puedes aprender sobre los errores comunes en GitHub.\n\n\n\nImagen tomada de Allison Horst.",
     "crumbs": [
       "**Sección 5** - Introducción a Git/GitHub",
-      "<span class='chapter-number'>44</span>  <span class='chapter-title'>Resumen y Práctica Final</span>"
+      "<span class='chapter-number'>46</span>  <span class='chapter-title'>Resumen y Práctica Final</span>"
     ]
   },
   {
     "objectID": "cap27.html#referencias",
     "href": "cap27.html#referencias",
-    "title": "44  Resumen y Práctica Final",
-    "section": "44.6 Referencias",
-    "text": "44.6 Referencias\n\nEvelia tutorial:Workshop sobre Git / Github 2025\nHaydee tutorial: Temas Selectos de Análisis Numérico y Computación Científica: Computo científico para el análisis de datos\nAlejandra Medina tutorial: Control de versiones con GitHub y RStudio",
+    "title": "46  Resumen y Práctica Final",
+    "section": "46.6 Referencias",
+    "text": "46.6 Referencias\n\nEvelia tutorial:Workshop sobre Git / Github 2025\nHaydee tutorial: Temas Selectos de Análisis Numérico y Computación Científica: Computo científico para el análisis de datos\nAlejandra Medina tutorial: Control de versiones con GitHub y RStudio",
     "crumbs": [
       "**Sección 5** - Introducción a Git/GitHub",
-      "<span class='chapter-number'>44</span>  <span class='chapter-title'>Resumen y Práctica Final</span>"
+      "<span class='chapter-number'>46</span>  <span class='chapter-title'>Resumen y Práctica Final</span>"
     ]
   },
   {
     "objectID": "cap29.html",
     "href": "cap29.html",
-    "title": "45  Introducción a Markdown",
+    "title": "47  Introducción a Markdown",
     "section": "",
-    "text": "45.1 ¿Qué es Markdown?\nMarkdown es un lenguaje de marcado ligero que permite añadir elementos de formato a documentos de texto plano. Creado por John Gruber en 2004, Markdown es actualmente uno de los lenguajes más populares del mundo.",
+    "text": "47.1 ¿Qué es Markdown?\nMarkdown es un lenguaje de marcado ligero que permite añadir elementos de formato a documentos de texto plano. Creado por John Gruber en 2004, Markdown es actualmente uno de los lenguajes más populares del mundo.",
     "crumbs": [
       "**Sección 6** - Introducción a R y Rstudio",
-      "<span class='chapter-number'>45</span>  <span class='chapter-title'>Introducción a Markdown</span>"
+      "<span class='chapter-number'>47</span>  <span class='chapter-title'>Introducción a Markdown</span>"
     ]
   },
   {
     "objectID": "cap29.html#qué-es-markdown",
     "href": "cap29.html#qué-es-markdown",
-    "title": "45  Introducción a Markdown",
+    "title": "47  Introducción a Markdown",
     "section": "",
     "text": "Sencillo y legible, sin necesidad de usar editores complicados o HTML.\nlenguaje de marcado ligero: Escribir texto que incluye instrucciones simples para darle formato.\n\n\n\n\n\n\n\nNota🧩 ¿Por qué se llama “ligero”?\n\n\n\nPorque:\n\nUsa símbolos sencillos como *, #, o - para indicar formato.\nNo requiere cerrar etiquetas como &lt;strong&gt; o &lt;div&gt; (como en HTML).\nEs minimalista y limpio, ideal para escribir rápido sin distracciones.",
     "crumbs": [
       "**Sección 6** - Introducción a R y Rstudio",
-      "<span class='chapter-number'>45</span>  <span class='chapter-title'>Introducción a Markdown</span>"
+      "<span class='chapter-number'>47</span>  <span class='chapter-title'>Introducción a Markdown</span>"
     ]
   },
   {
     "objectID": "cap29.html#para-qué-se-usa",
     "href": "cap29.html#para-qué-se-usa",
-    "title": "45  Introducción a Markdown",
-    "section": "45.2 🧠 ¿Para qué se usa?",
-    "text": "45.2 🧠 ¿Para qué se usa?\n\nCrear documentación técnica o científica\nEscribir README.md en proyectos de GitHub\nGenerar contenido para sitios web\nCrear tesis, notas, libros, presentaciones y posters\n\nEn R\n\n\n\nPaquete / Programa\nUso principal\n\n\n\n\nrmarkdown\nCrear documentos reproducibles con texto, código y resultados\n\n\nknitr\nEjecutar chunks de código en RMarkdown\n\n\nQuarto\nPlataforma moderna para documentos con R, Python, etc.\n\n\nbookdown\nCrear libros técnicos con Markdown + RMarkdown\n\n\nblogdown\nGenerar blogs científicos usando Markdown y Hugo\n\n\nflexdashboard\nDashboards interactivos escritos en Markdown\n\n\n\nEn Python\n\n\n\n\n\n\n\nPaquete / Programa\nUso principal\n\n\n\n\nJupyter Notebooks\nCeldas Markdown para explicar y documentar junto con código\n\n\nQuarto\nIgual que en R, permite combinar Markdown con código Python\n\n\nmkdocs\nGenerar sitios web de documentación técnica desde archivos Markdown\n\n\nSphinx + MyST\nDocumentación avanzada con soporte para Markdown\n\n\nmarkdown, mistune\nLibrerías para convertir Markdown a HTML\n\n\nnbconvert\nExportar notebooks con Markdown a PDF, HTML, LaTeX, etc.",
+    "title": "47  Introducción a Markdown",
+    "section": "47.2 🧠 ¿Para qué se usa?",
+    "text": "47.2 🧠 ¿Para qué se usa?\n\nCrear documentación técnica o científica\nEscribir README.md en proyectos de GitHub\nGenerar contenido para sitios web\nCrear tesis, notas, libros, presentaciones y posters\n\nEn R\n\n\n\nPaquete / Programa\nUso principal\n\n\n\n\nrmarkdown\nCrear documentos reproducibles con texto, código y resultados\n\n\nknitr\nEjecutar chunks de código en RMarkdown\n\n\nQuarto\nPlataforma moderna para documentos con R, Python, etc.\n\n\nbookdown\nCrear libros técnicos con Markdown + RMarkdown\n\n\nblogdown\nGenerar blogs científicos usando Markdown y Hugo\n\n\nflexdashboard\nDashboards interactivos escritos en Markdown\n\n\n\nEn Python\n\n\n\n\n\n\n\nPaquete / Programa\nUso principal\n\n\n\n\nJupyter Notebooks\nCeldas Markdown para explicar y documentar junto con código\n\n\nQuarto\nIgual que en R, permite combinar Markdown con código Python\n\n\nmkdocs\nGenerar sitios web de documentación técnica desde archivos Markdown\n\n\nSphinx + MyST\nDocumentación avanzada con soporte para Markdown\n\n\nmarkdown, mistune\nLibrerías para convertir Markdown a HTML\n\n\nnbconvert\nExportar notebooks con Markdown a PDF, HTML, LaTeX, etc.",
     "crumbs": [
       "**Sección 6** - Introducción a R y Rstudio",
-      "<span class='chapter-number'>45</span>  <span class='chapter-title'>Introducción a Markdown</span>"
+      "<span class='chapter-number'>47</span>  <span class='chapter-title'>Introducción a Markdown</span>"
     ]
   },
   {
     "objectID": "cap29.html#cómo-funciona",
     "href": "cap29.html#cómo-funciona",
-    "title": "45  Introducción a Markdown",
-    "section": "45.3 ¿Cómo funciona?",
-    "text": "45.3 ¿Cómo funciona?\nPasos generales:\n\nCrear un archivo Markdown con un editor de texto o una aplicación específica. El archivo debe tener la extensión .md o .markdown.\nSe abre el archivo Markdown en una aplicación Markdown.\nSe utiliza la aplicación Markdown para convertir el archivo Markdown en un documento HTML.\nVisualización del archivo HTML en un navegador web o use la aplicación Markdown para convertirlo a otro formato de archivo, como PDF.\n\n\n\n\n\n\n\nNota\n\n\n\nLa aplicación y el procesador de Markdown son dos componentes independientes. Para simplificar, los he combinado en un solo elemento (“aplicación de Markdown”) en la figura a continuación.\n\n\n\n\n\nImagen tomada de: https://www.markdownguide.org/getting-started/",
+    "title": "47  Introducción a Markdown",
+    "section": "47.3 ¿Cómo funciona?",
+    "text": "47.3 ¿Cómo funciona?\nPasos generales:\n\nCrear un archivo Markdown con un editor de texto o una aplicación específica. El archivo debe tener la extensión .md o .markdown.\nSe abre el archivo Markdown en una aplicación Markdown.\nSe utiliza la aplicación Markdown para convertir el archivo Markdown en un documento HTML.\nVisualización del archivo HTML en un navegador web o use la aplicación Markdown para convertirlo a otro formato de archivo, como PDF.\n\n\n\n\n\n\n\nNota\n\n\n\nLa aplicación y el procesador de Markdown son dos componentes independientes. Para simplificar, los he combinado en un solo elemento (“aplicación de Markdown”) en la figura a continuación.\n\n\n\n\n\nImagen tomada de: https://www.markdownguide.org/getting-started/",
     "crumbs": [
       "**Sección 6** - Introducción a R y Rstudio",
-      "<span class='chapter-number'>45</span>  <span class='chapter-title'>Introducción a Markdown</span>"
+      "<span class='chapter-number'>47</span>  <span class='chapter-title'>Introducción a Markdown</span>"
     ]
   },
   {
     "objectID": "cap29.html#sintaxis-de-escritura-y-formato-básicos",
     "href": "cap29.html#sintaxis-de-escritura-y-formato-básicos",
-    "title": "45  Introducción a Markdown",
-    "section": "45.4 Sintaxis de escritura y formato básicos",
-    "text": "45.4 Sintaxis de escritura y formato básicos\nRevisar la documentación de GitHub",
+    "title": "47  Introducción a Markdown",
+    "section": "47.4 Sintaxis de escritura y formato básicos",
+    "text": "47.4 Sintaxis de escritura y formato básicos\nRevisar la documentación de GitHub",
     "crumbs": [
       "**Sección 6** - Introducción a R y Rstudio",
-      "<span class='chapter-number'>45</span>  <span class='chapter-title'>Introducción a Markdown</span>"
+      "<span class='chapter-number'>47</span>  <span class='chapter-title'>Introducción a Markdown</span>"
     ]
   },
   {
     "objectID": "cap29.html#tablas-con-datatable",
     "href": "cap29.html#tablas-con-datatable",
-    "title": "45  Introducción a Markdown",
-    "section": "45.5 Tablas con datatable",
-    "text": "45.5 Tablas con datatable\n\n\nCódigo\nlibrary(dplyr)\n\niris %&gt;%\n  head(3) %&gt;%\n  DT::datatable()\n\n\n\n\nTabla 45.1: Tabla decorativa",
+    "title": "47  Introducción a Markdown",
+    "section": "47.5 Tablas con datatable",
+    "text": "47.5 Tablas con datatable\n\n\nCódigo\nlibrary(dplyr)\n\niris %&gt;%\n  head(3) %&gt;%\n  DT::datatable()\n\n\n\n\nTabla 47.1: Tabla decorativa",
     "crumbs": [
       "**Sección 6** - Introducción a R y Rstudio",
-      "<span class='chapter-number'>45</span>  <span class='chapter-title'>Introducción a Markdown</span>"
+      "<span class='chapter-number'>47</span>  <span class='chapter-title'>Introducción a Markdown</span>"
     ]
   },
   {
     "objectID": "cap29.html#librarygt",
     "href": "cap29.html#librarygt",
-    "title": "45  Introducción a Markdown",
-    "section": "45.6 library(gt)",
-    "text": "45.6 library(gt)\n\n\nCódigo\niris %&gt;% \n  head() %&gt;%\n  gt::gt() %&gt;%\n  gt::tab_spanner(label = \"Petalo\", columns = vars(Petal.Length,Petal.Width)) %&gt;%\n  gt::tab_spanner(label = \"Sepalo\", columns = vars(Sepal.Length,Sepal.Width))\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nSepalo\n\n\nPetalo\n\nSpecies\n\n\nSepal.Length\nSepal.Width\nPetal.Length\nPetal.Width\n\n\n\n\n5.1\n3.5\n1.4\n0.2\nsetosa\n\n\n4.9\n3.0\n1.4\n0.2\nsetosa\n\n\n4.7\n3.2\n1.3\n0.2\nsetosa\n\n\n4.6\n3.1\n1.5\n0.2\nsetosa\n\n\n5.0\n3.6\n1.4\n0.2\nsetosa\n\n\n5.4\n3.9\n1.7\n0.4\nsetosa\n\n\n\n\n\n\n\n\n\n\n\n\n\nNota\n\n\n\nSi gustas repasar podemos hacerlo con el script Sesion_Rmarkdown_13Oct2023.Rmd del repositorio RmarkdownGraphs_notes.",
+    "title": "47  Introducción a Markdown",
+    "section": "47.6 library(gt)",
+    "text": "47.6 library(gt)\n\n\nCódigo\niris %&gt;% \n  head() %&gt;%\n  gt::gt() %&gt;%\n  gt::tab_spanner(label = \"Petalo\", columns = vars(Petal.Length,Petal.Width)) %&gt;%\n  gt::tab_spanner(label = \"Sepalo\", columns = vars(Sepal.Length,Sepal.Width))\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nSepalo\n\n\nPetalo\n\nSpecies\n\n\nSepal.Length\nSepal.Width\nPetal.Length\nPetal.Width\n\n\n\n\n5.1\n3.5\n1.4\n0.2\nsetosa\n\n\n4.9\n3.0\n1.4\n0.2\nsetosa\n\n\n4.7\n3.2\n1.3\n0.2\nsetosa\n\n\n4.6\n3.1\n1.5\n0.2\nsetosa\n\n\n5.0\n3.6\n1.4\n0.2\nsetosa\n\n\n5.4\n3.9\n1.7\n0.4\nsetosa\n\n\n\n\n\n\n\n\n\n\n\n\n\nNota\n\n\n\nSi gustas repasar podemos hacerlo con el script Sesion_Rmarkdown_13Oct2023.Rmd del repositorio RmarkdownGraphs_notes.",
     "crumbs": [
       "**Sección 6** - Introducción a R y Rstudio",
-      "<span class='chapter-number'>45</span>  <span class='chapter-title'>Introducción a Markdown</span>"
+      "<span class='chapter-number'>47</span>  <span class='chapter-title'>Introducción a Markdown</span>"
     ]
   },
   {
     "objectID": "cap29.html#referencias",
     "href": "cap29.html#referencias",
-    "title": "45  Introducción a Markdown",
-    "section": "45.7 Referencias",
-    "text": "45.7 Referencias\n\nDocumentación de GitHub\nLibro de Rmarkdown\nEjercicios con Markdown\nCurso de Heladia Salgado\nCurso de Git y GitHub Evelia Coss\nMarkdown and rmarkdown\nGaleria de Markdown\nLesson 3: Basic Syntax\nIntroduction to Open Data Science with R\nData Science for Psychologists",
+    "title": "47  Introducción a Markdown",
+    "section": "47.7 Referencias",
+    "text": "47.7 Referencias\n\nDocumentación de GitHub\nLibro de Rmarkdown\nEjercicios con Markdown\nCurso de Heladia Salgado\nCurso de Git y GitHub Evelia Coss\nMarkdown and rmarkdown\nGaleria de Markdown\nLesson 3: Basic Syntax\nIntroduction to Open Data Science with R\nData Science for Psychologists",
     "crumbs": [
       "**Sección 6** - Introducción a R y Rstudio",
-      "<span class='chapter-number'>45</span>  <span class='chapter-title'>Introducción a Markdown</span>"
+      "<span class='chapter-number'>47</span>  <span class='chapter-title'>Introducción a Markdown</span>"
     ]
   },
   {
     "objectID": "s5_actividades3.html",
     "href": "s5_actividades3.html",
-    "title": "46  📚 Actividad 3: Página web con Rmarkdown",
+    "title": "48  📚 Actividad 3: Página web con Rmarkdown",
     "section": "",
-    "text": "46.0.1 ¿Qué es un RProject y por qué usarlo?\nFecha: 19 de febrero, 2026\nImagen tomada de: Allison Horst\nImagen tomada de: Allison Horst",
+    "text": "48.0.1 ¿Qué es un RProject y por qué usarlo?\nFecha: 19 de febrero, 2026\nImagen tomada de: Allison Horst\nImagen tomada de: Allison Horst",
     "crumbs": [
       "**Sección 6** - Introducción a R y Rstudio",
-      "<span class='chapter-number'>46</span>  <span class='chapter-title'>**📚** Actividad 3: Página web con Rmarkdown</span>"
+      "<span class='chapter-number'>48</span>  <span class='chapter-title'>**📚** Actividad 3: Página web con Rmarkdown</span>"
     ]
   },
   {
     "objectID": "s5_actividades3.html#otra-manera-de-realizar-commits-en-r",
     "href": "s5_actividades3.html#otra-manera-de-realizar-commits-en-r",
-    "title": "46  📚 Actividad 3: Página web con Rmarkdown",
-    "section": "47.1 Otra manera de realizar commits en R",
-    "text": "47.1 Otra manera de realizar commits en R\nCuando vinculas tu proyecto de R (.Rproj) con GitHub y habilitas Git, aparece una nueva pestaña llamada Git en la parte superior derecha de RStudio. Desde ahí puedes manejar tus cambios sin necesidad de usar la terminal.\n\n\n47.1.1 Flujo típico de trabajo\n\nDetectar cambios\n\nCada vez que modificas un archivo, RStudio lo marca en la pestaña Git.\nVerás íconos que indican si el archivo fue modificado (M), agregado (A) o eliminado (D).\n\n\n\n\nSeleccionar archivos para el commit\n\nMarca las casillas de los archivos que quieres incluir en el commit.\nEsto equivale a git add en la terminal.\n\nEscribir el mensaje de commit\n\nEn el cuadro de texto escribe un mensaje claro y descriptivo, por ejemplo: “Corrijo error en función de normalización”\nEl mensaje debe explicar qué cambiaste y por qué.\n\nHacer el commit\n\nHaz clic en el botón Commit.\nEsto guarda los cambios en tu historial local de Git.\n\n\n\n\nSincronizar con GitHub\n\nUsa los botones Push (subir cambios al repositorio remoto) y Pull (traer cambios del remoto).\nNormalmente, después de un commit local, harás Push para que tus cambios aparezcan en GitHub.",
+    "title": "48  📚 Actividad 3: Página web con Rmarkdown",
+    "section": "49.1 Otra manera de realizar commits en R",
+    "text": "49.1 Otra manera de realizar commits en R\nCuando vinculas tu proyecto de R (.Rproj) con GitHub y habilitas Git, aparece una nueva pestaña llamada Git en la parte superior derecha de RStudio. Desde ahí puedes manejar tus cambios sin necesidad de usar la terminal.\n\n\n49.1.1 Flujo típico de trabajo\n\nDetectar cambios\n\nCada vez que modificas un archivo, RStudio lo marca en la pestaña Git.\nVerás íconos que indican si el archivo fue modificado (M), agregado (A) o eliminado (D).\n\n\n\n\nSeleccionar archivos para el commit\n\nMarca las casillas de los archivos que quieres incluir en el commit.\nEsto equivale a git add en la terminal.\n\nEscribir el mensaje de commit\n\nEn el cuadro de texto escribe un mensaje claro y descriptivo, por ejemplo: “Corrijo error en función de normalización”\nEl mensaje debe explicar qué cambiaste y por qué.\n\nHacer el commit\n\nHaz clic en el botón Commit.\nEsto guarda los cambios en tu historial local de Git.\n\n\n\n\nSincronizar con GitHub\n\nUsa los botones Push (subir cambios al repositorio remoto) y Pull (traer cambios del remoto).\nNormalmente, después de un commit local, harás Push para que tus cambios aparezcan en GitHub.",
     "crumbs": [
       "**Sección 6** - Introducción a R y Rstudio",
-      "<span class='chapter-number'>46</span>  <span class='chapter-title'>**📚** Actividad 3: Página web con Rmarkdown</span>"
+      "<span class='chapter-number'>48</span>  <span class='chapter-title'>**📚** Actividad 3: Página web con Rmarkdown</span>"
     ]
   },
   {
     "objectID": "s5_actividades3.html#referencias",
     "href": "s5_actividades3.html#referencias",
-    "title": "46  📚 Actividad 3: Página web con Rmarkdown",
-    "section": "48.1 Referencias",
-    "text": "48.1 Referencias\n\nAllison Horst\nhttps://github.com/EveliaCoss/EveliaCoss.github.io\npostcards",
+    "title": "48  📚 Actividad 3: Página web con Rmarkdown",
+    "section": "50.1 Referencias",
+    "text": "50.1 Referencias\n\nAllison Horst\nhttps://github.com/EveliaCoss/EveliaCoss.github.io\npostcards",
     "crumbs": [
       "**Sección 6** - Introducción a R y Rstudio",
-      "<span class='chapter-number'>46</span>  <span class='chapter-title'>**📚** Actividad 3: Página web con Rmarkdown</span>"
+      "<span class='chapter-number'>48</span>  <span class='chapter-title'>**📚** Actividad 3: Página web con Rmarkdown</span>"
     ]
   },
   {
     "objectID": "s5_actividades4y5.html",
     "href": "s5_actividades4y5.html",
-    "title": "48  📚 Actividad 4 y 5",
+    "title": "50  📚 Actividad 4 y 5",
     "section": "",
-    "text": "48.1 📚 Actividad 4: Crear un documento de Quarto con formato de salida html\nFecha: 19 de febrero, 2026\nPara crear un documento nuevo, ve a Archivos/File &gt; Nuevo archivo &gt; Documento de Quarto.\nPara este tipo de archivos vamos a usar la información del YAML para HTML.",
+    "text": "50.1 📚 Actividad 4: Crear un documento de Quarto con formato de salida html\nFecha: 19 de febrero, 2026\nPara crear un documento nuevo, ve a Archivos/File &gt; Nuevo archivo &gt; Documento de Quarto.\nPara este tipo de archivos vamos a usar la información del YAML para HTML.",
     "crumbs": [
       "**Sección 6** - Introducción a R y Rstudio",
-      "<span class='chapter-number'>48</span>  <span class='chapter-title'>**📚** Actividad 4 y 5</span>"
+      "<span class='chapter-number'>50</span>  <span class='chapter-title'>**📚** Actividad 4 y 5</span>"
     ]
   },
   {
     "objectID": "s5_actividades4y5.html#actividad-5-explorar-la-galleria-de-quarto-y-elegir-un-diseño",
     "href": "s5_actividades4y5.html#actividad-5-explorar-la-galleria-de-quarto-y-elegir-un-diseño",
-    "title": "48  📚 Actividad 4 y 5",
-    "section": "48.2 📚 Actividad 5: Explorar la galleria de Quarto y elegir un diseño",
-    "text": "48.2 📚 Actividad 5: Explorar la galleria de Quarto y elegir un diseño\n\nVisita la galeria de Quarto.\nVe al apartado de Articles & Reports.\n\n\n\nSelecciona un diseño y da clic en el botón “&lt;/&gt;”.\n\n\n\nDescarga el archivo desde GitHub y abrelo en Rstudio.\n\n\n\n\n\n\n\n\nNota\n\n\n\nAquí les dejo mi ejemplo editado, ya que el ejemplo que descargaremos tendrá algunos errores en su sintaxis.",
+    "title": "50  📚 Actividad 4 y 5",
+    "section": "50.2 📚 Actividad 5: Explorar la galleria de Quarto y elegir un diseño",
+    "text": "50.2 📚 Actividad 5: Explorar la galleria de Quarto y elegir un diseño\n\nVisita la galeria de Quarto.\nVe al apartado de Articles & Reports.\n\n\n\nSelecciona un diseño y da clic en el botón “&lt;/&gt;”.\n\n\n\nDescarga el archivo desde GitHub y abrelo en Rstudio.\n\n\n\n\n\n\n\n\nNota\n\n\n\nAquí les dejo mi ejemplo editado, ya que el ejemplo que descargaremos tendrá algunos errores en su sintaxis.",
     "crumbs": [
       "**Sección 6** - Introducción a R y Rstudio",
-      "<span class='chapter-number'>48</span>  <span class='chapter-title'>**📚** Actividad 4 y 5</span>"
+      "<span class='chapter-number'>50</span>  <span class='chapter-title'>**📚** Actividad 4 y 5</span>"
     ]
   },
   {
     "objectID": "s5_actividades4y5.html#referencias",
     "href": "s5_actividades4y5.html#referencias",
-    "title": "48  📚 Actividad 4 y 5",
-    "section": "48.3 Referencias",
-    "text": "48.3 Referencias\n\nTutorial: Hello, Quarto",
+    "title": "50  📚 Actividad 4 y 5",
+    "section": "50.3 Referencias",
+    "text": "50.3 Referencias\n\nTutorial: Hello, Quarto",
     "crumbs": [
       "**Sección 6** - Introducción a R y Rstudio",
-      "<span class='chapter-number'>48</span>  <span class='chapter-title'>**📚** Actividad 4 y 5</span>"
+      "<span class='chapter-number'>50</span>  <span class='chapter-title'>**📚** Actividad 4 y 5</span>"
     ]
   },
   {
