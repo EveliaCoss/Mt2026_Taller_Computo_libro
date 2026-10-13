@@ -12,97 +12,453 @@
 
 Las condicionales son estructuras de programación que nos permiten tomar decisiones basadas en el resultado de una **expresión**. En otras palabras, nos permiten ejecutar diferentes bloques de código dependiendo de **si una condición se cumple o no**. Los condicionales son fundamentales para automatizar tareas y crear scripts fléxibles.
 
-La sintáxis básica de un condicional simple en formato de una línea es :
+![](figures/meme_if_else_inicio.jpeg){fig-align="center"}
+
+Estructura básica:
+
+``` bash
+if [ condición ]; then
+    # Instrucciones si se cumple
+fi
+```
+
+La sintáxis básica de un condicional simple en formato de una línea es:
 
 ``` {.bash code-copy="true" eval="false"}
-if [ condición ]; then orden1; orden2 …; fi
+if [ condición ]; then orden1; orden2; fi
 ```
 
 de igual manera pero en bloque identado:
 
 ``` {.bash code-copy="true" eval="false"}
 if [ condición ]; then      orden1     orden2  fi
+if [ condición ]; then
+    orden1
+    orden2
+fi
 ```
 
 ::: {.callout-note icon="false"}
 ## Ejemplo
 
-Si queremos verificar si existe el archivo **secuencias1.fastq** antes de realizar alguna operación sobre él. Puedes usar el siguiente condicional:
-:::
+Si queremos verificar si existe el archivo alumnos.txt antes de realizar alguna operación sobre él. Puedes usar el siguiente condicional:
 
 ``` {.bash code-copy="true" eval="false"}
-if [ -f secuencias1.fastq ]; then
+if [ -f matematicos/ejercicios/alumnos.txt ]; then
   echo "El archivo existe."
 else
   echo "El archivo no existe."
 fi
 ```
 
-::: {.callout-note icon="false"}
-## Explicación
+#### Explicación
 
-- **`if [ -f secuencias1.fastq ]`:** Verifica si **secuencias1.fastq** es un archivo regular.
+Dentro de `matematicos/ejercicios` revisaremos si existen los archivos de .txt que [generamos antes](https://eveliacoss.github.io/Mt2026_Taller_Computo_libro/cap11.html).
+
+- **`if [ -f alumnos.txt ]`:** Verifica si **`alumnos.txt`** es un archivo regular.
 - **`then`:** Si la condición es verdadera, se ejecuta el código siguiente.
 - **`else`:** Si la condición es falsa, se ejecuta el código siguiente.
 - **`fi`:** Indica el final de la estructura `if`.
 :::
 
-Los condicionales pueden ser tan complejos como lo imagines. Por ejemplo:
+### **Ejemplo 1. Verificar si una persona es mayor de edad**
 
-``` {.bash code-copy="true" eval="false"}
-for archivo in $file*.fastq; do 
-  if [ -f "$archivo" ]; then 
-    echo "Procesando archivo: $archivo"
-    wc -l "$archivo" 
-  else 
-    echo "No tienes archivos fastq"
-  fi 
-done
-```
-
-::: {.callout-note icon="false"}
-## Explicación del código
-
-En donde:
-
-``` {.bash code-copy="true" eval="false"}
-for archivo in $file*.fastq; do
-```
-
-- **`$file*.fastq`**: Expande a todos los archivos que comienzan con el valor de la variable `$file` y terminan con la extensión `.fastq`.
-
-- **`archivo`**: Variable que almacena el nombre de cada archivo encontrado.
+1.  Corchetes sencillos `[ ]`
 
 ``` bash
-echo "Procesando archivo: $archivo"
-wc -l "$archivo"
-```
+edad=20
 
-- **`echo`**: Imprime el mensaje indicando que se está procesando el archivo actual.
-
-- **`wc -l "$archivo"`**: Cuenta el número de líneas en el archivo usando `wc -l` y muestra el resultado en la terminal.
-
-``` bash
-else
-  echo "No tienes archivos fastq"
+if [ "$edad" -ge 18 ]; then
+    echo "Eres mayor de edad"
 fi
 ```
 
-- Si el archivo no existe o no es un archivo regular, muestra un mensaje de error indicando el problema.
+El operador `-ge` significa mayor o igual que.
+
+2\. Corchetes dobles `[[ ]]`
 
 ``` bash
-done
+if [[ $edad -ge 18 ]]; then
+    echo "Mayor de edad"
+fi
 ```
 
-- Fin del bucle
+3\. Paréntesis dobles `(( ))`
+
+``` bash
+if (( edad >= 18 )); then
+    echo "Mayor de edad"
+fi
+```
+
+::: {.callout-important icon="false"}
+### ¿Por qué no utilizar `>=` dentro de `[ ]` o `[[ ]]`?
+
+Porque esos operadores no funcionan como comparadores numéricos en esas estructuras.
 :::
 
-Archivo: `saludar.sh`
+## Tabla de operadores para condicionales en Bash
+
+| Operación     | `[ ]` y `[[ ]]` | `(( ))` |
+|---------------|-----------------|---------|
+| Igual a       | `-eq`           | `==`    |
+| Diferente de  | `-ne`           | `!=`    |
+| Mayor que     | `-gt`           | `>`     |
+| Menor que     | `-lt`           | `<`     |
+| Mayor o igual | `-ge`           | `>=`    |
+| Menor o igual | `-le`           | `<=`    |
+
+### Ejemplo 2. Verificar si un número es positivo
+
+1.  Corchetes sencillos `[ ]`
+
+``` bash
+numero=10
+
+if [ "$numero" -gt 0 ]; then
+    echo "El número es positivo"
+fi
+```
+
+::: {.callout-tip icon="false"}
+## Ejercicio grupal
+
+Convierte el ejemplo 2 cambiando a:
+
+2\. Corchetes dobles `[[ ]]`
+
+3\. Paréntesis dobles `(( ))`
+:::
+
+## Nivel básico: `if` y `else`
+
+¿Qué sucede si la condición no se cumple?
+
+Podemos utilizar `else` para indicar qué instrucciones ejecutar en caso contrario.
+
+``` bash
+if [ condición ]; then
+    # Si es verdadera
+else
+    # Si es falsa
+fi
+```
+
+### Ejemplo 3. Determinar sí un estudiante aprobó
+
+``` bash
+calificacion=7
+
+if [ "$calificacion" -ge 6 ]; then
+    echo "Aprobado"
+else
+    echo "Reprobado"
+fi
+```
+
+::: {.callout-tip icon="false"}
+## Ejercicio grupal
+
+Convierte el ejemplo 2 cambiando a:
+
+2\. Corchetes dobles `[[ ]]`
+
+3\. Paréntesis dobles `(( ))`
+:::
+
+### Ejemplo 4. Determinar si un número es par o impar
+
+``` bash
+numero=8
+
+if [ $((numero % 2)) -eq 0 ]; then
+    echo "El número es par"
+else
+    echo "El número es impar"
+fi
+```
+
+Aquí utilizamos dos conceptos:
+
+- `$(( ... ))` permite realizar operaciones aritméticas.
+
+- `%` obtiene el residuo de una división.
+
+Si el residuo al dividir entre 2 es cero, el número es par.
+
+## Nivel básico-intermedio: `elif`
+
+Cuando necesitamos evaluar varias condiciones, utilizamos `elif`, que significa else if.
+
+### Ejemplo 5. Clasificar calificaciones
+
+``` bash
+calificacion=8
+
+if [ "$calificacion" -ge 9 ]; then
+    echo "Excelente"
+elif [ "$calificacion" -ge 7 ]; then
+    echo "Bueno"
+elif [ "$calificacion" -ge 6 ]; then
+    echo "Suficiente"
+else
+    echo "Reprobado"
+fi
+```
+
+Bash evalúa las condiciones de arriba hacia abajo y ejecuta únicamente el primer bloque cuya condición sea verdadera.
+
+## Nivel intermedio: condiciones con `read`
+
+Hasta ahora hemos utilizado valores definidos dentro del script. Pero podemos pedir información directamente al usuario.
+
+### Ejemplo 6. Solicitar la edad
+
+``` bash
+echo "¿Cuántos años tienes?"
+read -r edad
+
+if [ "$edad" -ge 18 ]; then
+    echo "Puedes ingresar"
+else
+    echo "No puedes ingresar"
+fi
+```
+
+`read -r` permite almacenar lo que escribe el usuario en una variable. En este ejemplo se supone que introduce un número entero válido.
+
+### Ejemplo 7. Comparar dos números
+
+1.  Crea un script llamado `comparar_dos_numeros.sh`dentro de la carpeta `matematicos`
+2.  Copia el siguiente código
 
 ``` bash
 #!/bin/bash
 
-if [ $# -eq 0 ]; then
+echo "Ingresa el primer número:"
+read -r a
+
+echo "Ingresa el segundo número:"
+read -r b
+
+if [ "$a" -gt "$b" ]; then
+    echo "$a es mayor que $b"
+elif [ "$a" -lt "$b" ]; then
+    echo "$b es mayor que $a"
+else
+    echo "Los números son iguales"
+fi
+```
+
+3.  Ejecuta el script.
+
+## Nivel intermedio: condiciones con texto
+
+También podemos comparar cadenas de caracteres.
+
+| Operador | Significado                |
+|----------|----------------------------|
+| `=`      | Las cadenas son iguales    |
+| `!=`     | Las cadenas son diferentes |
+| `-z`     | La cadena está vacía       |
+| `-n`     | La cadena no está vacía    |
+
+### Ejemplo 8. Verificar una contraseña de ejemplo
+
+1.  Crea un script llamado `contrasena.sh`dentro de la carpeta `matematicos`
+2.  Copia el siguiente código
+
+``` bash
+#!/bin/bash
+
+clave="bash123"
+
+echo "Ingresa la contraseña:"
+read -r respuesta
+
+if [ "$respuesta" = "$clave" ]; then
+    echo "Acceso permitido"
+else
+    echo "Acceso denegado"
+fi
+```
+
+3.  Ejecuta el script.
+
+Este ejemplo es únicamente educativo; no es un sistema seguro de autenticación.
+
+## Nivel intermedio: operadores lógicos
+
+Podemos combinar dos o más condiciones.
+
+| Operador | Significado                               |
+|----------|-------------------------------------------|
+| `&&`     | AND: ambas condiciones deben cumplirse    |
+| `\|\|`   | OR: al menos una condición debe cumplirse |
+| `!`      | NOT: niega una condición                  |
+
+### Ejemplo 9. Verificar si una calificación está dentro del rango válido
+
+Ejecutar en la terminal:
+
+``` bash
+calificacion=8
+
+if [ "$calificacion" -ge 0 ] && [ "$calificacion" -le 10 ]; then
+    echo "Calificación válida"
+else
+    echo "Calificación inválida"
+fi
+```
+
+### Ejemplo 10. Verificar si un número está fuera de un rango
+
+``` bash
+numero=120
+
+if [ "$numero" -lt 1 ] || [ "$numero" -gt 100 ]; then
+    echo "Fuera del rango"
+else
+    echo "Dentro del rango"
+fi
+```
+
+## Nivel intermedio: comprobar archivos
+
+Los condicionales son especialmente útiles para automatizar tareas con archivos y directorios.
+
+| Operador | Comprueba si…             |
+|----------|---------------------------|
+| `-f`     | Existe un archivo regular |
+| `-d`     | Existe un directorio      |
+| `-e`     | Existe una ruta           |
+| `-r`     | Se puede leer             |
+| `-w`     | Se puede escribir         |
+| `-x`     | Se puede ejecutar         |
+
+### Ejemplo 11. Verificar si existe un archivo
+
+1.  Mueve a `matematicos/ejercicios/`
+
+2.  Ejecuta lo siguiente:
+
+``` bash
+archivo="datos.txt"
+
+if [ -f "$archivo" ]; then
+    echo "El archivo existe"
+else
+    echo "El archivo no existe"
+fi
+```
+
+### Ejemplo 12. Crear un directorio si no existe
+
+``` bash
+directorio="resultados"
+
+if [ ! -d "$directorio" ]; then
+    mkdir "$directorio"
+    echo "Directorio creado"
+else
+    echo "El directorio ya existe"
+fi
+```
+
+## Nivel intermedio: `case`
+
+Cuando necesitamos evaluar múltiples valores posibles de una misma variable, `case` puede resultar más sencillo que utilizar muchos `elif`.
+
+![](figures/meme_if_else.jpeg){fig-align="center"}
+
+### Ejemplo 13. Menú de opciones
+
+``` bash
+#!/bin/bash
+
+echo "1. Mostrar fecha"
+echo "2. Mostrar directorio actual"
+echo "3. Mostrar usuario"
+
+read -r opcion
+
+case "$opcion" in
+    1)
+        date
+        ;;
+    2)
+        pwd
+        ;;
+    3)
+        whoami
+        ;;
+    *)
+        echo "Opción no válida"
+        ;;
+esac
+```
+
+El símbolo `*` representa cualquier valor que no coincida con las opciones anteriores.
+
+## ¿Qué es la programación defensiva?
+
+La programación defensiva es una práctica que consiste en escribir programas capaces de anticipar, detectar y manejar posibles errores antes de que provoquen resultados inesperados.
+
+En otras palabras:
+
+No debemos asumir que el usuario siempre utilizará correctamente nuestro programa.
+
+![](figures/programacion_defensiva.JPG){fig-align="center" width="367"}
+
+### Ejemplo 14. `saludar.sh`
+
+#### Sin programación defensiva
+
+Crea un script que se llame `saludar_sin_pd.sh`
+
+``` bash
+#!/bin/bash
+
+nombre=$1
+echo "¡Hola, $nombre!"
+```
+
+Si ejecutamos:
+
+``` bash
+./saludar_sin_pd.sh Ana
+```
+
+Obtenemos:
+
+```         
+¡Hola, Ana!
+```
+
+Pero ¿qué sucede si olvidamos proporcionar el nombre?
+
+``` bash
+./saludar_sin_pd.sh
+```
+
+Resultado:
+
+```         
+¡Hola, !
+```
+
+El programa no presenta un error de ejecución, pero su resultado no es el esperado.
+
+#### Aplicando programación defensiva
+
+El programa saluda a una persona utilizando el nombre que recibe como argumento. Sin embargo, antes de hacerlo, verifica que el usuario haya proporcionado al menos un argumento.
+
+Crea un script que se llame `saludar.sh`
+
+``` bash
+#!/bin/bash
+
+if [ $# -eq 0 ]; then # if (( $# == 0 )); then
     echo "Error: Debes proporcionar un nombre"
     echo "Uso: ./saludar.sh <nombre>"
     exit 1
@@ -111,6 +467,65 @@ fi
 nombre=$1
 echo "¡Hola, $nombre!"
 ```
+
+#### Explicación línea por línea
+
+| Código | Explicación |
+|-------------------|-----------------------------------------------------|
+| `#!/bin/bash` | Indica que el script se ejecutará con Bash. |
+| `$#` | Número de argumentos proporcionados al script. |
+| `[ $# -eq 0 ]` | Comprueba si el número de argumentos es igual a cero. |
+| `then` | Inicia las instrucciones cuando la condición es verdadera. |
+| `echo` | Muestra mensajes en la terminal. |
+| `exit 1` | Termina el script con un código de error. |
+| `fi` | Finaliza el condicional `if`. |
+| `nombre=$1` | Guarda el primer argumento en la variable `nombre`. |
+| `echo "¡Hola, $nombre!"` | Muestra el saludo personalizado. |
+
+### Principios de programación defensiva
+
+| Principio | Aplicación en `saludar.sh` |
+|-----------------------------|-------------------------------------------|
+| Anticipar errores | El usuario podría olvidar escribir su nombre. |
+| Validar entradas | `$#` comprueba cuántos argumentos se recibieron. |
+| Mostrar mensajes claros | `echo` explica el error y cómo ejecutar el script. |
+| Detener ejecuciones incorrectas | `exit 1` evita continuar sin argumentos. |
+| Continuar cuando todo es correcto | El programa muestra el saludo. |
+
+### Pregunta para reflexionar
+
+Nuestro script ya comprueba si el usuario proporcionó un argumento, pero ¿qué sucede si ejecutamos lo siguiente?
+
+``` bash
+./saludar.sh Ana Pedro Maria
+```
+
+El programa responde:
+
+``` bash
+¡Hola, Ana!
+```
+
+¿Es correcto? Depende de lo que esperamos que haga nuestro programa.
+
+Si el objetivo es recibir exactamente un nombre, necesitamos agregar otra validación:
+
+``` bash
+#!/bin/bash
+
+if (( $# == 0 )); then
+    echo "Error: Debes proporcionar un nombre"
+    exit 1
+elif (( $# > 1 )); then
+    echo "Error: Solo debes proporcionar un nombre"
+    exit 1
+else
+    nombre=$1
+    echo "¡Hola, $nombre!"
+fi
+```
+
+Así, el programa no solo comprueba que haya argumentos, sino también que se reciba la cantidad esperada.
 
 ## Referencias
 

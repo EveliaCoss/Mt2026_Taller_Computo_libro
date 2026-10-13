@@ -638,7 +638,55 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Tabla de contenidos</h2>
    
   <ul>
-  <li><a href="#referencias" id="toc-referencias" class="nav-link active" data-scroll-target="#referencias"><span class="header-section-number">35.1</span> Referencias</a></li>
+  <li><a href="#ejemplo-1.-verificar-si-una-persona-es-mayor-de-edad" id="toc-ejemplo-1.-verificar-si-una-persona-es-mayor-de-edad" class="nav-link active" data-scroll-target="#ejemplo-1.-verificar-si-una-persona-es-mayor-de-edad"><span class="header-section-number">35.0.1</span> <strong>Ejemplo 1. Verificar si una persona es mayor de edad</strong></a></li>
+  <li><a href="#tabla-de-operadores-para-condicionales-en-bash" id="toc-tabla-de-operadores-para-condicionales-en-bash" class="nav-link" data-scroll-target="#tabla-de-operadores-para-condicionales-en-bash"><span class="header-section-number">35.1</span> Tabla de operadores para condicionales en Bash</a>
+  <ul>
+  <li><a href="#ejemplo-2.-verificar-si-un-número-es-positivo" id="toc-ejemplo-2.-verificar-si-un-número-es-positivo" class="nav-link" data-scroll-target="#ejemplo-2.-verificar-si-un-número-es-positivo"><span class="header-section-number">35.1.1</span> Ejemplo 2. Verificar si un número es positivo</a></li>
+  </ul></li>
+  <li><a href="#nivel-básico-if-y-else" id="toc-nivel-básico-if-y-else" class="nav-link" data-scroll-target="#nivel-básico-if-y-else"><span class="header-section-number">35.2</span> Nivel básico: <code>if</code> y <code>else</code></a>
+  <ul>
+  <li><a href="#ejemplo-3.-determinar-sí-un-estudiante-aprobó" id="toc-ejemplo-3.-determinar-sí-un-estudiante-aprobó" class="nav-link" data-scroll-target="#ejemplo-3.-determinar-sí-un-estudiante-aprobó"><span class="header-section-number">35.2.1</span> Ejemplo 3. Determinar sí un estudiante aprobó</a></li>
+  <li><a href="#ejemplo-4.-determinar-si-un-número-es-par-o-impar" id="toc-ejemplo-4.-determinar-si-un-número-es-par-o-impar" class="nav-link" data-scroll-target="#ejemplo-4.-determinar-si-un-número-es-par-o-impar"><span class="header-section-number">35.2.2</span> Ejemplo 4. Determinar si un número es par o impar</a></li>
+  </ul></li>
+  <li><a href="#nivel-básico-intermedio-elif" id="toc-nivel-básico-intermedio-elif" class="nav-link" data-scroll-target="#nivel-básico-intermedio-elif"><span class="header-section-number">35.3</span> Nivel básico-intermedio: <code>elif</code></a>
+  <ul>
+  <li><a href="#ejemplo-5.-clasificar-calificaciones" id="toc-ejemplo-5.-clasificar-calificaciones" class="nav-link" data-scroll-target="#ejemplo-5.-clasificar-calificaciones"><span class="header-section-number">35.3.1</span> Ejemplo 5. Clasificar calificaciones</a></li>
+  </ul></li>
+  <li><a href="#nivel-intermedio-condiciones-con-read" id="toc-nivel-intermedio-condiciones-con-read" class="nav-link" data-scroll-target="#nivel-intermedio-condiciones-con-read"><span class="header-section-number">35.4</span> Nivel intermedio: condiciones con <code>read</code></a>
+  <ul>
+  <li><a href="#ejemplo-6.-solicitar-la-edad" id="toc-ejemplo-6.-solicitar-la-edad" class="nav-link" data-scroll-target="#ejemplo-6.-solicitar-la-edad"><span class="header-section-number">35.4.1</span> Ejemplo 6. Solicitar la edad</a></li>
+  <li><a href="#ejemplo-7.-comparar-dos-números" id="toc-ejemplo-7.-comparar-dos-números" class="nav-link" data-scroll-target="#ejemplo-7.-comparar-dos-números"><span class="header-section-number">35.4.2</span> Ejemplo 7. Comparar dos números</a></li>
+  </ul></li>
+  <li><a href="#nivel-intermedio-condiciones-con-texto" id="toc-nivel-intermedio-condiciones-con-texto" class="nav-link" data-scroll-target="#nivel-intermedio-condiciones-con-texto"><span class="header-section-number">35.5</span> Nivel intermedio: condiciones con texto</a>
+  <ul>
+  <li><a href="#ejemplo-8.-verificar-una-contraseña-de-ejemplo" id="toc-ejemplo-8.-verificar-una-contraseña-de-ejemplo" class="nav-link" data-scroll-target="#ejemplo-8.-verificar-una-contraseña-de-ejemplo"><span class="header-section-number">35.5.1</span> Ejemplo 8. Verificar una contraseña de ejemplo</a></li>
+  </ul></li>
+  <li><a href="#nivel-intermedio-operadores-lógicos" id="toc-nivel-intermedio-operadores-lógicos" class="nav-link" data-scroll-target="#nivel-intermedio-operadores-lógicos"><span class="header-section-number">35.6</span> Nivel intermedio: operadores lógicos</a>
+  <ul>
+  <li><a href="#ejemplo-9.-verificar-si-una-calificación-está-dentro-del-rango-válido" id="toc-ejemplo-9.-verificar-si-una-calificación-está-dentro-del-rango-válido" class="nav-link" data-scroll-target="#ejemplo-9.-verificar-si-una-calificación-está-dentro-del-rango-válido"><span class="header-section-number">35.6.1</span> Ejemplo 9. Verificar si una calificación está dentro del rango válido</a></li>
+  <li><a href="#ejemplo-10.-verificar-si-un-número-está-fuera-de-un-rango" id="toc-ejemplo-10.-verificar-si-un-número-está-fuera-de-un-rango" class="nav-link" data-scroll-target="#ejemplo-10.-verificar-si-un-número-está-fuera-de-un-rango"><span class="header-section-number">35.6.2</span> Ejemplo 10. Verificar si un número está fuera de un rango</a></li>
+  </ul></li>
+  <li><a href="#nivel-intermedio-comprobar-archivos" id="toc-nivel-intermedio-comprobar-archivos" class="nav-link" data-scroll-target="#nivel-intermedio-comprobar-archivos"><span class="header-section-number">35.7</span> Nivel intermedio: comprobar archivos</a>
+  <ul>
+  <li><a href="#ejemplo-11.-verificar-si-existe-un-archivo" id="toc-ejemplo-11.-verificar-si-existe-un-archivo" class="nav-link" data-scroll-target="#ejemplo-11.-verificar-si-existe-un-archivo"><span class="header-section-number">35.7.1</span> Ejemplo 11. Verificar si existe un archivo</a></li>
+  <li><a href="#ejemplo-12.-crear-un-directorio-si-no-existe" id="toc-ejemplo-12.-crear-un-directorio-si-no-existe" class="nav-link" data-scroll-target="#ejemplo-12.-crear-un-directorio-si-no-existe"><span class="header-section-number">35.7.2</span> Ejemplo 12. Crear un directorio si no existe</a></li>
+  </ul></li>
+  <li><a href="#nivel-intermedio-case" id="toc-nivel-intermedio-case" class="nav-link" data-scroll-target="#nivel-intermedio-case"><span class="header-section-number">35.8</span> Nivel intermedio: <code>case</code></a>
+  <ul>
+  <li><a href="#ejemplo-13.-menú-de-opciones" id="toc-ejemplo-13.-menú-de-opciones" class="nav-link" data-scroll-target="#ejemplo-13.-menú-de-opciones"><span class="header-section-number">35.8.1</span> Ejemplo 13. Menú de opciones</a></li>
+  </ul></li>
+  <li><a href="#qué-es-la-programación-defensiva" id="toc-qué-es-la-programación-defensiva" class="nav-link" data-scroll-target="#qué-es-la-programación-defensiva"><span class="header-section-number">35.9</span> ¿Qué es la programación defensiva?</a>
+  <ul>
+  <li><a href="#ejemplo-14.-saludar.sh" id="toc-ejemplo-14.-saludar.sh" class="nav-link" data-scroll-target="#ejemplo-14.-saludar.sh"><span class="header-section-number">35.9.1</span> Ejemplo 14. <code>saludar.sh</code></a>
+  <ul class="collapse">
+  <li><a href="#sin-programación-defensiva" id="toc-sin-programación-defensiva" class="nav-link" data-scroll-target="#sin-programación-defensiva">Sin programación defensiva</a></li>
+  <li><a href="#aplicando-programación-defensiva" id="toc-aplicando-programación-defensiva" class="nav-link" data-scroll-target="#aplicando-programación-defensiva">Aplicando programación defensiva</a></li>
+  <li><a href="#explicación-línea-por-línea" id="toc-explicación-línea-por-línea" class="nav-link" data-scroll-target="#explicación-línea-por-línea">Explicación línea por línea</a></li>
+  </ul></li>
+  <li><a href="#principios-de-programación-defensiva" id="toc-principios-de-programación-defensiva" class="nav-link" data-scroll-target="#principios-de-programación-defensiva"><span class="header-section-number">35.9.2</span> Principios de programación defensiva</a></li>
+  <li><a href="#pregunta-para-reflexionar" id="toc-pregunta-para-reflexionar" class="nav-link" data-scroll-target="#pregunta-para-reflexionar"><span class="header-section-number">35.9.3</span> Pregunta para reflexionar</a></li>
+  </ul></li>
+  <li><a href="#referencias" id="toc-referencias" class="nav-link" data-scroll-target="#referencias"><span class="header-section-number">35.10</span> Referencias</a></li>
   </ul>
 </nav>
     </div>
@@ -675,10 +723,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul>
 </div>
 <p>Las condicionales son estructuras de programación que nos permiten tomar decisiones basadas en el resultado de una <strong>expresión</strong>. En otras palabras, nos permiten ejecutar diferentes bloques de código dependiendo de <strong>si una condición se cumple o no</strong>. Los condicionales son fundamentales para automatizar tareas y crear scripts fléxibles.</p>
-<p>La sintáxis básica de un condicional simple en formato de una línea es :</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1" data-code-copy="true" data-eval="false"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="bu">[</span> condición <span class="bu">]</span><span class="kw">;</span> <span class="cf">then</span> <span class="ex">orden1</span><span class="kw">;</span> <span class="ex">orden2</span> …<span class="kw">;</span> <span class="cf">fi</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="figures/meme_if_else_inicio.jpeg" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+<p>Estructura básica:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="bu">[</span> condición <span class="bu">]</span><span class="kw">;</span> <span class="cf">then</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Instrucciones si se cumple</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="cf">fi</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<p>La sintáxis básica de un condicional simple en formato de una línea es:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2" data-code-copy="true" data-eval="false"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="bu">[</span> condición <span class="bu">]</span><span class="kw">;</span> <span class="cf">then</span> <span class="ex">orden1</span><span class="kw">;</span> <span class="ex">orden2</span><span class="kw">;</span> <span class="cf">fi</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <p>de igual manera pero en bloque identado:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2" data-code-copy="true" data-eval="false"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="bu">[</span> condición <span class="bu">]</span><span class="kw">;</span> <span class="cf">then</span>      <span class="ex">orden1</span>     orden2  fi</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3" data-code-copy="true" data-eval="false"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="bu">[</span> condición <span class="bu">]</span><span class="kw">;</span> <span class="cf">then</span>      <span class="ex">orden1</span>     orden2  fi</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="bu">[</span> condición <span class="bu">]</span><span class="kw">;</span> <span class="cf">then</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="ex">orden1</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    <span class="ex">orden2</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="cf">fi</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="callout callout-style-default callout-note no-icon callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -689,88 +750,596 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Si queremos verificar si existe el archivo <strong>secuencias1.fastq</strong> antes de realizar alguna operación sobre él. Puedes usar el siguiente condicional:</p>
-</div>
-</div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3" data-code-copy="true" data-eval="false"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="bu">[</span> <span class="ot">-f</span> secuencias1.fastq <span class="bu">]</span><span class="kw">;</span> <span class="cf">then</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="bu">echo</span> <span class="st">"El archivo existe."</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="bu">echo</span> <span class="st">"El archivo no existe."</span></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="cf">fi</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="callout callout-style-default callout-note no-icon callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Nota</span>Explicación
-</div>
-</div>
-<div class="callout-body-container callout-body">
+<p>Si queremos verificar si existe el archivo alumnos.txt antes de realizar alguna operación sobre él. Puedes usar el siguiente condicional:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4" data-code-copy="true" data-eval="false"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="bu">[</span> <span class="ot">-f</span> matematicos/ejercicios/alumnos.txt <span class="bu">]</span><span class="kw">;</span> <span class="cf">then</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="bu">echo</span> <span class="st">"El archivo existe."</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="bu">echo</span> <span class="st">"El archivo no existe."</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="cf">fi</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<section id="explicación" class="level4">
+<h4 class="anchored" data-anchor-id="explicación">Explicación</h4>
+<p>Dentro de <code>matematicos/ejercicios</code> revisaremos si existen los archivos de .txt que <a href="https://eveliacoss.github.io/Mt2026_Taller_Computo_libro/cap11.html">generamos antes</a>.</p>
 <ul>
-<li><strong><code>if [ -f secuencias1.fastq ]</code>:</strong> Verifica si <strong>secuencias1.fastq</strong> es un archivo regular.</li>
+<li><strong><code>if [ -f alumnos.txt ]</code>:</strong> Verifica si <strong><code>alumnos.txt</code></strong> es un archivo regular.</li>
 <li><strong><code>then</code>:</strong> Si la condición es verdadera, se ejecuta el código siguiente.</li>
 <li><strong><code>else</code>:</strong> Si la condición es falsa, se ejecuta el código siguiente.</li>
 <li><strong><code>fi</code>:</strong> Indica el final de la estructura <code>if</code>.</li>
 </ul>
+</section>
 </div>
 </div>
-<p>Los condicionales pueden ser tan complejos como lo imagines. Por ejemplo:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4" data-code-copy="true" data-eval="false"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> archivo <span class="kw">in</span> <span class="va">$file</span><span class="pp">*</span>.fastq<span class="kw">;</span> <span class="cf">do</span> </span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> <span class="bu">[</span> <span class="ot">-f</span> <span class="st">"</span><span class="va">$archivo</span><span class="st">"</span> <span class="bu">]</span><span class="kw">;</span> <span class="cf">then</span> </span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">echo</span> <span class="st">"Procesando archivo: </span><span class="va">$archivo</span><span class="st">"</span></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">wc</span> <span class="at">-l</span> <span class="st">"</span><span class="va">$archivo</span><span class="st">"</span> </span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="cf">else</span> </span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    <span class="bu">echo</span> <span class="st">"No tienes archivos fastq"</span></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>  <span class="cf">fi</span> </span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="cf">done</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="callout callout-style-default callout-note no-icon callout-titled">
+<section id="ejemplo-1.-verificar-si-una-persona-es-mayor-de-edad" class="level3" data-number="35.0.1">
+<h3 data-number="35.0.1" class="anchored" data-anchor-id="ejemplo-1.-verificar-si-una-persona-es-mayor-de-edad"><span class="header-section-number">35.0.1</span> <strong>Ejemplo 1. Verificar si una persona es mayor de edad</strong></h3>
+<ol type="1">
+<li>Corchetes sencillos <code>[ ]</code></li>
+</ol>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="va">edad</span><span class="op">=</span>20</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="bu">[</span> <span class="st">"</span><span class="va">$edad</span><span class="st">"</span> <span class="ot">-ge</span> 18 <span class="bu">]</span><span class="kw">;</span> <span class="cf">then</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    <span class="bu">echo</span> <span class="st">"Eres mayor de edad"</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="cf">fi</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<p>El operador <code>-ge</code> significa mayor o igual que.</p>
+<p>2. Corchetes dobles <code>[[ ]]</code></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="kw">[[</span> <span class="va">$edad</span> <span class="ot">-ge</span> 18 <span class="kw">]];</span> <span class="cf">then</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">echo</span> <span class="st">"Mayor de edad"</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="cf">fi</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<p>3. Paréntesis dobles <code>(( ))</code></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="kw">((</span> <span class="va">edad</span> <span class="op">&gt;=</span> <span class="dv">18</span> <span class="kw">));</span> <span class="cf">then</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">echo</span> <span class="st">"Mayor de edad"</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="cf">fi</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="callout callout-style-default callout-important no-icon callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Nota</span>Explicación del código
+<span class="screen-reader-only">Importante</span>¿Por qué no utilizar <code>&gt;=</code> dentro de <code>[ ]</code> o <code>[[ ]]</code>?
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>En donde:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5" data-code-copy="true" data-eval="false"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> archivo <span class="kw">in</span> <span class="va">$file</span><span class="pp">*</span>.fastq<span class="kw">;</span> <span class="cf">do</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
-<ul>
-<li><p><strong><code>$file*.fastq</code></strong>: Expande a todos los archivos que comienzan con el valor de la variable <code>$file</code> y terminan con la extensión <code>.fastq</code>.</p></li>
-<li><p><strong><code>archivo</code></strong>: Variable que almacena el nombre de cada archivo encontrado.</p></li>
-</ul>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"Procesando archivo: </span><span class="va">$archivo</span><span class="st">"</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">wc</span> <span class="at">-l</span> <span class="st">"</span><span class="va">$archivo</span><span class="st">"</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
-<ul>
-<li><p><strong><code>echo</code></strong>: Imprime el mensaje indicando que se está procesando el archivo actual.</p></li>
-<li><p><strong><code>wc -l "$archivo"</code></strong>: Cuenta el número de líneas en el archivo usando <code>wc -l</code> y muestra el resultado en la terminal.</p></li>
-</ul>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="bu">echo</span> <span class="st">"No tienes archivos fastq"</span></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="cf">fi</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
-<ul>
-<li>Si el archivo no existe o no es un archivo regular, muestra un mensaje de error indicando el problema.</li>
-</ul>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="cf">done</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
-<ul>
-<li>Fin del bucle</li>
-</ul>
+<p>Porque esos operadores no funcionan como comparadores numéricos en esas estructuras.</p>
 </div>
 </div>
-<p>Archivo: <code>saludar.sh</code></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="bu">[</span> <span class="va">$#</span> <span class="ot">-eq</span> 0 <span class="bu">]</span><span class="kw">;</span> <span class="cf">then</span></span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>    <span class="bu">echo</span> <span class="st">"Error: Debes proporcionar un nombre"</span></span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>    <span class="bu">echo</span> <span class="st">"Uso: ./saludar.sh &lt;nombre&gt;"</span></span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>    <span class="bu">exit</span> 1</span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="cf">fi</span></span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="va">nombre</span><span class="op">=</span><span class="va">$1</span></span>
-<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"¡Hola, </span><span class="va">$nombre</span><span class="st">!"</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
-<section id="referencias" class="level2" data-number="35.1">
-<h2 data-number="35.1" class="anchored" data-anchor-id="referencias"><span class="header-section-number">35.1</span> Referencias</h2>
+</section>
+<section id="tabla-de-operadores-para-condicionales-en-bash" class="level2" data-number="35.1">
+<h2 data-number="35.1" class="anchored" data-anchor-id="tabla-de-operadores-para-condicionales-en-bash"><span class="header-section-number">35.1</span> Tabla de operadores para condicionales en Bash</h2>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Operación</th>
+<th><code>[ ]</code> y <code>[[ ]]</code></th>
+<th><code>(( ))</code></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Igual a</td>
+<td><code>-eq</code></td>
+<td><code>==</code></td>
+</tr>
+<tr class="even">
+<td>Diferente de</td>
+<td><code>-ne</code></td>
+<td><code>!=</code></td>
+</tr>
+<tr class="odd">
+<td>Mayor que</td>
+<td><code>-gt</code></td>
+<td><code>&gt;</code></td>
+</tr>
+<tr class="even">
+<td>Menor que</td>
+<td><code>-lt</code></td>
+<td><code>&lt;</code></td>
+</tr>
+<tr class="odd">
+<td>Mayor o igual</td>
+<td><code>-ge</code></td>
+<td><code>&gt;=</code></td>
+</tr>
+<tr class="even">
+<td>Menor o igual</td>
+<td><code>-le</code></td>
+<td><code>&lt;=</code></td>
+</tr>
+</tbody>
+</table>
+<section id="ejemplo-2.-verificar-si-un-número-es-positivo" class="level3" data-number="35.1.1">
+<h3 data-number="35.1.1" class="anchored" data-anchor-id="ejemplo-2.-verificar-si-un-número-es-positivo"><span class="header-section-number">35.1.1</span> Ejemplo 2. Verificar si un número es positivo</h3>
+<ol type="1">
+<li>Corchetes sencillos <code>[ ]</code></li>
+</ol>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="va">numero</span><span class="op">=</span>10</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="bu">[</span> <span class="st">"</span><span class="va">$numero</span><span class="st">"</span> <span class="ot">-gt</span> 0 <span class="bu">]</span><span class="kw">;</span> <span class="cf">then</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>    <span class="bu">echo</span> <span class="st">"El número es positivo"</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="cf">fi</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="callout callout-style-default callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Ejercicio grupal
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Convierte el ejemplo 2 cambiando a:</p>
+<p>2. Corchetes dobles <code>[[ ]]</code></p>
+<p>3. Paréntesis dobles <code>(( ))</code></p>
+</div>
+</div>
+</section>
+</section>
+<section id="nivel-básico-if-y-else" class="level2" data-number="35.2">
+<h2 data-number="35.2" class="anchored" data-anchor-id="nivel-básico-if-y-else"><span class="header-section-number">35.2</span> Nivel básico: <code>if</code> y <code>else</code></h2>
+<p>¿Qué sucede si la condición no se cumple?</p>
+<p>Podemos utilizar <code>else</code> para indicar qué instrucciones ejecutar en caso contrario.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="bu">[</span> condición <span class="bu">]</span><span class="kw">;</span> <span class="cf">then</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Si es verdadera</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Si es falsa</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="cf">fi</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<section id="ejemplo-3.-determinar-sí-un-estudiante-aprobó" class="level3" data-number="35.2.1">
+<h3 data-number="35.2.1" class="anchored" data-anchor-id="ejemplo-3.-determinar-sí-un-estudiante-aprobó"><span class="header-section-number">35.2.1</span> Ejemplo 3. Determinar sí un estudiante aprobó</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="va">calificacion</span><span class="op">=</span>7</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="bu">[</span> <span class="st">"</span><span class="va">$calificacion</span><span class="st">"</span> <span class="ot">-ge</span> 6 <span class="bu">]</span><span class="kw">;</span> <span class="cf">then</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>    <span class="bu">echo</span> <span class="st">"Aprobado"</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>    <span class="bu">echo</span> <span class="st">"Reprobado"</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="cf">fi</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="callout callout-style-default callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Ejercicio grupal
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Convierte el ejemplo 2 cambiando a:</p>
+<p>2. Corchetes dobles <code>[[ ]]</code></p>
+<p>3. Paréntesis dobles <code>(( ))</code></p>
+</div>
+</div>
+</section>
+<section id="ejemplo-4.-determinar-si-un-número-es-par-o-impar" class="level3" data-number="35.2.2">
+<h3 data-number="35.2.2" class="anchored" data-anchor-id="ejemplo-4.-determinar-si-un-número-es-par-o-impar"><span class="header-section-number">35.2.2</span> Ejemplo 4. Determinar si un número es par o impar</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="va">numero</span><span class="op">=</span>8</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="bu">[</span> <span class="va">$((numero</span> <span class="op">%</span> <span class="dv">2</span><span class="va">))</span> <span class="ot">-eq</span> 0 <span class="bu">]</span><span class="kw">;</span> <span class="cf">then</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>    <span class="bu">echo</span> <span class="st">"El número es par"</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>    <span class="bu">echo</span> <span class="st">"El número es impar"</span></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="cf">fi</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Aquí utilizamos dos conceptos:</p>
+<ul>
+<li><p><code>$(( ... ))</code> permite realizar operaciones aritméticas.</p></li>
+<li><p><code>%</code> obtiene el residuo de una división.</p></li>
+</ul>
+<p>Si el residuo al dividir entre 2 es cero, el número es par.</p>
+</section>
+</section>
+<section id="nivel-básico-intermedio-elif" class="level2" data-number="35.3">
+<h2 data-number="35.3" class="anchored" data-anchor-id="nivel-básico-intermedio-elif"><span class="header-section-number">35.3</span> Nivel básico-intermedio: <code>elif</code></h2>
+<p>Cuando necesitamos evaluar varias condiciones, utilizamos <code>elif</code>, que significa else if.</p>
+<section id="ejemplo-5.-clasificar-calificaciones" class="level3" data-number="35.3.1">
+<h3 data-number="35.3.1" class="anchored" data-anchor-id="ejemplo-5.-clasificar-calificaciones"><span class="header-section-number">35.3.1</span> Ejemplo 5. Clasificar calificaciones</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="va">calificacion</span><span class="op">=</span>8</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="bu">[</span> <span class="st">"</span><span class="va">$calificacion</span><span class="st">"</span> <span class="ot">-ge</span> 9 <span class="bu">]</span><span class="kw">;</span> <span class="cf">then</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>    <span class="bu">echo</span> <span class="st">"Excelente"</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="cf">elif</span> <span class="bu">[</span> <span class="st">"</span><span class="va">$calificacion</span><span class="st">"</span> <span class="ot">-ge</span> 7 <span class="bu">]</span><span class="kw">;</span> <span class="cf">then</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>    <span class="bu">echo</span> <span class="st">"Bueno"</span></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="cf">elif</span> <span class="bu">[</span> <span class="st">"</span><span class="va">$calificacion</span><span class="st">"</span> <span class="ot">-ge</span> 6 <span class="bu">]</span><span class="kw">;</span> <span class="cf">then</span></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>    <span class="bu">echo</span> <span class="st">"Suficiente"</span></span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span></span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>    <span class="bu">echo</span> <span class="st">"Reprobado"</span></span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a><span class="cf">fi</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Bash evalúa las condiciones de arriba hacia abajo y ejecuta únicamente el primer bloque cuya condición sea verdadera.</p>
+</section>
+</section>
+<section id="nivel-intermedio-condiciones-con-read" class="level2" data-number="35.4">
+<h2 data-number="35.4" class="anchored" data-anchor-id="nivel-intermedio-condiciones-con-read"><span class="header-section-number">35.4</span> Nivel intermedio: condiciones con <code>read</code></h2>
+<p>Hasta ahora hemos utilizado valores definidos dentro del script. Pero podemos pedir información directamente al usuario.</p>
+<section id="ejemplo-6.-solicitar-la-edad" class="level3" data-number="35.4.1">
+<h3 data-number="35.4.1" class="anchored" data-anchor-id="ejemplo-6.-solicitar-la-edad"><span class="header-section-number">35.4.1</span> Ejemplo 6. Solicitar la edad</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"¿Cuántos años tienes?"</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="bu">read</span> <span class="at">-r</span> <span class="va">edad</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="bu">[</span> <span class="st">"</span><span class="va">$edad</span><span class="st">"</span> <span class="ot">-ge</span> 18 <span class="bu">]</span><span class="kw">;</span> <span class="cf">then</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>    <span class="bu">echo</span> <span class="st">"Puedes ingresar"</span></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>    <span class="bu">echo</span> <span class="st">"No puedes ingresar"</span></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a><span class="cf">fi</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<p><code>read -r</code> permite almacenar lo que escribe el usuario en una variable. En este ejemplo se supone que introduce un número entero válido.</p>
+</section>
+<section id="ejemplo-7.-comparar-dos-números" class="level3" data-number="35.4.2">
+<h3 data-number="35.4.2" class="anchored" data-anchor-id="ejemplo-7.-comparar-dos-números"><span class="header-section-number">35.4.2</span> Ejemplo 7. Comparar dos números</h3>
+<ol type="1">
+<li>Crea un script llamado <code>comparar_dos_numeros.sh</code>dentro de la carpeta <code>matematicos</code></li>
+<li>Copia el siguiente código</li>
+</ol>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"Ingresa el primer número:"</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="bu">read</span> <span class="at">-r</span> <span class="va">a</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"Ingresa el segundo número:"</span></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="bu">read</span> <span class="at">-r</span> <span class="va">b</span></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="bu">[</span> <span class="st">"</span><span class="va">$a</span><span class="st">"</span> <span class="ot">-gt</span> <span class="st">"</span><span class="va">$b</span><span class="st">"</span> <span class="bu">]</span><span class="kw">;</span> <span class="cf">then</span></span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>    <span class="bu">echo</span> <span class="st">"</span><span class="va">$a</span><span class="st"> es mayor que </span><span class="va">$b</span><span class="st">"</span></span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a><span class="cf">elif</span> <span class="bu">[</span> <span class="st">"</span><span class="va">$a</span><span class="st">"</span> <span class="ot">-lt</span> <span class="st">"</span><span class="va">$b</span><span class="st">"</span> <span class="bu">]</span><span class="kw">;</span> <span class="cf">then</span></span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>    <span class="bu">echo</span> <span class="st">"</span><span class="va">$b</span><span class="st"> es mayor que </span><span class="va">$a</span><span class="st">"</span></span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span></span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a>    <span class="bu">echo</span> <span class="st">"Los números son iguales"</span></span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a><span class="cf">fi</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<ol start="3" type="1">
+<li>Ejecuta el script.</li>
+</ol>
+</section>
+</section>
+<section id="nivel-intermedio-condiciones-con-texto" class="level2" data-number="35.5">
+<h2 data-number="35.5" class="anchored" data-anchor-id="nivel-intermedio-condiciones-con-texto"><span class="header-section-number">35.5</span> Nivel intermedio: condiciones con texto</h2>
+<p>También podemos comparar cadenas de caracteres.</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Operador</th>
+<th>Significado</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>=</code></td>
+<td>Las cadenas son iguales</td>
+</tr>
+<tr class="even">
+<td><code>!=</code></td>
+<td>Las cadenas son diferentes</td>
+</tr>
+<tr class="odd">
+<td><code>-z</code></td>
+<td>La cadena está vacía</td>
+</tr>
+<tr class="even">
+<td><code>-n</code></td>
+<td>La cadena no está vacía</td>
+</tr>
+</tbody>
+</table>
+<section id="ejemplo-8.-verificar-una-contraseña-de-ejemplo" class="level3" data-number="35.5.1">
+<h3 data-number="35.5.1" class="anchored" data-anchor-id="ejemplo-8.-verificar-una-contraseña-de-ejemplo"><span class="header-section-number">35.5.1</span> Ejemplo 8. Verificar una contraseña de ejemplo</h3>
+<ol type="1">
+<li>Crea un script llamado <code>contrasena.sh</code>dentro de la carpeta <code>matematicos</code></li>
+<li>Copia el siguiente código</li>
+</ol>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="va">clave</span><span class="op">=</span><span class="st">"bash123"</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"Ingresa la contraseña:"</span></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a><span class="bu">read</span> <span class="at">-r</span> <span class="va">respuesta</span></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="bu">[</span> <span class="st">"</span><span class="va">$respuesta</span><span class="st">"</span> <span class="ot">=</span> <span class="st">"</span><span class="va">$clave</span><span class="st">"</span> <span class="bu">]</span><span class="kw">;</span> <span class="cf">then</span></span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>    <span class="bu">echo</span> <span class="st">"Acceso permitido"</span></span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span></span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>    <span class="bu">echo</span> <span class="st">"Acceso denegado"</span></span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a><span class="cf">fi</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<ol start="3" type="1">
+<li>Ejecuta el script.</li>
+</ol>
+<p>Este ejemplo es únicamente educativo; no es un sistema seguro de autenticación.</p>
+</section>
+</section>
+<section id="nivel-intermedio-operadores-lógicos" class="level2" data-number="35.6">
+<h2 data-number="35.6" class="anchored" data-anchor-id="nivel-intermedio-operadores-lógicos"><span class="header-section-number">35.6</span> Nivel intermedio: operadores lógicos</h2>
+<p>Podemos combinar dos o más condiciones.</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Operador</th>
+<th>Significado</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>&amp;&amp;</code></td>
+<td>AND: ambas condiciones deben cumplirse</td>
+</tr>
+<tr class="even">
+<td><code>\|\|</code></td>
+<td>OR: al menos una condición debe cumplirse</td>
+</tr>
+<tr class="odd">
+<td><code>!</code></td>
+<td>NOT: niega una condición</td>
+</tr>
+</tbody>
+</table>
+<section id="ejemplo-9.-verificar-si-una-calificación-está-dentro-del-rango-válido" class="level3" data-number="35.6.1">
+<h3 data-number="35.6.1" class="anchored" data-anchor-id="ejemplo-9.-verificar-si-una-calificación-está-dentro-del-rango-válido"><span class="header-section-number">35.6.1</span> Ejemplo 9. Verificar si una calificación está dentro del rango válido</h3>
+<p>Ejecutar en la terminal:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="va">calificacion</span><span class="op">=</span>8</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="bu">[</span> <span class="st">"</span><span class="va">$calificacion</span><span class="st">"</span> <span class="ot">-ge</span> 0 <span class="bu">]</span> <span class="kw">&amp;&amp;</span> <span class="bu">[</span> <span class="st">"</span><span class="va">$calificacion</span><span class="st">"</span> <span class="ot">-le</span> 10 <span class="bu">]</span><span class="kw">;</span> <span class="cf">then</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>    <span class="bu">echo</span> <span class="st">"Calificación válida"</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>    <span class="bu">echo</span> <span class="st">"Calificación inválida"</span></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a><span class="cf">fi</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="ejemplo-10.-verificar-si-un-número-está-fuera-de-un-rango" class="level3" data-number="35.6.2">
+<h3 data-number="35.6.2" class="anchored" data-anchor-id="ejemplo-10.-verificar-si-un-número-está-fuera-de-un-rango"><span class="header-section-number">35.6.2</span> Ejemplo 10. Verificar si un número está fuera de un rango</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="va">numero</span><span class="op">=</span>120</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="bu">[</span> <span class="st">"</span><span class="va">$numero</span><span class="st">"</span> <span class="ot">-lt</span> 1 <span class="bu">]</span> <span class="kw">||</span> <span class="bu">[</span> <span class="st">"</span><span class="va">$numero</span><span class="st">"</span> <span class="ot">-gt</span> 100 <span class="bu">]</span><span class="kw">;</span> <span class="cf">then</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>    <span class="bu">echo</span> <span class="st">"Fuera del rango"</span></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span></span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>    <span class="bu">echo</span> <span class="st">"Dentro del rango"</span></span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a><span class="cf">fi</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+</section>
+<section id="nivel-intermedio-comprobar-archivos" class="level2" data-number="35.7">
+<h2 data-number="35.7" class="anchored" data-anchor-id="nivel-intermedio-comprobar-archivos"><span class="header-section-number">35.7</span> Nivel intermedio: comprobar archivos</h2>
+<p>Los condicionales son especialmente útiles para automatizar tareas con archivos y directorios.</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Operador</th>
+<th>Comprueba si…</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>-f</code></td>
+<td>Existe un archivo regular</td>
+</tr>
+<tr class="even">
+<td><code>-d</code></td>
+<td>Existe un directorio</td>
+</tr>
+<tr class="odd">
+<td><code>-e</code></td>
+<td>Existe una ruta</td>
+</tr>
+<tr class="even">
+<td><code>-r</code></td>
+<td>Se puede leer</td>
+</tr>
+<tr class="odd">
+<td><code>-w</code></td>
+<td>Se puede escribir</td>
+</tr>
+<tr class="even">
+<td><code>-x</code></td>
+<td>Se puede ejecutar</td>
+</tr>
+</tbody>
+</table>
+<section id="ejemplo-11.-verificar-si-existe-un-archivo" class="level3" data-number="35.7.1">
+<h3 data-number="35.7.1" class="anchored" data-anchor-id="ejemplo-11.-verificar-si-existe-un-archivo"><span class="header-section-number">35.7.1</span> Ejemplo 11. Verificar si existe un archivo</h3>
+<ol type="1">
+<li><p>Mueve a <code>matematicos/ejercicios/</code></p></li>
+<li><p>Ejecuta lo siguiente:</p></li>
+</ol>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb18"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="va">archivo</span><span class="op">=</span><span class="st">"datos.txt"</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="bu">[</span> <span class="ot">-f</span> <span class="st">"</span><span class="va">$archivo</span><span class="st">"</span> <span class="bu">]</span><span class="kw">;</span> <span class="cf">then</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>    <span class="bu">echo</span> <span class="st">"El archivo existe"</span></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span></span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>    <span class="bu">echo</span> <span class="st">"El archivo no existe"</span></span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a><span class="cf">fi</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="ejemplo-12.-crear-un-directorio-si-no-existe" class="level3" data-number="35.7.2">
+<h3 data-number="35.7.2" class="anchored" data-anchor-id="ejemplo-12.-crear-un-directorio-si-no-existe"><span class="header-section-number">35.7.2</span> Ejemplo 12. Crear un directorio si no existe</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb19"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="va">directorio</span><span class="op">=</span><span class="st">"resultados"</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="bu">[</span> <span class="ot">!</span> <span class="ot">-d</span> <span class="st">"</span><span class="va">$directorio</span><span class="st">"</span> <span class="bu">]</span><span class="kw">;</span> <span class="cf">then</span></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mkdir</span> <span class="st">"</span><span class="va">$directorio</span><span class="st">"</span></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>    <span class="bu">echo</span> <span class="st">"Directorio creado"</span></span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span></span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>    <span class="bu">echo</span> <span class="st">"El directorio ya existe"</span></span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a><span class="cf">fi</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+</section>
+<section id="nivel-intermedio-case" class="level2" data-number="35.8">
+<h2 data-number="35.8" class="anchored" data-anchor-id="nivel-intermedio-case"><span class="header-section-number">35.8</span> Nivel intermedio: <code>case</code></h2>
+<p>Cuando necesitamos evaluar múltiples valores posibles de una misma variable, <code>case</code> puede resultar más sencillo que utilizar muchos <code>elif</code>.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="figures/meme_if_else.jpeg" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+<section id="ejemplo-13.-menú-de-opciones" class="level3" data-number="35.8.1">
+<h3 data-number="35.8.1" class="anchored" data-anchor-id="ejemplo-13.-menú-de-opciones"><span class="header-section-number">35.8.1</span> Ejemplo 13. Menú de opciones</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb20"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"1. Mostrar fecha"</span></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"2. Mostrar directorio actual"</span></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"3. Mostrar usuario"</span></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a><span class="bu">read</span> <span class="at">-r</span> <span class="va">opcion</span></span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a><span class="cf">case</span> <span class="st">"</span><span class="va">$opcion</span><span class="st">"</span> <span class="kw">in</span></span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>    <span class="ss">1</span><span class="kw">)</span></span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a>        <span class="fu">date</span></span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a>        <span class="cf">;;</span></span>
+<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a>    <span class="ss">2</span><span class="kw">)</span></span>
+<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a>        <span class="bu">pwd</span></span>
+<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a>        <span class="cf">;;</span></span>
+<span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a>    <span class="ss">3</span><span class="kw">)</span></span>
+<span id="cb20-17"><a href="#cb20-17" aria-hidden="true" tabindex="-1"></a>        <span class="fu">whoami</span></span>
+<span id="cb20-18"><a href="#cb20-18" aria-hidden="true" tabindex="-1"></a>        <span class="cf">;;</span></span>
+<span id="cb20-19"><a href="#cb20-19" aria-hidden="true" tabindex="-1"></a>    <span class="pp">*</span><span class="kw">)</span></span>
+<span id="cb20-20"><a href="#cb20-20" aria-hidden="true" tabindex="-1"></a>        <span class="bu">echo</span> <span class="st">"Opción no válida"</span></span>
+<span id="cb20-21"><a href="#cb20-21" aria-hidden="true" tabindex="-1"></a>        <span class="cf">;;</span></span>
+<span id="cb20-22"><a href="#cb20-22" aria-hidden="true" tabindex="-1"></a><span class="cf">esac</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<p>El símbolo <code>*</code> representa cualquier valor que no coincida con las opciones anteriores.</p>
+</section>
+</section>
+<section id="qué-es-la-programación-defensiva" class="level2" data-number="35.9">
+<h2 data-number="35.9" class="anchored" data-anchor-id="qué-es-la-programación-defensiva"><span class="header-section-number">35.9</span> ¿Qué es la programación defensiva?</h2>
+<p>La programación defensiva es una práctica que consiste en escribir programas capaces de anticipar, detectar y manejar posibles errores antes de que provoquen resultados inesperados.</p>
+<p>En otras palabras:</p>
+<p>No debemos asumir que el usuario siempre utilizará correctamente nuestro programa.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="figures/programacion_defensiva.JPG" class="img-fluid quarto-figure quarto-figure-center figure-img" width="367"></p>
+</figure>
+</div>
+<section id="ejemplo-14.-saludar.sh" class="level3" data-number="35.9.1">
+<h3 data-number="35.9.1" class="anchored" data-anchor-id="ejemplo-14.-saludar.sh"><span class="header-section-number">35.9.1</span> Ejemplo 14. <code>saludar.sh</code></h3>
+<section id="sin-programación-defensiva" class="level4">
+<h4 class="anchored" data-anchor-id="sin-programación-defensiva">Sin programación defensiva</h4>
+<p>Crea un script que se llame <code>saludar_sin_pd.sh</code></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb21"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="va">nombre</span><span class="op">=</span><span class="va">$1</span></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"¡Hola, </span><span class="va">$nombre</span><span class="st">!"</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Si ejecutamos:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb22"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="ex">./saludar_sin_pd.sh</span> Ana</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Obtenemos:</p>
+<pre><code>¡Hola, Ana!</code></pre>
+<p>Pero ¿qué sucede si olvidamos proporcionar el nombre?</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb24"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="ex">./saludar_sin_pd.sh</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Resultado:</p>
+<pre><code>¡Hola, !</code></pre>
+<p>El programa no presenta un error de ejecución, pero su resultado no es el esperado.</p>
+</section>
+<section id="aplicando-programación-defensiva" class="level4">
+<h4 class="anchored" data-anchor-id="aplicando-programación-defensiva">Aplicando programación defensiva</h4>
+<p>El programa saluda a una persona utilizando el nombre que recibe como argumento. Sin embargo, antes de hacerlo, verifica que el usuario haya proporcionado al menos un argumento.</p>
+<p>Crea un script que se llame <code>saludar.sh</code></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb26"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="bu">[</span> <span class="va">$#</span> <span class="ot">-eq</span> 0 <span class="bu">]</span><span class="kw">;</span> <span class="cf">then</span> <span class="co"># if (( $# == 0 )); then</span></span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>    <span class="bu">echo</span> <span class="st">"Error: Debes proporcionar un nombre"</span></span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>    <span class="bu">echo</span> <span class="st">"Uso: ./saludar.sh &lt;nombre&gt;"</span></span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>    <span class="bu">exit</span> 1</span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a><span class="cf">fi</span></span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a><span class="va">nombre</span><span class="op">=</span><span class="va">$1</span></span>
+<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"¡Hola, </span><span class="va">$nombre</span><span class="st">!"</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="explicación-línea-por-línea" class="level4">
+<h4 class="anchored" data-anchor-id="explicación-línea-por-línea">Explicación línea por línea</h4>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 26%">
+<col style="width: 73%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Código</th>
+<th>Explicación</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>#!/bin/bash</code></td>
+<td>Indica que el script se ejecutará con Bash.</td>
+</tr>
+<tr class="even">
+<td><code>$#</code></td>
+<td>Número de argumentos proporcionados al script.</td>
+</tr>
+<tr class="odd">
+<td><code>[ $# -eq 0 ]</code></td>
+<td>Comprueba si el número de argumentos es igual a cero.</td>
+</tr>
+<tr class="even">
+<td><code>then</code></td>
+<td>Inicia las instrucciones cuando la condición es verdadera.</td>
+</tr>
+<tr class="odd">
+<td><code>echo</code></td>
+<td>Muestra mensajes en la terminal.</td>
+</tr>
+<tr class="even">
+<td><code>exit 1</code></td>
+<td>Termina el script con un código de error.</td>
+</tr>
+<tr class="odd">
+<td><code>fi</code></td>
+<td>Finaliza el condicional <code>if</code>.</td>
+</tr>
+<tr class="even">
+<td><code>nombre=$1</code></td>
+<td>Guarda el primer argumento en la variable <code>nombre</code>.</td>
+</tr>
+<tr class="odd">
+<td><code>echo "¡Hola, $nombre!"</code></td>
+<td>Muestra el saludo personalizado.</td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="principios-de-programación-defensiva" class="level3" data-number="35.9.2">
+<h3 data-number="35.9.2" class="anchored" data-anchor-id="principios-de-programación-defensiva"><span class="header-section-number">35.9.2</span> Principios de programación defensiva</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 40%">
+<col style="width: 59%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Principio</th>
+<th>Aplicación en <code>saludar.sh</code></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Anticipar errores</td>
+<td>El usuario podría olvidar escribir su nombre.</td>
+</tr>
+<tr class="even">
+<td>Validar entradas</td>
+<td><code>$#</code> comprueba cuántos argumentos se recibieron.</td>
+</tr>
+<tr class="odd">
+<td>Mostrar mensajes claros</td>
+<td><code>echo</code> explica el error y cómo ejecutar el script.</td>
+</tr>
+<tr class="even">
+<td>Detener ejecuciones incorrectas</td>
+<td><code>exit 1</code> evita continuar sin argumentos.</td>
+</tr>
+<tr class="odd">
+<td>Continuar cuando todo es correcto</td>
+<td>El programa muestra el saludo.</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="pregunta-para-reflexionar" class="level3" data-number="35.9.3">
+<h3 data-number="35.9.3" class="anchored" data-anchor-id="pregunta-para-reflexionar"><span class="header-section-number">35.9.3</span> Pregunta para reflexionar</h3>
+<p>Nuestro script ya comprueba si el usuario proporcionó un argumento, pero ¿qué sucede si ejecutamos lo siguiente?</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb27"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="ex">./saludar.sh</span> Ana Pedro Maria</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<p>El programa responde:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb28"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="ex">¡Hola,</span> Ana!</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<p>¿Es correcto? Depende de lo que esperamos que haga nuestro programa.</p>
+<p>Si el objetivo es recibir exactamente un nombre, necesitamos agregar otra validación:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb29"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="kw">((</span> <span class="va">$#</span> <span class="op">==</span> <span class="dv">0</span> <span class="kw">));</span> <span class="cf">then</span></span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>    <span class="bu">echo</span> <span class="st">"Error: Debes proporcionar un nombre"</span></span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>    <span class="bu">exit</span> 1</span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a><span class="cf">elif</span> <span class="kw">((</span> <span class="va">$#</span> <span class="op">&gt;</span> <span class="dv">1</span> <span class="kw">));</span> <span class="cf">then</span></span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a>    <span class="bu">echo</span> <span class="st">"Error: Solo debes proporcionar un nombre"</span></span>
+<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a>    <span class="bu">exit</span> 1</span>
+<span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span></span>
+<span id="cb29-10"><a href="#cb29-10" aria-hidden="true" tabindex="-1"></a>    <span class="va">nombre</span><span class="op">=</span><span class="va">$1</span></span>
+<span id="cb29-11"><a href="#cb29-11" aria-hidden="true" tabindex="-1"></a>    <span class="bu">echo</span> <span class="st">"¡Hola, </span><span class="va">$nombre</span><span class="st">!"</span></span>
+<span id="cb29-12"><a href="#cb29-12" aria-hidden="true" tabindex="-1"></a><span class="cf">fi</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Así, el programa no solo comprueba que haya argumentos, sino también que se reciba la cantidad esperada.</p>
+</section>
+</section>
+<section id="referencias" class="level2" data-number="35.10">
+<h2 data-number="35.10" class="anchored" data-anchor-id="referencias"><span class="header-section-number">35.10</span> Referencias</h2>
 <ul>
 <li><a href="https://datacarpentry.github.io/semester-biology/materials/for-loops-indexing/">DataCarpentry For Loops</a></li>
 </ul>

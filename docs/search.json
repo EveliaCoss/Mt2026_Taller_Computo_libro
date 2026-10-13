@@ -1809,7 +1809,106 @@
     "href": "cap13.html",
     "title": "35  Condicionales",
     "section": "",
-    "text": "35.1 Referencias\nLas condicionales son estructuras de programación que nos permiten tomar decisiones basadas en el resultado de una expresión. En otras palabras, nos permiten ejecutar diferentes bloques de código dependiendo de si una condición se cumple o no. Los condicionales son fundamentales para automatizar tareas y crear scripts fléxibles.\nLa sintáxis básica de un condicional simple en formato de una línea es :\nde igual manera pero en bloque identado:\nLos condicionales pueden ser tan complejos como lo imagines. Por ejemplo:\nArchivo: saludar.sh",
+    "text": "35.0.1 Ejemplo 1. Verificar si una persona es mayor de edad\nLas condicionales son estructuras de programación que nos permiten tomar decisiones basadas en el resultado de una expresión. En otras palabras, nos permiten ejecutar diferentes bloques de código dependiendo de si una condición se cumple o no. Los condicionales son fundamentales para automatizar tareas y crear scripts fléxibles.\nEstructura básica:\nLa sintáxis básica de un condicional simple en formato de una línea es:\nde igual manera pero en bloque identado:\nEl operador -ge significa mayor o igual que.\n2. Corchetes dobles [[ ]]\n3. Paréntesis dobles (( ))",
+    "crumbs": [
+      "**Sección 4** - Edición de archivos con Bash",
+      "<span class='chapter-number'>35</span>  <span class='chapter-title'>Condicionales</span>"
+    ]
+  },
+  {
+    "objectID": "cap13.html#tabla-de-operadores-para-condicionales-en-bash",
+    "href": "cap13.html#tabla-de-operadores-para-condicionales-en-bash",
+    "title": "35  Condicionales",
+    "section": "35.1 Tabla de operadores para condicionales en Bash",
+    "text": "35.1 Tabla de operadores para condicionales en Bash\n\n\n\nOperación\n[ ] y [[ ]]\n(( ))\n\n\n\n\nIgual a\n-eq\n==\n\n\nDiferente de\n-ne\n!=\n\n\nMayor que\n-gt\n&gt;\n\n\nMenor que\n-lt\n&lt;\n\n\nMayor o igual\n-ge\n&gt;=\n\n\nMenor o igual\n-le\n&lt;=\n\n\n\n\n35.1.1 Ejemplo 2. Verificar si un número es positivo\n\nCorchetes sencillos [ ]\n\nnumero=10\n\nif [ \"$numero\" -gt 0 ]; then\n    echo \"El número es positivo\"\nfi\n\n\n\n\n\n\nTipEjercicio grupal\n\n\n\nConvierte el ejemplo 2 cambiando a:\n2. Corchetes dobles [[ ]]\n3. Paréntesis dobles (( ))",
+    "crumbs": [
+      "**Sección 4** - Edición de archivos con Bash",
+      "<span class='chapter-number'>35</span>  <span class='chapter-title'>Condicionales</span>"
+    ]
+  },
+  {
+    "objectID": "cap13.html#nivel-básico-if-y-else",
+    "href": "cap13.html#nivel-básico-if-y-else",
+    "title": "35  Condicionales",
+    "section": "35.2 Nivel básico: if y else",
+    "text": "35.2 Nivel básico: if y else\n¿Qué sucede si la condición no se cumple?\nPodemos utilizar else para indicar qué instrucciones ejecutar en caso contrario.\nif [ condición ]; then\n    # Si es verdadera\nelse\n    # Si es falsa\nfi\n\n35.2.1 Ejemplo 3. Determinar sí un estudiante aprobó\ncalificacion=7\n\nif [ \"$calificacion\" -ge 6 ]; then\n    echo \"Aprobado\"\nelse\n    echo \"Reprobado\"\nfi\n\n\n\n\n\n\nTipEjercicio grupal\n\n\n\nConvierte el ejemplo 2 cambiando a:\n2. Corchetes dobles [[ ]]\n3. Paréntesis dobles (( ))\n\n\n\n\n35.2.2 Ejemplo 4. Determinar si un número es par o impar\nnumero=8\n\nif [ $((numero % 2)) -eq 0 ]; then\n    echo \"El número es par\"\nelse\n    echo \"El número es impar\"\nfi\nAquí utilizamos dos conceptos:\n\n$(( ... )) permite realizar operaciones aritméticas.\n% obtiene el residuo de una división.\n\nSi el residuo al dividir entre 2 es cero, el número es par.",
+    "crumbs": [
+      "**Sección 4** - Edición de archivos con Bash",
+      "<span class='chapter-number'>35</span>  <span class='chapter-title'>Condicionales</span>"
+    ]
+  },
+  {
+    "objectID": "cap13.html#nivel-básico-intermedio-elif",
+    "href": "cap13.html#nivel-básico-intermedio-elif",
+    "title": "35  Condicionales",
+    "section": "35.3 Nivel básico-intermedio: elif",
+    "text": "35.3 Nivel básico-intermedio: elif\nCuando necesitamos evaluar varias condiciones, utilizamos elif, que significa else if.\n\n35.3.1 Ejemplo 5. Clasificar calificaciones\ncalificacion=8\n\nif [ \"$calificacion\" -ge 9 ]; then\n    echo \"Excelente\"\nelif [ \"$calificacion\" -ge 7 ]; then\n    echo \"Bueno\"\nelif [ \"$calificacion\" -ge 6 ]; then\n    echo \"Suficiente\"\nelse\n    echo \"Reprobado\"\nfi\nBash evalúa las condiciones de arriba hacia abajo y ejecuta únicamente el primer bloque cuya condición sea verdadera.",
+    "crumbs": [
+      "**Sección 4** - Edición de archivos con Bash",
+      "<span class='chapter-number'>35</span>  <span class='chapter-title'>Condicionales</span>"
+    ]
+  },
+  {
+    "objectID": "cap13.html#nivel-intermedio-condiciones-con-read",
+    "href": "cap13.html#nivel-intermedio-condiciones-con-read",
+    "title": "35  Condicionales",
+    "section": "35.4 Nivel intermedio: condiciones con read",
+    "text": "35.4 Nivel intermedio: condiciones con read\nHasta ahora hemos utilizado valores definidos dentro del script. Pero podemos pedir información directamente al usuario.\n\n35.4.1 Ejemplo 6. Solicitar la edad\necho \"¿Cuántos años tienes?\"\nread -r edad\n\nif [ \"$edad\" -ge 18 ]; then\n    echo \"Puedes ingresar\"\nelse\n    echo \"No puedes ingresar\"\nfi\nread -r permite almacenar lo que escribe el usuario en una variable. En este ejemplo se supone que introduce un número entero válido.\n\n\n35.4.2 Ejemplo 7. Comparar dos números\n\nCrea un script llamado comparar_dos_numeros.shdentro de la carpeta matematicos\nCopia el siguiente código\n\n#!/bin/bash\n\necho \"Ingresa el primer número:\"\nread -r a\n\necho \"Ingresa el segundo número:\"\nread -r b\n\nif [ \"$a\" -gt \"$b\" ]; then\n    echo \"$a es mayor que $b\"\nelif [ \"$a\" -lt \"$b\" ]; then\n    echo \"$b es mayor que $a\"\nelse\n    echo \"Los números son iguales\"\nfi\n\nEjecuta el script.",
+    "crumbs": [
+      "**Sección 4** - Edición de archivos con Bash",
+      "<span class='chapter-number'>35</span>  <span class='chapter-title'>Condicionales</span>"
+    ]
+  },
+  {
+    "objectID": "cap13.html#nivel-intermedio-condiciones-con-texto",
+    "href": "cap13.html#nivel-intermedio-condiciones-con-texto",
+    "title": "35  Condicionales",
+    "section": "35.5 Nivel intermedio: condiciones con texto",
+    "text": "35.5 Nivel intermedio: condiciones con texto\nTambién podemos comparar cadenas de caracteres.\n\n\n\nOperador\nSignificado\n\n\n\n\n=\nLas cadenas son iguales\n\n\n!=\nLas cadenas son diferentes\n\n\n-z\nLa cadena está vacía\n\n\n-n\nLa cadena no está vacía\n\n\n\n\n35.5.1 Ejemplo 8. Verificar una contraseña de ejemplo\n\nCrea un script llamado contrasena.shdentro de la carpeta matematicos\nCopia el siguiente código\n\n#!/bin/bash\n\nclave=\"bash123\"\n\necho \"Ingresa la contraseña:\"\nread -r respuesta\n\nif [ \"$respuesta\" = \"$clave\" ]; then\n    echo \"Acceso permitido\"\nelse\n    echo \"Acceso denegado\"\nfi\n\nEjecuta el script.\n\nEste ejemplo es únicamente educativo; no es un sistema seguro de autenticación.",
+    "crumbs": [
+      "**Sección 4** - Edición de archivos con Bash",
+      "<span class='chapter-number'>35</span>  <span class='chapter-title'>Condicionales</span>"
+    ]
+  },
+  {
+    "objectID": "cap13.html#nivel-intermedio-operadores-lógicos",
+    "href": "cap13.html#nivel-intermedio-operadores-lógicos",
+    "title": "35  Condicionales",
+    "section": "35.6 Nivel intermedio: operadores lógicos",
+    "text": "35.6 Nivel intermedio: operadores lógicos\nPodemos combinar dos o más condiciones.\n\n\n\nOperador\nSignificado\n\n\n\n\n&&\nAND: ambas condiciones deben cumplirse\n\n\n\\|\\|\nOR: al menos una condición debe cumplirse\n\n\n!\nNOT: niega una condición\n\n\n\n\n35.6.1 Ejemplo 9. Verificar si una calificación está dentro del rango válido\nEjecutar en la terminal:\ncalificacion=8\n\nif [ \"$calificacion\" -ge 0 ] && [ \"$calificacion\" -le 10 ]; then\n    echo \"Calificación válida\"\nelse\n    echo \"Calificación inválida\"\nfi\n\n\n35.6.2 Ejemplo 10. Verificar si un número está fuera de un rango\nnumero=120\n\nif [ \"$numero\" -lt 1 ] || [ \"$numero\" -gt 100 ]; then\n    echo \"Fuera del rango\"\nelse\n    echo \"Dentro del rango\"\nfi",
+    "crumbs": [
+      "**Sección 4** - Edición de archivos con Bash",
+      "<span class='chapter-number'>35</span>  <span class='chapter-title'>Condicionales</span>"
+    ]
+  },
+  {
+    "objectID": "cap13.html#nivel-intermedio-comprobar-archivos",
+    "href": "cap13.html#nivel-intermedio-comprobar-archivos",
+    "title": "35  Condicionales",
+    "section": "35.7 Nivel intermedio: comprobar archivos",
+    "text": "35.7 Nivel intermedio: comprobar archivos\nLos condicionales son especialmente útiles para automatizar tareas con archivos y directorios.\n\n\n\nOperador\nComprueba si…\n\n\n\n\n-f\nExiste un archivo regular\n\n\n-d\nExiste un directorio\n\n\n-e\nExiste una ruta\n\n\n-r\nSe puede leer\n\n\n-w\nSe puede escribir\n\n\n-x\nSe puede ejecutar\n\n\n\n\n35.7.1 Ejemplo 11. Verificar si existe un archivo\n\nMueve a matematicos/ejercicios/\nEjecuta lo siguiente:\n\narchivo=\"datos.txt\"\n\nif [ -f \"$archivo\" ]; then\n    echo \"El archivo existe\"\nelse\n    echo \"El archivo no existe\"\nfi\n\n\n35.7.2 Ejemplo 12. Crear un directorio si no existe\ndirectorio=\"resultados\"\n\nif [ ! -d \"$directorio\" ]; then\n    mkdir \"$directorio\"\n    echo \"Directorio creado\"\nelse\n    echo \"El directorio ya existe\"\nfi",
+    "crumbs": [
+      "**Sección 4** - Edición de archivos con Bash",
+      "<span class='chapter-number'>35</span>  <span class='chapter-title'>Condicionales</span>"
+    ]
+  },
+  {
+    "objectID": "cap13.html#nivel-intermedio-case",
+    "href": "cap13.html#nivel-intermedio-case",
+    "title": "35  Condicionales",
+    "section": "35.8 Nivel intermedio: case",
+    "text": "35.8 Nivel intermedio: case\nCuando necesitamos evaluar múltiples valores posibles de una misma variable, case puede resultar más sencillo que utilizar muchos elif.\n\n\n\n\n\n\n35.8.1 Ejemplo 13. Menú de opciones\n#!/bin/bash\n\necho \"1. Mostrar fecha\"\necho \"2. Mostrar directorio actual\"\necho \"3. Mostrar usuario\"\n\nread -r opcion\n\ncase \"$opcion\" in\n    1)\n        date\n        ;;\n    2)\n        pwd\n        ;;\n    3)\n        whoami\n        ;;\n    *)\n        echo \"Opción no válida\"\n        ;;\nesac\nEl símbolo * representa cualquier valor que no coincida con las opciones anteriores.",
+    "crumbs": [
+      "**Sección 4** - Edición de archivos con Bash",
+      "<span class='chapter-number'>35</span>  <span class='chapter-title'>Condicionales</span>"
+    ]
+  },
+  {
+    "objectID": "cap13.html#qué-es-la-programación-defensiva",
+    "href": "cap13.html#qué-es-la-programación-defensiva",
+    "title": "35  Condicionales",
+    "section": "35.9 ¿Qué es la programación defensiva?",
+    "text": "35.9 ¿Qué es la programación defensiva?\nLa programación defensiva es una práctica que consiste en escribir programas capaces de anticipar, detectar y manejar posibles errores antes de que provoquen resultados inesperados.\nEn otras palabras:\nNo debemos asumir que el usuario siempre utilizará correctamente nuestro programa.\n\n\n\n\n\n\n35.9.1 Ejemplo 14. saludar.sh\n\nSin programación defensiva\nCrea un script que se llame saludar_sin_pd.sh\n#!/bin/bash\n\nnombre=$1\necho \"¡Hola, $nombre!\"\nSi ejecutamos:\n./saludar_sin_pd.sh Ana\nObtenemos:\n¡Hola, Ana!\nPero ¿qué sucede si olvidamos proporcionar el nombre?\n./saludar_sin_pd.sh\nResultado:\n¡Hola, !\nEl programa no presenta un error de ejecución, pero su resultado no es el esperado.\n\n\nAplicando programación defensiva\nEl programa saluda a una persona utilizando el nombre que recibe como argumento. Sin embargo, antes de hacerlo, verifica que el usuario haya proporcionado al menos un argumento.\nCrea un script que se llame saludar.sh\n#!/bin/bash\n\nif [ $# -eq 0 ]; then # if (( $# == 0 )); then\n    echo \"Error: Debes proporcionar un nombre\"\n    echo \"Uso: ./saludar.sh &lt;nombre&gt;\"\n    exit 1\nfi\n\nnombre=$1\necho \"¡Hola, $nombre!\"\n\n\nExplicación línea por línea\n\n\n\n\n\n\n\nCódigo\nExplicación\n\n\n\n\n#!/bin/bash\nIndica que el script se ejecutará con Bash.\n\n\n$#\nNúmero de argumentos proporcionados al script.\n\n\n[ $# -eq 0 ]\nComprueba si el número de argumentos es igual a cero.\n\n\nthen\nInicia las instrucciones cuando la condición es verdadera.\n\n\necho\nMuestra mensajes en la terminal.\n\n\nexit 1\nTermina el script con un código de error.\n\n\nfi\nFinaliza el condicional if.\n\n\nnombre=$1\nGuarda el primer argumento en la variable nombre.\n\n\necho \"¡Hola, $nombre!\"\nMuestra el saludo personalizado.\n\n\n\n\n\n\n35.9.2 Principios de programación defensiva\n\n\n\n\n\n\n\nPrincipio\nAplicación en saludar.sh\n\n\n\n\nAnticipar errores\nEl usuario podría olvidar escribir su nombre.\n\n\nValidar entradas\n$# comprueba cuántos argumentos se recibieron.\n\n\nMostrar mensajes claros\necho explica el error y cómo ejecutar el script.\n\n\nDetener ejecuciones incorrectas\nexit 1 evita continuar sin argumentos.\n\n\nContinuar cuando todo es correcto\nEl programa muestra el saludo.\n\n\n\n\n\n35.9.3 Pregunta para reflexionar\nNuestro script ya comprueba si el usuario proporcionó un argumento, pero ¿qué sucede si ejecutamos lo siguiente?\n./saludar.sh Ana Pedro Maria\nEl programa responde:\n¡Hola, Ana!\n¿Es correcto? Depende de lo que esperamos que haga nuestro programa.\nSi el objetivo es recibir exactamente un nombre, necesitamos agregar otra validación:\n#!/bin/bash\n\nif (( $# == 0 )); then\n    echo \"Error: Debes proporcionar un nombre\"\n    exit 1\nelif (( $# &gt; 1 )); then\n    echo \"Error: Solo debes proporcionar un nombre\"\n    exit 1\nelse\n    nombre=$1\n    echo \"¡Hola, $nombre!\"\nfi\nAsí, el programa no solo comprueba que haya argumentos, sino también que se reciba la cantidad esperada.",
     "crumbs": [
       "**Sección 4** - Edición de archivos con Bash",
       "<span class='chapter-number'>35</span>  <span class='chapter-title'>Condicionales</span>"
@@ -1819,8 +1918,8 @@
     "objectID": "cap13.html#referencias",
     "href": "cap13.html#referencias",
     "title": "35  Condicionales",
-    "section": "",
-    "text": "DataCarpentry For Loops",
+    "section": "35.10 Referencias",
+    "text": "35.10 Referencias\n\nDataCarpentry For Loops",
     "crumbs": [
       "**Sección 4** - Edición de archivos con Bash",
       "<span class='chapter-number'>35</span>  <span class='chapter-title'>Condicionales</span>"
