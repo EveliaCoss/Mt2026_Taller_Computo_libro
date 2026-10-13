@@ -468,10 +468,12 @@ nombre=$1
 echo "¡Hola, $nombre!"
 ```
 
+![](figures/comofunciona-ifelse.png){fig-align="center" width="474"}
+
 #### Explicación línea por línea
 
 | Código | Explicación |
-|-------------------|-----------------------------------------------------|
+|--------------------|----------------------------------------------------|
 | `#!/bin/bash` | Indica que el script se ejecutará con Bash. |
 | `$#` | Número de argumentos proporcionados al script. |
 | `[ $# -eq 0 ]` | Comprueba si el número de argumentos es igual a cero. |
