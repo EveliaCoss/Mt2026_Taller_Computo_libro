@@ -1,6 +1,6 @@
 # Bucles (for loops)
 
-> **Fecha:** 13 de octubre, 2026
+> **Fecha:** 15 de octubre, 2026
 
 ::: content-box-gray
 **Objetivos:**
@@ -11,95 +11,508 @@
 - **Controlar la ejecución de bucles** → Usar instrucciones como `break` y `continue` para modificar el flujo dentro de un ciclo.
 :::
 
-Imagina que quieres realizar una misma tarea para 3 archivos distintos, ¿no sería nada molesto escribir el mismo código 3 veces, cierto?
+## ¿Qué es un bucle?
 
-¿Y qué pasa si tengo que analizar y procesar docenas o cientos de archivos? Para ello puedes escribir bucles. Un bucle es una **estructura de control** que permite ejecutar un bloque de código rápidamente mientras se cumpla una **determinada condición**. En bash los bucles más comunes son `for` y `while.`
+Un bucle (loop) es una estructura de control que permite ejecutar un bloque de instrucciones varias veces, sin necesidad de escribir repetidamente los mismos comandos.
 
-::: {.callout-note icon="false"}
-## For
+Por ejemplo, imaginemos que queremos mostrar cinco veces el mensaje `"Hola, mundo"`.
 
-`for` es ideal cuando sabes cuántas veces quieres que se repita ese bloque de código. Por ejemplo:
-:::
+Sin utilizar bucles:
 
-``` {.bash code-copy="true" eval="false"}
-for variable in lista_de_valores; do
-  # Comandos a ejecutar para cada valor en la lista
+``` bash
+echo "Hola, mundo"
+echo "Hola, mundo"
+echo "Hola, mundo"
+echo "Hola, mundo"
+echo "Hola, mundo"
+```
+
+Utilizando un bucle `for`:
+
+``` bash
+for numero in 1 2 3 4 5; do
+    echo "Hola, mundo"
 done
 ```
 
-::: {.callout-note icon="false"}
-## while
+Ambos producen el mismo resultado, pero el segundo es más corto, fácil de modificar y escalable.
 
-`while`, por su parte, se utiliza cuando quieres que un bloque de código se ejecute mientras se cumpla una determinada condición. Por ejemplo:
-:::
+## ¿Qué tipos de bucles existen en Bash?
 
-``` {.bash code-copy="true" eval="false"}
-while [ condición ]; do
-  # Comandos a ejecutar mientras la condición sea verdadera
+| Bucle | ¿Cuándo utilizarlo? |
+|----------------|--------------------------------------------------------|
+| `for` | Cuando queremos recorrer una lista de elementos o repetir una acción un número determinado de veces. |
+| `while` | Cuando queremos repetir instrucciones mientras una condición sea verdadera. |
+
+En esta clase nos concentraremos en `for`, uno de los bucles más utilizados en Bash.
+
+### Diferencias entre `for` y `while`
+
+| Característica | `for` | `while` |
+|----|----|----|
+| Recorre una lista de valores | Sí | Puede hacerlo con lógica adicional |
+| Evalúa una condición para continuar | En la variante aritmética | Sí |
+| Ideal para un número conocido de repeticiones | Sí | También puede utilizarse |
+| Ideal para repetir hasta obtener una entrada válida | Menos conveniente | Sí |
+| Útil para menús interactivos | Menos conveniente | Sí |
+
+## Estructura básica de `for`
+
+```         
+for variable in lista; do
+    comandos
 done
 ```
 
-## Actividad grupal
+| Elemento   | ¿Qué significa?                                        |
+|------------|--------------------------------------------------------|
+| `for`      | Inicia el bucle.                                       |
+| `variable` | Almacena temporalmente cada elemento de la lista.      |
+| `in`       | Indica qué valores se recorrerán.                      |
+| `lista`    | Conjunto de valores que queremos procesar.             |
+| `do`       | Marca el inicio de las instrucciones que se repetirán. |
+| `comandos` | Instrucciones que se ejecutan en cada iteración.       |
+| `done`     | Indica el final del bucle.                             |
 
-Retomando el ejercicio anterior, modifiquemos el código para crear un bucle para procesar los tres archivos fastq (**secuencias1.fastq, secuencias2.fastq, secuencias3.fastq** ) que tenemos.
+Ejemplo:
 
-**Paso 1.** Crear un script en Bash con el nombre bucles.sh empleando nano.
-
-``` {.bash code-copy="true" eval="false"}
-nano bucles.sh
+``` bash
+for numero in 1 2 3 4 5; do
+    echo "Número: $numero"
+done
 ```
 
-**Paso 2.** Copia el siguiente código dentro del script `bucle.sh` y guarda los cambios.
+Resultado:
 
-``` {.bash code-copy="true" eval="false"}
-#!/bin/bash
-# Script para analizar múltiples archivos FASTA
+```         
+Número: 1
+Número: 2
+Número: 3
+Número: 4
+Número: 5
+```
 
-# Archivos a procesar
-archivos=("archivo1.fasta" "archivo2.fasta" "archivo3.fasta")
+Cada vez que el bucle ejecuta sus instrucciones se conoce como una iteración.
 
-# Loop para analizar cada archivo
-for archivo in "${archivos[@]}"; do
-  echo "Archivo a procesar: $archivo"
-  
-  # Verifica si el archivo existe
-  if [ ! -f "$archivo" ]; then
-    echo "El archivo $archivo no existe. Saltando..."
-    continue
-  fi
+## Formas de utilizar `for` en Bash
 
-  # 1. Conteo de secuencias
-  numero_secuencias=$(grep -c '^@SRR098026' "$archivo")
-  echo "Número de secuencias en $archivo: $numero_secuencias"
+### Ejemplo 1. Recorrer una lista de palabras
 
-  # 2. Separación de malas lecturas
-  grep -B1 -A2 'NNNNNNNNNN' "$archivo" > "malas_lecturas_$archivo"
-  malas=$(wc -l < "malas_lecturas_$archivo")
-  echo "Número de malas lecturas en $archivo: $malas"
+No estamos limitados a utilizar números.
 
-  # 3. Búsqueda de patrones
-  echo "Desea buscar patrones en $archivo? (y/n):"
-  read -r respuesta
+``` bash
+for fruta in manzana pera naranja uva; do
+    echo "Me gusta la $fruta"
+done
+```
 
-  if [[ "$respuesta" == "y" ]]; then
-    patrones_file="patrones_$archivo.txt"
-    busqueda_file="busqueda_$archivo.txt"
+Resultado:
 
-    echo -e 'ACTG\nCCCCC\nNNNCNNN\nNNNGNNN\nTTTT\nTATA\nAAA' > "$patrones_file"
-    grep -f "$patrones_file" "$archivo" > "$busqueda_file"
+```         
+Me gusta la manzana
+Me gusta la pera
+Me gusta la naranja
+Me gusta la uva
+```
 
-    echo "Búsqueda de patrones guardada en: $busqueda_file"
-  else
-    echo "Patrones no buscados en $archivo."
-  fi
+### Ejemplo 2. Utilizar rangos numéricos `{ }`
 
-  echo "Procesamiento de $archivo completado."
-  echo "---------------------------------------"
+#### Opción 1. Expansión de llaves `{ }`
+
+Cuando tenemos números consecutivos, podemos utilizar la expansión de llaves.
+
+``` bash
+for numero in {1..10}; do
+    echo "$numero"
+done
+```
+
+También podemos contar hacia atrás:
+
+``` bash
+for numero in {10..1}; do
+    echo "$numero"
+done
+```
+
+Y establecer incrementos de 2 en 2:
+
+``` bash
+for numero in {0..10..2}; do
+    echo "$numero"
+done
+```
+
+Resultado: `0 2 4 6 8 10`.
+
+También puedes especificar el decremento:
+
+``` bash
+for numero in {10..1..-1}; do
+    echo "$numero"
+done
+```
+
+#### Opción 2. Utilizando `(( ))` — Estilo C
+
+``` bash
+for ((numero=10; numero>=1; numero--)); do
+    echo "$numero"
+done
+```
+
+Aquí:
+
+- `numero=10`: comienza en 10.
+- `numero>=1`: continúa mientras sea mayor o igual a 1.
+- `numero--`: disminuye el valor en 1.
+
+También puedes utilizar `numero-=1` en lugar de `numero--`.
+
+``` bash
+for ((i=1; i<=5; i++)); do
+    echo "Número: $i"
+done
+```
+
+| Elemento | Significado                                            |
+|----------|--------------------------------------------------------|
+| `i=1`    | Inicializa el contador en 1.                           |
+| `i<=5`   | El bucle continúa mientras `i` sea menor o igual a 5.  |
+| `i++`    | Incrementa el contador en 1 después de cada iteración. |
+
+Diferencia importante: en esta sintaxis utilizamos `(( ))` para realizar operaciones y comparaciones aritméticas, sin necesidad de escribir `$i`.
+
+#### Opción 3. Utilizando `seq`
+
+`seq` es un comando externo que genera secuencias numéricas.
+
+``` bash
+for numero in $(seq 10 -1 1); do
+    echo "$numero"
+done
+```
+
+La estructura `seq 10 -1 1` significa: comenzar en 10, disminuir de uno en uno y terminar en 1.
+
+## Comparación
+
+| Forma | Sintaxis | ¿Cuándo usarla? |
+|------------------------|------------------------|------------------------|
+| Llaves | `{10..1}` | Rangos fijos y sencillos. |
+| Estilo C | `((i=10; i>=1; i--))` | Cuando necesitas controlar el contador. |
+| `seq` | `$(seq 10 -1 1)` | Para generar secuencias numéricas, incluso con límites variables. |
+| Lista manual | `10 9 8 ... 1` | Cuando tienes valores específicos. |
+
+## ¿Y si quiero disminuir de 2 en 2?
+
+Puedes hacerlo de estas tres maneras:
+
+``` bash
+# Opción 1: Llaves
+for i in {10..1..2}; do
+    echo "$i"
 done
 
-# Mensaje final
-echo "Metaanálisis finalizado para todos los archivos."
+# Opción 2: Estilo C
+for ((i=10; i>=1; i-=2)); do
+    echo "$i"
+done
+
+# Opción 3: seq
+for i in $(seq 10 -2 1); do
+    echo "$i"
+done
 ```
+
+Las tres producen:
+
+```         
+10
+8
+6
+4
+2
+```
+
+Por ejemplo:
+
+``` bash
+echo "¿Desde qué número quieres contar?"
+read -r inicio
+
+for ((i=inicio; i>=1; i--)); do
+    echo "$i"
+done
+```
+
+## Realizar operaciones matemáticas
+
+Podemos combinar un bucle con la expansión aritmética `$(( ))`.
+
+``` bash
+for numero in {1..5}; do
+    cuadrado=$((numero * numero))
+    echo "$numero al cuadrado es $cuadrado"
+done
+```
+
+Resultado:
+
+```         
+1 al cuadrado es 1
+2 al cuadrado es 4
+3 al cuadrado es 9
+4 al cuadrado es 16
+5 al cuadrado es 25
+```
+
+## Utilizar un acumulador
+
+Un acumulador permite guardar un resultado que se va modificando en cada iteración.
+
+``` bash
+suma=0
+
+for numero in {1..5}; do
+    suma=$((suma + numero))
+done
+
+echo "La suma total es: $suma"
+```
+
+Resultado: `La suma total es: 15`.
+
+Observa que `suma=0` se encuentra antes del bucle para no reiniciar el acumulador en cada iteración.
+
+## Aplicaciones prácticas de `for` en Bash
+
+Colocate en la carpeta `matematicos`
+
+### Crear varios archivos automáticamente
+
+``` {.bash .bahs}
+for numero in {1..5}; do
+    touch "archivo${numero}.txt"
+done
+```
+
+Esto crea:
+
+```         
+archivo1.txt
+archivo2.txt
+archivo3.txt
+archivo4.txt
+archivo5.txt
+```
+
+### Recorrer archivos de un directorio
+
+``` bash
+for archivo in *.txt; do
+    echo "Encontré: $archivo"
+done
+```
+
+El patrón `*.txt` selecciona los archivos cuyos nombres terminan en `.txt` en el directorio actual.
+
+Nota: si no hay coincidencias, Bash normalmente conserva el patrón literal `*.txt`, salvo que se haya configurado otra opción de expansión.
+
+### Buscar una palabra en varios archivos
+
+``` bash
+for archivo in nombres.txt alumnos.txt usuarios.txt; do
+    if [ -f "$archivo" ]; then
+        echo "Buscando en $archivo"
+        grep -i "Ana" "$archivo"
+    fi
+done
+```
+
+Aquí combinamos:
+
+- `for` para recorrer archivos.
+- `if` y `-f` para verificar que cada archivo exista y sea un archivo regular.
+- `grep -i` para buscar el texto sin distinguir mayúsculas y minúsculas.
+
+## Bucles `while` en Bash
+
+### ¿Qué es un bucle `while`?
+
+En Bash, `while` es una estructura de control que permite repetir un bloque de instrucciones mientras una condición sea verdadera.
+
+A diferencia de `for`, que normalmente utilizamos para recorrer una lista o secuencia, `while` resulta especialmente útil cuando no sabemos exactamente cuántas veces necesitaremos repetir una acción.
+
+Por ejemplo:
+
+- Solicitar una contraseña hasta que sea correcta.
+- Repetir un menú hasta que el usuario decida salir.
+- Contar números mientras se cumpla una condición.
+- Leer un archivo línea por línea.
+- Validar que un usuario introduzca un dato correcto.
+
+### Estructura básica de `while`
+
+``` bash
+while [ condicion ]; do
+    comandos
+done
+```
+
+| Elemento        | ¿Qué significa?                                         |
+|---------------------|---------------------------------------------------|
+| `while`         | Inicia el bucle.                                        |
+| `[ condicion ]` | Evalúa si la condición es verdadera.                    |
+| `do`            | Indica el inicio de las instrucciones que se repetirán. |
+| `comandos`      | Instrucciones ejecutadas en cada iteración.             |
+| `done`          | Finaliza el bloque del bucle.                           |
+
+Importante: en Bash, `while` continúa mientras la condición devuelve un estado de salida exitoso (0).
+
+### Ejemplo 1. Contar del 1 al 5
+
+``` bash
+contador=1
+
+while [ "$contador" -le 5 ]; do
+    echo "Número: $contador"
+    contador=$((contador + 1))
+done
+```
+
+Resultado:
+
+```         
+Número: 1
+Número: 2
+Número: 3
+Número: 4
+Número: 5
+```
+
+**En cada iteración ocurre lo siguiente:**
+
+1.  Se evalúa si `contador` es menor o igual a 5.
+2.  Si es verdadero, se ejecuta `echo`.
+3.  Se incrementa `contador` en 1.
+4.  Se vuelve a evaluar la condición.
+5.  Cuando `contador` llega a 6, el bucle termina.
+
+## Repaso: Tabla de operadores para condicionales en Bash
+
+| Operación     | `[ ]` y `[[ ]]` | `(( ))` |
+|---------------|-----------------|---------|
+| Igual a       | `-eq`           | `==`    |
+| Diferente de  | `-ne`           | `!=`    |
+| Mayor que     | `-gt`           | `>`     |
+| Menor que     | `-lt`           | `<`     |
+| Mayor o igual | `-ge`           | `>=`    |
+| Menor o igual | `-le`           | `<=`    |
+
+### Ejemplo 2. Contar del 10 al 1
+
+``` bash
+contador=10
+
+while [ "$contador" -ge 1 ]; do
+    echo "$contador"
+    contador=$((contador - 1))
+done
+```
+
+También podemos utilizar la sintaxis aritmética de Bash:
+
+``` bash
+contador=10
+
+while (( contador >= 1 )); do
+    echo "$contador"
+    ((contador--))
+done
+```
+
+Ambas versiones producen una cuenta regresiva.
+
+### Ejemplo 3. Solicitar un número hasta que sea correcto
+
+Este ejemplo es especialmente útil para introducir validación de datos y programación defensiva.
+
+Queremos que el usuario introduzca un número entre 1 y 10.
+
+``` bash
+numero=0
+
+while [ "$numero" -lt 1 ] || [ "$numero" -gt 10 ]; do
+    echo "Introduce un número entre 1 y 10:"
+    read -r numero
+done
+
+echo "Número válido: $numero"
+```
+
+El bucle se repite mientras el número esté fuera del rango.
+
+Nota: este ejemplo supone que el usuario escribe números enteros. Más adelante podemos agregar una validación para impedir letras, entradas vacías y otros valores no numéricos.
+
+### Ejemplo 4. Solicitar una contraseña
+
+``` bash
+password=""
+
+while [ "$password" != "bash123" ]; do
+    echo "Introduce la contraseña:"
+    read -r password
+done
+
+echo "Acceso permitido"
+```
+
+Aquí utilizamos `!=`, que significa diferente de.
+
+El bucle continuará mientras la contraseña ingresada sea diferente de `"bash123"`.
+
+Este ejemplo es didáctico; en un sistema real no conviene guardar contraseñas directamente en el script ni mostrarlas mientras se escriben.
+
+### Ejemplo 5. Crear un menú interactivo con `while` y `case`
+
+Este ejemplo combina tres estructuras que los alumnos ya pueden conocer: `while`, `case` y `read`.
+
+``` bash
+opcion=0
+
+while [ "$opcion" != "4" ]; do
+    echo "===== MENÚ ====="
+    echo "1. Mostrar fecha"
+    echo "2. Mostrar directorio"
+    echo "3. Mostrar usuario"
+    echo "4. Salir"
+
+    read -r opcion
+
+    case "$opcion" in
+        1)
+            date
+            ;;
+        2)
+            pwd
+            ;;
+        3)
+            whoami
+            ;;
+        4)
+            echo "Hasta luego"
+            ;;
+        *)
+            echo "Opción no válida"
+            ;;
+    esac
+done
+```
+
+El menú se seguirá mostrando hasta que el usuario seleccione la opción 4.
+
+Esta es una de las aplicaciones más comunes de `while` en scripts interactivos.
 
 ## Referencias
 

@@ -86,7 +86,7 @@ fi
 3\. Paréntesis dobles `(( ))`
 
 ``` bash
-if (( edad >= 18 )); then
+if (( $edad >= 18 )); then
     echo "Mayor de edad"
 fi
 ```
@@ -186,6 +186,16 @@ Aquí utilizamos dos conceptos:
 
 Si el residuo al dividir entre 2 es cero, el número es par.
 
+::: {.callout-tip icon="false"}
+## Ejercicio grupal
+
+Convierte el ejemplo 2 cambiando a:
+
+2\. Corchetes dobles `[[ ]]`
+
+3\. Paréntesis dobles `(( ))`
+:::
+
 ## Nivel básico-intermedio: `elif`
 
 Cuando necesitamos evaluar varias condiciones, utilizamos `elif`, que significa else if.
@@ -207,6 +217,16 @@ fi
 ```
 
 Bash evalúa las condiciones de arriba hacia abajo y ejecuta únicamente el primer bloque cuya condición sea verdadera.
+
+::: {.callout-tip icon="false"}
+## Ejercicio grupal
+
+Convierte el ejemplo 2 cambiando a:
+
+2\. Corchetes dobles `[[ ]]`
+
+3\. Paréntesis dobles `(( ))`
+:::
 
 ## Nivel intermedio: condiciones con `read`
 
@@ -323,6 +343,13 @@ else
 fi
 ```
 
+Evaluemos las condiciones
+
+| Condición               | Evaluación             | Resultado |
+|-------------------------|------------------------|-----------|
+| `[ "$numero" -lt 1 ]`   | ¿120 es menor que 1?   | Falso     |
+| `[ "$numero" -gt 100 ]` | ¿120 es mayor que 100? | Verdadero |
+
 ## Nivel intermedio: comprobar archivos
 
 Los condicionales son especialmente útiles para automatizar tareas con archivos y directorios.
@@ -376,11 +403,12 @@ Cuando necesitamos evaluar múltiples valores posibles de una misma variable, `c
 ``` bash
 #!/bin/bash
 
+echo "===== MENÚ PRINCIPAL ====="
 echo "1. Mostrar fecha"
 echo "2. Mostrar directorio actual"
 echo "3. Mostrar usuario"
 
-read -r opcion
+read -r -p "Selecciona una opción: " opcion
 
 case "$opcion" in
     1)
@@ -398,7 +426,29 @@ case "$opcion" in
 esac
 ```
 
+Este código evalúa el contenido de la variable `opcion`.
+
+| Valor de `opcion` | Comando ejecutado | ¿Qué hace? |
+|----|----|----|
+| `1` | `date` | Muestra la fecha y hora actuales. |
+| `2` | `pwd` | Muestra el directorio actual. |
+| `3` | `whoami` | Muestra el usuario actual. |
+| Cualquier otro | `echo "Opción no válida"` | Muestra un mensaje de error. |
+
+Por ejemplo, si `opcion=2`, Bash ejecutará únicamente `pwd`.
+
 El símbolo `*` representa cualquier valor que no coincida con las opciones anteriores.
+
+::: callout-note
+En Bash, `read -r` permite leer información ingresada por el usuario sin interpretar las barras invertidas (`\`) como caracteres especiales.
+
+1\. Diferencia entre `read` y `read -r`
+
+| Comando | ¿Qué hace? |
+|----|----|
+| `read variable` | Lee una entrada, pero interpreta las barras invertidas (`\`). |
+| `read -r variable` | Lee la entrada respetando las barras invertidas literalmente. |
+:::
 
 ## ¿Qué es la programación defensiva?
 
@@ -406,7 +456,7 @@ La programación defensiva es una práctica que consiste en escribir programas c
 
 En otras palabras:
 
-No debemos asumir que el usuario siempre utilizará correctamente nuestro programa.
+*No debemos asumir que el usuario siempre utilizará correctamente nuestro programa.*
 
 ![](figures/programacion_defensiva.JPG){fig-align="center" width="367"}
 
@@ -473,7 +523,7 @@ echo "¡Hola, $nombre!"
 #### Explicación línea por línea
 
 | Código | Explicación |
-|--------------------|----------------------------------------------------|
+|------------------------------------|-------------------------------------------------------------------------------|
 | `#!/bin/bash` | Indica que el script se ejecutará con Bash. |
 | `$#` | Número de argumentos proporcionados al script. |
 | `[ $# -eq 0 ]` | Comprueba si el número de argumentos es igual a cero. |
@@ -487,7 +537,7 @@ echo "¡Hola, $nombre!"
 ### Principios de programación defensiva
 
 | Principio | Aplicación en `saludar.sh` |
-|-----------------------------|-------------------------------------------|
+|------------------------------------|---------------------------------------------------------------------------------------|
 | Anticipar errores | El usuario podría olvidar escribir su nombre. |
 | Validar entradas | `$#` comprueba cuántos argumentos se recibieron. |
 | Mostrar mensajes claros | `echo` explica el error y cómo ejecutar el script. |
