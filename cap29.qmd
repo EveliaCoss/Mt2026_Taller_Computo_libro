@@ -27,7 +27,7 @@ Porque:
 **En R**
 
 | Paquete / Programa | Uso principal |
-|----|----|
+|------------------------------------|------------------------------------|
 | [`rmarkdown`](https://github.com/EveliaCoss/RmarkdownGraphs_notes) | Crear documentos reproducibles con texto, código y resultados |
 | `knitr` | Ejecutar chunks de código en RMarkdown |
 | [`Quarto`](https://quarto.org/docs/get-started/hello/vscode.html) | Plataforma moderna para documentos con R, Python, etc. |
@@ -38,7 +38,7 @@ Porque:
 **En Python**
 
 | Paquete / Programa | Uso principal |
-|----|----|
+|------------------------------------|------------------------------------|
 | Jupyter Notebooks | Celdas Markdown para explicar y documentar junto con código |
 | `Quarto` | Igual que en R, permite combinar Markdown con código Python |
 | `mkdocs` | Generar sitios web de documentación técnica desde archivos Markdown |
@@ -59,38 +59,11 @@ Pasos generales:
 La aplicación y el procesador de Markdown son dos componentes independientes. Para simplificar, los he combinado en un solo elemento ("aplicación de Markdown") en la figura a continuación.
 :::
 
-[![Imagen tomada de: https://www.markdownguide.org/getting-started/](reproducible/figures/markdown-flowchart.png)](https://www.markdownguide.org/getting-started/)
+[![Imagen tomada de: https://www.markdownguide.org/getting-started/](figures/markdown-flowchart.png)](https://www.markdownguide.org/getting-started/)
 
 ## **Sintaxis de escritura y formato básicos**
 
 Revisar la [documentación de GitHub](https://docs.github.com/es/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax)
-
-## Tablas con datatable
-
-```{r, message=FALSE}
-#| label: tbl-bonita
-#| tbl-cap: "Tabla decorativa"
-
-library(dplyr)
-
-iris %>%
-  head(3) %>%
-  DT::datatable()
-```
-
-## [`library(gt)`](https://gt.rstudio.com/index.html)
-
-```{r, message=FALSE, warning=FALSE}
-iris %>% 
-  head() %>%
-  gt::gt() %>%
-  gt::tab_spanner(label = "Petalo", columns = vars(Petal.Length,Petal.Width)) %>%
-  gt::tab_spanner(label = "Sepalo", columns = vars(Sepal.Length,Sepal.Width))
-```
-
-::: callout-note
-Si gustas repasar podemos hacerlo con el script [Sesion_Rmarkdown_13Oct2023.Rmd](https://github.com/EveliaCoss/RmarkdownGraphs_notes/blob/main/Sesion_Rmarkdown_13Oct2023.Rmd) del repositorio [RmarkdownGraphs_notes](https://github.com/EveliaCoss/RmarkdownGraphs_notes/tree/main)**.**
-:::
 
 ## Referencias
 
