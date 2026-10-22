@@ -2366,377 +2366,377 @@
     ]
   },
   {
-    "objectID": "Intro_Quarto.html",
-    "href": "Intro_Quarto.html",
-    "title": "43  Introducción a Quarto",
-    "section": "",
-    "text": "43.1 ¿Cómo funciona?\nQuarto es una versión multilingüe y de última generación de R Markdown de Posit que incluye docenas de nuevas características y capacidades y al mismo tiempo puede renderizar la mayoría de los archivos Rmd existentes sin modificaciones.\nUtiliza el botón  Render en el IDE de RStudio para renderizar el archivo y obtener una vista previa de la salida con un solo clic o un atajo de teclado (⇧⌘K).\nSi prefiere renderizar automáticamente al guardar, puede activar la opción “Renderizar al guardar” en la barra de herramientas del editor. La vista previa se actualizará al volver a renderizar el documento. La vista previa en paralelo funciona tanto con HTML como con PDF.\nAl renderizar un documento de Quarto, knitr ejecuta primero todos los fragmentos de código y crea un nuevo documento Markdown (.md), que incluye el código y su salida. El archivo Markdown generado es procesado por pandoc , que crea el formato final. El botón Renderizar encapsula estas acciones y las ejecuta en el orden correcto.",
-    "crumbs": [
-      "**Sección 5** - Introducción a Git/GitHub",
-      "<span class='chapter-number'>43</span>  <span class='chapter-title'>Introducción a Quarto</span>"
-    ]
-  },
-  {
-    "objectID": "Intro_Quarto.html#cómo-se-compone",
-    "href": "Intro_Quarto.html#cómo-se-compone",
-    "title": "43  Introducción a Quarto",
-    "section": "43.2 ¿Cómo se compone?",
-    "text": "43.2 ¿Cómo se compone?\nEl archivo contiene tres tipos de contenido: un encabezado YAML, fragmentos de código y texto Markdown.\n\n43.2.1 encabezado YAML\nUn encabezado YAML (opcional) delimitado por tres guiones ( ---) en cada extremo.\n---\ntitle: \"Hello, Quarto\"\nformat: html\neditor: visual\n---\nAl renderizar, el símbolo title, \"Hello, Quarto\", aparecerá en la parte superior del documento renderizado con un tamaño de fuente mayor que el resto del documento. Los otros dos campos YAML indican que la salida debe estar en formato html formaty que el documento debe abrirse en formato visual editorpredeterminado.\nPuedes consultar todos los campos YAML disponibles para documentos: HTML aquí . Los campos YAML disponibles varían según el formato del documento; por ejemplo, consulte aquí los campos YAML para documentos PDF y aquí para MS Word.\n\n\n\n\n\n\nImportante\n\n\n\nPara crear archivos PDF, se necesitará instalar una distribución reciente de LaTeX. Recomendamos usar TinyTeX (basado en TexLive), que se puede instalar con el siguiente comando:\nquarto install tinytex",
-    "crumbs": [
-      "**Sección 5** - Introducción a Git/GitHub",
-      "<span class='chapter-number'>43</span>  <span class='chapter-title'>Introducción a Quarto</span>"
-    ]
-  },
-  {
-    "objectID": "Intro_Quarto.html#renderizar-a-varios-tipos-de-archivos",
-    "href": "Intro_Quarto.html#renderizar-a-varios-tipos-de-archivos",
-    "title": "43  Introducción a Quarto",
-    "section": "43.3 Renderizar a varios tipos de archivos",
-    "text": "43.3 Renderizar a varios tipos de archivos\nSi desea renderizar en todos los formatos, puede hacerlo con el paquete quarto , que proporciona una interfaz de R para la CLI de Quarto. Por ejemplo, para renderizar el documento actual, utilice quarto::quarto_render(). También puede especificar el nombre del documento que desea renderizar, así como los formatos de salida.\nquarto::quarto_render(\n  \"authoring.qmd\", \n  output_format = c(\"pdf\", \"html\", \"docx\")\n)\nComo resultado, verá aparecer tres nuevos archivos en el panel Archivos:\n\nauthoring.docx\nauthoring.html\nauthoring.pdf",
-    "crumbs": [
-      "**Sección 5** - Introducción a Git/GitHub",
-      "<span class='chapter-number'>43</span>  <span class='chapter-title'>Introducción a Quarto</span>"
-    ]
-  },
-  {
-    "objectID": "Intro_Quarto.html#callout-notas",
-    "href": "Intro_Quarto.html#callout-notas",
-    "title": "43  Introducción a Quarto",
-    "section": "43.4 Callout / notas",
-    "text": "43.4 Callout / notas\nDa clic en Insert/callout.\nPuede seleccionar uno de los cinco tipos de callout (nota, sugerencia, importante, precaución o advertencia), personalizar su apariencia (predeterminada, simple o mínima) y decidir si desea mostrar el ícono.\n\nLuego, intente insertar el texto dentro del cuadro de callout.\n\n\n\n\n\n\nNota\n\n\n\nNota\n\n\n\n\n\n\n\n\nTip\n\n\n\nSugerencia\n\n\n\n\n\n\n\n\nImportante\n\n\n\nImportante\n\n\n\n\n\n\n\n\nPrecaución\n\n\n\nPrecaución\n\n\n\n\n\n\n\n\nAdvertencia\n\n\n\nAdvertencia",
-    "crumbs": [
-      "**Sección 5** - Introducción a Git/GitHub",
-      "<span class='chapter-number'>43</span>  <span class='chapter-title'>Introducción a Quarto</span>"
-    ]
-  },
-  {
-    "objectID": "Intro_Quarto.html#cross-reference-referencias-cruzadas",
-    "href": "Intro_Quarto.html#cross-reference-referencias-cruzadas",
-    "title": "43  Introducción a Quarto",
-    "section": "43.5 Cross reference / Referencias cruzadas",
-    "text": "43.5 Cross reference / Referencias cruzadas\nLas cross references en Quarto son una forma de enlazar automáticamente figuras, tablas, secciones, ecuaciones y otros elementos dentro de tu documento, de manera que se numeran y se convierten en hipervínculos navegables. Esto evita tener que actualizar manualmente la numeración si agregas o quitas elementos.\n\nEtiqueta (label) Cada elemento que quieras referenciar necesita una etiqueta única.\n\nPara figuras: {#fig-nombre}\nPara tablas: {#tbl-nombre}\nPara secciones: {#sec-nombre}\nPara ecuaciones: {#eq-nombre}\n\nReferencia en el texto Para referenciar, se usa @ seguido del identificador:\n\n@fig-nombre → referencia a una figura.\n@tbl-nombre → referencia a una tabla.\n@sec-nombre → referencia a una sección.\n@eq-nombre → referencia a una ecuación.\n\n\nQuarto asigna números consecutivos a las entidades (Figura 1, Tabla 2, etc.) y actualiza todo si cambias el orden o agregas nuevos elementos.\nEjemplo:\n\n\n\n\n\n\n\n\nEntidad\nReferencia\nEtiqueta / Título\n\n\n\n\nSección\n@sec-eda\nID añadido al encabezado:\n# Análisis exploratorio de datos {#sec-eda}\n\n\nFigura\n@fig-pressure\nOpciones YAML en la celda de código:\n#| label: fig-scatterplot\n#| fig-cap: \"Pressure\"\n\n\nTabla\n@tbl-stats\nOpciones YAML en la celda de código:\n#| label: tbl-stats\n#| tbl-cap: \"Summary statistics for price and area of houses in Duke Forest\"\n\n\nEcuación\n@eq-slr\nAl final de la ecuación de visualización:\n$$ {#eq-slr}",
-    "crumbs": [
-      "**Sección 5** - Introducción a Git/GitHub",
-      "<span class='chapter-number'>43</span>  <span class='chapter-title'>Introducción a Quarto</span>"
-    ]
-  },
-  {
-    "objectID": "Intro_Quarto.html#sec-stats",
-    "href": "Intro_Quarto.html#sec-stats",
-    "title": "43  Introducción a Quarto",
-    "section": "44.1 Estadísticas descriptivas",
-    "text": "44.1 Estadísticas descriptivas\n\n\nCódigo\nknitr::kable(head(ggplot2::diamonds))\n\n\n\n\nTabla 44.1: Summary statistics for price and area of houses in Duke Forest\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\ncarat\ncut\ncolor\nclarity\ndepth\ntable\nprice\nx\ny\nz\n\n\n\n\n0.23\nIdeal\nE\nSI2\n61.5\n55\n326\n3.95\n3.98\n2.43\n\n\n0.21\nPremium\nE\nSI1\n59.8\n61\n326\n3.89\n3.84\n2.31\n\n\n0.23\nGood\nE\nVS1\n56.9\n65\n327\n4.05\n4.07\n2.31\n\n\n0.29\nPremium\nI\nVS2\n62.4\n58\n334\n4.20\n4.23\n2.63\n\n\n0.31\nGood\nJ\nSI2\n63.3\n58\n335\n4.34\n4.35\n2.75\n\n\n0.24\nVery Good\nJ\nVVS2\n62.8\n57\n336\n3.94\n3.96\n2.48\n\n\n\n\n\n\n\n\n\n44.1.1 Modelo de regresión\nEl modelo lineal simple se expresa como:\n\\[Y = \\beta_0 + \\beta_1 X + \\epsilon \\tag{44.1}\\]\nEjemplo en el texto:\nPresentamos los resultados del análisis exploratorio de datos en Capítulo 44 y la estadística descriptiva en Sección 44.1 .\nLa Figura 44.1 muestra la relación entre estas dos variables en un diagrama de dispersión.\nLa Tabla 44.1 presenta estadísticas descriptivas básicas de estas dos variables.\nPodemos ajustar un modelo de regresión lineal simple de la forma mostrada en Ecuación 44.1.",
-    "crumbs": [
-      "**Sección 5** - Introducción a Git/GitHub",
-      "<span class='chapter-number'>43</span>  <span class='chapter-title'>Introducción a Quarto</span>"
-    ]
-  },
-  {
-    "objectID": "Intro_Quarto.html#aprendiendo-más",
-    "href": "Intro_Quarto.html#aprendiendo-más",
-    "title": "43  Introducción a Quarto",
-    "section": "44.2 Aprendiendo más",
-    "text": "44.2 Aprendiendo más\n¡Ya has aprendido los conceptos básicos de Quarto! Una vez que te sientas cómodo creando y personalizando documentos, aquí tienes algunas cosas más que puedes explorar:\n\nPresentaciones : cree presentaciones de PowerPoint, Beamer y Revealjs utilizando la misma sintaxis que aprendió para crear documentos.\nSitios web : publique colecciones de documentos como un sitio web. Los sitios web admiten múltiples formas de navegación y búsqueda de texto completo.\nBlogs : crea un blog con una página acerca de, listas de publicaciones flexibles, categorías, feeds RSS y más de veinte temas.\nLibros : cree libros y manuscritos en formatos impresos (PDF, MS Word) y en línea (HTML, ePub).\nInteractividad : incluya componentes interactivos para ayudar a los lectores a explorar los conceptos y los datos que está presentando más profundamente.\n\n\nImagen tomada de: Allison Horst",
-    "crumbs": [
-      "**Sección 5** - Introducción a Git/GitHub",
-      "<span class='chapter-number'>43</span>  <span class='chapter-title'>Introducción a Quarto</span>"
-    ]
-  },
-  {
-    "objectID": "Intro_Quarto.html#referencias",
-    "href": "Intro_Quarto.html#referencias",
-    "title": "43  Introducción a Quarto",
-    "section": "44.3 Referencias",
-    "text": "44.3 Referencias\n\nTutorial: Hello, Quarto",
-    "crumbs": [
-      "**Sección 5** - Introducción a Git/GitHub",
-      "<span class='chapter-number'>43</span>  <span class='chapter-title'>Introducción a Quarto</span>"
-    ]
-  },
-  {
     "objectID": "cap17.html",
     "href": "cap17.html",
-    "title": "44  Repositorios",
+    "title": "43  Repositorios",
     "section": "",
     "text": "Fecha: 13 de octubre, 2026\n\nUn repositorio es donde se va a almacenar toda la información de nuestro proyecto, es donde vamos a tener toda la historia y registro de cambios y usuarios. Es recomendable tener un repositorio por proyecto y no multiples proyectos en un solo repositorio.\nVamos a hacer una carpeta para trabajar con git.\nmkdir Mi_primer_repo\ncd Mi_primer_repo\nPara inicializar un repositorio usamos lo siguiente (dentro de la carpeta).\ngit init\nAl inicializar el repositorio, cualquier carpeta y archivo que se cree dentro de la carpeta quedará su registro, no es necesario inicializar las carpetas anidadas.\nSi revisamos que tiene la carpeta solo con ls no vamos a notar ningún cambio pero si listamos con la opción -a veremos que contiene archivos ocultos.\n\n\n\n\n\n\nImportante\n\n\n\nEn el archivo .git se almacena TODA la información de nuestro repositorio, así que si lo borramos perderemos todo el historial del repositorio.\n\n\nls -a\n\n\n\n\n\n\nAdvertencia\n\n\n\nPara cambiar manualmente la rama de nuestro repositorio si no es la main, lo podemos hacer como sigue.\ngit checkout -b main\n\n\nPara preguntarle a git el estado de nuestro proyecto:\ngit status\nSi dentro de una carpeta preguntamos git status y obtenemos el siguiente mensaje:\nfatal: not a git repository (or any of the parent directories): .git\nsignifica que si podemos inicializarlo como un repositorio.\n\n\n\n\n\n\nNotaEjercicio 1\n\n\n\nDentro de la carpeta Mi_primer_repo crea una carpeta llamada subproyecto1. Si quieres llevar un registro de lo que hagas en ese subproyecto: ¿debes inicializarla? Inicializala. Ahora, ¿cómo borras el archivo .git?\n\n\n\n\n\n\nTipSolución\n\n\n\n\n\nNo es necesario inicializar subproyecto1 si forma parte del proyecto Mi_primer_repo, ya que todos los archivos y subcarpetas son rastreados por el repositorio ubicado en la carpeta principal. Sin embargo, si subproyecto1 fuera un proyecto independiente, podríamos inicializarlo con:\ncd subproyecto1\ngit init\nEsto crea una carpeta oculta llamada .git, que contiene toda la información del repositorio.\nSi decidimos que ya no queremos que subproyecto1 sea un repositorio Git, basta con eliminar la carpeta .git:\nEn Mac/Linux:\nrm -rf .git\nEn Windows (PowerShell):\nRemove-Item -Recurse -Force .git\no desde Git Bash:\nrm -rf .git\nDespués de eliminar .git, la carpeta seguirá existiendo, pero dejará de ser un repositorio Git.",
     "crumbs": [
       "**Sección 5** - Introducción a Git/GitHub",
-      "<span class='chapter-number'>44</span>  <span class='chapter-title'>Repositorios</span>"
+      "<span class='chapter-number'>43</span>  <span class='chapter-title'>Repositorios</span>"
     ]
   },
   {
     "objectID": "cap18.html",
     "href": "cap18.html",
-    "title": "45  Ignorar archivos/carpetas",
+    "title": "44  Ignorar archivos/carpetas",
     "section": "",
     "text": "Fecha: 13 de octubre, 2026\n\nEs muy usual tener un archivo llamado .gitignore donde se pueden colocar los nombres de archivos o carpetas que no queremos llevar registro.\nCreemos unos archivos de prueba.\ncd Mi_primer_repo\nmkdir resultados\ntouch a.csv b.csv c.csv resultados/a.out resultados/b.out\nSi preguntamos el estado veremos los cambios no registrados en el historial.\ngit status\nEstos archivos por el momento no nos sirven de nada y guardarlos o registrarlos sería una perdida de tiempo/espacio. Para ignorarlos, creamos el archivo .gitignore y añadimos los nombres a ese archivo:\nnano .gitignore\n*.csv\nresultados/\ncat .gitignore\nEstos patrones le están diciendo a Git que ignore todos los archivos .csv y todo lo que hay en la carpeta resultados, si después añadimos algo a la carpeta lo seguirá ignorando. Y si alguno de esos archivos ya se le dijo a Git que llevará su registro lo seguirá registrando.\ngit status\nSi nos fijamos, el único documento que ahora nos menciona Git es el archivo .gitignore. Lo que nos falta es añadirlo y hacer el commit.\ngit add .gitignore\ngit commit -m \"Creamos el archivo gitignore e ignoramos todo lo que hay en resultados y archivos csv\"\ngit status\nEl archivo .gitignore nos ayuda a no cometer el error de accidentalmente tratar de registrar y rastrear algo que se le dijo que no lo hiciera.\ngit add a.csv\nSi realmente queremos agregarlo, tendríamos que usar la opción -f:\ngit add -f a.csv\nPara ver el estado de los archivos ignorados usamos la siguiente instrucción:\ngit status --ignored\n\n\n\n\n\n\nNotaEjercicio 1\n\n\n\nSupongamos que tenemos las siguientes subcarpetas:\nresultados/plots\nresultados/datos\n¿Qué tenemos que hacer si queremos ignorar solamente lo que hay en datos y no lo que hay en plots?\n\n\n\n\n\n\nTipSolución\n\n\n\n\n\nSi queremos ignorar únicamente el contenido de la carpeta datos, pero seguir rastreando los archivos de plots, podemos crear (o modificar) un archivo .gitignore y agregar la siguiente línea:\nresultados/datos/\nLa barra / al final indica que queremos ignorar todo el contenido del directorio datos.\nEl archivo .gitignore podría verse así:\nresultados/datos/\nCon esta configuración, Git ignorará archivos como\nresultados/datos/datos1.csv\nresultados/datos/salida.txt\npero seguirá rastreando normalmente archivos como\nresultados/plots/figura1.png\nresultados/plots/heatmap.pdf\nPodemos comprobar qué archivos están siendo rastreados con:\ngit status\ny observaremos que los archivos dentro de resultados/datos/ no aparecen, mientras que los archivos dentro de resultados/plots/ sí.\n\n\n\n\n\nPara ignorar por ejemplo todos los archivos que terminan en .csv excepto uno en específico (b.csv) podemos indicarlo en el archivo .gitignore como:\n*.csv  # ignoramos todos los csv\n!b.csv # exepto el que se llama b.csv\n\n\n\n\n\n\nNotaEjercicio 2\n\n\n\nSupongamos ahora que tenemos la siguiente estructura de carpetas:\nresultados/plots\nresultados/datos\nresultados/img\nresultados/analisis\nY que queremos ignorar todo excepto lo que hay en datos. ¿Cómo lo harían?\n\n\n\n\n\n\nTipSolución\n\n\n\n\n\nUna forma de hacerlo es ignorar primero todo el contenido de resultados y después excluir de esa regla a la carpeta datos.\nPara ello, en el archivo .gitignore podemos escribir:\nresultados/*\n!resultados/datos/\nSin embargo, para que Git también considere los archivos dentro de datos, debemos añadir:\nresultados/*\n!resultados/datos/\n!resultados/datos/**\nCon esto, Git ignorará archivos como\nresultados/plots/figura1.png\nresultados/img/logo.jpg\nresultados/analisis/salida.txt\npero seguirá rastreando archivos dentro de\nresultados/datos/\nPor ejemplo,\nresultados/datos/datos1.csv\nresultados/datos/mediciones.txt\nPodemos verificarlo con:\ngit status\ny observaremos que solamente aparecen los archivos contenidos en resultados/datos.\n\n\n\n\n\n\n\n\n\n\n\nNotaEjercicio 3\n\n\n\nSupongamos que tenemos la siguiente estructura de archivos:\nresultados/rdatos/a.csv\nresultados/rdatos/b.csv\nresultados/rdatos/c.csv\nresultados/rdatos/info.txt\n¿Cómo le indicas a Git que ignore todos los csv de la carpeta rdatos menos el que se llama info.txt?\n\n\n\n\n\n\nTipSolución\n\n\n\n\n\nComo únicamente queremos ignorar los archivos con extensión .csv dentro de la carpeta rdatos, podemos añadir al archivo .gitignore la siguiente línea:\nresultados/rdatos/*.csv\nCon esta regla, Git ignorará\nresultados/rdatos/a.csv\nresultados/rdatos/b.csv\nresultados/rdatos/c.csv\npero seguirá rastreando cualquier archivo cuya extensión no sea .csv, por ejemplo\nresultados/rdatos/info.txt\nPodemos verificarlo con:\ngit status\ny observaremos que únicamente aparecerá info.txt, mientras que los archivos .csv serán ignorados.\n\n\n\n\n\n\n\n\n\n\n\nNotaEjercicio 4\n\n\n\nSupongamos que tenemos la siguiente estructura de datos:\nresultados/a.csv\nresultados/analisis1/b.csv\nresultados/analisis2/c.csv\nresultados/analisis2/sub_1/d.csv\n¿Cómo le indicamos a Git que ignore todos los archivos .csv sin indicar manualmente todos los directorios?\n\n\n\n\n\n\nTipSolución\n\n\n\n\n\nSi queremos ignorar todos los archivos con extensión .csv, independientemente del directorio en el que se encuentren, podemos añadir al archivo .gitignore la siguiente línea:\n*.csv\nCon esta regla, Git ignorará automáticamente archivos como\nresultados/a.csv\nresultados/analisis1/b.csv\nresultados/analisis2/c.csv\nresultados/analisis2/sub_1/d.csv\nsin necesidad de especificar manualmente cada carpeta.\nPodemos verificar qué archivos están siendo ignorados mediante:\ngit status\ny observaremos que los archivos con extensión .csv no aparecerán.\nAlternativamente, podríamos usar:\n**/*.csv\nque explícitamente indica que se ignoren todos los archivos .csv en cualquier subdirectorio, aunque en la mayoría de los casos basta con escribir simplemente:\n*.csv\n\n\n\n\n\n\n\n\n\n\n\nNotaEjercicio 5\n\n\n\nSi en el archivo .gitignore escribimos lo siguiente, ¿qué está ignorando?\n*.csv\n!*.csv\n\n\n\n\n\n\nTipSolución\n\n\n\n\n\nLa primera línea\n*.csv\nle indica a Git que ignore todos los archivos con extensión .csv.\nSin embargo, la segunda línea\n!*.csv\nniega la regla anterior y vuelve a incluir todos los archivos .csv.\nPor lo tanto, el efecto neto es que ningún archivo .csv será ignorado.\nRecordemos que en un archivo .gitignore, las reglas se procesan de arriba hacia abajo y las reglas posteriores tienen prioridad sobre las anteriores.\nPor ejemplo, si tenemos los archivos\na.csv\nb.csv\ndatos/c.csv\nninguno de ellos será ignorado.\nPodemos comprobarlo con:\ngit status\ny observaremos que todos los archivos .csv aparecerán normalmente.",
     "crumbs": [
       "**Sección 5** - Introducción a Git/GitHub",
-      "<span class='chapter-number'>45</span>  <span class='chapter-title'>Ignorar archivos/carpetas</span>"
+      "<span class='chapter-number'>44</span>  <span class='chapter-title'>Ignorar archivos/carpetas</span>"
     ]
   },
   {
     "objectID": "s5_actividades1y2.html",
     "href": "s5_actividades1y2.html",
-    "title": "46  📚 Actividad 1 y 2",
+    "title": "45  📚 Actividad 1 y 2",
     "section": "",
-    "text": "46.1 📚 Actividad 1: Miniresumen personal + foto para tu repositorio\nFecha: 17 de febrero, 2026",
+    "text": "45.1 📚 Actividad 1: Miniresumen personal + foto para tu repositorio\nFecha: 17 de febrero, 2026",
     "crumbs": [
       "**Sección 5** - Introducción a Git/GitHub",
-      "<span class='chapter-number'>46</span>  <span class='chapter-title'>**📚** Actividad 1 y 2</span>"
+      "<span class='chapter-number'>45</span>  <span class='chapter-title'>**📚** Actividad 1 y 2</span>"
     ]
   },
   {
     "objectID": "s5_actividades1y2.html#actividad-1-miniresumen-personal-foto-para-tu-repositorio",
     "href": "s5_actividades1y2.html#actividad-1-miniresumen-personal-foto-para-tu-repositorio",
-    "title": "46  📚 Actividad 1 y 2",
+    "title": "45  📚 Actividad 1 y 2",
     "section": "",
     "text": "Escribe un miniresumen en texto plano sobre ti. Debe tener entre 5 y 10 líneas.\nPuedes usar emojis para representar tus gustos, intereses o personalidad\nEl texto debe incluir:\n\nTus intereses académicos o personales\nQué te gusta hacer en tu tiempo libre\nQué te motiva a aprender ciencia o programación\nAlgún dato curioso o divertido sobre ti\n\n\n\n\n\n\n\n\nNotaActividad paso a paso\n\n\n\nPuedes aprender a realizar esta actividad paso a paso, siguiendo este tutorial.",
     "crumbs": [
       "**Sección 5** - Introducción a Git/GitHub",
-      "<span class='chapter-number'>46</span>  <span class='chapter-title'>**📚** Actividad 1 y 2</span>"
+      "<span class='chapter-number'>45</span>  <span class='chapter-title'>**📚** Actividad 1 y 2</span>"
     ]
   },
   {
     "objectID": "s5_actividades1y2.html#actividad-2-crear-un-sitio-de-páginas-de-github-nuestro-dominio",
     "href": "s5_actividades1y2.html#actividad-2-crear-un-sitio-de-páginas-de-github-nuestro-dominio",
-    "title": "46  📚 Actividad 1 y 2",
-    "section": "46.2 📚 Actividad 2: Crear un sitio de Páginas de GitHub (nuestro dominio)",
-    "text": "46.2 📚 Actividad 2: Crear un sitio de Páginas de GitHub (nuestro dominio)\n\nCrear un repositorio con el mismo nombre de usuario colocando: usuario.github.io.\n\n\n\nConfigura el repositorio como Público.\nAgrega un README (opcional).\nHaz clic en Create repository (Crear repositorio).\nPosteriormente ir a Settings del repositorio &gt; Pages. Y aquí encontraremos el URL de nuestro sitio web.\n\n\n\n\n\n\n\n\nNota\n\n\n\nEn este punto de la clase debemos tener dos repositorios con los siguientes nombres:\n\nEveliaCoss/EveliaCoss: Que va a contener el README de inicio de nuestro perfil.\nEveliaCoss/EveliaCoss.github.io: Contendra nuestro dominio para los sitios web.",
+    "title": "45  📚 Actividad 1 y 2",
+    "section": "45.2 📚 Actividad 2: Crear un sitio de Páginas de GitHub (nuestro dominio)",
+    "text": "45.2 📚 Actividad 2: Crear un sitio de Páginas de GitHub (nuestro dominio)\n\nCrear un repositorio con el mismo nombre de usuario colocando: usuario.github.io.\n\n\n\nConfigura el repositorio como Público.\nAgrega un README (opcional).\nHaz clic en Create repository (Crear repositorio).\nPosteriormente ir a Settings del repositorio &gt; Pages. Y aquí encontraremos el URL de nuestro sitio web.\n\n\n\n\n\n\n\n\nNota\n\n\n\nEn este punto de la clase debemos tener dos repositorios con los siguientes nombres:\n\nEveliaCoss/EveliaCoss: Que va a contener el README de inicio de nuestro perfil.\nEveliaCoss/EveliaCoss.github.io: Contendra nuestro dominio para los sitios web.",
     "crumbs": [
       "**Sección 5** - Introducción a Git/GitHub",
-      "<span class='chapter-number'>46</span>  <span class='chapter-title'>**📚** Actividad 1 y 2</span>"
+      "<span class='chapter-number'>45</span>  <span class='chapter-title'>**📚** Actividad 1 y 2</span>"
     ]
   },
   {
     "objectID": "s5_actividades1y2.html#tareas",
     "href": "s5_actividades1y2.html#tareas",
-    "title": "46  📚 Actividad 1 y 2",
-    "section": "46.3 📌 Tareas",
-    "text": "46.3 📌 Tareas\nTraer para la Próxima clase: 19 de febrero, 2026, vamos a crear nuestra página web empleando GitHub pages, por lo que deben traer:\n\nSincronizar su GitHub con Rstudio, revisar el material de Conectar a GitHub con SSH.\nTraer una foto y su miniresumen para crear su página web con GitHub pages\n\nEjemplo del Sitio Web que haremos en la siguiente clase:",
+    "title": "45  📚 Actividad 1 y 2",
+    "section": "45.3 📌 Tareas",
+    "text": "45.3 📌 Tareas\nTraer para la Próxima clase: 19 de febrero, 2026, vamos a crear nuestra página web empleando GitHub pages, por lo que deben traer:\n\nSincronizar su GitHub con Rstudio, revisar el material de Conectar a GitHub con SSH.\nTraer una foto y su miniresumen para crear su página web con GitHub pages\n\nEjemplo del Sitio Web que haremos en la siguiente clase:",
     "crumbs": [
       "**Sección 5** - Introducción a Git/GitHub",
-      "<span class='chapter-number'>46</span>  <span class='chapter-title'>**📚** Actividad 1 y 2</span>"
+      "<span class='chapter-number'>45</span>  <span class='chapter-title'>**📚** Actividad 1 y 2</span>"
     ]
   },
   {
     "objectID": "s5_actividades1y2.html#referencias",
     "href": "s5_actividades1y2.html#referencias",
-    "title": "46  📚 Actividad 1 y 2",
-    "section": "46.4 Referencias",
-    "text": "46.4 Referencias\n\nGitHub pages\nGitHub Profile README Generator",
+    "title": "45  📚 Actividad 1 y 2",
+    "section": "45.4 Referencias",
+    "text": "45.4 Referencias\n\nGitHub pages\nGitHub Profile README Generator",
     "crumbs": [
       "**Sección 5** - Introducción a Git/GitHub",
-      "<span class='chapter-number'>46</span>  <span class='chapter-title'>**📚** Actividad 1 y 2</span>"
+      "<span class='chapter-number'>45</span>  <span class='chapter-title'>**📚** Actividad 1 y 2</span>"
     ]
   },
   {
     "objectID": "cap27.html",
     "href": "cap27.html",
-    "title": "47  Resumen y Práctica Final",
+    "title": "46  Resumen y Práctica Final",
     "section": "",
-    "text": "47.1 Comandos usados en Github y RStudio",
+    "text": "46.1 Comandos usados en Github y RStudio",
     "crumbs": [
       "**Sección 5** - Introducción a Git/GitHub",
-      "<span class='chapter-number'>47</span>  <span class='chapter-title'>Resumen y Práctica Final</span>"
+      "<span class='chapter-number'>46</span>  <span class='chapter-title'>Resumen y Práctica Final</span>"
     ]
   },
   {
     "objectID": "cap27.html#comandos-usados-en-github-y-rstudio",
     "href": "cap27.html#comandos-usados-en-github-y-rstudio",
-    "title": "47  Resumen y Práctica Final",
+    "title": "46  Resumen y Práctica Final",
     "section": "",
     "text": "Importante\n\n\n\n\ngit add: Agregar cambios\ngit status: Revisamos el estado del proyecto\ngit commit: comentar los cambios\ngit checkout: Pordemos regresar cambios o cambiar de rama.\n\nEn Git, los comandos git pull y git push son utilizados para sincronizar y actualizar el contenido de un repositorio: \n\ngit pull: Actualiza la versión local de un repositorio desde otro remoto (en R studio flecha azul).\ngit push: Carga contenido en un repositorio remoto (en R studio flecha verde)",
     "crumbs": [
       "**Sección 5** - Introducción a Git/GitHub",
-      "<span class='chapter-number'>47</span>  <span class='chapter-title'>Resumen y Práctica Final</span>"
+      "<span class='chapter-number'>46</span>  <span class='chapter-title'>Resumen y Práctica Final</span>"
     ]
   },
   {
     "objectID": "cap27.html#página-de-inicio-en-github",
     "href": "cap27.html#página-de-inicio-en-github",
-    "title": "47  Resumen y Práctica Final",
-    "section": "47.2 Página de inicio en GitHub",
-    "text": "47.2 Página de inicio en GitHub\n\n\n\n\n\n\nNotaActividad\n\n\n\n\nEn GitHub, crea un repositorio con el mismo nombre de usuario. Ejemplo: Si el usuario es EveliaCoss y entonces el repositorio se llama EveliaCoss, dandonos la siguiente liga https://github.com/EveliaCoss/EveliaCoss\nAgrega un README al repositorio con tu informacion. Por Default ya trae una plantilla, modificala y adaptala a tu gusto.\nVisualiza como cambia tu inicio en el Github.\n\nPuedes aprender a realizar esta actividad paso a paso, siguiendo este tutorial.",
+    "title": "46  Resumen y Práctica Final",
+    "section": "46.2 Página de inicio en GitHub",
+    "text": "46.2 Página de inicio en GitHub\n\n\n\n\n\n\nNotaActividad\n\n\n\n\nEn GitHub, crea un repositorio con el mismo nombre de usuario. Ejemplo: Si el usuario es EveliaCoss y entonces el repositorio se llama EveliaCoss, dandonos la siguiente liga https://github.com/EveliaCoss/EveliaCoss\nAgrega un README al repositorio con tu informacion. Por Default ya trae una plantilla, modificala y adaptala a tu gusto.\nVisualiza como cambia tu inicio en el Github.\n\nPuedes aprender a realizar esta actividad paso a paso, siguiendo este tutorial.",
     "crumbs": [
       "**Sección 5** - Introducción a Git/GitHub",
-      "<span class='chapter-number'>47</span>  <span class='chapter-title'>Resumen y Práctica Final</span>"
+      "<span class='chapter-number'>46</span>  <span class='chapter-title'>Resumen y Práctica Final</span>"
     ]
   },
   {
     "objectID": "cap27.html#github-primero-rstudio-después",
     "href": "cap27.html#github-primero-rstudio-después",
-    "title": "47  Resumen y Práctica Final",
-    "section": "47.3 GitHub primero, RStudio después…",
-    "text": "47.3 GitHub primero, RStudio después…\n\nEn RStudio crea un nuevo proyecto: File &gt; New Project &gt; Version Control &gt; Git. Ahi pega el URL del repositorio https://github.com/mi_usuario/mi_repositorio.git. Da click en Create Project.\n\nEsto nos generará los siguientes elementos:\n\nUn directorio nuevo\nUn repositorio Git enlazado a al repositorio de GitHub\nUn proyecto en RStudio\n\nCon este procedimiento ya no es necesario preocuparse por configurar controles remotos Git y rastrear ramas en la línea de comandos.",
+    "title": "46  Resumen y Práctica Final",
+    "section": "46.3 GitHub primero, RStudio después…",
+    "text": "46.3 GitHub primero, RStudio después…\n\nEn RStudio crea un nuevo proyecto: File &gt; New Project &gt; Version Control &gt; Git. Ahi pega el URL del repositorio https://github.com/mi_usuario/mi_repositorio.git. Da click en Create Project.\n\nEsto nos generará los siguientes elementos:\n\nUn directorio nuevo\nUn repositorio Git enlazado a al repositorio de GitHub\nUn proyecto en RStudio\n\nCon este procedimiento ya no es necesario preocuparse por configurar controles remotos Git y rastrear ramas en la línea de comandos.",
     "crumbs": [
       "**Sección 5** - Introducción a Git/GitHub",
-      "<span class='chapter-number'>47</span>  <span class='chapter-title'>Resumen y Práctica Final</span>"
+      "<span class='chapter-number'>46</span>  <span class='chapter-title'>Resumen y Práctica Final</span>"
     ]
   },
   {
     "objectID": "cap27.html#comentar-pull-y-push-en-rstudio",
     "href": "cap27.html#comentar-pull-y-push-en-rstudio",
-    "title": "47  Resumen y Práctica Final",
-    "section": "47.4 Comentar, pull y push en Rstudio",
-    "text": "47.4 Comentar, pull y push en Rstudio\n\nCon la flecha azul podemos hacer pull (RECUERDA HACERLO ANTES DE HACER UN PUSH), y con la flecha verde un push. Para poder comentar y hacer push debemos marcar con una palomita mediante un click en las pequeñas cajas blancas de la columna Staged, damos click en commit lo cual nos abre la siguiente ventana.\n\nVolvemos a dar click en commit, y finalizamos con push (flecha verde).",
+    "title": "46  Resumen y Práctica Final",
+    "section": "46.4 Comentar, pull y push en Rstudio",
+    "text": "46.4 Comentar, pull y push en Rstudio\n\nCon la flecha azul podemos hacer pull (RECUERDA HACERLO ANTES DE HACER UN PUSH), y con la flecha verde un push. Para poder comentar y hacer push debemos marcar con una palomita mediante un click en las pequeñas cajas blancas de la columna Staged, damos click en commit lo cual nos abre la siguiente ventana.\n\nVolvemos a dar click en commit, y finalizamos con push (flecha verde).",
     "crumbs": [
       "**Sección 5** - Introducción a Git/GitHub",
-      "<span class='chapter-number'>47</span>  <span class='chapter-title'>Resumen y Práctica Final</span>"
+      "<span class='chapter-number'>46</span>  <span class='chapter-title'>Resumen y Práctica Final</span>"
     ]
   },
   {
     "objectID": "cap27.html#ediciones-desde-r-de-la-página-de-inicio-en-github",
     "href": "cap27.html#ediciones-desde-r-de-la-página-de-inicio-en-github",
-    "title": "47  Resumen y Práctica Final",
-    "section": "47.5 Ediciones desde R de la página de inicio en GitHub",
-    "text": "47.5 Ediciones desde R de la página de inicio en GitHub\n\n\n\n\n\n\nNotaActividad\n\n\n\n\nSincroniza el repositorio con el nombre de tu usuario en GitHub (ejemplo: EveliaCoss/EveliaCoss) con RStudio\nRealiza los cambios desde R y subelos a GitHub.\nVisualiza como cambia tu inicio en el Github.\n\n\n\n\n\n\n\n\n\nTipOh Shit, Git!?!\n\n\n\nTambién existe esta página llamada Oh Shit, Git!?!. En donde puedes aprender sobre los errores comunes en GitHub.\n\n\n\nImagen tomada de Allison Horst.",
+    "title": "46  Resumen y Práctica Final",
+    "section": "46.5 Ediciones desde R de la página de inicio en GitHub",
+    "text": "46.5 Ediciones desde R de la página de inicio en GitHub\n\n\n\n\n\n\nNotaActividad\n\n\n\n\nSincroniza el repositorio con el nombre de tu usuario en GitHub (ejemplo: EveliaCoss/EveliaCoss) con RStudio\nRealiza los cambios desde R y subelos a GitHub.\nVisualiza como cambia tu inicio en el Github.\n\n\n\n\n\n\n\n\n\nTipOh Shit, Git!?!\n\n\n\nTambién existe esta página llamada Oh Shit, Git!?!. En donde puedes aprender sobre los errores comunes en GitHub.\n\n\n\nImagen tomada de Allison Horst.",
     "crumbs": [
       "**Sección 5** - Introducción a Git/GitHub",
-      "<span class='chapter-number'>47</span>  <span class='chapter-title'>Resumen y Práctica Final</span>"
+      "<span class='chapter-number'>46</span>  <span class='chapter-title'>Resumen y Práctica Final</span>"
     ]
   },
   {
     "objectID": "cap27.html#referencias",
     "href": "cap27.html#referencias",
-    "title": "47  Resumen y Práctica Final",
-    "section": "47.6 Referencias",
-    "text": "47.6 Referencias\n\nEvelia tutorial:Workshop sobre Git / Github 2025\nHaydee tutorial: Temas Selectos de Análisis Numérico y Computación Científica: Computo científico para el análisis de datos\nAlejandra Medina tutorial: Control de versiones con GitHub y RStudio",
+    "title": "46  Resumen y Práctica Final",
+    "section": "46.6 Referencias",
+    "text": "46.6 Referencias\n\nEvelia tutorial:Workshop sobre Git / Github 2025\nHaydee tutorial: Temas Selectos de Análisis Numérico y Computación Científica: Computo científico para el análisis de datos\nAlejandra Medina tutorial: Control de versiones con GitHub y RStudio",
     "crumbs": [
       "**Sección 5** - Introducción a Git/GitHub",
-      "<span class='chapter-number'>47</span>  <span class='chapter-title'>Resumen y Práctica Final</span>"
+      "<span class='chapter-number'>46</span>  <span class='chapter-title'>Resumen y Práctica Final</span>"
     ]
   },
   {
     "objectID": "cap29.html",
     "href": "cap29.html",
-    "title": "48  Introducción a Markdown",
+    "title": "47  Introducción a Markdown",
     "section": "",
-    "text": "48.1 ¿Qué es Markdown?\nMarkdown es un lenguaje de marcado ligero que permite añadir elementos de formato a documentos de texto plano. Creado por John Gruber en 2004, Markdown es actualmente uno de los lenguajes más populares del mundo.",
+    "text": "47.1 ¿Qué es Markdown?\nMarkdown es un lenguaje de marcado ligero que permite añadir elementos de formato a documentos de texto plano. Creado por John Gruber en 2004, Markdown es actualmente uno de los lenguajes más populares del mundo.",
     "crumbs": [
       "**Sección 6** - Introducción a R y Rstudio",
-      "<span class='chapter-number'>48</span>  <span class='chapter-title'>Introducción a Markdown</span>"
+      "<span class='chapter-number'>47</span>  <span class='chapter-title'>Introducción a Markdown</span>"
     ]
   },
   {
     "objectID": "cap29.html#qué-es-markdown",
     "href": "cap29.html#qué-es-markdown",
-    "title": "48  Introducción a Markdown",
+    "title": "47  Introducción a Markdown",
     "section": "",
     "text": "Sencillo y legible, sin necesidad de usar editores complicados o HTML.\nlenguaje de marcado ligero: Escribir texto que incluye instrucciones simples para darle formato.\n\n\n\n\n\n\n\nNota🧩 ¿Por qué se llama “ligero”?\n\n\n\nPorque:\n\nUsa símbolos sencillos como *, #, o - para indicar formato.\nNo requiere cerrar etiquetas como &lt;strong&gt; o &lt;div&gt; (como en HTML).\nEs minimalista y limpio, ideal para escribir rápido sin distracciones.",
     "crumbs": [
       "**Sección 6** - Introducción a R y Rstudio",
-      "<span class='chapter-number'>48</span>  <span class='chapter-title'>Introducción a Markdown</span>"
+      "<span class='chapter-number'>47</span>  <span class='chapter-title'>Introducción a Markdown</span>"
     ]
   },
   {
     "objectID": "cap29.html#para-qué-se-usa",
     "href": "cap29.html#para-qué-se-usa",
-    "title": "48  Introducción a Markdown",
-    "section": "48.2 🧠 ¿Para qué se usa?",
-    "text": "48.2 🧠 ¿Para qué se usa?\n\nCrear documentación técnica o científica\nEscribir README.md en proyectos de GitHub\nGenerar contenido para sitios web\nCrear tesis, notas, libros, presentaciones y posters\n\nEn R\n\n\n\nPaquete / Programa\nUso principal\n\n\n\n\nrmarkdown\nCrear documentos reproducibles con texto, código y resultados\n\n\nknitr\nEjecutar chunks de código en RMarkdown\n\n\nQuarto\nPlataforma moderna para documentos con R, Python, etc.\n\n\nbookdown\nCrear libros técnicos con Markdown + RMarkdown\n\n\nblogdown\nGenerar blogs científicos usando Markdown y Hugo\n\n\nflexdashboard\nDashboards interactivos escritos en Markdown\n\n\n\nEn Python\n\n\n\n\n\n\n\nPaquete / Programa\nUso principal\n\n\n\n\nJupyter Notebooks\nCeldas Markdown para explicar y documentar junto con código\n\n\nQuarto\nIgual que en R, permite combinar Markdown con código Python\n\n\nmkdocs\nGenerar sitios web de documentación técnica desde archivos Markdown\n\n\nSphinx + MyST\nDocumentación avanzada con soporte para Markdown\n\n\nmarkdown, mistune\nLibrerías para convertir Markdown a HTML\n\n\nnbconvert\nExportar notebooks con Markdown a PDF, HTML, LaTeX, etc.",
+    "title": "47  Introducción a Markdown",
+    "section": "47.2 🧠 ¿Para qué se usa?",
+    "text": "47.2 🧠 ¿Para qué se usa?\n\nCrear documentación técnica o científica\nEscribir README.md en proyectos de GitHub\nGenerar contenido para sitios web\nCrear tesis, notas, libros, presentaciones y posters\n\nEn R\n\n\n\nPaquete / Programa\nUso principal\n\n\n\n\nrmarkdown\nCrear documentos reproducibles con texto, código y resultados\n\n\nknitr\nEjecutar chunks de código en RMarkdown\n\n\nQuarto\nPlataforma moderna para documentos con R, Python, etc.\n\n\nbookdown\nCrear libros técnicos con Markdown + RMarkdown\n\n\nblogdown\nGenerar blogs científicos usando Markdown y Hugo\n\n\nflexdashboard\nDashboards interactivos escritos en Markdown\n\n\n\nEn Python\n\n\n\n\n\n\n\nPaquete / Programa\nUso principal\n\n\n\n\nJupyter Notebooks\nCeldas Markdown para explicar y documentar junto con código\n\n\nQuarto\nIgual que en R, permite combinar Markdown con código Python\n\n\nmkdocs\nGenerar sitios web de documentación técnica desde archivos Markdown\n\n\nSphinx + MyST\nDocumentación avanzada con soporte para Markdown\n\n\nmarkdown, mistune\nLibrerías para convertir Markdown a HTML\n\n\nnbconvert\nExportar notebooks con Markdown a PDF, HTML, LaTeX, etc.",
     "crumbs": [
       "**Sección 6** - Introducción a R y Rstudio",
-      "<span class='chapter-number'>48</span>  <span class='chapter-title'>Introducción a Markdown</span>"
+      "<span class='chapter-number'>47</span>  <span class='chapter-title'>Introducción a Markdown</span>"
     ]
   },
   {
     "objectID": "cap29.html#cómo-funciona",
     "href": "cap29.html#cómo-funciona",
-    "title": "48  Introducción a Markdown",
-    "section": "48.3 ¿Cómo funciona?",
-    "text": "48.3 ¿Cómo funciona?\nPasos generales:\n\nCrear un archivo Markdown con un editor de texto o una aplicación específica. El archivo debe tener la extensión .md o .markdown.\nSe abre el archivo Markdown en una aplicación Markdown.\nSe utiliza la aplicación Markdown para convertir el archivo Markdown en un documento HTML.\nVisualización del archivo HTML en un navegador web o use la aplicación Markdown para convertirlo a otro formato de archivo, como PDF.\n\n\n\n\n\n\n\nNota\n\n\n\nLa aplicación y el procesador de Markdown son dos componentes independientes. Para simplificar, los he combinado en un solo elemento (“aplicación de Markdown”) en la figura a continuación.\n\n\n\n\n\nImagen tomada de: https://www.markdownguide.org/getting-started/",
+    "title": "47  Introducción a Markdown",
+    "section": "47.3 ¿Cómo funciona?",
+    "text": "47.3 ¿Cómo funciona?\nPasos generales:\n\nCrear un archivo Markdown con un editor de texto o una aplicación específica. El archivo debe tener la extensión .md o .markdown.\nSe abre el archivo Markdown en una aplicación Markdown.\nSe utiliza la aplicación Markdown para convertir el archivo Markdown en un documento HTML.\nVisualización del archivo HTML en un navegador web o use la aplicación Markdown para convertirlo a otro formato de archivo, como PDF.\n\n\n\n\n\n\n\nNota\n\n\n\nLa aplicación y el procesador de Markdown son dos componentes independientes. Para simplificar, los he combinado en un solo elemento (“aplicación de Markdown”) en la figura a continuación.\n\n\n\n\n\nImagen tomada de: https://www.markdownguide.org/getting-started/",
     "crumbs": [
       "**Sección 6** - Introducción a R y Rstudio",
-      "<span class='chapter-number'>48</span>  <span class='chapter-title'>Introducción a Markdown</span>"
+      "<span class='chapter-number'>47</span>  <span class='chapter-title'>Introducción a Markdown</span>"
     ]
   },
   {
     "objectID": "cap29.html#sintaxis-de-escritura-y-formato-básicos",
     "href": "cap29.html#sintaxis-de-escritura-y-formato-básicos",
-    "title": "48  Introducción a Markdown",
-    "section": "48.4 Sintaxis de escritura y formato básicos",
-    "text": "48.4 Sintaxis de escritura y formato básicos\nRevisar la documentación de GitHub",
+    "title": "47  Introducción a Markdown",
+    "section": "47.4 Sintaxis de escritura y formato básicos",
+    "text": "47.4 Sintaxis de escritura y formato básicos\nRevisar la documentación de GitHub",
     "crumbs": [
       "**Sección 6** - Introducción a R y Rstudio",
-      "<span class='chapter-number'>48</span>  <span class='chapter-title'>Introducción a Markdown</span>"
+      "<span class='chapter-number'>47</span>  <span class='chapter-title'>Introducción a Markdown</span>"
     ]
   },
   {
     "objectID": "cap29.html#referencias",
     "href": "cap29.html#referencias",
-    "title": "48  Introducción a Markdown",
-    "section": "48.5 Referencias",
-    "text": "48.5 Referencias\n\nDocumentación de GitHub\nLibro de Rmarkdown\nEjercicios con Markdown\nCurso de Heladia Salgado\nCurso de Git y GitHub Evelia Coss\nMarkdown and rmarkdown\nGaleria de Markdown\nLesson 3: Basic Syntax\nIntroduction to Open Data Science with R\nData Science for Psychologists",
+    "title": "47  Introducción a Markdown",
+    "section": "47.5 Referencias",
+    "text": "47.5 Referencias\n\nDocumentación de GitHub\nLibro de Rmarkdown\nEjercicios con Markdown\nCurso de Heladia Salgado\nCurso de Git y GitHub Evelia Coss\nMarkdown and rmarkdown\nGaleria de Markdown\nLesson 3: Basic Syntax\nIntroduction to Open Data Science with R\nData Science for Psychologists",
     "crumbs": [
       "**Sección 6** - Introducción a R y Rstudio",
-      "<span class='chapter-number'>48</span>  <span class='chapter-title'>Introducción a Markdown</span>"
+      "<span class='chapter-number'>47</span>  <span class='chapter-title'>Introducción a Markdown</span>"
     ]
   },
   {
     "objectID": "s5_actividades3.html",
     "href": "s5_actividades3.html",
-    "title": "49  📚 Actividad 3: Página web con Rmarkdown",
+    "title": "48  📚 Actividad 3: Página web con Rmarkdown",
     "section": "",
-    "text": "49.0.1 ¿Qué es un RProject y por qué usarlo?\nFecha: 19 de febrero, 2026\nImagen tomada de: Allison Horst\nImagen tomada de: Allison Horst",
+    "text": "48.0.1 ¿Qué es un RProject y por qué usarlo?\nFecha: 19 de febrero, 2026\nImagen tomada de: Allison Horst\nImagen tomada de: Allison Horst",
     "crumbs": [
       "**Sección 6** - Introducción a R y Rstudio",
-      "<span class='chapter-number'>49</span>  <span class='chapter-title'>**📚** Actividad 3: Página web con Rmarkdown</span>"
+      "<span class='chapter-number'>48</span>  <span class='chapter-title'>**📚** Actividad 3: Página web con Rmarkdown</span>"
     ]
   },
   {
     "objectID": "s5_actividades3.html#otra-manera-de-realizar-commits-en-r",
     "href": "s5_actividades3.html#otra-manera-de-realizar-commits-en-r",
-    "title": "49  📚 Actividad 3: Página web con Rmarkdown",
-    "section": "50.1 Otra manera de realizar commits en R",
-    "text": "50.1 Otra manera de realizar commits en R\nCuando vinculas tu proyecto de R (.Rproj) con GitHub y habilitas Git, aparece una nueva pestaña llamada Git en la parte superior derecha de RStudio. Desde ahí puedes manejar tus cambios sin necesidad de usar la terminal.\n\n\n50.1.1 Flujo típico de trabajo\n\nDetectar cambios\n\nCada vez que modificas un archivo, RStudio lo marca en la pestaña Git.\nVerás íconos que indican si el archivo fue modificado (M), agregado (A) o eliminado (D).\n\n\n\n\nSeleccionar archivos para el commit\n\nMarca las casillas de los archivos que quieres incluir en el commit.\nEsto equivale a git add en la terminal.\n\nEscribir el mensaje de commit\n\nEn el cuadro de texto escribe un mensaje claro y descriptivo, por ejemplo: “Corrijo error en función de normalización”\nEl mensaje debe explicar qué cambiaste y por qué.\n\nHacer el commit\n\nHaz clic en el botón Commit.\nEsto guarda los cambios en tu historial local de Git.\n\n\n\n\nSincronizar con GitHub\n\nUsa los botones Push (subir cambios al repositorio remoto) y Pull (traer cambios del remoto).\nNormalmente, después de un commit local, harás Push para que tus cambios aparezcan en GitHub.",
+    "title": "48  📚 Actividad 3: Página web con Rmarkdown",
+    "section": "49.1 Otra manera de realizar commits en R",
+    "text": "49.1 Otra manera de realizar commits en R\nCuando vinculas tu proyecto de R (.Rproj) con GitHub y habilitas Git, aparece una nueva pestaña llamada Git en la parte superior derecha de RStudio. Desde ahí puedes manejar tus cambios sin necesidad de usar la terminal.\n\n\n49.1.1 Flujo típico de trabajo\n\nDetectar cambios\n\nCada vez que modificas un archivo, RStudio lo marca en la pestaña Git.\nVerás íconos que indican si el archivo fue modificado (M), agregado (A) o eliminado (D).\n\n\n\n\nSeleccionar archivos para el commit\n\nMarca las casillas de los archivos que quieres incluir en el commit.\nEsto equivale a git add en la terminal.\n\nEscribir el mensaje de commit\n\nEn el cuadro de texto escribe un mensaje claro y descriptivo, por ejemplo: “Corrijo error en función de normalización”\nEl mensaje debe explicar qué cambiaste y por qué.\n\nHacer el commit\n\nHaz clic en el botón Commit.\nEsto guarda los cambios en tu historial local de Git.\n\n\n\n\nSincronizar con GitHub\n\nUsa los botones Push (subir cambios al repositorio remoto) y Pull (traer cambios del remoto).\nNormalmente, después de un commit local, harás Push para que tus cambios aparezcan en GitHub.",
     "crumbs": [
       "**Sección 6** - Introducción a R y Rstudio",
-      "<span class='chapter-number'>49</span>  <span class='chapter-title'>**📚** Actividad 3: Página web con Rmarkdown</span>"
+      "<span class='chapter-number'>48</span>  <span class='chapter-title'>**📚** Actividad 3: Página web con Rmarkdown</span>"
     ]
   },
   {
     "objectID": "s5_actividades3.html#referencias",
     "href": "s5_actividades3.html#referencias",
-    "title": "49  📚 Actividad 3: Página web con Rmarkdown",
-    "section": "51.1 Referencias",
-    "text": "51.1 Referencias\n\nAllison Horst\nhttps://github.com/EveliaCoss/EveliaCoss.github.io\npostcards",
+    "title": "48  📚 Actividad 3: Página web con Rmarkdown",
+    "section": "50.1 Referencias",
+    "text": "50.1 Referencias\n\nAllison Horst\nhttps://github.com/EveliaCoss/EveliaCoss.github.io\npostcards",
     "crumbs": [
       "**Sección 6** - Introducción a R y Rstudio",
-      "<span class='chapter-number'>49</span>  <span class='chapter-title'>**📚** Actividad 3: Página web con Rmarkdown</span>"
+      "<span class='chapter-number'>48</span>  <span class='chapter-title'>**📚** Actividad 3: Página web con Rmarkdown</span>"
+    ]
+  },
+  {
+    "objectID": "Intro_Quarto.html",
+    "href": "Intro_Quarto.html",
+    "title": "49  Introducción a Quarto",
+    "section": "",
+    "text": "49.1 ¿Cómo funciona?\nQuarto es una versión multilingüe y de última generación de R Markdown de Posit que incluye docenas de nuevas características y capacidades y al mismo tiempo puede renderizar la mayoría de los archivos Rmd existentes sin modificaciones.\nUtiliza el botón  Render en el IDE de RStudio para renderizar el archivo y obtener una vista previa de la salida con un solo clic o un atajo de teclado (⇧⌘K).\nSi prefiere renderizar automáticamente al guardar, puede activar la opción “Renderizar al guardar” en la barra de herramientas del editor. La vista previa se actualizará al volver a renderizar el documento. La vista previa en paralelo funciona tanto con HTML como con PDF.\nAl renderizar un documento de Quarto, knitr ejecuta primero todos los fragmentos de código y crea un nuevo documento Markdown (.md), que incluye el código y su salida. El archivo Markdown generado es procesado por pandoc , que crea el formato final. El botón Renderizar encapsula estas acciones y las ejecuta en el orden correcto.",
+    "crumbs": [
+      "**Sección 6** - Introducción a R y Rstudio",
+      "<span class='chapter-number'>49</span>  <span class='chapter-title'>Introducción a Quarto</span>"
+    ]
+  },
+  {
+    "objectID": "Intro_Quarto.html#cómo-se-compone",
+    "href": "Intro_Quarto.html#cómo-se-compone",
+    "title": "49  Introducción a Quarto",
+    "section": "49.2 ¿Cómo se compone?",
+    "text": "49.2 ¿Cómo se compone?\nEl archivo contiene tres tipos de contenido: un encabezado YAML, fragmentos de código y texto Markdown.\n\n49.2.1 encabezado YAML\nUn encabezado YAML (opcional) delimitado por tres guiones ( ---) en cada extremo.\n---\ntitle: \"Hello, Quarto\"\nformat: html\neditor: visual\n---\nAl renderizar, el símbolo title, \"Hello, Quarto\", aparecerá en la parte superior del documento renderizado con un tamaño de fuente mayor que el resto del documento. Los otros dos campos YAML indican que la salida debe estar en formato html formaty que el documento debe abrirse en formato visual editorpredeterminado.\nPuedes consultar todos los campos YAML disponibles para documentos: HTML aquí . Los campos YAML disponibles varían según el formato del documento; por ejemplo, consulte aquí los campos YAML para documentos PDF y aquí para MS Word.\n\n\n\n\n\n\nImportante\n\n\n\nPara crear archivos PDF, se necesitará instalar una distribución reciente de LaTeX. Recomendamos usar TinyTeX (basado en TexLive), que se puede instalar con el siguiente comando:\nquarto install tinytex",
+    "crumbs": [
+      "**Sección 6** - Introducción a R y Rstudio",
+      "<span class='chapter-number'>49</span>  <span class='chapter-title'>Introducción a Quarto</span>"
+    ]
+  },
+  {
+    "objectID": "Intro_Quarto.html#renderizar-a-varios-tipos-de-archivos",
+    "href": "Intro_Quarto.html#renderizar-a-varios-tipos-de-archivos",
+    "title": "49  Introducción a Quarto",
+    "section": "49.3 Renderizar a varios tipos de archivos",
+    "text": "49.3 Renderizar a varios tipos de archivos\nSi desea renderizar en todos los formatos, puede hacerlo con el paquete quarto , que proporciona una interfaz de R para la CLI de Quarto. Por ejemplo, para renderizar el documento actual, utilice quarto::quarto_render(). También puede especificar el nombre del documento que desea renderizar, así como los formatos de salida.\nquarto::quarto_render(\n  \"authoring.qmd\", \n  output_format = c(\"pdf\", \"html\", \"docx\")\n)\nComo resultado, verá aparecer tres nuevos archivos en el panel Archivos:\n\nauthoring.docx\nauthoring.html\nauthoring.pdf",
+    "crumbs": [
+      "**Sección 6** - Introducción a R y Rstudio",
+      "<span class='chapter-number'>49</span>  <span class='chapter-title'>Introducción a Quarto</span>"
+    ]
+  },
+  {
+    "objectID": "Intro_Quarto.html#callout-notas",
+    "href": "Intro_Quarto.html#callout-notas",
+    "title": "49  Introducción a Quarto",
+    "section": "49.4 Callout / notas",
+    "text": "49.4 Callout / notas\nDa clic en Insert/callout.\nPuede seleccionar uno de los cinco tipos de callout (nota, sugerencia, importante, precaución o advertencia), personalizar su apariencia (predeterminada, simple o mínima) y decidir si desea mostrar el ícono.\n\nLuego, intente insertar el texto dentro del cuadro de callout.\n\n\n\n\n\n\nNota\n\n\n\nNota\n\n\n\n\n\n\n\n\nTip\n\n\n\nSugerencia\n\n\n\n\n\n\n\n\nImportante\n\n\n\nImportante\n\n\n\n\n\n\n\n\nPrecaución\n\n\n\nPrecaución\n\n\n\n\n\n\n\n\nAdvertencia\n\n\n\nAdvertencia",
+    "crumbs": [
+      "**Sección 6** - Introducción a R y Rstudio",
+      "<span class='chapter-number'>49</span>  <span class='chapter-title'>Introducción a Quarto</span>"
+    ]
+  },
+  {
+    "objectID": "Intro_Quarto.html#cross-reference-referencias-cruzadas",
+    "href": "Intro_Quarto.html#cross-reference-referencias-cruzadas",
+    "title": "49  Introducción a Quarto",
+    "section": "49.5 Cross reference / Referencias cruzadas",
+    "text": "49.5 Cross reference / Referencias cruzadas\nLas cross references en Quarto son una forma de enlazar automáticamente figuras, tablas, secciones, ecuaciones y otros elementos dentro de tu documento, de manera que se numeran y se convierten en hipervínculos navegables. Esto evita tener que actualizar manualmente la numeración si agregas o quitas elementos.\n\nEtiqueta (label) Cada elemento que quieras referenciar necesita una etiqueta única.\n\nPara figuras: {#fig-nombre}\nPara tablas: {#tbl-nombre}\nPara secciones: {#sec-nombre}\nPara ecuaciones: {#eq-nombre}\n\nReferencia en el texto Para referenciar, se usa @ seguido del identificador:\n\n@fig-nombre → referencia a una figura.\n@tbl-nombre → referencia a una tabla.\n@sec-nombre → referencia a una sección.\n@eq-nombre → referencia a una ecuación.\n\n\nQuarto asigna números consecutivos a las entidades (Figura 1, Tabla 2, etc.) y actualiza todo si cambias el orden o agregas nuevos elementos.\nEjemplo:\n\n\n\n\n\n\n\n\nEntidad\nReferencia\nEtiqueta / Título\n\n\n\n\nSección\n@sec-eda\nID añadido al encabezado:\n# Análisis exploratorio de datos {#sec-eda}\n\n\nFigura\n@fig-pressure\nOpciones YAML en la celda de código:\n#| label: fig-scatterplot\n#| fig-cap: \"Pressure\"\n\n\nTabla\n@tbl-stats\nOpciones YAML en la celda de código:\n#| label: tbl-stats\n#| tbl-cap: \"Summary statistics for price and area of houses in Duke Forest\"\n\n\nEcuación\n@eq-slr\nAl final de la ecuación de visualización:\n$$ {#eq-slr}",
+    "crumbs": [
+      "**Sección 6** - Introducción a R y Rstudio",
+      "<span class='chapter-number'>49</span>  <span class='chapter-title'>Introducción a Quarto</span>"
+    ]
+  },
+  {
+    "objectID": "Intro_Quarto.html#sec-stats",
+    "href": "Intro_Quarto.html#sec-stats",
+    "title": "49  Introducción a Quarto",
+    "section": "50.1 Estadísticas descriptivas",
+    "text": "50.1 Estadísticas descriptivas\n\n\nCódigo\nknitr::kable(head(ggplot2::diamonds))\n\n\n\n\nTabla 50.1: Summary statistics for price and area of houses in Duke Forest\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\ncarat\ncut\ncolor\nclarity\ndepth\ntable\nprice\nx\ny\nz\n\n\n\n\n0.23\nIdeal\nE\nSI2\n61.5\n55\n326\n3.95\n3.98\n2.43\n\n\n0.21\nPremium\nE\nSI1\n59.8\n61\n326\n3.89\n3.84\n2.31\n\n\n0.23\nGood\nE\nVS1\n56.9\n65\n327\n4.05\n4.07\n2.31\n\n\n0.29\nPremium\nI\nVS2\n62.4\n58\n334\n4.20\n4.23\n2.63\n\n\n0.31\nGood\nJ\nSI2\n63.3\n58\n335\n4.34\n4.35\n2.75\n\n\n0.24\nVery Good\nJ\nVVS2\n62.8\n57\n336\n3.94\n3.96\n2.48\n\n\n\n\n\n\n\n\n\n50.1.1 Modelo de regresión\nEl modelo lineal simple se expresa como:\n\\[Y = \\beta_0 + \\beta_1 X + \\epsilon \\tag{50.1}\\]\nEjemplo en el texto:\nPresentamos los resultados del análisis exploratorio de datos en Capítulo 50 y la estadística descriptiva en Sección 50.1 .\nLa Figura 50.1 muestra la relación entre estas dos variables en un diagrama de dispersión.\nLa Tabla 50.1 presenta estadísticas descriptivas básicas de estas dos variables.\nPodemos ajustar un modelo de regresión lineal simple de la forma mostrada en Ecuación 50.1.",
+    "crumbs": [
+      "**Sección 6** - Introducción a R y Rstudio",
+      "<span class='chapter-number'>49</span>  <span class='chapter-title'>Introducción a Quarto</span>"
+    ]
+  },
+  {
+    "objectID": "Intro_Quarto.html#aprendiendo-más",
+    "href": "Intro_Quarto.html#aprendiendo-más",
+    "title": "49  Introducción a Quarto",
+    "section": "50.2 Aprendiendo más",
+    "text": "50.2 Aprendiendo más\n¡Ya has aprendido los conceptos básicos de Quarto! Una vez que te sientas cómodo creando y personalizando documentos, aquí tienes algunas cosas más que puedes explorar:\n\nPresentaciones : cree presentaciones de PowerPoint, Beamer y Revealjs utilizando la misma sintaxis que aprendió para crear documentos.\nSitios web : publique colecciones de documentos como un sitio web. Los sitios web admiten múltiples formas de navegación y búsqueda de texto completo.\nBlogs : crea un blog con una página acerca de, listas de publicaciones flexibles, categorías, feeds RSS y más de veinte temas.\nLibros : cree libros y manuscritos en formatos impresos (PDF, MS Word) y en línea (HTML, ePub).\nInteractividad : incluya componentes interactivos para ayudar a los lectores a explorar los conceptos y los datos que está presentando más profundamente.\n\n\nImagen tomada de: Allison Horst",
+    "crumbs": [
+      "**Sección 6** - Introducción a R y Rstudio",
+      "<span class='chapter-number'>49</span>  <span class='chapter-title'>Introducción a Quarto</span>"
+    ]
+  },
+  {
+    "objectID": "Intro_Quarto.html#referencias",
+    "href": "Intro_Quarto.html#referencias",
+    "title": "49  Introducción a Quarto",
+    "section": "50.3 Referencias",
+    "text": "50.3 Referencias\n\nTutorial: Hello, Quarto",
+    "crumbs": [
+      "**Sección 6** - Introducción a R y Rstudio",
+      "<span class='chapter-number'>49</span>  <span class='chapter-title'>Introducción a Quarto</span>"
     ]
   },
   {
     "objectID": "s5_actividades4y5.html",
     "href": "s5_actividades4y5.html",
-    "title": "51  📚 Actividad 4 y 5",
+    "title": "50  📚 Actividad 4 y 5",
     "section": "",
-    "text": "51.1 📚 Actividad 4: Crear un documento de Quarto con formato de salida html\nFecha: 19 de febrero, 2026\nPara crear un documento nuevo, ve a Archivos/File &gt; Nuevo archivo &gt; Documento de Quarto.\nPara este tipo de archivos vamos a usar la información del YAML para HTML.",
+    "text": "50.1 📚 Actividad 4: Crear un documento de Quarto con formato de salida html\nFecha: 19 de febrero, 2026\nPara crear un documento nuevo, ve a Archivos/File &gt; Nuevo archivo &gt; Documento de Quarto.\nPara este tipo de archivos vamos a usar la información del YAML para HTML.",
     "crumbs": [
       "**Sección 6** - Introducción a R y Rstudio",
-      "<span class='chapter-number'>51</span>  <span class='chapter-title'>**📚** Actividad 4 y 5</span>"
+      "<span class='chapter-number'>50</span>  <span class='chapter-title'>**📚** Actividad 4 y 5</span>"
     ]
   },
   {
     "objectID": "s5_actividades4y5.html#actividad-5-explorar-la-galleria-de-quarto-y-elegir-un-diseño",
     "href": "s5_actividades4y5.html#actividad-5-explorar-la-galleria-de-quarto-y-elegir-un-diseño",
-    "title": "51  📚 Actividad 4 y 5",
-    "section": "51.2 📚 Actividad 5: Explorar la galleria de Quarto y elegir un diseño",
-    "text": "51.2 📚 Actividad 5: Explorar la galleria de Quarto y elegir un diseño\n\nVisita la galeria de Quarto.\nVe al apartado de Articles & Reports.\n\n\n\nSelecciona un diseño y da clic en el botón “&lt;/&gt;”.\n\n\n\nDescarga el archivo desde GitHub y abrelo en Rstudio.\n\n\n\n\n\n\n\n\nNota\n\n\n\nAquí les dejo mi ejemplo editado, ya que el ejemplo que descargaremos tendrá algunos errores en su sintaxis.",
+    "title": "50  📚 Actividad 4 y 5",
+    "section": "50.2 📚 Actividad 5: Explorar la galleria de Quarto y elegir un diseño",
+    "text": "50.2 📚 Actividad 5: Explorar la galleria de Quarto y elegir un diseño\n\nVisita la galeria de Quarto.\nVe al apartado de Articles & Reports.\n\n\n\nSelecciona un diseño y da clic en el botón “&lt;/&gt;”.\n\n\n\nDescarga el archivo desde GitHub y abrelo en Rstudio.\n\n\n\n\n\n\n\n\nNota\n\n\n\nAquí les dejo mi ejemplo editado, ya que el ejemplo que descargaremos tendrá algunos errores en su sintaxis.",
     "crumbs": [
       "**Sección 6** - Introducción a R y Rstudio",
-      "<span class='chapter-number'>51</span>  <span class='chapter-title'>**📚** Actividad 4 y 5</span>"
+      "<span class='chapter-number'>50</span>  <span class='chapter-title'>**📚** Actividad 4 y 5</span>"
     ]
   },
   {
     "objectID": "s5_actividades4y5.html#referencias",
     "href": "s5_actividades4y5.html#referencias",
-    "title": "51  📚 Actividad 4 y 5",
-    "section": "51.3 Referencias",
-    "text": "51.3 Referencias\n\nTutorial: Hello, Quarto",
+    "title": "50  📚 Actividad 4 y 5",
+    "section": "50.3 Referencias",
+    "text": "50.3 Referencias\n\nTutorial: Hello, Quarto",
     "crumbs": [
       "**Sección 6** - Introducción a R y Rstudio",
-      "<span class='chapter-number'>51</span>  <span class='chapter-title'>**📚** Actividad 4 y 5</span>"
+      "<span class='chapter-number'>50</span>  <span class='chapter-title'>**📚** Actividad 4 y 5</span>"
     ]
   },
   {
