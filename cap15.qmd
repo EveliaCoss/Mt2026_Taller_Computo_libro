@@ -85,6 +85,30 @@ También existen otras plataformas como [Bitbucked](https://bitbucket.org/produc
 
 - Usualmente cuando inicies un proyecto colaborativo con GitHub inicializa el repositorio con un README. Copia el HTTPS URL para clonar el repositorio en la terminal `git clone` `https://github.com/TU-USUARIO/TU-REPOSITORIO.git`.
 
+::: {.callout-note icon="false"}
+## Actividad: Crea tu cuenta en GitHub
+
+Objetivo: Crear una cuenta personal en GitHub, una plataforma que permite almacenar, administrar y compartir proyectos de programación, así como llevar un control de los cambios realizados en el código.
+
+### Instrucciones
+
+1\. Ingresa a GitHub. Abre tu navegador y visita [https://github.com/](https://github.com/?utm_source=chatgpt.com).
+
+2\. Regístrate. Haz clic en el botón Sign up (Registrarse) para comenzar a crear tu cuenta.
+
+3\. Introduce tu correo electrónico. Utiliza una dirección de correo a la que tengas acceso, ya que necesitarás verificarla.
+
+4\. Crea una contraseña segura. Sigue los requisitos de seguridad que te indique GitHub. No compartas tu contraseña con nadie.
+
+5\. Elige tu nombre de usuario (username). Este nombre será tu identificador público en GitHub. Te recomiendo utilizar un nombre profesional, fácil de recordar y que puedas seguir utilizando durante tu formación académica.
+
+6\. Verifica tu cuenta. Completa las verificaciones de seguridad y confirma tu correo electrónico siguiendo las indicaciones de GitHub.
+
+7\. Selecciona el plan gratuito. Si GitHub te solicita elegir un plan, selecciona Free, que es suficiente para las actividades que realizaremos durante el curso. No necesitas contratar un plan de pago.
+
+8\. Ingresa a tu perfil. Una vez creada tu cuenta, haz clic en tu imagen de usuario y selecciona Your profile (Tu perfil).
+:::
+
 ## Referencias
 
 - Evelia tutorial:[Workshop sobre Git / Github 2025](https://eveliacoss.github.io/Workshop_GitGithub2025/)
