@@ -2425,7 +2425,7 @@
     "href": "Intro_Quarto.html#sec-stats",
     "title": "43  Introducción a Quarto",
     "section": "44.1 Estadísticas descriptivas",
-    "text": "44.1 Estadísticas descriptivas\n\n\nCódigo\nknitr::kable(head(ggplot2::diamonds))\n\n\n\n\nTabla 44.1: Summary statistics for price and area of houses in Duke Forest\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\ncarat\ncut\ncolor\nclarity\ndepth\ntable\nprice\nx\ny\nz\n\n\n\n\n0.23\nIdeal\nE\nSI2\n61.5\n55\n326\n3.95\n3.98\n2.43\n\n\n0.21\nPremium\nE\nSI1\n59.8\n61\n326\n3.89\n3.84\n2.31\n\n\n0.23\nGood\nE\nVS1\n56.9\n65\n327\n4.05\n4.07\n2.31\n\n\n0.29\nPremium\nI\nVS2\n62.4\n58\n334\n4.20\n4.23\n2.63\n\n\n0.31\nGood\nJ\nSI2\n63.3\n58\n335\n4.34\n4.35\n2.75\n\n\n0.24\nVery Good\nJ\nVVS2\n62.8\n57\n336\n3.94\n3.96\n2.48\n\n\n\n\n\n\n\n\n\n44.1.1 Modelo de regresión\nEl modelo lineal simple se expresa como:\n\\[Y = \\beta_0 + \\beta_1 X + \\epsilon\\] {#eq-slr}\nEjemplo en el texto:\nPresentamos los resultados del análisis exploratorio de datos en Capítulo 44 y la estadística descriptiva en Sección 44.1 .\nLa Figura 44.1 muestra la relación entre estas dos variables en un diagrama de dispersión.\nLa Tabla 44.1 presenta estadísticas descriptivas básicas de estas dos variables.\nPodemos ajustar un modelo de regresión lineal simple de la forma mostrada en ?eq-slr.",
+    "text": "44.1 Estadísticas descriptivas\n\n\nCódigo\nknitr::kable(head(ggplot2::diamonds))\n\n\n\n\nTabla 44.1: Summary statistics for price and area of houses in Duke Forest\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\ncarat\ncut\ncolor\nclarity\ndepth\ntable\nprice\nx\ny\nz\n\n\n\n\n0.23\nIdeal\nE\nSI2\n61.5\n55\n326\n3.95\n3.98\n2.43\n\n\n0.21\nPremium\nE\nSI1\n59.8\n61\n326\n3.89\n3.84\n2.31\n\n\n0.23\nGood\nE\nVS1\n56.9\n65\n327\n4.05\n4.07\n2.31\n\n\n0.29\nPremium\nI\nVS2\n62.4\n58\n334\n4.20\n4.23\n2.63\n\n\n0.31\nGood\nJ\nSI2\n63.3\n58\n335\n4.34\n4.35\n2.75\n\n\n0.24\nVery Good\nJ\nVVS2\n62.8\n57\n336\n3.94\n3.96\n2.48\n\n\n\n\n\n\n\n\n\n44.1.1 Modelo de regresión\nEl modelo lineal simple se expresa como:\n\\[Y = \\beta_0 + \\beta_1 X + \\epsilon \\tag{44.1}\\]\nEjemplo en el texto:\nPresentamos los resultados del análisis exploratorio de datos en Capítulo 44 y la estadística descriptiva en Sección 44.1 .\nLa Figura 44.1 muestra la relación entre estas dos variables en un diagrama de dispersión.\nLa Tabla 44.1 presenta estadísticas descriptivas básicas de estas dos variables.\nPodemos ajustar un modelo de regresión lineal simple de la forma mostrada en Ecuación 44.1.",
     "crumbs": [
       "**Sección 5** - Introducción a Git/GitHub",
       "<span class='chapter-number'>43</span>  <span class='chapter-title'>Introducción a Quarto</span>"
@@ -2663,33 +2663,11 @@
     ]
   },
   {
-    "objectID": "cap29.html#tablas-con-datatable",
-    "href": "cap29.html#tablas-con-datatable",
-    "title": "48  Introducción a Markdown",
-    "section": "48.5 Tablas con datatable",
-    "text": "48.5 Tablas con datatable\n\n\nCódigo\nlibrary(dplyr)\n\niris %&gt;%\n  head(3) %&gt;%\n  DT::datatable()\n\n\n\n\nTabla 48.1: Tabla decorativa",
-    "crumbs": [
-      "**Sección 6** - Introducción a R y Rstudio",
-      "<span class='chapter-number'>48</span>  <span class='chapter-title'>Introducción a Markdown</span>"
-    ]
-  },
-  {
-    "objectID": "cap29.html#librarygt",
-    "href": "cap29.html#librarygt",
-    "title": "48  Introducción a Markdown",
-    "section": "48.6 library(gt)",
-    "text": "48.6 library(gt)\n\n\nCódigo\niris %&gt;% \n  head() %&gt;%\n  gt::gt() %&gt;%\n  gt::tab_spanner(label = \"Petalo\", columns = vars(Petal.Length,Petal.Width)) %&gt;%\n  gt::tab_spanner(label = \"Sepalo\", columns = vars(Sepal.Length,Sepal.Width))\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nSepalo\n\n\nPetalo\n\nSpecies\n\n\nSepal.Length\nSepal.Width\nPetal.Length\nPetal.Width\n\n\n\n\n5.1\n3.5\n1.4\n0.2\nsetosa\n\n\n4.9\n3.0\n1.4\n0.2\nsetosa\n\n\n4.7\n3.2\n1.3\n0.2\nsetosa\n\n\n4.6\n3.1\n1.5\n0.2\nsetosa\n\n\n5.0\n3.6\n1.4\n0.2\nsetosa\n\n\n5.4\n3.9\n1.7\n0.4\nsetosa\n\n\n\n\n\n\n\n\n\n\n\n\n\nNota\n\n\n\nSi gustas repasar podemos hacerlo con el script Sesion_Rmarkdown_13Oct2023.Rmd del repositorio RmarkdownGraphs_notes.",
-    "crumbs": [
-      "**Sección 6** - Introducción a R y Rstudio",
-      "<span class='chapter-number'>48</span>  <span class='chapter-title'>Introducción a Markdown</span>"
-    ]
-  },
-  {
     "objectID": "cap29.html#referencias",
     "href": "cap29.html#referencias",
     "title": "48  Introducción a Markdown",
-    "section": "48.7 Referencias",
-    "text": "48.7 Referencias\n\nDocumentación de GitHub\nLibro de Rmarkdown\nEjercicios con Markdown\nCurso de Heladia Salgado\nCurso de Git y GitHub Evelia Coss\nMarkdown and rmarkdown\nGaleria de Markdown\nLesson 3: Basic Syntax\nIntroduction to Open Data Science with R\nData Science for Psychologists",
+    "section": "48.5 Referencias",
+    "text": "48.5 Referencias\n\nDocumentación de GitHub\nLibro de Rmarkdown\nEjercicios con Markdown\nCurso de Heladia Salgado\nCurso de Git y GitHub Evelia Coss\nMarkdown and rmarkdown\nGaleria de Markdown\nLesson 3: Basic Syntax\nIntroduction to Open Data Science with R\nData Science for Psychologists",
     "crumbs": [
       "**Sección 6** - Introducción a R y Rstudio",
       "<span class='chapter-number'>48</span>  <span class='chapter-title'>Introducción a Markdown</span>"

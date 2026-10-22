@@ -40,7 +40,7 @@ Ambos producen el mismo resultado, pero el segundo es más corto, fácil de modi
 ## ¿Qué tipos de bucles existen en Bash?
 
 | Bucle | ¿Cuándo utilizarlo? |
-|----------------|--------------------------------------------------------|
+|----|----|
 | `for` | Cuando queremos recorrer una lista de elementos o repetir una acción un número determinado de veces. |
 | `while` | Cuando queremos repetir instrucciones mientras una condición sea verdadera. |
 
@@ -198,7 +198,7 @@ La estructura `seq 10 -1 1` significa: comenzar en 10, disminuir de uno en uno y
 ## Comparación
 
 | Forma | Sintaxis | ¿Cuándo usarla? |
-|------------------------|------------------------|------------------------|
+|----|----|----|
 | Llaves | `{10..1}` | Rangos fijos y sencillos. |
 | Estilo C | `((i=10; i>=1; i--))` | Cuando necesitas controlar el contador. |
 | `seq` | `$(seq 10 -1 1)` | Para generar secuencias numéricas, incluso con límites variables. |
@@ -361,7 +361,7 @@ done
 ```
 
 | Elemento        | ¿Qué significa?                                         |
-|---------------------|---------------------------------------------------|
+|-----------------|---------------------------------------------------------|
 | `while`         | Inicia el bucle.                                        |
 | `[ condicion ]` | Evalúa si la condición es verdadera.                    |
 | `do`            | Indica el inicio de las instrucciones que se repetirán. |
