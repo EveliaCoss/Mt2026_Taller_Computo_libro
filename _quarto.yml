@@ -77,7 +77,6 @@ book:
         - Rstudio_paquetes.qmd # Instalar paquetes      
         - cap15.qmd # Intro a Git
         - cap22.qmd # Conexión con Github
-        - cap26.qmd # Conexión RStudio con Git         
         - cap16.qmd # Configurar git
         - cap17.qmd # Crear e inicializar repos
         - cap18.qmd # Ignorar archivos
