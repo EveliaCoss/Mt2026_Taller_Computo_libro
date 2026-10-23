@@ -1,6 +1,6 @@
-# Github
+# Conectar a GitHub con SSH
 
-> **Fecha:** 06 de octubre, 2026
+> **Fecha:** 22 de octubre, 2026
 
 El valor del control de versiones se hace evidente al comenzar a colaborar con otros. Contamos con la mayor parte de las herramientas necesarias para ello; lo único que resta es transferir cambios de un repositorio a otro.
 
@@ -36,6 +36,10 @@ La página principal del repositorio remoto muestra una serie de información qu
 
 [![SSH link para clonar el repositorio](https://haydeeperuyero.github.io/Computo_Cientifico/img/github_4.png){width="120%"}](https://haydeeperuyero.github.io/Computo_Cientifico/git-y-github.html#github)
 
+Si ya tienen archivos como README.md, entonces lo encontrarás en el botón CODE.
+
+![](figures/ssh_llave_repo.png){fig-align="center"}
+
 Ahora, dentro de nuestra carpeta del repositorio local, abrir una terminal y correr lo siguiente:
 
 ``` bash
@@ -62,7 +66,7 @@ Si ya tienen algún par de llaves configuradas las van a ver listadas, si no tie
 ls: cannot access '/c/Users/User/.ssh': No such file or directory
 ```
 
-### Paso 3.1: Crear un par de llaves SSH
+### Paso 3.1: Crear un par de llaves SSH (opción A)
 
 Para crear el par de llaves usamos el siguiente comando, la opción `-t` se refiere al tipo de algoritmo usado y la opción `-C` indica un comentario para la llave, en este caso el comentario es nuestro correo.
 
@@ -107,7 +111,7 @@ Si repetimos el comando siguiente, verán ahora ya sus dos claves pública y pri
 ls -al ~/.ssh
 ```
 
-### Paso 3.2 Generar una llave pública exclusiva para Github (opcional)
+### Paso 3.1 Generar una llave pública exclusiva para Github (opción B)
 
 En caso de que ya cuentes con una llave con ese nombre, puedes crear una nueva llave con otro nombre especifico para Github:
 
@@ -120,14 +124,14 @@ ssh-keygen -t ed25519 -C "your_email@example.com" -f ~/.ssh/id_ed25519_github
 Ahora que ya tenemos las claves, debemos decirle a GitHub cuales son.
 
 ``` bash
-cat ~/.ssh/id_ed25519.pub
+cat ~/.ssh/id_ed25519_github.pub
 ```
 
 Copia la cadena de caracteres, ve a la configuración de tu perfil de GitHub y da clic en "SSH and GPG Keys".
 
-[![SSH and GPG Keys](https://haydeeperuyero.github.io/Computo_Cientifico/img/github_5.png){width="120%"}](https://haydeeperuyero.github.io/Computo_Cientifico/git-y-github.html#github)
+[![SSH and GPG Keys](https://haydeeperuyero.github.io/Computo_Cientifico/img/github_5.png){width="62%"}](https://haydeeperuyero.github.io/Computo_Cientifico/git-y-github.html#github)
 
-Una vez ahí da clic en "Nueva llave SSH".
+Una vez ahí da clic en "**Nueva llave SSH**".
 
 [![Nueva llave SSH](https://haydeeperuyero.github.io/Computo_Cientifico/img/github_6.png){width="120%"}](https://haydeeperuyero.github.io/Computo_Cientifico/git-y-github.html#github)
 
@@ -135,7 +139,7 @@ Después coloca un título que te permita identificar que será la clave con la 
 
 [![Llave pública](https://haydeeperuyero.github.io/Computo_Cientifico/img/github_7.png){width="120%"}](https://haydeeperuyero.github.io/Computo_Cientifico/git-y-github.html#github)
 
-Ahora solo falta revisar la conexión desde la terminal.
+Ahora solo falta revisar la conexión desde la **terminal de Rstudio**.
 
 ``` bash
 ssh -T git@github.com
@@ -147,61 +151,49 @@ Si vez un mensaje similar al siguiente, significa que quedo completa la autentic
 Hi Name! Youve successfully authenticated, but GitHub does not provide shell access.
 ```
 
-### Paso 3.3 Solución a Error con la llave
+### Paso 3.2 Solución a Error con la llave
 
 A mi paso que la llave esta bien pero no tenia acceso a usar github, mostrando este mensaje:
 
+``` bash
+# ssh -i .ssh/id_ed25519_github -T git@github.com # En tu computadora desde Home
+ssh -i /home/r2358984/.ssh/id_ed25519_github -T git@github.com # En posit Cloud
+```
+
+El mensaje de salida será:
+
 ```         
-ssh -i .ssh/id_ed25519 -T git@github.com
-Hi HaydeePeruyero! You've successfully authenticated, but GitHub does not provide shell access.
+Hi EveliaCoss! You've successfully authenticated, but GitHub does not provide shell access.
 ```
 
-#### Agregar configuración
+### Paso 3.3 Crear un archivo de configuración
 
-Por lo que decidí configurar el archivo `~/.ssh/config`.
+Como Posit Cloud no tiene instalado `nano`, podemos crear el archivo directamente desde la terminal.
 
-``` bash
-nano ~/.ssh/config
-```
-
-agrega esto:
+Copia y ejecuta este bloque completo:
 
 ``` bash
+cat > ~/.ssh/config << 'EOF'
 Host github.com
-  HostName github.com
-  User git
-  IdentityFile ~/.ssh/id_ed25519
-  IdentitiesOnly yes
+    HostName github.com
+    User git
+    IdentityFile ~/.ssh/id_ed25519_github
+    IdentitiesOnly yes
+EOF
 ```
 
-Guarda y cierra las modificaciones del archivo.
+Esto le indica a SSH que utilice automáticamente tu clave `id_ed25519_github` cuando te conectes a GitHub.
 
-#### Verifica que los permisos estén correctos
+Ahora establece los permisos adecuados:
 
 ``` bash
-chmod 600 ~/.ssh/id_ed25519
-chmod 644 ~/.ssh/id_ed25519.pub
 chmod 600 ~/.ssh/config
 ```
 
-#### **Agrega tu clave al `ssh-agent`**
-
-Esto asegura que la clave esté disponible durante tus sesiones:
+Comprueba que se guardó:
 
 ``` bash
-ssh-add ~/.ssh/id_ed25519
-```
-
-#### Prueba conexión otra vez
-
-``` bash
-ssh -T git@github.com
-```
-
-Debe decir:
-
-``` bash
-Hi HaydeePeruyero! You've successfully authenticated, but GitHub does not provide shell access.
+cat ~/.ssh/config
 ```
 
 ## Paso 4: Push and pull
@@ -209,7 +201,7 @@ Hi HaydeePeruyero! You've successfully authenticated, but GitHub does not provid
 Una vez que ya tenemos configurado todo, solo falta enviar todo lo que tenemos en el repo local al remoto. Si se establecio la contraseña nos la va a pedir en la terminal o una ventana aparte.
 
 ``` bash
-git push origin main
+git push -u origin main
 ```
 
 En esa instrucción, `origin` se refiere al repositorio remoto y `main` al local (las ramas que estamos intentando poner en el mismo contenido).
@@ -226,44 +218,16 @@ git pull origin main
 
 Como no hemos realizado ningún cambio en el remoto, no veremos nada nuevo en el local. En el remoto también podemos añadir archivos directamente.
 
-:::: callout-note
-## Ejercicio
+## ¿Por qué aparecían tantos errores?
 
-Añade un archivo nuevo desde el repositorio remoto y actualiza tus cambios en el local.
+| Error | Causa | Solución |
+|----|----|----|
+| `Permission denied (publickey)` | SSH no seleccionaba tu clave correcta. | Crear `~/.ssh/config`. |
+| `nano: command not found` | El editor no está instalado. | Crear el archivo con `cat`. |
+| `Could not open a connection to your authentication agent` | El agente SSH no estaba activo. | No necesitas el agente si SSH utiliza directamente tu clave. |
+| `could not read Username for https` | Git estaba usando HTTPS. | Cambiar `origin` a SSH. |
+| `main has no upstream branch` | La rama local no tiene seguimiento remoto. | Ejecutar `git push -u origin main`. |
 
-::: {.callout-tip collapse="true" icon="false"}
-## Solución
+Una aclaración: `git config --global user.email` solo configura el correo que aparece en tus commits. No autentica tu cuenta con GitHub.
 
-Desde el repositorio remoto, podemos crear un nuevo archivo, por ejemplo `nuevo_archivo.txt`, escribir algo en él y guardar los cambios. GitHub realizará automáticamente un commit en el repositorio remoto.
-
-Ahora, en nuestra copia local, verificamos el estado del repositorio:
-
-``` bash
-git status
-```
-
-y descargamos los cambios del repositorio remoto con:
-
-``` bash
-git pull origin main
-```
-
-(En caso de que la rama principal tenga otro nombre, reemplazar `main` por el nombre correspondiente.)
-
-Git descargará e integrará automáticamente el nuevo commit en nuestro repositorio local.
-
-Podemos comprobar que el archivo se ha añadido con:
-
-``` bash
-ls
-```
-
-o revisar el historial con:
-
-``` bash
-git log --oneline
-```
-
-Observaremos que ahora el commit realizado desde GitHub también aparece en el historial local.
-:::
-::::
+Con esta configuración podrás utilizar tu clave SSH de Posit Cloud para trabajar con GitHub.
