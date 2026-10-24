@@ -123,35 +123,35 @@ Quarto asigna números consecutivos a las entidades (Figura 1, Tabla 2, etc.) y 
 
 Ejemplo:
 
-+-----------+-----------------+------------------------------------------------------------------------------+
-| Entidad   | Referencia      | Etiqueta / Título                                                            |
-+===========+=================+==============================================================================+
-| Sección   | `@sec-eda`      | ID añadido al encabezado:                                                    |
-|           |                 |                                                                              |
-|           |                 | ```                                                                          |
-|           |                 | # Análisis exploratorio de datos {#sec-eda}                                  |
-|           |                 | ```                                                                          |
-+-----------+-----------------+------------------------------------------------------------------------------+
-| Figura    | `@fig-pressure` | Opciones YAML en la celda de código:                                         |
-|           |                 |                                                                              |
-|           |                 | ```                                                                          |
-|           |                 | #| label: fig-scatterplot                                                    |
-|           |                 | #| fig-cap: "Pressure"                                                       |
-|           |                 | ```                                                                          |
-+-----------+-----------------+------------------------------------------------------------------------------+
-| Tabla     | `@tbl-stats`    | Opciones YAML en la celda de código:                                         |
-|           |                 |                                                                              |
-|           |                 | ```                                                                          |
-|           |                 | #| label: tbl-stats                                                          |
-|           |                 | #| tbl-cap: "Summary statistics for price and area of houses in Duke Forest" |
-|           |                 | ```                                                                          |
-+-----------+-----------------+------------------------------------------------------------------------------+
-| Ecuación  | `@eq-slr`       | Al final de la ecuación de visualización:                                    |
-|           |                 |                                                                              |
-|           |                 | ```                                                                          |
-|           |                 | $$ {#eq-slr}                                                                 |
-|           |                 | ```                                                                          |
-+-----------+-----------------+------------------------------------------------------------------------------+
++----------+-----------------+------------------------------------------------------------------------------+
+| Entidad  | Referencia      | Etiqueta / Título                                                            |
++==========+=================+==============================================================================+
+| Sección  | `@sec-eda`      | ID añadido al encabezado:                                                    |
+|          |                 |                                                                              |
+|          |                 | ```                                                                          |
+|          |                 | # Análisis exploratorio de datos {#sec-eda}                                  |
+|          |                 | ```                                                                          |
++----------+-----------------+------------------------------------------------------------------------------+
+| Figura   | `@fig-pressure` | Opciones YAML en la celda de código:                                         |
+|          |                 |                                                                              |
+|          |                 | ```                                                                          |
+|          |                 | #| label: fig-scatterplot                                                    |
+|          |                 | #| fig-cap: "Pressure"                                                       |
+|          |                 | ```                                                                          |
++----------+-----------------+------------------------------------------------------------------------------+
+| Tabla    | `@tbl-stats`    | Opciones YAML en la celda de código:                                         |
+|          |                 |                                                                              |
+|          |                 | ```                                                                          |
+|          |                 | #| label: tbl-stats                                                          |
+|          |                 | #| tbl-cap: "Summary statistics for price and area of houses in Duke Forest" |
+|          |                 | ```                                                                          |
++----------+-----------------+------------------------------------------------------------------------------+
+| Ecuación | `@eq-slr`       | Al final de la ecuación de visualización:                                    |
+|          |                 |                                                                              |
+|          |                 | ```                                                                          |
+|          |                 | $$ {#eq-slr}                                                                 |
+|          |                 | ```                                                                          |
++----------+-----------------+------------------------------------------------------------------------------+
 
 # Análisis exploratorio de datos {#sec-eda}
 
