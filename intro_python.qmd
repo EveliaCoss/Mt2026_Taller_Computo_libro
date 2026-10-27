@@ -44,11 +44,15 @@ Python es un ejemplo de lenguaje interpretado.
 
 ## Diferencia entre un lenguaje interpretado y uno compilado
 
-| Lenguaje interpretado | Lenguaje compilado |
-|------------------------------------|------------------------------------|
-| Utiliza un intérprete para ejecutar el programa. | Generalmente utiliza un compilador para generar código ejecutable. |
-| Normalmente no requiere generar un ejecutable independiente. | Habitualmente necesita una etapa de compilación previa. |
-| Ejemplo: Python. | Ejemplo: C. |
++--------------------------------------------------------------+--------------------------------------------------------------------+
+| Lenguaje interpretado                                        | Lenguaje compilado                                                 |
++==============================================================+====================================================================+
+| Utiliza un intérprete para ejecutar el programa.             | Generalmente utiliza un compilador para generar código ejecutable. |
++--------------------------------------------------------------+--------------------------------------------------------------------+
+| Normalmente no requiere generar un ejecutable independiente. | Habitualmente necesita una etapa de compilación previa.            |
++--------------------------------------------------------------+--------------------------------------------------------------------+
+| Ejemplo: Python.                                             | Ejemplo: C.                                                        |
++--------------------------------------------------------------+--------------------------------------------------------------------+
 
 ## ¿Qué es `reticulate`?
 
@@ -227,11 +231,15 @@ Una vez dentro de Python, observarás que el indicador de la consola cambia de `
 
 ### Comparación entre R y Python
 
-| Desde R con `reticulate` | Desde `repl_python()` |
-|------------------------------------|------------------------------------|
-| `np <- import("numpy")` | `import numpy as np` |
++------------------------------------------+----------------------------------------+
+| Desde R con `reticulate`                 | Desde `repl_python()`                  |
++==========================================+========================================+
+| `np <- import("numpy")`                  | `import numpy as np`                   |
++------------------------------------------+----------------------------------------+
 | `numeros <- np$array(c(10, 20, 30, 40))` | `numeros = np.array([10, 20, 30, 40])` |
-| `np$mean(numeros)` | `np.mean(numeros)` |
++------------------------------------------+----------------------------------------+
+| `np$mean(numeros)`                       | `np.mean(numeros)`                     |
++------------------------------------------+----------------------------------------+
 
 Observa las diferencias:
 
@@ -276,17 +284,35 @@ Esto es posible porque Python utiliza tipado dinámico.
 
 Python dispone de diferentes tipos de datos integrados.
 
-| Tipo            | Nombre en Python | Ejemplo             |
-|-----------------|------------------|---------------------|
-| Entero          | `int`            | `25`                |
-| Decimal         | `float`          | `3.1416`            |
-| Complejo        | `complex`        | `2 + 3j`            |
-| Cadena de texto | `str`            | `"Python"`          |
-| Booleano        | `bool`           | `True`, `False`     |
-| Lista           | `list`           | `[10, 20, 30]`      |
-| Tupla           | `tuple`          | `(10, 20, 30)`      |
-| Diccionario     | `dict`           | `{"nombre": "Ana"}` |
-| Conjunto        | `set`            | `{1, 2, 3}`         |
++-----------------+-----------------------------------------------+----------------------+-----------------------------------+---------------+---------------+-------------+
+| **Tipo**        | **Descripción**                               | **Nombre en Python** | **Ejemplo**                       | **Colección** | **Indexable** | **Mutable** |
++=================+===============================================+======================+===================================+===============+===============+=============+
+| Entero          | Números enteros                               | `int`                | `5, -10, 100`                     | No            | No            | No          |
++-----------------+-----------------------------------------------+----------------------+-----------------------------------+---------------+---------------+-------------+
+| Decimal         | Números de punto flotante                     | `float`              | `3.14, -0.001, 2.0`               | No            | No            | No          |
++-----------------+-----------------------------------------------+----------------------+-----------------------------------+---------------+---------------+-------------+
+| Complejo        | Números complejos con parte real e imaginaria | `complex`            | `3+4j`, `2-5j`, `1j`              | No            | No            | No          |
++-----------------+-----------------------------------------------+----------------------+-----------------------------------+---------------+---------------+-------------+
+| Cadena de texto | Cadena de caracteres                          | `str`                | `‘Hola’, “Mundo”`                 | No            | Sí            | No          |
++-----------------+-----------------------------------------------+----------------------+-----------------------------------+---------------+---------------+-------------+
+| Booleano        | Booleano (Verdadero o Falso)                  | `bool`               | `True`, `False`                   | No            | Sí            | No          |
++-----------------+-----------------------------------------------+----------------------+-----------------------------------+---------------+---------------+-------------+
+| Lista           | Lista ordenada de elementos                   | `list`               | `[10, 20, 30]`                    | Sí            | Sí            | Sí          |
++-----------------+-----------------------------------------------+----------------------+-----------------------------------+---------------+---------------+-------------+
+| Tupla           | Secuencia inmutable de elementos              | `tuple`              | `(10, 20, 30),` `(‘a’, ‘b’, ‘c’)` | Sí            | Sí            | No          |
++-----------------+-----------------------------------------------+----------------------+-----------------------------------+---------------+---------------+-------------+
+| Diccionario     | Colección de pares clave-valor                | `dict`               | `{"nombre": "Ana"}`               | Sí            | No            | Sí          |
+|                 |                                               |                      |                                   |               |               |             |
+|                 |                                               |                      | `{‘nombre’: ‘Juan’, ‘edad’: 30}`  |               |               |             |
++-----------------+-----------------------------------------------+----------------------+-----------------------------------+---------------+---------------+-------------+
+| Conjunto        | Colección no ordenada de elementos únicos     | `set`                | `{1, 2, 3}, {‘a’, ‘b’, ‘c’}`      | Sí            | No            | Sí          |
++-----------------+-----------------------------------------------+----------------------+-----------------------------------+---------------+---------------+-------------+
+
+Las **colecciones** son estructuras que almacenan una serie de elementos. Cada uno de estos elementos se puede considerar como una entidad independiente dentro de la colección.
+
+Los **tipos indexables** permiten acceder a cada elemento dentro de la colección mediante un identificador único, que puede ser un número entero (índice) o una clave, dependiendo del tipo de colección.
+
+Los **tipos mutables** tienen la característica de permitir la modificación de su contenido. Esto incluye la capacidad de agregar, eliminar o modificar elementos existentes en la colección.
 
 ### ¿Cómo identificar el tipo de un objeto?
 
@@ -336,6 +362,19 @@ x = 30
 
 Cuando ejecutamos `x = 30`, no modificamos el objeto entero `25`. La variable `x` simplemente deja de referenciar al objeto `25` y comienza a referenciar al objeto `30`.
 
+Python permite realizar operaciones básicas con los tipos de datos mencionados anteriormente. A continuación, se muestran algunos ejemplos:
+
+```{python}
+# Operaciones numéricas
+resultado = 10 + 5
+diferencia = 10 - 5
+producto = 10 * 5
+cociente = 10 / 5
+modulo = 10 % 3
+potencia = 10 ** 2
+```
+
 ## Referencias
 
-[Usar Python con R con reticulate : : GUÍA RÁPIDA](https://rstudio.github.io/cheatsheets/translations/spanish/reticulate_es.pdf)
+- [Usar Python con R con reticulate : : GUÍA RÁPIDA](https://rstudio.github.io/cheatsheets/translations/spanish/reticulate_es.pdf)
+- [Sección 4 Python](https://haydeeperuyero.github.io/Computo_Cientifico/python.html)

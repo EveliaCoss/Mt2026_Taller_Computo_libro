@@ -743,8 +743,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 data-number="50.3" class="anchored" data-anchor-id="diferencia-entre-un-lenguaje-interpretado-y-uno-compilado"><span class="header-section-number">50.3</span> Diferencia entre un lenguaje interpretado y uno compilado</h2>
 <table class="caption-top table">
 <colgroup>
-<col style="width: 50%">
-<col style="width: 50%">
+<col style="width: 47%">
+<col style="width: 52%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -1048,8 +1048,8 @@ Enter 'exit' or 'quit' to exit the REPL and return to R.</code></pre>
 <h3 data-number="50.10.2" class="anchored" data-anchor-id="comparación-entre-r-y-python"><span class="header-section-number">50.10.2</span> Comparación entre R y Python</h3>
 <table class="caption-top table">
 <colgroup>
-<col style="width: 50%">
-<col style="width: 50%">
+<col style="width: 51%">
+<col style="width: 48%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -1117,61 +1117,114 @@ Enter 'exit' or 'quit' to exit the REPL and return to R.</code></pre>
 <h2 data-number="50.13" class="anchored" data-anchor-id="tipos-de-objetos-en-python"><span class="header-section-number">50.13</span> Tipos de objetos en Python</h2>
 <p>Python dispone de diferentes tipos de datos integrados.</p>
 <table class="caption-top table">
+<colgroup>
+<col style="width: 10%">
+<col style="width: 27%">
+<col style="width: 13%">
+<col style="width: 20%">
+<col style="width: 9%">
+<col style="width: 9%">
+<col style="width: 7%">
+</colgroup>
 <thead>
 <tr class="header">
-<th>Tipo</th>
-<th>Nombre en Python</th>
-<th>Ejemplo</th>
+<th><strong>Tipo</strong></th>
+<th><strong>Descripción</strong></th>
+<th><strong>Nombre en Python</strong></th>
+<th><strong>Ejemplo</strong></th>
+<th><strong>Colección</strong></th>
+<th><strong>Indexable</strong></th>
+<th><strong>Mutable</strong></th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
 <td>Entero</td>
+<td>Números enteros</td>
 <td><code>int</code></td>
-<td><code>25</code></td>
+<td><code>5, -10, 100</code></td>
+<td>No</td>
+<td>No</td>
+<td>No</td>
 </tr>
 <tr class="even">
 <td>Decimal</td>
+<td>Números de punto flotante</td>
 <td><code>float</code></td>
-<td><code>3.1416</code></td>
+<td><code>3.14, -0.001, 2.0</code></td>
+<td>No</td>
+<td>No</td>
+<td>No</td>
 </tr>
 <tr class="odd">
 <td>Complejo</td>
+<td>Números complejos con parte real e imaginaria</td>
 <td><code>complex</code></td>
-<td><code>2 + 3j</code></td>
+<td><code>3+4j</code>, <code>2-5j</code>, <code>1j</code></td>
+<td>No</td>
+<td>No</td>
+<td>No</td>
 </tr>
 <tr class="even">
 <td>Cadena de texto</td>
+<td>Cadena de caracteres</td>
 <td><code>str</code></td>
-<td><code>"Python"</code></td>
+<td><code>‘Hola’, “Mundo”</code></td>
+<td>No</td>
+<td>Sí</td>
+<td>No</td>
 </tr>
 <tr class="odd">
 <td>Booleano</td>
+<td>Booleano (Verdadero o Falso)</td>
 <td><code>bool</code></td>
 <td><code>True</code>, <code>False</code></td>
+<td>No</td>
+<td>Sí</td>
+<td>No</td>
 </tr>
 <tr class="even">
 <td>Lista</td>
+<td>Lista ordenada de elementos</td>
 <td><code>list</code></td>
 <td><code>[10, 20, 30]</code></td>
+<td>Sí</td>
+<td>Sí</td>
+<td>Sí</td>
 </tr>
 <tr class="odd">
 <td>Tupla</td>
+<td>Secuencia inmutable de elementos</td>
 <td><code>tuple</code></td>
-<td><code>(10, 20, 30)</code></td>
+<td><code>(10, 20, 30),</code> <code>(‘a’, ‘b’, ‘c’)</code></td>
+<td>Sí</td>
+<td>Sí</td>
+<td>No</td>
 </tr>
 <tr class="even">
 <td>Diccionario</td>
+<td>Colección de pares clave-valor</td>
 <td><code>dict</code></td>
-<td><code>{"nombre": "Ana"}</code></td>
+<td><p><code>{"nombre": "Ana"}</code></p>
+<p><code>{‘nombre’: ‘Juan’, ‘edad’: 30}</code></p></td>
+<td>Sí</td>
+<td>No</td>
+<td>Sí</td>
 </tr>
 <tr class="odd">
 <td>Conjunto</td>
+<td>Colección no ordenada de elementos únicos</td>
 <td><code>set</code></td>
-<td><code>{1, 2, 3}</code></td>
+<td><code>{1, 2, 3}, {‘a’, ‘b’, ‘c’}</code></td>
+<td>Sí</td>
+<td>No</td>
+<td>Sí</td>
 </tr>
 </tbody>
 </table>
+<p>Las <strong>colecciones</strong> son estructuras que almacenan una serie de elementos. Cada uno de estos elementos se puede considerar como una entidad independiente dentro de la colección.</p>
+<p>Los <strong>tipos indexables</strong> permiten acceder a cada elemento dentro de la colección mediante un identificador único, que puede ser un número entero (índice) o una clave, dependiendo del tipo de colección.</p>
+<p>Los <strong>tipos mutables</strong> tienen la característica de permitir la modificación de su contenido. Esto incluye la capacidad de agregar, eliminar o modificar elementos existentes en la colección.</p>
 <section id="cómo-identificar-el-tipo-de-un-objeto" class="level3" data-number="50.13.1">
 <h3 data-number="50.13.1" class="anchored" data-anchor-id="cómo-identificar-el-tipo-de-un-objeto"><span class="header-section-number">50.13.1</span> ¿Cómo identificar el tipo de un objeto?</h3>
 <p>Utilizamos la función <code>type()</code>.</p>
@@ -1244,10 +1297,26 @@ Enter 'exit' or 'quit' to exit the REPL and return to R.</code></pre>
 </details>
 </div>
 <p>Cuando ejecutamos <code>x = 30</code>, no modificamos el objeto entero <code>25</code>. La variable <code>x</code> simplemente deja de referenciar al objeto <code>25</code> y comienza a referenciar al objeto <code>30</code>.</p>
+<p>Python permite realizar operaciones básicas con los tipos de datos mencionados anteriormente. A continuación, se muestran algunos ejemplos:</p>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Código</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb43"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Operaciones numéricas</span></span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>resultado <span class="op">=</span> <span class="dv">10</span> <span class="op">+</span> <span class="dv">5</span></span>
+<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a>diferencia <span class="op">=</span> <span class="dv">10</span> <span class="op">-</span> <span class="dv">5</span></span>
+<span id="cb43-4"><a href="#cb43-4" aria-hidden="true" tabindex="-1"></a>producto <span class="op">=</span> <span class="dv">10</span> <span class="op">*</span> <span class="dv">5</span></span>
+<span id="cb43-5"><a href="#cb43-5" aria-hidden="true" tabindex="-1"></a>cociente <span class="op">=</span> <span class="dv">10</span> <span class="op">/</span> <span class="dv">5</span></span>
+<span id="cb43-6"><a href="#cb43-6" aria-hidden="true" tabindex="-1"></a>modulo <span class="op">=</span> <span class="dv">10</span> <span class="op">%</span> <span class="dv">3</span></span>
+<span id="cb43-7"><a href="#cb43-7" aria-hidden="true" tabindex="-1"></a>potencia <span class="op">=</span> <span class="dv">10</span> <span class="op">**</span> <span class="dv">2</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
 </section>
 <section id="referencias" class="level2" data-number="50.15">
 <h2 data-number="50.15" class="anchored" data-anchor-id="referencias"><span class="header-section-number">50.15</span> Referencias</h2>
-<p><a href="https://rstudio.github.io/cheatsheets/translations/spanish/reticulate_es.pdf">Usar Python con R con reticulate : : GUÍA RÁPIDA</a></p>
+<ul>
+<li><a href="https://rstudio.github.io/cheatsheets/translations/spanish/reticulate_es.pdf">Usar Python con R con reticulate : : GUÍA RÁPIDA</a></li>
+<li><a href="https://haydeeperuyero.github.io/Computo_Cientifico/python.html">Sección 4 Python</a></li>
+</ul>
 
 
 </section>
