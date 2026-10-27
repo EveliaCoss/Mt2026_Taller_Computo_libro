@@ -81,7 +81,7 @@ book:
         - cap17.qmd # Crear e inicializar repos
         - cap18.qmd # Ignorar archivos
         - s5_actividades1y2.qmd # Actividad: Miniresumen personal + foto para tu repositorio
-        - cap27.qmd # Resumen y practica final          
+        - cap23.qmd # Resumen y practica final          
     - part: "**Sección 6** - Introducción a R y Rstudio"
       chapters: 
         - cap29.qmd             # Introducción a Markdown 
@@ -90,7 +90,8 @@ book:
         - s5_actividades4y5.qmd # Actividad: Primer libro de quarto
     - part: "**Sección 7** - Introducción a Python"
       chapters: 
-        - s5_actividades4y5.qmd 
+        - intro_python.qmd 
+        - quarto_python.qmd
   appendices: 
     - resources.qmd
     - notas.qmd

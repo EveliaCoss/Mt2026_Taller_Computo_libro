@@ -1,0 +1,65 @@
+---
+title: "Práctica de Python: Variables, objetos mutables e inmutables"
+format: html
+author: Evelia Coss
+jupyter: python3
+---
+
+**Objetivo**: Comprender cómo Python trabaja con variables y objetos, identificar los tipos de datos básicos, acceder a elementos mediante índices y diferenciar los objetos mutables de los inmutables.
+
+**Nivel: Básico a intermedio.**
+
+**Instrucciones:** Resuelve los siguientes 10 ejercicios utilizando Python. Antes de ejecutar cada programa, analiza qué resultado esperas obtener. No utilices atributos ni métodos de los objetos; puedes emplear funciones integradas como `print()`, `type()`, `id()` y `len()`.
+
+## Mi primer código en python
+
+```{python}
+mensaje = "Hola, mundo"
+print(mensaje)
+```
+
+## Mi primera Variable
+
+```{python}
+edad = 20
+print(type(edad))
+```
+
+## Parte I. Variables y tipos de objetos
+
+### Ejercicio 1. Mi primera colección de variables
+
+Crea un programa que almacene la siguiente información:
+
+- Nombre de un estudiante.
+- Edad.
+- Estatura en metros.
+- Si está inscrito en la universidad (`True` o `False`).
+
+Después, muestra cada variable junto con su tipo de dato utilizando `type()`.
+
+Código inicial:
+
+```{python}
+nombre = "Ana"
+edad = 19
+estatura = 1.65
+inscrito = True
+```
+
+Tu solución:
+
+```{python}
+# Completa el programa
+```
+
+::: {.callout-tip icon="false"}
+## Solución
+
+```{python}
+print(nombre, type(nombre))
+print(edad, type(edad))
+print(estatura, type(estatura))
+print(inscrito, type(inscrito))
+```
+:::

@@ -2355,8 +2355,8 @@
     ]
   },
   {
-    "objectID": "cap27.html",
-    "href": "cap27.html",
+    "objectID": "cap23.html",
+    "href": "cap23.html",
     "title": "45  Resumen y Práctica Final",
     "section": "",
     "text": "45.1 Comandos usados en Github y RStudio",
@@ -2366,8 +2366,8 @@
     ]
   },
   {
-    "objectID": "cap27.html#comandos-usados-en-github-y-rstudio",
-    "href": "cap27.html#comandos-usados-en-github-y-rstudio",
+    "objectID": "cap23.html#comandos-usados-en-github-y-rstudio",
+    "href": "cap23.html#comandos-usados-en-github-y-rstudio",
     "title": "45  Resumen y Práctica Final",
     "section": "",
     "text": "Importante\n\n\n\n\ngit add: Agregar cambios\ngit status: Revisamos el estado del proyecto\ngit commit: comentar los cambios\ngit checkout: Pordemos regresar cambios o cambiar de rama.\n\nEn Git, los comandos git pull y git push son utilizados para sincronizar y actualizar el contenido de un repositorio: \n\ngit pull: Actualiza la versión local de un repositorio desde otro remoto (en R studio flecha azul).\ngit push: Carga contenido en un repositorio remoto (en R studio flecha verde)",
@@ -2377,8 +2377,8 @@
     ]
   },
   {
-    "objectID": "cap27.html#página-de-inicio-en-github",
-    "href": "cap27.html#página-de-inicio-en-github",
+    "objectID": "cap23.html#página-de-inicio-en-github",
+    "href": "cap23.html#página-de-inicio-en-github",
     "title": "45  Resumen y Práctica Final",
     "section": "45.2 Página de inicio en GitHub",
     "text": "45.2 Página de inicio en GitHub\n\n\n\n\n\n\nNotaActividad\n\n\n\n\nEn GitHub, crea un repositorio con el mismo nombre de usuario. Ejemplo: Si el usuario es EveliaCoss y entonces el repositorio se llama EveliaCoss, dandonos la siguiente liga https://github.com/EveliaCoss/EveliaCoss\nAgrega un README al repositorio con tu informacion. Por Default ya trae una plantilla, modificala y adaptala a tu gusto.\nVisualiza como cambia tu inicio en el Github.\n\nPuedes aprender a realizar esta actividad paso a paso, siguiendo este tutorial.",
@@ -2388,8 +2388,8 @@
     ]
   },
   {
-    "objectID": "cap27.html#github-primero-rstudio-después",
-    "href": "cap27.html#github-primero-rstudio-después",
+    "objectID": "cap23.html#github-primero-rstudio-después",
+    "href": "cap23.html#github-primero-rstudio-después",
     "title": "45  Resumen y Práctica Final",
     "section": "45.3 GitHub primero, RStudio después…",
     "text": "45.3 GitHub primero, RStudio después…\n\nEn RStudio crea un nuevo proyecto: File &gt; New Project &gt; Version Control &gt; Git. Ahi pega el URL del repositorio https://github.com/mi_usuario/mi_repositorio.git. Da click en Create Project.\n\nEsto nos generará los siguientes elementos:\n\nUn directorio nuevo\nUn repositorio Git enlazado a al repositorio de GitHub\nUn proyecto en RStudio\n\nCon este procedimiento ya no es necesario preocuparse por configurar controles remotos Git y rastrear ramas en la línea de comandos.",
@@ -2399,8 +2399,8 @@
     ]
   },
   {
-    "objectID": "cap27.html#comentar-pull-y-push-en-rstudio",
-    "href": "cap27.html#comentar-pull-y-push-en-rstudio",
+    "objectID": "cap23.html#comentar-pull-y-push-en-rstudio",
+    "href": "cap23.html#comentar-pull-y-push-en-rstudio",
     "title": "45  Resumen y Práctica Final",
     "section": "45.4 Comentar, pull y push en Rstudio",
     "text": "45.4 Comentar, pull y push en Rstudio\n\nCon la flecha azul podemos hacer pull (RECUERDA HACERLO ANTES DE HACER UN PUSH), y con la flecha verde un push. Para poder comentar y hacer push debemos marcar con una palomita mediante un click en las pequeñas cajas blancas de la columna Staged, damos click en commit lo cual nos abre la siguiente ventana.\n\nVolvemos a dar click en commit, y finalizamos con push (flecha verde).",
@@ -2410,8 +2410,8 @@
     ]
   },
   {
-    "objectID": "cap27.html#ediciones-desde-r-de-la-página-de-inicio-en-github",
-    "href": "cap27.html#ediciones-desde-r-de-la-página-de-inicio-en-github",
+    "objectID": "cap23.html#ediciones-desde-r-de-la-página-de-inicio-en-github",
+    "href": "cap23.html#ediciones-desde-r-de-la-página-de-inicio-en-github",
     "title": "45  Resumen y Práctica Final",
     "section": "45.5 Ediciones desde R de la página de inicio en GitHub",
     "text": "45.5 Ediciones desde R de la página de inicio en GitHub\n\n\n\n\n\n\nNotaActividad\n\n\n\n\nSincroniza el repositorio con el nombre de tu usuario en GitHub (ejemplo: EveliaCoss/EveliaCoss) con RStudio\nRealiza los cambios desde R y subelos a GitHub.\nVisualiza como cambia tu inicio en el Github.\n\n\n\n\n\n\n\n\n\nTipOh Shit, Git!?!\n\n\n\nTambién existe esta página llamada Oh Shit, Git!?!. En donde puedes aprender sobre los errores comunes en GitHub.\n\n\n\nImagen tomada de Allison Horst.",
@@ -2421,8 +2421,8 @@
     ]
   },
   {
-    "objectID": "cap27.html#referencias",
-    "href": "cap27.html#referencias",
+    "objectID": "cap23.html#referencias",
+    "href": "cap23.html#referencias",
     "title": "45  Resumen y Práctica Final",
     "section": "45.6 Referencias",
     "text": "45.6 Referencias\n\nEvelia tutorial:Workshop sobre Git / Github 2025\nHaydee tutorial: Temas Selectos de Análisis Numérico y Computación Científica: Computo científico para el análisis de datos\nAlejandra Medina tutorial: Control de versiones con GitHub y RStudio",
@@ -2649,6 +2649,204 @@
     "crumbs": [
       "**Sección 6** - Introducción a R y Rstudio",
       "<span class='chapter-number'>49</span>  <span class='chapter-title'>**📚** Actividad 4 y 5</span>"
+    ]
+  },
+  {
+    "objectID": "intro_python.html",
+    "href": "intro_python.html",
+    "title": "50  Introducción a Python en Rstudio usando reticulate",
+    "section": "",
+    "text": "50.1 ¿Qué es Python?\nPython es un lenguaje de programación de alto nivel, interpretado, de propósito general y con una sintaxis clara y legible.\nFue creado por Guido van Rossum y publicado por primera vez en 1991.\nActualmente, Python es uno de los lenguajes más utilizados en el mundo debido a su versatilidad y facilidad de lectura.",
+    "crumbs": [
+      "**Sección 7** - Introducción a Python",
+      "<span class='chapter-number'>50</span>  <span class='chapter-title'>Introducción a Python en Rstudio usando `reticulate`</span>"
+    ]
+  },
+  {
+    "objectID": "intro_python.html#qué-es-python",
+    "href": "intro_python.html#qué-es-python",
+    "title": "50  Introducción a Python en Rstudio usando reticulate",
+    "section": "",
+    "text": "50.1.1 ¿Cuál es la historia del nombre?\nEn 1989, el programador neerlandés Guido van Rossum comenzó a desarrollar un nuevo lenguaje de programación mientras trabajaba en el centro de investigación CWI, en los Países Bajos.\nGuido era admirador del grupo humorístico británico Monty Python’s Flying Circus, por lo que decidió llamar Python a su nuevo lenguaje.\nSu intención era elegir un nombre que fuera corto, fácil de recordar y un poco divertido.\n\n\n\n\n\n\n\n¿Por qué utilizar Python?\nPermite desarrollar programas que realizan tareas de manera automática, procesan información, resuelven problemas y construyen aplicaciones.",
+    "crumbs": [
+      "**Sección 7** - Introducción a Python",
+      "<span class='chapter-number'>50</span>  <span class='chapter-title'>Introducción a Python en Rstudio usando `reticulate`</span>"
+    ]
+  },
+  {
+    "objectID": "intro_python.html#qué-es-un-lenguaje-interpretado",
+    "href": "intro_python.html#qué-es-un-lenguaje-interpretado",
+    "title": "50  Introducción a Python en Rstudio usando reticulate",
+    "section": "50.2 ¿Qué es un lenguaje interpretado?",
+    "text": "50.2 ¿Qué es un lenguaje interpretado?\nUn lenguaje interpretado es un lenguaje de programación cuyo código se ejecuta mediante un programa llamado intérprete, que se encarga de leer las instrucciones y ejecutarlas sin necesidad de generar previamente un archivo ejecutable independiente.\nPython es un ejemplo de lenguaje interpretado.\n\n50.2.1 ¿Cómo funciona?",
+    "crumbs": [
+      "**Sección 7** - Introducción a Python",
+      "<span class='chapter-number'>50</span>  <span class='chapter-title'>Introducción a Python en Rstudio usando `reticulate`</span>"
+    ]
+  },
+  {
+    "objectID": "intro_python.html#diferencia-entre-un-lenguaje-interpretado-y-uno-compilado",
+    "href": "intro_python.html#diferencia-entre-un-lenguaje-interpretado-y-uno-compilado",
+    "title": "50  Introducción a Python en Rstudio usando reticulate",
+    "section": "50.3 Diferencia entre un lenguaje interpretado y uno compilado",
+    "text": "50.3 Diferencia entre un lenguaje interpretado y uno compilado\n\n\n\n\n\n\n\nLenguaje interpretado\nLenguaje compilado\n\n\n\n\nUtiliza un intérprete para ejecutar el programa.\nGeneralmente utiliza un compilador para generar código ejecutable.\n\n\nNormalmente no requiere generar un ejecutable independiente.\nHabitualmente necesita una etapa de compilación previa.\n\n\nEjemplo: Python.\nEjemplo: C.",
+    "crumbs": [
+      "**Sección 7** - Introducción a Python",
+      "<span class='chapter-number'>50</span>  <span class='chapter-title'>Introducción a Python en Rstudio usando `reticulate`</span>"
+    ]
+  },
+  {
+    "objectID": "intro_python.html#qué-es-reticulate",
+    "href": "intro_python.html#qué-es-reticulate",
+    "title": "50  Introducción a Python en Rstudio usando reticulate",
+    "section": "50.4 ¿Qué es reticulate?",
+    "text": "50.4 ¿Qué es reticulate?\nreticulate es un paquete de R que permite ejecutar código de Python directamente desde R, facilitando la integración de ambos lenguajes de programación en un mismo proyecto.\nCon reticulate podemos aprovechar las herramientas de R y Python sin necesidad de cambiar constantemente entre programas.\n\n50.4.1 ¿Para qué sirve reticulate?\nEntre sus principales aplicaciones se encuentran:\n\nEjecutar código Python desde R: escribir y ejecutar instrucciones de Python dentro de una sesión de R.\nUtilizar bibliotecas de Python: acceder a herramientas como NumPy, pandas y scikit-learn.\nCompartir datos entre R y Python: transferir variables, vectores, listas y tablas de datos.\nIntegrar ambos lenguajes: desarrollar proyectos que aprovechen las funcionalidades de R y Python.\nTrabajar en Quarto y R Markdown: combinar fragmentos de código de ambos lenguajes en un documento reproducible.",
+    "crumbs": [
+      "**Sección 7** - Introducción a Python",
+      "<span class='chapter-number'>50</span>  <span class='chapter-title'>Introducción a Python en Rstudio usando `reticulate`</span>"
+    ]
+  },
+  {
+    "objectID": "intro_python.html#opción-a-ejecutar-python-desde-la-consola-de-r",
+    "href": "intro_python.html#opción-a-ejecutar-python-desde-la-consola-de-r",
+    "title": "50  Introducción a Python en Rstudio usando reticulate",
+    "section": "50.5 Opción A: Ejecutar Python desde la consola de R",
+    "text": "50.5 Opción A: Ejecutar Python desde la consola de R\nUna de las funciones más importantes es repl_python(), que permite acceder a una consola interactiva de Python sin salir de RStudio.\nPaso 1. Abrir la consola de Python desde R:\n\n\nCódigo\nlibrary(reticulate)\n\n\nWarning: package 'reticulate' was built under R version 4.6.1\n\n\nCódigo\nrepl_python()\n\n\nPython 3.12.13 (/Users/ecoss/.cache/uv/archive-v0/cb_IldkfR46NZ8HFdegcN/bin/python)\nReticulate 1.47.0 REPL -- A Python interpreter in R.\nEnter 'exit' or 'quit' to exit the REPL and return to R.\n\n\nexit\n\n\nO también podemos usar:\n\n\nCódigo\nreticulate::repl_python()\n\n\nPython 3.12.13 (/Users/ecoss/.cache/uv/archive-v0/cb_IldkfR46NZ8HFdegcN/bin/python)\nReticulate 1.47.0 REPL -- A Python interpreter in R.\nEnter 'exit' or 'quit' to exit the REPL and return to R.\n\n\nexit\n\n\nEl indicador de la consola cambiará de &gt; (R) a &gt;&gt;&gt; (Python). Para salir usa exit o quit.\nPaso 2. Escribir instrucciones de Python:\n\n\nCódigo\nprint(\"Hello world\")\n\n\nHello world\n\n\nPaso 3. Regresar a R:\n\n\nCódigo\nexit\n\n\nUse exit() or Ctrl-D (i.e. EOF) to exit\n\n\nEsto cierra la consola interactiva de Python y permite continuar trabajando con R.",
+    "crumbs": [
+      "**Sección 7** - Introducción a Python",
+      "<span class='chapter-number'>50</span>  <span class='chapter-title'>Introducción a Python en Rstudio usando `reticulate`</span>"
+    ]
+  },
+  {
+    "objectID": "intro_python.html#opción-b-ejecutar-instrucciones-de-python-desde-r",
+    "href": "intro_python.html#opción-b-ejecutar-instrucciones-de-python-desde-r",
+    "title": "50  Introducción a Python en Rstudio usando reticulate",
+    "section": "50.6 Opción B: Ejecutar instrucciones de Python desde R",
+    "text": "50.6 Opción B: Ejecutar instrucciones de Python desde R\nTambién podemos ejecutar código de Python directamente desde un script de R utilizando py_run_string().\n\n\nCódigo\nlibrary(reticulate)\npy_run_string(\"print('Hola desde Python')\")\n\n\nHola desde Python\n\n\nPara ejecutar varias instrucciones:\n\n\nCódigo\npy_run_string(\"\na = 10\nb = 20\nsuma = a + b\nprint('La suma es:', suma)\n\")\n\n\nLa suma es: 30",
+    "crumbs": [
+      "**Sección 7** - Introducción a Python",
+      "<span class='chapter-number'>50</span>  <span class='chapter-title'>Introducción a Python en Rstudio usando `reticulate`</span>"
+    ]
+  },
+  {
+    "objectID": "intro_python.html#compartir-variables-entre-r-y-python",
+    "href": "intro_python.html#compartir-variables-entre-r-y-python",
+    "title": "50  Introducción a Python en Rstudio usando reticulate",
+    "section": "50.7 Compartir variables entre R y Python",
+    "text": "50.7 Compartir variables entre R y Python\nUna característica importante de reticulate es que podemos utilizar variables creadas en Python desde R y viceversa.\nEjemplo 1. Crear una variable en Python y utilizarla en R.\n\n\nCódigo\nlibrary(reticulate)\npy_run_string(\"resultado = 5 * 8\")\npy$resultado\n\n\n[1] 40\n\n\nEjemplo 2. Crear una variable en R y utilizarla en Python.\n\n\nCódigo\nnumeros &lt;- c(10, 20, 30, 40)\npy$numeros &lt;- numeros\npy_run_string(\"print(sum(numeros))\")\n\n\n100.0",
+    "crumbs": [
+      "**Sección 7** - Introducción a Python",
+      "<span class='chapter-number'>50</span>  <span class='chapter-title'>Introducción a Python en Rstudio usando `reticulate`</span>"
+    ]
+  },
+  {
+    "objectID": "intro_python.html#utilizar-bibliotecas-de-python-desde-r",
+    "href": "intro_python.html#utilizar-bibliotecas-de-python-desde-r",
+    "title": "50  Introducción a Python en Rstudio usando reticulate",
+    "section": "50.8 Utilizar bibliotecas de Python desde R",
+    "text": "50.8 Utilizar bibliotecas de Python desde R\nPodemos utilizar bibliotecas como NumPy, pandas o scikit-learn.\nEn versiones recientes de reticulate, se recomienda declarar las dependencias con py_require(), que puede gestionar automáticamente un entorno de Python compatible.\n\n\nCódigo\nlibrary(reticulate)\n\npy_require(\"numpy\")\n\nnp &lt;- import(\"numpy\")\n\nnumeros &lt;- np$array(c(10, 20, 30, 40))\n\nnp$mean(numeros)\n\n\n[1] 25\n\n\nEste ejemplo utiliza NumPy, una biblioteca de Python especializada en operaciones numéricas.",
+    "crumbs": [
+      "**Sección 7** - Introducción a Python",
+      "<span class='chapter-number'>50</span>  <span class='chapter-title'>Introducción a Python en Rstudio usando `reticulate`</span>"
+    ]
+  },
+  {
+    "objectID": "intro_python.html#principales-funciones-de-reticulate",
+    "href": "intro_python.html#principales-funciones-de-reticulate",
+    "title": "50  Introducción a Python en Rstudio usando reticulate",
+    "section": "50.9 Principales funciones de reticulate",
+    "text": "50.9 Principales funciones de reticulate\n\n\n\nFunción\nDescripción\n\n\n\n\npy_config()\nMuestra la configuración de Python.\n\n\nrepl_python()\nAbre una consola interactiva de Python.\n\n\npy_run_string()\nEjecuta instrucciones de Python desde R.\n\n\npy_run_file()\nEjecuta un archivo .py.\n\n\nimport()\nImporta bibliotecas de Python.\n\n\npy_require()\nDeclara las dependencias de Python.\n\n\npy$variable\nAccede a variables de Python desde R.\n\n\nr_to_py()\nConvierte objetos de R a Python.\n\n\npy_to_r()\nConvierte objetos de Python a R.",
+    "crumbs": [
+      "**Sección 7** - Introducción a Python",
+      "<span class='chapter-number'>50</span>  <span class='chapter-title'>Introducción a Python en Rstudio usando `reticulate`</span>"
+    ]
+  },
+  {
+    "objectID": "intro_python.html#cómo-instalar-paquetes-de-python-desde-rstudio",
+    "href": "intro_python.html#cómo-instalar-paquetes-de-python-desde-rstudio",
+    "title": "50  Introducción a Python en Rstudio usando reticulate",
+    "section": "50.10 Cómo instalar paquetes de Python desde RStudio",
+    "text": "50.10 Cómo instalar paquetes de Python desde RStudio\nPodemos instalar bibliotecas de Python directamente desde RStudio utilizando el paquete reticulate, sin necesidad de abrir otra aplicación.\n\n50.10.1 Utilizar py_require() (recomendado)\nEn versiones recientes de reticulate, la función py_require() permite declarar las bibliotecas de Python que necesitamos y gestionar automáticamente sus dependencias.\nPaso 1. Declarar las bibliotecas de Python:\n\n\nCódigo\nlibrary(reticulate)\npy_require(\"numpy\")\npy_require(\"pandas\")\npy_require(\"matplotlib\")\npy_require(\"sympy\")\n\n\nTambién podemos declararlas juntas:\n\n\nCódigo\npy_require(c(\"numpy\", \"pandas\", \"matplotlib\", \"sympy\"))\n\n\npy_require() no necesariamente instala los paquetes en el momento de llamarla; declara las dependencias y permite que reticulate las resuelva al inicializar Python.\nPaso 2. Importar una biblioteca y utilizarla:\nOpción A:\n\n\nCódigo\nnp &lt;- import(\"numpy\")\nnumeros &lt;- np$array(c(10, 20, 30, 40))\nnp$mean(numeros)\n\n\n[1] 25\n\n\nOpción B:\n\n\nCódigo\nrepl_python()\n\n\nPython 3.12.13 (/Users/ecoss/.cache/uv/archive-v0/cb_IldkfR46NZ8HFdegcN/bin/python)\nReticulate 1.47.0 REPL -- A Python interpreter in R.\nEnter 'exit' or 'quit' to exit the REPL and return to R.\n\n\nexit\n\n\n\n\nCódigo\nimport numpy as np\n\nnumeros = np.array([10, 20, 30, 40])\n\nnp.mean(numeros)\n\n\nnp.float64(25.0)\n\n\nUna vez dentro de Python, observarás que el indicador de la consola cambia de &gt; a &gt;&gt;&gt;.\n\n\n50.10.2 Comparación entre R y Python\n\n\n\n\n\n\n\nDesde R con reticulate\nDesde repl_python()\n\n\n\n\nnp &lt;- import(\"numpy\")\nimport numpy as np\n\n\nnumeros &lt;- np$array(c(10, 20, 30, 40))\nnumeros = np.array([10, 20, 30, 40])\n\n\nnp$mean(numeros)\nnp.mean(numeros)\n\n\n\nObserva las diferencias:\n\nEn R utilizamos &lt;- para asignar valores; en Python utilizamos =.\nEn R utilizamos $ para acceder a funciones de un objeto; en Python utilizamos ..\nEn R utilizamos c() para crear un vector; en Python podemos utilizar [] para crear una lista.",
+    "crumbs": [
+      "**Sección 7** - Introducción a Python",
+      "<span class='chapter-number'>50</span>  <span class='chapter-title'>Introducción a Python en Rstudio usando `reticulate`</span>"
+    ]
+  },
+  {
+    "objectID": "intro_python.html#qué-es-un-objeto-en-python",
+    "href": "intro_python.html#qué-es-un-objeto-en-python",
+    "title": "50  Introducción a Python en Rstudio usando reticulate",
+    "section": "50.11 ¿Qué es un objeto en Python?",
+    "text": "50.11 ¿Qué es un objeto en Python?\nEn Python, un objeto es una entidad que contiene información (datos) y tiene un tipo que determina las operaciones que podemos realizar con él.\nUna característica fundamental de Python es que todo es un objeto, incluyendo números, cadenas de texto, listas, funciones y clases.\nCada objeto tiene tres características principales:\n\nIdentidad: permite distinguir un objeto de otro.\nTipo: determina qué clase de objeto es y qué operaciones admite.\nValor: representa la información que contiene el objeto.\nAtributos: representan características o información asociada con un objeto.\nMétodos: son funciones asociadas con un objeto que permiten realizar operaciones.",
+    "crumbs": [
+      "**Sección 7** - Introducción a Python",
+      "<span class='chapter-number'>50</span>  <span class='chapter-title'>Introducción a Python en Rstudio usando `reticulate`</span>"
+    ]
+  },
+  {
+    "objectID": "intro_python.html#variables-y-objetos-en-python",
+    "href": "intro_python.html#variables-y-objetos-en-python",
+    "title": "50  Introducción a Python en Rstudio usando reticulate",
+    "section": "50.12 Variables y objetos en Python",
+    "text": "50.12 Variables y objetos en Python\nUna variable es un nombre que hace referencia a un objeto almacenado en memoria.\nA diferencia de otros lenguajes, en Python no necesitamos declarar previamente el tipo de una variable.\n\n\n\n\n\nPodemos cambiar el objeto al que hace referencia una variable:\n\n\nCódigo\nnumero = 10\nnumero = \"Diez\"\n\n\nEn este caso, numero primero hace referencia a un objeto entero y después a una cadena de texto.\nEsto es posible porque Python utiliza tipado dinámico.",
+    "crumbs": [
+      "**Sección 7** - Introducción a Python",
+      "<span class='chapter-number'>50</span>  <span class='chapter-title'>Introducción a Python en Rstudio usando `reticulate`</span>"
+    ]
+  },
+  {
+    "objectID": "intro_python.html#tipos-de-objetos-en-python",
+    "href": "intro_python.html#tipos-de-objetos-en-python",
+    "title": "50  Introducción a Python en Rstudio usando reticulate",
+    "section": "50.13 Tipos de objetos en Python",
+    "text": "50.13 Tipos de objetos en Python\nPython dispone de diferentes tipos de datos integrados.\n\n\n\nTipo\nNombre en Python\nEjemplo\n\n\n\n\nEntero\nint\n25\n\n\nDecimal\nfloat\n3.1416\n\n\nComplejo\ncomplex\n2 + 3j\n\n\nCadena de texto\nstr\n\"Python\"\n\n\nBooleano\nbool\nTrue, False\n\n\nLista\nlist\n[10, 20, 30]\n\n\nTupla\ntuple\n(10, 20, 30)\n\n\nDiccionario\ndict\n{\"nombre\": \"Ana\"}\n\n\nConjunto\nset\n{1, 2, 3}\n\n\n\n\n50.13.1 ¿Cómo identificar el tipo de un objeto?\nUtilizamos la función type().\n\n\nCódigo\nedad = 20\nnombre = \"Carlos\"\npromedio = 9.5\n\nprint(type(edad))\n\n\n&lt;class 'int'&gt;\n\n\nCódigo\nprint(type(nombre))\n\n\n&lt;class 'str'&gt;\n\n\nCódigo\nprint(type(promedio))\n\n\n&lt;class 'float'&gt;",
+    "crumbs": [
+      "**Sección 7** - Introducción a Python",
+      "<span class='chapter-number'>50</span>  <span class='chapter-title'>Introducción a Python en Rstudio usando `reticulate`</span>"
+    ]
+  },
+  {
+    "objectID": "intro_python.html#objetos-mutables-e-inmutables",
+    "href": "intro_python.html#objetos-mutables-e-inmutables",
+    "title": "50  Introducción a Python en Rstudio usando reticulate",
+    "section": "50.14 Objetos mutables e inmutables",
+    "text": "50.14 Objetos mutables e inmutables\nLos objetos en Python pueden clasificarse en dos grandes grupos.\nObjetos mutables: permiten modificar su contenido después de haber sido creados. Por ejemplo, las listas y los diccionarios.\n\n\nCódigo\nnumeros = [10, 20, 30]\n\nnumeros[0] = 100 # Modificar el contenido de la posición 1\n\nprint(numeros)\n\n\n[100, 20, 30]\n\n\nObjetos inmutables: no permiten modificar su contenido una vez creados. Por ejemplo, los enteros, las cadenas de texto y las tuplas.\n\n\nCódigo\nnombre = \"Ana\"\nnombre = \"María\"\n\n\nEste código es válido, pero no modifica el objeto \"Ana\": la variable nombre pasa a hacer referencia a otro objeto.\n\n\n\n\n\nPor ejemplo:\n\n\nCódigo\nx = 25\nx = 30\n\n\nCuando ejecutamos x = 30, no modificamos el objeto entero 25. La variable x simplemente deja de referenciar al objeto 25 y comienza a referenciar al objeto 30.",
+    "crumbs": [
+      "**Sección 7** - Introducción a Python",
+      "<span class='chapter-number'>50</span>  <span class='chapter-title'>Introducción a Python en Rstudio usando `reticulate`</span>"
+    ]
+  },
+  {
+    "objectID": "intro_python.html#referencias",
+    "href": "intro_python.html#referencias",
+    "title": "50  Introducción a Python en Rstudio usando reticulate",
+    "section": "50.15 Referencias",
+    "text": "50.15 Referencias\nUsar Python con R con reticulate : : GUÍA RÁPIDA",
+    "crumbs": [
+      "**Sección 7** - Introducción a Python",
+      "<span class='chapter-number'>50</span>  <span class='chapter-title'>Introducción a Python en Rstudio usando `reticulate`</span>"
+    ]
+  },
+  {
+    "objectID": "quarto_python.html",
+    "href": "quarto_python.html",
+    "title": "51  Configuraciones para usar Quarto con Python",
+    "section": "",
+    "text": "51.0.1 Instalar los paquetes necesarios\nEl error ocurre porque Quarto está intentando ejecutar Python desde RStudio, pero en ese entorno faltan paquetes necesarios para utilizar Jupyter.\nEl mensaje principal es:\nEsto significa que Python no encuentra el módulo yaml, que pertenece al paquete PyYAML.\nAdemás, Quarto indica:\nVamos a solucionarlo en macOS utilizando RStudio.\nAbre la pestaña Terminal de RStudio (no la consola de R) y ejecuta:\nEstos paquetes cumplen distintas funciones:\nSi aparece el error externally-managed-environment, no fuerces la instalación. Utiliza un entorno virtual como se explica a continuación.",
+    "crumbs": [
+      "**Sección 7** - Introducción a Python",
+      "<span class='chapter-number'>51</span>  <span class='chapter-title'>Configuraciones para usar Quarto con Python</span>"
+    ]
+  },
+  {
+    "objectID": "quarto_python.html#referencias",
+    "href": "quarto_python.html#referencias",
+    "title": "51  Configuraciones para usar Quarto con Python",
+    "section": "51.1 Referencias",
+    "text": "51.1 Referencias\nUsar Python con R con reticulate : : GUÍA RÁPIDA",
+    "crumbs": [
+      "**Sección 7** - Introducción a Python",
+      "<span class='chapter-number'>51</span>  <span class='chapter-title'>Configuraciones para usar Quarto con Python</span>"
     ]
   },
   {

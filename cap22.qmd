@@ -223,7 +223,7 @@ Como no hemos realizado ningún cambio en el remoto, no veremos nada nuevo en el
 ## ¿Por qué aparecían tantos errores?
 
 | Error | Causa | Solución |
-|------------------------|------------------------|------------------------|
+|----|----|----|
 | `Permission denied (publickey)` | SSH no seleccionaba tu clave correcta. | Crear `~/.ssh/config`. |
 | `nano: command not found` | El editor no está instalado. | Crear el archivo con `cat`. |
 | `Could not open a connection to your authentication agent` | El agente SSH no estaba activo. | No necesitas el agente si SSH utiliza directamente tu clave. |
