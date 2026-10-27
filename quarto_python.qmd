@@ -1,0 +1,98 @@
+# Configuraciones para usar Quarto con Python
+
+> **Fecha:** X de octubre, 2026
+
+El error ocurre porque Quarto está intentando ejecutar Python desde RStudio, pero en ese entorno faltan paquetes necesarios para utilizar Jupyter.
+
+```         
+==> quarto preview python_ejercicio1.qmd --to html --no-watch-inputs --no-browse   Starting python3 kernel...Traceback (most recent call last):   File "/Applications/RStudio.app/Contents/Resources/app/quarto/share/jupyter/jupyter.py", line 20, in <module>     from notebook import notebook_execute, RestartKernel   File "/Applications/RStudio.app/Contents/Resources/app/quarto/share/jupyter/notebook.py", line 15, in <module>     from yaml import safe_load as parse_string ModuleNotFoundError: No module named 'yaml' Python 3 installation: {}  Jupyter is not available in this Python installation. Install with python3 -m pip install jupyter  WARN: Error encountered when rendering files
+```
+
+El mensaje principal es:
+
+```         
+ModuleNotFoundError: No module named 'yaml'
+```
+
+Esto significa que Python no encuentra el módulo `yaml`, que pertenece al paquete PyYAML.
+
+Además, Quarto indica:
+
+```         
+Jupyter is not available in this Python installation.
+```
+
+Vamos a solucionarlo en macOS utilizando RStudio.
+
+### Instalar los paquetes necesarios
+
+Abre la pestaña Terminal de RStudio (no la consola de R) y ejecuta:
+
+``` bash
+python3 -m pip install PyYAML jupyter ipykernel
+```
+
+Estos paquetes cumplen distintas funciones:
+
+| Paquete     | Función                                                     |
+|-------------|-------------------------------------------------------------|
+| `PyYAML`    | Permite leer archivos YAML utilizados por Quarto.           |
+| `jupyter`   | Permite ejecutar código Python dentro de documentos Quarto. |
+| `ipykernel` | Proporciona el kernel para ejecutar Python en Jupyter.      |
+
+Si aparece el error `externally-managed-environment`, no fuerces la instalación. Utiliza un entorno virtual como se explica a continuación.
+
+### Alternativa recomendada: crear un entorno virtual
+
+En la terminal de RStudio:
+
+``` bash
+python3 -m venv ~/.venvs/quarto-python
+```
+
+Actívalo:
+
+``` bash
+source ~/.venvs/quarto-python/bin/activate
+```
+
+Instala los paquetes:
+
+``` bash
+python -m pip install --upgrade pip
+python -m pip install PyYAML jupyter ipykernel
+```
+
+Comprueba que funcionan:
+
+``` bash
+python -c "import yaml; import ipykernel; print('Todo correcto')"
+```
+
+### Configurar Quarto para utilizar ese Python
+
+En la consola de RStudio, ejecuta:
+
+``` bash
+Sys.setenv(
+  QUARTO_PYTHON = path.expand("~/.venvs/quarto-python/bin/python")
+)
+```
+
+Después comprueba la configuración:
+
+```{r, eval=FALSE}
+quarto::quarto_check()
+```
+
+También puedes verificar desde la terminal:
+
+``` bash
+quarto check jupyter
+```
+
+Importante: `Sys.setenv()` configura la variable para la sesión actual de R. Si reinicias RStudio, tendrás que volver a establecerla o guardarla en tu archivo `.Renviron`.
+
+## Referencias
+
+[Usar Python con R con reticulate : : GUÍA RÁPIDA](https://rstudio.github.io/cheatsheets/translations/spanish/reticulate_es.pdf)
