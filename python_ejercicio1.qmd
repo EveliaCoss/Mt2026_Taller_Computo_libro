@@ -270,6 +270,23 @@ print(id(b))
 print(a is b)  # ¿Son el mismo objeto?
 ```
 
+Si queremos un objeto **nuevo** con el mismo valor, hay que **copiarlo**. Una forma es `a.copy()`, un **método** de las listas que veremos a detalle en la [🐍 Actividad 2](python_ejercicio2.qmd):
+
+```{python}
+a = [1, 2, 3]
+b = a.copy()   # b es un objeto NUEVO con el mismo valor
+
+print(id(a))
+print(id(b))
+print(a is b)  # ¿Son el mismo objeto?
+print(a == b)  # ¿Tienen el mismo valor?
+```
+
+| Instrucción | ¿Crea un objeto nuevo? | Si modificas `b`, ¿cambia `a`? |
+|----|----|----|
+| `b = a` | **No**: `b` es otro nombre para el mismo objeto. | **Sí** |
+| `b = a.copy()` | **Sí**: un objeto nuevo con el mismo valor. | No |
+
 ### Comparar valor e identidad: `==` vs `is`
 
 | Operador | ¿Qué compara? | Ejemplo |
@@ -607,6 +624,34 @@ Hay **un solo objeto** con **dos nombres**. Al modificar el objeto a través de 
 :::
 ::::
 
+#### Para comparar: ¿y si usamos `.copy()`?
+
+Observa qué cambia cuando, en lugar de `otra = original`, creamos una **copia** con `original.copy()`. Ejecuta el código y compara las identidades. Después prueba a modificar `referencia` y `copia` con otros valores.
+
+```{pyodide}
+#| autorun: true
+original = [1, 2, 3]
+referencia = original          # Otro nombre para el MISMO objeto
+copia = original.copy()        # Un objeto NUEVO con el mismo valor
+
+referencia[0] = 99             # Modifica el objeto original
+copia[1] = 50                  # Modifica solo la copia
+
+print("original:  ", original, "  id:", id(original))
+print("referencia:", referencia, "  id:", id(referencia))
+print("copia:     ", copia, "  id:", id(copia))
+print()
+print("¿referencia is original?", referencia is original)
+print("¿copia is original?     ", copia is original)
+```
+
+| | `referencia = original` | `copia = original.copy()` |
+|----|----|----|
+| ¿Mismo objeto que `original`? | **Sí** (misma identidad) | No (identidad distinta) |
+| ¿El cambio se ve en `original`? | **Sí**: `original[0]` ahora vale `99`. | No: `original[1]` sigue valiendo `2`. |
+
+`copy()` es un **método** de las listas: por eso se escribe con punto y paréntesis. Lo usaremos en el ejercicio 7 de la [🐍 Actividad 2](python_ejercicio2.qmd), junto con otros métodos.
+
 ### Ejercicio 7. ¿Mismo valor o mismo objeto?
 
 Completa el código usando `==` e `is` para responder:
@@ -657,9 +702,26 @@ print("¿a y c son el mismo objeto?", lista_a is lista_c)    # True
 A partir de la lista `primos` y la tupla `punto`:
 
 1.  Muestra el primer y el último elemento de `primos`.
-2.  Muestra los elementos de `primos` del índice 1 al 3 (incluido).
+2.  Muestra los elementos de `primos` del índice 1 al 3 (incluido): debe mostrar `[3, 5, 7]`.
 3.  Muestra la segunda coordenada de `punto`.
 4.  En la última línea escribe la expresión que obtiene el **último** elemento de `primos` (debe ser `11`).
+
+::: callout-note
+## ¿Por qué `primos[1:4]` y no `primos[1:3]`?
+
+En un rango `lista[inicio:fin]`, Python incluye el índice `inicio` pero **no incluye** el índice `fin`. Por eso, para llegar **hasta el índice 3**, el final del rango debe ser `4`:
+
+| Índice | 0 | 1 | 2 | 3 | 4 |
+|----|----|----|----|----|----|
+| `primos` | 2 | **3** | **5** | **7** | 11 |
+
+``` python
+primos[1:3]   # [3, 5]     → índices 1 y 2 (el 3 NO se incluye)
+primos[1:4]   # [3, 5, 7]  → índices 1, 2 y 3
+```
+
+Es la misma regla de `range(1, 4)`, que genera 1, 2 y 3. Una forma de recordarlo: `fin - inicio` es el **número de elementos** del resultado (`4 - 1 = 3` elementos).
+:::
 
 ```{pyodide}
 #| exercise: ej8
