@@ -382,7 +382,7 @@ Después del YAML escribe texto en Markdown e inserta bloques de código. Para i
 ````
 ## Mi primer programa en Python
 
-```{python}
+```{{python}}
 nombre = "Ana"
 edad = 20
 
@@ -404,11 +404,11 @@ format: html
 engine: knitr
 ---
 
-```{r}
+```{{r}}
 x <- c(1, 2, 3)
 ```
 
-```{python}
+```{{python}}
 import numpy as np
 print(np.array(r.x) * 2)    # Usar en Python una variable creada en R
 ```
@@ -421,7 +421,7 @@ En este caso Python lo ejecuta `reticulate`, con el Python de `RETICULATE_PYTHON
 Para comprobar todo de una vez, copia este bloque en tu documento y presiona **Render**:
 
 ````
-```{python}
+```{{python}}
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -451,7 +451,7 @@ Para ejecutar un bloque sin renderizar todo el documento, coloca el cursor dentr
 Las opciones de cada bloque se escriben al inicio, cada una en una línea que comienza con `#|`:
 
 ````
-```{python}
+```{{python}}
 #| label: fig-grafica
 #| fig-cap: "Mi primera gráfica en Python"
 #| echo: false

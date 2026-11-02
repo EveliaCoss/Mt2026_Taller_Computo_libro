@@ -1,0 +1,918 @@
+---
+engine: knitr
+---
+
+# Funciones en Python
+
+{{< include ./_extensions/r-wasm/live/_knitr.qmd >}}
+
+> **Fecha:** 17 de noviembre, 2026
+
+Desde el inicio del curso hemos usado **funciones**: `print()`, `len()`, `type()`, `sum()`, `max()`... Son bloques de código con un nombre que realizan una tarea. En este capítulo aprenderemos a **crear nuestras propias funciones** y a escribirlas siguiendo **buenas prácticas**.
+
+En este capítulo veremos:
+
+- Cómo **definir** y **llamar** una función con `def` y `return`.
+- **Parámetros**, **argumentos** y **valores por defecto**.
+- La diferencia entre `return` y `print()`.
+- Cómo **documentar** una función con *docstrings* y anotaciones de tipo.
+- El **alcance** de las variables (locales y globales).
+- **Programación defensiva** dentro de las funciones y cómo **probarlas**.
+- Funciones como argumentos, funciones `lambda` y recursión.
+
+## ¿Por qué crear funciones?
+
+Imagina que necesitas calcular el área de un círculo en varias partes de tu programa:
+
+``` python
+area_1 = 3.141592653589793 * 2 ** 2
+area_2 = 3.141592653589793 * 5 ** 2
+area_3 = 3.141592653589793 * 7.5 ** 2
+```
+
+Si descubres un error en la fórmula, tendrás que corregirlo en **cada** línea. Con una función, la fórmula se escribe **una sola vez**:
+
+```{python}
+import math
+
+def area_circulo(radio):
+    return math.pi * radio ** 2
+
+print(area_circulo(2))
+print(area_circulo(5))
+print(area_circulo(7.5))
+```
+
+| Ventaja | ¿Qué significa? |
+|------------------------------------|------------------------------------|
+| **Reutilizar** código | Escribes la lógica una vez y la usas muchas veces. |
+| **No repetirte** | Principio *DRY* (*Don't Repeat Yourself*): si algo cambia, lo cambias en un solo lugar. |
+| **Organizar** | Divides un problema grande en tareas pequeñas con nombres claros. |
+| **Probar** | Puedes verificar cada función por separado. |
+| **Leer** | `area_circulo(5)` dice **qué** hace; `math.pi * 5 ** 2` dice **cómo**. |
+
+Es la misma idea que una función en matemáticas: $f(x) = x^2 + 1$ recibe un valor $x$ y **regresa** un resultado.
+
+## Definir y llamar una función
+
+``` python
+def nombre_funcion(parametro_1, parametro_2):
+    """Descripción breve de lo que hace la función."""
+    resultado = parametro_1 + parametro_2      # Cuerpo de la función
+    return resultado                            # Valor que regresa
+```
+
+| Parte | ¿Qué es? |
+|------------------------------------|------------------------------------|
+| `def` | Palabra reservada para **definir** una función. |
+| `nombre_funcion` | El nombre de la función (en `snake_case`, como las variables). |
+| `(parametro_1, parametro_2)` | Los **parámetros**: los datos que recibe. Puede no tener ninguno: `()`. |
+| `:` | Los dos puntos, como en `if` y `for`. |
+| `"""..."""` | El *docstring*: la documentación de la función (opcional, pero muy recomendable). |
+| Cuerpo | Las instrucciones, con **4 espacios** de indentación. |
+| `return` | Termina la función y **regresa** un valor a quien la llamó. |
+
+Definir una función **no la ejecuta**: solo la guarda con ese nombre. Para ejecutarla hay que **llamarla**, escribiendo su nombre con paréntesis:
+
+```{python}
+def saludar(nombre):
+    return "¡Hola, " + nombre + "!"
+
+mensaje = saludar("Ana")     # Llamar a la función
+print(mensaje)
+print(saludar("Luis"))
+```
+
+Una función puede no recibir parámetros:
+
+```{python}
+def mostrar_bienvenida():
+    print("Bienvenida al Taller de Cómputo")
+
+mostrar_bienvenida()
+```
+
+::: callout-important
+La función debe **definirse antes** de llamarla. Si la llamas antes de la línea `def`, obtendrás un `NameError`.
+:::
+
+## Parámetros y argumentos
+
+- Los **parámetros** son los nombres que aparecen en la **definición**: `def potencia(base, exponente)`.
+- Los **argumentos** son los valores que se envían al **llamarla**: `potencia(2, 10)`.
+
+### Argumentos por posición y por nombre
+
+```{python}
+def potencia(base, exponente):
+    return base ** exponente
+
+print(potencia(2, 10))                     # Por posición: base=2, exponente=10
+print(potencia(exponente=10, base=2))      # Por nombre: el orden no importa
+print(potencia(10, 2))                     # ¡Cuidado! base=10, exponente=2
+```
+
+Pasar los argumentos **por nombre** hace el código más claro cuando hay varios parámetros.
+
+### Valores por defecto
+
+Un parámetro puede tener un **valor por defecto**, que se usa si no se envía ese argumento:
+
+```{python}
+def potencia(base, exponente=2):
+    return base ** exponente
+
+print(potencia(5))        # Usa exponente=2 -> 25
+print(potencia(5, 3))     # Usa exponente=3 -> 125
+```
+
+Ya usamos valores por defecto sin saberlo: `print()` tiene `sep=" "` y `end="\n"`, y `round()` tiene `ndigits=None`.
+
+::: callout-warning
+Los parámetros con valor por defecto van **al final**: `def f(a, b=2)` es correcto, pero `def f(a=1, b)` produce un `SyntaxError`.
+:::
+
+## `return` vs. `print()`
+
+Es la confusión más común al empezar:
+
+|   | `print()` | `return` |
+|------------------------|------------------------|------------------------|
+| ¿Qué hace? | **Muestra** un valor en la pantalla. | **Regresa** un valor a quien llamó la función. |
+| ¿Se puede guardar el resultado? | **No**. | **Sí**: `x = funcion()`. |
+| ¿Termina la función? | No. | **Sí**, inmediatamente. |
+
+```{python}
+def doble_con_print(x):
+    print(x * 2)
+
+def doble_con_return(x):
+    return x * 2
+
+a = doble_con_print(5)     # Muestra 10, pero no regresa nada
+b = doble_con_return(5)    # No muestra nada, regresa 10
+
+print("a =", a)            # None
+print("b =", b)            # 10
+print(b + 1)               # Podemos seguir usando el resultado
+```
+
+Una función **sin `return`** regresa `None`. Por eso, las funciones que **calculan** algo deben usar `return`, y dejar el `print()` para quien las llama.
+
+### Regresar varios valores
+
+Una función puede regresar varios valores separados por comas. Python los agrupa en una **tupla**, que podemos desempaquetar:
+
+```{python}
+def division_entera(dividendo, divisor):
+    cociente = dividendo // divisor
+    residuo = dividendo % divisor
+    return cociente, residuo
+
+cociente, residuo = division_entera(17, 5)
+print("Cociente:", cociente, " Residuo:", residuo)
+print(division_entera(17, 5))      # (3, 2): una tupla
+```
+
+### `return` termina la función
+
+Después de `return`, la función **termina**, aunque haya más líneas. Esto permite salir en cuanto conocemos la respuesta:
+
+```{python}
+def es_primo(n):
+    if n < 2:
+        return False
+    for divisor in range(2, int(n ** 0.5) + 1):
+        if n % divisor == 0:
+            return False          # Encontramos un divisor: ya no es primo
+    return True                   # No hubo divisores
+
+print([n for n in range(1, 30) if es_primo(n)])
+```
+
+Compara con el ejercicio de números primos del capítulo de [ciclos](python_for.qmd): `return` reemplaza a la combinación de una variable `es_primo` y `break`.
+
+## Documentar funciones
+
+### *Docstrings*
+
+Un ***docstring*** es un texto entre triples comillas justo debajo de la línea `def`. Explica **qué hace** la función, **qué recibe** y **qué regresa**. Es lo que muestra `help()`:
+
+```{python}
+def area_triangulo(base, altura):
+    """Calcula el área de un triángulo.
+
+    Parámetros:
+        base (float): longitud de la base.
+        altura (float): altura del triángulo.
+
+    Regresa:
+        float: el área, base * altura / 2.
+    """
+    return base * altura / 2
+
+help(area_triangulo)
+```
+
+### Anotaciones de tipo
+
+Las **anotaciones de tipo** (*type hints*) indican qué tipo de dato espera cada parámetro y qué tipo regresa la función. Python **no las verifica**, pero hacen el código más claro:
+
+```{python}
+def promedio(datos: list) -> float:
+    """Regresa el promedio de una lista de números."""
+    return sum(datos) / len(datos)
+
+print(promedio([8, 9, 10]))
+```
+
+`datos: list` significa "se espera una lista" y `-> float` significa "regresa un decimal".
+
+## Alcance de las variables
+
+Las variables creadas **dentro** de una función son **locales**: solo existen mientras la función se ejecuta.
+
+```{python}
+def calcular_iva(precio):
+    tasa = 0.16                 # Variable local
+    return precio * tasa
+
+print(calcular_iva(100))
+print(tasa)                     # NameError: tasa solo existía dentro de la función
+```
+
+Una función **puede leer** una variable global (definida fuera de todas las funciones), pero depender de ella es una mala práctica: es mejor pasarla como **parámetro**.
+
+```{python}
+TASA_IVA = 0.16                 # Constante global
+
+def calcular_iva(precio, tasa=TASA_IVA):
+    return precio * tasa
+
+print(calcular_iva(100))
+print(calcular_iva(100, tasa=0.08))
+```
+
+|   | Variable local | Variable global |
+|------------------------|------------------------|------------------------|
+| ¿Dónde se crea? | Dentro de una función. | Fuera de todas las funciones. |
+| ¿Dónde existe? | Solo dentro de esa función. | En todo el programa. |
+| Recomendación | Úsalas libremente. | Úsalas solo para **constantes** (`MAYUSCULAS`). |
+
+## Programación defensiva en funciones
+
+Una función no sabe con qué datos la llamarán. Siguiendo lo que vimos en el capítulo de [buenas prácticas](python_buenas_practicas.qmd), una buena función **valida sus argumentos** al inicio y lanza un error claro con `raise` si son incorrectos:
+
+```{python}
+def factorial(n):
+    """Regresa n! para un entero n >= 0."""
+    if not isinstance(n, int):
+        raise TypeError("n debe ser un número entero")
+    if n < 0:
+        raise ValueError("n no puede ser negativo; se recibió " + str(n))
+
+    resultado = 1
+    for i in range(2, n + 1):
+        resultado *= i
+    return resultado
+
+print(factorial(5))
+print(factorial(-3))
+```
+
+Quien llama a la función puede **atrapar** el error con `try` / `except`:
+
+```{python}
+try:
+    print(factorial(-3))
+except ValueError as error:
+    print("No se pudo calcular:", error)
+```
+
+## Probar funciones
+
+Una función se **prueba** llamándola con valores cuya respuesta ya conocemos. Con `assert`, la prueba no muestra nada si todo está bien y se detiene si algo falla:
+
+```{python}
+assert factorial(0) == 1
+assert factorial(1) == 1
+assert factorial(5) == 120
+assert es_primo(2) and es_primo(97)
+assert not es_primo(1) and not es_primo(91)
+print("Todas las pruebas pasaron ✅")
+```
+
+::: callout-tip
+Escribe las pruebas **al mismo tiempo** que la función e incluye los **casos límite**: 0, 1, números negativos, listas vacías. Si más adelante modificas la función, vuelve a ejecutar las pruebas para verificar que no rompiste nada.
+:::
+
+## Funciones como argumentos y funciones `lambda`
+
+En Python, las funciones también son **objetos**: se pueden guardar en variables y enviar como argumentos a otras funciones. Ya lo hicimos en la [🐍 Actividad 2](python_ejercicio2.qmd) con `max(set(datos), key=datos.count)`.
+
+```{python}
+def ultimo_digito(n):
+    return n % 10
+
+numeros = [23, 51, 17, 40, 88]
+print(sorted(numeros, key=ultimo_digito))    # Ordenar por el último dígito
+```
+
+Una función **`lambda`** es una función pequeña, de una sola expresión y sin nombre, útil para estos casos:
+
+```{python}
+print(sorted(numeros, key=lambda n: n % 10))
+
+cuadrado = lambda x: x ** 2       # Funciona, pero para esto es mejor usar def
+print(cuadrado(9))
+```
+
+Usa `lambda` solo para funciones muy cortas que pasas como argumento; si necesitas un nombre, usa `def`.
+
+## Recursión
+
+Una función **recursiva** se llama **a sí misma**. Es útil para definiciones matemáticas recursivas, como el factorial: $n! = n \cdot (n-1)!$ con $0! = 1$.
+
+```{python}
+def factorial_recursivo(n):
+    if n == 0:                                # Caso base: detiene la recursión
+        return 1
+    return n * factorial_recursivo(n - 1)     # Caso recursivo
+
+print(factorial_recursivo(5))   # 5 * 4 * 3 * 2 * 1 * 1 = 120
+```
+
+Toda función recursiva necesita un **caso base**; sin él, se llamaría a sí misma indefinidamente hasta producir un `RecursionError`.
+
+## Buenas prácticas al escribir funciones
+
+| Práctica | Mal | Bien |
+|------------------------|------------------------|------------------------|
+| Nombres con **verbos** en `snake_case`. | `def x(a):` | `def calcular_promedio(datos):` |
+| **Una sola tarea** por función. | Una función que lee datos, calcula y grafica. | Tres funciones pequeñas. |
+| **Regresar** valores en lugar de imprimirlos. | `print(resultado)` dentro de la función. | `return resultado` y que quien la llama decida. |
+| **Documentar** con un *docstring*. | Sin explicación. | `"""Calcula el área de un círculo."""` |
+| Pasar los datos como **parámetros**. | Usar variables globales dentro de la función. | `def calcular_iva(precio, tasa):` |
+| **Validar** los argumentos. | Dejar que falle con un error confuso. | `raise ValueError("n no puede ser negativo")` |
+| Funciones **cortas**. | 100 líneas en una función. | Si no cabe en la pantalla, divídela. |
+| **Probar** con casos conocidos. | Confiar en que funciona. | `assert factorial(5) == 120` |
+| No usar **listas** como valor por defecto. | `def agregar(x, lista=[]):` | `def agregar(x, lista=None):` (ver ejercicio 7). |
+
+## Errores comunes
+
+| Error | Ejemplo | Corrección |
+|------------------------|------------------------|------------------------|
+| Olvidar los paréntesis al llamar | `area_circulo` (muestra `<function ...>`) | `area_circulo(5)` |
+| Olvidar el `return` | La función regresa `None`. | Agrega `return resultado`. |
+| Llamar antes de definir | `NameError: name 'f' is not defined` | Escribe el `def` antes de la llamada. |
+| Número incorrecto de argumentos | `TypeError: potencia() missing 1 required positional argument` | Revisa cuántos parámetros recibe. |
+| Usar una variable local afuera | `NameError` | Regrésala con `return`. |
+| Olvidar los dos puntos o la indentación | `SyntaxError` / `IndentationError` | `def f(x):` y cuerpo con 4 espacios. |
+| Llamar `sum`, `max`, `list`... a una función o variable | Se pierde la función integrada. | Usa nombres descriptivos. |
+
+## Ejercicios
+
+Resuelve los ejercicios en los editores interactivos. Recuerda que lo que escribas **no se guarda** al recargar la página. En estos ejercicios, **Run Code** prueba tu función con **varios valores**, no solo con los del ejemplo.
+
+### Ejercicio 1. Área de un rectángulo
+
+Completa la función `area_rectangulo(base, altura)` para que **regrese** el área del rectángulo.
+
+```{pyodide}
+#| exercise: fn1
+def area_rectangulo(base, altura):
+    """Regresa el área de un rectángulo."""
+    ______
+
+print(area_rectangulo(3, 4))
+```
+
+```{pyodide}
+#| exercise: fn1
+#| check: true
+try:
+    f = envir_result["area_rectangulo"]
+except Exception:
+    f = None
+if f is None:
+    feedback = {"correct": False, "message": "No encontré la función area_rectangulo."}
+elif f(3, 4) is None:
+    feedback = {"correct": False, "message": "Tu función regresa None: usa return en lugar de print()."}
+elif f(3, 4) == 12 and f(2.5, 2) == 5 and f(0, 7) == 0:
+    feedback = {"correct": True, "message": "¡Correcto! Tu función funciona con todos los casos de prueba."}
+else:
+    feedback = {"correct": False, "message": "Revisa la fórmula: el área es base * altura."}
+feedback
+```
+
+:::: {.hint exercise="fn1"}
+::: {.callout-note collapse="false"}
+## Pista
+
+Escribe `return base * altura`. Si usas `print()`, la función mostrará el valor, pero regresará `None`.
+:::
+::::
+
+:::: {.solution exercise="fn1"}
+::: {.callout-tip collapse="false"}
+## Solución
+
+``` python
+def area_rectangulo(base, altura):
+    """Regresa el área de un rectángulo."""
+    return base * altura
+
+print(area_rectangulo(3, 4))   # 12
+```
+:::
+::::
+
+### Ejercicio 2. De Celsius a Fahrenheit
+
+Escribe la función `celsius_a_fahrenheit(celsius)` que convierta una temperatura con la fórmula $F = \frac{9}{5} C + 32$. Incluye un *docstring*.
+
+```{pyodide}
+#| exercise: fn2
+def celsius_a_fahrenheit(celsius):
+    ______
+
+print(celsius_a_fahrenheit(0))      # Debe ser 32
+print(celsius_a_fahrenheit(100))    # Debe ser 212
+```
+
+```{pyodide}
+#| exercise: fn2
+#| check: true
+import math
+try:
+    f = envir_result["celsius_a_fahrenheit"]
+except Exception:
+    f = None
+correcta = f is not None and f(0) is not None
+if correcta:
+    for c, esperado in [(0, 32), (100, 212), (-40, -40), (37, 98.6)]:
+        if not math.isclose(f(c), esperado):
+            correcta = False
+if f is None:
+    feedback = {"correct": False, "message": "No encontré la función celsius_a_fahrenheit."}
+elif f(0) is None:
+    feedback = {"correct": False, "message": "Tu función regresa None: usa return."}
+elif correcta:
+    if f.__doc__:
+        feedback = {"correct": True, "message": "¡Correcto! Además, documentaste tu función. Curiosidad: -40 °C = -40 °F."}
+    else:
+        feedback = {"correct": True, "message": "¡Correcto! Agrega un docstring para documentar tu función."}
+else:
+    feedback = {"correct": False, "message": "Revisa la fórmula: 9 / 5 * celsius + 32."}
+feedback
+```
+
+:::: {.hint exercise="fn2"}
+::: {.callout-note collapse="false"}
+## Pista
+
+El *docstring* va en la primera línea del cuerpo: `"""Convierte grados Celsius a Fahrenheit."""`. Después: `return 9 / 5 * celsius + 32`.
+:::
+::::
+
+:::: {.solution exercise="fn2"}
+::: {.callout-tip collapse="false"}
+## Solución
+
+``` python
+def celsius_a_fahrenheit(celsius):
+    """Convierte una temperatura de grados Celsius a grados Fahrenheit."""
+    return 9 / 5 * celsius + 32
+
+print(celsius_a_fahrenheit(0))      # 32.0
+print(celsius_a_fahrenheit(100))    # 212.0
+```
+:::
+::::
+
+### Ejercicio 3. ¿Es par?
+
+Escribe la función `es_par(n)` que regrese `True` si `n` es par y `False` si es impar. Intenta escribirla en **una sola línea** de cuerpo, sin `if`.
+
+```{pyodide}
+#| exercise: fn3
+def es_par(n):
+    ______
+
+print(es_par(4), es_par(7))
+```
+
+```{pyodide}
+#| exercise: fn3
+#| check: true
+try:
+    f = envir_result["es_par"]
+except Exception:
+    f = None
+if f is None:
+    feedback = {"correct": False, "message": "No encontré la función es_par."}
+elif [f(0), f(2), f(10), f(-4), f(1), f(7), f(-3)] == [True, True, True, True, False, False, False]:
+    feedback = {"correct": True, "message": "¡Correcto! Una expresión booleana como n % 2 == 0 ya regresa True o False."}
+else:
+    feedback = {"correct": False, "message": "La función debe regresar True para 0, 2, 10, -4 y False para 1, 7, -3."}
+feedback
+```
+
+:::: {.hint exercise="fn3"}
+::: {.callout-note collapse="false"}
+## Pista
+
+La expresión `n % 2 == 0` ya es `True` o `False`: puedes regresarla directamente con `return`.
+:::
+::::
+
+:::: {.solution exercise="fn3"}
+::: {.callout-tip collapse="false"}
+## Solución
+
+``` python
+def es_par(n):
+    """Regresa True si n es par."""
+    return n % 2 == 0
+
+print(es_par(4), es_par(7))   # True False
+```
+
+Es mejor que escribir `if n % 2 == 0: return True` y `else: return False`: hace lo mismo con menos código.
+:::
+::::
+
+### Ejercicio 4. Factorial con validación
+
+Completa la función `factorial(n)` para que:
+
+1.  Lance un `ValueError` si `n` es negativo.
+2.  Calcule $n!$ con un ciclo `for` y lo regrese.
+
+```{pyodide}
+#| exercise: fn4
+def factorial(n):
+    """Regresa n! para un entero n >= 0."""
+    if ______:
+        raise ValueError("n no puede ser negativo")
+    resultado = 1
+    for i in range(2, n + 1):
+        ______
+    return resultado
+
+print(factorial(5))
+```
+
+```{pyodide}
+#| exercise: fn4
+#| check: true
+try:
+    f = envir_result["factorial"]
+except Exception:
+    f = None
+if f is None:
+    feedback = {"correct": False, "message": "No encontré la función factorial."}
+elif not (f(0) == 1 and f(1) == 1 and f(5) == 120 and f(10) == 3628800):
+    feedback = {"correct": False, "message": "Revisa el cálculo: factorial(0) = 1, factorial(5) = 120."}
+else:
+    try:
+        f(-1)
+        feedback = {"correct": False, "message": "El cálculo es correcto, pero factorial(-1) debería lanzar un ValueError."}
+    except ValueError:
+        feedback = {"correct": True, "message": "¡Correcto! Tu función calcula bien y rechaza los números negativos."}
+feedback
+```
+
+:::: {.hint exercise="fn4"}
+::: {.callout-note collapse="false"}
+## Pista
+
+La condición es `n < 0`. Dentro del ciclo, acumula el producto con `resultado *= i`.
+:::
+::::
+
+:::: {.solution exercise="fn4"}
+::: {.callout-tip collapse="false"}
+## Solución
+
+``` python
+def factorial(n):
+    """Regresa n! para un entero n >= 0."""
+    if n < 0:
+        raise ValueError("n no puede ser negativo")
+    resultado = 1
+    for i in range(2, n + 1):
+        resultado *= i
+    return resultado
+
+print(factorial(5))   # 120
+```
+:::
+::::
+
+### Ejercicio 5. Estadísticas de una lista
+
+Escribe la función `estadisticas(datos)` que regrese **tres valores**: la media, el mínimo y el máximo de la lista. Después desempaqueta el resultado en tres variables.
+
+```{pyodide}
+#| exercise: fn5
+def estadisticas(datos):
+    """Regresa la media, el mínimo y el máximo de una lista de números."""
+    ______
+
+media, minimo, maximo = estadisticas([4, 8, 15, 16, 23, 42])
+print("Media:", media, " Mínimo:", minimo, " Máximo:", maximo)
+```
+
+```{pyodide}
+#| exercise: fn5
+#| check: true
+import math
+try:
+    f = envir_result["estadisticas"]
+except Exception:
+    f = None
+if f is None:
+    feedback = {"correct": False, "message": "No encontré la función estadisticas."}
+else:
+    r1 = f([4, 8, 15, 16, 23, 42])
+    r2 = f([7])
+    if not (isinstance(r1, tuple) and len(r1) == 3):
+        feedback = {"correct": False, "message": "La función debe regresar tres valores separados por comas: return media, minimo, maximo."}
+    elif math.isclose(r1[0], 18) and r1[1:] == (4, 42) and math.isclose(r2[0], 7) and r2[1:] == (7, 7):
+        feedback = {"correct": True, "message": "¡Correcto! La función regresa una tupla con los tres valores."}
+    else:
+        feedback = {"correct": False, "message": "Para [4, 8, 15, 16, 23, 42] debe regresar (18.0, 4, 42)."}
+feedback
+```
+
+:::: {.hint exercise="fn5"}
+::: {.callout-note collapse="false"}
+## Pista
+
+Usa las funciones integradas `sum()`, `len()`, `min()` y `max()`, y regresa los tres valores separados por comas: `return media, minimo, maximo`.
+:::
+::::
+
+:::: {.solution exercise="fn5"}
+::: {.callout-tip collapse="false"}
+## Solución
+
+``` python
+def estadisticas(datos):
+    """Regresa la media, el mínimo y el máximo de una lista de números."""
+    media = sum(datos) / len(datos)
+    return media, min(datos), max(datos)
+
+media, minimo, maximo = estadisticas([4, 8, 15, 16, 23, 42])
+print("Media:", media, " Mínimo:", minimo, " Máximo:", maximo)
+```
+:::
+::::
+
+### Ejercicio 6. Distancia entre dos puntos
+
+Escribe la función `distancia(p, q)` que reciba dos puntos como tuplas `(x, y)` y regrese la distancia entre ellos:
+
+$$d(p, q) = \sqrt{(x_2 - x_1)^2 + (y_2 - y_1)^2}$$
+
+Usa **anotaciones de tipo** y un *docstring*.
+
+```{pyodide}
+#| exercise: fn6
+def distancia(p: tuple, q: tuple) -> float:
+    """______"""
+    x1, y1 = p
+    x2, y2 = q
+    ______
+
+print(distancia((0, 0), (3, 4)))    # Debe ser 5.0
+```
+
+```{pyodide}
+#| exercise: fn6
+#| check: true
+import math
+try:
+    f = envir_result["distancia"]
+except Exception:
+    f = None
+if f is None:
+    feedback = {"correct": False, "message": "No encontré la función distancia."}
+elif f((0, 0), (3, 4)) is None:
+    feedback = {"correct": False, "message": "Tu función regresa None: usa return."}
+elif (math.isclose(f((0, 0), (3, 4)), 5) and math.isclose(f((1, 2), (4, 6)), 5)
+      and math.isclose(f((2, 2), (2, 2)), 0) and math.isclose(f((-1, -1), (1, 1)), 2 ** 1.5)):
+    if f.__doc__ and "______" not in f.__doc__:
+        feedback = {"correct": True, "message": "¡Correcto! Es el teorema de Pitágoras aplicado a dos puntos."}
+    else:
+        feedback = {"correct": True, "message": "¡El cálculo es correcto! Completa también el docstring."}
+else:
+    feedback = {"correct": False, "message": "Revisa la fórmula: ((x2 - x1) ** 2 + (y2 - y1) ** 2) ** 0.5."}
+feedback
+```
+
+:::: {.hint exercise="fn6"}
+::: {.callout-note collapse="false"}
+## Pista
+
+La raíz cuadrada es elevar a `0.5`: `return ((x2 - x1) ** 2 + (y2 - y1) ** 2) ** 0.5`. En el *docstring* describe qué hace la función.
+:::
+::::
+
+:::: {.solution exercise="fn6"}
+::: {.callout-tip collapse="false"}
+## Solución
+
+``` python
+def distancia(p: tuple, q: tuple) -> float:
+    """Regresa la distancia euclidiana entre los puntos p = (x1, y1) y q = (x2, y2)."""
+    x1, y1 = p
+    x2, y2 = q
+    return ((x2 - x1) ** 2 + (y2 - y1) ** 2) ** 0.5
+
+print(distancia((0, 0), (3, 4)))    # 5.0
+```
+
+Python también incluye esta función: `math.dist((0, 0), (3, 4))`.
+:::
+::::
+
+### Ejercicio 7. Detective: el valor por defecto que se "acuerda"
+
+La función `agregar_calificacion()` debería crear una lista **nueva** cada vez que no se le pasa una lista. Ejecuta el código: ¿por qué la segunda llamada también contiene el `9`?
+
+Corrígela usando `None` como valor por defecto.
+
+```{pyodide}
+#| exercise: fn7
+def agregar_calificacion(calificacion, lista=[]):
+    lista.append(calificacion)
+    return lista
+
+print(agregar_calificacion(9))     # [9]
+print(agregar_calificacion(7))     # Debería ser [7]
+```
+
+```{pyodide}
+#| exercise: fn7
+#| check: true
+try:
+    f = envir_result["agregar_calificacion"]
+except Exception:
+    f = None
+if f is None:
+    feedback = {"correct": False, "message": "No encontré la función agregar_calificacion."}
+else:
+    a = f(1)
+    b = f(2)
+    c = f(3, [10])
+    if a == [1] and b == [2] and c == [10, 3]:
+        feedback = {"correct": True, "message": "¡Correcto! Con None, cada llamada crea una lista nueva."}
+    else:
+        feedback = {"correct": False, "message": "Cada llamada sin lista debe regresar una lista nueva. Usa lista=None y crea la lista dentro de la función."}
+feedback
+```
+
+:::: {.hint exercise="fn7"}
+::: {.callout-note collapse="false"}
+## Pista
+
+El valor por defecto `[]` se crea **una sola vez**, al definir la función, y todas las llamadas comparten **la misma lista** (las listas son mutables). Usa `lista=None` y, dentro de la función, `if lista is None: lista = []`.
+:::
+::::
+
+:::: {.solution exercise="fn7"}
+::: {.callout-tip collapse="false"}
+## Solución
+
+``` python
+def agregar_calificacion(calificacion, lista=None):
+    if lista is None:
+        lista = []          # Una lista nueva en cada llamada
+    lista.append(calificacion)
+    return lista
+
+print(agregar_calificacion(9))     # [9]
+print(agregar_calificacion(7))     # [7]
+```
+
+Es el mismo fenómeno de la [🐍 Actividad 1](python_ejercicio1.qmd): dos nombres que apuntan al **mismo objeto mutable**.
+:::
+::::
+
+## Reto final: raíz cuadrada con el método de Newton
+
+En el capítulo de [ciclos](python_for.qmd) aproximamos $\sqrt{2}$ con el método de Newton usando un ciclo `while`. Conviértelo en una **función reutilizable** que siga las buenas prácticas:
+
+1.  Se llama `raiz_newton(n, tolerancia=1e-10)` y tiene un *docstring*.
+2.  Lanza un `ValueError` si `n` es negativo.
+3.  Si `n` es 0, regresa 0.
+4.  En otro caso, empieza en `x = n` y repite $x = x - \frac{x^2 - n}{2x}$ **mientras** $|x^2 - n| >$ `tolerancia`.
+5.  Regresa `x`.
+
+```{pyodide}
+#| exercise: reto_fn
+def raiz_newton(n, tolerancia=1e-10):
+    """______"""
+    ______
+
+print(raiz_newton(2))      # Aproximadamente 1.41421356
+print(raiz_newton(9))      # Aproximadamente 3.0
+```
+
+```{pyodide}
+#| exercise: reto_fn
+#| check: true
+import math
+try:
+    f = envir_result["raiz_newton"]
+except Exception:
+    f = None
+if f is None:
+    feedback = {"correct": False, "message": "No encontré la función raiz_newton."}
+else:
+    try:
+        bien = f(0) == 0
+        for n in [2, 9, 10, 0.25, 1e6]:
+            if not math.isclose(f(n), math.sqrt(n), rel_tol=1e-8):
+                bien = False
+    except Exception:
+        bien = False
+    if not bien:
+        feedback = {"correct": False, "message": "Compara con math.sqrt: revisa el caso n = 0 y la fórmula x - (x**2 - n) / (2 * x)."}
+    else:
+        try:
+            f(-4)
+            feedback = {"correct": False, "message": "Calcula bien, pero raiz_newton(-4) debería lanzar un ValueError."}
+        except ValueError:
+            if f.__doc__ and "______" not in f.__doc__:
+                feedback = {"correct": True, "message": "¡Excelente! Tu función es correcta, valida sus datos y está documentada."}
+            else:
+                feedback = {"correct": True, "message": "¡Calcula y valida correctamente! Completa también el docstring."}
+feedback
+```
+
+:::: {.hint exercise="reto_fn"}
+::: {.callout-note collapse="false"}
+## Pista
+
+Primero las validaciones: `if n < 0: raise ValueError(...)` y `if n == 0: return 0`. Después, `x = n` y el ciclo `while abs(x ** 2 - n) > tolerancia:` con la fórmula de Newton.
+:::
+::::
+
+:::: {.solution exercise="reto_fn"}
+::: {.callout-tip collapse="false"}
+## Solución
+
+``` python
+def raiz_newton(n, tolerancia=1e-10):
+    """Aproxima la raíz cuadrada de n >= 0 con el método de Newton.
+
+    Parámetros:
+        n (float): número no negativo.
+        tolerancia (float): error máximo permitido en |x**2 - n|.
+
+    Regresa:
+        float: aproximación de la raíz cuadrada de n.
+    """
+    if n < 0:
+        raise ValueError("n no puede ser negativo")
+    if n == 0:
+        return 0
+    x = n
+    while abs(x ** 2 - n) > tolerancia:
+        x = x - (x ** 2 - n) / (2 * x)
+    return x
+
+print(raiz_newton(2))      # 1.4142135623746899
+print(raiz_newton(9))      # 3.0
+```
+
+Ahora el método se puede usar con **cualquier** número, se prueba fácilmente y el mensaje de error explica qué salió mal. **Extra:** escribe pruebas con `assert` comparando con `math.sqrt()`.
+:::
+::::
+
+## Resumen
+
+| Tema | Idea clave |
+|------------------------------------|------------------------------------|
+| Definir | `def nombre(parametros):` con el cuerpo indentado 4 espacios. |
+| Llamar | `nombre(argumentos)`; definir no es lo mismo que ejecutar. |
+| `return` | Regresa un valor y termina la función; sin `return`, la función regresa `None`. |
+| `return` vs. `print()` | `print()` muestra; `return` entrega el valor para seguir usándolo. |
+| Parámetros | Por posición, por nombre y con valores por defecto (al final). |
+| Documentación | *Docstring* con `"""..."""` y anotaciones de tipo `def f(x: int) -> float:`. |
+| Alcance | Las variables de una función son locales; usa parámetros en lugar de globales. |
+| Programación defensiva | Valida los argumentos y usa `raise` con mensajes claros. |
+| Pruebas | `assert` con casos conocidos y casos límite. |
+| `lambda` | Funciones cortas sin nombre, útiles como argumento (`key=`). |
+| Recursión | Una función que se llama a sí misma; necesita un caso base. |
+
+## Referencias
+
+- [Documentación de Python: Definir funciones](https://docs.python.org/es/3/tutorial/controlflow.html#defining-functions)
+- [Documentación de Python: Más sobre definición de funciones](https://docs.python.org/es/3/tutorial/controlflow.html#more-on-defining-functions)
+- [PEP 257: Convenciones para docstrings](https://peps.python.org/pep-0257/)
+- [PEP 8: Guía de estilo (nombres de funciones)](https://peps.python.org/pep-0008/#function-and-variable-names)
+- [Sección 4.11 Funciones y scripts, Cómputo Científico (Haydeé Peruyero)](https://haydeeperuyero.github.io/Computo_Cientifico/python.html)

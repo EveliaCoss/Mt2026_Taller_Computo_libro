@@ -19,7 +19,7 @@ if (length(venv_python) > 0) {
 }
 ```
 
-> **Fecha:** 03 de noviembre, 2026
+> **Fecha:** 05 de noviembre, 2026
 
 [NumPy](https://numpy.org/) (*Numerical Python*) es la biblioteca base del cómputo científico en Python. Su objeto principal es el **arreglo** (`ndarray`): una colección de números del **mismo tipo**, organizada en una o más dimensiones, con la que podemos hacer operaciones matemáticas de forma rápida y con muy poco código.
 
@@ -61,8 +61,8 @@ print("Lista * 2:  ", lista * 2)     # Repite la lista
 print("Arreglo * 2:", arreglo * 2)   # Multiplica cada elemento
 ```
 
-| | Lista (`list`) | Arreglo de NumPy (`ndarray`) |
-|----|----|----|
+|   | Lista (`list`) | Arreglo de NumPy (`ndarray`) |
+|------------------------|------------------------|------------------------|
 | Tipos de elementos | Puede mezclar tipos: `[1, "a", True]`. | Todos del **mismo tipo** (`dtype`). |
 | `+` | Concatena: `[1, 2] + [3, 4]` → `[1, 2, 3, 4]`. | Suma elemento a elemento: `[4, 6]`. |
 | `* 2` | Repite la lista. | Multiplica cada elemento. |
@@ -73,7 +73,7 @@ print("Arreglo * 2:", arreglo * 2)   # Multiplica cada elemento
 ## Crear arreglos
 
 | Función | ¿Qué crea? | Ejemplo | Resultado |
-|----|----|----|----|
+|------------------|------------------|------------------|------------------|
 | `np.array()` | Un arreglo a partir de una lista. | `np.array([1, 2, 3])` | `[1 2 3]` |
 | `np.arange()` | Una secuencia, como `range()`. | `np.arange(0, 10, 2)` | `[0 2 4 6 8]` |
 | `np.linspace()` | `n` valores igualmente espaciados, **incluyendo** el final. | `np.linspace(0, 1, 5)` | `[0. 0.25 0.5 0.75 1.]` |
@@ -106,12 +106,12 @@ En NumPy, la **dimensión** de un arreglo indica cuántos **ejes** se necesitan 
 
 Los atributos de un arreglo (que ya vimos en la [🐍 Actividad 2](python_ejercicio2.qmd)) describen su estructura:
 
-| Atributo | ¿Qué contiene? |
-|----|----|
-| `ndim` | Número de dimensiones (ejes). |
-| `shape` | Tamaño del arreglo en cada eje. |
-| `size` | Número total de elementos. |
-| `dtype` | Tipo de dato de los elementos. |
+| Atributo | ¿Qué contiene?                  |
+|----------|---------------------------------|
+| `ndim`   | Número de dimensiones (ejes).   |
+| `shape`  | Tamaño del arreglo en cada eje. |
+| `size`   | Número total de elementos.      |
+| `dtype`  | Tipo de dato de los elementos.  |
 
 ```{python}
 escalar = np.array(25)
@@ -170,14 +170,16 @@ print(np.exp([0, 1, 2]).round(3))
 
 **Funciones estadísticas:**
 
-| Función | ¿Qué calcula? |
-|----|----|
-| `np.sum()` | Suma de los elementos. |
-| `np.mean()` | Media. |
-| `np.median()` | Mediana. |
-| `np.std()` | Desviación estándar. |
-| `np.min()`, `np.max()` | Mínimo y máximo. |
+| Función                      | ¿Qué calcula?                         |
+|------------------------------|---------------------------------------|
+| `np.sum()`                   | Suma de los elementos.                |
+| `np.mean()`                  | Media.                                |
+| `np.median()`                | Mediana.                              |
+| `np.std()`                   | Desviación estándar.                  |
+| `np.min()`, `np.max()`       | Mínimo y máximo.                      |
 | `np.argmin()`, `np.argmax()` | **Posición** del mínimo y del máximo. |
+
+![](figures/python_estadistica.png){fig-align="center"}
 
 ```{python}
 datos = np.array([12, 7, 3, 7, 25, 12, 7, 9, 18])
@@ -309,8 +311,8 @@ print(np.where(calificaciones >= 6, "Aprobado", "Reprobado"))
 
 Recuerda del capítulo de [variables y objetos](python_ejercicio1.qmd) que dos nombres pueden apuntar al **mismo objeto**. En NumPy ocurre algo parecido con las **vistas**:
 
-| | Vista (*view*) | Copia (*copy*) |
-|----|----|----|
+|   | Vista (*view*) | Copia (*copy*) |
+|------------------------|------------------------|------------------------|
 | ¿Qué es? | Otra forma de ver los **mismos datos**. | Un arreglo **nuevo** con sus propios datos. |
 | ¿Modificarla cambia el original? | **Sí.** | No. |
 | ¿Cuándo se produce? | Rebanado (`a[1:3]`), `reshape()`. | Indexación extravagante (`a[[1, 2]]`), máscaras, `.copy()`. |
@@ -340,11 +342,11 @@ print(copia.base is None)    # La copia es independiente
 
 Igual que con las listas (`sorted()` vs. `sort()`), en NumPy hay dos formas de ordenar:
 
-| Forma | ¿Qué hace? |
-|----|----|
-| `np.sort(a)` | Regresa una **copia** ordenada; `a` no cambia. |
-| `a.sort()` | Ordena `a` **en su lugar** (*in-place*). |
-| `np.argsort(a)` | Regresa los **índices** que ordenarían a `a`. |
+| Forma           | ¿Qué hace?                                     |
+|-----------------|------------------------------------------------|
+| `np.sort(a)`    | Regresa una **copia** ordenada; `a` no cambia. |
+| `a.sort()`      | Ordena `a` **en su lugar** (*in-place*).       |
+| `np.argsort(a)` | Regresa los **índices** que ordenarían a `a`.  |
 
 ```{python}
 a = np.array([9, 2, 6, 1, 7])
@@ -397,13 +399,13 @@ print(columna * fila)                      # forma (5, 5)
 
 NumPy incluye las operaciones de matrices más comunes:
 
-| Operación | Notación matemática | NumPy |
-|----|----|----|
-| Producto de matrices | $AB$ | `A @ B` |
-| Transpuesta | $A^T$ | `A.T` |
-| Determinante | $\det(A)$ | `np.linalg.det(A)` |
-| Inversa | $A^{-1}$ | `np.linalg.inv(A)` |
-| Resolver $Ax = b$ | $x = A^{-1}b$ | `np.linalg.solve(A, b)` |
+| Operación            | Notación matemática | NumPy                   |
+|----------------------|---------------------|-------------------------|
+| Producto de matrices | $AB$                | `A @ B`                 |
+| Transpuesta          | $A^T$               | `A.T`                   |
+| Determinante         | $\det(A)$           | `np.linalg.det(A)`      |
+| Inversa              | $A^{-1}$            | `np.linalg.inv(A)`      |
+| Resolver $Ax = b$    | $x = A^{-1}b$       | `np.linalg.solve(A, b)` |
 
 ```{python}
 A = np.array([[2, 1],
@@ -456,15 +458,15 @@ else:
 feedback
 ```
 
-::: {.hint exercise="np1"}
+:::: {.hint exercise="np1"}
 ::: {.callout-note collapse="false"}
 ## Pista
 
 `np.arange(1, 11)`, `np.full((3, 3), 5)` y `matriz.sum()` (o `np.sum(matriz)`).
 :::
-:::
+::::
 
-::: {.solution exercise="np1"}
+:::: {.solution exercise="np1"}
 ::: {.callout-tip collapse="false"}
 ## Solución
 
@@ -481,7 +483,7 @@ matriz = np.array([[1, 2, 3], [4, 5, 6], [7, 8, 9]])
 matriz.sum()   # 45
 ```
 :::
-:::
+::::
 
 ### Ejercicio 2. Dimensiones
 
@@ -519,15 +521,15 @@ else:
 feedback
 ```
 
-::: {.hint exercise="np2"}
+:::: {.hint exercise="np2"}
 ::: {.callout-note collapse="false"}
 ## Pista
 
 `np.arange(24)` genera los números del 0 al 23 y `.reshape(2, 3, 4)` les da la forma.
 :::
-:::
+::::
 
-::: {.solution exercise="np2"}
+:::: {.solution exercise="np2"}
 ::: {.callout-tip collapse="false"}
 ## Solución
 
@@ -546,7 +548,7 @@ d = np.arange(24).reshape(2, 3, 4)
 d
 ```
 :::
-:::
+::::
 
 ### Ejercicio 3. Estadística con NumPy
 
@@ -578,7 +580,10 @@ esperado = {"media": 11.11, "mediana": 9.0, "desviacion": 6.35, "posicion_maximo
 if not isinstance(result, dict):
     feedback = {"correct": False, "message": "La última línea debe regresar el diccionario resumen."}
 else:
-    incorrectos = [clave for clave in esperado if clave not in result or abs(float(result[clave]) - esperado[clave]) > 1e-9]
+    incorrectos = []
+    for clave in esperado:
+        if clave not in result or abs(float(result[clave]) - esperado[clave]) > 1e-9:
+            incorrectos.append(clave)
     if not incorrectos:
         feedback = {"correct": True, "message": "¡Correcto! Media 11.11, mediana 9.0, desviación 6.35 y el máximo (25) está en la posición 4."}
     else:
@@ -586,15 +591,15 @@ else:
 feedback
 ```
 
-::: {.hint exercise="np3"}
+:::: {.hint exercise="np3"}
 ::: {.callout-note collapse="false"}
 ## Pista
 
 Usa `np.mean(datos)`, `np.median(datos)` y `np.std(datos)`, y redondea con `.round(2)` o con `round(..., 2)`. La posición del máximo es `np.argmax(datos)`.
 :::
-:::
+::::
 
-::: {.solution exercise="np3"}
+:::: {.solution exercise="np3"}
 ::: {.callout-tip collapse="false"}
 ## Solución
 
@@ -614,7 +619,7 @@ resumen
 
 Compara con la Actividad 2: para la mediana ya no necesitamos ordenar la lista ni calcular el índice central, `np.median()` lo hace por nosotros.
 :::
-:::
+::::
 
 ### Ejercicio 4. Máscaras booleanas
 
@@ -648,15 +653,15 @@ else:
 feedback
 ```
 
-::: {.hint exercise="np4"}
+:::: {.hint exercise="np4"}
 ::: {.callout-note collapse="false"}
 ## Pista
 
 `mascara = a > 4` y después `a[mascara]`. Para el extra: `a[(a % 2 == 0) | (a % 5 == 0)]`, con paréntesis en cada condición.
 :::
-:::
+::::
 
-::: {.solution exercise="np4"}
+:::: {.solution exercise="np4"}
 ::: {.callout-tip collapse="false"}
 ## Solución
 
@@ -674,7 +679,7 @@ print(a[(a % 2 == 0) | (a % 5 == 0)])   # Extra: [ 0  2  4  5  6  8 10]
 a[mascara]   # [ 5  6  7  8  9 10 11]
 ```
 :::
-:::
+::::
 
 ### Ejercicio 5. Mensajes ocultos con indexación extravagante
 
@@ -704,15 +709,15 @@ else:
 feedback
 ```
 
-::: {.hint exercise="np5"}
+:::: {.hint exercise="np5"}
 ::: {.callout-note collapse="false"}
 ## Pista
 
 Primero ubica la fila y la columna de cada letra en la matriz impresa (recuerda que empiezan en 0). Después escribe `letras[[fila_O, fila_M, fila_G], [col_O, col_M, col_G]]`.
 :::
-:::
+::::
 
-::: {.solution exercise="np5"}
+:::: {.solution exercise="np5"}
 ::: {.callout-tip collapse="false"}
 ## Solución
 
@@ -727,7 +732,7 @@ print(letras[[3, 2, 4], [4, 2, 1]])   # Extra: ['W' 'O' 'Z']
 letras[[2, 2, 1], [2, 0, 0]]          # ['O' 'M' 'G']
 ```
 :::
-:::
+::::
 
 ### Ejercicio 6. Vista o copia
 
@@ -758,15 +763,15 @@ else:
 feedback
 ```
 
-::: {.hint exercise="np6"}
+:::: {.hint exercise="np6"}
 ::: {.callout-note collapse="false"}
 ## Pista
 
 El rebanado `original[1:4]` crea una **vista**. Agrega `.copy()` al final de esa línea.
 :::
-:::
+::::
 
-::: {.solution exercise="np6"}
+:::: {.solution exercise="np6"}
 ::: {.callout-tip collapse="false"}
 ## Solución
 
@@ -783,19 +788,17 @@ print("¿parte depende de original?", parte.base is original)  # False
 original
 ```
 :::
-:::
+::::
 
 ### Ejercicio 7. Sistema de ecuaciones
 
 Resuelve el sistema de ecuaciones:
 
-$$
-\begin{cases}
+$$\begin{cases}
 2x + y - z = 3 \\
 x - y + 2z = 5 \\
 3x + 2y + z = 10
-\end{cases}
-$$
+\end{cases}$$
 
 1.  Escribe la matriz de coeficientes `A` y el vector de términos independientes `b`.
 2.  Verifica que el sistema tiene solución única calculando $\det(A) \neq 0$.
@@ -828,15 +831,15 @@ else:
 feedback
 ```
 
-::: {.hint exercise="np7"}
+:::: {.hint exercise="np7"}
 ::: {.callout-note collapse="false"}
 ## Pista
 
 Cada fila de `A` contiene los coeficientes de una ecuación: la primera es `[2, 1, -1]`. El vector `b` es `[3, 5, 10]`. Después usa `np.linalg.solve(A, b)`.
 :::
-:::
+::::
 
-::: {.solution exercise="np7"}
+:::: {.solution exercise="np7"}
 ::: {.callout-tip collapse="false"}
 ## Solución
 
@@ -856,7 +859,7 @@ print("Comprobación A @ solución:", A @ solucion)
 solucion
 ```
 :::
-:::
+::::
 
 ## Reto final: el tablero de ajedrez
 
@@ -894,15 +897,15 @@ else:
 feedback
 ```
 
-::: {.hint exercise="reto_np"}
+:::: {.hint exercise="reto_np"}
 ::: {.callout-note collapse="false"}
 ## Pista
 
 `tablero[0::2, 1::2]` selecciona las filas 0, 2, 4, 6 y las columnas 1, 3, 5, 7. ¿Qué rebanado selecciona las filas impares y las columnas pares?
 :::
-:::
+::::
 
-::: {.solution exercise="reto_np"}
+:::: {.solution exercise="reto_np"}
 ::: {.callout-tip collapse="false"}
 ## Solución
 
@@ -927,12 +930,12 @@ columnas = np.arange(8)
 tablero = (filas + columnas) % 2
 ```
 :::
-:::
+::::
 
 ## Resumen
 
 | Tema | Idea clave |
-|----|----|
+|------------------------------------|------------------------------------|
 | `ndarray` | Arreglo de elementos del mismo tipo, con una o más dimensiones. |
 | Crear arreglos | `np.array`, `np.arange`, `np.linspace`, `np.zeros`, `np.ones`, `np.full`, `np.eye`. |
 | Atributos | `ndim` (ejes), `shape` (tamaño por eje), `size` (total), `dtype` (tipo). |

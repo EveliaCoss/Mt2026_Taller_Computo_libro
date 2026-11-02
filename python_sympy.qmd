@@ -19,7 +19,9 @@ if (length(venv_python) > 0) {
 }
 ```
 
-> **Fecha:** 03 de noviembre, 2026
+> **Fecha:** 10 y 12 de noviembre, 2026
+>
+> **Invitado:** Dr. José Crispin Ruiz Pantaleon (JCRP)
 
 [SymPy](https://www.sympy.org/) es una biblioteca de Python para hacer **matemáticas simbólicas**: manipula expresiones con variables como lo haríamos con lápiz y papel, y obtiene resultados **exactos** en lugar de aproximaciones decimales.
 
@@ -42,8 +44,8 @@ print("NumPy: ", np.sqrt(8))   # Aproximación decimal
 print("SymPy: ", sp.sqrt(8))   # Resultado exacto
 ```
 
-| | Cálculo numérico (NumPy) | Cálculo simbólico (SymPy) |
-|----|----|----|
+|   | Cálculo numérico (NumPy) | Cálculo simbólico (SymPy) |
+|------------------------|------------------------|------------------------|
 | Trabaja con | Números decimales. | Símbolos y expresiones exactas. |
 | $\sqrt{8}$ | `2.8284271247461903` | `2*sqrt(2)` |
 | $\frac{1}{3} + \frac{1}{6}$ | `0.5` (con posibles errores de redondeo) | `1/2` (fracción exacta) |
@@ -100,7 +102,7 @@ print(sp.sqrt(r**2))   # Sabe que r es positivo
 ### Sustituir y evaluar
 
 | Método | ¿Qué hace? | Ejemplo |
-|----|----|----|
+|------------------------|------------------------|------------------------|
 | `expr.subs(x, valor)` | Sustituye un símbolo por un valor u otra expresión. | `(x**2).subs(x, 3)` → `9` |
 | `expr.evalf()` o `sp.N(expr)` | Calcula el valor decimal. | `sp.sqrt(2).evalf()` → `1.414...` |
 | `sp.N(expr, n)` | Valor decimal con `n` dígitos. | `sp.N(sp.pi, 50)` |
@@ -126,7 +128,7 @@ print(x + sp.Rational(1, 2))   # 1/2: fracción exacta
 ## Simplificar, expandir y factorizar
 
 | Función | ¿Qué hace? | Ejemplo | Resultado |
-|----|----|----|----|
+|------------------|------------------|------------------|------------------|
 | `sp.expand()` | Desarrolla productos y potencias. | `sp.expand((x + 1)**2)` | `x**2 + 2*x + 1` |
 | `sp.factor()` | Factoriza. | `sp.factor(x**2 - 1)` | `(x - 1)*(x + 1)` |
 | `sp.simplify()` | Intenta encontrar la forma más simple. | `sp.simplify(sp.sin(x)**2 + sp.cos(x)**2)` | `1` |
@@ -192,7 +194,7 @@ print(sp.solve(sistema, [x, y, z]))
 ## Cálculo
 
 | Operación | Notación | SymPy |
-|----|----|----|
+|------------------------|------------------------|------------------------|
 | Límite | $\lim_{x \to a} f(x)$ | `sp.limit(f, x, a)` |
 | Límite al infinito | $\lim_{x \to \infty} f(x)$ | `sp.limit(f, x, sp.oo)` |
 | Derivada | $\frac{df}{dx}$ | `sp.diff(f, x)` |
@@ -323,7 +325,7 @@ print(f"$${sp.latex(integral)} = {sp.latex(integral.doit())}$$")
 ## Errores comunes
 
 | Error | Ejemplo | Corrección |
-|----|----|----|
+|------------------------|------------------------|------------------------|
 | Usar un símbolo sin declararlo | `sp.diff(x**2, x)` sin `sp.symbols` (`NameError`) | `x = sp.symbols("x")` |
 | Usar `^` para potencias | `x^2` (`TypeError`) | `x**2` |
 | Fracciones con `/` entre enteros | `x + 1/3` da `x + 0.333...` | `x + sp.Rational(1, 3)` |
@@ -364,15 +366,15 @@ else:
 feedback
 ```
 
-::: {.hint exercise="sp1"}
+:::: {.hint exercise="sp1"}
 ::: {.callout-note collapse="false"}
 ## Pista
 
 Usa `sp.expand((x + 1)**3)` y `sp.factor(x**2 - 5*x + 6)`. Recuerda que la potencia se escribe con `**`.
 :::
-:::
+::::
 
-::: {.solution exercise="sp1"}
+:::: {.solution exercise="sp1"}
 ::: {.callout-tip collapse="false"}
 ## Solución
 
@@ -385,7 +387,7 @@ print(sp.expand((x + 1)**3))   # x**3 + 3*x**2 + 3*x + 1
 sp.factor(x**2 - 5*x + 6)      # (x - 3)*(x - 2)
 ```
 :::
-:::
+::::
 
 ### Ejercicio 2. Raíces de un polinomio
 
@@ -415,15 +417,15 @@ else:
 feedback
 ```
 
-::: {.hint exercise="sp2"}
+:::: {.hint exercise="sp2"}
 ::: {.callout-note collapse="false"}
 ## Pista
 
 `sp.solve(p, x)` regresa una lista con las raíces. Para verificar: `p.subs(x, 1)`.
 :::
-:::
+::::
 
-::: {.solution exercise="sp2"}
+:::: {.solution exercise="sp2"}
 ::: {.callout-tip collapse="false"}
 ## Solución
 
@@ -440,7 +442,7 @@ print("p(1) =", p.subs(x, 1)) # 0
 raices
 ```
 :::
-:::
+::::
 
 ### Ejercicio 3. El número $e$ como límite
 
@@ -469,15 +471,15 @@ else:
 feedback
 ```
 
-::: {.hint exercise="sp3"}
+:::: {.hint exercise="sp3"}
 ::: {.callout-note collapse="false"}
 ## Pista
 
 El infinito es `sp.oo`. Para ver el valor con 20 dígitos usa `sp.N(limite, 20)`.
 :::
-:::
+::::
 
-::: {.solution exercise="sp3"}
+:::: {.solution exercise="sp3"}
 ::: {.callout-tip collapse="false"}
 ## Solución
 
@@ -492,7 +494,7 @@ print("Valor decimal:", sp.N(limite, 20))   # 2.7182818284590452354
 limite
 ```
 :::
-:::
+::::
 
 ### Ejercicio 4. Derivadas
 
@@ -528,15 +530,15 @@ else:
 feedback
 ```
 
-::: {.hint exercise="sp4"}
+:::: {.hint exercise="sp4"}
 ::: {.callout-note collapse="false"}
 ## Pista
 
 `sp.diff(f, x)` y `sp.diff(f, x, 2)`. Para evaluar: `primera.subs(x, sp.pi)`. Usa `sp.pi`, no `3.1416`, para obtener el resultado exacto.
 :::
-:::
+::::
 
-::: {.solution exercise="sp4"}
+:::: {.solution exercise="sp4"}
 ::: {.callout-tip collapse="false"}
 ## Solución
 
@@ -555,7 +557,7 @@ print("f''(x) =", segunda)
 primera.subs(x, sp.pi)        # -pi**2
 ```
 :::
-:::
+::::
 
 ### Ejercicio 5. Integrales
 
@@ -585,15 +587,15 @@ else:
 feedback
 ```
 
-::: {.hint exercise="sp5"}
+:::: {.hint exercise="sp5"}
 ::: {.callout-note collapse="false"}
 ## Pista
 
 `sp.integrate(x * sp.exp(x), x)` para la indefinida y `sp.integrate(x * sp.exp(x), (x, 0, 1))` para la definida. Para verificar, deriva: `sp.diff(indefinida, x)`.
 :::
-:::
+::::
 
-::: {.solution exercise="sp5"}
+:::: {.solution exercise="sp5"}
 ::: {.callout-tip collapse="false"}
 ## Solución
 
@@ -608,7 +610,7 @@ print("Verificación:", sp.simplify(sp.diff(indefinida, x)))   # x*exp(x)
 sp.integrate(x * sp.exp(x), (x, 0, 1))                        # 1
 ```
 :::
-:::
+::::
 
 ### Ejercicio 6. Fórmula de la suma de cuadrados
 
@@ -638,15 +640,15 @@ else:
 feedback
 ```
 
-::: {.hint exercise="sp6"}
+:::: {.hint exercise="sp6"}
 ::: {.callout-note collapse="false"}
 ## Pista
 
 `sp.factor(sp.summation(i**2, (i, 1, n)))`. Para evaluar la fórmula: `formula.subs(n, 100)`.
 :::
-:::
+::::
 
-::: {.solution exercise="sp6"}
+:::: {.solution exercise="sp6"}
 ::: {.callout-tip collapse="false"}
 ## Solución
 
@@ -661,7 +663,7 @@ print("Con n = 100:", formula.subs(n, 100))   # 338350
 formula
 ```
 :::
-:::
+::::
 
 ## Reto final: dos series famosas
 
@@ -694,15 +696,15 @@ else:
 feedback
 ```
 
-::: {.hint exercise="reto_sp"}
+:::: {.hint exercise="reto_sp"}
 ::: {.callout-note collapse="false"}
 ## Pista
 
 `sp.summation((-1)**k / (2*k + 1), (k, 0, sp.oo))` y `sp.summation(1 / k**2, (k, 1, sp.oo))`.
 :::
-:::
+::::
 
-::: {.solution exercise="reto_sp"}
+:::: {.solution exercise="reto_sp"}
 ::: {.callout-tip collapse="false"}
 ## Solución
 
@@ -720,12 +722,12 @@ basilea
 
 Por eso la aproximación con 1000 términos multiplicaba la suma por 4: $4 \cdot \frac{\pi}{4} = \pi$.
 :::
-:::
+::::
 
 ## Resumen
 
 | Tema | SymPy |
-|----|----|
+|------------------------------------|------------------------------------|
 | Símbolos | `x, y = sp.symbols("x y")` |
 | Sustituir / evaluar | `expr.subs(x, 2)`, `expr.evalf()`, `sp.N(expr, n)` |
 | Fracciones y constantes | `sp.Rational(1, 3)`, `sp.pi`, `sp.E`, `sp.I`, `sp.oo` |

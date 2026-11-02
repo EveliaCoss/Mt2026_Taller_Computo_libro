@@ -8,6 +8,8 @@ engine: knitr
 
 ```{r}
 #| include: false
+# Mostrar solo el resultado de la última línea de cada bloque de Python (como en Jupyter)
+knitr::opts_chunk$set(jupyter_compat = TRUE)
 # Usar el entorno del curso (~/.venvs/quarto-python) si existe, aunque RStudio tenga configurado otro Python.
 # Si no existe, reticulate descarga automáticamente las bibliotecas necesarias.
 venv_python <- path.expand(c("~/.venvs/quarto-python/bin/python", "~/.venvs/quarto-python/Scripts/python.exe"))
@@ -33,14 +35,14 @@ def _mostrar_en_libro(self, *args, **kwargs):
 go.Figure.show = _mostrar_en_libro
 ```
 
-> **Fecha:** 03 de noviembre, 2026
+> **Fecha:** 19 de noviembre, 2026
 
 Una buena gráfica permite ver en segundos lo que en una tabla de números tardaríamos mucho en descubrir: tendencias, relaciones, valores atípicos o el comportamiento de una función.
 
 En este capítulo usaremos dos bibliotecas:
 
 |   | Matplotlib | Plotly |
-|------------------------|------------------------|------------------------|
+|----|----|----|
 | Tipo de gráfica | **Estática** (imagen). | **Interactiva** (zoom, desplazamiento, información al pasar el ratón). |
 | Ideal para | Artículos, tesis, reportes en PDF. | Páginas web, exploración de datos, presentaciones. |
 | Formato de salida | PNG, PDF, SVG. | HTML. |
@@ -51,7 +53,7 @@ En este capítulo usaremos dos bibliotecas:
 Las bibliotecas de este capítulo (`numpy`, `pandas`, `matplotlib`, `plotly` y `sympy`) ya las instalaste en tu entorno `quarto-python` en el capítulo [Configuraciones para usar Quarto con Python](quarto_python.qmd). Si necesitas repasar algo, consulta ahí:
 
 | Si necesitas... | Consulta |
-|------------------------------------|------------------------------------|
+|----|----|
 | Instalar las bibliotecas | [Paso 3. Instalar todos los paquetes del curso](quarto_python.qmd#paso-3.-instalar-todos-los-paquetes-del-curso) |
 | Comprobar que RStudio usa tu entorno | [Paso 6. Verificar que todo funciona](quarto_python.qmd#paso-6.-verificar-que-todo-funciona) |
 | Resolver `ModuleNotFoundError: No module named 'matplotlib'` (o `'plotly'`) | [Solución de problemas: `ModuleNotFoundError` al ejecutar o renderizar desde RStudio](quarto_python.qmd#modulenotfounderror-al-ejecutar-o-renderizar-desde-rstudio) |
@@ -83,7 +85,7 @@ plt.show()
 ```
 
 | Función | ¿Qué hace? |
-|------------------------------------|------------------------------------|
+|----|----|
 | `plt.figure(figsize=(ancho, alto))` | Crea una figura nueva del tamaño indicado. |
 | `plt.plot(x, y)` | Dibuja una línea que une los puntos. |
 | `plt.xlabel()`, `plt.ylabel()` | Etiquetas de los ejes. |
@@ -99,7 +101,7 @@ Los textos entre signos de dólar, como `"$f(x) = x^2$"`, se escriben en **LaTeX
 ### Personalizar líneas y marcadores
 
 | Argumento   | Valores comunes                                             |
-|------------------------------------|------------------------------------|
+|-------------|-------------------------------------------------------------|
 | `color`     | `"red"`, `"tab:blue"`, `"#007f99"`                          |
 | `linestyle` | `"-"` (continua), `"--"` (guiones), `":"` (puntos), `"-."`  |
 | `linewidth` | Grosor de la línea, por ejemplo `2`.                        |
@@ -173,7 +175,7 @@ Observa que `axs` es un **arreglo de NumPy** de 2 × 2, por eso usamos `axs[fila
 ## Tipos de gráficas
 
 | Gráfica | ¿Para qué sirve? | Matplotlib | Plotly Express |
-|------------------|------------------|------------------|------------------|
+|----|----|----|----|
 | Línea | Funciones, tendencias en el tiempo. | `plt.plot()` | `px.line()` |
 | Dispersión | Relación entre dos variables. | `plt.scatter()` | `px.scatter()` |
 | Barras | Comparar categorías. | `plt.bar()` | `px.bar()` |
@@ -269,7 +271,7 @@ plt.show()
 ```
 
 | Parte de la caja | ¿Qué representa? |
-|------------------------------------|------------------------------------|
+|----|----|
 | Línea dentro de la caja | La **mediana**. |
 | Borde inferior y superior de la caja | Primer y tercer **cuartil** (el 50 % central de los datos). |
 | "Bigotes" | El rango de los datos sin contar valores atípicos. |
@@ -452,7 +454,7 @@ Crear la figura (`fig = px.scatter(...)`) **no** la dibuja: solo la guarda en la
 `px.data` es un **módulo de Plotly que incluye conjuntos de datos reales para practicar**. Vienen dentro de la biblioteca, así que **no necesitas descargar archivos** ni tener internet. Cada función de `px.data` regresa los datos como una **tabla** de pandas (un `DataFrame`):
 
 | Función | Contenido | Filas |
-|------------------------|------------------------|------------------------|
+|----|----|----|
 | `px.data.iris()` | Medidas de flores de tres especies de iris. | 150 |
 | `px.data.gapminder()` | Esperanza de vida, PIB y población de 142 países (1952-2007). | 1704 |
 | `px.data.tips()` | Cuentas y propinas en un restaurante. | 244 |
@@ -496,7 +498,7 @@ El conjunto *iris* nació de una **pregunta biológica**: ¿podemos distinguir e
 **¿Por qué sigue siendo tan usado casi 90 años después?** Porque es pequeño (150 filas), no tiene datos faltantes, sus variables son fáciles de entender y tiene una estructura interesante: *setosa* se separa claramente de las otras dos especies, mientras que *versicolor* y *virginica* se **traslapan** un poco. Eso lo hace perfecto para probar métodos y verificar si funcionan. Lo verás en las gráficas de este capítulo.
 
 | Área | ¿Para qué se usa el conjunto *iris*? |
-|------------------------------------|------------------------------------|
+|----|----|
 | **Botánica y taxonomía** | Su origen: estudiar cómo se distinguen las especies a partir de mediciones. |
 | **Estadística** | Estadística descriptiva, pruebas de hipótesis y análisis multivariado, como el análisis discriminante lineal de Fisher. |
 | **Álgebra lineal** | Ejemplo clásico de **proyecciones**: el análisis de componentes principales (PCA) y el análisis discriminante reducen las 4 dimensiones a 2 que se pueden graficar. |
@@ -578,7 +580,7 @@ fig.show()
 Gira la superficie arrastrando con el ratón y acércate con la rueda del ratón.
 
 | Parte | ¿Qué hace? |
-|------------------------------------|------------------------------------|
+|----|----|
 | `go.Surface(x=X, y=Y, z=Z)` | Crea la **superficie** a partir de la malla. |
 | `colorscale="RdBu"` | Paleta de colores (como `cmap` en Matplotlib). |
 | `go.Figure(...)` | Crea la **figura** que contiene la superficie. |
@@ -621,7 +623,7 @@ fig.show()                        # 8. Mostrar
 El código se divide en estas partes:
 
 | Parte | Argumentos | ¿Qué hace? |
-|------------------------|------------------------|------------------------|
+|----|----|----|
 | 1\. Datos | `gapminder` | El `DataFrame` con la información. Cada fila es un país en un año. |
 | 2\. Ejes | `x="gdpPercap"`, `y="lifeExp"` | Qué columnas se grafican en cada eje. |
 | 3\. Tamaño y color | `size="pop"`, `color="continent"` | Cada punto es más grande si el país tiene más población y tiene el color de su continente. Así una sola gráfica muestra **cuatro** variables. |
@@ -643,7 +645,7 @@ fig.write_image("mi_grafica.png")   # Imagen estática (requiere el paquete kale
 ## Buenas prácticas de visualización
 
 | Práctica | ¿Por qué? |
-|------------------------------------|------------------------------------|
+|----|----|
 | Etiqueta **siempre** los ejes, con unidades. | Una gráfica sin etiquetas no se puede interpretar. |
 | Usa un título que diga **qué** muestra la gráfica. | El lector debe entenderla sin leer el código. |
 | Elige el tipo de gráfica según la **pregunta**. | Comparar → barras; distribución → histograma; relación → dispersión. |
@@ -1065,7 +1067,7 @@ Las sumas parciales **oscilan** alrededor de $\pi$: quedan por arriba cuando el 
 ## Resumen
 
 | Tema | Idea clave |
-|------------------------------------|------------------------------------|
+|----|----|
 | Matplotlib | Gráficas estáticas: `plt.plot`, `plt.scatter`, `plt.bar`, `plt.hist`, `plt.boxplot`, `plt.pie`. |
 | Elementos de una gráfica | `xlabel`, `ylabel`, `title`, `legend`, `grid`, `annotate`, `savefig`. |
 | Varias gráficas | `fig, axs = plt.subplots(filas, columnas)` y los métodos `ax.set_title()`, `ax.set_xlabel()`... |

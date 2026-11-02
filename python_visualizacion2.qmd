@@ -1,0 +1,966 @@
+---
+engine: knitr
+---
+
+# Visualización II: curvas, lugares geométricos y gráficas avanzadas en 2D
+
+{{< include ./_extensions/r-wasm/live/_knitr.qmd >}}
+
+```{r}
+#| include: false
+# Mostrar solo el resultado de la última línea de cada bloque de Python (como en Jupyter)
+knitr::opts_chunk$set(jupyter_compat = TRUE)
+# Usar el entorno del curso (~/.venvs/quarto-python) si existe, aunque RStudio tenga configurado otro Python.
+venv_python <- path.expand(c("~/.venvs/quarto-python/bin/python", "~/.venvs/quarto-python/Scripts/python.exe"))
+venv_python <- venv_python[file.exists(venv_python)]
+if (length(venv_python) > 0) {
+  Sys.setenv(RETICULATE_PYTHON = venv_python[1])
+} else {
+  reticulate::py_require(c("numpy", "pandas", "matplotlib", "seaborn", "sympy", "plotly"))
+}
+```
+
+> **Fecha:** 19 de noviembre, 2026
+
+En la [primera parte de visualización](python_visualizacion.qmd) aprendimos a construir gráficas con Matplotlib y Plotly. En esta segunda parte usaremos esas herramientas para **estudiar curvas** como en el curso de **Geometría Analítica**, y conoceremos **Seaborn**, una biblioteca para gráficas estadísticas.
+
+Al terminar este capítulo podrás:
+
+- Preparar un **plano cartesiano** "matemático" con Matplotlib: ejes centrados, misma escala y cuadrícula.
+- Graficar curvas **explícitas**, **implícitas**, **paramétricas** y **polares**.
+- **Discutir una curva** con SymPy y visualizar sus intersecciones, simetrías, extensión y asíntotas.
+- Obtener y graficar **lugares geométricos**.
+- Crear gráficas estadísticas con **Seaborn** y **mapas de calor** en 2D.
+
+Los ejemplos y ejercicios están basados en la hoja **Ejercicios: Curvas y Lugares Geométricos** de Geometría Analítica.
+
+```{python}
+import numpy as np
+import matplotlib.pyplot as plt
+import sympy as sp
+```
+
+## Un plano cartesiano para geometría analítica
+
+Las gráficas de Matplotlib tienen, por defecto, los ejes en los bordes y escalas distintas en $x$ y en $y$: una circunferencia se vería como una elipse. Para geometría analítica conviene **centrar los ejes** en el origen y usar la **misma escala**. Como lo haremos muchas veces, escribimos una **función** (capítulo de [funciones](python_funciones.qmd)):
+
+```{python}
+def plano_cartesiano(ax, limite=5):
+    """Configura ax como un plano cartesiano: ejes en el origen, misma escala y cuadrícula."""
+    ax.spines["left"].set_position("zero")      # Eje y en x = 0
+    ax.spines["bottom"].set_position("zero")    # Eje x en y = 0
+    ax.spines["right"].set_visible(False)
+    ax.spines["top"].set_visible(False)
+    ax.set_xlim(-limite, limite)
+    ax.set_ylim(-limite, limite)
+    ax.set_aspect("equal")                      # Misma escala en ambos ejes
+    ax.grid(True, alpha=0.3)
+    return ax
+
+fig, ax = plt.subplots(figsize=(5, 5))
+plano_cartesiano(ax)
+ax.set_title("Plano cartesiano")
+plt.show()
+```
+
+| Instrucción | ¿Qué hace? |
+|------------------------------------|------------------------------------|
+| `ax.spines["left"].set_position("zero")` | Mueve el eje vertical a $x = 0$. |
+| `ax.spines["bottom"].set_position("zero")` | Mueve el eje horizontal a $y = 0$. |
+| `ax.spines["right"].set_visible(False)` | Oculta el borde derecho (y lo mismo con `"top"`). |
+| `ax.set_aspect("equal")` | Una unidad mide lo mismo en ambos ejes. |
+
+## Cuatro formas de describir una curva
+
+| Forma | Ejemplo (circunferencia de radio 3) | ¿Cómo se grafica? |
+|------------------------|------------------------|------------------------|
+| **Explícita** $y = f(x)$ | $y = \pm\sqrt{9 - x^2}$ (dos funciones) | `ax.plot(x, f(x))` |
+| **Implícita** $F(x, y) = 0$ | $x^2 + y^2 - 9 = 0$ | `ax.contour(X, Y, F, levels=[0])` |
+| **Paramétrica** $(x(t), y(t))$ | $x = 3\cos t,\ y = 3\sin t$ | `ax.plot(x(t), y(t))` |
+| **Polar** $r = r(\theta)$ | $r = 3$ | `x = r cos θ`, `y = r sin θ` |
+
+### Curvas implícitas: la curva de nivel cero
+
+Muchas curvas de geometría analítica están dadas en forma **implícita**, como $x^2 + y^2 = 9$ o $xy = 4$, y no siempre es fácil despejar $y$. El truco es graficar la **curva de nivel 0** de $F(x, y)$, con `contour()` (lo vimos en [funciones de dos variables](python_visualizacion.qmd#funciones-de-dos-variables)):
+
+```{python}
+x = np.linspace(-5, 5, 400)
+y = np.linspace(-5, 5, 400)
+X, Y = np.meshgrid(x, y)
+
+fig, ax = plt.subplots(figsize=(5, 5))
+plano_cartesiano(ax)
+ax.contour(X, Y, X**2 + Y**2 - 9, levels=[0], colors="tab:blue")    # x² + y² = 9
+ax.contour(X, Y, X * Y - 4, levels=[0], colors="tab:red")           # xy = 4
+ax.set_title("$x^2 + y^2 = 9$ (azul) y $xy = 4$ (rojo)")
+plt.show()
+```
+
+`levels=[0]` dibuja **solo** los puntos donde $F(x, y) = 0$, es decir, la curva.
+
+### Curvas paramétricas y polares
+
+```{python}
+t = np.linspace(0, 2 * np.pi, 400)
+
+fig, axs = plt.subplots(1, 2, figsize=(10, 5))
+
+# Paramétrica: una elipse x = 4 cos t, y = 2 sin t
+plano_cartesiano(axs[0])
+axs[0].plot(4 * np.cos(t), 2 * np.sin(t))
+axs[0].set_title("Paramétrica: $x = 4\\cos t$, $y = 2\\sin t$")
+
+# Polar: una rosa de 4 pétalos r = 4 cos(2θ)
+r = 4 * np.cos(2 * t)
+plano_cartesiano(axs[1])
+axs[1].plot(r * np.cos(t), r * np.sin(t), color="tab:purple")
+axs[1].set_title("Polar: $r = 4\\cos(2\\theta)$")
+
+plt.show()
+```
+
+## Discutir una curva con SymPy y Matplotlib
+
+**Discutir** una curva es analizar sus intersecciones con los ejes, simetrías, extensión y asíntotas **antes** de bosquejarla. SymPy hace los cálculos y Matplotlib la gráfica. Tomemos el ejercicio 1a) de la hoja: $xy - x - 2y = 0$.
+
+```{python}
+x, y = sp.symbols("x y", real=True)
+F = x*y - x - 2*y
+```
+
+**1. Intersecciones con los ejes.** Con el eje $x$ ($y = 0$) y con el eje $y$ ($x = 0$):
+
+```{python}
+print("Con el eje x:", sp.solve(F.subs(y, 0), x))
+print("Con el eje y:", sp.solve(F.subs(x, 0), y))
+```
+
+La curva pasa por el **origen**.
+
+**2. Simetrías.** Una curva $F(x, y) = 0$ es simétrica respecto al eje $x$ si al cambiar $y$ por $-y$ la ecuación no cambia; respecto al eje $y$ si al cambiar $x$ por $-x$ no cambia; y respecto al origen si al cambiar ambos no cambia:
+
+```{python}
+def es_simetrica(F, sustitucion):
+    """Regresa True si F no cambia al aplicar la sustitución."""
+    return sp.expand(F.subs(sustitucion, simultaneous=True) - F) == 0
+
+print("Eje x:  ", es_simetrica(F, {y: -y}))
+print("Eje y:  ", es_simetrica(F, {x: -x}))
+print("Origen: ", es_simetrica(F, {x: -x, y: -y}))
+```
+
+No es simétrica respecto a los ejes ni al origen.
+
+**3. Extensión y asíntotas.** Despejamos $y$:
+
+```{python}
+y_despejada = sp.solve(F, y)[0]
+print("y =", y_despejada)
+print("Límite cuando x → ∞:", sp.limit(y_despejada, x, sp.oo))
+print("Límite cuando x → 2⁺:", sp.limit(y_despejada, x, 2, "+"))
+```
+
+Como $y = \frac{x}{x - 2}$, la curva no está definida en $x = 2$ (**asíntota vertical**), y $y \to 1$ cuando $x \to \pm\infty$ (**asíntota horizontal** $y = 1$). Por eso la extensión es $x \neq 2$, $y \neq 1$.
+
+**4. La gráfica.** Reunimos todo: la curva, sus asíntotas punteadas y el punto de corte con los ejes:
+
+```{python}
+fig, ax = plt.subplots(figsize=(6, 6))
+plano_cartesiano(ax, limite=6)
+
+xs = np.linspace(-6, 6, 1001)          # 1001 puntos: así x = 2 no está en la malla
+ys = xs / (xs - 2)
+ys[np.abs(xs - 2) < 0.02] = np.nan        # Evita una línea falsa que una las dos ramas
+
+ax.plot(xs, ys, color="tab:blue", label="$xy - x - 2y = 0$")
+ax.axvline(2, color="gray", linestyle="--", label="Asíntota $x = 2$")
+ax.axhline(1, color="gray", linestyle=":", label="Asíntota $y = 1$")
+ax.scatter([0], [0], color="black", zorder=3, label="Corte con los ejes $(0, 0)$")
+ax.legend(loc="lower left", fontsize=8)
+plt.show()
+```
+
+::: callout-tip
+Cerca de una asíntota vertical, `plt.plot()` une el último punto de una rama con el primero de la otra y dibuja una línea vertical **falsa**. Cambiar esos valores por `np.nan` ("no es un número") corta la línea.
+:::
+
+## Dónde existen puntos reales
+
+En $y^2 = x - 1$ (ejercicio 2a), $y$ solo es real cuando $x - 1 \geq 0$. SymPy encuentra ese conjunto con `solveset()`, y podemos **sombrear** en la gráfica la región donde existe la curva:
+
+```{python}
+x = sp.symbols("x", real=True)
+print("2a) y² = x - 1:     ", sp.solveset(x - 1 >= 0, x, sp.S.Reals))
+print("2b) y² = x(x - 2):  ", sp.solveset(x * (x - 2) >= 0, x, sp.S.Reals))
+```
+
+```{python}
+X, Y = np.meshgrid(np.linspace(-4, 6, 400), np.linspace(-5, 5, 400))
+
+fig, axs = plt.subplots(1, 2, figsize=(10, 5))
+
+plano_cartesiano(axs[0])
+axs[0].axvspan(1, 5, color="tab:green", alpha=0.15, label="$x \\geq 1$")
+axs[0].contour(X, Y, Y**2 - (X - 1), levels=[0], colors="tab:green")
+axs[0].set_title("2a) $y^2 = x - 1$")
+axs[0].legend(loc="lower left")
+
+plano_cartesiano(axs[1])
+axs[1].axvspan(-5, 0, color="tab:orange", alpha=0.15, label="$x \\leq 0$ o $x \\geq 2$")
+axs[1].axvspan(2, 5, color="tab:orange", alpha=0.15)
+axs[1].contour(X, Y, Y**2 - X * (X - 2), levels=[0], colors="tab:orange")
+axs[1].set_title("2b) $y^2 = x(x - 2)$")
+axs[1].legend(loc="lower left")
+
+plt.show()
+```
+
+`ax.axvspan(a, b)` sombrea la franja vertical entre $x = a$ y $x = b$.
+
+## Intersecciones entre curvas
+
+Para el ejercicio 3a), las intersecciones de $x^2 + y^2 = 5$ y $y = x + 1$ son las soluciones del **sistema**:
+
+```{python}
+x, y = sp.symbols("x y", real=True)
+puntos = sp.solve([x**2 + y**2 - 5, y - (x + 1)], [x, y])
+print("Intersecciones:", puntos)
+
+X, Y = np.meshgrid(np.linspace(-4, 4, 400), np.linspace(-4, 4, 400))
+fig, ax = plt.subplots(figsize=(5, 5))
+plano_cartesiano(ax, limite=4)
+ax.contour(X, Y, X**2 + Y**2 - 5, levels=[0], colors="tab:blue")
+xs = np.linspace(-4, 4, 100)
+ax.plot(xs, xs + 1, color="tab:red")
+for px_, py_ in puntos:
+    ax.scatter(float(px_), float(py_), color="black", zorder=3)
+    ax.annotate(f"({px_}, {py_})", (float(px_), float(py_)), xytext=(8, -12), textcoords="offset points")
+ax.set_title("$x^2 + y^2 = 5$ y $y = x + 1$")
+plt.show()
+```
+
+En el ejercicio 3b), `sp.solve([x**2 + y**2 - 1, y - 2], [x, y])` regresa `[]`: la recta $y = 2$ queda **fuera** de la circunferencia de radio 1 y no hay intersección.
+
+## Curvas que se factorizan
+
+Si una ecuación se puede **factorizar**, su gráfica es la **unión** de las gráficas de cada factor, porque un producto es cero cuando alguno de sus factores es cero. Para el ejercicio 4a):
+
+```{python}
+print(sp.factor(x**2 + x*y - 2*y**2))
+```
+
+$x^2 + xy - 2y^2 = (x - y)(x + 2y) = 0$ es la unión de las rectas $y = x$ y $y = -\frac{x}{2}$. Para el ejercicio 4b), $(x^2 + y^2 - 4)(y - x) = 0$ es la unión de una circunferencia de radio 2 y la recta $y = x$:
+
+```{python}
+X, Y = np.meshgrid(np.linspace(-4, 4, 400), np.linspace(-4, 4, 400))
+
+fig, axs = plt.subplots(1, 2, figsize=(10, 5))
+plano_cartesiano(axs[0], limite=4)
+axs[0].contour(X, Y, X**2 + X * Y - 2 * Y**2, levels=[0], colors="tab:blue")
+axs[0].set_title("4a) $x^2 + xy - 2y^2 = 0$")
+
+plano_cartesiano(axs[1], limite=4)
+axs[1].contour(X, Y, (X**2 + Y**2 - 4) * (Y - X), levels=[0], colors="tab:purple")
+axs[1].set_title("4b) $(x^2 + y^2 - 4)(y - x) = 0$")
+plt.show()
+```
+
+¡No necesitamos factorizar para graficar! `contour()` con `levels=[0]` dibuja directamente la unión de las curvas.
+
+## Lugares geométricos
+
+Un **lugar geométrico** es el conjunto de **todos** los puntos $P(x, y)$ que cumplen una condición. El método siempre es el mismo:
+
+1.  Escribir la condición con la **fórmula de la distancia**: $d(P, A) = \sqrt{(x - x_A)^2 + (y - y_A)^2}$.
+2.  **Simplificar** con SymPy hasta obtener una ecuación en $x$ y $y$.
+3.  **Graficar** la ecuación junto con los puntos de la condición, para interpretarla.
+
+Para no repetir la fórmula, la guardamos en una función. Usamos el **cuadrado** de la distancia, que no tiene raíz y es más fácil de simplificar:
+
+```{python}
+def distancia2(P, Q):
+    """Regresa el cuadrado de la distancia entre los puntos P y Q."""
+    return (P[0] - Q[0])**2 + (P[1] - Q[1])**2
+
+x, y = sp.symbols("x y", real=True)
+P = (x, y)
+```
+
+### Ejemplo: la mediatriz (ejercicio 5)
+
+Los puntos que **equidistan** de $A = (-2, 1)$ y $B = (4, 3)$ cumplen $d(P, A)^2 = d(P, B)^2$:
+
+```{python}
+A, B = (-2, 1), (4, 3)
+ecuacion = sp.expand(distancia2(P, A) - distancia2(P, B))
+print(ecuacion, "= 0")
+print("Simplificada:", sp.factor(ecuacion), "= 0")
+```
+
+La ecuación $3x + y - 5 = 0$ es una **recta**: la **mediatriz** del segmento $AB$, que pasa por el punto medio del segmento y es perpendicular a él.
+
+```{python}
+fig, ax = plt.subplots(figsize=(5, 5))
+plano_cartesiano(ax, limite=6)
+xs = np.linspace(-6, 6, 100)
+ax.plot(xs, 5 - 3 * xs, label="Mediatriz $3x + y - 5 = 0$")
+ax.plot([A[0], B[0]], [A[1], B[1]], "k--", label="Segmento $AB$")
+ax.scatter(*zip(A, B), color="black", zorder=3)
+ax.scatter([1], [2], color="tab:red", zorder=3, label="Punto medio $(1, 2)$")
+ax.annotate("A", A, xytext=(-14, 4), textcoords="offset points")
+ax.annotate("B", B, xytext=(6, 4), textcoords="offset points")
+ax.legend(loc="lower left", fontsize=8)
+plt.show()
+```
+
+### Ejemplo: la parábola (ejercicio 6)
+
+Los puntos cuya distancia al **eje** $x$ (que es $|y|$) es igual a su distancia al punto $F = (0, 4)$ cumplen $y^2 = d(P, F)^2$:
+
+```{python}
+F_ = (0, 4)
+ecuacion = sp.expand(y**2 - distancia2(P, F_))
+print(ecuacion, "= 0")
+print("y =", sp.solve(ecuacion, y)[0])
+```
+
+Es la **parábola** $y = \frac{x^2}{8} + 2$, con **foco** en $F = (0, 4)$ y **directriz** el eje $x$. Verifiquemos la propiedad con un punto cualquiera de la curva:
+
+```{python}
+fig, ax = plt.subplots(figsize=(6, 5))
+plano_cartesiano(ax, limite=8)
+ax.set_ylim(-1, 9)
+xs = np.linspace(-8, 8, 200)
+ax.plot(xs, xs**2 / 8 + 2, label="$y = x^2/8 + 2$")
+ax.scatter(*F_, color="tab:red", zorder=3, label="Foco $F = (0, 4)$")
+ax.axhline(0, color="tab:green", linewidth=2, label="Directriz: eje $x$")
+
+px0 = 4
+py0 = px0**2 / 8 + 2                                      # Un punto de la parábola: (4, 4)
+ax.plot([px0, F_[0]], [py0, F_[1]], "r--")               # Distancia al foco
+ax.plot([px0, px0], [py0, 0], "g--")                     # Distancia a la directriz
+ax.scatter([px0], [py0], color="black", zorder=3)
+ax.legend(loc="upper left", fontsize=8)
+ax.set_title(f"En P = ({px0}, {py0:.0f}): distancia al foco = distancia al eje x = {py0:.0f}")
+plt.show()
+```
+
+## Seaborn: gráficas estadísticas
+
+[Seaborn](https://seaborn.pydata.org/) es una biblioteca construida **sobre Matplotlib** para hacer gráficas estadísticas con muy poco código. Trabaja directamente con tablas de pandas (`DataFrame`) y elige automáticamente colores, leyendas y etiquetas.
+
+|   | Matplotlib | Seaborn |
+|------------------------|------------------------|------------------------|
+| Nivel | Bajo: controlas cada detalle. | Alto: una función hace toda la gráfica. |
+| Datos | Arreglos y listas. | Principalmente `DataFrame`. |
+| Ideal para | Gráficas matemáticas y personalizadas. | Exploración estadística de datos. |
+| ¿Se pueden combinar? | Sí: las gráficas de Seaborn son objetos de Matplotlib (`ax`). |  |
+
+```{python}
+import seaborn as sns
+import plotly.express as px
+
+sns.set_theme(style="whitegrid")       # Estilo general de las gráficas
+iris = px.data.iris()                  # El conjunto iris que conocimos en la primera parte
+```
+
+| Función de Seaborn | Gráfica |
+|------------------------------------|------------------------------------|
+| `sns.scatterplot()` | Dispersión, con color (`hue`) por grupo. |
+| `sns.histplot()` | Histograma, opcionalmente con la curva de densidad (`kde=True`). |
+| `sns.kdeplot()` | Curva de densidad (versión "suave" del histograma). |
+| `sns.boxplot()`, `sns.violinplot()` | Caja y violín por grupo. |
+| `sns.regplot()` | Dispersión con recta de regresión. |
+| `sns.pairplot()` | Todas las gráficas de dispersión entre pares de variables. |
+| `sns.heatmap()` | Mapa de calor de una matriz. |
+
+### Distribuciones por grupo
+
+```{python}
+fig, axs = plt.subplots(1, 2, figsize=(11, 4))
+
+sns.histplot(data=iris, x="petal_length", hue="species", kde=True, ax=axs[0])
+axs[0].set_title("Histograma con densidad")
+
+sns.violinplot(data=iris, x="species", y="petal_length", ax=axs[1])
+axs[1].set_title("Diagrama de violín")
+
+fig.tight_layout()
+plt.show()
+```
+
+Observa el argumento `ax=`: así una gráfica de Seaborn se coloca en uno de los `subplots` de Matplotlib.
+
+### Matriz de dispersión: `pairplot()`
+
+```{python}
+sns.pairplot(iris.drop(columns="species_id"), hue="species", height=2)
+plt.show()
+```
+
+Una sola línea crea las $4 \times 4$ combinaciones de variables. En la diagonal aparece la distribución de cada variable.
+
+## Mapas de calor en 2D
+
+Un **mapa de calor** (*heatmap*) representa los valores de una **matriz** con colores. Hay tres formas principales de hacerlo:
+
+| Función | Ideal para |
+|------------------------------------|------------------------------------|
+| `plt.imshow()` | Matrices grandes o imágenes; funciones $f(x, y)$ en una malla. |
+| `plt.pcolormesh()` | Mallas con coordenadas $x$, $y$ explícitas. |
+| `sns.heatmap()` | Tablas pequeñas, con los **valores escritos** en cada celda (`annot=True`). |
+
+### Matriz de correlación con Seaborn
+
+La **correlación** mide qué tan relacionadas están dos variables, de $-1$ a $1$. Pandas calcula la matriz de correlación con `.corr()` y Seaborn la dibuja:
+
+```{python}
+correlacion = iris.drop(columns=["species", "species_id"]).corr()
+
+plt.figure(figsize=(6, 5))
+sns.heatmap(correlacion, annot=True, fmt=".2f", cmap="RdBu_r", vmin=-1, vmax=1, square=True)
+plt.title("Correlación entre las medidas de iris")
+plt.show()
+```
+
+Usamos una paleta **divergente** (`RdBu_r`): azul para correlaciones negativas, rojo para positivas y blanco para cero.
+
+| Tipo de paleta | Cuándo usarla | Ejemplos |
+|------------------------|------------------------|------------------------|
+| **Secuencial** | Valores de menor a mayor. | `viridis`, `Blues`, `magma` |
+| **Divergente** | Valores alrededor de un centro (como el 0). | `RdBu_r`, `coolwarm` |
+| **Cualitativa** | Categorías sin orden. | `tab10`, `Set2` |
+
+### El mapa de calor de un lugar geométrico
+
+Un mapa de calor también ayuda a **ver** un lugar geométrico. Pintemos, en cada punto del plano, la diferencia $d(P, A) - d(P, B)$ para los puntos del ejercicio 5. La mediatriz es exactamente donde esa diferencia vale **cero**:
+
+```{python}
+X, Y = np.meshgrid(np.linspace(-6, 6, 300), np.linspace(-6, 6, 300))
+diferencia = np.sqrt((X + 2)**2 + (Y - 1)**2) - np.sqrt((X - 4)**2 + (Y - 3)**2)
+
+fig, ax = plt.subplots(figsize=(6, 5))
+malla = ax.pcolormesh(X, Y, diferencia, cmap="RdBu_r", shading="auto")
+fig.colorbar(malla, label="$d(P, A) - d(P, B)$")
+ax.contour(X, Y, diferencia, levels=[0], colors="black", linewidths=2)
+ax.scatter([-2, 4], [1, 3], color="black", zorder=3)
+ax.set_aspect("equal")
+ax.set_title("La mediatriz: donde $d(P, A) = d(P, B)$")
+plt.show()
+```
+
+Los puntos rojos están más cerca de $B$ y los azules más cerca de $A$; la frontera blanca es la mediatriz.
+
+## Ejercicios
+
+Resuelve los ejercicios en los editores interactivos. Recuerda que lo que escribas **no se guarda** al recargar la página. Cada editor incluye la función `plano_cartesiano()` para que la uses.
+
+### Ejercicio 1. Discutir $xy = 4$ (ejercicio 1c)
+
+1.  Usa la función `es_simetrica()` para averiguar si $xy = 4$ es simétrica respecto al eje $x$, al eje $y$, al origen y a la recta $y = x$ (sustitución `{x: y, y: x}`).
+2.  Grafica la curva con `contour()` y sus asíntotas (los ejes).
+3.  En la última línea deja la tupla `(eje_x, eje_y, origen, recta_y_x)` con tus cuatro resultados.
+
+```{pyodide}
+#| exercise: vis2_1
+import numpy as np
+import matplotlib.pyplot as plt
+import sympy as sp
+
+def plano_cartesiano(ax, limite=5):
+    ax.spines["left"].set_position("zero"); ax.spines["bottom"].set_position("zero")
+    ax.spines["right"].set_visible(False); ax.spines["top"].set_visible(False)
+    ax.set_xlim(-limite, limite); ax.set_ylim(-limite, limite)
+    ax.set_aspect("equal"); ax.grid(True, alpha=0.3)
+
+def es_simetrica(F, sustitucion):
+    return sp.expand(F.subs(sustitucion, simultaneous=True) - F) == 0
+
+x, y = sp.symbols("x y", real=True)
+F = x*y - 4
+
+eje_x = es_simetrica(F, ______)
+eje_y = es_simetrica(F, ______)
+origen = es_simetrica(F, ______)
+recta_y_x = es_simetrica(F, ______)
+
+X, Y = np.meshgrid(np.linspace(-5, 5, 400), np.linspace(-5, 5, 400))
+fig, ax = plt.subplots(figsize=(5, 5))
+plano_cartesiano(ax)
+ax.contour(X, Y, ______, levels=[0], colors="tab:red")
+ax.set_title("xy = 4")
+plt.show()
+
+(eje_x, eje_y, origen, recta_y_x)
+```
+
+```{pyodide}
+#| exercise: vis2_1
+#| check: true
+if result == (False, False, True, True):
+    feedback = {"correct": True, "message": "¡Correcto! La hipérbola xy = 4 es simétrica respecto al origen y a las rectas y = x y y = -x, pero no a los ejes."}
+else:
+    feedback = {"correct": False, "message": "Revisa las sustituciones: eje x {y: -y}, eje y {x: -x}, origen {x: -x, y: -y}, recta y = x {x: y, y: x}."}
+feedback
+```
+
+:::: {.hint exercise="vis2_1"}
+::: {.callout-note collapse="false"}
+## Pista
+
+Las sustituciones son diccionarios: `{y: -y}`, `{x: -x}`, `{x: -x, y: -y}` y `{x: y, y: x}`. Para la gráfica, la función en la malla es `X * Y - 4`.
+:::
+::::
+
+:::: {.solution exercise="vis2_1"}
+::: {.callout-tip collapse="false"}
+## Solución
+
+``` python
+eje_x = es_simetrica(F, {y: -y})            # False
+eje_y = es_simetrica(F, {x: -x})            # False
+origen = es_simetrica(F, {x: -x, y: -y})    # True
+recta_y_x = es_simetrica(F, {x: y, y: x})   # True
+
+X, Y = np.meshgrid(np.linspace(-5, 5, 400), np.linspace(-5, 5, 400))
+fig, ax = plt.subplots(figsize=(5, 5))
+plano_cartesiano(ax)
+ax.contour(X, Y, X * Y - 4, levels=[0], colors="tab:red")
+ax.set_title("xy = 4")
+plt.show()
+
+(eje_x, eje_y, origen, recta_y_x)
+```
+
+Las asíntotas son los propios ejes: cuando $x \to \infty$, $y = 4/x \to 0$.
+:::
+::::
+
+### Ejercicio 2. Intersección de una circunferencia y una recta
+
+Encuentra con SymPy las intersecciones de la circunferencia $x^2 + y^2 = 25$ y la recta $x + y = 7$. Grafica ambas curvas y marca los puntos. Deja la lista de puntos en la **última línea**.
+
+```{pyodide}
+#| exercise: vis2_2
+import numpy as np
+import matplotlib.pyplot as plt
+import sympy as sp
+
+def plano_cartesiano(ax, limite=5):
+    ax.spines["left"].set_position("zero"); ax.spines["bottom"].set_position("zero")
+    ax.spines["right"].set_visible(False); ax.spines["top"].set_visible(False)
+    ax.set_xlim(-limite, limite); ax.set_ylim(-limite, limite)
+    ax.set_aspect("equal"); ax.grid(True, alpha=0.3)
+
+x, y = sp.symbols("x y", real=True)
+puntos = sp.solve([______, ______], [x, y])
+print(puntos)
+
+X, Y = np.meshgrid(np.linspace(-8, 8, 400), np.linspace(-8, 8, 400))
+fig, ax = plt.subplots(figsize=(5, 5))
+plano_cartesiano(ax, limite=8)
+ax.contour(X, Y, X**2 + Y**2 - 25, levels=[0], colors="tab:blue")
+ax.contour(X, Y, X + Y - 7, levels=[0], colors="tab:red")
+for punto in puntos:
+    ax.scatter(float(punto[0]), float(punto[1]), color="black", zorder=3)
+plt.show()
+
+puntos
+```
+
+```{pyodide}
+#| exercise: vis2_2
+#| check: true
+if isinstance(result, list) and sorted(result) == [(3, 4), (4, 3)]:
+    feedback = {"correct": True, "message": "¡Correcto! Se cortan en (3, 4) y (4, 3): ¡dos ternas pitagóricas!"}
+elif isinstance(result, list) and len(result) == 0:
+    feedback = {"correct": False, "message": "No hay soluciones: revisa que escribiste bien las dos ecuaciones (igualadas a cero)."}
+else:
+    feedback = {"correct": False, "message": "Escribe las ecuaciones igualadas a cero: x**2 + y**2 - 25 y x + y - 7."}
+feedback
+```
+
+:::: {.hint exercise="vis2_2"}
+::: {.callout-note collapse="false"}
+## Pista
+
+`sp.solve()` supone que cada expresión está igualada a cero: escribe `x**2 + y**2 - 25` y `x + y - 7`.
+:::
+::::
+
+:::: {.solution exercise="vis2_2"}
+::: {.callout-tip collapse="false"}
+## Solución
+
+``` python
+puntos = sp.solve([x**2 + y**2 - 25, x + y - 7], [x, y])
+print(puntos)   # [(3, 4), (4, 3)]
+```
+:::
+::::
+
+### Ejercicio 3. Lugar geométrico: equidistancia (ejercicio 7)
+
+Obtén la ecuación del lugar geométrico de los puntos $P(x, y)$ que equidistan de $A(1, -2)$ y $B(5, 4)$. Grafícalo junto con los puntos $A$ y $B$. Deja la ecuación simplificada (la expresión igualada a cero) en la **última línea**.
+
+```{pyodide}
+#| exercise: vis2_3
+import numpy as np
+import matplotlib.pyplot as plt
+import sympy as sp
+
+def distancia2(P, Q):
+    return (P[0] - Q[0])**2 + (P[1] - Q[1])**2
+
+x, y = sp.symbols("x y", real=True)
+P = (x, y)
+A, B = (1, -2), (5, 4)
+
+ecuacion = sp.expand(______)
+print(sp.factor(ecuacion), "= 0")
+
+xs = np.linspace(-2, 8, 100)
+plt.plot(xs, (9 - 2 * xs) / 3, label="Lugar geométrico")
+plt.scatter([1, 5], [-2, 4], color="black")
+plt.gca().set_aspect("equal")
+plt.grid(True)
+plt.legend()
+plt.show()
+
+ecuacion
+```
+
+```{pyodide}
+#| exercise: vis2_3
+#| check: true
+import sympy as sp
+x, y = sp.symbols("x y", real=True)
+if not isinstance(result, sp.Basic):
+    feedback = {"correct": False, "message": "La última línea debe regresar la ecuación (una expresión de SymPy)."}
+else:
+    cociente = sp.simplify(result / (2*x + 3*y - 9))
+    if cociente.is_number and cociente != 0:
+        feedback = {"correct": True, "message": "¡Correcto! Es la recta 2x + 3y - 9 = 0: la mediatriz del segmento AB."}
+    else:
+        feedback = {"correct": False, "message": "Revisa la condición: distancia2(P, A) - distancia2(P, B)."}
+feedback
+```
+
+:::: {.hint exercise="vis2_3"}
+::: {.callout-note collapse="false"}
+## Pista
+
+La condición $d(P, A) = d(P, B)$ es equivalente a $d(P, A)^2 - d(P, B)^2 = 0$: escribe `distancia2(P, A) - distancia2(P, B)`.
+:::
+::::
+
+:::: {.solution exercise="vis2_3"}
+::: {.callout-tip collapse="false"}
+## Solución
+
+``` python
+ecuacion = sp.expand(distancia2(P, A) - distancia2(P, B))
+print(sp.factor(ecuacion), "= 0")   # 4*(2*x + 3*y - 9) = 0
+
+ecuacion
+```
+
+Es la recta $2x + 3y - 9 = 0$, la **mediatriz** del segmento $AB$, igual que en el ejemplo del ejercicio 5.
+:::
+::::
+
+### Ejercicio 4. Lugar geométrico: una circunferencia escondida (ejercicio 8)
+
+El cuadrado de la distancia de $P(x, y)$ a $A(4, 1)$ es igual a su distancia al eje $Y$, que es $|x|$. Para los puntos con $x \geq 0$, la condición es $d(P, A)^2 = x$.
+
+1.  Obtén la ecuación con SymPy.
+2.  Encuentra el **centro** de la curva: el punto donde las derivadas de la ecuación respecto a $x$ y a $y$ valen cero (así se "completa el cuadrado" con cálculo).
+3.  Grafica la curva con `contour()`.
+4.  Deja el centro como tupla `(cx, cy)` en la **última línea**.
+
+```{pyodide}
+#| exercise: vis2_4
+import numpy as np
+import matplotlib.pyplot as plt
+import sympy as sp
+
+def distancia2(P, Q):
+    return (P[0] - Q[0])**2 + (P[1] - Q[1])**2
+
+x, y = sp.symbols("x y", real=True)
+P = (x, y)
+
+ecuacion = sp.expand(distancia2(P, (4, 1)) - x)
+print(ecuacion, "= 0")
+
+centro = sp.solve([sp.diff(ecuacion, x), ______], [x, y])
+cx, cy = centro[x], centro[y]
+radio = sp.sqrt(-ecuacion.subs({x: cx, y: cy}))
+print("Centro:", (cx, cy), " Radio:", radio)
+
+X, Y = np.meshgrid(np.linspace(0, 8, 400), np.linspace(-3, 5, 400))
+plt.contour(X, Y, (X - 4)**2 + (Y - 1)**2 - X, levels=[0], colors="tab:purple")
+plt.scatter([float(cx)], [float(cy)], color="black")
+plt.gca().set_aspect("equal")
+plt.grid(True)
+plt.show()
+
+(cx, cy)
+```
+
+```{pyodide}
+#| exercise: vis2_4
+#| check: true
+import sympy as sp
+if result == (sp.Rational(9, 2), 1):
+    feedback = {"correct": True, "message": "¡Correcto! Es la circunferencia de centro (9/2, 1) y radio √17/2."}
+else:
+    feedback = {"correct": False, "message": "El segundo elemento de la lista es la derivada respecto a y: sp.diff(ecuacion, y)."}
+feedback
+```
+
+:::: {.hint exercise="vis2_4"}
+::: {.callout-note collapse="false"}
+## Pista
+
+El sistema es la derivada respecto a `x` **y** la derivada respecto a `y`: `sp.diff(ecuacion, y)`.
+:::
+::::
+
+:::: {.solution exercise="vis2_4"}
+::: {.callout-tip collapse="false"}
+## Solución
+
+``` python
+centro = sp.solve([sp.diff(ecuacion, x), sp.diff(ecuacion, y)], [x, y])
+cx, cy = centro[x], centro[y]
+radio = sp.sqrt(-ecuacion.subs({x: cx, y: cy}))
+print("Centro:", (cx, cy), " Radio:", radio)   # Centro: (9/2, 1)  Radio: sqrt(17)/2
+```
+
+La ecuación $x^2 - 9x + y^2 - 2y + 17 = 0$ es equivalente a $\left(x - \frac{9}{2}\right)^2 + (y - 1)^2 = \frac{17}{4}$. Todos sus puntos tienen $x > 0$, así que el caso $x < 0$ no aporta puntos.
+:::
+::::
+
+### Ejercicio 5. La elipse de los jardineros (ejercicio 9)
+
+Los puntos cuya **suma** de distancias a $A(3, 0)$ y $B(-3, 0)$ es 8 forman una **elipse** con focos $A$ y $B$. Si clavas dos estacas en los focos, atas una cuerda de longitud 8 y la mantienes tensa con un lápiz, ¡dibujas esta elipse!
+
+Para una elipse con centro en el origen: el **semieje mayor** es $a = \frac{8}{2}$, la distancia del centro a cada foco es $c = 3$ y el **semieje menor** cumple $b^2 = a^2 - c^2$.
+
+1.  Calcula `a`, `c` y `b`.
+2.  Grafica la curva $d(P, A) + d(P, B) = 8$ con `contour()` y compárala con la paramétrica $x = a\cos t$, $y = b\sin t$.
+3.  Deja la tupla `(a, b**2, c)` en la **última línea**.
+
+```{pyodide}
+#| exercise: vis2_5
+import numpy as np
+import matplotlib.pyplot as plt
+
+a = ______
+c = ______
+b = ______
+
+X, Y = np.meshgrid(np.linspace(-5, 5, 400), np.linspace(-5, 5, 400))
+suma = np.sqrt((X - 3)**2 + Y**2) + np.sqrt((X + 3)**2 + Y**2)
+plt.contour(X, Y, suma, levels=[8], colors="tab:blue", linewidths=4)
+
+t = np.linspace(0, 2 * np.pi, 200)
+plt.plot(a * np.cos(t), b * np.sin(t), "y--", label="Paramétrica")
+plt.scatter([3, -3], [0, 0], color="red", label="Focos")
+plt.gca().set_aspect("equal")
+plt.legend()
+plt.show()
+
+(a, b**2, c)
+```
+
+```{pyodide}
+#| exercise: vis2_5
+#| check: true
+import math
+if isinstance(result, tuple) and len(result) == 3 and math.isclose(result[0], 4) and math.isclose(result[1], 7) and math.isclose(result[2], 3):
+    feedback = {"correct": True, "message": "¡Correcto! La elipse es x²/16 + y²/7 = 1: la curva de nivel y la paramétrica coinciden."}
+else:
+    feedback = {"correct": False, "message": "Revisa: a = 8 / 2, c = 3 y b = (a**2 - c**2) ** 0.5."}
+feedback
+```
+
+:::: {.hint exercise="vis2_5"}
+::: {.callout-note collapse="false"}
+## Pista
+
+`a = 8 / 2`, `c = 3` y `b = (a**2 - c**2) ** 0.5`.
+:::
+::::
+
+:::: {.solution exercise="vis2_5"}
+::: {.callout-tip collapse="false"}
+## Solución
+
+``` python
+a = 8 / 2                      # 4.0
+c = 3
+b = (a**2 - c**2) ** 0.5       # √7 ≈ 2.6458
+```
+
+La ecuación es $\frac{x^2}{16} + \frac{y^2}{7} = 1$. La curva de nivel (gruesa) y la paramétrica (punteada) coinciden.
+:::
+::::
+
+### Ejercicio 6. Un mapa de calor de la aritmética modular
+
+Construye la **tabla de multiplicar módulo 7**: la entrada $(i, j)$ es $i \cdot j \bmod 7$, para $i, j = 0, 1, \dots, 6$. Usa *broadcasting* de NumPy (sin ciclos) y dibuja la tabla con `sns.heatmap()`. ¿Qué patrón observas en las filas?
+
+```{pyodide}
+#| exercise: vis2_6
+# --- Preparar Seaborn en el navegador (no modificar) ---
+import micropip
+await micropip.install("seaborn")
+# -------------------------------------------------------
+
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+n = 7
+i = np.arange(n).reshape(n, 1)    # Columna
+j = np.arange(n)                  # Fila
+tabla = ______
+
+plt.figure(figsize=(5, 4))
+sns.heatmap(tabla, annot=True, cmap="viridis", cbar=False, square=True)
+plt.title("Multiplicación módulo 7")
+plt.show()
+
+tabla
+```
+
+```{pyodide}
+#| exercise: vis2_6
+#| check: true
+import numpy as np
+esperada = (np.arange(7).reshape(7, 1) * np.arange(7)) % 7
+if isinstance(result, np.ndarray) and result.shape == (7, 7) and np.array_equal(result, esperada):
+    feedback = {"correct": True, "message": "¡Correcto! Cada fila (excepto la del 0) contiene todos los números del 0 al 6: como 7 es primo, todo número distinto de cero tiene inverso módulo 7."}
+else:
+    feedback = {"correct": False, "message": "La tabla es (i * j) % n: el producto de la columna por la fila, módulo n."}
+feedback
+```
+
+:::: {.hint exercise="vis2_6"}
+::: {.callout-note collapse="false"}
+## Pista
+
+Con *broadcasting*, `i * j` produce una matriz de $7 \times 7$. Después aplica `% n`.
+:::
+::::
+
+:::: {.solution exercise="vis2_6"}
+::: {.callout-tip collapse="false"}
+## Solución
+
+``` python
+tabla = (i * j) % n
+```
+
+**Extra:** cambia `n = 7` por `n = 8`. Como 8 no es primo, algunas filas ya no contienen todos los números.
+:::
+::::
+
+## Reto final: discute la curva completa
+
+Discute la curva $y^2 = x(x - 2)$ (ejercicio 2b) en un solo programa:
+
+1.  Intersecciones con los ejes.
+2.  Simetrías respecto al eje $x$, al eje $y$ y al origen.
+3.  Valores de $x$ para los que existen puntos reales.
+4.  Su gráfica con la región de existencia sombreada.
+5.  Deja en la **última línea** la tupla `(cortes_eje_x, simetrica_eje_x)` con la lista de cortes con el eje $x$ ordenada y si es simétrica respecto al eje $x$.
+
+```{pyodide}
+#| exercise: reto_vis2
+import numpy as np
+import matplotlib.pyplot as plt
+import sympy as sp
+
+x, y = sp.symbols("x y", real=True)
+F = y**2 - x*(x - 2)
+
+cortes_eje_x = sorted(sp.solve(F.subs(y, 0), x))
+cortes_eje_y = sp.solve(F.subs(x, 0), y)
+simetrica_eje_x = ______
+simetrica_eje_y = ______
+existencia = sp.solveset(______ >= 0, x, sp.S.Reals)
+
+print("Cortes con el eje x:", cortes_eje_x, " con el eje y:", cortes_eje_y)
+print("Simétrica eje x:", simetrica_eje_x, " eje y:", simetrica_eje_y)
+print("Existe para x en:", existencia)
+
+X, Y = np.meshgrid(np.linspace(-4, 6, 400), np.linspace(-5, 5, 400))
+plt.axvspan(-4, 0, color="orange", alpha=0.15)
+plt.axvspan(2, 6, color="orange", alpha=0.15)
+plt.contour(X, Y, Y**2 - X * (X - 2), levels=[0], colors="tab:orange")
+plt.axhline(0, color="black", linewidth=0.8)
+plt.axvline(0, color="black", linewidth=0.8)
+plt.gca().set_aspect("equal")
+plt.show()
+
+(cortes_eje_x, simetrica_eje_x)
+```
+
+```{pyodide}
+#| exercise: reto_vis2
+#| check: true
+if result == ([0, 2], True):
+    feedback = {"correct": True, "message": "¡Excelente! Corta al eje x en 0 y 2, es simétrica respecto al eje x y existe para x ≤ 0 o x ≥ 2: es una hipérbola."}
+elif isinstance(result, tuple) and result[0] == [0, 2]:
+    feedback = {"correct": False, "message": "Los cortes son correctos. Revisa la simetría: compara F con F al cambiar y por -y."}
+else:
+    feedback = {"correct": False, "message": "La última línea debe ser (cortes_eje_x, simetrica_eje_x)."}
+feedback
+```
+
+:::: {.hint exercise="reto_vis2"}
+::: {.callout-note collapse="false"}
+## Pista
+
+Para la simetría respecto al eje $x$: `sp.expand(F.subs(y, -y) - F) == 0`. La condición de existencia es que el lado derecho no sea negativo: `x*(x - 2) >= 0`.
+:::
+::::
+
+:::: {.solution exercise="reto_vis2"}
+::: {.callout-tip collapse="false"}
+## Solución
+
+``` python
+simetrica_eje_x = sp.expand(F.subs(y, -y) - F) == 0     # True
+simetrica_eje_y = sp.expand(F.subs(x, -x) - F) == 0     # False
+existencia = sp.solveset(x*(x - 2) >= 0, x, sp.S.Reals) # (-oo, 0] ∪ [2, oo)
+```
+
+Completando el cuadrado, $y^2 = x^2 - 2x$ es $(x - 1)^2 - y^2 = 1$: una **hipérbola** con centro en $(1, 0)$.
+:::
+::::
+
+## Resumen
+
+| Tema | Herramienta |
+|------------------------------------|------------------------------------|
+| Plano cartesiano | `ax.spines[...].set_position("zero")` y `ax.set_aspect("equal")` |
+| Curvas implícitas | `ax.contour(X, Y, F, levels=[0])` |
+| Paramétricas y polares | `ax.plot(x(t), y(t))`, con `x = r cos θ`, `y = r sin θ` |
+| Discutir una curva | SymPy: `solve` (cortes), `subs` (simetrías), `limit` (asíntotas), `solveset` (extensión) |
+| Asíntotas | `ax.axvline()`, `ax.axhline()` y `np.nan` para cortar la línea |
+| Regiones | `ax.axvspan()` |
+| Lugares geométricos | Distancia al cuadrado + `sp.expand()` / `sp.factor()` + gráfica |
+| Seaborn | `histplot`, `violinplot`, `pairplot`, `heatmap`, con `hue` y `ax=` |
+| Mapas de calor 2D | `imshow`, `pcolormesh`, `sns.heatmap`; paletas secuenciales, divergentes y cualitativas |
+
+## Referencias
+
+- [Matplotlib: posición de los ejes (*spines*)](https://matplotlib.org/stable/gallery/spines/spine_placement_demo.html)
+- [Matplotlib: `contour`](https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.contour.html)
+- [Seaborn: tutorial oficial](https://seaborn.pydata.org/tutorial.html)
+- [Matplotlib: elegir mapas de colores](https://matplotlib.org/stable/users/explain/colors/colormaps.html)
+- Hoja de ejercicios *Curvas y Lugares Geométricos*, Geometría Analítica, semestre 2027-1.

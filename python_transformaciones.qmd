@@ -1,0 +1,879 @@
+---
+engine: knitr
+---
+
+# Transformaciones geométricas en 2D y 3D
+
+{{< include ./_extensions/r-wasm/live/_knitr.qmd >}}
+
+```{r}
+#| include: false
+# Mostrar solo el resultado de la última línea de cada bloque de Python (como en Jupyter)
+knitr::opts_chunk$set(jupyter_compat = TRUE)
+# Usar el entorno del curso (~/.venvs/quarto-python) si existe, aunque RStudio tenga configurado otro Python.
+venv_python <- path.expand(c("~/.venvs/quarto-python/bin/python", "~/.venvs/quarto-python/Scripts/python.exe"))
+venv_python <- venv_python[file.exists(venv_python)]
+if (length(venv_python) > 0) {
+  Sys.setenv(RETICULATE_PYTHON = venv_python[1])
+} else {
+  reticulate::py_require(c("numpy", "matplotlib", "sympy", "plotly", "pandas"))
+}
+```
+
+```{python}
+#| include: false
+# Hace que fig.show() muestre las figuras de Plotly dentro del libro
+import plotly.graph_objects as go
+_primera_figura = True
+def _mostrar_en_libro(self, *args, **kwargs):
+    global _primera_figura
+    html = self.to_html(include_plotlyjs="cdn" if _primera_figura else False, full_html=False)
+    print("```{=html}\n" + html + "\n```")
+    _primera_figura = False
+go.Figure.show = _mostrar_en_libro
+```
+
+> **Fecha:** 26 de noviembre, 2026
+
+Mover, girar, agrandar o reflejar una figura son **transformaciones geométricas**. Aparecen en geometría analítica (rotación y traslación de ejes), en álgebra lineal, en gráficas por computadora y en videojuegos. En este capítulo las representaremos con **matrices de NumPy** y visualizaremos su efecto con Matplotlib.
+
+Al terminar este capítulo podrás:
+
+- Explicar qué es una **transformación geométrica** y cuáles se pueden escribir como una matriz.
+- Representar **traslaciones, rotaciones, escalamientos, reflexiones** y cizallas en 2D.
+- Usar **coordenadas homogéneas** para escribir la traslación como una matriz.
+- **Componer** transformaciones y entender por qué el **orden** importa.
+- Aplicar **rotaciones en 3D** a cuerpos geométricos.
+- **Documentar** transformaciones en Quarto con matrices en LaTeX.
+
+```{python}
+import numpy as np
+import matplotlib.pyplot as plt
+```
+
+## ¿Qué es una transformación geométrica?
+
+Una **transformación geométrica** es una regla $T$ que a cada punto $P$ del plano (o del espacio) le asigna otro punto $P' = T(P)$, su **imagen**. Al aplicarla a todos los puntos de una figura, obtenemos una figura transformada.
+
+| Transformación | ¿Qué hace? | ¿Conserva distancias? | ¿Conserva la forma? |
+|------------------|------------------|------------------|------------------|
+| **Traslación** | Desplaza la figura. | Sí | Sí |
+| **Rotación** | Gira la figura alrededor de un punto. | Sí | Sí |
+| **Reflexión** | Refleja la figura respecto a una recta, como un espejo. | Sí | Sí (pero invierte la orientación) |
+| **Escalamiento** | Agranda o reduce la figura. | No | Sí, si la escala es igual en todas las direcciones |
+| **Cizalla** | "Inclina" la figura, como un mazo de cartas empujado. | No | No |
+
+Las tres primeras conservan las distancias, por eso se llaman **isometrías** (movimientos rígidos).
+
+## Figuras como matrices de puntos
+
+Para transformar una figura con NumPy, guardamos sus vértices como **columnas** de una matriz de $2 \times n$: la primera fila tiene las coordenadas $x$ y la segunda las coordenadas $y$.
+
+```{python}
+# Triángulo con vértices (0, 0), (2, 0) y (1, 2)
+triangulo = np.array([[0, 2, 1],     # coordenadas x
+                      [0, 0, 2]])    # coordenadas y
+print(triangulo.shape)               # 2 filas, 3 puntos
+```
+
+Para no repetir el código de las gráficas, escribimos dos **funciones**: una que prepara el plano y otra que dibuja una figura cerrada (uniendo el último vértice con el primero):
+
+```{python}
+def plano(ax, limite=4):
+    """Prepara ax como plano cartesiano con ejes en el origen y misma escala."""
+    ax.axhline(0, color="black", linewidth=0.8)
+    ax.axvline(0, color="black", linewidth=0.8)
+    ax.set_xlim(-limite, limite)
+    ax.set_ylim(-limite, limite)
+    ax.set_aspect("equal")
+    ax.grid(True, alpha=0.3)
+
+def dibujar(ax, figura, **opciones):
+    """Dibuja el polígono cuyos vértices son las columnas de figura (2 × n)."""
+    cerrada = np.hstack([figura, figura[:, :1]])     # Agregar el primer vértice al final
+    ax.fill(cerrada[0], cerrada[1], alpha=0.3, **opciones)
+    ax.plot(cerrada[0], cerrada[1], **opciones)
+
+fig, ax = plt.subplots(figsize=(4, 4))
+plano(ax)
+dibujar(ax, triangulo, color="tab:blue")
+plt.show()
+```
+
+`np.hstack()` pega matrices **horizontalmente** (agrega columnas) y `figura[:, :1]` es la primera columna: así el polígono queda cerrado.
+
+## Transformaciones lineales: una matriz de $2 \times 2$
+
+Muchas transformaciones que dejan fijo el origen se escriben como una **matriz** $M$ de $2 \times 2$. Transformar un punto es multiplicar la matriz por el vector del punto:
+
+$$\begin{pmatrix} x' \\ y' \end{pmatrix} = M \begin{pmatrix} x \\ y \end{pmatrix}$$
+
+Y como los puntos de nuestra figura son las columnas de una matriz, **una sola multiplicación** `M @ figura` transforma todos los vértices a la vez.
+
+| Transformación | Matriz | Efecto |
+|------------------------|------------------------|------------------------|
+| Escalamiento | $\begin{pmatrix} s_x & 0 \\ 0 & s_y \end{pmatrix}$ | Multiplica $x$ por $s_x$ y $y$ por $s_y$. |
+| Rotación de ángulo $\theta$ | $\begin{pmatrix} \cos\theta & -\sin\theta \\ \sin\theta & \cos\theta \end{pmatrix}$ | Gira $\theta$ radianes en sentido contrario a las manecillas del reloj. |
+| Reflexión en el eje $x$ | $\begin{pmatrix} 1 & 0 \\ 0 & -1 \end{pmatrix}$ | $(x, y) \to (x, -y)$ |
+| Reflexión en el eje $y$ | $\begin{pmatrix} -1 & 0 \\ 0 & 1 \end{pmatrix}$ | $(x, y) \to (-x, y)$ |
+| Reflexión en la recta $y = x$ | $\begin{pmatrix} 0 & 1 \\ 1 & 0 \end{pmatrix}$ | $(x, y) \to (y, x)$ |
+| Cizalla horizontal | $\begin{pmatrix} 1 & k \\ 0 & 1 \end{pmatrix}$ | $(x, y) \to (x + ky, y)$ |
+
+```{python}
+def rotacion(theta):
+    """Matriz de rotación de ángulo theta (en radianes)."""
+    return np.array([[np.cos(theta), -np.sin(theta)],
+                     [np.sin(theta),  np.cos(theta)]])
+
+transformaciones = {
+    "Escala (1.5, 0.5)": np.array([[1.5, 0], [0, 0.5]]),
+    "Rotación de 60°": rotacion(np.radians(60)),
+    "Reflexión en el eje y": np.array([[-1, 0], [0, 1]]),
+    "Reflexión en y = x": np.array([[0, 1], [1, 0]]),
+    "Cizalla, k = 1": np.array([[1, 1], [0, 1]]),
+}
+
+fig, axs = plt.subplots(1, 5, figsize=(17, 3.8))
+for ax, (nombre, M) in zip(axs, transformaciones.items()):
+    plano(ax)
+    dibujar(ax, triangulo, color="tab:blue")
+    dibujar(ax, M @ triangulo, color="tab:red")
+    ax.set_title(nombre)
+fig.tight_layout()
+plt.show()
+```
+
+En azul está la figura original y en rojo su imagen.
+
+### El determinante: área y orientación
+
+El **determinante** de la matriz dice cómo cambia el **área** de cualquier figura y si se invierte su **orientación**:
+
+```{python}
+for nombre, M in transformaciones.items():
+    print(f"{nombre:25s} det = {np.linalg.det(M):6.2f}")
+```
+
+| Determinante | Significado |
+|------------------------------------|------------------------------------|
+| $\lvert\det M\rvert$ | Factor por el que se multiplica el área. |
+| $\det M = 1$ | Conserva el área y la orientación (como las rotaciones y las cizallas). |
+| $\det M < 0$ | **Invierte la orientación**: el triángulo queda "volteado", como las reflexiones. |
+| $\det M = 0$ | Aplasta la figura sobre una recta o un punto. |
+
+### Ver el efecto sobre todo el plano
+
+Una matriz transforma **todo** el plano, no solo una figura. Para verlo, transformemos una cuadrícula y la circunferencia unitaria:
+
+```{python}
+def dibujar_cuadricula(ax, M, color):
+    """Dibuja la imagen bajo M de las rectas x = k y y = k, para k = -3, ..., 3."""
+    t = np.linspace(-3, 3, 50)
+    for k in range(-3, 4):
+        vertical = M @ np.vstack([np.full_like(t, k), t])
+        horizontal = M @ np.vstack([t, np.full_like(t, k)])
+        ax.plot(vertical[0], vertical[1], color=color, linewidth=0.7)
+        ax.plot(horizontal[0], horizontal[1], color=color, linewidth=0.7)
+
+A = np.array([[1.5, 1], [0.5, 1]])
+t = np.linspace(0, 2 * np.pi, 200)
+circulo = np.vstack([np.cos(t), np.sin(t)])
+
+fig, axs = plt.subplots(1, 2, figsize=(10, 5))
+for ax, M, titulo in [(axs[0], np.eye(2), "Antes"), (axs[1], A, "Después de aplicar A")]:
+    plano(ax, limite=5)
+    dibujar_cuadricula(ax, M, "tab:gray")
+    imagen = M @ circulo
+    ax.plot(imagen[0], imagen[1], color="tab:red", linewidth=2)
+    ax.set_title(titulo)
+plt.show()
+```
+
+Las rectas siguen siendo **rectas** y paralelas, y la circunferencia se convierte en una **elipse**: así se comporta toda transformación lineal.
+
+## Traslaciones y coordenadas homogéneas
+
+La traslación $(x, y) \to (x + t_x, y + t_y)$ **no** se puede escribir como una matriz de $2 \times 2$, porque mueve el origen. Hay dos formas de hacerla:
+
+**1. Sumando un vector** (con *broadcasting* de NumPy):
+
+```{python}
+desplazamiento = np.array([[3], [1]])        # Vector columna (2 × 1)
+trasladado = triangulo + desplazamiento       # Se suma a cada columna
+print(trasladado)
+```
+
+**2. Con coordenadas homogéneas.** Agregamos una tercera coordenada igual a 1: el punto $(x, y)$ se escribe $(x, y, 1)$. Así la traslación **sí** es una matriz de $3 \times 3$:
+
+$$\begin{pmatrix} x + t_x \\ y + t_y \\ 1 \end{pmatrix} = \begin{pmatrix} 1 & 0 & t_x \\ 0 & 1 & t_y \\ 0 & 0 & 1 \end{pmatrix} \begin{pmatrix} x \\ y \\ 1 \end{pmatrix}$$
+
+```{python}
+def traslacion(tx, ty):
+    """Matriz de traslación en coordenadas homogéneas (3 × 3)."""
+    return np.array([[1, 0, tx],
+                     [0, 1, ty],
+                     [0, 0, 1]])
+
+def homogenea(M):
+    """Convierte una matriz lineal de 2 × 2 en una matriz homogénea de 3 × 3."""
+    H = np.eye(3)
+    H[:2, :2] = M
+    return H
+
+def a_homogeneas(figura):
+    """Agrega una fila de unos a una figura de 2 × n."""
+    return np.vstack([figura, np.ones(figura.shape[1])])
+
+tri_h = a_homogeneas(triangulo)
+print(traslacion(3, 1) @ tri_h)
+```
+
+La ventaja de las coordenadas homogéneas es que **todas** las transformaciones (rotación, escala, reflexión y traslación) se vuelven matrices de $3 \times 3$ y se pueden **combinar multiplicándolas**.
+
+## Composición: el orden importa
+
+Aplicar primero $A$ y después $B$ equivale a aplicar el producto $BA$: la matriz que se aplica **primero** va a la **derecha**, más cerca del punto.
+
+$$P' = B(A\,P) = (BA)\,P$$
+
+Como el producto de matrices **no es conmutativo**, el orden cambia el resultado. Comparemos "girar 90° y luego trasladar 3 unidades a la derecha" con "trasladar y luego girar":
+
+```{python}
+R90 = homogenea(rotacion(np.pi / 2))
+T = traslacion(3, 0)
+
+primero_rotar = T @ R90 @ tri_h          # Rotar y después trasladar
+primero_trasladar = R90 @ T @ tri_h      # Trasladar y después rotar
+
+fig, axs = plt.subplots(1, 2, figsize=(10, 5))
+for ax, resultado, titulo in [(axs[0], primero_rotar, "Rotar 90° y luego trasladar"),
+                              (axs[1], primero_trasladar, "Trasladar y luego rotar 90°")]:
+    plano(ax, limite=5)
+    dibujar(ax, triangulo, color="tab:blue")
+    dibujar(ax, resultado[:2], color="tab:red")
+    ax.set_title(titulo)
+plt.show()
+```
+
+### Rotar alrededor de un punto cualquiera
+
+La matriz de rotación gira alrededor del **origen**. Para girar alrededor de otro punto $C$ se componen tres transformaciones:
+
+1.  Trasladar $C$ al origen: $T(-C)$.
+2.  Rotar: $R(\theta)$.
+3.  Regresar: $T(C)$.
+
+$$M = T(C)\, R(\theta)\, T(-C)$$
+
+```{python}
+C = (2, 1)
+M = traslacion(*C) @ homogenea(rotacion(np.radians(90))) @ traslacion(-C[0], -C[1])
+
+fig, ax = plt.subplots(figsize=(5, 5))
+plano(ax, limite=4)
+dibujar(ax, triangulo, color="tab:blue")
+dibujar(ax, (M @ tri_h)[:2], color="tab:red")
+ax.scatter(*C, color="black", zorder=3)
+ax.annotate("C = (2, 1)", C, xytext=(8, -12), textcoords="offset points")
+ax.set_title("Rotación de 90° alrededor de C")
+plt.show()
+```
+
+El operador `*` en `traslacion(*C)` **desempaqueta** la tupla: equivale a `traslacion(2, 1)`.
+
+## Conexión con geometría analítica: rotación de ejes
+
+En geometría analítica, **rotar los ejes** un ángulo $\theta$ permite eliminar el término $xy$ de una ecuación. Las coordenadas cambian según:
+
+$$x = u\cos\theta - v\sin\theta, \qquad y = u\sin\theta + v\cos\theta$$
+
+Para la hipérbola $xy = 4$ (ejercicio 1c de la [parte II](python_visualizacion2.qmd)), con $\theta = 45°$:
+
+```{python}
+import sympy as sp
+
+u, v = sp.symbols("u v", real=True)
+theta = sp.pi / 4
+x_rot = u * sp.cos(theta) - v * sp.sin(theta)
+y_rot = u * sp.sin(theta) + v * sp.cos(theta)
+
+nueva = sp.expand(x_rot * y_rot - 4)
+print(nueva, "= 0")
+```
+
+$\frac{u^2}{2} - \frac{v^2}{2} - 4 = 0$ es lo mismo que $\frac{u^2}{8} - \frac{v^2}{8} = 1$: una hipérbola en su **forma canónica**, con los ejes rotados 45°. Lo comprobamos girando la hipérbola canónica con nuestra matriz de rotación:
+
+```{python}
+s = np.linspace(-2, 2, 200)
+rama = np.vstack([np.sqrt(8) * np.cosh(s), np.sqrt(8) * np.sinh(s)])   # u²/8 - v²/8 = 1 (rama derecha)
+
+fig, axs = plt.subplots(1, 2, figsize=(10, 5))
+for ax in axs:
+    plano(ax, limite=7)
+
+axs[0].plot(rama[0], rama[1], color="tab:blue")
+axs[0].plot(-rama[0], rama[1], color="tab:blue")
+axs[0].set_title("$u^2/8 - v^2/8 = 1$ (forma canónica)")
+
+girada = rotacion(np.pi / 4) @ rama
+axs[1].plot(girada[0], girada[1], color="tab:red")
+axs[1].plot(-girada[0], -girada[1], color="tab:red")
+xs = np.linspace(0.3, 7, 100)
+axs[1].plot(xs, 4 / xs, "k:", label="$xy = 4$")
+axs[1].legend()
+axs[1].set_title("Rotada 45°: coincide con $xy = 4$")
+plt.show()
+```
+
+La curva roja (la canónica rotada) coincide con la gráfica de $y = 4/x$ (punteada).
+
+## Transformaciones en 3D
+
+En el espacio, los puntos tienen tres coordenadas y las transformaciones lineales son matrices de $3 \times 3$. Hay una matriz de rotación para cada **eje**:
+
+$$R_x(\theta) = \begin{pmatrix} 1 & 0 & 0 \\ 0 & \cos\theta & -\sin\theta \\ 0 & \sin\theta & \cos\theta \end{pmatrix}, \quad
+R_y(\theta) = \begin{pmatrix} \cos\theta & 0 & \sin\theta \\ 0 & 1 & 0 \\ -\sin\theta & 0 & \cos\theta \end{pmatrix}, \quad
+R_z(\theta) = \begin{pmatrix} \cos\theta & -\sin\theta & 0 \\ \sin\theta & \cos\theta & 0 \\ 0 & 0 & 1 \end{pmatrix}$$
+
+```{python}
+def rot_x(t):
+    return np.array([[1, 0, 0], [0, np.cos(t), -np.sin(t)], [0, np.sin(t), np.cos(t)]])
+
+def rot_y(t):
+    return np.array([[np.cos(t), 0, np.sin(t)], [0, 1, 0], [-np.sin(t), 0, np.cos(t)]])
+
+def rot_z(t):
+    return np.array([[np.cos(t), -np.sin(t), 0], [np.sin(t), np.cos(t), 0], [0, 0, 1]])
+```
+
+### Un cubo que gira
+
+Un cubo tiene 8 vértices y 12 aristas. Guardamos los vértices como columnas de una matriz de $3 \times 8$ y las aristas como pares de índices:
+
+```{python}
+from itertools import product
+
+vertices = np.array(list(product([0, 1], repeat=3))).T      # Las 8 combinaciones de 0 y 1
+aristas = [(i, j) for i in range(8) for j in range(i + 1, 8)
+           if np.abs(vertices[:, i] - vertices[:, j]).sum() == 1]   # Difieren en una coordenada
+print("Vértices:", vertices.shape, " Aristas:", len(aristas))
+
+def dibujar_cubo(ax, V, color):
+    for i, j in aristas:
+        ax.plot(*zip(V[:, i], V[:, j]), color=color)
+
+fig = plt.figure(figsize=(13, 4))
+casos = [("Original", np.eye(3)), ("$R_z(45°)$", rot_z(np.pi / 4)),
+         ("$R_x(45°)$ y luego $R_z(45°)$", rot_z(np.pi / 4) @ rot_x(np.pi / 4)),
+         ("Escala (1, 2, 0.5)", np.diag([1, 2, 0.5]))]
+for k, (titulo, M) in enumerate(casos, start=1):
+    ax = fig.add_subplot(1, 4, k, projection="3d")
+    dibujar_cubo(ax, vertices, "lightgray")
+    dibujar_cubo(ax, M @ vertices, "tab:red")
+    ax.set_xlim(-1.5, 1.5); ax.set_ylim(-1.5, 2); ax.set_zlim(-0.5, 2)
+    ax.set_box_aspect((1, 1, 1))
+    ax.set_title(titulo)
+fig.tight_layout()
+plt.show()
+```
+
+`itertools.product([0, 1], repeat=3)` genera las 8 combinaciones $(0,0,0), (0,0,1), \dots, (1,1,1)$, que son los vértices del cubo unitario. Dos vértices forman una arista si difieren en **exactamente una** coordenada.
+
+### Una rotación interactiva con Plotly
+
+Con Plotly podemos crear una **animación** con un cuadro por cada ángulo. Presiona ▶ o mueve la barra deslizante:
+
+```{python}
+#| output: asis
+def lineas_cubo(V):
+    """Regresa las coordenadas de las aristas separadas por None, para dibujarlas como una sola línea."""
+    xs, ys, zs = [], [], []
+    for i, j in aristas:
+        xs += [V[0, i], V[0, j], None]
+        ys += [V[1, i], V[1, j], None]
+        zs += [V[2, i], V[2, j], None]
+    return xs, ys, zs
+
+angulos = np.radians(np.arange(0, 361, 15))
+cuadros = []
+for a in angulos:
+    xs, ys, zs = lineas_cubo(rot_z(a) @ vertices)
+    cuadros.append(go.Frame(data=[go.Scatter3d(x=xs, y=ys, z=zs, mode="lines", line={"width": 6})],
+                            name=f"{np.degrees(a):.0f}°"))
+
+xs, ys, zs = lineas_cubo(vertices)
+fig = go.Figure(data=[go.Scatter3d(x=xs, y=ys, z=zs, mode="lines", line={"width": 6})], frames=cuadros)
+fig.update_layout(
+    title="Rotación del cubo alrededor del eje z",
+    scene={"xaxis": {"range": [-1.5, 1.5]}, "yaxis": {"range": [-1.5, 1.5]}, "zaxis": {"range": [0, 1.5]},
+           "aspectmode": "cube"},
+    updatemenus=[{"type": "buttons", "buttons": [{"label": "▶", "method": "animate", "args": [None]}]}],
+    sliders=[{"steps": [{"label": c.name, "method": "animate", "args": [[c.name]]} for c in cuadros]}],
+    width=600, height=550,
+)
+fig.show()
+```
+
+## Documentar transformaciones en Quarto
+
+Las matrices se escriben en LaTeX con el entorno `pmatrix` (paréntesis) o `bmatrix` (corchetes). Las filas se separan con `\\` y las columnas con `&`:
+
+``` markdown
+La rotación de ángulo $\theta$ es:
+
+$$
+R(\theta) = \begin{pmatrix} \cos\theta & -\sin\theta \\ \sin\theta & \cos\theta \end{pmatrix}
+$$
+```
+
+SymPy puede **generar** el código LaTeX de una matriz por ti con `sp.latex()`:
+
+```{python}
+th = sp.symbols("theta")
+R = sp.Matrix([[sp.cos(th), -sp.sin(th)], [sp.sin(th), sp.cos(th)]])
+print(sp.latex(R))
+print(sp.latex(R.subs(th, sp.pi / 6)))
+```
+
+Y con la opción `#| output: asis` el resultado aparece directamente como fórmula en tu documento:
+
+```{python}
+#| output: asis
+print(f"$$R(30°) = {sp.latex(R.subs(th, sp.pi / 6))}, \\qquad \\det R = {sp.latex(sp.simplify(R.det()))}$$")
+```
+
+Recomendaciones para documentar una transformación:
+
+- Escribe la **matriz** en LaTeX y explica qué hace.
+- Muestra la figura **original y transformada** en la misma gráfica, con colores distintos y una leyenda.
+- Usa `label: fig-...` y `fig-cap` para numerar las figuras y citarlas con `@fig-...` (lo vimos en la [parte III](python_visualizacion3d.qmd#documentar-visualizaciones-en-quarto)).
+- Si compones transformaciones, indica el **orden** en que se aplican.
+
+## Ejercicios
+
+Resuelve los ejercicios en los editores interactivos. Recuerda que lo que escribas **no se guarda** al recargar la página. La revisión de los ejercicios con funciones **prueba tu función con varios valores**.
+
+### Ejercicio 1. La matriz de rotación
+
+Completa la función `rotacion(theta)` que regresa la matriz de rotación de $2 \times 2$. Comprueba que $R(90°)$ lleva el punto $(1, 0)$ a $(0, 1)$.
+
+```{pyodide}
+#| exercise: tr1
+import numpy as np
+
+def rotacion(theta):
+    """Matriz de rotación de ángulo theta (radianes)."""
+    return np.array([[______, ______],
+                     [______, ______]])
+
+print(np.round(rotacion(np.pi / 2) @ np.array([1, 0]), 10))
+```
+
+```{pyodide}
+#| exercise: tr1
+#| check: true
+import numpy as np
+try:
+    f = envir_result["rotacion"]
+except Exception:
+    f = None
+if f is None:
+    feedback = {"correct": False, "message": "No encontré la función rotacion."}
+else:
+    R90 = f(np.pi / 2)
+    R = f(0.7)
+    if not np.allclose(R90 @ np.array([1, 0]), [0, 1]):
+        feedback = {"correct": False, "message": "R(90°) debe llevar (1, 0) a (0, 1). Revisa los signos: [[cos, -sin], [sin, cos]]."}
+    elif np.allclose(R.T @ R, np.eye(2)) and np.isclose(np.linalg.det(R), 1):
+        feedback = {"correct": True, "message": "¡Correcto! Además, Rᵀ R = I y det R = 1: las rotaciones conservan distancias y orientación."}
+    else:
+        feedback = {"correct": False, "message": "Revisa la matriz: [[cos θ, -sin θ], [sin θ, cos θ]]."}
+feedback
+```
+
+:::: {.hint exercise="tr1"}
+::: {.callout-note collapse="false"}
+## Pista
+
+La primera fila es `np.cos(theta), -np.sin(theta)` y la segunda `np.sin(theta), np.cos(theta)`.
+:::
+::::
+
+:::: {.solution exercise="tr1"}
+::: {.callout-tip collapse="false"}
+## Solución
+
+``` python
+def rotacion(theta):
+    """Matriz de rotación de ángulo theta (radianes)."""
+    return np.array([[np.cos(theta), -np.sin(theta)],
+                     [np.sin(theta),  np.cos(theta)]])
+
+print(np.round(rotacion(np.pi / 2) @ np.array([1, 0]), 10))   # [0. 1.]
+```
+:::
+::::
+
+### Ejercicio 2. Escalar y reflejar un triángulo
+
+Al triángulo de vértices $(0, 0)$, $(2, 0)$ y $(1, 2)$ aplícale **primero** un escalamiento $S$ con $s_x = 2$, $s_y = 0.5$ y **después** una reflexión $F$ en el eje $x$. Grafica el original y la imagen. Deja la figura transformada en la **última línea**.
+
+```{pyodide}
+#| exercise: tr2
+import numpy as np
+import matplotlib.pyplot as plt
+
+triangulo = np.array([[0, 2, 1],
+                      [0, 0, 2]])
+S = np.array(______)
+F = np.array(______)
+
+imagen = ______          # Primero S, después F
+
+for figura, color in [(triangulo, "tab:blue"), (imagen, "tab:red")]:
+    cerrada = np.hstack([figura, figura[:, :1]])
+    plt.fill(cerrada[0], cerrada[1], color=color, alpha=0.3)
+plt.axhline(0, color="black"); plt.axvline(0, color="black")
+plt.gca().set_aspect("equal")
+plt.show()
+
+imagen
+```
+
+```{pyodide}
+#| exercise: tr2
+#| check: true
+import numpy as np
+esperada = np.array([[0, 4, 2], [0, 0, -1]])
+if isinstance(result, np.ndarray) and result.shape == (2, 3) and np.allclose(result, esperada):
+    feedback = {"correct": True, "message": "¡Correcto! Los vértices son (0, 0), (4, 0) y (2, -1)."}
+elif isinstance(result, np.ndarray) and result.shape == (2, 3):
+    feedback = {"correct": False, "message": "Revisa las matrices y el orden: imagen = F @ S @ triangulo (la que se aplica primero va a la derecha)."}
+else:
+    feedback = {"correct": False, "message": "La última línea debe regresar la figura transformada (2 × 3)."}
+feedback
+```
+
+:::: {.hint exercise="tr2"}
+::: {.callout-note collapse="false"}
+## Pista
+
+`S = np.array([[2, 0], [0, 0.5]])`, `F = np.array([[1, 0], [0, -1]])` y `imagen = F @ S @ triangulo`.
+:::
+::::
+
+:::: {.solution exercise="tr2"}
+::: {.callout-tip collapse="false"}
+## Solución
+
+``` python
+S = np.array([[2, 0], [0, 0.5]])
+F = np.array([[1, 0], [0, -1]])
+imagen = F @ S @ triangulo      # [[0, 4, 2], [0, 0, -1]]
+```
+
+En este caso el orden **no** importa ($FS = SF$, porque ambas son diagonales), pero en general sí.
+:::
+::::
+
+### Ejercicio 3. El orden de la composición
+
+Aplica al punto $P = (1, 0)$, en coordenadas homogéneas, la rotación de 90° y la traslación $(3, 0)$ en los dos órdenes posibles. Deja la tupla `(primero_rotar, primero_trasladar)` con las coordenadas $(x, y)$ de cada resultado en la **última línea**.
+
+```{pyodide}
+#| exercise: tr3
+import numpy as np
+
+def traslacion(tx, ty):
+    return np.array([[1, 0, tx], [0, 1, ty], [0, 0, 1]])
+
+def rotacion_h(theta):
+    return np.array([[np.cos(theta), -np.sin(theta), 0],
+                     [np.sin(theta),  np.cos(theta), 0],
+                     [0, 0, 1]])
+
+P = np.array([1, 0, 1])                       # (1, 0) en coordenadas homogéneas
+R = rotacion_h(np.pi / 2)
+T = traslacion(3, 0)
+
+primero_rotar = ______ @ P                     # Rotar y después trasladar
+primero_trasladar = ______ @ P                 # Trasladar y después rotar
+
+print("Primero rotar:", np.round(primero_rotar, 10))
+print("Primero trasladar:", np.round(primero_trasladar, 10))
+
+(tuple(np.round(primero_rotar[:2], 10)), tuple(np.round(primero_trasladar[:2], 10)))
+```
+
+```{pyodide}
+#| exercise: tr3
+#| check: true
+if result == ((3.0, 1.0), (0.0, 4.0)):
+    feedback = {"correct": True, "message": "¡Correcto! Rotar y trasladar da (3, 1); trasladar y rotar da (0, 4): el producto de matrices no es conmutativo."}
+elif result == ((0.0, 4.0), (3.0, 1.0)):
+    feedback = {"correct": False, "message": "Están invertidos: la matriz que se aplica primero va a la DERECHA. Rotar primero es T @ R."}
+else:
+    feedback = {"correct": False, "message": "Usa T @ R para rotar primero y R @ T para trasladar primero."}
+feedback
+```
+
+:::: {.hint exercise="tr3"}
+::: {.callout-note collapse="false"}
+## Pista
+
+La matriz que se aplica **primero** va a la **derecha**, junto al punto: "rotar y después trasladar" es `T @ R @ P`.
+:::
+::::
+
+:::: {.solution exercise="tr3"}
+::: {.callout-tip collapse="false"}
+## Solución
+
+``` python
+primero_rotar = T @ R @ P          # [3. 1. 1.]
+primero_trasladar = R @ T @ P      # [0. 4. 1.]
+```
+:::
+::::
+
+### Ejercicio 4. Rotar alrededor de un punto
+
+Escribe la función `rotar_alrededor(punto, centro, theta)` que rote el `punto` $(x, y)$ un ángulo `theta` alrededor del `centro` $(c_x, c_y)$ y regrese las nuevas coordenadas como un arreglo de dos elementos. Usa la composición $T(C)\, R(\theta)\, T(-C)$.
+
+```{pyodide}
+#| exercise: tr4
+import numpy as np
+
+def traslacion(tx, ty):
+    return np.array([[1, 0, tx], [0, 1, ty], [0, 0, 1]])
+
+def rotacion_h(theta):
+    return np.array([[np.cos(theta), -np.sin(theta), 0],
+                     [np.sin(theta),  np.cos(theta), 0],
+                     [0, 0, 1]])
+
+def rotar_alrededor(punto, centro, theta):
+    """Rota punto un ángulo theta alrededor de centro."""
+    cx, cy = centro
+    M = ______
+    P = np.array([punto[0], punto[1], 1])
+    return (M @ P)[:2]
+
+print(np.round(rotar_alrededor((2, 1), (1, 1), np.pi / 2), 10))   # Debe ser [1. 2.]
+```
+
+```{pyodide}
+#| exercise: tr4
+#| check: true
+import numpy as np
+try:
+    f = envir_result["rotar_alrededor"]
+except Exception:
+    f = None
+if f is None:
+    feedback = {"correct": False, "message": "No encontré la función rotar_alrededor."}
+else:
+    bien = np.allclose(f((2, 1), (1, 1), np.pi / 2), [1, 2])
+    bien = bien and np.allclose(f((3, 0), (0, 0), np.pi), [-3, 0])
+    bien = bien and np.allclose(f((5, 5), (5, 5), 1.234), [5, 5])
+    bien = bien and np.allclose(f((0, 0), (1, 0), np.pi), [2, 0])
+    if bien:
+        feedback = {"correct": True, "message": "¡Correcto! Tu función funciona con cualquier centro y ángulo; el centro siempre queda fijo."}
+    else:
+        feedback = {"correct": False, "message": "Revisa la composición: traslacion(cx, cy) @ rotacion_h(theta) @ traslacion(-cx, -cy)."}
+feedback
+```
+
+:::: {.hint exercise="tr4"}
+::: {.callout-note collapse="false"}
+## Pista
+
+`M = traslacion(cx, cy) @ rotacion_h(theta) @ traslacion(-cx, -cy)`: primero se lleva el centro al origen (derecha), luego se rota y al final se regresa (izquierda).
+:::
+::::
+
+:::: {.solution exercise="tr4"}
+::: {.callout-tip collapse="false"}
+## Solución
+
+``` python
+def rotar_alrededor(punto, centro, theta):
+    """Rota punto un ángulo theta alrededor de centro."""
+    cx, cy = centro
+    M = traslacion(cx, cy) @ rotacion_h(theta) @ traslacion(-cx, -cy)
+    P = np.array([punto[0], punto[1], 1])
+    return (M @ P)[:2]
+```
+:::
+::::
+
+### Ejercicio 5. Rotaciones en 3D
+
+Completa las funciones `rot_x(t)` y `rot_z(t)`. Después rota el punto $(1, 0, 0)$ 90° alrededor del eje $z$ y el punto $(0, 1, 0)$ 90° alrededor del eje $x$.
+
+```{pyodide}
+#| exercise: tr5
+import numpy as np
+
+def rot_x(t):
+    return np.array([[1, 0, 0],
+                     [0, np.cos(t), ______],
+                     [0, ______, np.cos(t)]])
+
+def rot_z(t):
+    return np.array([[np.cos(t), ______, 0],
+                     [______, np.cos(t), 0],
+                     [0, 0, 1]])
+
+print("Rz(90°)(1, 0, 0) =", np.round(rot_z(np.pi / 2) @ [1, 0, 0], 10))   # Debe ser (0, 1, 0)
+print("Rx(90°)(0, 1, 0) =", np.round(rot_x(np.pi / 2) @ [0, 1, 0], 10))   # Debe ser (0, 0, 1)
+```
+
+```{pyodide}
+#| exercise: tr5
+#| check: true
+import numpy as np
+try:
+    fx = envir_result["rot_x"]
+    fz = envir_result["rot_z"]
+except Exception:
+    fx = None
+    fz = None
+if fx is None or fz is None:
+    feedback = {"correct": False, "message": "No encontré las funciones rot_x y rot_z."}
+elif not np.allclose(fz(np.pi / 2) @ [1, 0, 0], [0, 1, 0]):
+    feedback = {"correct": False, "message": "Revisa rot_z: debe llevar (1, 0, 0) a (0, 1, 0)."}
+elif not np.allclose(fx(np.pi / 2) @ [0, 1, 0], [0, 0, 1]):
+    feedback = {"correct": False, "message": "Revisa rot_x: debe llevar (0, 1, 0) a (0, 0, 1)."}
+elif np.isclose(np.linalg.det(fx(0.4)), 1) and np.isclose(np.linalg.det(fz(0.4)), 1):
+    feedback = {"correct": True, "message": "¡Correcto! Ambas matrices tienen determinante 1."}
+else:
+    feedback = {"correct": False, "message": "Revisa los signos de los senos."}
+feedback
+```
+
+:::: {.hint exercise="tr5"}
+::: {.callout-note collapse="false"}
+## Pista
+
+En ambas matrices, el bloque de rotación es $\begin{pmatrix} \cos t & -\sin t \\ \sin t & \cos t \end{pmatrix}$: el `-np.sin(t)` va arriba a la derecha y el `np.sin(t)` abajo a la izquierda.
+:::
+::::
+
+:::: {.solution exercise="tr5"}
+::: {.callout-tip collapse="false"}
+## Solución
+
+``` python
+def rot_x(t):
+    return np.array([[1, 0, 0],
+                     [0, np.cos(t), -np.sin(t)],
+                     [0, np.sin(t),  np.cos(t)]])
+
+def rot_z(t):
+    return np.array([[np.cos(t), -np.sin(t), 0],
+                     [np.sin(t),  np.cos(t), 0],
+                     [0, 0, 1]])
+```
+:::
+::::
+
+## Reto final: rotar una cónica
+
+La ecuación $x^2 + xy + y^2 = 6$ es una **elipse rotada**: el término $xy$ indica que sus ejes no son paralelos a los ejes coordenados. Para una ecuación $Ax^2 + Bxy + Cy^2 = F$, el ángulo que elimina el término $xy$ cumple $\cot 2\theta = \frac{A - C}{B}$; como aquí $A = C$, el ángulo es $\theta = 45°$.
+
+1.  Sustituye con SymPy $x = u\cos\theta - v\sin\theta$ y $y = u\sin\theta + v\cos\theta$ con $\theta = \pi/4$.
+2.  Simplifica la ecuación: debe quedar **sin término** $uv$.
+3.  Grafica la elipse original con `contour()`.
+4.  Deja la ecuación en las nuevas coordenadas (expresión igualada a cero) en la **última línea**.
+
+```{pyodide}
+#| exercise: reto_tr
+import numpy as np
+import matplotlib.pyplot as plt
+import sympy as sp
+
+u, v = sp.symbols("u v", real=True)
+theta = sp.pi / 4
+
+x = ______
+y = ______
+
+nueva = sp.expand(x**2 + x*y + y**2 - 6)
+print(nueva, "= 0")
+
+X, Y = np.meshgrid(np.linspace(-4, 4, 400), np.linspace(-4, 4, 400))
+plt.contour(X, Y, X**2 + X * Y + Y**2 - 6, levels=[0], colors="tab:red")
+plt.plot([-4, 4], [-4, 4], "k:", label="Nuevo eje u (45°)")
+plt.plot([-4, 4], [4, -4], "k--", label="Nuevo eje v")
+plt.gca().set_aspect("equal")
+plt.legend()
+plt.show()
+
+nueva
+```
+
+```{pyodide}
+#| exercise: reto_tr
+#| check: true
+import sympy as sp
+u, v = sp.symbols("u v", real=True)
+if not isinstance(result, sp.Basic):
+    feedback = {"correct": False, "message": "La última línea debe regresar la nueva ecuación."}
+elif sp.expand(result).coeff(u, 1).coeff(v, 1) != 0:
+    feedback = {"correct": False, "message": "Todavía hay término uv: revisa la sustitución de x y y."}
+else:
+    cociente = sp.simplify(result / (3*u**2 + v**2 - 12))
+    if cociente.is_number and cociente != 0:
+        feedback = {"correct": True, "message": "¡Excelente! Queda 3u²/2 + v²/2 = 6, es decir, u²/4 + v²/12 = 1: una elipse con semiejes 2 y 2√3."}
+    else:
+        feedback = {"correct": False, "message": "Revisa la sustitución: x = u*cos(θ) - v*sin(θ), y = u*sin(θ) + v*cos(θ)."}
+feedback
+```
+
+:::: {.hint exercise="reto_tr"}
+::: {.callout-note collapse="false"}
+## Pista
+
+`x = u * sp.cos(theta) - v * sp.sin(theta)` y `y = u * sp.sin(theta) + v * sp.cos(theta)`. Usa `sp.cos` y `sp.sin` (no los de NumPy) para obtener resultados exactos.
+:::
+::::
+
+:::: {.solution exercise="reto_tr"}
+::: {.callout-tip collapse="false"}
+## Solución
+
+``` python
+x = u * sp.cos(theta) - v * sp.sin(theta)
+y = u * sp.sin(theta) + v * sp.cos(theta)
+
+nueva = sp.expand(x**2 + x*y + y**2 - 6)
+print(nueva, "= 0")      # 3*u**2/2 + v**2/2 - 6 = 0
+```
+
+$\frac{3u^2}{2} + \frac{v^2}{2} = 6$ equivale a $\frac{u^2}{4} + \frac{v^2}{12} = 1$: una elipse con semieje $2$ en la dirección del eje $u$ (a 45°) y $2\sqrt{3}$ en la dirección del eje $v$.
+:::
+::::
+
+## Resumen
+
+| Tema | Idea clave | NumPy |
+|------------------------|------------------------|------------------------|
+| Figura | Vértices como columnas de una matriz $2 \times n$ (o $3 \times n$). | `np.array([[x...], [y...]])` |
+| Transformación lineal | $P' = MP$; transforma todos los vértices a la vez. | `M @ figura` |
+| Rotación | $\begin{pmatrix} \cos\theta & -\sin\theta \\ \sin\theta & \cos\theta \end{pmatrix}$ | `np.cos`, `np.sin` |
+| Escala, reflexión, cizalla | Matrices diagonales, con $-1$ o con un término fuera de la diagonal. | `np.diag()` |
+| Determinante | Factor de área; negativo si invierte la orientación. | `np.linalg.det(M)` |
+| Traslación | Suma de un vector o matriz homogénea $3 \times 3$. | *Broadcasting* o `traslacion(tx, ty)` |
+| Composición | Aplicar $A$ y luego $B$ es $BA$: el orden importa. | `B @ A @ figura` |
+| Rotar alrededor de $C$ | $T(C)\,R(\theta)\,T(-C)$ | Producto de tres matrices |
+| 3D | Rotaciones $R_x$, $R_y$, $R_z$ de $3 \times 3$. | `rot_z(t) @ vertices` |
+| Geometría analítica | Rotar los ejes elimina el término $xy$ de una cónica. | SymPy: `subs` / `expand` |
+
+## Referencias
+
+- [NumPy: álgebra lineal (`numpy.linalg`)](https://numpy.org/doc/stable/reference/routines.linalg.html)
+- [3Blue1Brown: Esencia del álgebra lineal (transformaciones lineales y matrices)](https://www.3blue1brown.com/topics/linear-algebra)
+- [Matplotlib: gráficas 3D](https://matplotlib.org/stable/gallery/mplot3d/index.html)
+- [Plotly: animaciones](https://plotly.com/python/animations/)
+- [Quarto: matemáticas con LaTeX](https://quarto.org/docs/authoring/markdown-basics.html#equations)

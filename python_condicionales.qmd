@@ -6,7 +6,7 @@ engine: knitr
 
 {{< include ./_extensions/r-wasm/live/_knitr.qmd >}}
 
-> **Fecha:** 03 de noviembre, 2026
+> **Fecha:** 05 de noviembre, 2026
 
 Hasta ahora, nuestros programas ejecutan **todas** sus instrucciones, una tras otra. Los **condicionales** permiten que un programa **tome decisiones**: ejecutar ciertas instrucciones solo si se cumple una condición.
 
@@ -41,7 +41,7 @@ No confundas `=` con `==`. Un solo signo **asigna** un valor (`x = 5`); dos sign
 Combinan varias preguntas.
 
 | Operador | Regresa `True` si... | Ejemplo | Resultado |
-|----|----|----|----|
+|------------------|------------------|------------------|------------------|
 | `and` | **Ambas** condiciones son verdaderas. | `5 > 3 and 2 > 4` | `False` |
 | `or` | **Al menos una** condición es verdadera. | `5 > 3 or 2 > 4` | `True` |
 | `not` | La condición es falsa (la invierte). | `not 5 > 3` | `False` |
@@ -49,7 +49,7 @@ Combinan varias preguntas.
 ### Otras preguntas útiles
 
 | Expresión | Pregunta | Ejemplo | Resultado |
-|----|----|----|----|
+|------------------|------------------|------------------|------------------|
 | `x in coleccion` | ¿`x` está en la colección? | `3 in [1, 2, 3]` | `True` |
 | `isinstance(x, tipo)` | ¿`x` es de ese tipo? | `isinstance(8.5, (int, float))` | `True` |
 | `a <= x <= b` | ¿`x` está entre `a` y `b`? | `0 <= 8.5 <= 10` | `True` |
@@ -85,7 +85,7 @@ q = trae_credencial       # ¿Trae su credencial?
 **`and`: se necesitan las dos.** "Puede entrar si pagó **y** trae credencial".
 
 | Caso | `p` (pagó) | `q` (credencial) | `p and q` (¿entra?) | ¿Por qué? |
-|----|----|----|----|----|
+|---------------|---------------|---------------|---------------|---------------|
 | 1 | `True` | `True` | `True` | Cumple las dos condiciones. |
 | 2 | `True` | `False` | `False` | Le falta la credencial. |
 | 3 | `False` | `True` | `False` | Le falta pagar. |
@@ -96,7 +96,7 @@ q = trae_credencial       # ¿Trae su credencial?
 **`or`: basta con una.** "Obtiene un descuento si es estudiante **o** si es docente".
 
 | Caso | `p` (estudiante) | `q` (docente) | `p or q` (¿descuento?) | ¿Por qué? |
-|----|----|----|----|----|
+|---------------|---------------|---------------|---------------|---------------|
 | 1 | `True` | `True` | `True` | Cumple las dos (con una bastaba). |
 | 2 | `True` | `False` | `True` | Es estudiante. |
 | 3 | `False` | `True` | `True` | Es docente. |
@@ -238,7 +238,7 @@ print("Calificación:", calificacion, "Nivel:", nivel)
 ### Diferencias con Bash
 
 |   | Bash | Python |
-|----|----|----|
+|------------------------|------------------------|------------------------|
 | Inicio | `if [ condición ]; then` | `if condición:` |
 | Otra condición | `elif [ condición ]; then` | `elif condición:` |
 | En otro caso | `else` | `else:` |
@@ -334,7 +334,7 @@ else:
 ```
 
 | Herramienta | ¿Qué hace? | ¿Cuándo usarla? |
-|----|----|----|
+|------------------------|------------------------|------------------------|
 | `assert` | Detiene el programa con `AssertionError`. | Verificar supuestos mientras programas. |
 | `if` + `print()` | Muestra un aviso y continúa. | Cuando el programa puede seguir sin ese dato. |
 | `if` + `raise` | Detiene el programa con el error que elijas. | Rechazar datos incorrectos con un mensaje claro. |
@@ -343,7 +343,7 @@ else:
 ## Errores comunes
 
 | Error | Ejemplo | Corrección |
-|----|----|----|
+|------------------------|------------------------|------------------------|
 | Usar `=` en lugar de `==` | `if x = 5:` (`SyntaxError`) | `if x == 5:` |
 | Olvidar los dos puntos | `if x > 5` (`SyntaxError`) | `if x > 5:` |
 | Olvidar la indentación | `print()` alineado con el `if` (`IndentationError`) | Indenta 4 espacios. |
@@ -770,7 +770,7 @@ nivel   # 'MB'
 ## Resumen
 
 | Tema | Idea clave |
-|----|----|
+|------------------------------------|------------------------------------|
 | Expresiones booleanas | Preguntas que regresan `True` o `False`: `==`, `!=`, `<`, `<=`, `and`, `or`, `not`, `in`, `isinstance()`. |
 | `if` | Ejecuta un bloque solo si la condición es verdadera. Termina con `:` y usa 4 espacios de indentación. |
 | `else` | Qué hacer si la condición es falsa. |
