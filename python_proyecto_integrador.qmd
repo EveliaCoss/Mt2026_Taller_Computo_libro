@@ -1,0 +1,616 @@
+---
+engine: knitr
+---
+
+# **🧩 Proyecto integrador: atlas de cónicas rotadas**
+
+{{< include ./_extensions/r-wasm/live/_knitr.qmd >}}
+
+> **Fecha de entrega:** *por definir*
+
+::: callout-important
+## 🚧 Proyecto en construcción
+
+Este proyecto lo estamos **definiendo en conjunto** la **Dra. Haydeé Peruyero**, profesora de **Geometría Analítica**, y la **Dra. Evelia Coss**, profesora del **Taller de Cómputo**, para que integre lo que aprenden en ambas materias. Los detalles (cónicas asignadas, partes, rúbrica y fecha de entrega) pueden cambiar mientras terminamos de definirlo.
+:::
+
+En **Geometría Analítica** estudiaron las cónicas (elipse, parábola e hipérbola) y aprendieron que una ecuación de segundo grado con término $xy$ representa una cónica **rotada**. En este proyecto construirán, **en equipo**, un sitio web que analice una de esas cónicas usando **todo** lo que aprendimos en el Taller de Cómputo: Python, SymPy, NumPy, visualización, transformaciones geométricas, números aleatorios, Quarto, Git y GitHub.
+
+::: {.callout-note icon="false"}
+## 🧭 Este capítulo es una guía, no un ejemplo resuelto
+
+Aquí **no** encontrarán las respuestas ni cómo resolver su cónica. Para cada parte del proyecto les decimos **qué** deben entregar y 📖 **dónde estudiarlo** en el libro. El único código que les damos es el punto de partida de `funciones.py`: **incompleto y con errores** que ustedes deben corregir.
+
+El capítulo [Geometría analítica en el espacio con Python](python_geometria_espacio.qmd) sigue **el mismo método** que necesitan aquí (operar con NumPy, graficar y comprobar), así que úsenlo como modelo: en la sección [Aprender del capítulo de geometría en el espacio](#aprender-del-capítulo-de-geometría-en-el-espacio) les decimos qué ejemplo corresponde a cada parte.
+:::
+
+## Objetivo
+
+Analizar la cónica
+
+$$Ax^2 + Bxy + Cy^2 + Dx + Ey + F = 0$$
+
+que le corresponda a su equipo: **clasificarla**, **eliminar el término $xy$** mediante una rotación de ejes, obtener su **forma canónica** y sus **elementos**, **visualizarla** en 2D y 3D, **comprobar** su definición como lugar geométrico, **estimar un área** con el método de Monte Carlo y **publicar** todo en un sitio web de Quarto en GitHub Pages.
+
+### ¿Qué temas integra?
+
+| Parte del proyecto | Geometría Analítica | Dónde estudiarlo en el libro |
+|----|----|----|
+| 1. Repositorio y sitio web | — | [Git/GitHub](cap15.qmd), [Quarto](Intro_Quarto.qmd), [Quarto con Python](quarto_python.qmd) |
+| 2. Funciones del proyecto | Discriminante $B^2 - 4AC$, ángulo de rotación | [Funciones](python_funciones.qmd), [buenas prácticas](python_buenas_practicas.qmd), [condicionales](python_condicionales.qmd), [`plano_z()` en geometría en el espacio](python_geometria_espacio.qmd#de-la-geometría-analítica-a-numpy) |
+| 3. Análisis algebraico | Rotación de ejes, forma canónica, elementos | [SymPy](python_sympy.qmd), [rotación de ejes](python_transformaciones.qmd#conexión-con-geometría-analítica-rotación-de-ejes) |
+| 4. Visualización 2D | Gráfica de la cónica y sus elementos | [Visualización I: geometría analítica en el plano](python_visualizacion.qmd#geometría-analítica-en-el-plano-curvas-y-lugares-geométricos) |
+| 5. Transformación con matrices | Rotación de ejes como transformación | [Transformaciones geométricas](python_transformaciones.qmd), [Álgebra lineal con NumPy](python_algebra_lineal.qmd), [forma paramétrica en el espacio](python_geometria_espacio.qmd#avanzado-2.-el-ángulo-entre-dos-planos-que-no-se-pueden-despejar-en-z) |
+| 6. Lugar geométrico | Definición de cada cónica con distancias | [Lugares geométricos](python_visualizacion.qmd#lugares-geométricos), [norma de un vector](python_algebra_lineal.qmd#norma-de-un-vector), [distancia de un punto a un plano](python_geometria_espacio.qmd#medio-2.-distancia-de-un-punto-a-un-plano), [ciclos](python_for.qmd) |
+| 7. Área con Monte Carlo | Área de la elipse o de una región | [Números aleatorios](python_aleatorios.qmd#el-método-de-monte-carlo) |
+| 8. Visualización 3D interactiva | La cónica como curva de nivel | [Visualización III](python_visualizacion3d.qmd), [graficar un plano](python_geometria_espacio.qmd#básico-1.-representar-gráficamente-un-plano) |
+
+## Organización
+
+- **Equipos** de 3 o 4 personas.
+- Cada equipo trabaja en **un solo repositorio de GitHub**; **todos** los integrantes deben tener *commits* (se revisará el historial).
+- El resultado es un **sitio web de Quarto** publicado en GitHub Pages, con su código, gráficas y explicaciones.
+- Al final, cada equipo **presenta** su sitio en clase (5 a 7 minutos).
+
+### Cónicas asignadas
+
+| Equipo | Ecuación |
+|----|----|
+| 1 | $7x^2 - 6\sqrt{3}\,xy + 13y^2 - 16 = 0$ |
+| 2 | $3x^2 - 10xy + 3y^2 + 32 = 0$ |
+| 3 | $x^2 - 2xy + y^2 - 8x - 8y = 0$ |
+| 4 | $xy - 2x - 2y = 0$ |
+| 5 | $2x^2 + 3xy - 2y^2 - 25 = 0$ |
+| 6 | $13x^2 + 10xy + 13y^2 - 72 = 0$ |
+
+::: callout-tip
+La profesora puede asignar las cónicas por sorteo... ¡con `random.choice()`! Si hay más equipos que cónicas, dos equipos pueden tener la misma ecuación.
+:::
+
+## Los entregables
+
+El sitio debe tener las siguientes secciones. Cada una se describe en [Partes del proyecto](#partes-del-proyecto) y se evalúa con la [rúbrica](#rúbrica-de-evaluación).
+
+| Parte | Entregable | Puntos |
+|----|----|----|
+| 1 | Repositorio en GitHub y sitio publicado en GitHub Pages | 10 |
+| 2 | Funciones documentadas y probadas: `clasificar_conica()` y `angulo_rotacion()` | 15 |
+| 3 | Análisis algebraico con SymPy: clasificación, rotación, forma canónica y elementos | 20 |
+| 4 | Gráfica 2D de la cónica con sus ejes rotados y sus elementos | 15 |
+| 5 | Comprobación de la rotación con una matriz de NumPy | 10 |
+| 6 | Comprobación numérica de la definición como lugar geométrico | 10 |
+| 7 | Área estimada con Monte Carlo, comparada con el valor exacto | 10 |
+| 8 | Gráfica 3D interactiva con Plotly | 5 |
+| 9 | Presentación, claridad y documentación | 5 |
+| | **Total** | **100** |
+
+## Rúbrica de evaluación
+
+| Criterio | Excelente | Suficiente | Insuficiente |
+|----|----|----|----|
+| **Repositorio y sitio** (10) | Sitio publicado y navegable; todos los integrantes tienen *commits* con mensajes claros. (10) | Sitio publicado, pero con páginas incompletas o *commits* de una sola persona. (6) | El sitio no está publicado. (0–3) |
+| **Funciones** (15) | Funciones con *docstring*, validación y pruebas con `assert` que pasan. (15) | Funciones correctas, pero sin documentación o sin pruebas. (9) | Las funciones no existen o dan resultados incorrectos. (0–5) |
+| **Análisis algebraico** (20) | Clasificación, ángulo, forma canónica y **todos** los elementos correctos, obtenidos con SymPy. (20) | Forma canónica correcta, pero faltan elementos. (12) | Forma canónica incorrecta o calculada a mano sin código. (0–7) |
+| **Visualización 2D** (15) | Cónica, ejes rotados y elementos, con título, leyenda, etiquetas y misma escala en los ejes. (15) | Cónica graficada, pero faltan elementos o etiquetas. (9) | Gráfica incorrecta o ausente. (0–5) |
+| **Matriz de rotación** (10) | La canónica girada con NumPy coincide con la original y se reporta el error. (10) | Se gira la curva, pero sin comparar ni reportar el error. (6) | No se usa la matriz de rotación. (0–3) |
+| **Lugar geométrico** (10) | Se comprueba numéricamente la definición en muchos puntos y se interpreta el resultado. (10) | Se comprueba en pocos puntos o sin interpretación. (6) | No se comprueba. (0–3) |
+| **Monte Carlo** (10) | Estimación reproducible (con semilla), comparada con el valor exacto y con una gráfica de convergencia. (10) | Estimación correcta, sin comparación o sin gráfica. (6) | Estimación incorrecta o ausente. (0–3) |
+| **3D interactiva** (5) | Gráfica de Plotly que muestra la cónica como curva de nivel, con título. (5) | Gráfica 3D estática o sin explicación. (3) | Ausente. (0) |
+| **Presentación y documentación** (5) | Explicaciones claras en cada sección, fórmulas en LaTeX, figuras con pie y conclusiones. (5) | Explicaciones breves o incompletas. (3) | Solo código, sin explicaciones. (0–1) |
+
+## Aprender del capítulo de geometría en el espacio
+
+En [Geometría analítica en el espacio con Python](python_geometria_espacio.qmd) resolvimos ejercicios de rectas y planos siguiendo siempre tres pasos: **operar** con NumPy, **graficar** y **comprobar** con números que el resultado tiene sentido. Su proyecto sigue exactamente esos tres pasos, pero en el plano y con cónicas. Antes de empezar cada parte, repasen el ejemplo que le corresponde:
+
+| En geometría en el espacio... | ...les sirve en su proyecto en |
+|----|----|
+| [`plano_z()`](python_geometria_espacio.qmd#de-la-geometría-analítica-a-numpy): una fórmula que se repite, guardada en una función corta con *docstring*. | **Parte 2.** Funciones del proyecto. |
+| [Básico 2](python_geometria_espacio.qmd#básico-2.-paralelos-distintos-o-coincidentes): decidir entre dos casos (paralelos o coincidentes) a partir de los coeficientes. | **Partes 2 y 3.** Clasificación de la cónica. |
+| [Medio 1](python_geometria_espacio.qmd#medio-1.-el-plano-que-pasa-por-tres-puntos): después de obtener la ecuación, **comprobar** que los otros puntos también la cumplen. | **Parte 3.** Comprobar sus resultados. |
+| [Medio 2](python_geometria_espacio.qmd#medio-2.-distancia-de-un-punto-a-un-plano): distancia con `np.linalg.norm()` y valor absoluto, y comprobación con `np.isclose()`. | **Parte 6.** Lugar geométrico. |
+| [Avanzado 1](python_geometria_espacio.qmd#avanzado-1.-la-recta-de-intersección-de-dos-planos): muchos puntos de una recta $P_0 + t\,\mathbf{d}$ calculados de una sola vez con NumPy. | **Parte 5.** Comprobación con la matriz de rotación. |
+| [Avanzado 2](python_geometria_espacio.qmd#avanzado-2.-el-ángulo-entre-dos-planos-que-no-se-pueden-despejar-en-z): cuando no se puede despejar, se usa la **forma paramétrica**. | **Parte 5.** Comprobación con la matriz de rotación. |
+| [Básico 1](python_geometria_espacio.qmd#básico-1.-representar-gráficamente-un-plano): graficar un plano con una malla y `plot_surface()`. | **Parte 8.** Visualización 3D. |
+| [Avanzado 1](python_geometria_espacio.qmd#avanzado-1.-la-recta-de-intersección-de-dos-planos): la recta es la **intersección** de dos planos. | **Parte 8.** Visualización 3D. |
+
+## Partes del proyecto
+
+### Parte 1. Repositorio y sitio web
+
+**Qué hacer:** crear el repositorio, el sitio web de Quarto y publicarlo en GitHub Pages **desde la primera semana**, aunque esté vacío. Así detectan a tiempo los problemas de configuración.
+
+📖 **Dónde estudiarlo:** [Introducción a Git/GitHub](cap15.qmd), [Introducción a Quarto](Intro_Quarto.qmd), [Configuraciones para usar Quarto con Python](quarto_python.qmd) y [Publicar en GitHub Pages](python_visualizacion3d.qmd#publicar-en-github-pages).
+
+Los pasos están en la sección [Estructura del sitio](#estructura-del-sitio).
+
+### Parte 2. Funciones del proyecto
+
+**Qué hacer:** escribir en el archivo `funciones.py` las funciones que usarán en todo el sitio. Como mínimo `clasificar_conica(A, B, C)` y `angulo_rotacion(A, B, C)`, con *docstring*, validación de los argumentos y pruebas con `assert`.
+
+📖 **Dónde estudiarlo:**
+
+- [Definir y llamar una función](python_funciones.qmd#definir-y-llamar-una-función), [*docstrings*](python_funciones.qmd#docstrings), [programación defensiva en funciones](python_funciones.qmd#programación-defensiva-en-funciones) y [probar funciones](python_funciones.qmd#probar-funciones).
+- [`if`, `elif` y `else`](python_condicionales.qmd#if-elif-y-else), [`assert`](python_buenas_practicas.qmd#assert-verificar-que-algo-sea-verdadero) y [`raise`](python_buenas_practicas.qmd#raise-lanzar-un-error-propio).
+- La función [`plano_z()`](python_geometria_espacio.qmd#de-la-geometría-analítica-a-numpy) de geometría en el espacio: así de corta y documentada debe ser cada una de sus funciones.
+
+**Punto de partida de `funciones.py`:** copien este código en su archivo. Las funciones están **incompletas** y tienen **errores a propósito**: su trabajo es completarlas, encontrar los errores y corregirlos.
+
+``` python
+"""Funciones del proyecto integrador: atlas de cónicas rotadas."""
+import numpy as np
+import sympy as sp
+
+x, y, u, v = sp.symbols("x y u v", real=True)
+
+
+# ⚠️ Estas funciones están INCOMPLETAS y tienen ERRORES A PROPÓSITO.
+#    1. Completen cada ______.
+#    2. Cada línea marcada con 🐞 tiene un error: deben cambiar algo para corregirlo.
+#    3. Comprueben sus correcciones con las pruebas (assert) de la página Análisis.
+
+
+def coeficientes(expresion):
+    """Regresa los coeficientes A, B, C, D, E, F de Ax² + Bxy + Cy² + Dx + Ey + F."""
+    P = sp.Poly(expresion, x, y)
+    monomios = ______                                # Lista de los seis monomios, en el orden de A, B, C, D, E, F
+    return [P.coeff_monomial(m) for m in monomios]
+
+
+def clasificar_conica(A, B, C):
+    """Clasifica la cónica según el discriminante B² - 4AC."""
+    if A == 0 or B == 0 or C == 0:                   # 🐞 ¿Esta validación rechaza cónicas que sí son válidas? Pruébenla con xy = 4.
+        raise ValueError("No es una ecuación de segundo grado: A, B y C son cero")
+    discriminante = ______                           # Escriban ustedes la fórmula del discriminante.
+    if discriminante > 0:                            # 🐞 ¿Qué signo tiene el discriminante de una elipse?
+        return "elipse"
+    elif ______:                                     # ¿Cuándo es parábola?
+        return "parábola"
+    else:
+        return "hipérbola"
+
+
+def angulo_rotacion(A, B, C):
+    """Ángulo θ (en radianes) que elimina el término xy: tan(2θ) = B / (A - C)."""
+    if B == 0:
+        return ______                                # Sin término xy: ¿cuánto hay que rotar?
+    if A == C:
+        return sp.pi / 2                             # 🐞 Si 2θ = 90°, ¿cuánto vale θ?
+    return sp.atan((A - C) / B) / 2                  # 🐞 Revisen la fracción con el docstring.
+
+
+def matriz_rotacion(theta):
+    """Matriz de rotación de NumPy (2 × 2) para un ángulo theta en radianes."""
+    t = float(theta)                                 # NumPy necesita un número, no un símbolo de SymPy
+    return np.array(______)
+```
+
+::: callout-warning
+## 🐞 Encuentren y corrijan los errores
+
+Las líneas marcadas con 🐞 tienen al menos un error cada una, y hay **errores silenciosos**: el código se ejecuta sin avisar, pero da resultados incorrectos. Por eso **no basta con que corra**: escriban las [pruebas](#pruebas-de-las-funciones) y corrijan hasta que **todas** pasen. En su entrega, `funciones.py` **no** debe tener ningún `______` ni ningún 🐞. Repasen [errores silenciosos](python_buenas_practicas.qmd#un-error-silencioso) y [leer los mensajes de error](python_buenas_practicas.qmd#leer-los-mensajes-de-error).
+:::
+
+`sp.Poly()` y `coeff_monomial()` son nuevas: convierten la expresión en un polinomio y extraen el coeficiente de cada monomio (por ejemplo, de `x*y`). Pueden agregar más funciones si les ayudan, como una que prepare el plano cartesiano (`plano_cartesiano()` de [Visualización I](python_visualizacion.qmd#un-plano-cartesiano-para-geometría-analítica)).
+
+::: callout-important
+## Sus funciones deben verse en la página Análisis
+
+Las profesoras revisaremos sus funciones **en su sitio publicado**, así que la página `analisis.qmd` debe tener una sección **Funciones del proyecto** que muestre el contenido completo de `funciones.py`. La forma más sencilla es incluir el archivo; así la página siempre muestra la versión más reciente:
+
+````markdown
+```{.python filename="funciones.py"}
+{{{< include funciones.py >}}}
+```
+````
+:::
+
+Sus funciones deben ir acompañadas de **pruebas con `assert`** en `analisis.qmd`. Practíquenlo en el [Calentamiento 3](#pruebas-de-las-funciones).
+
+### Parte 3. Análisis algebraico
+
+**Qué hacer:** con SymPy, **clasificar** su cónica, encontrar el **ángulo de rotación**, **rotar** los ejes, llegar a la **forma canónica** y obtener todos sus **elementos**, primero en las coordenadas $(u, v)$ y después en las originales $(x, y)$.
+
+| Si su cónica es... | Elementos que deben reportar |
+|----|----|
+| Elipse | Centro, vértices, covértices, focos, excentricidad y eje focal. |
+| Hipérbola | Centro, vértices, focos, excentricidad, eje focal y **asíntotas**. |
+| Parábola | Vértice, foco, **directriz**, eje y el parámetro $p$. |
+
+📖 **Dónde estudiarlo:**
+
+- SymPy: [sustituir y evaluar](python_sympy.qmd#sustituir-y-evaluar), [simplificar, expandir y factorizar](python_sympy.qmd#simplificar-expandir-y-factorizar), [ecuaciones](python_sympy.qmd#ecuaciones), [matrices](python_sympy.qmd#matrices) y [de SymPy a LaTeX](python_sympy.qmd#de-sympy-a-latex).
+- [Conexión con geometría analítica: rotación de ejes](python_transformaciones.qmd#conexión-con-geometría-analítica-rotación-de-ejes).
+- [Discutir una curva con SymPy y Matplotlib](python_visualizacion.qmd#discutir-una-curva-con-sympy-y-matplotlib).
+- Comprobar sustituyendo, como en el [Medio 1 de geometría en el espacio](python_geometria_espacio.qmd#medio-1.-el-plano-que-pasa-por-tres-puntos).
+
+### Parte 4. Visualización 2D
+
+**Qué hacer:** graficar la ecuación **original** junto con los ejes rotados $u$ y $v$ y todos los elementos de la Parte 3, con título, leyenda y la misma escala en ambos ejes.
+
+📖 **Dónde estudiarlo:**
+
+- [Un plano cartesiano para geometría analítica](python_visualizacion.qmd#un-plano-cartesiano-para-geometría-analítica) y [curvas implícitas: la curva de nivel cero](python_visualizacion.qmd#curvas-implícitas-la-curva-de-nivel-cero).
+- [Paso 1. Crear una malla con `np.meshgrid()`](python_visualizacion.qmd#paso-1.-crear-una-malla-con-np.meshgrid), [anotaciones](python_visualizacion.qmd#anotaciones) y [buenas prácticas de visualización](python_visualizacion.qmd#buenas-prácticas-de-visualización).
+- [Básico 1 de geometría en el espacio](python_geometria_espacio.qmd#básico-1.-representar-gráficamente-un-plano): marcar puntos importantes sobre la gráfica (ahí, los cortes con los ejes).
+
+### Parte 5. Comprobación con una matriz de rotación
+
+**Qué hacer:** tomar la forma **canónica** en $(u, v)$, **parametrizarla**, **girarla** el ángulo $\theta$ con una matriz de NumPy y comprobar que cae sobre la curva original. Reporten el **error máximo**.
+
+📖 **Dónde estudiarlo:**
+
+- [Figuras como matrices de puntos](python_transformaciones.qmd#figuras-como-matrices-de-puntos), [transformaciones lineales](python_transformaciones.qmd#transformaciones-lineales-una-matriz-de-2-times-2) y [rotar alrededor de un punto](python_transformaciones.qmd#rotar-alrededor-de-un-punto-cualquiera) (si su cónica no está centrada en el origen).
+- [Producto de matrices](python_algebra_lineal.qmd#producto-de-matrices) con `@`.
+- [Curvas paramétricas y polares](python_visualizacion.qmd#curvas-paramétricas-y-polares).
+- En geometría en el espacio: [Avanzado 1](python_geometria_espacio.qmd#avanzado-1.-la-recta-de-intersección-de-dos-planos) (muchos puntos de una recta de una sola vez) y [Avanzado 2](python_geometria_espacio.qmd#avanzado-2.-el-ángulo-entre-dos-planos-que-no-se-pueden-despejar-en-z) (forma paramétrica cuando no se puede despejar).
+
+### Parte 6. Comprobación como lugar geométrico
+
+**Qué hacer:** comprobar **numéricamente**, en todos los puntos de la curva de la Parte 5, la definición de su cónica como lugar geométrico, e **interpretar** el resultado.
+
+| Cónica | Definición como lugar geométrico | Qué deben comprobar |
+|----|----|----|
+| Elipse | $d(P, F_1) + d(P, F_2) = 2a$ | La suma es constante. |
+| Hipérbola | $\lvert d(P, F_1) - d(P, F_2) \rvert = 2a$ | La diferencia (en valor absoluto) es constante. |
+| Parábola | $d(P, F) = d(P, \text{directriz})$ | Ambas distancias son iguales. |
+
+📖 **Dónde estudiarlo:**
+
+- [Lugares geométricos](python_visualizacion.qmd#lugares-geométricos) y el [ejercicio 6 de funciones: distancia entre dos puntos](python_funciones.qmd#ejercicio-6.-distancia-entre-dos-puntos).
+- [Norma de un vector](python_algebra_lineal.qmd#norma-de-un-vector): la distancia entre $P$ y $Q$ es la norma de $P - Q$.
+- [Medio 2 de geometría en el espacio](python_geometria_espacio.qmd#medio-2.-distancia-de-un-punto-a-un-plano): la distancia de un punto a un plano.
+
+### Parte 7. Área con el método de Monte Carlo
+
+**Qué hacer:** estimar un área lanzando puntos al azar, compararla con el valor **exacto** y hacer una **gráfica de convergencia** que muestre cómo disminuye el error al aumentar el número de puntos.
+
+📖 **Dónde estudiarlo:**
+
+- [Números aleatorios con NumPy](python_aleatorios.qmd#números-aleatorios-con-numpy), [estimar $\pi$ lanzando "dardos"](python_aleatorios.qmd#estimar-pi-lanzando-dardos), [¿qué tan rápido converge?](python_aleatorios.qmd#qué-tan-rápido-converge) y [estimar una integral](python_aleatorios.qmd#estimar-una-integral).
+- [Documentar simulaciones en Quarto](python_aleatorios.qmd#documentar-simulaciones-en-quarto).
+- [Integrales con SymPy](python_sympy.qmd#integrales), para el valor exacto.
+- [El determinante: área y orientación](python_transformaciones.qmd#el-determinante-área-y-orientación).
+
+### Parte 8. Visualización 3D interactiva
+
+**Qué hacer:** mostrar que su cónica es la **curva de nivel 0** de la superficie $z = F(x, y)$, donde $F(x, y)$ es el lado izquierdo de su ecuación; es decir, la **intersección** de esa superficie con el plano $z = 0$.
+
+📖 **Dónde estudiarlo:**
+
+- [Superficies $z = f(x, y)$](python_visualizacion3d.qmd#superficies-z-fx-y), [superficie con curvas de nivel en Plotly](python_visualizacion3d.qmd#superficie-con-curvas-de-nivel) y [curva y superficies en la misma escena](python_visualizacion3d.qmd#curva-y-superficies-en-la-misma-escena).
+- [Básico 1 de geometría en el espacio](python_geometria_espacio.qmd#básico-1.-representar-gráficamente-un-plano): graficar un plano.
+- [Avanzado 1 de geometría en el espacio](python_geometria_espacio.qmd#avanzado-1.-la-recta-de-intersección-de-dos-planos): la intersección de dos superficies (ahí, dos planos).
+- [Publicar en GitHub Pages](python_visualizacion3d.qmd#publicar-en-github-pages).
+
+## Indicaciones para cada tipo de cónica
+
+Según la cónica de su equipo, tomen en cuenta lo siguiente:
+
+| Si su cónica... | Hagan esto |
+|----|----|
+| Es una **elipse** | Para Monte Carlo, estimen el área **de toda la elipse** y compárenla con la fórmula que conocen de Geometría Analítica. |
+| Es una **hipérbola** | Además de los focos y vértices, obtengan las **asíntotas** y grafíquenlas (rotadas a las coordenadas $x, y$). Para Monte Carlo, estimen el área de la región entre una rama y el **lado recto** (la recta perpendicular al eje focal que pasa por el foco). |
+| Es una **parábola** | Obtengan el **vértice**, el **foco** y la **directriz**, y grafiquen los tres. Para Monte Carlo, estimen el área de la región entre la parábola y su **lado recto**. |
+| Tiene términos $Dx$ o $Ey$ | Después de rotar quedarán términos de primer grado: **completen el cuadrado** (o trasladen el origen) para encontrar el **centro** o el **vértice**. Repasen el [ejercicio 8 de Visualización I](python_visualizacion.qmd#ejercicio-8.-lugar-geométrico-una-circunferencia-escondida-ejercicio-8) y las [derivadas con SymPy](python_sympy.qmd#derivadas): en el centro, las derivadas parciales valen cero. |
+| Tiene un ángulo de rotación que no es "bonito" | Trabajen con el valor exacto de SymPy y conviértanlo con `float()` solo para graficar. |
+
+::: callout-tip
+## Monte Carlo en coordenadas canónicas
+
+Para las regiones de la hipérbola y la parábola es más fácil lanzar los puntos **en las coordenadas $(u, v)$**, donde la cónica está en forma canónica: el área es la misma porque la rotación la conserva. El valor exacto lo pueden obtener con `sp.integrate()` en esas mismas coordenadas.
+:::
+
+## Calentamiento: pongan a prueba sus funciones
+
+Antes de empezar el proyecto, completen y prueben las dos funciones principales, y escriban sus primeras pruebas con `assert`. En los calentamientos 1 y 2, **Run Code** probará sus funciones con varias cónicas que **no** son las del proyecto: el resultado de la suya lo tienen que obtener y reportar ustedes en su sitio.
+
+### Calentamiento 1. Clasificar una cónica
+
+```{pyodide}
+#| exercise: pi1
+def clasificar_conica(A, B, C):
+    """Clasifica la cónica Ax² + Bxy + Cy² + ... = 0 según el discriminante B² - 4AC."""
+    discriminante = ______
+    if discriminante < 0:
+        return "elipse"
+    elif ______:
+        return "parábola"
+    else:
+        return "hipérbola"
+
+print(clasificar_conica(1, 0, 1))     # x² + y² = 1
+```
+
+```{pyodide}
+#| exercise: pi1
+#| check: true
+try:
+    f = envir_result["clasificar_conica"]
+except Exception:
+    f = None
+if f is None:
+    feedback = {"correct": False, "message": "No encontré la función clasificar_conica."}
+else:
+    obtenidos = [f(1, 0, 1), f(5, -6, 5), f(0, 0, 1), f(1, 2, 1), f(1, 0, -1), f(1, 4, 1)]
+    esperados = ["elipse", "elipse", "parábola", "parábola", "hipérbola", "hipérbola"]
+    if obtenidos == esperados:
+        feedback = {"correct": True, "message": "¡Correcto! Tu función clasifica bien las cónicas de prueba. Ahora úsala con la de tu equipo."}
+    else:
+        feedback = {"correct": False, "message": "Al menos una cónica de prueba quedó mal clasificada. Revisa la fórmula del discriminante y la condición de la parábola."}
+feedback
+```
+
+::: {.hint exercise="pi1"}
+::: {.callout-note collapse="false"}
+## Pista
+
+Escriban el discriminante $B^2 - 4AC$ con los operadores de Python (repasen la potencia en [Introducción a Python](intro_python.qmd)). ¿Qué valor tiene el discriminante cuando la cónica es una parábola? Para **comparar** dos valores usen el operador que vimos en [operadores de comparación](python_condicionales.qmd#operadores-de-comparación).
+:::
+:::
+
+### Calentamiento 2. El ángulo de rotación
+
+Completen `angulo_rotacion(A, B, C)` para que regrese el ángulo $\theta$, **en grados**, que elimina el término $xy$. Recuerden que $\tan 2\theta = \dfrac{B}{A - C}$:
+
+- Si $B = 0$, no hay que rotar.
+- Si $A = C$, el denominador es cero y $2\theta = 90°$.
+- En otro caso, despejen $\theta$ de la fórmula.
+
+```{pyodide}
+#| exercise: pi2
+import math
+
+def angulo_rotacion(A, B, C):
+    """Ángulo θ (en grados) que elimina el término xy de Ax² + Bxy + Cy² + ... = 0."""
+    if B == 0:
+        return 0
+    if ______:
+        return ______
+    return ______
+
+print(angulo_rotacion(0, 1, 0))     # xy = 4
+```
+
+```{pyodide}
+#| exercise: pi2
+#| check: true
+import math
+try:
+    f = envir_result["angulo_rotacion"]
+except Exception:
+    f = None
+if f is None:
+    feedback = {"correct": False, "message": "No encontré la función angulo_rotacion."}
+else:
+    try:
+        ok = math.isclose(f(3, 2 * 3 ** 0.5, 1), 30) and math.isclose(f(5, -6, 5), 45)
+        ok = ok and math.isclose(f(4, 2, 2), 22.5) and math.isclose(f(2, 2, 4), -22.5)
+        ok = ok and f(1, 0, 4) == 0
+    except Exception:
+        ok = False
+    if ok:
+        feedback = {"correct": True, "message": "¡Correcto! Ahora calcula el ángulo de tu cónica y compruébalo a mano con la fórmula de tan 2θ."}
+    else:
+        feedback = {"correct": False, "message": "Al menos un ángulo no coincide. Revisa la condición A == C, que el resultado esté en grados y que dividas entre 2 al final."}
+feedback
+```
+
+::: {.hint exercise="pi2"}
+::: {.callout-note collapse="false"}
+## Pista
+
+`math.atan()` es la tangente inversa y regresa el ángulo en **radianes**; `math.degrees()` lo convierte a grados. La fórmula da $2\theta$: ¿qué falta para obtener $\theta$? Si $2\theta = 90°$, ¿cuánto vale $\theta$?
+:::
+:::
+
+### Calentamiento 3. Pruebas con `assert` {#pruebas-de-las-funciones}
+
+Antes de usar sus funciones en el análisis, **escriban sus propias pruebas con `assert`**, como aprendimos en [Probar funciones](python_funciones.qmd#probar-funciones) y en [`assert`: verificar que algo sea verdadero](python_buenas_practicas.qmd#assert-verificar-que-algo-sea-verdadero). Cada prueba llama a una función con una cónica cuya respuesta **ya conocen** de Geometría Analítica y la compara con el resultado esperado: si todo está bien, `assert` no muestra nada; si algo falla, Python se detiene con un `AssertionError`.
+
+Copien en el editor **sus** funciones de los calentamientos 1 y 2, ya completas y corregidas (`angulo_rotacion()` regresa el ángulo **en grados**). Después completen cada `______` de las pruebas con el **resultado esperado** o con los **coeficientes** `A, B, C` de una cónica que ustedes elijan. **Run Code** revisará que sus funciones sean correctas y que todas sus pruebas pasen.
+
+```{pyodide}
+#| exercise: pi_pruebas
+import math
+
+# 1. Copien aquí sus funciones clasificar_conica() y angulo_rotacion()
+#    de los calentamientos 1 y 2.
+______
+
+
+# 2. Pruebas de clasificar_conica(A, B, C)
+assert clasificar_conica(1, 0, 1) == ______           # x² + y² = 1
+assert clasificar_conica(______) == "parábola"        # Una parábola sin término xy
+assert clasificar_conica(______) == "hipérbola"       # Una hipérbola sin término xy
+assert clasificar_conica(______) == "hipérbola"       # Una cónica CON término xy
+
+# 3. Pruebas de angulo_rotacion(A, B, C), en grados
+assert angulo_rotacion(1, 0, 4) == ______             # Sin término xy
+assert angulo_rotacion(______) == 45                  # Una cónica con término xy y A = C
+
+print("Todas las pruebas pasaron ✅")
+```
+
+```{pyodide}
+#| exercise: pi_pruebas
+#| check: true
+import math
+import traceback
+num_assert = user_code.count("assert ")
+if "______" in user_code:
+    feedback = {"correct": False, "message": "Todavía hay espacios ______ sin completar."}
+elif "def clasificar_conica" not in user_code or "def angulo_rotacion" not in user_code:
+    feedback = {"correct": False, "message": "Copia en el editor tus funciones clasificar_conica() y angulo_rotacion() de los calentamientos 1 y 2."}
+elif num_assert < 6:
+    feedback = {"correct": False, "message": "Escribe al menos 6 pruebas con assert (tienes " + str(num_assert) + ")."}
+else:
+    entorno = {}
+    try:
+        exec(user_code, entorno)
+        clasificar = entorno["clasificar_conica"]
+        angulo = entorno["angulo_rotacion"]
+        bien = clasificar(5, -6, 5) == "elipse" and clasificar(1, 2, 1) == "parábola" and clasificar(1, 4, 1) == "hipérbola"
+        bien = bien and math.isclose(angulo(3, 2 * 3 ** 0.5, 1), 30) and math.isclose(angulo(2, 2, 4), -22.5)
+        if bien:
+            feedback = {"correct": True, "message": "¡Correcto! Tus funciones son correctas y tus " + str(num_assert) + " pruebas pasan. Escribe pruebas así en tu analisis.qmd, también para coeficientes()."}
+        else:
+            feedback = {"correct": False, "message": "Tus pruebas pasan, pero tus funciones no son correctas: revísalas con los calentamientos 1 y 2."}
+    except AssertionError as e:
+        linea = traceback.extract_tb(e.__traceback__)[-1].lineno
+        feedback = {"correct": False, "message": "La prueba de la línea " + str(linea) + " falló: revisa el resultado esperado, los coeficientes que elegiste o tu función."}
+    except Exception as e:
+        feedback = {"correct": False, "message": "Tu código tiene un error: " + type(e).__name__ + ": " + str(e)}
+feedback
+```
+
+::: {.hint exercise="pi_pruebas"}
+::: {.callout-note collapse="false"}
+## Pista
+
+Los resultados esperados se escriben **entre comillas**, igual que los regresa la función: `"elipse"`, `"parábola"` o `"hipérbola"`. Para los coeficientes, escriban tres números separados por comas, `A, B, C`, de una ecuación que conozcan de Geometría Analítica (por ejemplo, de su forma canónica): ¿cuánto vale cada uno si el término no aparece? Y si no hay término $xy$, ¿cuánto hay que rotar?
+:::
+:::
+
+En **su** proyecto, escriban las pruebas en `analisis.qmd`, **antes** del análisis, y agreguen también pruebas para `coeficientes()` con una ecuación sencilla cuyos coeficientes puedan verificar a mano. **No** usen la cónica de su equipo: las pruebas sirven para confiar en sus funciones **antes** de usarlas con ella.
+
+## Estructura del sitio
+
+### 1. Crear el proyecto
+
+En RStudio: **File \> New Project \> New Directory \> Quarto Website**. Llamen al proyecto, por ejemplo, `proyecto-conicas-equipo1`. Después configuren `_quarto.yml`:
+
+``` yaml
+project:
+  type: website
+  output-dir: docs
+
+website:
+  title: "Atlas de cónicas: equipo 1"
+  navbar:
+    left:
+      - href: index.qmd
+        text: Inicio
+      - href: analisis.qmd
+        text: Análisis
+      - href: visualizacion.qmd
+        text: Visualización
+      - href: simulacion.qmd
+        text: Monte Carlo
+      - href: conclusiones.qmd
+        text: Conclusiones
+
+format:
+  html:
+    theme: cosmo
+    toc: true
+
+execute:
+  error: true
+```
+
+### 2. Archivos de la entrega
+
+```
+proyecto-conicas-equipo1/
+├── _quarto.yml          # Configuración del sitio web
+├── index.qmd            # Inicio: equipo, cónica y resumen de resultados
+├── funciones.py         # Funciones del proyecto (documentadas)
+├── analisis.qmd         # Pruebas, clasificación, rotación, forma canónica y elementos
+├── visualizacion.qmd    # Gráfica 2D, matriz de rotación, lugar geométrico y 3D
+├── simulacion.qmd       # Monte Carlo y convergencia
+├── conclusiones.qmd     # Conclusiones, distribución del trabajo y referencias
+├── README.md            # Descripción del repositorio
+├── .gitignore           # Archivos que Git no debe guardar
+└── docs/                # Sitio generado por quarto render (se publica en GitHub Pages)
+```
+
+| Archivo | Partes de la rúbrica | Qué debe tener |
+|----|----|----|
+| `_quarto.yml` | 1 | `type: website`, `output-dir: docs` (para GitHub Pages) y el menú de navegación. |
+| `index.qmd` | 1, 9 | Integrantes, la ecuación y una **tabla de resumen** de resultados. Si calculan los valores con código en línea `` `{python} ...` ``, la tabla se actualiza sola. |
+| `funciones.py` | 2 | Las funciones de la [Parte 2](#parte-2.-funciones-del-proyecto), cada una con *docstring*. Las páginas las importan con `from funciones import ...`. |
+| `analisis.qmd` | 2, 3 | Una sección **Funciones del proyecto** que muestre todo `funciones.py` (para que las profesoras lo revisen), las **pruebas con `assert`** antes del análisis; la forma canónica y los elementos escritos en LaTeX (una tabla ayuda mucho). |
+| `visualizacion.qmd` | 4, 5, 6, 8 | Figuras con `label: fig-...` y `fig-cap`, citadas en el texto con `@fig-...` ([pies de figura y referencias cruzadas](python_visualizacion3d.qmd#pies-de-figura-y-referencias-cruzadas)); el error de la rotación y el resultado del lugar geométrico **reportados e interpretados**. |
+| `simulacion.qmd` | 7 | Semilla y parámetros al inicio, comparación con el valor exacto y gráfica de convergencia. |
+| `conclusiones.qmd` | 9 | Qué aprendieron, **quién hizo qué** y referencias (incluido el uso de IA). |
+
+Cada página de Python debe empezar con un encabezado como este:
+
+````
+---
+title: "Análisis algebraico"
+jupyter: python3
+---
+
+```{{python}}
+import numpy as np
+import sympy as sp
+from funciones import clasificar_conica, angulo_rotacion
+```
+````
+
+Y el `.gitignore` debe incluir, al menos:
+
+```
+/.quarto/
+__pycache__/
+*.quarto_ipynb
+```
+
+### 3. Publicar en GitHub Pages
+
+1.  Creen el repositorio en GitHub e inviten a sus compañeros como colaboradores (**Settings \> Collaborators**).
+2.  Renderizen el sitio con **Build \> Render Website** (o `quarto render` en la Terminal).
+3.  Suban los cambios: `git add .`, `git commit -m "..."` y `git push`.
+4.  En GitHub, **Settings \> Pages**: rama `main`, carpeta `/docs`, **Save**.
+5.  Su sitio estará en `https://usuario.github.io/proyecto-conicas-equipo1/`.
+
+Consulten [Configuraciones para usar Quarto con Python](quarto_python.qmd) si aparece algún error al renderizar, y [Visualización III](python_visualizacion3d.qmd#publicar-en-github-pages) para más detalles de la publicación.
+
+## Ejemplo de entrega
+
+Para que vean cómo se organiza un sitio terminado, preparamos un proyecto con una cónica que **no** está asignada a ningún equipo, $5x^2 - 6xy + 5y^2 - 8 = 0$.
+
+::: {.callout-tip icon="false"}
+## 🌐 Vean el sitio de ejemplo
+
+- [**Ver el sitio de ejemplo publicado**](ejemplos/proyecto-conicas-ejemplo/docs/index.html){target="_blank"}: así debe verse su entrega en GitHub Pages.
+:::
+
+::: callout-important
+## Las funciones no vienen incluidas
+
+En el ejemplo **no** se muestran las funciones del proyecto: escribirlas es **trabajo de ustedes**, a partir del [punto de partida de la Parte 2](#parte-2.-funciones-del-proyecto). En la página [Análisis del ejemplo](ejemplos/proyecto-conicas-ejemplo/docs/analisis.html#funciones-del-proyecto){target="_blank"} verán dónde deben aparecer en **su** sitio para que las profesoras podamos revisarlas.
+
+El ejemplo es una **guía**, no una plantilla para copiar: su cónica es diferente y puede necesitar pasos que este ejemplo no tiene (asíntotas, directriz, completar el cuadrado). La rúbrica evalúa **su** análisis y que puedan **explicar** su código en la presentación.
+:::
+
+## Lista de verificación antes de entregar
+
+- [ ] El sitio está publicado y abre desde la dirección de GitHub Pages.
+- [ ] Todos los integrantes tienen *commits* en el repositorio.
+- [ ] `funciones.py` tiene *docstrings* y las pruebas con `assert` pasan.
+- [ ] La forma canónica y los elementos están escritos en LaTeX.
+- [ ] Todas las gráficas tienen título, etiquetas y la misma escala en ambos ejes (`set_aspect("equal")`).
+- [ ] La simulación de Monte Carlo usa una **semilla** y reporta el número de puntos.
+- [ ] La gráfica 3D de Plotly funciona en el sitio publicado.
+- [ ] Hay una sección de **conclusiones** y de **referencias**.
+- [ ] El documento se renderiza sin errores.
+
+## Preguntas frecuentes
+
+**¿Hay un ejemplo resuelto que podamos seguir?** Está el [ejemplo de entrega](#ejemplo-de-entrega), pero sin las funciones: la idea es que ustedes construyan el análisis. Además, cada herramienta tiene ejemplos resueltos en su capítulo; por ejemplo, la rotación de $xy = 4$ en [Transformaciones geométricas](python_transformaciones.qmd#conexión-con-geometría-analítica-rotación-de-ejes) y el método de operar, graficar y comprobar en [Geometría analítica en el espacio](python_geometria_espacio.qmd#ejemplos-resueltos).
+
+**¿Podemos usar inteligencia artificial?** Sí, como apoyo para entender errores o ideas, pero deben **entender y poder explicar** cada línea de su código en la presentación. Indiquen en las referencias si la usaron y para qué.
+
+**¿Qué hacemos si `quarto render` falla?** Lean el último mensaje de error y busquen la solución en [Configuraciones para usar Quarto con Python](quarto_python.qmd#solución-de-problemas). Si aparece `ModuleNotFoundError`, revisen `QUARTO_PYTHON`.
+
+**¿Cómo trabajamos varias personas sin romper el código?** Antes de empezar a trabajar, hagan `git pull`; al terminar, `git add`, `git commit` y `git push`. Si es posible, cada integrante trabaja en una página distinta.
+
+## Referencias
+
+- Hoja de ejercicios *Curvas y Lugares Geométricos*, Geometría Analítica, semestre 2027-1.
+- [SymPy: resolución de ecuaciones y simplificación](https://docs.sympy.org/latest/tutorials/intro-tutorial/index.html)
+- [Quarto: crear un sitio web](https://quarto.org/docs/websites/)
+- [Quarto: publicar en GitHub Pages](https://quarto.org/docs/publishing/github-pages.html)
+- [Wikipedia: sección cónica](https://es.wikipedia.org/wiki/Secci%C3%B3n_c%C3%B3nica)

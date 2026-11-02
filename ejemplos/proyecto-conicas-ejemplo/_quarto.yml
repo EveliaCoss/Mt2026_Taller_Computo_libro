@@ -1,0 +1,28 @@
+project:
+  type: website
+  output-dir: docs
+
+website:
+  title: "Atlas de cónicas: equipo de ejemplo"
+  navbar:
+    left:
+      - href: index.qmd
+        text: Inicio
+      - href: analisis.qmd
+        text: Análisis
+      - href: visualizacion.qmd
+        text: Visualización
+      - href: simulacion.qmd
+        text: Monte Carlo
+      - href: conclusiones.qmd
+        text: Conclusiones
+
+format:
+  html:
+    theme: cosmo
+    toc: true
+    code-fold: show
+    code-copy: true
+
+execute:
+  error: true

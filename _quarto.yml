@@ -4,6 +4,8 @@ project:
   resources:
     - notebooks/*.ipynb   # Notebooks de las actividades (descarga y Google Colab)
     - notebooks/*.qmd     # Archivos .qmd de las actividades (descarga para RStudio)
+    - ejemplos/proyecto-conicas-ejemplo.zip        # Proyecto integrador de ejemplo (código fuente)
+    - ejemplos/proyecto-conicas-ejemplo/docs/**    # Proyecto integrador de ejemplo (sitio publicado)
 
 book:
   title: "Taller de Cómputo"
@@ -110,6 +112,7 @@ book:
         - python_aleatorios.qmd         # Números aleatorios y aplicaciones (Monte Carlo)
         - python_visualizacion3d.qmd    # Visualización III: gráficas en 3D
         - python_transformaciones.qmd   # Transformaciones geométricas en 2D y 3D
+        - python_proyecto_integrador.qmd # Proyecto integrador: atlas de cónicas rotadas
 
   appendices: 
     - python_entornos.qmd           # Google Colab, Jupyter, python vs pip, instalar paquetes

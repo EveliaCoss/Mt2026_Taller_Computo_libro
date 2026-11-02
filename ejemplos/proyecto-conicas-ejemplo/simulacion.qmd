@@ -1,0 +1,75 @@
+---
+title: "Área con el método de Monte Carlo"
+jupyter: python3
+---
+
+## Parámetros
+
+```{python}
+import numpy as np
+import matplotlib.pyplot as plt
+
+SEMILLA = 2026
+N_PUNTOS = 200_000
+LADO = 3                     # Lanzamos puntos en el cuadrado [-3, 3] × [-3, 3]
+AREA_EXACTA = 2 * np.pi      # πab con a = 2, b = 1
+
+rng = np.random.default_rng(SEMILLA)
+```
+
+## Estimación
+
+Un punto $(x, y)$ está **dentro** de la elipse si $5x^2 - 6xy + 5y^2 - 8 < 0$. El área es la fracción de puntos dentro, multiplicada por el área del cuadrado:
+
+$$\text{Área} \approx (2 \cdot 3)^2 \cdot \frac{\text{puntos dentro}}{\text{puntos totales}}$$
+
+```{python}
+px = rng.uniform(-LADO, LADO, N_PUNTOS)
+py = rng.uniform(-LADO, LADO, N_PUNTOS)
+dentro = 5*px**2 - 6*px*py + 5*py**2 - 8 < 0
+
+area_estimada = (2 * LADO)**2 * dentro.mean()
+error = abs(area_estimada - AREA_EXACTA)
+```
+
+Con `{python} f"{N_PUNTOS:,}"` puntos, el área estimada es **`{python} f"{area_estimada:.4f}"`**, mientras que el área exacta es $2\pi \approx$ `{python} f"{AREA_EXACTA:.4f}"`: un error de `{python} f"{error:.4f}"`.
+
+```{python}
+#| label: fig-puntos
+#| fig-cap: "Los primeros 5000 puntos: en azul los que caen dentro de la elipse."
+m = 5000
+fig, ax = plt.subplots(figsize=(5, 5))
+ax.scatter(px[:m][dentro[:m]], py[:m][dentro[:m]], s=2, color="tab:blue", label="Dentro")
+ax.scatter(px[:m][~dentro[:m]], py[:m][~dentro[:m]], s=2, color="lightgray", label="Fuera")
+ax.set_aspect("equal")
+ax.legend(loc="lower right")
+plt.show()
+```
+
+## Convergencia
+
+```{python}
+#| label: fig-convergencia
+#| fig-cap: "El error de la estimación disminuye como $1/\\sqrt{n}$."
+tamanos = np.logspace(2, 6, 9).astype(int)
+errores = []
+for n in tamanos:
+    qx = rng.uniform(-LADO, LADO, n)
+    qy = rng.uniform(-LADO, LADO, n)
+    estimacion = (2 * LADO)**2 * np.mean(5*qx**2 - 6*qx*qy + 5*qy**2 - 8 < 0)
+    errores.append(abs(estimacion - AREA_EXACTA))
+
+fig, ax = plt.subplots(figsize=(7, 4))
+ax.loglog(tamanos, errores, "o-", label="Error de la estimación")
+ax.loglog(tamanos, 10 / np.sqrt(tamanos), "r--", label="Referencia $1/\\sqrt{n}$")
+ax.set_xlabel("Número de puntos $n$")
+ax.set_ylabel("Error absoluto")
+ax.legend()
+plt.show()
+```
+
+Como muestra la @fig-convergencia, para reducir el error 10 veces se necesitan aproximadamente 100 veces más puntos.
+
+::: callout-note
+La rotación **no cambia el área**: la matriz de rotación tiene determinante 1. Por eso el área de la elipse rotada es igual a la de su forma canónica, $\pi a b$.
+:::

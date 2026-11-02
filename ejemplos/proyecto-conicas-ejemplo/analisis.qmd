@@ -1,0 +1,109 @@
+---
+title: "Análisis algebraico"
+jupyter: python3
+---
+
+```{python}
+import sympy as sp
+from funciones import x, y, u, v, coeficientes, clasificar_conica, angulo_rotacion, rotar_ecuacion
+
+ecuacion = 5*x**2 - 6*x*y + 5*y**2 - 8
+```
+
+## Funciones del proyecto
+
+::: callout-important
+## Las funciones no se incluyen en este ejemplo
+
+En este sitio de ejemplo **no mostramos** el código de las funciones (`clasificar_conica()`, `angulo_rotacion()`, `rotar_ecuacion()`, ...): **escribirlas es parte de su trabajo**. Escríbanlas a partir del [punto de partida de la Parte 2](https://eveliacoss.github.io/Mt2026_Taller_Computo_libro/python_proyecto_integrador.html#parte-2.-funciones-del-proyecto) del libro: las funciones vienen **incompletas** y con **errores a propósito**, que deben corregir y comprobar con sus pruebas.
+
+En **su** entrega, esta sección de la página **Análisis** debe mostrar **todas sus funciones**, para que las profesoras podamos revisarlas. La forma más sencilla es incluir el archivo `funciones.py` completo; así la página siempre muestra la versión más reciente:
+
+````markdown
+```{.python filename="funciones.py"}
+{{{< include funciones.py >}}}
+```
+````
+:::
+
+## Pruebas de las funciones
+
+::: callout-note
+## Esta sección la escriben ustedes
+
+Practíquenlo primero en el ejercicio interactivo del libro: [Pruebas de las funciones](https://eveliacoss.github.io/Mt2026_Taller_Computo_libro/python_proyecto_integrador.html#pruebas-de-las-funciones).
+
+Antes de usar sus funciones en el análisis, **escriban sus propias pruebas con `assert`**, como aprendimos en [Probar funciones](https://eveliacoss.github.io/Mt2026_Taller_Computo_libro/python_funciones.html#probar-funciones) y en [`assert`: verificar que algo sea verdadero](https://eveliacoss.github.io/Mt2026_Taller_Computo_libro/python_buenas_practicas.html#assert-verificar-que-algo-sea-verdadero). Cada prueba llama a una función con una cónica cuya respuesta **ya conocen** de Geometría Analítica y la compara con el resultado esperado. Si todo está bien, `assert` no muestra nada; si algo falla, Python se detiene con un `AssertionError` en la prueba que no pasó.
+
+Escriban, como mínimo, pruebas para:
+
+1.  `clasificar_conica()` con una **elipse** (una circunferencia sirve), una **parábola** y una **hipérbola** sin término $xy$.
+2.  `clasificar_conica()` con una cónica que **sí** tenga término $xy$.
+3.  `angulo_rotacion()` con una cónica **sin** término $xy$ y con una en la que $A = C$.
+4.  `coeficientes()` con una ecuación sencilla cuyos coeficientes puedan verificar a mano.
+
+Al final agreguen un `print()` que avise que todas las pruebas pasaron. **No** usen la cónica de su equipo: las pruebas sirven para confiar en sus funciones **antes** de usarlas con ella.
+
+💡 Si `angulo_rotacion()` regresa un valor exacto de SymPy, compárenlo con valores exactos (como `sp.pi`); si regresa decimales, usen `math.isclose()` o `np.isclose()`, porque dos decimales casi nunca son exactamente iguales.
+:::
+
+## Clasificación
+
+```{python}
+A, B, C, D, E, F = coeficientes(ecuacion)
+print("A =", A, " B =", B, " C =", C, " D =", D, " E =", E, " F =", F)
+print("Tipo de cónica:", clasificar_conica(A, B, C))
+```
+
+La cónica es una **elipse**.
+
+## Rotación de ejes
+
+El ángulo que elimina el término $xy$ cumple $\tan 2\theta = \frac{B}{A - C}$. Como $A = C$, el denominador es cero y $2\theta = 90°$:
+
+```{python}
+theta = angulo_rotacion(A, B, C)
+print("θ =", theta, "=", sp.deg(theta), "°")
+```
+
+Con $x = u\cos\theta - v\sin\theta$ y $y = u\sin\theta + v\cos\theta$:
+
+```{python}
+rotada = rotar_ecuacion(ecuacion, theta)
+print(rotada, "= 0")
+```
+
+## Forma canónica
+
+```{python}
+canonica = sp.expand((rotada + 8) / 8)
+print(canonica, "= 1")
+```
+
+$$\frac{u^2}{4} + \frac{v^2}{1} = 1$$
+
+## Elementos
+
+```{python}
+a, b = 2, 1
+c = sp.sqrt(a**2 - b**2)
+R = sp.Matrix([[sp.cos(theta), -sp.sin(theta)], [sp.sin(theta), sp.cos(theta)]])
+
+def a_xy(punto):
+    """Convierte un punto de las coordenadas (u, v) a (x, y)."""
+    return tuple(sp.simplify(R * sp.Matrix(punto)))
+
+print("c =", c, "  e =", c / a)
+print("Vértices:", a_xy((a, 0)), a_xy((-a, 0)))
+print("Covértices:", a_xy((0, b)), a_xy((0, -b)))
+print("Focos:", a_xy((c, 0)), a_xy((-c, 0)))
+```
+
+| Elemento | En $(u, v)$ | En $(x, y)$ |
+|----|----|----|
+| Centro | $(0, 0)$ | $(0, 0)$ |
+| Vértices | $(\pm 2, 0)$ | $(\sqrt{2}, \sqrt{2})$, $(-\sqrt{2}, -\sqrt{2})$ |
+| Covértices | $(0, \pm 1)$ | $\left(-\frac{\sqrt{2}}{2}, \frac{\sqrt{2}}{2}\right)$, $\left(\frac{\sqrt{2}}{2}, -\frac{\sqrt{2}}{2}\right)$ |
+| Focos | $(\pm\sqrt{3}, 0)$ | $\left(\frac{\sqrt{6}}{2}, \frac{\sqrt{6}}{2}\right)$, $\left(-\frac{\sqrt{6}}{2}, -\frac{\sqrt{6}}{2}\right)$ |
+| Excentricidad | $e = \frac{c}{a} = \frac{\sqrt{3}}{2}$ | |
+| Eje focal | Eje $u$ | La recta $y = x$ |

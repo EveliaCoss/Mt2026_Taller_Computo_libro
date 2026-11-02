@@ -1,0 +1,27 @@
+---
+title: "Conclusiones"
+---
+
+## Lo que aprendimos
+
+- El **discriminante** $B^2 - 4AC = -64$ permitió clasificar la cónica como una **elipse** sin graficarla.
+- Una **rotación de 45°** eliminó el término $xy$ y llevó la ecuación a su forma canónica $\frac{u^2}{4} + v^2 = 1$.
+- La **matriz de rotación** de NumPy confirmó el resultado: la elipse canónica girada coincide con la ecuación original con un error de $10^{-15}$.
+- Comprobamos numéricamente la **definición** de la elipse: la suma de distancias a los focos es $2a = 4$ en todos los puntos.
+- El **método de Monte Carlo** estimó el área con un error de centésimas, que disminuye como $1/\sqrt{n}$.
+- Como las rotaciones tienen **determinante 1**, conservan las áreas.
+
+## Distribución del trabajo
+
+| Integrante | Contribución |
+|----|----|
+| Evelia Coss | Funciones, análisis algebraico y simulación de Monte Carlo (`funciones.py`, `analisis.qmd`, `simulacion.qmd`) |
+| Haydeé Peruyero | Visualización 2D y 3D, sitio web y publicación (`visualizacion.qmd`, `_quarto.yml`) |
+
+## Referencias
+
+- Apuntes y hoja de ejercicios *Curvas y Lugares Geométricos*, Geometría Analítica, semestre 2027-1.
+- Taller de Cómputo: capítulos de SymPy, NumPy, visualización, transformaciones geométricas y números aleatorios.
+- [Documentación de SymPy](https://docs.sympy.org/)
+- [Quarto: sitios web](https://quarto.org/docs/websites/)
+- Uso de inteligencia artificial: la usamos para entender un mensaje de error de `quarto render`; todo el código fue escrito y revisado por el equipo.
