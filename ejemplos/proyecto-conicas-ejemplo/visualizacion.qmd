@@ -1,0 +1,97 @@
+---
+title: "Visualización"
+jupyter: python3
+---
+
+```{python}
+import numpy as np
+import matplotlib.pyplot as plt
+import plotly.graph_objects as go
+from funciones import matriz_rotacion, plano_cartesiano
+
+theta = np.pi / 4
+a, b, c = 2, 1, np.sqrt(3)
+R = matriz_rotacion(theta)
+
+X, Y = np.meshgrid(np.linspace(-3, 3, 400), np.linspace(-3, 3, 400))
+Z = 5*X**2 - 6*X*Y + 5*Y**2 - 8
+```
+
+## La cónica y sus elementos
+
+```{python}
+#| label: fig-conica
+#| fig-cap: "La elipse $5x^2 - 6xy + 5y^2 = 8$ con sus ejes rotados 45°, sus vértices y sus focos."
+focos = R @ np.array([[c, -c], [0, 0]])
+vertices = R @ np.array([[a, -a, 0, 0], [0, 0, b, -b]])
+
+fig, ax = plt.subplots(figsize=(6, 6))
+plano_cartesiano(ax)
+ax.contour(X, Y, Z, levels=[0], colors="tab:blue", linewidths=2)
+
+t = np.array([-3, 3])
+ax.plot(t * np.cos(theta), t * np.sin(theta), "g--", label="Eje $u$ (eje focal)")
+ax.plot(-t * np.sin(theta), t * np.cos(theta), "m--", label="Eje $v$")
+ax.scatter(*focos, color="red", zorder=3, label="Focos")
+ax.scatter(*vertices, color="black", zorder=3, label="Vértices y covértices")
+ax.legend(loc="lower right", fontsize=8)
+plt.show()
+```
+
+La @fig-conica muestra que el eje mayor de la elipse está sobre la recta $y = x$, rotado 45° respecto al eje $x$.
+
+## Comprobación con la matriz de rotación
+
+Giramos la elipse canónica $u = 2\cos s$, $v = \sin s$ con la matriz de rotación $R(\theta)$ y la comparamos con la ecuación original:
+
+```{python}
+#| label: fig-comprobacion
+#| fig-cap: "La elipse canónica girada 45° con NumPy coincide con la ecuación original."
+s = np.linspace(0, 2 * np.pi, 300)
+girada = R @ np.vstack([a * np.cos(s), b * np.sin(s)])
+
+fig, ax = plt.subplots(figsize=(5, 5))
+plano_cartesiano(ax)
+ax.contour(X, Y, Z, levels=[0], colors="tab:blue", linewidths=6, alpha=0.3)
+ax.plot(girada[0], girada[1], "r--", label="Canónica girada")
+ax.legend(loc="lower right", fontsize=8)
+plt.show()
+
+error = np.abs(5*girada[0]**2 - 6*girada[0]*girada[1] + 5*girada[1]**2 - 8).max()
+print("Error máximo:", error)
+```
+
+El error máximo es del orden de $10^{-15}$: la forma canónica y el ángulo son correctos.
+
+## Lugar geométrico
+
+Una elipse es el conjunto de puntos cuya **suma de distancias a los focos** es $2a = 4$. Lo comprobamos en los 300 puntos de la curva:
+
+```{python}
+d1 = np.hypot(girada[0] - focos[0, 0], girada[1] - focos[1, 0])
+d2 = np.hypot(girada[0] - focos[0, 1], girada[1] - focos[1, 1])
+suma = d1 + d2
+print("Suma mínima:", suma.min(), "  Suma máxima:", suma.max())
+```
+
+En todos los puntos la suma vale 4 (salvo el redondeo de la computadora): la curva cumple la definición de elipse.
+
+## La cónica en 3D
+
+La elipse es la curva de nivel $z = 0$ de la superficie $z = 5x^2 - 6xy + 5y^2 - 8$. Gira la gráfica con el ratón:
+
+```{python}
+xs = np.linspace(-2.5, 2.5, 60)
+Xs, Ys = np.meshgrid(xs, xs)
+Zs = 5*Xs**2 - 6*Xs*Ys + 5*Ys**2 - 8
+
+fig = go.Figure()
+fig.add_trace(go.Surface(x=Xs, y=Ys, z=Zs, colorscale="Viridis", opacity=0.85, showscale=False,
+                         contours={"z": {"show": True, "start": 0, "end": 0, "size": 1,
+                                         "color": "red", "width": 8}}))
+fig.add_trace(go.Surface(x=Xs, y=Ys, z=np.zeros_like(Zs), opacity=0.25,
+                         colorscale=[[0, "gray"], [1, "gray"]], showscale=False))
+fig.update_layout(title="La elipse como curva de nivel z = 0", height=550,
+                  scene={"zaxis": {"range": [-10, 40]}})
+fig.show()
+```

@@ -1,0 +1,51 @@
+---
+title: "Atlas de cónicas: $5x^2 - 6xy + 5y^2 - 8 = 0$"
+subtitle: "Proyecto integrador · Taller de Cómputo · ENES Juriquilla, UNAM"
+author:
+  - Evelia Coss
+  - Haydeé Peruyero
+date: today
+jupyter: python3
+---
+
+## Presentación
+
+En este sitio analizamos la cónica
+
+$$5x^2 - 6xy + 5y^2 - 8 = 0$$
+
+con las herramientas del Taller de Cómputo: **SymPy** para el análisis algebraico, **NumPy** para las transformaciones y la simulación, y **Matplotlib** y **Plotly** para las gráficas. El término $xy$ indica que la cónica está **rotada** respecto a los ejes coordenados.
+
+```{python}
+#| echo: false
+import sympy as sp
+from funciones import x, y, coeficientes, clasificar_conica, angulo_rotacion
+
+ecuacion = 5*x**2 - 6*x*y + 5*y**2 - 8
+A, B, C, D, E, F = coeficientes(ecuacion)
+tipo = clasificar_conica(A, B, C)
+theta = angulo_rotacion(A, B, C)
+```
+
+## Resumen de resultados
+
+| Resultado | Valor |
+|----|----|
+| Tipo de cónica | `{python} tipo` |
+| Discriminante $B^2 - 4AC$ | `{python} B**2 - 4*A*C` |
+| Ángulo de rotación | `{python} sp.deg(theta)`° |
+| Forma canónica | $\dfrac{u^2}{4} + \dfrac{v^2}{1} = 1$ |
+| Semiejes | $a = 2$, $b = 1$ |
+| Excentricidad | $e = \frac{\sqrt{3}}{2} \approx 0.866$ |
+| Área exacta | $\pi a b = 2\pi \approx 6.2832$ |
+
+## Contenido del sitio
+
+| Página | Contenido |
+|----|----|
+| [Análisis](analisis.qmd) | Pruebas de las funciones, clasificación, rotación de ejes, forma canónica y elementos. |
+| [Visualización](visualizacion.qmd) | Gráfica 2D, comprobación con la matriz de rotación, lugar geométrico y gráfica 3D. |
+| [Monte Carlo](simulacion.qmd) | Estimación del área y convergencia de la simulación. |
+| [Conclusiones](conclusiones.qmd) | Lo que aprendimos y referencias. |
+
+El código fuente está en nuestro repositorio de GitHub. Las funciones del proyecto están en el archivo `funciones.py`.

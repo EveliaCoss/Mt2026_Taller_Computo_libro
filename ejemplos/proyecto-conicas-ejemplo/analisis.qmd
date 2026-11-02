@@ -1,0 +1,88 @@
+---
+title: "Análisis algebraico"
+jupyter: python3
+---
+
+```{python}
+import sympy as sp
+from funciones import x, y, u, v, coeficientes, clasificar_conica, angulo_rotacion, rotar_ecuacion
+
+ecuacion = 5*x**2 - 6*x*y + 5*y**2 - 8
+```
+
+## Pruebas de las funciones
+
+Antes de usar nuestras funciones, las probamos con cónicas cuya respuesta ya conocemos:
+
+```{python}
+assert clasificar_conica(1, 0, 1) == "elipse"        # x² + y² = r²
+assert clasificar_conica(0, 0, 1) == "parábola"      # y² = 4px
+assert clasificar_conica(1, 0, -1) == "hipérbola"    # x² - y² = 1
+assert clasificar_conica(0, 1, 0) == "hipérbola"     # xy = 4
+assert angulo_rotacion(1, 0, 4) == 0                 # Sin término xy
+assert angulo_rotacion(0, 1, 0) == sp.pi / 4         # xy = 4: 45°
+assert angulo_rotacion(7, -6*sp.sqrt(3), 13) == sp.pi / 6
+print("Todas las pruebas pasaron ✅")
+```
+
+## Clasificación
+
+```{python}
+A, B, C, D, E, F = coeficientes(ecuacion)
+discriminante = B**2 - 4*A*C
+print("A =", A, " B =", B, " C =", C, " D =", D, " E =", E, " F =", F)
+print("B² - 4AC =", discriminante, "→", clasificar_conica(A, B, C))
+```
+
+Como $B^2 - 4AC = -64 < 0$, la cónica es una **elipse**.
+
+## Rotación de ejes
+
+El ángulo que elimina el término $xy$ cumple $\tan 2\theta = \frac{B}{A - C}$. Como $A = C$, el denominador es cero y $2\theta = 90°$:
+
+```{python}
+theta = angulo_rotacion(A, B, C)
+print("θ =", theta, "=", sp.deg(theta), "°")
+```
+
+Con $x = u\cos\theta - v\sin\theta$ y $y = u\sin\theta + v\cos\theta$:
+
+```{python}
+rotada = rotar_ecuacion(ecuacion, theta)
+print(rotada, "= 0")
+```
+
+## Forma canónica
+
+```{python}
+canonica = sp.expand((rotada + 8) / 8)
+print(canonica, "= 1")
+```
+
+$$\frac{u^2}{4} + \frac{v^2}{1} = 1$$
+
+## Elementos
+
+```{python}
+a, b = 2, 1
+c = sp.sqrt(a**2 - b**2)
+R = sp.Matrix([[sp.cos(theta), -sp.sin(theta)], [sp.sin(theta), sp.cos(theta)]])
+
+def a_xy(punto):
+    """Convierte un punto de las coordenadas (u, v) a (x, y)."""
+    return tuple(sp.simplify(R * sp.Matrix(punto)))
+
+print("c =", c, "  e =", c / a)
+print("Vértices:", a_xy((a, 0)), a_xy((-a, 0)))
+print("Covértices:", a_xy((0, b)), a_xy((0, -b)))
+print("Focos:", a_xy((c, 0)), a_xy((-c, 0)))
+```
+
+| Elemento | En $(u, v)$ | En $(x, y)$ |
+|----|----|----|
+| Centro | $(0, 0)$ | $(0, 0)$ |
+| Vértices | $(\pm 2, 0)$ | $(\sqrt{2}, \sqrt{2})$, $(-\sqrt{2}, -\sqrt{2})$ |
+| Covértices | $(0, \pm 1)$ | $\left(-\frac{\sqrt{2}}{2}, \frac{\sqrt{2}}{2}\right)$, $\left(\frac{\sqrt{2}}{2}, -\frac{\sqrt{2}}{2}\right)$ |
+| Focos | $(\pm\sqrt{3}, 0)$ | $\left(\frac{\sqrt{6}}{2}, \frac{\sqrt{6}}{2}\right)$, $\left(-\frac{\sqrt{6}}{2}, -\frac{\sqrt{6}}{2}\right)$ |
+| Excentricidad | $e = \frac{c}{a} = \frac{\sqrt{3}}{2}$ | |
+| Eje focal | Eje $u$ | La recta $y = x$ |

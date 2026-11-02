@@ -707,6 +707,12 @@ window.Quarto = {
  <span class="menu-text"><span class="chapter-number">66</span>&nbsp; <span class="chapter-title">Transformaciones geométricas en 2D y 3D</span></span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./python_proyecto_integrador.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">67</span>&nbsp; <span class="chapter-title">🧩 Proyecto integrador: atlas de cónicas rotadas</span></span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
@@ -1251,7 +1257,7 @@ Tip
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">id</span>(edad))    <span class="co"># Identidad</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-stdout">
-<pre><code>4584440352</code></pre>
+<pre><code>4551410208</code></pre>
 </div>
 </div>
 <p>La <strong>identidad</strong> es un número único que Python asigna a cada objeto mientras existe (en la práctica, su dirección en la memoria). Tu número será diferente al de esta página y puede cambiar cada vez que ejecutes el programa; lo importante es <strong>comparar</strong> identidades, no memorizarlas.</p>
@@ -1341,14 +1347,14 @@ Tip
 <span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">id</span>(a))</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-stdout">
-<pre><code>4561773696</code></pre>
+<pre><code>4528743552</code></pre>
 </div>
 <details open="" class="code-fold">
 <summary>Código</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">id</span>(b))</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-stdout">
-<pre><code>4561773696</code></pre>
+<pre><code>4528743552</code></pre>
 </div>
 <details open="" class="code-fold">
 <summary>Código</summary>
@@ -1368,14 +1374,14 @@ Tip
 <span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">id</span>(a))</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-stdout">
-<pre><code>4554782208</code></pre>
+<pre><code>4521752064</code></pre>
 </div>
 <details open="" class="code-fold">
 <summary>Código</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">id</span>(b))</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-stdout">
-<pre><code>4563466816</code></pre>
+<pre><code>4530427456</code></pre>
 </div>
 <details open="" class="code-fold">
 <summary>Código</summary>
@@ -1532,7 +1538,7 @@ Nota
 <span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">id</span>(numeros))</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-stdout">
-<pre><code>4563402048</code></pre>
+<pre><code>4530239552</code></pre>
 </div>
 <details open="" class="code-fold">
 <summary>Código</summary>
@@ -1547,7 +1553,7 @@ Nota
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb48"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">id</span>(numeros))     <span class="co"># Misma identidad: es el mismo objeto</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-stdout">
-<pre><code>4563402048</code></pre>
+<pre><code>4530239552</code></pre>
 </div>
 </div>
 <div class="cell">
@@ -1557,7 +1563,7 @@ Nota
 <span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">id</span>(x))</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-stdout">
-<pre><code>4584440512</code></pre>
+<pre><code>4551410368</code></pre>
 </div>
 <details open="" class="code-fold">
 <summary>Código</summary>
@@ -1565,7 +1571,7 @@ Nota
 <span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">id</span>(x))           <span class="co"># Identidad distinta</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-stdout">
-<pre><code>4584440544</code></pre>
+<pre><code>4551410400</code></pre>
 </div>
 </div>
 </section>

@@ -1,0 +1,163 @@
+[
+  {
+    "objectID": "analisis.html",
+    "href": "analisis.html",
+    "title": "Análisis algebraico",
+    "section": "",
+    "text": "Code\nimport sympy as sp\nfrom funciones import x, y, u, v, coeficientes, clasificar_conica, angulo_rotacion, rotar_ecuacion\n\necuacion = 5*x**2 - 6*x*y + 5*y**2 - 8"
+  },
+  {
+    "objectID": "analisis.html#pruebas-de-las-funciones",
+    "href": "analisis.html#pruebas-de-las-funciones",
+    "title": "Análisis algebraico",
+    "section": "Pruebas de las funciones",
+    "text": "Pruebas de las funciones\nAntes de usar nuestras funciones, las probamos con cónicas cuya respuesta ya conocemos:\n\n\nCode\nassert clasificar_conica(1, 0, 1) == \"elipse\"        # x² + y² = r²\nassert clasificar_conica(0, 0, 1) == \"parábola\"      # y² = 4px\nassert clasificar_conica(1, 0, -1) == \"hipérbola\"    # x² - y² = 1\nassert clasificar_conica(0, 1, 0) == \"hipérbola\"     # xy = 4\nassert angulo_rotacion(1, 0, 4) == 0                 # Sin término xy\nassert angulo_rotacion(0, 1, 0) == sp.pi / 4         # xy = 4: 45°\nassert angulo_rotacion(7, -6*sp.sqrt(3), 13) == sp.pi / 6\nprint(\"Todas las pruebas pasaron ✅\")\n\n\nTodas las pruebas pasaron ✅"
+  },
+  {
+    "objectID": "analisis.html#clasificación",
+    "href": "analisis.html#clasificación",
+    "title": "Análisis algebraico",
+    "section": "Clasificación",
+    "text": "Clasificación\n\n\nCode\nA, B, C, D, E, F = coeficientes(ecuacion)\ndiscriminante = B**2 - 4*A*C\nprint(\"A =\", A, \" B =\", B, \" C =\", C, \" D =\", D, \" E =\", E, \" F =\", F)\nprint(\"B² - 4AC =\", discriminante, \"→\", clasificar_conica(A, B, C))\n\n\nA = 5  B = -6  C = 5  D = 0  E = 0  F = -8\nB² - 4AC = -64 → elipse\n\n\nComo \\(B^2 - 4AC = -64 &lt; 0\\), la cónica es una elipse."
+  },
+  {
+    "objectID": "analisis.html#rotación-de-ejes",
+    "href": "analisis.html#rotación-de-ejes",
+    "title": "Análisis algebraico",
+    "section": "Rotación de ejes",
+    "text": "Rotación de ejes\nEl ángulo que elimina el término \\(xy\\) cumple \\(\\tan 2\\theta = \\frac{B}{A - C}\\). Como \\(A = C\\), el denominador es cero y \\(2\\theta = 90°\\):\n\n\nCode\ntheta = angulo_rotacion(A, B, C)\nprint(\"θ =\", theta, \"=\", sp.deg(theta), \"°\")\n\n\nθ = pi/4 = 45 °\n\n\nCon \\(x = u\\cos\\theta - v\\sin\\theta\\) y \\(y = u\\sin\\theta + v\\cos\\theta\\):\n\n\nCode\nrotada = rotar_ecuacion(ecuacion, theta)\nprint(rotada, \"= 0\")\n\n\n2*u**2 + 8*v**2 - 8 = 0"
+  },
+  {
+    "objectID": "analisis.html#forma-canónica",
+    "href": "analisis.html#forma-canónica",
+    "title": "Análisis algebraico",
+    "section": "Forma canónica",
+    "text": "Forma canónica\n\n\nCode\ncanonica = sp.expand((rotada + 8) / 8)\nprint(canonica, \"= 1\")\n\n\nu**2/4 + v**2 = 1\n\n\n\\[\\frac{u^2}{4} + \\frac{v^2}{1} = 1\\]"
+  },
+  {
+    "objectID": "analisis.html#elementos",
+    "href": "analisis.html#elementos",
+    "title": "Análisis algebraico",
+    "section": "Elementos",
+    "text": "Elementos\n\n\nCode\na, b = 2, 1\nc = sp.sqrt(a**2 - b**2)\nR = sp.Matrix([[sp.cos(theta), -sp.sin(theta)], [sp.sin(theta), sp.cos(theta)]])\n\ndef a_xy(punto):\n    \"\"\"Convierte un punto de las coordenadas (u, v) a (x, y).\"\"\"\n    return tuple(sp.simplify(R * sp.Matrix(punto)))\n\nprint(\"c =\", c, \"  e =\", c / a)\nprint(\"Vértices:\", a_xy((a, 0)), a_xy((-a, 0)))\nprint(\"Covértices:\", a_xy((0, b)), a_xy((0, -b)))\nprint(\"Focos:\", a_xy((c, 0)), a_xy((-c, 0)))\n\n\nc = sqrt(3)   e = sqrt(3)/2\nVértices: (sqrt(2), sqrt(2)) (-sqrt(2), -sqrt(2))\nCovértices: (-sqrt(2)/2, sqrt(2)/2) (sqrt(2)/2, -sqrt(2)/2)\nFocos: (sqrt(6)/2, sqrt(6)/2) (-sqrt(6)/2, -sqrt(6)/2)\n\n\n\n\n\n\n\n\n\n\nElemento\nEn \\((u, v)\\)\nEn \\((x, y)\\)\n\n\n\n\nCentro\n\\((0, 0)\\)\n\\((0, 0)\\)\n\n\nVértices\n\\((\\pm 2, 0)\\)\n\\((\\sqrt{2}, \\sqrt{2})\\), \\((-\\sqrt{2}, -\\sqrt{2})\\)\n\n\nCovértices\n\\((0, \\pm 1)\\)\n\\(\\left(-\\frac{\\sqrt{2}}{2}, \\frac{\\sqrt{2}}{2}\\right)\\), \\(\\left(\\frac{\\sqrt{2}}{2}, -\\frac{\\sqrt{2}}{2}\\right)\\)\n\n\nFocos\n\\((\\pm\\sqrt{3}, 0)\\)\n\\(\\left(\\frac{\\sqrt{6}}{2}, \\frac{\\sqrt{6}}{2}\\right)\\), \\(\\left(-\\frac{\\sqrt{6}}{2}, -\\frac{\\sqrt{6}}{2}\\right)\\)\n\n\nExcentricidad\n\\(e = \\frac{c}{a} = \\frac{\\sqrt{3}}{2}\\)\n\n\n\nEje focal\nEje \\(u\\)\nLa recta \\(y = x\\)"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Atlas de cónicas: \\(5x^2 - 6xy + 5y^2 - 8 = 0\\)",
+    "section": "",
+    "text": "En este sitio analizamos la cónica\n\\[5x^2 - 6xy + 5y^2 - 8 = 0\\]\ncon las herramientas del Taller de Cómputo: SymPy para el análisis algebraico, NumPy para las transformaciones y la simulación, y Matplotlib y Plotly para las gráficas. El término \\(xy\\) indica que la cónica está rotada respecto a los ejes coordenados."
+  },
+  {
+    "objectID": "index.html#presentación",
+    "href": "index.html#presentación",
+    "title": "Atlas de cónicas: \\(5x^2 - 6xy + 5y^2 - 8 = 0\\)",
+    "section": "",
+    "text": "En este sitio analizamos la cónica\n\\[5x^2 - 6xy + 5y^2 - 8 = 0\\]\ncon las herramientas del Taller de Cómputo: SymPy para el análisis algebraico, NumPy para las transformaciones y la simulación, y Matplotlib y Plotly para las gráficas. El término \\(xy\\) indica que la cónica está rotada respecto a los ejes coordenados."
+  },
+  {
+    "objectID": "index.html#resumen-de-resultados",
+    "href": "index.html#resumen-de-resultados",
+    "title": "Atlas de cónicas: \\(5x^2 - 6xy + 5y^2 - 8 = 0\\)",
+    "section": "Resumen de resultados",
+    "text": "Resumen de resultados\n\n\n\nResultado\nValor\n\n\n\n\nTipo de cónica\nelipse\n\n\nDiscriminante \\(B^2 - 4AC\\)\n-64\n\n\nÁngulo de rotación\n45°\n\n\nForma canónica\n\\(\\dfrac{u^2}{4} + \\dfrac{v^2}{1} = 1\\)\n\n\nSemiejes\n\\(a = 2\\), \\(b = 1\\)\n\n\nExcentricidad\n\\(e = \\frac{\\sqrt{3}}{2} \\approx 0.866\\)\n\n\nÁrea exacta\n\\(\\pi a b = 2\\pi \\approx 6.2832\\)"
+  },
+  {
+    "objectID": "index.html#contenido-del-sitio",
+    "href": "index.html#contenido-del-sitio",
+    "title": "Atlas de cónicas: \\(5x^2 - 6xy + 5y^2 - 8 = 0\\)",
+    "section": "Contenido del sitio",
+    "text": "Contenido del sitio\n\n\n\nPágina\nContenido\n\n\n\n\nAnálisis\nPruebas de las funciones, clasificación, rotación de ejes, forma canónica y elementos.\n\n\nVisualización\nGráfica 2D, comprobación con la matriz de rotación, lugar geométrico y gráfica 3D.\n\n\nMonte Carlo\nEstimación del área y convergencia de la simulación.\n\n\nConclusiones\nLo que aprendimos y referencias.\n\n\n\nEl código fuente está en nuestro repositorio de GitHub. Las funciones del proyecto están en el archivo funciones.py."
+  },
+  {
+    "objectID": "conclusiones.html",
+    "href": "conclusiones.html",
+    "title": "Conclusiones",
+    "section": "",
+    "text": "El discriminante \\(B^2 - 4AC = -64\\) permitió clasificar la cónica como una elipse sin graficarla.\nUna rotación de 45° eliminó el término \\(xy\\) y llevó la ecuación a su forma canónica \\(\\frac{u^2}{4} + v^2 = 1\\).\nLa matriz de rotación de NumPy confirmó el resultado: la elipse canónica girada coincide con la ecuación original con un error de \\(10^{-15}\\).\nComprobamos numéricamente la definición de la elipse: la suma de distancias a los focos es \\(2a = 4\\) en todos los puntos.\nEl método de Monte Carlo estimó el área con un error de centésimas, que disminuye como \\(1/\\sqrt{n}\\).\nComo las rotaciones tienen determinante 1, conservan las áreas."
+  },
+  {
+    "objectID": "conclusiones.html#lo-que-aprendimos",
+    "href": "conclusiones.html#lo-que-aprendimos",
+    "title": "Conclusiones",
+    "section": "",
+    "text": "El discriminante \\(B^2 - 4AC = -64\\) permitió clasificar la cónica como una elipse sin graficarla.\nUna rotación de 45° eliminó el término \\(xy\\) y llevó la ecuación a su forma canónica \\(\\frac{u^2}{4} + v^2 = 1\\).\nLa matriz de rotación de NumPy confirmó el resultado: la elipse canónica girada coincide con la ecuación original con un error de \\(10^{-15}\\).\nComprobamos numéricamente la definición de la elipse: la suma de distancias a los focos es \\(2a = 4\\) en todos los puntos.\nEl método de Monte Carlo estimó el área con un error de centésimas, que disminuye como \\(1/\\sqrt{n}\\).\nComo las rotaciones tienen determinante 1, conservan las áreas."
+  },
+  {
+    "objectID": "conclusiones.html#distribución-del-trabajo",
+    "href": "conclusiones.html#distribución-del-trabajo",
+    "title": "Conclusiones",
+    "section": "Distribución del trabajo",
+    "text": "Distribución del trabajo\n\n\n\n\n\n\n\nIntegrante\nContribución\n\n\n\n\nEvelia Coss\nFunciones, análisis algebraico y simulación de Monte Carlo (funciones.py, analisis.qmd, simulacion.qmd)\n\n\nHaydeé Peruyero\nVisualización 2D y 3D, sitio web y publicación (visualizacion.qmd, _quarto.yml)"
+  },
+  {
+    "objectID": "conclusiones.html#referencias",
+    "href": "conclusiones.html#referencias",
+    "title": "Conclusiones",
+    "section": "Referencias",
+    "text": "Referencias\n\nApuntes y hoja de ejercicios Curvas y Lugares Geométricos, Geometría Analítica, semestre 2027-1.\nTaller de Cómputo: capítulos de SymPy, NumPy, visualización, transformaciones geométricas y números aleatorios.\nDocumentación de SymPy\nQuarto: sitios web\nUso de inteligencia artificial: la usamos para entender un mensaje de error de quarto render; todo el código fue escrito y revisado por el equipo."
+  },
+  {
+    "objectID": "visualizacion.html",
+    "href": "visualizacion.html",
+    "title": "Visualización",
+    "section": "",
+    "text": "Code\nimport numpy as np\nimport matplotlib.pyplot as plt\nimport plotly.graph_objects as go\nfrom funciones import matriz_rotacion, plano_cartesiano\n\ntheta = np.pi / 4\na, b, c = 2, 1, np.sqrt(3)\nR = matriz_rotacion(theta)\n\nX, Y = np.meshgrid(np.linspace(-3, 3, 400), np.linspace(-3, 3, 400))\nZ = 5*X**2 - 6*X*Y + 5*Y**2 - 8"
+  },
+  {
+    "objectID": "visualizacion.html#la-cónica-y-sus-elementos",
+    "href": "visualizacion.html#la-cónica-y-sus-elementos",
+    "title": "Visualización",
+    "section": "La cónica y sus elementos",
+    "text": "La cónica y sus elementos\n\n\nCode\nfocos = R @ np.array([[c, -c], [0, 0]])\nvertices = R @ np.array([[a, -a, 0, 0], [0, 0, b, -b]])\n\nfig, ax = plt.subplots(figsize=(6, 6))\nplano_cartesiano(ax)\nax.contour(X, Y, Z, levels=[0], colors=\"tab:blue\", linewidths=2)\n\nt = np.array([-3, 3])\nax.plot(t * np.cos(theta), t * np.sin(theta), \"g--\", label=\"Eje $u$ (eje focal)\")\nax.plot(-t * np.sin(theta), t * np.cos(theta), \"m--\", label=\"Eje $v$\")\nax.scatter(*focos, color=\"red\", zorder=3, label=\"Focos\")\nax.scatter(*vertices, color=\"black\", zorder=3, label=\"Vértices y covértices\")\nax.legend(loc=\"lower right\", fontsize=8)\nplt.show()\n\n\n\n\n\n\n\n\nFigure 1: La elipse \\(5x^2 - 6xy + 5y^2 = 8\\) con sus ejes rotados 45°, sus vértices y sus focos.\n\n\n\n\n\nLa Figure 1 muestra que el eje mayor de la elipse está sobre la recta \\(y = x\\), rotado 45° respecto al eje \\(x\\)."
+  },
+  {
+    "objectID": "visualizacion.html#comprobación-con-la-matriz-de-rotación",
+    "href": "visualizacion.html#comprobación-con-la-matriz-de-rotación",
+    "title": "Visualización",
+    "section": "Comprobación con la matriz de rotación",
+    "text": "Comprobación con la matriz de rotación\nGiramos la elipse canónica \\(u = 2\\cos s\\), \\(v = \\sin s\\) con la matriz de rotación \\(R(\\theta)\\) y la comparamos con la ecuación original:\n\n\nCode\ns = np.linspace(0, 2 * np.pi, 300)\ngirada = R @ np.vstack([a * np.cos(s), b * np.sin(s)])\n\nfig, ax = plt.subplots(figsize=(5, 5))\nplano_cartesiano(ax)\nax.contour(X, Y, Z, levels=[0], colors=\"tab:blue\", linewidths=6, alpha=0.3)\nax.plot(girada[0], girada[1], \"r--\", label=\"Canónica girada\")\nax.legend(loc=\"lower right\", fontsize=8)\nplt.show()\n\nerror = np.abs(5*girada[0]**2 - 6*girada[0]*girada[1] + 5*girada[1]**2 - 8).max()\nprint(\"Error máximo:\", error)\n\n\n\n\n\n\n\n\nFigure 2: La elipse canónica girada 45° con NumPy coincide con la ecuación original.\n\n\n\n\n\nError máximo: 5.329070518200751e-15\n\n\nEl error máximo es del orden de \\(10^{-15}\\): la forma canónica y el ángulo son correctos."
+  },
+  {
+    "objectID": "visualizacion.html#lugar-geométrico",
+    "href": "visualizacion.html#lugar-geométrico",
+    "title": "Visualización",
+    "section": "Lugar geométrico",
+    "text": "Lugar geométrico\nUna elipse es el conjunto de puntos cuya suma de distancias a los focos es \\(2a = 4\\). Lo comprobamos en los 300 puntos de la curva:\n\n\nCode\nd1 = np.hypot(girada[0] - focos[0, 0], girada[1] - focos[1, 0])\nd2 = np.hypot(girada[0] - focos[0, 1], girada[1] - focos[1, 1])\nsuma = d1 + d2\nprint(\"Suma mínima:\", suma.min(), \"  Suma máxima:\", suma.max())\n\n\nSuma mínima: 3.999999999999999   Suma máxima: 4.000000000000001\n\n\nEn todos los puntos la suma vale 4 (salvo el redondeo de la computadora): la curva cumple la definición de elipse."
+  },
+  {
+    "objectID": "visualizacion.html#la-cónica-en-3d",
+    "href": "visualizacion.html#la-cónica-en-3d",
+    "title": "Visualización",
+    "section": "La cónica en 3D",
+    "text": "La cónica en 3D\nLa elipse es la curva de nivel \\(z = 0\\) de la superficie \\(z = 5x^2 - 6xy + 5y^2 - 8\\). Gira la gráfica con el ratón:\n\n\nCode\nxs = np.linspace(-2.5, 2.5, 60)\nXs, Ys = np.meshgrid(xs, xs)\nZs = 5*Xs**2 - 6*Xs*Ys + 5*Ys**2 - 8\n\nfig = go.Figure()\nfig.add_trace(go.Surface(x=Xs, y=Ys, z=Zs, colorscale=\"Viridis\", opacity=0.85, showscale=False,\n                         contours={\"z\": {\"show\": True, \"start\": 0, \"end\": 0, \"size\": 1,\n                                         \"color\": \"red\", \"width\": 8}}))\nfig.add_trace(go.Surface(x=Xs, y=Ys, z=np.zeros_like(Zs), opacity=0.25,\n                         colorscale=[[0, \"gray\"], [1, \"gray\"]], showscale=False))\nfig.update_layout(title=\"La elipse como curva de nivel z = 0\", height=550,\n                  scene={\"zaxis\": {\"range\": [-10, 40]}})\nfig.show()"
+  },
+  {
+    "objectID": "simulacion.html",
+    "href": "simulacion.html",
+    "title": "Área con el método de Monte Carlo",
+    "section": "",
+    "text": "Code\nimport numpy as np\nimport matplotlib.pyplot as plt\n\nSEMILLA = 2026\nN_PUNTOS = 200_000\nLADO = 3                     # Lanzamos puntos en el cuadrado [-3, 3] × [-3, 3]\nAREA_EXACTA = 2 * np.pi      # πab con a = 2, b = 1\n\nrng = np.random.default_rng(SEMILLA)"
+  },
+  {
+    "objectID": "simulacion.html#parámetros",
+    "href": "simulacion.html#parámetros",
+    "title": "Área con el método de Monte Carlo",
+    "section": "",
+    "text": "Code\nimport numpy as np\nimport matplotlib.pyplot as plt\n\nSEMILLA = 2026\nN_PUNTOS = 200_000\nLADO = 3                     # Lanzamos puntos en el cuadrado [-3, 3] × [-3, 3]\nAREA_EXACTA = 2 * np.pi      # πab con a = 2, b = 1\n\nrng = np.random.default_rng(SEMILLA)"
+  },
+  {
+    "objectID": "simulacion.html#estimación",
+    "href": "simulacion.html#estimación",
+    "title": "Área con el método de Monte Carlo",
+    "section": "Estimación",
+    "text": "Estimación\nUn punto \\((x, y)\\) está dentro de la elipse si \\(5x^2 - 6xy + 5y^2 - 8 &lt; 0\\). El área es la fracción de puntos dentro, multiplicada por el área del cuadrado:\n\\[\\text{Área} \\approx (2 \\cdot 3)^2 \\cdot \\frac{\\text{puntos dentro}}{\\text{puntos totales}}\\]\n\n\nCode\npx = rng.uniform(-LADO, LADO, N_PUNTOS)\npy = rng.uniform(-LADO, LADO, N_PUNTOS)\ndentro = 5*px**2 - 6*px*py + 5*py**2 - 8 &lt; 0\n\narea_estimada = (2 * LADO)**2 * dentro.mean()\nerror = abs(area_estimada - AREA_EXACTA)\n\n\nCon 200,000 puntos, el área estimada es 6.2408, mientras que el área exacta es \\(2\\pi \\approx\\) 6.2832: un error de 0.0424.\n\n\nCode\nm = 5000\nfig, ax = plt.subplots(figsize=(5, 5))\nax.scatter(px[:m][dentro[:m]], py[:m][dentro[:m]], s=2, color=\"tab:blue\", label=\"Dentro\")\nax.scatter(px[:m][~dentro[:m]], py[:m][~dentro[:m]], s=2, color=\"lightgray\", label=\"Fuera\")\nax.set_aspect(\"equal\")\nax.legend(loc=\"lower right\")\nplt.show()\n\n\n\n\n\n\n\n\nFigure 1: Los primeros 5000 puntos: en azul los que caen dentro de la elipse."
+  },
+  {
+    "objectID": "simulacion.html#convergencia",
+    "href": "simulacion.html#convergencia",
+    "title": "Área con el método de Monte Carlo",
+    "section": "Convergencia",
+    "text": "Convergencia\n\n\nCode\ntamanos = np.logspace(2, 6, 9).astype(int)\nerrores = []\nfor n in tamanos:\n    qx = rng.uniform(-LADO, LADO, n)\n    qy = rng.uniform(-LADO, LADO, n)\n    estimacion = (2 * LADO)**2 * np.mean(5*qx**2 - 6*qx*qy + 5*qy**2 - 8 &lt; 0)\n    errores.append(abs(estimacion - AREA_EXACTA))\n\nfig, ax = plt.subplots(figsize=(7, 4))\nax.loglog(tamanos, errores, \"o-\", label=\"Error de la estimación\")\nax.loglog(tamanos, 10 / np.sqrt(tamanos), \"r--\", label=\"Referencia $1/\\\\sqrt{n}$\")\nax.set_xlabel(\"Número de puntos $n$\")\nax.set_ylabel(\"Error absoluto\")\nax.legend()\nplt.show()\n\n\n\n\n\n\n\n\nFigure 2: El error de la estimación disminuye como \\(1/\\sqrt{n}\\).\n\n\n\n\n\nComo muestra la Figure 2, para reducir el error 10 veces se necesitan aproximadamente 100 veces más puntos.\n\n\n\n\n\n\nNote\n\n\n\nLa rotación no cambia el área: la matriz de rotación tiene determinante 1. Por eso el área de la elipse rotada es igual a la de su forma canónica, \\(\\pi a b\\)."
+  }
+]

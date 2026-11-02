@@ -1,0 +1,1152 @@
+---
+engine: knitr
+---
+
+# 🧩 Proyecto integrador: atlas de cónicas rotadas
+
+{{< include ./_extensions/r-wasm/live/_knitr.qmd >}}
+
+```{r}
+#| include: false
+# Mostrar solo el resultado de la última línea de cada bloque de Python (como en Jupyter)
+knitr::opts_chunk$set(jupyter_compat = TRUE)
+# Usar el entorno del curso (~/.venvs/quarto-python) si existe, aunque RStudio tenga configurado otro Python.
+venv_python <- path.expand(c("~/.venvs/quarto-python/bin/python", "~/.venvs/quarto-python/Scripts/python.exe"))
+venv_python <- venv_python[file.exists(venv_python)]
+if (length(venv_python) > 0) {
+  Sys.setenv(RETICULATE_PYTHON = venv_python[1])
+} else {
+  reticulate::py_require(c("numpy", "matplotlib", "sympy", "plotly", "pandas"))
+}
+```
+
+```{python}
+#| include: false
+# Hace que fig.show() muestre las figuras de Plotly dentro del libro
+import plotly.graph_objects as go
+_primera_figura = True
+def _mostrar_en_libro(self, *args, **kwargs):
+    global _primera_figura
+    html = self.to_html(include_plotlyjs="cdn" if _primera_figura else False, full_html=False)
+    print("```{=html}\n" + html + "\n```")
+    _primera_figura = False
+go.Figure.show = _mostrar_en_libro
+```
+
+> **Fecha de entrega:** *por definir*
+
+En **Geometría Analítica** estudiaron las cónicas (elipse, parábola e hipérbola) y aprendieron que una ecuación de segundo grado con término $xy$ representa una cónica **rotada**. En este proyecto construirán, **en equipo**, un sitio web que analice una de esas cónicas usando **todo** lo que aprendimos en el Taller de Cómputo: Python, SymPy, NumPy, visualización, transformaciones geométricas, números aleatorios, Quarto, Git y GitHub.
+
+## Objetivo
+
+Analizar la cónica
+
+$$Ax^2 + Bxy + Cy^2 + Dx + Ey + F = 0$$
+
+que le corresponda a su equipo: **clasificarla**, **eliminar el término $xy$** mediante una rotación de ejes, obtener su **forma canónica** y sus **elementos**, **visualizarla** en 2D y 3D, **comprobar** su definición como lugar geométrico, **estimar un área** con el método de Monte Carlo y **publicar** todo en un sitio web de Quarto en GitHub Pages.
+
+### ¿Qué temas integra?
+
+| Parte del proyecto | Geometría Analítica | Taller de Cómputo |
+|----|----|----|
+| 1. Repositorio y sitio web | — | [Git/GitHub](cap15.qmd), [Quarto](Intro_Quarto.qmd), [Quarto con Python](quarto_python.qmd) |
+| 2. Funciones del proyecto | Discriminante $B^2 - 4AC$, ángulo de rotación | [Funciones](python_funciones.qmd), [buenas prácticas](python_buenas_practicas.qmd), [condicionales](python_condicionales.qmd) |
+| 3. Análisis algebraico | Rotación de ejes, forma canónica, elementos | [SymPy](python_sympy.qmd) |
+| 4. Visualización 2D | Gráfica de la cónica y sus elementos | [Visualización I](python_visualizacion.qmd) y [II](python_visualizacion2.qmd) |
+| 5. Transformación con matrices | Rotación de ejes como transformación | [Transformaciones geométricas](python_transformaciones.qmd), [NumPy](python_numpy.qmd) |
+| 6. Lugar geométrico | Definición de cada cónica con distancias | [Visualización II](python_visualizacion2.qmd#lugares-geométricos), [ciclos](python_for.qmd) |
+| 7. Área con Monte Carlo | Área de la elipse o de una región | [Números aleatorios](python_aleatorios.qmd) |
+| 8. Visualización 3D interactiva | La cónica como curva de nivel | [Visualización III](python_visualizacion3d.qmd) |
+
+## Organización
+
+- **Equipos** de 2 o 3 personas.
+- Cada equipo trabaja en **un solo repositorio de GitHub**; **todos** los integrantes deben tener *commits* (se revisará el historial).
+- El resultado es un **sitio web de Quarto** publicado en GitHub Pages, con su código, gráficas y explicaciones.
+- Al final, cada equipo **presenta** su sitio en clase (5 a 7 minutos).
+
+### Cónicas asignadas
+
+| Equipo | Ecuación |
+|----|----|
+| 1 | $7x^2 - 6\sqrt{3}\,xy + 13y^2 - 16 = 0$ |
+| 2 | $3x^2 - 10xy + 3y^2 + 32 = 0$ |
+| 3 | $x^2 - 2xy + y^2 - 8x - 8y = 0$ |
+| 4 | $xy - 2x - 2y = 0$ |
+| 5 | $2x^2 + 3xy - 2y^2 - 25 = 0$ |
+| 6 | $13x^2 + 10xy + 13y^2 - 72 = 0$ |
+
+::: callout-tip
+La profesora puede asignar las cónicas por sorteo... ¡con `random.choice()`! Si hay más equipos que cónicas, dos equipos pueden tener la misma ecuación.
+:::
+
+## Los entregables
+
+El sitio debe tener las siguientes secciones. Cada una se explica con un **ejemplo resuelto** más abajo, usando una cónica que **no** está asignada a ningún equipo: $5x^2 - 6xy + 5y^2 - 8 = 0$. Al final encontrarán también un [ejemplo de entrega completo](#ejemplo-de-entrega-completo): el sitio publicado y todos sus archivos.
+
+| Parte | Entregable | Puntos |
+|----|----|----|
+| 1 | Repositorio en GitHub y sitio publicado en GitHub Pages | 10 |
+| 2 | Funciones documentadas y probadas: `clasificar_conica()` y `angulo_rotacion()` | 15 |
+| 3 | Análisis algebraico con SymPy: clasificación, rotación, forma canónica y elementos | 20 |
+| 4 | Gráfica 2D de la cónica con sus ejes rotados y sus elementos | 15 |
+| 5 | Comprobación de la rotación con una matriz de NumPy | 10 |
+| 6 | Comprobación numérica de la definición como lugar geométrico | 10 |
+| 7 | Área estimada con Monte Carlo, comparada con el valor exacto | 10 |
+| 8 | Gráfica 3D interactiva con Plotly | 5 |
+| 9 | Presentación, claridad y documentación | 5 |
+| | **Total** | **100** |
+
+## Ejemplo resuelto: $5x^2 - 6xy + 5y^2 - 8 = 0$
+
+```{python}
+import numpy as np
+import matplotlib.pyplot as plt
+import sympy as sp
+
+x, y, u, v = sp.symbols("x y u v", real=True)
+ecuacion = 5*x**2 - 6*x*y + 5*y**2 - 8
+```
+
+### Parte 2. Funciones del proyecto
+
+Escribimos funciones reutilizables, con *docstring* y validación, siguiendo el capítulo de [funciones](python_funciones.qmd):
+
+```{python}
+def coeficientes(expresion):
+    """Regresa los coeficientes A, B, C, D, E, F de Ax² + Bxy + Cy² + Dx + Ey + F."""
+    P = sp.Poly(expresion, x, y)
+    monomios = [x**2, x*y, y**2, x, y, 1]
+    return [P.coeff_monomial(m) for m in monomios]
+
+
+def clasificar_conica(A, B, C):
+    """Clasifica la cónica según el discriminante B² - 4AC."""
+    if A == 0 and B == 0 and C == 0:
+        raise ValueError("No es una ecuación de segundo grado: A, B y C son cero")
+    discriminante = B**2 - 4*A*C
+    if discriminante < 0:
+        return "elipse"
+    elif discriminante == 0:
+        return "parábola"
+    else:
+        return "hipérbola"
+
+
+def angulo_rotacion(A, B, C):
+    """Ángulo θ (en radianes) que elimina el término xy: tan(2θ) = B / (A - C)."""
+    if B == 0:
+        return 0
+    if A == C:
+        return sp.pi / 4
+    return sp.atan(B / (A - C)) / 2
+```
+
+Y las **probamos** con casos conocidos, como en el capítulo de funciones:
+
+```{python}
+assert clasificar_conica(1, 0, 1) == "elipse"        # x² + y² = r²
+assert clasificar_conica(0, 0, 1) == "parábola"      # y² = 4px
+assert clasificar_conica(1, 0, -1) == "hipérbola"    # x² - y² = 1
+assert clasificar_conica(0, 1, 0) == "hipérbola"     # xy = 4
+assert angulo_rotacion(1, 0, 4) == 0                 # Sin término xy: no hay que rotar
+assert angulo_rotacion(0, 1, 0) == sp.pi / 4         # xy = 4 se rota 45°
+print("Todas las pruebas pasaron ✅")
+```
+
+### Parte 3. Análisis algebraico
+
+**Clasificación y ángulo de rotación:**
+
+```{python}
+A, B, C, D, E, F = coeficientes(ecuacion)
+print("Coeficientes:", A, B, C, D, E, F)
+print("Discriminante B² - 4AC =", B**2 - 4*A*C, "→", clasificar_conica(A, B, C))
+
+theta = angulo_rotacion(A, B, C)
+print("Ángulo de rotación:", theta, "=", sp.deg(theta), "grados")
+```
+
+**Rotación de ejes.** Sustituimos $x = u\cos\theta - v\sin\theta$ y $y = u\sin\theta + v\cos\theta$:
+
+```{python}
+x_rot = u*sp.cos(theta) - v*sp.sin(theta)
+y_rot = u*sp.sin(theta) + v*sp.cos(theta)
+
+rotada = sp.expand(ecuacion.subs({x: x_rot, y: y_rot}, simultaneous=True))
+print(rotada, "= 0")
+```
+
+El término $uv$ desapareció. Dividiendo entre 8 se obtiene la **forma canónica**:
+
+```{python}
+canonica = sp.expand((rotada + 8) / 8)
+print(canonica, "= 1")
+```
+
+$$\frac{u^2}{4} + \frac{v^2}{1} = 1$$
+
+**Elementos.** Es una elipse con centro en el origen y eje mayor sobre el eje $u$:
+
+```{python}
+a, b = 2, 1
+c = sp.sqrt(a**2 - b**2)
+print("a =", a, " b =", b, " c =", c, " excentricidad e =", c / a)
+
+R = sp.Matrix([[sp.cos(theta), -sp.sin(theta)], [sp.sin(theta), sp.cos(theta)]])
+for nombre, punto in [("Vértice", (a, 0)), ("Vértice", (-a, 0)), ("Foco", (c, 0)), ("Foco", (-c, 0))]:
+    original = sp.simplify(R * sp.Matrix(punto))
+    print(f"{nombre} {punto} en (u, v)  →  {tuple(original)} en (x, y)")
+```
+
+Para regresar un punto de las coordenadas $(u, v)$ a las originales $(x, y)$ multiplicamos por la **matriz de rotación** $R(\theta)$: es la misma sustitución que usamos arriba, escrita como matriz.
+
+### Parte 4. Visualización 2D
+
+Graficamos la ecuación original con `contour()` (la curva de nivel 0, como en [Visualización II](python_visualizacion2.qmd)), los ejes rotados $u$ y $v$, y los focos y vértices:
+
+```{python}
+th = float(theta)
+focos = np.array([[np.sqrt(3), -np.sqrt(3)], [0, 0]])          # Focos en (u, v)
+vertices = np.array([[2, -2, 0, 0], [0, 0, 1, -1]])             # Vértices en (u, v)
+Rn = np.array([[np.cos(th), -np.sin(th)], [np.sin(th), np.cos(th)]])
+
+X, Y = np.meshgrid(np.linspace(-3, 3, 400), np.linspace(-3, 3, 400))
+Z = 5*X**2 - 6*X*Y + 5*Y**2 - 8
+
+fig, ax = plt.subplots(figsize=(6, 6))
+ax.axhline(0, color="black", linewidth=0.8)
+ax.axvline(0, color="black", linewidth=0.8)
+ax.contour(X, Y, Z, levels=[0], colors="tab:blue", linewidths=2)
+
+t = np.linspace(-3, 3, 2)
+ax.plot(t * np.cos(th), t * np.sin(th), "g--", label="Eje $u$ (rotado 45°)")
+ax.plot(-t * np.sin(th), t * np.cos(th), "m--", label="Eje $v$")
+
+f_xy = Rn @ focos
+v_xy = Rn @ vertices
+ax.scatter(f_xy[0], f_xy[1], color="red", zorder=3, label="Focos")
+ax.scatter(v_xy[0], v_xy[1], color="black", zorder=3, label="Vértices")
+
+ax.set_xlim(-3, 3)
+ax.set_ylim(-3, 3)
+ax.set_aspect("equal")
+ax.grid(True, alpha=0.3)
+ax.legend(loc="lower right", fontsize=8)
+ax.set_title("$5x^2 - 6xy + 5y^2 = 8$")
+plt.show()
+```
+
+### Parte 5. Comprobación con una matriz de rotación
+
+Tomamos la elipse **canónica** $\frac{u^2}{4} + v^2 = 1$, la parametrizamos y la **giramos** $\theta$ con la matriz $R(\theta)$ de NumPy ([transformaciones geométricas](python_transformaciones.qmd)). Si el análisis es correcto, debe caer exactamente sobre la curva original:
+
+```{python}
+s = np.linspace(0, 2 * np.pi, 200)
+canonica_uv = np.vstack([2 * np.cos(s), 1 * np.sin(s)])    # u = a cos s, v = b sin s
+girada = Rn @ canonica_uv
+
+fig, axs = plt.subplots(1, 2, figsize=(10, 5))
+for ax_ in axs:
+    ax_.axhline(0, color="black", linewidth=0.8)
+    ax_.axvline(0, color="black", linewidth=0.8)
+    ax_.set_xlim(-3, 3); ax_.set_ylim(-3, 3)
+    ax_.set_aspect("equal")
+    ax_.grid(True, alpha=0.3)
+
+axs[0].plot(canonica_uv[0], canonica_uv[1], color="tab:green")
+axs[0].set_title("Forma canónica en $(u, v)$")
+
+axs[1].contour(X, Y, Z, levels=[0], colors="tab:blue", linewidths=5, alpha=0.4)
+axs[1].plot(girada[0], girada[1], "r--", label="Canónica girada con $R(\\theta)$")
+axs[1].legend(loc="lower right", fontsize=8)
+axs[1].set_title("Coincide con la ecuación original")
+plt.show()
+
+error = np.abs(5*girada[0]**2 - 6*girada[0]*girada[1] + 5*girada[1]**2 - 8).max()
+print("Error máximo al sustituir en la ecuación original:", error)
+```
+
+El error es del orden de $10^{-15}$: la rotación es correcta.
+
+### Parte 6. Comprobación como lugar geométrico
+
+Una **elipse** es el lugar geométrico de los puntos cuya **suma** de distancias a los dos focos es constante e igual a $2a$. Lo comprobamos en los 200 puntos de la curva:
+
+```{python}
+F1, F2 = f_xy[:, 0], f_xy[:, 1]
+d1 = np.hypot(girada[0] - F1[0], girada[1] - F1[1])
+d2 = np.hypot(girada[0] - F2[0], girada[1] - F2[1])
+suma = d1 + d2
+
+print("Suma mínima:", suma.min(), "  Suma máxima:", suma.max(), "  2a =", 2 * a)
+```
+
+`np.hypot(dx, dy)` calcula $\sqrt{dx^2 + dy^2}$, la distancia entre dos puntos.
+
+| Cónica | Definición como lugar geométrico | Qué deben comprobar |
+|----|----|----|
+| Elipse | $d(P, F_1) + d(P, F_2) = 2a$ | La suma es constante. |
+| Hipérbola | $\lvert d(P, F_1) - d(P, F_2) \rvert = 2a$ | La diferencia (en valor absoluto) es constante. |
+| Parábola | $d(P, F) = d(P, \text{directriz})$ | Ambas distancias son iguales. |
+
+### Parte 7. Área con el método de Monte Carlo
+
+El área de una elipse es $\pi a b = 2\pi \approx 6.2832$. La estimamos lanzando puntos al azar en el cuadrado $[-3, 3] \times [-3, 3]$, que la contiene, y contando cuántos cumplen $5x^2 - 6xy + 5y^2 - 8 < 0$, es decir, cuántos caen **dentro** ([números aleatorios](python_aleatorios.qmd)):
+
+```{python}
+rng = np.random.default_rng(2026)
+n = 200_000
+px = rng.uniform(-3, 3, n)
+py = rng.uniform(-3, 3, n)
+dentro = 5*px**2 - 6*px*py + 5*py**2 - 8 < 0
+
+area_cuadrado = 6 * 6
+area_estimada = area_cuadrado * dentro.mean()
+print(f"Monte Carlo (n = {n}): {area_estimada:.4f}   Exacta πab = {2 * np.pi:.4f}")
+```
+
+La diferencia, de unas centésimas, se debe al azar: como vimos en [números aleatorios](python_aleatorios.qmd#qué-tan-rápido-converge), el error disminuye como $1/\sqrt{n}$. En su proyecto incluyan una **gráfica de convergencia** que muestre cómo se acerca la estimación al valor exacto al aumentar $n$.
+
+::: callout-note
+## ¿Por qué el área no cambia al rotar?
+
+La matriz de rotación tiene **determinante 1** (lo vimos en [transformaciones geométricas](python_transformaciones.qmd#el-determinante-área-y-orientación)): las rotaciones **conservan las áreas**. Por eso el área de la cónica rotada es la misma que la de su forma canónica, y se puede calcular con la fórmula de la forma canónica o con una integral en las coordenadas $(u, v)$.
+:::
+
+### Parte 8. Visualización 3D interactiva
+
+La cónica es la **curva de nivel 0** de la superficie $z = 5x^2 - 6xy + 5y^2 - 8$: es decir, la intersección de esa superficie con el plano $z = 0$. Con Plotly ([Visualización III](python_visualizacion3d.qmd)) podemos girarla para verlo:
+
+```{python}
+#| output: asis
+xs = np.linspace(-2.5, 2.5, 60)
+Xs, Ys = np.meshgrid(xs, xs)
+Zs = 5*Xs**2 - 6*Xs*Ys + 5*Ys**2 - 8
+
+fig = go.Figure()
+fig.add_trace(go.Surface(x=Xs, y=Ys, z=Zs, colorscale="Viridis", opacity=0.85, showscale=False,
+                         contours={"z": {"show": True, "start": 0, "end": 0, "size": 1,
+                                         "color": "red", "width": 8}}))
+fig.add_trace(go.Surface(x=Xs, y=Ys, z=np.zeros_like(Zs), opacity=0.25, colorscale=[[0, "gray"], [1, "gray"]],
+                         showscale=False, name="Plano z = 0"))
+fig.update_layout(title="La elipse como curva de nivel z = 0", width=650, height=550,
+                  scene={"zaxis": {"range": [-10, 40]}})
+fig.show()
+```
+
+## Indicaciones para cada tipo de cónica
+
+El ejemplo es una elipse centrada en el origen. Según la cónica de su equipo, tomen en cuenta lo siguiente:
+
+| Si su cónica... | Hagan esto |
+|----|----|
+| Es una **hipérbola** | Además de los focos y vértices, obtengan las **asíntotas** $v = \pm\frac{b}{a}u$ y grafíquenlas (rotadas a las coordenadas $x, y$). Para Monte Carlo, estimen el área de la región entre una rama y el **lado recto** (la recta perpendicular al eje focal que pasa por el foco). |
+| Es una **parábola** | Obtengan el **vértice**, el **foco** y la **directriz**, y grafiquen los tres. Para Monte Carlo, estimen el área de la región entre la parábola y su **lado recto**; el valor exacto es $\frac{8}{3}p^2$, donde $p$ es la distancia del vértice al foco. |
+| Tiene términos $Dx$ o $Ey$ | Después de rotar quedarán términos de primer grado: **completen el cuadrado** (o trasladen el origen) para encontrar el **centro** o el **vértice**. Pueden usar `sp.solve([sp.diff(G, u), sp.diff(G, v)], [u, v])`, como en el ejercicio 4 de [Visualización II](python_visualizacion2.qmd). |
+| Tiene un ángulo de rotación que no es "bonito" | Trabajen con el valor exacto de SymPy y conviértanlo con `float()` solo para graficar. |
+
+::: callout-tip
+## Monte Carlo en coordenadas canónicas
+
+Para las regiones de la hipérbola y la parábola es más fácil lanzar los puntos **en las coordenadas $(u, v)$**, donde la cónica está en forma canónica: el área es la misma porque la rotación la conserva. Después comparen con el valor exacto que obtengan con `sp.integrate()`.
+:::
+
+## Calentamiento: pongan a prueba sus funciones
+
+Antes de empezar el proyecto, completen y prueben las dos funciones principales. **Run Code** las probará con las seis cónicas del proyecto.
+
+### Calentamiento 1. Clasificar una cónica
+
+```{pyodide}
+#| exercise: pi1
+def clasificar_conica(A, B, C):
+    """Clasifica la cónica Ax² + Bxy + Cy² + ... = 0 según el discriminante B² - 4AC."""
+    discriminante = ______
+    if discriminante < 0:
+        return "elipse"
+    elif ______:
+        return "parábola"
+    else:
+        return "hipérbola"
+
+print(clasificar_conica(5, -6, 5))     # Ejemplo resuelto: elipse
+```
+
+```{pyodide}
+#| exercise: pi1
+#| check: true
+try:
+    f = envir_result["clasificar_conica"]
+except Exception:
+    f = None
+if f is None:
+    feedback = {"correct": False, "message": "No encontré la función clasificar_conica."}
+else:
+    obtenidos = [f(7, -6 * 3 ** 0.5, 13), f(3, -10, 3), f(1, -2, 1), f(0, 1, 0), f(2, 3, -2), f(13, 10, 13)]
+    esperados = ["elipse", "hipérbola", "parábola", "hipérbola", "hipérbola", "elipse"]
+    if obtenidos == esperados:
+        feedback = {"correct": True, "message": "¡Correcto! Equipos 1 y 6: elipse; equipos 2, 4 y 5: hipérbola; equipo 3: parábola."}
+    else:
+        feedback = {"correct": False, "message": "Revisa el discriminante B**2 - 4*A*C y la condición de la parábola (discriminante == 0). Obtuviste: " + str(obtenidos)}
+feedback
+```
+
+::: {.hint exercise="pi1"}
+::: {.callout-note collapse="false"}
+## Pista
+
+El discriminante es `B**2 - 4*A*C`. Es parábola cuando el discriminante es **cero**: `discriminante == 0`.
+:::
+:::
+
+::: {.solution exercise="pi1"}
+::: {.callout-tip collapse="false"}
+## Solución
+
+``` python
+def clasificar_conica(A, B, C):
+    """Clasifica la cónica Ax² + Bxy + Cy² + ... = 0 según el discriminante B² - 4AC."""
+    discriminante = B**2 - 4*A*C
+    if discriminante < 0:
+        return "elipse"
+    elif discriminante == 0:
+        return "parábola"
+    else:
+        return "hipérbola"
+```
+:::
+:::
+
+### Calentamiento 2. El ángulo de rotación
+
+Completen `angulo_rotacion(A, B, C)` para que regrese el ángulo $\theta$, **en grados**, que elimina el término $xy$:
+
+- Si $B = 0$, no hay que rotar: $\theta = 0$.
+- Si $A = C$, $\theta = 45°$.
+- En otro caso, $\theta = \frac{1}{2}\arctan\left(\frac{B}{A - C}\right)$.
+
+```{pyodide}
+#| exercise: pi2
+import math
+
+def angulo_rotacion(A, B, C):
+    """Ángulo θ (en grados) que elimina el término xy de Ax² + Bxy + Cy² + ... = 0."""
+    if B == 0:
+        return 0
+    if ______:
+        return 45
+    return math.degrees(______) / 2
+
+print(angulo_rotacion(5, -6, 5))     # Ejemplo resuelto: 45
+```
+
+```{pyodide}
+#| exercise: pi2
+#| check: true
+import math
+try:
+    f = envir_result["angulo_rotacion"]
+except Exception:
+    f = None
+if f is None:
+    feedback = {"correct": False, "message": "No encontré la función angulo_rotacion."}
+else:
+    ok = math.isclose(f(7, -6 * 3 ** 0.5, 13), 30) and math.isclose(f(3, -10, 3), 45)
+    ok = ok and math.isclose(f(0, 1, 0), 45) and math.isclose(f(2, 3, -2), 18.43494882292201)
+    ok = ok and f(1, 0, 4) == 0
+    if ok:
+        feedback = {"correct": True, "message": "¡Correcto! Equipo 1: 30°; equipos 2, 3, 4 y 6: 45°; equipo 5: ≈ 18.43°."}
+    else:
+        feedback = {"correct": False, "message": "Revisa la condición A == C y la fórmula math.atan(B / (A - C))."}
+feedback
+```
+
+::: {.hint exercise="pi2"}
+::: {.callout-note collapse="false"}
+## Pista
+
+La condición es `A == C`. Para el caso general: `math.degrees(math.atan(B / (A - C))) / 2`.
+:::
+:::
+
+::: {.solution exercise="pi2"}
+::: {.callout-tip collapse="false"}
+## Solución
+
+``` python
+def angulo_rotacion(A, B, C):
+    """Ángulo θ (en grados) que elimina el término xy de Ax² + Bxy + Cy² + ... = 0."""
+    if B == 0:
+        return 0
+    if A == C:
+        return 45
+    return math.degrees(math.atan(B / (A - C))) / 2
+```
+
+Para el equipo 1: $\tan 2\theta = \frac{-6\sqrt{3}}{7 - 13} = \sqrt{3}$, así que $2\theta = 60°$ y $\theta = 30°$.
+:::
+:::
+
+## Estructura del sitio
+
+### 1. Crear el proyecto
+
+En RStudio: **File \> New Project \> New Directory \> Quarto Website**. Llamen al proyecto, por ejemplo, `proyecto-conicas-equipo1`. Después configuren `_quarto.yml`:
+
+``` yaml
+project:
+  type: website
+  output-dir: docs
+
+website:
+  title: "Atlas de cónicas: equipo 1"
+  navbar:
+    left:
+      - href: index.qmd
+        text: Inicio
+      - href: analisis.qmd
+        text: Análisis
+      - href: visualizacion.qmd
+        text: Visualización
+      - href: simulacion.qmd
+        text: Monte Carlo
+
+format:
+  html:
+    theme: cosmo
+    toc: true
+
+execute:
+  error: true
+```
+
+### 2. Páginas sugeridas
+
+| Archivo | Contenido | Partes |
+|----|----|----|
+| `index.qmd` | Presentación del equipo, la cónica asignada y un resumen de resultados. | 1 |
+| `funciones.py` | Las funciones del proyecto, para importarlas desde cada página con `from funciones import ...`. | 2 |
+| `analisis.qmd` | Pruebas de las funciones, clasificación, rotación, forma canónica y elementos. | 2 y 3 |
+| `visualizacion.qmd` | Gráfica 2D, comprobación con la matriz de rotación, lugar geométrico y gráfica 3D. | 4, 5, 6 y 8 |
+| `simulacion.qmd` | Área con Monte Carlo, gráfica de convergencia y comparación con el valor exacto. | 7 |
+
+Cada página de Python debe empezar con un encabezado como este:
+
+````
+---
+title: "Análisis algebraico"
+jupyter: python3
+---
+
+```{{python}}
+import numpy as np
+import sympy as sp
+from funciones import clasificar_conica, angulo_rotacion
+```
+````
+
+### 3. Publicar en GitHub Pages
+
+1.  Creen el repositorio en GitHub e inviten a sus compañeros como colaboradores (**Settings \> Collaborators**).
+2.  Renderizen el sitio con **Build \> Render Website** (o `quarto render` en la Terminal).
+3.  Suban los cambios: `git add .`, `git commit -m "..."` y `git push`.
+4.  En GitHub, **Settings \> Pages**: rama `main`, carpeta `/docs`, **Save**.
+5.  Su sitio estará en `https://usuario.github.io/proyecto-conicas-equipo1/`.
+
+Consulten [Configuraciones para usar Quarto con Python](quarto_python.qmd) si aparece algún error al renderizar, y [Visualización III](python_visualizacion3d.qmd#publicar-en-github-pages) para más detalles de la publicación.
+
+## Ejemplo de entrega completo
+
+Para que vean **exactamente** qué se espera, preparamos un proyecto completo con la cónica del ejemplo resuelto, $5x^2 - 6xy + 5y^2 - 8 = 0$, tal como lo entregaría un equipo.
+
+::: {.callout-tip icon="false"}
+## 🌐 Vean el resultado y descarguen el código
+
+- [**Ver el sitio de ejemplo publicado**](ejemplos/proyecto-conicas-ejemplo/docs/index.html){target="_blank"}: así debe verse su entrega en GitHub Pages.
+- [**📥 Descargar el proyecto de ejemplo (.zip)**](ejemplos/proyecto-conicas-ejemplo.zip){download="proyecto-conicas-ejemplo.zip"}: todos los archivos fuente, listos para abrir en RStudio.
+:::
+
+::: callout-important
+El ejemplo es una **guía**, no una plantilla para copiar: su cónica es diferente y puede necesitar pasos que este ejemplo no tiene (asíntotas, directriz, completar el cuadrado). La rúbrica evalúa **su** análisis y que puedan **explicar** su código en la presentación.
+:::
+
+### Archivos de la entrega
+
+```
+proyecto-conicas-ejemplo/
+├── _quarto.yml          # Configuración del sitio web
+├── index.qmd            # Inicio: equipo, cónica y resumen de resultados
+├── funciones.py         # Funciones del proyecto (documentadas)
+├── analisis.qmd         # Pruebas, clasificación, rotación, forma canónica y elementos
+├── visualizacion.qmd    # Gráfica 2D, matriz de rotación, lugar geométrico y 3D
+├── simulacion.qmd       # Monte Carlo y convergencia
+├── conclusiones.qmd     # Conclusiones, distribución del trabajo y referencias
+├── README.md            # Descripción del repositorio
+├── .gitignore           # Archivos que Git no debe guardar
+└── docs/                # Sitio generado por quarto render (se publica en GitHub Pages)
+```
+
+| Archivo | Partes de la rúbrica | Qué observar |
+|----|----|----|
+| `_quarto.yml` | 1 | `type: website`, `output-dir: docs` (para GitHub Pages) y el menú de navegación. |
+| `index.qmd` | 1, 9 | Autoras, la ecuación y una **tabla de resumen** cuyos valores se calculan con código en línea `` `{python} ...` ``. |
+| `funciones.py` | 2 | Cada función tiene *docstring*; `clasificar_conica()` valida sus argumentos con `raise`. Las páginas la importan con `from funciones import ...`. |
+| `analisis.qmd` | 2, 3 | Las **pruebas con `assert`** van antes del análisis; los elementos se resumen en una tabla en LaTeX. |
+| `visualizacion.qmd` | 4, 5, 6, 8 | Figuras con `label: fig-...` y `fig-cap`, citadas en el texto con `@fig-...`; el error de la rotación y la suma de distancias se **reportan**. |
+| `simulacion.qmd` | 7 | Semilla y parámetros al inicio, resultados con código en línea y gráfica de convergencia. |
+| `conclusiones.qmd` | 9 | Qué aprendieron, **quién hizo qué** y referencias (incluido el uso de IA). |
+
+### Contenido de cada archivo
+
+::: panel-tabset
+## `_quarto.yml`
+
+````yaml
+project:
+  type: website
+  output-dir: docs
+
+website:
+  title: "Atlas de cónicas: equipo de ejemplo"
+  navbar:
+    left:
+      - href: index.qmd
+        text: Inicio
+      - href: analisis.qmd
+        text: Análisis
+      - href: visualizacion.qmd
+        text: Visualización
+      - href: simulacion.qmd
+        text: Monte Carlo
+      - href: conclusiones.qmd
+        text: Conclusiones
+
+format:
+  html:
+    theme: cosmo
+    toc: true
+    code-fold: show
+    code-copy: true
+
+execute:
+  error: true
+````
+
+## `index.qmd`
+
+````markdown
+---
+title: "Atlas de cónicas: $5x^2 - 6xy + 5y^2 - 8 = 0$"
+subtitle: "Proyecto integrador · Taller de Cómputo · ENES Juriquilla, UNAM"
+author:
+  - Evelia Coss
+  - Haydeé Peruyero
+date: today
+jupyter: python3
+---
+
+## Presentación
+
+En este sitio analizamos la cónica
+
+$$5x^2 - 6xy + 5y^2 - 8 = 0$$
+
+con las herramientas del Taller de Cómputo: **SymPy** para el análisis algebraico, **NumPy** para las transformaciones y la simulación, y **Matplotlib** y **Plotly** para las gráficas. El término $xy$ indica que la cónica está **rotada** respecto a los ejes coordenados.
+
+```{{python}}
+#| echo: false
+import sympy as sp
+from funciones import x, y, coeficientes, clasificar_conica, angulo_rotacion
+
+ecuacion = 5*x**2 - 6*x*y + 5*y**2 - 8
+A, B, C, D, E, F = coeficientes(ecuacion)
+tipo = clasificar_conica(A, B, C)
+theta = angulo_rotacion(A, B, C)
+```
+
+## Resumen de resultados
+
+| Resultado | Valor |
+|----|----|
+| Tipo de cónica | `{python} tipo` |
+| Discriminante $B^2 - 4AC$ | `{python} B**2 - 4*A*C` |
+| Ángulo de rotación | `{python} sp.deg(theta)`° |
+| Forma canónica | $\dfrac{u^2}{4} + \dfrac{v^2}{1} = 1$ |
+| Semiejes | $a = 2$, $b = 1$ |
+| Excentricidad | $e = \frac{\sqrt{3}}{2} \approx 0.866$ |
+| Área exacta | $\pi a b = 2\pi \approx 6.2832$ |
+
+## Contenido del sitio
+
+| Página | Contenido |
+|----|----|
+| [Análisis](analisis.qmd) | Pruebas de las funciones, clasificación, rotación de ejes, forma canónica y elementos. |
+| [Visualización](visualizacion.qmd) | Gráfica 2D, comprobación con la matriz de rotación, lugar geométrico y gráfica 3D. |
+| [Monte Carlo](simulacion.qmd) | Estimación del área y convergencia de la simulación. |
+| [Conclusiones](conclusiones.qmd) | Lo que aprendimos y referencias. |
+
+El código fuente está en nuestro repositorio de GitHub. Las funciones del proyecto están en el archivo `funciones.py`.
+````
+
+## `funciones.py`
+
+````python
+"""Funciones del proyecto integrador: atlas de cónicas rotadas."""
+import numpy as np
+import sympy as sp
+
+x, y, u, v = sp.symbols("x y u v", real=True)
+
+
+def coeficientes(expresion):
+    """Regresa [A, B, C, D, E, F] de la cónica Ax² + Bxy + Cy² + Dx + Ey + F = 0."""
+    P = sp.Poly(expresion, x, y)
+    return [P.coeff_monomial(m) for m in (x**2, x*y, y**2, x, y, 1)]
+
+
+def clasificar_conica(A, B, C):
+    """Clasifica la cónica según el discriminante B² - 4AC."""
+    if A == 0 and B == 0 and C == 0:
+        raise ValueError("No es una ecuación de segundo grado: A, B y C son cero")
+    discriminante = B**2 - 4*A*C
+    if discriminante < 0:
+        return "elipse"
+    elif discriminante == 0:
+        return "parábola"
+    else:
+        return "hipérbola"
+
+
+def angulo_rotacion(A, B, C):
+    """Ángulo θ exacto (radianes) que elimina el término xy: tan(2θ) = B / (A - C)."""
+    if B == 0:
+        return sp.Integer(0)
+    if A == C:
+        return sp.pi / 4
+    return sp.atan(sp.nsimplify(B) / sp.nsimplify(A - C)) / 2
+
+
+def rotar_ecuacion(expresion, theta):
+    """Sustituye x = u cos θ - v sin θ, y = u sin θ + v cos θ y simplifica."""
+    sustitucion = {x: u*sp.cos(theta) - v*sp.sin(theta),
+                   y: u*sp.sin(theta) + v*sp.cos(theta)}
+    return sp.expand(sp.simplify(expresion.subs(sustitucion, simultaneous=True)))
+
+
+def matriz_rotacion(theta):
+    """Matriz de rotación de NumPy (2 × 2) para un ángulo theta en radianes."""
+    t = float(theta)
+    return np.array([[np.cos(t), -np.sin(t)],
+                     [np.sin(t),  np.cos(t)]])
+
+
+def plano_cartesiano(ax, limite=3):
+    """Prepara ax como plano cartesiano: ejes en el origen, misma escala y cuadrícula."""
+    ax.axhline(0, color="black", linewidth=0.8)
+    ax.axvline(0, color="black", linewidth=0.8)
+    ax.set_xlim(-limite, limite)
+    ax.set_ylim(-limite, limite)
+    ax.set_aspect("equal")
+    ax.grid(True, alpha=0.3)
+````
+
+## `analisis.qmd`
+
+````markdown
+---
+title: "Análisis algebraico"
+jupyter: python3
+---
+
+```{{python}}
+import sympy as sp
+from funciones import x, y, u, v, coeficientes, clasificar_conica, angulo_rotacion, rotar_ecuacion
+
+ecuacion = 5*x**2 - 6*x*y + 5*y**2 - 8
+```
+
+## Pruebas de las funciones
+
+Antes de usar nuestras funciones, las probamos con cónicas cuya respuesta ya conocemos:
+
+```{{python}}
+assert clasificar_conica(1, 0, 1) == "elipse"        # x² + y² = r²
+assert clasificar_conica(0, 0, 1) == "parábola"      # y² = 4px
+assert clasificar_conica(1, 0, -1) == "hipérbola"    # x² - y² = 1
+assert clasificar_conica(0, 1, 0) == "hipérbola"     # xy = 4
+assert angulo_rotacion(1, 0, 4) == 0                 # Sin término xy
+assert angulo_rotacion(0, 1, 0) == sp.pi / 4         # xy = 4: 45°
+assert angulo_rotacion(7, -6*sp.sqrt(3), 13) == sp.pi / 6
+print("Todas las pruebas pasaron ✅")
+```
+
+## Clasificación
+
+```{{python}}
+A, B, C, D, E, F = coeficientes(ecuacion)
+discriminante = B**2 - 4*A*C
+print("A =", A, " B =", B, " C =", C, " D =", D, " E =", E, " F =", F)
+print("B² - 4AC =", discriminante, "→", clasificar_conica(A, B, C))
+```
+
+Como $B^2 - 4AC = -64 < 0$, la cónica es una **elipse**.
+
+## Rotación de ejes
+
+El ángulo que elimina el término $xy$ cumple $\tan 2\theta = \frac{B}{A - C}$. Como $A = C$, el denominador es cero y $2\theta = 90°$:
+
+```{{python}}
+theta = angulo_rotacion(A, B, C)
+print("θ =", theta, "=", sp.deg(theta), "°")
+```
+
+Con $x = u\cos\theta - v\sin\theta$ y $y = u\sin\theta + v\cos\theta$:
+
+```{{python}}
+rotada = rotar_ecuacion(ecuacion, theta)
+print(rotada, "= 0")
+```
+
+## Forma canónica
+
+```{{python}}
+canonica = sp.expand((rotada + 8) / 8)
+print(canonica, "= 1")
+```
+
+$$\frac{u^2}{4} + \frac{v^2}{1} = 1$$
+
+## Elementos
+
+```{{python}}
+a, b = 2, 1
+c = sp.sqrt(a**2 - b**2)
+R = sp.Matrix([[sp.cos(theta), -sp.sin(theta)], [sp.sin(theta), sp.cos(theta)]])
+
+def a_xy(punto):
+    """Convierte un punto de las coordenadas (u, v) a (x, y)."""
+    return tuple(sp.simplify(R * sp.Matrix(punto)))
+
+print("c =", c, "  e =", c / a)
+print("Vértices:", a_xy((a, 0)), a_xy((-a, 0)))
+print("Covértices:", a_xy((0, b)), a_xy((0, -b)))
+print("Focos:", a_xy((c, 0)), a_xy((-c, 0)))
+```
+
+| Elemento | En $(u, v)$ | En $(x, y)$ |
+|----|----|----|
+| Centro | $(0, 0)$ | $(0, 0)$ |
+| Vértices | $(\pm 2, 0)$ | $(\sqrt{2}, \sqrt{2})$, $(-\sqrt{2}, -\sqrt{2})$ |
+| Covértices | $(0, \pm 1)$ | $\left(-\frac{\sqrt{2}}{2}, \frac{\sqrt{2}}{2}\right)$, $\left(\frac{\sqrt{2}}{2}, -\frac{\sqrt{2}}{2}\right)$ |
+| Focos | $(\pm\sqrt{3}, 0)$ | $\left(\frac{\sqrt{6}}{2}, \frac{\sqrt{6}}{2}\right)$, $\left(-\frac{\sqrt{6}}{2}, -\frac{\sqrt{6}}{2}\right)$ |
+| Excentricidad | $e = \frac{c}{a} = \frac{\sqrt{3}}{2}$ | |
+| Eje focal | Eje $u$ | La recta $y = x$ |
+````
+
+## `visualizacion.qmd`
+
+````markdown
+---
+title: "Visualización"
+jupyter: python3
+---
+
+```{{python}}
+import numpy as np
+import matplotlib.pyplot as plt
+import plotly.graph_objects as go
+from funciones import matriz_rotacion, plano_cartesiano
+
+theta = np.pi / 4
+a, b, c = 2, 1, np.sqrt(3)
+R = matriz_rotacion(theta)
+
+X, Y = np.meshgrid(np.linspace(-3, 3, 400), np.linspace(-3, 3, 400))
+Z = 5*X**2 - 6*X*Y + 5*Y**2 - 8
+```
+
+## La cónica y sus elementos
+
+```{{python}}
+#| label: fig-conica
+#| fig-cap: "La elipse $5x^2 - 6xy + 5y^2 = 8$ con sus ejes rotados 45°, sus vértices y sus focos."
+focos = R @ np.array([[c, -c], [0, 0]])
+vertices = R @ np.array([[a, -a, 0, 0], [0, 0, b, -b]])
+
+fig, ax = plt.subplots(figsize=(6, 6))
+plano_cartesiano(ax)
+ax.contour(X, Y, Z, levels=[0], colors="tab:blue", linewidths=2)
+
+t = np.array([-3, 3])
+ax.plot(t * np.cos(theta), t * np.sin(theta), "g--", label="Eje $u$ (eje focal)")
+ax.plot(-t * np.sin(theta), t * np.cos(theta), "m--", label="Eje $v$")
+ax.scatter(*focos, color="red", zorder=3, label="Focos")
+ax.scatter(*vertices, color="black", zorder=3, label="Vértices y covértices")
+ax.legend(loc="lower right", fontsize=8)
+plt.show()
+```
+
+La @fig-conica muestra que el eje mayor de la elipse está sobre la recta $y = x$, rotado 45° respecto al eje $x$.
+
+## Comprobación con la matriz de rotación
+
+Giramos la elipse canónica $u = 2\cos s$, $v = \sin s$ con la matriz de rotación $R(\theta)$ y la comparamos con la ecuación original:
+
+```{{python}}
+#| label: fig-comprobacion
+#| fig-cap: "La elipse canónica girada 45° con NumPy coincide con la ecuación original."
+s = np.linspace(0, 2 * np.pi, 300)
+girada = R @ np.vstack([a * np.cos(s), b * np.sin(s)])
+
+fig, ax = plt.subplots(figsize=(5, 5))
+plano_cartesiano(ax)
+ax.contour(X, Y, Z, levels=[0], colors="tab:blue", linewidths=6, alpha=0.3)
+ax.plot(girada[0], girada[1], "r--", label="Canónica girada")
+ax.legend(loc="lower right", fontsize=8)
+plt.show()
+
+error = np.abs(5*girada[0]**2 - 6*girada[0]*girada[1] + 5*girada[1]**2 - 8).max()
+print("Error máximo:", error)
+```
+
+El error máximo es del orden de $10^{-15}$: la forma canónica y el ángulo son correctos.
+
+## Lugar geométrico
+
+Una elipse es el conjunto de puntos cuya **suma de distancias a los focos** es $2a = 4$. Lo comprobamos en los 300 puntos de la curva:
+
+```{{python}}
+d1 = np.hypot(girada[0] - focos[0, 0], girada[1] - focos[1, 0])
+d2 = np.hypot(girada[0] - focos[0, 1], girada[1] - focos[1, 1])
+suma = d1 + d2
+print("Suma mínima:", suma.min(), "  Suma máxima:", suma.max())
+```
+
+En todos los puntos la suma vale 4 (salvo el redondeo de la computadora): la curva cumple la definición de elipse.
+
+## La cónica en 3D
+
+La elipse es la curva de nivel $z = 0$ de la superficie $z = 5x^2 - 6xy + 5y^2 - 8$. Gira la gráfica con el ratón:
+
+```{{python}}
+xs = np.linspace(-2.5, 2.5, 60)
+Xs, Ys = np.meshgrid(xs, xs)
+Zs = 5*Xs**2 - 6*Xs*Ys + 5*Ys**2 - 8
+
+fig = go.Figure()
+fig.add_trace(go.Surface(x=Xs, y=Ys, z=Zs, colorscale="Viridis", opacity=0.85, showscale=False,
+                         contours={"z": {"show": True, "start": 0, "end": 0, "size": 1,
+                                         "color": "red", "width": 8}}))
+fig.add_trace(go.Surface(x=Xs, y=Ys, z=np.zeros_like(Zs), opacity=0.25,
+                         colorscale=[[0, "gray"], [1, "gray"]], showscale=False))
+fig.update_layout(title="La elipse como curva de nivel z = 0", height=550,
+                  scene={"zaxis": {"range": [-10, 40]}})
+fig.show()
+```
+````
+
+## `simulacion.qmd`
+
+````markdown
+---
+title: "Área con el método de Monte Carlo"
+jupyter: python3
+---
+
+## Parámetros
+
+```{{python}}
+import numpy as np
+import matplotlib.pyplot as plt
+
+SEMILLA = 2026
+N_PUNTOS = 200_000
+LADO = 3                     # Lanzamos puntos en el cuadrado [-3, 3] × [-3, 3]
+AREA_EXACTA = 2 * np.pi      # πab con a = 2, b = 1
+
+rng = np.random.default_rng(SEMILLA)
+```
+
+## Estimación
+
+Un punto $(x, y)$ está **dentro** de la elipse si $5x^2 - 6xy + 5y^2 - 8 < 0$. El área es la fracción de puntos dentro, multiplicada por el área del cuadrado:
+
+$$\text{Área} \approx (2 \cdot 3)^2 \cdot \frac{\text{puntos dentro}}{\text{puntos totales}}$$
+
+```{{python}}
+px = rng.uniform(-LADO, LADO, N_PUNTOS)
+py = rng.uniform(-LADO, LADO, N_PUNTOS)
+dentro = 5*px**2 - 6*px*py + 5*py**2 - 8 < 0
+
+area_estimada = (2 * LADO)**2 * dentro.mean()
+error = abs(area_estimada - AREA_EXACTA)
+```
+
+Con `{python} f"{N_PUNTOS:,}"` puntos, el área estimada es **`{python} f"{area_estimada:.4f}"`**, mientras que el área exacta es $2\pi \approx$ `{python} f"{AREA_EXACTA:.4f}"`: un error de `{python} f"{error:.4f}"`.
+
+```{{python}}
+#| label: fig-puntos
+#| fig-cap: "Los primeros 5000 puntos: en azul los que caen dentro de la elipse."
+m = 5000
+fig, ax = plt.subplots(figsize=(5, 5))
+ax.scatter(px[:m][dentro[:m]], py[:m][dentro[:m]], s=2, color="tab:blue", label="Dentro")
+ax.scatter(px[:m][~dentro[:m]], py[:m][~dentro[:m]], s=2, color="lightgray", label="Fuera")
+ax.set_aspect("equal")
+ax.legend(loc="lower right")
+plt.show()
+```
+
+## Convergencia
+
+```{{python}}
+#| label: fig-convergencia
+#| fig-cap: "El error de la estimación disminuye como $1/\\sqrt{n}$."
+tamanos = np.logspace(2, 6, 9).astype(int)
+errores = []
+for n in tamanos:
+    qx = rng.uniform(-LADO, LADO, n)
+    qy = rng.uniform(-LADO, LADO, n)
+    estimacion = (2 * LADO)**2 * np.mean(5*qx**2 - 6*qx*qy + 5*qy**2 - 8 < 0)
+    errores.append(abs(estimacion - AREA_EXACTA))
+
+fig, ax = plt.subplots(figsize=(7, 4))
+ax.loglog(tamanos, errores, "o-", label="Error de la estimación")
+ax.loglog(tamanos, 10 / np.sqrt(tamanos), "r--", label="Referencia $1/\\sqrt{n}$")
+ax.set_xlabel("Número de puntos $n$")
+ax.set_ylabel("Error absoluto")
+ax.legend()
+plt.show()
+```
+
+Como muestra la @fig-convergencia, para reducir el error 10 veces se necesitan aproximadamente 100 veces más puntos.
+
+::: callout-note
+La rotación **no cambia el área**: la matriz de rotación tiene determinante 1. Por eso el área de la elipse rotada es igual a la de su forma canónica, $\pi a b$.
+:::
+````
+
+## `conclusiones.qmd`
+
+````markdown
+---
+title: "Conclusiones"
+---
+
+## Lo que aprendimos
+
+- El **discriminante** $B^2 - 4AC = -64$ permitió clasificar la cónica como una **elipse** sin graficarla.
+- Una **rotación de 45°** eliminó el término $xy$ y llevó la ecuación a su forma canónica $\frac{u^2}{4} + v^2 = 1$.
+- La **matriz de rotación** de NumPy confirmó el resultado: la elipse canónica girada coincide con la ecuación original con un error de $10^{-15}$.
+- Comprobamos numéricamente la **definición** de la elipse: la suma de distancias a los focos es $2a = 4$ en todos los puntos.
+- El **método de Monte Carlo** estimó el área con un error de centésimas, que disminuye como $1/\sqrt{n}$.
+- Como las rotaciones tienen **determinante 1**, conservan las áreas.
+
+## Distribución del trabajo
+
+| Integrante | Contribución |
+|----|----|
+| Evelia Coss | Funciones, análisis algebraico y simulación de Monte Carlo (`funciones.py`, `analisis.qmd`, `simulacion.qmd`) |
+| Haydeé Peruyero | Visualización 2D y 3D, sitio web y publicación (`visualizacion.qmd`, `_quarto.yml`) |
+
+## Referencias
+
+- Apuntes y hoja de ejercicios *Curvas y Lugares Geométricos*, Geometría Analítica, semestre 2027-1.
+- Taller de Cómputo: capítulos de SymPy, NumPy, visualización, transformaciones geométricas y números aleatorios.
+- [Documentación de SymPy](https://docs.sympy.org/)
+- [Quarto: sitios web](https://quarto.org/docs/websites/)
+- Uso de inteligencia artificial: la usamos para entender un mensaje de error de `quarto render`; todo el código fue escrito y revisado por el equipo.
+````
+
+## `README.md`
+
+````markdown
+# Atlas de cónicas: equipo de ejemplo
+
+Proyecto integrador del Taller de Cómputo (ENES Juriquilla, UNAM).
+
+Análisis de la cónica $5x^2 - 6xy + 5y^2 - 8 = 0$ con Python, SymPy, NumPy, Matplotlib y Plotly.
+
+- **Sitio web:** https://usuario.github.io/proyecto-conicas-ejemplo/
+- **Autoras:** Evelia Coss y Haydeé Peruyero
+
+## Cómo reproducir el sitio
+
+1. Activar el entorno: `source ~/.venvs/quarto-python/bin/activate`
+2. Renderizar: `quarto render`
+3. El sitio queda en la carpeta `docs/`.
+````
+
+## `.gitignore`
+
+````
+/.quarto/
+__pycache__/
+*.quarto_ipynb
+
+**/*.quarto_ipynb
+````
+
+:::
+
+### Cómo usar el ejemplo
+
+1.  Descarguen el `.zip` y descomprímanlo.
+2.  En RStudio, abran la carpeta como proyecto: **File \> Open Project in New Session...** (o **File \> New Project \> Existing Directory**).
+3.  Verifiquen que su entorno esté configurado ([Configuraciones para usar Quarto con Python](quarto_python.qmd)).
+4.  Rendericen el sitio con **Build \> Render Website** o, en la **Terminal**, con `quarto render`.
+5.  Abran `docs/index.html` en el navegador y comparen con el [sitio publicado](ejemplos/proyecto-conicas-ejemplo/docs/index.html){target="_blank"}.
+
+Después, creen **su propio** proyecto (sección [Estructura del sitio](#estructura-del-sitio)) con la cónica de su equipo, usando el ejemplo como referencia.
+
+## Calendario sugerido
+
+| Semana | Avance esperado |
+|----|----|
+| 1 | Formar el equipo, crear el repositorio y el sitio vacío publicado. Escribir y probar `funciones.py`. Clasificar la cónica y encontrar el ángulo de rotación. |
+| 2 | Forma canónica y elementos. Gráfica 2D, comprobación con la matriz de rotación y comprobación del lugar geométrico. |
+| 3 | Área con Monte Carlo, gráfica 3D, conclusiones y revisión del sitio. Presentación en clase. |
+
+## Rúbrica de evaluación
+
+| Criterio | Excelente | Suficiente | Insuficiente |
+|----|----|----|----|
+| **Repositorio y sitio** (10) | Sitio publicado y navegable; todos los integrantes tienen *commits* con mensajes claros. (10) | Sitio publicado, pero con páginas incompletas o *commits* de una sola persona. (6) | El sitio no está publicado. (0–3) |
+| **Funciones** (15) | Funciones con *docstring*, validación y pruebas con `assert` que pasan. (15) | Funciones correctas, pero sin documentación o sin pruebas. (9) | Las funciones no existen o dan resultados incorrectos. (0–5) |
+| **Análisis algebraico** (20) | Clasificación, ángulo, forma canónica y **todos** los elementos correctos, obtenidos con SymPy. (20) | Forma canónica correcta, pero faltan elementos. (12) | Forma canónica incorrecta o calculada a mano sin código. (0–7) |
+| **Visualización 2D** (15) | Cónica, ejes rotados y elementos, con título, leyenda, etiquetas y misma escala en los ejes. (15) | Cónica graficada, pero faltan elementos o etiquetas. (9) | Gráfica incorrecta o ausente. (0–5) |
+| **Matriz de rotación** (10) | La canónica girada con NumPy coincide con la original y se reporta el error. (10) | Se gira la curva, pero sin comparar ni reportar el error. (6) | No se usa la matriz de rotación. (0–3) |
+| **Lugar geométrico** (10) | Se comprueba numéricamente la definición en muchos puntos y se interpreta el resultado. (10) | Se comprueba en pocos puntos o sin interpretación. (6) | No se comprueba. (0–3) |
+| **Monte Carlo** (10) | Estimación reproducible (con semilla), comparada con el valor exacto y con una gráfica de convergencia. (10) | Estimación correcta, sin comparación o sin gráfica. (6) | Estimación incorrecta o ausente. (0–3) |
+| **3D interactiva** (5) | Gráfica de Plotly que muestra la cónica como curva de nivel, con título. (5) | Gráfica 3D estática o sin explicación. (3) | Ausente. (0) |
+| **Presentación y documentación** (5) | Explicaciones claras en cada sección, fórmulas en LaTeX, figuras con pie y conclusiones. (5) | Explicaciones breves o incompletas. (3) | Solo código, sin explicaciones. (0–1) |
+
+## Lista de verificación antes de entregar
+
+- [ ] El sitio está publicado y abre desde la dirección de GitHub Pages.
+- [ ] Todos los integrantes tienen *commits* en el repositorio.
+- [ ] `funciones.py` tiene *docstrings* y las pruebas con `assert` pasan.
+- [ ] La forma canónica y los elementos están escritos en LaTeX.
+- [ ] Todas las gráficas tienen título, etiquetas y la misma escala en ambos ejes (`set_aspect("equal")`).
+- [ ] La simulación de Monte Carlo usa una **semilla** y reporta el número de puntos.
+- [ ] La gráfica 3D de Plotly funciona en el sitio publicado.
+- [ ] Hay una sección de **conclusiones** y de **referencias**.
+- [ ] El documento se renderiza sin errores.
+
+## Preguntas frecuentes
+
+**¿Podemos usar inteligencia artificial?** Sí, como apoyo para entender errores o ideas, pero deben **entender y poder explicar** cada línea de su código en la presentación. Indiquen en las referencias si la usaron y para qué.
+
+**¿Qué hacemos si `quarto render` falla?** Lean el último mensaje de error y busquen la solución en [Configuraciones para usar Quarto con Python](quarto_python.qmd#solución-de-problemas). Si aparece `ModuleNotFoundError`, revisen `QUARTO_PYTHON`.
+
+**¿Cómo sabemos si nuestra forma canónica es correcta?** Con la **Parte 5**: si la curva canónica girada con la matriz de rotación coincide con la ecuación original y el error es casi cero, el análisis es correcto.
+
+**¿Cómo trabajamos varias personas sin romper el código?** Antes de empezar a trabajar, hagan `git pull`; al terminar, `git add`, `git commit` y `git push`. Si es posible, cada integrante trabaja en una página distinta.
+
+## Referencias
+
+- Hoja de ejercicios *Curvas y Lugares Geométricos*, Geometría Analítica, semestre 2027-1.
+- [SymPy: resolución de ecuaciones y simplificación](https://docs.sympy.org/latest/tutorials/intro-tutorial/index.html)
+- [Quarto: crear un sitio web](https://quarto.org/docs/websites/)
+- [Quarto: publicar en GitHub Pages](https://quarto.org/docs/publishing/github-pages.html)
+- [Wikipedia: sección cónica](https://es.wikipedia.org/wiki/Secci%C3%B3n_c%C3%B3nica)
