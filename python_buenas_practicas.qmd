@@ -6,7 +6,7 @@ engine: knitr
 
 {{< include ./_extensions/r-wasm/live/_knitr.qmd >}}
 
-> **Fecha:** 03 de noviembre, 2026
+> **Fecha:** 05 de noviembre, 2026
 
 En los capítulos anteriores creamos muchas variables. En este capítulo veremos:
 
@@ -57,7 +57,7 @@ Además existen palabras reservadas **suaves** (*soft keywords*): `match`, `case
 Un nombre válido en Python (también llamado **identificador**) debe cumplir estas reglas **obligatorias**:
 
 | Regla | Válido | Inválido |
-|----|----|----|
+|------------------------|------------------------|------------------------|
 | Solo puede contener letras, dígitos y guion bajo (`_`). | `nota_final` | `nota-final`, `nota final`, `nota$` |
 | No puede empezar con un dígito. | `lugar2` | `2lugar` |
 | No puede ser una palabra reservada. | `clase` | `class` |
@@ -80,7 +80,7 @@ Python acepta letras con acentos y la `ñ` en los nombres (`año = 2026` es vál
 Las reglas dicen qué nombres **funcionan**; las convenciones dicen qué nombres son **buenos**. La comunidad de Python sigue la guía de estilo [PEP 8](https://peps.python.org/pep-0008/).
 
 | Elemento | Convención | Ejemplo |
-|----|----|----|
+|------------------------|------------------------|------------------------|
 | Variables y funciones | `snake_case`: minúsculas separadas por guion bajo. | `promedio_final`, `calcular_area()` |
 | Constantes | `MAYUSCULAS` con guion bajo. | `PI = 3.14159`, `CALIFICACION_MAXIMA = 10` |
 | Clases | `PascalCase`: cada palabra inicia con mayúscula. | `Estudiante`, `MatrizCuadrada` |
@@ -124,7 +124,7 @@ sum([1, 2, 3])
 Un programa se escribe una vez, pero se **lee muchas veces** (por tus compañeros, tu profesora y tu "yo del futuro").
 
 | Práctica | En lugar de | Escribe |
-|----|----|----|
+|------------------------|------------------------|------------------------|
 | Espacios alrededor de `=` y de los operadores. | `total=a+b*2` | `total = a + b * 2` |
 | Un espacio después de cada coma. | `print(a,b,c)` | `print(a, b, c)` |
 | Una instrucción por línea. | `a = 1; b = 2` | `a = 1` y en otra línea `b = 2` |
@@ -135,7 +135,7 @@ Un programa se escribe una vez, pero se **lee muchas veces** (por tus compañero
 
 ### Comentarios y documentación
 
-![](figures/python_estadistica.png){fig-align="center"}
+![](figures/python_cuadrado.png){fig-align="center"}
 
 ```{python}
 # Programa: área y perímetro de un rectángulo
@@ -186,7 +186,7 @@ Python **no marca ningún error**, pero el promedio de `37.5` no tiene sentido e
 Un **error silencioso** (también llamado **error lógico**) ocurre cuando el programa **se ejecuta sin problemas, pero produce un resultado incorrecto**. Python no muestra ningún mensaje porque, para él, todo está bien: sumar `9 + 8.5 + 95` y dividir entre 3 es una operación perfectamente válida. Python hace **lo que escribimos**, no **lo que queríamos** hacer.
 
 |   | Error con mensaje | Error silencioso (lógico) |
-|----|----|----|
+|------------------------|------------------------|------------------------|
 | ¿El programa se detiene? | **Sí**, con un mensaje como `TypeError` o `NameError`. | **No**, termina con normalidad. |
 | ¿Cómo nos enteramos? | Python nos avisa y señala la línea. | Solo si **revisamos** el resultado y notamos que no tiene sentido. |
 | Ejemplo | `"Edad: " + 20` → `TypeError`. | Un promedio de `37.5` en una escala de 0 a 10. |
@@ -199,7 +199,7 @@ Un **error silencioso** (también llamado **error lógico**) ocurre cuando el pr
 Todos estos programas se ejecutan **sin mensajes de error**, pero dan un resultado incorrecto:
 
 | Código | Resultado obtenido | Resultado esperado | ¿Qué salió mal? |
-|----|----|----|----|
+|------------------|------------------|------------------|------------------|
 | `promedio = 6 + 10 / 2` | `11.0` | `8.0` | **Jerarquía de operaciones**: la división se hace antes que la suma. Faltan paréntesis: `(6 + 10) / 2`. |
 | `mitad = 17 // 2` | `8` | `8.5` | `//` es la **división entera** (descarta los decimales); la división normal es `/`. |
 | `math.sin(90)` | `0.894` | `1.0` | Las funciones trigonométricas usan **radianes**, no grados: `math.sin(math.radians(90))`. |
@@ -251,7 +251,7 @@ La **programación defensiva** busca justamente esto: convertir los errores sile
 Antes de defendernos de los errores hay que saber **leerlos**. La última línea de un mensaje de error indica el **tipo** de error y una descripción:
 
 | Error | ¿Cuándo ocurre? | Ejemplo |
-|----|----|----|
+|------------------------|------------------------|------------------------|
 | `SyntaxError` | El código está mal escrito. | `2lugar = "Luis"` |
 | `IndentationError` | La indentación es incorrecta. | Un `print` con espacios de más. |
 | `NameError` | Usas una variable que no existe. | `print(resultado)` sin haberla creado. |
@@ -347,14 +347,14 @@ Atrapa siempre un **tipo de error específico** (`except ValueError:`). Si escri
 Normalmente Python ejecuta las instrucciones de arriba hacia abajo. Las **estructuras de control de interrupción** cambian ese flujo: detienen el programa, salen de un bloque o saltan instrucciones. Todas son **palabras reservadas** (o funciones) de Python:
 
 | Instrucción | ¿Qué hace? | ¿Dónde se usa? | Se estudia en... |
-|----|----|----|----|
+|------------------|------------------|------------------|------------------|
 | `assert` | Detiene el programa si una condición es falsa. | En cualquier parte. | Este capítulo. |
 | `raise` | Lanza (provoca) un error con un mensaje propio. | En cualquier parte. | Este capítulo y [condicionales](python_condicionales.qmd). |
 | `try` / `except` / `finally` | Atrapa un error para que el programa no se detenga. | En cualquier parte. | Este capítulo. |
 | `pass` | No hace nada; reserva el lugar de un bloque que aún no escribes. | Dentro de `if`, `for`, `while`, funciones... | Este capítulo. |
 | `break` | **Sale** inmediatamente de un ciclo. | Solo dentro de `for` o `while`. | [Ciclos `for` y `while`](python_for.qmd). |
 | `continue` | **Salta** al siguiente paso de un ciclo. | Solo dentro de `for` o `while`. | [Ciclos `for` y `while`](python_for.qmd). |
-| `return` | Termina una **función** y regresa un valor. | Solo dentro de funciones (`def`). | Capítulo de funciones. |
+| `return` | Termina una **función** y regresa un valor. | Solo dentro de funciones (`def`). | [Funciones](python_funciones.qmd). |
 | `exit()` / `sys.exit()` | Termina **todo** el programa. | Scripts de Python (`.py`). | Este capítulo. |
 
 ### `raise`: lanzar un error propio
@@ -642,7 +642,7 @@ El tipo de error aparece al inicio de la última línea del mensaje, por ejemplo
 ## Solución
 
 | Línea | Tipo de error | ¿Cómo lo evitarías? |
-|----|----|----|
+|------------------------|------------------------|------------------------|
 | `10 / 0` | `ZeroDivisionError` | Verificar que el divisor sea distinto de cero: `assert divisor != 0`. |
 | `int("diez")` | `ValueError` | Verificar que el texto contenga solo dígitos: `"diez".isdigit()`. |
 | `[1, 2, 3][5]` | `IndexError` | Verificar que el índice sea menor que `len(lista)`. |
@@ -791,7 +791,7 @@ print("Total:", total)
 ## Resumen
 
 | Tema | Idea clave |
-|----|----|
+|------------------------------------|------------------------------------|
 | Palabras reservadas | No se pueden usar como nombres (`class`, `if`, `for`...). |
 | Reglas de nombres | Letras, dígitos y `_`; no empezar con dígito; distingue mayúsculas. |
 | Convenciones (PEP 8) | `snake_case` para variables, `MAYUSCULAS` para constantes, `PascalCase` para clases. |

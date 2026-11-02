@@ -100,9 +100,15 @@ book:
         - python_buenas_practicas.qmd   # Sintaxis de nombres, buenas prácticas y programación defensiva
         - python_condicionales.qmd      # Condicionales: if, elif, else
         - python_numpy.qmd              # Introducción a NumPy
-        - python_for.qmd                # Ciclos for
         - python_sympy.qmd              # Cálculo simbólico con SymPy
+        - python_for.qmd                # Ciclos for
+        - python_funciones.qmd          # Funciones y buenas prácticas
         - python_visualizacion.qmd      # Visualización de datos: Matplotlib y Plotly
+        - python_visualizacion2.qmd     # Visualización II: curvas, lugares geométricos y 2D avanzado
+        - python_aleatorios.qmd         # Números aleatorios y aplicaciones (Monte Carlo)
+        - python_visualizacion3d.qmd    # Visualización III: gráficas en 3D
+        - python_transformaciones.qmd   # Transformaciones geométricas en 2D y 3D
+
   appendices: 
     - python_entornos.qmd           # Google Colab, Jupyter, python vs pip, instalar paquetes
     - python_conda.qmd              # Conda y Miniconda

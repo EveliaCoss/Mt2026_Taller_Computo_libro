@@ -68,7 +68,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./python_for.html" rel="next">
+<link href="./python_sympy.html" rel="next">
 <link href="./python_condicionales.html" rel="prev">
 <link href="./flyer/logo.png" rel="icon" type="image/png">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
@@ -649,20 +649,50 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./python_for.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">57</span>&nbsp; <span class="chapter-title">Ciclos <code>for</code> y <code>while</code> en Python</span></span></a>
+  <a href="./python_sympy.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">57</span>&nbsp; <span class="chapter-title">Cálculo simbólico con SymPy</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./python_sympy.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">58</span>&nbsp; <span class="chapter-title">Cálculo simbólico con SymPy</span></span></a>
+  <a href="./python_for.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">58</span>&nbsp; <span class="chapter-title">Ciclos <code>for</code> y <code>while</code> en Python</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./python_funciones.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">59</span>&nbsp; <span class="chapter-title">Funciones en Python</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./python_visualizacion.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">59</span>&nbsp; <span class="chapter-title">Visualización de datos con Matplotlib y Plotly</span></span></a>
+ <span class="menu-text"><span class="chapter-number">60</span>&nbsp; <span class="chapter-title">Visualización de datos con Matplotlib y Plotly</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./python_visualizacion2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">61</span>&nbsp; <span class="chapter-title">Visualización II: curvas, lugares geométricos y gráficas avanzadas en 2D</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./python_aleatorios.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">62</span>&nbsp; <span class="chapter-title">Números aleatorios y aplicaciones</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./python_visualizacion3d.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">63</span>&nbsp; <span class="chapter-title">Visualización III: gráficas en 3D</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./python_transformaciones.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">64</span>&nbsp; <span class="chapter-title">Transformaciones geométricas en 2D y 3D</span></span></a>
   </div>
 </li>
       </ul>
@@ -774,7 +804,7 @@ window.Quarto = {
 
 
 <blockquote class="blockquote">
-<p><strong>Fecha:</strong> 03 de noviembre, 2026</p>
+<p><strong>Fecha:</strong> 05 de noviembre, 2026</p>
 </blockquote>
 <p><a href="https://numpy.org/">NumPy</a> (<em>Numerical Python</em>) es la biblioteca base del cómputo científico en Python. Su objeto principal es el <strong>arreglo</strong> (<code>ndarray</code>): una colección de números del <strong>mismo tipo</strong>, organizada en una o más dimensiones, con la que podemos hacer operaciones matemáticas de forma rápida y con muy poco código.</p>
 <p>En este capítulo veremos:</p>
@@ -1208,6 +1238,11 @@ window.Quarto = {
 </tr>
 </tbody>
 </table>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="figures/python_estadistica.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
 <div class="cell">
 <details open="" class="code-fold">
 <summary>Código</summary>
@@ -1989,7 +2024,7 @@ eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWUsImV4ZXJjaXNlIjoibnAzIn0sImNvZGUiOiJp
 </div>
 <div class="cell" data-exercise="np3" data-check="true">
 <script type="exercise-check-np3-contents">
-eyJhdHRyIjp7ImNoZWNrIjp0cnVlLCJlZGl0Ijp0cnVlLCJldmFsIjp0cnVlLCJleGVyY2lzZSI6Im5wMyJ9LCJjb2RlIjoiZXNwZXJhZG8gPSB7XCJtZWRpYVwiOiAxMS4xMSwgXCJtZWRpYW5hXCI6IDkuMCwgXCJkZXN2aWFjaW9uXCI6IDYuMzUsIFwicG9zaWNpb25fbWF4aW1vXCI6IDR9XG5pZiBub3QgaXNpbnN0YW5jZShyZXN1bHQsIGRpY3QpOlxuICAgIGZlZWRiYWNrID0ge1wiY29ycmVjdFwiOiBGYWxzZSwgXCJtZXNzYWdlXCI6IFwiTGEgw7psdGltYSBsw61uZWEgZGViZSByZWdyZXNhciBlbCBkaWNjaW9uYXJpbyByZXN1bWVuLlwifVxuZWxzZTpcbiAgICBpbmNvcnJlY3RvcyA9IFtjbGF2ZSBmb3IgY2xhdmUgaW4gZXNwZXJhZG8gaWYgY2xhdmUgbm90IGluIHJlc3VsdCBvciBhYnMoZmxvYXQocmVzdWx0W2NsYXZlXSkgLSBlc3BlcmFkb1tjbGF2ZV0pID4gMWUtOV1cbiAgICBpZiBub3QgaW5jb3JyZWN0b3M6XG4gICAgICAgIGZlZWRiYWNrID0ge1wiY29ycmVjdFwiOiBUcnVlLCBcIm1lc3NhZ2VcIjogXCLCoUNvcnJlY3RvISBNZWRpYSAxMS4xMSwgbWVkaWFuYSA5LjAsIGRlc3ZpYWNpw7NuIDYuMzUgeSBlbCBtw6F4aW1vICgyNSkgZXN0w6EgZW4gbGEgcG9zaWNpw7NuIDQuXCJ9XG4gICAgZWxzZTpcbiAgICAgICAgZmVlZGJhY2sgPSB7XCJjb3JyZWN0XCI6IEZhbHNlLCBcIm1lc3NhZ2VcIjogXCJSZXZpc2E6IFwiICsgXCIsIFwiLmpvaW4oaW5jb3JyZWN0b3MpICsgXCIuIFJlY3VlcmRhIHJlZG9uZGVhciBhIDIgZGVjaW1hbGVzLlwifVxuZmVlZGJhY2sifQ==
+eyJhdHRyIjp7ImNoZWNrIjp0cnVlLCJlZGl0Ijp0cnVlLCJldmFsIjp0cnVlLCJleGVyY2lzZSI6Im5wMyJ9LCJjb2RlIjoiZXNwZXJhZG8gPSB7XCJtZWRpYVwiOiAxMS4xMSwgXCJtZWRpYW5hXCI6IDkuMCwgXCJkZXN2aWFjaW9uXCI6IDYuMzUsIFwicG9zaWNpb25fbWF4aW1vXCI6IDR9XG5pZiBub3QgaXNpbnN0YW5jZShyZXN1bHQsIGRpY3QpOlxuICAgIGZlZWRiYWNrID0ge1wiY29ycmVjdFwiOiBGYWxzZSwgXCJtZXNzYWdlXCI6IFwiTGEgw7psdGltYSBsw61uZWEgZGViZSByZWdyZXNhciBlbCBkaWNjaW9uYXJpbyByZXN1bWVuLlwifVxuZWxzZTpcbiAgICBpbmNvcnJlY3RvcyA9IFtdXG4gICAgZm9yIGNsYXZlIGluIGVzcGVyYWRvOlxuICAgICAgICBpZiBjbGF2ZSBub3QgaW4gcmVzdWx0IG9yIGFicyhmbG9hdChyZXN1bHRbY2xhdmVdKSAtIGVzcGVyYWRvW2NsYXZlXSkgPiAxZS05OlxuICAgICAgICAgICAgaW5jb3JyZWN0b3MuYXBwZW5kKGNsYXZlKVxuICAgIGlmIG5vdCBpbmNvcnJlY3RvczpcbiAgICAgICAgZmVlZGJhY2sgPSB7XCJjb3JyZWN0XCI6IFRydWUsIFwibWVzc2FnZVwiOiBcIsKhQ29ycmVjdG8hIE1lZGlhIDExLjExLCBtZWRpYW5hIDkuMCwgZGVzdmlhY2nDs24gNi4zNSB5IGVsIG3DoXhpbW8gKDI1KSBlc3TDoSBlbiBsYSBwb3NpY2nDs24gNC5cIn1cbiAgICBlbHNlOlxuICAgICAgICBmZWVkYmFjayA9IHtcImNvcnJlY3RcIjogRmFsc2UsIFwibWVzc2FnZVwiOiBcIlJldmlzYTogXCIgKyBcIiwgXCIuam9pbihpbmNvcnJlY3RvcykgKyBcIi4gUmVjdWVyZGEgcmVkb25kZWFyIGEgMiBkZWNpbWFsZXMuXCJ9XG5mZWVkYmFjayJ9
 </script>
 </div>
 <div class="hint webr-ojs-exercise exercise-hint d-none" data-exercise="np3">
@@ -2243,13 +2278,11 @@ eyJhdHRyIjp7ImNoZWNrIjp0cnVlLCJlZGl0Ijp0cnVlLCJldmFsIjp0cnVlLCJleGVyY2lzZSI6Im5w
 <section id="ejercicio-7.-sistema-de-ecuaciones" class="level3" data-number="56.12.7">
 <h3 data-number="56.12.7" class="anchored" data-anchor-id="ejercicio-7.-sistema-de-ecuaciones"><span class="header-section-number">56.12.7</span> Ejercicio 7. Sistema de ecuaciones</h3>
 <p>Resuelve el sistema de ecuaciones:</p>
-<p><span class="math display">\[
-\begin{cases}
+<p><span class="math display">\[\begin{cases}
 2x + y - z = 3 \\
 x - y + 2z = 5 \\
 3x + 2y + z = 10
-\end{cases}
-\]</span></p>
+\end{cases}\]</span></p>
 <ol type="1">
 <li>Escribe la matriz de coeficientes <code>A</code> y el vector de términos independientes <code>b</code>.</li>
 <li>Verifica que el sistema tiene solución única calculando <span class="math inline">\(\det(A) \neq 0\)</span>.</li>
@@ -2947,8 +2980,8 @@ window._ojs.runtime.interpretFromScriptTags();
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./python_for.html" class="pagination-link" aria-label="Ciclos `for` y `while` en Python">
-        <span class="nav-page-text"><span class="chapter-number">57</span>&nbsp; <span class="chapter-title">Ciclos <code>for</code> y <code>while</code> en Python</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./python_sympy.html" class="pagination-link" aria-label="Cálculo simbólico con SymPy">
+        <span class="nav-page-text"><span class="chapter-number">57</span>&nbsp; <span class="chapter-title">Cálculo simbólico con SymPy</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

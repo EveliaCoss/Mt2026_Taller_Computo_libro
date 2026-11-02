@@ -620,20 +620,50 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./python_for.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">57</span>&nbsp; <span class="chapter-title">Ciclos <code>for</code> y <code>while</code> en Python</span></span></a>
+  <a href="./python_sympy.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">57</span>&nbsp; <span class="chapter-title">Cálculo simbólico con SymPy</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./python_sympy.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">58</span>&nbsp; <span class="chapter-title">Cálculo simbólico con SymPy</span></span></a>
+  <a href="./python_for.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">58</span>&nbsp; <span class="chapter-title">Ciclos <code>for</code> y <code>while</code> en Python</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./python_funciones.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">59</span>&nbsp; <span class="chapter-title">Funciones en Python</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./python_visualizacion.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">59</span>&nbsp; <span class="chapter-title">Visualización de datos con Matplotlib y Plotly</span></span></a>
+ <span class="menu-text"><span class="chapter-number">60</span>&nbsp; <span class="chapter-title">Visualización de datos con Matplotlib y Plotly</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./python_visualizacion2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">61</span>&nbsp; <span class="chapter-title">Visualización II: curvas, lugares geométricos y gráficas avanzadas en 2D</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./python_aleatorios.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">62</span>&nbsp; <span class="chapter-title">Números aleatorios y aplicaciones</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./python_visualizacion3d.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">63</span>&nbsp; <span class="chapter-title">Visualización III: gráficas en 3D</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./python_transformaciones.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">64</span>&nbsp; <span class="chapter-title">Transformaciones geométricas en 2D y 3D</span></span></a>
   </div>
 </li>
       </ul>
@@ -1373,157 +1403,56 @@ Advertencia
 </tbody>
 </table>
 <p>Después del YAML escribe texto en Markdown e inserta bloques de código. Para insertar un bloque de Python usa <strong>Insert &gt; Code Cell &gt; Python</strong> o escríbelo:</p>
-<pre><code>## Mi primer programa en Python
-
-
-::: {.cell}
-
-```{.python .cell-code}
-nombre = "Ana"
-edad = 20
-
-print("Hola", nombre)
-```
-
-::: {.cell-output .cell-output-stdout}
-
-```
-Hola Ana
-```
-
-
-:::
-
-```{.python .cell-code}
-print("Edad:", edad)
-```
-
-::: {.cell-output .cell-output-stdout}
-
-```
-Edad: 20
-```
-
-
-:::
-:::
-</code></pre>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb25"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">## Mi primer programa en Python</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>nombre <span class="op">=</span> <span class="st">"Ana"</span></span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>edad <span class="op">=</span> <span class="dv">20</span></span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Hola"</span>, nombre)</span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Edad:"</span>, edad)</span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Guarda el archivo y presiona el botón <strong>Render</strong> (o <code>Cmd/Ctrl + Shift + K</code>). Quarto ejecutará el código y mostrará el documento HTML con los resultados.</p>
 </section>
 <section id="documento-con-el-motor-knitr-r-y-python-juntos" class="level3" data-number="51.10.2">
 <h3 data-number="51.10.2" class="anchored" data-anchor-id="documento-con-el-motor-knitr-r-y-python-juntos"><span class="header-section-number">51.10.2</span> 7.2. Documento con el motor knitr (R y Python juntos)</h3>
 <p>Si tu documento combina bloques de <strong>R</strong> y de <strong>Python</strong>, usa el motor <code>knitr</code>:</p>
-<pre><code>---
-title: "R y Python juntos"
-format: html
-engine: knitr
----
-
-
-::: {.cell}
-
-```{.r .cell-code}
-x &lt;- c(1, 2, 3)
-```
-:::
-
-
-
-::: {.cell}
-
-```{.python .cell-code}
-import numpy as np
-print(np.array(r.x) * 2)    # Usar en Python una variable creada en R
-```
-
-::: {.cell-output .cell-output-stdout}
-
-```
-[2. 4. 6.]
-```
-
-
-:::
-:::
-</code></pre>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb26"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "R y Python juntos"</span></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a><span class="an">format:</span><span class="co"> html</span></span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a><span class="an">engine:</span><span class="co"> knitr</span></span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>)</span>
+<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb26-13"><a href="#cb26-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(np.array(r.x) <span class="op">*</span> <span class="dv">2</span>)    <span class="co"># Usar en Python una variable creada en R</span></span>
+<span id="cb26-14"><a href="#cb26-14" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <p>En este caso Python lo ejecuta <code>reticulate</code>, con el Python de <code>RETICULATE_PYTHON</code>.</p>
 </section>
 <section id="una-prueba-con-todas-las-bibliotecas" class="level3" data-number="51.10.3">
 <h3 data-number="51.10.3" class="anchored" data-anchor-id="una-prueba-con-todas-las-bibliotecas"><span class="header-section-number">51.10.3</span> 7.3. Una prueba con todas las bibliotecas</h3>
 <p>Para comprobar todo de una vez, copia este bloque en tu documento y presiona <strong>Render</strong>:</p>
-<pre><code>
-::: {.cell}
-
-```{.python .cell-code}
-import numpy as np
-import pandas as pd
-import matplotlib.pyplot as plt
-import sympy as sp
-import plotly
-
-print("NumPy:", np.__version__)
-```
-
-::: {.cell-output .cell-output-stdout}
-
-```
-NumPy: 2.5.4
-```
-
-
-:::
-
-```{.python .cell-code}
-print("pandas:", pd.__version__)
-```
-
-::: {.cell-output .cell-output-stdout}
-
-```
-pandas: 3.1.0
-```
-
-
-:::
-
-```{.python .cell-code}
-print("SymPy:", sp.__version__)
-```
-
-::: {.cell-output .cell-output-stdout}
-
-```
-SymPy: 1.14.0
-```
-
-
-:::
-
-```{.python .cell-code}
-print("Plotly:", plotly.__version__)
-```
-
-::: {.cell-output .cell-output-stdout}
-
-```
-Plotly: 7.1.0
-```
-
-
-:::
-
-```{.python .cell-code}
-x = np.linspace(0, 2 * np.pi, 100)
-plt.plot(x, np.sin(x))
-plt.title("¡Todo funciona!")
-plt.show()
-```
-
-::: {.cell-output-display}
-![](quarto_python_files/figure-html/unnamed-chunk-9-1.png){width=672}
-:::
-:::
-</code></pre>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb27"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sympy <span class="im">as</span> sp</span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> plotly</span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"NumPy:"</span>, np.__version__)</span>
+<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"pandas:"</span>, pd.__version__)</span>
+<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"SymPy:"</span>, sp.__version__)</span>
+<span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Plotly:"</span>, plotly.__version__)</span>
+<span id="cb27-12"><a href="#cb27-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-13"><a href="#cb27-13" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.linspace(<span class="dv">0</span>, <span class="dv">2</span> <span class="op">*</span> np.pi, <span class="dv">100</span>)</span>
+<span id="cb27-14"><a href="#cb27-14" aria-hidden="true" tabindex="-1"></a>plt.plot(x, np.sin(x))</span>
+<span id="cb27-15"><a href="#cb27-15" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"¡Todo funciona!"</span>)</span>
+<span id="cb27-16"><a href="#cb27-16" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
+<span id="cb27-17"><a href="#cb27-17" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Si ves las versiones y la gráfica, estás listo para el resto del curso.</p>
 </section>
 <section id="ejecutar-un-bloque-sin-renderizar" class="level3" data-number="51.10.4">
@@ -1533,13 +1462,16 @@ plt.show()
 <section id="opciones-de-los-bloques-de-código" class="level3" data-number="51.10.5">
 <h3 data-number="51.10.5" class="anchored" data-anchor-id="opciones-de-los-bloques-de-código"><span class="header-section-number">51.10.5</span> 7.5. Opciones de los bloques de código</h3>
 <p>Las opciones de cada bloque se escriben al inicio, cada una en una línea que comienza con <code>#|</code>:</p>
-<pre><code>
-::: {.cell}
-::: {.cell-output-display}
-![Mi primera gráfica en Python](quarto_python_files/figure-html/fig-grafica-3.png){#fig-grafica width=672}
-:::
-:::
-</code></pre>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb28"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-grafica</span></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: "Mi primera gráfica en Python"</span></span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a>plt.plot([<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>], [<span class="dv">1</span>, <span class="dv">4</span>, <span class="dv">9</span>, <span class="dv">16</span>])</span>
+<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
+<span id="cb28-10"><a href="#cb28-10" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <table class="caption-top table">
 <colgroup>
 <col style="width: 50%">

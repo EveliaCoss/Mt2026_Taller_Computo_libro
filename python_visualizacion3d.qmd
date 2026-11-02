@@ -1,0 +1,760 @@
+---
+engine: knitr
+---
+
+# Visualización III: gráficas en 3D
+
+{{< include ./_extensions/r-wasm/live/_knitr.qmd >}}
+
+```{r}
+#| include: false
+# Mostrar solo el resultado de la última línea de cada bloque de Python (como en Jupyter)
+knitr::opts_chunk$set(jupyter_compat = TRUE)
+# Usar el entorno del curso (~/.venvs/quarto-python) si existe, aunque RStudio tenga configurado otro Python.
+venv_python <- path.expand(c("~/.venvs/quarto-python/bin/python", "~/.venvs/quarto-python/Scripts/python.exe"))
+venv_python <- venv_python[file.exists(venv_python)]
+if (length(venv_python) > 0) {
+  Sys.setenv(RETICULATE_PYTHON = venv_python[1])
+} else {
+  reticulate::py_require(c("numpy", "matplotlib", "plotly", "pandas"))
+}
+```
+
+```{python}
+#| include: false
+# Hace que fig.show() muestre las figuras de Plotly dentro del libro
+import plotly.graph_objects as go
+_primera_figura = True
+def _mostrar_en_libro(self, *args, **kwargs):
+    global _primera_figura
+    html = self.to_html(include_plotlyjs="cdn" if _primera_figura else False, full_html=False)
+    print("```{=html}\n" + html + "\n```")
+    _primera_figura = False
+go.Figure.show = _mostrar_en_libro
+```
+
+> **Fecha:** 26 de noviembre, 2026
+
+En las partes [I](python_visualizacion.qmd) y [II](python_visualizacion2.qmd) trabajamos en el plano. Ahora pasaremos al **espacio**: superficies, curvas y mapas de calor en tres dimensiones, primero con Matplotlib (gráficas estáticas) y después con Plotly (gráficas interactivas que puedes girar).
+
+Al terminar este capítulo podrás:
+
+- Crear **superficies** en 3D con Matplotlib, incluidas las superficies cuádricas de la geometría analítica.
+- Dibujar **curvas en 3D** a partir de su forma paramétrica.
+- Crear **mapas de calor** en 2D y en 3D.
+- Crear visualizaciones **interactivas** en 3D con Plotly.
+- **Combinar** gráficas 2D y 3D en una misma figura y en un mismo documento.
+- **Documentar** tus visualizaciones en Quarto y **publicarlas** en GitHub Pages.
+
+```{python}
+import numpy as np
+import matplotlib.pyplot as plt
+import plotly.graph_objects as go
+```
+
+## Ejes en 3D con Matplotlib
+
+Para dibujar en 3D se crea un eje con la opción `projection="3d"`:
+
+```{python}
+fig = plt.figure(figsize=(5, 5))
+ax = fig.add_subplot(projection="3d")
+ax.set_xlabel("x")
+ax.set_ylabel("y")
+ax.set_zlabel("z")
+ax.set_title("Ejes en 3D")
+plt.show()
+```
+
+| Método | ¿Qué hace? |
+|------------------------------------|------------------------------------|
+| `fig.add_subplot(projection="3d")` | Crea un eje tridimensional. |
+| `ax.set_xlabel()`, `ax.set_ylabel()`, `ax.set_zlabel()` | Etiquetas de los tres ejes. |
+| `ax.set_xlim()`, `ax.set_ylim()`, `ax.set_zlim()` | Límites de cada eje. |
+| `ax.view_init(elev=30, azim=45)` | **Punto de vista**: elevación (ángulo vertical) y azimut (ángulo horizontal), en grados. |
+| `ax.set_box_aspect((1, 1, 1))` | Misma escala en los tres ejes, para que una esfera se vea redonda. |
+
+## Superficies $z = f(x, y)$
+
+Como en las [funciones de dos variables](python_visualizacion.qmd#funciones-de-dos-variables), primero creamos una **malla** con `np.meshgrid()` y evaluamos la función. Después la dibujamos con `plot_surface()`:
+
+```{python}
+x = np.linspace(-2, 2, 60)
+y = np.linspace(-2, 2, 60)
+X, Y = np.meshgrid(x, y)
+Z = X**2 - Y**2                      # Paraboloide hiperbólico (silla de montar)
+
+fig = plt.figure(figsize=(6, 5))
+ax = fig.add_subplot(projection="3d")
+superficie = ax.plot_surface(X, Y, Z, cmap="viridis")
+fig.colorbar(superficie, shrink=0.6, label="z")
+ax.set_xlabel("x"); ax.set_ylabel("y"); ax.set_zlabel("z")
+ax.set_title("$z = x^2 - y^2$")
+plt.show()
+```
+
+### Otras formas de dibujar una superficie
+
+```{python}
+fig = plt.figure(figsize=(13, 4))
+
+ax1 = fig.add_subplot(1, 3, 1, projection="3d")
+ax1.plot_wireframe(X, Y, Z, rstride=4, cstride=4, color="tab:blue")
+ax1.set_title("Malla de alambre (wireframe)")
+
+ax2 = fig.add_subplot(1, 3, 2, projection="3d")
+ax2.plot_surface(X, Y, Z, cmap="coolwarm", alpha=0.8)
+ax2.contour(X, Y, Z, zdir="z", offset=-4, levels=10, cmap="coolwarm")   # Curvas de nivel proyectadas
+ax2.set_zlim(-4, 4)
+ax2.set_title("Superficie + curvas de nivel")
+
+ax3 = fig.add_subplot(1, 3, 3, projection="3d")
+ax3.plot_surface(X, Y, Z, cmap="viridis")
+ax3.view_init(elev=60, azim=-30)
+ax3.set_title("Otro punto de vista")
+
+fig.tight_layout()
+plt.show()
+```
+
+| Función | ¿Qué dibuja? |
+|------------------------------------|------------------------------------|
+| `ax.plot_surface(X, Y, Z, cmap=...)` | Una superficie coloreada según su altura. |
+| `ax.plot_wireframe(X, Y, Z)` | Solo las líneas de la malla. |
+| `ax.contour(X, Y, Z, zdir="z", offset=c)` | Las curvas de nivel **proyectadas** sobre el plano $z = c$. |
+| `ax.contour3D(X, Y, Z)` | Las curvas de nivel **a su altura** dentro del espacio. |
+
+## Superficies cuádricas en forma paramétrica
+
+Muchas superficies de la geometría analítica no son de la forma $z = f(x, y)$: una esfera, por ejemplo, tiene **dos** valores de $z$ para cada $(x, y)$. En esos casos usamos una **parametrización** con dos parámetros $(u, v)$, igual que una curva paramétrica usa uno:
+
+| Superficie | Ecuación | Parametrización |
+|------------------------|------------------------|------------------------|
+| Esfera | $x^2 + y^2 + z^2 = R^2$ | $x = R\cos u \sin v,\ y = R\sin u \sin v,\ z = R\cos v$ |
+| Elipsoide | $\frac{x^2}{a^2} + \frac{y^2}{b^2} + \frac{z^2}{c^2} = 1$ | $x = a\cos u \sin v,\ y = b\sin u \sin v,\ z = c\cos v$ |
+| Hiperboloide de una hoja | $\frac{x^2}{a^2} + \frac{y^2}{b^2} - \frac{z^2}{c^2} = 1$ | $x = a\cosh v \cos u,\ y = b\cosh v \sin u,\ z = c\sinh v$ |
+| Cono | $x^2 + y^2 = z^2$ | $x = v\cos u,\ y = v\sin u,\ z = v$ |
+
+con $u \in [0, 2\pi]$. `plot_surface()` acepta directamente las tres matrices `X`, `Y`, `Z`:
+
+```{python}
+u, v = np.meshgrid(np.linspace(0, 2 * np.pi, 50), np.linspace(0, np.pi, 50))
+u2, v2 = np.meshgrid(np.linspace(0, 2 * np.pi, 50), np.linspace(-1.5, 1.5, 50))
+
+superficies = {
+    "Esfera, R = 1": (np.cos(u) * np.sin(v), np.sin(u) * np.sin(v), np.cos(v)),
+    "Elipsoide 3 × 2 × 1": (3 * np.cos(u) * np.sin(v), 2 * np.sin(u) * np.sin(v), np.cos(v)),
+    "Hiperboloide de una hoja": (np.cosh(v2) * np.cos(u2), np.cosh(v2) * np.sin(u2), np.sinh(v2)),
+    "Cono": (v2 * np.cos(u2), v2 * np.sin(u2), v2),
+}
+
+fig = plt.figure(figsize=(12, 9))
+for k, (nombre, (Xs, Ys, Zs)) in enumerate(superficies.items(), start=1):
+    ax = fig.add_subplot(2, 2, k, projection="3d")
+    ax.plot_surface(Xs, Ys, Zs, cmap="viridis", alpha=0.9)
+    ax.set_box_aspect((np.ptp(Xs), np.ptp(Ys), np.ptp(Zs)))    # Misma escala en los tres ejes
+    ax.set_title(nombre)
+fig.tight_layout()
+plt.show()
+```
+
+`np.ptp()` (*peak to peak*) calcula el rango de valores, `max - min`, de cada coordenada. Usarlo en `set_box_aspect()` hace que la esfera se vea redonda y no aplastada.
+
+## Curvas en 3D
+
+Una curva en el espacio se describe con una **parametrización** $(x(t), y(t), z(t))$ y se dibuja con `ax.plot(x, y, z)`:
+
+```{python}
+t = np.linspace(0, 6 * np.pi, 600)
+
+fig = plt.figure(figsize=(12, 4))
+
+ax1 = fig.add_subplot(1, 3, 1, projection="3d")
+ax1.plot(np.cos(t), np.sin(t), t / (2 * np.pi), color="tab:blue")
+ax1.set_title("Hélice: $(\\cos t, \\sin t, t/2\\pi)$")
+
+s = np.linspace(0, 2 * np.pi, 600)
+ax2 = fig.add_subplot(1, 3, 2, projection="3d")
+ax2.plot(np.sin(s) + 2 * np.sin(2 * s), np.cos(s) - 2 * np.cos(2 * s), -np.sin(3 * s), color="tab:red")
+ax2.set_title("Nudo trébol")
+
+ax3 = fig.add_subplot(1, 3, 3, projection="3d")
+ax3.plot(t * np.cos(t), t * np.sin(t), t, color="tab:green")
+ax3.set_title("Hélice cónica: $(t\\cos t, t\\sin t, t)$")
+
+fig.tight_layout()
+plt.show()
+```
+
+### La curva de Viviani: intersección de dos superficies
+
+La **curva de Viviani** es la intersección de la esfera $x^2 + y^2 + z^2 = 1$ con el cilindro $\left(x - \frac{1}{2}\right)^2 + y^2 = \frac{1}{4}$. Su parametrización es:
+
+$$x = \frac{1 + \cos t}{2}, \quad y = \frac{\sin t}{2}, \quad z = \sin\frac{t}{2}, \quad t \in [0, 4\pi]$$
+
+Dibujarla junto con las dos superficies ayuda a **ver** de dónde sale:
+
+```{python}
+t = np.linspace(0, 4 * np.pi, 600)
+xv, yv, zv = (1 + np.cos(t)) / 2, np.sin(t) / 2, np.sin(t / 2)
+
+u, v = np.meshgrid(np.linspace(0, 2 * np.pi, 40), np.linspace(0, np.pi, 40))
+xc, zc = np.meshgrid(np.linspace(0, 2 * np.pi, 40), np.linspace(-1, 1, 20))
+
+fig = plt.figure(figsize=(6, 6))
+ax = fig.add_subplot(projection="3d")
+ax.plot_surface(np.cos(u) * np.sin(v), np.sin(u) * np.sin(v), np.cos(v), color="lightblue", alpha=0.25)
+ax.plot_surface(0.5 + 0.5 * np.cos(xc), 0.5 * np.sin(xc), zc, color="orange", alpha=0.25)
+ax.plot(xv, yv, zv, color="black", linewidth=2.5, label="Curva de Viviani")
+ax.set_box_aspect((1, 1, 1))
+ax.legend()
+ax.set_title("Esfera ∩ cilindro")
+plt.show()
+```
+
+Comprobemos con NumPy que **todos** los puntos de la curva están sobre las dos superficies:
+
+```{python}
+print("Error máximo en la esfera:  ", np.abs(xv**2 + yv**2 + zv**2 - 1).max())
+print("Error máximo en el cilindro:", np.abs((xv - 0.5)**2 + yv**2 - 0.25).max())
+```
+
+Los errores son del orden de $10^{-16}$, es decir, cero salvo el redondeo de la computadora.
+
+## Mapas de calor en 2D y en 3D
+
+Un **mapa de calor** representa valores con colores. Una misma función $f(x, y)$ se puede mostrar como mapa de calor en el plano o como una superficie en el espacio con los mismos colores:
+
+```{python}
+x = np.linspace(-3, 3, 150)
+X, Y = np.meshgrid(x, x)
+Z = np.sin(X) * np.cos(Y) * np.exp(-(X**2 + Y**2) / 8)
+
+fig = plt.figure(figsize=(11, 4.5))
+
+ax1 = fig.add_subplot(1, 2, 1)
+mapa = ax1.pcolormesh(X, Y, Z, cmap="RdBu_r", shading="auto")
+fig.colorbar(mapa, ax=ax1, shrink=0.8)
+ax1.set_aspect("equal")
+ax1.set_title("Mapa de calor 2D")
+
+ax2 = fig.add_subplot(1, 2, 2, projection="3d")
+ax2.plot_surface(X, Y, Z, cmap="RdBu_r")
+ax2.set_title("La misma función en 3D")
+
+fig.tight_layout()
+plt.show()
+```
+
+### Mapas de calor de funciones de tres variables
+
+¿Y si la función tiene **tres** variables, como la temperatura $T(x, y, z)$ dentro de una habitación? No podemos dibujar una cuarta dimensión, pero sí podemos **colorear puntos del espacio** según su valor: es un **mapa de calor en 3D**. Usaremos $f(x, y, z) = x^2 + y^2 + z^2$, el cuadrado de la distancia al origen:
+
+```{python}
+g = np.linspace(-1, 1, 12)
+XX, YY, ZZ = np.meshgrid(g, g, g)           # 12 × 12 × 12 = 1728 puntos del espacio
+valores = XX**2 + YY**2 + ZZ**2
+
+fig = plt.figure(figsize=(6, 5))
+ax = fig.add_subplot(projection="3d")
+puntos = ax.scatter(XX, YY, ZZ, c=valores, cmap="inferno", s=12)
+fig.colorbar(puntos, shrink=0.6, label="$x^2 + y^2 + z^2$")
+ax.set_title("Mapa de calor 3D: color = distancia² al origen")
+plt.show()
+```
+
+Los puntos oscuros están cerca del origen y los claros en las esquinas del cubo. Los puntos con el **mismo color** forman esferas: son las **superficies de nivel** de la función, el equivalente en 3D de las curvas de nivel.
+
+## Gráficas 3D interactivas con Plotly
+
+Las gráficas de Matplotlib son imágenes fijas: el punto de vista se elige al programarlas. Con Plotly puedes **girarlas con el ratón**, hacer zoom y ver el valor de cada punto. Usaremos el módulo `plotly.graph_objects` (`go`), que vimos en la [primera parte](python_visualizacion.qmd#superficie-en-3d).
+
+| Función de Plotly | ¿Qué dibuja? | Equivalente en Matplotlib |
+|------------------------|------------------------|------------------------|
+| `go.Surface(x=X, y=Y, z=Z)` | Superficie. | `ax.plot_surface()` |
+| `go.Scatter3d(x=, y=, z=, mode="lines")` | Curva en 3D. | `ax.plot(x, y, z)` |
+| `go.Scatter3d(..., mode="markers")` | Puntos en 3D. | `ax.scatter(x, y, z)` |
+| `go.Volume(x=, y=, z=, value=)` | Mapa de calor 3D con superficies de nivel. | — |
+| `go.Heatmap(z=Z)` | Mapa de calor 2D. | `ax.pcolormesh()` |
+
+### Superficie con curvas de nivel
+
+```{python}
+#| output: asis
+x = np.linspace(-2, 2, 60)
+X, Y = np.meshgrid(x, x)
+Z = X**2 - Y**2
+
+fig = go.Figure(go.Surface(
+    x=X, y=Y, z=Z, colorscale="Viridis",
+    contours={"z": {"show": True, "usecolormap": True, "project_z": True}},   # Curvas de nivel
+))
+fig.update_layout(title="z = x² − y²: gira la gráfica con el ratón", width=650, height=550)
+fig.show()
+```
+
+### Curva y superficies en la misma escena
+
+```{python}
+#| output: asis
+u, v = np.meshgrid(np.linspace(0, 2 * np.pi, 40), np.linspace(0, np.pi, 40))
+
+fig = go.Figure()
+fig.add_trace(go.Surface(x=np.cos(u) * np.sin(v), y=np.sin(u) * np.sin(v), z=np.cos(v),
+                         opacity=0.3, colorscale="Blues", showscale=False, name="Esfera"))
+fig.add_trace(go.Scatter3d(x=xv, y=yv, z=zv, mode="lines",
+                           line={"width": 6, "color": "black"}, name="Curva de Viviani"))
+fig.update_layout(title="La curva de Viviani sobre la esfera", width=650, height=550,
+                  scene={"aspectmode": "data"})       # Misma escala en los tres ejes
+fig.show()
+```
+
+### Mapa de calor 3D interactivo: `go.Volume`
+
+```{python}
+#| output: asis
+g = np.linspace(-1, 1, 25)
+XX, YY, ZZ = np.meshgrid(g, g, g)
+
+fig = go.Figure(go.Volume(
+    x=XX.flatten(), y=YY.flatten(), z=ZZ.flatten(),
+    value=(XX**2 + YY**2 + ZZ**2).flatten(),
+    isomin=0.1, isomax=1, opacity=0.15, surface_count=6, colorscale="Inferno",
+))
+fig.update_layout(title="Superficies de nivel de x² + y² + z²", width=650, height=550)
+fig.show()
+```
+
+`go.Volume` necesita los puntos como **listas planas**: por eso usamos `.flatten()`, que convierte un arreglo de cualquier dimensión en un vector. Cada "capa" de color es una superficie de nivel; en este caso, esferas concéntricas.
+
+## Combinar visualizaciones 2D y 3D
+
+### En una misma figura de Matplotlib
+
+Un `fig.add_subplot()` puede ser 2D y otro 3D. Así comparamos una superficie con sus curvas de nivel:
+
+```{python}
+x = np.linspace(-2, 2, 100)
+X, Y = np.meshgrid(x, x)
+Z = X**2 - Y**2
+
+fig = plt.figure(figsize=(11, 4.5))
+
+ax1 = fig.add_subplot(1, 2, 1, projection="3d")
+ax1.plot_surface(X, Y, Z, cmap="coolwarm")
+ax1.scatter([0], [0], [0], color="black", s=40)
+ax1.set_title("Superficie: el punto silla en (0, 0, 0)")
+
+ax2 = fig.add_subplot(1, 2, 2)
+curvas = ax2.contour(X, Y, Z, levels=12, cmap="coolwarm")
+ax2.clabel(curvas, fontsize=7)
+ax2.scatter([0], [0], color="black")
+ax2.set_aspect("equal")
+ax2.set_title("Curvas de nivel: hipérbolas")
+
+fig.tight_layout()
+plt.show()
+```
+
+Las curvas de nivel $x^2 - y^2 = c$ son **hipérbolas**: conectan esta gráfica con las cónicas de la [parte II](python_visualizacion2.qmd).
+
+### En una misma figura de Plotly: `make_subplots`
+
+```{python}
+#| output: asis
+from plotly.subplots import make_subplots
+
+fig = make_subplots(rows=1, cols=2, specs=[[{"type": "surface"}, {"type": "xy"}]],
+                    subplot_titles=("Superficie 3D", "Curvas de nivel 2D"))
+fig.add_trace(go.Surface(x=x, y=x, z=Z, colorscale="RdBu", showscale=False), row=1, col=1)
+fig.add_trace(go.Contour(x=x, y=x, z=Z, colorscale="RdBu"), row=1, col=2)
+fig.update_layout(width=900, height=450)
+fig.show()
+```
+
+`specs` indica el **tipo** de cada celda: `"surface"` (o `"scene"`) para 3D y `"xy"` para 2D.
+
+## Documentar visualizaciones en Quarto
+
+Cuando escribas tus propios documentos (por ejemplo, la tarea de Geometría Analítica), Quarto ofrece opciones para que tus figuras se vean profesionales.
+
+### Pies de figura y referencias cruzadas
+
+Si un bloque tiene una **etiqueta** que empieza con `fig-` y un **pie de figura**, Quarto numera la figura y puedes citarla en el texto con `@`:
+
+```{{{python}}}
+#| label: fig-silla
+#| fig-cap: "El paraboloide hiperbólico $z = x^2 - y^2$."
+
+fig = plt.figure()
+ax = fig.add_subplot(projection="3d")
+ax.plot_surface(X, Y, Z, cmap="coolwarm")
+plt.show()
+```
+
+Como se observa en la @fig-silla, el origen es un punto silla.
+
+En el documento final, `@fig-silla` se convierte en "Figura 1", con un enlace a la figura.
+
+### Varias figuras lado a lado
+
+```{{{python}}}
+#| label: fig-comparacion
+#| fig-cap: "Una superficie y sus curvas de nivel."
+#| fig-subcap:
+#|   - "Vista en 3D"
+#|   - "Vista en 2D"
+#| layout-ncol: 2
+
+# Primera figura (3D)
+...
+plt.show()
+
+# Segunda figura (2D)
+...
+plt.show()
+```
+
+| Opción | ¿Qué hace? |
+|------------------------------------|------------------------------------|
+| `label: fig-nombre` | Identificador de la figura (debe empezar con `fig-`). |
+| `fig-cap` | Pie de figura; acepta LaTeX. |
+| `fig-subcap` | Subtítulos de cada figura cuando el bloque produce varias. |
+| `layout-ncol: 2` | Coloca las figuras en 2 columnas. |
+| `fig-width`, `fig-height` | Tamaño de las figuras de Matplotlib (en pulgadas). |
+| `fig-align: center` | Centra la figura. |
+| `echo: false` | Muestra la figura pero oculta el código. |
+| `code-fold: true` | El código queda oculto en un botón desplegable. |
+
+::: callout-note
+Las figuras de **Plotly** son interactivas solo en formatos **HTML** (`format: html`). Si generas un PDF, usa Matplotlib o guarda la figura de Plotly como imagen.
+:::
+
+### Publicar en GitHub Pages
+
+Como hicimos con nuestras páginas web en la sección de Markdown y Quarto, un proyecto de Quarto se puede publicar gratis en **GitHub Pages**:
+
+1.  En el archivo `_quarto.yml` de tu proyecto, indica que el resultado se guarde en la carpeta `docs`:
+
+    ``` yaml
+    project:
+      type: website
+      output-dir: docs
+    ```
+
+2.  Renderiza el proyecto completo. En la **Terminal**: `quarto render` (o el botón **Render** / **Build** de RStudio).
+
+3.  Sube los cambios a GitHub. En la **Terminal**:
+
+    ``` bash
+    git add .
+    git commit -m "Agregar visualizaciones 3D"
+    git push
+    ```
+
+4.  En GitHub, ve a **Settings \> Pages**, elige la rama `main` y la carpeta `/docs`, y da clic en **Save**.
+
+5.  Después de unos minutos, tu sitio estará en `https://tu_usuario.github.io/nombre_del_repositorio/`, con las gráficas de Plotly funcionando de forma interactiva.
+
+::: callout-tip
+Si tu documento solo tiene bloques de Python (motor Jupyter), Quarto necesita `QUARTO_PYTHON` configurado al renderizar. Consulta el capítulo [Configuraciones para usar Quarto con Python](quarto_python.qmd).
+:::
+
+## Ejercicios
+
+Resuelve los ejercicios en los editores interactivos. Recuerda que lo que escribas **no se guarda** al recargar la página. Las gráficas 3D pueden tardar unos segundos en aparecer.
+
+### Ejercicio 1. El sombrero mexicano
+
+Grafica la superficie $z = \dfrac{\sin\left(\sqrt{x^2 + y^2}\right)}{\sqrt{x^2 + y^2}}$ en $[-10, 10] \times [-10, 10]$. Prueba dos puntos de vista distintos con `view_init()`.
+
+```{pyodide}
+#| exercise: v3_1
+import numpy as np
+import matplotlib.pyplot as plt
+
+x = np.linspace(-10, 10, 120)
+X, Y = np.meshgrid(x, x)
+R = np.sqrt(X**2 + Y**2) + 1e-12      # Sumamos 1e-12 para no dividir entre cero en el origen
+Z = ______
+
+fig = plt.figure(figsize=(6, 5))
+ax = fig.add_subplot(projection="3d")
+ax.plot_surface(X, Y, Z, cmap="viridis")
+ax.view_init(elev=______, azim=______)
+ax.set_title("Sombrero mexicano")
+plt.show()
+```
+
+:::: {.hint exercise="v3_1"}
+::: {.callout-note collapse="false"}
+## Pista
+
+`Z = np.sin(R) / R`. Prueba `view_init(elev=30, azim=45)` y luego `view_init(elev=80, azim=0)`.
+:::
+::::
+
+:::: {.solution exercise="v3_1"}
+::: {.callout-tip collapse="false"}
+## Solución
+
+``` python
+Z = np.sin(R) / R
+ax.view_init(elev=30, azim=45)
+```
+
+Con `elev=90` lo ves desde arriba: las crestas forman **circunferencias**, porque la función solo depende de la distancia al origen.
+:::
+::::
+
+### Ejercicio 2. Cilindro cortado por un plano
+
+El cilindro $x^2 + y^2 = 1$ cortado por el plano $z = x + 1$ produce una curva. Parametrízala con $x = \cos t$, $y = \sin t$ y $z$ dada por el plano. Dibuja la curva y comprueba con NumPy que cumple ambas ecuaciones. Deja la tupla con los dos errores máximos en la **última línea**.
+
+```{pyodide}
+#| exercise: v3_2
+import numpy as np
+import matplotlib.pyplot as plt
+
+t = np.linspace(0, 2 * np.pi, 200)
+x = np.cos(t)
+y = np.sin(t)
+z = ______
+
+error_cilindro = np.abs(x**2 + y**2 - 1).max()
+error_plano = np.abs(______).max()
+print("Errores:", error_cilindro, error_plano)
+
+fig = plt.figure(figsize=(6, 5))
+ax = fig.add_subplot(projection="3d")
+ax.plot(x, y, z, color="black", linewidth=2)
+ax.set_title("Intersección cilindro-plano")
+plt.show()
+
+(error_cilindro, error_plano)
+```
+
+```{pyodide}
+#| exercise: v3_2
+#| check: true
+if isinstance(result, tuple) and len(result) == 2 and max(result) < 1e-12 and "______" not in user_code:
+    feedback = {"correct": True, "message": "¡Correcto! La curva está en el cilindro y en el plano. Es una elipse: el plano corta al cilindro de forma oblicua."}
+else:
+    feedback = {"correct": False, "message": "z debe salir del plano: z = x + 1. Para el error del plano: z - (x + 1)."}
+feedback
+```
+
+:::: {.hint exercise="v3_2"}
+::: {.callout-note collapse="false"}
+## Pista
+
+Del plano: `z = x + 1`. El error del plano es lo que le falta a `z` para cumplir la ecuación: `z - (x + 1)`.
+:::
+::::
+
+:::: {.solution exercise="v3_2"}
+::: {.callout-tip collapse="false"}
+## Solución
+
+``` python
+z = x + 1
+error_plano = np.abs(z - (x + 1)).max()
+```
+
+**Extra:** agrega el cilindro y el plano a la gráfica con `plot_surface()` y `alpha=0.3`.
+:::
+::::
+
+### Ejercicio 3. Mapa de calor 2D y 3D de una campana
+
+Grafica la "campana de Gauss" en dos variables, $f(x, y) = e^{-(x^2 + y^2)}$, en $[-2, 2] \times [-2, 2]$, como mapa de calor 2D y como superficie 3D, lado a lado. Usa **101** puntos por eje para que el origen esté en la malla. Deja el valor máximo de `Z` en la **última línea**.
+
+```{pyodide}
+#| exercise: v3_3
+import numpy as np
+import matplotlib.pyplot as plt
+
+x = np.linspace(-2, 2, ______)
+X, Y = np.meshgrid(x, x)
+Z = ______
+
+fig = plt.figure(figsize=(10, 4))
+ax1 = fig.add_subplot(1, 2, 1)
+mapa = ax1.pcolormesh(X, Y, Z, cmap="magma", shading="auto")
+fig.colorbar(mapa, ax=ax1)
+ax1.set_aspect("equal")
+
+ax2 = fig.add_subplot(1, 2, 2, projection=______)
+ax2.plot_surface(X, Y, Z, cmap="magma")
+plt.show()
+
+Z.max()
+```
+
+```{pyodide}
+#| exercise: v3_3
+#| check: true
+import math
+if result is not None and math.isclose(float(result), 1.0):
+    feedback = {"correct": True, "message": "¡Correcto! El máximo es 1, en el origen: e⁰ = 1."}
+else:
+    feedback = {"correct": False, "message": "Revisa: 101 puntos, Z = np.exp(-(X**2 + Y**2)) y projection=\"3d\"."}
+feedback
+```
+
+:::: {.hint exercise="v3_3"}
+::: {.callout-note collapse="false"}
+## Pista
+
+`np.linspace(-2, 2, 101)`, `Z = np.exp(-(X**2 + Y**2))` y `projection="3d"`.
+:::
+::::
+
+:::: {.solution exercise="v3_3"}
+::: {.callout-tip collapse="false"}
+## Solución
+
+``` python
+x = np.linspace(-2, 2, 101)
+X, Y = np.meshgrid(x, x)
+Z = np.exp(-(X**2 + Y**2))
+ax2 = fig.add_subplot(1, 2, 2, projection="3d")
+```
+
+Con 100 puntos, el máximo sería 0.9992: el origen no estaría exactamente en la malla.
+:::
+::::
+
+### Ejercicio 4. Una hélice interactiva con Plotly
+
+Dibuja con Plotly una **hélice** de radio 1 que dé 3 vueltas, $(\cos t, \sin t, t)$ con $t \in [0, 6\pi]$, junto con el cilindro $x^2 + y^2 = 1$ sobre el que está enrollada. Gírala con el ratón.
+
+```{pyodide}
+#| exercise: v3_4
+# --- Preparar Plotly en el navegador (no modificar) ---
+import micropip
+await micropip.install("plotly")
+import pandas
+import plotly.graph_objects as go
+from IPython.display import display, HTML
+go.Figure.show = lambda fig, *args, **kwargs: display(HTML(fig.to_html(include_plotlyjs="cdn", full_html=False)))
+# -------------------------------------------------------
+
+import numpy as np
+
+t = np.linspace(0, ______, 400)
+u, h = np.meshgrid(np.linspace(0, 2 * np.pi, 40), np.linspace(0, 6 * np.pi, 20))
+
+fig = go.Figure()
+fig.add_trace(go.Surface(x=np.cos(u), y=np.sin(u), z=h, opacity=0.2, showscale=False))
+fig.add_trace(go.Scatter3d(x=______, y=______, z=t, mode="lines", line={"width": 6}))
+fig.update_layout(title="Hélice sobre un cilindro", width=600, height=500)
+fig.show()
+```
+
+:::: {.hint exercise="v3_4"}
+::: {.callout-note collapse="false"}
+## Pista
+
+Tres vueltas son $t \in [0, 6\pi]$: `6 * np.pi`. Las coordenadas de la hélice son `np.cos(t)` y `np.sin(t)`.
+:::
+::::
+
+:::: {.solution exercise="v3_4"}
+::: {.callout-tip collapse="false"}
+## Solución
+
+``` python
+t = np.linspace(0, 6 * np.pi, 400)
+fig.add_trace(go.Scatter3d(x=np.cos(t), y=np.sin(t), z=t, mode="lines", line={"width": 6}))
+```
+:::
+::::
+
+## Reto final: el hiperboloide de una hoja
+
+El **hiperboloide de una hoja** $\dfrac{x^2}{a^2} + \dfrac{y^2}{b^2} - \dfrac{z^2}{c^2} = 1$ es una superficie curva que, sorprendentemente, se puede construir **solo con rectas**: por eso se usa en torres de enfriamiento y en estructuras como la Torre de Cantón.
+
+1.  Parametrízalo con $a = 2$, $b = 2$, $c = 3$: $x = a\cosh v \cos u$, $y = b\cosh v \sin u$, $z = c\sinh v$, con $u \in [0, 2\pi]$ y $v \in [-1, 1]$.
+2.  Grafícalo con `plot_surface()` (o `plot_wireframe()` para ver las líneas).
+3.  Verifica con NumPy que todos los puntos cumplen la ecuación: deja el **error máximo** en la **última línea**.
+
+```{pyodide}
+#| exercise: reto_v3
+import numpy as np
+import matplotlib.pyplot as plt
+
+a, b, c = 2, 2, 3
+u, v = np.meshgrid(np.linspace(0, 2 * np.pi, 50), np.linspace(-1, 1, 30))
+
+X = ______
+Y = ______
+Z = ______
+
+error = np.abs(X**2 / a**2 + Y**2 / b**2 - Z**2 / c**2 - 1).max()
+print("Error máximo:", error)
+
+fig = plt.figure(figsize=(6, 6))
+ax = fig.add_subplot(projection="3d")
+ax.plot_wireframe(X, Y, Z, rstride=2, cstride=3, color="tab:blue", linewidth=0.6)
+ax.set_box_aspect((1, 1, 1.2))
+ax.set_title("Hiperboloide de una hoja")
+plt.show()
+
+error
+```
+
+```{pyodide}
+#| exercise: reto_v3
+#| check: true
+if result is not None and float(result) < 1e-10 and "______" not in user_code:
+    feedback = {"correct": True, "message": "¡Excelente! Tu parametrización cumple la ecuación en todos los puntos (cosh² − sinh² = 1)."}
+else:
+    feedback = {"correct": False, "message": "Revisa la parametrización: X = a*np.cosh(v)*np.cos(u), Y = b*np.cosh(v)*np.sin(u), Z = c*np.sinh(v)."}
+feedback
+```
+
+:::: {.hint exercise="reto_v3"}
+::: {.callout-note collapse="false"}
+## Pista
+
+NumPy tiene las funciones hiperbólicas `np.cosh()` y `np.sinh()`. La parametrización funciona porque $\cosh^2 v - \sinh^2 v = 1$.
+:::
+::::
+
+:::: {.solution exercise="reto_v3"}
+::: {.callout-tip collapse="false"}
+## Solución
+
+``` python
+X = a * np.cosh(v) * np.cos(u)
+Y = b * np.cosh(v) * np.sin(u)
+Z = c * np.sinh(v)
+```
+
+Sustituyendo: $\cosh^2 v(\cos^2 u + \sin^2 u) - \sinh^2 v = \cosh^2 v - \sinh^2 v = 1$. **Extra:** cambia el signo para obtener el hiperboloide de **dos** hojas, $x = a\sinh v\cos u$, $y = b\sinh v\sin u$, $z = \pm c\cosh v$.
+:::
+::::
+
+## Resumen
+
+| Tema | Matplotlib | Plotly |
+|------------------------|------------------------|------------------------|
+| Eje 3D | `fig.add_subplot(projection="3d")` | Automático con trazos 3D |
+| Superficie $z = f(x, y)$ | `ax.plot_surface(X, Y, Z)` | `go.Surface(x=X, y=Y, z=Z)` |
+| Superficie paramétrica | `plot_surface` con `X(u, v)`, `Y(u, v)`, `Z(u, v)` | `go.Surface` con las mismas matrices |
+| Curva en 3D | `ax.plot(x, y, z)` | `go.Scatter3d(mode="lines")` |
+| Curvas de nivel | `ax.contour(..., zdir="z", offset=c)` | `contours={"z": {"show": True}}` |
+| Mapa de calor 2D | `pcolormesh`, `imshow` | `go.Heatmap`, `go.Contour` |
+| Mapa de calor 3D | `ax.scatter(X, Y, Z, c=valores)` | `go.Volume` |
+| Punto de vista y escala | `view_init()`, `set_box_aspect()` | Con el ratón; `scene={"aspectmode": "data"}` |
+| 2D y 3D juntos | `add_subplot(..., projection="3d")` y uno normal | `make_subplots(specs=...)` |
+| Documentar | `label: fig-...`, `fig-cap`, `@fig-...`, `layout-ncol` | Igual, en formato HTML |
+
+## Referencias
+
+- [Matplotlib: gráficas 3D (*mplot3d*)](https://matplotlib.org/stable/gallery/mplot3d/index.html)
+- [Plotly: gráficas 3D en Python](https://plotly.com/python/3d-charts/)
+- [Plotly: subgráficas mixtas](https://plotly.com/python/mixed-subplots/)
+- [Quarto: figuras y referencias cruzadas](https://quarto.org/docs/authoring/figures.html)
+- [Quarto: publicar en GitHub Pages](https://quarto.org/docs/publishing/github-pages.html)

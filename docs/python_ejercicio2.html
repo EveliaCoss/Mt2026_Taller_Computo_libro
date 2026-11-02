@@ -649,20 +649,50 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./python_for.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">57</span>&nbsp; <span class="chapter-title">Ciclos <code>for</code> y <code>while</code> en Python</span></span></a>
+  <a href="./python_sympy.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">57</span>&nbsp; <span class="chapter-title">Cálculo simbólico con SymPy</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./python_sympy.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">58</span>&nbsp; <span class="chapter-title">Cálculo simbólico con SymPy</span></span></a>
+  <a href="./python_for.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">58</span>&nbsp; <span class="chapter-title">Ciclos <code>for</code> y <code>while</code> en Python</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./python_funciones.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">59</span>&nbsp; <span class="chapter-title">Funciones en Python</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./python_visualizacion.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">59</span>&nbsp; <span class="chapter-title">Visualización de datos con Matplotlib y Plotly</span></span></a>
+ <span class="menu-text"><span class="chapter-number">60</span>&nbsp; <span class="chapter-title">Visualización de datos con Matplotlib y Plotly</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./python_visualizacion2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">61</span>&nbsp; <span class="chapter-title">Visualización II: curvas, lugares geométricos y gráficas avanzadas en 2D</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./python_aleatorios.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">62</span>&nbsp; <span class="chapter-title">Números aleatorios y aplicaciones</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./python_visualizacion3d.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">63</span>&nbsp; <span class="chapter-title">Visualización III: gráficas en 3D</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./python_transformaciones.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">64</span>&nbsp; <span class="chapter-title">Transformaciones geométricas en 2D y 3D</span></span></a>
   </div>
 </li>
       </ul>
@@ -2494,7 +2524,7 @@ eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWUsImV4ZXJjaXNlIjoicmV0byJ9LCJjb2RlIjoi
 </div>
 <div class="cell" data-exercise="reto" data-check="true">
 <script type="exercise-check-reto-contents">
-eyJhdHRyIjp7ImNoZWNrIjp0cnVlLCJlZGl0Ijp0cnVlLCJldmFsIjp0cnVlLCJleGVyY2lzZSI6InJldG8ifSwiY29kZSI6ImVzcGVyYWRvID0ge1wibWVkaWFcIjogMTEuMTEsIFwibWVkaWFuYVwiOiA5LCBcIm1vZGFcIjogNywgXCJyYW5nb1wiOiAyMn1cbmlmIG5vdCBpc2luc3RhbmNlKHJlc3VsdCwgZGljdCk6XG4gICAgZmVlZGJhY2sgPSB7XCJjb3JyZWN0XCI6IEZhbHNlLCBcIm1lc3NhZ2VcIjogXCJMYSDDumx0aW1hIGzDrW5lYSBkZWJlIHJlZ3Jlc2FyIGVsIGRpY2Npb25hcmlvIHJlc3VtZW4uXCJ9XG5lbGlmIGVudmlyX3Jlc3VsdFtcImRhdG9zXCJdICE9IFsxMiwgNywgMywgNywgMjUsIDEyLCA3LCA5LCAxOF06XG4gICAgZmVlZGJhY2sgPSB7XCJjb3JyZWN0XCI6IEZhbHNlLCBcIm1lc3NhZ2VcIjogXCJNb2RpZmljYXN0ZSBsYSBsaXN0YSBkYXRvcy4gVXNhIHNvcnRlZCgpLCBxdWUgcmVncmVzYSB1bmEgbGlzdGEgbnVldmEsIGVuIGx1Z2FyIGRlIHNvcnQoKS5cIn1cbmVsaWYgcmVzdWx0ID09IGVzcGVyYWRvOlxuICAgIGZlZWRiYWNrID0ge1wiY29ycmVjdFwiOiBUcnVlLCBcIm1lc3NhZ2VcIjogXCLCoUV4Y2VsZW50ZSEgTWVkaWEgMTEuMTEsIG1lZGlhbmEgOSwgbW9kYSA3IHkgcmFuZ28gMjIuXCJ9XG5lbHNlOlxuICAgIGluY29ycmVjdG9zID0gW2NsYXZlIGZvciBjbGF2ZSBpbiBlc3BlcmFkbyBpZiByZXN1bHQuZ2V0KGNsYXZlKSAhPSBlc3BlcmFkb1tjbGF2ZV1dXG4gICAgZmVlZGJhY2sgPSB7XCJjb3JyZWN0XCI6IEZhbHNlLCBcIm1lc3NhZ2VcIjogXCJSZXZpc2E6IFwiICsgXCIsIFwiLmpvaW4oaW5jb3JyZWN0b3MpfVxuZmVlZGJhY2sifQ==
+eyJhdHRyIjp7ImNoZWNrIjp0cnVlLCJlZGl0Ijp0cnVlLCJldmFsIjp0cnVlLCJleGVyY2lzZSI6InJldG8ifSwiY29kZSI6ImVzcGVyYWRvID0ge1wibWVkaWFcIjogMTEuMTEsIFwibWVkaWFuYVwiOiA5LCBcIm1vZGFcIjogNywgXCJyYW5nb1wiOiAyMn1cbmlmIG5vdCBpc2luc3RhbmNlKHJlc3VsdCwgZGljdCk6XG4gICAgZmVlZGJhY2sgPSB7XCJjb3JyZWN0XCI6IEZhbHNlLCBcIm1lc3NhZ2VcIjogXCJMYSDDumx0aW1hIGzDrW5lYSBkZWJlIHJlZ3Jlc2FyIGVsIGRpY2Npb25hcmlvIHJlc3VtZW4uXCJ9XG5lbGlmIGVudmlyX3Jlc3VsdFtcImRhdG9zXCJdICE9IFsxMiwgNywgMywgNywgMjUsIDEyLCA3LCA5LCAxOF06XG4gICAgZmVlZGJhY2sgPSB7XCJjb3JyZWN0XCI6IEZhbHNlLCBcIm1lc3NhZ2VcIjogXCJNb2RpZmljYXN0ZSBsYSBsaXN0YSBkYXRvcy4gVXNhIHNvcnRlZCgpLCBxdWUgcmVncmVzYSB1bmEgbGlzdGEgbnVldmEsIGVuIGx1Z2FyIGRlIHNvcnQoKS5cIn1cbmVsaWYgcmVzdWx0ID09IGVzcGVyYWRvOlxuICAgIGZlZWRiYWNrID0ge1wiY29ycmVjdFwiOiBUcnVlLCBcIm1lc3NhZ2VcIjogXCLCoUV4Y2VsZW50ZSEgTWVkaWEgMTEuMTEsIG1lZGlhbmEgOSwgbW9kYSA3IHkgcmFuZ28gMjIuXCJ9XG5lbHNlOlxuICAgIGluY29ycmVjdG9zID0gW11cbiAgICBmb3IgY2xhdmUgaW4gZXNwZXJhZG86XG4gICAgICAgIGlmIHJlc3VsdC5nZXQoY2xhdmUpICE9IGVzcGVyYWRvW2NsYXZlXTpcbiAgICAgICAgICAgIGluY29ycmVjdG9zLmFwcGVuZChjbGF2ZSlcbiAgICBmZWVkYmFjayA9IHtcImNvcnJlY3RcIjogRmFsc2UsIFwibWVzc2FnZVwiOiBcIlJldmlzYTogXCIgKyBcIiwgXCIuam9pbihpbmNvcnJlY3Rvcyl9XG5mZWVkYmFjayJ9
 </script>
 </div>
 <div class="hint webr-ojs-exercise exercise-hint d-none" data-exercise="reto">

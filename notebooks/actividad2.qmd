@@ -839,7 +839,10 @@ elif datos != [12, 7, 3, 7, 25, 12, 7, 9, 18]:
 elif result == esperado:
     feedback = {"correct": True, "message": "¡Excelente! Media 11.11, mediana 9, moda 7 y rango 22."}
 else:
-    incorrectos = [clave for clave in esperado if result.get(clave) != esperado[clave]]
+    incorrectos = []
+    for clave in esperado:
+        if result.get(clave) != esperado[clave]:
+            incorrectos.append(clave)
     feedback = {"correct": False, "message": "Revisa: " + ", ".join(incorrectos)}
 feedback
 print(("✅ " if feedback["correct"] else "❌ ") + feedback["message"])
