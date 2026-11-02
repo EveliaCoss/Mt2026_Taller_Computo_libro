@@ -1,0 +1,743 @@
+---
+engine: knitr
+---
+
+# Cálculo simbólico con SymPy
+
+{{< include ./_extensions/r-wasm/live/_knitr.qmd >}}
+
+```{r}
+#| include: false
+# Usar el entorno del curso (~/.venvs/quarto-python) si existe, aunque RStudio tenga configurado otro Python.
+# Si no existe, reticulate descarga automáticamente las bibliotecas necesarias.
+venv_python <- path.expand(c("~/.venvs/quarto-python/bin/python", "~/.venvs/quarto-python/Scripts/python.exe"))
+venv_python <- venv_python[file.exists(venv_python)]
+if (length(venv_python) > 0) {
+  Sys.setenv(RETICULATE_PYTHON = venv_python[1])
+} else {
+  reticulate::py_require(c("numpy", "sympy"))
+}
+```
+
+> **Fecha:** 03 de noviembre, 2026
+
+[SymPy](https://www.sympy.org/) es una biblioteca de Python para hacer **matemáticas simbólicas**: manipula expresiones con variables como lo haríamos con lápiz y papel, y obtiene resultados **exactos** en lugar de aproximaciones decimales.
+
+En este capítulo veremos:
+
+- La diferencia entre el cálculo **numérico** (NumPy) y el **simbólico** (SymPy).
+- Cómo definir **símbolos** y manipular **expresiones**: sustituir, simplificar, factorizar y expandir.
+- Cómo resolver **ecuaciones** y **sistemas de ecuaciones**.
+- **Cálculo**: límites, derivadas, integrales, series y sumas.
+- **Matrices** y **ecuaciones diferenciales**.
+- Cómo convertir resultados a **LaTeX** para tus documentos de Quarto.
+
+## Cálculo numérico vs. cálculo simbólico
+
+```{python}
+import numpy as np
+import sympy as sp
+
+print("NumPy: ", np.sqrt(8))   # Aproximación decimal
+print("SymPy: ", sp.sqrt(8))   # Resultado exacto
+```
+
+| | Cálculo numérico (NumPy) | Cálculo simbólico (SymPy) |
+|----|----|----|
+| Trabaja con | Números decimales. | Símbolos y expresiones exactas. |
+| $\sqrt{8}$ | `2.8284271247461903` | `2*sqrt(2)` |
+| $\frac{1}{3} + \frac{1}{6}$ | `0.5` (con posibles errores de redondeo) | `1/2` (fracción exacta) |
+| Derivar $x^2$ | Aproxima la pendiente en puntos. | Obtiene $2x$. |
+| Ideal para | Datos, simulaciones, grandes cantidades de números. | Álgebra, cálculo, demostrar y verificar fórmulas. |
+
+```{python}
+print(0.1 + 0.2)                                  # Error de redondeo de los decimales
+print(sp.Rational(1, 10) + sp.Rational(2, 10))    # Fracciones exactas
+print(sp.pi.evalf(30))                            # Pi con 30 dígitos
+```
+
+## Instalar e importar SymPy
+
+En tu computadora, instálalo en tu entorno virtual (consulta el apéndice [Entornos para trabajar con Python](python_entornos.qmd)):
+
+``` bash
+python -m pip install sympy
+```
+
+En Google Colab y en los editores de esta página **ya está instalado**. Por convención se importa con el alias `sp`:
+
+```{python}
+import sympy as sp
+print(sp.__version__)
+```
+
+## Símbolos y expresiones
+
+En Python, una variable debe tener un valor antes de usarse. En SymPy primero declaramos qué nombres son **símbolos** matemáticos con `sp.symbols()`:
+
+```{python}
+x, y = sp.symbols("x y")
+
+expresion = x**2 + 2*x*y + y**2
+print(expresion)
+print(type(x))
+```
+
+::: callout-important
+Para elevar a una potencia se usa `**`, no `^`. En Python, `x^2` es otra operación (el "o exclusivo" entre bits) y produce un error con los símbolos.
+:::
+
+Podemos indicar **supuestos** sobre los símbolos, que SymPy usa para simplificar:
+
+```{python}
+t = sp.symbols("t")
+r = sp.symbols("r", positive=True)
+
+print(sp.sqrt(t**2))   # No sabe si t es negativo
+print(sp.sqrt(r**2))   # Sabe que r es positivo
+```
+
+### Sustituir y evaluar
+
+| Método | ¿Qué hace? | Ejemplo |
+|----|----|----|
+| `expr.subs(x, valor)` | Sustituye un símbolo por un valor u otra expresión. | `(x**2).subs(x, 3)` → `9` |
+| `expr.evalf()` o `sp.N(expr)` | Calcula el valor decimal. | `sp.sqrt(2).evalf()` → `1.414...` |
+| `sp.N(expr, n)` | Valor decimal con `n` dígitos. | `sp.N(sp.pi, 50)` |
+
+```{python}
+f = x**2 + 3*x - 1
+
+print(f.subs(x, 2))                  # Evaluar en x = 2
+print(f.subs(x, y + 1))              # Sustituir por otra expresión
+print(f.subs(x, sp.sqrt(2)))         # Resultado exacto
+print(f.subs(x, sp.sqrt(2)).evalf()) # Resultado decimal
+```
+
+### Fracciones exactas
+
+Si escribes `1/2` dentro de una expresión, Python calcula primero el decimal `0.5`. Para obtener una fracción exacta usa `sp.Rational()`:
+
+```{python}
+print(x + 1/2)                 # 0.5: decimal
+print(x + sp.Rational(1, 2))   # 1/2: fracción exacta
+```
+
+## Simplificar, expandir y factorizar
+
+| Función | ¿Qué hace? | Ejemplo | Resultado |
+|----|----|----|----|
+| `sp.expand()` | Desarrolla productos y potencias. | `sp.expand((x + 1)**2)` | `x**2 + 2*x + 1` |
+| `sp.factor()` | Factoriza. | `sp.factor(x**2 - 1)` | `(x - 1)*(x + 1)` |
+| `sp.simplify()` | Intenta encontrar la forma más simple. | `sp.simplify(sp.sin(x)**2 + sp.cos(x)**2)` | `1` |
+| `sp.cancel()` | Simplifica fracciones de polinomios. | `sp.cancel((x**2 - 1)/(x - 1))` | `x + 1` |
+| `sp.apart()` | Fracciones parciales. | `sp.apart(1/(x**2 - 1))` | `-1/(2*(x + 1)) + 1/(2*(x - 1))` |
+| `sp.collect()` | Agrupa términos por un símbolo. | `sp.collect(x*y + x, x)` | `x*(y + 1)` |
+| `sp.trigsimp()` | Simplifica expresiones trigonométricas. | `sp.trigsimp(2*sp.sin(x)*sp.cos(x))` | `sin(2*x)` |
+
+```{python}
+print(sp.expand((x + y)**3))
+print(sp.factor(x**3 - x**2 - x + 1))
+print(sp.cancel((x**2 - 1) / (x - 1)))
+print(sp.apart(1 / (x**2 - 1)))
+```
+
+## Ecuaciones
+
+Para escribir una ecuación **no** se usa `=` (que asigna) ni `==` (que compara), sino `sp.Eq(lado_izquierdo, lado_derecho)`. Para resolverla usamos `sp.solve()`:
+
+```{python}
+ecuacion = sp.Eq(x**2 - 5*x, -6)
+
+print(ecuacion)
+print(sp.solve(ecuacion, x))
+```
+
+Si pasamos solo una expresión, `sp.solve()` supone que está igualada a cero:
+
+```{python}
+print(sp.solve(x**2 - 4, x))
+print(sp.solve(x**2 + 1, x))   # Soluciones complejas: I es la unidad imaginaria
+```
+
+Con `sp.solveset()` podemos indicar en qué conjunto buscar soluciones:
+
+```{python}
+print(sp.solveset(x**2 + 1, x, domain=sp.S.Reals))   # Sin soluciones reales
+```
+
+### La fórmula general
+
+SymPy puede resolver la ecuación cuadrática **con coeficientes simbólicos** y obtener la fórmula general que usamos en el capítulo de [condicionales](python_condicionales.qmd):
+
+```{python}
+a, b, c = sp.symbols("a b c")
+print(sp.solve(a*x**2 + b*x + c, x))
+```
+
+### Sistemas de ecuaciones
+
+Es el mismo sistema que resolvimos con `np.linalg.solve()` en el capítulo de [NumPy](python_numpy.qmd), pero ahora con solución **exacta**:
+
+```{python}
+x, y, z = sp.symbols("x y z")
+
+sistema = [sp.Eq(2*x + y - z, 3),
+           sp.Eq(x - y + 2*z, 5),
+           sp.Eq(3*x + 2*y + z, 10)]
+
+print(sp.solve(sistema, [x, y, z]))
+```
+
+## Cálculo
+
+| Operación | Notación | SymPy |
+|----|----|----|
+| Límite | $\lim_{x \to a} f(x)$ | `sp.limit(f, x, a)` |
+| Límite al infinito | $\lim_{x \to \infty} f(x)$ | `sp.limit(f, x, sp.oo)` |
+| Derivada | $\frac{df}{dx}$ | `sp.diff(f, x)` |
+| Derivada de orden $n$ | $\frac{d^n f}{dx^n}$ | `sp.diff(f, x, n)` |
+| Derivada parcial | $\frac{\partial f}{\partial y}$ | `sp.diff(f, y)` |
+| Integral indefinida | $\int f\,dx$ | `sp.integrate(f, x)` |
+| Integral definida | $\int_a^b f\,dx$ | `sp.integrate(f, (x, a, b))` |
+| Serie de Taylor | $f(x) \approx \sum \frac{f^{(n)}(a)}{n!}(x-a)^n$ | `sp.series(f, x, a, n)` |
+| Suma | $\sum_{i=1}^{n} f(i)$ | `sp.summation(f, (i, 1, n))` |
+
+El infinito se escribe `sp.oo` (dos letras "o"), y las constantes son `sp.pi`, `sp.E` y `sp.I`.
+
+### Límites
+
+```{python}
+x, n = sp.symbols("x n")
+
+print(sp.limit(sp.sin(x) / x, x, 0))
+print(sp.limit((1 + 1/n)**n, n, sp.oo))   # El número e
+print(sp.limit(1/x, x, 0, dir="+"))       # Límite por la derecha
+```
+
+### Derivadas
+
+```{python}
+f = x**2 * sp.sin(x)
+
+print(sp.diff(f, x))         # Primera derivada
+print(sp.diff(f, x, 2))      # Segunda derivada
+
+x, y = sp.symbols("x y")
+g = x**2 * y + sp.sin(y)
+print(sp.diff(g, y))         # Derivada parcial respecto a y
+```
+
+### Integrales
+
+```{python}
+print(sp.integrate(x * sp.exp(x), x))                    # Indefinida (sin la constante C)
+print(sp.integrate(x * sp.exp(x), (x, 0, 1)))            # Definida
+print(sp.integrate(sp.exp(-x**2), (x, -sp.oo, sp.oo)))   # Integral de Gauss
+```
+
+### Series de Taylor
+
+```{python}
+print(sp.series(sp.sin(x), x, 0, 8))
+print(sp.series(sp.exp(x), x, 0, 5).removeO())   # Sin el término O(x^n)
+```
+
+### Sumas
+
+En el capítulo de [ciclos `for`](python_for.qmd) sumamos los números del 1 al 100 con un ciclo. SymPy puede obtener la **fórmula** para cualquier $n$:
+
+```{python}
+i, n = sp.symbols("i n", integer=True, positive=True)
+
+print(sp.factor(sp.summation(i, (i, 1, n))))      # 1 + 2 + ... + n
+print(sp.summation(i, (i, 1, 100)))               # Con n = 100
+```
+
+## Matrices
+
+`sp.Matrix` trabaja con valores exactos, incluidas fracciones y símbolos:
+
+```{python}
+M = sp.Matrix([[2, 1],
+               [1, 3]])
+
+print("det(M) =", M.det())
+print("M^-1 =", M.inv())
+print("Valores propios:", M.eigenvals())
+```
+
+| Operación | SymPy |
+|----|----|
+| Producto | `A * B` (en SymPy, `*` **sí** es el producto de matrices) |
+| Transpuesta | `A.T` |
+| Determinante | `A.det()` |
+| Inversa | `A.inv()` |
+| Forma escalonada reducida | `A.rref()` |
+| Valores y vectores propios | `A.eigenvals()`, `A.eigenvects()` |
+
+## Ecuaciones diferenciales
+
+Para resolver una ecuación diferencial ordinaria declaramos una **función** desconocida con `sp.Function()` y usamos `sp.dsolve()`. Por ejemplo, $y'' + y = 0$:
+
+```{python}
+y = sp.Function("y")
+x = sp.symbols("x")
+
+edo = sp.Eq(y(x).diff(x, 2) + y(x), 0)
+print(sp.dsolve(edo, y(x)))
+```
+
+`C1` y `C2` son las constantes de integración.
+
+## De SymPy a NumPy: `lambdify()`
+
+Para evaluar una expresión en **muchos** puntos (por ejemplo, para graficarla), conviértela en una función de NumPy con `sp.lambdify()`:
+
+```{python}
+expr = sp.sin(x)**2
+f_numpy = sp.lambdify(x, expr, "numpy")
+
+valores = np.linspace(0, np.pi, 5)
+print(f_numpy(valores).round(4))
+```
+
+Usaremos esta herramienta en el capítulo de [visualización de datos](python_visualizacion.qmd).
+
+## De SymPy a LaTeX
+
+`sp.latex()` convierte cualquier expresión al código LaTeX que usamos en Markdown y Quarto:
+
+```{python}
+integral = sp.Integral(sp.exp(-x**2), (x, -sp.oo, sp.oo))
+print(sp.latex(integral), "=", sp.latex(integral.doit()))
+```
+
+En un documento de Quarto puedes mostrar el resultado como fórmula con la opción `#| output: asis`:
+
+```{python}
+#| output: asis
+print(f"$${sp.latex(integral)} = {sp.latex(integral.doit())}$$")
+```
+
+## Errores comunes
+
+| Error | Ejemplo | Corrección |
+|----|----|----|
+| Usar un símbolo sin declararlo | `sp.diff(x**2, x)` sin `sp.symbols` (`NameError`) | `x = sp.symbols("x")` |
+| Usar `^` para potencias | `x^2` (`TypeError`) | `x**2` |
+| Fracciones con `/` entre enteros | `x + 1/3` da `x + 0.333...` | `x + sp.Rational(1, 3)` |
+| Usar funciones de NumPy con símbolos | `np.sin(x)` (`TypeError`) | `sp.sin(x)` |
+| Escribir ecuaciones con `=` | `x**2 = 4` (`SyntaxError`) | `sp.Eq(x**2, 4)` |
+| Olvidar el símbolo en `solve` o `diff` | `sp.diff(x*y)` (ambiguo) | `sp.diff(x*y, x)` |
+
+## Ejercicios
+
+Resuelve los ejercicios en los editores interactivos. Recuerda que lo que escribas **no se guarda** al recargar la página. La primera vez que ejecutes un editor, SymPy puede tardar unos segundos en cargar.
+
+### Ejercicio 1. Factorizar y expandir
+
+1.  Expande $(x + 1)^3$.
+2.  Factoriza $x^2 - 5x + 6$ y deja el resultado en la **última línea**.
+
+```{pyodide}
+#| exercise: sp1
+import sympy as sp
+x = sp.symbols("x")
+
+print(______)   # (x + 1)^3 expandido
+
+______          # x^2 - 5x + 6 factorizado
+```
+
+```{pyodide}
+#| exercise: sp1
+#| check: true
+import sympy as sp
+x = sp.symbols("x")
+if isinstance(result, sp.Basic) and result == sp.factor(x**2 - 5*x + 6):
+    feedback = {"correct": True, "message": "¡Correcto! x² - 5x + 6 = (x - 2)(x - 3)."}
+elif isinstance(result, sp.Basic) and sp.expand(result - (x**2 - 5*x + 6)) == 0:
+    feedback = {"correct": False, "message": "Es la misma expresión, pero no está factorizada. Usa sp.factor()."}
+else:
+    feedback = {"correct": False, "message": "La última línea debe regresar x**2 - 5*x + 6 factorizado."}
+feedback
+```
+
+::: {.hint exercise="sp1"}
+::: {.callout-note collapse="false"}
+## Pista
+
+Usa `sp.expand((x + 1)**3)` y `sp.factor(x**2 - 5*x + 6)`. Recuerda que la potencia se escribe con `**`.
+:::
+:::
+
+::: {.solution exercise="sp1"}
+::: {.callout-tip collapse="false"}
+## Solución
+
+``` python
+import sympy as sp
+x = sp.symbols("x")
+
+print(sp.expand((x + 1)**3))   # x**3 + 3*x**2 + 3*x + 1
+
+sp.factor(x**2 - 5*x + 6)      # (x - 3)*(x - 2)
+```
+:::
+:::
+
+### Ejercicio 2. Raíces de un polinomio
+
+Encuentra todas las raíces del polinomio $p(x) = x^3 - 6x^2 + 11x - 6$. Después **verifica** que cada raíz cumple $p(r) = 0$ sustituyéndola con `subs()`. Deja la lista de raíces en la **última línea**.
+
+```{pyodide}
+#| exercise: sp2
+import sympy as sp
+x = sp.symbols("x")
+
+p = x**3 - 6*x**2 + 11*x - 6
+raices = ______
+
+print("Raíces:", raices)
+print("p(1) =", ______)
+
+raices
+```
+
+```{pyodide}
+#| exercise: sp2
+#| check: true
+if isinstance(result, list) and sorted(result) == [1, 2, 3]:
+    feedback = {"correct": True, "message": "¡Correcto! p(x) = (x - 1)(x - 2)(x - 3)."}
+else:
+    feedback = {"correct": False, "message": "Las raíces deben ser 1, 2 y 3. Usa sp.solve(p, x)."}
+feedback
+```
+
+::: {.hint exercise="sp2"}
+::: {.callout-note collapse="false"}
+## Pista
+
+`sp.solve(p, x)` regresa una lista con las raíces. Para verificar: `p.subs(x, 1)`.
+:::
+:::
+
+::: {.solution exercise="sp2"}
+::: {.callout-tip collapse="false"}
+## Solución
+
+``` python
+import sympy as sp
+x = sp.symbols("x")
+
+p = x**3 - 6*x**2 + 11*x - 6
+raices = sp.solve(p, x)
+
+print("Raíces:", raices)     # [1, 2, 3]
+print("p(1) =", p.subs(x, 1)) # 0
+
+raices
+```
+:::
+:::
+
+### Ejercicio 3. El número $e$ como límite
+
+Calcula $\displaystyle\lim_{n \to \infty} \left(1 + \frac{1}{n}\right)^n$ y muestra su valor con 20 dígitos. Deja el límite en la **última línea**.
+
+```{pyodide}
+#| exercise: sp3
+import sympy as sp
+n = sp.symbols("n")
+
+limite = ______
+
+print("Límite:", limite)
+print("Valor decimal:", ______)
+limite
+```
+
+```{pyodide}
+#| exercise: sp3
+#| check: true
+import sympy as sp
+if result == sp.E:
+    feedback = {"correct": True, "message": "¡Correcto! El límite es el número e = 2.71828..."}
+else:
+    feedback = {"correct": False, "message": "Revisa el límite: sp.limit((1 + 1/n)**n, n, sp.oo)."}
+feedback
+```
+
+::: {.hint exercise="sp3"}
+::: {.callout-note collapse="false"}
+## Pista
+
+El infinito es `sp.oo`. Para ver el valor con 20 dígitos usa `sp.N(limite, 20)`.
+:::
+:::
+
+::: {.solution exercise="sp3"}
+::: {.callout-tip collapse="false"}
+## Solución
+
+``` python
+import sympy as sp
+n = sp.symbols("n")
+
+limite = sp.limit((1 + 1/n)**n, n, sp.oo)
+
+print("Límite:", limite)                    # E
+print("Valor decimal:", sp.N(limite, 20))   # 2.7182818284590452354
+limite
+```
+:::
+:::
+
+### Ejercicio 4. Derivadas
+
+Para $f(x) = x^2 \sin(x)$:
+
+1.  Calcula la primera y la segunda derivada.
+2.  Evalúa la primera derivada en $x = \pi$ y deja el resultado en la **última línea**.
+
+```{pyodide}
+#| exercise: sp4
+import sympy as sp
+x = sp.symbols("x")
+
+f = x**2 * sp.sin(x)
+
+primera = ______
+segunda = ______
+
+print("f'(x) =", primera)
+print("f''(x) =", segunda)
+
+______   # f'(pi)
+```
+
+```{pyodide}
+#| exercise: sp4
+#| check: true
+import sympy as sp
+if isinstance(result, sp.Basic) and sp.simplify(result + sp.pi**2) == 0:
+    feedback = {"correct": True, "message": "¡Correcto! f'(π) = 2π·sin(π) + π²·cos(π) = -π²."}
+else:
+    feedback = {"correct": False, "message": "Evalúa la primera derivada en x = π con primera.subs(x, sp.pi)."}
+feedback
+```
+
+::: {.hint exercise="sp4"}
+::: {.callout-note collapse="false"}
+## Pista
+
+`sp.diff(f, x)` y `sp.diff(f, x, 2)`. Para evaluar: `primera.subs(x, sp.pi)`. Usa `sp.pi`, no `3.1416`, para obtener el resultado exacto.
+:::
+:::
+
+::: {.solution exercise="sp4"}
+::: {.callout-tip collapse="false"}
+## Solución
+
+``` python
+import sympy as sp
+x = sp.symbols("x")
+
+f = x**2 * sp.sin(x)
+
+primera = sp.diff(f, x)       # x**2*cos(x) + 2*x*sin(x)
+segunda = sp.diff(f, x, 2)    # -x**2*sin(x) + 4*x*cos(x) + 2*sin(x)
+
+print("f'(x) =", primera)
+print("f''(x) =", segunda)
+
+primera.subs(x, sp.pi)        # -pi**2
+```
+:::
+:::
+
+### Ejercicio 5. Integrales
+
+1.  Calcula la integral indefinida $\int x e^x \, dx$.
+2.  **Verifica** tu resultado derivándolo: debes obtener de nuevo $x e^x$.
+3.  Calcula la integral definida $\int_0^1 x e^x \, dx$ y déjala en la **última línea**.
+
+```{pyodide}
+#| exercise: sp5
+import sympy as sp
+x = sp.symbols("x")
+
+indefinida = ______
+print("Integral indefinida:", indefinida)
+print("Verificación:", sp.simplify(______))
+
+______   # Integral definida de 0 a 1
+```
+
+```{pyodide}
+#| exercise: sp5
+#| check: true
+if result == 1:
+    feedback = {"correct": True, "message": "¡Correcto! La integral definida vale exactamente 1."}
+else:
+    feedback = {"correct": False, "message": "La integral definida de 0 a 1 debe ser 1. Usa sp.integrate(f, (x, 0, 1))."}
+feedback
+```
+
+::: {.hint exercise="sp5"}
+::: {.callout-note collapse="false"}
+## Pista
+
+`sp.integrate(x * sp.exp(x), x)` para la indefinida y `sp.integrate(x * sp.exp(x), (x, 0, 1))` para la definida. Para verificar, deriva: `sp.diff(indefinida, x)`.
+:::
+:::
+
+::: {.solution exercise="sp5"}
+::: {.callout-tip collapse="false"}
+## Solución
+
+``` python
+import sympy as sp
+x = sp.symbols("x")
+
+indefinida = sp.integrate(x * sp.exp(x), x)
+print("Integral indefinida:", indefinida)                     # (x - 1)*exp(x)
+print("Verificación:", sp.simplify(sp.diff(indefinida, x)))   # x*exp(x)
+
+sp.integrate(x * sp.exp(x), (x, 0, 1))                        # 1
+```
+:::
+:::
+
+### Ejercicio 6. Fórmula de la suma de cuadrados
+
+Usa `sp.summation()` para obtener una fórmula de $\displaystyle\sum_{i=1}^{n} i^2 = 1^2 + 2^2 + \cdots + n^2$. Factoriza el resultado y déjalo en la **última línea**. Después úsala para calcular la suma con $n = 100$.
+
+```{pyodide}
+#| exercise: sp6
+import sympy as sp
+i, n = sp.symbols("i n", integer=True, positive=True)
+
+formula = ______
+print("Fórmula:", formula)
+print("Con n = 100:", ______)
+
+formula
+```
+
+```{pyodide}
+#| exercise: sp6
+#| check: true
+import sympy as sp
+n = sp.symbols("n", integer=True, positive=True)
+if isinstance(result, sp.Basic) and sp.simplify(result - n*(n + 1)*(2*n + 1)/6) == 0:
+    feedback = {"correct": True, "message": "¡Correcto! La suma es n(n + 1)(2n + 1)/6; con n = 100 vale 338350."}
+else:
+    feedback = {"correct": False, "message": "Revisa la suma: sp.summation(i**2, (i, 1, n))."}
+feedback
+```
+
+::: {.hint exercise="sp6"}
+::: {.callout-note collapse="false"}
+## Pista
+
+`sp.factor(sp.summation(i**2, (i, 1, n)))`. Para evaluar la fórmula: `formula.subs(n, 100)`.
+:::
+:::
+
+::: {.solution exercise="sp6"}
+::: {.callout-tip collapse="false"}
+## Solución
+
+``` python
+import sympy as sp
+i, n = sp.symbols("i n", integer=True, positive=True)
+
+formula = sp.factor(sp.summation(i**2, (i, 1, n)))
+print("Fórmula:", formula)                    # n*(n + 1)*(2*n + 1)/6
+print("Con n = 100:", formula.subs(n, 100))   # 338350
+
+formula
+```
+:::
+:::
+
+## Reto final: dos series famosas
+
+En el capítulo de ciclos `for` aproximamos $\pi$ sumando 1000 términos de la serie de Leibniz. Con SymPy podemos calcular la suma **infinita** de forma exacta:
+
+1.  Calcula $\displaystyle\sum_{k=0}^{\infty} \frac{(-1)^k}{2k + 1}$ (serie de Leibniz).
+2.  Calcula $\displaystyle\sum_{k=1}^{\infty} \frac{1}{k^2}$ (el **problema de Basilea**, resuelto por Euler en 1734) y déjala en la **última línea**.
+
+```{pyodide}
+#| exercise: reto_sp
+import sympy as sp
+k = sp.symbols("k", integer=True)
+
+leibniz = ______
+print("Serie de Leibniz:", leibniz)
+
+basilea = ______
+print("Problema de Basilea:", basilea, "≈", sp.N(basilea))
+basilea
+```
+
+```{pyodide}
+#| exercise: reto_sp
+#| check: true
+import sympy as sp
+if result == sp.pi**2 / 6:
+    feedback = {"correct": True, "message": "¡Excelente! La serie de Leibniz suma π/4 y la de Basilea π²/6."}
+else:
+    feedback = {"correct": False, "message": "La última línea debe regresar la suma de 1/k² desde k = 1 hasta infinito."}
+feedback
+```
+
+::: {.hint exercise="reto_sp"}
+::: {.callout-note collapse="false"}
+## Pista
+
+`sp.summation((-1)**k / (2*k + 1), (k, 0, sp.oo))` y `sp.summation(1 / k**2, (k, 1, sp.oo))`.
+:::
+:::
+
+::: {.solution exercise="reto_sp"}
+::: {.callout-tip collapse="false"}
+## Solución
+
+``` python
+import sympy as sp
+k = sp.symbols("k", integer=True)
+
+leibniz = sp.summation((-1)**k / (2*k + 1), (k, 0, sp.oo))
+print("Serie de Leibniz:", leibniz)                          # pi/4
+
+basilea = sp.summation(1 / k**2, (k, 1, sp.oo))
+print("Problema de Basilea:", basilea, "≈", sp.N(basilea))   # pi**2/6 ≈ 1.64493406684823
+basilea
+```
+
+Por eso la aproximación con 1000 términos multiplicaba la suma por 4: $4 \cdot \frac{\pi}{4} = \pi$.
+:::
+:::
+
+## Resumen
+
+| Tema | SymPy |
+|----|----|
+| Símbolos | `x, y = sp.symbols("x y")` |
+| Sustituir / evaluar | `expr.subs(x, 2)`, `expr.evalf()`, `sp.N(expr, n)` |
+| Fracciones y constantes | `sp.Rational(1, 3)`, `sp.pi`, `sp.E`, `sp.I`, `sp.oo` |
+| Manipular expresiones | `expand`, `factor`, `simplify`, `cancel`, `apart`, `trigsimp` |
+| Ecuaciones | `sp.Eq(izq, der)`, `sp.solve()`, `sp.solveset()` |
+| Cálculo | `limit`, `diff`, `integrate`, `series`, `summation` |
+| Matrices | `sp.Matrix`, `.det()`, `.inv()`, `.eigenvals()` |
+| Ecuaciones diferenciales | `sp.Function`, `sp.dsolve()` |
+| Conversión | `sp.lambdify()` (a NumPy), `sp.latex()` (a LaTeX) |
+
+## Referencias
+
+- [Documentación de SymPy](https://docs.sympy.org/latest/index.html)
+- [Tutorial introductorio de SymPy](https://docs.sympy.org/latest/tutorials/intro-tutorial/index.html)
+- [Scientific Python Lectures: SymPy](https://lectures.scientific-python.org/packages/sympy.html)

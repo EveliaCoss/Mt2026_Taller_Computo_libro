@@ -1,0 +1,2742 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es" xml:lang="es"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.37">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>54&nbsp; Sintaxis de nombres, buenas prácticas y programación defensiva en Python – Taller de Cómputo</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./python_condicionales.html" rel="next">
+<link href="./python_ejercicio2.html" rel="prev">
+<link href="./flyer/logo.png" rel="icon" type="image/png">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-6f5e339e910af865eb2cfbba9cbcf7d6.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="site_libs/quarto-contrib/focus-mode-1.0.0/focus-mode.js"></script>
+<link href="site_libs/quarto-contrib/focus-mode-1.0.0/focus-mode.css" rel="stylesheet">
+<script src="site_libs/quarto-contrib/live-runtime/live-runtime.js" type="module"></script>
+<link href="site_libs/quarto-contrib/live-runtime/live-runtime.css" rel="stylesheet">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No se han encontrado resultados",
+    "search-matching-documents-text": "documentos encontrados",
+    "search-copy-link-title": "Copiar el enlace en la búsqueda",
+    "search-hide-matches-text": "Ocultar resultados adicionales",
+    "search-more-match-text": "resultado adicional en este documento",
+    "search-more-matches-text": "resultados adicionales en este documento",
+    "search-clear-button-title": "Borrar",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancelar",
+    "search-submit-button-title": "Enviar",
+    "search-label": "Buscar"
+  }
+}</script><script type="module" src="site_libs/quarto-ojs/quarto-ojs-runtime.js"></script>
+<link href="site_libs/quarto-ojs/quarto-ojs.css" rel="stylesheet">
+<script>
+(function () {
+  try {
+    if (!window.matchMedia("(hover: hover) and (pointer: fine)").matches) return;
+    if (window.localStorage.getItem("quarto-focus-mode") === "1") {
+      document.documentElement.classList.add("focus-mode-persisted");
+    }
+    if (window.localStorage.getItem("quarto-presentation-mode") === "1") {
+      document.documentElement.classList.add("presentation-mode-preload");
+    }
+  } catch (e) {}
+})();
+</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./intro_python.html"><strong>Sección 7</strong> - Introducción a Python</a></li><li class="breadcrumb-item"><a href="./python_buenas_practicas.html"><span class="chapter-number">54</span>&nbsp; <span class="chapter-title">Sintaxis de nombres, buenas prácticas y programación defensiva en Python</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Buscar" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
+      <a href="./index.html" class="sidebar-logo-link">
+      <img src="./flyer/logo_enes.png" alt="" class="sidebar-logo light-content py-0 d-lg-inline d-none">
+      <img src="./flyer/logo_enes.png" alt="" class="sidebar-logo dark-content py-0 d-lg-inline d-none">
+      </a>
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Taller de Cómputo</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/EveliaCoss/Mt2026_Taller_Computo_libro" title="Ejecutar el código" class="quarto-navigation-tool px-1" aria-label="Ejecutar el código"><i class="bi bi-github"></i></a>
+    <div class="dropdown">
+      <a href="" title="Compartir" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" role="link" aria-label="Compartir"><i class="bi bi-share"></i></a>
+      <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-0">
+          <li>
+            <a class="dropdown-item sidebar-tools-main-item" href="https://twitter.com/intent/tweet?url=|url|">
+              <i class="bi bi-twitter pe-1"></i>
+            Twitter
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item sidebar-tools-main-item" href="https://www.facebook.com/sharer/sharer.php?u=|url|">
+              <i class="bi bi-facebook pe-1"></i>
+            Facebook
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item sidebar-tools-main-item" href="https://www.linkedin.com/sharing/share-offsite/?url=|url|">
+              <i class="bi bi-linkedin pe-1"></i>
+            LinkedIn
+            </a>
+          </li>
+      </ul>
+    </div>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Buscar"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Información general</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./temario.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Temario</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cap1A.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introducción e integración</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./evaluacion.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Sistema de evaluación + DOC</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text"><strong>Sección 1</strong> - Componentes de una computadora</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Alternar sección">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cap2A.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Introducción a los Componentes de una Computadora</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./game1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title"><strong>🎮 AhaSlides 1 - Manos a la obra</strong></span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cap2B.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Sistema Operativo (SO) y sus funciones</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Tarea1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title"><strong>✏️ Tarea 1 -</strong> Mi Sistema Operativo</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cap3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Buenas prácticas en programación</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./s1_actividad1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title"><strong>📚</strong> <strong>Actividad 1 en equipo -</strong> Mi primer algoritmo</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./game2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title"><strong>🎮 AhaSlides 2 -Manos a la obra</strong></span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./udocz.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Doc (uDocz) para el apoyo de este curso <strong>🤖</strong></span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text"><strong>Sección 2</strong> - Instalación de programas</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Alternar sección">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./TodoLits.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">📌 <strong>To do list -</strong> Instalación de programas</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./install_B.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Instalación de Git y Bash</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./install_R.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Instalación de R, RStudio y Rtools/XCode</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./intro_R.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Introducción a R y Rstudio</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./install_python.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Instalación de Python y reticulate en Rstudio</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./integracion_bash_rstudio.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Integración de Bash en la terminal de Rstudio</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text"><strong>Sección 3</strong> - Introducción a Bash</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Alternar sección">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cap4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Introducción a Linux/Unix</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cap5.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Mis primeros pasos en Bash</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./game3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title"><strong>🎮 AhaSlides 3 -Manos a la obra</strong></span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cap6.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Caracteres, Strings y Wildcards</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./game4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title"><strong>🎮 AhaSlides 4 -Manos a la obra</strong></span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./regex.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Expresiones regulares (REGEX)</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cap7.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Encontrar patrones con <code>grep</code></span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./game5.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title"><strong>🎮 AhaSlides 5 -Manos a la obra</strong></span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
+ <span class="menu-text"><strong>Sección 4</strong> - Edición de archivos con Bash</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Alternar sección">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cap8.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Edición de archivos con los editores de texto (<code>nano</code> y <code>vim</code>)</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cap8_crearRproject.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Crear un R Project</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Bash_script.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Scripts en Bash</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cap9.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Edición de archivos con el editor de flujo <code>sed</code></span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cap10.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">Tipos de enlaces - symlinks, hard links e hipervínculos</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./s1_actividad2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title"><strong>📚 Proyecto integrador en equipo -</strong> Script Bash</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cap11.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">Filtrado de texto (<code>grep, cut, sort, uniq, wc</code>)</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cap12.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">32</span>&nbsp; <span class="chapter-title">printf vs echo</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./s3_actividad2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">33</span>&nbsp; <span class="chapter-title"><strong>📚</strong> <strong>Actividad 2 en equipo -</strong> ¡REDUCE EL CÓDIGO BASH!</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cap13.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">34</span>&nbsp; <span class="chapter-title">Condicionales</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./game6.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">35</span>&nbsp; <span class="chapter-title"><strong>🎮 AhaSlides 6 -Manos a la obra</strong></span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cap14.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">36</span>&nbsp; <span class="chapter-title">Bucles (for loops)</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./game7.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">37</span>&nbsp; <span class="chapter-title"><strong>🎮 AhaSlides 7 -Manos a la obra</strong></span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
+ <span class="menu-text"><strong>Sección 5</strong> - Introducción a Git/GitHub</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Alternar sección">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Rstudio_paquetes.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">38</span>&nbsp; <span class="chapter-title">Descargar y cargar Librerías en Rstudio</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cap15.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">39</span>&nbsp; <span class="chapter-title">Introducción a Git / GitHub</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cap22.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">40</span>&nbsp; <span class="chapter-title">Conectar a GitHub con SSH</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cap16.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">41</span>&nbsp; <span class="chapter-title">Configurar Git</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cap17.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">42</span>&nbsp; <span class="chapter-title">Repositorios</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cap18.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">43</span>&nbsp; <span class="chapter-title">Ignorar archivos/carpetas</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./s5_actividades1y2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">44</span>&nbsp; <span class="chapter-title"><strong>📚</strong> Actividad 1 y 2</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cap23.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">45</span>&nbsp; <span class="chapter-title">Resumen y Práctica Final</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true">
+ <span class="menu-text"><strong>Sección 6</strong> - Introducción a R y Rstudio</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true" aria-label="Alternar sección">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cap29.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">46</span>&nbsp; <span class="chapter-title">Introducción a Markdown</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./s5_actividades3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">47</span>&nbsp; <span class="chapter-title"><strong>📚</strong> Actividad 3: Página web con Rmarkdown</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Intro_Quarto.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">48</span>&nbsp; <span class="chapter-title">Introducción a Quarto</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./s5_actividades4y5.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">49</span>&nbsp; <span class="chapter-title"><strong>📚</strong> Actividad 4 y 5</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true">
+ <span class="menu-text"><strong>Sección 7</strong> - Introducción a Python</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true" aria-label="Alternar sección">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./intro_python.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">50</span>&nbsp; <span class="chapter-title">Introducción a Python en Rstudio usando <code>reticulate</code></span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./quarto_python.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">51</span>&nbsp; <span class="chapter-title">Configuraciones para usar Quarto con Python</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./python_ejercicio1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">52</span>&nbsp; <span class="chapter-title">🐍 Actividad 1: variables y objetos (tipo, valor e identidad)</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./python_ejercicio2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">53</span>&nbsp; <span class="chapter-title">🐍 Actividad 2: atributos y métodos de los objetos</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./python_buenas_practicas.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">54</span>&nbsp; <span class="chapter-title">Sintaxis de nombres, buenas prácticas y programación defensiva en Python</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./python_condicionales.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">55</span>&nbsp; <span class="chapter-title">Condicionales en Python</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./python_numpy.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">56</span>&nbsp; <span class="chapter-title">Introducción a NumPy</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./python_for.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">57</span>&nbsp; <span class="chapter-title">Ciclos <code>for</code> y <code>while</code> en Python</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./python_sympy.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">58</span>&nbsp; <span class="chapter-title">Cálculo simbólico con SymPy</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./python_visualizacion.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">59</span>&nbsp; <span class="chapter-title">Visualización de datos con Matplotlib y Plotly</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="true">
+ <span class="menu-text">Apéndices</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="true" aria-label="Alternar sección">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./python_entornos.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Entornos para trabajar con Python: RStudio, Google Colab y Jupyter Notebook</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./python_conda.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Conda y Miniconda: gestión de entornos y paquetes</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ejemplo_quizdown.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">Quizzes</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ejemplo_CodeRandPython.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">D</span>&nbsp; <span class="chapter-title">Codigo en R</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Tabla de contenidos</h2>
+   
+  <ul>
+  <li><a href="#palabras-reservadas" id="toc-palabras-reservadas" class="nav-link active" data-scroll-target="#palabras-reservadas"><span class="header-section-number">54.1</span> Palabras reservadas</a></li>
+  <li><a href="#reglas-para-nombrar-variables" id="toc-reglas-para-nombrar-variables" class="nav-link" data-scroll-target="#reglas-para-nombrar-variables"><span class="header-section-number">54.2</span> Reglas para nombrar variables</a></li>
+  <li><a href="#convenciones-cómo-elegir-buenos-nombres" id="toc-convenciones-cómo-elegir-buenos-nombres" class="nav-link" data-scroll-target="#convenciones-cómo-elegir-buenos-nombres"><span class="header-section-number">54.3</span> Convenciones: cómo elegir buenos nombres</a>
+  <ul>
+  <li><a href="#recomendaciones" id="toc-recomendaciones" class="nav-link" data-scroll-target="#recomendaciones"><span class="header-section-number">54.3.1</span> Recomendaciones</a></li>
+  <li><a href="#cuidado-no-sobrescribas-funciones-integradas" id="toc-cuidado-no-sobrescribas-funciones-integradas" class="nav-link" data-scroll-target="#cuidado-no-sobrescribas-funciones-integradas"><span class="header-section-number">54.3.2</span> ¡Cuidado! No sobrescribas funciones integradas</a></li>
+  </ul></li>
+  <li><a href="#buenas-prácticas-de-estilo" id="toc-buenas-prácticas-de-estilo" class="nav-link" data-scroll-target="#buenas-prácticas-de-estilo"><span class="header-section-number">54.4</span> Buenas prácticas de estilo</a>
+  <ul>
+  <li><a href="#comentarios-y-documentación" id="toc-comentarios-y-documentación" class="nav-link" data-scroll-target="#comentarios-y-documentación"><span class="header-section-number">54.4.1</span> Comentarios y documentación</a></li>
+  <li><a href="#el-zen-de-python" id="toc-el-zen-de-python" class="nav-link" data-scroll-target="#el-zen-de-python"><span class="header-section-number">54.4.2</span> El Zen de Python</a></li>
+  </ul></li>
+  <li><a href="#programación-defensiva" id="toc-programación-defensiva" class="nav-link" data-scroll-target="#programación-defensiva"><span class="header-section-number">54.5</span> Programación defensiva</a>
+  <ul>
+  <li><a href="#un-error-silencioso" id="toc-un-error-silencioso" class="nav-link" data-scroll-target="#un-error-silencioso"><span class="header-section-number">54.5.1</span> Un error silencioso</a>
+  <ul class="collapse">
+  <li><a href="#qué-es-un-error-silencioso" id="toc-qué-es-un-error-silencioso" class="nav-link" data-scroll-target="#qué-es-un-error-silencioso">¿Qué es un error silencioso?</a></li>
+  <li><a href="#más-ejemplos-de-errores-silenciosos" id="toc-más-ejemplos-de-errores-silenciosos" class="nav-link" data-scroll-target="#más-ejemplos-de-errores-silenciosos">Más ejemplos de errores silenciosos</a></li>
+  <li><a href="#cómo-descubrir-un-error-silencioso" id="toc-cómo-descubrir-un-error-silencioso" class="nav-link" data-scroll-target="#cómo-descubrir-un-error-silencioso">¿Cómo descubrir un error silencioso?</a></li>
+  </ul></li>
+  <li><a href="#principios-de-la-programación-defensiva" id="toc-principios-de-la-programación-defensiva" class="nav-link" data-scroll-target="#principios-de-la-programación-defensiva"><span class="header-section-number">54.5.2</span> Principios de la programación defensiva</a></li>
+  <li><a href="#leer-los-mensajes-de-error" id="toc-leer-los-mensajes-de-error" class="nav-link" data-scroll-target="#leer-los-mensajes-de-error"><span class="header-section-number">54.5.3</span> Leer los mensajes de error</a></li>
+  <li><a href="#assert-verificar-que-algo-sea-verdadero" id="toc-assert-verificar-que-algo-sea-verdadero" class="nav-link" data-scroll-target="#assert-verificar-que-algo-sea-verdadero"><span class="header-section-number">54.5.4</span> <code>assert</code>: verificar que algo sea verdadero</a></li>
+  <li><a href="#try-except-capturar-un-error-sin-detener-el-programa" id="toc-try-except-capturar-un-error-sin-detener-el-programa" class="nav-link" data-scroll-target="#try-except-capturar-un-error-sin-detener-el-programa"><span class="header-section-number">54.5.5</span> <code>try</code> / <code>except</code>: capturar un error sin detener el programa</a></li>
+  </ul></li>
+  <li><a href="#estructuras-de-control-de-interrupción" id="toc-estructuras-de-control-de-interrupción" class="nav-link" data-scroll-target="#estructuras-de-control-de-interrupción"><span class="header-section-number">54.6</span> Estructuras de control de interrupción</a>
+  <ul>
+  <li><a href="#raise-lanzar-un-error-propio" id="toc-raise-lanzar-un-error-propio" class="nav-link" data-scroll-target="#raise-lanzar-un-error-propio"><span class="header-section-number">54.6.1</span> <code>raise</code>: lanzar un error propio</a></li>
+  <li><a href="#pass-un-bloque-que-todavía-no-escribes" id="toc-pass-un-bloque-que-todavía-no-escribes" class="nav-link" data-scroll-target="#pass-un-bloque-que-todavía-no-escribes"><span class="header-section-number">54.6.2</span> <code>pass</code>: un bloque que todavía no escribes</a></li>
+  <li><a href="#break-y-continue-interrumpir-un-ciclo" id="toc-break-y-continue-interrumpir-un-ciclo" class="nav-link" data-scroll-target="#break-y-continue-interrumpir-un-ciclo"><span class="header-section-number">54.6.3</span> <code>break</code> y <code>continue</code>: interrumpir un ciclo</a></li>
+  <li><a href="#exit-terminar-el-programa" id="toc-exit-terminar-el-programa" class="nav-link" data-scroll-target="#exit-terminar-el-programa"><span class="header-section-number">54.6.4</span> <code>exit()</code>: terminar el programa</a></li>
+  </ul></li>
+  <li><a href="#lo-que-sigue-condicionales" id="toc-lo-que-sigue-condicionales" class="nav-link" data-scroll-target="#lo-que-sigue-condicionales"><span class="header-section-number">54.7</span> Lo que sigue: condicionales</a></li>
+  <li><a href="#ejercicios" id="toc-ejercicios" class="nav-link" data-scroll-target="#ejercicios"><span class="header-section-number">54.8</span> Ejercicios</a>
+  <ul>
+  <li><a href="#ejercicio-1.-corrige-los-nombres-inválidos" id="toc-ejercicio-1.-corrige-los-nombres-inválidos" class="nav-link" data-scroll-target="#ejercicio-1.-corrige-los-nombres-inválidos"><span class="header-section-number">54.8.1</span> Ejercicio 1. Corrige los nombres inválidos</a></li>
+  <li><a href="#ejercicio-2.-nombres-descriptivos" id="toc-ejercicio-2.-nombres-descriptivos" class="nav-link" data-scroll-target="#ejercicio-2.-nombres-descriptivos"><span class="header-section-number">54.8.2</span> Ejercicio 2. Nombres descriptivos</a></li>
+  <li><a href="#ejercicio-3.-la-función-perdida" id="toc-ejercicio-3.-la-función-perdida" class="nav-link" data-scroll-target="#ejercicio-3.-la-función-perdida"><span class="header-section-number">54.8.3</span> Ejercicio 3. La función perdida</a></li>
+  <li><a href="#ejercicio-4.-defiende-tu-promedio" id="toc-ejercicio-4.-defiende-tu-promedio" class="nav-link" data-scroll-target="#ejercicio-4.-defiende-tu-promedio"><span class="header-section-number">54.8.4</span> Ejercicio 4. Defiende tu promedio</a></li>
+  <li><a href="#ejercicio-5.-detective-de-errores" id="toc-ejercicio-5.-detective-de-errores" class="nav-link" data-scroll-target="#ejercicio-5.-detective-de-errores"><span class="header-section-number">54.8.5</span> Ejercicio 5. Detective de errores</a></li>
+  <li><a href="#ejercicio-6.-convertir-texto-a-número-sin-que-el-programa-se-detenga" id="toc-ejercicio-6.-convertir-texto-a-número-sin-que-el-programa-se-detenga" class="nav-link" data-scroll-target="#ejercicio-6.-convertir-texto-a-número-sin-que-el-programa-se-detenga"><span class="header-section-number">54.8.6</span> Ejercicio 6. Convertir texto a número sin que el programa se detenga</a></li>
+  <li><a href="#ejercicio-7.-caza-de-errores-silenciosos" id="toc-ejercicio-7.-caza-de-errores-silenciosos" class="nav-link" data-scroll-target="#ejercicio-7.-caza-de-errores-silenciosos"><span class="header-section-number">54.8.7</span> Ejercicio 7. Caza de errores silenciosos</a></li>
+  </ul></li>
+  <li><a href="#resumen" id="toc-resumen" class="nav-link" data-scroll-target="#resumen"><span class="header-section-number">54.9</span> Resumen</a></li>
+  <li><a href="#referencias" id="toc-referencias" class="nav-link" data-scroll-target="#referencias"><span class="header-section-number">54.10</span> Referencias</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./intro_python.html"><strong>Sección 7</strong> - Introducción a Python</a></li><li class="breadcrumb-item"><a href="./python_buenas_practicas.html"><span class="chapter-number">54</span>&nbsp; <span class="chapter-title">Sintaxis de nombres, buenas prácticas y programación defensiva en Python</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">54</span>&nbsp; <span class="chapter-title">Sintaxis de nombres, buenas prácticas y programación defensiva en Python</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<blockquote class="blockquote">
+<p><strong>Fecha:</strong> 03 de noviembre, 2026</p>
+</blockquote>
+<p>En los capítulos anteriores creamos muchas variables. En este capítulo veremos:</p>
+<ul>
+<li>Las <strong>reglas</strong> que debe cumplir un nombre en Python y las <strong>convenciones</strong> para elegir buenos nombres.</li>
+<li>Las <strong>buenas prácticas</strong> para escribir código claro (retomando el capítulo de <a href="./cap3.html">Buenas prácticas en programación</a>).</li>
+<li>Qué es la <strong>programación defensiva</strong> y cómo usar <code>assert</code> y <code>try</code> / <code>except</code> para detectar y manejar errores.</li>
+<li>Las <strong>estructuras de control de interrupción</strong>: <code>raise</code>, <code>pass</code>, <code>break</code>, <code>continue</code>, <code>return</code> y <code>exit()</code>.</li>
+</ul>
+<p>Este último tema prepara el capítulo de <strong>condicionales</strong> (<code>if</code>, <code>elif</code>, <code>else</code>).</p>
+<section id="palabras-reservadas" class="level2" data-number="54.1">
+<h2 data-number="54.1" class="anchored" data-anchor-id="palabras-reservadas"><span class="header-section-number">54.1</span> Palabras reservadas</h2>
+<p>Las <strong>palabras reservadas</strong> (<em>keywords</em>) tienen un significado especial en Python, por lo que <strong>no podemos usarlas como nombres</strong> de variables. Python 3 tiene 35:</p>
+<table class="caption-top table">
+<tbody>
+<tr class="odd">
+<td><code>False</code></td>
+<td><code>None</code></td>
+<td><code>True</code></td>
+<td><code>and</code></td>
+<td><code>as</code></td>
+</tr>
+<tr class="even">
+<td><code>assert</code></td>
+<td><code>async</code></td>
+<td><code>await</code></td>
+<td><code>break</code></td>
+<td><code>class</code></td>
+</tr>
+<tr class="odd">
+<td><code>continue</code></td>
+<td><code>def</code></td>
+<td><code>del</code></td>
+<td><code>elif</code></td>
+<td><code>else</code></td>
+</tr>
+<tr class="even">
+<td><code>except</code></td>
+<td><code>finally</code></td>
+<td><code>for</code></td>
+<td><code>from</code></td>
+<td><code>global</code></td>
+</tr>
+<tr class="odd">
+<td><code>if</code></td>
+<td><code>import</code></td>
+<td><code>in</code></td>
+<td><code>is</code></td>
+<td><code>lambda</code></td>
+</tr>
+<tr class="even">
+<td><code>nonlocal</code></td>
+<td><code>not</code></td>
+<td><code>or</code></td>
+<td><code>pass</code></td>
+<td><code>raise</code></td>
+</tr>
+<tr class="odd">
+<td><code>return</code></td>
+<td><code>try</code></td>
+<td><code>while</code></td>
+<td><code>with</code></td>
+<td><code>yield</code></td>
+</tr>
+</tbody>
+</table>
+<p>Podemos consultarlas desde Python con el módulo <code>keyword</code>:</p>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Código</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> keyword</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">len</span>(keyword.kwlist))</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>35</code></pre>
+</div>
+<details open="" class="code-fold">
+<summary>Código</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(keyword.iskeyword(<span class="st">"if"</span>))</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>True</code></pre>
+</div>
+<details open="" class="code-fold">
+<summary>Código</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(keyword.iskeyword(<span class="st">"edad"</span>))</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>False</code></pre>
+</div>
+</div>
+<p>Si intentamos usar una palabra reservada como nombre, obtenemos un <code>SyntaxError</code>:</p>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Código</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> <span class="op">=</span> <span class="st">"Taller de Cómputo"</span>   <span class="co"># SyntaxError: invalid syntax</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Nota
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Además existen palabras reservadas <strong>suaves</strong> (<em>soft keywords</em>): <code>match</code>, <code>case</code>, <code>type</code> y <code>_</code>. Solo son especiales en ciertos contextos, así que Python permite usarlas como nombres, pero es mejor evitarlas.</p>
+</div>
+</div>
+</section>
+<section id="reglas-para-nombrar-variables" class="level2" data-number="54.2">
+<h2 data-number="54.2" class="anchored" data-anchor-id="reglas-para-nombrar-variables"><span class="header-section-number">54.2</span> Reglas para nombrar variables</h2>
+<p>Un nombre válido en Python (también llamado <strong>identificador</strong>) debe cumplir estas reglas <strong>obligatorias</strong>:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Regla</th>
+<th>Válido</th>
+<th>Inválido</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Solo puede contener letras, dígitos y guion bajo (<code>_</code>).</td>
+<td><code>nota_final</code></td>
+<td><code>nota-final</code>, <code>nota final</code>, <code>nota$</code></td>
+</tr>
+<tr class="even">
+<td>No puede empezar con un dígito.</td>
+<td><code>lugar2</code></td>
+<td><code>2lugar</code></td>
+</tr>
+<tr class="odd">
+<td>No puede ser una palabra reservada.</td>
+<td><code>clase</code></td>
+<td><code>class</code></td>
+</tr>
+<tr class="even">
+<td>Distingue mayúsculas de minúsculas.</td>
+<td><code>edad</code>, <code>Edad</code> y <code>EDAD</code> son <strong>tres</strong> variables distintas.</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Código</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>edad <span class="op">=</span> <span class="dv">20</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>Edad <span class="op">=</span> <span class="dv">30</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>EDAD <span class="op">=</span> <span class="dv">40</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(edad, Edad, EDAD)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>20 30 40</code></pre>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Python acepta letras con acentos y la <code>ñ</code> en los nombres (<code>año = 2026</code> es válido), pero se recomienda usar solo letras sin acentos (<code>anio</code>, <code>anno</code> o <code>year</code>) para evitar problemas al compartir tu código con otras computadoras o teclados.</p>
+</div>
+</div>
+</section>
+<section id="convenciones-cómo-elegir-buenos-nombres" class="level2" data-number="54.3">
+<h2 data-number="54.3" class="anchored" data-anchor-id="convenciones-cómo-elegir-buenos-nombres"><span class="header-section-number">54.3</span> Convenciones: cómo elegir buenos nombres</h2>
+<p>Las reglas dicen qué nombres <strong>funcionan</strong>; las convenciones dicen qué nombres son <strong>buenos</strong>. La comunidad de Python sigue la guía de estilo <a href="https://peps.python.org/pep-0008/">PEP 8</a>.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Elemento</th>
+<th>Convención</th>
+<th>Ejemplo</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Variables y funciones</td>
+<td><code>snake_case</code>: minúsculas separadas por guion bajo.</td>
+<td><code>promedio_final</code>, <code>calcular_area()</code></td>
+</tr>
+<tr class="even">
+<td>Constantes</td>
+<td><code>MAYUSCULAS</code> con guion bajo.</td>
+<td><code>PI = 3.14159</code>, <code>CALIFICACION_MAXIMA = 10</code></td>
+</tr>
+<tr class="odd">
+<td>Clases</td>
+<td><code>PascalCase</code>: cada palabra inicia con mayúscula.</td>
+<td><code>Estudiante</code>, <code>MatrizCuadrada</code></td>
+</tr>
+<tr class="even">
+<td>Módulos (archivos <code>.py</code>)</td>
+<td>Nombres cortos en minúsculas.</td>
+<td><code>operaciones.py</code></td>
+</tr>
+<tr class="odd">
+<td>Uso “interno”</td>
+<td>Empiezan con un guion bajo.</td>
+<td><code>_temporal</code></td>
+</tr>
+</tbody>
+</table>
+<section id="recomendaciones" class="level3" data-number="54.3.1">
+<h3 data-number="54.3.1" class="anchored" data-anchor-id="recomendaciones"><span class="header-section-number">54.3.1</span> Recomendaciones</h3>
+<ul>
+<li><strong>Usa nombres descriptivos</strong>: <code>area_triangulo</code> dice más que <code>a</code> o <code>x1</code>.</li>
+<li><strong>Sé consistente</strong>: si usas español, usa español en todo el programa.</li>
+<li><strong>Evita nombres de una sola letra</strong>, excepto en casos muy conocidos, como <code>i</code> en un ciclo o <code>x</code>, <code>y</code> en una fórmula matemática.</li>
+<li><strong>Evita <code>l</code> (ele minúscula), <code>O</code> (o mayúscula) e <code>I</code> (i mayúscula)</strong> como nombres: se confunden con <code>1</code> y <code>0</code>.</li>
+<li><strong>No uses nombres de funciones integradas</strong> como <code>list</code>, <code>sum</code>, <code>max</code>, <code>min</code>, <code>len</code>, <code>type</code>, <code>id</code>, <code>str</code> o <code>input</code> (ver más abajo).</li>
+</ul>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Poco claro</th>
+<th>Mejor</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>a = 5</code></td>
+<td><code>base = 5</code></td>
+</tr>
+<tr class="even">
+<td><code>x = a * h / 2</code></td>
+<td><code>area_triangulo = base * altura / 2</code></td>
+</tr>
+<tr class="odd">
+<td><code>l = [8, 9, 10]</code></td>
+<td><code>calificaciones = [8, 9, 10]</code></td>
+</tr>
+<tr class="even">
+<td><code>numeroDeEstudiantes = 30</code></td>
+<td><code>numero_estudiantes = 30</code></td>
+</tr>
+<tr class="odd">
+<td><code>t = 0.16</code></td>
+<td><code>TASA_IVA = 0.16</code></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="cuidado-no-sobrescribas-funciones-integradas" class="level3" data-number="54.3.2">
+<h3 data-number="54.3.2" class="anchored" data-anchor-id="cuidado-no-sobrescribas-funciones-integradas"><span class="header-section-number">54.3.2</span> ¡Cuidado! No sobrescribas funciones integradas</h3>
+<p>Python no marca error si usas <code>sum</code> o <code>max</code> como nombre de variable, pero a partir de ese momento <strong>pierdes la función original</strong>:</p>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Código</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="bu">sum</span> <span class="op">=</span> <span class="dv">10</span>                <span class="co"># Ahora "sum" apunta a un entero, no a la función</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="bu">sum</span>([<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>])          <span class="co"># TypeError: 'int' object is not callable</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>TypeError: 'int' object is not callable</code></pre>
+</div>
+</div>
+<p>Para recuperar la función, elimina la variable con <code>del</code>:</p>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Código</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="kw">del</span> <span class="bu">sum</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="bu">sum</span>([<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>])</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>6</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="buenas-prácticas-de-estilo" class="level2" data-number="54.4">
+<h2 data-number="54.4" class="anchored" data-anchor-id="buenas-prácticas-de-estilo"><span class="header-section-number">54.4</span> Buenas prácticas de estilo</h2>
+<p>Un programa se escribe una vez, pero se <strong>lee muchas veces</strong> (por tus compañeros, tu profesora y tu “yo del futuro”).</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Práctica</th>
+<th>En lugar de</th>
+<th>Escribe</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Espacios alrededor de <code>=</code> y de los operadores.</td>
+<td><code>total=a+b*2</code></td>
+<td><code>total = a + b * 2</code></td>
+</tr>
+<tr class="even">
+<td>Un espacio después de cada coma.</td>
+<td><code>print(a,b,c)</code></td>
+<td><code>print(a, b, c)</code></td>
+</tr>
+<tr class="odd">
+<td>Una instrucción por línea.</td>
+<td><code>a = 1; b = 2</code></td>
+<td><code>a = 1</code> y en otra línea <code>b = 2</code></td>
+</tr>
+<tr class="even">
+<td>Indentación de <strong>4 espacios</strong> (no tabuladores).</td>
+<td></td>
+<td><code>····print("hola")</code></td>
+</tr>
+<tr class="odd">
+<td>Líneas cortas (máximo 79 caracteres).</td>
+<td></td>
+<td>Divide las líneas largas.</td>
+</tr>
+<tr class="even">
+<td>Constantes en lugar de “números mágicos”.</td>
+<td><code>precio * 0.16</code></td>
+<td><code>precio * TASA_IVA</code></td>
+</tr>
+<tr class="odd">
+<td>Comentarios que expliquen el <strong>por qué</strong>.</td>
+<td><code>x = x + 1  # suma 1</code></td>
+<td><code>intentos = intentos + 1  # el usuario falló otra vez</code></td>
+</tr>
+</tbody>
+</table>
+<section id="comentarios-y-documentación" class="level3" data-number="54.4.1">
+<h3 data-number="54.4.1" class="anchored" data-anchor-id="comentarios-y-documentación"><span class="header-section-number">54.4.1</span> Comentarios y documentación</h3>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="figures/python_estadistica.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Código</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Programa: área y perímetro de un rectángulo</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Autora: Ana López</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Fecha: 03/11/2026</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>BASE <span class="op">=</span> <span class="dv">5</span>      <span class="co"># en centímetros</span></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>ALTURA <span class="op">=</span> <span class="dv">3</span>    <span class="co"># en centímetros</span></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>area <span class="op">=</span> BASE <span class="op">*</span> ALTURA</span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>perimetro <span class="op">=</span> <span class="dv">2</span> <span class="op">*</span> (BASE <span class="op">+</span> ALTURA)</span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Área:"</span>, area, <span class="st">"cm²"</span>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Área: 15 cm²</code></pre>
+</div>
+<details open="" class="code-fold">
+<summary>Código</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Perímetro:"</span>, perimetro, <span class="st">"cm"</span>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Perímetro: 16 cm</code></pre>
+</div>
+</div>
+</section>
+<section id="el-zen-de-python" class="level3" data-number="54.4.2">
+<h3 data-number="54.4.2" class="anchored" data-anchor-id="el-zen-de-python"><span class="header-section-number">54.4.2</span> El Zen de Python</h3>
+<p>Python incluye un “poema” con su filosofía de diseño. Ejecútalo:</p>
+<div class="cell">
+<div>
+<div id="pyodide-1" class="exercise-cell">
+
+</div>
+<script type="pyodide-1-contents">
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiaW1wb3J0IHRoaXMifQ==
+</script>
+</div>
+</div>
+<p>Algunas frases importantes: <em>“Bello es mejor que feo”</em>, <em>“Explícito es mejor que implícito”</em>, <em>“Simple es mejor que complejo”</em> y <em>“La legibilidad cuenta”</em>.</p>
+</section>
+</section>
+<section id="programación-defensiva" class="level2" data-number="54.5">
+<h2 data-number="54.5" class="anchored" data-anchor-id="programación-defensiva"><span class="header-section-number">54.5</span> Programación defensiva</h2>
+<p>La <strong>programación defensiva</strong> consiste en escribir código que <strong>anticipa</strong> lo que puede salir mal: datos incorrectos, listas vacías, divisiones entre cero o tipos inesperados.</p>
+<p>Su objetivo es que, si algo falla, el programa <strong>falle pronto y con un mensaje claro</strong>, en lugar de continuar y producir un <strong>resultado incorrecto en silencio</strong>.</p>
+<section id="un-error-silencioso" class="level3" data-number="54.5.1">
+<h3 data-number="54.5.1" class="anchored" data-anchor-id="un-error-silencioso"><span class="header-section-number">54.5.1</span> Un error silencioso</h3>
+<p>Observa este programa. ¿Ves el problema?</p>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Código</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>calificaciones <span class="op">=</span> [<span class="dv">9</span>, <span class="fl">8.5</span>, <span class="dv">95</span>]   <span class="co"># Alguien escribió 95 en lugar de 9.5</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>promedio <span class="op">=</span> <span class="bu">sum</span>(calificaciones) <span class="op">/</span> <span class="bu">len</span>(calificaciones)</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Promedio:"</span>, promedio)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Promedio: 37.5</code></pre>
+</div>
+</div>
+<p>Python <strong>no marca ningún error</strong>, pero el promedio de <code>37.5</code> no tiene sentido en una escala de 0 a 10. El resultado correcto, con <code>9.5</code>, sería <code>9.0</code>.</p>
+<section id="qué-es-un-error-silencioso" class="level4">
+<h4 class="anchored" data-anchor-id="qué-es-un-error-silencioso">¿Qué es un error silencioso?</h4>
+<p>Un <strong>error silencioso</strong> (también llamado <strong>error lógico</strong>) ocurre cuando el programa <strong>se ejecuta sin problemas, pero produce un resultado incorrecto</strong>. Python no muestra ningún mensaje porque, para él, todo está bien: sumar <code>9 + 8.5 + 95</code> y dividir entre 3 es una operación perfectamente válida. Python hace <strong>lo que escribimos</strong>, no <strong>lo que queríamos</strong> hacer.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th>Error con mensaje</th>
+<th>Error silencioso (lógico)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>¿El programa se detiene?</td>
+<td><strong>Sí</strong>, con un mensaje como <code>TypeError</code> o <code>NameError</code>.</td>
+<td><strong>No</strong>, termina con normalidad.</td>
+</tr>
+<tr class="even">
+<td>¿Cómo nos enteramos?</td>
+<td>Python nos avisa y señala la línea.</td>
+<td>Solo si <strong>revisamos</strong> el resultado y notamos que no tiene sentido.</td>
+</tr>
+<tr class="odd">
+<td>Ejemplo</td>
+<td><code>"Edad: " + 20</code> → <code>TypeError</code>.</td>
+<td>Un promedio de <code>37.5</code> en una escala de 0 a 10.</td>
+</tr>
+<tr class="even">
+<td>¿Qué tan peligroso es?</td>
+<td>Poco: es fácil encontrarlo y corregirlo.</td>
+<td><strong>Mucho</strong>: el resultado incorrecto se puede usar sin que nadie lo note.</td>
+</tr>
+</tbody>
+</table>
+<p>¿Por qué es tan peligroso? Imagina que ese promedio se usa para decidir quién aprueba el curso, o que el resultado de un cálculo se usa en un reporte o en otro programa: el error se <strong>propaga</strong> y cada vez es más difícil saber de dónde vino.</p>
+</section>
+<section id="más-ejemplos-de-errores-silenciosos" class="level4">
+<h4 class="anchored" data-anchor-id="más-ejemplos-de-errores-silenciosos">Más ejemplos de errores silenciosos</h4>
+<p>Todos estos programas se ejecutan <strong>sin mensajes de error</strong>, pero dan un resultado incorrecto:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Código</th>
+<th>Resultado obtenido</th>
+<th>Resultado esperado</th>
+<th>¿Qué salió mal?</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>promedio = 6 + 10 / 2</code></td>
+<td><code>11.0</code></td>
+<td><code>8.0</code></td>
+<td><strong>Jerarquía de operaciones</strong>: la división se hace antes que la suma. Faltan paréntesis: <code>(6 + 10) / 2</code>.</td>
+</tr>
+<tr class="even">
+<td><code>mitad = 17 // 2</code></td>
+<td><code>8</code></td>
+<td><code>8.5</code></td>
+<td><code>//</code> es la <strong>división entera</strong> (descarta los decimales); la división normal es <code>/</code>.</td>
+</tr>
+<tr class="odd">
+<td><code>math.sin(90)</code></td>
+<td><code>0.894</code></td>
+<td><code>1.0</code></td>
+<td>Las funciones trigonométricas usan <strong>radianes</strong>, no grados: <code>math.sin(math.radians(90))</code>.</td>
+</tr>
+<tr class="even">
+<td><code>total = "8" + "9"</code></td>
+<td><code>"89"</code></td>
+<td><code>17</code></td>
+<td>Los datos son <strong>texto</strong>: <code>+</code> los une en lugar de sumarlos. Hay que convertirlos con <code>int()</code>.</td>
+</tr>
+<tr class="odd">
+<td><code>area = 3.14 * radio ** 2</code> (con <code>radio = 2</code>)</td>
+<td><code>12.56</code></td>
+<td><code>12.566...</code></td>
+<td>Una <strong>aproximación</strong> de <span class="math inline">\(\pi\)</span> pierde precisión; usa <code>math.pi</code>.</td>
+</tr>
+<tr class="even">
+<td><code>0.1 + 0.2 == 0.3</code></td>
+<td><code>False</code></td>
+<td><code>True</code></td>
+<td>Los decimales se guardan de forma <strong>aproximada</strong> en la computadora; para compararlos usa <code>math.isclose()</code>.</td>
+</tr>
+</tbody>
+</table>
+<p>Compruébalo tú: ejecuta el código y compara cada resultado con el esperado.</p>
+<div class="cell">
+<div>
+<div id="pyodide-2" class="exercise-cell">
+
+</div>
+<script type="pyodide-2-contents">
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiaW1wb3J0IG1hdGhcblxucHJpbnQoXCI2ICsgMTAgLyAyID1cIiwgNiArIDEwIC8gMikgICAgICAgICAgICAgICAgICAjIMK/RXMgZWwgcHJvbWVkaW8gZGUgNiB5IDEwP1xucHJpbnQoXCIxNyAvLyAyID1cIiwgMTcgLy8gMikgICAgICAgICAgICAgICAgICAgICAgICAjIMK/RXMgbGEgbWl0YWQgZGUgMTc/XG5wcmludChcInNpbig5MCkgPVwiLCBtYXRoLnNpbig5MCkpICAgICAgICAgICAgICAgICAgICMgwr9FcyBlbCBzZW5vIGRlIDkwIGdyYWRvcz9cbnByaW50KCdcIjhcIiArIFwiOVwiID0nLCBcIjhcIiArIFwiOVwiKSAgICAgICAgICAgICAgICAgICAgIyDCv0VzIGxhIHN1bWEgZGUgOCB5IDk/XG5wcmludChcIjAuMSArIDAuMiA9PSAwLjM6XCIsIDAuMSArIDAuMiA9PSAwLjMpICAgICAgICMgwr9Tb24gaWd1YWxlcz8ifQ==
+</script>
+</div>
+</div>
+</section>
+<section id="cómo-descubrir-un-error-silencioso" class="level4">
+<h4 class="anchored" data-anchor-id="cómo-descubrir-un-error-silencioso">¿Cómo descubrir un error silencioso?</h4>
+<p>Como Python no nos avisa, nosotros debemos <strong>verificar</strong> los resultados:</p>
+<ol type="1">
+<li><strong>Estima el resultado antes de calcular.</strong> Si las calificaciones van de 0 a 10, el promedio <strong>no puede</strong> ser <code>37.5</code>. Pregúntate siempre: “¿este número tiene sentido?”.</li>
+<li><strong>Prueba con casos que ya conoces.</strong> Antes de usar tu programa con datos nuevos, pruébalo con datos cuya respuesta sabes: el promedio de <code>[8, 10]</code> debe ser <code>9</code>; el seno de 90° debe ser <code>1</code>.</li>
+<li><strong>Muestra los valores intermedios</strong> con <code>print()</code> para seguir el cálculo paso a paso.</li>
+<li><strong>Revisa los tipos</strong> con <code>type()</code>: muchos errores silenciosos ocurren porque un número en realidad es texto (<code>"8"</code>).</li>
+<li><strong>Verifica los rangos</strong> de los datos: ninguna calificación puede ser menor que 0 ni mayor que 10. Esto lo automatizaremos con <code>assert</code> en esta misma sección.</li>
+</ol>
+<p>Aplicando el punto 5, el error del ejemplo se hace visible con una sola línea:</p>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Código</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>calificaciones <span class="op">=</span> [<span class="dv">9</span>, <span class="fl">8.5</span>, <span class="dv">95</span>]</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Mayor calificación:"</span>, <span class="bu">max</span>(calificaciones))   <span class="co"># 95: ¡fuera del rango de 0 a 10!</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Mayor calificación: 95</code></pre>
+</div>
+</div>
+<p>La <strong>programación defensiva</strong> busca justamente esto: convertir los errores silenciosos en errores <strong>con mensaje</strong>, para que el programa nos avise en cuanto algo no tiene sentido.</p>
+</section>
+</section>
+<section id="principios-de-la-programación-defensiva" class="level3" data-number="54.5.2">
+<h3 data-number="54.5.2" class="anchored" data-anchor-id="principios-de-la-programación-defensiva"><span class="header-section-number">54.5.2</span> Principios de la programación defensiva</h3>
+<ol type="1">
+<li><strong>Valida los datos de entrada</strong>: verifica el tipo y el rango antes de usarlos.</li>
+<li><strong>Falla pronto</strong>: detén el programa en cuanto detectes un problema, no al final.</li>
+<li><strong>Usa mensajes claros</strong>: explica <strong>qué</strong> salió mal y <strong>cómo</strong> corregirlo.</li>
+<li><strong>No confíes en supuestos</strong>: “la lista nunca estará vacía” o “el usuario siempre escribirá un número”.</li>
+<li><strong>Prueba los casos límite</strong>: cero, números negativos, listas vacías, texto en lugar de números.</li>
+</ol>
+</section>
+<section id="leer-los-mensajes-de-error" class="level3" data-number="54.5.3">
+<h3 data-number="54.5.3" class="anchored" data-anchor-id="leer-los-mensajes-de-error"><span class="header-section-number">54.5.3</span> Leer los mensajes de error</h3>
+<p>Antes de defendernos de los errores hay que saber <strong>leerlos</strong>. La última línea de un mensaje de error indica el <strong>tipo</strong> de error y una descripción:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Error</th>
+<th>¿Cuándo ocurre?</th>
+<th>Ejemplo</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>SyntaxError</code></td>
+<td>El código está mal escrito.</td>
+<td><code>2lugar = "Luis"</code></td>
+</tr>
+<tr class="even">
+<td><code>IndentationError</code></td>
+<td>La indentación es incorrecta.</td>
+<td>Un <code>print</code> con espacios de más.</td>
+</tr>
+<tr class="odd">
+<td><code>NameError</code></td>
+<td>Usas una variable que no existe.</td>
+<td><code>print(resultado)</code> sin haberla creado.</td>
+</tr>
+<tr class="even">
+<td><code>TypeError</code></td>
+<td>La operación no es válida para ese tipo.</td>
+<td><code>"Edad: " + 20</code></td>
+</tr>
+<tr class="odd">
+<td><code>ValueError</code></td>
+<td>El tipo es correcto, pero el valor no.</td>
+<td><code>int("diez")</code></td>
+</tr>
+<tr class="even">
+<td><code>ZeroDivisionError</code></td>
+<td>Divides entre cero.</td>
+<td><code>10 / 0</code></td>
+</tr>
+<tr class="odd">
+<td><code>IndexError</code></td>
+<td>El índice no existe en la lista.</td>
+<td><code>[1, 2, 3][5]</code></td>
+</tr>
+<tr class="even">
+<td><code>KeyError</code></td>
+<td>La clave no existe en el diccionario.</td>
+<td><code>{"a": 1}["b"]</code></td>
+</tr>
+<tr class="odd">
+<td><code>AttributeError</code></td>
+<td>El objeto no tiene ese atributo o método.</td>
+<td><code>(1, 2).append(3)</code></td>
+</tr>
+<tr class="even">
+<td><code>AssertionError</code></td>
+<td>Falló una verificación con <code>assert</code>.</td>
+<td><code>assert 5 &lt; 3</code></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="assert-verificar-que-algo-sea-verdadero" class="level3" data-number="54.5.4">
+<h3 data-number="54.5.4" class="anchored" data-anchor-id="assert-verificar-que-algo-sea-verdadero"><span class="header-section-number">54.5.4</span> <code>assert</code>: verificar que algo sea verdadero</h3>
+<p>La instrucción <code>assert</code> verifica una expresión booleana. Si es <code>True</code>, el programa continúa sin hacer nada; si es <code>False</code>, el programa <strong>se detiene</strong> con un <code>AssertionError</code> y el mensaje que escribimos:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> condicion, <span class="st">"Mensaje si la condición es falsa"</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<p>La <strong>condición</strong> es una pregunta cuya respuesta es <code>True</code> o <code>False</code>, por ejemplo <code>len(calificaciones) &gt; 0</code> (¿la lista tiene elementos?) o <code>max(calificaciones) &lt;= 10</code> (¿la mayor calificación es a lo más 10?). Estudiaremos estas preguntas, llamadas <strong>expresiones booleanas</strong>, en el capítulo de <a href="./python_condicionales.html">Condicionales en Python</a>.</p>
+<p>Apliquémoslo al ejemplo del error silencioso (este editor se ejecuta solo al cargar la página; observa que el <code>print()</code> final <strong>nunca se ejecuta</strong>):</p>
+<div class="cell" data-autorun="true">
+<div>
+<div id="pyodide-3" class="exercise-cell">
+
+</div>
+<script type="pyodide-3-contents">
+eyJhdHRyIjp7ImF1dG9ydW4iOnRydWUsImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiQ0FMSUZJQ0FDSU9OX01JTklNQSA9IDBcbkNBTElGSUNBQ0lPTl9NQVhJTUEgPSAxMFxuXG5jYWxpZmljYWNpb25lcyA9IFs5LCA4LjUsIDk1XVxuXG5hc3NlcnQgbGVuKGNhbGlmaWNhY2lvbmVzKSA+IDAsIFwiTGEgbGlzdGEgZGUgY2FsaWZpY2FjaW9uZXMgZXN0w6EgdmFjw61hXCJcbmFzc2VydCBtaW4oY2FsaWZpY2FjaW9uZXMpID49IENBTElGSUNBQ0lPTl9NSU5JTUEsIFwiSGF5IGNhbGlmaWNhY2lvbmVzIG1lbm9yZXMgcXVlIDBcIlxuYXNzZXJ0IG1heChjYWxpZmljYWNpb25lcykgPD0gQ0FMSUZJQ0FDSU9OX01BWElNQSwgXCJIYXkgY2FsaWZpY2FjaW9uZXMgbWF5b3JlcyBxdWUgMTBcIlxuXG5wcm9tZWRpbyA9IHN1bShjYWxpZmljYWNpb25lcykgLyBsZW4oY2FsaWZpY2FjaW9uZXMpXG5wcmludChcIlByb21lZGlvOlwiLCBwcm9tZWRpbykifQ==
+</script>
+</div>
+</div>
+<p>Ahora el programa <strong>se detiene antes</strong> de calcular un promedio incorrecto y nos dice exactamente qué revisar. Cambia <code>95</code> por <code>9.5</code> y presiona <strong>Run Code</strong>: las tres verificaciones pasan y se muestra el promedio.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Nota
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><code>assert</code> es ideal para detectar <strong>errores de programación</strong> mientras desarrollas. Para validar datos que escribe un usuario, lo recomendable es decidir qué hacer con un <strong>condicional</strong>, como veremos en el capítulo de condicionales.</p>
+</div>
+</div>
+</section>
+<section id="try-except-capturar-un-error-sin-detener-el-programa" class="level3" data-number="54.5.5">
+<h3 data-number="54.5.5" class="anchored" data-anchor-id="try-except-capturar-un-error-sin-detener-el-programa"><span class="header-section-number">54.5.5</span> <code>try</code> / <code>except</code>: capturar un error sin detener el programa</h3>
+<p><code>assert</code> y los errores <strong>detienen</strong> el programa. A veces preferimos <strong>atrapar</strong> el error y decidir qué hacer. Para eso existe <code>try</code> / <code>except</code>:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="cf">try</span>:</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Código que podría fallar</span></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="cf">except</span> TipoDeError:</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Qué hacer si ocurre ese error</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Python intenta ejecutar el bloque <code>try</code>. Si ocurre el error indicado, en lugar de detenerse, ejecuta el bloque <code>except</code>:</p>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Código</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>texto <span class="op">=</span> <span class="st">"diez"</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="cf">try</span>:</span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>    numero <span class="op">=</span> <span class="bu">int</span>(texto)</span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Número convertido:"</span>, numero)</span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a><span class="cf">except</span> <span class="pp">ValueError</span>:</span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Aviso: no se puede convertir"</span>, <span class="bu">repr</span>(texto), <span class="st">"en un número"</span>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Aviso: no se puede convertir 'diez' en un número</code></pre>
+</div>
+<details open="" class="code-fold">
+<summary>Código</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"El programa continúa"</span>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>El programa continúa</code></pre>
+</div>
+</div>
+<p>Podemos atrapar varios tipos de error y agregar un bloque <code>finally</code>, que se ejecuta <strong>siempre</strong>, haya o no error:</p>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Código</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>dividendo <span class="op">=</span> <span class="dv">10</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>divisor <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a><span class="cf">try</span>:</span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>    resultado <span class="op">=</span> dividendo <span class="op">/</span> divisor</span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Resultado:"</span>, resultado)</span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a><span class="cf">except</span> <span class="pp">ZeroDivisionError</span>:</span>
+<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Error: no se puede dividir entre cero"</span>)</span>
+<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a><span class="cf">except</span> <span class="pp">TypeError</span>:</span>
+<span id="cb28-10"><a href="#cb28-10" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Error: los dos valores deben ser números"</span>)</span>
+<span id="cb28-11"><a href="#cb28-11" aria-hidden="true" tabindex="-1"></a><span class="cf">finally</span>:</span>
+<span id="cb28-12"><a href="#cb28-12" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Fin del cálculo"</span>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Error: no se puede dividir entre cero
+Fin del cálculo</code></pre>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Atrapa siempre un <strong>tipo de error específico</strong> (<code>except ValueError:</code>). Si escribes solo <code>except:</code>, ocultarás también errores que no esperabas y será más difícil encontrar fallas en tu programa.</p>
+</div>
+</div>
+</section>
+</section>
+<section id="estructuras-de-control-de-interrupción" class="level2" data-number="54.6">
+<h2 data-number="54.6" class="anchored" data-anchor-id="estructuras-de-control-de-interrupción"><span class="header-section-number">54.6</span> Estructuras de control de interrupción</h2>
+<p>Normalmente Python ejecuta las instrucciones de arriba hacia abajo. Las <strong>estructuras de control de interrupción</strong> cambian ese flujo: detienen el programa, salen de un bloque o saltan instrucciones. Todas son <strong>palabras reservadas</strong> (o funciones) de Python:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Instrucción</th>
+<th>¿Qué hace?</th>
+<th>¿Dónde se usa?</th>
+<th>Se estudia en…</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>assert</code></td>
+<td>Detiene el programa si una condición es falsa.</td>
+<td>En cualquier parte.</td>
+<td>Este capítulo.</td>
+</tr>
+<tr class="even">
+<td><code>raise</code></td>
+<td>Lanza (provoca) un error con un mensaje propio.</td>
+<td>En cualquier parte.</td>
+<td>Este capítulo y <a href="./python_condicionales.html">condicionales</a>.</td>
+</tr>
+<tr class="odd">
+<td><code>try</code> / <code>except</code> / <code>finally</code></td>
+<td>Atrapa un error para que el programa no se detenga.</td>
+<td>En cualquier parte.</td>
+<td>Este capítulo.</td>
+</tr>
+<tr class="even">
+<td><code>pass</code></td>
+<td>No hace nada; reserva el lugar de un bloque que aún no escribes.</td>
+<td>Dentro de <code>if</code>, <code>for</code>, <code>while</code>, funciones…</td>
+<td>Este capítulo.</td>
+</tr>
+<tr class="odd">
+<td><code>break</code></td>
+<td><strong>Sale</strong> inmediatamente de un ciclo.</td>
+<td>Solo dentro de <code>for</code> o <code>while</code>.</td>
+<td><a href="./python_for.html">Ciclos <code>for</code> y <code>while</code></a>.</td>
+</tr>
+<tr class="even">
+<td><code>continue</code></td>
+<td><strong>Salta</strong> al siguiente paso de un ciclo.</td>
+<td>Solo dentro de <code>for</code> o <code>while</code>.</td>
+<td><a href="./python_for.html">Ciclos <code>for</code> y <code>while</code></a>.</td>
+</tr>
+<tr class="odd">
+<td><code>return</code></td>
+<td>Termina una <strong>función</strong> y regresa un valor.</td>
+<td>Solo dentro de funciones (<code>def</code>).</td>
+<td>Capítulo de funciones.</td>
+</tr>
+<tr class="even">
+<td><code>exit()</code> / <code>sys.exit()</code></td>
+<td>Termina <strong>todo</strong> el programa.</td>
+<td>Scripts de Python (<code>.py</code>).</td>
+<td>Este capítulo.</td>
+</tr>
+</tbody>
+</table>
+<section id="raise-lanzar-un-error-propio" class="level3" data-number="54.6.1">
+<h3 data-number="54.6.1" class="anchored" data-anchor-id="raise-lanzar-un-error-propio"><span class="header-section-number">54.6.1</span> <code>raise</code>: lanzar un error propio</h3>
+<p><code>raise</code> produce un error del tipo que elijamos, con un mensaje claro para quien use el programa:</p>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Código</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="cf">raise</span> <span class="pp">ValueError</span>(<span class="st">"La calificación debe estar entre 0 y 10"</span>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>ValueError: La calificación debe estar entre 0 y 10</code></pre>
+</div>
+</div>
+<p>En el capítulo de condicionales lo combinaremos con <code>if</code> para lanzar el error <strong>solo</strong> cuando un dato sea incorrecto.</p>
+</section>
+<section id="pass-un-bloque-que-todavía-no-escribes" class="level3" data-number="54.6.2">
+<h3 data-number="54.6.2" class="anchored" data-anchor-id="pass-un-bloque-que-todavía-no-escribes"><span class="header-section-number">54.6.2</span> <code>pass</code>: un bloque que todavía no escribes</h3>
+<p>Python no permite bloques vacíos. <code>pass</code> sirve para “apartar el lugar” mientras terminas tu programa:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="cf">try</span>:</span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>    resultado <span class="op">=</span> <span class="dv">10</span> <span class="op">/</span> <span class="dv">0</span></span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a><span class="cf">except</span> <span class="pp">ZeroDivisionError</span>:</span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">pass</span>          <span class="co"># Por ahora, ignorar el error (lo completaremos después)</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="break-y-continue-interrumpir-un-ciclo" class="level3" data-number="54.6.3">
+<h3 data-number="54.6.3" class="anchored" data-anchor-id="break-y-continue-interrumpir-un-ciclo"><span class="header-section-number">54.6.3</span> <code>break</code> y <code>continue</code>: interrumpir un ciclo</h3>
+<p>Estas dos instrucciones solo funcionan <strong>dentro de un ciclo</strong> (<code>for</code> o <code>while</code>), que veremos más adelante. Su idea es:</p>
+<ul>
+<li><code>break</code> = “<strong>ya terminé</strong>, sal del ciclo aunque falten elementos”. Por ejemplo, dejar de buscar en cuanto encuentras un divisor de un número.</li>
+<li><code>continue</code> = “<strong>sáltate este</strong> y sigue con el siguiente”. Por ejemplo, ignorar los datos vacíos de una lista.</li>
+</ul>
+<p>Si escribes <code>break</code> fuera de un ciclo, Python marca un error:</p>
+<div class="cell">
+<div>
+<div id="pyodide-4" class="exercise-cell">
+
+</div>
+<script type="pyodide-4-contents">
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoicHJpbnQoXCJBbnRlc1wiKVxuYnJlYWtcbnByaW50KFwiRGVzcHXDqXNcIikifQ==
+</script>
+</div>
+</div>
+</section>
+<section id="exit-terminar-el-programa" class="level3" data-number="54.6.4">
+<h3 data-number="54.6.4" class="anchored" data-anchor-id="exit-terminar-el-programa"><span class="header-section-number">54.6.4</span> <code>exit()</code>: terminar el programa</h3>
+<p>En un script (<code>.py</code>) que se ejecuta desde la Terminal, <code>exit()</code> o <code>sys.exit()</code> terminan el programa completo:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sys</span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>edad <span class="op">=</span> <span class="op">-</span><span class="dv">5</span></span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>sys.exit(<span class="st">"Error: la edad no puede ser negativa"</span>)   <span class="co"># El programa termina aquí</span></span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Esta línea nunca se ejecuta"</span>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Advertencia
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>No uses <code>exit()</code> en Jupyter, Google Colab o Quarto: detiene el <em>kernel</em> (el programa que ejecuta tu código) y tendrás que reiniciarlo. En esos entornos es mejor usar <code>raise</code> o <code>assert</code>.</p>
+</div>
+</div>
+</section>
+</section>
+<section id="lo-que-sigue-condicionales" class="level2" data-number="54.7">
+<h2 data-number="54.7" class="anchored" data-anchor-id="lo-que-sigue-condicionales"><span class="header-section-number">54.7</span> Lo que sigue: condicionales</h2>
+<p><code>assert</code> siempre <strong>detiene</strong> el programa. ¿Y si queremos mostrar un aviso y continuar, o hacer algo distinto según el caso? Para eso existen los <strong>condicionales</strong> (<code>if</code>, <code>elif</code>, <code>else</code>), que veremos en el capítulo <a href="./python_condicionales.html">Condicionales en Python</a>.</p>
+</section>
+<section id="ejercicios" class="level2" data-number="54.8">
+<h2 data-number="54.8" class="anchored" data-anchor-id="ejercicios"><span class="header-section-number">54.8</span> Ejercicios</h2>
+<p>Resuelve los ejercicios en los editores interactivos. Recuerda que lo que escribas <strong>no se guarda</strong> al recargar la página.</p>
+<section id="ejercicio-1.-corrige-los-nombres-inválidos" class="level3" data-number="54.8.1">
+<h3 data-number="54.8.1" class="anchored" data-anchor-id="ejercicio-1.-corrige-los-nombres-inválidos"><span class="header-section-number">54.8.1</span> Ejercicio 1. Corrige los nombres inválidos</h3>
+<p>El siguiente programa no funciona porque <strong>todos</strong> los nombres de variables son inválidos. Corrígelos para que el programa se ejecute y muestre los cuatro valores.</p>
+<div class="cell" data-exercise="bp1">
+<div>
+<div id="pyodide-5" class="exercise-cell">
+
+</div>
+<script type="pyodide-5-contents">
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWUsImV4ZXJjaXNlIjoiYnAxIn0sImNvZGUiOiIyZG9fbHVnYXIgPSBcIkx1aXNcIlxubWktY2FsaWZpY2FjaW9uID0gOS41XG5jbGFzcyA9IFwiVGFsbGVyIGRlIEPDs21wdXRvXCJcbm5vbWJyZSBjb21wbGV0byA9IFwiQW5hIEzDs3BlelwiXG5cbnByaW50KDJkb19sdWdhciwgbWktY2FsaWZpY2FjaW9uLCBjbGFzcywgbm9tYnJlIGNvbXBsZXRvKSJ9
+</script>
+</div>
+</div>
+<div class="hint webr-ojs-exercise exercise-hint d-none" data-exercise="bp1">
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Nota</span>Pista
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-6" class="callout-6-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<p>Hay cuatro errores distintos: un nombre que empieza con un dígito, uno con guion medio, una palabra reservada y uno con espacio. Recuerda cambiar también los nombres dentro del <code>print()</code>.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="webr-ojs-exercise exercise-solution d-none" data-exercise="bp1">
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Solución
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-7" class="callout-7-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>segundo_lugar <span class="op">=</span> <span class="st">"Luis"</span></span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>mi_calificacion <span class="op">=</span> <span class="fl">9.5</span></span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>clase <span class="op">=</span> <span class="st">"Taller de Cómputo"</span></span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>nombre_completo <span class="op">=</span> <span class="st">"Ana López"</span></span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(segundo_lugar, mi_calificacion, clase, nombre_completo)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="ejercicio-2.-nombres-descriptivos" class="level3" data-number="54.8.2">
+<h3 data-number="54.8.2" class="anchored" data-anchor-id="ejercicio-2.-nombres-descriptivos"><span class="header-section-number">54.8.2</span> Ejercicio 2. Nombres descriptivos</h3>
+<p>El programa funciona, pero es difícil saber qué calcula. Cambia los nombres de las variables por nombres descriptivos en <code>snake_case</code> y usa una constante para el valor que nunca cambia. ¿Qué calcula el programa?</p>
+<div class="cell" data-exercise="bp2">
+<div>
+<div id="pyodide-6" class="exercise-cell">
+
+</div>
+<script type="pyodide-6-contents">
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWUsImV4ZXJjaXNlIjoiYnAyIn0sImNvZGUiOiJhID0gMy4xNDE1OVxuYiA9IDRcbmMgPSBhICogYiAqKiAyXG5kID0gMiAqIGEgKiBiXG5wcmludChjLCBkKSJ9
+</script>
+</div>
+</div>
+<div class="hint webr-ojs-exercise exercise-hint d-none" data-exercise="bp2">
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Nota</span>Pista
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-8" class="callout-8-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<p><code>3.14159</code> es aproximadamente <span class="math inline">\(\pi\)</span>. Las fórmulas <span class="math inline">\(\pi r^2\)</span> y <span class="math inline">\(2 \pi r\)</span> corresponden a una figura muy conocida.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="webr-ojs-exercise exercise-solution d-none" data-exercise="bp2">
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Solución
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-9" class="callout-9-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<p>El programa calcula el <strong>área</strong> y el <strong>perímetro</strong> de un círculo de radio 4.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>PI <span class="op">=</span> <span class="fl">3.14159</span></span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>radio <span class="op">=</span> <span class="dv">4</span></span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>area_circulo <span class="op">=</span> PI <span class="op">*</span> radio <span class="op">**</span> <span class="dv">2</span></span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a>perimetro_circulo <span class="op">=</span> <span class="dv">2</span> <span class="op">*</span> PI <span class="op">*</span> radio</span>
+<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Área:"</span>, area_circulo)</span>
+<span id="cb35-8"><a href="#cb35-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Perímetro:"</span>, perimetro_circulo)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="ejercicio-3.-la-función-perdida" class="level3" data-number="54.8.3">
+<h3 data-number="54.8.3" class="anchored" data-anchor-id="ejercicio-3.-la-función-perdida"><span class="header-section-number">54.8.3</span> Ejercicio 3. La función perdida</h3>
+<p>Ejecuta el código. ¿Por qué aparece <code>TypeError: 'int' object is not callable</code>? Corrígelo cambiando el nombre de la variable de la primera línea por una constante con un nombre adecuado. La última línea debe regresar la mejor calificación.</p>
+<div class="cell" data-exercise="bp3">
+<div>
+<div id="pyodide-7" class="exercise-cell">
+
+</div>
+<script type="pyodide-7-contents">
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWUsImV4ZXJjaXNlIjoiYnAzIn0sImNvZGUiOiJtYXggPSAxMCAgICMgQ2FsaWZpY2FjacOzbiBtw6F4aW1hIHBvc2libGVcblxuY2FsaWZpY2FjaW9uZXMgPSBbOCwgOS41LCA3XVxucHJpbnQoXCJFc2NhbGEgZGUgMCBhXCIsIG1heClcblxubWVqb3IgPSBtYXgoY2FsaWZpY2FjaW9uZXMpXG5tZWpvciJ9
+</script>
+</div>
+</div>
+<div class="cell" data-exercise="bp3" data-check="true">
+<script type="exercise-check-bp3-contents">
+eyJhdHRyIjp7ImNoZWNrIjp0cnVlLCJlZGl0Ijp0cnVlLCJldmFsIjp0cnVlLCJleGVyY2lzZSI6ImJwMyJ9LCJjb2RlIjoiaWYgcmVzdWx0ID09IDkuNTpcbiAgICBmZWVkYmFjayA9IHtcImNvcnJlY3RcIjogVHJ1ZSwgXCJtZXNzYWdlXCI6IFwiwqFDb3JyZWN0byEgQWwgbm8gc29icmVzY3JpYmlyIG1heCwgbGEgZnVuY2nDs24gaW50ZWdyYWRhIHZ1ZWx2ZSBhIGZ1bmNpb25hci5cIn1cbmVsc2U6XG4gICAgZmVlZGJhY2sgPSB7XCJjb3JyZWN0XCI6IEZhbHNlLCBcIm1lc3NhZ2VcIjogXCJMYSDDumx0aW1hIGzDrW5lYSBkZWJlIHJlZ3Jlc2FyIGxhIG1lam9yIGNhbGlmaWNhY2nDs24gKDkuNSkuXCJ9XG5mZWVkYmFjayJ9
+</script>
+</div>
+<div class="hint webr-ojs-exercise exercise-hint d-none" data-exercise="bp3">
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Nota</span>Pista
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-10" class="callout-10-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<p>En la primera línea, <code>max</code> deja de ser la función y pasa a ser el número <code>10</code>. Cambia ese nombre (por ejemplo, <code>CALIFICACION_MAXIMA</code>) en las dos líneas donde aparece como número.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="webr-ojs-exercise exercise-solution d-none" data-exercise="bp3">
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-11-contents" aria-controls="callout-11" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Solución
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-11" class="callout-11-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>CALIFICACION_MAXIMA <span class="op">=</span> <span class="dv">10</span></span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>calificaciones <span class="op">=</span> [<span class="dv">8</span>, <span class="fl">9.5</span>, <span class="dv">7</span>]</span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Escala de 0 a"</span>, CALIFICACION_MAXIMA)</span>
+<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a>mejor <span class="op">=</span> <span class="bu">max</span>(calificaciones)</span>
+<span id="cb36-7"><a href="#cb36-7" aria-hidden="true" tabindex="-1"></a>mejor   <span class="co"># 9.5</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="ejercicio-4.-defiende-tu-promedio" class="level3" data-number="54.8.4">
+<h3 data-number="54.8.4" class="anchored" data-anchor-id="ejercicio-4.-defiende-tu-promedio"><span class="header-section-number">54.8.4</span> Ejercicio 4. Defiende tu promedio</h3>
+<ol type="1">
+<li>Agrega tres <code>assert</code> antes de calcular el promedio para verificar que:
+<ul>
+<li>La lista <strong>no está vacía</strong>.</li>
+<li>Ninguna calificación es <strong>menor que</strong> <code>CALIFICACION_MINIMA</code>.</li>
+<li>Ninguna calificación es <strong>mayor que</strong> <code>CALIFICACION_MAXIMA</code>.</li>
+</ul></li>
+<li>Ejecuta el código: debe detenerse con un mensaje claro.</li>
+<li>Corrige el dato erróneo (<code>95</code> debía ser <code>9.5</code>) y vuelve a ejecutar. La última línea debe regresar el promedio.</li>
+</ol>
+<div class="cell" data-exercise="bp5">
+<div>
+<div id="pyodide-9" class="exercise-cell">
+
+</div>
+<script type="pyodide-9-contents">
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWUsImV4ZXJjaXNlIjoiYnA1In0sImNvZGUiOiJDQUxJRklDQUNJT05fTUlOSU1BID0gMFxuQ0FMSUZJQ0FDSU9OX01BWElNQSA9IDEwXG5cbmNhbGlmaWNhY2lvbmVzID0gWzksIDguNSwgOTVdXG5cbiMgQWdyZWdhIGFxdcOtIHR1cyB0cmVzIGFzc2VydFxuXG5cbnByb21lZGlvID0gc3VtKGNhbGlmaWNhY2lvbmVzKSAvIGxlbihjYWxpZmljYWNpb25lcylcbnByb21lZGlvIn0=
+</script>
+</div>
+</div>
+<div class="cell" data-exercise="bp5" data-check="true">
+<script type="exercise-check-bp5-contents">
+eyJhdHRyIjp7ImNoZWNrIjp0cnVlLCJlZGl0Ijp0cnVlLCJldmFsIjp0cnVlLCJleGVyY2lzZSI6ImJwNSJ9LCJjb2RlIjoiaWYgXCJhc3NlcnRcIiBub3QgaW4gdXNlcl9jb2RlOlxuICAgIGZlZWRiYWNrID0ge1wiY29ycmVjdFwiOiBGYWxzZSwgXCJtZXNzYWdlXCI6IFwiQWdyZWdhIGxhcyB2ZXJpZmljYWNpb25lcyBjb24gYXNzZXJ0IGFudGVzIGRlIGNhbGN1bGFyIGVsIHByb21lZGlvLlwifVxuZWxpZiByZXN1bHQgPT0gOS4wOlxuICAgIGZlZWRiYWNrID0ge1wiY29ycmVjdFwiOiBUcnVlLCBcIm1lc3NhZ2VcIjogXCLCoUNvcnJlY3RvISBUdXMgYXNzZXJ0IHByb3RlZ2VuIGVsIGPDoWxjdWxvIHkgZWwgcHJvbWVkaW8gZXMgOS4wLlwifVxuZWxzZTpcbiAgICBmZWVkYmFjayA9IHtcImNvcnJlY3RcIjogRmFsc2UsIFwibWVzc2FnZVwiOiBcIkNvcnJpZ2UgZWwgZGF0byBlcnLDs25lbyAoOTUgZGViw61hIHNlciA5LjUpOyBlbCBwcm9tZWRpbyBkZWJlIHNlciA5LjAuXCJ9XG5mZWVkYmFjayJ9
+</script>
+</div>
+<div class="hint webr-ojs-exercise exercise-hint d-none" data-exercise="bp5">
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-12-contents" aria-controls="callout-12" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Nota</span>Pista
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-12" class="callout-12-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<p>Usa las funciones integradas <code>len()</code>, <code>min()</code> y <code>max()</code>: <code>assert min(calificaciones) &gt;= CALIFICACION_MINIMA, "mensaje"</code>.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="webr-ojs-exercise exercise-solution d-none" data-exercise="bp5">
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-13-contents" aria-controls="callout-13" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Solución
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-13" class="callout-13-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>CALIFICACION_MINIMA <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>CALIFICACION_MAXIMA <span class="op">=</span> <span class="dv">10</span></span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a>calificaciones <span class="op">=</span> [<span class="dv">9</span>, <span class="fl">8.5</span>, <span class="fl">9.5</span>]</span>
+<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-6"><a href="#cb37-6" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> <span class="bu">len</span>(calificaciones) <span class="op">&gt;</span> <span class="dv">0</span>, <span class="st">"La lista de calificaciones está vacía"</span></span>
+<span id="cb37-7"><a href="#cb37-7" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> <span class="bu">min</span>(calificaciones) <span class="op">&gt;=</span> CALIFICACION_MINIMA, <span class="st">"Hay calificaciones menores que 0"</span></span>
+<span id="cb37-8"><a href="#cb37-8" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> <span class="bu">max</span>(calificaciones) <span class="op">&lt;=</span> CALIFICACION_MAXIMA, <span class="st">"Hay calificaciones mayores que 10"</span></span>
+<span id="cb37-9"><a href="#cb37-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-10"><a href="#cb37-10" aria-hidden="true" tabindex="-1"></a>promedio <span class="op">=</span> <span class="bu">sum</span>(calificaciones) <span class="op">/</span> <span class="bu">len</span>(calificaciones)</span>
+<span id="cb37-11"><a href="#cb37-11" aria-hidden="true" tabindex="-1"></a>promedio   <span class="co"># 9.0</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="ejercicio-5.-detective-de-errores" class="level3" data-number="54.8.5">
+<h3 data-number="54.8.5" class="anchored" data-anchor-id="ejercicio-5.-detective-de-errores"><span class="header-section-number">54.8.5</span> Ejercicio 5. Detective de errores</h3>
+<p>Cada línea del editor produce un error diferente. Quita el <code>#</code> de <strong>una línea a la vez</strong>, ejecuta y anota el <strong>tipo de error</strong>. Después escribe cómo lo evitarías.</p>
+<div class="cell" data-exercise="bp6">
+<div>
+<div id="pyodide-11" class="exercise-cell">
+
+</div>
+<script type="pyodide-11-contents">
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWUsImV4ZXJjaXNlIjoiYnA2In0sImNvZGUiOiIjIHByaW50KDEwIC8gMClcbiMgcHJpbnQoaW50KFwiZGllelwiKSlcbiMgcHJpbnQoWzEsIDIsIDNdWzVdKVxuIyBwcmludCh7XCJhXCI6IDF9W1wiYlwiXSlcbiMgcHJpbnQoXCJFZGFkOiBcIiArIDIwKVxuIyBwcmludChyZXN1bHRhZG8pIn0=
+</script>
+</div>
+</div>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Línea</th>
+<th>Tipo de error</th>
+<th>¿Cómo lo evitarías?</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>10 / 0</code></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td><code>int("diez")</code></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td><code>[1, 2, 3][5]</code></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td><code>{"a": 1}["b"]</code></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td><code>"Edad: " + 20</code></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td><code>print(resultado)</code></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<div class="hint webr-ojs-exercise exercise-hint d-none" data-exercise="bp6">
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-14-contents" aria-controls="callout-14" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Nota</span>Pista
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-14" class="callout-14-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<p>El tipo de error aparece al inicio de la última línea del mensaje, por ejemplo <code>ZeroDivisionError: division by zero</code>. Revisa la tabla de la sección <a href="#leer-los-mensajes-de-error">Leer los mensajes de error</a>.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="webr-ojs-exercise exercise-solution d-none" data-exercise="bp6">
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-15-contents" aria-controls="callout-15" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Solución
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-15" class="callout-15-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Línea</th>
+<th>Tipo de error</th>
+<th>¿Cómo lo evitarías?</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>10 / 0</code></td>
+<td><code>ZeroDivisionError</code></td>
+<td>Verificar que el divisor sea distinto de cero: <code>assert divisor != 0</code>.</td>
+</tr>
+<tr class="even">
+<td><code>int("diez")</code></td>
+<td><code>ValueError</code></td>
+<td>Verificar que el texto contenga solo dígitos: <code>"diez".isdigit()</code>.</td>
+</tr>
+<tr class="odd">
+<td><code>[1, 2, 3][5]</code></td>
+<td><code>IndexError</code></td>
+<td>Verificar que el índice sea menor que <code>len(lista)</code>.</td>
+</tr>
+<tr class="even">
+<td><code>{"a": 1}["b"]</code></td>
+<td><code>KeyError</code></td>
+<td>Verificar con <code>"b" in diccionario</code> o usar <code>diccionario.get("b")</code>.</td>
+</tr>
+<tr class="odd">
+<td><code>"Edad: " + 20</code></td>
+<td><code>TypeError</code></td>
+<td>Convertir el número a texto: <code>"Edad: " + str(20)</code>.</td>
+</tr>
+<tr class="even">
+<td><code>print(resultado)</code></td>
+<td><code>NameError</code></td>
+<td>Crear la variable antes de usarla y revisar que el nombre esté bien escrito.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="ejercicio-6.-convertir-texto-a-número-sin-que-el-programa-se-detenga" class="level3" data-number="54.8.6">
+<h3 data-number="54.8.6" class="anchored" data-anchor-id="ejercicio-6.-convertir-texto-a-número-sin-que-el-programa-se-detenga"><span class="header-section-number">54.8.6</span> Ejercicio 6. Convertir texto a número sin que el programa se detenga</h3>
+<p>Completa el programa para que intente convertir <code>texto</code> en número entero. Si no es posible, debe mostrar un aviso y guardar <code>None</code> (ausencia de valor) en <code>numero</code>, <strong>sin detener el programa</strong>. Deja <code>numero</code> en la <strong>última línea</strong>.</p>
+<p>Prueba con <code>"diez"</code>, <code>"10"</code> y <code>"3.5"</code>.</p>
+<div class="cell" data-exercise="bp6">
+<div>
+<div id="pyodide-12" class="exercise-cell">
+
+</div>
+<script type="pyodide-12-contents">
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWUsImV4ZXJjaXNlIjoiYnA2In0sImNvZGUiOiJ0ZXh0byA9IFwiZGllelwiXG5cbl9fX19fXzpcbiAgICBudW1lcm8gPSBpbnQodGV4dG8pXG5fX19fX18gVmFsdWVFcnJvcjpcbiAgICBwcmludChcIkF2aXNvOiBubyBzZSBwdWVkZSBjb252ZXJ0aXJcIiwgcmVwcih0ZXh0byksIFwiZW4gdW4gbsO6bWVybyBlbnRlcm9cIilcbiAgICBudW1lcm8gPSBOb25lXG5cbnByaW50KFwiRWwgcHJvZ3JhbWEgY29udGluw7phXCIpXG5udW1lcm8ifQ==
+</script>
+</div>
+</div>
+<div class="cell" data-exercise="bp6" data-check="true">
+<script type="exercise-check-bp6-contents">
+eyJhdHRyIjp7ImNoZWNrIjp0cnVlLCJlZGl0Ijp0cnVlLCJldmFsIjp0cnVlLCJleGVyY2lzZSI6ImJwNiJ9LCJjb2RlIjoiaWYgXCJ0cnlcIiBpbiB1c2VyX2NvZGUgYW5kIFwiZXhjZXB0XCIgaW4gdXNlcl9jb2RlIGFuZCByZXN1bHQgaXMgTm9uZTpcbiAgICBmZWVkYmFjayA9IHtcImNvcnJlY3RcIjogVHJ1ZSwgXCJtZXNzYWdlXCI6IFwiwqFDb3JyZWN0byEgRWwgZXJyb3Igc2UgYXRyYXDDsyB5IGVsIHByb2dyYW1hIGNvbnRpbnXDsy4gUHJ1ZWJhIGFob3JhIGNvbiB0ZXh0byA9IFxcXCIxMFxcXCIuXCJ9XG5lbGlmIFwidHJ5XCIgbm90IGluIHVzZXJfY29kZSBvciBcImV4Y2VwdFwiIG5vdCBpbiB1c2VyX2NvZGU6XG4gICAgZmVlZGJhY2sgPSB7XCJjb3JyZWN0XCI6IEZhbHNlLCBcIm1lc3NhZ2VcIjogXCJVc2EgdHJ5IHkgZXhjZXB0IHBhcmEgYXRyYXBhciBlbCBlcnJvci5cIn1cbmVsc2U6XG4gICAgZmVlZGJhY2sgPSB7XCJjb3JyZWN0XCI6IEZhbHNlLCBcIm1lc3NhZ2VcIjogXCJDb24gdGV4dG8gPSBcXFwiZGllelxcXCIsIG51bWVybyBkZWJlIHNlciBOb25lLlwifVxuZmVlZGJhY2sifQ==
+</script>
+</div>
+<div class="hint webr-ojs-exercise exercise-hint d-none" data-exercise="bp6">
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-16-contents" aria-controls="callout-16" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Nota</span>Pista
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-16" class="callout-16-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<p>Los espacios en blanco son las palabras <code>try</code> y <code>except</code>. No olvides los dos puntos al final de cada una.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="webr-ojs-exercise exercise-solution d-none" data-exercise="bp6">
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-17-contents" aria-controls="callout-17" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Solución
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-17" class="callout-17-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb38"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>texto <span class="op">=</span> <span class="st">"diez"</span></span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a><span class="cf">try</span>:</span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a>    numero <span class="op">=</span> <span class="bu">int</span>(texto)</span>
+<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a><span class="cf">except</span> <span class="pp">ValueError</span>:</span>
+<span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Aviso: no se puede convertir"</span>, <span class="bu">repr</span>(texto), <span class="st">"en un número entero"</span>)</span>
+<span id="cb38-7"><a href="#cb38-7" aria-hidden="true" tabindex="-1"></a>    numero <span class="op">=</span> <span class="va">None</span></span>
+<span id="cb38-8"><a href="#cb38-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-9"><a href="#cb38-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"El programa continúa"</span>)</span>
+<span id="cb38-10"><a href="#cb38-10" aria-hidden="true" tabindex="-1"></a>numero   <span class="co"># None</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Con <code>"3.5"</code> también obtienes el aviso: <code>int()</code> no convierte textos con punto decimal. Para eso usarías <code>float()</code>.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="ejercicio-7.-caza-de-errores-silenciosos" class="level3" data-number="54.8.7">
+<h3 data-number="54.8.7" class="anchored" data-anchor-id="ejercicio-7.-caza-de-errores-silenciosos"><span class="header-section-number">54.8.7</span> Ejercicio 7. Caza de errores silenciosos</h3>
+<p>Cada línea de este programa se ejecuta sin errores, pero <strong>las tres dan un resultado incorrecto</strong>. Corrígelas para obtener:</p>
+<ul>
+<li><code>promedio</code>: el promedio de 6 y 10, que es <code>8.0</code>.</li>
+<li><code>seno</code>: el seno de 90 <strong>grados</strong>, que es <code>1.0</code>.</li>
+<li><code>total</code>: la suma de las calificaciones que llegaron como texto, que es <code>17</code>.</li>
+</ul>
+<p>Deja la tupla de la última línea sin cambios.</p>
+<div class="cell" data-exercise="bp7">
+<div>
+<div id="pyodide-14" class="exercise-cell">
+
+</div>
+<script type="pyodide-14-contents">
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWUsImV4ZXJjaXNlIjoiYnA3In0sImNvZGUiOiJpbXBvcnQgbWF0aFxuXG5wcm9tZWRpbyA9IDYgKyAxMCAvIDJcbnNlbm8gPSBtYXRoLnNpbig5MClcbnRvdGFsID0gXCI4XCIgKyBcIjlcIlxuXG5wcmludChcIlByb21lZGlvOlwiLCBwcm9tZWRpbylcbnByaW50KFwiU2VubyBkZSA5MMKwOlwiLCBzZW5vKVxucHJpbnQoXCJUb3RhbDpcIiwgdG90YWwpXG4ocHJvbWVkaW8sIHNlbm8sIHRvdGFsKSJ9
+</script>
+</div>
+</div>
+<div class="cell" data-exercise="bp7" data-check="true">
+<script type="exercise-check-bp7-contents">
+eyJhdHRyIjp7ImNoZWNrIjp0cnVlLCJlZGl0Ijp0cnVlLCJldmFsIjp0cnVlLCJleGVyY2lzZSI6ImJwNyJ9LCJjb2RlIjoiaW1wb3J0IG1hdGhcbmlmIG5vdCBpc2luc3RhbmNlKHJlc3VsdCwgdHVwbGUpIG9yIGxlbihyZXN1bHQpICE9IDM6XG4gICAgZmVlZGJhY2sgPSB7XCJjb3JyZWN0XCI6IEZhbHNlLCBcIm1lc3NhZ2VcIjogXCJObyBtb2RpZmlxdWVzIGxhIMO6bHRpbWEgbMOtbmVhOiBkZWJlIHJlZ3Jlc2FyIChwcm9tZWRpbywgc2VubywgdG90YWwpLlwifVxuZWxzZTpcbiAgICBwLCBzLCB0ID0gcmVzdWx0XG4gICAgZXJyb3JlcyA9IFtdXG4gICAgaWYgbm90IChpc2luc3RhbmNlKHAsIChpbnQsIGZsb2F0KSkgYW5kIG1hdGguaXNjbG9zZShwLCA4LjApKTpcbiAgICAgICAgZXJyb3Jlcy5hcHBlbmQoXCJwcm9tZWRpbyAocmV2aXNhIGxvcyBwYXLDqW50ZXNpcylcIilcbiAgICBpZiBub3QgKGlzaW5zdGFuY2UocywgZmxvYXQpIGFuZCBtYXRoLmlzY2xvc2UocywgMS4wKSk6XG4gICAgICAgIGVycm9yZXMuYXBwZW5kKFwic2VubyAoY29udmllcnRlIGxvcyBncmFkb3MgYSByYWRpYW5lcylcIilcbiAgICBpZiBub3QgKGlzaW5zdGFuY2UodCwgaW50KSBhbmQgdCA9PSAxNyk6XG4gICAgICAgIGVycm9yZXMuYXBwZW5kKFwidG90YWwgKGNvbnZpZXJ0ZSBsb3MgdGV4dG9zIGEgbsO6bWVyb3MpXCIpXG4gICAgaWYgZXJyb3JlczpcbiAgICAgICAgZmVlZGJhY2sgPSB7XCJjb3JyZWN0XCI6IEZhbHNlLCBcIm1lc3NhZ2VcIjogXCJUb2RhdsOtYSBoYXkgZXJyb3JlcyBzaWxlbmNpb3NvcyBlbjogXCIgKyBcIiwgXCIuam9pbihlcnJvcmVzKSArIFwiLlwifVxuICAgIGVsc2U6XG4gICAgICAgIGZlZWRiYWNrID0ge1wiY29ycmVjdFwiOiBUcnVlLCBcIm1lc3NhZ2VcIjogXCLCoUNvcnJlY3RvISBFbmNvbnRyYXN0ZSBsb3MgdHJlcyBlcnJvcmVzIHNpbGVuY2lvc29zLlwifVxuZmVlZGJhY2sifQ==
+</script>
+</div>
+<div class="hint webr-ojs-exercise exercise-hint d-none" data-exercise="bp7">
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-18-contents" aria-controls="callout-18" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Nota</span>Pista
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-18" class="callout-18-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li>¿Qué operación hace Python primero, la suma o la división?</li>
+<li><code>math.radians(90)</code> convierte 90 grados a radianes.</li>
+<li><code>int("8")</code> convierte el texto <code>"8"</code> en el número <code>8</code>.</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+<div class="webr-ojs-exercise exercise-solution d-none" data-exercise="bp7">
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-19-contents" aria-controls="callout-19" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Solución
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-19" class="callout-19-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb39"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> math</span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>promedio <span class="op">=</span> (<span class="dv">6</span> <span class="op">+</span> <span class="dv">10</span>) <span class="op">/</span> <span class="dv">2</span>                 <span class="co"># 8.0</span></span>
+<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a>seno <span class="op">=</span> math.sin(math.radians(<span class="dv">90</span>))       <span class="co"># 1.0</span></span>
+<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a>total <span class="op">=</span> <span class="bu">int</span>(<span class="st">"8"</span>) <span class="op">+</span> <span class="bu">int</span>(<span class="st">"9"</span>)             <span class="co"># 17</span></span>
+<span id="cb39-6"><a href="#cb39-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-7"><a href="#cb39-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Promedio:"</span>, promedio)</span>
+<span id="cb39-8"><a href="#cb39-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Seno de 90°:"</span>, seno)</span>
+<span id="cb39-9"><a href="#cb39-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Total:"</span>, total)</span>
+<span id="cb39-10"><a href="#cb39-10" aria-hidden="true" tabindex="-1"></a>(promedio, seno, total)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="resumen" class="level2" data-number="54.9">
+<h2 data-number="54.9" class="anchored" data-anchor-id="resumen"><span class="header-section-number">54.9</span> Resumen</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Tema</th>
+<th>Idea clave</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Palabras reservadas</td>
+<td>No se pueden usar como nombres (<code>class</code>, <code>if</code>, <code>for</code>…).</td>
+</tr>
+<tr class="even">
+<td>Reglas de nombres</td>
+<td>Letras, dígitos y <code>_</code>; no empezar con dígito; distingue mayúsculas.</td>
+</tr>
+<tr class="odd">
+<td>Convenciones (PEP 8)</td>
+<td><code>snake_case</code> para variables, <code>MAYUSCULAS</code> para constantes, <code>PascalCase</code> para clases.</td>
+</tr>
+<tr class="even">
+<td>Funciones integradas</td>
+<td>No uses <code>sum</code>, <code>max</code>, <code>list</code>… como nombres de variables.</td>
+</tr>
+<tr class="odd">
+<td>Estilo</td>
+<td>Espacios alrededor de operadores, 4 espacios de indentación, comentarios útiles.</td>
+</tr>
+<tr class="even">
+<td>Error silencioso</td>
+<td>El programa no falla, pero el resultado es incorrecto; se detecta verificando los resultados.</td>
+</tr>
+<tr class="odd">
+<td>Programación defensiva</td>
+<td>Anticipa errores, valida los datos y falla pronto con mensajes claros.</td>
+</tr>
+<tr class="even">
+<td><code>assert</code></td>
+<td>Detiene el programa si una condición es falsa.</td>
+</tr>
+<tr class="odd">
+<td><code>try</code> / <code>except</code></td>
+<td>Atrapa un error para que el programa no se detenga.</td>
+</tr>
+<tr class="even">
+<td>Interrupción</td>
+<td><code>raise</code> (lanzar error), <code>pass</code> (bloque vacío), <code>break</code> / <code>continue</code> (ciclos), <code>exit()</code> (terminar el script).</td>
+</tr>
+<tr class="odd">
+<td>Siguiente paso</td>
+<td>Los <strong>condicionales</strong> (<code>if</code>, <code>elif</code>, <code>else</code>) permiten decidir qué hacer en lugar de detener el programa.</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="referencias" class="level2" data-number="54.10">
+<h2 data-number="54.10" class="anchored" data-anchor-id="referencias"><span class="header-section-number">54.10</span> Referencias</h2>
+<ul>
+<li><a href="https://peps.python.org/pep-0008/">PEP 8: Guía de estilo para código Python</a></li>
+<li><a href="https://docs.python.org/es/3/reference/lexical_analysis.html#keywords">Documentación de Python: Palabras reservadas</a></li>
+<li><a href="https://docs.python.org/es/3/library/exceptions.html">Documentación de Python: Excepciones integradas</a></li>
+<li><a href="https://docs.python.org/es/3/reference/simple_stmts.html#the-assert-statement">Documentación de Python: La instrucción <code>assert</code></a></li>
+<li><a href="https://haydeeperuyero.github.io/Computo_Cientifico/python.html">Sección 4 Python: Palabras reservadas y sintaxis de nombres</a></li>
+</ul>
+
+
+<script type="pyodide-data">
+eyJvcHRpb25zIjp7ImVudiI6eyJQTE9UTFlfUkVOREVSRVIiOiJwbG90bHlfbWltZXR5cGUifSwiaW5kZXhVUkwiOiJodHRwczovL2Nkbi5qc2RlbGl2ci5uZXQvcHlvZGlkZS92MC4yOC4xL2Z1bGwvIn0sInBhY2thZ2VzIjp7InBrZ3MiOlsicHlvZGlkZV9odHRwIiwibWljcm9waXAiLCJpcHl0aG9uIl19fQ==
+</script>
+<script type="ojs-module-contents">
+eyJjb250ZW50cyI6W3siY2VsbE5hbWUiOiJweW9kaWRlLTE0IiwiaW5saW5lIjpmYWxzZSwibWV0aG9kTmFtZSI6ImludGVycHJldCIsInNvdXJjZSI6InZpZXdvZiBfcHlvZGlkZV9lZGl0b3JfMTQgPSB7XG4gIGNvbnN0IHsgUHlvZGlkZUV4ZXJjaXNlRWRpdG9yLCBiNjREZWNvZGUgfSA9IHdpbmRvdy5fZXhlcmNpc2Vfb2pzX3J1bnRpbWU7XG5cbiAgY29uc3Qgc2NyaXB0Q29udGVudCA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoYHNjcmlwdFt0eXBlPVxcXCJweW9kaWRlLTE0LWNvbnRlbnRzXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgYmxvY2sgPSBKU09OLnBhcnNlKGI2NERlY29kZShzY3JpcHRDb250ZW50KSk7XG5cbiAgLy8gRGVmYXVsdCBleGVyY2lzZSBjb25maWd1cmF0aW9uXG4gIGNvbnN0IG9wdGlvbnMgPSBPYmplY3QuYXNzaWduKFxuICAgIHtcbiAgICAgIGlkOiBcInB5b2RpZGUtMTQtY29udGVudHNcIixcbiAgICAgIGVudmlyOiBgZXhlcmNpc2UtZW52LSR7YmxvY2suYXR0ci5leGVyY2lzZX1gLFxuICAgICAgZXJyb3I6IGZhbHNlLFxuICAgICAgY2FwdGlvbjogJ0V4ZXJjaXNlJyxcbiAgICB9LFxuICAgIGJsb2NrLmF0dHJcbiAgKTtcblxuICBjb25zdCBlZGl0b3IgPSBuZXcgUHlvZGlkZUV4ZXJjaXNlRWRpdG9yKHB5b2RpZGVPanMucHlvZGlkZVByb21pc2UsIGJsb2NrLmNvZGUsIG9wdGlvbnMpO1xuICByZXR1cm4gZWRpdG9yLmNvbnRhaW5lcjtcbn1cbnZpZXdvZiBfcHlvZGlkZV92YWx1ZV8xNCA9IHB5b2RpZGVPanMucHJvY2VzcyhfcHlvZGlkZV9lZGl0b3JfMTQsIHt9KTtcbl9weW9kaWRlX2ZlZWRiYWNrXzE0ID0ge1xuICBjb25zdCB7IFB5b2RpZGVHcmFkZXIgfSA9IHdpbmRvdy5fZXhlcmNpc2Vfb2pzX3J1bnRpbWU7XG4gIGNvbnN0IGVtcHR5RmVlZGJhY2sgPSBkb2N1bWVudC5jcmVhdGVFbGVtZW50KCdkaXYnKTtcblxuICBjb25zdCBncmFkZXIgPSBuZXcgUHlvZGlkZUdyYWRlcihfcHlvZGlkZV92YWx1ZV8xNC5ldmFsdWF0b3IpO1xuICBjb25zdCBmZWVkYmFjayA9IGF3YWl0IGdyYWRlci5ncmFkZUV4ZXJjaXNlKCk7XG4gIGlmICghZmVlZGJhY2spIHJldHVybiBlbXB0eUZlZWRiYWNrO1xuICByZXR1cm4gZmVlZGJhY2s7XG59XG4ifSx7ImNlbGxOYW1lIjoicHlvZGlkZS0xMiIsImlubGluZSI6ZmFsc2UsIm1ldGhvZE5hbWUiOiJpbnRlcnByZXQiLCJzb3VyY2UiOiJ2aWV3b2YgX3B5b2RpZGVfZWRpdG9yXzEyID0ge1xuICBjb25zdCB7IFB5b2RpZGVFeGVyY2lzZUVkaXRvciwgYjY0RGVjb2RlIH0gPSB3aW5kb3cuX2V4ZXJjaXNlX29qc19ydW50aW1lO1xuXG4gIGNvbnN0IHNjcmlwdENvbnRlbnQgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKGBzY3JpcHRbdHlwZT1cXFwicHlvZGlkZS0xMi1jb250ZW50c1xcXCJdYCkudGV4dENvbnRlbnQ7XG4gIGNvbnN0IGJsb2NrID0gSlNPTi5wYXJzZShiNjREZWNvZGUoc2NyaXB0Q29udGVudCkpO1xuXG4gIC8vIERlZmF1bHQgZXhlcmNpc2UgY29uZmlndXJhdGlvblxuICBjb25zdCBvcHRpb25zID0gT2JqZWN0LmFzc2lnbihcbiAgICB7XG4gICAgICBpZDogXCJweW9kaWRlLTEyLWNvbnRlbnRzXCIsXG4gICAgICBlbnZpcjogYGV4ZXJjaXNlLWVudi0ke2Jsb2NrLmF0dHIuZXhlcmNpc2V9YCxcbiAgICAgIGVycm9yOiBmYWxzZSxcbiAgICAgIGNhcHRpb246ICdFeGVyY2lzZScsXG4gICAgfSxcbiAgICBibG9jay5hdHRyXG4gICk7XG5cbiAgY29uc3QgZWRpdG9yID0gbmV3IFB5b2RpZGVFeGVyY2lzZUVkaXRvcihweW9kaWRlT2pzLnB5b2RpZGVQcm9taXNlLCBibG9jay5jb2RlLCBvcHRpb25zKTtcbiAgcmV0dXJuIGVkaXRvci5jb250YWluZXI7XG59XG52aWV3b2YgX3B5b2RpZGVfdmFsdWVfMTIgPSBweW9kaWRlT2pzLnByb2Nlc3MoX3B5b2RpZGVfZWRpdG9yXzEyLCB7fSk7XG5fcHlvZGlkZV9mZWVkYmFja18xMiA9IHtcbiAgY29uc3QgeyBQeW9kaWRlR3JhZGVyIH0gPSB3aW5kb3cuX2V4ZXJjaXNlX29qc19ydW50aW1lO1xuICBjb25zdCBlbXB0eUZlZWRiYWNrID0gZG9jdW1lbnQuY3JlYXRlRWxlbWVudCgnZGl2Jyk7XG5cbiAgY29uc3QgZ3JhZGVyID0gbmV3IFB5b2RpZGVHcmFkZXIoX3B5b2RpZGVfdmFsdWVfMTIuZXZhbHVhdG9yKTtcbiAgY29uc3QgZmVlZGJhY2sgPSBhd2FpdCBncmFkZXIuZ3JhZGVFeGVyY2lzZSgpO1xuICBpZiAoIWZlZWRiYWNrKSByZXR1cm4gZW1wdHlGZWVkYmFjaztcbiAgcmV0dXJuIGZlZWRiYWNrO1xufVxuIn0seyJjZWxsTmFtZSI6InB5b2RpZGUtMTEiLCJpbmxpbmUiOmZhbHNlLCJtZXRob2ROYW1lIjoiaW50ZXJwcmV0Iiwic291cmNlIjoidmlld29mIF9weW9kaWRlX2VkaXRvcl8xMSA9IHtcbiAgY29uc3QgeyBQeW9kaWRlRXhlcmNpc2VFZGl0b3IsIGI2NERlY29kZSB9ID0gd2luZG93Ll9leGVyY2lzZV9vanNfcnVudGltZTtcblxuICBjb25zdCBzY3JpcHRDb250ZW50ID0gZG9jdW1lbnQucXVlcnlTZWxlY3Rvcihgc2NyaXB0W3R5cGU9XFxcInB5b2RpZGUtMTEtY29udGVudHNcXFwiXWApLnRleHRDb250ZW50O1xuICBjb25zdCBibG9jayA9IEpTT04ucGFyc2UoYjY0RGVjb2RlKHNjcmlwdENvbnRlbnQpKTtcblxuICAvLyBEZWZhdWx0IGV4ZXJjaXNlIGNvbmZpZ3VyYXRpb25cbiAgY29uc3Qgb3B0aW9ucyA9IE9iamVjdC5hc3NpZ24oXG4gICAge1xuICAgICAgaWQ6IFwicHlvZGlkZS0xMS1jb250ZW50c1wiLFxuICAgICAgZW52aXI6IGBleGVyY2lzZS1lbnYtJHtibG9jay5hdHRyLmV4ZXJjaXNlfWAsXG4gICAgICBlcnJvcjogZmFsc2UsXG4gICAgICBjYXB0aW9uOiAnRXhlcmNpc2UnLFxuICAgIH0sXG4gICAgYmxvY2suYXR0clxuICApO1xuXG4gIGNvbnN0IGVkaXRvciA9IG5ldyBQeW9kaWRlRXhlcmNpc2VFZGl0b3IocHlvZGlkZU9qcy5weW9kaWRlUHJvbWlzZSwgYmxvY2suY29kZSwgb3B0aW9ucyk7XG4gIHJldHVybiBlZGl0b3IuY29udGFpbmVyO1xufVxudmlld29mIF9weW9kaWRlX3ZhbHVlXzExID0gcHlvZGlkZU9qcy5wcm9jZXNzKF9weW9kaWRlX2VkaXRvcl8xMSwge30pO1xuX3B5b2RpZGVfZmVlZGJhY2tfMTEgPSB7XG4gIGNvbnN0IHsgUHlvZGlkZUdyYWRlciB9ID0gd2luZG93Ll9leGVyY2lzZV9vanNfcnVudGltZTtcbiAgY29uc3QgZW1wdHlGZWVkYmFjayA9IGRvY3VtZW50LmNyZWF0ZUVsZW1lbnQoJ2RpdicpO1xuXG4gIGNvbnN0IGdyYWRlciA9IG5ldyBQeW9kaWRlR3JhZGVyKF9weW9kaWRlX3ZhbHVlXzExLmV2YWx1YXRvcik7XG4gIGNvbnN0IGZlZWRiYWNrID0gYXdhaXQgZ3JhZGVyLmdyYWRlRXhlcmNpc2UoKTtcbiAgaWYgKCFmZWVkYmFjaykgcmV0dXJuIGVtcHR5RmVlZGJhY2s7XG4gIHJldHVybiBmZWVkYmFjaztcbn1cbiJ9LHsiY2VsbE5hbWUiOiJweW9kaWRlLTkiLCJpbmxpbmUiOmZhbHNlLCJtZXRob2ROYW1lIjoiaW50ZXJwcmV0Iiwic291cmNlIjoidmlld29mIF9weW9kaWRlX2VkaXRvcl85ID0ge1xuICBjb25zdCB7IFB5b2RpZGVFeGVyY2lzZUVkaXRvciwgYjY0RGVjb2RlIH0gPSB3aW5kb3cuX2V4ZXJjaXNlX29qc19ydW50aW1lO1xuXG4gIGNvbnN0IHNjcmlwdENvbnRlbnQgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKGBzY3JpcHRbdHlwZT1cXFwicHlvZGlkZS05LWNvbnRlbnRzXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgYmxvY2sgPSBKU09OLnBhcnNlKGI2NERlY29kZShzY3JpcHRDb250ZW50KSk7XG5cbiAgLy8gRGVmYXVsdCBleGVyY2lzZSBjb25maWd1cmF0aW9uXG4gIGNvbnN0IG9wdGlvbnMgPSBPYmplY3QuYXNzaWduKFxuICAgIHtcbiAgICAgIGlkOiBcInB5b2RpZGUtOS1jb250ZW50c1wiLFxuICAgICAgZW52aXI6IGBleGVyY2lzZS1lbnYtJHtibG9jay5hdHRyLmV4ZXJjaXNlfWAsXG4gICAgICBlcnJvcjogZmFsc2UsXG4gICAgICBjYXB0aW9uOiAnRXhlcmNpc2UnLFxuICAgIH0sXG4gICAgYmxvY2suYXR0clxuICApO1xuXG4gIGNvbnN0IGVkaXRvciA9IG5ldyBQeW9kaWRlRXhlcmNpc2VFZGl0b3IocHlvZGlkZU9qcy5weW9kaWRlUHJvbWlzZSwgYmxvY2suY29kZSwgb3B0aW9ucyk7XG4gIHJldHVybiBlZGl0b3IuY29udGFpbmVyO1xufVxudmlld29mIF9weW9kaWRlX3ZhbHVlXzkgPSBweW9kaWRlT2pzLnByb2Nlc3MoX3B5b2RpZGVfZWRpdG9yXzksIHt9KTtcbl9weW9kaWRlX2ZlZWRiYWNrXzkgPSB7XG4gIGNvbnN0IHsgUHlvZGlkZUdyYWRlciB9ID0gd2luZG93Ll9leGVyY2lzZV9vanNfcnVudGltZTtcbiAgY29uc3QgZW1wdHlGZWVkYmFjayA9IGRvY3VtZW50LmNyZWF0ZUVsZW1lbnQoJ2RpdicpO1xuXG4gIGNvbnN0IGdyYWRlciA9IG5ldyBQeW9kaWRlR3JhZGVyKF9weW9kaWRlX3ZhbHVlXzkuZXZhbHVhdG9yKTtcbiAgY29uc3QgZmVlZGJhY2sgPSBhd2FpdCBncmFkZXIuZ3JhZGVFeGVyY2lzZSgpO1xuICBpZiAoIWZlZWRiYWNrKSByZXR1cm4gZW1wdHlGZWVkYmFjaztcbiAgcmV0dXJuIGZlZWRiYWNrO1xufVxuIn0seyJjZWxsTmFtZSI6InB5b2RpZGUtNyIsImlubGluZSI6ZmFsc2UsIm1ldGhvZE5hbWUiOiJpbnRlcnByZXQiLCJzb3VyY2UiOiJ2aWV3b2YgX3B5b2RpZGVfZWRpdG9yXzcgPSB7XG4gIGNvbnN0IHsgUHlvZGlkZUV4ZXJjaXNlRWRpdG9yLCBiNjREZWNvZGUgfSA9IHdpbmRvdy5fZXhlcmNpc2Vfb2pzX3J1bnRpbWU7XG5cbiAgY29uc3Qgc2NyaXB0Q29udGVudCA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoYHNjcmlwdFt0eXBlPVxcXCJweW9kaWRlLTctY29udGVudHNcXFwiXWApLnRleHRDb250ZW50O1xuICBjb25zdCBibG9jayA9IEpTT04ucGFyc2UoYjY0RGVjb2RlKHNjcmlwdENvbnRlbnQpKTtcblxuICAvLyBEZWZhdWx0IGV4ZXJjaXNlIGNvbmZpZ3VyYXRpb25cbiAgY29uc3Qgb3B0aW9ucyA9IE9iamVjdC5hc3NpZ24oXG4gICAge1xuICAgICAgaWQ6IFwicHlvZGlkZS03LWNvbnRlbnRzXCIsXG4gICAgICBlbnZpcjogYGV4ZXJjaXNlLWVudi0ke2Jsb2NrLmF0dHIuZXhlcmNpc2V9YCxcbiAgICAgIGVycm9yOiBmYWxzZSxcbiAgICAgIGNhcHRpb246ICdFeGVyY2lzZScsXG4gICAgfSxcbiAgICBibG9jay5hdHRyXG4gICk7XG5cbiAgY29uc3QgZWRpdG9yID0gbmV3IFB5b2RpZGVFeGVyY2lzZUVkaXRvcihweW9kaWRlT2pzLnB5b2RpZGVQcm9taXNlLCBibG9jay5jb2RlLCBvcHRpb25zKTtcbiAgcmV0dXJuIGVkaXRvci5jb250YWluZXI7XG59XG52aWV3b2YgX3B5b2RpZGVfdmFsdWVfNyA9IHB5b2RpZGVPanMucHJvY2VzcyhfcHlvZGlkZV9lZGl0b3JfNywge30pO1xuX3B5b2RpZGVfZmVlZGJhY2tfNyA9IHtcbiAgY29uc3QgeyBQeW9kaWRlR3JhZGVyIH0gPSB3aW5kb3cuX2V4ZXJjaXNlX29qc19ydW50aW1lO1xuICBjb25zdCBlbXB0eUZlZWRiYWNrID0gZG9jdW1lbnQuY3JlYXRlRWxlbWVudCgnZGl2Jyk7XG5cbiAgY29uc3QgZ3JhZGVyID0gbmV3IFB5b2RpZGVHcmFkZXIoX3B5b2RpZGVfdmFsdWVfNy5ldmFsdWF0b3IpO1xuICBjb25zdCBmZWVkYmFjayA9IGF3YWl0IGdyYWRlci5ncmFkZUV4ZXJjaXNlKCk7XG4gIGlmICghZmVlZGJhY2spIHJldHVybiBlbXB0eUZlZWRiYWNrO1xuICByZXR1cm4gZmVlZGJhY2s7XG59XG4ifSx7ImNlbGxOYW1lIjoicHlvZGlkZS02IiwiaW5saW5lIjpmYWxzZSwibWV0aG9kTmFtZSI6ImludGVycHJldCIsInNvdXJjZSI6InZpZXdvZiBfcHlvZGlkZV9lZGl0b3JfNiA9IHtcbiAgY29uc3QgeyBQeW9kaWRlRXhlcmNpc2VFZGl0b3IsIGI2NERlY29kZSB9ID0gd2luZG93Ll9leGVyY2lzZV9vanNfcnVudGltZTtcblxuICBjb25zdCBzY3JpcHRDb250ZW50ID0gZG9jdW1lbnQucXVlcnlTZWxlY3Rvcihgc2NyaXB0W3R5cGU9XFxcInB5b2RpZGUtNi1jb250ZW50c1xcXCJdYCkudGV4dENvbnRlbnQ7XG4gIGNvbnN0IGJsb2NrID0gSlNPTi5wYXJzZShiNjREZWNvZGUoc2NyaXB0Q29udGVudCkpO1xuXG4gIC8vIERlZmF1bHQgZXhlcmNpc2UgY29uZmlndXJhdGlvblxuICBjb25zdCBvcHRpb25zID0gT2JqZWN0LmFzc2lnbihcbiAgICB7XG4gICAgICBpZDogXCJweW9kaWRlLTYtY29udGVudHNcIixcbiAgICAgIGVudmlyOiBgZXhlcmNpc2UtZW52LSR7YmxvY2suYXR0ci5leGVyY2lzZX1gLFxuICAgICAgZXJyb3I6IGZhbHNlLFxuICAgICAgY2FwdGlvbjogJ0V4ZXJjaXNlJyxcbiAgICB9LFxuICAgIGJsb2NrLmF0dHJcbiAgKTtcblxuICBjb25zdCBlZGl0b3IgPSBuZXcgUHlvZGlkZUV4ZXJjaXNlRWRpdG9yKHB5b2RpZGVPanMucHlvZGlkZVByb21pc2UsIGJsb2NrLmNvZGUsIG9wdGlvbnMpO1xuICByZXR1cm4gZWRpdG9yLmNvbnRhaW5lcjtcbn1cbnZpZXdvZiBfcHlvZGlkZV92YWx1ZV82ID0gcHlvZGlkZU9qcy5wcm9jZXNzKF9weW9kaWRlX2VkaXRvcl82LCB7fSk7XG5fcHlvZGlkZV9mZWVkYmFja182ID0ge1xuICBjb25zdCB7IFB5b2RpZGVHcmFkZXIgfSA9IHdpbmRvdy5fZXhlcmNpc2Vfb2pzX3J1bnRpbWU7XG4gIGNvbnN0IGVtcHR5RmVlZGJhY2sgPSBkb2N1bWVudC5jcmVhdGVFbGVtZW50KCdkaXYnKTtcblxuICBjb25zdCBncmFkZXIgPSBuZXcgUHlvZGlkZUdyYWRlcihfcHlvZGlkZV92YWx1ZV82LmV2YWx1YXRvcik7XG4gIGNvbnN0IGZlZWRiYWNrID0gYXdhaXQgZ3JhZGVyLmdyYWRlRXhlcmNpc2UoKTtcbiAgaWYgKCFmZWVkYmFjaykgcmV0dXJuIGVtcHR5RmVlZGJhY2s7XG4gIHJldHVybiBmZWVkYmFjaztcbn1cbiJ9LHsiY2VsbE5hbWUiOiJweW9kaWRlLTUiLCJpbmxpbmUiOmZhbHNlLCJtZXRob2ROYW1lIjoiaW50ZXJwcmV0Iiwic291cmNlIjoidmlld29mIF9weW9kaWRlX2VkaXRvcl81ID0ge1xuICBjb25zdCB7IFB5b2RpZGVFeGVyY2lzZUVkaXRvciwgYjY0RGVjb2RlIH0gPSB3aW5kb3cuX2V4ZXJjaXNlX29qc19ydW50aW1lO1xuXG4gIGNvbnN0IHNjcmlwdENvbnRlbnQgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKGBzY3JpcHRbdHlwZT1cXFwicHlvZGlkZS01LWNvbnRlbnRzXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgYmxvY2sgPSBKU09OLnBhcnNlKGI2NERlY29kZShzY3JpcHRDb250ZW50KSk7XG5cbiAgLy8gRGVmYXVsdCBleGVyY2lzZSBjb25maWd1cmF0aW9uXG4gIGNvbnN0IG9wdGlvbnMgPSBPYmplY3QuYXNzaWduKFxuICAgIHtcbiAgICAgIGlkOiBcInB5b2RpZGUtNS1jb250ZW50c1wiLFxuICAgICAgZW52aXI6IGBleGVyY2lzZS1lbnYtJHtibG9jay5hdHRyLmV4ZXJjaXNlfWAsXG4gICAgICBlcnJvcjogZmFsc2UsXG4gICAgICBjYXB0aW9uOiAnRXhlcmNpc2UnLFxuICAgIH0sXG4gICAgYmxvY2suYXR0clxuICApO1xuXG4gIGNvbnN0IGVkaXRvciA9IG5ldyBQeW9kaWRlRXhlcmNpc2VFZGl0b3IocHlvZGlkZU9qcy5weW9kaWRlUHJvbWlzZSwgYmxvY2suY29kZSwgb3B0aW9ucyk7XG4gIHJldHVybiBlZGl0b3IuY29udGFpbmVyO1xufVxudmlld29mIF9weW9kaWRlX3ZhbHVlXzUgPSBweW9kaWRlT2pzLnByb2Nlc3MoX3B5b2RpZGVfZWRpdG9yXzUsIHt9KTtcbl9weW9kaWRlX2ZlZWRiYWNrXzUgPSB7XG4gIGNvbnN0IHsgUHlvZGlkZUdyYWRlciB9ID0gd2luZG93Ll9leGVyY2lzZV9vanNfcnVudGltZTtcbiAgY29uc3QgZW1wdHlGZWVkYmFjayA9IGRvY3VtZW50LmNyZWF0ZUVsZW1lbnQoJ2RpdicpO1xuXG4gIGNvbnN0IGdyYWRlciA9IG5ldyBQeW9kaWRlR3JhZGVyKF9weW9kaWRlX3ZhbHVlXzUuZXZhbHVhdG9yKTtcbiAgY29uc3QgZmVlZGJhY2sgPSBhd2FpdCBncmFkZXIuZ3JhZGVFeGVyY2lzZSgpO1xuICBpZiAoIWZlZWRiYWNrKSByZXR1cm4gZW1wdHlGZWVkYmFjaztcbiAgcmV0dXJuIGZlZWRiYWNrO1xufVxuIn0seyJjZWxsTmFtZSI6InB5b2RpZGUtNCIsImlubGluZSI6ZmFsc2UsIm1ldGhvZE5hbWUiOiJpbnRlcnByZXQiLCJzb3VyY2UiOiJ2aWV3b2YgX3B5b2RpZGVfZWRpdG9yXzQgPSB7XG4gIGNvbnN0IHsgUHlvZGlkZUV4ZXJjaXNlRWRpdG9yLCBiNjREZWNvZGUgfSA9IHdpbmRvdy5fZXhlcmNpc2Vfb2pzX3J1bnRpbWU7XG5cbiAgY29uc3Qgc2NyaXB0Q29udGVudCA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoYHNjcmlwdFt0eXBlPVxcXCJweW9kaWRlLTQtY29udGVudHNcXFwiXWApLnRleHRDb250ZW50O1xuICBjb25zdCBibG9jayA9IEpTT04ucGFyc2UoYjY0RGVjb2RlKHNjcmlwdENvbnRlbnQpKTtcblxuICBjb25zdCBvcHRpb25zID0gT2JqZWN0LmFzc2lnbih7IGlkOiBgcHlvZGlkZS00LWNvbnRlbnRzYCB9LCBibG9jay5hdHRyKTtcbiAgY29uc3QgZWRpdG9yID0gbmV3IFB5b2RpZGVFeGVyY2lzZUVkaXRvcihcbiAgICBweW9kaWRlT2pzLnB5b2RpZGVQcm9taXNlLFxuICAgIGJsb2NrLmNvZGUsXG4gICAgb3B0aW9uc1xuICApO1xuXG4gIHJldHVybiBlZGl0b3IuY29udGFpbmVyO1xufVxuX3B5b2RpZGVfdmFsdWVfNCA9IHB5b2RpZGVPanMucHJvY2VzcyhfcHlvZGlkZV9lZGl0b3JfNCwge30pO1xuIn0seyJjZWxsTmFtZSI6InB5b2RpZGUtMyIsImlubGluZSI6ZmFsc2UsIm1ldGhvZE5hbWUiOiJpbnRlcnByZXQiLCJzb3VyY2UiOiJ2aWV3b2YgX3B5b2RpZGVfZWRpdG9yXzMgPSB7XG4gIGNvbnN0IHsgUHlvZGlkZUV4ZXJjaXNlRWRpdG9yLCBiNjREZWNvZGUgfSA9IHdpbmRvdy5fZXhlcmNpc2Vfb2pzX3J1bnRpbWU7XG5cbiAgY29uc3Qgc2NyaXB0Q29udGVudCA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoYHNjcmlwdFt0eXBlPVxcXCJweW9kaWRlLTMtY29udGVudHNcXFwiXWApLnRleHRDb250ZW50O1xuICBjb25zdCBibG9jayA9IEpTT04ucGFyc2UoYjY0RGVjb2RlKHNjcmlwdENvbnRlbnQpKTtcblxuICBjb25zdCBvcHRpb25zID0gT2JqZWN0LmFzc2lnbih7IGlkOiBgcHlvZGlkZS0zLWNvbnRlbnRzYCB9LCBibG9jay5hdHRyKTtcbiAgY29uc3QgZWRpdG9yID0gbmV3IFB5b2RpZGVFeGVyY2lzZUVkaXRvcihcbiAgICBweW9kaWRlT2pzLnB5b2RpZGVQcm9taXNlLFxuICAgIGJsb2NrLmNvZGUsXG4gICAgb3B0aW9uc1xuICApO1xuXG4gIHJldHVybiBlZGl0b3IuY29udGFpbmVyO1xufVxuX3B5b2RpZGVfdmFsdWVfMyA9IHB5b2RpZGVPanMucHJvY2VzcyhfcHlvZGlkZV9lZGl0b3JfMywge30pO1xuIn0seyJjZWxsTmFtZSI6InB5b2RpZGUtMiIsImlubGluZSI6ZmFsc2UsIm1ldGhvZE5hbWUiOiJpbnRlcnByZXQiLCJzb3VyY2UiOiJ2aWV3b2YgX3B5b2RpZGVfZWRpdG9yXzIgPSB7XG4gIGNvbnN0IHsgUHlvZGlkZUV4ZXJjaXNlRWRpdG9yLCBiNjREZWNvZGUgfSA9IHdpbmRvdy5fZXhlcmNpc2Vfb2pzX3J1bnRpbWU7XG5cbiAgY29uc3Qgc2NyaXB0Q29udGVudCA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoYHNjcmlwdFt0eXBlPVxcXCJweW9kaWRlLTItY29udGVudHNcXFwiXWApLnRleHRDb250ZW50O1xuICBjb25zdCBibG9jayA9IEpTT04ucGFyc2UoYjY0RGVjb2RlKHNjcmlwdENvbnRlbnQpKTtcblxuICBjb25zdCBvcHRpb25zID0gT2JqZWN0LmFzc2lnbih7IGlkOiBgcHlvZGlkZS0yLWNvbnRlbnRzYCB9LCBibG9jay5hdHRyKTtcbiAgY29uc3QgZWRpdG9yID0gbmV3IFB5b2RpZGVFeGVyY2lzZUVkaXRvcihcbiAgICBweW9kaWRlT2pzLnB5b2RpZGVQcm9taXNlLFxuICAgIGJsb2NrLmNvZGUsXG4gICAgb3B0aW9uc1xuICApO1xuXG4gIHJldHVybiBlZGl0b3IuY29udGFpbmVyO1xufVxuX3B5b2RpZGVfdmFsdWVfMiA9IHB5b2RpZGVPanMucHJvY2VzcyhfcHlvZGlkZV9lZGl0b3JfMiwge30pO1xuIn0seyJjZWxsTmFtZSI6InB5b2RpZGUtMSIsImlubGluZSI6ZmFsc2UsIm1ldGhvZE5hbWUiOiJpbnRlcnByZXQiLCJzb3VyY2UiOiJ2aWV3b2YgX3B5b2RpZGVfZWRpdG9yXzEgPSB7XG4gIGNvbnN0IHsgUHlvZGlkZUV4ZXJjaXNlRWRpdG9yLCBiNjREZWNvZGUgfSA9IHdpbmRvdy5fZXhlcmNpc2Vfb2pzX3J1bnRpbWU7XG5cbiAgY29uc3Qgc2NyaXB0Q29udGVudCA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoYHNjcmlwdFt0eXBlPVxcXCJweW9kaWRlLTEtY29udGVudHNcXFwiXWApLnRleHRDb250ZW50O1xuICBjb25zdCBibG9jayA9IEpTT04ucGFyc2UoYjY0RGVjb2RlKHNjcmlwdENvbnRlbnQpKTtcblxuICBjb25zdCBvcHRpb25zID0gT2JqZWN0LmFzc2lnbih7IGlkOiBgcHlvZGlkZS0xLWNvbnRlbnRzYCB9LCBibG9jay5hdHRyKTtcbiAgY29uc3QgZWRpdG9yID0gbmV3IFB5b2RpZGVFeGVyY2lzZUVkaXRvcihcbiAgICBweW9kaWRlT2pzLnB5b2RpZGVQcm9taXNlLFxuICAgIGJsb2NrLmNvZGUsXG4gICAgb3B0aW9uc1xuICApO1xuXG4gIHJldHVybiBlZGl0b3IuY29udGFpbmVyO1xufVxuX3B5b2RpZGVfdmFsdWVfMSA9IHB5b2RpZGVPanMucHJvY2VzcyhfcHlvZGlkZV9lZGl0b3JfMSwge30pO1xuIn0seyJjZWxsTmFtZSI6InB5b2RpZGUtcHJlbHVkZSIsImlubGluZSI6ZmFsc2UsIm1ldGhvZE5hbWUiOiJpbnRlcnByZXRRdWlldCIsInNvdXJjZSI6InB5b2RpZGVPanMgPSB7XG4gIGNvbnN0IHtcbiAgICBQeW9kaWRlRXZhbHVhdG9yLFxuICAgIFB5b2RpZGVFbnZpcm9ubWVudE1hbmFnZXIsXG4gICAgc2V0dXBQeXRob24sXG4gICAgc3RhcnRQeW9kaWRlV29ya2VyLFxuICAgIGI2NERlY29kZSxcbiAgICBjb2xsYXBzZVBhdGgsXG4gIH0gPSB3aW5kb3cuX2V4ZXJjaXNlX29qc19ydW50aW1lO1xuXG4gIGNvbnN0IHN0YXR1c0NvbnRhaW5lciA9IGRvY3VtZW50LmdldEVsZW1lbnRCeUlkKFwiZXhlcmNpc2UtbG9hZGluZy1zdGF0dXNcIik7XG4gIGNvbnN0IGluZGljYXRvckNvbnRhaW5lciA9IGRvY3VtZW50LmdldEVsZW1lbnRCeUlkKFwiZXhlcmNpc2UtbG9hZGluZy1pbmRpY2F0b3JcIik7XG4gIGluZGljYXRvckNvbnRhaW5lci5jbGFzc0xpc3QucmVtb3ZlKFwiZC1ub25lXCIpO1xuXG4gIGxldCBzdGF0dXNUZXh0ID0gZG9jdW1lbnQuY3JlYXRlRWxlbWVudChcImRpdlwiKVxuICBzdGF0dXNUZXh0LmNsYXNzTGlzdCA9IFwiZXhlcmNpc2UtbG9hZGluZy1kZXRhaWxzXCI7XG4gIHN0YXR1c1RleHQgPSBzdGF0dXNDb250YWluZXIuYXBwZW5kQ2hpbGQoc3RhdHVzVGV4dCk7XG4gIHN0YXR1c1RleHQudGV4dENvbnRlbnQgPSBgSW5pdGlhbGlzZWA7XG5cbiAgLy8gSG9pc3QgaW5kaWNhdG9yIG91dCBmcm9tIGZpbmFsIHNsaWRlIHdoZW4gcnVubmluZyB1bmRlciByZXZlYWxcbiAgY29uc3QgcmV2ZWFsU3RhdHVzID0gZG9jdW1lbnQucXVlcnlTZWxlY3RvcihcIi5yZXZlYWwgLmV4ZXJjaXNlLWxvYWRpbmctaW5kaWNhdG9yXCIpO1xuICBpZiAocmV2ZWFsU3RhdHVzKSB7XG4gICAgcmV2ZWFsU3RhdHVzLnJlbW92ZSgpO1xuICAgIGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoXCIucmV2ZWFsID4gLnNsaWRlc1wiKS5hcHBlbmRDaGlsZChyZXZlYWxTdGF0dXMpO1xuICB9XG5cbiAgLy8gTWFrZSBhbnkgcmV2ZWFsIHNsaWRlcyB3aXRoIGxpdmUgY2VsbHMgc2Nyb2xsYWJsZVxuICBkb2N1bWVudC5xdWVyeVNlbGVjdG9yQWxsKFwiLnJldmVhbCAuZXhlcmNpc2UtY2VsbFwiKS5mb3JFYWNoKChlbCkgPT4ge1xuICAgIGVsLmNsb3Nlc3QoJ3NlY3Rpb24uc2xpZGUnKS5jbGFzc0xpc3QuYWRkKFwic2Nyb2xsYWJsZVwiKTtcbiAgfSlcblxuICAvLyBQeW9kaWRlIHN1cHBsZW1lbnRhbCBkYXRhIGFuZCBvcHRpb25zXG4gIGNvbnN0IGRhdGFDb250ZW50ID0gZG9jdW1lbnQucXVlcnlTZWxlY3Rvcihgc2NyaXB0W3R5cGU9XFxcInB5b2RpZGUtZGF0YVxcXCJdYCkudGV4dENvbnRlbnQ7XG4gIGNvbnN0IGRhdGEgPSBKU09OLnBhcnNlKGI2NERlY29kZShkYXRhQ29udGVudCkpO1xuXG4gIC8vIEdyYWIgbGlzdCBvZiByZXNvdXJjZXMgdG8gYmUgZG93bmxvYWRlZFxuICBjb25zdCBmaWxlc0NvbnRlbnQgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKGBzY3JpcHRbdHlwZT1cXFwidmZzLWZpbGVcXFwiXWApLnRleHRDb250ZW50O1xuICBjb25zdCBmaWxlcyA9IEpTT04ucGFyc2UoYjY0RGVjb2RlKGZpbGVzQ29udGVudCkpO1xuXG4gIGxldCBweW9kaWRlUHJvbWlzZSA9IChhc3luYyAoKSA9PiB7XG4gICAgc3RhdHVzVGV4dC50ZXh0Q29udGVudCA9IGBEb3dubG9hZGluZyBQeW9kaWRlYDtcbiAgICBjb25zdCBweW9kaWRlID0gYXdhaXQgc3RhcnRQeW9kaWRlV29ya2VyKGRhdGEub3B0aW9ucyk7XG5cbiAgICBzdGF0dXNUZXh0LnRleHRDb250ZW50ID0gYERvd25sb2FkaW5nIHBhY2thZ2U6IG1pY3JvcGlwYDtcbiAgICBhd2FpdCBweW9kaWRlLmxvYWRQYWNrYWdlKFwibWljcm9waXBcIik7XG4gICAgY29uc3QgbWljcm9waXAgPSBhd2FpdCBweW9kaWRlLnB5aW1wb3J0KFwibWljcm9waXBcIik7XG4gICAgYXdhaXQgZGF0YS5wYWNrYWdlcy5wa2dzLm1hcCgocGtnKSA9PiAoKSA9PiB7XG4gICAgICBzdGF0dXNUZXh0LnRleHRDb250ZW50ID0gYERvd25sb2FkaW5nIHBhY2thZ2U6ICR7cGtnfWA7XG4gICAgICByZXR1cm4gbWljcm9waXAuaW5zdGFsbChwa2cpO1xuICAgIH0pLnJlZHVjZSgoY3VyLCBuZXh0KSA9PiBjdXIudGhlbihuZXh0KSwgUHJvbWlzZS5yZXNvbHZlKCkpO1xuICAgIGF3YWl0IG1pY3JvcGlwLmRlc3Ryb3koKTtcblxuICAgIC8vIERvd25sb2FkIGFuZCBpbnN0YWxsIHJlc291cmNlc1xuICAgIGF3YWl0IGZpbGVzLm1hcCgoZmlsZSkgPT4gYXN5bmMgKCkgPT4ge1xuICAgICAgY29uc3QgbmFtZSA9IGZpbGUuc3Vic3RyaW5nKGZpbGUubGFzdEluZGV4T2YoJy8nKSArIDEpO1xuICAgICAgc3RhdHVzVGV4dC50ZXh0Q29udGVudCA9IGBEb3dubG9hZGluZyByZXNvdXJjZTogJHtuYW1lfWA7XG4gICAgICBjb25zdCByZXNwb25zZSA9IGF3YWl0IGZldGNoKGZpbGUpO1xuICAgICAgaWYgKCFyZXNwb25zZS5vaykge1xuICAgICAgICB0aHJvdyBuZXcgRXJyb3IoYENhbid0IGRvd25sb2FkIFxcYCR7ZmlsZX1cXGAuIEVycm9yICR7cmVzcG9uc2Uuc3RhdHVzfTogXCIke3Jlc3BvbnNlLnN0YXR1c1RleHR9XCIuYCk7XG4gICAgICB9XG4gICAgICBjb25zdCBkYXRhID0gYXdhaXQgcmVzcG9uc2UuYXJyYXlCdWZmZXIoKTtcblxuICAgICAgLy8gU3RvcmUgVVJMcyBpbiB0aGUgY3dkIHdpdGhvdXQgYW55IHN1YmRpcmVjdG9yeSBzdHJ1Y3R1cmVcbiAgICAgIGlmIChmaWxlLmluY2x1ZGVzKFwiOi8vXCIpKSB7XG4gICAgICAgIGZpbGUgPSBuYW1lO1xuICAgICAgfVxuXG4gICAgICAvLyBDb2xsYXBzZSBoaWdoZXIgZGlyZWN0b3J5IHN0cnVjdHVyZVxuICAgICAgZmlsZSA9IGNvbGxhcHNlUGF0aChmaWxlKTtcblxuICAgICAgLy8gQ3JlYXRlIGRpcmVjdG9yeSB0cmVlLCBpZ25vcmluZyBcImRpcmVjdG9yeSBleGlzdHNcIiBWRlMgZXJyb3JzXG4gICAgICBjb25zdCBwYXJ0cyA9IGZpbGUuc3BsaXQoJy8nKS5zbGljZSgwLCAtMSk7XG4gICAgICBsZXQgcGF0aCA9ICcnO1xuICAgICAgd2hpbGUgKHBhcnRzLmxlbmd0aCA+IDApIHtcbiAgICAgICAgcGF0aCArPSBwYXJ0cy5zaGlmdCgpICsgJy8nO1xuICAgICAgICB0cnkge1xuICAgICAgICAgIGF3YWl0IHB5b2RpZGUuRlMubWtkaXIocGF0aCk7XG4gICAgICAgIH0gY2F0Y2ggKGUpIHtcbiAgICAgICAgICBpZiAoZS5uYW1lICE9PSBcIkVycm5vRXJyb3JcIikgdGhyb3cgZTtcbiAgICAgICAgICBpZiAoZS5lcnJubyAhPT0gMjApIHtcbiAgICAgICAgICAgIGNvbnN0IGVycm9yVGV4dFB0ciA9IGF3YWl0IHB5b2RpZGUuX21vZHVsZS5fc3RyZXJyb3IoZS5lcnJubyk7XG4gICAgICAgICAgICBjb25zdCBlcnJvclRleHQgPSBhd2FpdCBweW9kaWRlLl9tb2R1bGUuVVRGOFRvU3RyaW5nKGVycm9yVGV4dFB0cik7XG4gICAgICAgICAgICB0aHJvdyBuZXcgRXJyb3IoYEZpbGVzeXN0ZW0gRXJyb3IgJHtlLmVycm5vfSBcIiR7ZXJyb3JUZXh0fVwiLmApO1xuICAgICAgICAgIH1cbiAgICAgICAgfVxuICAgICAgfVxuXG4gICAgICAvLyBXcml0ZSB0aGlzIGZpbGUgdG8gdGhlIFZGU1xuICAgICAgdHJ5IHtcbiAgICAgICAgcmV0dXJuIGF3YWl0IHB5b2RpZGUuRlMud3JpdGVGaWxlKGZpbGUsIG5ldyBVaW50OEFycmF5KGRhdGEpKTtcbiAgICAgIH0gY2F0Y2ggKGUpIHtcbiAgICAgICAgaWYgKGUubmFtZSAhPT0gXCJFcnJub0Vycm9yXCIpIHRocm93IGU7XG4gICAgICAgIGNvbnN0IGVycm9yVGV4dFB0ciA9IGF3YWl0IHB5b2RpZGUuX21vZHVsZS5fc3RyZXJyb3IoZS5lcnJubyk7XG4gICAgICAgIGNvbnN0IGVycm9yVGV4dCA9IGF3YWl0IHB5b2RpZGUuX21vZHVsZS5VVEY4VG9TdHJpbmcoZXJyb3JUZXh0UHRyKTtcbiAgICAgICAgdGhyb3cgbmV3IEVycm9yKGBGaWxlc3lzdGVtIEVycm9yICR7ZS5lcnJub30gXCIke2Vycm9yVGV4dH1cIi5gKTtcbiAgICAgIH1cbiAgICB9KS5yZWR1Y2UoKGN1ciwgbmV4dCkgPT4gY3VyLnRoZW4obmV4dCksIFByb21pc2UucmVzb2x2ZSgpKTtcblxuICAgIHN0YXR1c1RleHQudGV4dENvbnRlbnQgPSBgUHlvZGlkZSBlbnZpcm9ubWVudCBzZXR1cGA7XG4gICAgYXdhaXQgc2V0dXBQeXRob24ocHlvZGlkZSk7XG5cbiAgICBzdGF0dXNUZXh0LnJlbW92ZSgpO1xuICAgIGlmIChzdGF0dXNDb250YWluZXIuY2hpbGRyZW4ubGVuZ3RoID09IDApIHtcbiAgICAgIHN0YXR1c0NvbnRhaW5lci5wYXJlbnROb2RlLnJlbW92ZSgpO1xuICAgIH1cbiAgICByZXR1cm4gcHlvZGlkZTtcbiAgfSkoKS5jYXRjaCgoZXJyKSA9PiB7XG4gICAgc3RhdHVzVGV4dC5zdHlsZS5jb2xvciA9IFwidmFyKC0tZXhlcmNpc2UtZWRpdG9yLWhsLWVyLCAjQUQwMDAwKVwiO1xuICAgIHN0YXR1c1RleHQudGV4dENvbnRlbnQgPSBlcnIubWVzc2FnZTtcbiAgICAvL2luZGljYXRvckNvbnRhaW5lci5xdWVyeVNlbGVjdG9yKFwiLnNwaW5uZXItZ3Jvd1wiKS5jbGFzc0xpc3QuYWRkKFwiZC1ub25lXCIpO1xuICAgIHRocm93IGVycjtcbiAgfSk7XG5cbiAgLy8gS2VlcCB0cmFjayBvZiBpbml0aWFsIE9KUyBibG9jayByZW5kZXJcbiAgY29uc3QgcmVuZGVyZWRPanMgPSB7fTtcblxuICBjb25zdCBwcm9jZXNzID0gYXN5bmMgKGNvbnRleHQsIGlucHV0cykgPT4ge1xuICAgIGNvbnN0IHB5b2RpZGUgPSBhd2FpdCBweW9kaWRlUHJvbWlzZTtcbiAgICBjb25zdCBldmFsdWF0b3IgPSBuZXcgUHlvZGlkZUV2YWx1YXRvcihweW9kaWRlLCBjb250ZXh0KTtcbiAgICBhd2FpdCBldmFsdWF0b3IucHJvY2VzcyhpbnB1dHMpO1xuICAgIHJldHVybiBldmFsdWF0b3IuY29udGFpbmVyO1xuICB9XG5cbiAgcmV0dXJuIHtcbiAgICBweW9kaWRlUHJvbWlzZSxcbiAgICByZW5kZXJlZE9qcyxcbiAgICBwcm9jZXNzLFxuICB9O1xufVxuIn1dfQ==
+</script>
+<div id="exercise-loading-indicator" class="exercise-loading-indicator d-none d-flex align-items-center gap-2">
+<div id="exercise-loading-status" class="d-flex gap-2">
+
+</div>
+<div class="spinner-grow spinner-grow-sm">
+
+</div>
+</div>
+<script type="vfs-file">
+W10=
+</script>
+</section>
+
+</main> <!-- /main -->
+<script type="ojs-module-contents">
+eyJjb250ZW50cyI6W119
+</script>
+<script type="module">
+if (window.location.protocol === "file:") { alert("The OJS runtime does not work with file:// URLs. Please use a web server to view this document."); }
+window._ojs.paths.runtimeToDoc = "../..";
+window._ojs.paths.runtimeToRoot = "../..";
+window._ojs.paths.docToRoot = "";
+window._ojs.selfContained = false;
+window._ojs.runtime.interpretFromScriptTags();
+</script>
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copiado");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copiado");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/github\.com\/EveliaCoss\/Mt2026_Taller_Computo_libro");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        const annoteTargets = window.document.querySelectorAll('.code-annotation-anchor');
+        for (let i=0; i<annoteTargets.length; i++) {
+          const annoteTarget = annoteTargets[i];
+          const targetCell = annoteTarget.getAttribute("data-target-cell");
+          const targetAnnotation = annoteTarget.getAttribute("data-target-annotation");
+          const contentFn = () => {
+            const content = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+            if (content) {
+              const tipContent = content.cloneNode(true);
+              tipContent.classList.add("code-annotation-tip-content");
+              return tipContent.outerHTML;
+            }
+          }
+          const config = {
+            allowHTML: true,
+            content: contentFn,
+            onShow: (instance) => {
+              selectCodeLines(instance.reference);
+              instance.reference.classList.add('code-annotation-active');
+              window.tippy.hideAll();
+            },
+            onHide: (instance) => {
+              unselectCodeLines();
+              instance.reference.classList.remove('code-annotation-active');
+            },
+            maxWidth: 300,
+            delay: [50, 0],
+            duration: [200, 0],
+            offset: [5, 10],
+            arrow: true,
+            appendTo: function(el) {
+              return el.parentElement.parentElement.parentElement;
+            },
+            interactive: true,
+            interactiveBorder: 10,
+            theme: 'quarto',
+            placement: 'right',
+            popperOptions: {
+              modifiers: [
+              {
+                name: 'flip',
+                options: {
+                  flipVariations: false, // true by default
+                  allowedAutoPlacements: ['right'],
+                  fallbackPlacements: ['right', 'top', 'top-start', 'top-end', 'bottom', 'bottom-start', 'bottom-end', 'left'],
+                },
+              },
+              {
+                name: 'preventOverflow',
+                options: {
+                  mainAxis: false,
+                  altAxis: false
+                }
+              }
+              ]        
+            }      
+          };
+          window.tippy(annoteTarget, config); 
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./python_ejercicio2.html" class="pagination-link" aria-label="🐍 Actividad 2: atributos y métodos de los objetos">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">53</span>&nbsp; <span class="chapter-title">🐍 Actividad 2: atributos y métodos de los objetos</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./python_condicionales.html" class="pagination-link" aria-label="Condicionales en Python">
+        <span class="nav-page-text"><span class="chapter-number">55</span>&nbsp; <span class="chapter-title">Condicionales en Python</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+<p>Taller de Cómputo, 1er semestre: Dra. Evelia Coss</p>
+</div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>

@@ -1,0 +1,347 @@
+# Conda y Miniconda: gestión de entornos y paquetes
+
+> **Fecha:** 03 de noviembre, 2026
+
+En el apéndice [Entornos para trabajar con Python](python_entornos.qmd) y en el capítulo [Configuraciones para usar Quarto con Python](quarto_python.qmd) creamos un entorno virtual con `venv` e instalamos paquetes con `pip`. En este apéndice conoceremos **conda**, una herramienta muy utilizada en ciencia de datos y bioinformática que combina ambas tareas, y **Miniconda**, la forma más ligera de instalarla.
+
+## ¿Qué es conda?
+
+**Conda** es un **gestor de paquetes** y un **gestor de entornos** de código abierto. Es decir, hace dos trabajos:
+
+1.  **Instalar paquetes** (como `pip`), resolviendo automáticamente las dependencias entre ellos.
+2.  **Crear entornos aislados** (como `venv`), cada uno con su propia versión de Python y sus propios paquetes.
+
+A diferencia de `pip`, conda **no se limita a Python**: también puede instalar R, programas de línea de comandos (por ejemplo `samtools` o `blast` en bioinformática) y bibliotecas escritas en C o Fortran que algunos paquetes necesitan para funcionar.
+
+### ¿Para qué se usa?
+
+- Tener **varias versiones de Python** en la misma computadora sin que interfieran entre sí.
+- Separar los paquetes de cada proyecto: un entorno para el curso, otro para la tesis, otro para un análisis específico.
+- Instalar paquetes difíciles de compilar (por ejemplo, con dependencias de C) sin errores.
+- **Reproducir** un análisis en otra computadora con exactamente las mismas versiones.
+- Instalar herramientas científicas que no están en `pip`, como las de [Bioconda](https://bioconda.github.io/).
+
+## ¿Qué es Miniconda?
+
+Conda es la herramienta; para instalarla debemos elegir una **distribución**, es decir, un instalador que incluye conda junto con otros programas.
+
+| Distribución | ¿Qué incluye? | Tamaño aproximado | Canal por defecto |
+|----|----|----|----|
+| **Anaconda** | conda, Python y más de 250 paquetes científicos preinstalados, además de la interfaz gráfica *Anaconda Navigator*. | Varios GB | `defaults` (Anaconda) |
+| **Miniconda** | Solo conda, Python y lo mínimo necesario. Tú instalas lo que necesites. | Cientos de MB | `defaults` (Anaconda) |
+| **Miniforge** | Como Miniconda, pero configurado para usar la comunidad `conda-forge`. | Cientos de MB | `conda-forge` |
+| **Micromamba** | Un solo ejecutable, muy rápido, sin entorno `base`. | Decenas de MB | `conda-forge` |
+
+**Miniconda** es la versión mínima de Anaconda: instala únicamente conda y Python. Es la opción recomendada cuando queremos ahorrar espacio y decidir nosotros mismos qué paquetes instalar.
+
+::: callout-note
+## ¿Y mamba?
+
+**Mamba** es una reimplementación de conda mucho más rápida para resolver dependencias. Desde la versión 23.10 de conda, el "motor" de mamba (`libmamba`) se usa por defecto, así que conda ya es mucho más rápido que antes. Los comandos de `mamba` son los mismos que los de `conda`.
+:::
+
+### Canales: ¿de dónde se descargan los paquetes?
+
+Un **canal** es un repositorio en internet donde se guardan los paquetes de conda.
+
+| Canal | Descripción |
+|----|----|
+| `defaults` | Canal oficial de la empresa Anaconda. |
+| `conda-forge` | Canal mantenido por la comunidad. Es el más grande y actualizado. |
+| `bioconda` | Paquetes de bioinformática. Requiere `conda-forge`. |
+
+::: callout-important
+El uso del canal `defaults` de Anaconda está sujeto a sus [términos de servicio](https://www.anaconda.com/legal/terms/terms-of-service), que exigen una licencia de pago a organizaciones grandes (más de 200 personas). Por eso muchas universidades y centros de investigación recomiendan **Miniforge** o configurar Miniconda para usar `conda-forge`.
+:::
+
+## Instalación de Miniconda
+
+Descarga el instalador desde la [página oficial de Miniconda](https://www.anaconda.com/docs/getting-started/miniconda/install).
+
+### macOS
+
+En la terminal (Bash). Para computadoras con chip Apple Silicon (M1, M2, M3...):
+
+``` bash
+curl -O https://repo.anaconda.com/miniconda/Miniconda3-latest-MacOSX-arm64.sh
+bash Miniconda3-latest-MacOSX-arm64.sh
+```
+
+Para computadoras con procesador Intel, cambia `arm64` por `x86_64`. Si no sabes cuál tienes, ejecuta `uname -m`.
+
+### Linux
+
+``` bash
+curl -O https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
+bash Miniconda3-latest-Linux-x86_64.sh
+```
+
+Durante la instalación acepta la licencia (`yes`), deja la ruta propuesta (`~/miniconda3`) y responde `yes` cuando pregunte si deseas inicializar conda. Después **cierra y vuelve a abrir la terminal**.
+
+### Windows
+
+1.  Descarga y ejecuta el instalador `.exe`.
+2.  Elige la instalación **Just Me** y deja la ruta propuesta.
+3.  Para usar conda, abre el programa **Anaconda Prompt (miniconda3)** desde el menú de inicio.
+
+### Verificar la instalación
+
+``` bash
+conda --version     # conda 25.x.x
+conda info          # Información de la instalación
+```
+
+Al abrir la terminal verás `(base)` al inicio de la línea: significa que el entorno `base` está activo.
+
+### Configuración recomendada
+
+Usar `conda-forge` como canal principal:
+
+``` bash
+conda config --add channels conda-forge
+conda config --set channel_priority strict
+```
+
+Evitar que el entorno `base` se active automáticamente cada vez que abres la terminal:
+
+``` bash
+conda config --set auto_activate_base false
+```
+
+::: callout-tip
+**No instales paquetes en el entorno `base`.** El entorno `base` contiene a conda mismo; si lo llenas de paquetes puedes dañar la instalación. Crea siempre un entorno para cada proyecto.
+:::
+
+### Instalar Miniconda desde RStudio
+
+El paquete `reticulate` puede instalar Miniconda por nosotros, desde la consola de R:
+
+```{r, eval=FALSE}
+library(reticulate)
+install_miniconda()
+```
+
+## ¿Cómo se utiliza conda?
+
+### Crear y activar un entorno
+
+``` bash
+conda create -n taller python=3.12   # Crear el entorno "taller" con Python 3.12
+conda activate taller                # Activarlo
+python --version                     # Python 3.12.x
+conda deactivate                     # Salir del entorno
+```
+
+Cuando el entorno está activo, la terminal muestra su nombre: `(taller)`.
+
+### Instalar, actualizar y eliminar paquetes
+
+Con el entorno activo:
+
+``` bash
+conda install numpy pandas matplotlib    # Instalar varios paquetes
+conda install -c bioconda samtools       # Instalar desde un canal específico
+conda list                               # Ver los paquetes instalados
+conda update pandas                      # Actualizar un paquete
+conda remove matplotlib                  # Eliminar un paquete
+conda search numpy                       # Ver las versiones disponibles
+```
+
+También podemos crear el entorno e instalar los paquetes en un solo paso:
+
+``` bash
+conda create -n analisis python=3.12 numpy pandas jupyter
+```
+
+### Administrar los entornos
+
+``` bash
+conda env list                 # Listar todos los entornos (* marca el activo)
+conda remove -n taller --all   # Eliminar un entorno completo
+```
+
+### Resumen de comandos
+
+| Comando | ¿Qué hace? |
+|----|----|
+| `conda create -n nombre python=3.12` | Crea un entorno con una versión de Python. |
+| `conda activate nombre` | Activa un entorno. |
+| `conda deactivate` | Desactiva el entorno actual. |
+| `conda env list` | Lista los entornos. |
+| `conda install paquete` | Instala un paquete en el entorno activo. |
+| `conda list` | Lista los paquetes del entorno activo. |
+| `conda update paquete` | Actualiza un paquete. |
+| `conda remove paquete` | Elimina un paquete. |
+| `conda env export > environment.yml` | Guarda la receta del entorno. |
+| `conda env create -f environment.yml` | Crea un entorno a partir de una receta. |
+| `conda remove -n nombre --all` | Elimina un entorno. |
+
+### Conda y pip juntos
+
+No todos los paquetes existen en conda. Si necesitas uno que solo está en `pip`, puedes instalarlo dentro del entorno de conda:
+
+``` bash
+conda activate taller
+python -m pip install paquete_raro
+```
+
+Regla práctica: **primero instala todo lo posible con conda y al final usa pip**. Si después instalas más paquetes con conda, pueden generarse conflictos con los que instalaste con pip.
+
+## Control de versiones con conda
+
+Conda nos permite controlar tres tipos de versiones.
+
+### 1. Versiones de Python
+
+Cada entorno puede tener una versión de Python distinta:
+
+``` bash
+conda create -n py311 python=3.11
+conda create -n py313 python=3.13
+```
+
+Así podemos ejecutar un proyecto antiguo con Python 3.11 y uno nuevo con Python 3.13 en la misma computadora.
+
+### 2. Versiones de paquetes
+
+| Instrucción | Significado |
+|----|----|
+| `conda install numpy` | La versión más reciente compatible. |
+| `conda install numpy=1.26` | Cualquier versión `1.26.x`. |
+| `conda install numpy=1.26.4` | Exactamente la versión `1.26.4`. |
+| `conda install "numpy>=1.26"` | La versión `1.26` o una más reciente. |
+| `conda install "numpy>=1.26,<2"` | Entre la `1.26` y antes de la `2`. |
+
+::: callout-note
+Una versión como `1.26.4` sigue el esquema **mayor.menor.parche**. Un cambio en la versión **mayor** (de `1.x` a `2.x`) puede hacer que tu código deje de funcionar; los cambios **menores** y de **parche** suelen ser compatibles.
+:::
+
+### 3. Versiones del entorno completo: `environment.yml`
+
+Para compartir un entorno o reproducirlo en otra computadora, guardamos su "receta" en un archivo `environment.yml`:
+
+``` bash
+conda env export --from-history > environment.yml
+```
+
+La opción `--from-history` guarda solo los paquetes que tú pediste (no todas sus dependencias), por lo que el archivo funciona en otros sistemas operativos. El resultado se ve así:
+
+``` yaml
+name: taller
+channels:
+  - conda-forge
+dependencies:
+  - python=3.12
+  - numpy
+  - pandas
+  - jupyter
+```
+
+En otra computadora, el entorno se crea con:
+
+``` bash
+conda env create -f environment.yml
+```
+
+Y si modificas el archivo, actualizas el entorno con:
+
+``` bash
+conda env update -f environment.yml --prune
+```
+
+::: callout-tip
+El archivo `environment.yml` es texto plano, así que puedes guardarlo en tu repositorio de **Git/GitHub** junto con tu código. Así cualquier persona (incluido tu "yo del futuro") podrá reproducir tu análisis. Lo que **no** debes subir a GitHub es la carpeta del entorno.
+:::
+
+### Historial de cambios del entorno
+
+Conda guarda un registro de cada modificación del entorno, que permite regresar a un estado anterior:
+
+``` bash
+conda list --revisions     # Ver el historial de cambios
+conda install --revision 2 # Regresar a la revisión 2
+```
+
+## Usar conda en RStudio, Quarto y Jupyter
+
+### Con `reticulate`
+
+Desde la consola de R:
+
+```{r, eval=FALSE}
+library(reticulate)
+
+conda_create("taller", packages = c("numpy", "pandas"), python_version = "3.12")
+use_condaenv("taller")   # Usar este entorno en la sesión
+conda_list()             # Listar los entornos de conda
+```
+
+### Con Quarto
+
+El entorno necesita `jupyter` para que Quarto pueda ejecutar Python:
+
+``` bash
+conda activate taller
+conda install jupyter pyyaml
+```
+
+Después indica a Quarto qué Python usar, desde la consola de R:
+
+```{r, eval=FALSE}
+Sys.setenv(QUARTO_PYTHON = path.expand("~/miniconda3/envs/taller/bin/python"))
+```
+
+Para conocer la ruta exacta, ejecuta `conda activate taller` y después `which python` en la terminal.
+
+### Con Jupyter Notebook
+
+``` bash
+conda activate taller
+conda install notebook ipykernel
+jupyter notebook
+```
+
+Al volver a abrir la terminal **no necesitas reinstalar**: los paquetes se conservan en el entorno. Solo ejecuta `conda activate taller` antes de trabajar.
+
+::: callout-note
+En **Google Colab** no se utiliza conda: cada sesión es una máquina virtual nueva y los paquetes se instalan con `!pip install`.
+:::
+
+## conda vs `venv` + `pip`
+
+| Característica | `venv` + `pip` | conda |
+|----|----|----|
+| ¿Viene con Python? | Sí. | No, se instala aparte. |
+| Instala paquetes de... | Solo Python (desde PyPI). | Python, R, C, herramientas de línea de comandos. |
+| ¿Puede instalar otra versión de Python? | No, usa la versión que ya tienes. | Sí, una por entorno. |
+| ¿Resuelve dependencias entre todos los paquetes? | Parcialmente. | Sí. |
+| Archivo para reproducir el entorno | `requirements.txt` | `environment.yml` |
+| Espacio en disco | Menor. | Mayor. |
+
+## Ventajas y desventajas
+
+| Ventajas | Desventajas |
+|----|----|
+| Administra **entornos y paquetes** con una sola herramienta. | Ocupa más espacio en disco: cada entorno guarda sus propias copias. |
+| Permite tener **varias versiones de Python** en la misma computadora. | La instalación de paquetes puede ser más lenta que con `pip`. |
+| Instala software que **no es de Python** (R, `samtools`, compiladores). | Algunos paquetes recientes aparecen primero en `pip` que en conda. |
+| Evita errores de compilación: los paquetes vienen ya compilados. | Mezclar conda y pip sin cuidado puede generar conflictos. |
+| Funciona igual en Windows, macOS y Linux. | Puede haber confusión con varios Python instalados (sistema, Homebrew, conda). |
+| Facilita la **reproducibilidad** con `environment.yml`. | El canal `defaults` de Anaconda tiene restricciones de licencia para organizaciones grandes. |
+| Es el estándar en bioinformática gracias a **Bioconda**. | Anaconda completa ocupa varios GB, aunque no uses la mayoría de los paquetes. |
+
+### ¿Cuándo usar cada opción?
+
+- **`venv` + `pip`**: proyectos sencillos que solo usan paquetes de Python.
+- **Miniconda o Miniforge**: proyectos científicos, varias versiones de Python o herramientas de bioinformática.
+- **Anaconda**: si prefieres una interfaz gráfica y tener todo instalado desde el inicio, y tienes suficiente espacio en disco.
+- **Google Colab**: si no puedes instalar nada en tu computadora.
+
+## Referencias
+
+- [Documentación oficial de conda](https://docs.conda.io/projects/conda/en/latest/)
+- [Hoja de referencia de conda (PDF)](https://docs.conda.io/projects/conda/en/latest/user-guide/cheatsheet.html)
+- [Instalación de Miniconda](https://www.anaconda.com/docs/getting-started/miniconda/install)
+- [Miniforge (conda-forge)](https://github.com/conda-forge/miniforge)
+- [Bioconda](https://bioconda.github.io/)
+- [reticulate: instalar paquetes de Python](https://rstudio.github.io/reticulate/articles/python_packages.html)
