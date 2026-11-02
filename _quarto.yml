@@ -1,6 +1,9 @@
 project:
   type: book
   output-dir: docs #docs _book
+  resources:
+    - notebooks/*.ipynb   # Notebooks de las actividades (descarga y Google Colab)
+    - notebooks/*.qmd     # Archivos .qmd de las actividades (descarga para RStudio)
 
 book:
   title: "Taller de Cómputo"

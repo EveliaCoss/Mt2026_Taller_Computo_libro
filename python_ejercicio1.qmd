@@ -1,5 +1,21 @@
 ---
 engine: knitr
+other-links:
+  - text: "Opción A: en este libro"
+    icon: book
+    href: "#opción-a.-en-este-libro"
+  - text: "Opción B: Google Colab"
+    icon: google
+    href: https://colab.research.google.com/github/EveliaCoss/Mt2026_Taller_Computo_libro/blob/main/notebooks/actividad1.ipynb
+    target: _blank
+  - text: "Opción C: Jupyter Notebook"
+    icon: journal-code
+    href: "#opción-c.-en-jupyter-notebook-en-tu-computadora"
+  - text: "Opción D: tu propio .qmd"
+    icon: file-earmark-code
+    href: "#opción-d.-en-rstudio-con-tu-propio-archivo-.qmd"
+language:
+  other-links-title: "Haz esta actividad en..."
 ---
 
 # 🐍 Actividad 1: variables y objetos (tipo, valor e identidad)
@@ -12,7 +28,7 @@ engine: knitr
 
 **Nivel: Básico.**
 
-**Instrucciones:** Resuelve los ejercicios directamente en esta página, en los editores de código interactivos. Antes de ejecutar cada programa, analiza qué resultado esperas obtener. **No utilices atributos ni métodos** de los objetos (los veremos en el siguiente capítulo); solo puedes emplear funciones integradas como `print()`, `type()`, `id()`, `len()`, `int()`, `float()`, `str()` y `bool()`.
+**Instrucciones:** Resuelve cada ejercicio completando su código. Antes de ejecutar cada programa, analiza qué resultado esperas obtener. **No utilices atributos ni métodos** de los objetos (los veremos en el siguiente capítulo); solo puedes emplear funciones integradas como `print()`, `type()`, `id()`, `len()`, `int()`, `float()`, `str()` y `bool()`.
 
 ## ¿Cómo usar los editores de esta página?
 
@@ -38,7 +54,156 @@ mensaje = "Hola, mundo"
 print(mensaje)
 ```
 
+## ¿Dónde hacer esta actividad?
+
+Puedes resolver la actividad de cuatro formas. **El contenido y los ejercicios son los mismos**; elige la que prefieras. También encontrarás los enlaces a cada opción en la barra de la derecha, en **Haz esta actividad en...**
+
+| | A: en este libro | B: en Google Colab | C: en Jupyter Notebook | D: en RStudio (tu `.qmd`) |
+|----|----|----|----|----|
+| ¿Dónde se ejecuta? | En tu navegador, en esta página. | En una computadora de Google. | En tu computadora. | En tu computadora. |
+| ¿Qué necesitas? | Nada, solo el navegador. | Una cuenta de Google. | El entorno `quarto-python` con Jupyter. | RStudio y el entorno `quarto-python` configurado. |
+| Archivo | Ninguno. | `actividad1.ipynb` (en tu Drive). | `actividad1.ipynb` | `actividad1.qmd` |
+| ¿Se guarda tu trabajo? | **No**: se pierde al recargar la página. | **Sí**, si guardas una copia en tu Drive. | **Sí**, en tu computadora. | **Sí**, en tu computadora (y puedes subirlo a GitHub). |
+| ¿Necesita internet? | Solo para cargar la página. | Sí, siempre. | No. | No. |
+| Revisión de respuestas | Automática, con **Run Code**. | Celdas **✅ Verificar**. | Celdas **✅ Verificar**. | Bloques **✅ Verificar**. |
+| Resultado final | — | Notebook en Drive. | Notebook `.ipynb`. | Documento HTML con **Render**. |
+
+### Opción A. En este libro
+
+Usa los editores interactivos de esta página, como se explica en la sección anterior, [¿Cómo usar los editores de esta página?](#cómo-usar-los-editores-de-esta-página). Es la opción más rápida, pero **tu código no se guarda**: si quieres conservarlo, cópialo en otro lugar antes de cerrar la página.
+
+### Opción B. En Google Colab
+
+[![Abrir en Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/EveliaCoss/Mt2026_Taller_Computo_libro/blob/main/notebooks/actividad1.ipynb)
+
+1.  Da clic en el botón **Open in Colab** e inicia sesión con tu cuenta de Google.
+2.  **Guarda tu propia copia:** **Archivo \> Guardar una copia en Drive**. ¡No te saltes este paso! Si trabajas sin guardar una copia, tus cambios se perderán.
+3.  Ejecuta las celdas **en orden**, de arriba hacia abajo, con el botón ▶ o con `Shift + Enter`.
+4.  Completa los espacios `______` de cada ejercicio y ejecuta la celda.
+
+**¿Qué cambia respecto al libro?**
+
+| En el libro (Opción A) | En Google Colab (Opción B) |
+|----|----|
+| Editores con el botón **Run Code**. | Celdas de código con el botón ▶ (o `Shift + Enter`). |
+| Botones **Show Hint** y **Show Solution**. | Bloques **💡 Pista** y **✔️ Solución**: da clic sobre ellos para desplegarlos. |
+| **Run Code** revisa tu respuesta automáticamente. | Ejecuta tu solución y después la celda **✅ Verificar el ejercicio...** |
+| **Start Over** regresa al código inicial. | No existe: si borras algo, consúltalo en el libro o vuelve a abrir el enlace original. |
+| Cada editor es independiente. | Todas las celdas comparten las mismas variables: ejecútalas **en orden**. |
+| El código se pierde al recargar la página. | El código se guarda en tu copia de Drive. |
+
+::: callout-note
+En los ejercicios con verificación, la última línea de tu código guarda el resultado en la variable `respuesta` (por ejemplo, `respuesta = numero + 5`). **No borres esa línea**: la celda **✅ Verificar** revisa esa variable. Si la sesión se desconecta, usa **Entorno de ejecución \> Ejecutar todas**.
+:::
+
+### Opción C. En Jupyter Notebook (en tu computadora)
+
+1.  Descarga el notebook: [**📥 actividad1.ipynb**](notebooks/actividad1.ipynb){download="actividad1.ipynb"}. También puedes [verlo en GitHub](https://github.com/EveliaCoss/Mt2026_Taller_Computo_libro/blob/main/notebooks/actividad1.ipynb).
+2.  Mueve el archivo a la carpeta donde guardas tus trabajos del curso.
+3.  Abre la **Terminal**, activa tu entorno y abre Jupyter Notebook:
+
+    ::: panel-tabset
+    ## macOS y Linux
+
+    ``` bash
+    source ~/.venvs/quarto-python/bin/activate
+    jupyter notebook
+    ```
+
+    ## Windows (Git Bash)
+
+    ``` bash
+    source ~/.venvs/quarto-python/Scripts/activate
+    jupyter notebook
+    ```
+    :::
+
+4.  Se abrirá el navegador. Navega hasta la carpeta del archivo y da doble clic en `actividad1.ipynb`.
+5.  Ejecuta las celdas en orden con `Shift + Enter`. Tu trabajo se guarda con `Ctrl/Cmd + S`.
+
+Las diferencias con el libro son las mismas que en Google Colab (tabla de la opción B). Además:
+
+- La celda **✅ Verificar** muestra su código (en Colab aparece oculto); no necesitas leerlo, solo ejecutarlo.
+- No cierres la Terminal mientras usas Jupyter: es el programa que ejecuta tu código. Para terminar, guarda el notebook y presiona `Ctrl + C` en la Terminal.
+- Si `jupyter: command not found`, activa el entorno (paso 3) o consulta el capítulo [Configuraciones para usar Quarto con Python](quarto_python.qmd).
+
+### Opción D. En RStudio, con tu propio archivo `.qmd`
+
+Esta opción te da **tu propio documento de Quarto** con toda la actividad: escribes tus respuestas en él, lo guardas en tu carpeta del curso y, al final, lo conviertes en un documento HTML con **Render**. Es la mejor opción si quieres **entregar** tu actividad o guardarla en tu repositorio de GitHub.
+
+**Requisito:** haber configurado tu entorno en el capítulo [Configuraciones para usar Quarto con Python](quarto_python.qmd) (pasos 1 a 6).
+
+1.  Descarga el archivo: [**📥 actividad1.qmd**](notebooks/actividad1.qmd){download="actividad1.qmd"}.
+2.  Muévelo a la carpeta de tu proyecto de RStudio del curso y ábrelo con **File \> Open File...**
+3.  En el encabezado (YAML), cambia `Tu nombre` por tu nombre:
+
+    ``` yaml
+    ---
+    title: "🐍 Actividad 1: variables y objetos (tipo, valor e identidad)"
+    author: "Tu nombre"
+    format: html
+    jupyter: python3
+    execute:
+      error: true   # Muestra los errores sin detener el documento
+    ---
+    ```
+
+4.  Ejecuta los bloques **en orden** con el botón ▶ de cada bloque (o `Cmd/Ctrl + Shift + Enter`). El resultado aparece debajo de cada bloque.
+5.  Completa los espacios `______` y ejecuta los bloques **✅ Verificar** después de tu solución.
+6.  Guarda tus cambios (`Cmd/Ctrl + S`) y, al terminar, presiona **Render** para generar `actividad1.html` con todas tus respuestas y resultados.
+
+| Elemento del YAML | ¿Para qué sirve? |
+|----|----|
+| `jupyter: python3` | Usa el motor Jupyter con el Python de `QUARTO_PYTHON` al presionar **Render**. |
+| `execute: error: true` | Si un bloque tiene un error (por ejemplo, un `______` sin completar), el documento **sí se genera** y muestra el error en lugar de detenerse. |
+
+::: callout-tip
+## ¿Y si quiero empezar mi propio `.qmd` desde cero?
+
+También puedes crear un documento nuevo con **File \> New File \> Quarto Document...**, poner el YAML de arriba y copiar ahí los ejercicios que quieras. Así practicas lo que aprendiste en el [Paso 7](quarto_python.qmd#paso-7.-mi-primer-documento-de-quarto-con-python) del capítulo de configuración.
+:::
+
+::: callout-warning
+Si al ejecutar un bloque aparece `ModuleNotFoundError` o `NameError: name '______' is not defined`:
+
+- `NameError` con `______` significa que **todavía no completaste** ese espacio: es normal.
+- `ModuleNotFoundError` indica un problema de configuración: consulta la [solución de problemas](quarto_python.qmd#solución-de-problemas) del capítulo de configuración.
+:::
+
 ## Repaso: objeto y variable
+
+### Abrir Python en RStudio: `repl_python()`
+
+Además de los editores de esta página, puedes hacer los ejercicios en **RStudio**. Como vimos en el capítulo [Introducción a Python en Rstudio usando `reticulate`](intro_python.qmd), la función `repl_python()` abre una **consola interactiva de Python** dentro de la **Console** de RStudio:
+
+1.  En la **Console**, carga `reticulate` y abre Python:
+
+    ```{r, eval=FALSE}
+    library(reticulate)
+    repl_python()
+    ```
+
+2.  El indicador de la Console cambia de `>` (R) a `>>>` (Python). Ahora puedes escribir código de Python, una instrucción a la vez:
+
+    ``` python
+    edad = 20
+    print(type(edad))   # Muestra: <class 'int'>
+    ```
+
+    No escribas el símbolo `>>>`: lo agrega la Console automáticamente.
+
+3.  Para **regresar a R**, escribe `exit` (o `quit`) y presiona `Enter`. El indicador vuelve a ser `>`.
+
+| Indicador de la Console | Lenguaje activo | ¿Cómo cambiar? |
+|----|----|----|
+| `>` | R | `repl_python()` para pasar a Python. |
+| `>>>` | Python | `exit` para regresar a R. |
+
+::: callout-tip
+- Las variables que crees en `repl_python()` **se conservan** al regresar a R; puedes usarlas desde R con `py$nombre_variable`.
+- Para guardar tu trabajo, es mejor escribir el código en un documento de Quarto (`.qmd`) con bloques `{python}` y ejecutarlos con `Cmd/Ctrl + Enter`: RStudio abre `repl_python()` automáticamente.
+- Si aparece `ModuleNotFoundError` o la consola usa otro Python, revisa la configuración del capítulo [Configuraciones para usar Quarto con Python](quarto_python.qmd).
+:::
 
 ### ¿Qué es un objeto?
 
