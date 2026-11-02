@@ -247,7 +247,7 @@ print(sp.series(sp.exp(x), x, 0, 5).removeO())   # Sin el término O(x^n)
 
 ### Sumas
 
-En el capítulo de [ciclos `for`](python_for.qmd) sumamos los números del 1 al 100 con un ciclo. SymPy puede obtener la **fórmula** para cualquier $n$:
+Para sumar los números del 1 al 100 podríamos sumarlos uno por uno; en el capítulo de [ciclos `for`](python_for.qmd) aprenderemos a hacerlo con un ciclo. SymPy, en cambio, obtiene directamente la **fórmula** para cualquier $n$:
 
 ```{python}
 i, n = sp.symbols("i n", integer=True, positive=True)
@@ -667,7 +667,7 @@ formula
 
 ## Reto final: dos series famosas
 
-En el capítulo de ciclos `for` aproximamos $\pi$ sumando 1000 términos de la serie de Leibniz. Con SymPy podemos calcular la suma **infinita** de forma exacta:
+La **serie de Leibniz** permite aproximar $\pi$; en el capítulo de [ciclos `for`](python_for.qmd) la usaremos para aproximarlo sumando 1000 de sus términos. Con SymPy podemos calcular la suma **infinita** de forma exacta:
 
 1.  Calcula $\displaystyle\sum_{k=0}^{\infty} \frac{(-1)^k}{2k + 1}$ (serie de Leibniz).
 2.  Calcula $\displaystyle\sum_{k=1}^{\infty} \frac{1}{k^2}$ (el **problema de Basilea**, resuelto por Euler en 1734) y déjala en la **última línea**.
@@ -720,7 +720,7 @@ print("Problema de Basilea:", basilea, "≈", sp.N(basilea))   # pi**2/6 ≈ 1.6
 basilea
 ```
 
-Por eso la aproximación con 1000 términos multiplicaba la suma por 4: $4 \cdot \frac{\pi}{4} = \pi$.
+Por eso, para aproximar $\pi$ con esta serie, hay que multiplicar la suma por 4: $4 \cdot \frac{\pi}{4} = \pi$. Lo haremos en el capítulo de [ciclos `for`](python_for.qmd).
 :::
 ::::
 

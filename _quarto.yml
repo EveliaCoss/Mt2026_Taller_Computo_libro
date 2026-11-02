@@ -96,7 +96,9 @@ book:
         - intro_python.qmd 
         - quarto_python.qmd
         - python_ejercicio1.qmd         # Práctica: tipo, valor e identidad (interactiva)
+        - game8.qmd         
         - python_ejercicio2.qmd         # Práctica: atributos y métodos (interactiva)
+        - game9.qmd   
         - python_buenas_practicas.qmd   # Sintaxis de nombres, buenas prácticas y programación defensiva
         - python_condicionales.qmd      # Condicionales: if, elif, else
         - python_numpy.qmd              # Introducción a NumPy

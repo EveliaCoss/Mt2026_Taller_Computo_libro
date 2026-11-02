@@ -1,40 +1,191 @@
 # Temario {.unnumbered}
 
-El [**Plan de clases**](https://docs.google.com/document/d/17rDksWqGWQqDFUMFqzgVF_BXnBDP3KMUrysgxIPGv9U/edit?usp=sharing) detallado con actividades, recursos, plantillas, material de lectura esta disponible en pdf. Aquí listamos la organización de los temas y las habilidades que el alumno debe lograr.
+El [**Plan de clases**](https://docs.google.com/document/d/17rDksWqGWQqDFUMFqzgVF_BXnBDP3KMUrysgxIPGv9U/edit?usp=sharing) detallado, con actividades, recursos, plantillas y material de lectura, está disponible en PDF. Aquí se resume la organización de los temas, las fechas de cada sesión y las habilidades que el alumno debe lograr.
 
-+----------------------------------------------------+---------------------------------------------------------------------------------------------------+
-| Módulos                                            | Objetivo(s)                                                                                       |
-+:===================================================+:==================================================================================================+
-| **Introducción e integración**                     | 1.  Presentar los lineamientos de la materia                                                      |
-|                                                    | 2.  Introducir al curso.                                                                          |
-|                                                    | 3.  Comprender qué es un Sistema Operativo (SO) y cuál es su función principal en una computadora |
-|                                                    | 4.  Identificar los SO más comunes en el mercado actual                                           |
-+----------------------------------------------------+---------------------------------------------------------------------------------------------------+
-| **Componentes de una Computadora**                 | 1.  Identificar los componentes internos principales y complementarios                            |
-|                                                    | 2.  Diferenciar entre Hardware y Software                                                         |
-|                                                    | 3.  Reconocer la importancia del SO en el funcionamiento de dispositivos                          |
-+----------------------------------------------------+---------------------------------------------------------------------------------------------------+
-| **Introducción a Linux/Unix**                      | 1.  Comprender la historia y filosofía de Linux/Unix                                              |
-|                                                    | 2.  Entender qué es GNU y su importancia en el software libre                                     |
-|                                                    | 3.  Diferenciar entre Linux, GNU y GNU/Linux                                                      |
-|                                                    | 4.  Reconocer las principales versiones y distribuciones de GNU/Linux                             |
-|                                                    | 5.  Valorar la importancia del software libre y de código abierto                                 |
-|                                                    | 6.  Aplicar este conocimiento en la selección de sistemas operativos                              |
-+----------------------------------------------------+---------------------------------------------------------------------------------------------------+
-| **Fundamentos de Programación y Buenas Prácticas** | 1.  Comprender qué es la programación y su importancia                                            |
-|                                                    | 2.  Entender los conceptos fundamentales de programación                                          |
-|                                                    | 3.  Identificar los lenguajes de programación más populares                                       |
-|                                                    | 4.  Aplicar buenas prácticas en la escritura de código                                            |
-|                                                    | 5.  Reconocer errores comunes en programación                                                     |
-|                                                    | 6.  Valorar la importancia de código limpio y documentado                                         |
-|                                                    | 7.  Crear programas simples siguiendo buenas prácticas                                            |
-+----------------------------------------------------+---------------------------------------------------------------------------------------------------+
-| **Introducción a Bash**                            | 1.  Comprender la historia y filosofía de Linux/Unix                                              |
-|                                                    | 2.  Entender qué es GNU y su importancia en el software libre                                     |
-|                                                    | 3.  Diferenciar entre Linux, GNU y GNU/Linux                                                      |
-|                                                    | 4.  Reconocer las principales versiones y distribuciones de GNU/Linux                             |
-|                                                    | 5.  Valorar la importancia del software libre y de código abierto                                 |
-|                                                    | 6.  Aplicar este conocimiento en la selección de sistemas operativos                              |
-+----------------------------------------------------+---------------------------------------------------------------------------------------------------+
-|                                                    |                                                                                                   |
-+----------------------------------------------------+---------------------------------------------------------------------------------------------------+
+## Organización del curso
+
+| Sección | Tema | Periodo (2026) | Capítulos |
+|----|----|----|----|
+| — | Introducción e integración | 1 sep | [Introducción e integración](cap1A.qmd), [Sistema de evaluación](evaluacion.qmd) |
+| 1 | Componentes de una computadora y algoritmos | 1 sep – 3 sep | 8 ([ver sección](#sección-1.-componentes-de-una-computadora-y-algoritmos)) |
+| 2 | Instalación de programas | 8 sep | 6 ([ver sección](#sección-2.-instalación-de-programas)) |
+| 3 | Introducción a Bash | 17 sep – 24 sep | 8 ([ver sección](#sección-3.-introducción-a-bash)) |
+| 4 | Edición de archivos con Bash | 29 sep – 15 oct | 13 ([ver sección](#sección-4.-edición-de-archivos-con-bash)) |
+| 5 | Introducción a Git y GitHub | 6 oct – 22 oct | 8 ([ver sección](#sección-5.-introducción-a-git-y-github)) |
+| 6 | Markdown y Quarto | 22 oct | 4 ([ver sección](#sección-6.-markdown-y-quarto)) |
+| 7 | Introducción a Python | 26 oct – 26 nov | 17 ([ver sección](#sección-7.-introducción-a-python)) |
+
+**Tipos de capítulos:** 📖 lección · 🐍 📚 actividad · 🎮 juego de repaso (AhaSlides / Kahoot) · ✏️ tarea · 📌 lista de pendientes.
+
+## Objetivos y sesiones por sección
+
+### Sección 1. Componentes de una computadora y algoritmos
+
+**Al terminar esta sección, el alumno podrá:**
+
+1.  Identificar los componentes internos principales y complementarios de una computadora.
+2.  Diferenciar entre *hardware* y *software*.
+3.  Comprender qué es un sistema operativo (SO), sus funciones y los SO más comunes.
+4.  Representar soluciones con lenguaje natural, pseudocódigo y diagramas de flujo.
+5.  Aplicar buenas prácticas en programación y en la documentación del código.
+
+| Fecha | Capítulo | Tipo |
+|----|----|----|
+| 01 de septiembre, 2026 | [Introducción a los Componentes de una Computadora](cap2A.qmd) | 📖 Lección |
+| — | [🎮 AhaSlides 1 - Manos a la obra](game1.qmd) | 🎮 Juego |
+| 03 de septiembre, 2026 | [Sistema Operativo (SO) y sus funciones](cap2B.qmd) | 📖 Lección |
+| — | [✏️ Tarea 1 - Mi Sistema Operativo](Tarea1.qmd) | ✏️ Tarea |
+| 03 de septiembre, 2026 | [Buenas prácticas en programación](cap3.qmd) | 📖 Lección |
+| 03 de septiembre, 2026 | [📚 Actividad 1 en equipo - Mi primer algoritmo](s1_actividad1.qmd) | 📚 Actividad |
+| — | [🎮 AhaSlides 2 -Manos a la obra](game2.qmd) | 🎮 Juego |
+| 01 de septiembre, 2026 | [Doc (uDocz) para el apoyo de este curso 🤖](udocz.qmd) | 📖 Lección |
+
+### Sección 2. Instalación de programas
+
+**Al terminar esta sección, el alumno podrá:**
+
+1.  Instalar Git, Bash, R, RStudio, Rtools/Xcode y Python en su computadora.
+2.  Conectar Python con RStudio mediante el paquete `reticulate`.
+3.  Usar la terminal de Bash dentro de RStudio.
+
+| Fecha | Capítulo | Tipo |
+|----|----|----|
+| — | [📌 To do list - Instalación de programas](TodoLits.qmd) | 📌 Lista |
+| 08 de septiembre, 2026 | [Instalación de Git y Bash](install_B.qmd) | 📖 Lección |
+| 08 de septiembre, 2026 | [Instalación de R, RStudio y Rtools/XCode](install_R.qmd) | 📖 Lección |
+| 08 de septiembre, 2026 | [Introducción a R y Rstudio](intro_R.qmd) | 📖 Lección |
+| 08 de septiembre, 2026 | [Instalación de Python y reticulate en Rstudio](install_python.qmd) | 📖 Lección |
+| 08 de septiembre, 2026 | [Integración de Bash en la terminal de Rstudio](integracion_bash_rstudio.qmd) | 📖 Lección |
+
+### Sección 3. Introducción a Bash
+
+**Al terminar esta sección, el alumno podrá:**
+
+1.  Comprender la historia y la filosofía de Unix, GNU y GNU/Linux, y la importancia del software libre.
+2.  Navegar el sistema de archivos y manipular archivos y carpetas desde la terminal.
+3.  Usar comodines (*wildcards*), flujos (*streams*) y redirecciones.
+4.  Buscar patrones en textos con expresiones regulares (REGEX) y `grep`.
+
+| Fecha | Capítulo | Tipo |
+|----|----|----|
+| 17 de septiembre, 2026 | [Introducción a Linux/Unix](cap4.qmd) | 📖 Lección |
+| 17 de septiembre, 2026 | [Mis primeros pasos en Bash](cap5.qmd) | 📖 Lección |
+| — | [🎮 AhaSlides 3 -Manos a la obra](game3.qmd) | 🎮 Juego |
+| 22 de septiembre, 2026 | [Caracteres, Strings y Wildcards](cap6.qmd) | 📖 Lección |
+| — | [🎮 AhaSlides 4 -Manos a la obra](game4.qmd) | 🎮 Juego |
+| 24 de septiembre, 2026 | [Expresiones regulares (REGEX)](regex.qmd) | 📖 Lección |
+| — | [Encontrar patrones con `grep`](cap7.qmd) | 📖 Lección |
+| — | [🎮 AhaSlides 5 -Manos a la obra](game5.qmd) | 🎮 Juego |
+
+### Sección 4. Edición de archivos con Bash
+
+**Al terminar esta sección, el alumno podrá:**
+
+1.  Editar archivos con `nano`, `vim` y el editor de flujo `sed`.
+2.  Organizar su trabajo en un R Project y crear enlaces simbólicos.
+3.  Filtrar y resumir textos con `grep`, `cut`, `sort`, `uniq` y `wc`.
+4.  Escribir *scripts* de Bash con variables, `printf`/`echo`, condicionales y ciclos.
+
+| Fecha | Capítulo | Tipo |
+|----|----|----|
+| 29 de septiembre, 2026 | [Edición de archivos con los editores de texto (`nano` y `vim`)](cap8.qmd) | 📖 Lección |
+| 29 de septiembre, 2026 | [Crear un R Project](cap8_crearRproject.qmd) | 📖 Lección |
+| 29 de septiembre, 2026 | [Scripts en Bash](Bash_script.qmd) | 📖 Lección |
+| 06 de octubre, 2026 | [Edición de archivos con el editor de flujo `sed`](cap9.qmd) | 📖 Lección |
+| 06 de octubre, 2026 | [Tipos de enlaces - symlinks, hard links e hipervínculos](cap10.qmd) | 📖 Lección |
+| — | [📚 Proyecto integrador en equipo - Script Bash](s1_actividad2.qmd) | 📚 Actividad |
+| 06 de octubre, 2026 | [Filtrado de texto (`grep, cut, sort, uniq, wc`)](cap11.qmd) | 📖 Lección |
+| 08 de octubre, 2026 | [printf vs echo](cap12.qmd) | 📖 Lección |
+| 08 de octubre, 2026 | [📚 Actividad 2 en equipo - ¡REDUCE EL CÓDIGO BASH!](s3_actividad2.qmd) | 📚 Actividad |
+| 13 de octubre, 2026 | [Condicionales](cap13.qmd) | 📖 Lección |
+| — | [🎮 AhaSlides 6 -Manos a la obra](game6.qmd) | 🎮 Juego |
+| 15 de octubre, 2026 | [Bucles (for loops)](cap14.qmd) | 📖 Lección |
+| — | [🎮 AhaSlides 7 -Manos a la obra](game7.qmd) | 🎮 Juego |
+
+### Sección 5. Introducción a Git y GitHub
+
+**Al terminar esta sección, el alumno podrá:**
+
+1.  Instalar y cargar paquetes en RStudio.
+2.  Comprender qué es el control de versiones y para qué sirve.
+3.  Configurar Git y conectarse a GitHub mediante SSH.
+4.  Crear repositorios, registrar cambios (`add`, `commit`, `push`) e ignorar archivos con `.gitignore`.
+
+| Fecha | Capítulo | Tipo |
+|----|----|----|
+| 06 de octubre, 2026 | [Descargar y cargar Librerías en Rstudio](Rstudio_paquetes.qmd) | 📖 Lección |
+| 22 de octubre, 2026 | [Introducción a Git / GitHub](cap15.qmd) | 📖 Lección |
+| 22 de octubre, 2026 | [Conectar a GitHub con SSH](cap22.qmd) | 📖 Lección |
+| 06 de octubre, 2026 | [Configurar Git](cap16.qmd) | 📖 Lección |
+| 13 de octubre, 2026 | [Repositorios](cap17.qmd) | 📖 Lección |
+| 13 de octubre, 2026 | [Ignorar archivos/carpetas](cap18.qmd) | 📖 Lección |
+| — | [📚 Actividad 1 y 2](s5_actividades1y2.qmd) | 📚 Actividad |
+| — | [Resumen y Práctica Final](cap23.qmd) | 📖 Lección |
+
+### Sección 6. Markdown y Quarto
+
+**Al terminar esta sección, el alumno podrá:**
+
+1.  Escribir documentos con la sintaxis de Markdown.
+2.  Crear y publicar una página web personal.
+3.  Crear documentos y libros de Quarto que combinan texto, código y resultados.
+
+| Fecha | Capítulo | Tipo |
+|----|----|----|
+| — | [Introducción a Markdown](cap29.qmd) | 📖 Lección |
+| — | [📚 Actividad 3: Página web con Rmarkdown](s5_actividades3.qmd) | 📚 Actividad |
+| 22 de octubre, 2026 | [Introducción a Quarto](Intro_Quarto.qmd) | 📖 Lección |
+| — | [📚 Actividad 4 y 5](s5_actividades4y5.qmd) | 📚 Actividad |
+
+### Sección 7. Introducción a Python
+
+**Al terminar esta sección, el alumno podrá:**
+
+1.  Ejecutar Python desde RStudio con `reticulate` y configurar un entorno virtual para Quarto.
+2.  Comprender el tipo, el valor y la identidad de los objetos, y usar sus atributos y métodos.
+3.  Nombrar variables correctamente y aplicar programación defensiva (`assert`, `try`/`except`, `raise`).
+4.  Controlar el flujo de un programa con condicionales (`if`, `elif`, `else`) y ciclos (`for`, `while`).
+5.  Crear funciones documentadas, validadas y probadas.
+6.  Realizar cálculo numérico con NumPy y cálculo simbólico con SymPy.
+7.  Visualizar datos, curvas, lugares geométricos y superficies en 2D y 3D con Matplotlib, Seaborn y Plotly.
+8.  Representar transformaciones geométricas con matrices.
+9.  Simular fenómenos aleatorios y aplicar el método de Monte Carlo.
+10.  Documentar sus análisis en Quarto y publicarlos en GitHub Pages.
+
+| Fecha | Capítulo | Tipo |
+|----|----|----|
+| 26 de octubre, 2026 | [Introducción a Python en Rstudio usando `reticulate`](intro_python.qmd) | 📖 Lección |
+| 03 de noviembre, 2026 | [Configuraciones para usar Quarto con Python](quarto_python.qmd) | 📖 Lección |
+| 03 de noviembre, 2026 | [🐍 Actividad 1: variables y objetos (tipo, valor e identidad)](python_ejercicio1.qmd) | 🐍 Actividad |
+| — | [🎮 AhaSlides 8 -Manos a la obra](game8.qmd) | 🎮 Juego |
+| 03 de noviembre, 2026 | [🐍 Actividad 2: atributos y métodos de los objetos](python_ejercicio2.qmd) | 🐍 Actividad |
+| — | [🎮 AhaSlides 9 -Manos a la obra](game9.qmd) | 🎮 Juego |
+| 05 de noviembre, 2026 | [Sintaxis de nombres, buenas prácticas y programación defensiva en Python](python_buenas_practicas.qmd) | 📖 Lección |
+| 05 de noviembre, 2026 | [Condicionales en Python](python_condicionales.qmd) | 📖 Lección |
+| 05 de noviembre, 2026 | [Introducción a NumPy](python_numpy.qmd) | 📖 Lección |
+| 10 y 12 de noviembre, 2026 | [Cálculo simbólico con SymPy](python_sympy.qmd) | 📖 Lección |
+| 17 de noviembre, 2026 | [Ciclos `for` y `while` en Python](python_for.qmd) | 📖 Lección |
+| 17 de noviembre, 2026 | [Funciones en Python](python_funciones.qmd) | 📖 Lección |
+| 19 de noviembre, 2026 | [Visualización de datos con Matplotlib y Plotly](python_visualizacion.qmd) | 📖 Lección |
+| 19 de noviembre, 2026 | [Visualización II: curvas, lugares geométricos y gráficas avanzadas en 2D](python_visualizacion2.qmd) | 📖 Lección |
+| 24 de noviembre, 2026 | [Números aleatorios y aplicaciones](python_aleatorios.qmd) | 📖 Lección |
+| 26 de noviembre, 2026 | [Visualización III: gráficas en 3D](python_visualizacion3d.qmd) | 📖 Lección |
+| 26 de noviembre, 2026 | [Transformaciones geométricas en 2D y 3D](python_transformaciones.qmd) | 📖 Lección |
+
+## Apéndices
+
+Material de consulta para usar en cualquier momento del curso:
+
+- [Entornos para trabajar con Python: RStudio, Google Colab y Jupyter Notebook](python_entornos.qmd)
+- [Conda y Miniconda: gestión de entornos y paquetes](python_conda.qmd)
+
+## Habilidades al terminar el curso
+
+Al concluir el Taller de Cómputo, el alumno será capaz de:
+
+- Usar la **terminal** para trabajar con archivos y automatizar tareas con *scripts* de Bash.
+- Llevar el **control de versiones** de sus proyectos con Git y compartirlos en GitHub.
+- Escribir **documentos reproducibles** y páginas web con Markdown y Quarto.
+- **Programar en Python** con buenas prácticas: código claro, documentado, probado y defensivo.
+- Aplicar Python a las **matemáticas**: cálculo numérico y simbólico, geometría analítica, transformaciones geométricas y simulación.
+- **Comunicar resultados** mediante visualizaciones estáticas e interactivas.
