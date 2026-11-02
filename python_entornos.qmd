@@ -1,0 +1,353 @@
+# Entornos para trabajar con Python: RStudio, Google Colab y Jupyter Notebook
+
+> **Fecha:** 03 de noviembre, 2026
+
+Hasta ahora hemos ejecutado Python desde RStudio con `reticulate` y con Quarto. Sin embargo, existen otros entornos muy utilizados para programar en Python. En este apéndice veremos:
+
+- Qué necesitamos para usar **Google Colab** y **Jupyter Notebook**.
+- La diferencia entre los comandos `python` y `pip` (y sus versiones `python3` y `pip3`).
+- Cómo instalar paquetes en **RStudio**, **Google Colab** y **Jupyter Notebook**.
+- Qué pasa cuando cerramos y volvemos a abrir nuestro trabajo: ¿hay que instalar de nuevo?
+
+## Comparación general de los entornos
+
+| Característica | RStudio + Quarto | Google Colab | Jupyter Notebook |
+|----|----|----|----|
+| ¿Dónde se ejecuta? | En tu computadora. | En una computadora de Google (en la nube). | En tu computadora. |
+| ¿Necesito instalar Python? | Sí. | No. | Sí. |
+| ¿Necesito internet? | No (solo para instalar paquetes). | Sí, siempre. | No (solo para instalar paquetes). |
+| Tipo de archivo | `.qmd` | `.ipynb` | `.ipynb` |
+| ¿Dónde se guarda el archivo? | En tu computadora. | En tu Google Drive. | En tu computadora. |
+
+Un **notebook** (cuaderno) es un documento formado por **celdas**. Cada celda puede contener texto (Markdown) o código que se ejecuta y muestra su resultado justo debajo. Es la misma idea de los bloques de código de Quarto.
+
+## El comando `python` vs el comando `pip`
+
+Son dos programas distintos que se usan juntos:
+
+| Comando | ¿Qué es? | ¿Para qué sirve? | Ejemplo |
+|----|----|----|----|
+| `python` / `python3` | El **intérprete** de Python. | Ejecutar código y programas de Python. | `python3 mi_script.py` |
+| `pip` / `pip3` | El **gestor de paquetes** de Python (*Package Installer for Python*). | Instalar, actualizar y desinstalar bibliotecas. | `pip3 install numpy` |
+
+Una analogía: `python` es el **cocinero** y `pip` es quien **surte la despensa**. El cocinero solo puede usar los ingredientes (paquetes) que hay en *su* despensa.
+
+### ¿Por qué existen `python3` y `pip3`?
+
+Durante muchos años convivieron dos versiones de Python incompatibles entre sí: **Python 2** y **Python 3**. Para distinguirlas, el comando `python` (y `pip`) apuntaba a Python 2, mientras que `python3` (y `pip3`) apuntaba a Python 3.
+
+Python 2 dejó de recibir soporte el **1 de enero de 2020**. Hoy siempre trabajaremos con **Python 3**, pero los nombres con el `3` se conservan:
+
+| Sistema operativo | Intérprete | Gestor de paquetes |
+|----|----|----|
+| macOS y Linux | `python3` | `pip3` o `python3 -m pip` |
+| Windows | `python` o `py` | `pip` o `py -m pip` |
+
+En macOS y Linux el comando `python` (sin el 3) puede no existir o apuntar a otra instalación. Por eso en este curso usamos `python3`.
+
+### Verificar las versiones
+
+En la terminal (Bash):
+
+``` bash
+python3 --version     # Python 3.12.13
+pip3 --version        # pip 25.0 from /.../python3.12/site-packages/pip (python 3.12)
+```
+
+Observa que `pip3 --version` también indica **a qué Python pertenece** (al final, entre paréntesis). Si tienes varias versiones instaladas, puede ocurrir que `pip3` instale los paquetes en un Python distinto al que usas.
+
+Para saber exactamente qué programa se está ejecutando:
+
+``` bash
+which python3    # macOS / Linux
+which pip3
+```
+
+``` bash
+where python     # Windows
+```
+
+### La forma recomendada: `python3 -m pip`
+
+Para evitar instalar un paquete en el Python equivocado, se recomienda llamar a `pip` **a través del intérprete**:
+
+``` bash
+python3 -m pip install numpy
+```
+
+La opción `-m` significa "ejecuta el módulo `pip` **de este** Python". Así nos aseguramos de que el paquete quede instalado en el mismo Python que después usará nuestro código.
+
+| Forma | ¿Recomendada? | Motivo |
+|----|----|----|
+| `pip install numpy` | No | Puede pertenecer a otra versión de Python. |
+| `pip3 install numpy` | A veces | Funciona si solo tienes un Python 3. |
+| `python3 -m pip install numpy` | **Sí** | Instala en el Python que estás usando. |
+
+::: callout-important
+`pip` se ejecuta en la **terminal**, no dentro de Python. Si escribes `pip install numpy` en la consola de Python (`>>>`) obtendrás un `SyntaxError`.
+:::
+
+## Google Colab
+
+[Google Colaboratory](https://colab.research.google.com/) (Colab) es un servicio gratuito de Google que permite escribir y ejecutar notebooks de Python desde el navegador, sin instalar nada en tu computadora.
+
+### Requisitos
+
+- Una **cuenta de Google** (Gmail o la cuenta institucional).
+- Un navegador web (Chrome, Firefox, Safari o Edge).
+- Conexión a internet.
+
+No necesitas instalar Python: Colab ya incluye Python 3 y muchas bibliotecas preinstaladas como `numpy`, `pandas`, `matplotlib` y `scikit-learn`.
+
+### Pasos para crear tu primer notebook
+
+1.  Entra a <https://colab.research.google.com/> e inicia sesión con tu cuenta de Google.
+2.  Da clic en **Nuevo notebook** (o en **Archivo \> Nuevo notebook en Drive**).
+3.  Cambia el nombre del archivo dando clic en `Untitled0.ipynb` (parte superior izquierda), por ejemplo `practica_python.ipynb`.
+4.  Escribe código en la celda y ejecútala con el botón ▶ o con `Shift + Enter`.
+5.  Agrega celdas con **+ Código** o **+ Texto**.
+
+``` python
+print("Hola desde Google Colab")
+```
+
+El notebook se guarda automáticamente en tu Google Drive, en la carpeta **Colab Notebooks**.
+
+### Verificar la versión de Python en Colab
+
+En una celda:
+
+``` python
+import sys
+print(sys.version)
+```
+
+En Colab también podemos ejecutar comandos de la terminal anteponiendo un signo de admiración `!`:
+
+``` python
+!python3 --version
+!pip --version
+```
+
+### ¿Qué es el entorno de ejecución?
+
+Cuando ejecutas tu primera celda, Google te asigna temporalmente una computadora (una **máquina virtual**). A esto se le llama **entorno de ejecución** (*runtime*).
+
+- En la versión gratuita, el entorno se desconecta si no lo usas durante un tiempo (aproximadamente 90 minutos) y tiene un tiempo máximo de uso por sesión (alrededor de 12 horas).
+- Al desconectarse, la máquina virtual **se borra**.
+
+Esto es clave para entender qué pasa al instalar paquetes (ver [Qué pasa cuando cerramos y volvemos a abrir](#sec-reabrir)).
+
+### Trabajar con archivos en Colab
+
+Los archivos que subes al panel de la izquierda (icono de carpeta 📁) se guardan en `/content` y **se pierden** cuando el entorno se desconecta. Para conservarlos, conecta tu Google Drive:
+
+``` python
+from google.colab import drive
+drive.mount('/content/drive')
+```
+
+Tus archivos estarán en `/content/drive/MyDrive/`.
+
+## Jupyter Notebook
+
+[Jupyter Notebook](https://jupyter.org/) es la aplicación original de los notebooks `.ipynb`. A diferencia de Colab, se ejecuta **en tu propia computadora** y se abre en el navegador.
+
+### Requisitos previos
+
+1.  **Python 3 instalado** (revisa el capítulo de instalación de Python). Verifica:
+
+    ``` bash
+    python3 --version
+    ```
+
+2.  **`pip` disponible**:
+
+    ``` bash
+    python3 -m pip --version
+    ```
+
+3.  **Recomendado:** un entorno virtual. Puedes usar el mismo entorno que creamos para Quarto:
+
+    ``` bash
+    source ~/.venvs/quarto-python/bin/activate
+    ```
+
+    En Windows (Git Bash):
+
+    ``` bash
+    source ~/.venvs/quarto-python/Scripts/activate
+    ```
+
+::: callout-note
+## ¿Qué es un entorno virtual?
+
+Un entorno virtual (`venv`) es una carpeta que contiene su propia copia de Python y sus propios paquetes. Así, los paquetes de un proyecto no se mezclan con los de otro ni con el Python del sistema. Cuando el entorno está activo, la terminal muestra su nombre entre paréntesis, por ejemplo `(quarto-python)`.
+:::
+
+### Instalar Jupyter Notebook
+
+Con el entorno activo:
+
+``` bash
+python3 -m pip install notebook
+```
+
+Si ya instalaste `jupyter` en el capítulo de Quarto con Python, el paquete `notebook` ya está incluido.
+
+### Instalar las bibliotecas que usaremos en el curso
+
+En la terminal, activa el entorno virtual e instala las bibliotecas:
+
+``` bash
+source ~/.venvs/quarto-python/bin/activate
+
+python -m pip install numpy pandas matplotlib seaborn scipy
+```
+
+| Biblioteca | ¿Para qué sirve? |
+|----|----|
+| `numpy` | Cálculo numérico con arreglos (*arrays*). |
+| `pandas` | Manejo de tablas de datos (*data frames*). |
+| `matplotlib` | Creación de gráficas. |
+| `seaborn` | Gráficas estadísticas, construida sobre `matplotlib`. |
+| `scipy` | Herramientas científicas: estadística, optimización, álgebra lineal. |
+
+Con el entorno activo usamos `python` (sin el 3): dentro del entorno virtual, `python` apunta al Python del entorno. Como estas bibliotecas quedan instaladas en el entorno virtual, estarán disponibles tanto en Jupyter Notebook como en Quarto.
+
+### Abrir Jupyter Notebook
+
+En la terminal:
+
+``` bash
+jupyter notebook
+```
+
+Se abrirá el navegador en una dirección como `http://localhost:8888`. Desde ahí:
+
+1.  Navega a la carpeta donde quieres trabajar.
+2.  Da clic en **New \> Notebook** y elige el kernel **Python 3**.
+3.  Escribe código en una celda y ejecútala con `Shift + Enter`.
+
+::: callout-important
+No cierres la terminal mientras usas Jupyter: la terminal es el "servidor" que ejecuta tu código. Para terminar, guarda tu notebook, cierra la pestaña y en la terminal presiona `Ctrl + C`.
+:::
+
+### ¿Qué es un kernel?
+
+El **kernel** es el programa que ejecuta el código de tu notebook. El kernel `python3` corresponde a un intérprete de Python específico. Si quieres que tu entorno virtual aparezca como opción en Jupyter (y en Quarto), regístralo con `ipykernel`:
+
+``` bash
+python3 -m ipykernel install --user --name quarto-python --display-name "Python (quarto-python)"
+```
+
+## Instalar paquetes en cada entorno
+
+### En RStudio
+
+**Opción A. Desde la Terminal de RStudio (pestaña *Terminal*):**
+
+``` bash
+source ~/.venvs/quarto-python/bin/activate
+python3 -m pip install seaborn
+```
+
+Esta opción instala el paquete en el entorno virtual que utiliza Quarto.
+
+**Opción B. Desde la consola de R con `reticulate`:**
+
+```{r, eval=FALSE}
+library(reticulate)
+py_require("seaborn")
+```
+
+Recuerda que `py_require()` declara la dependencia y `reticulate` la resuelve al iniciar Python (lo vimos en [Cómo instalar paquetes de Python desde RStudio](intro_python.qmd)).
+
+### En Google Colab
+
+En una celda de código:
+
+``` python
+!pip install biopython
+```
+
+o bien, con el comando mágico `%pip`:
+
+``` python
+%pip install biopython
+```
+
+Antes de instalar, revisa si el paquete ya viene incluido:
+
+``` python
+!pip show pandas
+```
+
+### En Jupyter Notebook
+
+**Opción A. Desde la terminal** (con el entorno virtual activo):
+
+``` bash
+python3 -m pip install seaborn
+```
+
+**Opción B. Desde una celda del notebook:**
+
+``` python
+%pip install seaborn
+```
+
+En Jupyter se recomienda `%pip` en lugar de `!pip`, porque `%pip` instala el paquete en el **mismo Python que usa el kernel**, mientras que `!pip` podría usar otro Python. Es la misma idea que `python3 -m pip`.
+
+Si instalas un paquete mientras el notebook está abierto y no lo reconoce, reinicia el kernel: **Kernel \> Restart Kernel**.
+
+### Resumen: ¿cómo instalo un paquete?
+
+| Entorno | ¿Dónde escribo? | Comando |
+|----|----|----|
+| RStudio (Terminal) | Pestaña *Terminal* | `python3 -m pip install paquete` |
+| RStudio (`reticulate`) | Consola de R | `py_require("paquete")` |
+| Google Colab | Celda de código | `!pip install paquete` o `%pip install paquete` |
+| Jupyter Notebook | Celda de código | `%pip install paquete` |
+| Jupyter Notebook | Terminal | `python3 -m pip install paquete` |
+
+En todos los casos, **después de instalar** debemos **importar** el paquete en nuestro código:
+
+``` python
+import seaborn as sns
+```
+
+## Qué pasa cuando cerramos y volvemos a abrir {#sec-reabrir}
+
+Recuerda lo que aprendimos en R: `install.packages()` se ejecuta **una sola vez**, pero `library()` se ejecuta **cada vez** que abrimos una nueva sesión. En Python ocurre lo mismo: **instalar** (`pip install`) e **importar** (`import`) son dos pasos diferentes.
+
+| Entorno | ¿Se conservan los paquetes instalados? | ¿Se conservan las variables? | ¿Qué debo hacer al volver a abrir? |
+|----|----|----|----|
+| RStudio (venv / Terminal) | **Sí**, quedan guardados en tu computadora. | No | Volver a ejecutar los `import` y tu código. |
+| RStudio (`reticulate`) | **Sí**, quedan en caché. | No | Volver a ejecutar `library(reticulate)`, `py_require()` y tu código. |
+| Jupyter Notebook | **Sí**, quedan en el entorno virtual. | No | Activar el entorno, abrir `jupyter notebook` y ejecutar las celdas desde el inicio. |
+| Google Colab | **No**, la máquina virtual se borra. | No | Volver a ejecutar `!pip install` **y** todas las celdas. |
+
+::: callout-tip
+## Buenas prácticas
+
+- En **Colab**, coloca todas las instalaciones (`!pip install ...`) en la **primera celda** del notebook, para volver a ejecutarlas fácilmente cada vez que lo abras.
+- En cualquier notebook, al volver a abrirlo usa **Ejecutar todo** (*Run all*) para recuperar tus variables. Las salidas que ves guardadas son solo el resultado de la última ejecución, las variables ya no existen en memoria.
+- En **Jupyter** y **RStudio** no necesitas reinstalar, solo **activar el mismo entorno virtual** que usaste para instalar los paquetes.
+:::
+
+### Errores comunes
+
+| Error | ¿Qué significa? | Solución |
+|----|----|----|
+| `ModuleNotFoundError: No module named 'seaborn'` | El paquete no está instalado en el Python que estás usando. | Instálalo con `python3 -m pip` o `%pip` en ese mismo entorno. |
+| `NameError: name 'np' is not defined` | No ejecutaste el `import` (o la celda donde creaste la variable) en esta sesión. | Ejecuta las celdas desde el inicio. |
+| `SyntaxError` al escribir `pip install` | Escribiste `pip` dentro de Python. | Usa la terminal, o en notebooks antepón `!` o `%`. |
+| `error: externally-managed-environment` | Intentas instalar en el Python del sistema. | Usa un entorno virtual. |
+
+## Referencias
+
+- [Google Colab: Bienvenido a Colaboratory](https://colab.research.google.com/notebooks/intro.ipynb)
+- [Jupyter Notebook: documentación oficial](https://jupyter-notebook.readthedocs.io/)
+- [Python Packaging User Guide: Installing packages](https://packaging.python.org/en/latest/tutorials/installing-packages/)
+- [IPython: comando mágico `%pip`](https://ipython.readthedocs.io/en/stable/interactive/magics.html#magic-pip)

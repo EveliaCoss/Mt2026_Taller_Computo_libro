@@ -1,0 +1,1060 @@
+---
+engine: knitr
+---
+
+# Ciclos `for` y `while` en Python
+
+{{< include ./_extensions/r-wasm/live/_knitr.qmd >}}
+
+> **Fecha:** 03 de noviembre, 2026
+
+Un **ciclo** (o **bucle**) permite **repetir** un bloque de instrucciones sin tener que escribirlas muchas veces. Python tiene dos tipos de ciclos: `for` repite el bloque **una vez por cada elemento** de una colección, y `while` lo repite **mientras una condición sea verdadera**.
+
+Ya usamos ciclos en Bash (capítulo de [Bucles (for loops)](cap14.qmd)); la idea es la misma, solo cambia la sintaxis. En este capítulo veremos:
+
+- La estructura de un ciclo `for` y cómo recorrer listas, cadenas, tuplas, conjuntos y diccionarios.
+- La función `range()` para generar secuencias de números.
+- **Acumuladores** y **contadores**: sumar, multiplicar y contar dentro de un ciclo.
+- Cómo combinar `for` con condicionales, y las instrucciones `break` y `continue`.
+- El ciclo `while` y cuándo usarlo en lugar de `for`.
+- Ciclos anidados, `enumerate()`, `zip()` y comprensiones de listas.
+- Cuándo conviene usar NumPy en lugar de un ciclo.
+
+## Estructura de un ciclo `for`
+
+``` python
+for elemento in coleccion:
+    instruccion_1     # Se repiten una vez por cada elemento
+    instruccion_2
+
+instruccion_3         # Se ejecuta una sola vez, al terminar el ciclo
+```
+
+Igual que en los condicionales:
+
+1.  La línea del `for` termina con **dos puntos** (`:`).
+2.  Las instrucciones que se repiten llevan **indentación de 4 espacios**.
+3.  No hay palabra de cierre (en Bash usábamos `done`): el bloque termina cuando termina la indentación.
+
+En cada **iteración** (cada vuelta del ciclo), la variable `elemento` hace referencia al siguiente objeto de la colección:
+
+```{python}
+frutas = ["manzana", "pera", "uva"]
+
+for fruta in frutas:
+    print("Me gusta la", fruta)
+
+print("Fin del ciclo")
+```
+
+| Iteración | Valor de `fruta` | Se muestra |
+|----|----|----|
+| 1 | `"manzana"` | `Me gusta la manzana` |
+| 2 | `"pera"` | `Me gusta la pera` |
+| 3 | `"uva"` | `Me gusta la uva` |
+
+::: callout-tip
+Elige un nombre de variable que describa **un** elemento de la colección: `for fruta in frutas`, `for numero in numeros`, `for estudiante in estudiantes`. Así el código se lee casi como en español.
+:::
+
+## Recorrer distintos tipos de objetos
+
+`for` funciona con cualquier objeto **iterable**, es decir, cualquier colección cuyos elementos se puedan recorrer uno por uno:
+
+| Objeto | Cada iteración entrega... | Ejemplo |
+|----|----|----|
+| `list` | Cada elemento, en orden. | `for x in [3, 1, 2]:` |
+| `tuple` | Cada elemento, en orden. | `for x in (3, 1, 2):` |
+| `str` | Cada **carácter**. | `for letra in "hola":` |
+| `set` | Cada elemento, **sin orden garantizado**. | `for x in {3, 1, 2}:` |
+| `dict` | Cada **clave**. | `for clave in diccionario:` |
+| `range` | Cada número de la secuencia. | `for i in range(5):` |
+
+**Recorrer una cadena:**
+
+```{python}
+for letra in "Python":
+    print(letra)
+```
+
+**Recorrer un diccionario:** usa el método `items()` para obtener la clave y el valor al mismo tiempo.
+
+```{python}
+estudiante = {"nombre": "Ana", "edad": 19, "semestre": 1}
+
+for clave, valor in estudiante.items():
+    print(clave, "->", valor)
+```
+
+En `for clave, valor in ...`, cada elemento de `items()` es una tupla de dos valores, `("nombre", "Ana")`, que Python **desempaqueta** en dos variables.
+
+## La función `range()`
+
+`range()` genera una secuencia de **números enteros**. Es la forma más común de repetir algo un número determinado de veces.
+
+| Forma | Genera | Ejemplo | Resultado |
+|----|----|----|----|
+| `range(fin)` | De `0` a `fin - 1`. | `range(5)` | `0, 1, 2, 3, 4` |
+| `range(inicio, fin)` | De `inicio` a `fin - 1`. | `range(1, 6)` | `1, 2, 3, 4, 5` |
+| `range(inicio, fin, paso)` | De `inicio` a `fin - 1`, de `paso` en `paso`. | `range(0, 11, 2)` | `0, 2, 4, 6, 8, 10` |
+| Paso negativo | Cuenta hacia atrás. | `range(10, 0, -2)` | `10, 8, 6, 4, 2` |
+
+::: callout-important
+El valor `fin` **nunca se incluye**, igual que en los rangos de índices (`lista[1:4]`). Para obtener los números del 1 al 10 escribe `range(1, 11)`.
+:::
+
+```{python}
+for i in range(1, 6):
+    print(i, "al cuadrado es", i ** 2)
+```
+
+Para ver todos los números de un `range` de una vez, conviértelo en lista:
+
+```{python}
+print(list(range(10, 0, -2)))
+```
+
+### Diferencias con Bash
+
+| | Bash | Python |
+|----|----|----|
+| Inicio | `for i in 1 2 3; do` | `for i in [1, 2, 3]:` |
+| Rango del 1 al 5 | `for i in {1..5}; do` o `$(seq 1 5)` | `for i in range(1, 6):` |
+| Rango con paso | `{0..10..2}` o `$(seq 0 2 10)` | `range(0, 11, 2)` |
+| Usar la variable | `echo $i` | `print(i)` |
+| Cierre | `done` | No hay: termina la indentación. |
+
+## Acumuladores y contadores
+
+Un **acumulador** es una variable que va guardando un resultado parcial en cada iteración. Siempre sigue tres pasos:
+
+1.  **Inicializar** la variable **antes** del ciclo.
+2.  **Actualizarla** dentro del ciclo.
+3.  **Usarla** después del ciclo.
+
+**Suma** (se inicializa en `0`, el neutro de la suma): $\sum_{i=1}^{5} i$
+
+```{python}
+suma = 0                      # 1. Inicializar
+
+for i in range(1, 6):
+    suma = suma + i           # 2. Actualizar
+    print("i =", i, " suma parcial =", suma)
+
+print("Suma total:", suma)    # 3. Usar
+```
+
+**Producto** (se inicializa en `1`, el neutro de la multiplicación): $5! = 1 \cdot 2 \cdot 3 \cdot 4 \cdot 5$
+
+```{python}
+factorial = 1
+
+for i in range(1, 6):
+    factorial = factorial * i
+
+print("5! =", factorial)
+```
+
+**Construir una lista** (se inicializa con la lista vacía `[]`):
+
+```{python}
+cuadrados = []
+
+for i in range(1, 6):
+    cuadrados.append(i ** 2)
+
+print(cuadrados)
+```
+
+### Operadores de asignación abreviados
+
+Como actualizar una variable es muy común, Python tiene una forma abreviada:
+
+| Forma larga | Forma abreviada |
+|----|----|
+| `suma = suma + i` | `suma += i` |
+| `resta = resta - i` | `resta -= i` |
+| `producto = producto * i` | `producto *= i` |
+| `cociente = cociente / i` | `cociente /= i` |
+| `contador = contador + 1` | `contador += 1` |
+
+## `for` con condicionales
+
+Dentro de un ciclo podemos usar `if` para actuar solo sobre algunos elementos. Por ejemplo, un **contador** de números pares y una lista con los impares:
+
+```{python}
+numeros = [4, 7, 10, 13, 16, 19]
+
+pares = 0
+impares = []
+
+for numero in numeros:
+    if numero % 2 == 0:
+        pares += 1
+    else:
+        impares.append(numero)
+
+print("Cantidad de pares:", pares)
+print("Impares:", impares)
+```
+
+Observa los **dos niveles de indentación**: 4 espacios para lo que está dentro del `for` y 8 para lo que está dentro del `if`.
+
+### `break`: salir del ciclo
+
+`break` **termina el ciclo inmediatamente**, aunque falten elementos por recorrer. Es útil cuando ya encontramos lo que buscábamos:
+
+```{python}
+numeros = [3, 8, 12, 5, 20, 7]
+
+for numero in numeros:
+    if numero > 10:
+        print("El primer número mayor que 10 es", numero)
+        break
+    print("Revisando", numero)
+```
+
+### `continue`: saltar a la siguiente iteración
+
+`continue` **salta el resto del bloque** y pasa al siguiente elemento:
+
+```{python}
+for i in range(1, 11):
+    if i % 3 == 0:
+        continue           # Salta los múltiplos de 3
+    print(i, end=" ")
+```
+
+El argumento `end=" "` de `print()` muestra los valores en la misma línea, separados por un espacio.
+
+## Ciclos `while`
+
+El ciclo `while` repite un bloque **mientras** una condición sea verdadera. A diferencia de `for`, no recorre una colección: revisa la condición **antes de cada vuelta** y se detiene en cuanto la condición es falsa.
+
+``` python
+while condicion:
+    instruccion_1     # Se repiten mientras la condición sea True
+    instruccion_2
+
+instruccion_3         # Se ejecuta al terminar el ciclo
+```
+
+```{python}
+contador = 1
+
+while contador <= 5:
+    print("Número:", contador)
+    contador += 1        # ¡Importante! Actualizar la variable de la condición
+
+print("Fin del ciclo")
+```
+
+En cada vuelta ocurre lo siguiente:
+
+1.  Python evalúa la condición `contador <= 5`.
+2.  Si es `True`, ejecuta el bloque: muestra el número y aumenta `contador` en 1.
+3.  Regresa al paso 1. Cuando `contador` vale 6, la condición es `False` y el ciclo termina.
+
+### ¿Cuándo usar `for` y cuándo `while`?
+
+| | `for` | `while` |
+|----|----|----|
+| Repite... | Una vez por cada elemento de una colección. | Mientras una condición sea verdadera. |
+| ¿Sabemos cuántas vueltas dará? | **Sí**: tantas como elementos. | **No** necesariamente. |
+| Ejemplo típico | Recorrer una lista, sumar del 1 al 100. | Repetir hasta alcanzar una precisión, pedir un dato hasta que sea válido. |
+| Riesgo | Muy bajo. | Ciclo infinito si la condición nunca se vuelve falsa. |
+
+Un problema donde **no sabemos** cuántas vueltas necesitamos: ¿cuántos términos de la serie de Leibniz hacen falta para que la aproximación de $\pi$ tenga un error menor que 0.01?
+
+```{python}
+import math
+
+suma = 0
+k = 0
+
+while abs(4 * suma - math.pi) >= 0.01:
+    suma += (-1) ** k / (2 * k + 1)
+    k += 1
+
+print("Términos necesarios:", k)
+print("Aproximación:", 4 * suma)
+```
+
+### Diferencias con Bash
+
+| | Bash | Python |
+|----|----|----|
+| Inicio | `while [ "$contador" -le 5 ]; do` | `while contador <= 5:` |
+| Incrementar | `contador=$((contador + 1))` | `contador += 1` |
+| Cierre | `done` | No hay: termina la indentación. |
+
+### ¡Cuidado con los ciclos infinitos!
+
+Si la condición **nunca** se vuelve falsa, el ciclo no termina. El error más común es olvidar actualizar la variable de la condición:
+
+``` python
+contador = 1
+while contador <= 5:
+    print(contador)      # contador siempre vale 1: ¡ciclo infinito!
+```
+
+::: callout-warning
+Si un programa se queda "atorado" en un ciclo infinito, detenlo: en la consola o la Terminal presiona `Ctrl + C`; en Jupyter o Colab usa el botón ■ (*Interrumpir*). En los editores de esta página, recarga la página.
+:::
+
+### `while True` con `break`
+
+A veces la condición para salir se conoce **dentro** del ciclo. Entonces se usa `while True` (que siempre es verdadero) junto con `break`:
+
+```{python}
+n = 27
+pasos = 0
+
+while True:
+    if n == 1:
+        break            # Salir del ciclo
+    if n % 2 == 0:
+        n = n // 2
+    else:
+        n = 3 * n + 1
+    pasos += 1
+
+print("Pasos para llegar a 1:", pasos)
+```
+
+`break` y `continue` funcionan igual en `while` que en `for`.
+
+## Ciclos anidados
+
+Un ciclo puede ir dentro de otro. El ciclo interno se ejecuta **completo** en cada iteración del ciclo externo:
+
+```{python}
+for i in range(1, 4):
+    for j in range(1, 4):
+        print(i, "x", j, "=", i * j)
+    print("---")
+```
+
+Si el ciclo externo da 3 vueltas y el interno 3, el bloque interno se ejecuta $3 \times 3 = 9$ veces.
+
+## Funciones útiles: `enumerate()` y `zip()`
+
+**`enumerate()`** entrega la **posición** y el **elemento** al mismo tiempo:
+
+```{python}
+estudiantes = ["Ana", "Luis", "Sofía"]
+
+for posicion, nombre in enumerate(estudiantes, start=1):
+    print(posicion, nombre)
+```
+
+**`zip()`** recorre **varias listas en paralelo**:
+
+```{python}
+nombres = ["Ana", "Luis", "Sofía"]
+calificaciones = [9.5, 8, 10]
+
+for nombre, calificacion in zip(nombres, calificaciones):
+    print(nombre, "obtuvo", calificacion)
+```
+
+## Comprensiones de listas
+
+Una **comprensión de listas** es una forma corta de construir una lista con un ciclo `for`, en una sola línea:
+
+``` python
+nueva_lista = [expresion for elemento in coleccion if condicion]
+```
+
+Las dos versiones siguientes producen la misma lista:
+
+```{python}
+# Con un ciclo for
+pares_cuadrados = []
+for i in range(1, 11):
+    if i % 2 == 0:
+        pares_cuadrados.append(i ** 2)
+print(pares_cuadrados)
+
+# Con una comprensión de listas
+pares_cuadrados = [i ** 2 for i in range(1, 11) if i % 2 == 0]
+print(pares_cuadrados)
+```
+
+Se parece mucho a la notación de conjuntos en matemáticas: $\{\, i^2 \mid i \in \{1, \dots, 10\},\ i \text{ par} \,\}$.
+
+::: callout-tip
+Esta es la sintaxis que usamos en la 🐍 Actividad 2 (atributos y métodos) para ocultar los nombres que empiezan con `_`: `[nombre for nombre in dir(numero) if not nombre.startswith("_")]`.
+:::
+
+## Ciclos `for` vs. NumPy
+
+En el capítulo de [NumPy](python_numpy.qmd) vimos que podemos operar sobre **todo el arreglo a la vez** (vectorización). Muchos problemas que resolvemos con un ciclo `for` se pueden resolver así:
+
+| Problema | Con un ciclo `for` | Con NumPy |
+|----|----|----|
+| Suma de 1 a 100 | `for i in range(1, 101): suma += i` | `np.arange(1, 101).sum()` |
+| Factorial de 10 | `for i in range(1, 11): factorial *= i` | `np.arange(1, 11).prod()` |
+| Cuadrados del 1 al 5 | `for i in range(1, 6): cuadrados.append(i ** 2)` | `np.arange(1, 6) ** 2` |
+| Múltiplos de 3 hasta 30 | `for` + `if` + `append()` | `a = np.arange(1, 31)` y `a[a % 3 == 0]` |
+
+Además de ser más corto, el código vectorizado es **mucho más rápido**, porque NumPy hace los cálculos internamente en el lenguaje C. Compruébalo con la suma de los cuadrados de los primeros 1 000 000 de números:
+
+```{pyodide}
+import time
+import numpy as np
+
+n = 1_000_000
+
+inicio = time.time()
+suma = 0
+for i in range(n):
+    suma += i ** 2
+print("Con for:  ", round(time.time() - inicio, 3), "segundos")
+
+inicio = time.time()
+suma_np = np.sum(np.arange(n, dtype=np.int64) ** 2)
+print("Con NumPy:", round(time.time() - inicio, 3), "segundos")
+
+print("¿Mismo resultado?", suma == suma_np)
+```
+
+## Errores comunes
+
+| Error | Ejemplo | Corrección |
+|----|----|----|
+| Olvidar los dos puntos | `for i in range(5)` (`SyntaxError`) | `for i in range(5):` |
+| Olvidar la indentación | `print(i)` alineado con el `for` (`IndentationError`) | Indenta 4 espacios. |
+| Inicializar el acumulador **dentro** del ciclo | `for i in ...:` y después `suma = 0` | Inicializa **antes** del `for`. |
+| Olvidar que `range()` no incluye el final | `range(1, 10)` para "del 1 al 10" | `range(1, 11)` |
+| Recorrer un número | `for i in 5:` (`TypeError`) | `for i in range(5):` |
+| Usar índices sin necesidad | `for i in range(len(lista)): print(lista[i])` | `for elemento in lista: print(elemento)` |
+| Modificar una lista mientras se recorre | `for x in lista: lista.remove(x)` | Construye una lista nueva. |
+| Olvidar actualizar la variable de un `while` | `while i < 5: print(i)` (ciclo infinito) | Agrega `i += 1` dentro del ciclo. |
+
+## Ejercicios
+
+Resuelve los ejercicios en los editores interactivos. Recuerda que lo que escribas **no se guarda** al recargar la página.
+
+### Ejercicio 1. La suma de Gauss
+
+Se cuenta que, de niño, Carl Friedrich Gauss sumó los números del 1 al 100 en unos segundos. Calcula $\sum_{i=1}^{100} i$ con un ciclo `for` y un acumulador. Después compara tu resultado con la fórmula de Gauss: $\frac{n(n+1)}{2}$.
+
+```{pyodide}
+#| exercise: for1
+n = 100
+suma = ______
+
+for i in ______:
+    suma += ______
+
+print("Con el ciclo:", suma)
+print("Con la fórmula:", n * (n + 1) // 2)
+suma
+```
+
+```{pyodide}
+#| exercise: for1
+#| check: true
+if result == 5050:
+    feedback = {"correct": True, "message": "¡Correcto! 1 + 2 + ... + 100 = 5050."}
+elif result == 4950:
+    feedback = {"correct": False, "message": "Obtuviste 4950: te faltó el 100. Recuerda que range() no incluye el valor final."}
+else:
+    feedback = {"correct": False, "message": "La suma debe ser 5050. Inicializa suma en 0 y recorre range(1, n + 1)."}
+feedback
+```
+
+::: {.hint exercise="for1"}
+::: {.callout-note collapse="false"}
+## Pista
+
+La suma se inicializa en `0`. Para incluir el 100, el rango debe ser `range(1, n + 1)`.
+:::
+:::
+
+::: {.solution exercise="for1"}
+::: {.callout-tip collapse="false"}
+## Solución
+
+``` python
+n = 100
+suma = 0
+
+for i in range(1, n + 1):
+    suma += i
+
+print("Con el ciclo:", suma)
+print("Con la fórmula:", n * (n + 1) // 2)
+suma   # 5050
+```
+:::
+:::
+
+### Ejercicio 2. Factorial
+
+Calcula $10! = 1 \cdot 2 \cdot 3 \cdots 10$ con un ciclo `for`.
+
+```{pyodide}
+#| exercise: for2
+n = 10
+factorial = ______
+
+for i in ______:
+    ______
+
+print(n, "! =", factorial)
+factorial
+```
+
+```{pyodide}
+#| exercise: for2
+#| check: true
+if result == 3628800:
+    feedback = {"correct": True, "message": "¡Correcto! 10! = 3,628,800."}
+elif result == 0:
+    feedback = {"correct": False, "message": "Obtuviste 0: el producto debe inicializarse en 1, no en 0 (o tu rango empieza en 0)."}
+elif result == 362880:
+    feedback = {"correct": False, "message": "Obtuviste 9!: recuerda que range() no incluye el valor final."}
+else:
+    feedback = {"correct": False, "message": "10! debe ser 3628800."}
+feedback
+```
+
+::: {.hint exercise="for2"}
+::: {.callout-note collapse="false"}
+## Pista
+
+El neutro de la multiplicación es `1`. Usa `factorial *= i` y `range(1, n + 1)`.
+:::
+:::
+
+::: {.solution exercise="for2"}
+::: {.callout-tip collapse="false"}
+## Solución
+
+``` python
+n = 10
+factorial = 1
+
+for i in range(1, n + 1):
+    factorial *= i
+
+print(n, "! =", factorial)
+factorial   # 3628800
+```
+:::
+:::
+
+### Ejercicio 3. Múltiplos de 3
+
+Construye la lista `multiplos` con todos los múltiplos de 3 entre 1 y 30 (incluido), usando un ciclo `for` y un `if`. Después intenta obtener la misma lista con `range()` usando un paso de 3, sin `if`.
+
+```{pyodide}
+#| exercise: for3
+multiplos = []
+
+for numero in range(1, 31):
+    if ______:
+        ______
+
+print(multiplos)
+multiplos
+```
+
+```{pyodide}
+#| exercise: for3
+#| check: true
+esperado = [3, 6, 9, 12, 15, 18, 21, 24, 27, 30]
+if result == esperado:
+    feedback = {"correct": True, "message": "¡Correcto! También puedes obtenerla con list(range(3, 31, 3))."}
+elif isinstance(result, list) and result == esperado[:-1]:
+    feedback = {"correct": False, "message": "Te faltó el 30: revisa el final del rango."}
+else:
+    feedback = {"correct": False, "message": "La lista debe contener los múltiplos de 3 del 3 al 30."}
+feedback
+```
+
+::: {.hint exercise="for3"}
+::: {.callout-note collapse="false"}
+## Pista
+
+Un número es múltiplo de 3 si `numero % 3 == 0`. Para agregarlo a la lista usa `multiplos.append(numero)`.
+:::
+:::
+
+::: {.solution exercise="for3"}
+::: {.callout-tip collapse="false"}
+## Solución
+
+``` python
+multiplos = []
+
+for numero in range(1, 31):
+    if numero % 3 == 0:
+        multiplos.append(numero)
+
+print(multiplos)
+print(list(range(3, 31, 3)))   # Misma lista, sin if
+multiplos
+```
+:::
+:::
+
+### Ejercicio 4. ¿Es un número primo?
+
+Un número $n > 1$ es **primo** si sus únicos divisores son 1 y él mismo. Completa el programa para revisar todos los posibles divisores entre 2 y $n - 1$: si encuentras uno, el número **no** es primo y puedes salir del ciclo con `break`.
+
+Prueba con `97`, `91`, `2` y `1`.
+
+```{pyodide}
+#| exercise: for4
+n = 97
+
+es_primo = n > 1        # 0 y 1 no son primos
+
+for divisor in range(2, n):
+    if ______:
+        es_primo = False
+        print(n, "es divisible entre", divisor)
+        ______
+
+print(n, "es primo:", es_primo)
+es_primo
+```
+
+```{pyodide}
+#| exercise: for4
+#| check: true
+if result is True and "break" in user_code:
+    feedback = {"correct": True, "message": "¡Correcto! 97 es primo. Prueba con 91 = 7 × 13."}
+elif result is True:
+    feedback = {"correct": True, "message": "¡Correcto! 97 es primo. Agrega break para no seguir revisando cuando encuentres un divisor."}
+else:
+    feedback = {"correct": False, "message": "97 sí es primo. Revisa tu condición: divisor divide a n si n % divisor == 0."}
+feedback
+```
+
+::: {.hint exercise="for4"}
+::: {.callout-note collapse="false"}
+## Pista
+
+`divisor` divide a `n` si `n % divisor == 0`. Escribe `break` después del `print()`, con la misma indentación.
+:::
+:::
+
+::: {.solution exercise="for4"}
+::: {.callout-tip collapse="false"}
+## Solución
+
+``` python
+n = 97
+
+es_primo = n > 1
+
+for divisor in range(2, n):
+    if n % divisor == 0:
+        es_primo = False
+        print(n, "es divisible entre", divisor)
+        break
+
+print(n, "es primo:", es_primo)
+es_primo   # True
+```
+
+Para números grandes basta con revisar los divisores hasta $\sqrt{n}$: `range(2, int(n ** 0.5) + 1)`. ¿Por qué?
+:::
+:::
+
+### Ejercicio 5. Sucesión de Fibonacci
+
+La sucesión de Fibonacci empieza con 0 y 1, y cada término es la suma de los dos anteriores: $F_n = F_{n-1} + F_{n-2}$.
+
+Completa la lista `fibonacci` para que tenga los **primeros 10 términos**.
+
+```{pyodide}
+#| exercise: for5
+fibonacci = [0, 1]
+
+for i in range(______):
+    siguiente = ______
+    fibonacci.append(siguiente)
+
+print(fibonacci)
+fibonacci
+```
+
+```{pyodide}
+#| exercise: for5
+#| check: true
+esperado = [0, 1, 1, 2, 3, 5, 8, 13, 21, 34]
+if result == esperado:
+    feedback = {"correct": True, "message": "¡Correcto! Los primeros 10 términos son 0, 1, 1, 2, 3, 5, 8, 13, 21, 34."}
+elif isinstance(result, list) and result[:min(len(result), 10)] == esperado[:min(len(result), 10)]:
+    feedback = {"correct": False, "message": "Los términos son correctos, pero la lista tiene " + str(len(result)) + " elementos y debe tener 10."}
+else:
+    feedback = {"correct": False, "message": "Revisa la fórmula: el siguiente término es la suma de los dos últimos de la lista."}
+feedback
+```
+
+::: {.hint exercise="for5"}
+::: {.callout-note collapse="false"}
+## Pista
+
+La lista ya tiene 2 términos, así que el ciclo debe dar 8 vueltas: `range(8)`. Los dos últimos elementos de la lista son `fibonacci[-1]` y `fibonacci[-2]`.
+:::
+:::
+
+::: {.solution exercise="for5"}
+::: {.callout-tip collapse="false"}
+## Solución
+
+``` python
+fibonacci = [0, 1]
+
+for i in range(8):
+    siguiente = fibonacci[-1] + fibonacci[-2]
+    fibonacci.append(siguiente)
+
+print(fibonacci)
+fibonacci   # [0, 1, 1, 2, 3, 5, 8, 13, 21, 34]
+```
+
+Observa que la variable `i` no se usa dentro del ciclo: solo sirve para repetir 8 veces. En estos casos es común llamarla `_`: `for _ in range(8):`.
+:::
+:::
+
+### Ejercicio 6. Aproximar $\pi$
+
+La **serie de Leibniz** permite aproximar $\pi$:
+
+$$\pi = 4 \sum_{k=0}^{\infty} \frac{(-1)^k}{2k + 1} = 4 \left(1 - \frac{1}{3} + \frac{1}{5} - \frac{1}{7} + \cdots\right)$$
+
+Calcula la aproximación con los primeros **1000 términos** ($k = 0, 1, \dots, 999$) y compárala con el valor real.
+
+```{pyodide}
+#| exercise: for6
+terminos = 1000
+suma = 0
+
+for k in ______:
+    suma += ______
+
+aproximacion = 4 * suma
+print("Aproximación:", aproximacion)
+print("Valor real:  ", 3.141592653589793)
+aproximacion
+```
+
+```{pyodide}
+#| exercise: for6
+#| check: true
+if isinstance(result, float) and abs(result - 3.1405926538397932) < 1e-9:
+    feedback = {"correct": True, "message": "¡Correcto! Con 1000 términos se obtiene 3.14059... Prueba con 100000 términos: la serie converge muy lentamente."}
+elif isinstance(result, float) and abs(result - 3.141592653589793) < 0.01:
+    feedback = {"correct": False, "message": "Te acercas a pi, pero revisa que uses exactamente 1000 términos: range(terminos)."}
+else:
+    feedback = {"correct": False, "message": "Revisa el término de la serie: (-1) ** k / (2 * k + 1)."}
+feedback
+```
+
+::: {.hint exercise="for6"}
+::: {.callout-note collapse="false"}
+## Pista
+
+Recorre `range(terminos)` y en cada iteración suma `(-1) ** k / (2 * k + 1)`. El signo alterna porque $(-1)^k$ vale $1$ si $k$ es par y $-1$ si es impar.
+:::
+:::
+
+::: {.solution exercise="for6"}
+::: {.callout-tip collapse="false"}
+## Solución
+
+``` python
+terminos = 1000
+suma = 0
+
+for k in range(terminos):
+    suma += (-1) ** k / (2 * k + 1)
+
+aproximacion = 4 * suma
+print("Aproximación:", aproximacion)   # 3.1405926538397932
+print("Valor real:  ", 3.141592653589793)
+aproximacion
+```
+:::
+:::
+
+### Ejercicio 7. Aproximar $\pi$ sin ciclos
+
+En el ejercicio anterior aproximamos $\pi$ con un ciclo `for`:
+
+$$\pi \approx 4 \sum_{k=0}^{999} \frac{(-1)^k}{2k + 1}$$
+
+Calcula la misma aproximación con NumPy, **sin usar `for`**: crea un arreglo `k` con los valores de 0 a 999, calcula todos los términos a la vez y súmalos.
+
+```{pyodide}
+#| exercise: for7
+import numpy as np
+
+k = ______
+terminos = ______
+aproximacion = 4 * ______
+
+print("Aproximación:", aproximacion)
+print("Valor real:  ", np.pi)
+aproximacion
+```
+
+```{pyodide}
+#| exercise: for7
+#| check: true
+uc = user_code
+if "for " in uc:
+    feedback = {"correct": False, "message": "Intenta resolverlo sin el ciclo for: opera directamente sobre el arreglo k."}
+elif abs(float(result) - 3.1405926538397932) < 1e-9:
+    feedback = {"correct": True, "message": "¡Correcto! Obtuviste lo mismo que con el ciclo for, en una sola línea."}
+else:
+    feedback = {"correct": False, "message": "Revisa el término: (-1) ** k / (2 * k + 1), con k = np.arange(1000)."}
+feedback
+```
+
+::: {.hint exercise="for7"}
+::: {.callout-note collapse="false"}
+## Pista
+
+`k = np.arange(1000)`. La expresión `(-1) ** k / (2 * k + 1)` se calcula para **todos** los valores de `k` a la vez. Después usa `np.sum()` o `.sum()`.
+:::
+:::
+
+::: {.solution exercise="for7"}
+::: {.callout-tip collapse="false"}
+## Solución
+
+``` python
+import numpy as np
+
+k = np.arange(1000)
+terminos = (-1.0) ** k / (2 * k + 1)
+aproximacion = 4 * terminos.sum()
+
+print("Aproximación:", aproximacion)   # 3.1405926538397932
+print("Valor real:  ", np.pi)
+aproximacion
+```
+
+Usamos `-1.0` en lugar de `-1` para que NumPy trabaje con decimales desde el inicio.
+:::
+:::
+
+### Ejercicio 8. La conjetura de Collatz
+
+Toma un número entero positivo $n$. Si es par, divídelo entre 2; si es impar, multiplícalo por 3 y súmale 1. Repite el proceso. La **conjetura de Collatz** dice que, sin importar con qué número empieces, siempre llegarás a 1 (¡nadie lo ha demostrado todavía!).
+
+Con un ciclo `while`, cuenta cuántos **pasos** se necesitan para llegar a 1 empezando en $n = 6$ y guarda la sucesión en la lista `sucesion`. Deja `pasos` en la **última línea**. Después prueba con $n = 27$.
+
+```{pyodide}
+#| exercise: for8
+n = 6
+pasos = 0
+sucesion = [n]
+
+while ______:
+    if ______:
+        n = n // 2
+    else:
+        n = ______
+    sucesion.append(n)
+    pasos += 1
+
+print(sucesion)
+pasos
+```
+
+```{pyodide}
+#| exercise: for8
+#| check: true
+if result == 8:
+    feedback = {"correct": True, "message": "¡Correcto! 6 → 3 → 10 → 5 → 16 → 8 → 4 → 2 → 1: son 8 pasos. Con n = 27 se necesitan 111."}
+else:
+    feedback = {"correct": False, "message": "Para n = 6 se necesitan 8 pasos. Revisa la condición del while (repetir mientras n sea distinto de 1)."}
+feedback
+```
+
+::: {.hint exercise="for8"}
+::: {.callout-note collapse="false"}
+## Pista
+
+El ciclo debe repetirse mientras `n != 1`. Un número es par si `n % 2 == 0`. Si es impar, el nuevo valor es `3 * n + 1`.
+:::
+:::
+
+::: {.solution exercise="for8"}
+::: {.callout-tip collapse="false"}
+## Solución
+
+``` python
+n = 6
+pasos = 0
+sucesion = [n]
+
+while n != 1:
+    if n % 2 == 0:
+        n = n // 2
+    else:
+        n = 3 * n + 1
+    sucesion.append(n)
+    pasos += 1
+
+print(sucesion)   # [6, 3, 10, 5, 16, 8, 4, 2, 1]
+pasos             # 8
+```
+
+Usamos `while` porque **no sabemos de antemano** cuántos pasos se necesitan.
+:::
+:::
+
+### Ejercicio 9. Raíz cuadrada con el método de Newton
+
+El **método de Newton** aproxima $\sqrt{2}$ con la fórmula $x_{\text{nuevo}} = x - \dfrac{x^2 - 2}{2x}$, empezando en $x = 1$. Cada vuelta mejora la aproximación.
+
+Repite la fórmula **mientras** el error $|x^2 - 2|$ sea mayor que `tolerancia`. Cuenta las iteraciones y deja `x` en la **última línea**.
+
+```{pyodide}
+#| exercise: for9
+x = 1.0
+tolerancia = 1e-12
+iteraciones = 0
+
+while ______:
+    x = ______
+    iteraciones += 1
+    print("Iteración", iteraciones, ": x =", x)
+
+print("Valor real:", 2 ** 0.5)
+x
+```
+
+```{pyodide}
+#| exercise: for9
+#| check: true
+if isinstance(result, float) and abs(result - 2 ** 0.5) < 1e-10:
+    feedback = {"correct": True, "message": "¡Correcto! El método de Newton converge muy rápido: solo 5 iteraciones."}
+else:
+    feedback = {"correct": False, "message": "Revisa la condición abs(x**2 - 2) > tolerancia y la fórmula x - (x**2 - 2) / (2 * x)."}
+feedback
+```
+
+::: {.hint exercise="for9"}
+::: {.callout-note collapse="false"}
+## Pista
+
+La condición es `abs(x ** 2 - 2) > tolerancia` y la actualización `x = x - (x ** 2 - 2) / (2 * x)`.
+:::
+:::
+
+::: {.solution exercise="for9"}
+::: {.callout-tip collapse="false"}
+## Solución
+
+``` python
+x = 1.0
+tolerancia = 1e-12
+iteraciones = 0
+
+while abs(x ** 2 - 2) > tolerancia:
+    x = x - (x ** 2 - 2) / (2 * x)
+    iteraciones += 1
+    print("Iteración", iteraciones, ": x =", x)
+
+print("Valor real:", 2 ** 0.5)
+x   # 1.4142135623730951
+```
+:::
+:::
+
+## Reto final: el contador de palabras
+
+Escribe un programa que, a partir de la cadena `texto`:
+
+1.  Convierta todo a minúsculas y separe las palabras.
+2.  Guarde en un **conjunto** las palabras únicas.
+3.  Con un ciclo `for`, guarde en un **diccionario** cuántas veces aparece cada palabra única.
+4.  Deje en la **última línea** la palabra que más se repite.
+
+```{pyodide}
+#| exercise: reto_for
+texto = "Python es divertido y Python es poderoso y R también es poderoso"
+
+palabras = ______
+unicas = ______
+
+conteo = {}
+for palabra in unicas:
+    conteo[palabra] = ______
+
+print(conteo)
+max(conteo, key=conteo.get)   # Palabra más repetida
+```
+
+```{pyodide}
+#| exercise: reto_for
+#| check: true
+if result == "es":
+    feedback = {"correct": True, "message": "¡Excelente! La palabra más repetida es 'es' (3 veces)."}
+elif result == "python":
+    feedback = {"correct": False, "message": "Obtuviste 'python'. Revisa que cuentes las palabras en la lista palabras, no en el conjunto."}
+else:
+    feedback = {"correct": False, "message": "La palabra más repetida no es correcta. Revisa cada paso."}
+feedback
+```
+
+::: {.hint exercise="reto_for"}
+::: {.callout-note collapse="false"}
+## Pista
+
+Puedes encadenar métodos: `texto.lower().split()`. Para el conjunto usa `set(palabras)` y para contar `palabras.count(palabra)`. En la última línea, `max(conteo, key=conteo.get)` busca la clave con el valor más grande.
+:::
+:::
+
+::: {.solution exercise="reto_for"}
+::: {.callout-tip collapse="false"}
+## Solución
+
+``` python
+texto = "Python es divertido y Python es poderoso y R también es poderoso"
+
+palabras = texto.lower().split()
+unicas = set(palabras)
+
+conteo = {}
+for palabra in unicas:
+    conteo[palabra] = palabras.count(palabra)
+
+print(conteo)
+max(conteo, key=conteo.get)   # 'es'
+```
+:::
+:::
+
+## Resumen
+
+| Tema | Idea clave |
+|----|----|
+| `for elemento in coleccion:` | Repite el bloque una vez por cada elemento. Termina con `:` y usa 4 espacios de indentación. |
+| Iterables | `list`, `tuple`, `str`, `set`, `dict` (claves) y `range`. |
+| `range(inicio, fin, paso)` | Genera enteros; el `fin` **no** se incluye. |
+| Acumuladores | Inicializar antes del ciclo (`0` para sumar, `1` para multiplicar, `[]` para listas), actualizar dentro, usar después. |
+| `+=`, `*=` | Formas abreviadas de actualizar una variable. |
+| `while condicion:` | Repite mientras la condición sea verdadera; cuidado con los ciclos infinitos. |
+| `break` / `continue` | Salir del ciclo / saltar a la siguiente iteración (en `for` y `while`). |
+| `enumerate()` / `zip()` | Posición y elemento / varias listas en paralelo. |
+| Comprensión de listas | `[expresion for x in coleccion if condicion]` |
+
+## Referencias
+
+- [Documentación de Python: La instrucción `for`](https://docs.python.org/es/3/tutorial/controlflow.html#for-statements)
+- [Documentación de Python: La función `range()`](https://docs.python.org/es/3/tutorial/controlflow.html#the-range-function)
+- [Documentación de Python: La instrucción `while`](https://docs.python.org/es/3/reference/compound_stmts.html#the-while-statement)
+- [Documentación de Python: `break` y `continue`](https://docs.python.org/es/3/tutorial/controlflow.html#break-and-continue-statements)
+- [Documentación de Python: Comprensión de listas](https://docs.python.org/es/3/tutorial/datastructures.html#list-comprehensions)

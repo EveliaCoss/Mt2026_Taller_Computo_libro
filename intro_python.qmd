@@ -44,15 +44,11 @@ Python es un ejemplo de lenguaje interpretado.
 
 ## Diferencia entre un lenguaje interpretado y uno compilado
 
-+--------------------------------------------------------------+--------------------------------------------------------------------+
-| Lenguaje interpretado                                        | Lenguaje compilado                                                 |
-+==============================================================+====================================================================+
-| Utiliza un intérprete para ejecutar el programa.             | Generalmente utiliza un compilador para generar código ejecutable. |
-+--------------------------------------------------------------+--------------------------------------------------------------------+
-| Normalmente no requiere generar un ejecutable independiente. | Habitualmente necesita una etapa de compilación previa.            |
-+--------------------------------------------------------------+--------------------------------------------------------------------+
-| Ejemplo: Python.                                             | Ejemplo: C.                                                        |
-+--------------------------------------------------------------+--------------------------------------------------------------------+
+| Lenguaje interpretado | Lenguaje compilado |
+|----|----|
+| Utiliza un intérprete para ejecutar el programa. | Generalmente utiliza un compilador para generar código ejecutable. |
+| Normalmente no requiere generar un ejecutable independiente. | Habitualmente necesita una etapa de compilación previa. |
+| Ejemplo: Python. | Ejemplo: C. |
 
 ## ¿Qué es `reticulate`?
 
@@ -231,15 +227,11 @@ Una vez dentro de Python, observarás que el indicador de la consola cambia de `
 
 ### Comparación entre R y Python
 
-+------------------------------------------+----------------------------------------+
-| Desde R con `reticulate`                 | Desde `repl_python()`                  |
-+==========================================+========================================+
-| `np <- import("numpy")`                  | `import numpy as np`                   |
-+------------------------------------------+----------------------------------------+
+| Desde R con `reticulate` | Desde `repl_python()` |
+|----|----|
+| `np <- import("numpy")` | `import numpy as np` |
 | `numeros <- np$array(c(10, 20, 30, 40))` | `numeros = np.array([10, 20, 30, 40])` |
-+------------------------------------------+----------------------------------------+
-| `np$mean(numeros)`                       | `np.mean(numeros)`                     |
-+------------------------------------------+----------------------------------------+
+| `np$mean(numeros)` | `np.mean(numeros)` |
 
 Observa las diferencias:
 

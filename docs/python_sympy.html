@@ -1,0 +1,2590 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es" xml:lang="es"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.37">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>58&nbsp; Cálculo simbólico con SymPy – Taller de Cómputo</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./python_visualizacion.html" rel="next">
+<link href="./python_for.html" rel="prev">
+<link href="./flyer/logo.png" rel="icon" type="image/png">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-6f5e339e910af865eb2cfbba9cbcf7d6.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="site_libs/quarto-contrib/focus-mode-1.0.0/focus-mode.js"></script>
+<link href="site_libs/quarto-contrib/focus-mode-1.0.0/focus-mode.css" rel="stylesheet">
+<script src="site_libs/quarto-contrib/live-runtime/live-runtime.js" type="module"></script>
+<link href="site_libs/quarto-contrib/live-runtime/live-runtime.css" rel="stylesheet">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No se han encontrado resultados",
+    "search-matching-documents-text": "documentos encontrados",
+    "search-copy-link-title": "Copiar el enlace en la búsqueda",
+    "search-hide-matches-text": "Ocultar resultados adicionales",
+    "search-more-match-text": "resultado adicional en este documento",
+    "search-more-matches-text": "resultados adicionales en este documento",
+    "search-clear-button-title": "Borrar",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancelar",
+    "search-submit-button-title": "Enviar",
+    "search-label": "Buscar"
+  }
+}</script><script type="module" src="site_libs/quarto-ojs/quarto-ojs-runtime.js"></script>
+<link href="site_libs/quarto-ojs/quarto-ojs.css" rel="stylesheet">
+<script>
+(function () {
+  try {
+    if (!window.matchMedia("(hover: hover) and (pointer: fine)").matches) return;
+    if (window.localStorage.getItem("quarto-focus-mode") === "1") {
+      document.documentElement.classList.add("focus-mode-persisted");
+    }
+    if (window.localStorage.getItem("quarto-presentation-mode") === "1") {
+      document.documentElement.classList.add("presentation-mode-preload");
+    }
+  } catch (e) {}
+})();
+</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./intro_python.html"><strong>Sección 7</strong> - Introducción a Python</a></li><li class="breadcrumb-item"><a href="./python_sympy.html"><span class="chapter-number">58</span>&nbsp; <span class="chapter-title">Cálculo simbólico con SymPy</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Buscar" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
+      <a href="./index.html" class="sidebar-logo-link">
+      <img src="./flyer/logo_enes.png" alt="" class="sidebar-logo light-content py-0 d-lg-inline d-none">
+      <img src="./flyer/logo_enes.png" alt="" class="sidebar-logo dark-content py-0 d-lg-inline d-none">
+      </a>
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Taller de Cómputo</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/EveliaCoss/Mt2026_Taller_Computo_libro" title="Ejecutar el código" class="quarto-navigation-tool px-1" aria-label="Ejecutar el código"><i class="bi bi-github"></i></a>
+    <div class="dropdown">
+      <a href="" title="Compartir" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" role="link" aria-label="Compartir"><i class="bi bi-share"></i></a>
+      <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-0">
+          <li>
+            <a class="dropdown-item sidebar-tools-main-item" href="https://twitter.com/intent/tweet?url=|url|">
+              <i class="bi bi-twitter pe-1"></i>
+            Twitter
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item sidebar-tools-main-item" href="https://www.facebook.com/sharer/sharer.php?u=|url|">
+              <i class="bi bi-facebook pe-1"></i>
+            Facebook
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item sidebar-tools-main-item" href="https://www.linkedin.com/sharing/share-offsite/?url=|url|">
+              <i class="bi bi-linkedin pe-1"></i>
+            LinkedIn
+            </a>
+          </li>
+      </ul>
+    </div>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Buscar"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Información general</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./temario.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Temario</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cap1A.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introducción e integración</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./evaluacion.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Sistema de evaluación + DOC</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text"><strong>Sección 1</strong> - Componentes de una computadora</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Alternar sección">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cap2A.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Introducción a los Componentes de una Computadora</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./game1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title"><strong>🎮 AhaSlides 1 - Manos a la obra</strong></span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cap2B.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Sistema Operativo (SO) y sus funciones</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Tarea1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title"><strong>✏️ Tarea 1 -</strong> Mi Sistema Operativo</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cap3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Buenas prácticas en programación</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./s1_actividad1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title"><strong>📚</strong> <strong>Actividad 1 en equipo -</strong> Mi primer algoritmo</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./game2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title"><strong>🎮 AhaSlides 2 -Manos a la obra</strong></span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./udocz.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Doc (uDocz) para el apoyo de este curso <strong>🤖</strong></span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text"><strong>Sección 2</strong> - Instalación de programas</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Alternar sección">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./TodoLits.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">📌 <strong>To do list -</strong> Instalación de programas</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./install_B.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Instalación de Git y Bash</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./install_R.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Instalación de R, RStudio y Rtools/XCode</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./intro_R.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Introducción a R y Rstudio</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./install_python.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Instalación de Python y reticulate en Rstudio</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./integracion_bash_rstudio.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Integración de Bash en la terminal de Rstudio</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text"><strong>Sección 3</strong> - Introducción a Bash</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Alternar sección">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cap4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Introducción a Linux/Unix</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cap5.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Mis primeros pasos en Bash</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./game3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title"><strong>🎮 AhaSlides 3 -Manos a la obra</strong></span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cap6.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Caracteres, Strings y Wildcards</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./game4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title"><strong>🎮 AhaSlides 4 -Manos a la obra</strong></span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./regex.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Expresiones regulares (REGEX)</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cap7.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Encontrar patrones con <code>grep</code></span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./game5.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title"><strong>🎮 AhaSlides 5 -Manos a la obra</strong></span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
+ <span class="menu-text"><strong>Sección 4</strong> - Edición de archivos con Bash</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Alternar sección">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cap8.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Edición de archivos con los editores de texto (<code>nano</code> y <code>vim</code>)</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cap8_crearRproject.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Crear un R Project</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Bash_script.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Scripts en Bash</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cap9.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Edición de archivos con el editor de flujo <code>sed</code></span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cap10.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">Tipos de enlaces - symlinks, hard links e hipervínculos</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./s1_actividad2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title"><strong>📚 Proyecto integrador en equipo -</strong> Script Bash</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cap11.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">Filtrado de texto (<code>grep, cut, sort, uniq, wc</code>)</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cap12.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">32</span>&nbsp; <span class="chapter-title">printf vs echo</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./s3_actividad2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">33</span>&nbsp; <span class="chapter-title"><strong>📚</strong> <strong>Actividad 2 en equipo -</strong> ¡REDUCE EL CÓDIGO BASH!</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cap13.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">34</span>&nbsp; <span class="chapter-title">Condicionales</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./game6.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">35</span>&nbsp; <span class="chapter-title"><strong>🎮 AhaSlides 6 -Manos a la obra</strong></span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cap14.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">36</span>&nbsp; <span class="chapter-title">Bucles (for loops)</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./game7.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">37</span>&nbsp; <span class="chapter-title"><strong>🎮 AhaSlides 7 -Manos a la obra</strong></span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
+ <span class="menu-text"><strong>Sección 5</strong> - Introducción a Git/GitHub</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Alternar sección">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Rstudio_paquetes.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">38</span>&nbsp; <span class="chapter-title">Descargar y cargar Librerías en Rstudio</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cap15.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">39</span>&nbsp; <span class="chapter-title">Introducción a Git / GitHub</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cap22.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">40</span>&nbsp; <span class="chapter-title">Conectar a GitHub con SSH</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cap16.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">41</span>&nbsp; <span class="chapter-title">Configurar Git</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cap17.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">42</span>&nbsp; <span class="chapter-title">Repositorios</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cap18.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">43</span>&nbsp; <span class="chapter-title">Ignorar archivos/carpetas</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./s5_actividades1y2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">44</span>&nbsp; <span class="chapter-title"><strong>📚</strong> Actividad 1 y 2</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cap23.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">45</span>&nbsp; <span class="chapter-title">Resumen y Práctica Final</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true">
+ <span class="menu-text"><strong>Sección 6</strong> - Introducción a R y Rstudio</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true" aria-label="Alternar sección">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cap29.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">46</span>&nbsp; <span class="chapter-title">Introducción a Markdown</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./s5_actividades3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">47</span>&nbsp; <span class="chapter-title"><strong>📚</strong> Actividad 3: Página web con Rmarkdown</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Intro_Quarto.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">48</span>&nbsp; <span class="chapter-title">Introducción a Quarto</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./s5_actividades4y5.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">49</span>&nbsp; <span class="chapter-title"><strong>📚</strong> Actividad 4 y 5</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true">
+ <span class="menu-text"><strong>Sección 7</strong> - Introducción a Python</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true" aria-label="Alternar sección">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./intro_python.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">50</span>&nbsp; <span class="chapter-title">Introducción a Python en Rstudio usando <code>reticulate</code></span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./quarto_python.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">51</span>&nbsp; <span class="chapter-title">Configuraciones para usar Quarto con Python</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./python_ejercicio1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">52</span>&nbsp; <span class="chapter-title">🐍 Actividad 1: variables y objetos (tipo, valor e identidad)</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./python_ejercicio2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">53</span>&nbsp; <span class="chapter-title">🐍 Actividad 2: atributos y métodos de los objetos</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./python_buenas_practicas.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">54</span>&nbsp; <span class="chapter-title">Sintaxis de nombres, buenas prácticas y programación defensiva en Python</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./python_condicionales.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">55</span>&nbsp; <span class="chapter-title">Condicionales en Python</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./python_numpy.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">56</span>&nbsp; <span class="chapter-title">Introducción a NumPy</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./python_for.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">57</span>&nbsp; <span class="chapter-title">Ciclos <code>for</code> y <code>while</code> en Python</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./python_sympy.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">58</span>&nbsp; <span class="chapter-title">Cálculo simbólico con SymPy</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./python_visualizacion.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">59</span>&nbsp; <span class="chapter-title">Visualización de datos con Matplotlib y Plotly</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="true">
+ <span class="menu-text">Apéndices</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="true" aria-label="Alternar sección">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./python_entornos.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Entornos para trabajar con Python: RStudio, Google Colab y Jupyter Notebook</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./python_conda.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Conda y Miniconda: gestión de entornos y paquetes</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ejemplo_quizdown.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">Quizzes</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ejemplo_CodeRandPython.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">D</span>&nbsp; <span class="chapter-title">Codigo en R</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Tabla de contenidos</h2>
+   
+  <ul>
+  <li><a href="#cálculo-numérico-vs.-cálculo-simbólico" id="toc-cálculo-numérico-vs.-cálculo-simbólico" class="nav-link active" data-scroll-target="#cálculo-numérico-vs.-cálculo-simbólico"><span class="header-section-number">58.1</span> Cálculo numérico vs.&nbsp;cálculo simbólico</a></li>
+  <li><a href="#instalar-e-importar-sympy" id="toc-instalar-e-importar-sympy" class="nav-link" data-scroll-target="#instalar-e-importar-sympy"><span class="header-section-number">58.2</span> Instalar e importar SymPy</a></li>
+  <li><a href="#símbolos-y-expresiones" id="toc-símbolos-y-expresiones" class="nav-link" data-scroll-target="#símbolos-y-expresiones"><span class="header-section-number">58.3</span> Símbolos y expresiones</a>
+  <ul>
+  <li><a href="#sustituir-y-evaluar" id="toc-sustituir-y-evaluar" class="nav-link" data-scroll-target="#sustituir-y-evaluar"><span class="header-section-number">58.3.1</span> Sustituir y evaluar</a></li>
+  <li><a href="#fracciones-exactas" id="toc-fracciones-exactas" class="nav-link" data-scroll-target="#fracciones-exactas"><span class="header-section-number">58.3.2</span> Fracciones exactas</a></li>
+  </ul></li>
+  <li><a href="#simplificar-expandir-y-factorizar" id="toc-simplificar-expandir-y-factorizar" class="nav-link" data-scroll-target="#simplificar-expandir-y-factorizar"><span class="header-section-number">58.4</span> Simplificar, expandir y factorizar</a></li>
+  <li><a href="#ecuaciones" id="toc-ecuaciones" class="nav-link" data-scroll-target="#ecuaciones"><span class="header-section-number">58.5</span> Ecuaciones</a>
+  <ul>
+  <li><a href="#la-fórmula-general" id="toc-la-fórmula-general" class="nav-link" data-scroll-target="#la-fórmula-general"><span class="header-section-number">58.5.1</span> La fórmula general</a></li>
+  <li><a href="#sistemas-de-ecuaciones" id="toc-sistemas-de-ecuaciones" class="nav-link" data-scroll-target="#sistemas-de-ecuaciones"><span class="header-section-number">58.5.2</span> Sistemas de ecuaciones</a></li>
+  </ul></li>
+  <li><a href="#cálculo" id="toc-cálculo" class="nav-link" data-scroll-target="#cálculo"><span class="header-section-number">58.6</span> Cálculo</a>
+  <ul>
+  <li><a href="#límites" id="toc-límites" class="nav-link" data-scroll-target="#límites"><span class="header-section-number">58.6.1</span> Límites</a></li>
+  <li><a href="#derivadas" id="toc-derivadas" class="nav-link" data-scroll-target="#derivadas"><span class="header-section-number">58.6.2</span> Derivadas</a></li>
+  <li><a href="#integrales" id="toc-integrales" class="nav-link" data-scroll-target="#integrales"><span class="header-section-number">58.6.3</span> Integrales</a></li>
+  <li><a href="#series-de-taylor" id="toc-series-de-taylor" class="nav-link" data-scroll-target="#series-de-taylor"><span class="header-section-number">58.6.4</span> Series de Taylor</a></li>
+  <li><a href="#sumas" id="toc-sumas" class="nav-link" data-scroll-target="#sumas"><span class="header-section-number">58.6.5</span> Sumas</a></li>
+  </ul></li>
+  <li><a href="#matrices" id="toc-matrices" class="nav-link" data-scroll-target="#matrices"><span class="header-section-number">58.7</span> Matrices</a></li>
+  <li><a href="#ecuaciones-diferenciales" id="toc-ecuaciones-diferenciales" class="nav-link" data-scroll-target="#ecuaciones-diferenciales"><span class="header-section-number">58.8</span> Ecuaciones diferenciales</a></li>
+  <li><a href="#de-sympy-a-numpy-lambdify" id="toc-de-sympy-a-numpy-lambdify" class="nav-link" data-scroll-target="#de-sympy-a-numpy-lambdify"><span class="header-section-number">58.9</span> De SymPy a NumPy: <code>lambdify()</code></a></li>
+  <li><a href="#de-sympy-a-latex" id="toc-de-sympy-a-latex" class="nav-link" data-scroll-target="#de-sympy-a-latex"><span class="header-section-number">58.10</span> De SymPy a LaTeX</a></li>
+  <li><a href="#errores-comunes" id="toc-errores-comunes" class="nav-link" data-scroll-target="#errores-comunes"><span class="header-section-number">58.11</span> Errores comunes</a></li>
+  <li><a href="#ejercicios" id="toc-ejercicios" class="nav-link" data-scroll-target="#ejercicios"><span class="header-section-number">58.12</span> Ejercicios</a>
+  <ul>
+  <li><a href="#ejercicio-1.-factorizar-y-expandir" id="toc-ejercicio-1.-factorizar-y-expandir" class="nav-link" data-scroll-target="#ejercicio-1.-factorizar-y-expandir"><span class="header-section-number">58.12.1</span> Ejercicio 1. Factorizar y expandir</a></li>
+  <li><a href="#ejercicio-2.-raíces-de-un-polinomio" id="toc-ejercicio-2.-raíces-de-un-polinomio" class="nav-link" data-scroll-target="#ejercicio-2.-raíces-de-un-polinomio"><span class="header-section-number">58.12.2</span> Ejercicio 2. Raíces de un polinomio</a></li>
+  <li><a href="#ejercicio-3.-el-número-e-como-límite" id="toc-ejercicio-3.-el-número-e-como-límite" class="nav-link" data-scroll-target="#ejercicio-3.-el-número-e-como-límite"><span class="header-section-number">58.12.3</span> Ejercicio 3. El número <span class="math inline">\(e\)</span> como límite</a></li>
+  <li><a href="#ejercicio-4.-derivadas" id="toc-ejercicio-4.-derivadas" class="nav-link" data-scroll-target="#ejercicio-4.-derivadas"><span class="header-section-number">58.12.4</span> Ejercicio 4. Derivadas</a></li>
+  <li><a href="#ejercicio-5.-integrales" id="toc-ejercicio-5.-integrales" class="nav-link" data-scroll-target="#ejercicio-5.-integrales"><span class="header-section-number">58.12.5</span> Ejercicio 5. Integrales</a></li>
+  <li><a href="#ejercicio-6.-fórmula-de-la-suma-de-cuadrados" id="toc-ejercicio-6.-fórmula-de-la-suma-de-cuadrados" class="nav-link" data-scroll-target="#ejercicio-6.-fórmula-de-la-suma-de-cuadrados"><span class="header-section-number">58.12.6</span> Ejercicio 6. Fórmula de la suma de cuadrados</a></li>
+  </ul></li>
+  <li><a href="#reto-final-dos-series-famosas" id="toc-reto-final-dos-series-famosas" class="nav-link" data-scroll-target="#reto-final-dos-series-famosas"><span class="header-section-number">58.13</span> Reto final: dos series famosas</a></li>
+  <li><a href="#resumen" id="toc-resumen" class="nav-link" data-scroll-target="#resumen"><span class="header-section-number">58.14</span> Resumen</a></li>
+  <li><a href="#referencias" id="toc-referencias" class="nav-link" data-scroll-target="#referencias"><span class="header-section-number">58.15</span> Referencias</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./intro_python.html"><strong>Sección 7</strong> - Introducción a Python</a></li><li class="breadcrumb-item"><a href="./python_sympy.html"><span class="chapter-number">58</span>&nbsp; <span class="chapter-title">Cálculo simbólico con SymPy</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">58</span>&nbsp; <span class="chapter-title">Cálculo simbólico con SymPy</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<blockquote class="blockquote">
+<p><strong>Fecha:</strong> 03 de noviembre, 2026</p>
+</blockquote>
+<p><a href="https://www.sympy.org/">SymPy</a> es una biblioteca de Python para hacer <strong>matemáticas simbólicas</strong>: manipula expresiones con variables como lo haríamos con lápiz y papel, y obtiene resultados <strong>exactos</strong> en lugar de aproximaciones decimales.</p>
+<p>En este capítulo veremos:</p>
+<ul>
+<li>La diferencia entre el cálculo <strong>numérico</strong> (NumPy) y el <strong>simbólico</strong> (SymPy).</li>
+<li>Cómo definir <strong>símbolos</strong> y manipular <strong>expresiones</strong>: sustituir, simplificar, factorizar y expandir.</li>
+<li>Cómo resolver <strong>ecuaciones</strong> y <strong>sistemas de ecuaciones</strong>.</li>
+<li><strong>Cálculo</strong>: límites, derivadas, integrales, series y sumas.</li>
+<li><strong>Matrices</strong> y <strong>ecuaciones diferenciales</strong>.</li>
+<li>Cómo convertir resultados a <strong>LaTeX</strong> para tus documentos de Quarto.</li>
+</ul>
+<section id="cálculo-numérico-vs.-cálculo-simbólico" class="level2" data-number="58.1">
+<h2 data-number="58.1" class="anchored" data-anchor-id="cálculo-numérico-vs.-cálculo-simbólico"><span class="header-section-number">58.1</span> Cálculo numérico vs.&nbsp;cálculo simbólico</h2>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Código</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sympy <span class="im">as</span> sp</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"NumPy: "</span>, np.sqrt(<span class="dv">8</span>))   <span class="co"># Aproximación decimal</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>NumPy:  2.8284271247461903</code></pre>
+</div>
+<details open="" class="code-fold">
+<summary>Código</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"SymPy: "</span>, sp.sqrt(<span class="dv">8</span>))   <span class="co"># Resultado exacto</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>SymPy:  2*sqrt(2)</code></pre>
+</div>
+</div>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th>Cálculo numérico (NumPy)</th>
+<th>Cálculo simbólico (SymPy)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Trabaja con</td>
+<td>Números decimales.</td>
+<td>Símbolos y expresiones exactas.</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(\sqrt{8}\)</span></td>
+<td><code>2.8284271247461903</code></td>
+<td><code>2*sqrt(2)</code></td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(\frac{1}{3} + \frac{1}{6}\)</span></td>
+<td><code>0.5</code> (con posibles errores de redondeo)</td>
+<td><code>1/2</code> (fracción exacta)</td>
+</tr>
+<tr class="even">
+<td>Derivar <span class="math inline">\(x^2\)</span></td>
+<td>Aproxima la pendiente en puntos.</td>
+<td>Obtiene <span class="math inline">\(2x\)</span>.</td>
+</tr>
+<tr class="odd">
+<td>Ideal para</td>
+<td>Datos, simulaciones, grandes cantidades de números.</td>
+<td>Álgebra, cálculo, demostrar y verificar fórmulas.</td>
+</tr>
+</tbody>
+</table>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Código</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="fl">0.1</span> <span class="op">+</span> <span class="fl">0.2</span>)                                  <span class="co"># Error de redondeo de los decimales</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>0.30000000000000004</code></pre>
+</div>
+<details open="" class="code-fold">
+<summary>Código</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(sp.Rational(<span class="dv">1</span>, <span class="dv">10</span>) <span class="op">+</span> sp.Rational(<span class="dv">2</span>, <span class="dv">10</span>))    <span class="co"># Fracciones exactas</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>3/10</code></pre>
+</div>
+<details open="" class="code-fold">
+<summary>Código</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(sp.pi.evalf(<span class="dv">30</span>))                            <span class="co"># Pi con 30 dígitos</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>3.14159265358979323846264338328</code></pre>
+</div>
+</div>
+</section>
+<section id="instalar-e-importar-sympy" class="level2" data-number="58.2">
+<h2 data-number="58.2" class="anchored" data-anchor-id="instalar-e-importar-sympy"><span class="header-section-number">58.2</span> Instalar e importar SymPy</h2>
+<p>En tu computadora, instálalo en tu entorno virtual (consulta el apéndice <a href="./python_entornos.html">Entornos para trabajar con Python</a>):</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> <span class="at">-m</span> pip install sympy</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<p>En Google Colab y en los editores de esta página <strong>ya está instalado</strong>. Por convención se importa con el alias <code>sp</code>:</p>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Código</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sympy <span class="im">as</span> sp</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(sp.__version__)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>1.14.0</code></pre>
+</div>
+</div>
+</section>
+<section id="símbolos-y-expresiones" class="level2" data-number="58.3">
+<h2 data-number="58.3" class="anchored" data-anchor-id="símbolos-y-expresiones"><span class="header-section-number">58.3</span> Símbolos y expresiones</h2>
+<p>En Python, una variable debe tener un valor antes de usarse. En SymPy primero declaramos qué nombres son <strong>símbolos</strong> matemáticos con <code>sp.symbols()</code>:</p>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Código</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>x, y <span class="op">=</span> sp.symbols(<span class="st">"x y"</span>)</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>expresion <span class="op">=</span> x<span class="op">**</span><span class="dv">2</span> <span class="op">+</span> <span class="dv">2</span><span class="op">*</span>x<span class="op">*</span>y <span class="op">+</span> y<span class="op">**</span><span class="dv">2</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(expresion)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>x**2 + 2*x*y + y**2</code></pre>
+</div>
+<details open="" class="code-fold">
+<summary>Código</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">type</span>(x))</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>&lt;class 'sympy.core.symbol.Symbol'&gt;</code></pre>
+</div>
+</div>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Importante
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Para elevar a una potencia se usa <code>**</code>, no <code>^</code>. En Python, <code>x^2</code> es otra operación (el “o exclusivo” entre bits) y produce un error con los símbolos.</p>
+</div>
+</div>
+<p>Podemos indicar <strong>supuestos</strong> sobre los símbolos, que SymPy usa para simplificar:</p>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Código</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>t <span class="op">=</span> sp.symbols(<span class="st">"t"</span>)</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>r <span class="op">=</span> sp.symbols(<span class="st">"r"</span>, positive<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(sp.sqrt(t<span class="op">**</span><span class="dv">2</span>))   <span class="co"># No sabe si t es negativo</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>sqrt(t**2)</code></pre>
+</div>
+<details open="" class="code-fold">
+<summary>Código</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(sp.sqrt(r<span class="op">**</span><span class="dv">2</span>))   <span class="co"># Sabe que r es positivo</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>r</code></pre>
+</div>
+</div>
+<section id="sustituir-y-evaluar" class="level3" data-number="58.3.1">
+<h3 data-number="58.3.1" class="anchored" data-anchor-id="sustituir-y-evaluar"><span class="header-section-number">58.3.1</span> Sustituir y evaluar</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Método</th>
+<th>¿Qué hace?</th>
+<th>Ejemplo</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>expr.subs(x, valor)</code></td>
+<td>Sustituye un símbolo por un valor u otra expresión.</td>
+<td><code>(x**2).subs(x, 3)</code> → <code>9</code></td>
+</tr>
+<tr class="even">
+<td><code>expr.evalf()</code> o <code>sp.N(expr)</code></td>
+<td>Calcula el valor decimal.</td>
+<td><code>sp.sqrt(2).evalf()</code> → <code>1.414...</code></td>
+</tr>
+<tr class="odd">
+<td><code>sp.N(expr, n)</code></td>
+<td>Valor decimal con <code>n</code> dígitos.</td>
+<td><code>sp.N(sp.pi, 50)</code></td>
+</tr>
+</tbody>
+</table>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Código</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>f <span class="op">=</span> x<span class="op">**</span><span class="dv">2</span> <span class="op">+</span> <span class="dv">3</span><span class="op">*</span>x <span class="op">-</span> <span class="dv">1</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(f.subs(x, <span class="dv">2</span>))                  <span class="co"># Evaluar en x = 2</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>9</code></pre>
+</div>
+<details open="" class="code-fold">
+<summary>Código</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(f.subs(x, y <span class="op">+</span> <span class="dv">1</span>))              <span class="co"># Sustituir por otra expresión</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>3*y + (y + 1)**2 + 2</code></pre>
+</div>
+<details open="" class="code-fold">
+<summary>Código</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(f.subs(x, sp.sqrt(<span class="dv">2</span>)))         <span class="co"># Resultado exacto</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>1 + 3*sqrt(2)</code></pre>
+</div>
+<details open="" class="code-fold">
+<summary>Código</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(f.subs(x, sp.sqrt(<span class="dv">2</span>)).evalf()) <span class="co"># Resultado decimal</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>5.24264068711928</code></pre>
+</div>
+</div>
+</section>
+<section id="fracciones-exactas" class="level3" data-number="58.3.2">
+<h3 data-number="58.3.2" class="anchored" data-anchor-id="fracciones-exactas"><span class="header-section-number">58.3.2</span> Fracciones exactas</h3>
+<p>Si escribes <code>1/2</code> dentro de una expresión, Python calcula primero el decimal <code>0.5</code>. Para obtener una fracción exacta usa <code>sp.Rational()</code>:</p>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Código</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(x <span class="op">+</span> <span class="dv">1</span><span class="op">/</span><span class="dv">2</span>)                 <span class="co"># 0.5: decimal</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>x + 0.5</code></pre>
+</div>
+<details open="" class="code-fold">
+<summary>Código</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(x <span class="op">+</span> sp.Rational(<span class="dv">1</span>, <span class="dv">2</span>))   <span class="co"># 1/2: fracción exacta</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>x + 1/2</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="simplificar-expandir-y-factorizar" class="level2" data-number="58.4">
+<h2 data-number="58.4" class="anchored" data-anchor-id="simplificar-expandir-y-factorizar"><span class="header-section-number">58.4</span> Simplificar, expandir y factorizar</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Función</th>
+<th>¿Qué hace?</th>
+<th>Ejemplo</th>
+<th>Resultado</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>sp.expand()</code></td>
+<td>Desarrolla productos y potencias.</td>
+<td><code>sp.expand((x + 1)**2)</code></td>
+<td><code>x**2 + 2*x + 1</code></td>
+</tr>
+<tr class="even">
+<td><code>sp.factor()</code></td>
+<td>Factoriza.</td>
+<td><code>sp.factor(x**2 - 1)</code></td>
+<td><code>(x - 1)*(x + 1)</code></td>
+</tr>
+<tr class="odd">
+<td><code>sp.simplify()</code></td>
+<td>Intenta encontrar la forma más simple.</td>
+<td><code>sp.simplify(sp.sin(x)**2 + sp.cos(x)**2)</code></td>
+<td><code>1</code></td>
+</tr>
+<tr class="even">
+<td><code>sp.cancel()</code></td>
+<td>Simplifica fracciones de polinomios.</td>
+<td><code>sp.cancel((x**2 - 1)/(x - 1))</code></td>
+<td><code>x + 1</code></td>
+</tr>
+<tr class="odd">
+<td><code>sp.apart()</code></td>
+<td>Fracciones parciales.</td>
+<td><code>sp.apart(1/(x**2 - 1))</code></td>
+<td><code>-1/(2*(x + 1)) + 1/(2*(x - 1))</code></td>
+</tr>
+<tr class="even">
+<td><code>sp.collect()</code></td>
+<td>Agrupa términos por un símbolo.</td>
+<td><code>sp.collect(x*y + x, x)</code></td>
+<td><code>x*(y + 1)</code></td>
+</tr>
+<tr class="odd">
+<td><code>sp.trigsimp()</code></td>
+<td>Simplifica expresiones trigonométricas.</td>
+<td><code>sp.trigsimp(2*sp.sin(x)*sp.cos(x))</code></td>
+<td><code>sin(2*x)</code></td>
+</tr>
+</tbody>
+</table>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Código</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(sp.expand((x <span class="op">+</span> y)<span class="op">**</span><span class="dv">3</span>))</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>x**3 + 3*x**2*y + 3*x*y**2 + y**3</code></pre>
+</div>
+<details open="" class="code-fold">
+<summary>Código</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(sp.factor(x<span class="op">**</span><span class="dv">3</span> <span class="op">-</span> x<span class="op">**</span><span class="dv">2</span> <span class="op">-</span> x <span class="op">+</span> <span class="dv">1</span>))</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>(x - 1)**2*(x + 1)</code></pre>
+</div>
+<details open="" class="code-fold">
+<summary>Código</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb38"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(sp.cancel((x<span class="op">**</span><span class="dv">2</span> <span class="op">-</span> <span class="dv">1</span>) <span class="op">/</span> (x <span class="op">-</span> <span class="dv">1</span>)))</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>x + 1</code></pre>
+</div>
+<details open="" class="code-fold">
+<summary>Código</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb40"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(sp.apart(<span class="dv">1</span> <span class="op">/</span> (x<span class="op">**</span><span class="dv">2</span> <span class="op">-</span> <span class="dv">1</span>)))</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>-1/(2*(x + 1)) + 1/(2*(x - 1))</code></pre>
+</div>
+</div>
+</section>
+<section id="ecuaciones" class="level2" data-number="58.5">
+<h2 data-number="58.5" class="anchored" data-anchor-id="ecuaciones"><span class="header-section-number">58.5</span> Ecuaciones</h2>
+<p>Para escribir una ecuación <strong>no</strong> se usa <code>=</code> (que asigna) ni <code>==</code> (que compara), sino <code>sp.Eq(lado_izquierdo, lado_derecho)</code>. Para resolverla usamos <code>sp.solve()</code>:</p>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Código</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb42"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>ecuacion <span class="op">=</span> sp.Eq(x<span class="op">**</span><span class="dv">2</span> <span class="op">-</span> <span class="dv">5</span><span class="op">*</span>x, <span class="op">-</span><span class="dv">6</span>)</span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(ecuacion)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Eq(x**2 - 5*x, -6)</code></pre>
+</div>
+<details open="" class="code-fold">
+<summary>Código</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb44"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(sp.solve(ecuacion, x))</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[2, 3]</code></pre>
+</div>
+</div>
+<p>Si pasamos solo una expresión, <code>sp.solve()</code> supone que está igualada a cero:</p>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Código</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb46"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(sp.solve(x<span class="op">**</span><span class="dv">2</span> <span class="op">-</span> <span class="dv">4</span>, x))</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[-2, 2]</code></pre>
+</div>
+<details open="" class="code-fold">
+<summary>Código</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb48"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(sp.solve(x<span class="op">**</span><span class="dv">2</span> <span class="op">+</span> <span class="dv">1</span>, x))   <span class="co"># Soluciones complejas: I es la unidad imaginaria</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[-I, I]</code></pre>
+</div>
+</div>
+<p>Con <code>sp.solveset()</code> podemos indicar en qué conjunto buscar soluciones:</p>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Código</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb50"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(sp.solveset(x<span class="op">**</span><span class="dv">2</span> <span class="op">+</span> <span class="dv">1</span>, x, domain<span class="op">=</span>sp.S.Reals))   <span class="co"># Sin soluciones reales</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>EmptySet</code></pre>
+</div>
+</div>
+<section id="la-fórmula-general" class="level3" data-number="58.5.1">
+<h3 data-number="58.5.1" class="anchored" data-anchor-id="la-fórmula-general"><span class="header-section-number">58.5.1</span> La fórmula general</h3>
+<p>SymPy puede resolver la ecuación cuadrática <strong>con coeficientes simbólicos</strong> y obtener la fórmula general que usamos en el capítulo de <a href="./python_condicionales.html">condicionales</a>:</p>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Código</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb52"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a>a, b, c <span class="op">=</span> sp.symbols(<span class="st">"a b c"</span>)</span>
+<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(sp.solve(a<span class="op">*</span>x<span class="op">**</span><span class="dv">2</span> <span class="op">+</span> b<span class="op">*</span>x <span class="op">+</span> c, x))</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[(-b - sqrt(-4*a*c + b**2))/(2*a), (-b + sqrt(-4*a*c + b**2))/(2*a)]</code></pre>
+</div>
+</div>
+</section>
+<section id="sistemas-de-ecuaciones" class="level3" data-number="58.5.2">
+<h3 data-number="58.5.2" class="anchored" data-anchor-id="sistemas-de-ecuaciones"><span class="header-section-number">58.5.2</span> Sistemas de ecuaciones</h3>
+<p>Es el mismo sistema que resolvimos con <code>np.linalg.solve()</code> en el capítulo de <a href="./python_numpy.html">NumPy</a>, pero ahora con solución <strong>exacta</strong>:</p>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Código</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb54"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a>x, y, z <span class="op">=</span> sp.symbols(<span class="st">"x y z"</span>)</span>
+<span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb54-3"><a href="#cb54-3" aria-hidden="true" tabindex="-1"></a>sistema <span class="op">=</span> [sp.Eq(<span class="dv">2</span><span class="op">*</span>x <span class="op">+</span> y <span class="op">-</span> z, <span class="dv">3</span>),</span>
+<span id="cb54-4"><a href="#cb54-4" aria-hidden="true" tabindex="-1"></a>           sp.Eq(x <span class="op">-</span> y <span class="op">+</span> <span class="dv">2</span><span class="op">*</span>z, <span class="dv">5</span>),</span>
+<span id="cb54-5"><a href="#cb54-5" aria-hidden="true" tabindex="-1"></a>           sp.Eq(<span class="dv">3</span><span class="op">*</span>x <span class="op">+</span> <span class="dv">2</span><span class="op">*</span>y <span class="op">+</span> z, <span class="dv">10</span>)]</span>
+<span id="cb54-6"><a href="#cb54-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb54-7"><a href="#cb54-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(sp.solve(sistema, [x, y, z]))</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>{x: 2, y: 1, z: 2}</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="cálculo" class="level2" data-number="58.6">
+<h2 data-number="58.6" class="anchored" data-anchor-id="cálculo"><span class="header-section-number">58.6</span> Cálculo</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Operación</th>
+<th>Notación</th>
+<th>SymPy</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Límite</td>
+<td><span class="math inline">\(\lim_{x \to a} f(x)\)</span></td>
+<td><code>sp.limit(f, x, a)</code></td>
+</tr>
+<tr class="even">
+<td>Límite al infinito</td>
+<td><span class="math inline">\(\lim_{x \to \infty} f(x)\)</span></td>
+<td><code>sp.limit(f, x, sp.oo)</code></td>
+</tr>
+<tr class="odd">
+<td>Derivada</td>
+<td><span class="math inline">\(\frac{df}{dx}\)</span></td>
+<td><code>sp.diff(f, x)</code></td>
+</tr>
+<tr class="even">
+<td>Derivada de orden <span class="math inline">\(n\)</span></td>
+<td><span class="math inline">\(\frac{d^n f}{dx^n}\)</span></td>
+<td><code>sp.diff(f, x, n)</code></td>
+</tr>
+<tr class="odd">
+<td>Derivada parcial</td>
+<td><span class="math inline">\(\frac{\partial f}{\partial y}\)</span></td>
+<td><code>sp.diff(f, y)</code></td>
+</tr>
+<tr class="even">
+<td>Integral indefinida</td>
+<td><span class="math inline">\(\int f\,dx\)</span></td>
+<td><code>sp.integrate(f, x)</code></td>
+</tr>
+<tr class="odd">
+<td>Integral definida</td>
+<td><span class="math inline">\(\int_a^b f\,dx\)</span></td>
+<td><code>sp.integrate(f, (x, a, b))</code></td>
+</tr>
+<tr class="even">
+<td>Serie de Taylor</td>
+<td><span class="math inline">\(f(x) \approx \sum \frac{f^{(n)}(a)}{n!}(x-a)^n\)</span></td>
+<td><code>sp.series(f, x, a, n)</code></td>
+</tr>
+<tr class="odd">
+<td>Suma</td>
+<td><span class="math inline">\(\sum_{i=1}^{n} f(i)\)</span></td>
+<td><code>sp.summation(f, (i, 1, n))</code></td>
+</tr>
+</tbody>
+</table>
+<p>El infinito se escribe <code>sp.oo</code> (dos letras “o”), y las constantes son <code>sp.pi</code>, <code>sp.E</code> y <code>sp.I</code>.</p>
+<section id="límites" class="level3" data-number="58.6.1">
+<h3 data-number="58.6.1" class="anchored" data-anchor-id="límites"><span class="header-section-number">58.6.1</span> Límites</h3>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Código</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb56"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a>x, n <span class="op">=</span> sp.symbols(<span class="st">"x n"</span>)</span>
+<span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb56-3"><a href="#cb56-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(sp.limit(sp.sin(x) <span class="op">/</span> x, x, <span class="dv">0</span>))</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>1</code></pre>
+</div>
+<details open="" class="code-fold">
+<summary>Código</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb58"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(sp.limit((<span class="dv">1</span> <span class="op">+</span> <span class="dv">1</span><span class="op">/</span>n)<span class="op">**</span>n, n, sp.oo))   <span class="co"># El número e</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>E</code></pre>
+</div>
+<details open="" class="code-fold">
+<summary>Código</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb60"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(sp.limit(<span class="dv">1</span><span class="op">/</span>x, x, <span class="dv">0</span>, <span class="bu">dir</span><span class="op">=</span><span class="st">"+"</span>))       <span class="co"># Límite por la derecha</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>oo</code></pre>
+</div>
+</div>
+</section>
+<section id="derivadas" class="level3" data-number="58.6.2">
+<h3 data-number="58.6.2" class="anchored" data-anchor-id="derivadas"><span class="header-section-number">58.6.2</span> Derivadas</h3>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Código</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb62"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a>f <span class="op">=</span> x<span class="op">**</span><span class="dv">2</span> <span class="op">*</span> sp.sin(x)</span>
+<span id="cb62-2"><a href="#cb62-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-3"><a href="#cb62-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(sp.diff(f, x))         <span class="co"># Primera derivada</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>x**2*cos(x) + 2*x*sin(x)</code></pre>
+</div>
+<details open="" class="code-fold">
+<summary>Código</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb64"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(sp.diff(f, x, <span class="dv">2</span>))      <span class="co"># Segunda derivada</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>-x**2*sin(x) + 4*x*cos(x) + 2*sin(x)</code></pre>
+</div>
+<details open="" class="code-fold">
+<summary>Código</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb66"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a>x, y <span class="op">=</span> sp.symbols(<span class="st">"x y"</span>)</span>
+<span id="cb66-2"><a href="#cb66-2" aria-hidden="true" tabindex="-1"></a>g <span class="op">=</span> x<span class="op">**</span><span class="dv">2</span> <span class="op">*</span> y <span class="op">+</span> sp.sin(y)</span>
+<span id="cb66-3"><a href="#cb66-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(sp.diff(g, y))         <span class="co"># Derivada parcial respecto a y</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>x**2 + cos(y)</code></pre>
+</div>
+</div>
+</section>
+<section id="integrales" class="level3" data-number="58.6.3">
+<h3 data-number="58.6.3" class="anchored" data-anchor-id="integrales"><span class="header-section-number">58.6.3</span> Integrales</h3>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Código</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb68"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(sp.integrate(x <span class="op">*</span> sp.exp(x), x))                    <span class="co"># Indefinida (sin la constante C)</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>(x - 1)*exp(x)</code></pre>
+</div>
+<details open="" class="code-fold">
+<summary>Código</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb70"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb70-1"><a href="#cb70-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(sp.integrate(x <span class="op">*</span> sp.exp(x), (x, <span class="dv">0</span>, <span class="dv">1</span>)))            <span class="co"># Definida</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>1</code></pre>
+</div>
+<details open="" class="code-fold">
+<summary>Código</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb72"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb72-1"><a href="#cb72-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(sp.integrate(sp.exp(<span class="op">-</span>x<span class="op">**</span><span class="dv">2</span>), (x, <span class="op">-</span>sp.oo, sp.oo)))   <span class="co"># Integral de Gauss</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>sqrt(pi)</code></pre>
+</div>
+</div>
+</section>
+<section id="series-de-taylor" class="level3" data-number="58.6.4">
+<h3 data-number="58.6.4" class="anchored" data-anchor-id="series-de-taylor"><span class="header-section-number">58.6.4</span> Series de Taylor</h3>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Código</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb74"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb74-1"><a href="#cb74-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(sp.series(sp.sin(x), x, <span class="dv">0</span>, <span class="dv">8</span>))</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>x - x**3/6 + x**5/120 - x**7/5040 + O(x**8)</code></pre>
+</div>
+<details open="" class="code-fold">
+<summary>Código</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb76"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb76-1"><a href="#cb76-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(sp.series(sp.exp(x), x, <span class="dv">0</span>, <span class="dv">5</span>).removeO())   <span class="co"># Sin el término O(x^n)</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>x**4/24 + x**3/6 + x**2/2 + x + 1</code></pre>
+</div>
+</div>
+</section>
+<section id="sumas" class="level3" data-number="58.6.5">
+<h3 data-number="58.6.5" class="anchored" data-anchor-id="sumas"><span class="header-section-number">58.6.5</span> Sumas</h3>
+<p>En el capítulo de <a href="./python_for.html">ciclos <code>for</code></a> sumamos los números del 1 al 100 con un ciclo. SymPy puede obtener la <strong>fórmula</strong> para cualquier <span class="math inline">\(n\)</span>:</p>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Código</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb78"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb78-1"><a href="#cb78-1" aria-hidden="true" tabindex="-1"></a>i, n <span class="op">=</span> sp.symbols(<span class="st">"i n"</span>, integer<span class="op">=</span><span class="va">True</span>, positive<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb78-2"><a href="#cb78-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb78-3"><a href="#cb78-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(sp.factor(sp.summation(i, (i, <span class="dv">1</span>, n))))      <span class="co"># 1 + 2 + ... + n</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>n*(n + 1)/2</code></pre>
+</div>
+<details open="" class="code-fold">
+<summary>Código</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb80"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb80-1"><a href="#cb80-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(sp.summation(i, (i, <span class="dv">1</span>, <span class="dv">100</span>)))               <span class="co"># Con n = 100</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>5050</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="matrices" class="level2" data-number="58.7">
+<h2 data-number="58.7" class="anchored" data-anchor-id="matrices"><span class="header-section-number">58.7</span> Matrices</h2>
+<p><code>sp.Matrix</code> trabaja con valores exactos, incluidas fracciones y símbolos:</p>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Código</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb82"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb82-1"><a href="#cb82-1" aria-hidden="true" tabindex="-1"></a>M <span class="op">=</span> sp.Matrix([[<span class="dv">2</span>, <span class="dv">1</span>],</span>
+<span id="cb82-2"><a href="#cb82-2" aria-hidden="true" tabindex="-1"></a>               [<span class="dv">1</span>, <span class="dv">3</span>]])</span>
+<span id="cb82-3"><a href="#cb82-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb82-4"><a href="#cb82-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"det(M) ="</span>, M.det())</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>det(M) = 5</code></pre>
+</div>
+<details open="" class="code-fold">
+<summary>Código</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb84"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb84-1"><a href="#cb84-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"M^-1 ="</span>, M.inv())</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>M^-1 = Matrix([[3/5, -1/5], [-1/5, 2/5]])</code></pre>
+</div>
+<details open="" class="code-fold">
+<summary>Código</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb86"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb86-1"><a href="#cb86-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Valores propios:"</span>, M.eigenvals())</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Valores propios: {5/2 - sqrt(5)/2: 1, sqrt(5)/2 + 5/2: 1}</code></pre>
+</div>
+</div>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Operación</th>
+<th>SymPy</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Producto</td>
+<td><code>A * B</code> (en SymPy, <code>*</code> <strong>sí</strong> es el producto de matrices)</td>
+</tr>
+<tr class="even">
+<td>Transpuesta</td>
+<td><code>A.T</code></td>
+</tr>
+<tr class="odd">
+<td>Determinante</td>
+<td><code>A.det()</code></td>
+</tr>
+<tr class="even">
+<td>Inversa</td>
+<td><code>A.inv()</code></td>
+</tr>
+<tr class="odd">
+<td>Forma escalonada reducida</td>
+<td><code>A.rref()</code></td>
+</tr>
+<tr class="even">
+<td>Valores y vectores propios</td>
+<td><code>A.eigenvals()</code>, <code>A.eigenvects()</code></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="ecuaciones-diferenciales" class="level2" data-number="58.8">
+<h2 data-number="58.8" class="anchored" data-anchor-id="ecuaciones-diferenciales"><span class="header-section-number">58.8</span> Ecuaciones diferenciales</h2>
+<p>Para resolver una ecuación diferencial ordinaria declaramos una <strong>función</strong> desconocida con <code>sp.Function()</code> y usamos <code>sp.dsolve()</code>. Por ejemplo, <span class="math inline">\(y'' + y = 0\)</span>:</p>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Código</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb88"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb88-1"><a href="#cb88-1" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> sp.Function(<span class="st">"y"</span>)</span>
+<span id="cb88-2"><a href="#cb88-2" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> sp.symbols(<span class="st">"x"</span>)</span>
+<span id="cb88-3"><a href="#cb88-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb88-4"><a href="#cb88-4" aria-hidden="true" tabindex="-1"></a>edo <span class="op">=</span> sp.Eq(y(x).diff(x, <span class="dv">2</span>) <span class="op">+</span> y(x), <span class="dv">0</span>)</span>
+<span id="cb88-5"><a href="#cb88-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(sp.dsolve(edo, y(x)))</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Eq(y(x), C1*sin(x) + C2*cos(x))</code></pre>
+</div>
+</div>
+<p><code>C1</code> y <code>C2</code> son las constantes de integración.</p>
+</section>
+<section id="de-sympy-a-numpy-lambdify" class="level2" data-number="58.9">
+<h2 data-number="58.9" class="anchored" data-anchor-id="de-sympy-a-numpy-lambdify"><span class="header-section-number">58.9</span> De SymPy a NumPy: <code>lambdify()</code></h2>
+<p>Para evaluar una expresión en <strong>muchos</strong> puntos (por ejemplo, para graficarla), conviértela en una función de NumPy con <code>sp.lambdify()</code>:</p>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Código</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb90"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb90-1"><a href="#cb90-1" aria-hidden="true" tabindex="-1"></a>expr <span class="op">=</span> sp.sin(x)<span class="op">**</span><span class="dv">2</span></span>
+<span id="cb90-2"><a href="#cb90-2" aria-hidden="true" tabindex="-1"></a>f_numpy <span class="op">=</span> sp.lambdify(x, expr, <span class="st">"numpy"</span>)</span>
+<span id="cb90-3"><a href="#cb90-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb90-4"><a href="#cb90-4" aria-hidden="true" tabindex="-1"></a>valores <span class="op">=</span> np.linspace(<span class="dv">0</span>, np.pi, <span class="dv">5</span>)</span>
+<span id="cb90-5"><a href="#cb90-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(f_numpy(valores).<span class="bu">round</span>(<span class="dv">4</span>))</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[0.  0.5 1.  0.5 0. ]</code></pre>
+</div>
+</div>
+<p>Usaremos esta herramienta en el capítulo de <a href="./python_visualizacion.html">visualización de datos</a>.</p>
+</section>
+<section id="de-sympy-a-latex" class="level2" data-number="58.10">
+<h2 data-number="58.10" class="anchored" data-anchor-id="de-sympy-a-latex"><span class="header-section-number">58.10</span> De SymPy a LaTeX</h2>
+<p><code>sp.latex()</code> convierte cualquier expresión al código LaTeX que usamos en Markdown y Quarto:</p>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Código</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb92"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb92-1"><a href="#cb92-1" aria-hidden="true" tabindex="-1"></a>integral <span class="op">=</span> sp.Integral(sp.exp(<span class="op">-</span>x<span class="op">**</span><span class="dv">2</span>), (x, <span class="op">-</span>sp.oo, sp.oo))</span>
+<span id="cb92-2"><a href="#cb92-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(sp.latex(integral), <span class="st">"="</span>, sp.latex(integral.doit()))</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>\int\limits_{-\infty}^{\infty} e^{- x^{2}}\, dx = \sqrt{\pi}</code></pre>
+</div>
+</div>
+<p>En un documento de Quarto puedes mostrar el resultado como fórmula con la opción <code>#| output: asis</code>:</p>
+<details open="" class="code-fold">
+<summary>Código</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb94"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb94-1"><a href="#cb94-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"$$</span><span class="sc">{</span>sp<span class="sc">.</span>latex(integral)<span class="sc">}</span><span class="ss"> = </span><span class="sc">{</span>sp<span class="sc">.</span>latex(integral.doit())<span class="sc">}</span><span class="ss">$$"</span>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<p><span class="math display">\[\int\limits_{-\infty}^{\infty} e^{- x^{2}}\, dx = \sqrt{\pi}\]</span></p>
+</section>
+<section id="errores-comunes" class="level2" data-number="58.11">
+<h2 data-number="58.11" class="anchored" data-anchor-id="errores-comunes"><span class="header-section-number">58.11</span> Errores comunes</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Error</th>
+<th>Ejemplo</th>
+<th>Corrección</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Usar un símbolo sin declararlo</td>
+<td><code>sp.diff(x**2, x)</code> sin <code>sp.symbols</code> (<code>NameError</code>)</td>
+<td><code>x = sp.symbols("x")</code></td>
+</tr>
+<tr class="even">
+<td>Usar <code>^</code> para potencias</td>
+<td><code>x^2</code> (<code>TypeError</code>)</td>
+<td><code>x**2</code></td>
+</tr>
+<tr class="odd">
+<td>Fracciones con <code>/</code> entre enteros</td>
+<td><code>x + 1/3</code> da <code>x + 0.333...</code></td>
+<td><code>x + sp.Rational(1, 3)</code></td>
+</tr>
+<tr class="even">
+<td>Usar funciones de NumPy con símbolos</td>
+<td><code>np.sin(x)</code> (<code>TypeError</code>)</td>
+<td><code>sp.sin(x)</code></td>
+</tr>
+<tr class="odd">
+<td>Escribir ecuaciones con <code>=</code></td>
+<td><code>x**2 = 4</code> (<code>SyntaxError</code>)</td>
+<td><code>sp.Eq(x**2, 4)</code></td>
+</tr>
+<tr class="even">
+<td>Olvidar el símbolo en <code>solve</code> o <code>diff</code></td>
+<td><code>sp.diff(x*y)</code> (ambiguo)</td>
+<td><code>sp.diff(x*y, x)</code></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="ejercicios" class="level2" data-number="58.12">
+<h2 data-number="58.12" class="anchored" data-anchor-id="ejercicios"><span class="header-section-number">58.12</span> Ejercicios</h2>
+<p>Resuelve los ejercicios en los editores interactivos. Recuerda que lo que escribas <strong>no se guarda</strong> al recargar la página. La primera vez que ejecutes un editor, SymPy puede tardar unos segundos en cargar.</p>
+<section id="ejercicio-1.-factorizar-y-expandir" class="level3" data-number="58.12.1">
+<h3 data-number="58.12.1" class="anchored" data-anchor-id="ejercicio-1.-factorizar-y-expandir"><span class="header-section-number">58.12.1</span> Ejercicio 1. Factorizar y expandir</h3>
+<ol type="1">
+<li>Expande <span class="math inline">\((x + 1)^3\)</span>.</li>
+<li>Factoriza <span class="math inline">\(x^2 - 5x + 6\)</span> y deja el resultado en la <strong>última línea</strong>.</li>
+</ol>
+<div class="cell" data-exercise="sp1">
+<div>
+<div id="pyodide-1" class="exercise-cell">
+
+</div>
+<script type="pyodide-1-contents">
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWUsImV4ZXJjaXNlIjoic3AxIn0sImNvZGUiOiJpbXBvcnQgc3ltcHkgYXMgc3BcbnggPSBzcC5zeW1ib2xzKFwieFwiKVxuXG5wcmludChfX19fX18pICAgIyAoeCArIDEpXjMgZXhwYW5kaWRvXG5cbl9fX19fXyAgICAgICAgICAjIHheMiAtIDV4ICsgNiBmYWN0b3JpemFkbyJ9
+</script>
+</div>
+</div>
+<div class="cell" data-exercise="sp1" data-check="true">
+<script type="exercise-check-sp1-contents">
+eyJhdHRyIjp7ImNoZWNrIjp0cnVlLCJlZGl0Ijp0cnVlLCJldmFsIjp0cnVlLCJleGVyY2lzZSI6InNwMSJ9LCJjb2RlIjoiaW1wb3J0IHN5bXB5IGFzIHNwXG54ID0gc3Auc3ltYm9scyhcInhcIilcbmlmIGlzaW5zdGFuY2UocmVzdWx0LCBzcC5CYXNpYykgYW5kIHJlc3VsdCA9PSBzcC5mYWN0b3IoeCoqMiAtIDUqeCArIDYpOlxuICAgIGZlZWRiYWNrID0ge1wiY29ycmVjdFwiOiBUcnVlLCBcIm1lc3NhZ2VcIjogXCLCoUNvcnJlY3RvISB4wrIgLSA1eCArIDYgPSAoeCAtIDIpKHggLSAzKS5cIn1cbmVsaWYgaXNpbnN0YW5jZShyZXN1bHQsIHNwLkJhc2ljKSBhbmQgc3AuZXhwYW5kKHJlc3VsdCAtICh4KioyIC0gNSp4ICsgNikpID09IDA6XG4gICAgZmVlZGJhY2sgPSB7XCJjb3JyZWN0XCI6IEZhbHNlLCBcIm1lc3NhZ2VcIjogXCJFcyBsYSBtaXNtYSBleHByZXNpw7NuLCBwZXJvIG5vIGVzdMOhIGZhY3Rvcml6YWRhLiBVc2Egc3AuZmFjdG9yKCkuXCJ9XG5lbHNlOlxuICAgIGZlZWRiYWNrID0ge1wiY29ycmVjdFwiOiBGYWxzZSwgXCJtZXNzYWdlXCI6IFwiTGEgw7psdGltYSBsw61uZWEgZGViZSByZWdyZXNhciB4KioyIC0gNSp4ICsgNiBmYWN0b3JpemFkby5cIn1cbmZlZWRiYWNrIn0=
+</script>
+</div>
+<div class="hint webr-ojs-exercise exercise-hint d-none" data-exercise="sp1">
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Nota</span>Pista
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<p>Usa <code>sp.expand((x + 1)**3)</code> y <code>sp.factor(x**2 - 5*x + 6)</code>. Recuerda que la potencia se escribe con <code>**</code>.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="webr-ojs-exercise exercise-solution d-none" data-exercise="sp1">
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Solución
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb95"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb95-1"><a href="#cb95-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sympy <span class="im">as</span> sp</span>
+<span id="cb95-2"><a href="#cb95-2" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> sp.symbols(<span class="st">"x"</span>)</span>
+<span id="cb95-3"><a href="#cb95-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb95-4"><a href="#cb95-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(sp.expand((x <span class="op">+</span> <span class="dv">1</span>)<span class="op">**</span><span class="dv">3</span>))   <span class="co"># x**3 + 3*x**2 + 3*x + 1</span></span>
+<span id="cb95-5"><a href="#cb95-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb95-6"><a href="#cb95-6" aria-hidden="true" tabindex="-1"></a>sp.factor(x<span class="op">**</span><span class="dv">2</span> <span class="op">-</span> <span class="dv">5</span><span class="op">*</span>x <span class="op">+</span> <span class="dv">6</span>)      <span class="co"># (x - 3)*(x - 2)</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="ejercicio-2.-raíces-de-un-polinomio" class="level3" data-number="58.12.2">
+<h3 data-number="58.12.2" class="anchored" data-anchor-id="ejercicio-2.-raíces-de-un-polinomio"><span class="header-section-number">58.12.2</span> Ejercicio 2. Raíces de un polinomio</h3>
+<p>Encuentra todas las raíces del polinomio <span class="math inline">\(p(x) = x^3 - 6x^2 + 11x - 6\)</span>. Después <strong>verifica</strong> que cada raíz cumple <span class="math inline">\(p(r) = 0\)</span> sustituyéndola con <code>subs()</code>. Deja la lista de raíces en la <strong>última línea</strong>.</p>
+<div class="cell" data-exercise="sp2">
+<div>
+<div id="pyodide-3" class="exercise-cell">
+
+</div>
+<script type="pyodide-3-contents">
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWUsImV4ZXJjaXNlIjoic3AyIn0sImNvZGUiOiJpbXBvcnQgc3ltcHkgYXMgc3BcbnggPSBzcC5zeW1ib2xzKFwieFwiKVxuXG5wID0geCoqMyAtIDYqeCoqMiArIDExKnggLSA2XG5yYWljZXMgPSBfX19fX19cblxucHJpbnQoXCJSYcOtY2VzOlwiLCByYWljZXMpXG5wcmludChcInAoMSkgPVwiLCBfX19fX18pXG5cbnJhaWNlcyJ9
+</script>
+</div>
+</div>
+<div class="cell" data-exercise="sp2" data-check="true">
+<script type="exercise-check-sp2-contents">
+eyJhdHRyIjp7ImNoZWNrIjp0cnVlLCJlZGl0Ijp0cnVlLCJldmFsIjp0cnVlLCJleGVyY2lzZSI6InNwMiJ9LCJjb2RlIjoiaWYgaXNpbnN0YW5jZShyZXN1bHQsIGxpc3QpIGFuZCBzb3J0ZWQocmVzdWx0KSA9PSBbMSwgMiwgM106XG4gICAgZmVlZGJhY2sgPSB7XCJjb3JyZWN0XCI6IFRydWUsIFwibWVzc2FnZVwiOiBcIsKhQ29ycmVjdG8hIHAoeCkgPSAoeCAtIDEpKHggLSAyKSh4IC0gMykuXCJ9XG5lbHNlOlxuICAgIGZlZWRiYWNrID0ge1wiY29ycmVjdFwiOiBGYWxzZSwgXCJtZXNzYWdlXCI6IFwiTGFzIHJhw61jZXMgZGViZW4gc2VyIDEsIDIgeSAzLiBVc2Egc3Auc29sdmUocCwgeCkuXCJ9XG5mZWVkYmFjayJ9
+</script>
+</div>
+<div class="hint webr-ojs-exercise exercise-hint d-none" data-exercise="sp2">
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Nota</span>Pista
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<p><code>sp.solve(p, x)</code> regresa una lista con las raíces. Para verificar: <code>p.subs(x, 1)</code>.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="webr-ojs-exercise exercise-solution d-none" data-exercise="sp2">
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Solución
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-5" class="callout-5-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb96"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb96-1"><a href="#cb96-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sympy <span class="im">as</span> sp</span>
+<span id="cb96-2"><a href="#cb96-2" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> sp.symbols(<span class="st">"x"</span>)</span>
+<span id="cb96-3"><a href="#cb96-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb96-4"><a href="#cb96-4" aria-hidden="true" tabindex="-1"></a>p <span class="op">=</span> x<span class="op">**</span><span class="dv">3</span> <span class="op">-</span> <span class="dv">6</span><span class="op">*</span>x<span class="op">**</span><span class="dv">2</span> <span class="op">+</span> <span class="dv">11</span><span class="op">*</span>x <span class="op">-</span> <span class="dv">6</span></span>
+<span id="cb96-5"><a href="#cb96-5" aria-hidden="true" tabindex="-1"></a>raices <span class="op">=</span> sp.solve(p, x)</span>
+<span id="cb96-6"><a href="#cb96-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb96-7"><a href="#cb96-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Raíces:"</span>, raices)     <span class="co"># [1, 2, 3]</span></span>
+<span id="cb96-8"><a href="#cb96-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"p(1) ="</span>, p.subs(x, <span class="dv">1</span>)) <span class="co"># 0</span></span>
+<span id="cb96-9"><a href="#cb96-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb96-10"><a href="#cb96-10" aria-hidden="true" tabindex="-1"></a>raices</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="ejercicio-3.-el-número-e-como-límite" class="level3" data-number="58.12.3">
+<h3 data-number="58.12.3" class="anchored" data-anchor-id="ejercicio-3.-el-número-e-como-límite"><span class="header-section-number">58.12.3</span> Ejercicio 3. El número <span class="math inline">\(e\)</span> como límite</h3>
+<p>Calcula <span class="math inline">\(\displaystyle\lim_{n \to \infty} \left(1 + \frac{1}{n}\right)^n\)</span> y muestra su valor con 20 dígitos. Deja el límite en la <strong>última línea</strong>.</p>
+<div class="cell" data-exercise="sp3">
+<div>
+<div id="pyodide-5" class="exercise-cell">
+
+</div>
+<script type="pyodide-5-contents">
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWUsImV4ZXJjaXNlIjoic3AzIn0sImNvZGUiOiJpbXBvcnQgc3ltcHkgYXMgc3Bcbm4gPSBzcC5zeW1ib2xzKFwiblwiKVxuXG5saW1pdGUgPSBfX19fX19cblxucHJpbnQoXCJMw61taXRlOlwiLCBsaW1pdGUpXG5wcmludChcIlZhbG9yIGRlY2ltYWw6XCIsIF9fX19fXylcbmxpbWl0ZSJ9
+</script>
+</div>
+</div>
+<div class="cell" data-exercise="sp3" data-check="true">
+<script type="exercise-check-sp3-contents">
+eyJhdHRyIjp7ImNoZWNrIjp0cnVlLCJlZGl0Ijp0cnVlLCJldmFsIjp0cnVlLCJleGVyY2lzZSI6InNwMyJ9LCJjb2RlIjoiaW1wb3J0IHN5bXB5IGFzIHNwXG5pZiByZXN1bHQgPT0gc3AuRTpcbiAgICBmZWVkYmFjayA9IHtcImNvcnJlY3RcIjogVHJ1ZSwgXCJtZXNzYWdlXCI6IFwiwqFDb3JyZWN0byEgRWwgbMOtbWl0ZSBlcyBlbCBuw7ptZXJvIGUgPSAyLjcxODI4Li4uXCJ9XG5lbHNlOlxuICAgIGZlZWRiYWNrID0ge1wiY29ycmVjdFwiOiBGYWxzZSwgXCJtZXNzYWdlXCI6IFwiUmV2aXNhIGVsIGzDrW1pdGU6IHNwLmxpbWl0KCgxICsgMS9uKSoqbiwgbiwgc3Aub28pLlwifVxuZmVlZGJhY2sifQ==
+</script>
+</div>
+<div class="hint webr-ojs-exercise exercise-hint d-none" data-exercise="sp3">
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Nota</span>Pista
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-6" class="callout-6-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<p>El infinito es <code>sp.oo</code>. Para ver el valor con 20 dígitos usa <code>sp.N(limite, 20)</code>.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="webr-ojs-exercise exercise-solution d-none" data-exercise="sp3">
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Solución
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-7" class="callout-7-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb97"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb97-1"><a href="#cb97-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sympy <span class="im">as</span> sp</span>
+<span id="cb97-2"><a href="#cb97-2" aria-hidden="true" tabindex="-1"></a>n <span class="op">=</span> sp.symbols(<span class="st">"n"</span>)</span>
+<span id="cb97-3"><a href="#cb97-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb97-4"><a href="#cb97-4" aria-hidden="true" tabindex="-1"></a>limite <span class="op">=</span> sp.limit((<span class="dv">1</span> <span class="op">+</span> <span class="dv">1</span><span class="op">/</span>n)<span class="op">**</span>n, n, sp.oo)</span>
+<span id="cb97-5"><a href="#cb97-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb97-6"><a href="#cb97-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Límite:"</span>, limite)                    <span class="co"># E</span></span>
+<span id="cb97-7"><a href="#cb97-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Valor decimal:"</span>, sp.N(limite, <span class="dv">20</span>))   <span class="co"># 2.7182818284590452354</span></span>
+<span id="cb97-8"><a href="#cb97-8" aria-hidden="true" tabindex="-1"></a>limite</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="ejercicio-4.-derivadas" class="level3" data-number="58.12.4">
+<h3 data-number="58.12.4" class="anchored" data-anchor-id="ejercicio-4.-derivadas"><span class="header-section-number">58.12.4</span> Ejercicio 4. Derivadas</h3>
+<p>Para <span class="math inline">\(f(x) = x^2 \sin(x)\)</span>:</p>
+<ol type="1">
+<li>Calcula la primera y la segunda derivada.</li>
+<li>Evalúa la primera derivada en <span class="math inline">\(x = \pi\)</span> y deja el resultado en la <strong>última línea</strong>.</li>
+</ol>
+<div class="cell" data-exercise="sp4">
+<div>
+<div id="pyodide-7" class="exercise-cell">
+
+</div>
+<script type="pyodide-7-contents">
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWUsImV4ZXJjaXNlIjoic3A0In0sImNvZGUiOiJpbXBvcnQgc3ltcHkgYXMgc3BcbnggPSBzcC5zeW1ib2xzKFwieFwiKVxuXG5mID0geCoqMiAqIHNwLnNpbih4KVxuXG5wcmltZXJhID0gX19fX19fXG5zZWd1bmRhID0gX19fX19fXG5cbnByaW50KFwiZicoeCkgPVwiLCBwcmltZXJhKVxucHJpbnQoXCJmJycoeCkgPVwiLCBzZWd1bmRhKVxuXG5fX19fX18gICAjIGYnKHBpKSJ9
+</script>
+</div>
+</div>
+<div class="cell" data-exercise="sp4" data-check="true">
+<script type="exercise-check-sp4-contents">
+eyJhdHRyIjp7ImNoZWNrIjp0cnVlLCJlZGl0Ijp0cnVlLCJldmFsIjp0cnVlLCJleGVyY2lzZSI6InNwNCJ9LCJjb2RlIjoiaW1wb3J0IHN5bXB5IGFzIHNwXG5pZiBpc2luc3RhbmNlKHJlc3VsdCwgc3AuQmFzaWMpIGFuZCBzcC5zaW1wbGlmeShyZXN1bHQgKyBzcC5waSoqMikgPT0gMDpcbiAgICBmZWVkYmFjayA9IHtcImNvcnJlY3RcIjogVHJ1ZSwgXCJtZXNzYWdlXCI6IFwiwqFDb3JyZWN0byEgZicoz4ApID0gMs+AwrdzaW4oz4ApICsgz4DCssK3Y29zKM+AKSA9IC3PgMKyLlwifVxuZWxzZTpcbiAgICBmZWVkYmFjayA9IHtcImNvcnJlY3RcIjogRmFsc2UsIFwibWVzc2FnZVwiOiBcIkV2YWzDumEgbGEgcHJpbWVyYSBkZXJpdmFkYSBlbiB4ID0gz4AgY29uIHByaW1lcmEuc3Vicyh4LCBzcC5waSkuXCJ9XG5mZWVkYmFjayJ9
+</script>
+</div>
+<div class="hint webr-ojs-exercise exercise-hint d-none" data-exercise="sp4">
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Nota</span>Pista
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-8" class="callout-8-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<p><code>sp.diff(f, x)</code> y <code>sp.diff(f, x, 2)</code>. Para evaluar: <code>primera.subs(x, sp.pi)</code>. Usa <code>sp.pi</code>, no <code>3.1416</code>, para obtener el resultado exacto.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="webr-ojs-exercise exercise-solution d-none" data-exercise="sp4">
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Solución
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-9" class="callout-9-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb98"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb98-1"><a href="#cb98-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sympy <span class="im">as</span> sp</span>
+<span id="cb98-2"><a href="#cb98-2" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> sp.symbols(<span class="st">"x"</span>)</span>
+<span id="cb98-3"><a href="#cb98-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb98-4"><a href="#cb98-4" aria-hidden="true" tabindex="-1"></a>f <span class="op">=</span> x<span class="op">**</span><span class="dv">2</span> <span class="op">*</span> sp.sin(x)</span>
+<span id="cb98-5"><a href="#cb98-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb98-6"><a href="#cb98-6" aria-hidden="true" tabindex="-1"></a>primera <span class="op">=</span> sp.diff(f, x)       <span class="co"># x**2*cos(x) + 2*x*sin(x)</span></span>
+<span id="cb98-7"><a href="#cb98-7" aria-hidden="true" tabindex="-1"></a>segunda <span class="op">=</span> sp.diff(f, x, <span class="dv">2</span>)    <span class="co"># -x**2*sin(x) + 4*x*cos(x) + 2*sin(x)</span></span>
+<span id="cb98-8"><a href="#cb98-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb98-9"><a href="#cb98-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"f'(x) ="</span>, primera)</span>
+<span id="cb98-10"><a href="#cb98-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"f''(x) ="</span>, segunda)</span>
+<span id="cb98-11"><a href="#cb98-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb98-12"><a href="#cb98-12" aria-hidden="true" tabindex="-1"></a>primera.subs(x, sp.pi)        <span class="co"># -pi**2</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="ejercicio-5.-integrales" class="level3" data-number="58.12.5">
+<h3 data-number="58.12.5" class="anchored" data-anchor-id="ejercicio-5.-integrales"><span class="header-section-number">58.12.5</span> Ejercicio 5. Integrales</h3>
+<ol type="1">
+<li>Calcula la integral indefinida <span class="math inline">\(\int x e^x \, dx\)</span>.</li>
+<li><strong>Verifica</strong> tu resultado derivándolo: debes obtener de nuevo <span class="math inline">\(x e^x\)</span>.</li>
+<li>Calcula la integral definida <span class="math inline">\(\int_0^1 x e^x \, dx\)</span> y déjala en la <strong>última línea</strong>.</li>
+</ol>
+<div class="cell" data-exercise="sp5">
+<div>
+<div id="pyodide-9" class="exercise-cell">
+
+</div>
+<script type="pyodide-9-contents">
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWUsImV4ZXJjaXNlIjoic3A1In0sImNvZGUiOiJpbXBvcnQgc3ltcHkgYXMgc3BcbnggPSBzcC5zeW1ib2xzKFwieFwiKVxuXG5pbmRlZmluaWRhID0gX19fX19fXG5wcmludChcIkludGVncmFsIGluZGVmaW5pZGE6XCIsIGluZGVmaW5pZGEpXG5wcmludChcIlZlcmlmaWNhY2nDs246XCIsIHNwLnNpbXBsaWZ5KF9fX19fXykpXG5cbl9fX19fXyAgICMgSW50ZWdyYWwgZGVmaW5pZGEgZGUgMCBhIDEifQ==
+</script>
+</div>
+</div>
+<div class="cell" data-exercise="sp5" data-check="true">
+<script type="exercise-check-sp5-contents">
+eyJhdHRyIjp7ImNoZWNrIjp0cnVlLCJlZGl0Ijp0cnVlLCJldmFsIjp0cnVlLCJleGVyY2lzZSI6InNwNSJ9LCJjb2RlIjoiaWYgcmVzdWx0ID09IDE6XG4gICAgZmVlZGJhY2sgPSB7XCJjb3JyZWN0XCI6IFRydWUsIFwibWVzc2FnZVwiOiBcIsKhQ29ycmVjdG8hIExhIGludGVncmFsIGRlZmluaWRhIHZhbGUgZXhhY3RhbWVudGUgMS5cIn1cbmVsc2U6XG4gICAgZmVlZGJhY2sgPSB7XCJjb3JyZWN0XCI6IEZhbHNlLCBcIm1lc3NhZ2VcIjogXCJMYSBpbnRlZ3JhbCBkZWZpbmlkYSBkZSAwIGEgMSBkZWJlIHNlciAxLiBVc2Egc3AuaW50ZWdyYXRlKGYsICh4LCAwLCAxKSkuXCJ9XG5mZWVkYmFjayJ9
+</script>
+</div>
+<div class="hint webr-ojs-exercise exercise-hint d-none" data-exercise="sp5">
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Nota</span>Pista
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-10" class="callout-10-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<p><code>sp.integrate(x * sp.exp(x), x)</code> para la indefinida y <code>sp.integrate(x * sp.exp(x), (x, 0, 1))</code> para la definida. Para verificar, deriva: <code>sp.diff(indefinida, x)</code>.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="webr-ojs-exercise exercise-solution d-none" data-exercise="sp5">
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-11-contents" aria-controls="callout-11" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Solución
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-11" class="callout-11-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb99"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb99-1"><a href="#cb99-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sympy <span class="im">as</span> sp</span>
+<span id="cb99-2"><a href="#cb99-2" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> sp.symbols(<span class="st">"x"</span>)</span>
+<span id="cb99-3"><a href="#cb99-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-4"><a href="#cb99-4" aria-hidden="true" tabindex="-1"></a>indefinida <span class="op">=</span> sp.integrate(x <span class="op">*</span> sp.exp(x), x)</span>
+<span id="cb99-5"><a href="#cb99-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Integral indefinida:"</span>, indefinida)                     <span class="co"># (x - 1)*exp(x)</span></span>
+<span id="cb99-6"><a href="#cb99-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Verificación:"</span>, sp.simplify(sp.diff(indefinida, x)))   <span class="co"># x*exp(x)</span></span>
+<span id="cb99-7"><a href="#cb99-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-8"><a href="#cb99-8" aria-hidden="true" tabindex="-1"></a>sp.integrate(x <span class="op">*</span> sp.exp(x), (x, <span class="dv">0</span>, <span class="dv">1</span>))                        <span class="co"># 1</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="ejercicio-6.-fórmula-de-la-suma-de-cuadrados" class="level3" data-number="58.12.6">
+<h3 data-number="58.12.6" class="anchored" data-anchor-id="ejercicio-6.-fórmula-de-la-suma-de-cuadrados"><span class="header-section-number">58.12.6</span> Ejercicio 6. Fórmula de la suma de cuadrados</h3>
+<p>Usa <code>sp.summation()</code> para obtener una fórmula de <span class="math inline">\(\displaystyle\sum_{i=1}^{n} i^2 = 1^2 + 2^2 + \cdots + n^2\)</span>. Factoriza el resultado y déjalo en la <strong>última línea</strong>. Después úsala para calcular la suma con <span class="math inline">\(n = 100\)</span>.</p>
+<div class="cell" data-exercise="sp6">
+<div>
+<div id="pyodide-11" class="exercise-cell">
+
+</div>
+<script type="pyodide-11-contents">
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWUsImV4ZXJjaXNlIjoic3A2In0sImNvZGUiOiJpbXBvcnQgc3ltcHkgYXMgc3BcbmksIG4gPSBzcC5zeW1ib2xzKFwiaSBuXCIsIGludGVnZXI9VHJ1ZSwgcG9zaXRpdmU9VHJ1ZSlcblxuZm9ybXVsYSA9IF9fX19fX1xucHJpbnQoXCJGw7NybXVsYTpcIiwgZm9ybXVsYSlcbnByaW50KFwiQ29uIG4gPSAxMDA6XCIsIF9fX19fXylcblxuZm9ybXVsYSJ9
+</script>
+</div>
+</div>
+<div class="cell" data-exercise="sp6" data-check="true">
+<script type="exercise-check-sp6-contents">
+eyJhdHRyIjp7ImNoZWNrIjp0cnVlLCJlZGl0Ijp0cnVlLCJldmFsIjp0cnVlLCJleGVyY2lzZSI6InNwNiJ9LCJjb2RlIjoiaW1wb3J0IHN5bXB5IGFzIHNwXG5uID0gc3Auc3ltYm9scyhcIm5cIiwgaW50ZWdlcj1UcnVlLCBwb3NpdGl2ZT1UcnVlKVxuaWYgaXNpbnN0YW5jZShyZXN1bHQsIHNwLkJhc2ljKSBhbmQgc3Auc2ltcGxpZnkocmVzdWx0IC0gbioobiArIDEpKigyKm4gKyAxKS82KSA9PSAwOlxuICAgIGZlZWRiYWNrID0ge1wiY29ycmVjdFwiOiBUcnVlLCBcIm1lc3NhZ2VcIjogXCLCoUNvcnJlY3RvISBMYSBzdW1hIGVzIG4obiArIDEpKDJuICsgMSkvNjsgY29uIG4gPSAxMDAgdmFsZSAzMzgzNTAuXCJ9XG5lbHNlOlxuICAgIGZlZWRiYWNrID0ge1wiY29ycmVjdFwiOiBGYWxzZSwgXCJtZXNzYWdlXCI6IFwiUmV2aXNhIGxhIHN1bWE6IHNwLnN1bW1hdGlvbihpKioyLCAoaSwgMSwgbikpLlwifVxuZmVlZGJhY2sifQ==
+</script>
+</div>
+<div class="hint webr-ojs-exercise exercise-hint d-none" data-exercise="sp6">
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-12-contents" aria-controls="callout-12" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Nota</span>Pista
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-12" class="callout-12-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<p><code>sp.factor(sp.summation(i**2, (i, 1, n)))</code>. Para evaluar la fórmula: <code>formula.subs(n, 100)</code>.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="webr-ojs-exercise exercise-solution d-none" data-exercise="sp6">
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-13-contents" aria-controls="callout-13" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Solución
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-13" class="callout-13-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb100"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb100-1"><a href="#cb100-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sympy <span class="im">as</span> sp</span>
+<span id="cb100-2"><a href="#cb100-2" aria-hidden="true" tabindex="-1"></a>i, n <span class="op">=</span> sp.symbols(<span class="st">"i n"</span>, integer<span class="op">=</span><span class="va">True</span>, positive<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb100-3"><a href="#cb100-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb100-4"><a href="#cb100-4" aria-hidden="true" tabindex="-1"></a>formula <span class="op">=</span> sp.factor(sp.summation(i<span class="op">**</span><span class="dv">2</span>, (i, <span class="dv">1</span>, n)))</span>
+<span id="cb100-5"><a href="#cb100-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Fórmula:"</span>, formula)                    <span class="co"># n*(n + 1)*(2*n + 1)/6</span></span>
+<span id="cb100-6"><a href="#cb100-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Con n = 100:"</span>, formula.subs(n, <span class="dv">100</span>))   <span class="co"># 338350</span></span>
+<span id="cb100-7"><a href="#cb100-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb100-8"><a href="#cb100-8" aria-hidden="true" tabindex="-1"></a>formula</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="reto-final-dos-series-famosas" class="level2" data-number="58.13">
+<h2 data-number="58.13" class="anchored" data-anchor-id="reto-final-dos-series-famosas"><span class="header-section-number">58.13</span> Reto final: dos series famosas</h2>
+<p>En el capítulo de ciclos <code>for</code> aproximamos <span class="math inline">\(\pi\)</span> sumando 1000 términos de la serie de Leibniz. Con SymPy podemos calcular la suma <strong>infinita</strong> de forma exacta:</p>
+<ol type="1">
+<li>Calcula <span class="math inline">\(\displaystyle\sum_{k=0}^{\infty} \frac{(-1)^k}{2k + 1}\)</span> (serie de Leibniz).</li>
+<li>Calcula <span class="math inline">\(\displaystyle\sum_{k=1}^{\infty} \frac{1}{k^2}\)</span> (el <strong>problema de Basilea</strong>, resuelto por Euler en 1734) y déjala en la <strong>última línea</strong>.</li>
+</ol>
+<div class="cell" data-exercise="reto_sp">
+<div>
+<div id="pyodide-13" class="exercise-cell">
+
+</div>
+<script type="pyodide-13-contents">
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWUsImV4ZXJjaXNlIjoicmV0b19zcCJ9LCJjb2RlIjoiaW1wb3J0IHN5bXB5IGFzIHNwXG5rID0gc3Auc3ltYm9scyhcImtcIiwgaW50ZWdlcj1UcnVlKVxuXG5sZWlibml6ID0gX19fX19fXG5wcmludChcIlNlcmllIGRlIExlaWJuaXo6XCIsIGxlaWJuaXopXG5cbmJhc2lsZWEgPSBfX19fX19cbnByaW50KFwiUHJvYmxlbWEgZGUgQmFzaWxlYTpcIiwgYmFzaWxlYSwgXCLiiYhcIiwgc3AuTihiYXNpbGVhKSlcbmJhc2lsZWEifQ==
+</script>
+</div>
+</div>
+<div class="cell" data-exercise="reto_sp" data-check="true">
+<script type="exercise-check-reto_sp-contents">
+eyJhdHRyIjp7ImNoZWNrIjp0cnVlLCJlZGl0Ijp0cnVlLCJldmFsIjp0cnVlLCJleGVyY2lzZSI6InJldG9fc3AifSwiY29kZSI6ImltcG9ydCBzeW1weSBhcyBzcFxuaWYgcmVzdWx0ID09IHNwLnBpKioyIC8gNjpcbiAgICBmZWVkYmFjayA9IHtcImNvcnJlY3RcIjogVHJ1ZSwgXCJtZXNzYWdlXCI6IFwiwqFFeGNlbGVudGUhIExhIHNlcmllIGRlIExlaWJuaXogc3VtYSDPgC80IHkgbGEgZGUgQmFzaWxlYSDPgMKyLzYuXCJ9XG5lbHNlOlxuICAgIGZlZWRiYWNrID0ge1wiY29ycmVjdFwiOiBGYWxzZSwgXCJtZXNzYWdlXCI6IFwiTGEgw7psdGltYSBsw61uZWEgZGViZSByZWdyZXNhciBsYSBzdW1hIGRlIDEva8KyIGRlc2RlIGsgPSAxIGhhc3RhIGluZmluaXRvLlwifVxuZmVlZGJhY2sifQ==
+</script>
+</div>
+<div class="hint webr-ojs-exercise exercise-hint d-none" data-exercise="reto_sp">
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-14-contents" aria-controls="callout-14" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Nota</span>Pista
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-14" class="callout-14-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<p><code>sp.summation((-1)**k / (2*k + 1), (k, 0, sp.oo))</code> y <code>sp.summation(1 / k**2, (k, 1, sp.oo))</code>.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="webr-ojs-exercise exercise-solution d-none" data-exercise="reto_sp">
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-15-contents" aria-controls="callout-15" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Solución
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-15" class="callout-15-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb101"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb101-1"><a href="#cb101-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sympy <span class="im">as</span> sp</span>
+<span id="cb101-2"><a href="#cb101-2" aria-hidden="true" tabindex="-1"></a>k <span class="op">=</span> sp.symbols(<span class="st">"k"</span>, integer<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb101-3"><a href="#cb101-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb101-4"><a href="#cb101-4" aria-hidden="true" tabindex="-1"></a>leibniz <span class="op">=</span> sp.summation((<span class="op">-</span><span class="dv">1</span>)<span class="op">**</span>k <span class="op">/</span> (<span class="dv">2</span><span class="op">*</span>k <span class="op">+</span> <span class="dv">1</span>), (k, <span class="dv">0</span>, sp.oo))</span>
+<span id="cb101-5"><a href="#cb101-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Serie de Leibniz:"</span>, leibniz)                          <span class="co"># pi/4</span></span>
+<span id="cb101-6"><a href="#cb101-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb101-7"><a href="#cb101-7" aria-hidden="true" tabindex="-1"></a>basilea <span class="op">=</span> sp.summation(<span class="dv">1</span> <span class="op">/</span> k<span class="op">**</span><span class="dv">2</span>, (k, <span class="dv">1</span>, sp.oo))</span>
+<span id="cb101-8"><a href="#cb101-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Problema de Basilea:"</span>, basilea, <span class="st">"≈"</span>, sp.N(basilea))   <span class="co"># pi**2/6 ≈ 1.64493406684823</span></span>
+<span id="cb101-9"><a href="#cb101-9" aria-hidden="true" tabindex="-1"></a>basilea</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Por eso la aproximación con 1000 términos multiplicaba la suma por 4: <span class="math inline">\(4 \cdot \frac{\pi}{4} = \pi\)</span>.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="resumen" class="level2" data-number="58.14">
+<h2 data-number="58.14" class="anchored" data-anchor-id="resumen"><span class="header-section-number">58.14</span> Resumen</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Tema</th>
+<th>SymPy</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Símbolos</td>
+<td><code>x, y = sp.symbols("x y")</code></td>
+</tr>
+<tr class="even">
+<td>Sustituir / evaluar</td>
+<td><code>expr.subs(x, 2)</code>, <code>expr.evalf()</code>, <code>sp.N(expr, n)</code></td>
+</tr>
+<tr class="odd">
+<td>Fracciones y constantes</td>
+<td><code>sp.Rational(1, 3)</code>, <code>sp.pi</code>, <code>sp.E</code>, <code>sp.I</code>, <code>sp.oo</code></td>
+</tr>
+<tr class="even">
+<td>Manipular expresiones</td>
+<td><code>expand</code>, <code>factor</code>, <code>simplify</code>, <code>cancel</code>, <code>apart</code>, <code>trigsimp</code></td>
+</tr>
+<tr class="odd">
+<td>Ecuaciones</td>
+<td><code>sp.Eq(izq, der)</code>, <code>sp.solve()</code>, <code>sp.solveset()</code></td>
+</tr>
+<tr class="even">
+<td>Cálculo</td>
+<td><code>limit</code>, <code>diff</code>, <code>integrate</code>, <code>series</code>, <code>summation</code></td>
+</tr>
+<tr class="odd">
+<td>Matrices</td>
+<td><code>sp.Matrix</code>, <code>.det()</code>, <code>.inv()</code>, <code>.eigenvals()</code></td>
+</tr>
+<tr class="even">
+<td>Ecuaciones diferenciales</td>
+<td><code>sp.Function</code>, <code>sp.dsolve()</code></td>
+</tr>
+<tr class="odd">
+<td>Conversión</td>
+<td><code>sp.lambdify()</code> (a NumPy), <code>sp.latex()</code> (a LaTeX)</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="referencias" class="level2" data-number="58.15">
+<h2 data-number="58.15" class="anchored" data-anchor-id="referencias"><span class="header-section-number">58.15</span> Referencias</h2>
+<ul>
+<li><a href="https://docs.sympy.org/latest/index.html">Documentación de SymPy</a></li>
+<li><a href="https://docs.sympy.org/latest/tutorials/intro-tutorial/index.html">Tutorial introductorio de SymPy</a></li>
+<li><a href="https://lectures.scientific-python.org/packages/sympy.html">Scientific Python Lectures: SymPy</a></li>
+</ul>
+
+
+<script type="pyodide-data">
+eyJvcHRpb25zIjp7ImVudiI6eyJQTE9UTFlfUkVOREVSRVIiOiJwbG90bHlfbWltZXR5cGUifSwiaW5kZXhVUkwiOiJodHRwczovL2Nkbi5qc2RlbGl2ci5uZXQvcHlvZGlkZS92MC4yOC4xL2Z1bGwvIn0sInBhY2thZ2VzIjp7InBrZ3MiOlsicHlvZGlkZV9odHRwIiwibWljcm9waXAiLCJpcHl0aG9uIl19fQ==
+</script>
+<script type="ojs-module-contents">
+eyJjb250ZW50cyI6W3siY2VsbE5hbWUiOiJweW9kaWRlLTEzIiwiaW5saW5lIjpmYWxzZSwibWV0aG9kTmFtZSI6ImludGVycHJldCIsInNvdXJjZSI6InZpZXdvZiBfcHlvZGlkZV9lZGl0b3JfMTMgPSB7XG4gIGNvbnN0IHsgUHlvZGlkZUV4ZXJjaXNlRWRpdG9yLCBiNjREZWNvZGUgfSA9IHdpbmRvdy5fZXhlcmNpc2Vfb2pzX3J1bnRpbWU7XG5cbiAgY29uc3Qgc2NyaXB0Q29udGVudCA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoYHNjcmlwdFt0eXBlPVxcXCJweW9kaWRlLTEzLWNvbnRlbnRzXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgYmxvY2sgPSBKU09OLnBhcnNlKGI2NERlY29kZShzY3JpcHRDb250ZW50KSk7XG5cbiAgLy8gRGVmYXVsdCBleGVyY2lzZSBjb25maWd1cmF0aW9uXG4gIGNvbnN0IG9wdGlvbnMgPSBPYmplY3QuYXNzaWduKFxuICAgIHtcbiAgICAgIGlkOiBcInB5b2RpZGUtMTMtY29udGVudHNcIixcbiAgICAgIGVudmlyOiBgZXhlcmNpc2UtZW52LSR7YmxvY2suYXR0ci5leGVyY2lzZX1gLFxuICAgICAgZXJyb3I6IGZhbHNlLFxuICAgICAgY2FwdGlvbjogJ0V4ZXJjaXNlJyxcbiAgICB9LFxuICAgIGJsb2NrLmF0dHJcbiAgKTtcblxuICBjb25zdCBlZGl0b3IgPSBuZXcgUHlvZGlkZUV4ZXJjaXNlRWRpdG9yKHB5b2RpZGVPanMucHlvZGlkZVByb21pc2UsIGJsb2NrLmNvZGUsIG9wdGlvbnMpO1xuICByZXR1cm4gZWRpdG9yLmNvbnRhaW5lcjtcbn1cbnZpZXdvZiBfcHlvZGlkZV92YWx1ZV8xMyA9IHB5b2RpZGVPanMucHJvY2VzcyhfcHlvZGlkZV9lZGl0b3JfMTMsIHt9KTtcbl9weW9kaWRlX2ZlZWRiYWNrXzEzID0ge1xuICBjb25zdCB7IFB5b2RpZGVHcmFkZXIgfSA9IHdpbmRvdy5fZXhlcmNpc2Vfb2pzX3J1bnRpbWU7XG4gIGNvbnN0IGVtcHR5RmVlZGJhY2sgPSBkb2N1bWVudC5jcmVhdGVFbGVtZW50KCdkaXYnKTtcblxuICBjb25zdCBncmFkZXIgPSBuZXcgUHlvZGlkZUdyYWRlcihfcHlvZGlkZV92YWx1ZV8xMy5ldmFsdWF0b3IpO1xuICBjb25zdCBmZWVkYmFjayA9IGF3YWl0IGdyYWRlci5ncmFkZUV4ZXJjaXNlKCk7XG4gIGlmICghZmVlZGJhY2spIHJldHVybiBlbXB0eUZlZWRiYWNrO1xuICByZXR1cm4gZmVlZGJhY2s7XG59XG4ifSx7ImNlbGxOYW1lIjoicHlvZGlkZS0xMSIsImlubGluZSI6ZmFsc2UsIm1ldGhvZE5hbWUiOiJpbnRlcnByZXQiLCJzb3VyY2UiOiJ2aWV3b2YgX3B5b2RpZGVfZWRpdG9yXzExID0ge1xuICBjb25zdCB7IFB5b2RpZGVFeGVyY2lzZUVkaXRvciwgYjY0RGVjb2RlIH0gPSB3aW5kb3cuX2V4ZXJjaXNlX29qc19ydW50aW1lO1xuXG4gIGNvbnN0IHNjcmlwdENvbnRlbnQgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKGBzY3JpcHRbdHlwZT1cXFwicHlvZGlkZS0xMS1jb250ZW50c1xcXCJdYCkudGV4dENvbnRlbnQ7XG4gIGNvbnN0IGJsb2NrID0gSlNPTi5wYXJzZShiNjREZWNvZGUoc2NyaXB0Q29udGVudCkpO1xuXG4gIC8vIERlZmF1bHQgZXhlcmNpc2UgY29uZmlndXJhdGlvblxuICBjb25zdCBvcHRpb25zID0gT2JqZWN0LmFzc2lnbihcbiAgICB7XG4gICAgICBpZDogXCJweW9kaWRlLTExLWNvbnRlbnRzXCIsXG4gICAgICBlbnZpcjogYGV4ZXJjaXNlLWVudi0ke2Jsb2NrLmF0dHIuZXhlcmNpc2V9YCxcbiAgICAgIGVycm9yOiBmYWxzZSxcbiAgICAgIGNhcHRpb246ICdFeGVyY2lzZScsXG4gICAgfSxcbiAgICBibG9jay5hdHRyXG4gICk7XG5cbiAgY29uc3QgZWRpdG9yID0gbmV3IFB5b2RpZGVFeGVyY2lzZUVkaXRvcihweW9kaWRlT2pzLnB5b2RpZGVQcm9taXNlLCBibG9jay5jb2RlLCBvcHRpb25zKTtcbiAgcmV0dXJuIGVkaXRvci5jb250YWluZXI7XG59XG52aWV3b2YgX3B5b2RpZGVfdmFsdWVfMTEgPSBweW9kaWRlT2pzLnByb2Nlc3MoX3B5b2RpZGVfZWRpdG9yXzExLCB7fSk7XG5fcHlvZGlkZV9mZWVkYmFja18xMSA9IHtcbiAgY29uc3QgeyBQeW9kaWRlR3JhZGVyIH0gPSB3aW5kb3cuX2V4ZXJjaXNlX29qc19ydW50aW1lO1xuICBjb25zdCBlbXB0eUZlZWRiYWNrID0gZG9jdW1lbnQuY3JlYXRlRWxlbWVudCgnZGl2Jyk7XG5cbiAgY29uc3QgZ3JhZGVyID0gbmV3IFB5b2RpZGVHcmFkZXIoX3B5b2RpZGVfdmFsdWVfMTEuZXZhbHVhdG9yKTtcbiAgY29uc3QgZmVlZGJhY2sgPSBhd2FpdCBncmFkZXIuZ3JhZGVFeGVyY2lzZSgpO1xuICBpZiAoIWZlZWRiYWNrKSByZXR1cm4gZW1wdHlGZWVkYmFjaztcbiAgcmV0dXJuIGZlZWRiYWNrO1xufVxuIn0seyJjZWxsTmFtZSI6InB5b2RpZGUtOSIsImlubGluZSI6ZmFsc2UsIm1ldGhvZE5hbWUiOiJpbnRlcnByZXQiLCJzb3VyY2UiOiJ2aWV3b2YgX3B5b2RpZGVfZWRpdG9yXzkgPSB7XG4gIGNvbnN0IHsgUHlvZGlkZUV4ZXJjaXNlRWRpdG9yLCBiNjREZWNvZGUgfSA9IHdpbmRvdy5fZXhlcmNpc2Vfb2pzX3J1bnRpbWU7XG5cbiAgY29uc3Qgc2NyaXB0Q29udGVudCA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoYHNjcmlwdFt0eXBlPVxcXCJweW9kaWRlLTktY29udGVudHNcXFwiXWApLnRleHRDb250ZW50O1xuICBjb25zdCBibG9jayA9IEpTT04ucGFyc2UoYjY0RGVjb2RlKHNjcmlwdENvbnRlbnQpKTtcblxuICAvLyBEZWZhdWx0IGV4ZXJjaXNlIGNvbmZpZ3VyYXRpb25cbiAgY29uc3Qgb3B0aW9ucyA9IE9iamVjdC5hc3NpZ24oXG4gICAge1xuICAgICAgaWQ6IFwicHlvZGlkZS05LWNvbnRlbnRzXCIsXG4gICAgICBlbnZpcjogYGV4ZXJjaXNlLWVudi0ke2Jsb2NrLmF0dHIuZXhlcmNpc2V9YCxcbiAgICAgIGVycm9yOiBmYWxzZSxcbiAgICAgIGNhcHRpb246ICdFeGVyY2lzZScsXG4gICAgfSxcbiAgICBibG9jay5hdHRyXG4gICk7XG5cbiAgY29uc3QgZWRpdG9yID0gbmV3IFB5b2RpZGVFeGVyY2lzZUVkaXRvcihweW9kaWRlT2pzLnB5b2RpZGVQcm9taXNlLCBibG9jay5jb2RlLCBvcHRpb25zKTtcbiAgcmV0dXJuIGVkaXRvci5jb250YWluZXI7XG59XG52aWV3b2YgX3B5b2RpZGVfdmFsdWVfOSA9IHB5b2RpZGVPanMucHJvY2VzcyhfcHlvZGlkZV9lZGl0b3JfOSwge30pO1xuX3B5b2RpZGVfZmVlZGJhY2tfOSA9IHtcbiAgY29uc3QgeyBQeW9kaWRlR3JhZGVyIH0gPSB3aW5kb3cuX2V4ZXJjaXNlX29qc19ydW50aW1lO1xuICBjb25zdCBlbXB0eUZlZWRiYWNrID0gZG9jdW1lbnQuY3JlYXRlRWxlbWVudCgnZGl2Jyk7XG5cbiAgY29uc3QgZ3JhZGVyID0gbmV3IFB5b2RpZGVHcmFkZXIoX3B5b2RpZGVfdmFsdWVfOS5ldmFsdWF0b3IpO1xuICBjb25zdCBmZWVkYmFjayA9IGF3YWl0IGdyYWRlci5ncmFkZUV4ZXJjaXNlKCk7XG4gIGlmICghZmVlZGJhY2spIHJldHVybiBlbXB0eUZlZWRiYWNrO1xuICByZXR1cm4gZmVlZGJhY2s7XG59XG4ifSx7ImNlbGxOYW1lIjoicHlvZGlkZS03IiwiaW5saW5lIjpmYWxzZSwibWV0aG9kTmFtZSI6ImludGVycHJldCIsInNvdXJjZSI6InZpZXdvZiBfcHlvZGlkZV9lZGl0b3JfNyA9IHtcbiAgY29uc3QgeyBQeW9kaWRlRXhlcmNpc2VFZGl0b3IsIGI2NERlY29kZSB9ID0gd2luZG93Ll9leGVyY2lzZV9vanNfcnVudGltZTtcblxuICBjb25zdCBzY3JpcHRDb250ZW50ID0gZG9jdW1lbnQucXVlcnlTZWxlY3Rvcihgc2NyaXB0W3R5cGU9XFxcInB5b2RpZGUtNy1jb250ZW50c1xcXCJdYCkudGV4dENvbnRlbnQ7XG4gIGNvbnN0IGJsb2NrID0gSlNPTi5wYXJzZShiNjREZWNvZGUoc2NyaXB0Q29udGVudCkpO1xuXG4gIC8vIERlZmF1bHQgZXhlcmNpc2UgY29uZmlndXJhdGlvblxuICBjb25zdCBvcHRpb25zID0gT2JqZWN0LmFzc2lnbihcbiAgICB7XG4gICAgICBpZDogXCJweW9kaWRlLTctY29udGVudHNcIixcbiAgICAgIGVudmlyOiBgZXhlcmNpc2UtZW52LSR7YmxvY2suYXR0ci5leGVyY2lzZX1gLFxuICAgICAgZXJyb3I6IGZhbHNlLFxuICAgICAgY2FwdGlvbjogJ0V4ZXJjaXNlJyxcbiAgICB9LFxuICAgIGJsb2NrLmF0dHJcbiAgKTtcblxuICBjb25zdCBlZGl0b3IgPSBuZXcgUHlvZGlkZUV4ZXJjaXNlRWRpdG9yKHB5b2RpZGVPanMucHlvZGlkZVByb21pc2UsIGJsb2NrLmNvZGUsIG9wdGlvbnMpO1xuICByZXR1cm4gZWRpdG9yLmNvbnRhaW5lcjtcbn1cbnZpZXdvZiBfcHlvZGlkZV92YWx1ZV83ID0gcHlvZGlkZU9qcy5wcm9jZXNzKF9weW9kaWRlX2VkaXRvcl83LCB7fSk7XG5fcHlvZGlkZV9mZWVkYmFja183ID0ge1xuICBjb25zdCB7IFB5b2RpZGVHcmFkZXIgfSA9IHdpbmRvdy5fZXhlcmNpc2Vfb2pzX3J1bnRpbWU7XG4gIGNvbnN0IGVtcHR5RmVlZGJhY2sgPSBkb2N1bWVudC5jcmVhdGVFbGVtZW50KCdkaXYnKTtcblxuICBjb25zdCBncmFkZXIgPSBuZXcgUHlvZGlkZUdyYWRlcihfcHlvZGlkZV92YWx1ZV83LmV2YWx1YXRvcik7XG4gIGNvbnN0IGZlZWRiYWNrID0gYXdhaXQgZ3JhZGVyLmdyYWRlRXhlcmNpc2UoKTtcbiAgaWYgKCFmZWVkYmFjaykgcmV0dXJuIGVtcHR5RmVlZGJhY2s7XG4gIHJldHVybiBmZWVkYmFjaztcbn1cbiJ9LHsiY2VsbE5hbWUiOiJweW9kaWRlLTUiLCJpbmxpbmUiOmZhbHNlLCJtZXRob2ROYW1lIjoiaW50ZXJwcmV0Iiwic291cmNlIjoidmlld29mIF9weW9kaWRlX2VkaXRvcl81ID0ge1xuICBjb25zdCB7IFB5b2RpZGVFeGVyY2lzZUVkaXRvciwgYjY0RGVjb2RlIH0gPSB3aW5kb3cuX2V4ZXJjaXNlX29qc19ydW50aW1lO1xuXG4gIGNvbnN0IHNjcmlwdENvbnRlbnQgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKGBzY3JpcHRbdHlwZT1cXFwicHlvZGlkZS01LWNvbnRlbnRzXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgYmxvY2sgPSBKU09OLnBhcnNlKGI2NERlY29kZShzY3JpcHRDb250ZW50KSk7XG5cbiAgLy8gRGVmYXVsdCBleGVyY2lzZSBjb25maWd1cmF0aW9uXG4gIGNvbnN0IG9wdGlvbnMgPSBPYmplY3QuYXNzaWduKFxuICAgIHtcbiAgICAgIGlkOiBcInB5b2RpZGUtNS1jb250ZW50c1wiLFxuICAgICAgZW52aXI6IGBleGVyY2lzZS1lbnYtJHtibG9jay5hdHRyLmV4ZXJjaXNlfWAsXG4gICAgICBlcnJvcjogZmFsc2UsXG4gICAgICBjYXB0aW9uOiAnRXhlcmNpc2UnLFxuICAgIH0sXG4gICAgYmxvY2suYXR0clxuICApO1xuXG4gIGNvbnN0IGVkaXRvciA9IG5ldyBQeW9kaWRlRXhlcmNpc2VFZGl0b3IocHlvZGlkZU9qcy5weW9kaWRlUHJvbWlzZSwgYmxvY2suY29kZSwgb3B0aW9ucyk7XG4gIHJldHVybiBlZGl0b3IuY29udGFpbmVyO1xufVxudmlld29mIF9weW9kaWRlX3ZhbHVlXzUgPSBweW9kaWRlT2pzLnByb2Nlc3MoX3B5b2RpZGVfZWRpdG9yXzUsIHt9KTtcbl9weW9kaWRlX2ZlZWRiYWNrXzUgPSB7XG4gIGNvbnN0IHsgUHlvZGlkZUdyYWRlciB9ID0gd2luZG93Ll9leGVyY2lzZV9vanNfcnVudGltZTtcbiAgY29uc3QgZW1wdHlGZWVkYmFjayA9IGRvY3VtZW50LmNyZWF0ZUVsZW1lbnQoJ2RpdicpO1xuXG4gIGNvbnN0IGdyYWRlciA9IG5ldyBQeW9kaWRlR3JhZGVyKF9weW9kaWRlX3ZhbHVlXzUuZXZhbHVhdG9yKTtcbiAgY29uc3QgZmVlZGJhY2sgPSBhd2FpdCBncmFkZXIuZ3JhZGVFeGVyY2lzZSgpO1xuICBpZiAoIWZlZWRiYWNrKSByZXR1cm4gZW1wdHlGZWVkYmFjaztcbiAgcmV0dXJuIGZlZWRiYWNrO1xufVxuIn0seyJjZWxsTmFtZSI6InB5b2RpZGUtMyIsImlubGluZSI6ZmFsc2UsIm1ldGhvZE5hbWUiOiJpbnRlcnByZXQiLCJzb3VyY2UiOiJ2aWV3b2YgX3B5b2RpZGVfZWRpdG9yXzMgPSB7XG4gIGNvbnN0IHsgUHlvZGlkZUV4ZXJjaXNlRWRpdG9yLCBiNjREZWNvZGUgfSA9IHdpbmRvdy5fZXhlcmNpc2Vfb2pzX3J1bnRpbWU7XG5cbiAgY29uc3Qgc2NyaXB0Q29udGVudCA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoYHNjcmlwdFt0eXBlPVxcXCJweW9kaWRlLTMtY29udGVudHNcXFwiXWApLnRleHRDb250ZW50O1xuICBjb25zdCBibG9jayA9IEpTT04ucGFyc2UoYjY0RGVjb2RlKHNjcmlwdENvbnRlbnQpKTtcblxuICAvLyBEZWZhdWx0IGV4ZXJjaXNlIGNvbmZpZ3VyYXRpb25cbiAgY29uc3Qgb3B0aW9ucyA9IE9iamVjdC5hc3NpZ24oXG4gICAge1xuICAgICAgaWQ6IFwicHlvZGlkZS0zLWNvbnRlbnRzXCIsXG4gICAgICBlbnZpcjogYGV4ZXJjaXNlLWVudi0ke2Jsb2NrLmF0dHIuZXhlcmNpc2V9YCxcbiAgICAgIGVycm9yOiBmYWxzZSxcbiAgICAgIGNhcHRpb246ICdFeGVyY2lzZScsXG4gICAgfSxcbiAgICBibG9jay5hdHRyXG4gICk7XG5cbiAgY29uc3QgZWRpdG9yID0gbmV3IFB5b2RpZGVFeGVyY2lzZUVkaXRvcihweW9kaWRlT2pzLnB5b2RpZGVQcm9taXNlLCBibG9jay5jb2RlLCBvcHRpb25zKTtcbiAgcmV0dXJuIGVkaXRvci5jb250YWluZXI7XG59XG52aWV3b2YgX3B5b2RpZGVfdmFsdWVfMyA9IHB5b2RpZGVPanMucHJvY2VzcyhfcHlvZGlkZV9lZGl0b3JfMywge30pO1xuX3B5b2RpZGVfZmVlZGJhY2tfMyA9IHtcbiAgY29uc3QgeyBQeW9kaWRlR3JhZGVyIH0gPSB3aW5kb3cuX2V4ZXJjaXNlX29qc19ydW50aW1lO1xuICBjb25zdCBlbXB0eUZlZWRiYWNrID0gZG9jdW1lbnQuY3JlYXRlRWxlbWVudCgnZGl2Jyk7XG5cbiAgY29uc3QgZ3JhZGVyID0gbmV3IFB5b2RpZGVHcmFkZXIoX3B5b2RpZGVfdmFsdWVfMy5ldmFsdWF0b3IpO1xuICBjb25zdCBmZWVkYmFjayA9IGF3YWl0IGdyYWRlci5ncmFkZUV4ZXJjaXNlKCk7XG4gIGlmICghZmVlZGJhY2spIHJldHVybiBlbXB0eUZlZWRiYWNrO1xuICByZXR1cm4gZmVlZGJhY2s7XG59XG4ifSx7ImNlbGxOYW1lIjoicHlvZGlkZS0xIiwiaW5saW5lIjpmYWxzZSwibWV0aG9kTmFtZSI6ImludGVycHJldCIsInNvdXJjZSI6InZpZXdvZiBfcHlvZGlkZV9lZGl0b3JfMSA9IHtcbiAgY29uc3QgeyBQeW9kaWRlRXhlcmNpc2VFZGl0b3IsIGI2NERlY29kZSB9ID0gd2luZG93Ll9leGVyY2lzZV9vanNfcnVudGltZTtcblxuICBjb25zdCBzY3JpcHRDb250ZW50ID0gZG9jdW1lbnQucXVlcnlTZWxlY3Rvcihgc2NyaXB0W3R5cGU9XFxcInB5b2RpZGUtMS1jb250ZW50c1xcXCJdYCkudGV4dENvbnRlbnQ7XG4gIGNvbnN0IGJsb2NrID0gSlNPTi5wYXJzZShiNjREZWNvZGUoc2NyaXB0Q29udGVudCkpO1xuXG4gIC8vIERlZmF1bHQgZXhlcmNpc2UgY29uZmlndXJhdGlvblxuICBjb25zdCBvcHRpb25zID0gT2JqZWN0LmFzc2lnbihcbiAgICB7XG4gICAgICBpZDogXCJweW9kaWRlLTEtY29udGVudHNcIixcbiAgICAgIGVudmlyOiBgZXhlcmNpc2UtZW52LSR7YmxvY2suYXR0ci5leGVyY2lzZX1gLFxuICAgICAgZXJyb3I6IGZhbHNlLFxuICAgICAgY2FwdGlvbjogJ0V4ZXJjaXNlJyxcbiAgICB9LFxuICAgIGJsb2NrLmF0dHJcbiAgKTtcblxuICBjb25zdCBlZGl0b3IgPSBuZXcgUHlvZGlkZUV4ZXJjaXNlRWRpdG9yKHB5b2RpZGVPanMucHlvZGlkZVByb21pc2UsIGJsb2NrLmNvZGUsIG9wdGlvbnMpO1xuICByZXR1cm4gZWRpdG9yLmNvbnRhaW5lcjtcbn1cbnZpZXdvZiBfcHlvZGlkZV92YWx1ZV8xID0gcHlvZGlkZU9qcy5wcm9jZXNzKF9weW9kaWRlX2VkaXRvcl8xLCB7fSk7XG5fcHlvZGlkZV9mZWVkYmFja18xID0ge1xuICBjb25zdCB7IFB5b2RpZGVHcmFkZXIgfSA9IHdpbmRvdy5fZXhlcmNpc2Vfb2pzX3J1bnRpbWU7XG4gIGNvbnN0IGVtcHR5RmVlZGJhY2sgPSBkb2N1bWVudC5jcmVhdGVFbGVtZW50KCdkaXYnKTtcblxuICBjb25zdCBncmFkZXIgPSBuZXcgUHlvZGlkZUdyYWRlcihfcHlvZGlkZV92YWx1ZV8xLmV2YWx1YXRvcik7XG4gIGNvbnN0IGZlZWRiYWNrID0gYXdhaXQgZ3JhZGVyLmdyYWRlRXhlcmNpc2UoKTtcbiAgaWYgKCFmZWVkYmFjaykgcmV0dXJuIGVtcHR5RmVlZGJhY2s7XG4gIHJldHVybiBmZWVkYmFjaztcbn1cbiJ9LHsiY2VsbE5hbWUiOiJweW9kaWRlLXByZWx1ZGUiLCJpbmxpbmUiOmZhbHNlLCJtZXRob2ROYW1lIjoiaW50ZXJwcmV0UXVpZXQiLCJzb3VyY2UiOiJweW9kaWRlT2pzID0ge1xuICBjb25zdCB7XG4gICAgUHlvZGlkZUV2YWx1YXRvcixcbiAgICBQeW9kaWRlRW52aXJvbm1lbnRNYW5hZ2VyLFxuICAgIHNldHVwUHl0aG9uLFxuICAgIHN0YXJ0UHlvZGlkZVdvcmtlcixcbiAgICBiNjREZWNvZGUsXG4gICAgY29sbGFwc2VQYXRoLFxuICB9ID0gd2luZG93Ll9leGVyY2lzZV9vanNfcnVudGltZTtcblxuICBjb25zdCBzdGF0dXNDb250YWluZXIgPSBkb2N1bWVudC5nZXRFbGVtZW50QnlJZChcImV4ZXJjaXNlLWxvYWRpbmctc3RhdHVzXCIpO1xuICBjb25zdCBpbmRpY2F0b3JDb250YWluZXIgPSBkb2N1bWVudC5nZXRFbGVtZW50QnlJZChcImV4ZXJjaXNlLWxvYWRpbmctaW5kaWNhdG9yXCIpO1xuICBpbmRpY2F0b3JDb250YWluZXIuY2xhc3NMaXN0LnJlbW92ZShcImQtbm9uZVwiKTtcblxuICBsZXQgc3RhdHVzVGV4dCA9IGRvY3VtZW50LmNyZWF0ZUVsZW1lbnQoXCJkaXZcIilcbiAgc3RhdHVzVGV4dC5jbGFzc0xpc3QgPSBcImV4ZXJjaXNlLWxvYWRpbmctZGV0YWlsc1wiO1xuICBzdGF0dXNUZXh0ID0gc3RhdHVzQ29udGFpbmVyLmFwcGVuZENoaWxkKHN0YXR1c1RleHQpO1xuICBzdGF0dXNUZXh0LnRleHRDb250ZW50ID0gYEluaXRpYWxpc2VgO1xuXG4gIC8vIEhvaXN0IGluZGljYXRvciBvdXQgZnJvbSBmaW5hbCBzbGlkZSB3aGVuIHJ1bm5pbmcgdW5kZXIgcmV2ZWFsXG4gIGNvbnN0IHJldmVhbFN0YXR1cyA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoXCIucmV2ZWFsIC5leGVyY2lzZS1sb2FkaW5nLWluZGljYXRvclwiKTtcbiAgaWYgKHJldmVhbFN0YXR1cykge1xuICAgIHJldmVhbFN0YXR1cy5yZW1vdmUoKTtcbiAgICBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKFwiLnJldmVhbCA+IC5zbGlkZXNcIikuYXBwZW5kQ2hpbGQocmV2ZWFsU3RhdHVzKTtcbiAgfVxuXG4gIC8vIE1ha2UgYW55IHJldmVhbCBzbGlkZXMgd2l0aCBsaXZlIGNlbGxzIHNjcm9sbGFibGVcbiAgZG9jdW1lbnQucXVlcnlTZWxlY3RvckFsbChcIi5yZXZlYWwgLmV4ZXJjaXNlLWNlbGxcIikuZm9yRWFjaCgoZWwpID0+IHtcbiAgICBlbC5jbG9zZXN0KCdzZWN0aW9uLnNsaWRlJykuY2xhc3NMaXN0LmFkZChcInNjcm9sbGFibGVcIik7XG4gIH0pXG5cbiAgLy8gUHlvZGlkZSBzdXBwbGVtZW50YWwgZGF0YSBhbmQgb3B0aW9uc1xuICBjb25zdCBkYXRhQ29udGVudCA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoYHNjcmlwdFt0eXBlPVxcXCJweW9kaWRlLWRhdGFcXFwiXWApLnRleHRDb250ZW50O1xuICBjb25zdCBkYXRhID0gSlNPTi5wYXJzZShiNjREZWNvZGUoZGF0YUNvbnRlbnQpKTtcblxuICAvLyBHcmFiIGxpc3Qgb2YgcmVzb3VyY2VzIHRvIGJlIGRvd25sb2FkZWRcbiAgY29uc3QgZmlsZXNDb250ZW50ID0gZG9jdW1lbnQucXVlcnlTZWxlY3Rvcihgc2NyaXB0W3R5cGU9XFxcInZmcy1maWxlXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgZmlsZXMgPSBKU09OLnBhcnNlKGI2NERlY29kZShmaWxlc0NvbnRlbnQpKTtcblxuICBsZXQgcHlvZGlkZVByb21pc2UgPSAoYXN5bmMgKCkgPT4ge1xuICAgIHN0YXR1c1RleHQudGV4dENvbnRlbnQgPSBgRG93bmxvYWRpbmcgUHlvZGlkZWA7XG4gICAgY29uc3QgcHlvZGlkZSA9IGF3YWl0IHN0YXJ0UHlvZGlkZVdvcmtlcihkYXRhLm9wdGlvbnMpO1xuXG4gICAgc3RhdHVzVGV4dC50ZXh0Q29udGVudCA9IGBEb3dubG9hZGluZyBwYWNrYWdlOiBtaWNyb3BpcGA7XG4gICAgYXdhaXQgcHlvZGlkZS5sb2FkUGFja2FnZShcIm1pY3JvcGlwXCIpO1xuICAgIGNvbnN0IG1pY3JvcGlwID0gYXdhaXQgcHlvZGlkZS5weWltcG9ydChcIm1pY3JvcGlwXCIpO1xuICAgIGF3YWl0IGRhdGEucGFja2FnZXMucGtncy5tYXAoKHBrZykgPT4gKCkgPT4ge1xuICAgICAgc3RhdHVzVGV4dC50ZXh0Q29udGVudCA9IGBEb3dubG9hZGluZyBwYWNrYWdlOiAke3BrZ31gO1xuICAgICAgcmV0dXJuIG1pY3JvcGlwLmluc3RhbGwocGtnKTtcbiAgICB9KS5yZWR1Y2UoKGN1ciwgbmV4dCkgPT4gY3VyLnRoZW4obmV4dCksIFByb21pc2UucmVzb2x2ZSgpKTtcbiAgICBhd2FpdCBtaWNyb3BpcC5kZXN0cm95KCk7XG5cbiAgICAvLyBEb3dubG9hZCBhbmQgaW5zdGFsbCByZXNvdXJjZXNcbiAgICBhd2FpdCBmaWxlcy5tYXAoKGZpbGUpID0+IGFzeW5jICgpID0+IHtcbiAgICAgIGNvbnN0IG5hbWUgPSBmaWxlLnN1YnN0cmluZyhmaWxlLmxhc3RJbmRleE9mKCcvJykgKyAxKTtcbiAgICAgIHN0YXR1c1RleHQudGV4dENvbnRlbnQgPSBgRG93bmxvYWRpbmcgcmVzb3VyY2U6ICR7bmFtZX1gO1xuICAgICAgY29uc3QgcmVzcG9uc2UgPSBhd2FpdCBmZXRjaChmaWxlKTtcbiAgICAgIGlmICghcmVzcG9uc2Uub2spIHtcbiAgICAgICAgdGhyb3cgbmV3IEVycm9yKGBDYW4ndCBkb3dubG9hZCBcXGAke2ZpbGV9XFxgLiBFcnJvciAke3Jlc3BvbnNlLnN0YXR1c306IFwiJHtyZXNwb25zZS5zdGF0dXNUZXh0fVwiLmApO1xuICAgICAgfVxuICAgICAgY29uc3QgZGF0YSA9IGF3YWl0IHJlc3BvbnNlLmFycmF5QnVmZmVyKCk7XG5cbiAgICAgIC8vIFN0b3JlIFVSTHMgaW4gdGhlIGN3ZCB3aXRob3V0IGFueSBzdWJkaXJlY3Rvcnkgc3RydWN0dXJlXG4gICAgICBpZiAoZmlsZS5pbmNsdWRlcyhcIjovL1wiKSkge1xuICAgICAgICBmaWxlID0gbmFtZTtcbiAgICAgIH1cblxuICAgICAgLy8gQ29sbGFwc2UgaGlnaGVyIGRpcmVjdG9yeSBzdHJ1Y3R1cmVcbiAgICAgIGZpbGUgPSBjb2xsYXBzZVBhdGgoZmlsZSk7XG5cbiAgICAgIC8vIENyZWF0ZSBkaXJlY3RvcnkgdHJlZSwgaWdub3JpbmcgXCJkaXJlY3RvcnkgZXhpc3RzXCIgVkZTIGVycm9yc1xuICAgICAgY29uc3QgcGFydHMgPSBmaWxlLnNwbGl0KCcvJykuc2xpY2UoMCwgLTEpO1xuICAgICAgbGV0IHBhdGggPSAnJztcbiAgICAgIHdoaWxlIChwYXJ0cy5sZW5ndGggPiAwKSB7XG4gICAgICAgIHBhdGggKz0gcGFydHMuc2hpZnQoKSArICcvJztcbiAgICAgICAgdHJ5IHtcbiAgICAgICAgICBhd2FpdCBweW9kaWRlLkZTLm1rZGlyKHBhdGgpO1xuICAgICAgICB9IGNhdGNoIChlKSB7XG4gICAgICAgICAgaWYgKGUubmFtZSAhPT0gXCJFcnJub0Vycm9yXCIpIHRocm93IGU7XG4gICAgICAgICAgaWYgKGUuZXJybm8gIT09IDIwKSB7XG4gICAgICAgICAgICBjb25zdCBlcnJvclRleHRQdHIgPSBhd2FpdCBweW9kaWRlLl9tb2R1bGUuX3N0cmVycm9yKGUuZXJybm8pO1xuICAgICAgICAgICAgY29uc3QgZXJyb3JUZXh0ID0gYXdhaXQgcHlvZGlkZS5fbW9kdWxlLlVURjhUb1N0cmluZyhlcnJvclRleHRQdHIpO1xuICAgICAgICAgICAgdGhyb3cgbmV3IEVycm9yKGBGaWxlc3lzdGVtIEVycm9yICR7ZS5lcnJub30gXCIke2Vycm9yVGV4dH1cIi5gKTtcbiAgICAgICAgICB9XG4gICAgICAgIH1cbiAgICAgIH1cblxuICAgICAgLy8gV3JpdGUgdGhpcyBmaWxlIHRvIHRoZSBWRlNcbiAgICAgIHRyeSB7XG4gICAgICAgIHJldHVybiBhd2FpdCBweW9kaWRlLkZTLndyaXRlRmlsZShmaWxlLCBuZXcgVWludDhBcnJheShkYXRhKSk7XG4gICAgICB9IGNhdGNoIChlKSB7XG4gICAgICAgIGlmIChlLm5hbWUgIT09IFwiRXJybm9FcnJvclwiKSB0aHJvdyBlO1xuICAgICAgICBjb25zdCBlcnJvclRleHRQdHIgPSBhd2FpdCBweW9kaWRlLl9tb2R1bGUuX3N0cmVycm9yKGUuZXJybm8pO1xuICAgICAgICBjb25zdCBlcnJvclRleHQgPSBhd2FpdCBweW9kaWRlLl9tb2R1bGUuVVRGOFRvU3RyaW5nKGVycm9yVGV4dFB0cik7XG4gICAgICAgIHRocm93IG5ldyBFcnJvcihgRmlsZXN5c3RlbSBFcnJvciAke2UuZXJybm99IFwiJHtlcnJvclRleHR9XCIuYCk7XG4gICAgICB9XG4gICAgfSkucmVkdWNlKChjdXIsIG5leHQpID0+IGN1ci50aGVuKG5leHQpLCBQcm9taXNlLnJlc29sdmUoKSk7XG5cbiAgICBzdGF0dXNUZXh0LnRleHRDb250ZW50ID0gYFB5b2RpZGUgZW52aXJvbm1lbnQgc2V0dXBgO1xuICAgIGF3YWl0IHNldHVwUHl0aG9uKHB5b2RpZGUpO1xuXG4gICAgc3RhdHVzVGV4dC5yZW1vdmUoKTtcbiAgICBpZiAoc3RhdHVzQ29udGFpbmVyLmNoaWxkcmVuLmxlbmd0aCA9PSAwKSB7XG4gICAgICBzdGF0dXNDb250YWluZXIucGFyZW50Tm9kZS5yZW1vdmUoKTtcbiAgICB9XG4gICAgcmV0dXJuIHB5b2RpZGU7XG4gIH0pKCkuY2F0Y2goKGVycikgPT4ge1xuICAgIHN0YXR1c1RleHQuc3R5bGUuY29sb3IgPSBcInZhcigtLWV4ZXJjaXNlLWVkaXRvci1obC1lciwgI0FEMDAwMClcIjtcbiAgICBzdGF0dXNUZXh0LnRleHRDb250ZW50ID0gZXJyLm1lc3NhZ2U7XG4gICAgLy9pbmRpY2F0b3JDb250YWluZXIucXVlcnlTZWxlY3RvcihcIi5zcGlubmVyLWdyb3dcIikuY2xhc3NMaXN0LmFkZChcImQtbm9uZVwiKTtcbiAgICB0aHJvdyBlcnI7XG4gIH0pO1xuXG4gIC8vIEtlZXAgdHJhY2sgb2YgaW5pdGlhbCBPSlMgYmxvY2sgcmVuZGVyXG4gIGNvbnN0IHJlbmRlcmVkT2pzID0ge307XG5cbiAgY29uc3QgcHJvY2VzcyA9IGFzeW5jIChjb250ZXh0LCBpbnB1dHMpID0+IHtcbiAgICBjb25zdCBweW9kaWRlID0gYXdhaXQgcHlvZGlkZVByb21pc2U7XG4gICAgY29uc3QgZXZhbHVhdG9yID0gbmV3IFB5b2RpZGVFdmFsdWF0b3IocHlvZGlkZSwgY29udGV4dCk7XG4gICAgYXdhaXQgZXZhbHVhdG9yLnByb2Nlc3MoaW5wdXRzKTtcbiAgICByZXR1cm4gZXZhbHVhdG9yLmNvbnRhaW5lcjtcbiAgfVxuXG4gIHJldHVybiB7XG4gICAgcHlvZGlkZVByb21pc2UsXG4gICAgcmVuZGVyZWRPanMsXG4gICAgcHJvY2VzcyxcbiAgfTtcbn1cbiJ9XX0=
+</script>
+<div id="exercise-loading-indicator" class="exercise-loading-indicator d-none d-flex align-items-center gap-2">
+<div id="exercise-loading-status" class="d-flex gap-2">
+
+</div>
+<div class="spinner-grow spinner-grow-sm">
+
+</div>
+</div>
+<script type="vfs-file">
+W10=
+</script>
+</section>
+
+</main> <!-- /main -->
+<script type="ojs-module-contents">
+eyJjb250ZW50cyI6W119
+</script>
+<script type="module">
+if (window.location.protocol === "file:") { alert("The OJS runtime does not work with file:// URLs. Please use a web server to view this document."); }
+window._ojs.paths.runtimeToDoc = "../..";
+window._ojs.paths.runtimeToRoot = "../..";
+window._ojs.paths.docToRoot = "";
+window._ojs.selfContained = false;
+window._ojs.runtime.interpretFromScriptTags();
+</script>
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copiado");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copiado");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/github\.com\/EveliaCoss\/Mt2026_Taller_Computo_libro");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        const annoteTargets = window.document.querySelectorAll('.code-annotation-anchor');
+        for (let i=0; i<annoteTargets.length; i++) {
+          const annoteTarget = annoteTargets[i];
+          const targetCell = annoteTarget.getAttribute("data-target-cell");
+          const targetAnnotation = annoteTarget.getAttribute("data-target-annotation");
+          const contentFn = () => {
+            const content = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+            if (content) {
+              const tipContent = content.cloneNode(true);
+              tipContent.classList.add("code-annotation-tip-content");
+              return tipContent.outerHTML;
+            }
+          }
+          const config = {
+            allowHTML: true,
+            content: contentFn,
+            onShow: (instance) => {
+              selectCodeLines(instance.reference);
+              instance.reference.classList.add('code-annotation-active');
+              window.tippy.hideAll();
+            },
+            onHide: (instance) => {
+              unselectCodeLines();
+              instance.reference.classList.remove('code-annotation-active');
+            },
+            maxWidth: 300,
+            delay: [50, 0],
+            duration: [200, 0],
+            offset: [5, 10],
+            arrow: true,
+            appendTo: function(el) {
+              return el.parentElement.parentElement.parentElement;
+            },
+            interactive: true,
+            interactiveBorder: 10,
+            theme: 'quarto',
+            placement: 'right',
+            popperOptions: {
+              modifiers: [
+              {
+                name: 'flip',
+                options: {
+                  flipVariations: false, // true by default
+                  allowedAutoPlacements: ['right'],
+                  fallbackPlacements: ['right', 'top', 'top-start', 'top-end', 'bottom', 'bottom-start', 'bottom-end', 'left'],
+                },
+              },
+              {
+                name: 'preventOverflow',
+                options: {
+                  mainAxis: false,
+                  altAxis: false
+                }
+              }
+              ]        
+            }      
+          };
+          window.tippy(annoteTarget, config); 
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./python_for.html" class="pagination-link" aria-label="Ciclos `for` y `while` en Python">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">57</span>&nbsp; <span class="chapter-title">Ciclos <code>for</code> y <code>while</code> en Python</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./python_visualizacion.html" class="pagination-link" aria-label="Visualización de datos con Matplotlib y Plotly">
+        <span class="nav-page-text"><span class="chapter-number">59</span>&nbsp; <span class="chapter-title">Visualización de datos con Matplotlib y Plotly</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+<p>Taller de Cómputo, 1er semestre: Dra. Evelia Coss</p>
+</div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>

@@ -92,10 +92,17 @@ book:
       chapters: 
         - intro_python.qmd 
         - quarto_python.qmd
+        - python_ejercicio1.qmd         # Práctica: tipo, valor e identidad (interactiva)
+        - python_ejercicio2.qmd         # Práctica: atributos y métodos (interactiva)
+        - python_buenas_practicas.qmd   # Sintaxis de nombres, buenas prácticas y programación defensiva
+        - python_condicionales.qmd      # Condicionales: if, elif, else
+        - python_numpy.qmd              # Introducción a NumPy
+        - python_for.qmd                # Ciclos for
+        - python_sympy.qmd              # Cálculo simbólico con SymPy
+        - python_visualizacion.qmd      # Visualización de datos: Matplotlib y Plotly
   appendices: 
-    - resources.qmd
-    - notas.qmd
-    - docente.qmd
+    - python_entornos.qmd           # Google Colab, Jupyter, python vs pip, instalar paquetes
+    - python_conda.qmd              # Conda y Miniconda
     - ejemplo_quizdown.qmd
     - ejemplo_CodeRandPython.qmd
   # Information
@@ -106,18 +113,19 @@ book:
 
 format:
   html:
+    ojs-engine: true      # requerido por quarto-live (editores interactivos de Python y R)
     crossrefs-hover: true # activa los popups al pasar el mouse sobre referencias cruzadas (secciones, figuras, tablas).
     footnotes-hover: true # muestra notas al pie como tooltip emergente.
     toc-depth: 4          # incluye encabezados hasta nivel ####.
     number-depth: 3
     filters:
       - focus-mode # https://lsbjordao.github.io/quarto-book-focus-mode-example/chapter-03.html
+      - live       # quarto-live: editores interactivos {pyodide} y {webr}
     # css
     css: styles.css
     linkcolor: "#007f99"
     # code
     engine: knitr
-    live: true
     
   # Boton para cambiar tema de oscuro a claro
     theme:

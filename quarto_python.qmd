@@ -1,98 +1,415 @@
 # Configuraciones para usar Quarto con Python
 
-> **Fecha:** X de octubre, 2026
+> **Fecha:** 03 de noviembre, 2026
 
-El error ocurre porque Quarto está intentando ejecutar Python desde RStudio, pero en ese entorno faltan paquetes necesarios para utilizar Jupyter.
+En el capítulo anterior ejecutamos Python desde R con `reticulate`. Ahora aprenderemos a escribir documentos de **Quarto** (`.qmd`) con bloques de código de **Python**, y a configurar RStudio para que pueda ejecutarlos.
 
-```         
-==> quarto preview python_ejercicio1.qmd --to html --no-watch-inputs --no-browse   Starting python3 kernel...Traceback (most recent call last):   File "/Applications/RStudio.app/Contents/Resources/app/quarto/share/jupyter/jupyter.py", line 20, in <module>     from notebook import notebook_execute, RestartKernel   File "/Applications/RStudio.app/Contents/Resources/app/quarto/share/jupyter/notebook.py", line 15, in <module>     from yaml import safe_load as parse_string ModuleNotFoundError: No module named 'yaml' Python 3 installation: {}  Jupyter is not available in this Python installation. Install with python3 -m pip install jupyter  WARN: Error encountered when rendering files
-```
+Al terminar este capítulo podrás:
 
-El mensaje principal es:
+- Entender qué **motor de ejecución** usa Quarto para ejecutar Python.
+- Crear un **entorno virtual** con los paquetes que Quarto necesita.
+- Indicar a Quarto qué Python utilizar, de forma **permanente**.
+- Escribir y renderizar tu primer documento de Quarto con Python.
+- Indicar a RStudio (y a `reticulate`) qué Python utilizar.
+- Resolver los errores más comunes.
 
-```         
-ModuleNotFoundError: No module named 'yaml'
-```
+## ¿Cómo ejecuta Quarto el código de Python?
 
-Esto significa que Python no encuentra el módulo `yaml`, que pertenece al paquete PyYAML.
+Quarto no ejecuta el código por sí mismo: utiliza un **motor de ejecución** (*engine*). Para Python existen dos opciones:
 
-Además, Quarto indica:
+| Motor | ¿Quién ejecuta Python? | ¿Cuándo lo usa Quarto? |
+|----|----|----|
+| `jupyter` | Un kernel de **Jupyter**. | Cuando el documento **solo** tiene bloques `{python}`, o cuando el YAML incluye `jupyter: python3`. |
+| `knitr` | **R**, mediante el paquete `reticulate`. | Cuando el documento tiene al menos un bloque `{r}`, o cuando el YAML incluye `engine: knitr`. |
 
-```         
-Jupyter is not available in this Python installation.
-```
+En este capítulo configuraremos el motor **Jupyter**, que es el más común para documentos que solo usan Python. Para usarlo, Quarto necesita un Python que tenga instalados los paquetes `jupyter` y `PyYAML`.
 
-Vamos a solucionarlo en macOS utilizando RStudio.
+## Requisitos previos
 
-### Instalar los paquetes necesarios
+- **Python 3** instalado. Verifica en la terminal: `python3 --version`.
+- **RStudio** actualizado (ya incluye Quarto).
+- Saber abrir la pestaña **Terminal** de RStudio (no confundir con la pestaña *Console*, que es la consola de R).
 
-Abre la pestaña Terminal de RStudio (no la consola de R) y ejecuta:
+| Pestaña de RStudio | ¿Qué se escribe ahí? | Indicador |
+|----|----|----|
+| **Console** | Código de R. | `>` |
+| **Terminal** | Comandos de Bash (`python3`, `pip`, `source`). | `$` o `%` |
 
-``` bash
-python3 -m pip install PyYAML jupyter ipykernel
-```
+## Paso 1. Crear un entorno virtual
 
-Estos paquetes cumplen distintas funciones:
+Un **entorno virtual** es una carpeta con su propia copia de Python y sus propios paquetes. Usarlo evita mezclar los paquetes del curso con el Python del sistema (y evita el error `externally-managed-environment`).
 
-| Paquete     | Función                                                     |
-|-------------|-------------------------------------------------------------|
-| `PyYAML`    | Permite leer archivos YAML utilizados por Quarto.           |
-| `jupyter`   | Permite ejecutar código Python dentro de documentos Quarto. |
-| `ipykernel` | Proporciona el kernel para ejecutar Python en Jupyter.      |
-
-Si aparece el error `externally-managed-environment`, no fuerces la instalación. Utiliza un entorno virtual como se explica a continuación.
-
-### Alternativa recomendada: crear un entorno virtual
-
-En la terminal de RStudio:
+En la **Terminal** de RStudio:
 
 ``` bash
 python3 -m venv ~/.venvs/quarto-python
 ```
 
-Actívalo:
+Esto crea el entorno en la carpeta `.venvs/quarto-python` dentro de tu carpeta personal. Solo se hace **una vez**.
+
+## Paso 2. Activar el entorno
+
+::: panel-tabset
+## macOS y Linux
 
 ``` bash
 source ~/.venvs/quarto-python/bin/activate
 ```
 
-Instala los paquetes:
+## Windows (Git Bash)
+
+``` bash
+source ~/.venvs/quarto-python/Scripts/activate
+```
+:::
+
+Cuando el entorno está activo, la terminal muestra su nombre entre paréntesis:
+
+```
+(quarto-python) $
+```
+
+Dentro del entorno usamos `python` (sin el 3), porque apunta al Python del entorno. Para salir del entorno escribe `deactivate`.
+
+## Paso 3. Instalar los paquetes
+
+Con el entorno activo, instala los paquetes que necesita Quarto:
 
 ``` bash
 python -m pip install --upgrade pip
 python -m pip install PyYAML jupyter ipykernel
 ```
 
-Comprueba que funcionan:
+| Paquete     | Función                                                     |
+|-------------|-------------------------------------------------------------|
+| `PyYAML`    | Permite leer el encabezado YAML de los documentos de Quarto. |
+| `jupyter`   | Permite ejecutar código Python dentro de documentos Quarto. |
+| `ipykernel` | Proporciona el kernel para ejecutar Python en Jupyter.      |
+
+Aprovecha para instalar las bibliotecas que usaremos en el curso:
 
 ``` bash
-python -c "import yaml; import ipykernel; print('Todo correcto')"
+python -m pip install numpy pandas matplotlib seaborn scipy sympy plotly
 ```
 
-### Configurar Quarto para utilizar ese Python
-
-En la consola de RStudio, ejecuta:
+Comprueba que todo funciona:
 
 ``` bash
-Sys.setenv(
-  QUARTO_PYTHON = path.expand("~/.venvs/quarto-python/bin/python")
-)
+python -c "import yaml, ipykernel, numpy, pandas, matplotlib, sympy, plotly; print('Todo correcto')"
 ```
 
-Después comprueba la configuración:
+Si aparece `Todo correcto`, la instalación terminó bien. Los paquetes quedan guardados en el entorno: **no necesitas reinstalarlos** cada vez que abras RStudio.
+
+## Paso 4. Indicar a Quarto qué Python utilizar
+
+Por defecto, Quarto busca el primer `python3` que encuentra en tu computadora, que normalmente **no** es el de nuestro entorno. Para indicarle cuál usar, configuramos la variable de entorno `QUARTO_PYTHON`.
+
+### Opción A. Solo para la sesión actual
+
+En la **Console** de RStudio (es código de R):
+
+::: panel-tabset
+## macOS y Linux
 
 ```{r, eval=FALSE}
-quarto::quarto_check()
+Sys.setenv(QUARTO_PYTHON = path.expand("~/.venvs/quarto-python/bin/python"))
 ```
 
-También puedes verificar desde la terminal:
+## Windows
+
+```{r, eval=FALSE}
+Sys.setenv(QUARTO_PYTHON = path.expand("~/.venvs/quarto-python/Scripts/python.exe"))
+```
+:::
+
+Esta configuración **se pierde** al cerrar o reiniciar RStudio.
+
+### Opción B. De forma permanente (recomendada)
+
+Guarda la variable en el archivo `.Renviron`, que R lee automáticamente cada vez que inicia.
+
+1.  Primero obtén la ruta completa del Python de tu entorno. En la **Console** de R:
+
+    ```{r, eval=FALSE}
+    path.expand("~/.venvs/quarto-python/bin/python")
+    # [1] "/Users/tu_usuario/.venvs/quarto-python/bin/python"
+    ```
+
+2.  Abre el archivo `.Renviron`:
+
+    ```{r, eval=FALSE}
+    file.edit("~/.Renviron")
+    ```
+
+3.  Agrega la siguiente línea con **tu** ruta completa (no uses `~`), guarda el archivo y deja una línea vacía al final:
+
+    ```
+    QUARTO_PYTHON=/Users/tu_usuario/.venvs/quarto-python/bin/python
+    ```
+
+4.  Reinicia R: **Session \> Restart R**.
+
+5.  Verifica que la variable quedó configurada:
+
+    ```{r, eval=FALSE}
+    Sys.getenv("QUARTO_PYTHON")
+    ```
+
+### Verificar la configuración
+
+En la **Terminal**:
 
 ``` bash
 quarto check jupyter
 ```
 
-Importante: `Sys.setenv()` configura la variable para la sesión actual de R. Si reinicias RStudio, tendrás que volver a establecerla o guardarla en tu archivo `.Renviron`.
+Debe mostrar la ruta del Python de tu entorno (`Path`) y la versión de Jupyter, por ejemplo:
+
+```         
+[✓] Checking Python 3 installation....OK
+      Version: 3.12.13
+      Path: /Users/tu_usuario/.venvs/quarto-python/bin/python
+      Jupyter: 5.9.1
+      Kernels: python3
+
+[✓] Checking Jupyter engine render....OK
+```
+
+Si en `Path` aparece otra ruta (por ejemplo `/usr/bin/python3`), Quarto no está usando tu entorno: revisa la configuración de `QUARTO_PYTHON`.
+
+::: callout-note
+Si la terminal responde `quarto: command not found`, instala Quarto desde [quarto.org](https://quarto.org/docs/get-started/). RStudio trae su propia copia de Quarto, pero no siempre está disponible en la terminal. Aun así, el botón **Render** de RStudio funcionará.
+:::
+
+::: callout-important
+`QUARTO_PYTHON` solo afecta a **Quarto con el motor Jupyter**. Si usas `reticulate` (motor `knitr`), Python se configura por separado con `RETICULATE_PYTHON`, `use_virtualenv()` o `py_require()`.
+
+```{r, eval=FALSE}
+library(reticulate)
+use_virtualenv("~/.venvs/quarto-python")
+```
+:::
+
+## Paso 5. Configurar el encabezado YAML
+
+Crea un documento nuevo en RStudio: **File \> New File \> Quarto Document...** Al inicio del archivo `.qmd` coloca:
+
+``` yaml
+---
+title: "Introducción a Python"
+author: "Tu nombre"
+format: html
+jupyter: python3
+---
+```
+
+| Elemento | Descripción |
+|----|----|
+| `title` | Título del documento. |
+| `author` | Autor o responsable del documento. |
+| `format: html` | Genera un documento HTML. |
+| `jupyter: python3` | Indica que Python se ejecutará con el motor Jupyter, usando el kernel `python3`. |
+
+## Paso 6. Escribir y renderizar código de Python
+
+Después del YAML puedes escribir texto en Markdown e insertar bloques de código. Para insertar un bloque de Python usa el botón **Insert \> Code Cell \> Python** o escribe:
+
+````
+## Mi primer programa en Python
+
+```{python}
+nombre = "Ana"
+edad = 20
+
+print("Hola", nombre)
+print("Edad:", edad)
+```
+````
+
+Presiona el botón **Render** (o `Cmd/Ctrl + Shift + K`). Quarto ejecutará el código y mostrará los resultados en el documento HTML.
+
+Para ejecutar un bloque sin renderizar todo el documento, coloca el cursor dentro del bloque y presiona `Cmd/Ctrl + Enter` (línea por línea) o el botón ▶ (bloque completo).
+
+### Opciones de los bloques de código
+
+Las opciones de cada bloque se escriben al inicio, cada una en una línea que comienza con `#|`:
+
+````
+```{python}
+#| label: fig-grafica
+#| fig-cap: "Mi primera gráfica en Python"
+#| echo: false
+
+import matplotlib.pyplot as plt
+
+plt.plot([1, 2, 3, 4], [1, 4, 9, 16])
+plt.show()
+```
+````
+
+| Opción | ¿Qué hace? |
+|----|----|
+| `echo: false` | Muestra el resultado pero oculta el código. |
+| `eval: false` | Muestra el código pero no lo ejecuta. |
+| `output: false` | Ejecuta el código pero oculta el resultado. |
+| `warning: false` | Oculta las advertencias. |
+| `label: fig-nombre` | Nombre del bloque, permite hacer referencias cruzadas a la figura. |
+| `fig-cap: "..."` | Pie de la figura. |
+
+## Solución de problemas
+
+### Error: `No module named 'yaml'` / `Jupyter is not available`
+
+Al presionar **Render** puede aparecer:
+
+```
+Starting python3 kernel...
+Traceback (most recent call last):
+  File ".../quarto/share/jupyter/jupyter.py", line 20, in <module>
+    from notebook import notebook_execute, RestartKernel
+  File ".../quarto/share/jupyter/notebook.py", line 15, in <module>
+    from yaml import safe_load as parse_string
+ModuleNotFoundError: No module named 'yaml'
+
+Jupyter is not available in this Python installation.
+Install with python3 -m pip install jupyter
+```
+
+**¿Qué significa?** Quarto encontró un Python que **no** tiene instalados `PyYAML` ni `jupyter`. Generalmente ocurre porque Quarto está usando el Python del sistema y no el de nuestro entorno.
+
+**Solución:** revisa los pasos 3 y 4: instala los paquetes en el entorno y configura `QUARTO_PYTHON`.
+
+### Error: `ModuleNotFoundError` al ejecutar código desde RStudio
+
+Al ejecutar un bloque de Python en RStudio, o al presionar **Render**, puede aparecer:
+
+```         
+ModuleNotFoundError: No module named 'sympy'
+ModuleNotFoundError: No module named 'matplotlib'
+ModuleNotFoundError: No module named 'plotly'
+```
+
+**¿Qué significa?** Python no encuentra la biblioteca **en el Python que se está usando**, aunque la hayas instalado en tu entorno `quarto-python`.
+
+**¿Por qué ocurre?** En los documentos que tienen bloques `{r}` (motor `knitr`), el código de Python **no** lo ejecuta Jupyter, sino `reticulate`. Y `reticulate` **no** usa `QUARTO_PYTHON`: usa el intérprete de Python que está configurado en RStudio. Si RStudio apunta a otro Python (por ejemplo, uno que `reticulate` creó automáticamente en la carpeta `~/.cache/uv/...`), ese Python no tiene tus bibliotecas.
+
+| Variable o configuración | ¿Quién la usa? |
+|----|----|
+| `QUARTO_PYTHON` | Quarto, con el motor **Jupyter** (documentos con `jupyter: python3`). |
+| Intérprete de Python de RStudio (o `RETICULATE_PYTHON`) | `reticulate`, con el motor **knitr** (documentos con bloques `{r}` o `engine: knitr`) y la consola de Python de RStudio. |
+
+La solución es que **ambos** apunten al mismo entorno: `~/.venvs/quarto-python`.
+
+#### Paso 1. Identifica qué Python está usando RStudio
+
+En la **Console** de R:
+
+```{r, eval=FALSE}
+library(reticulate)
+py_config()
+```
+
+Observa la primera línea, `python:`. Si **no** aparece la ruta de tu entorno (`~/.venvs/quarto-python`), como en este ejemplo, entonces RStudio está usando otro Python:
+
+![Salida de `py_config()` cuando RStudio usa un Python de la caché de `uv`: la línea `python:` no apunta a `~/.venvs/quarto-python`.](figures/rstudio_install_python.png){fig-align="center"} También puedes preguntar si una biblioteca está disponible:
+
+```{r, eval=FALSE}
+py_module_available("sympy")   # FALSE si no está instalada en ese Python
+```
+
+#### Paso 2. Verifica que tu entorno tenga todas las bibliotecas
+
+En la **Terminal** de RStudio:
+
+``` bash
+source ~/.venvs/quarto-python/bin/activate
+python -m pip install numpy pandas matplotlib seaborn scipy sympy plotly
+python -c "import sympy, matplotlib, plotly; print('Todo correcto')"
+```
+
+#### Paso 3. Selecciona tu entorno como el Python de RStudio
+
+1.  Abre **Tools \> Global Options...**
+2.  En el menú de la izquierda, elige **Python**.
+3.  En *Python interpreter*, da clic en **Select...**
+4.  Elige la pestaña **Virtual Environments** y selecciona `~/.venvs/quarto-python/bin/python`.
+    -   En **Windows**, la ruta es `~/.venvs/quarto-python/Scripts/python.exe`.
+    -   Si no aparece en la lista, cierra la ventana, escribe la ruta completa en el campo *Python interpreter* y continúa.
+5.  Da clic en **Select** y después en **OK**.
+
+::: callout-tip
+Si solo quieres usar este entorno en un proyecto, haz lo mismo en **Tools \> Project Options... \> Python**. Esta configuración tiene prioridad sobre la global.
+:::
+
+#### Paso 4. Reinicia R
+
+Ve a **Session \> Restart R** (o cierra y abre RStudio).
+
+::: callout-important
+Este paso es **obligatorio**: `reticulate` elige qué Python usar **una sola vez por sesión**, la primera vez que ejecutas código de Python. Si no reinicias R, seguirá usando el Python anterior y el error no desaparecerá.
+:::
+
+#### Paso 5. Comprueba que ya funciona
+
+En la **Console** de R:
+
+```{r, eval=FALSE}
+library(reticulate)
+py_config()                        # La línea python: debe mostrar ~/.venvs/quarto-python
+py_module_available("sympy")       # Debe ser TRUE
+py_module_available("matplotlib")  # Debe ser TRUE
+py_module_available("plotly")      # Debe ser TRUE
+```
+
+Ahora vuelve a ejecutar tu bloque de Python o presiona **Render**.
+
+#### Alternativa: configurar `RETICULATE_PYTHON` en `.Renviron`
+
+En lugar del menú de RStudio, puedes guardar la ruta en el archivo `.Renviron`, igual que hicimos con `QUARTO_PYTHON` en el [paso 4](#paso-4.-indicar-a-quarto-qué-python-utilizar). Ábrelo desde la **Console**:
+
+```{r, eval=FALSE}
+file.edit("~/.Renviron")
+```
+
+y agrega esta línea con **tu** ruta completa (no uses `~`):
+
+```         
+RETICULATE_PYTHON=/Users/tu_usuario/.venvs/quarto-python/bin/python
+```
+
+Guarda el archivo, deja una línea vacía al final y reinicia R (**Session \> Restart R**).
+
+::: callout-note
+Cuando RStudio o `RETICULATE_PYTHON` indican un Python fijo, la función `py_require()` **ya no puede instalar** bibliotecas por ti. En ese caso instálalas siempre en tu entorno con `python -m pip install ...` (paso 2).
+:::
+
+### Tabla de errores comunes
+
+| Error | Causa | Solución |
+|----|----|----|
+| `No module named 'yaml'` / `Jupyter is not available` | Quarto usa un Python sin `jupyter` ni `PyYAML`. | Pasos 3 y 4. |
+| `ModuleNotFoundError: No module named 'pandas'` | La biblioteca no está instalada en el Python que usa Quarto. | Activa el entorno e instálala con `python -m pip install pandas`. |
+| `ModuleNotFoundError` al ejecutar o renderizar desde RStudio, aunque la biblioteca esté instalada | RStudio (`reticulate`) usa otro Python. | Selecciona `~/.venvs/quarto-python` en **Tools \> Global Options \> Python** y reinicia R. |
+| `error: externally-managed-environment` | Intentaste instalar en el Python del sistema. | Usa el entorno virtual (pasos 1 a 3). |
+| Funcionaba ayer y hoy no | Usaste `Sys.setenv()` y reiniciaste RStudio. | Guarda `QUARTO_PYTHON` en `.Renviron` (Opción B). |
+| `source: no such file or directory` | La ruta del entorno es incorrecta. | En Windows usa `Scripts/` en lugar de `bin/`. |
+| `SyntaxError` al escribir `pip install` | Escribiste el comando en la Console de R o dentro de Python. | Escríbelo en la pestaña **Terminal**. |
+
+## Resumen
+
+| Paso | ¿Dónde? | Comando | ¿Cuántas veces? |
+|----|----|----|----|
+| 1. Crear el entorno | Terminal | `python3 -m venv ~/.venvs/quarto-python` | Una vez |
+| 2. Activar el entorno | Terminal | `source ~/.venvs/quarto-python/bin/activate` | Cada vez que instales paquetes |
+| 3. Instalar paquetes | Terminal | `python -m pip install PyYAML jupyter ipykernel` | Una vez |
+| 4. Configurar Quarto | Archivo `.Renviron` | `QUARTO_PYTHON=/ruta/completa/bin/python` | Una vez |
+| 4b. Configurar RStudio (`reticulate`) | **Tools \> Global Options \> Python** | `~/.venvs/quarto-python/bin/python` | Una vez |
+| 5. Encabezado YAML | Documento `.qmd` | `jupyter: python3` | En cada documento |
+| 6. Renderizar | RStudio | Botón **Render** | Cada vez que quieras ver el resultado |
 
 ## Referencias
 
-[Usar Python con R con reticulate : : GUÍA RÁPIDA](https://rstudio.github.io/cheatsheets/translations/spanish/reticulate_es.pdf)
+- [Quarto: Using Python](https://quarto.org/docs/computations/python.html)
+- [Quarto: Engine Binding](https://quarto.org/docs/computations/execution-options.html#engine-binding)
+- [Python: entornos virtuales y paquetes](https://docs.python.org/es/3/tutorial/venv.html)
+- [Usar Python con R con reticulate : : GUÍA RÁPIDA](https://rstudio.github.io/cheatsheets/translations/spanish/reticulate_es.pdf)
