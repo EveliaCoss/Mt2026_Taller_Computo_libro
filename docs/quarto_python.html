@@ -683,38 +683,60 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Tabla de contenidos</h2>
    
   <ul>
-  <li><a href="#cómo-ejecuta-quarto-el-código-de-python" id="toc-cómo-ejecuta-quarto-el-código-de-python" class="nav-link active" data-scroll-target="#cómo-ejecuta-quarto-el-código-de-python"><span class="header-section-number">51.1</span> ¿Cómo ejecuta Quarto el código de Python?</a></li>
-  <li><a href="#requisitos-previos" id="toc-requisitos-previos" class="nav-link" data-scroll-target="#requisitos-previos"><span class="header-section-number">51.2</span> Requisitos previos</a></li>
-  <li><a href="#paso-1.-crear-un-entorno-virtual" id="toc-paso-1.-crear-un-entorno-virtual" class="nav-link" data-scroll-target="#paso-1.-crear-un-entorno-virtual"><span class="header-section-number">51.3</span> Paso 1. Crear un entorno virtual</a></li>
-  <li><a href="#paso-2.-activar-el-entorno" id="toc-paso-2.-activar-el-entorno" class="nav-link" data-scroll-target="#paso-2.-activar-el-entorno"><span class="header-section-number">51.4</span> Paso 2. Activar el entorno</a></li>
-  <li><a href="#paso-3.-instalar-los-paquetes" id="toc-paso-3.-instalar-los-paquetes" class="nav-link" data-scroll-target="#paso-3.-instalar-los-paquetes"><span class="header-section-number">51.5</span> Paso 3. Instalar los paquetes</a></li>
-  <li><a href="#paso-4.-indicar-a-quarto-qué-python-utilizar" id="toc-paso-4.-indicar-a-quarto-qué-python-utilizar" class="nav-link" data-scroll-target="#paso-4.-indicar-a-quarto-qué-python-utilizar"><span class="header-section-number">51.6</span> Paso 4. Indicar a Quarto qué Python utilizar</a>
+  <li><a href="#lista-de-verificación" id="toc-lista-de-verificación" class="nav-link active" data-scroll-target="#lista-de-verificación"><span class="header-section-number">51.1</span> Lista de verificación</a></li>
+  <li><a href="#cómo-ejecuta-quarto-el-código-de-python" id="toc-cómo-ejecuta-quarto-el-código-de-python" class="nav-link" data-scroll-target="#cómo-ejecuta-quarto-el-código-de-python"><span class="header-section-number">51.2</span> ¿Cómo ejecuta Quarto el código de Python?</a></li>
+  <li><a href="#requisitos-previos" id="toc-requisitos-previos" class="nav-link" data-scroll-target="#requisitos-previos"><span class="header-section-number">51.3</span> Requisitos previos</a>
   <ul>
-  <li><a href="#opción-a.-solo-para-la-sesión-actual" id="toc-opción-a.-solo-para-la-sesión-actual" class="nav-link" data-scroll-target="#opción-a.-solo-para-la-sesión-actual"><span class="header-section-number">51.6.1</span> Opción A. Solo para la sesión actual</a></li>
-  <li><a href="#opción-b.-de-forma-permanente-recomendada" id="toc-opción-b.-de-forma-permanente-recomendada" class="nav-link" data-scroll-target="#opción-b.-de-forma-permanente-recomendada"><span class="header-section-number">51.6.2</span> Opción B. De forma permanente (recomendada)</a></li>
-  <li><a href="#verificar-la-configuración" id="toc-verificar-la-configuración" class="nav-link" data-scroll-target="#verificar-la-configuración"><span class="header-section-number">51.6.3</span> Verificar la configuración</a></li>
+  <li><a href="#las-pestañas-console-y-terminal" id="toc-las-pestañas-console-y-terminal" class="nav-link" data-scroll-target="#las-pestañas-console-y-terminal"><span class="header-section-number">51.3.1</span> Las pestañas Console y Terminal</a></li>
+  <li><a href="#verificar-que-python-3-está-instalado" id="toc-verificar-que-python-3-está-instalado" class="nav-link" data-scroll-target="#verificar-que-python-3-está-instalado"><span class="header-section-number">51.3.2</span> Verificar que Python 3 está instalado</a></li>
+  <li><a href="#rstudio-y-quarto" id="toc-rstudio-y-quarto" class="nav-link" data-scroll-target="#rstudio-y-quarto"><span class="header-section-number">51.3.3</span> RStudio y Quarto</a></li>
   </ul></li>
-  <li><a href="#paso-5.-configurar-el-encabezado-yaml" id="toc-paso-5.-configurar-el-encabezado-yaml" class="nav-link" data-scroll-target="#paso-5.-configurar-el-encabezado-yaml"><span class="header-section-number">51.7</span> Paso 5. Configurar el encabezado YAML</a></li>
-  <li><a href="#paso-6.-escribir-y-renderizar-código-de-python" id="toc-paso-6.-escribir-y-renderizar-código-de-python" class="nav-link" data-scroll-target="#paso-6.-escribir-y-renderizar-código-de-python"><span class="header-section-number">51.8</span> Paso 6. Escribir y renderizar código de Python</a>
+  <li><a href="#paso-1.-crear-el-entorno-virtual" id="toc-paso-1.-crear-el-entorno-virtual" class="nav-link" data-scroll-target="#paso-1.-crear-el-entorno-virtual"><span class="header-section-number">51.4</span> Paso 1. Crear el entorno virtual</a></li>
+  <li><a href="#paso-2.-activar-el-entorno-virtual" id="toc-paso-2.-activar-el-entorno-virtual" class="nav-link" data-scroll-target="#paso-2.-activar-el-entorno-virtual"><span class="header-section-number">51.5</span> Paso 2. Activar el entorno virtual</a></li>
+  <li><a href="#paso-3.-instalar-todos-los-paquetes-del-curso" id="toc-paso-3.-instalar-todos-los-paquetes-del-curso" class="nav-link" data-scroll-target="#paso-3.-instalar-todos-los-paquetes-del-curso"><span class="header-section-number">51.6</span> Paso 3. Instalar todos los paquetes del curso</a>
   <ul>
-  <li><a href="#opciones-de-los-bloques-de-código" id="toc-opciones-de-los-bloques-de-código" class="nav-link" data-scroll-target="#opciones-de-los-bloques-de-código"><span class="header-section-number">51.8.1</span> Opciones de los bloques de código</a></li>
+  <li><a href="#comprobar-la-instalación" id="toc-comprobar-la-instalación" class="nav-link" data-scroll-target="#comprobar-la-instalación"><span class="header-section-number">51.6.1</span> Comprobar la instalación</a></li>
   </ul></li>
-  <li><a href="#solución-de-problemas" id="toc-solución-de-problemas" class="nav-link" data-scroll-target="#solución-de-problemas"><span class="header-section-number">51.9</span> Solución de problemas</a>
+  <li><a href="#paso-4.-indicar-a-quarto-y-a-rstudio-qué-python-usar" id="toc-paso-4.-indicar-a-quarto-y-a-rstudio-qué-python-usar" class="nav-link" data-scroll-target="#paso-4.-indicar-a-quarto-y-a-rstudio-qué-python-usar"><span class="header-section-number">51.7</span> Paso 4. Indicar a Quarto y a RStudio qué Python usar</a>
   <ul>
-  <li><a href="#error-no-module-named-yaml-jupyter-is-not-available" id="toc-error-no-module-named-yaml-jupyter-is-not-available" class="nav-link" data-scroll-target="#error-no-module-named-yaml-jupyter-is-not-available"><span class="header-section-number">51.9.1</span> Error: <code>No module named 'yaml'</code> / <code>Jupyter is not available</code></a></li>
-  <li><a href="#error-modulenotfounderror-al-ejecutar-código-desde-rstudio" id="toc-error-modulenotfounderror-al-ejecutar-código-desde-rstudio" class="nav-link" data-scroll-target="#error-modulenotfounderror-al-ejecutar-código-desde-rstudio"><span class="header-section-number">51.9.2</span> Error: <code>ModuleNotFoundError</code> al ejecutar código desde RStudio</a>
-  <ul class="collapse">
-  <li><a href="#paso-1.-identifica-qué-python-está-usando-rstudio" id="toc-paso-1.-identifica-qué-python-está-usando-rstudio" class="nav-link" data-scroll-target="#paso-1.-identifica-qué-python-está-usando-rstudio">Paso 1. Identifica qué Python está usando RStudio</a></li>
-  <li><a href="#paso-2.-verifica-que-tu-entorno-tenga-todas-las-bibliotecas" id="toc-paso-2.-verifica-que-tu-entorno-tenga-todas-las-bibliotecas" class="nav-link" data-scroll-target="#paso-2.-verifica-que-tu-entorno-tenga-todas-las-bibliotecas">Paso 2. Verifica que tu entorno tenga todas las bibliotecas</a></li>
-  <li><a href="#paso-3.-selecciona-tu-entorno-como-el-python-de-rstudio" id="toc-paso-3.-selecciona-tu-entorno-como-el-python-de-rstudio" class="nav-link" data-scroll-target="#paso-3.-selecciona-tu-entorno-como-el-python-de-rstudio">Paso 3. Selecciona tu entorno como el Python de RStudio</a></li>
-  <li><a href="#paso-4.-reinicia-r" id="toc-paso-4.-reinicia-r" class="nav-link" data-scroll-target="#paso-4.-reinicia-r">Paso 4. Reinicia R</a></li>
-  <li><a href="#paso-5.-comprueba-que-ya-funciona" id="toc-paso-5.-comprueba-que-ya-funciona" class="nav-link" data-scroll-target="#paso-5.-comprueba-que-ya-funciona">Paso 5. Comprueba que ya funciona</a></li>
-  <li><a href="#alternativa-configurar-reticulate_python-en-.renviron" id="toc-alternativa-configurar-reticulate_python-en-.renviron" class="nav-link" data-scroll-target="#alternativa-configurar-reticulate_python-en-.renviron">Alternativa: configurar <code>RETICULATE_PYTHON</code> en <code>.Renviron</code></a></li>
+  <li><a href="#obtener-la-ruta-completa-del-python-del-entorno" id="toc-obtener-la-ruta-completa-del-python-del-entorno" class="nav-link" data-scroll-target="#obtener-la-ruta-completa-del-python-del-entorno"><span class="header-section-number">51.7.1</span> 4.1. Obtener la ruta completa del Python del entorno</a></li>
+  <li><a href="#editar-el-archivo-.renviron" id="toc-editar-el-archivo-.renviron" class="nav-link" data-scroll-target="#editar-el-archivo-.renviron"><span class="header-section-number">51.7.2</span> 4.2. Editar el archivo <code>.Renviron</code></a></li>
   </ul></li>
-  <li><a href="#tabla-de-errores-comunes" id="toc-tabla-de-errores-comunes" class="nav-link" data-scroll-target="#tabla-de-errores-comunes"><span class="header-section-number">51.9.3</span> Tabla de errores comunes</a></li>
+  <li><a href="#paso-5.-reiniciar-r" id="toc-paso-5.-reiniciar-r" class="nav-link" data-scroll-target="#paso-5.-reiniciar-r"><span class="header-section-number">51.8</span> Paso 5. Reiniciar R</a></li>
+  <li><a href="#paso-6.-verificar-que-todo-funciona" id="toc-paso-6.-verificar-que-todo-funciona" class="nav-link" data-scroll-target="#paso-6.-verificar-que-todo-funciona"><span class="header-section-number">51.9</span> Paso 6. Verificar que todo funciona</a>
+  <ul>
+  <li><a href="#las-variables-quedaron-guardadas" id="toc-las-variables-quedaron-guardadas" class="nav-link" data-scroll-target="#las-variables-quedaron-guardadas"><span class="header-section-number">51.9.1</span> 6.1. Las variables quedaron guardadas</a></li>
+  <li><a href="#quarto-encuentra-jupyter-motor-jupyter" id="toc-quarto-encuentra-jupyter-motor-jupyter" class="nav-link" data-scroll-target="#quarto-encuentra-jupyter-motor-jupyter"><span class="header-section-number">51.9.2</span> 6.2. Quarto encuentra Jupyter (motor <code>jupyter</code>)</a></li>
+  <li><a href="#reticulate-usa-tu-entorno-motor-knitr" id="toc-reticulate-usa-tu-entorno-motor-knitr" class="nav-link" data-scroll-target="#reticulate-usa-tu-entorno-motor-knitr"><span class="header-section-number">51.9.3</span> 6.3. <code>reticulate</code> usa tu entorno (motor <code>knitr</code>)</a></li>
   </ul></li>
-  <li><a href="#resumen" id="toc-resumen" class="nav-link" data-scroll-target="#resumen"><span class="header-section-number">51.10</span> Resumen</a></li>
-  <li><a href="#referencias" id="toc-referencias" class="nav-link" data-scroll-target="#referencias"><span class="header-section-number">51.11</span> Referencias</a></li>
+  <li><a href="#paso-7.-mi-primer-documento-de-quarto-con-python" id="toc-paso-7.-mi-primer-documento-de-quarto-con-python" class="nav-link" data-scroll-target="#paso-7.-mi-primer-documento-de-quarto-con-python"><span class="header-section-number">51.10</span> Paso 7. Mi primer documento de Quarto con Python</a>
+  <ul>
+  <li><a href="#documento-con-el-motor-jupyter-solo-python" id="toc-documento-con-el-motor-jupyter-solo-python" class="nav-link" data-scroll-target="#documento-con-el-motor-jupyter-solo-python"><span class="header-section-number">51.10.1</span> 7.1. Documento con el motor Jupyter (solo Python)</a></li>
+  <li><a href="#documento-con-el-motor-knitr-r-y-python-juntos" id="toc-documento-con-el-motor-knitr-r-y-python-juntos" class="nav-link" data-scroll-target="#documento-con-el-motor-knitr-r-y-python-juntos"><span class="header-section-number">51.10.2</span> 7.2. Documento con el motor knitr (R y Python juntos)</a></li>
+  <li><a href="#una-prueba-con-todas-las-bibliotecas" id="toc-una-prueba-con-todas-las-bibliotecas" class="nav-link" data-scroll-target="#una-prueba-con-todas-las-bibliotecas"><span class="header-section-number">51.10.3</span> 7.3. Una prueba con todas las bibliotecas</a></li>
+  <li><a href="#ejecutar-un-bloque-sin-renderizar" id="toc-ejecutar-un-bloque-sin-renderizar" class="nav-link" data-scroll-target="#ejecutar-un-bloque-sin-renderizar"><span class="header-section-number">51.10.4</span> 7.4. Ejecutar un bloque sin renderizar</a></li>
+  <li><a href="#opciones-de-los-bloques-de-código" id="toc-opciones-de-los-bloques-de-código" class="nav-link" data-scroll-target="#opciones-de-los-bloques-de-código"><span class="header-section-number">51.10.5</span> 7.5. Opciones de los bloques de código</a></li>
+  </ul></li>
+  <li><a href="#paso-8-opcional.-usar-el-entorno-en-jupyter-notebook" id="toc-paso-8-opcional.-usar-el-entorno-en-jupyter-notebook" class="nav-link" data-scroll-target="#paso-8-opcional.-usar-el-entorno-en-jupyter-notebook"><span class="header-section-number">51.11</span> Paso 8 (opcional). Usar el entorno en Jupyter Notebook</a></li>
+  <li><a href="#solución-de-problemas" id="toc-solución-de-problemas" class="nav-link" data-scroll-target="#solución-de-problemas"><span class="header-section-number">51.12</span> Solución de problemas</a>
+  <ul>
+  <li><a href="#python3-command-not-found-python-no-se-reconoce-como-un-comando" id="toc-python3-command-not-found-python-no-se-reconoce-como-un-comando" class="nav-link" data-scroll-target="#python3-command-not-found-python-no-se-reconoce-como-un-comando"><span class="header-section-number">51.12.1</span> <code>python3: command not found</code> / <code>python no se reconoce como un comando</code></a></li>
+  <li><a href="#the-virtual-environment-was-not-created-successfully-because-ensurepip-is-not-available" id="toc-the-virtual-environment-was-not-created-successfully-because-ensurepip-is-not-available" class="nav-link" data-scroll-target="#the-virtual-environment-was-not-created-successfully-because-ensurepip-is-not-available"><span class="header-section-number">51.12.2</span> <code>The virtual environment was not created successfully because ensurepip is not available</code></a></li>
+  <li><a href="#source-no-such-file-or-directory" id="toc-source-no-such-file-or-directory" class="nav-link" data-scroll-target="#source-no-such-file-or-directory"><span class="header-section-number">51.12.3</span> <code>source: no such file or directory</code></a></li>
+  <li><a href="#error-externally-managed-environment" id="toc-error-externally-managed-environment" class="nav-link" data-scroll-target="#error-externally-managed-environment"><span class="header-section-number">51.12.4</span> <code>error: externally-managed-environment</code></a></li>
+  <li><a href="#defaulting-to-user-installation-because-normal-site-packages-is-not-writeable" id="toc-defaulting-to-user-installation-because-normal-site-packages-is-not-writeable" class="nav-link" data-scroll-target="#defaulting-to-user-installation-because-normal-site-packages-is-not-writeable"><span class="header-section-number">51.12.5</span> <code>Defaulting to user installation because normal site-packages is not writeable</code></a></li>
+  <li><a href="#syntaxerror-invalid-syntax-al-escribir-pip-install" id="toc-syntaxerror-invalid-syntax-al-escribir-pip-install" class="nav-link" data-scroll-target="#syntaxerror-invalid-syntax-al-escribir-pip-install"><span class="header-section-number">51.12.6</span> <code>SyntaxError: invalid syntax</code> al escribir <code>pip install</code></a></li>
+  <li><a href="#readtimeouterror-connection-error-durante-la-instalación" id="toc-readtimeouterror-connection-error-durante-la-instalación" class="nav-link" data-scroll-target="#readtimeouterror-connection-error-durante-la-instalación"><span class="header-section-number">51.12.7</span> <code>ReadTimeoutError</code> / <code>Connection error</code> durante la instalación</a></li>
+  <li><a href="#quarto-command-not-found" id="toc-quarto-command-not-found" class="nav-link" data-scroll-target="#quarto-command-not-found"><span class="header-section-number">51.12.8</span> <code>quarto: command not found</code></a></li>
+  <li><a href="#no-module-named-yaml-jupyter-is-not-available" id="toc-no-module-named-yaml-jupyter-is-not-available" class="nav-link" data-scroll-target="#no-module-named-yaml-jupyter-is-not-available"><span class="header-section-number">51.12.9</span> <code>No module named 'yaml'</code> / <code>Jupyter is not available</code></a></li>
+  <li><a href="#modulenotfounderror-al-ejecutar-o-renderizar-desde-rstudio" id="toc-modulenotfounderror-al-ejecutar-o-renderizar-desde-rstudio" class="nav-link" data-scroll-target="#modulenotfounderror-al-ejecutar-o-renderizar-desde-rstudio"><span class="header-section-number">51.12.10</span> <code>ModuleNotFoundError</code> al ejecutar o renderizar desde RStudio</a></li>
+  <li><a href="#ejecuté-use_virtualenv-pero-py_config-sigue-mostrando-el-python-anterior" id="toc-ejecuté-use_virtualenv-pero-py_config-sigue-mostrando-el-python-anterior" class="nav-link" data-scroll-target="#ejecuté-use_virtualenv-pero-py_config-sigue-mostrando-el-python-anterior"><span class="header-section-number">51.12.11</span> Ejecuté <code>use_virtualenv()</code> pero <code>py_config()</code> sigue mostrando el Python anterior</a></li>
+  <li><a href="#modulenotfounderror-no-module-named-pandas-o-cualquier-otra-biblioteca" id="toc-modulenotfounderror-no-module-named-pandas-o-cualquier-otra-biblioteca" class="nav-link" data-scroll-target="#modulenotfounderror-no-module-named-pandas-o-cualquier-otra-biblioteca"><span class="header-section-number">51.12.12</span> <code>ModuleNotFoundError: No module named 'pandas'</code> (o cualquier otra biblioteca)</a></li>
+  <li><a href="#cambié-.renviron-pero-no-pasa-nada-funcionaba-ayer-y-hoy-no" id="toc-cambié-.renviron-pero-no-pasa-nada-funcionaba-ayer-y-hoy-no" class="nav-link" data-scroll-target="#cambié-.renviron-pero-no-pasa-nada-funcionaba-ayer-y-hoy-no"><span class="header-section-number">51.12.13</span> Cambié <code>.Renviron</code> pero no pasa nada / “Funcionaba ayer y hoy no”</a></li>
+  <li><a href="#tabla-de-errores-comunes" id="toc-tabla-de-errores-comunes" class="nav-link" data-scroll-target="#tabla-de-errores-comunes"><span class="header-section-number">51.12.14</span> Tabla de errores comunes</a></li>
+  </ul></li>
+  <li><a href="#resumen" id="toc-resumen" class="nav-link" data-scroll-target="#resumen"><span class="header-section-number">51.13</span> Resumen</a></li>
+  <li><a href="#referencias" id="toc-referencias" class="nav-link" data-scroll-target="#referencias"><span class="header-section-number">51.14</span> Referencias</a></li>
   </ul>
 </nav>
     </div>
@@ -743,30 +765,96 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <blockquote class="blockquote">
 <p><strong>Fecha:</strong> 03 de noviembre, 2026</p>
 </blockquote>
-<p>En el capítulo anterior ejecutamos Python desde R con <code>reticulate</code>. Ahora aprenderemos a escribir documentos de <strong>Quarto</strong> (<code>.qmd</code>) con bloques de código de <strong>Python</strong>, y a configurar RStudio para que pueda ejecutarlos.</p>
+<p>En el capítulo anterior ejecutamos Python desde R con <code>reticulate</code>. Ahora configuraremos nuestra computadora para escribir documentos de <strong>Quarto</strong> (<code>.qmd</code>) con bloques de código de <strong>Python</strong> desde RStudio, e instalaremos <strong>todas las bibliotecas</strong> que usaremos en el resto del curso.</p>
 <p>Al terminar este capítulo podrás:</p>
 <ul>
-<li>Entender qué <strong>motor de ejecución</strong> usa Quarto para ejecutar Python.</li>
-<li>Crear un <strong>entorno virtual</strong> con los paquetes que Quarto necesita.</li>
-<li>Indicar a Quarto qué Python utilizar, de forma <strong>permanente</strong>.</li>
+<li>Entender qué <strong>motor de ejecución</strong> usa Quarto para ejecutar Python y qué configuración necesita cada uno.</li>
+<li>Crear un <strong>entorno virtual</strong> e instalar en él todos los paquetes del curso.</li>
+<li>Indicar de forma <strong>permanente</strong> a Quarto y a RStudio qué Python utilizar.</li>
+<li><strong>Verificar</strong> que todo funciona antes de empezar a programar.</li>
 <li>Escribir y renderizar tu primer documento de Quarto con Python.</li>
-<li>Indicar a RStudio (y a <code>reticulate</code>) qué Python utilizar.</li>
-<li>Resolver los errores más comunes.</li>
+<li>Identificar y resolver los errores más comunes.</li>
 </ul>
-<section id="cómo-ejecuta-quarto-el-código-de-python" class="level2" data-number="51.1">
-<h2 data-number="51.1" class="anchored" data-anchor-id="cómo-ejecuta-quarto-el-código-de-python"><span class="header-section-number">51.1</span> ¿Cómo ejecuta Quarto el código de Python?</h2>
-<p>Quarto no ejecuta el código por sí mismo: utiliza un <strong>motor de ejecución</strong> (<em>engine</em>). Para Python existen dos opciones:</p>
+<section id="lista-de-verificación" class="level2" data-number="51.1">
+<h2 data-number="51.1" class="anchored" data-anchor-id="lista-de-verificación"><span class="header-section-number">51.1</span> Lista de verificación</h2>
+<p>Esta es la ruta completa. Cada paso se explica a detalle más abajo; marca cada uno cuando lo termines:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>✔</th>
+<th>Paso</th>
+<th>¿Dónde?</th>
+<th>¿Cuántas veces?</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>☐</td>
+<td><a href="#requisitos-previos">Requisitos previos</a>: verificar Python y RStudio</td>
+<td>Terminal</td>
+<td>Una vez</td>
+</tr>
+<tr class="even">
+<td>☐</td>
+<td><a href="#paso-1.-crear-el-entorno-virtual">Paso 1</a>: crear el entorno virtual</td>
+<td>Terminal</td>
+<td>Una vez</td>
+</tr>
+<tr class="odd">
+<td>☐</td>
+<td><a href="#paso-2.-activar-el-entorno-virtual">Paso 2</a>: activar el entorno</td>
+<td>Terminal</td>
+<td>Cada vez que instales paquetes</td>
+</tr>
+<tr class="even">
+<td>☐</td>
+<td><a href="#paso-3.-instalar-todos-los-paquetes-del-curso">Paso 3</a>: instalar todos los paquetes del curso</td>
+<td>Terminal</td>
+<td>Una vez</td>
+</tr>
+<tr class="odd">
+<td>☐</td>
+<td><a href="#paso-4.-indicar-a-quarto-y-a-rstudio-qué-python-usar">Paso 4</a>: configurar <code>QUARTO_PYTHON</code> y <code>RETICULATE_PYTHON</code></td>
+<td>Archivo <code>.Renviron</code></td>
+<td>Una vez</td>
+</tr>
+<tr class="even">
+<td>☐</td>
+<td><a href="#paso-5.-reiniciar-r">Paso 5</a>: reiniciar R</td>
+<td>RStudio</td>
+<td>Después de cada cambio en <code>.Renviron</code></td>
+</tr>
+<tr class="odd">
+<td>☐</td>
+<td><a href="#paso-6.-verificar-que-todo-funciona">Paso 6</a>: verificar que todo funciona</td>
+<td>Terminal y Console</td>
+<td>Una vez (y cuando algo falle)</td>
+</tr>
+<tr class="even">
+<td>☐</td>
+<td><a href="#paso-7.-mi-primer-documento-de-quarto-con-python">Paso 7</a>: crear y renderizar tu primer documento</td>
+<td>RStudio</td>
+<td>En cada documento</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="cómo-ejecuta-quarto-el-código-de-python" class="level2" data-number="51.2">
+<h2 data-number="51.2" class="anchored" data-anchor-id="cómo-ejecuta-quarto-el-código-de-python"><span class="header-section-number">51.2</span> ¿Cómo ejecuta Quarto el código de Python?</h2>
+<p>Quarto no ejecuta el código por sí mismo: utiliza un <strong>motor de ejecución</strong> (<em>engine</em>). Para Python existen dos opciones, y <strong>cada una busca Python de forma diferente</strong>:</p>
 <table class="caption-top table">
 <colgroup>
-<col style="width: 33%">
-<col style="width: 33%">
-<col style="width: 33%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
 </colgroup>
 <thead>
 <tr class="header">
 <th>Motor</th>
 <th>¿Quién ejecuta Python?</th>
 <th>¿Cuándo lo usa Quarto?</th>
+<th>¿Qué Python usa?</th>
 </tr>
 </thead>
 <tbody>
@@ -774,184 +862,94 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td><code>jupyter</code></td>
 <td>Un kernel de <strong>Jupyter</strong>.</td>
 <td>Cuando el documento <strong>solo</strong> tiene bloques <code>{python}</code>, o cuando el YAML incluye <code>jupyter: python3</code>.</td>
+<td>El que indique la variable <strong><code>QUARTO_PYTHON</code></strong>.</td>
 </tr>
 <tr class="even">
 <td><code>knitr</code></td>
 <td><strong>R</strong>, mediante el paquete <code>reticulate</code>.</td>
 <td>Cuando el documento tiene al menos un bloque <code>{r}</code>, o cuando el YAML incluye <code>engine: knitr</code>.</td>
+<td>El que indique la variable <strong><code>RETICULATE_PYTHON</code></strong> (o, si no existe, el configurado en RStudio).</td>
 </tr>
 </tbody>
 </table>
-<p>En este capítulo configuraremos el motor <strong>Jupyter</strong>, que es el más común para documentos que solo usan Python. Para usarlo, Quarto necesita un Python que tenga instalados los paquetes <code>jupyter</code> y <code>PyYAML</code>.</p>
+<p>Por eso configuraremos <strong>las dos variables</strong> para que apunten al <strong>mismo</strong> entorno virtual: así, sin importar qué motor use tu documento, siempre tendrás disponibles tus bibliotecas. Los bloques de Python que ejecutas a mano en RStudio (<code>Cmd/Ctrl + Enter</code>) también usan <code>reticulate</code>.</p>
 </section>
-<section id="requisitos-previos" class="level2" data-number="51.2">
-<h2 data-number="51.2" class="anchored" data-anchor-id="requisitos-previos"><span class="header-section-number">51.2</span> Requisitos previos</h2>
-<ul>
-<li><strong>Python 3</strong> instalado. Verifica en la terminal: <code>python3 --version</code>.</li>
-<li><strong>RStudio</strong> actualizado (ya incluye Quarto).</li>
-<li>Saber abrir la pestaña <strong>Terminal</strong> de RStudio (no confundir con la pestaña <em>Console</em>, que es la consola de R).</li>
-</ul>
+<section id="requisitos-previos" class="level2" data-number="51.3">
+<h2 data-number="51.3" class="anchored" data-anchor-id="requisitos-previos"><span class="header-section-number">51.3</span> Requisitos previos</h2>
+<section id="las-pestañas-console-y-terminal" class="level3" data-number="51.3.1">
+<h3 data-number="51.3.1" class="anchored" data-anchor-id="las-pestañas-console-y-terminal"><span class="header-section-number">51.3.1</span> Las pestañas Console y Terminal</h3>
+<p>En este capítulo escribiremos comandos en <strong>dos</strong> lugares distintos de RStudio. Es el error más común, así que antes de empezar identifica cada pestaña:</p>
 <table class="caption-top table">
 <colgroup>
-<col style="width: 33%">
-<col style="width: 33%">
-<col style="width: 33%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
 </colgroup>
 <thead>
 <tr class="header">
 <th>Pestaña de RStudio</th>
 <th>¿Qué se escribe ahí?</th>
 <th>Indicador</th>
+<th>Ejemplo</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
 <td><strong>Console</strong></td>
-<td>Código de R.</td>
+<td>Código de <strong>R</strong>.</td>
 <td><code>&gt;</code></td>
+<td><code>library(reticulate)</code></td>
 </tr>
 <tr class="even">
 <td><strong>Terminal</strong></td>
-<td>Comandos de Bash (<code>python3</code>, <code>pip</code>, <code>source</code>).</td>
+<td>Comandos de <strong>Bash</strong> (<code>python3</code>, <code>pip</code>, <code>source</code>).</td>
 <td><code>$</code> o <code>%</code></td>
+<td><code>python3 --version</code></td>
 </tr>
 </tbody>
 </table>
+<p>Si no ves la pestaña <strong>Terminal</strong>, ábrela con <strong>Tools &gt; Terminal &gt; New Terminal</strong> (o <code>Alt + Shift + R</code>). En Windows, verifica que la Terminal use <strong>Git Bash</strong>: <strong>Tools &gt; Global Options &gt; Terminal &gt; New terminals open with: Git Bash</strong>.</p>
 </section>
-<section id="paso-1.-crear-un-entorno-virtual" class="level2" data-number="51.3">
-<h2 data-number="51.3" class="anchored" data-anchor-id="paso-1.-crear-un-entorno-virtual"><span class="header-section-number">51.3</span> Paso 1. Crear un entorno virtual</h2>
-<p>Un <strong>entorno virtual</strong> es una carpeta con su propia copia de Python y sus propios paquetes. Usarlo evita mezclar los paquetes del curso con el Python del sistema (y evita el error <code>externally-managed-environment</code>).</p>
-<p>En la <strong>Terminal</strong> de RStudio:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python3</span> <span class="at">-m</span> venv ~/.venvs/quarto-python</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Esto crea el entorno en la carpeta <code>.venvs/quarto-python</code> dentro de tu carpeta personal. Solo se hace <strong>una vez</strong>.</p>
-</section>
-<section id="paso-2.-activar-el-entorno" class="level2" data-number="51.4">
-<h2 data-number="51.4" class="anchored" data-anchor-id="paso-2.-activar-el-entorno"><span class="header-section-number">51.4</span> Paso 2. Activar el entorno</h2>
+<section id="verificar-que-python-3-está-instalado" class="level3" data-number="51.3.2">
+<h3 data-number="51.3.2" class="anchored" data-anchor-id="verificar-que-python-3-está-instalado"><span class="header-section-number">51.3.2</span> Verificar que Python 3 está instalado</h3>
+<p>En la <strong>Terminal</strong>:</p>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
 <ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true" href="" aria-current="page">macOS y Linux</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false" href="">Windows (Git Bash)</a></li></ul>
 <div class="tab-content">
 <div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="bu">source</span> ~/.venvs/quarto-python/bin/activate</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python3</span> <span class="at">--version</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="bu">source</span> ~/.venvs/quarto-python/Scripts/activate</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> <span class="at">--version</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div>
 </div>
-<p>Cuando el entorno está activo, la terminal muestra su nombre entre paréntesis:</p>
-<pre><code>(quarto-python) $</code></pre>
-<p>Dentro del entorno usamos <code>python</code> (sin el 3), porque apunta al Python del entorno. Para salir del entorno escribe <code>deactivate</code>.</p>
+<p>Debe aparecer algo como <code>Python 3.12.13</code>. Cualquier versión <strong>3.10 o más reciente</strong> funciona. Si aparece <code>command not found</code> (o <code>no se reconoce como un comando</code>), instala Python siguiendo el capítulo <a href="./install_python.html">Instalación de Python y reticulate en Rstudio</a>.</p>
 </section>
-<section id="paso-3.-instalar-los-paquetes" class="level2" data-number="51.5">
-<h2 data-number="51.5" class="anchored" data-anchor-id="paso-3.-instalar-los-paquetes"><span class="header-section-number">51.5</span> Paso 3. Instalar los paquetes</h2>
-<p>Con el entorno activo, instala los paquetes que necesita Quarto:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> <span class="at">-m</span> pip install <span class="at">--upgrade</span> pip</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> <span class="at">-m</span> pip install PyYAML jupyter ipykernel</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
-<table class="caption-top table">
-<colgroup>
-<col style="width: 17%">
-<col style="width: 82%">
-</colgroup>
-<thead>
-<tr class="header">
-<th>Paquete</th>
-<th>Función</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code>PyYAML</code></td>
-<td>Permite leer el encabezado YAML de los documentos de Quarto.</td>
-</tr>
-<tr class="even">
-<td><code>jupyter</code></td>
-<td>Permite ejecutar código Python dentro de documentos Quarto.</td>
-</tr>
-<tr class="odd">
-<td><code>ipykernel</code></td>
-<td>Proporciona el kernel para ejecutar Python en Jupyter.</td>
-</tr>
-</tbody>
-</table>
-<p>Aprovecha para instalar las bibliotecas que usaremos en el curso:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> <span class="at">-m</span> pip install numpy pandas matplotlib seaborn scipy sympy plotly</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Comprueba que todo funciona:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> <span class="at">-c</span> <span class="st">"import yaml, ipykernel, numpy, pandas, matplotlib, sympy, plotly; print('Todo correcto')"</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Si aparece <code>Todo correcto</code>, la instalación terminó bien. Los paquetes quedan guardados en el entorno: <strong>no necesitas reinstalarlos</strong> cada vez que abras RStudio.</p>
+<section id="rstudio-y-quarto" class="level3" data-number="51.3.3">
+<h3 data-number="51.3.3" class="anchored" data-anchor-id="rstudio-y-quarto"><span class="header-section-number">51.3.3</span> RStudio y Quarto</h3>
+<p>RStudio ya incluye Quarto, así que no necesitas instalarlo por separado. Usa una versión reciente de RStudio (<strong>Help &gt; Check for Updates</strong>).</p>
 </section>
-<section id="paso-4.-indicar-a-quarto-qué-python-utilizar" class="level2" data-number="51.6">
-<h2 data-number="51.6" class="anchored" data-anchor-id="paso-4.-indicar-a-quarto-qué-python-utilizar"><span class="header-section-number">51.6</span> Paso 4. Indicar a Quarto qué Python utilizar</h2>
-<p>Por defecto, Quarto busca el primer <code>python3</code> que encuentra en tu computadora, que normalmente <strong>no</strong> es el de nuestro entorno. Para indicarle cuál usar, configuramos la variable de entorno <code>QUARTO_PYTHON</code>.</p>
-<section id="opción-a.-solo-para-la-sesión-actual" class="level3" data-number="51.6.1">
-<h3 data-number="51.6.1" class="anchored" data-anchor-id="opción-a.-solo-para-la-sesión-actual"><span class="header-section-number">51.6.1</span> Opción A. Solo para la sesión actual</h3>
-<p>En la <strong>Console</strong> de RStudio (es código de R):</p>
+</section>
+<section id="paso-1.-crear-el-entorno-virtual" class="level2" data-number="51.4">
+<h2 data-number="51.4" class="anchored" data-anchor-id="paso-1.-crear-el-entorno-virtual"><span class="header-section-number">51.4</span> Paso 1. Crear el entorno virtual</h2>
+<p>Un <strong>entorno virtual</strong> es una carpeta con su propia copia de Python y sus propios paquetes. Usarlo evita mezclar los paquetes del curso con el Python del sistema (y evita el error <code>externally-managed-environment</code>).</p>
+<p>En la <strong>Terminal</strong> de RStudio:</p>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
-<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-2-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-1" role="tab" aria-controls="tabset-2-1" aria-selected="true" href="">macOS y Linux</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-2" role="tab" aria-controls="tabset-2-2" aria-selected="false" href="">Windows</a></li></ul>
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-2-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-1" role="tab" aria-controls="tabset-2-1" aria-selected="true" href="">macOS y Linux</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-2" role="tab" aria-controls="tabset-2-2" aria-selected="false" href="">Windows (Git Bash)</a></li></ul>
 <div class="tab-content">
 <div id="tabset-2-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-2-1-tab">
-<div class="cell">
-<details open="" class="code-fold">
-<summary>Código</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Sys.setenv</span>(<span class="at">QUARTO_PYTHON =</span> <span class="fu">path.expand</span>(<span class="st">"~/.venvs/quarto-python/bin/python"</span>))</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
-</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python3</span> <span class="at">-m</span> venv ~/.venvs/quarto-python</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div id="tabset-2-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-2-2-tab">
-<div class="cell">
-<details open="" class="code-fold">
-<summary>Código</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Sys.setenv</span>(<span class="at">QUARTO_PYTHON =</span> <span class="fu">path.expand</span>(<span class="st">"~/.venvs/quarto-python/Scripts/python.exe"</span>))</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> <span class="at">-m</span> venv ~/.venvs/quarto-python</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div>
 </div>
-</div>
-<p>Esta configuración <strong>se pierde</strong> al cerrar o reiniciar RStudio.</p>
-</section>
-<section id="opción-b.-de-forma-permanente-recomendada" class="level3" data-number="51.6.2">
-<h3 data-number="51.6.2" class="anchored" data-anchor-id="opción-b.-de-forma-permanente-recomendada"><span class="header-section-number">51.6.2</span> Opción B. De forma permanente (recomendada)</h3>
-<p>Guarda la variable en el archivo <code>.Renviron</code>, que R lee automáticamente cada vez que inicia.</p>
-<ol type="1">
-<li><p>Primero obtén la ruta completa del Python de tu entorno. En la <strong>Console</strong> de R:</p>
-<div class="cell">
-<details open="" class="code-fold">
-<summary>Código</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">path.expand</span>(<span class="st">"~/.venvs/quarto-python/bin/python"</span>)</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="co"># [1] "/Users/tu_usuario/.venvs/quarto-python/bin/python"</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
-</div></li>
-<li><p>Abre el archivo <code>.Renviron</code>:</p>
-<div class="cell">
-<details open="" class="code-fold">
-<summary>Código</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">file.edit</span>(<span class="st">"~/.Renviron"</span>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
-</div></li>
-<li><p>Agrega la siguiente línea con <strong>tu</strong> ruta completa (no uses <code>~</code>), guarda el archivo y deja una línea vacía al final:</p>
-<pre><code>QUARTO_PYTHON=/Users/tu_usuario/.venvs/quarto-python/bin/python</code></pre></li>
-<li><p>Reinicia R: <strong>Session &gt; Restart R</strong>.</p></li>
-<li><p>Verifica que la variable quedó configurada:</p>
-<div class="cell">
-<details open="" class="code-fold">
-<summary>Código</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Sys.getenv</span>(<span class="st">"QUARTO_PYTHON"</span>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
-</div></li>
-</ol>
-</section>
-<section id="verificar-la-configuración" class="level3" data-number="51.6.3">
-<h3 data-number="51.6.3" class="anchored" data-anchor-id="verificar-la-configuración"><span class="header-section-number">51.6.3</span> Verificar la configuración</h3>
-<p>En la <strong>Terminal</strong>:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto</span> check jupyter</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Debe mostrar la ruta del Python de tu entorno (<code>Path</code>) y la versión de Jupyter, por ejemplo:</p>
-<pre><code>[✓] Checking Python 3 installation....OK
-      Version: 3.12.13
-      Path: /Users/tu_usuario/.venvs/quarto-python/bin/python
-      Jupyter: 5.9.1
-      Kernels: python3
-
-[✓] Checking Jupyter engine render....OK</code></pre>
-<p>Si en <code>Path</code> aparece otra ruta (por ejemplo <code>/usr/bin/python3</code>), Quarto no está usando tu entorno: revisa la configuración de <code>QUARTO_PYTHON</code>.</p>
+<p>Esto crea el entorno en la carpeta <code>.venvs/quarto-python</code> dentro de tu carpeta personal (<code>~</code>). Solo se hace <strong>una vez</strong>. El comando no muestra ningún mensaje si todo sale bien. Compruébalo listando la carpeta:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> ~/.venvs/quarto-python</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Debes ver las carpetas <code>bin</code> (en Windows, <code>Scripts</code>), <code>include</code> y <code>lib</code>, y el archivo <code>pyvenv.cfg</code>.</p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -962,9 +960,40 @@ Nota
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Si la terminal responde <code>quarto: command not found</code>, instala Quarto desde <a href="https://quarto.org/docs/get-started/">quarto.org</a>. RStudio trae su propia copia de Quarto, pero no siempre está disponible en la terminal. Aun así, el botón <strong>Render</strong> de RStudio funcionará.</p>
+<p>La carpeta <code>.venvs</code> empieza con un punto, por lo que está <strong>oculta</strong>: no la verás en el Finder o el Explorador de archivos a menos que actives la opción de mostrar archivos ocultos. Es normal.</p>
 </div>
 </div>
+</section>
+<section id="paso-2.-activar-el-entorno-virtual" class="level2" data-number="51.5">
+<h2 data-number="51.5" class="anchored" data-anchor-id="paso-2.-activar-el-entorno-virtual"><span class="header-section-number">51.5</span> Paso 2. Activar el entorno virtual</h2>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-3-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-1" role="tab" aria-controls="tabset-3-1" aria-selected="true" href="">macOS y Linux</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-3-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-2" role="tab" aria-controls="tabset-3-2" aria-selected="false" href="">Windows (Git Bash)</a></li></ul>
+<div class="tab-content">
+<div id="tabset-3-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-3-1-tab">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="bu">source</span> ~/.venvs/quarto-python/bin/activate</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div id="tabset-3-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-3-2-tab">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="bu">source</span> ~/.venvs/quarto-python/Scripts/activate</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+<p>Cuando el entorno está activo, la terminal muestra su nombre entre paréntesis al inicio de la línea:</p>
+<pre><code>(quarto-python) $</code></pre>
+<p>Comprueba que <code>python</code> ahora es el del entorno:</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-4-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-4-1" role="tab" aria-controls="tabset-4-1" aria-selected="true" href="">macOS y Linux</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-4-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-4-2" role="tab" aria-controls="tabset-4-2" aria-selected="false" href="">Windows (Git Bash)</a></li></ul>
+<div class="tab-content">
+<div id="tabset-4-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-4-1-tab">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">which</span> python</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="co"># /Users/tu_usuario/.venvs/quarto-python/bin/python</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div id="tabset-4-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-4-2-tab">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">which</span> python</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="co"># /c/Users/tu_usuario/.venvs/quarto-python/Scripts/python</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+<p>Dentro del entorno usamos <code>python</code> (sin el 3), porque apunta al Python del entorno. Para salir del entorno escribe <code>deactivate</code>.</p>
 <div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -975,27 +1004,344 @@ Importante
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p><code>QUARTO_PYTHON</code> solo afecta a <strong>Quarto con el motor Jupyter</strong>. Si usas <code>reticulate</code> (motor <code>knitr</code>), Python se configura por separado con <code>RETICULATE_PYTHON</code>, <code>use_virtualenv()</code> o <code>py_require()</code>.</p>
+<p>La activación solo dura <strong>mientras esa Terminal esté abierta</strong>. Si cierras la Terminal o abres una nueva, tendrás que activar el entorno otra vez <strong>antes de instalar paquetes</strong>. Para renderizar documentos <strong>no</strong> necesitas activarlo: de eso se encargan las variables del paso 4.</p>
+</div>
+</div>
+</section>
+<section id="paso-3.-instalar-todos-los-paquetes-del-curso" class="level2" data-number="51.6">
+<h2 data-number="51.6" class="anchored" data-anchor-id="paso-3.-instalar-todos-los-paquetes-del-curso"><span class="header-section-number">51.6</span> Paso 3. Instalar todos los paquetes del curso</h2>
+<p>Con el entorno <strong>activo</strong> (verifica que aparezca <code>(quarto-python)</code>), actualiza <code>pip</code> e instala todos los paquetes con un solo comando:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> <span class="at">-m</span> pip install <span class="at">--upgrade</span> pip</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> <span class="at">-m</span> pip install PyYAML jupyter ipykernel numpy pandas matplotlib seaborn scipy sympy plotly</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<p>La instalación tarda algunos minutos y muestra muchos mensajes. Al final debe aparecer una línea que empieza con <code>Successfully installed ...</code>.</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Paquete</th>
+<th>¿Para qué sirve?</th>
+<th>¿Dónde lo usaremos?</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>PyYAML</code></td>
+<td>Leer el encabezado YAML de los documentos de Quarto.</td>
+<td>Quarto (obligatorio).</td>
+</tr>
+<tr class="even">
+<td><code>jupyter</code></td>
+<td>Ejecutar código de Python dentro de los documentos de Quarto.</td>
+<td>Quarto y Jupyter Notebook (obligatorio).</td>
+</tr>
+<tr class="odd">
+<td><code>ipykernel</code></td>
+<td>Proporcionar el <em>kernel</em> que ejecuta Python en Jupyter.</td>
+<td>Quarto y Jupyter Notebook (obligatorio).</td>
+</tr>
+<tr class="even">
+<td><code>numpy</code></td>
+<td>Arreglos y cálculo numérico.</td>
+<td><a href="./python_numpy.html">Introducción a NumPy</a>.</td>
+</tr>
+<tr class="odd">
+<td><code>pandas</code></td>
+<td>Tablas de datos (<code>DataFrame</code>).</td>
+<td><a href="./python_visualizacion.html">Visualización de datos</a>.</td>
+</tr>
+<tr class="even">
+<td><code>matplotlib</code></td>
+<td>Gráficas estáticas.</td>
+<td><a href="./python_visualizacion.html">Visualización de datos</a>.</td>
+</tr>
+<tr class="odd">
+<td><code>seaborn</code></td>
+<td>Gráficas estadísticas, construidas sobre Matplotlib.</td>
+<td>Visualización de datos.</td>
+</tr>
+<tr class="even">
+<td><code>scipy</code></td>
+<td>Herramientas científicas: estadística, optimización, álgebra lineal.</td>
+<td>Cómputo científico.</td>
+</tr>
+<tr class="odd">
+<td><code>sympy</code></td>
+<td>Cálculo simbólico (derivadas, integrales, ecuaciones).</td>
+<td><a href="./python_sympy.html">Cálculo simbólico con SymPy</a>.</td>
+</tr>
+<tr class="even">
+<td><code>plotly</code></td>
+<td>Gráficas interactivas.</td>
+<td><a href="./python_visualizacion.html">Visualización de datos</a>.</td>
+</tr>
+</tbody>
+</table>
+<section id="comprobar-la-instalación" class="level3" data-number="51.6.1">
+<h3 data-number="51.6.1" class="anchored" data-anchor-id="comprobar-la-instalación"><span class="header-section-number">51.6.1</span> Comprobar la instalación</h3>
+<p>Todavía en la <strong>Terminal</strong>, con el entorno activo:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> <span class="at">-c</span> <span class="st">"import yaml, jupyter, ipykernel, numpy, pandas, matplotlib, seaborn, scipy, sympy, plotly; print('Todo correcto')"</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Si aparece <code>Todo correcto</code>, la instalación terminó bien. Si aparece <code>ModuleNotFoundError: No module named '...'</code>, vuelve a ejecutar el comando de instalación: probablemente se interrumpió.</p>
+<p>Para ver todos los paquetes instalados y sus versiones:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> <span class="at">-m</span> pip list</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Los paquetes quedan guardados en el entorno: <strong>no necesitas reinstalarlos</strong> cada vez que abras RStudio.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Si más adelante necesitas otra biblioteca, el procedimiento es siempre el mismo: abre la Terminal, <strong>activa el entorno</strong> (paso 2) y ejecuta <code>python -m pip install nombre_del_paquete</code>.</p>
+</div>
+</div>
+</section>
+</section>
+<section id="paso-4.-indicar-a-quarto-y-a-rstudio-qué-python-usar" class="level2" data-number="51.7">
+<h2 data-number="51.7" class="anchored" data-anchor-id="paso-4.-indicar-a-quarto-y-a-rstudio-qué-python-usar"><span class="header-section-number">51.7</span> Paso 4. Indicar a Quarto y a RStudio qué Python usar</h2>
+<p>Configuraremos las dos variables de la tabla del inicio en el archivo <strong><code>.Renviron</code></strong>, que R lee automáticamente cada vez que inicia. Así la configuración es <strong>permanente</strong>.</p>
+<section id="obtener-la-ruta-completa-del-python-del-entorno" class="level3" data-number="51.7.1">
+<h3 data-number="51.7.1" class="anchored" data-anchor-id="obtener-la-ruta-completa-del-python-del-entorno"><span class="header-section-number">51.7.1</span> 4.1. Obtener la ruta completa del Python del entorno</h3>
+<p>En la <strong>Terminal</strong>, con el entorno <strong>activo</strong>:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> <span class="at">-c</span> <span class="st">"import sys; print(sys.executable)"</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Sistema</th>
+<th>Ejemplo de resultado</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>macOS</td>
+<td><code>/Users/ana/.venvs/quarto-python/bin/python</code></td>
+</tr>
+<tr class="even">
+<td>Linux</td>
+<td><code>/home/ana/.venvs/quarto-python/bin/python</code></td>
+</tr>
+<tr class="odd">
+<td>Windows</td>
+<td><code>C:\Users\ana\.venvs\quarto-python\Scripts\python.exe</code></td>
+</tr>
+</tbody>
+</table>
+<p>Copia <strong>tu</strong> resultado; lo usarás en el siguiente paso.</p>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Advertencia</span>En Windows
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li>Cambia las diagonales invertidas <code>\</code> por diagonales normales <code>/</code>: <code>C:/Users/ana/.venvs/quarto-python/Scripts/python.exe</code>.</li>
+<li><strong>No</strong> uses <code>path.expand("~/...")</code> en la Console de R para obtener la ruta: en Windows, el <code>~</code> de R apunta a la carpeta <strong>Documentos</strong>, no a tu carpeta personal, y la ruta quedaría mal.</li>
+</ul>
+</div>
+</div>
+</section>
+<section id="editar-el-archivo-.renviron" class="level3" data-number="51.7.2">
+<h3 data-number="51.7.2" class="anchored" data-anchor-id="editar-el-archivo-.renviron"><span class="header-section-number">51.7.2</span> 4.2. Editar el archivo <code>.Renviron</code></h3>
+<p>En la <strong>Console</strong> de R:</p>
 <div class="cell">
 <details open="" class="code-fold">
 <summary>Código</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(reticulate)</span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="fu">use_virtualenv</span>(<span class="st">"~/.venvs/quarto-python"</span>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">file.edit</span>(<span class="st">"~/.Renviron"</span>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<p>Se abrirá el archivo en el editor de RStudio (si no existía, se crea vacío). Agrega estas <strong>dos líneas</strong>, reemplazando la ruta por <strong>la tuya</strong>:</p>
+<pre><code>QUARTO_PYTHON=/Users/tu_usuario/.venvs/quarto-python/bin/python
+RETICULATE_PYTHON=/Users/tu_usuario/.venvs/quarto-python/bin/python</code></pre>
+<p>Reglas del archivo <code>.Renviron</code>:</p>
+<ul>
+<li>Una variable por línea, con el formato <code>NOMBRE=valor</code>.</li>
+<li><strong>Sin espacios</strong> alrededor del signo <code>=</code>.</li>
+<li>Usa la ruta <strong>completa</strong>: no uses <code>~</code>.</li>
+<li>Deja una <strong>línea vacía al final</strong> del archivo.</li>
+<li>Si el archivo ya tenía otras líneas, <strong>no las borres</strong>; agrega las nuevas debajo.</li>
+</ul>
+<p>Guarda el archivo (<code>Cmd/Ctrl + S</code>).</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Variable</th>
+<th>¿Quién la usa?</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>QUARTO_PYTHON</code></td>
+<td>Quarto, cuando el documento usa el motor <strong>Jupyter</strong> (<code>jupyter: python3</code>).</td>
+</tr>
+<tr class="even">
+<td><code>RETICULATE_PYTHON</code></td>
+<td><code>reticulate</code>, cuando el documento usa el motor <strong>knitr</strong> (tiene bloques <code>{r}</code>), y al ejecutar bloques de Python a mano en RStudio.</td>
+</tr>
+</tbody>
+</table>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Nota</span>¿Y si solo quiero probar en esta sesión?
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Puedes definir las variables temporalmente en la <strong>Console</strong>, en lugar de usar <code>.Renviron</code>. Se pierden al reiniciar R y deben ejecutarse <strong>antes</strong> de cualquier código de Python:</p>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Código</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Sys.setenv</span>(<span class="at">QUARTO_PYTHON =</span> <span class="st">"/Users/tu_usuario/.venvs/quarto-python/bin/python"</span>)</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="fu">Sys.setenv</span>(<span class="at">RETICULATE_PYTHON =</span> <span class="st">"/Users/tu_usuario/.venvs/quarto-python/bin/python"</span>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
 </div>
 </div>
 </section>
 </section>
-<section id="paso-5.-configurar-el-encabezado-yaml" class="level2" data-number="51.7">
-<h2 data-number="51.7" class="anchored" data-anchor-id="paso-5.-configurar-el-encabezado-yaml"><span class="header-section-number">51.7</span> Paso 5. Configurar el encabezado YAML</h2>
-<p>Crea un documento nuevo en RStudio: <strong>File &gt; New File &gt; Quarto Document…</strong> Al inicio del archivo <code>.qmd</code> coloca:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">"Introducción a Python"</span></span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="fu">author</span><span class="kw">:</span><span class="at"> </span><span class="st">"Tu nombre"</span></span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="fu">format</span><span class="kw">:</span><span class="at"> html</span></span>
-<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a><span class="fu">jupyter</span><span class="kw">:</span><span class="at"> python3</span></span>
-<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<section id="paso-5.-reiniciar-r" class="level2" data-number="51.8">
+<h2 data-number="51.8" class="anchored" data-anchor-id="paso-5.-reiniciar-r"><span class="header-section-number">51.8</span> Paso 5. Reiniciar R</h2>
+<p>Ve a <strong>Session &gt; Restart R</strong> (o cierra RStudio por completo y vuelve a abrirlo).</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Importante
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Este paso es <strong>obligatorio</strong>. R solo lee el archivo <code>.Renviron</code> al <strong>iniciar</strong>, y <code>reticulate</code> elige qué Python usar <strong>una sola vez por sesión</strong>. Si no reinicias R, tus cambios no tendrán efecto.</p>
+</div>
+</div>
+</section>
+<section id="paso-6.-verificar-que-todo-funciona" class="level2" data-number="51.9">
+<h2 data-number="51.9" class="anchored" data-anchor-id="paso-6.-verificar-que-todo-funciona"><span class="header-section-number">51.9</span> Paso 6. Verificar que todo funciona</h2>
+<section id="las-variables-quedaron-guardadas" class="level3" data-number="51.9.1">
+<h3 data-number="51.9.1" class="anchored" data-anchor-id="las-variables-quedaron-guardadas"><span class="header-section-number">51.9.1</span> 6.1. Las variables quedaron guardadas</h3>
+<p>En la <strong>Console</strong>:</p>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Código</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Sys.getenv</span>(<span class="st">"QUARTO_PYTHON"</span>)</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="fu">Sys.getenv</span>(<span class="st">"RETICULATE_PYTHON"</span>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<p>Ambas deben mostrar la ruta de tu entorno. Si aparece <code>""</code> (vacío), R no leyó el archivo: revisa que lo hayas guardado, que no haya espacios alrededor del <code>=</code> y que hayas reiniciado R.</p>
+</section>
+<section id="quarto-encuentra-jupyter-motor-jupyter" class="level3" data-number="51.9.2">
+<h3 data-number="51.9.2" class="anchored" data-anchor-id="quarto-encuentra-jupyter-motor-jupyter"><span class="header-section-number">51.9.2</span> 6.2. Quarto encuentra Jupyter (motor <code>jupyter</code>)</h3>
+<p>En la <strong>Terminal</strong>:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb19"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto</span> check jupyter</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Debe mostrar la ruta del Python de tu entorno (<code>Path</code>) y la versión de Jupyter:</p>
+<pre><code>[✓] Checking Python 3 installation....OK
+      Version: 3.12.13
+      Path: /Users/tu_usuario/.venvs/quarto-python/bin/python
+      Jupyter: 5.9.1
+      Kernels: python3
+
+[✓] Checking Jupyter engine render....OK</code></pre>
+<p>Si en <code>Path</code> aparece otra ruta (por ejemplo <code>/usr/bin/python3</code>), Quarto no está usando tu entorno: revisa <code>QUARTO_PYTHON</code> (6.1). Si la Terminal responde <code>quarto: command not found</code>, consulta <a href="#quarto-command-not-found">ese error</a> en la solución de problemas: no impide usar el botón <strong>Render</strong>.</p>
+</section>
+<section id="reticulate-usa-tu-entorno-motor-knitr" class="level3" data-number="51.9.3">
+<h3 data-number="51.9.3" class="anchored" data-anchor-id="reticulate-usa-tu-entorno-motor-knitr"><span class="header-section-number">51.9.3</span> 6.3. <code>reticulate</code> usa tu entorno (motor <code>knitr</code>)</h3>
+<p>En la <strong>Console</strong>, <strong>antes que cualquier otra cosa</strong>:</p>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Código</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(reticulate)</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="fu">py_config</span>()</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<p>La primera línea, <code>python:</code>, debe mostrar tu entorno, y la última nota debe decir que se usó <code>RETICULATE_PYTHON</code>:</p>
+<pre><code>python:         /Users/tu_usuario/.venvs/quarto-python/bin/python
+libpython:      /Users/tu_usuario/.local/share/uv/python/cpython-3.12.13-macos-aarch64-none/lib/libpython3.12.dylib
+pythonhome:     /Users/tu_usuario/.venvs/quarto-python:/Users/tu_usuario/.venvs/quarto-python
+version:        3.12.13 (main, Apr 14 2026, 14:33:40) [Clang 22.1.3 ]
+numpy:          /Users/tu_usuario/.venvs/quarto-python/lib/python3.12/site-packages/numpy
+numpy_version:  2.5.4
+
+NOTE: Python version was forced by RETICULATE_PYTHON</code></pre>
+<p>Las rutas de <code>libpython</code> pueden ser distintas en tu computadora; lo importante es la línea <code>python:</code>. Comprueba también que <code>reticulate</code> encuentra las bibliotecas:</p>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Código</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">py_module_available</span>(<span class="st">"numpy"</span>)        <span class="co"># TRUE</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="fu">py_module_available</span>(<span class="st">"matplotlib"</span>)   <span class="co"># TRUE</span></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="fu">py_module_available</span>(<span class="st">"plotly"</span>)       <span class="co"># TRUE</span></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="fu">py_module_available</span>(<span class="st">"sympy"</span>)        <span class="co"># TRUE</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<p>Si todo dice <code>TRUE</code>, <strong>la configuración está completa</strong>. 🎉</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Si la línea <code>python:</code> muestra…</th>
+<th>Significa</th>
+<th>¿Qué hacer?</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>.../.venvs/quarto-python/bin/python</code></td>
+<td>✅ Usa tu entorno.</td>
+<td>Nada.</td>
+</tr>
+<tr class="even">
+<td><code>.../.cache/uv/archive-v0/.../bin/python</code></td>
+<td>❌ Usa un Python temporal que creó <code>reticulate</code>, sin tus bibliotecas.</td>
+<td>Revisa <code>RETICULATE_PYTHON</code> (pasos 4 y 5).</td>
+</tr>
+<tr class="odd">
+<td><code>.../.local/share/uv/python/.../bin/python3.12</code> y <code>numpy: [NOT FOUND]</code></td>
+<td>❌ Usa el Python <strong>base</strong> del entorno, sin tus bibliotecas.</td>
+<td>Revisa <code>RETICULATE_PYTHON</code> (pasos 4 y 5) y <a href="#modulenotfounderror-al-ejecutar-o-renderizar-desde-rstudio">este error</a>.</td>
+</tr>
+<tr class="even">
+<td><code>/usr/bin/python3</code> u otra ruta</td>
+<td>❌ Usa el Python del sistema.</td>
+<td>Revisa <code>RETICULATE_PYTHON</code> (pasos 4 y 5).</td>
+</tr>
+</tbody>
+</table>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Advertencia
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><code>py_config()</code> no solo <strong>muestra</strong> la configuración: también <strong>inicia</strong> Python. Si la ruta es incorrecta, corrige <code>.Renviron</code> y <strong>reinicia R</strong> antes de volver a ejecutarla.</p>
+</div>
+</div>
+</section>
+</section>
+<section id="paso-7.-mi-primer-documento-de-quarto-con-python" class="level2" data-number="51.10">
+<h2 data-number="51.10" class="anchored" data-anchor-id="paso-7.-mi-primer-documento-de-quarto-con-python"><span class="header-section-number">51.10</span> Paso 7. Mi primer documento de Quarto con Python</h2>
+<section id="documento-con-el-motor-jupyter-solo-python" class="level3" data-number="51.10.1">
+<h3 data-number="51.10.1" class="anchored" data-anchor-id="documento-con-el-motor-jupyter-solo-python"><span class="header-section-number">51.10.1</span> 7.1. Documento con el motor Jupyter (solo Python)</h3>
+<p>Crea un documento nuevo: <strong>File &gt; New File &gt; Quarto Document…</strong> y, al inicio del archivo <code>.qmd</code>, coloca:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb24"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">"Introducción a Python"</span></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="fu">author</span><span class="kw">:</span><span class="at"> </span><span class="st">"Tu nombre"</span></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a><span class="fu">format</span><span class="kw">:</span><span class="at"> html</span></span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a><span class="fu">jupyter</span><span class="kw">:</span><span class="at"> python3</span></span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <table class="caption-top table">
 <colgroup>
 <col style="width: 50%">
@@ -1022,14 +1368,11 @@ Importante
 </tr>
 <tr class="even">
 <td><code>jupyter: python3</code></td>
-<td>Indica que Python se ejecutará con el motor Jupyter, usando el kernel <code>python3</code>.</td>
+<td>Indica que Python se ejecutará con el motor Jupyter, usando el kernel <code>python3</code> (el Python de <code>QUARTO_PYTHON</code>).</td>
 </tr>
 </tbody>
 </table>
-</section>
-<section id="paso-6.-escribir-y-renderizar-código-de-python" class="level2" data-number="51.8">
-<h2 data-number="51.8" class="anchored" data-anchor-id="paso-6.-escribir-y-renderizar-código-de-python"><span class="header-section-number">51.8</span> Paso 6. Escribir y renderizar código de Python</h2>
-<p>Después del YAML puedes escribir texto en Markdown e insertar bloques de código. Para insertar un bloque de Python usa el botón <strong>Insert &gt; Code Cell &gt; Python</strong> o escribe:</p>
+<p>Después del YAML escribe texto en Markdown e inserta bloques de código. Para insertar un bloque de Python usa <strong>Insert &gt; Code Cell &gt; Python</strong> o escríbelo:</p>
 <pre><code>## Mi primer programa en Python
 
 
@@ -1065,38 +1408,135 @@ Edad: 20
 :::
 :::
 </code></pre>
-<p>Presiona el botón <strong>Render</strong> (o <code>Cmd/Ctrl + Shift + K</code>). Quarto ejecutará el código y mostrará los resultados en el documento HTML.</p>
-<p>Para ejecutar un bloque sin renderizar todo el documento, coloca el cursor dentro del bloque y presiona <code>Cmd/Ctrl + Enter</code> (línea por línea) o el botón ▶ (bloque completo).</p>
-<section id="opciones-de-los-bloques-de-código" class="level3" data-number="51.8.1">
-<h3 data-number="51.8.1" class="anchored" data-anchor-id="opciones-de-los-bloques-de-código"><span class="header-section-number">51.8.1</span> Opciones de los bloques de código</h3>
+<p>Guarda el archivo y presiona el botón <strong>Render</strong> (o <code>Cmd/Ctrl + Shift + K</code>). Quarto ejecutará el código y mostrará el documento HTML con los resultados.</p>
+</section>
+<section id="documento-con-el-motor-knitr-r-y-python-juntos" class="level3" data-number="51.10.2">
+<h3 data-number="51.10.2" class="anchored" data-anchor-id="documento-con-el-motor-knitr-r-y-python-juntos"><span class="header-section-number">51.10.2</span> 7.2. Documento con el motor knitr (R y Python juntos)</h3>
+<p>Si tu documento combina bloques de <strong>R</strong> y de <strong>Python</strong>, usa el motor <code>knitr</code>:</p>
+<pre><code>---
+title: "R y Python juntos"
+format: html
+engine: knitr
+---
+
+
+::: {.cell}
+
+```{.r .cell-code}
+x &lt;- c(1, 2, 3)
+```
+:::
+
+
+
+::: {.cell}
+
+```{.python .cell-code}
+import numpy as np
+print(np.array(r.x) * 2)    # Usar en Python una variable creada en R
+```
+
+::: {.cell-output .cell-output-stdout}
+
+```
+[2. 4. 6.]
+```
+
+
+:::
+:::
+</code></pre>
+<p>En este caso Python lo ejecuta <code>reticulate</code>, con el Python de <code>RETICULATE_PYTHON</code>.</p>
+</section>
+<section id="una-prueba-con-todas-las-bibliotecas" class="level3" data-number="51.10.3">
+<h3 data-number="51.10.3" class="anchored" data-anchor-id="una-prueba-con-todas-las-bibliotecas"><span class="header-section-number">51.10.3</span> 7.3. Una prueba con todas las bibliotecas</h3>
+<p>Para comprobar todo de una vez, copia este bloque en tu documento y presiona <strong>Render</strong>:</p>
+<pre><code>
+::: {.cell}
+
+```{.python .cell-code}
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+import sympy as sp
+import plotly
+
+print("NumPy:", np.__version__)
+```
+
+::: {.cell-output .cell-output-stdout}
+
+```
+NumPy: 2.5.4
+```
+
+
+:::
+
+```{.python .cell-code}
+print("pandas:", pd.__version__)
+```
+
+::: {.cell-output .cell-output-stdout}
+
+```
+pandas: 3.1.0
+```
+
+
+:::
+
+```{.python .cell-code}
+print("SymPy:", sp.__version__)
+```
+
+::: {.cell-output .cell-output-stdout}
+
+```
+SymPy: 1.14.0
+```
+
+
+:::
+
+```{.python .cell-code}
+print("Plotly:", plotly.__version__)
+```
+
+::: {.cell-output .cell-output-stdout}
+
+```
+Plotly: 7.1.0
+```
+
+
+:::
+
+```{.python .cell-code}
+x = np.linspace(0, 2 * np.pi, 100)
+plt.plot(x, np.sin(x))
+plt.title("¡Todo funciona!")
+plt.show()
+```
+
+::: {.cell-output-display}
+![](quarto_python_files/figure-html/unnamed-chunk-9-1.png){width=672}
+:::
+:::
+</code></pre>
+<p>Si ves las versiones y la gráfica, estás listo para el resto del curso.</p>
+</section>
+<section id="ejecutar-un-bloque-sin-renderizar" class="level3" data-number="51.10.4">
+<h3 data-number="51.10.4" class="anchored" data-anchor-id="ejecutar-un-bloque-sin-renderizar"><span class="header-section-number">51.10.4</span> 7.4. Ejecutar un bloque sin renderizar</h3>
+<p>Para ejecutar un bloque sin renderizar todo el documento, coloca el cursor dentro del bloque y presiona <code>Cmd/Ctrl + Enter</code> (línea por línea) o el botón ▶ (bloque completo). El resultado aparece debajo del bloque o en la Console, que cambia de <code>&gt;</code> a <code>&gt;&gt;&gt;</code> (Python).</p>
+</section>
+<section id="opciones-de-los-bloques-de-código" class="level3" data-number="51.10.5">
+<h3 data-number="51.10.5" class="anchored" data-anchor-id="opciones-de-los-bloques-de-código"><span class="header-section-number">51.10.5</span> 7.5. Opciones de los bloques de código</h3>
 <p>Las opciones de cada bloque se escriben al inicio, cada una en una línea que comienza con <code>#|</code>:</p>
 <pre><code>
 ::: {.cell}
-::: {.cell-output .cell-output-stdout}
-
-```
-ModuleNotFoundError: No module named 'matplotlib'
-```
-
-
-:::
-
-::: {.cell-output .cell-output-stdout}
-
-```
-NameError: name 'plt' is not defined
-```
-
-
-:::
-
-::: {.cell-output .cell-output-stdout}
-
-```
-NameError: name 'plt' is not defined
-```
-
-
+::: {.cell-output-display}
+![Mi primera gráfica en Python](quarto_python_files/figure-html/fig-grafica-3.png){#fig-grafica width=672}
 :::
 :::
 </code></pre>
@@ -1140,11 +1580,76 @@ NameError: name 'plt' is not defined
 </table>
 </section>
 </section>
-<section id="solución-de-problemas" class="level2" data-number="51.9">
-<h2 data-number="51.9" class="anchored" data-anchor-id="solución-de-problemas"><span class="header-section-number">51.9</span> Solución de problemas</h2>
-<section id="error-no-module-named-yaml-jupyter-is-not-available" class="level3" data-number="51.9.1">
-<h3 data-number="51.9.1" class="anchored" data-anchor-id="error-no-module-named-yaml-jupyter-is-not-available"><span class="header-section-number">51.9.1</span> Error: <code>No module named 'yaml'</code> / <code>Jupyter is not available</code></h3>
-<p>Al presionar <strong>Render</strong> puede aparecer:</p>
+<section id="paso-8-opcional.-usar-el-entorno-en-jupyter-notebook" class="level2" data-number="51.11">
+<h2 data-number="51.11" class="anchored" data-anchor-id="paso-8-opcional.-usar-el-entorno-en-jupyter-notebook"><span class="header-section-number">51.11</span> Paso 8 (opcional). Usar el entorno en Jupyter Notebook</h2>
+<p>Si también quieres usar este entorno en Jupyter Notebook (consulta el apéndice <a href="./python_entornos.html">Entornos para trabajar con Python</a>), regístralo como un <em>kernel</em> con nombre propio. En la <strong>Terminal</strong>, con el entorno activo:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb29"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> <span class="at">-m</span> ipykernel install <span class="at">--user</span> <span class="at">--name</span> quarto-python <span class="at">--display-name</span> <span class="st">"Python (quarto-python)"</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Después, al crear un notebook en Jupyter, elige el kernel <strong>Python (quarto-python)</strong>.</p>
+</section>
+<section id="solución-de-problemas" class="level2" data-number="51.12">
+<h2 data-number="51.12" class="anchored" data-anchor-id="solución-de-problemas"><span class="header-section-number">51.12</span> Solución de problemas</h2>
+<p>Busca en esta sección el mensaje que te apareció. Al final hay una <a href="#tabla-de-errores-comunes">tabla de resumen</a>.</p>
+<section id="python3-command-not-found-python-no-se-reconoce-como-un-comando" class="level3" data-number="51.12.1">
+<h3 data-number="51.12.1" class="anchored" data-anchor-id="python3-command-not-found-python-no-se-reconoce-como-un-comando"><span class="header-section-number">51.12.1</span> <code>python3: command not found</code> / <code>python no se reconoce como un comando</code></h3>
+<p><strong>¿Dónde aparece?</strong> En la Terminal, en los requisitos previos o en el paso 1.</p>
+<p><strong>Causa:</strong> Python no está instalado o la Terminal no lo encuentra.</p>
+<p><strong>Solución:</strong></p>
+<ul>
+<li>En <strong>Windows</strong> usa <code>python</code> (sin el 3) o <code>py</code>.</li>
+<li>Si tampoco funciona, instala Python siguiendo el capítulo <a href="./install_python.html">Instalación de Python y reticulate en Rstudio</a>. En Windows, marca la casilla <strong>“Add Python to PATH”</strong> durante la instalación.</li>
+<li>Cierra y vuelve a abrir la Terminal después de instalar.</li>
+</ul>
+</section>
+<section id="the-virtual-environment-was-not-created-successfully-because-ensurepip-is-not-available" class="level3" data-number="51.12.2">
+<h3 data-number="51.12.2" class="anchored" data-anchor-id="the-virtual-environment-was-not-created-successfully-because-ensurepip-is-not-available"><span class="header-section-number">51.12.2</span> <code>The virtual environment was not created successfully because ensurepip is not available</code></h3>
+<p><strong>¿Dónde aparece?</strong> En el paso 1, en <strong>Linux</strong> (Ubuntu/Debian).</p>
+<p><strong>Solución:</strong> instala el módulo <code>venv</code> y vuelve a crear el entorno:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb30"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt install python3-venv</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="ex">python3</span> <span class="at">-m</span> venv ~/.venvs/quarto-python</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="source-no-such-file-or-directory" class="level3" data-number="51.12.3">
+<h3 data-number="51.12.3" class="anchored" data-anchor-id="source-no-such-file-or-directory"><span class="header-section-number">51.12.3</span> <code>source: no such file or directory</code></h3>
+<p><strong>¿Dónde aparece?</strong> En el paso 2, al activar el entorno.</p>
+<p><strong>Causa:</strong> la ruta es incorrecta o el entorno no se creó.</p>
+<p><strong>Solución:</strong></p>
+<ul>
+<li>En <strong>Windows</strong> la carpeta se llama <code>Scripts</code>, no <code>bin</code>: <code>source ~/.venvs/quarto-python/Scripts/activate</code>.</li>
+<li>Verifica que el entorno existe: <code>ls ~/.venvs/quarto-python</code>. Si no existe, repite el paso 1.</li>
+</ul>
+</section>
+<section id="error-externally-managed-environment" class="level3" data-number="51.12.4">
+<h3 data-number="51.12.4" class="anchored" data-anchor-id="error-externally-managed-environment"><span class="header-section-number">51.12.4</span> <code>error: externally-managed-environment</code></h3>
+<p><strong>¿Dónde aparece?</strong> En el paso 3, al instalar paquetes.</p>
+<p><strong>Causa:</strong> intentaste instalar en el Python del sistema porque el entorno <strong>no está activo</strong>.</p>
+<p><strong>Solución:</strong> activa el entorno (paso 2), verifica que aparezca <code>(quarto-python)</code> al inicio de la línea y vuelve a instalar. <strong>No</strong> uses la opción <code>--break-system-packages</code>.</p>
+</section>
+<section id="defaulting-to-user-installation-because-normal-site-packages-is-not-writeable" class="level3" data-number="51.12.5">
+<h3 data-number="51.12.5" class="anchored" data-anchor-id="defaulting-to-user-installation-because-normal-site-packages-is-not-writeable"><span class="header-section-number">51.12.5</span> <code>Defaulting to user installation because normal site-packages is not writeable</code></h3>
+<p><strong>¿Dónde aparece?</strong> En el paso 3.</p>
+<p><strong>Causa:</strong> igual que el error anterior: el entorno no está activo y los paquetes se están instalando en otro lugar.</p>
+<p><strong>Solución:</strong> cancela con <code>Ctrl + C</code>, activa el entorno (paso 2) y vuelve a instalar.</p>
+</section>
+<section id="syntaxerror-invalid-syntax-al-escribir-pip-install" class="level3" data-number="51.12.6">
+<h3 data-number="51.12.6" class="anchored" data-anchor-id="syntaxerror-invalid-syntax-al-escribir-pip-install"><span class="header-section-number">51.12.6</span> <code>SyntaxError: invalid syntax</code> al escribir <code>pip install</code></h3>
+<p><strong>¿Dónde aparece?</strong> Al escribir el comando de instalación.</p>
+<p><strong>Causa:</strong> escribiste el comando en la <strong>Console</strong> de R o dentro de Python (<code>&gt;&gt;&gt;</code>), en lugar de la <strong>Terminal</strong>.</p>
+<p><strong>Solución:</strong> si la Console muestra <code>&gt;&gt;&gt;</code>, escribe <code>exit</code> para regresar a R. Después escribe el comando en la pestaña <strong>Terminal</strong>.</p>
+</section>
+<section id="readtimeouterror-connection-error-durante-la-instalación" class="level3" data-number="51.12.7">
+<h3 data-number="51.12.7" class="anchored" data-anchor-id="readtimeouterror-connection-error-durante-la-instalación"><span class="header-section-number">51.12.7</span> <code>ReadTimeoutError</code> / <code>Connection error</code> durante la instalación</h3>
+<p><strong>¿Dónde aparece?</strong> En el paso 3.</p>
+<p><strong>Causa:</strong> la conexión a internet se interrumpió o es lenta.</p>
+<p><strong>Solución:</strong> vuelve a ejecutar el mismo comando de instalación; <code>pip</code> continuará con los paquetes que faltan. Si la red de la escuela es lenta, instala los paquetes de uno en uno.</p>
+</section>
+<section id="quarto-command-not-found" class="level3" data-number="51.12.8">
+<h3 data-number="51.12.8" class="anchored" data-anchor-id="quarto-command-not-found"><span class="header-section-number">51.12.8</span> <code>quarto: command not found</code></h3>
+<p><strong>¿Dónde aparece?</strong> En el paso 6.2, en la Terminal.</p>
+<p><strong>Causa:</strong> RStudio trae su propia copia de Quarto, pero no siempre está disponible en la Terminal.</p>
+<p><strong>Solución:</strong> no te preocupes: el botón <strong>Render</strong> de RStudio <strong>sí</strong> funciona. Para tener el comando <code>quarto</code> en la Terminal, instala Quarto desde <a href="https://quarto.org/docs/get-started/">quarto.org</a> y vuelve a abrir la Terminal. Mientras tanto, puedes verificar el motor Jupyter renderizando el documento de prueba del paso 7.3.</p>
+</section>
+<section id="no-module-named-yaml-jupyter-is-not-available" class="level3" data-number="51.12.9">
+<h3 data-number="51.12.9" class="anchored" data-anchor-id="no-module-named-yaml-jupyter-is-not-available"><span class="header-section-number">51.12.9</span> <code>No module named 'yaml'</code> / <code>Jupyter is not available</code></h3>
+<p><strong>¿Dónde aparece?</strong> Al presionar <strong>Render</strong> en un documento con <code>jupyter: python3</code>.</p>
 <pre><code>Starting python3 kernel...
 Traceback (most recent call last):
   File ".../quarto/share/jupyter/jupyter.py", line 20, in &lt;module&gt;
@@ -1155,137 +1660,83 @@ ModuleNotFoundError: No module named 'yaml'
 
 Jupyter is not available in this Python installation.
 Install with python3 -m pip install jupyter</code></pre>
-<p><strong>¿Qué significa?</strong> Quarto encontró un Python que <strong>no</strong> tiene instalados <code>PyYAML</code> ni <code>jupyter</code>. Generalmente ocurre porque Quarto está usando el Python del sistema y no el de nuestro entorno.</p>
-<p><strong>Solución:</strong> revisa los pasos 3 y 4: instala los paquetes en el entorno y configura <code>QUARTO_PYTHON</code>.</p>
+<p><strong>Causa:</strong> Quarto encontró un Python que <strong>no</strong> tiene instalados <code>PyYAML</code> ni <code>jupyter</code>. Generalmente es el Python del sistema, porque <code>QUARTO_PYTHON</code> no está configurada.</p>
+<p><strong>Solución:</strong></p>
+<ol type="1">
+<li>Verifica que los paquetes estén instalados en tu entorno (paso 3, <em>Comprobar la instalación</em>).</li>
+<li>Verifica <code>QUARTO_PYTHON</code> con <code>Sys.getenv("QUARTO_PYTHON")</code> (paso 6.1).</li>
+<li>Si está vacía o es incorrecta, corrige <code>.Renviron</code> (paso 4) y reinicia R (paso 5).</li>
+</ol>
 </section>
-<section id="error-modulenotfounderror-al-ejecutar-código-desde-rstudio" class="level3" data-number="51.9.2">
-<h3 data-number="51.9.2" class="anchored" data-anchor-id="error-modulenotfounderror-al-ejecutar-código-desde-rstudio"><span class="header-section-number">51.9.2</span> Error: <code>ModuleNotFoundError</code> al ejecutar código desde RStudio</h3>
-<p>Al ejecutar un bloque de Python en RStudio, o al presionar <strong>Render</strong>, puede aparecer:</p>
+<section id="modulenotfounderror-al-ejecutar-o-renderizar-desde-rstudio" class="level3" data-number="51.12.10">
+<h3 data-number="51.12.10" class="anchored" data-anchor-id="modulenotfounderror-al-ejecutar-o-renderizar-desde-rstudio"><span class="header-section-number">51.12.10</span> <code>ModuleNotFoundError</code> al ejecutar o renderizar desde RStudio</h3>
+<p><strong>¿Dónde aparece?</strong> Al ejecutar un bloque de Python con <code>Cmd/Ctrl + Enter</code> o al presionar <strong>Render</strong> en un documento con bloques <code>{r}</code>:</p>
 <pre><code>ModuleNotFoundError: No module named 'sympy'
 ModuleNotFoundError: No module named 'matplotlib'
 ModuleNotFoundError: No module named 'plotly'</code></pre>
-<p><strong>¿Qué significa?</strong> Python no encuentra la biblioteca <strong>en el Python que se está usando</strong>, aunque la hayas instalado en tu entorno <code>quarto-python</code>.</p>
-<p><strong>¿Por qué ocurre?</strong> En los documentos que tienen bloques <code>{r}</code> (motor <code>knitr</code>), el código de Python <strong>no</strong> lo ejecuta Jupyter, sino <code>reticulate</code>. Y <code>reticulate</code> <strong>no</strong> usa <code>QUARTO_PYTHON</code>: usa el intérprete de Python que está configurado en RStudio. Si RStudio apunta a otro Python (por ejemplo, uno que <code>reticulate</code> creó automáticamente en la carpeta <code>~/.cache/uv/...</code>), ese Python no tiene tus bibliotecas.</p>
-<table class="caption-top table">
-<colgroup>
-<col style="width: 50%">
-<col style="width: 50%">
-</colgroup>
-<thead>
-<tr class="header">
-<th>Variable o configuración</th>
-<th>¿Quién la usa?</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code>QUARTO_PYTHON</code></td>
-<td>Quarto, con el motor <strong>Jupyter</strong> (documentos con <code>jupyter: python3</code>).</td>
-</tr>
-<tr class="even">
-<td>Intérprete de Python de RStudio (o <code>RETICULATE_PYTHON</code>)</td>
-<td><code>reticulate</code>, con el motor <strong>knitr</strong> (documentos con bloques <code>{r}</code> o <code>engine: knitr</code>) y la consola de Python de RStudio.</td>
-</tr>
-</tbody>
-</table>
-<p>La solución es que <strong>ambos</strong> apunten al mismo entorno: <code>~/.venvs/quarto-python</code>.</p>
-<section id="paso-1.-identifica-qué-python-está-usando-rstudio" class="level4">
-<h4 class="anchored" data-anchor-id="paso-1.-identifica-qué-python-está-usando-rstudio">Paso 1. Identifica qué Python está usando RStudio</h4>
-<p>En la <strong>Console</strong> de R:</p>
-<div class="cell">
-<details open="" class="code-fold">
-<summary>Código</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(reticulate)</span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="fu">py_config</span>()</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
-</div>
-<p>Observa la primera línea, <code>python:</code>. Si <strong>no</strong> aparece la ruta de tu entorno (<code>~/.venvs/quarto-python</code>), como en este ejemplo, entonces RStudio está usando otro Python:</p>
-<p><img src="figures/rstudio_install_python.png" class="img-fluid quarto-figure quarto-figure-center" alt="Salida de py_config() cuando RStudio usa un Python de la caché de uv: la línea python: no apunta a ~/.venvs/quarto-python."> También puedes preguntar si una biblioteca está disponible:</p>
-<div class="cell">
-<details open="" class="code-fold">
-<summary>Código</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">py_module_available</span>(<span class="st">"sympy"</span>)   <span class="co"># FALSE si no está instalada en ese Python</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
-</div>
-</section>
-<section id="paso-2.-verifica-que-tu-entorno-tenga-todas-las-bibliotecas" class="level4">
-<h4 class="anchored" data-anchor-id="paso-2.-verifica-que-tu-entorno-tenga-todas-las-bibliotecas">Paso 2. Verifica que tu entorno tenga todas las bibliotecas</h4>
-<p>En la <strong>Terminal</strong> de RStudio:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb24"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="bu">source</span> ~/.venvs/quarto-python/bin/activate</span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> <span class="at">-m</span> pip install numpy pandas matplotlib seaborn scipy sympy plotly</span>
-<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> <span class="at">-c</span> <span class="st">"import sympy, matplotlib, plotly; print('Todo correcto')"</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
-</section>
-<section id="paso-3.-selecciona-tu-entorno-como-el-python-de-rstudio" class="level4">
-<h4 class="anchored" data-anchor-id="paso-3.-selecciona-tu-entorno-como-el-python-de-rstudio">Paso 3. Selecciona tu entorno como el Python de RStudio</h4>
+<p><strong>Causa:</strong> Python no encuentra la biblioteca <strong>en el Python que está usando <code>reticulate</code></strong>, aunque esté instalada en tu entorno <code>quarto-python</code>. Ocurre cuando <code>RETICULATE_PYTHON</code> no está configurada y RStudio usa otro Python.</p>
+<p><strong>Solución:</strong></p>
 <ol type="1">
-<li>Abre <strong>Tools &gt; Global Options…</strong></li>
-<li>En el menú de la izquierda, elige <strong>Python</strong>.</li>
-<li>En <em>Python interpreter</em>, da clic en <strong>Select…</strong></li>
-<li>Elige la pestaña <strong>Virtual Environments</strong> y selecciona <code>~/.venvs/quarto-python/bin/python</code>.
-<ul>
-<li>En <strong>Windows</strong>, la ruta es <code>~/.venvs/quarto-python/Scripts/python.exe</code>.</li>
-<li>Si no aparece en la lista, cierra la ventana, escribe la ruta completa en el campo <em>Python interpreter</em> y continúa.</li>
-</ul></li>
-<li>Da clic en <strong>Select</strong> y después en <strong>OK</strong>.</li>
+<li><p><strong>Diagnostica</strong> en la <strong>Console</strong>:</p>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Código</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(reticulate)</span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="fu">py_config</span>()</span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a><span class="fu">py_module_available</span>(<span class="st">"matplotlib"</span>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<p>Por ejemplo, esta salida indica que se está usando un Python temporal de la carpeta <code>.cache/uv</code>:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="figures/rstudio_install_python.png" class="img-fluid figure-img"></p>
+<figcaption>Salida de <code>py_config()</code> cuando se usa un Python de la caché de <code>uv</code>: la línea <code>python:</code> no apunta a <code>~/.venvs/quarto-python</code>.</figcaption>
+</figure>
+</div></li>
+<li><p><strong>Configura</strong> <code>RETICULATE_PYTHON</code> en <code>.Renviron</code> (paso 4).</p></li>
+<li><p><strong>Reinicia R</strong> (paso 5) y <strong>verifica</strong> de nuevo con <code>py_config()</code> (paso 6.3).</p></li>
 </ol>
-<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout callout-style-default callout-warning callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Tip
+<span class="screen-reader-only">Advertencia</span>¿Por qué no basta con Tools &gt; Global Options &gt; Python?
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Si solo quieres usar este entorno en un proyecto, haz lo mismo en <strong>Tools &gt; Project Options… &gt; Python</strong>. Esta configuración tiene prioridad sobre la global.</p>
+<p>En ese menú también se puede elegir un Python, pero con los entornos <code>venv</code> suele fallar: el archivo <code>~/.venvs/quarto-python/bin/python</code> es un <strong>enlace simbólico</strong> (un “atajo”) al Python base con el que se creó el entorno. Si RStudio sigue el atajo, guarda el <strong>Python base</strong>, que no tiene tus bibliotecas. En ese caso <code>py_config()</code> muestra:</p>
+<pre><code>python:         /Users/tu_usuario/.local/share/uv/python/cpython-3.12.13-macos-aarch64-none/bin/python3.12
+...
+numpy:           [NOT FOUND]
+
+NOTE: Python version was forced by use_python() function</code></pre>
+<p><code>RETICULATE_PYTHON</code> tiene <strong>prioridad</strong> sobre ese menú. Cuando está configurada, <code>reticulate</code> lo indica con el mensaje <em>“The request to <code>use_python(...)</code> will be ignored because the environment variable RETICULATE_PYTHON is set”</em>, y usa tu entorno.</p>
 </div>
 </div>
-</section>
-<section id="paso-4.-reinicia-r" class="level4">
-<h4 class="anchored" data-anchor-id="paso-4.-reinicia-r">Paso 4. Reinicia R</h4>
-<p>Ve a <strong>Session &gt; Restart R</strong> (o cierra y abre RStudio).</p>
-<div class="callout callout-style-default callout-important callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Importante
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Este paso es <strong>obligatorio</strong>: <code>reticulate</code> elige qué Python usar <strong>una sola vez por sesión</strong>, la primera vez que ejecutas código de Python. Si no reinicias R, seguirá usando el Python anterior y el error no desaparecerá.</p>
-</div>
-</div>
-</section>
-<section id="paso-5.-comprueba-que-ya-funciona" class="level4">
-<h4 class="anchored" data-anchor-id="paso-5.-comprueba-que-ya-funciona">Paso 5. Comprueba que ya funciona</h4>
-<p>En la <strong>Console</strong> de R:</p>
+<p><strong>Solución rápida para la sesión actual</strong> (por ejemplo, en clase): reinicia R (<strong>Session &gt; Restart R</strong>) y ejecuta en la <strong>Console</strong>, <strong>antes</strong> de cualquier código de Python:</p>
 <div class="cell">
 <details open="" class="code-fold">
 <summary>Código</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(reticulate)</span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="fu">py_config</span>()                        <span class="co"># La línea python: debe mostrar ~/.venvs/quarto-python</span></span>
-<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="fu">py_module_available</span>(<span class="st">"sympy"</span>)       <span class="co"># Debe ser TRUE</span></span>
-<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a><span class="fu">py_module_available</span>(<span class="st">"matplotlib"</span>)  <span class="co"># Debe ser TRUE</span></span>
-<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a><span class="fu">py_module_available</span>(<span class="st">"plotly"</span>)      <span class="co"># Debe ser TRUE</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(reticulate)</span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="fu">use_virtualenv</span>(<span class="st">"~/.venvs/quarto-python"</span>, <span class="at">required =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a><span class="fu">py_config</span>()   <span class="co"># La línea python: debe mostrar ~/.venvs/quarto-python</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
-<p>Ahora vuelve a ejecutar tu bloque de Python o presiona <strong>Render</strong>.</p>
+<p>Esta configuración se pierde al reiniciar R.</p>
 </section>
-<section id="alternativa-configurar-reticulate_python-en-.renviron" class="level4">
-<h4 class="anchored" data-anchor-id="alternativa-configurar-reticulate_python-en-.renviron">Alternativa: configurar <code>RETICULATE_PYTHON</code> en <code>.Renviron</code></h4>
-<p>En lugar del menú de RStudio, puedes guardar la ruta en el archivo <code>.Renviron</code>, igual que hicimos con <code>QUARTO_PYTHON</code> en el <a href="#paso-4.-indicar-a-quarto-qué-python-utilizar">paso 4</a>. Ábrelo desde la <strong>Console</strong>:</p>
-<div class="cell">
-<details open="" class="code-fold">
-<summary>Código</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">file.edit</span>(<span class="st">"~/.Renviron"</span>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
-</div>
-<p>y agrega esta línea con <strong>tu</strong> ruta completa (no uses <code>~</code>):</p>
-<pre><code>RETICULATE_PYTHON=/Users/tu_usuario/.venvs/quarto-python/bin/python</code></pre>
-<p>Guarda el archivo, deja una línea vacía al final y reinicia R (<strong>Session &gt; Restart R</strong>).</p>
+<section id="ejecuté-use_virtualenv-pero-py_config-sigue-mostrando-el-python-anterior" class="level3" data-number="51.12.11">
+<h3 data-number="51.12.11" class="anchored" data-anchor-id="ejecuté-use_virtualenv-pero-py_config-sigue-mostrando-el-python-anterior"><span class="header-section-number">51.12.11</span> Ejecuté <code>use_virtualenv()</code> pero <code>py_config()</code> sigue mostrando el Python anterior</h3>
+<p><strong>¿Dónde aparece?</strong> En la Console. <code>use_virtualenv()</code> <strong>no muestra ningún error</strong>, pero no tiene efecto: <code>py_config()</code> sigue mostrando la ruta anterior.</p>
+<p><strong>Causa:</strong> Python ya se había iniciado en esta sesión (por ejemplo, porque ejecutaste antes <code>py_config()</code> o un bloque de Python), y <code>reticulate</code> <strong>no puede cambiar</strong> de Python sin reiniciar R.</p>
+<p><strong>Solución:</strong> reinicia R (<strong>Session &gt; Restart R</strong>) y ejecuta <code>use_virtualenv()</code> <strong>antes</strong> que cualquier otra cosa.</p>
+</section>
+<section id="modulenotfounderror-no-module-named-pandas-o-cualquier-otra-biblioteca" class="level3" data-number="51.12.12">
+<h3 data-number="51.12.12" class="anchored" data-anchor-id="modulenotfounderror-no-module-named-pandas-o-cualquier-otra-biblioteca"><span class="header-section-number">51.12.12</span> <code>ModuleNotFoundError: No module named 'pandas'</code> (o cualquier otra biblioteca)</h3>
+<p><strong>¿Dónde aparece?</strong> Al renderizar o ejecutar, aunque la configuración esté bien (<code>py_config()</code> muestra tu entorno).</p>
+<p><strong>Causa:</strong> esa biblioteca no está instalada en tu entorno.</p>
+<p><strong>Solución:</strong> en la <strong>Terminal</strong>, activa el entorno (paso 2) e instálala: <code>python -m pip install pandas</code>.</p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -1296,68 +1747,126 @@ Nota
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Cuando RStudio o <code>RETICULATE_PYTHON</code> indican un Python fijo, la función <code>py_require()</code> <strong>ya no puede instalar</strong> bibliotecas por ti. En ese caso instálalas siempre en tu entorno con <code>python -m pip install ...</code> (paso 2).</p>
+<p>Cuando <code>RETICULATE_PYTHON</code> indica un Python fijo, la función <code>py_require()</code> <strong>ya no puede instalar</strong> bibliotecas por ti. Instálalas siempre en tu entorno con <code>python -m pip install ...</code>.</p>
 </div>
 </div>
 </section>
+<section id="cambié-.renviron-pero-no-pasa-nada-funcionaba-ayer-y-hoy-no" class="level3" data-number="51.12.13">
+<h3 data-number="51.12.13" class="anchored" data-anchor-id="cambié-.renviron-pero-no-pasa-nada-funcionaba-ayer-y-hoy-no"><span class="header-section-number">51.12.13</span> Cambié <code>.Renviron</code> pero no pasa nada / “Funcionaba ayer y hoy no”</h3>
+<p><strong>Causas y soluciones:</strong></p>
+<ul>
+<li><strong>No reiniciaste R</strong>: ve a <strong>Session &gt; Restart R</strong> (paso 5).</li>
+<li><strong>Usaste <code>Sys.setenv()</code></strong> en lugar de <code>.Renviron</code>: esa configuración se pierde al reiniciar. Guarda las variables en <code>.Renviron</code> (paso 4).</li>
+<li><strong>Hay espacios</strong> alrededor del <code>=</code>: debe ser <code>QUARTO_PYTHON=/ruta</code>, no <code>QUARTO_PYTHON = /ruta</code>.</li>
+<li><strong>Usaste <code>~</code></strong> en la ruta: escribe la ruta completa.</li>
+<li><strong>Falta la línea vacía</strong> al final del archivo: agrégala y guarda.</li>
+<li><strong>En Windows</strong> usaste <code>\</code>: cámbialas por <code>/</code>.</li>
+<li><strong>Moviste o borraste</strong> la carpeta <code>~/.venvs/quarto-python</code>: créala de nuevo (pasos 1 a 3).</li>
+</ul>
+<p>Verifica siempre con <code>Sys.getenv("QUARTO_PYTHON")</code> y <code>Sys.getenv("RETICULATE_PYTHON")</code> (paso 6.1).</p>
 </section>
-<section id="tabla-de-errores-comunes" class="level3" data-number="51.9.3">
-<h3 data-number="51.9.3" class="anchored" data-anchor-id="tabla-de-errores-comunes"><span class="header-section-number">51.9.3</span> Tabla de errores comunes</h3>
+<section id="tabla-de-errores-comunes" class="level3" data-number="51.12.14">
+<h3 data-number="51.12.14" class="anchored" data-anchor-id="tabla-de-errores-comunes"><span class="header-section-number">51.12.14</span> Tabla de errores comunes</h3>
 <table class="caption-top table">
 <colgroup>
-<col style="width: 33%">
-<col style="width: 33%">
-<col style="width: 33%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
 </colgroup>
 <thead>
 <tr class="header">
-<th>Error</th>
+<th>Mensaje o síntoma</th>
+<th>¿Dónde?</th>
 <th>Causa</th>
 <th>Solución</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td><code>No module named 'yaml'</code> / <code>Jupyter is not available</code></td>
-<td>Quarto usa un Python sin <code>jupyter</code> ni <code>PyYAML</code>.</td>
-<td>Pasos 3 y 4.</td>
+<td><code>python3: command not found</code></td>
+<td>Terminal</td>
+<td>Python no instalado o no encontrado.</td>
+<td>En Windows usa <code>python</code>; si no, instala Python.</td>
 </tr>
 <tr class="even">
-<td><code>ModuleNotFoundError: No module named 'pandas'</code></td>
-<td>La biblioteca no está instalada en el Python que usa Quarto.</td>
-<td>Activa el entorno e instálala con <code>python -m pip install pandas</code>.</td>
+<td><code>ensurepip is not available</code></td>
+<td>Terminal (Linux)</td>
+<td>Falta el módulo <code>venv</code>.</td>
+<td><code>sudo apt install python3-venv</code>.</td>
 </tr>
 <tr class="odd">
-<td><code>ModuleNotFoundError</code> al ejecutar o renderizar desde RStudio, aunque la biblioteca esté instalada</td>
-<td>RStudio (<code>reticulate</code>) usa otro Python.</td>
-<td>Selecciona <code>~/.venvs/quarto-python</code> en <strong>Tools &gt; Global Options &gt; Python</strong> y reinicia R.</td>
-</tr>
-<tr class="even">
-<td><code>error: externally-managed-environment</code></td>
-<td>Intentaste instalar en el Python del sistema.</td>
-<td>Usa el entorno virtual (pasos 1 a 3).</td>
-</tr>
-<tr class="odd">
-<td>Funcionaba ayer y hoy no</td>
-<td>Usaste <code>Sys.setenv()</code> y reiniciaste RStudio.</td>
-<td>Guarda <code>QUARTO_PYTHON</code> en <code>.Renviron</code> (Opción B).</td>
-</tr>
-<tr class="even">
 <td><code>source: no such file or directory</code></td>
-<td>La ruta del entorno es incorrecta.</td>
+<td>Terminal</td>
+<td>Ruta incorrecta.</td>
 <td>En Windows usa <code>Scripts/</code> en lugar de <code>bin/</code>.</td>
 </tr>
+<tr class="even">
+<td><code>externally-managed-environment</code></td>
+<td>Terminal</td>
+<td>El entorno no está activo.</td>
+<td>Activa el entorno (paso 2).</td>
+</tr>
 <tr class="odd">
+<td><code>Defaulting to user installation</code></td>
+<td>Terminal</td>
+<td>El entorno no está activo.</td>
+<td>Activa el entorno (paso 2).</td>
+</tr>
+<tr class="even">
 <td><code>SyntaxError</code> al escribir <code>pip install</code></td>
-<td>Escribiste el comando en la Console de R o dentro de Python.</td>
-<td>Escríbelo en la pestaña <strong>Terminal</strong>.</td>
+<td>Console</td>
+<td>El comando se escribió en R o en Python.</td>
+<td>Escríbelo en la <strong>Terminal</strong>.</td>
+</tr>
+<tr class="odd">
+<td><code>ReadTimeoutError</code></td>
+<td>Terminal</td>
+<td>Conexión lenta.</td>
+<td>Repite la instalación.</td>
+</tr>
+<tr class="even">
+<td><code>quarto: command not found</code></td>
+<td>Terminal</td>
+<td>Quarto no está en la Terminal.</td>
+<td>Usa el botón <strong>Render</strong> o instala Quarto.</td>
+</tr>
+<tr class="odd">
+<td><code>No module named 'yaml'</code> / <code>Jupyter is not available</code></td>
+<td>Render</td>
+<td>Falta <code>QUARTO_PYTHON</code> o los paquetes.</td>
+<td>Pasos 3, 4 y 5.</td>
+</tr>
+<tr class="even">
+<td><code>ModuleNotFoundError</code> y <code>py_config()</code> <strong>no</strong> muestra tu entorno</td>
+<td>RStudio</td>
+<td>Falta <code>RETICULATE_PYTHON</code>.</td>
+<td>Pasos 4 y 5.</td>
+</tr>
+<tr class="odd">
+<td><code>ModuleNotFoundError</code> y <code>py_config()</code> <strong>sí</strong> muestra tu entorno</td>
+<td>RStudio</td>
+<td>La biblioteca no está instalada.</td>
+<td><code>python -m pip install ...</code> con el entorno activo.</td>
+</tr>
+<tr class="even">
+<td><code>use_virtualenv()</code> no cambia el Python</td>
+<td>Console</td>
+<td>Python ya se inició en la sesión.</td>
+<td>Reinicia R y ejecútalo primero.</td>
+</tr>
+<tr class="odd">
+<td><code>Sys.getenv()</code> regresa <code>""</code></td>
+<td>Console</td>
+<td>R no leyó <code>.Renviron</code>.</td>
+<td>Revisa el formato del archivo y reinicia R.</td>
 </tr>
 </tbody>
 </table>
 </section>
 </section>
-<section id="resumen" class="level2" data-number="51.10">
-<h2 data-number="51.10" class="anchored" data-anchor-id="resumen"><span class="header-section-number">51.10</span> Resumen</h2>
+<section id="resumen" class="level2" data-number="51.13">
+<h2 data-number="51.13" class="anchored" data-anchor-id="resumen"><span class="header-section-number">51.13</span> Resumen</h2>
 <table class="caption-top table">
 <colgroup>
 <col style="width: 25%">
@@ -1369,7 +1878,7 @@ Nota
 <tr class="header">
 <th>Paso</th>
 <th>¿Dónde?</th>
-<th>Comando</th>
+<th>Comando o acción</th>
 <th>¿Cuántas veces?</th>
 </tr>
 </thead>
@@ -1387,44 +1896,45 @@ Nota
 <td>Cada vez que instales paquetes</td>
 </tr>
 <tr class="odd">
-<td>3. Instalar paquetes</td>
+<td>3. Instalar los paquetes</td>
 <td>Terminal</td>
-<td><code>python -m pip install PyYAML jupyter ipykernel</code></td>
+<td><code>python -m pip install PyYAML jupyter ipykernel numpy pandas matplotlib seaborn scipy sympy plotly</code></td>
 <td>Una vez</td>
 </tr>
 <tr class="even">
-<td>4. Configurar Quarto</td>
+<td>4. Configurar las variables</td>
 <td>Archivo <code>.Renviron</code></td>
-<td><code>QUARTO_PYTHON=/ruta/completa/bin/python</code></td>
+<td><code>QUARTO_PYTHON=/ruta/completa</code> y <code>RETICULATE_PYTHON=/ruta/completa</code></td>
 <td>Una vez</td>
 </tr>
 <tr class="odd">
-<td>4b. Configurar RStudio (<code>reticulate</code>)</td>
-<td><strong>Tools &gt; Global Options &gt; Python</strong></td>
-<td><code>~/.venvs/quarto-python/bin/python</code></td>
-<td>Una vez</td>
+<td>5. Reiniciar R</td>
+<td>RStudio</td>
+<td><strong>Session &gt; Restart R</strong></td>
+<td>Después de cada cambio en <code>.Renviron</code></td>
 </tr>
 <tr class="even">
-<td>5. Encabezado YAML</td>
-<td>Documento <code>.qmd</code></td>
-<td><code>jupyter: python3</code></td>
-<td>En cada documento</td>
+<td>6. Verificar</td>
+<td>Terminal y Console</td>
+<td><code>quarto check jupyter</code>, <code>py_config()</code>, <code>py_module_available()</code></td>
+<td>Una vez (y cuando algo falle)</td>
 </tr>
 <tr class="odd">
-<td>6. Renderizar</td>
+<td>7. Crear y renderizar</td>
 <td>RStudio</td>
-<td>Botón <strong>Render</strong></td>
-<td>Cada vez que quieras ver el resultado</td>
+<td>YAML con <code>jupyter: python3</code> (o <code>engine: knitr</code>) y botón <strong>Render</strong></td>
+<td>En cada documento</td>
 </tr>
 </tbody>
 </table>
 </section>
-<section id="referencias" class="level2" data-number="51.11">
-<h2 data-number="51.11" class="anchored" data-anchor-id="referencias"><span class="header-section-number">51.11</span> Referencias</h2>
+<section id="referencias" class="level2" data-number="51.14">
+<h2 data-number="51.14" class="anchored" data-anchor-id="referencias"><span class="header-section-number">51.14</span> Referencias</h2>
 <ul>
 <li><a href="https://quarto.org/docs/computations/python.html">Quarto: Using Python</a></li>
 <li><a href="https://quarto.org/docs/computations/execution-options.html#engine-binding">Quarto: Engine Binding</a></li>
 <li><a href="https://docs.python.org/es/3/tutorial/venv.html">Python: entornos virtuales y paquetes</a></li>
+<li><a href="https://rstudio.github.io/reticulate/articles/versions.html">reticulate: Python version configuration</a></li>
 <li><a href="https://rstudio.github.io/cheatsheets/translations/spanish/reticulate_es.pdf">Usar Python con R con reticulate : : GUÍA RÁPIDA</a></li>
 </ul>
 

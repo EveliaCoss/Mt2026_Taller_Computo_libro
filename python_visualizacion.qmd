@@ -33,89 +33,36 @@ def _mostrar_en_libro(self, *args, **kwargs):
 go.Figure.show = _mostrar_en_libro
 ```
 
-```         
-_primera_figura = False
-```
-
 > **Fecha:** 03 de noviembre, 2026
 
 Una buena gráfica permite ver en segundos lo que en una tabla de números tardaríamos mucho en descubrir: tendencias, relaciones, valores atípicos o el comportamiento de una función.
 
 En este capítulo usaremos dos bibliotecas:
 
-| | Matplotlib | Plotly |
-|----|----|----|
+|   | Matplotlib | Plotly |
+|------------------------|------------------------|------------------------|
 | Tipo de gráfica | **Estática** (imagen). | **Interactiva** (zoom, desplazamiento, información al pasar el ratón). |
 | Ideal para | Artículos, tesis, reportes en PDF. | Páginas web, exploración de datos, presentaciones. |
 | Formato de salida | PNG, PDF, SVG. | HTML. |
 | Estilo de código | Se construye paso a paso (ejes, líneas, etiquetas). | Una función crea la gráfica completa. |
 
-## Instalar e importar
+## Antes de empezar
 
-En tu computadora, instálalas en tu entorno virtual desde la **Terminal** (consulta el apéndice [Entornos para trabajar con Python](python_entornos.qmd)):
+Las bibliotecas de este capítulo (`numpy`, `pandas`, `matplotlib`, `plotly` y `sympy`) ya las instalaste en tu entorno `quarto-python` en el capítulo [Configuraciones para usar Quarto con Python](quarto_python.qmd). Si necesitas repasar algo, consulta ahí:
 
-``` bash
-source ~/.venvs/quarto-python/bin/activate
-python -m pip install numpy pandas matplotlib plotly sympy
-```
+| Si necesitas... | Consulta |
+|------------------------------------|------------------------------------|
+| Instalar las bibliotecas | [Paso 3. Instalar todos los paquetes del curso](quarto_python.qmd#paso-3.-instalar-todos-los-paquetes-del-curso) |
+| Comprobar que RStudio usa tu entorno | [Paso 6. Verificar que todo funciona](quarto_python.qmd#paso-6.-verificar-que-todo-funciona) |
+| Resolver `ModuleNotFoundError: No module named 'matplotlib'` (o `'plotly'`) | [Solución de problemas: `ModuleNotFoundError` al ejecutar o renderizar desde RStudio](quarto_python.qmd#modulenotfounderror-al-ejecutar-o-renderizar-desde-rstudio) |
 
-En Google Colab y en los editores de esta página **ya están disponibles**. Por convención se importan así:
+En Google Colab y en los editores de esta página las bibliotecas **ya están disponibles**. Por convención se importan así:
 
 ```{python}
 import numpy as np
 import matplotlib.pyplot as plt
 import plotly.express as px
 ```
-
-### Si aparece `ModuleNotFoundError: No module named 'matplotlib'` (o `'plotly'`)
-
-```         
-ModuleNotFoundError: No module named 'matplotlib'
-ModuleNotFoundError: No module named 'plotly'
-```
-
-Este error significa que **el Python que está ejecutando tu código no tiene esas bibliotecas**, aunque las hayas instalado en tu entorno `quarto-python`.
-
-**¿Por qué ocurre?** En RStudio, los bloques de Python de un documento con bloques `{r}` los ejecuta `reticulate`, que usa el **intérprete de Python configurado en RStudio** (no `QUARTO_PYTHON`). Si RStudio apunta a otro Python, por ejemplo uno de la carpeta `~/.cache/uv/...`, ese Python no tiene Matplotlib ni Plotly.
-
-**Solución paso a paso:**
-
-1.  **Identifica qué Python usa RStudio.** En la **Console** de R:
-
-    ```{r, eval=FALSE}
-    library(reticulate)
-    py_config()                          # Revisa la línea python:
-    py_module_available("matplotlib")    # FALSE = no está instalada en ese Python
-    py_module_available("plotly")
-    ```
-
-2.  **Instala las bibliotecas en tu entorno.** En la **Terminal**:
-
-    ``` bash
-    source ~/.venvs/quarto-python/bin/activate
-    python -m pip install numpy pandas matplotlib plotly sympy
-    python -c "import matplotlib, plotly; print('Todo correcto')"
-    ```
-
-3.  **Selecciona tu entorno en RStudio:** **Tools \> Global Options... \> Python \> Select...**, pestaña **Virtual Environments**, elige `~/.venvs/quarto-python/bin/python` (en Windows, `~/.venvs/quarto-python/Scripts/python.exe`) y da clic en **Select** y **OK**.
-
-4.  **Cierra RStudio por completo y vuelve a abrirlo.** Es obligatorio: `reticulate` elige el Python **una sola vez por sesión**. Si RStudio sigue abierto, puede conservar el Python anterior.
-
-5.  **Comprueba** en la **Console** que `py_config()` muestre `~/.venvs/quarto-python` y que `py_module_available("matplotlib")` y `py_module_available("plotly")` sean `TRUE`.
-
-Encontrarás la explicación completa en el capítulo [Configuraciones para usar Quarto con Python](quarto_python.qmd), sección *Solución de problemas*.
-
-::: callout-tip
-## ¿Cómo lo resolvimos en este libro?
-
-Para que este capítulo funcione aunque RStudio tenga configurado otro Python, al inicio del documento hay un bloque de R oculto que le indica a `reticulate` que use el entorno del curso **antes** de ejecutar cualquier código de Python. Puedes usar la misma idea en tus documentos: coloca este bloque de R **al inicio** del archivo `.qmd`.
-
-```{r, eval=FALSE}
-Sys.setenv(RETICULATE_PYTHON = path.expand("~/.venvs/quarto-python/bin/python"))
-```
-
-En Windows usa `~/.venvs/quarto-python/Scripts/python.exe`. Este bloque **debe** ir antes del primer bloque de Python; si Python ya se inició, no tiene efecto (reinicia R con **Session \> Restart R**).
-:::
 
 ## Matplotlib: la estructura de una gráfica
 
@@ -530,7 +477,40 @@ print("Columnas:", list(iris.columns))
 | `species` | Especie: *setosa*, *versicolor* o *virginica*. |
 | `species_id` | Número de la especie (1, 2 o 3). |
 
-En las funciones de Plotly Express, el primer argumento es el `DataFrame` y los demás indican **qué columna** usar en cada parte de la gráfica, escribiendo su nombre como texto: `x="sepal_length"`.
+![](figures/dataset_iris.png){fig-align="center"}
+
+En las funciones de **Plotly Express**, el primer argumento es el `DataFrame` y los demás indican **qué columna** usar en cada parte de la gráfica, escribiendo su nombre como texto: `x="sepal_length"`.
+
+### Una mini historia del conjunto *iris*
+
+::: {.callout-tip icon="false"}
+## 🌸 En pocas palabras
+
+El conjunto *iris* nació de una **pregunta biológica**: ¿podemos distinguir especies de flores utilizando **únicamente sus características físicas**? En 1936, Fisher demostró que **las matemáticas podían ayudarnos a responderla**. Hoy, casi 90 años después, seguimos utilizando esos mismos datos para aprender **estadística, programación e inteligencia artificial**.
+:::
+
+**El botánico que midió las flores.** A mediados de la década de 1930, el botánico estadounidense **Edgar Anderson** quería entender cómo se diferencian y evolucionan las especies de plantas. Para ello midió con cuidado el sépalo y el pétalo de cientos de flores de iris; gran parte de ellas las recolectó en la **península de Gaspé**, en Quebec, Canadá. Anderson tomó 50 flores de cada una de tres especies: *Iris setosa*, *Iris versicolor* e *Iris virginica*.
+
+**El estadístico que lo hizo famoso.** En 1936, el estadístico y matemático británico **Ronald A. Fisher** usó las mediciones de Anderson en el artículo *"The use of multiple measurements in taxonomic problems"* (El uso de mediciones múltiples en problemas taxonómicos). Ahí presentó el **análisis discriminante lineal**: un método para encontrar la **combinación lineal** de las cuatro mediciones que mejor separa a las especies. Por eso el conjunto también se conoce como el ***iris*** **de Fisher** o el ***iris*** **de Anderson**.
+
+**¿Por qué sigue siendo tan usado casi 90 años después?** Porque es pequeño (150 filas), no tiene datos faltantes, sus variables son fáciles de entender y tiene una estructura interesante: *setosa* se separa claramente de las otras dos especies, mientras que *versicolor* y *virginica* se **traslapan** un poco. Eso lo hace perfecto para probar métodos y verificar si funcionan. Lo verás en las gráficas de este capítulo.
+
+| Área | ¿Para qué se usa el conjunto *iris*? |
+|------------------------------------|------------------------------------|
+| **Botánica y taxonomía** | Su origen: estudiar cómo se distinguen las especies a partir de mediciones. |
+| **Estadística** | Estadística descriptiva, pruebas de hipótesis y análisis multivariado, como el análisis discriminante lineal de Fisher. |
+| **Álgebra lineal** | Ejemplo clásico de **proyecciones**: el análisis de componentes principales (PCA) y el análisis discriminante reducen las 4 dimensiones a 2 que se pueden graficar. |
+| **Aprendizaje automático** (*machine learning*) | Primer ejemplo de **clasificación** (predecir la especie a partir de las medidas) y de **agrupamiento** (encontrar grupos sin conocer la especie, por ejemplo con *k-means*). Es uno de los conjuntos más descargados del [repositorio de aprendizaje automático de UCI](https://archive.ics.uci.edu/dataset/53/iris), donde está disponible desde 1988. |
+| **Visualización de datos** | Ejemplo estándar para enseñar gráficas de dispersión, histogramas, diagramas de caja y matrices de gráficas. |
+| **Programación y software** | Viene incluido en muchas herramientas: en R (`iris`), en Python con `plotly.express`, `seaborn` y `scikit-learn`. Se usa para probar que un programa funciona. |
+
+Como ya lo conoces de R, puedes compararlo: en la **Console** de R, `head(iris)` muestra las mismas primeras filas, con las columnas `Sepal.Length`, `Sepal.Width`, `Petal.Length`, `Petal.Width` y `Species`.
+
+::: callout-note
+## Un dato para reflexionar
+
+Fisher hizo aportaciones fundamentales a la estadística, pero también promovió la **eugenesia**, una ideología hoy rechazada, y publicó este trabajo en la revista *Annals of Eugenics*. Por eso, algunos docentes prefieren usar conjuntos alternativos, como [*Palmer penguins*](https://allisonhorst.github.io/palmerpenguins/) (medidas de pingüinos de la Antártida, publicado en 2020), que tiene una estructura parecida. Conocer el origen de los datos también es parte de analizarlos con responsabilidad.
+:::
 
 ### Dispersión
 
@@ -606,6 +586,8 @@ Gira la superficie arrastrando con el ratón y acércate con la rueda del ratón
 | `fig.show()` | Muestra la figura. |
 
 ### Animaciones
+
+![](figures/dataset_gapminder.png){fig-align="center"}
 
 El conjunto *gapminder* contiene la esperanza de vida, el PIB per cápita y la población de 142 países entre 1952 y 2007, cada 5 años. Primero veamos sus columnas:
 

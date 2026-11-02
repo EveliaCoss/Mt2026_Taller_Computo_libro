@@ -1,0 +1,2584 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es" xml:lang="es">
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="quarto-1.9.37" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+
+
+<title>55  Condicionales en Python – Taller de Cómputo</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+<!-- htmldependencies:E3FAD763 -->
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No se han encontrado resultados",
+    "search-matching-documents-text": "documentos encontrados",
+    "search-copy-link-title": "Copiar el enlace en la búsqueda",
+    "search-hide-matches-text": "Ocultar resultados adicionales",
+    "search-more-match-text": "resultado adicional en este documento",
+    "search-more-matches-text": "resultados adicionales en este documento",
+    "search-clear-button-title": "Borrar",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancelar",
+    "search-submit-button-title": "Enviar",
+    "search-label": "Buscar"
+  }
+}</script><script type="module" src="site_libs/quarto-ojs/quarto-ojs-runtime.js"></script>
+<link  href="site_libs/quarto-ojs/quarto-ojs.css" rel="stylesheet" />
+<script>
+(function () {
+  try {
+    if (!window.matchMedia("(hover: hover) and (pointer: fine)").matches) return;
+    if (window.localStorage.getItem("quarto-focus-mode") === "1") {
+      document.documentElement.classList.add("focus-mode-persisted");
+    }
+    if (window.localStorage.getItem("quarto-presentation-mode") === "1") {
+      document.documentElement.classList.add("presentation-mode-preload");
+    }
+  } catch (e) {}
+})();
+</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn"
+      data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" 
+      aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral"
+      onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <h1 class="quarto-secondary-nav-title no-breadcrumbs"></h1>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" role="link"
+        aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral"
+        onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Buscar" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
+      <a href="/index.html" class="sidebar-logo-link">
+      <img src="/flyer/logo_enes.png" alt="" class="sidebar-logo light-content py-0 d-lg-inline d-none"/>
+      <img src="/flyer/logo_enes.png" alt="" class="sidebar-logo dark-content py-0 d-lg-inline d-none"/>
+      </a>
+    <div class="sidebar-title mb-0 py-0">
+      <a href="/">
+      Taller de Cómputo
+      </a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/EveliaCoss/Mt2026_Taller_Computo_libro"  title="Ejecutar el código" class="quarto-navigation-tool px-1" aria-label="Ejecutar el código"><i class="bi bi-github"></i></a>
+    <div class="dropdown">
+      <a href="" title="Compartir" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" role="link" aria-label="Compartir"><i class="bi bi-share"></i></a>
+      <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-0">
+          <li>
+            <a class="dropdown-item sidebar-tools-main-item" href="https://twitter.com/intent/tweet?url=|url|">
+              <i class="bi bi-twitter pe-1"></i>
+            Twitter
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item sidebar-tools-main-item" href="https://www.facebook.com/sharer/sharer.php?u=|url|">
+              <i class="bi bi-facebook pe-1"></i>
+            Facebook
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item sidebar-tools-main-item" href="https://www.linkedin.com/sharing/share-offsite/?url=|url|">
+              <i class="bi bi-linkedin pe-1"></i>
+            LinkedIn
+            </a>
+          </li>
+      </ul>
+    </div>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Buscar"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Información general</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/temario.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Temario</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/cap1A.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class='chapter-number'>1</span>  <span class='chapter-title'>Introducción e integración</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/evaluacion.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class='chapter-number'>2</span>  <span class='chapter-title'>Sistema de evaluación + DOC</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1"  role="navigation" aria-expanded="true">
+ <span class="menu-text">**Sección 1** - Componentes de una computadora</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Alternar sección">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/cap2A.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class='chapter-number'>3</span>  <span class='chapter-title'>Introducción a los Componentes de una Computadora</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/game1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class='chapter-number'>4</span>  <span class='chapter-title'>**🎮 AhaSlides 1 - Manos a la obra**</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/cap2B.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class='chapter-number'>5</span>  <span class='chapter-title'>Sistema Operativo (SO) y sus funciones</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/Tarea1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class='chapter-number'>6</span>  <span class='chapter-title'>**✏️ Tarea 1 -** Mi Sistema Operativo</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/cap3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class='chapter-number'>7</span>  <span class='chapter-title'>Buenas prácticas en programación</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/s1_actividad1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class='chapter-number'>8</span>  <span class='chapter-title'>**📚** **Actividad 1 en equipo -** Mi primer algoritmo</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/game2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class='chapter-number'>9</span>  <span class='chapter-title'>**🎮 AhaSlides 2 -Manos a la obra**</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/udocz.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class='chapter-number'>10</span>  <span class='chapter-title'>Doc (uDocz) para el apoyo de este curso **🤖**</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2"  role="navigation" aria-expanded="true">
+ <span class="menu-text">**Sección 2** - Instalación de programas</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Alternar sección">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/TodoLits.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class='chapter-number'>11</span>  <span class='chapter-title'>📌 **To do list -** Instalación de programas</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/install_B.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class='chapter-number'>12</span>  <span class='chapter-title'>Instalación de Git y Bash</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/install_R.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class='chapter-number'>13</span>  <span class='chapter-title'>Instalación de R, RStudio y Rtools/XCode</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/intro_R.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class='chapter-number'>14</span>  <span class='chapter-title'>Introducción a R y Rstudio</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/install_python.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class='chapter-number'>15</span>  <span class='chapter-title'>Instalación de Python y reticulate en Rstudio</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/integracion_bash_rstudio.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class='chapter-number'>16</span>  <span class='chapter-title'>Integración de Bash en la terminal de Rstudio</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3"  role="navigation" aria-expanded="true">
+ <span class="menu-text">**Sección 3** - Introducción a Bash</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Alternar sección">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/cap4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class='chapter-number'>17</span>  <span class='chapter-title'>Introducción a Linux/Unix</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/cap5.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class='chapter-number'>18</span>  <span class='chapter-title'>Mis primeros pasos en Bash</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/game3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class='chapter-number'>19</span>  <span class='chapter-title'>**🎮 AhaSlides 3 -Manos a la obra**</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/cap6.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class='chapter-number'>20</span>  <span class='chapter-title'>Caracteres, Strings y Wildcards</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/game4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class='chapter-number'>21</span>  <span class='chapter-title'>**🎮 AhaSlides 4 -Manos a la obra**</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/regex.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class='chapter-number'>22</span>  <span class='chapter-title'>Expresiones regulares (REGEX)</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/cap7.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class='chapter-number'>23</span>  <span class='chapter-title'>Encontrar patrones con `grep`</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/game5.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class='chapter-number'>24</span>  <span class='chapter-title'>**🎮 AhaSlides 5 -Manos a la obra**</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4"  role="navigation" aria-expanded="true">
+ <span class="menu-text">**Sección 4** - Edición de archivos con Bash</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Alternar sección">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/cap8.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class='chapter-number'>25</span>  <span class='chapter-title'>Edición de archivos con los editores de texto (`nano` y `vim`)</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/cap8_crearRproject.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class='chapter-number'>26</span>  <span class='chapter-title'>Crear un R Project</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/Bash_script.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class='chapter-number'>27</span>  <span class='chapter-title'>Scripts en Bash</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/cap9.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class='chapter-number'>28</span>  <span class='chapter-title'>Edición de archivos con el editor de flujo `sed`</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/cap10.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class='chapter-number'>29</span>  <span class='chapter-title'>Tipos de enlaces - symlinks, hard links e hipervínculos</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/s1_actividad2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class='chapter-number'>30</span>  <span class='chapter-title'>**📚 Proyecto integrador en equipo -** Script Bash</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/cap11.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class='chapter-number'>31</span>  <span class='chapter-title'>Filtrado de texto (`grep, cut, sort, uniq, wc`)</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/cap12.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class='chapter-number'>32</span>  <span class='chapter-title'>printf vs echo</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/s3_actividad2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class='chapter-number'>33</span>  <span class='chapter-title'>**📚** **Actividad 2 en equipo -** ¡REDUCE EL CÓDIGO BASH!</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/cap13.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class='chapter-number'>34</span>  <span class='chapter-title'>Condicionales</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/game6.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class='chapter-number'>35</span>  <span class='chapter-title'>**🎮 AhaSlides 6 -Manos a la obra**</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/cap14.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class='chapter-number'>36</span>  <span class='chapter-title'>Bucles (for loops)</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/game7.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class='chapter-number'>37</span>  <span class='chapter-title'>**🎮 AhaSlides 7 -Manos a la obra**</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5"  role="navigation" aria-expanded="true">
+ <span class="menu-text">**Sección 5** - Introducción a Git/GitHub</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Alternar sección">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/Rstudio_paquetes.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class='chapter-number'>38</span>  <span class='chapter-title'>Descargar y cargar Librerías en Rstudio</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/cap15.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class='chapter-number'>39</span>  <span class='chapter-title'>Introducción a Git / GitHub</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/cap22.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class='chapter-number'>40</span>  <span class='chapter-title'>Conectar a GitHub con SSH</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/cap16.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class='chapter-number'>41</span>  <span class='chapter-title'>Configurar Git</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/cap17.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class='chapter-number'>42</span>  <span class='chapter-title'>Repositorios</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/cap18.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class='chapter-number'>43</span>  <span class='chapter-title'>Ignorar archivos/carpetas</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/s5_actividades1y2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class='chapter-number'>44</span>  <span class='chapter-title'>**📚** Actividad 1 y 2</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/cap23.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class='chapter-number'>45</span>  <span class='chapter-title'>Resumen y Práctica Final</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6"  role="navigation" aria-expanded="true">
+ <span class="menu-text">**Sección 6** - Introducción a R y Rstudio</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true" aria-label="Alternar sección">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/cap29.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class='chapter-number'>46</span>  <span class='chapter-title'>Introducción a Markdown</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/s5_actividades3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class='chapter-number'>47</span>  <span class='chapter-title'>**📚** Actividad 3: Página web con Rmarkdown</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/Intro_Quarto.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class='chapter-number'>48</span>  <span class='chapter-title'>Introducción a Quarto</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/s5_actividades4y5.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class='chapter-number'>49</span>  <span class='chapter-title'>**📚** Actividad 4 y 5</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7"  role="navigation" aria-expanded="true">
+ <span class="menu-text">**Sección 7** - Introducción a Python</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true" aria-label="Alternar sección">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/intro_python.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class='chapter-number'>50</span>  <span class='chapter-title'>Introducción a Python en Rstudio usando `reticulate`</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/quarto_python.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class='chapter-number'>51</span>  <span class='chapter-title'>Configuraciones para usar Quarto con Python</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/python_ejercicio1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class='chapter-number'>52</span>  <span class='chapter-title'>🐍 Actividad 1: variables y objetos (tipo, valor e identidad)</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/python_ejercicio2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class='chapter-number'>53</span>  <span class='chapter-title'>🐍 Actividad 2: atributos y métodos de los objetos</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/python_buenas_practicas.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class='chapter-number'>54</span>  <span class='chapter-title'>Sintaxis de nombres, buenas prácticas y programación defensiva en Python</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/python_condicionales.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class='chapter-number'>55</span>  <span class='chapter-title'>Condicionales en Python</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/python_numpy.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class='chapter-number'>56</span>  <span class='chapter-title'>Introducción a NumPy</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/python_for.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class='chapter-number'>57</span>  <span class='chapter-title'>Ciclos `for` y `while` en Python</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/python_sympy.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class='chapter-number'>58</span>  <span class='chapter-title'>Cálculo simbólico con SymPy</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/python_visualizacion.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class='chapter-number'>59</span>  <span class='chapter-title'>Visualización de datos con Matplotlib y Plotly</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8"  role="navigation" aria-expanded="true">
+ <span class="menu-text">Apéndices</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="true" aria-label="Alternar sección">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/python_entornos.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class='chapter-number'>A</span>  <span class='chapter-title'>Entornos para trabajar con Python: RStudio, Google Colab y Jupyter Notebook</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/python_conda.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class='chapter-number'>B</span>  <span class='chapter-title'>Conda y Miniconda: gestión de entornos y paquetes</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/ejemplo_quizdown.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class='chapter-number'>C</span>  <span class='chapter-title'>Quizzes</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/ejemplo_CodeRandPython.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class='chapter-number'>D</span>  <span class='chapter-title'>Codigo en R</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" ></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <div id="quarto-toc-target"></div>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">55</span>  <span class="chapter-title">Condicionales en Python</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+<nav id="TOC" role="doc-toc">
+    <h2 id="toc-title">Tabla de contenidos</h2>
+   
+  <ul>
+  <li><a href="#expresiones-booleanas-hacer-preguntas" id="toc-expresiones-booleanas-hacer-preguntas"><span class="header-section-number">55.1</span> Expresiones booleanas: hacer preguntas</a>
+  <ul>
+  <li><a href="#operadores-de-comparación" id="toc-operadores-de-comparación"><span class="header-section-number">55.1.1</span> Operadores de comparación</a></li>
+  <li><a href="#operadores-lógicos" id="toc-operadores-lógicos"><span class="header-section-number">55.1.2</span> Operadores lógicos</a></li>
+  <li><a href="#otras-preguntas-útiles" id="toc-otras-preguntas-útiles"><span class="header-section-number">55.1.3</span> Otras preguntas útiles</a></li>
+  <li><a href="#tablas-de-verdad" id="toc-tablas-de-verdad"><span class="header-section-number">55.1.4</span> Tablas de verdad</a></li>
+  <li><a href="#valores-verdaderos-y-falsos" id="toc-valores-verdaderos-y-falsos"><span class="header-section-number">55.1.5</span> Valores “verdaderos” y “falsos”</a></li>
+  </ul></li>
+  <li><a href="#la-instrucción-if" id="toc-la-instrucción-if"><span class="header-section-number">55.2</span> La instrucción <code>if</code></a></li>
+  <li><a href="#if-y-else" id="toc-if-y-else"><span class="header-section-number">55.3</span> <code>if</code> y <code>else</code></a></li>
+  <li><a href="#if-elif-y-else" id="toc-if-elif-y-else"><span class="header-section-number">55.4</span> <code>if</code>, <code>elif</code> y <code>else</code></a>
+  <ul>
+  <li><a href="#diferencias-con-bash" id="toc-diferencias-con-bash"><span class="header-section-number">55.4.1</span> Diferencias con Bash</a></li>
+  </ul></li>
+  <li><a href="#condicionales-anidados" id="toc-condicionales-anidados"><span class="header-section-number">55.5</span> Condicionales anidados</a></li>
+  <li><a href="#expresión-condicional-en-una-línea" id="toc-expresión-condicional-en-una-línea"><span class="header-section-number">55.6</span> Expresión condicional en una línea</a></li>
+  <li><a href="#programación-defensiva-con-condicionales" id="toc-programación-defensiva-con-condicionales"><span class="header-section-number">55.7</span> Programación defensiva con condicionales</a></li>
+  <li><a href="#errores-comunes" id="toc-errores-comunes"><span class="header-section-number">55.8</span> Errores comunes</a></li>
+  <li><a href="#ejercicios" id="toc-ejercicios"><span class="header-section-number">55.9</span> Ejercicios</a>
+  <ul>
+  <li><a href="#ejercicio-1.-expresiones-booleanas" id="toc-ejercicio-1.-expresiones-booleanas"><span class="header-section-number">55.9.1</span> Ejercicio 1. Expresiones booleanas</a></li>
+  <li><a href="#ejercicio-2.-par-o-impar" id="toc-ejercicio-2.-par-o-impar"><span class="header-section-number">55.9.2</span> Ejercicio 2. Par o impar</a></li>
+  <li><a href="#ejercicio-3.-escala-de-calificaciones-con-validación" id="toc-ejercicio-3.-escala-de-calificaciones-con-validación"><span class="header-section-number">55.9.3</span> Ejercicio 3. Escala de calificaciones con validación</a></li>
+  <li><a href="#ejercicio-4.-año-bisiesto" id="toc-ejercicio-4.-año-bisiesto"><span class="header-section-number">55.9.4</span> Ejercicio 4. Año bisiesto</a></li>
+  <li><a href="#ejercicio-5.-raíces-de-una-ecuación-cuadrática" id="toc-ejercicio-5.-raíces-de-una-ecuación-cuadrática"><span class="header-section-number">55.9.5</span> Ejercicio 5. Raíces de una ecuación cuadrática</a></li>
+  <li><a href="#ejercicio-6.-detective-de-condicionales" id="toc-ejercicio-6.-detective-de-condicionales"><span class="header-section-number">55.9.6</span> Ejercicio 6. Detective de condicionales</a></li>
+  </ul></li>
+  <li><a href="#resumen" id="toc-resumen"><span class="header-section-number">55.10</span> Resumen</a></li>
+  <li><a href="#referencias" id="toc-referencias"><span class="header-section-number">55.11</span> Referencias</a></li>
+  </ul>
+</nav>
+<blockquote>
+<p><strong>Fecha:</strong> 03 de noviembre, 2026</p>
+</blockquote>
+<p>Hasta ahora, nuestros programas ejecutan <strong>todas</strong> sus instrucciones, una tras otra. Los <strong>condicionales</strong> permiten que un programa <strong>tome decisiones</strong>: ejecutar ciertas instrucciones solo si se cumple una condición.</p>
+<p>Ya usamos condicionales en Bash (capítulo de <a href="cap13.qmd">Condicionales</a>); la idea es la misma, solo cambia la sintaxis. En este capítulo veremos:</p>
+<ul>
+<li><strong>Expresiones booleanas</strong>: las preguntas que regresan <code>True</code> o <code>False</code>.</li>
+<li>Las instrucciones <code>if</code>, <code>else</code> y <code>elif</code>.</li>
+<li>Condicionales anidados y la expresión condicional en una línea.</li>
+<li>Cómo usar condicionales para la <strong>programación defensiva</strong> (continuación del capítulo de <a href="python_buenas_practicas.qmd">buenas prácticas</a>).</li>
+</ul>
+<section id="expresiones-booleanas-hacer-preguntas" class="level2" data-number="55.1">
+<h2 data-number="55.1"><span class="header-section-number">55.1</span> Expresiones booleanas: hacer preguntas</h2>
+<p>Para tomar decisiones necesitamos hacer <strong>preguntas</strong> cuya respuesta sea <code>True</code> (verdadero) o <code>False</code> (falso). A estas preguntas se les llama <strong>expresiones booleanas</strong>.</p>
+<section id="operadores-de-comparación" class="level3" data-number="55.1.1">
+<h3 data-number="55.1.1"><span class="header-section-number">55.1.1</span> Operadores de comparación</h3>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th>Operador</th>
+<th>Significado</th>
+<th>Ejemplo</th>
+<th>Resultado</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>==</code></td>
+<td>Igual a</td>
+<td><code>5 == 5</code></td>
+<td><code>True</code></td>
+</tr>
+<tr class="even">
+<td><code>!=</code></td>
+<td>Diferente de</td>
+<td><code>5 != 3</code></td>
+<td><code>True</code></td>
+</tr>
+<tr class="odd">
+<td><code>&gt;</code></td>
+<td>Mayor que</td>
+<td><code>5 &gt; 8</code></td>
+<td><code>False</code></td>
+</tr>
+<tr class="even">
+<td><code>&lt;</code></td>
+<td>Menor que</td>
+<td><code>5 &lt; 8</code></td>
+<td><code>True</code></td>
+</tr>
+<tr class="odd">
+<td><code>&gt;=</code></td>
+<td>Mayor o igual que</td>
+<td><code>5 &gt;= 5</code></td>
+<td><code>True</code></td>
+</tr>
+<tr class="even">
+<td><code>&lt;=</code></td>
+<td>Menor o igual que</td>
+<td><code>4 &lt;= 3</code></td>
+<td><code>False</code></td>
+</tr>
+</tbody>
+</table>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class='callout-icon'></i>
+</div>
+<div class="callout-title-container flex-fill">
+Importante
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>No confundas <code>=</code> con <code>==</code>. Un solo signo <strong>asigna</strong> un valor (<code>x = 5</code>); dos signos <strong>comparan</strong> (<code>x == 5</code>).</p>
+</div>
+</div>
+</section>
+<section id="operadores-lógicos" class="level3" data-number="55.1.2">
+<h3 data-number="55.1.2"><span class="header-section-number">55.1.2</span> Operadores lógicos</h3>
+<p>Combinan varias preguntas.</p>
+<table class="caption-top">
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Operador</th>
+<th>Regresa <code>True</code> si…</th>
+<th>Ejemplo</th>
+<th>Resultado</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>and</code></td>
+<td><strong>Ambas</strong> condiciones son verdaderas.</td>
+<td><code>5 &gt; 3 and 2 &gt; 4</code></td>
+<td><code>False</code></td>
+</tr>
+<tr class="even">
+<td><code>or</code></td>
+<td><strong>Al menos una</strong> condición es verdadera.</td>
+<td><code>5 &gt; 3 or 2 &gt; 4</code></td>
+<td><code>True</code></td>
+</tr>
+<tr class="odd">
+<td><code>not</code></td>
+<td>La condición es falsa (la invierte).</td>
+<td><code>not 5 &gt; 3</code></td>
+<td><code>False</code></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="otras-preguntas-útiles" class="level3" data-number="55.1.3">
+<h3 data-number="55.1.3"><span class="header-section-number">55.1.3</span> Otras preguntas útiles</h3>
+<table class="caption-top">
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Expresión</th>
+<th>Pregunta</th>
+<th>Ejemplo</th>
+<th>Resultado</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>x in coleccion</code></td>
+<td>¿<code>x</code> está en la colección?</td>
+<td><code>3 in [1, 2, 3]</code></td>
+<td><code>True</code></td>
+</tr>
+<tr class="even">
+<td><code>isinstance(x, tipo)</code></td>
+<td>¿<code>x</code> es de ese tipo?</td>
+<td><code>isinstance(8.5, (int, float))</code></td>
+<td><code>True</code></td>
+</tr>
+<tr class="odd">
+<td><code>a &lt;= x &lt;= b</code></td>
+<td>¿<code>x</code> está entre <code>a</code> y <code>b</code>?</td>
+<td><code>0 &lt;= 8.5 &lt;= 10</code></td>
+<td><code>True</code></td>
+</tr>
+<tr class="even">
+<td><code>len(x) &gt; 0</code></td>
+<td>¿La colección tiene elementos?</td>
+<td><code>len([]) &gt; 0</code></td>
+<td><code>False</code></td>
+</tr>
+</tbody>
+</table>
+<p>Python permite <strong>encadenar comparaciones</strong>: <code>0 &lt;= x &lt;= 10</code> es lo mismo que <code>0 &lt;= x and x &lt;= 10</code>, como se escribe en matemáticas.</p>
+<div class="cell">
+<details open class="code-fold">
+<summary>Código</summary>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python cell-code"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>calificacion <span class="op">=</span> <span class="fl">8.5</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">isinstance</span>(calificacion, (<span class="bu">int</span>, <span class="bu">float</span>)))   <span class="co"># ¿Es un número?</span></span></code></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>True</code></pre>
+</div>
+<details open class="code-fold">
+<summary>Código</summary>
+<div class="sourceCode" id="cb3"><pre class="sourceCode python cell-code"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="dv">0</span> <span class="op">&lt;=</span> calificacion <span class="op">&lt;=</span> <span class="dv">10</span>)                   <span class="co"># ¿Está en el rango?</span></span></code></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>True</code></pre>
+</div>
+<details open class="code-fold">
+<summary>Código</summary>
+<div class="sourceCode" id="cb5"><pre class="sourceCode python cell-code"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(calificacion <span class="kw">in</span> [<span class="dv">6</span>, <span class="dv">7</span>, <span class="dv">8</span>, <span class="dv">9</span>, <span class="dv">10</span>])          <span class="co"># ¿Es un entero entre 6 y 10?</span></span></code></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>False</code></pre>
+</div>
+</div>
+</section>
+<section id="tablas-de-verdad" class="level3" data-number="55.1.4">
+<h3 data-number="55.1.4"><span class="header-section-number">55.1.4</span> Tablas de verdad</h3>
+<p>Una <strong>tabla de verdad</strong> muestra el resultado de un operador lógico para <strong>todas las combinaciones posibles</strong> de valores. Igual que en lógica matemática (<span class="math inline">\(\land\)</span>, <span class="math inline">\(\lor\)</span>, <span class="math inline">\(\neg\)</span>), usamos letras para representar condiciones:</p>
+<ul>
+<li><code>p</code> y <code>q</code> son dos <strong>condiciones</strong> cualesquiera, cada una puede ser <code>True</code> o <code>False</code>.</li>
+<li>Cada <strong>fila</strong> es <strong>un caso posible</strong>. Como hay dos condiciones y cada una tiene dos valores, existen <span class="math inline">\(2 \times 2 = 4\)</span> casos.</li>
+<li>Las demás <strong>columnas</strong> dicen qué resultado da cada operador <strong>en ese caso</strong>.</li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img src="figures/python_tabla_verdad.png" class="img-fluid quarto-figure quarto-figure-center" /></p>
+</figure>
+</div>
+<p>Para entenderlo con un ejemplo concreto, imagina que para entrar a un examen se revisan dos condiciones:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>p <span class="op">=</span> pago_inscripcion      <span class="co"># ¿Pagó la inscripción?</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>q <span class="op">=</span> trae_credencial       <span class="co"># ¿Trae su credencial?</span></span></code></pre></div>
+<p><strong><code>and</code>: se necesitan las dos.</strong> “Puede entrar si pagó <strong>y</strong> trae credencial”.</p>
+<table class="caption-top">
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Caso</th>
+<th><code>p</code> (pagó)</th>
+<th><code>q</code> (credencial)</th>
+<th><code>p and q</code> (¿entra?)</th>
+<th>¿Por qué?</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td><code>True</code></td>
+<td><code>True</code></td>
+<td><code>True</code></td>
+<td>Cumple las dos condiciones.</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td><code>True</code></td>
+<td><code>False</code></td>
+<td><code>False</code></td>
+<td>Le falta la credencial.</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td><code>False</code></td>
+<td><code>True</code></td>
+<td><code>False</code></td>
+<td>Le falta pagar.</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td><code>False</code></td>
+<td><code>False</code></td>
+<td><code>False</code></td>
+<td>No cumple ninguna.</td>
+</tr>
+</tbody>
+</table>
+<p><code>and</code> solo da <code>True</code> en <strong>un</strong> caso: cuando <strong>ambas</strong> condiciones son verdaderas.</p>
+<p><strong><code>or</code>: basta con una.</strong> “Obtiene un descuento si es estudiante <strong>o</strong> si es docente”.</p>
+<table class="caption-top">
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Caso</th>
+<th><code>p</code> (estudiante)</th>
+<th><code>q</code> (docente)</th>
+<th><code>p or q</code> (¿descuento?)</th>
+<th>¿Por qué?</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td><code>True</code></td>
+<td><code>True</code></td>
+<td><code>True</code></td>
+<td>Cumple las dos (con una bastaba).</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td><code>True</code></td>
+<td><code>False</code></td>
+<td><code>True</code></td>
+<td>Es estudiante.</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td><code>False</code></td>
+<td><code>True</code></td>
+<td><code>True</code></td>
+<td>Es docente.</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td><code>False</code></td>
+<td><code>False</code></td>
+<td><code>False</code></td>
+<td>No cumple ninguna.</td>
+</tr>
+</tbody>
+</table>
+<p><code>or</code> solo da <code>False</code> en <strong>un</strong> caso: cuando <strong>ninguna</strong> condición es verdadera.</p>
+<p><strong><code>not</code>: invierte el valor.</strong> Solo tiene una condición, así que hay dos casos:</p>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th>Caso</th>
+<th><code>p</code> (¿llueve?)</th>
+<th><code>not p</code> (¿no llueve?)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td><code>True</code></td>
+<td><code>False</code></td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td><code>False</code></td>
+<td><code>True</code></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Tabla completa.</strong> Así se resumen los tres operadores. Lee cada fila de izquierda a derecha: “si <code>p</code> vale … y <code>q</code> vale …, entonces <code>p and q</code> vale …, <code>p or q</code> vale … y <code>not p</code> vale …”.</p>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th><code>p</code></th>
+<th><code>q</code></th>
+<th><code>p and q</code></th>
+<th><code>p or q</code></th>
+<th><code>not p</code></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>True</code></td>
+<td><code>True</code></td>
+<td><code>True</code></td>
+<td><code>True</code></td>
+<td><code>False</code></td>
+</tr>
+<tr class="even">
+<td><code>True</code></td>
+<td><code>False</code></td>
+<td><code>False</code></td>
+<td><code>True</code></td>
+<td><code>False</code></td>
+</tr>
+<tr class="odd">
+<td><code>False</code></td>
+<td><code>True</code></td>
+<td><code>False</code></td>
+<td><code>True</code></td>
+<td><code>True</code></td>
+</tr>
+<tr class="even">
+<td><code>False</code></td>
+<td><code>False</code></td>
+<td><code>False</code></td>
+<td><code>False</code></td>
+<td><code>True</code></td>
+</tr>
+</tbody>
+</table>
+<p>Compruébalo con Python: cambia los valores de <code>p</code> y <code>q</code> para reproducir cada fila de la tabla.</p>
+<div class="cell">
+<div>
+<div id="pyodide-1" class="exercise-cell">
+
+</div>
+<script type="pyodide-1-contents">
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoicCA9IFRydWVcbnEgPSBGYWxzZVxuXG5wcmludChcInAgYW5kIHEgPVwiLCBwIGFuZCBxKVxucHJpbnQoXCJwIG9yIHEgID1cIiwgcCBvciBxKVxucHJpbnQoXCJub3QgcCAgID1cIiwgbm90IHApIn0=
+</script>
+</div>
+</div>
+</section>
+<section id="valores-verdaderos-y-falsos" class="level3" data-number="55.1.5">
+<h3 data-number="55.1.5"><span class="header-section-number">55.1.5</span> Valores “verdaderos” y “falsos”</h3>
+<p>En una condición, Python también acepta objetos que no son booleanos. Estos valores se consideran <strong>falsos</strong>; cualquier otro valor se considera <strong>verdadero</strong>:</p>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th>Tipo</th>
+<th>Valor considerado falso</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Booleano</td>
+<td><code>False</code></td>
+</tr>
+<tr class="even">
+<td>Números</td>
+<td><code>0</code>, <code>0.0</code></td>
+</tr>
+<tr class="odd">
+<td>Texto</td>
+<td><code>""</code> (cadena vacía)</td>
+</tr>
+<tr class="even">
+<td>Colecciones</td>
+<td><code>[]</code>, <code>()</code>, <code>{}</code>, <code>set()</code> (vacías)</td>
+</tr>
+<tr class="odd">
+<td>Ausencia de valor</td>
+<td><code>None</code></td>
+</tr>
+</tbody>
+</table>
+<div class="cell">
+<details open class="code-fold">
+<summary>Código</summary>
+<div class="sourceCode" id="cb8"><pre class="sourceCode python cell-code"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">bool</span>(<span class="dv">0</span>), <span class="bu">bool</span>(<span class="op">-</span><span class="dv">3</span>))</span></code></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>False True</code></pre>
+</div>
+<details open class="code-fold">
+<summary>Código</summary>
+<div class="sourceCode" id="cb10"><pre class="sourceCode python cell-code"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">bool</span>(<span class="st">&quot;&quot;</span>), <span class="bu">bool</span>(<span class="st">&quot;hola&quot;</span>))</span></code></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>False True</code></pre>
+</div>
+<details open class="code-fold">
+<summary>Código</summary>
+<div class="sourceCode" id="cb12"><pre class="sourceCode python cell-code"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">bool</span>([]), <span class="bu">bool</span>([<span class="dv">0</span>]))</span></code></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>False True</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="la-instrucción-if" class="level2" data-number="55.2">
+<h2 data-number="55.2"><span class="header-section-number">55.2</span> La instrucción <code>if</code></h2>
+<p><code>if</code> ejecuta un bloque de código <strong>solo si</strong> la condición es verdadera:</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> condicion:</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>    instruccion_1     <span class="co"># Se ejecutan solo si la condición es True</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>    instruccion_2</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>instruccion_3         <span class="co"># Se ejecuta siempre</span></span></code></pre></div>
+<p>Observa tres detalles de la sintaxis:</p>
+<ol type="1">
+<li>La línea del <code>if</code> termina con <strong>dos puntos</strong> (<code>:</code>).</li>
+<li>Las instrucciones que dependen del <code>if</code> llevan <strong>indentación de 4 espacios</strong>. En Python, la indentación <strong>no es opcional</strong>: indica qué instrucciones pertenecen al bloque.</li>
+<li>No hay palabra de cierre (en Bash usábamos <code>fi</code>): el bloque termina cuando termina la indentación.</li>
+</ol>
+<div class="cell">
+<details open class="code-fold">
+<summary>Código</summary>
+<div class="sourceCode" id="cb15"><pre class="sourceCode python cell-code"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>edad <span class="op">=</span> <span class="dv">20</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> edad <span class="op">&gt;=</span> <span class="dv">18</span>:</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">&quot;Eres mayor de edad&quot;</span>)</span></code></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Eres mayor de edad</code></pre>
+</div>
+<details open class="code-fold">
+<summary>Código</summary>
+<div class="sourceCode" id="cb17"><pre class="sourceCode python cell-code"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;Fin del programa&quot;</span>)</span></code></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Fin del programa</code></pre>
+</div>
+</div>
+</section>
+<section id="if-y-else" class="level2" data-number="55.3">
+<h2 data-number="55.3"><span class="header-section-number">55.3</span> <code>if</code> y <code>else</code></h2>
+<p><code>else</code> indica qué hacer cuando la condición es <strong>falsa</strong>:</p>
+<div class="cell">
+<details open class="code-fold">
+<summary>Código</summary>
+<div class="sourceCode" id="cb19"><pre class="sourceCode python cell-code"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>calificacion <span class="op">=</span> <span class="fl">5.5</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> calificacion <span class="op">&gt;=</span> <span class="dv">6</span>:</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">&quot;Aprobado&quot;</span>)</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span>:</span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">&quot;Reprobado&quot;</span>)</span></code></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Reprobado</code></pre>
+</div>
+</div>
+<p>Ejemplo: saber si un número es par o impar con el operador módulo <code>%</code>, que regresa el <strong>residuo</strong> de una división:</p>
+<div class="cell">
+<details open class="code-fold">
+<summary>Código</summary>
+<div class="sourceCode" id="cb21"><pre class="sourceCode python cell-code"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>numero <span class="op">=</span> <span class="dv">17</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> numero <span class="op">%</span> <span class="dv">2</span> <span class="op">==</span> <span class="dv">0</span>:</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(numero, <span class="st">&quot;es par&quot;</span>)</span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span>:</span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(numero, <span class="st">&quot;es impar&quot;</span>)</span></code></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>17 es impar</code></pre>
+</div>
+</div>
+</section>
+<section id="if-elif-y-else" class="level2" data-number="55.4">
+<h2 data-number="55.4"><span class="header-section-number">55.4</span> <code>if</code>, <code>elif</code> y <code>else</code></h2>
+<p>Cuando hay más de dos casos, usamos <code>elif</code> (abreviatura de <em>else if</em>). Python evalúa las condiciones <strong>de arriba hacia abajo</strong> y ejecuta <strong>solo el primer bloque</strong> cuya condición sea verdadera.</p>
+<p>Por ejemplo, la escala de calificaciones de la UNAM:</p>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th>Calificación</th>
+<th>Nivel</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>9 a 10</td>
+<td>MB (Muy Bien)</td>
+</tr>
+<tr class="even">
+<td>8 a 8.9</td>
+<td>B (Bien)</td>
+</tr>
+<tr class="odd">
+<td>6 a 7.9</td>
+<td>S (Suficiente)</td>
+</tr>
+<tr class="even">
+<td>Menor que 6</td>
+<td>NA (No Acreditado)</td>
+</tr>
+</tbody>
+</table>
+<p>Modifica la calificación y presiona <strong>Run Code</strong>:</p>
+<div class="cell" data-autorun="true">
+<div>
+<div id="pyodide-2" class="exercise-cell">
+
+</div>
+<script type="pyodide-2-contents">
+eyJhdHRyIjp7ImF1dG9ydW4iOnRydWUsImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiY2FsaWZpY2FjaW9uID0gOC41XG5cbmlmIGNhbGlmaWNhY2lvbiA+PSA5OlxuICAgIG5pdmVsID0gXCJNQlwiXG5lbGlmIGNhbGlmaWNhY2lvbiA+PSA4OlxuICAgIG5pdmVsID0gXCJCXCJcbmVsaWYgY2FsaWZpY2FjaW9uID49IDY6XG4gICAgbml2ZWwgPSBcIlNcIlxuZWxzZTpcbiAgICBuaXZlbCA9IFwiTkFcIlxuXG5wcmludChcIkNhbGlmaWNhY2nDs246XCIsIGNhbGlmaWNhY2lvbiwgXCJOaXZlbDpcIiwgbml2ZWwpIn0=
+</script>
+</div>
+</div>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class='callout-icon'></i>
+</div>
+<div class="callout-title-container flex-fill">
+Importante
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>El orden importa.</strong> Si la primera condición fuera <code>calificacion &gt;= 6</code>, una calificación de 9.5 también la cumpliría y obtendríamos <code>"S"</code>. Cuando las condiciones se traslapan, escribe primero la más restrictiva.</p>
+</div>
+</div>
+<section id="diferencias-con-bash" class="level3" data-number="55.4.1">
+<h3 data-number="55.4.1"><span class="header-section-number">55.4.1</span> Diferencias con Bash</h3>
+<table class="caption-top">
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th>Bash</th>
+<th>Python</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Inicio</td>
+<td><code>if [ condición ]; then</code></td>
+<td><code>if condición:</code></td>
+</tr>
+<tr class="even">
+<td>Otra condición</td>
+<td><code>elif [ condición ]; then</code></td>
+<td><code>elif condición:</code></td>
+</tr>
+<tr class="odd">
+<td>En otro caso</td>
+<td><code>else</code></td>
+<td><code>else:</code></td>
+</tr>
+<tr class="even">
+<td>Cierre</td>
+<td><code>fi</code></td>
+<td>No hay: termina la indentación.</td>
+</tr>
+<tr class="odd">
+<td>Comparar números</td>
+<td><code>-eq</code>, <code>-ne</code>, <code>-gt</code>, <code>-lt</code>, <code>-ge</code>, <code>-le</code></td>
+<td><code>==</code>, <code>!=</code>, <code>&gt;</code>, <code>&lt;</code>, <code>&gt;=</code>, <code>&lt;=</code></td>
+</tr>
+<tr class="even">
+<td>Operadores lógicos</td>
+<td><code>&amp;&amp;</code>, <code>||</code>, <code>!</code></td>
+<td><code>and</code>, <code>or</code>, <code>not</code></td>
+</tr>
+<tr class="odd">
+<td>Mostrar texto</td>
+<td><code>echo "Aprobado"</code></td>
+<td><code>print("Aprobado")</code></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="condicionales-anidados" class="level2" data-number="55.5">
+<h2 data-number="55.5"><span class="header-section-number">55.5</span> Condicionales anidados</h2>
+<p>Un <code>if</code> puede ir dentro de otro. Cada nivel agrega 4 espacios de indentación:</p>
+<div class="cell">
+<details open class="code-fold">
+<summary>Código</summary>
+<div class="sourceCode" id="cb23"><pre class="sourceCode python cell-code"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>numero <span class="op">=</span> <span class="op">-</span><span class="dv">4</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> numero <span class="op">!=</span> <span class="dv">0</span>:</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> numero <span class="op">&gt;</span> <span class="dv">0</span>:</span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">&quot;Positivo&quot;</span>)</span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">&quot;Negativo&quot;</span>)</span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span>:</span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">&quot;Cero&quot;</span>)</span></code></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Negativo</code></pre>
+</div>
+</div>
+<p>Muchas veces un condicional anidado se puede escribir de forma más clara con <code>elif</code>:</p>
+<div class="cell">
+<details open class="code-fold">
+<summary>Código</summary>
+<div class="sourceCode" id="cb25"><pre class="sourceCode python cell-code"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>numero <span class="op">=</span> <span class="op">-</span><span class="dv">4</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> numero <span class="op">&gt;</span> <span class="dv">0</span>:</span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">&quot;Positivo&quot;</span>)</span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a><span class="cf">elif</span> numero <span class="op">&lt;</span> <span class="dv">0</span>:</span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">&quot;Negativo&quot;</span>)</span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span>:</span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">&quot;Cero&quot;</span>)</span></code></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Negativo</code></pre>
+</div>
+</div>
+</section>
+<section id="expresión-condicional-en-una-línea" class="level2" data-number="55.6">
+<h2 data-number="55.6"><span class="header-section-number">55.6</span> Expresión condicional en una línea</h2>
+<p>Cuando solo queremos elegir entre <strong>dos valores</strong>, podemos escribir el condicional en una sola línea:</p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>variable <span class="op">=</span> valor_si_verdadero <span class="cf">if</span> condicion <span class="cf">else</span> valor_si_falso</span></code></pre></div>
+<div class="cell">
+<details open class="code-fold">
+<summary>Código</summary>
+<div class="sourceCode" id="cb28"><pre class="sourceCode python cell-code"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>calificacion <span class="op">=</span> <span class="dv">7</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>estado <span class="op">=</span> <span class="st">&quot;Aprobado&quot;</span> <span class="cf">if</span> calificacion <span class="op">&gt;=</span> <span class="dv">6</span> <span class="cf">else</span> <span class="st">&quot;Reprobado&quot;</span></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(estado)</span></code></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Aprobado</code></pre>
+</div>
+</div>
+<p>Úsala solo en casos sencillos; si la condición es larga, el <code>if</code> normal es más fácil de leer.</p>
+</section>
+<section id="programación-defensiva-con-condicionales" class="level2" data-number="55.7">
+<h2 data-number="55.7"><span class="header-section-number">55.7</span> Programación defensiva con condicionales</h2>
+<p>En el capítulo de <a href="python_buenas_practicas.qmd">buenas prácticas</a> usamos <code>assert</code> para detener el programa cuando un dato era incorrecto. Con condicionales tenemos más opciones:</p>
+<p><strong>Opción 1. Avisar y continuar:</strong></p>
+<div class="cell">
+<details open class="code-fold">
+<summary>Código</summary>
+<div class="sourceCode" id="cb30"><pre class="sourceCode python cell-code"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>calificacion <span class="op">=</span> <span class="dv">95</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="dv">0</span> <span class="op">&lt;=</span> calificacion <span class="op">&lt;=</span> <span class="dv">10</span>:</span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">&quot;Calificación registrada:&quot;</span>, calificacion)</span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span>:</span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">&quot;Aviso: la calificación&quot;</span>, calificacion, <span class="st">&quot;no está entre 0 y 10 y no se registró&quot;</span>)</span></code></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Aviso: la calificación 95 no está entre 0 y 10 y no se registró</code></pre>
+</div>
+</div>
+<p><strong>Opción 2. Detener el programa con un error claro (<code>raise</code>):</strong></p>
+<p>La instrucción <code>raise</code> <strong>lanza un error</strong> del tipo que elijamos, con un mensaje propio. Es la forma recomendada de rechazar datos incorrectos:</p>
+<div class="cell">
+<details open class="code-fold">
+<summary>Código</summary>
+<div class="sourceCode" id="cb32"><pre class="sourceCode python cell-code"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>calificacion <span class="op">=</span> <span class="dv">95</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="kw">not</span> <span class="bu">isinstance</span>(calificacion, (<span class="bu">int</span>, <span class="bu">float</span>)):</span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">raise</span> <span class="pp">TypeError</span>(<span class="st">&quot;La calificación debe ser un número&quot;</span>)</span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a><span class="cf">elif</span> <span class="kw">not</span> <span class="dv">0</span> <span class="op">&lt;=</span> calificacion <span class="op">&lt;=</span> <span class="dv">10</span>:</span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">raise</span> <span class="pp">ValueError</span>(<span class="st">&quot;La calificación debe estar entre 0 y 10; se recibió &quot;</span> <span class="op">+</span> <span class="bu">str</span>(calificacion))</span></code></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>ValueError: La calificación debe estar entre 0 y 10; se recibió 95</code></pre>
+</div>
+</div>
+<p><strong>Opción 3. Evitar el error antes de que ocurra:</strong></p>
+<div class="cell">
+<details open class="code-fold">
+<summary>Código</summary>
+<div class="sourceCode" id="cb34"><pre class="sourceCode python cell-code"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>total <span class="op">=</span> <span class="dv">45</span></span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>estudiantes <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> estudiantes <span class="op">&gt;</span> <span class="dv">0</span>:</span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a>    promedio <span class="op">=</span> total <span class="op">/</span> estudiantes</span>
+<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">&quot;Promedio:&quot;</span>, promedio)</span>
+<span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span>:</span>
+<span id="cb34-8"><a href="#cb34-8" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">&quot;No hay estudiantes: no se puede calcular el promedio&quot;</span>)</span></code></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>No hay estudiantes: no se puede calcular el promedio</code></pre>
+</div>
+</div>
+<table class="caption-top">
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Herramienta</th>
+<th>¿Qué hace?</th>
+<th>¿Cuándo usarla?</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>assert</code></td>
+<td>Detiene el programa con <code>AssertionError</code>.</td>
+<td>Verificar supuestos mientras programas.</td>
+</tr>
+<tr class="even">
+<td><code>if</code> + <code>print()</code></td>
+<td>Muestra un aviso y continúa.</td>
+<td>Cuando el programa puede seguir sin ese dato.</td>
+</tr>
+<tr class="odd">
+<td><code>if</code> + <code>raise</code></td>
+<td>Detiene el programa con el error que elijas.</td>
+<td>Rechazar datos incorrectos con un mensaje claro.</td>
+</tr>
+<tr class="even">
+<td><code>if</code> / <code>else</code></td>
+<td>Elige otro camino.</td>
+<td>Evitar un error antes de que ocurra (por ejemplo, dividir entre cero).</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="errores-comunes" class="level2" data-number="55.8">
+<h2 data-number="55.8"><span class="header-section-number">55.8</span> Errores comunes</h2>
+<table class="caption-top">
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Error</th>
+<th>Ejemplo</th>
+<th>Corrección</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Usar <code>=</code> en lugar de <code>==</code></td>
+<td><code>if x = 5:</code> (<code>SyntaxError</code>)</td>
+<td><code>if x == 5:</code></td>
+</tr>
+<tr class="even">
+<td>Olvidar los dos puntos</td>
+<td><code>if x &gt; 5</code> (<code>SyntaxError</code>)</td>
+<td><code>if x &gt; 5:</code></td>
+</tr>
+<tr class="odd">
+<td>Olvidar la indentación</td>
+<td><code>print()</code> alineado con el <code>if</code> (<code>IndentationError</code>)</td>
+<td>Indenta 4 espacios.</td>
+</tr>
+<tr class="even">
+<td>Comparar con varios valores mal escritos</td>
+<td><code>if color == "rojo" or "azul":</code> (¡siempre es <code>True</code>!)</td>
+<td><code>if color == "rojo" or color == "azul":</code> o <code>if color in ["rojo", "azul"]:</code></td>
+</tr>
+<tr class="odd">
+<td>Condiciones en desorden en <code>elif</code></td>
+<td><code>if c &gt;= 6: ... elif c &gt;= 9: ...</code></td>
+<td>Escribe primero la condición más restrictiva.</td>
+</tr>
+<tr class="even">
+<td>Comparar un texto con un número</td>
+<td><code>if "8" &gt; 6:</code> (<code>TypeError</code>)</td>
+<td>Convierte primero: <code>if int("8") &gt; 6:</code></td>
+</tr>
+</tbody>
+</table>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class='callout-icon'></i>
+</div>
+<div class="callout-title-container flex-fill">
+Nota
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>¿Por qué <code>color == "rojo" or "azul"</code> siempre es verdadero? Python lo interpreta como <code>(color == "rojo") or ("azul")</code>, y una cadena no vacía como <code>"azul"</code> se considera <strong>verdadera</strong>.</p>
+</div>
+</div>
+</section>
+<section id="ejercicios" class="level2" data-number="55.9">
+<h2 data-number="55.9"><span class="header-section-number">55.9</span> Ejercicios</h2>
+<p>Resuelve los ejercicios en los editores interactivos. Recuerda que lo que escribas <strong>no se guarda</strong> al recargar la página.</p>
+<section id="ejercicio-1.-expresiones-booleanas" class="level3" data-number="55.9.1">
+<h3 data-number="55.9.1"><span class="header-section-number">55.9.1</span> Ejercicio 1. Expresiones booleanas</h3>
+<p><strong>Parte A.</strong> Antes de ejecutar, predice si cada línea muestra <code>True</code> o <code>False</code>. Después ejecuta el código para comprobarlo.</p>
+<p><strong>Parte B.</strong> En la última línea, escribe <strong>una</strong> expresión booleana que verifique que <code>calificacion</code> es un número (<code>int</code> o <code>float</code>) <strong>y</strong> que está entre 0 y 10. Con el valor <code>8.5</code> debe regresar <code>True</code>; prueba también con <code>11</code> y con <code>"8.5"</code> (texto), que deben regresar <code>False</code>.</p>
+<div class="cell" data-exercise="cond1">
+<div>
+<div id="pyodide-3" class="exercise-cell">
+
+</div>
+<script type="pyodide-3-contents">
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWUsImV4ZXJjaXNlIjoiY29uZDEifSwiY29kZSI6IiMgUGFydGUgQVxucHJpbnQoNyA+IDMgYW5kIDEwIDwgNSlcbnByaW50KDcgPiAzIG9yIDEwIDwgNSlcbnByaW50KG5vdCA0ID09IDQpXG5wcmludCgzIGluIFsxLCAyLCAzXSlcbnByaW50KFwiYVwiIGluIFwiUHl0aG9uXCIpXG5wcmludCgyIDw9IDIgPCA1KVxuXG4jIFBhcnRlIEJcbmNhbGlmaWNhY2lvbiA9IDguNVxuX19fX19fIn0=
+</script>
+</div>
+</div>
+<div class="cell" data-exercise="cond1" data-check="true">
+<script type="exercise-check-cond1-contents">
+eyJhdHRyIjp7ImNoZWNrIjp0cnVlLCJlZGl0Ijp0cnVlLCJldmFsIjp0cnVlLCJleGVyY2lzZSI6ImNvbmQxIn0sImNvZGUiOiJ1YyA9IHVzZXJfY29kZS5yZXBsYWNlKFwiIFwiLCBcIlwiKVxuaWYgcmVzdWx0IGlzIFRydWUgYW5kIFwiaXNpbnN0YW5jZVwiIGluIHVjIGFuZCAoXCI8PVwiIGluIHVjIG9yIFwiPj1cIiBpbiB1Yyk6XG4gICAgZmVlZGJhY2sgPSB7XCJjb3JyZWN0XCI6IFRydWUsIFwibWVzc2FnZVwiOiBcIsKhQ29ycmVjdG8hIFBydWViYSBhaG9yYSBjYW1iaWFuZG8gY2FsaWZpY2FjaW9uIHBvciAxMSBvIHBvciBcXFwiOC41XFxcIi5cIn1cbmVsaWYgcmVzdWx0IGlzIFRydWU6XG4gICAgZmVlZGJhY2sgPSB7XCJjb3JyZWN0XCI6IEZhbHNlLCBcIm1lc3NhZ2VcIjogXCJSZWdyZXNhIFRydWUsIHBlcm8gdHUgZXhwcmVzacOzbiBkZWJlIHVzYXIgaXNpbnN0YW5jZSgpIHkgY29tcGFyYXIgY29uIDAgeSAxMC5cIn1cbmVsc2U6XG4gICAgZmVlZGJhY2sgPSB7XCJjb3JyZWN0XCI6IEZhbHNlLCBcIm1lc3NhZ2VcIjogXCJDb24gY2FsaWZpY2FjaW9uID0gOC41IGxhIGV4cHJlc2nDs24gZGViZSByZWdyZXNhciBUcnVlLlwifVxuZmVlZGJhY2sifQ==
+</script>
+</div>
+<div class="hint webr-ojs-exercise exercise-hint d-none" data-exercise="cond1">
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class='callout-icon'></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Nota</span>Pista
+</div>
+<div class='callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end'><i class='callout-toggle'></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<p>Une dos preguntas con <code>and</code>: <code>isinstance(calificacion, (int, float))</code> y <code>0 &lt;= calificacion &lt;= 10</code>. Python evalúa de izquierda a derecha y, si la primera pregunta es <code>False</code>, ya no evalúa la segunda; por eso con <code>"8.5"</code> no aparece un error.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="webr-ojs-exercise exercise-solution d-none" data-exercise="cond1">
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class='callout-icon'></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Solución
+</div>
+<div class='callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end'><i class='callout-toggle'></i></div>
+</div>
+<div id="callout-5" class="callout-5-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<div class="sourceCode" id="cb36"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Parte A</span></span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="dv">7</span> <span class="op">&gt;</span> <span class="dv">3</span> <span class="kw">and</span> <span class="dv">10</span> <span class="op">&lt;</span> <span class="dv">5</span>)   <span class="co"># False: la segunda es falsa</span></span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="dv">7</span> <span class="op">&gt;</span> <span class="dv">3</span> <span class="kw">or</span> <span class="dv">10</span> <span class="op">&lt;</span> <span class="dv">5</span>)    <span class="co"># True: la primera es verdadera</span></span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="kw">not</span> <span class="dv">4</span> <span class="op">==</span> <span class="dv">4</span>)         <span class="co"># False</span></span>
+<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="dv">3</span> <span class="kw">in</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>])     <span class="co"># True</span></span>
+<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;a&quot;</span> <span class="kw">in</span> <span class="st">&quot;Python&quot;</span>)    <span class="co"># False: no hay &quot;a&quot; en &quot;Python&quot;</span></span>
+<span id="cb36-7"><a href="#cb36-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="dv">2</span> <span class="op">&lt;=</span> <span class="dv">2</span> <span class="op">&lt;</span> <span class="dv">5</span>)         <span class="co"># True</span></span>
+<span id="cb36-8"><a href="#cb36-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-9"><a href="#cb36-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Parte B</span></span>
+<span id="cb36-10"><a href="#cb36-10" aria-hidden="true" tabindex="-1"></a>calificacion <span class="op">=</span> <span class="fl">8.5</span></span>
+<span id="cb36-11"><a href="#cb36-11" aria-hidden="true" tabindex="-1"></a><span class="bu">isinstance</span>(calificacion, (<span class="bu">int</span>, <span class="bu">float</span>)) <span class="kw">and</span> <span class="dv">0</span> <span class="op">&lt;=</span> calificacion <span class="op">&lt;=</span> <span class="dv">10</span></span></code></pre></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="ejercicio-2.-par-o-impar" class="level3" data-number="55.9.2">
+<h3 data-number="55.9.2"><span class="header-section-number">55.9.2</span> Ejercicio 2. Par o impar</h3>
+<p>Completa el programa para que la variable <code>tipo</code> sea <code>"par"</code> si <code>numero</code> es par, o <code>"impar"</code> en otro caso. Prueba con varios números.</p>
+<div class="cell" data-exercise="cond2">
+<div>
+<div id="pyodide-5" class="exercise-cell">
+
+</div>
+<script type="pyodide-5-contents">
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWUsImV4ZXJjaXNlIjoiY29uZDIifSwiY29kZSI6Im51bWVybyA9IDE3XG5cbmlmIF9fX19fXzpcbiAgICB0aXBvID0gXCJwYXJcIlxuX19fX19fXG4gICAgdGlwbyA9IFwiaW1wYXJcIlxuXG5wcmludChudW1lcm8sIFwiZXNcIiwgdGlwbylcbnRpcG8ifQ==
+</script>
+</div>
+</div>
+<div class="cell" data-exercise="cond2" data-check="true">
+<script type="exercise-check-cond2-contents">
+eyJhdHRyIjp7ImNoZWNrIjp0cnVlLCJlZGl0Ijp0cnVlLCJldmFsIjp0cnVlLCJleGVyY2lzZSI6ImNvbmQyIn0sImNvZGUiOiJpZiByZXN1bHQgPT0gXCJpbXBhclwiOlxuICAgIGZlZWRiYWNrID0ge1wiY29ycmVjdFwiOiBUcnVlLCBcIm1lc3NhZ2VcIjogXCLCoUNvcnJlY3RvISAxNyAlIDIgZXMgMSwgYXPDrSBxdWUgMTcgZXMgaW1wYXIuIFBydWViYSBjb24gb3Ryb3MgbsO6bWVyb3MuXCJ9XG5lbGlmIHJlc3VsdCA9PSBcInBhclwiOlxuICAgIGZlZWRiYWNrID0ge1wiY29ycmVjdFwiOiBGYWxzZSwgXCJtZXNzYWdlXCI6IFwiMTcgbm8gZXMgcGFyLiBSZXZpc2EgdHUgY29uZGljacOzbjogdW4gbsO6bWVybyBlcyBwYXIgc2kgZWwgcmVzaWR1byBkZSBkaXZpZGlybG8gZW50cmUgMiBlcyAwLlwifVxuZWxzZTpcbiAgICBmZWVkYmFjayA9IHtcImNvcnJlY3RcIjogRmFsc2UsIFwibWVzc2FnZVwiOiBcIkxhIHZhcmlhYmxlIHRpcG8gZGViZSBzZXIgXFxcInBhclxcXCIgbyBcXFwiaW1wYXJcXFwiLlwifVxuZmVlZGJhY2sifQ==
+</script>
+</div>
+<div class="hint webr-ojs-exercise exercise-hint d-none" data-exercise="cond2">
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class='callout-icon'></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Nota</span>Pista
+</div>
+<div class='callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end'><i class='callout-toggle'></i></div>
+</div>
+<div id="callout-6" class="callout-6-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<p><code>numero % 2</code> es el residuo de dividir entre 2. No olvides los dos puntos después de <code>else</code>.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="webr-ojs-exercise exercise-solution d-none" data-exercise="cond2">
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class='callout-icon'></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Solución
+</div>
+<div class='callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end'><i class='callout-toggle'></i></div>
+</div>
+<div id="callout-7" class="callout-7-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<div class="sourceCode" id="cb37"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>numero <span class="op">=</span> <span class="dv">17</span></span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> numero <span class="op">%</span> <span class="dv">2</span> <span class="op">==</span> <span class="dv">0</span>:</span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a>    tipo <span class="op">=</span> <span class="st">&quot;par&quot;</span></span>
+<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span>:</span>
+<span id="cb37-6"><a href="#cb37-6" aria-hidden="true" tabindex="-1"></a>    tipo <span class="op">=</span> <span class="st">&quot;impar&quot;</span></span>
+<span id="cb37-7"><a href="#cb37-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-8"><a href="#cb37-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(numero, <span class="st">&quot;es&quot;</span>, tipo)</span>
+<span id="cb37-9"><a href="#cb37-9" aria-hidden="true" tabindex="-1"></a>tipo</span></code></pre></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="ejercicio-3.-escala-de-calificaciones-con-validación" class="level3" data-number="55.9.3">
+<h3 data-number="55.9.3"><span class="header-section-number">55.9.3</span> Ejercicio 3. Escala de calificaciones con validación</h3>
+<p>Completa el programa para asignar el nivel según la escala de la UNAM (MB, B, S, NA). <strong>Antes</strong> de clasificar, verifica que la calificación esté entre 0 y 10; si no lo está, <code>nivel</code> debe ser <code>"Inválida"</code>.</p>
+<p>Prueba con <code>8.5</code>, <code>9.5</code>, <code>6</code>, <code>4</code> y <code>11</code>.</p>
+<div class="cell" data-exercise="cond3">
+<div>
+<div id="pyodide-7" class="exercise-cell">
+
+</div>
+<script type="pyodide-7-contents">
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWUsImV4ZXJjaXNlIjoiY29uZDMifSwiY29kZSI6ImNhbGlmaWNhY2lvbiA9IDguNVxuXG5pZiBub3QgMCA8PSBjYWxpZmljYWNpb24gPD0gMTA6XG4gICAgbml2ZWwgPSBcIkludsOhbGlkYVwiXG5lbGlmIF9fX19fXzpcbiAgICBuaXZlbCA9IFwiTUJcIlxuZWxpZiBfX19fX186XG4gICAgbml2ZWwgPSBcIkJcIlxuZWxpZiBfX19fX186XG4gICAgbml2ZWwgPSBcIlNcIlxuZWxzZTpcbiAgICBuaXZlbCA9IF9fX19fX1xuXG5wcmludChcIkNhbGlmaWNhY2nDs246XCIsIGNhbGlmaWNhY2lvbiwgXCJOaXZlbDpcIiwgbml2ZWwpXG5uaXZlbCJ9
+</script>
+</div>
+</div>
+<div class="cell" data-exercise="cond3" data-check="true">
+<script type="exercise-check-cond3-contents">
+eyJhdHRyIjp7ImNoZWNrIjp0cnVlLCJlZGl0Ijp0cnVlLCJldmFsIjp0cnVlLCJleGVyY2lzZSI6ImNvbmQzIn0sImNvZGUiOiJpZiByZXN1bHQgPT0gXCJCXCI6XG4gICAgZmVlZGJhY2sgPSB7XCJjb3JyZWN0XCI6IFRydWUsIFwibWVzc2FnZVwiOiBcIsKhQ29ycmVjdG8hIDguNSBjb3JyZXNwb25kZSBhIEIuIFBydWViYSBhaG9yYSBjb24gOS41LCA2LCA0IHkgMTEuXCJ9XG5lbGlmIHJlc3VsdCA9PSBcIlNcIjpcbiAgICBmZWVkYmFjayA9IHtcImNvcnJlY3RcIjogRmFsc2UsIFwibWVzc2FnZVwiOiBcIk9idHV2aXN0ZSBTOiByZXZpc2EgZWwgb3JkZW4gZGUgdHVzIGNvbmRpY2lvbmVzLCBwcmltZXJvIGxhIG3DoXMgYWx0YS5cIn1cbmVsc2U6XG4gICAgZmVlZGJhY2sgPSB7XCJjb3JyZWN0XCI6IEZhbHNlLCBcIm1lc3NhZ2VcIjogXCJDb24gY2FsaWZpY2FjaW9uID0gOC41IGVsIG5pdmVsIGRlYmUgc2VyIEIuXCJ9XG5mZWVkYmFjayJ9
+</script>
+</div>
+<div class="hint webr-ojs-exercise exercise-hint d-none" data-exercise="cond3">
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class='callout-icon'></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Nota</span>Pista
+</div>
+<div class='callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end'><i class='callout-toggle'></i></div>
+</div>
+<div id="callout-8" class="callout-8-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<p>Como la validación ya descartó los valores fuera de rango, basta con <code>calificacion &gt;= 9</code>, <code>calificacion &gt;= 8</code> y <code>calificacion &gt;= 6</code>, en ese orden.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="webr-ojs-exercise exercise-solution d-none" data-exercise="cond3">
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class='callout-icon'></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Solución
+</div>
+<div class='callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end'><i class='callout-toggle'></i></div>
+</div>
+<div id="callout-9" class="callout-9-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<div class="sourceCode" id="cb38"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>calificacion <span class="op">=</span> <span class="fl">8.5</span></span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="kw">not</span> <span class="dv">0</span> <span class="op">&lt;=</span> calificacion <span class="op">&lt;=</span> <span class="dv">10</span>:</span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a>    nivel <span class="op">=</span> <span class="st">&quot;Inválida&quot;</span></span>
+<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a><span class="cf">elif</span> calificacion <span class="op">&gt;=</span> <span class="dv">9</span>:</span>
+<span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a>    nivel <span class="op">=</span> <span class="st">&quot;MB&quot;</span></span>
+<span id="cb38-7"><a href="#cb38-7" aria-hidden="true" tabindex="-1"></a><span class="cf">elif</span> calificacion <span class="op">&gt;=</span> <span class="dv">8</span>:</span>
+<span id="cb38-8"><a href="#cb38-8" aria-hidden="true" tabindex="-1"></a>    nivel <span class="op">=</span> <span class="st">&quot;B&quot;</span></span>
+<span id="cb38-9"><a href="#cb38-9" aria-hidden="true" tabindex="-1"></a><span class="cf">elif</span> calificacion <span class="op">&gt;=</span> <span class="dv">6</span>:</span>
+<span id="cb38-10"><a href="#cb38-10" aria-hidden="true" tabindex="-1"></a>    nivel <span class="op">=</span> <span class="st">&quot;S&quot;</span></span>
+<span id="cb38-11"><a href="#cb38-11" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span>:</span>
+<span id="cb38-12"><a href="#cb38-12" aria-hidden="true" tabindex="-1"></a>    nivel <span class="op">=</span> <span class="st">&quot;NA&quot;</span></span>
+<span id="cb38-13"><a href="#cb38-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-14"><a href="#cb38-14" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;Calificación:&quot;</span>, calificacion, <span class="st">&quot;Nivel:&quot;</span>, nivel)</span>
+<span id="cb38-15"><a href="#cb38-15" aria-hidden="true" tabindex="-1"></a>nivel</span></code></pre></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="ejercicio-4.-año-bisiesto" class="level3" data-number="55.9.4">
+<h3 data-number="55.9.4"><span class="header-section-number">55.9.4</span> Ejercicio 4. Año bisiesto</h3>
+<p>Un año es <strong>bisiesto</strong> si es divisible entre 4, <strong>excepto</strong> los que son divisibles entre 100, <strong>a menos que</strong> también sean divisibles entre 400. Por ejemplo: 2024 sí es bisiesto, 1900 no lo es y 2000 sí lo es.</p>
+<ol type="1">
+<li>Escribe una expresión booleana y guárdala en <code>es_bisiesto</code>.</li>
+<li>Usa un <code>if</code> / <code>else</code> para mostrar si el año es bisiesto o no.</li>
+<li>Deja <code>es_bisiesto</code> en la última línea.</li>
+</ol>
+<div class="cell" data-exercise="cond4">
+<div>
+<div id="pyodide-9" class="exercise-cell">
+
+</div>
+<script type="pyodide-9-contents">
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWUsImV4ZXJjaXNlIjoiY29uZDQifSwiY29kZSI6ImFuaW8gPSAxOTAwXG5cbmVzX2Jpc2llc3RvID0gX19fX19fXG5cbiMgTXVlc3RyYSB1biBtZW5zYWplIGNvbiBpZiAvIGVsc2VcblxuXG5lc19iaXNpZXN0byJ9
+</script>
+</div>
+</div>
+<div class="cell" data-exercise="cond4" data-check="true">
+<script type="exercise-check-cond4-contents">
+eyJhdHRyIjp7ImNoZWNrIjp0cnVlLCJlZGl0Ijp0cnVlLCJldmFsIjp0cnVlLCJleGVyY2lzZSI6ImNvbmQ0In0sImNvZGUiOiJpZiByZXN1bHQgaXMgRmFsc2UgYW5kIFwiJVwiIGluIHVzZXJfY29kZTpcbiAgICBmZWVkYmFjayA9IHtcImNvcnJlY3RcIjogVHJ1ZSwgXCJtZXNzYWdlXCI6IFwiwqFDb3JyZWN0byEgMTkwMCBlcyBkaXZpc2libGUgZW50cmUgMTAwIHBlcm8gbm8gZW50cmUgNDAwLCBhc8OtIHF1ZSBubyBlcyBiaXNpZXN0by4gUHJ1ZWJhIGNvbiAyMDAwIHkgMjAyNC5cIn1cbmVsaWYgcmVzdWx0IGlzIFRydWU6XG4gICAgZmVlZGJhY2sgPSB7XCJjb3JyZWN0XCI6IEZhbHNlLCBcIm1lc3NhZ2VcIjogXCIxOTAwIE5PIGVzIGJpc2llc3RvOiBlcyBkaXZpc2libGUgZW50cmUgMTAwIHBlcm8gbm8gZW50cmUgNDAwLlwifVxuZWxzZTpcbiAgICBmZWVkYmFjayA9IHtcImNvcnJlY3RcIjogRmFsc2UsIFwibWVzc2FnZVwiOiBcImVzX2Jpc2llc3RvIGRlYmUgc2VyIHVuYSBleHByZXNpw7NuIGJvb2xlYW5hIHF1ZSB1c2UgZWwgb3BlcmFkb3IgJS5cIn1cbmZlZWRiYWNrIn0=
+</script>
+</div>
+<div class="hint webr-ojs-exercise exercise-hint d-none" data-exercise="cond4">
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class='callout-icon'></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Nota</span>Pista
+</div>
+<div class='callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end'><i class='callout-toggle'></i></div>
+</div>
+<div id="callout-10" class="callout-10-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<p>“Divisible entre 4” se escribe <code>anio % 4 == 0</code>. La regla completa combina tres condiciones con <code>and</code> y <code>or</code>: (divisible entre 4 <strong>y no</strong> entre 100) <strong>o</strong> divisible entre 400.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="webr-ojs-exercise exercise-solution d-none" data-exercise="cond4">
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-11-contents" aria-controls="callout-11" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class='callout-icon'></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Solución
+</div>
+<div class='callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end'><i class='callout-toggle'></i></div>
+</div>
+<div id="callout-11" class="callout-11-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<div class="sourceCode" id="cb39"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>anio <span class="op">=</span> <span class="dv">1900</span></span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>es_bisiesto <span class="op">=</span> (anio <span class="op">%</span> <span class="dv">4</span> <span class="op">==</span> <span class="dv">0</span> <span class="kw">and</span> anio <span class="op">%</span> <span class="dv">100</span> <span class="op">!=</span> <span class="dv">0</span>) <span class="kw">or</span> anio <span class="op">%</span> <span class="dv">400</span> <span class="op">==</span> <span class="dv">0</span></span>
+<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> es_bisiesto:</span>
+<span id="cb39-6"><a href="#cb39-6" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(anio, <span class="st">&quot;es bisiesto&quot;</span>)</span>
+<span id="cb39-7"><a href="#cb39-7" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span>:</span>
+<span id="cb39-8"><a href="#cb39-8" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(anio, <span class="st">&quot;no es bisiesto&quot;</span>)</span>
+<span id="cb39-9"><a href="#cb39-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-10"><a href="#cb39-10" aria-hidden="true" tabindex="-1"></a>es_bisiesto</span></code></pre></div>
+<p>Observa que <code>if es_bisiesto:</code> es suficiente; no hace falta escribir <code>if es_bisiesto == True:</code>.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="ejercicio-5.-raíces-de-una-ecuación-cuadrática" class="level3" data-number="55.9.5">
+<h3 data-number="55.9.5"><span class="header-section-number">55.9.5</span> Ejercicio 5. Raíces de una ecuación cuadrática</h3>
+<p>Para la ecuación <span class="math inline">\(ax^2 + bx + c = 0\)</span>, el <strong>discriminante</strong> <span class="math inline">\(\Delta = b^2 - 4ac\)</span> indica cuántas raíces reales tiene:</p>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th>Discriminante</th>
+<th>Raíces reales</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">\(\Delta &gt; 0\)</span></td>
+<td>Dos: <span class="math inline">\(x = \dfrac{-b \pm \sqrt{\Delta}}{2a}\)</span></td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(\Delta = 0\)</span></td>
+<td>Una: <span class="math inline">\(x = \dfrac{-b}{2a}\)</span></td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(\Delta &lt; 0\)</span></td>
+<td>Ninguna</td>
+</tr>
+</tbody>
+</table>
+<p>Completa el programa para que la lista <code>raices</code> contenga las raíces reales. Como programación defensiva, si <code>a == 0</code> el programa debe lanzar un <code>ValueError</code>, porque la ecuación no es cuadrática.</p>
+<p>Prueba con <code>(1, -3, 2)</code>, <code>(1, 2, 1)</code>, <code>(1, 0, 1)</code> y <code>(0, 2, 1)</code>.</p>
+<div class="cell" data-exercise="cond5">
+<div>
+<div id="pyodide-11" class="exercise-cell">
+
+</div>
+<script type="pyodide-11-contents">
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWUsImV4ZXJjaXNlIjoiY29uZDUifSwiY29kZSI6ImEsIGIsIGMgPSAxLCAtMywgMlxuXG5pZiBhID09IDA6XG4gICAgcmFpc2UgVmFsdWVFcnJvcihcImEgbm8gcHVlZGUgc2VyIDA6IGxhIGVjdWFjacOzbiBubyBlcyBjdWFkcsOhdGljYVwiKVxuXG5kaXNjcmltaW5hbnRlID0gX19fX19fXG5cbmlmIF9fX19fXzpcbiAgICB4MSA9ICgtYiArIGRpc2NyaW1pbmFudGUgKiogMC41KSAvICgyICogYSlcbiAgICB4MiA9ICgtYiAtIGRpc2NyaW1pbmFudGUgKiogMC41KSAvICgyICogYSlcbiAgICByYWljZXMgPSBbeDEsIHgyXVxuZWxpZiBfX19fX186XG4gICAgcmFpY2VzID0gWy1iIC8gKDIgKiBhKV1cbmVsc2U6XG4gICAgcmFpY2VzID0gW11cblxucHJpbnQoXCJEaXNjcmltaW5hbnRlOlwiLCBkaXNjcmltaW5hbnRlKVxucHJpbnQoXCJSYcOtY2VzIHJlYWxlczpcIiwgcmFpY2VzKVxucmFpY2VzIn0=
+</script>
+</div>
+</div>
+<div class="cell" data-exercise="cond5" data-check="true">
+<script type="exercise-check-cond5-contents">
+eyJhdHRyIjp7ImNoZWNrIjp0cnVlLCJlZGl0Ijp0cnVlLCJldmFsIjp0cnVlLCJleGVyY2lzZSI6ImNvbmQ1In0sImNvZGUiOiJpZiBpc2luc3RhbmNlKHJlc3VsdCwgbGlzdCkgYW5kIHNvcnRlZChyZXN1bHQpID09IFsxLjAsIDIuMF06XG4gICAgZmVlZGJhY2sgPSB7XCJjb3JyZWN0XCI6IFRydWUsIFwibWVzc2FnZVwiOiBcIsKhQ29ycmVjdG8hIHjCsiAtIDN4ICsgMiA9ICh4IC0gMSkoeCAtIDIpLCBzdXMgcmHDrWNlcyBzb24gMSB5IDIuIFBydWViYSBjb24gbG9zIG90cm9zIGNvZWZpY2llbnRlcy5cIn1cbmVsc2U6XG4gICAgZmVlZGJhY2sgPSB7XCJjb3JyZWN0XCI6IEZhbHNlLCBcIm1lc3NhZ2VcIjogXCJQYXJhIGE9MSwgYj0tMywgYz0yIGxhcyByYcOtY2VzIGRlYmVuIHNlciAxIHkgMi4gUmV2aXNhIGVsIGRpc2NyaW1pbmFudGUgYioqMiAtIDQqYSpjIHkgbGFzIGNvbmRpY2lvbmVzLlwifVxuZmVlZGJhY2sifQ==
+</script>
+</div>
+<div class="hint webr-ojs-exercise exercise-hint d-none" data-exercise="cond5">
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-12-contents" aria-controls="callout-12" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class='callout-icon'></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Nota</span>Pista
+</div>
+<div class='callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end'><i class='callout-toggle'></i></div>
+</div>
+<div id="callout-12" class="callout-12-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<p>El discriminante es <code>b ** 2 - 4 * a * c</code>. Las condiciones son <code>discriminante &gt; 0</code> y <code>discriminante == 0</code>. Elevar a <code>0.5</code> es lo mismo que sacar raíz cuadrada.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="webr-ojs-exercise exercise-solution d-none" data-exercise="cond5">
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-13-contents" aria-controls="callout-13" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class='callout-icon'></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Solución
+</div>
+<div class='callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end'><i class='callout-toggle'></i></div>
+</div>
+<div id="callout-13" class="callout-13-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<div class="sourceCode" id="cb40"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>a, b, c <span class="op">=</span> <span class="dv">1</span>, <span class="op">-</span><span class="dv">3</span>, <span class="dv">2</span></span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> a <span class="op">==</span> <span class="dv">0</span>:</span>
+<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">raise</span> <span class="pp">ValueError</span>(<span class="st">&quot;a no puede ser 0: la ecuación no es cuadrática&quot;</span>)</span>
+<span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-6"><a href="#cb40-6" aria-hidden="true" tabindex="-1"></a>discriminante <span class="op">=</span> b <span class="op">**</span> <span class="dv">2</span> <span class="op">-</span> <span class="dv">4</span> <span class="op">*</span> a <span class="op">*</span> c</span>
+<span id="cb40-7"><a href="#cb40-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-8"><a href="#cb40-8" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> discriminante <span class="op">&gt;</span> <span class="dv">0</span>:</span>
+<span id="cb40-9"><a href="#cb40-9" aria-hidden="true" tabindex="-1"></a>    x1 <span class="op">=</span> (<span class="op">-</span>b <span class="op">+</span> discriminante <span class="op">**</span> <span class="fl">0.5</span>) <span class="op">/</span> (<span class="dv">2</span> <span class="op">*</span> a)</span>
+<span id="cb40-10"><a href="#cb40-10" aria-hidden="true" tabindex="-1"></a>    x2 <span class="op">=</span> (<span class="op">-</span>b <span class="op">-</span> discriminante <span class="op">**</span> <span class="fl">0.5</span>) <span class="op">/</span> (<span class="dv">2</span> <span class="op">*</span> a)</span>
+<span id="cb40-11"><a href="#cb40-11" aria-hidden="true" tabindex="-1"></a>    raices <span class="op">=</span> [x1, x2]</span>
+<span id="cb40-12"><a href="#cb40-12" aria-hidden="true" tabindex="-1"></a><span class="cf">elif</span> discriminante <span class="op">==</span> <span class="dv">0</span>:</span>
+<span id="cb40-13"><a href="#cb40-13" aria-hidden="true" tabindex="-1"></a>    raices <span class="op">=</span> [<span class="op">-</span>b <span class="op">/</span> (<span class="dv">2</span> <span class="op">*</span> a)]</span>
+<span id="cb40-14"><a href="#cb40-14" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span>:</span>
+<span id="cb40-15"><a href="#cb40-15" aria-hidden="true" tabindex="-1"></a>    raices <span class="op">=</span> []</span>
+<span id="cb40-16"><a href="#cb40-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-17"><a href="#cb40-17" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;Discriminante:&quot;</span>, discriminante)</span>
+<span id="cb40-18"><a href="#cb40-18" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;Raíces reales:&quot;</span>, raices)</span>
+<span id="cb40-19"><a href="#cb40-19" aria-hidden="true" tabindex="-1"></a>raices   <span class="co"># [2.0, 1.0]</span></span></code></pre></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="ejercicio-6.-detective-de-condicionales" class="level3" data-number="55.9.6">
+<h3 data-number="55.9.6"><span class="header-section-number">55.9.6</span> Ejercicio 6. Detective de condicionales</h3>
+<p>El programa tiene <strong>dos errores de lógica</strong>: no marca ningún error, pero los resultados son incorrectos.</p>
+<ol type="1">
+<li><code>"azul"</code> no es un color cálido, pero el programa dice que sí. ¿Por qué?</li>
+<li>Una calificación de <code>9.5</code> debería ser <code>"MB"</code>, pero el programa dice <code>"S"</code>. ¿Por qué?</li>
+</ol>
+<p>Corrige ambos errores. La última línea debe regresar <code>"MB"</code>.</p>
+<div class="cell" data-exercise="cond6">
+<div>
+<div id="pyodide-13" class="exercise-cell">
+
+</div>
+<script type="pyodide-13-contents">
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWUsImV4ZXJjaXNlIjoiY29uZDYifSwiY29kZSI6ImNvbG9yID0gXCJhenVsXCJcblxuaWYgY29sb3IgPT0gXCJyb2pvXCIgb3IgXCJuYXJhbmphXCI6XG4gICAgcHJpbnQoY29sb3IsIFwiZXMgdW4gY29sb3IgY8OhbGlkb1wiKVxuZWxzZTpcbiAgICBwcmludChjb2xvciwgXCJlcyB1biBjb2xvciBmcsOtb1wiKVxuXG5jYWxpZmljYWNpb24gPSA5LjVcblxuaWYgY2FsaWZpY2FjaW9uID49IDY6XG4gICAgbml2ZWwgPSBcIlNcIlxuZWxpZiBjYWxpZmljYWNpb24gPj0gODpcbiAgICBuaXZlbCA9IFwiQlwiXG5lbGlmIGNhbGlmaWNhY2lvbiA+PSA5OlxuICAgIG5pdmVsID0gXCJNQlwiXG5cbm5pdmVsIn0=
+</script>
+</div>
+</div>
+<div class="cell" data-exercise="cond6" data-check="true">
+<script type="exercise-check-cond6-contents">
+eyJhdHRyIjp7ImNoZWNrIjp0cnVlLCJlZGl0Ijp0cnVlLCJldmFsIjp0cnVlLCJleGVyY2lzZSI6ImNvbmQ2In0sImNvZGUiOiJ1YyA9IHVzZXJfY29kZS5yZXBsYWNlKFwiIFwiLCBcIlwiKVxuaWYgcmVzdWx0ID09IFwiTUJcIiBhbmQgJ29yXCJuYXJhbmphXCInIG5vdCBpbiB1YzpcbiAgICBmZWVkYmFjayA9IHtcImNvcnJlY3RcIjogVHJ1ZSwgXCJtZXNzYWdlXCI6IFwiwqFDb3JyZWN0byEgQ29ycmVnaXN0ZSBsYXMgZG9zIGNvbmRpY2lvbmVzLlwifVxuZWxpZiByZXN1bHQgPT0gXCJNQlwiOlxuICAgIGZlZWRiYWNrID0ge1wiY29ycmVjdFwiOiBGYWxzZSwgXCJtZXNzYWdlXCI6IFwiTGEgY2FsaWZpY2FjacOzbiB5YSBmdW5jaW9uYSwgcGVybyBmYWx0YSBjb3JyZWdpciBsYSBjb25kaWNpw7NuIGRlbCBjb2xvci5cIn1cbmVsc2U6XG4gICAgZmVlZGJhY2sgPSB7XCJjb3JyZWN0XCI6IEZhbHNlLCBcIm1lc3NhZ2VcIjogXCJMYSBjYWxpZmljYWNpw7NuIDkuNSBkZWJlIHNlciBNQi4gUmV2aXNhIGVsIG9yZGVuIGRlIGxhcyBjb25kaWNpb25lcy5cIn1cbmZlZWRiYWNrIn0=
+</script>
+</div>
+<div class="hint webr-ojs-exercise exercise-hint d-none" data-exercise="cond6">
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-14-contents" aria-controls="callout-14" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class='callout-icon'></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Nota</span>Pista
+</div>
+<div class='callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end'><i class='callout-toggle'></i></div>
+</div>
+<div id="callout-14" class="callout-14-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li>Python lee la condición como <code>(color == "rojo") or ("naranja")</code>, y una cadena no vacía siempre es verdadera.</li>
+<li>Con <code>9.5</code>, la primera condición <code>calificacion &gt;= 6</code> ya es verdadera, así que Python no revisa las siguientes.</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+<div class="webr-ojs-exercise exercise-solution d-none" data-exercise="cond6">
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-15-contents" aria-controls="callout-15" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class='callout-icon'></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Solución
+</div>
+<div class='callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end'><i class='callout-toggle'></i></div>
+</div>
+<div id="callout-15" class="callout-15-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<div class="sourceCode" id="cb41"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>color <span class="op">=</span> <span class="st">&quot;azul&quot;</span></span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> color <span class="kw">in</span> [<span class="st">&quot;rojo&quot;</span>, <span class="st">&quot;naranja&quot;</span>]:   <span class="co"># o: color == &quot;rojo&quot; or color == &quot;naranja&quot;</span></span>
+<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(color, <span class="st">&quot;es un color cálido&quot;</span>)</span>
+<span id="cb41-5"><a href="#cb41-5" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span>:</span>
+<span id="cb41-6"><a href="#cb41-6" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(color, <span class="st">&quot;es un color frío&quot;</span>)</span>
+<span id="cb41-7"><a href="#cb41-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-8"><a href="#cb41-8" aria-hidden="true" tabindex="-1"></a>calificacion <span class="op">=</span> <span class="fl">9.5</span></span>
+<span id="cb41-9"><a href="#cb41-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-10"><a href="#cb41-10" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> calificacion <span class="op">&gt;=</span> <span class="dv">9</span>:</span>
+<span id="cb41-11"><a href="#cb41-11" aria-hidden="true" tabindex="-1"></a>    nivel <span class="op">=</span> <span class="st">&quot;MB&quot;</span></span>
+<span id="cb41-12"><a href="#cb41-12" aria-hidden="true" tabindex="-1"></a><span class="cf">elif</span> calificacion <span class="op">&gt;=</span> <span class="dv">8</span>:</span>
+<span id="cb41-13"><a href="#cb41-13" aria-hidden="true" tabindex="-1"></a>    nivel <span class="op">=</span> <span class="st">&quot;B&quot;</span></span>
+<span id="cb41-14"><a href="#cb41-14" aria-hidden="true" tabindex="-1"></a><span class="cf">elif</span> calificacion <span class="op">&gt;=</span> <span class="dv">6</span>:</span>
+<span id="cb41-15"><a href="#cb41-15" aria-hidden="true" tabindex="-1"></a>    nivel <span class="op">=</span> <span class="st">&quot;S&quot;</span></span>
+<span id="cb41-16"><a href="#cb41-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-17"><a href="#cb41-17" aria-hidden="true" tabindex="-1"></a>nivel   <span class="co"># &#39;MB&#39;</span></span></code></pre></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="resumen" class="level2" data-number="55.10">
+<h2 data-number="55.10"><span class="header-section-number">55.10</span> Resumen</h2>
+<table class="caption-top">
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Tema</th>
+<th>Idea clave</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Expresiones booleanas</td>
+<td>Preguntas que regresan <code>True</code> o <code>False</code>: <code>==</code>, <code>!=</code>, <code>&lt;</code>, <code>&lt;=</code>, <code>and</code>, <code>or</code>, <code>not</code>, <code>in</code>, <code>isinstance()</code>.</td>
+</tr>
+<tr class="even">
+<td><code>if</code></td>
+<td>Ejecuta un bloque solo si la condición es verdadera. Termina con <code>:</code> y usa 4 espacios de indentación.</td>
+</tr>
+<tr class="odd">
+<td><code>else</code></td>
+<td>Qué hacer si la condición es falsa.</td>
+</tr>
+<tr class="even">
+<td><code>elif</code></td>
+<td>Revisa otra condición; solo se ejecuta el <strong>primer</strong> bloque verdadero.</td>
+</tr>
+<tr class="odd">
+<td>Anidados</td>
+<td>Un <code>if</code> dentro de otro; muchas veces se simplifican con <code>elif</code>.</td>
+</tr>
+<tr class="even">
+<td>En una línea</td>
+<td><code>valor_1 if condicion else valor_2</code>.</td>
+</tr>
+<tr class="odd">
+<td>Programación defensiva</td>
+<td><code>if</code> + <code>print()</code> para avisar, <code>if</code> + <code>raise</code> para rechazar datos, <code>if</code> / <code>else</code> para evitar errores.</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="referencias" class="level2" data-number="55.11">
+<h2 data-number="55.11"><span class="header-section-number">55.11</span> Referencias</h2>
+<ul>
+<li><a href="https://docs.python.org/es/3/tutorial/controlflow.html#if-statements">Documentación de Python: La instrucción <code>if</code></a></li>
+<li><a href="https://docs.python.org/es/3/library/stdtypes.html#comparisons">Documentación de Python: Comparaciones</a></li>
+<li><a href="https://docs.python.org/es/3/library/stdtypes.html#truth-value-testing">Documentación de Python: Prueba de valor de verdad</a></li>
+<li><a href="https://docs.python.org/es/3/reference/simple_stmts.html#the-raise-statement">Documentación de Python: La instrucción <code>raise</code></a></li>
+</ul>
+<div id="quarto-navigation-envelope" class="hidden">
+<p><span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1zaWRlYmFyLXRpdGxl">Taller de Cómputo</span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1uYXZiYXItdGl0bGU=">Taller de Cómputo</span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1uZXh0"><span class="chapter-number">56</span>  <span class="chapter-title">Introducción a NumPy</span></span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1wcmV2"><span class="chapter-number">54</span>  <span class="chapter-title">Sintaxis de nombres, buenas prácticas y programación defensiva en Python</span></span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1zaWRlYmFyOi9pbmRleC5odG1sSW5mb3JtYWNpw7NuLWdlbmVyYWw=">Información general</span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1zaWRlYmFyOi90ZW1hcmlvLmh0bWxUZW1hcmlv">Temario</span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1zaWRlYmFyOi9jYXAxQS5odG1sPHNwYW4tY2xhc3M9J2NoYXB0ZXItbnVtYmVyJz4xPC9zcGFuPi0tPHNwYW4tY2xhc3M9J2NoYXB0ZXItdGl0bGUnPkludHJvZHVjY2nDs24tZS1pbnRlZ3JhY2nDs248L3NwYW4+"><span class="chapter-number">1</span>  <span class="chapter-title">Introducción e integración</span></span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1zaWRlYmFyOi9ldmFsdWFjaW9uLmh0bWw8c3Bhbi1jbGFzcz0nY2hhcHRlci1udW1iZXInPjI8L3NwYW4+LS08c3Bhbi1jbGFzcz0nY2hhcHRlci10aXRsZSc+U2lzdGVtYS1kZS1ldmFsdWFjacOzbi0rLURPQzwvc3Bhbj4="><span class="chapter-number">2</span>  <span class="chapter-title">Sistema de evaluación + DOC</span></span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1zaWRlYmFyOnF1YXJ0by1zaWRlYmFyLXNlY3Rpb24tMQ=="><strong>Sección 1</strong> - Componentes de una computadora</span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1zaWRlYmFyOi9jYXAyQS5odG1sPHNwYW4tY2xhc3M9J2NoYXB0ZXItbnVtYmVyJz4zPC9zcGFuPi0tPHNwYW4tY2xhc3M9J2NoYXB0ZXItdGl0bGUnPkludHJvZHVjY2nDs24tYS1sb3MtQ29tcG9uZW50ZXMtZGUtdW5hLUNvbXB1dGFkb3JhPC9zcGFuPg=="><span class="chapter-number">3</span>  <span class="chapter-title">Introducción a los Componentes de una Computadora</span></span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1zaWRlYmFyOi9nYW1lMS5odG1sPHNwYW4tY2xhc3M9J2NoYXB0ZXItbnVtYmVyJz40PC9zcGFuPi0tPHNwYW4tY2xhc3M9J2NoYXB0ZXItdGl0bGUnPioq8J+Ori1BaGFTbGlkZXMtMS0tLU1hbm9zLWEtbGEtb2JyYSoqPC9zcGFuPg=="><span class="chapter-number">4</span>  <span class="chapter-title"><strong>🎮 AhaSlides 1 - Manos a la obra</strong></span></span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1zaWRlYmFyOi9jYXAyQi5odG1sPHNwYW4tY2xhc3M9J2NoYXB0ZXItbnVtYmVyJz41PC9zcGFuPi0tPHNwYW4tY2xhc3M9J2NoYXB0ZXItdGl0bGUnPlNpc3RlbWEtT3BlcmF0aXZvLShTTykteS1zdXMtZnVuY2lvbmVzPC9zcGFuPg=="><span class="chapter-number">5</span>  <span class="chapter-title">Sistema Operativo (SO) y sus funciones</span></span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1zaWRlYmFyOi9UYXJlYTEuaHRtbDxzcGFuLWNsYXNzPSdjaGFwdGVyLW51bWJlcic+Njwvc3Bhbj4tLTxzcGFuLWNsYXNzPSdjaGFwdGVyLXRpdGxlJz4qKuKcj++4jy1UYXJlYS0xLS0qKi1NaS1TaXN0ZW1hLU9wZXJhdGl2bzwvc3Bhbj4="><span class="chapter-number">6</span>  <span class="chapter-title"><strong>✏️ Tarea 1 -</strong> Mi Sistema Operativo</span></span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1zaWRlYmFyOi9jYXAzLmh0bWw8c3Bhbi1jbGFzcz0nY2hhcHRlci1udW1iZXInPjc8L3NwYW4+LS08c3Bhbi1jbGFzcz0nY2hhcHRlci10aXRsZSc+QnVlbmFzLXByw6FjdGljYXMtZW4tcHJvZ3JhbWFjacOzbjwvc3Bhbj4="><span class="chapter-number">7</span>  <span class="chapter-title">Buenas prácticas en programación</span></span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1zaWRlYmFyOi9zMV9hY3RpdmlkYWQxLmh0bWw8c3Bhbi1jbGFzcz0nY2hhcHRlci1udW1iZXInPjg8L3NwYW4+LS08c3Bhbi1jbGFzcz0nY2hhcHRlci10aXRsZSc+Kirwn5OaKiotKipBY3RpdmlkYWQtMS1lbi1lcXVpcG8tLSoqLU1pLXByaW1lci1hbGdvcml0bW88L3NwYW4+"><span class="chapter-number">8</span>  <span class="chapter-title"><strong>📚</strong> <strong>Actividad 1 en equipo -</strong> Mi primer algoritmo</span></span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1zaWRlYmFyOi9nYW1lMi5odG1sPHNwYW4tY2xhc3M9J2NoYXB0ZXItbnVtYmVyJz45PC9zcGFuPi0tPHNwYW4tY2xhc3M9J2NoYXB0ZXItdGl0bGUnPioq8J+Ori1BaGFTbGlkZXMtMi0tTWFub3MtYS1sYS1vYnJhKio8L3NwYW4+"><span class="chapter-number">9</span>  <span class="chapter-title"><strong>🎮 AhaSlides 2 -Manos a la obra</strong></span></span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1zaWRlYmFyOi91ZG9jei5odG1sPHNwYW4tY2xhc3M9J2NoYXB0ZXItbnVtYmVyJz4xMDwvc3Bhbj4tLTxzcGFuLWNsYXNzPSdjaGFwdGVyLXRpdGxlJz5Eb2MtKHVEb2N6KS1wYXJhLWVsLWFwb3lvLWRlLWVzdGUtY3Vyc28tKirwn6SWKio8L3NwYW4+"><span class="chapter-number">10</span>  <span class="chapter-title">Doc (uDocz) para el apoyo de este curso <strong>🤖</strong></span></span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1zaWRlYmFyOnF1YXJ0by1zaWRlYmFyLXNlY3Rpb24tMg=="><strong>Sección 2</strong> - Instalación de programas</span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1zaWRlYmFyOi9Ub2RvTGl0cy5odG1sPHNwYW4tY2xhc3M9J2NoYXB0ZXItbnVtYmVyJz4xMTwvc3Bhbj4tLTxzcGFuLWNsYXNzPSdjaGFwdGVyLXRpdGxlJz7wn5OMLSoqVG8tZG8tbGlzdC0tKiotSW5zdGFsYWNpw7NuLWRlLXByb2dyYW1hczwvc3Bhbj4="><span class="chapter-number">11</span>  <span class="chapter-title">📌 <strong>To do list -</strong> Instalación de programas</span></span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1zaWRlYmFyOi9pbnN0YWxsX0IuaHRtbDxzcGFuLWNsYXNzPSdjaGFwdGVyLW51bWJlcic+MTI8L3NwYW4+LS08c3Bhbi1jbGFzcz0nY2hhcHRlci10aXRsZSc+SW5zdGFsYWNpw7NuLWRlLUdpdC15LUJhc2g8L3NwYW4+"><span class="chapter-number">12</span>  <span class="chapter-title">Instalación de Git y Bash</span></span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1zaWRlYmFyOi9pbnN0YWxsX1IuaHRtbDxzcGFuLWNsYXNzPSdjaGFwdGVyLW51bWJlcic+MTM8L3NwYW4+LS08c3Bhbi1jbGFzcz0nY2hhcHRlci10aXRsZSc+SW5zdGFsYWNpw7NuLWRlLVIsLVJTdHVkaW8teS1SdG9vbHMvWENvZGU8L3NwYW4+"><span class="chapter-number">13</span>  <span class="chapter-title">Instalación de R, RStudio y Rtools/XCode</span></span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1zaWRlYmFyOi9pbnRyb19SLmh0bWw8c3Bhbi1jbGFzcz0nY2hhcHRlci1udW1iZXInPjE0PC9zcGFuPi0tPHNwYW4tY2xhc3M9J2NoYXB0ZXItdGl0bGUnPkludHJvZHVjY2nDs24tYS1SLXktUnN0dWRpbzwvc3Bhbj4="><span class="chapter-number">14</span>  <span class="chapter-title">Introducción a R y Rstudio</span></span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1zaWRlYmFyOi9pbnN0YWxsX3B5dGhvbi5odG1sPHNwYW4tY2xhc3M9J2NoYXB0ZXItbnVtYmVyJz4xNTwvc3Bhbj4tLTxzcGFuLWNsYXNzPSdjaGFwdGVyLXRpdGxlJz5JbnN0YWxhY2nDs24tZGUtUHl0aG9uLXktcmV0aWN1bGF0ZS1lbi1Sc3R1ZGlvPC9zcGFuPg=="><span class="chapter-number">15</span>  <span class="chapter-title">Instalación de Python y reticulate en Rstudio</span></span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1zaWRlYmFyOi9pbnRlZ3JhY2lvbl9iYXNoX3JzdHVkaW8uaHRtbDxzcGFuLWNsYXNzPSdjaGFwdGVyLW51bWJlcic+MTY8L3NwYW4+LS08c3Bhbi1jbGFzcz0nY2hhcHRlci10aXRsZSc+SW50ZWdyYWNpw7NuLWRlLUJhc2gtZW4tbGEtdGVybWluYWwtZGUtUnN0dWRpbzwvc3Bhbj4="><span class="chapter-number">16</span>  <span class="chapter-title">Integración de Bash en la terminal de Rstudio</span></span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1zaWRlYmFyOnF1YXJ0by1zaWRlYmFyLXNlY3Rpb24tMw=="><strong>Sección 3</strong> - Introducción a Bash</span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1zaWRlYmFyOi9jYXA0Lmh0bWw8c3Bhbi1jbGFzcz0nY2hhcHRlci1udW1iZXInPjE3PC9zcGFuPi0tPHNwYW4tY2xhc3M9J2NoYXB0ZXItdGl0bGUnPkludHJvZHVjY2nDs24tYS1MaW51eC9Vbml4PC9zcGFuPg=="><span class="chapter-number">17</span>  <span class="chapter-title">Introducción a Linux/Unix</span></span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1zaWRlYmFyOi9jYXA1Lmh0bWw8c3Bhbi1jbGFzcz0nY2hhcHRlci1udW1iZXInPjE4PC9zcGFuPi0tPHNwYW4tY2xhc3M9J2NoYXB0ZXItdGl0bGUnPk1pcy1wcmltZXJvcy1wYXNvcy1lbi1CYXNoPC9zcGFuPg=="><span class="chapter-number">18</span>  <span class="chapter-title">Mis primeros pasos en Bash</span></span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1zaWRlYmFyOi9nYW1lMy5odG1sPHNwYW4tY2xhc3M9J2NoYXB0ZXItbnVtYmVyJz4xOTwvc3Bhbj4tLTxzcGFuLWNsYXNzPSdjaGFwdGVyLXRpdGxlJz4qKvCfjq4tQWhhU2xpZGVzLTMtLU1hbm9zLWEtbGEtb2JyYSoqPC9zcGFuPg=="><span class="chapter-number">19</span>  <span class="chapter-title"><strong>🎮 AhaSlides 3 -Manos a la obra</strong></span></span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1zaWRlYmFyOi9jYXA2Lmh0bWw8c3Bhbi1jbGFzcz0nY2hhcHRlci1udW1iZXInPjIwPC9zcGFuPi0tPHNwYW4tY2xhc3M9J2NoYXB0ZXItdGl0bGUnPkNhcmFjdGVyZXMsLVN0cmluZ3MteS1XaWxkY2FyZHM8L3NwYW4+"><span class="chapter-number">20</span>  <span class="chapter-title">Caracteres, Strings y Wildcards</span></span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1zaWRlYmFyOi9nYW1lNC5odG1sPHNwYW4tY2xhc3M9J2NoYXB0ZXItbnVtYmVyJz4yMTwvc3Bhbj4tLTxzcGFuLWNsYXNzPSdjaGFwdGVyLXRpdGxlJz4qKvCfjq4tQWhhU2xpZGVzLTQtLU1hbm9zLWEtbGEtb2JyYSoqPC9zcGFuPg=="><span class="chapter-number">21</span>  <span class="chapter-title"><strong>🎮 AhaSlides 4 -Manos a la obra</strong></span></span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1zaWRlYmFyOi9yZWdleC5odG1sPHNwYW4tY2xhc3M9J2NoYXB0ZXItbnVtYmVyJz4yMjwvc3Bhbj4tLTxzcGFuLWNsYXNzPSdjaGFwdGVyLXRpdGxlJz5FeHByZXNpb25lcy1yZWd1bGFyZXMtKFJFR0VYKTwvc3Bhbj4="><span class="chapter-number">22</span>  <span class="chapter-title">Expresiones regulares (REGEX)</span></span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1zaWRlYmFyOi9jYXA3Lmh0bWw8c3Bhbi1jbGFzcz0nY2hhcHRlci1udW1iZXInPjIzPC9zcGFuPi0tPHNwYW4tY2xhc3M9J2NoYXB0ZXItdGl0bGUnPkVuY29udHJhci1wYXRyb25lcy1jb24tYGdyZXBgPC9zcGFuPg=="><span class="chapter-number">23</span>  <span class="chapter-title">Encontrar patrones con <code>grep</code></span></span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1zaWRlYmFyOi9nYW1lNS5odG1sPHNwYW4tY2xhc3M9J2NoYXB0ZXItbnVtYmVyJz4yNDwvc3Bhbj4tLTxzcGFuLWNsYXNzPSdjaGFwdGVyLXRpdGxlJz4qKvCfjq4tQWhhU2xpZGVzLTUtLU1hbm9zLWEtbGEtb2JyYSoqPC9zcGFuPg=="><span class="chapter-number">24</span>  <span class="chapter-title"><strong>🎮 AhaSlides 5 -Manos a la obra</strong></span></span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1zaWRlYmFyOnF1YXJ0by1zaWRlYmFyLXNlY3Rpb24tNA=="><strong>Sección 4</strong> - Edición de archivos con Bash</span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1zaWRlYmFyOi9jYXA4Lmh0bWw8c3Bhbi1jbGFzcz0nY2hhcHRlci1udW1iZXInPjI1PC9zcGFuPi0tPHNwYW4tY2xhc3M9J2NoYXB0ZXItdGl0bGUnPkVkaWNpw7NuLWRlLWFyY2hpdm9zLWNvbi1sb3MtZWRpdG9yZXMtZGUtdGV4dG8tKGBuYW5vYC15LWB2aW1gKTwvc3Bhbj4="><span class="chapter-number">25</span>  <span class="chapter-title">Edición de archivos con los editores de texto (<code>nano</code> y <code>vim</code>)</span></span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1zaWRlYmFyOi9jYXA4X2NyZWFyUnByb2plY3QuaHRtbDxzcGFuLWNsYXNzPSdjaGFwdGVyLW51bWJlcic+MjY8L3NwYW4+LS08c3Bhbi1jbGFzcz0nY2hhcHRlci10aXRsZSc+Q3JlYXItdW4tUi1Qcm9qZWN0PC9zcGFuPg=="><span class="chapter-number">26</span>  <span class="chapter-title">Crear un R Project</span></span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1zaWRlYmFyOi9CYXNoX3NjcmlwdC5odG1sPHNwYW4tY2xhc3M9J2NoYXB0ZXItbnVtYmVyJz4yNzwvc3Bhbj4tLTxzcGFuLWNsYXNzPSdjaGFwdGVyLXRpdGxlJz5TY3JpcHRzLWVuLUJhc2g8L3NwYW4+"><span class="chapter-number">27</span>  <span class="chapter-title">Scripts en Bash</span></span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1zaWRlYmFyOi9jYXA5Lmh0bWw8c3Bhbi1jbGFzcz0nY2hhcHRlci1udW1iZXInPjI4PC9zcGFuPi0tPHNwYW4tY2xhc3M9J2NoYXB0ZXItdGl0bGUnPkVkaWNpw7NuLWRlLWFyY2hpdm9zLWNvbi1lbC1lZGl0b3ItZGUtZmx1am8tYHNlZGA8L3NwYW4+"><span class="chapter-number">28</span>  <span class="chapter-title">Edición de archivos con el editor de flujo <code>sed</code></span></span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1zaWRlYmFyOi9jYXAxMC5odG1sPHNwYW4tY2xhc3M9J2NoYXB0ZXItbnVtYmVyJz4yOTwvc3Bhbj4tLTxzcGFuLWNsYXNzPSdjaGFwdGVyLXRpdGxlJz5UaXBvcy1kZS1lbmxhY2VzLS0tc3ltbGlua3MsLWhhcmQtbGlua3MtZS1oaXBlcnbDrW5jdWxvczwvc3Bhbj4="><span class="chapter-number">29</span>  <span class="chapter-title">Tipos de enlaces - symlinks, hard links e hipervínculos</span></span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1zaWRlYmFyOi9zMV9hY3RpdmlkYWQyLmh0bWw8c3Bhbi1jbGFzcz0nY2hhcHRlci1udW1iZXInPjMwPC9zcGFuPi0tPHNwYW4tY2xhc3M9J2NoYXB0ZXItdGl0bGUnPioq8J+Tmi1Qcm95ZWN0by1pbnRlZ3JhZG9yLWVuLWVxdWlwby0tKiotU2NyaXB0LUJhc2g8L3NwYW4+"><span class="chapter-number">30</span>  <span class="chapter-title"><strong>📚 Proyecto integrador en equipo -</strong> Script Bash</span></span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1zaWRlYmFyOi9jYXAxMS5odG1sPHNwYW4tY2xhc3M9J2NoYXB0ZXItbnVtYmVyJz4zMTwvc3Bhbj4tLTxzcGFuLWNsYXNzPSdjaGFwdGVyLXRpdGxlJz5GaWx0cmFkby1kZS10ZXh0by0oYGdyZXAsLWN1dCwtc29ydCwtdW5pcSwtd2NgKTwvc3Bhbj4="><span class="chapter-number">31</span>  <span class="chapter-title">Filtrado de texto (<code>grep, cut, sort, uniq, wc</code>)</span></span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1zaWRlYmFyOi9jYXAxMi5odG1sPHNwYW4tY2xhc3M9J2NoYXB0ZXItbnVtYmVyJz4zMjwvc3Bhbj4tLTxzcGFuLWNsYXNzPSdjaGFwdGVyLXRpdGxlJz5wcmludGYtdnMtZWNobzwvc3Bhbj4="><span class="chapter-number">32</span>  <span class="chapter-title">printf vs echo</span></span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1zaWRlYmFyOi9zM19hY3RpdmlkYWQyLmh0bWw8c3Bhbi1jbGFzcz0nY2hhcHRlci1udW1iZXInPjMzPC9zcGFuPi0tPHNwYW4tY2xhc3M9J2NoYXB0ZXItdGl0bGUnPioq8J+TmioqLSoqQWN0aXZpZGFkLTItZW4tZXF1aXBvLS0qKi3CoVJFRFVDRS1FTC1Dw5NESUdPLUJBU0ghPC9zcGFuPg=="><span class="chapter-number">33</span>  <span class="chapter-title"><strong>📚</strong> <strong>Actividad 2 en equipo -</strong> ¡REDUCE EL CÓDIGO BASH!</span></span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1zaWRlYmFyOi9jYXAxMy5odG1sPHNwYW4tY2xhc3M9J2NoYXB0ZXItbnVtYmVyJz4zNDwvc3Bhbj4tLTxzcGFuLWNsYXNzPSdjaGFwdGVyLXRpdGxlJz5Db25kaWNpb25hbGVzPC9zcGFuPg=="><span class="chapter-number">34</span>  <span class="chapter-title">Condicionales</span></span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1zaWRlYmFyOi9nYW1lNi5odG1sPHNwYW4tY2xhc3M9J2NoYXB0ZXItbnVtYmVyJz4zNTwvc3Bhbj4tLTxzcGFuLWNsYXNzPSdjaGFwdGVyLXRpdGxlJz4qKvCfjq4tQWhhU2xpZGVzLTYtLU1hbm9zLWEtbGEtb2JyYSoqPC9zcGFuPg=="><span class="chapter-number">35</span>  <span class="chapter-title"><strong>🎮 AhaSlides 6 -Manos a la obra</strong></span></span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1zaWRlYmFyOi9jYXAxNC5odG1sPHNwYW4tY2xhc3M9J2NoYXB0ZXItbnVtYmVyJz4zNjwvc3Bhbj4tLTxzcGFuLWNsYXNzPSdjaGFwdGVyLXRpdGxlJz5CdWNsZXMtKGZvci1sb29wcyk8L3NwYW4+"><span class="chapter-number">36</span>  <span class="chapter-title">Bucles (for loops)</span></span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1zaWRlYmFyOi9nYW1lNy5odG1sPHNwYW4tY2xhc3M9J2NoYXB0ZXItbnVtYmVyJz4zNzwvc3Bhbj4tLTxzcGFuLWNsYXNzPSdjaGFwdGVyLXRpdGxlJz4qKvCfjq4tQWhhU2xpZGVzLTctLU1hbm9zLWEtbGEtb2JyYSoqPC9zcGFuPg=="><span class="chapter-number">37</span>  <span class="chapter-title"><strong>🎮 AhaSlides 7 -Manos a la obra</strong></span></span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1zaWRlYmFyOnF1YXJ0by1zaWRlYmFyLXNlY3Rpb24tNQ=="><strong>Sección 5</strong> - Introducción a Git/GitHub</span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1zaWRlYmFyOi9Sc3R1ZGlvX3BhcXVldGVzLmh0bWw8c3Bhbi1jbGFzcz0nY2hhcHRlci1udW1iZXInPjM4PC9zcGFuPi0tPHNwYW4tY2xhc3M9J2NoYXB0ZXItdGl0bGUnPkRlc2Nhcmdhci15LWNhcmdhci1MaWJyZXLDrWFzLWVuLVJzdHVkaW88L3NwYW4+"><span class="chapter-number">38</span>  <span class="chapter-title">Descargar y cargar Librerías en Rstudio</span></span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1zaWRlYmFyOi9jYXAxNS5odG1sPHNwYW4tY2xhc3M9J2NoYXB0ZXItbnVtYmVyJz4zOTwvc3Bhbj4tLTxzcGFuLWNsYXNzPSdjaGFwdGVyLXRpdGxlJz5JbnRyb2R1Y2Npw7NuLWEtR2l0LS8tR2l0SHViPC9zcGFuPg=="><span class="chapter-number">39</span>  <span class="chapter-title">Introducción a Git / GitHub</span></span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1zaWRlYmFyOi9jYXAyMi5odG1sPHNwYW4tY2xhc3M9J2NoYXB0ZXItbnVtYmVyJz40MDwvc3Bhbj4tLTxzcGFuLWNsYXNzPSdjaGFwdGVyLXRpdGxlJz5Db25lY3Rhci1hLUdpdEh1Yi1jb24tU1NIPC9zcGFuPg=="><span class="chapter-number">40</span>  <span class="chapter-title">Conectar a GitHub con SSH</span></span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1zaWRlYmFyOi9jYXAxNi5odG1sPHNwYW4tY2xhc3M9J2NoYXB0ZXItbnVtYmVyJz40MTwvc3Bhbj4tLTxzcGFuLWNsYXNzPSdjaGFwdGVyLXRpdGxlJz5Db25maWd1cmFyLUdpdDwvc3Bhbj4="><span class="chapter-number">41</span>  <span class="chapter-title">Configurar Git</span></span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1zaWRlYmFyOi9jYXAxNy5odG1sPHNwYW4tY2xhc3M9J2NoYXB0ZXItbnVtYmVyJz40Mjwvc3Bhbj4tLTxzcGFuLWNsYXNzPSdjaGFwdGVyLXRpdGxlJz5SZXBvc2l0b3Jpb3M8L3NwYW4+"><span class="chapter-number">42</span>  <span class="chapter-title">Repositorios</span></span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1zaWRlYmFyOi9jYXAxOC5odG1sPHNwYW4tY2xhc3M9J2NoYXB0ZXItbnVtYmVyJz40Mzwvc3Bhbj4tLTxzcGFuLWNsYXNzPSdjaGFwdGVyLXRpdGxlJz5JZ25vcmFyLWFyY2hpdm9zL2NhcnBldGFzPC9zcGFuPg=="><span class="chapter-number">43</span>  <span class="chapter-title">Ignorar archivos/carpetas</span></span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1zaWRlYmFyOi9zNV9hY3RpdmlkYWRlczF5Mi5odG1sPHNwYW4tY2xhc3M9J2NoYXB0ZXItbnVtYmVyJz40NDwvc3Bhbj4tLTxzcGFuLWNsYXNzPSdjaGFwdGVyLXRpdGxlJz4qKvCfk5oqKi1BY3RpdmlkYWQtMS15LTI8L3NwYW4+"><span class="chapter-number">44</span>  <span class="chapter-title"><strong>📚</strong> Actividad 1 y 2</span></span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1zaWRlYmFyOi9jYXAyMy5odG1sPHNwYW4tY2xhc3M9J2NoYXB0ZXItbnVtYmVyJz40NTwvc3Bhbj4tLTxzcGFuLWNsYXNzPSdjaGFwdGVyLXRpdGxlJz5SZXN1bWVuLXktUHLDoWN0aWNhLUZpbmFsPC9zcGFuPg=="><span class="chapter-number">45</span>  <span class="chapter-title">Resumen y Práctica Final</span></span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1zaWRlYmFyOnF1YXJ0by1zaWRlYmFyLXNlY3Rpb24tNg=="><strong>Sección 6</strong> - Introducción a R y Rstudio</span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1zaWRlYmFyOi9jYXAyOS5odG1sPHNwYW4tY2xhc3M9J2NoYXB0ZXItbnVtYmVyJz40Njwvc3Bhbj4tLTxzcGFuLWNsYXNzPSdjaGFwdGVyLXRpdGxlJz5JbnRyb2R1Y2Npw7NuLWEtTWFya2Rvd248L3NwYW4+"><span class="chapter-number">46</span>  <span class="chapter-title">Introducción a Markdown</span></span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1zaWRlYmFyOi9zNV9hY3RpdmlkYWRlczMuaHRtbDxzcGFuLWNsYXNzPSdjaGFwdGVyLW51bWJlcic+NDc8L3NwYW4+LS08c3Bhbi1jbGFzcz0nY2hhcHRlci10aXRsZSc+Kirwn5OaKiotQWN0aXZpZGFkLTM6LVDDoWdpbmEtd2ViLWNvbi1SbWFya2Rvd248L3NwYW4+"><span class="chapter-number">47</span>  <span class="chapter-title"><strong>📚</strong> Actividad 3: Página web con Rmarkdown</span></span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1zaWRlYmFyOi9JbnRyb19RdWFydG8uaHRtbDxzcGFuLWNsYXNzPSdjaGFwdGVyLW51bWJlcic+NDg8L3NwYW4+LS08c3Bhbi1jbGFzcz0nY2hhcHRlci10aXRsZSc+SW50cm9kdWNjacOzbi1hLVF1YXJ0bzwvc3Bhbj4="><span class="chapter-number">48</span>  <span class="chapter-title">Introducción a Quarto</span></span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1zaWRlYmFyOi9zNV9hY3RpdmlkYWRlczR5NS5odG1sPHNwYW4tY2xhc3M9J2NoYXB0ZXItbnVtYmVyJz40OTwvc3Bhbj4tLTxzcGFuLWNsYXNzPSdjaGFwdGVyLXRpdGxlJz4qKvCfk5oqKi1BY3RpdmlkYWQtNC15LTU8L3NwYW4+"><span class="chapter-number">49</span>  <span class="chapter-title"><strong>📚</strong> Actividad 4 y 5</span></span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1zaWRlYmFyOnF1YXJ0by1zaWRlYmFyLXNlY3Rpb24tNw=="><strong>Sección 7</strong> - Introducción a Python</span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1zaWRlYmFyOi9pbnRyb19weXRob24uaHRtbDxzcGFuLWNsYXNzPSdjaGFwdGVyLW51bWJlcic+NTA8L3NwYW4+LS08c3Bhbi1jbGFzcz0nY2hhcHRlci10aXRsZSc+SW50cm9kdWNjacOzbi1hLVB5dGhvbi1lbi1Sc3R1ZGlvLXVzYW5kby1gcmV0aWN1bGF0ZWA8L3NwYW4+"><span class="chapter-number">50</span>  <span class="chapter-title">Introducción a Python en Rstudio usando <code>reticulate</code></span></span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1zaWRlYmFyOi9xdWFydG9fcHl0aG9uLmh0bWw8c3Bhbi1jbGFzcz0nY2hhcHRlci1udW1iZXInPjUxPC9zcGFuPi0tPHNwYW4tY2xhc3M9J2NoYXB0ZXItdGl0bGUnPkNvbmZpZ3VyYWNpb25lcy1wYXJhLXVzYXItUXVhcnRvLWNvbi1QeXRob248L3NwYW4+"><span class="chapter-number">51</span>  <span class="chapter-title">Configuraciones para usar Quarto con Python</span></span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1zaWRlYmFyOi9weXRob25fZWplcmNpY2lvMS5odG1sPHNwYW4tY2xhc3M9J2NoYXB0ZXItbnVtYmVyJz41Mjwvc3Bhbj4tLTxzcGFuLWNsYXNzPSdjaGFwdGVyLXRpdGxlJz7wn5CNLUFjdGl2aWRhZC0xOi12YXJpYWJsZXMteS1vYmpldG9zLSh0aXBvLC12YWxvci1lLWlkZW50aWRhZCk8L3NwYW4+"><span class="chapter-number">52</span>  <span class="chapter-title">🐍 Actividad 1: variables y objetos (tipo, valor e identidad)</span></span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1zaWRlYmFyOi9weXRob25fZWplcmNpY2lvMi5odG1sPHNwYW4tY2xhc3M9J2NoYXB0ZXItbnVtYmVyJz41Mzwvc3Bhbj4tLTxzcGFuLWNsYXNzPSdjaGFwdGVyLXRpdGxlJz7wn5CNLUFjdGl2aWRhZC0yOi1hdHJpYnV0b3MteS1tw6l0b2Rvcy1kZS1sb3Mtb2JqZXRvczwvc3Bhbj4="><span class="chapter-number">53</span>  <span class="chapter-title">🐍 Actividad 2: atributos y métodos de los objetos</span></span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1zaWRlYmFyOi9weXRob25fYnVlbmFzX3ByYWN0aWNhcy5odG1sPHNwYW4tY2xhc3M9J2NoYXB0ZXItbnVtYmVyJz41NDwvc3Bhbj4tLTxzcGFuLWNsYXNzPSdjaGFwdGVyLXRpdGxlJz5TaW50YXhpcy1kZS1ub21icmVzLC1idWVuYXMtcHLDoWN0aWNhcy15LXByb2dyYW1hY2nDs24tZGVmZW5zaXZhLWVuLVB5dGhvbjwvc3Bhbj4="><span class="chapter-number">54</span>  <span class="chapter-title">Sintaxis de nombres, buenas prácticas y programación defensiva en Python</span></span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1zaWRlYmFyOi9weXRob25fY29uZGljaW9uYWxlcy5odG1sPHNwYW4tY2xhc3M9J2NoYXB0ZXItbnVtYmVyJz41NTwvc3Bhbj4tLTxzcGFuLWNsYXNzPSdjaGFwdGVyLXRpdGxlJz5Db25kaWNpb25hbGVzLWVuLVB5dGhvbjwvc3Bhbj4="><span class="chapter-number">55</span>  <span class="chapter-title">Condicionales en Python</span></span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1zaWRlYmFyOi9weXRob25fbnVtcHkuaHRtbDxzcGFuLWNsYXNzPSdjaGFwdGVyLW51bWJlcic+NTY8L3NwYW4+LS08c3Bhbi1jbGFzcz0nY2hhcHRlci10aXRsZSc+SW50cm9kdWNjacOzbi1hLU51bVB5PC9zcGFuPg=="><span class="chapter-number">56</span>  <span class="chapter-title">Introducción a NumPy</span></span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1zaWRlYmFyOi9weXRob25fZm9yLmh0bWw8c3Bhbi1jbGFzcz0nY2hhcHRlci1udW1iZXInPjU3PC9zcGFuPi0tPHNwYW4tY2xhc3M9J2NoYXB0ZXItdGl0bGUnPkNpY2xvcy1gZm9yYC15LWB3aGlsZWAtZW4tUHl0aG9uPC9zcGFuPg=="><span class="chapter-number">57</span>  <span class="chapter-title">Ciclos <code>for</code> y <code>while</code> en Python</span></span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1zaWRlYmFyOi9weXRob25fc3ltcHkuaHRtbDxzcGFuLWNsYXNzPSdjaGFwdGVyLW51bWJlcic+NTg8L3NwYW4+LS08c3Bhbi1jbGFzcz0nY2hhcHRlci10aXRsZSc+Q8OhbGN1bG8tc2ltYsOzbGljby1jb24tU3ltUHk8L3NwYW4+"><span class="chapter-number">58</span>  <span class="chapter-title">Cálculo simbólico con SymPy</span></span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1zaWRlYmFyOi9weXRob25fdmlzdWFsaXphY2lvbi5odG1sPHNwYW4tY2xhc3M9J2NoYXB0ZXItbnVtYmVyJz41OTwvc3Bhbj4tLTxzcGFuLWNsYXNzPSdjaGFwdGVyLXRpdGxlJz5WaXN1YWxpemFjacOzbi1kZS1kYXRvcy1jb24tTWF0cGxvdGxpYi15LVBsb3RseTwvc3Bhbj4="><span class="chapter-number">59</span>  <span class="chapter-title">Visualización de datos con Matplotlib y Plotly</span></span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1zaWRlYmFyOnF1YXJ0by1zaWRlYmFyLXNlY3Rpb24tOA==">Apéndices</span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1zaWRlYmFyOi9weXRob25fZW50b3Jub3MuaHRtbDxzcGFuLWNsYXNzPSdjaGFwdGVyLW51bWJlcic+QTwvc3Bhbj4tLTxzcGFuLWNsYXNzPSdjaGFwdGVyLXRpdGxlJz5FbnRvcm5vcy1wYXJhLXRyYWJhamFyLWNvbi1QeXRob246LVJTdHVkaW8sLUdvb2dsZS1Db2xhYi15LUp1cHl0ZXItTm90ZWJvb2s8L3NwYW4+"><span class="chapter-number">A</span>  <span class="chapter-title">Entornos para trabajar con Python: RStudio, Google Colab y Jupyter Notebook</span></span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1zaWRlYmFyOi9weXRob25fY29uZGEuaHRtbDxzcGFuLWNsYXNzPSdjaGFwdGVyLW51bWJlcic+Qjwvc3Bhbj4tLTxzcGFuLWNsYXNzPSdjaGFwdGVyLXRpdGxlJz5Db25kYS15LU1pbmljb25kYTotZ2VzdGnDs24tZGUtZW50b3Jub3MteS1wYXF1ZXRlczwvc3Bhbj4="><span class="chapter-number">B</span>  <span class="chapter-title">Conda y Miniconda: gestión de entornos y paquetes</span></span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1zaWRlYmFyOi9lamVtcGxvX3F1aXpkb3duLmh0bWw8c3Bhbi1jbGFzcz0nY2hhcHRlci1udW1iZXInPkM8L3NwYW4+LS08c3Bhbi1jbGFzcz0nY2hhcHRlci10aXRsZSc+UXVpenplczwvc3Bhbj4="><span class="chapter-number">C</span>  <span class="chapter-title">Quizzes</span></span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1zaWRlYmFyOi9lamVtcGxvX0NvZGVSYW5kUHl0aG9uLmh0bWw8c3Bhbi1jbGFzcz0nY2hhcHRlci1udW1iZXInPkQ8L3NwYW4+LS08c3Bhbi1jbGFzcz0nY2hhcHRlci10aXRsZSc+Q29kaWdvLWVuLVI8L3NwYW4+"><span class="chapter-number">D</span>  <span class="chapter-title">Codigo en R</span></span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWJyZWFkY3J1bWJzLSoqU2VjY2nDs24tNyoqLS0tSW50cm9kdWNjacOzbi1hLVB5dGhvbg=="><strong>Sección 7</strong> - Introducción a Python</span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWJyZWFkY3J1bWJzLTxzcGFuLWNsYXNzPSdjaGFwdGVyLW51bWJlcic+NTU8L3NwYW4+LS08c3Bhbi1jbGFzcz0nY2hhcHRlci10aXRsZSc+Q29uZGljaW9uYWxlcy1lbi1QeXRob248L3NwYW4+"><span class="chapter-number">55</span>  <span class="chapter-title">Condicionales en Python</span></span></p>
+<div class="hidden quarto-markdown-envelope-contents" data-render-id="Zm9vdGVyLWNlbnRlcg==">
+<p>Taller de Cómputo, 1er semestre: Dra. Evelia Coss</p>
+</div>
+</div>
+<div id="quarto-meta-markdown" class="hidden">
+<p><span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLW1ldGF0aXRsZQ=="><span class="chapter-number">55</span>  <span class="chapter-title">Condicionales en Python</span> – Taller de Cómputo</span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLXR3aXR0ZXJjYXJkdGl0bGU="><span class="chapter-number">55</span>  <span class="chapter-title">Condicionales en Python</span> – Taller de Cómputo</span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLW9nY2FyZHRpdGxl"><span class="chapter-number">55</span>  <span class="chapter-title">Condicionales en Python</span> – Taller de Cómputo</span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLW1ldGFzaXRlbmFtZQ==">Taller de Cómputo</span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLXR3aXR0ZXJjYXJkZGVzYw=="></span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLW9nY2FyZGRkZXNj"></span></p>
+</div>
+<script type="pyodide-data">
+eyJvcHRpb25zIjp7ImVudiI6eyJQTE9UTFlfUkVOREVSRVIiOiJwbG90bHlfbWltZXR5cGUifSwiaW5kZXhVUkwiOiJodHRwczovL2Nkbi5qc2RlbGl2ci5uZXQvcHlvZGlkZS92MC4yOC4xL2Z1bGwvIn0sInBhY2thZ2VzIjp7InBrZ3MiOlsicHlvZGlkZV9odHRwIiwibWljcm9waXAiLCJpcHl0aG9uIl19fQ==
+</script>
+<script type="ojs-module-contents">
+eyJjb250ZW50cyI6W3siY2VsbE5hbWUiOiJweW9kaWRlLTEzIiwiaW5saW5lIjpmYWxzZSwibWV0aG9kTmFtZSI6ImludGVycHJldCIsInNvdXJjZSI6InZpZXdvZiBfcHlvZGlkZV9lZGl0b3JfMTMgPSB7XG4gIGNvbnN0IHsgUHlvZGlkZUV4ZXJjaXNlRWRpdG9yLCBiNjREZWNvZGUgfSA9IHdpbmRvdy5fZXhlcmNpc2Vfb2pzX3J1bnRpbWU7XG5cbiAgY29uc3Qgc2NyaXB0Q29udGVudCA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoYHNjcmlwdFt0eXBlPVxcXCJweW9kaWRlLTEzLWNvbnRlbnRzXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgYmxvY2sgPSBKU09OLnBhcnNlKGI2NERlY29kZShzY3JpcHRDb250ZW50KSk7XG5cbiAgLy8gRGVmYXVsdCBleGVyY2lzZSBjb25maWd1cmF0aW9uXG4gIGNvbnN0IG9wdGlvbnMgPSBPYmplY3QuYXNzaWduKFxuICAgIHtcbiAgICAgIGlkOiBcInB5b2RpZGUtMTMtY29udGVudHNcIixcbiAgICAgIGVudmlyOiBgZXhlcmNpc2UtZW52LSR7YmxvY2suYXR0ci5leGVyY2lzZX1gLFxuICAgICAgZXJyb3I6IGZhbHNlLFxuICAgICAgY2FwdGlvbjogJ0V4ZXJjaXNlJyxcbiAgICB9LFxuICAgIGJsb2NrLmF0dHJcbiAgKTtcblxuICBjb25zdCBlZGl0b3IgPSBuZXcgUHlvZGlkZUV4ZXJjaXNlRWRpdG9yKHB5b2RpZGVPanMucHlvZGlkZVByb21pc2UsIGJsb2NrLmNvZGUsIG9wdGlvbnMpO1xuICByZXR1cm4gZWRpdG9yLmNvbnRhaW5lcjtcbn1cbnZpZXdvZiBfcHlvZGlkZV92YWx1ZV8xMyA9IHB5b2RpZGVPanMucHJvY2VzcyhfcHlvZGlkZV9lZGl0b3JfMTMsIHt9KTtcbl9weW9kaWRlX2ZlZWRiYWNrXzEzID0ge1xuICBjb25zdCB7IFB5b2RpZGVHcmFkZXIgfSA9IHdpbmRvdy5fZXhlcmNpc2Vfb2pzX3J1bnRpbWU7XG4gIGNvbnN0IGVtcHR5RmVlZGJhY2sgPSBkb2N1bWVudC5jcmVhdGVFbGVtZW50KCdkaXYnKTtcblxuICBjb25zdCBncmFkZXIgPSBuZXcgUHlvZGlkZUdyYWRlcihfcHlvZGlkZV92YWx1ZV8xMy5ldmFsdWF0b3IpO1xuICBjb25zdCBmZWVkYmFjayA9IGF3YWl0IGdyYWRlci5ncmFkZUV4ZXJjaXNlKCk7XG4gIGlmICghZmVlZGJhY2spIHJldHVybiBlbXB0eUZlZWRiYWNrO1xuICByZXR1cm4gZmVlZGJhY2s7XG59XG4ifSx7ImNlbGxOYW1lIjoicHlvZGlkZS0xMSIsImlubGluZSI6ZmFsc2UsIm1ldGhvZE5hbWUiOiJpbnRlcnByZXQiLCJzb3VyY2UiOiJ2aWV3b2YgX3B5b2RpZGVfZWRpdG9yXzExID0ge1xuICBjb25zdCB7IFB5b2RpZGVFeGVyY2lzZUVkaXRvciwgYjY0RGVjb2RlIH0gPSB3aW5kb3cuX2V4ZXJjaXNlX29qc19ydW50aW1lO1xuXG4gIGNvbnN0IHNjcmlwdENvbnRlbnQgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKGBzY3JpcHRbdHlwZT1cXFwicHlvZGlkZS0xMS1jb250ZW50c1xcXCJdYCkudGV4dENvbnRlbnQ7XG4gIGNvbnN0IGJsb2NrID0gSlNPTi5wYXJzZShiNjREZWNvZGUoc2NyaXB0Q29udGVudCkpO1xuXG4gIC8vIERlZmF1bHQgZXhlcmNpc2UgY29uZmlndXJhdGlvblxuICBjb25zdCBvcHRpb25zID0gT2JqZWN0LmFzc2lnbihcbiAgICB7XG4gICAgICBpZDogXCJweW9kaWRlLTExLWNvbnRlbnRzXCIsXG4gICAgICBlbnZpcjogYGV4ZXJjaXNlLWVudi0ke2Jsb2NrLmF0dHIuZXhlcmNpc2V9YCxcbiAgICAgIGVycm9yOiBmYWxzZSxcbiAgICAgIGNhcHRpb246ICdFeGVyY2lzZScsXG4gICAgfSxcbiAgICBibG9jay5hdHRyXG4gICk7XG5cbiAgY29uc3QgZWRpdG9yID0gbmV3IFB5b2RpZGVFeGVyY2lzZUVkaXRvcihweW9kaWRlT2pzLnB5b2RpZGVQcm9taXNlLCBibG9jay5jb2RlLCBvcHRpb25zKTtcbiAgcmV0dXJuIGVkaXRvci5jb250YWluZXI7XG59XG52aWV3b2YgX3B5b2RpZGVfdmFsdWVfMTEgPSBweW9kaWRlT2pzLnByb2Nlc3MoX3B5b2RpZGVfZWRpdG9yXzExLCB7fSk7XG5fcHlvZGlkZV9mZWVkYmFja18xMSA9IHtcbiAgY29uc3QgeyBQeW9kaWRlR3JhZGVyIH0gPSB3aW5kb3cuX2V4ZXJjaXNlX29qc19ydW50aW1lO1xuICBjb25zdCBlbXB0eUZlZWRiYWNrID0gZG9jdW1lbnQuY3JlYXRlRWxlbWVudCgnZGl2Jyk7XG5cbiAgY29uc3QgZ3JhZGVyID0gbmV3IFB5b2RpZGVHcmFkZXIoX3B5b2RpZGVfdmFsdWVfMTEuZXZhbHVhdG9yKTtcbiAgY29uc3QgZmVlZGJhY2sgPSBhd2FpdCBncmFkZXIuZ3JhZGVFeGVyY2lzZSgpO1xuICBpZiAoIWZlZWRiYWNrKSByZXR1cm4gZW1wdHlGZWVkYmFjaztcbiAgcmV0dXJuIGZlZWRiYWNrO1xufVxuIn0seyJjZWxsTmFtZSI6InB5b2RpZGUtOSIsImlubGluZSI6ZmFsc2UsIm1ldGhvZE5hbWUiOiJpbnRlcnByZXQiLCJzb3VyY2UiOiJ2aWV3b2YgX3B5b2RpZGVfZWRpdG9yXzkgPSB7XG4gIGNvbnN0IHsgUHlvZGlkZUV4ZXJjaXNlRWRpdG9yLCBiNjREZWNvZGUgfSA9IHdpbmRvdy5fZXhlcmNpc2Vfb2pzX3J1bnRpbWU7XG5cbiAgY29uc3Qgc2NyaXB0Q29udGVudCA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoYHNjcmlwdFt0eXBlPVxcXCJweW9kaWRlLTktY29udGVudHNcXFwiXWApLnRleHRDb250ZW50O1xuICBjb25zdCBibG9jayA9IEpTT04ucGFyc2UoYjY0RGVjb2RlKHNjcmlwdENvbnRlbnQpKTtcblxuICAvLyBEZWZhdWx0IGV4ZXJjaXNlIGNvbmZpZ3VyYXRpb25cbiAgY29uc3Qgb3B0aW9ucyA9IE9iamVjdC5hc3NpZ24oXG4gICAge1xuICAgICAgaWQ6IFwicHlvZGlkZS05LWNvbnRlbnRzXCIsXG4gICAgICBlbnZpcjogYGV4ZXJjaXNlLWVudi0ke2Jsb2NrLmF0dHIuZXhlcmNpc2V9YCxcbiAgICAgIGVycm9yOiBmYWxzZSxcbiAgICAgIGNhcHRpb246ICdFeGVyY2lzZScsXG4gICAgfSxcbiAgICBibG9jay5hdHRyXG4gICk7XG5cbiAgY29uc3QgZWRpdG9yID0gbmV3IFB5b2RpZGVFeGVyY2lzZUVkaXRvcihweW9kaWRlT2pzLnB5b2RpZGVQcm9taXNlLCBibG9jay5jb2RlLCBvcHRpb25zKTtcbiAgcmV0dXJuIGVkaXRvci5jb250YWluZXI7XG59XG52aWV3b2YgX3B5b2RpZGVfdmFsdWVfOSA9IHB5b2RpZGVPanMucHJvY2VzcyhfcHlvZGlkZV9lZGl0b3JfOSwge30pO1xuX3B5b2RpZGVfZmVlZGJhY2tfOSA9IHtcbiAgY29uc3QgeyBQeW9kaWRlR3JhZGVyIH0gPSB3aW5kb3cuX2V4ZXJjaXNlX29qc19ydW50aW1lO1xuICBjb25zdCBlbXB0eUZlZWRiYWNrID0gZG9jdW1lbnQuY3JlYXRlRWxlbWVudCgnZGl2Jyk7XG5cbiAgY29uc3QgZ3JhZGVyID0gbmV3IFB5b2RpZGVHcmFkZXIoX3B5b2RpZGVfdmFsdWVfOS5ldmFsdWF0b3IpO1xuICBjb25zdCBmZWVkYmFjayA9IGF3YWl0IGdyYWRlci5ncmFkZUV4ZXJjaXNlKCk7XG4gIGlmICghZmVlZGJhY2spIHJldHVybiBlbXB0eUZlZWRiYWNrO1xuICByZXR1cm4gZmVlZGJhY2s7XG59XG4ifSx7ImNlbGxOYW1lIjoicHlvZGlkZS03IiwiaW5saW5lIjpmYWxzZSwibWV0aG9kTmFtZSI6ImludGVycHJldCIsInNvdXJjZSI6InZpZXdvZiBfcHlvZGlkZV9lZGl0b3JfNyA9IHtcbiAgY29uc3QgeyBQeW9kaWRlRXhlcmNpc2VFZGl0b3IsIGI2NERlY29kZSB9ID0gd2luZG93Ll9leGVyY2lzZV9vanNfcnVudGltZTtcblxuICBjb25zdCBzY3JpcHRDb250ZW50ID0gZG9jdW1lbnQucXVlcnlTZWxlY3Rvcihgc2NyaXB0W3R5cGU9XFxcInB5b2RpZGUtNy1jb250ZW50c1xcXCJdYCkudGV4dENvbnRlbnQ7XG4gIGNvbnN0IGJsb2NrID0gSlNPTi5wYXJzZShiNjREZWNvZGUoc2NyaXB0Q29udGVudCkpO1xuXG4gIC8vIERlZmF1bHQgZXhlcmNpc2UgY29uZmlndXJhdGlvblxuICBjb25zdCBvcHRpb25zID0gT2JqZWN0LmFzc2lnbihcbiAgICB7XG4gICAgICBpZDogXCJweW9kaWRlLTctY29udGVudHNcIixcbiAgICAgIGVudmlyOiBgZXhlcmNpc2UtZW52LSR7YmxvY2suYXR0ci5leGVyY2lzZX1gLFxuICAgICAgZXJyb3I6IGZhbHNlLFxuICAgICAgY2FwdGlvbjogJ0V4ZXJjaXNlJyxcbiAgICB9LFxuICAgIGJsb2NrLmF0dHJcbiAgKTtcblxuICBjb25zdCBlZGl0b3IgPSBuZXcgUHlvZGlkZUV4ZXJjaXNlRWRpdG9yKHB5b2RpZGVPanMucHlvZGlkZVByb21pc2UsIGJsb2NrLmNvZGUsIG9wdGlvbnMpO1xuICByZXR1cm4gZWRpdG9yLmNvbnRhaW5lcjtcbn1cbnZpZXdvZiBfcHlvZGlkZV92YWx1ZV83ID0gcHlvZGlkZU9qcy5wcm9jZXNzKF9weW9kaWRlX2VkaXRvcl83LCB7fSk7XG5fcHlvZGlkZV9mZWVkYmFja183ID0ge1xuICBjb25zdCB7IFB5b2RpZGVHcmFkZXIgfSA9IHdpbmRvdy5fZXhlcmNpc2Vfb2pzX3J1bnRpbWU7XG4gIGNvbnN0IGVtcHR5RmVlZGJhY2sgPSBkb2N1bWVudC5jcmVhdGVFbGVtZW50KCdkaXYnKTtcblxuICBjb25zdCBncmFkZXIgPSBuZXcgUHlvZGlkZUdyYWRlcihfcHlvZGlkZV92YWx1ZV83LmV2YWx1YXRvcik7XG4gIGNvbnN0IGZlZWRiYWNrID0gYXdhaXQgZ3JhZGVyLmdyYWRlRXhlcmNpc2UoKTtcbiAgaWYgKCFmZWVkYmFjaykgcmV0dXJuIGVtcHR5RmVlZGJhY2s7XG4gIHJldHVybiBmZWVkYmFjaztcbn1cbiJ9LHsiY2VsbE5hbWUiOiJweW9kaWRlLTUiLCJpbmxpbmUiOmZhbHNlLCJtZXRob2ROYW1lIjoiaW50ZXJwcmV0Iiwic291cmNlIjoidmlld29mIF9weW9kaWRlX2VkaXRvcl81ID0ge1xuICBjb25zdCB7IFB5b2RpZGVFeGVyY2lzZUVkaXRvciwgYjY0RGVjb2RlIH0gPSB3aW5kb3cuX2V4ZXJjaXNlX29qc19ydW50aW1lO1xuXG4gIGNvbnN0IHNjcmlwdENvbnRlbnQgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKGBzY3JpcHRbdHlwZT1cXFwicHlvZGlkZS01LWNvbnRlbnRzXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgYmxvY2sgPSBKU09OLnBhcnNlKGI2NERlY29kZShzY3JpcHRDb250ZW50KSk7XG5cbiAgLy8gRGVmYXVsdCBleGVyY2lzZSBjb25maWd1cmF0aW9uXG4gIGNvbnN0IG9wdGlvbnMgPSBPYmplY3QuYXNzaWduKFxuICAgIHtcbiAgICAgIGlkOiBcInB5b2RpZGUtNS1jb250ZW50c1wiLFxuICAgICAgZW52aXI6IGBleGVyY2lzZS1lbnYtJHtibG9jay5hdHRyLmV4ZXJjaXNlfWAsXG4gICAgICBlcnJvcjogZmFsc2UsXG4gICAgICBjYXB0aW9uOiAnRXhlcmNpc2UnLFxuICAgIH0sXG4gICAgYmxvY2suYXR0clxuICApO1xuXG4gIGNvbnN0IGVkaXRvciA9IG5ldyBQeW9kaWRlRXhlcmNpc2VFZGl0b3IocHlvZGlkZU9qcy5weW9kaWRlUHJvbWlzZSwgYmxvY2suY29kZSwgb3B0aW9ucyk7XG4gIHJldHVybiBlZGl0b3IuY29udGFpbmVyO1xufVxudmlld29mIF9weW9kaWRlX3ZhbHVlXzUgPSBweW9kaWRlT2pzLnByb2Nlc3MoX3B5b2RpZGVfZWRpdG9yXzUsIHt9KTtcbl9weW9kaWRlX2ZlZWRiYWNrXzUgPSB7XG4gIGNvbnN0IHsgUHlvZGlkZUdyYWRlciB9ID0gd2luZG93Ll9leGVyY2lzZV9vanNfcnVudGltZTtcbiAgY29uc3QgZW1wdHlGZWVkYmFjayA9IGRvY3VtZW50LmNyZWF0ZUVsZW1lbnQoJ2RpdicpO1xuXG4gIGNvbnN0IGdyYWRlciA9IG5ldyBQeW9kaWRlR3JhZGVyKF9weW9kaWRlX3ZhbHVlXzUuZXZhbHVhdG9yKTtcbiAgY29uc3QgZmVlZGJhY2sgPSBhd2FpdCBncmFkZXIuZ3JhZGVFeGVyY2lzZSgpO1xuICBpZiAoIWZlZWRiYWNrKSByZXR1cm4gZW1wdHlGZWVkYmFjaztcbiAgcmV0dXJuIGZlZWRiYWNrO1xufVxuIn0seyJjZWxsTmFtZSI6InB5b2RpZGUtMyIsImlubGluZSI6ZmFsc2UsIm1ldGhvZE5hbWUiOiJpbnRlcnByZXQiLCJzb3VyY2UiOiJ2aWV3b2YgX3B5b2RpZGVfZWRpdG9yXzMgPSB7XG4gIGNvbnN0IHsgUHlvZGlkZUV4ZXJjaXNlRWRpdG9yLCBiNjREZWNvZGUgfSA9IHdpbmRvdy5fZXhlcmNpc2Vfb2pzX3J1bnRpbWU7XG5cbiAgY29uc3Qgc2NyaXB0Q29udGVudCA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoYHNjcmlwdFt0eXBlPVxcXCJweW9kaWRlLTMtY29udGVudHNcXFwiXWApLnRleHRDb250ZW50O1xuICBjb25zdCBibG9jayA9IEpTT04ucGFyc2UoYjY0RGVjb2RlKHNjcmlwdENvbnRlbnQpKTtcblxuICAvLyBEZWZhdWx0IGV4ZXJjaXNlIGNvbmZpZ3VyYXRpb25cbiAgY29uc3Qgb3B0aW9ucyA9IE9iamVjdC5hc3NpZ24oXG4gICAge1xuICAgICAgaWQ6IFwicHlvZGlkZS0zLWNvbnRlbnRzXCIsXG4gICAgICBlbnZpcjogYGV4ZXJjaXNlLWVudi0ke2Jsb2NrLmF0dHIuZXhlcmNpc2V9YCxcbiAgICAgIGVycm9yOiBmYWxzZSxcbiAgICAgIGNhcHRpb246ICdFeGVyY2lzZScsXG4gICAgfSxcbiAgICBibG9jay5hdHRyXG4gICk7XG5cbiAgY29uc3QgZWRpdG9yID0gbmV3IFB5b2RpZGVFeGVyY2lzZUVkaXRvcihweW9kaWRlT2pzLnB5b2RpZGVQcm9taXNlLCBibG9jay5jb2RlLCBvcHRpb25zKTtcbiAgcmV0dXJuIGVkaXRvci5jb250YWluZXI7XG59XG52aWV3b2YgX3B5b2RpZGVfdmFsdWVfMyA9IHB5b2RpZGVPanMucHJvY2VzcyhfcHlvZGlkZV9lZGl0b3JfMywge30pO1xuX3B5b2RpZGVfZmVlZGJhY2tfMyA9IHtcbiAgY29uc3QgeyBQeW9kaWRlR3JhZGVyIH0gPSB3aW5kb3cuX2V4ZXJjaXNlX29qc19ydW50aW1lO1xuICBjb25zdCBlbXB0eUZlZWRiYWNrID0gZG9jdW1lbnQuY3JlYXRlRWxlbWVudCgnZGl2Jyk7XG5cbiAgY29uc3QgZ3JhZGVyID0gbmV3IFB5b2RpZGVHcmFkZXIoX3B5b2RpZGVfdmFsdWVfMy5ldmFsdWF0b3IpO1xuICBjb25zdCBmZWVkYmFjayA9IGF3YWl0IGdyYWRlci5ncmFkZUV4ZXJjaXNlKCk7XG4gIGlmICghZmVlZGJhY2spIHJldHVybiBlbXB0eUZlZWRiYWNrO1xuICByZXR1cm4gZmVlZGJhY2s7XG59XG4ifSx7ImNlbGxOYW1lIjoicHlvZGlkZS0yIiwiaW5saW5lIjpmYWxzZSwibWV0aG9kTmFtZSI6ImludGVycHJldCIsInNvdXJjZSI6InZpZXdvZiBfcHlvZGlkZV9lZGl0b3JfMiA9IHtcbiAgY29uc3QgeyBQeW9kaWRlRXhlcmNpc2VFZGl0b3IsIGI2NERlY29kZSB9ID0gd2luZG93Ll9leGVyY2lzZV9vanNfcnVudGltZTtcblxuICBjb25zdCBzY3JpcHRDb250ZW50ID0gZG9jdW1lbnQucXVlcnlTZWxlY3Rvcihgc2NyaXB0W3R5cGU9XFxcInB5b2RpZGUtMi1jb250ZW50c1xcXCJdYCkudGV4dENvbnRlbnQ7XG4gIGNvbnN0IGJsb2NrID0gSlNPTi5wYXJzZShiNjREZWNvZGUoc2NyaXB0Q29udGVudCkpO1xuXG4gIGNvbnN0IG9wdGlvbnMgPSBPYmplY3QuYXNzaWduKHsgaWQ6IGBweW9kaWRlLTItY29udGVudHNgIH0sIGJsb2NrLmF0dHIpO1xuICBjb25zdCBlZGl0b3IgPSBuZXcgUHlvZGlkZUV4ZXJjaXNlRWRpdG9yKFxuICAgIHB5b2RpZGVPanMucHlvZGlkZVByb21pc2UsXG4gICAgYmxvY2suY29kZSxcbiAgICBvcHRpb25zXG4gICk7XG5cbiAgcmV0dXJuIGVkaXRvci5jb250YWluZXI7XG59XG5fcHlvZGlkZV92YWx1ZV8yID0gcHlvZGlkZU9qcy5wcm9jZXNzKF9weW9kaWRlX2VkaXRvcl8yLCB7fSk7XG4ifSx7ImNlbGxOYW1lIjoicHlvZGlkZS0xIiwiaW5saW5lIjpmYWxzZSwibWV0aG9kTmFtZSI6ImludGVycHJldCIsInNvdXJjZSI6InZpZXdvZiBfcHlvZGlkZV9lZGl0b3JfMSA9IHtcbiAgY29uc3QgeyBQeW9kaWRlRXhlcmNpc2VFZGl0b3IsIGI2NERlY29kZSB9ID0gd2luZG93Ll9leGVyY2lzZV9vanNfcnVudGltZTtcblxuICBjb25zdCBzY3JpcHRDb250ZW50ID0gZG9jdW1lbnQucXVlcnlTZWxlY3Rvcihgc2NyaXB0W3R5cGU9XFxcInB5b2RpZGUtMS1jb250ZW50c1xcXCJdYCkudGV4dENvbnRlbnQ7XG4gIGNvbnN0IGJsb2NrID0gSlNPTi5wYXJzZShiNjREZWNvZGUoc2NyaXB0Q29udGVudCkpO1xuXG4gIGNvbnN0IG9wdGlvbnMgPSBPYmplY3QuYXNzaWduKHsgaWQ6IGBweW9kaWRlLTEtY29udGVudHNgIH0sIGJsb2NrLmF0dHIpO1xuICBjb25zdCBlZGl0b3IgPSBuZXcgUHlvZGlkZUV4ZXJjaXNlRWRpdG9yKFxuICAgIHB5b2RpZGVPanMucHlvZGlkZVByb21pc2UsXG4gICAgYmxvY2suY29kZSxcbiAgICBvcHRpb25zXG4gICk7XG5cbiAgcmV0dXJuIGVkaXRvci5jb250YWluZXI7XG59XG5fcHlvZGlkZV92YWx1ZV8xID0gcHlvZGlkZU9qcy5wcm9jZXNzKF9weW9kaWRlX2VkaXRvcl8xLCB7fSk7XG4ifSx7ImNlbGxOYW1lIjoicHlvZGlkZS1wcmVsdWRlIiwiaW5saW5lIjpmYWxzZSwibWV0aG9kTmFtZSI6ImludGVycHJldFF1aWV0Iiwic291cmNlIjoicHlvZGlkZU9qcyA9IHtcbiAgY29uc3Qge1xuICAgIFB5b2RpZGVFdmFsdWF0b3IsXG4gICAgUHlvZGlkZUVudmlyb25tZW50TWFuYWdlcixcbiAgICBzZXR1cFB5dGhvbixcbiAgICBzdGFydFB5b2RpZGVXb3JrZXIsXG4gICAgYjY0RGVjb2RlLFxuICAgIGNvbGxhcHNlUGF0aCxcbiAgfSA9IHdpbmRvdy5fZXhlcmNpc2Vfb2pzX3J1bnRpbWU7XG5cbiAgY29uc3Qgc3RhdHVzQ29udGFpbmVyID0gZG9jdW1lbnQuZ2V0RWxlbWVudEJ5SWQoXCJleGVyY2lzZS1sb2FkaW5nLXN0YXR1c1wiKTtcbiAgY29uc3QgaW5kaWNhdG9yQ29udGFpbmVyID0gZG9jdW1lbnQuZ2V0RWxlbWVudEJ5SWQoXCJleGVyY2lzZS1sb2FkaW5nLWluZGljYXRvclwiKTtcbiAgaW5kaWNhdG9yQ29udGFpbmVyLmNsYXNzTGlzdC5yZW1vdmUoXCJkLW5vbmVcIik7XG5cbiAgbGV0IHN0YXR1c1RleHQgPSBkb2N1bWVudC5jcmVhdGVFbGVtZW50KFwiZGl2XCIpXG4gIHN0YXR1c1RleHQuY2xhc3NMaXN0ID0gXCJleGVyY2lzZS1sb2FkaW5nLWRldGFpbHNcIjtcbiAgc3RhdHVzVGV4dCA9IHN0YXR1c0NvbnRhaW5lci5hcHBlbmRDaGlsZChzdGF0dXNUZXh0KTtcbiAgc3RhdHVzVGV4dC50ZXh0Q29udGVudCA9IGBJbml0aWFsaXNlYDtcblxuICAvLyBIb2lzdCBpbmRpY2F0b3Igb3V0IGZyb20gZmluYWwgc2xpZGUgd2hlbiBydW5uaW5nIHVuZGVyIHJldmVhbFxuICBjb25zdCByZXZlYWxTdGF0dXMgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKFwiLnJldmVhbCAuZXhlcmNpc2UtbG9hZGluZy1pbmRpY2F0b3JcIik7XG4gIGlmIChyZXZlYWxTdGF0dXMpIHtcbiAgICByZXZlYWxTdGF0dXMucmVtb3ZlKCk7XG4gICAgZG9jdW1lbnQucXVlcnlTZWxlY3RvcihcIi5yZXZlYWwgPiAuc2xpZGVzXCIpLmFwcGVuZENoaWxkKHJldmVhbFN0YXR1cyk7XG4gIH1cblxuICAvLyBNYWtlIGFueSByZXZlYWwgc2xpZGVzIHdpdGggbGl2ZSBjZWxscyBzY3JvbGxhYmxlXG4gIGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3JBbGwoXCIucmV2ZWFsIC5leGVyY2lzZS1jZWxsXCIpLmZvckVhY2goKGVsKSA9PiB7XG4gICAgZWwuY2xvc2VzdCgnc2VjdGlvbi5zbGlkZScpLmNsYXNzTGlzdC5hZGQoXCJzY3JvbGxhYmxlXCIpO1xuICB9KVxuXG4gIC8vIFB5b2RpZGUgc3VwcGxlbWVudGFsIGRhdGEgYW5kIG9wdGlvbnNcbiAgY29uc3QgZGF0YUNvbnRlbnQgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKGBzY3JpcHRbdHlwZT1cXFwicHlvZGlkZS1kYXRhXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgZGF0YSA9IEpTT04ucGFyc2UoYjY0RGVjb2RlKGRhdGFDb250ZW50KSk7XG5cbiAgLy8gR3JhYiBsaXN0IG9mIHJlc291cmNlcyB0byBiZSBkb3dubG9hZGVkXG4gIGNvbnN0IGZpbGVzQ29udGVudCA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoYHNjcmlwdFt0eXBlPVxcXCJ2ZnMtZmlsZVxcXCJdYCkudGV4dENvbnRlbnQ7XG4gIGNvbnN0IGZpbGVzID0gSlNPTi5wYXJzZShiNjREZWNvZGUoZmlsZXNDb250ZW50KSk7XG5cbiAgbGV0IHB5b2RpZGVQcm9taXNlID0gKGFzeW5jICgpID0+IHtcbiAgICBzdGF0dXNUZXh0LnRleHRDb250ZW50ID0gYERvd25sb2FkaW5nIFB5b2RpZGVgO1xuICAgIGNvbnN0IHB5b2RpZGUgPSBhd2FpdCBzdGFydFB5b2RpZGVXb3JrZXIoZGF0YS5vcHRpb25zKTtcblxuICAgIHN0YXR1c1RleHQudGV4dENvbnRlbnQgPSBgRG93bmxvYWRpbmcgcGFja2FnZTogbWljcm9waXBgO1xuICAgIGF3YWl0IHB5b2RpZGUubG9hZFBhY2thZ2UoXCJtaWNyb3BpcFwiKTtcbiAgICBjb25zdCBtaWNyb3BpcCA9IGF3YWl0IHB5b2RpZGUucHlpbXBvcnQoXCJtaWNyb3BpcFwiKTtcbiAgICBhd2FpdCBkYXRhLnBhY2thZ2VzLnBrZ3MubWFwKChwa2cpID0+ICgpID0+IHtcbiAgICAgIHN0YXR1c1RleHQudGV4dENvbnRlbnQgPSBgRG93bmxvYWRpbmcgcGFja2FnZTogJHtwa2d9YDtcbiAgICAgIHJldHVybiBtaWNyb3BpcC5pbnN0YWxsKHBrZyk7XG4gICAgfSkucmVkdWNlKChjdXIsIG5leHQpID0+IGN1ci50aGVuKG5leHQpLCBQcm9taXNlLnJlc29sdmUoKSk7XG4gICAgYXdhaXQgbWljcm9waXAuZGVzdHJveSgpO1xuXG4gICAgLy8gRG93bmxvYWQgYW5kIGluc3RhbGwgcmVzb3VyY2VzXG4gICAgYXdhaXQgZmlsZXMubWFwKChmaWxlKSA9PiBhc3luYyAoKSA9PiB7XG4gICAgICBjb25zdCBuYW1lID0gZmlsZS5zdWJzdHJpbmcoZmlsZS5sYXN0SW5kZXhPZignLycpICsgMSk7XG4gICAgICBzdGF0dXNUZXh0LnRleHRDb250ZW50ID0gYERvd25sb2FkaW5nIHJlc291cmNlOiAke25hbWV9YDtcbiAgICAgIGNvbnN0IHJlc3BvbnNlID0gYXdhaXQgZmV0Y2goZmlsZSk7XG4gICAgICBpZiAoIXJlc3BvbnNlLm9rKSB7XG4gICAgICAgIHRocm93IG5ldyBFcnJvcihgQ2FuJ3QgZG93bmxvYWQgXFxgJHtmaWxlfVxcYC4gRXJyb3IgJHtyZXNwb25zZS5zdGF0dXN9OiBcIiR7cmVzcG9uc2Uuc3RhdHVzVGV4dH1cIi5gKTtcbiAgICAgIH1cbiAgICAgIGNvbnN0IGRhdGEgPSBhd2FpdCByZXNwb25zZS5hcnJheUJ1ZmZlcigpO1xuXG4gICAgICAvLyBTdG9yZSBVUkxzIGluIHRoZSBjd2Qgd2l0aG91dCBhbnkgc3ViZGlyZWN0b3J5IHN0cnVjdHVyZVxuICAgICAgaWYgKGZpbGUuaW5jbHVkZXMoXCI6Ly9cIikpIHtcbiAgICAgICAgZmlsZSA9IG5hbWU7XG4gICAgICB9XG5cbiAgICAgIC8vIENvbGxhcHNlIGhpZ2hlciBkaXJlY3Rvcnkgc3RydWN0dXJlXG4gICAgICBmaWxlID0gY29sbGFwc2VQYXRoKGZpbGUpO1xuXG4gICAgICAvLyBDcmVhdGUgZGlyZWN0b3J5IHRyZWUsIGlnbm9yaW5nIFwiZGlyZWN0b3J5IGV4aXN0c1wiIFZGUyBlcnJvcnNcbiAgICAgIGNvbnN0IHBhcnRzID0gZmlsZS5zcGxpdCgnLycpLnNsaWNlKDAsIC0xKTtcbiAgICAgIGxldCBwYXRoID0gJyc7XG4gICAgICB3aGlsZSAocGFydHMubGVuZ3RoID4gMCkge1xuICAgICAgICBwYXRoICs9IHBhcnRzLnNoaWZ0KCkgKyAnLyc7XG4gICAgICAgIHRyeSB7XG4gICAgICAgICAgYXdhaXQgcHlvZGlkZS5GUy5ta2RpcihwYXRoKTtcbiAgICAgICAgfSBjYXRjaCAoZSkge1xuICAgICAgICAgIGlmIChlLm5hbWUgIT09IFwiRXJybm9FcnJvclwiKSB0aHJvdyBlO1xuICAgICAgICAgIGlmIChlLmVycm5vICE9PSAyMCkge1xuICAgICAgICAgICAgY29uc3QgZXJyb3JUZXh0UHRyID0gYXdhaXQgcHlvZGlkZS5fbW9kdWxlLl9zdHJlcnJvcihlLmVycm5vKTtcbiAgICAgICAgICAgIGNvbnN0IGVycm9yVGV4dCA9IGF3YWl0IHB5b2RpZGUuX21vZHVsZS5VVEY4VG9TdHJpbmcoZXJyb3JUZXh0UHRyKTtcbiAgICAgICAgICAgIHRocm93IG5ldyBFcnJvcihgRmlsZXN5c3RlbSBFcnJvciAke2UuZXJybm99IFwiJHtlcnJvclRleHR9XCIuYCk7XG4gICAgICAgICAgfVxuICAgICAgICB9XG4gICAgICB9XG5cbiAgICAgIC8vIFdyaXRlIHRoaXMgZmlsZSB0byB0aGUgVkZTXG4gICAgICB0cnkge1xuICAgICAgICByZXR1cm4gYXdhaXQgcHlvZGlkZS5GUy53cml0ZUZpbGUoZmlsZSwgbmV3IFVpbnQ4QXJyYXkoZGF0YSkpO1xuICAgICAgfSBjYXRjaCAoZSkge1xuICAgICAgICBpZiAoZS5uYW1lICE9PSBcIkVycm5vRXJyb3JcIikgdGhyb3cgZTtcbiAgICAgICAgY29uc3QgZXJyb3JUZXh0UHRyID0gYXdhaXQgcHlvZGlkZS5fbW9kdWxlLl9zdHJlcnJvcihlLmVycm5vKTtcbiAgICAgICAgY29uc3QgZXJyb3JUZXh0ID0gYXdhaXQgcHlvZGlkZS5fbW9kdWxlLlVURjhUb1N0cmluZyhlcnJvclRleHRQdHIpO1xuICAgICAgICB0aHJvdyBuZXcgRXJyb3IoYEZpbGVzeXN0ZW0gRXJyb3IgJHtlLmVycm5vfSBcIiR7ZXJyb3JUZXh0fVwiLmApO1xuICAgICAgfVxuICAgIH0pLnJlZHVjZSgoY3VyLCBuZXh0KSA9PiBjdXIudGhlbihuZXh0KSwgUHJvbWlzZS5yZXNvbHZlKCkpO1xuXG4gICAgc3RhdHVzVGV4dC50ZXh0Q29udGVudCA9IGBQeW9kaWRlIGVudmlyb25tZW50IHNldHVwYDtcbiAgICBhd2FpdCBzZXR1cFB5dGhvbihweW9kaWRlKTtcblxuICAgIHN0YXR1c1RleHQucmVtb3ZlKCk7XG4gICAgaWYgKHN0YXR1c0NvbnRhaW5lci5jaGlsZHJlbi5sZW5ndGggPT0gMCkge1xuICAgICAgc3RhdHVzQ29udGFpbmVyLnBhcmVudE5vZGUucmVtb3ZlKCk7XG4gICAgfVxuICAgIHJldHVybiBweW9kaWRlO1xuICB9KSgpLmNhdGNoKChlcnIpID0+IHtcbiAgICBzdGF0dXNUZXh0LnN0eWxlLmNvbG9yID0gXCJ2YXIoLS1leGVyY2lzZS1lZGl0b3ItaGwtZXIsICNBRDAwMDApXCI7XG4gICAgc3RhdHVzVGV4dC50ZXh0Q29udGVudCA9IGVyci5tZXNzYWdlO1xuICAgIC8vaW5kaWNhdG9yQ29udGFpbmVyLnF1ZXJ5U2VsZWN0b3IoXCIuc3Bpbm5lci1ncm93XCIpLmNsYXNzTGlzdC5hZGQoXCJkLW5vbmVcIik7XG4gICAgdGhyb3cgZXJyO1xuICB9KTtcblxuICAvLyBLZWVwIHRyYWNrIG9mIGluaXRpYWwgT0pTIGJsb2NrIHJlbmRlclxuICBjb25zdCByZW5kZXJlZE9qcyA9IHt9O1xuXG4gIGNvbnN0IHByb2Nlc3MgPSBhc3luYyAoY29udGV4dCwgaW5wdXRzKSA9PiB7XG4gICAgY29uc3QgcHlvZGlkZSA9IGF3YWl0IHB5b2RpZGVQcm9taXNlO1xuICAgIGNvbnN0IGV2YWx1YXRvciA9IG5ldyBQeW9kaWRlRXZhbHVhdG9yKHB5b2RpZGUsIGNvbnRleHQpO1xuICAgIGF3YWl0IGV2YWx1YXRvci5wcm9jZXNzKGlucHV0cyk7XG4gICAgcmV0dXJuIGV2YWx1YXRvci5jb250YWluZXI7XG4gIH1cblxuICByZXR1cm4ge1xuICAgIHB5b2RpZGVQcm9taXNlLFxuICAgIHJlbmRlcmVkT2pzLFxuICAgIHByb2Nlc3MsXG4gIH07XG59XG4ifV19
+</script>
+<div id="exercise-loading-indicator" class="exercise-loading-indicator d-none d-flex align-items-center gap-2">
+<div id="exercise-loading-status" class="d-flex gap-2">
+
+</div>
+<div class="spinner-grow spinner-grow-sm">
+
+</div>
+</div>
+<script type="vfs-file">
+W10=
+</script>
+</section>
+
+</main> <!-- /main -->
+<script type="ojs-module-contents">
+eyJjb250ZW50cyI6W119
+</script>
+<script type="module">
+if (window.location.protocol === "file:") { alert("The OJS runtime does not work with file:// URLs. Please use a web server to view this document."); }
+window._ojs.paths.runtimeToDoc = "../..";
+window._ojs.paths.runtimeToRoot = "../..";
+window._ojs.paths.docToRoot = "";
+window._ojs.selfContained = false;
+window._ojs.runtime.interpretFromScriptTags();
+</script>
+<script id = "quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copiado");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copiado");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/github\.com\/EveliaCoss\/Mt2026_Taller_Computo_libro");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        const annoteTargets = window.document.querySelectorAll('.code-annotation-anchor');
+        for (let i=0; i<annoteTargets.length; i++) {
+          const annoteTarget = annoteTargets[i];
+          const targetCell = annoteTarget.getAttribute("data-target-cell");
+          const targetAnnotation = annoteTarget.getAttribute("data-target-annotation");
+          const contentFn = () => {
+            const content = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+            if (content) {
+              const tipContent = content.cloneNode(true);
+              tipContent.classList.add("code-annotation-tip-content");
+              return tipContent.outerHTML;
+            }
+          }
+          const config = {
+            allowHTML: true,
+            content: contentFn,
+            onShow: (instance) => {
+              selectCodeLines(instance.reference);
+              instance.reference.classList.add('code-annotation-active');
+              window.tippy.hideAll();
+            },
+            onHide: (instance) => {
+              unselectCodeLines();
+              instance.reference.classList.remove('code-annotation-active');
+            },
+            maxWidth: 300,
+            delay: [50, 0],
+            duration: [200, 0],
+            offset: [5, 10],
+            arrow: true,
+            appendTo: function(el) {
+              return el.parentElement.parentElement.parentElement;
+            },
+            interactive: true,
+            interactiveBorder: 10,
+            theme: 'quarto',
+            placement: 'right',
+            popperOptions: {
+              modifiers: [
+              {
+                name: 'flip',
+                options: {
+                  flipVariations: false, // true by default
+                  allowedAutoPlacements: ['right'],
+                  fallbackPlacements: ['right', 'top', 'top-start', 'top-end', 'bottom', 'bottom-start', 'bottom-end', 'left'],
+                },
+              },
+              {
+                name: 'preventOverflow',
+                options: {
+                  mainAxis: false,
+                  altAxis: false
+                }
+              }
+              ]        
+            }      
+          };
+          window.tippy(annoteTarget, config); 
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a  href="/python_buenas_practicas.html" class="pagination-link" aria-label="Sintaxis de nombres, buenas prácticas y programación defensiva en Python">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class='chapter-number'>54</span>  <span class='chapter-title'>Sintaxis de nombres, buenas prácticas y programación defensiva en Python</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a  href="/python_numpy.html" class="pagination-link" aria-label="Introducción a NumPy">
+        <span class="nav-page-text"><span class='chapter-number'>56</span>  <span class='chapter-title'>Introducción a NumPy</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+      <div class='footer-contents'>Taller de Cómputo, 1er semestre: Dra. Evelia Coss</div>  
+    </div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+</body>
+
+</html>
