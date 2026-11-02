@@ -1,0 +1,888 @@
+---
+title: "🐍 Actividad 2: atributos y métodos de los objetos"
+author: "Tu nombre"
+format: html
+jupyter: python3
+execute:
+  error: true   # Muestra los errores sin detener el documento
+---
+
+> **Fecha:** 03 de noviembre, 2026
+
+**Objetivo**: Utilizar los atributos y métodos de los objetos de Python (cadenas, listas, tuplas, conjuntos y diccionarios) y comprender cómo se comportan los métodos en objetos mutables e inmutables.
+
+**Nivel: Básico a intermedio.**
+
+**Instrucciones:** Resuelve cada ejercicio completando su código. Antes de ejecutar cada programa, analiza qué resultado esperas obtener. Completa los espacios `______`; en algunos ejercicios se revisa tu respuesta automáticamente.
+
+Esta es la versión para **RStudio** de la actividad del [libro del curso](https://eveliacoss.github.io/Mt2026_Taller_Computo_libro/python_ejercicio2.html). Es **tu propio archivo**: escribe tus respuestas aquí y guárdalo.
+
+**Antes de empezar:**
+
+1. Cambia `Tu nombre` por tu nombre en el encabezado (YAML) del archivo.
+2. Ejecuta los bloques **en orden**, de arriba hacia abajo, con el botón ▶ de cada bloque (o `Cmd/Ctrl + Shift + Enter`).
+3. Completa los espacios `______` de cada ejercicio.
+4. Da clic en **💡 Pista** o **✔️ Solución** para desplegarlas.
+5. En los ejercicios con **✅ Verificar**, ejecuta primero tu solución y después la celda de verificación.
+6. Al terminar, presiona **Render** para generar tu documento HTML con todos tus resultados.
+
+## Recordatorio: ¿cómo se usa un objeto?
+
+En Python accedemos a los atributos y métodos de un objeto con un **punto** (`.`):
+
+``` python
+objeto.atributo      # Atributo: información del objeto (sin paréntesis)
+objeto.metodo()      # Método: una acción que realiza el objeto (con paréntesis)
+```
+
+La diferencia principal:
+
+|   | Atributo | Método |
+|----|----|----|
+| ¿Qué es? | Un **dato** guardado en el objeto. | Una **función** que pertenece al objeto. |
+| ¿Lleva paréntesis? | No: `objeto.atributo` | Sí: `objeto.metodo()` |
+| Ejemplo | `numero.real` | `saludo.upper()` |
+
+![](https://raw.githubusercontent.com/EveliaCoss/Mt2026_Taller_Computo_libro/main/figures/objeto_atributos.png)
+
+### Atributos de los números: `real` e `imag`
+
+Un **número complejo** tiene una parte real y una parte imaginaria: $a + bi$. En Python la unidad imaginaria se escribe con `j`, por ejemplo `3 + 4j`.
+
+Los números en Python tienen dos atributos:
+
+| Atributo | ¿Qué contiene?                               | Ejemplo con `3 + 4j` |
+|----------|----------------------------------------------|----------------------|
+| `real`   | La parte real del número.                    | `3.0`                |
+| `imag`   | La parte imaginaria del número (sin la `j`). | `4.0`                |
+
+```{python}
+numero = 3 + 4j          # Número complejo
+
+print(numero.real)       # Atributo: parte real
+print(numero.imag)       # Atributo: parte imaginaria
+print(type(numero.real)) # Ambas partes se guardan como float
+```
+
+Los enteros (`int`) y los decimales (`float`) también tienen estos atributos. Su parte imaginaria es `0`:
+
+```{python}
+edad = 20
+print(edad.real)
+print(edad.imag)
+```
+
+Compara con un **método** del mismo objeto. `conjugate()` regresa el conjugado del número ($3 - 4i$), y por ser método lleva paréntesis:
+
+```{python}
+print(numero.conjugate())
+
+saludo = "hola"
+print(saludo.upper())    # Método de las cadenas
+```
+
+Si escribes paréntesis en un atributo, Python marca un error, porque un atributo es un dato y no una función que se pueda llamar:
+
+```{python}
+numero.real()
+```
+
+### `dir()`: ¿qué atributos y métodos tiene un objeto?
+
+La función `dir()` regresa una **lista con los nombres** de todos los atributos y métodos de un objeto:
+
+```{python}
+print(dir(numero))
+```
+
+Los nombres que empiezan y terminan con doble guion bajo, como `__add__`, son **métodos especiales** que Python usa internamente (por ejemplo, `__add__` se ejecuta cuando usamos `+`). Por ahora podemos ignorarlos y mostrar solo los demás (no te preocupes por la sintaxis de esta línea: la entenderás en el capítulo de [ciclos `for`](https://eveliacoss.github.io/Mt2026_Taller_Computo_libro/python_for.html)):
+
+```{python}
+print([nombre for nombre in dir(numero) if not nombre.startswith("_")])
+```
+
+Ahí aparecen `real` e `imag` (atributos) y `conjugate` (método). Hagamos lo mismo con una cadena de texto:
+
+```{python}
+print([nombre for nombre in dir("hola") if not nombre.startswith("_")])
+```
+
+> **💡 Consejo**
+>
+> `dir()` no indica cuál nombre es atributo y cuál es método. Para saberlo, consulta su documentación con `help()`.
+
+### `help()`: ¿cómo se usa un atributo o método?
+
+La función `help()` muestra la **documentación** de un objeto, una función o un método: qué hace, qué argumentos recibe y qué regresa.
+
+```{python}
+help(str.upper)
+```
+
+```{python}
+help(str.replace)
+```
+
+Para consultar un método escribimos el tipo, un punto y el nombre del método **sin paréntesis**: `help(str.replace)`, no `help(str.replace())`. También funciona con un objeto: `help(saludo.upper)`.
+
+| Función  | ¿Qué hace?                                      | Ejemplo           |
+|----------|-------------------------------------------------|-------------------|
+| `type()` | Indica el tipo del objeto.                      | `type(numero)`    |
+| `dir()`  | Lista los nombres de sus atributos y métodos.   | `dir(numero)`     |
+| `help()` | Muestra la documentación de un objeto o método. | `help(str.upper)` |
+
+
+> **📝 Nota**
+>
+> Si ejecutas `help(str)` en la consola, la documentación es muy larga y se muestra por páginas. Avanza con la barra espaciadora y sal con la tecla `q`. En Jupyter, Colab y Quarto se muestra completa debajo de la celda.
+
+### Funciones integradas y atributos más usados
+
+Además de los métodos, Python tiene **funciones integradas** (*built-in functions*), como `len()`. Estas funciones **no se escriben con punto**: el objeto va dentro de los paréntesis.
+
+|   | Función integrada | Método | Atributo |
+|----|----|----|----|
+| ¿Cómo se escribe? | `funcion(objeto)` | `objeto.metodo()` | `objeto.atributo` |
+| Ejemplo | `len(lista)` | `lista.count(3)` | `numero.real` |
+| ¿Funciona con...? | Muchos tipos de objetos. | Solo con el tipo al que pertenece. | Solo con el tipo al que pertenece. |
+
+Por eso escribimos `len(lista)` y no `lista.len()`.
+
+#### Funciones integradas más usadas
+
+| Función | ¿Qué hace? | Ejemplo | Resultado |
+|----|----|----|----|
+| `print()` | Muestra uno o más valores. | `print("Hola", 5)` | `Hola 5` |
+| `type()` | Regresa el tipo del objeto. | `type(3.5)` | `<class 'float'>` |
+| `id()` | Regresa la identidad del objeto. | `id(x)` | `4371203472` |
+| `len()` | Regresa el número de elementos. | `len([4, 7, 1])` | `3` |
+| `sum()` | Suma los elementos. | `sum([4, 7, 1])` | `12` |
+| `min()`, `max()` | Regresan el menor o el mayor elemento. | `max([4, 7, 1])` | `7` |
+| `abs()` | Valor absoluto. | `abs(-8)` | `8` |
+| `round()` | Redondea a cierto número de decimales. | `round(3.14159, 2)` | `3.14` |
+| `pow()` | Potencia (igual que `**`). | `pow(2, 10)` | `1024` |
+| `divmod()` | Cociente y residuo de una división entera. | `divmod(17, 5)` | `(3, 2)` |
+| `sorted()` | Regresa una lista **nueva** ordenada. | `sorted([4, 7, 1])` | `[1, 4, 7]` |
+| `range()` | Genera una secuencia de enteros. | `list(range(1, 6))` | `[1, 2, 3, 4, 5]` |
+| `int()`, `float()`, `str()` | Convierten a entero, decimal o texto. | `int("42")` | `42` |
+| `list()`, `tuple()`, `set()` | Convierten a lista, tupla o conjunto. | `set([1, 1, 2])` | `{1, 2}` |
+| `isinstance()` | Indica si un objeto es de cierto tipo. | `isinstance(5, int)` | `True` |
+| `dir()` | Lista los atributos y métodos de un objeto. | `dir(5)` | `['__abs__', ...]` |
+| `help()` | Muestra la documentación. | `help(len)` | (documentación) |
+
+Pruébalas: modifica la lista y presiona **Run Code**.
+
+```{python}
+numeros = [4, 7, 1, 9, 4]
+
+print("Elementos:", len(numeros))
+print("Suma:", sum(numeros))
+print("Mínimo:", min(numeros), "Máximo:", max(numeros))
+print("Promedio:", round(sum(numeros) / len(numeros), 2))
+print("Ordenada:", sorted(numeros))
+print("Sin repetidos:", set(numeros))
+print("Cociente y residuo de 17 / 5:", divmod(17, 5))
+```
+
+> **⚠️ Advertencia**
+>
+> Si escribes una función integrada como si fuera un método, obtendrás un error: `numeros.len()` produce `AttributeError: 'list' object has no attribute 'len'`.
+
+
+#### Atributos más usados
+
+Los atributos son menos comunes que los métodos en los tipos básicos de Python. Estos son los que más usarás:
+
+| Tipo de objeto | Atributo | ¿Qué contiene? | Ejemplo | Resultado |
+|----|----|----|----|----|
+| `int`, `float`, `complex` | `real` | Parte real del número. | `(3 + 4j).real` | `3.0` |
+| `int`, `float`, `complex` | `imag` | Parte imaginaria del número. | `(3 + 4j).imag` | `4.0` |
+| `int` | `numerator` | Numerador (el propio entero). | `(7).numerator` | `7` |
+| `int` | `denominator` | Denominador (siempre `1`). | `(7).denominator` | `1` |
+| `range` | `start`, `stop`, `step` | Inicio, fin y paso del rango. | `range(0, 10, 2).step` | `2` |
+| Cualquier objeto | `__class__` | El tipo del objeto (igual que `type()`). | `"hola".__class__` | `<class 'str'>` |
+| Cualquier objeto | `__doc__` | El texto de su documentación. | `len.__doc__` | `'Return the number of items...'` |
+
+```{python}
+numero = 3 + 4j
+print(numero.real, numero.imag)
+
+rango = range(0, 10, 2)
+print(rango.start, rango.stop, rango.step)
+print(list(rango))
+
+print((7).numerator, (7).denominator)
+```
+
+> **📝 Nota**
+>
+> Para usar un atributo directamente sobre un número entero escribe el número entre paréntesis: `(7).numerator`. Si escribes `7.numerator`, Python cree que el punto es el punto decimal y marca un `SyntaxError`.
+
+
+Cuando trabajes con bibliotecas como **NumPy** y **pandas**, los atributos serán muy frecuentes:
+
+| Biblioteca | Atributo | ¿Qué contiene? |
+|----|----|----|
+| NumPy (`array`) | `shape` | Dimensiones del arreglo, por ejemplo `(3, 4)`. |
+| NumPy (`array`) | `ndim` | Número de dimensiones. |
+| NumPy (`array`) | `size` | Número total de elementos. |
+| NumPy (`array`) | `dtype` | Tipo de dato de los elementos. |
+| NumPy (`array`) | `T` | La matriz transpuesta. |
+| pandas (`DataFrame`) | `shape` | Número de filas y columnas. |
+| pandas (`DataFrame`) | `columns` | Nombres de las columnas. |
+| pandas (`DataFrame`) | `dtypes` | Tipo de dato de cada columna. |
+
+### Principales métodos
+
+| Tipo | Método | ¿Qué hace? | ¿Modifica el objeto? |
+|----|----|----|----|
+| `str` | `upper()`, `lower()` | Convierte a mayúsculas / minúsculas. | No, regresa una nueva cadena. |
+| `str` | `replace(a, b)` | Reemplaza `a` por `b`. | No, regresa una nueva cadena. |
+| `str` | `count(x)` | Cuenta cuántas veces aparece `x`. | No |
+| `str` | `split(sep)` | Separa la cadena en una lista. | No |
+| `str` | `strip()` | Elimina espacios al inicio y al final. | No |
+| `list` | `append(x)` | Agrega `x` al final. | **Sí** |
+| `list` | `extend(lista)` | Agrega varios elementos al final. | **Sí** |
+| `list` | `insert(i, x)` | Inserta `x` en la posición `i`. | **Sí** |
+| `list` | `remove(x)` | Elimina la primera aparición de `x`. | **Sí** |
+| `list` | `pop()` | Elimina y regresa el último elemento. | **Sí** |
+| `list` | `sort()`, `reverse()` | Ordena / invierte la lista. | **Sí** |
+| `tuple` | `count(x)`, `index(x)` | Cuenta / busca la posición de `x`. | No |
+| `set` | `add(x)` | Agrega `x` al conjunto. | **Sí** |
+| `set` | `union()`, `intersection()`, `difference()` | Operaciones de conjuntos. | No, regresan un nuevo conjunto. |
+| `dict` | `keys()`, `values()`, `items()` | Regresan las claves, valores o pares. | No |
+| `dict` | `get(clave)` | Regresa el valor de una clave (o `None` si no existe). | No |
+| `dict` | `update(dicc)` | Agrega o actualiza pares clave-valor. | **Sí** |
+| `dict` | `pop(clave)` | Elimina una clave y regresa su valor. | **Sí** |
+
+Observa el patrón: los métodos de los objetos **inmutables** (`str`, `tuple`) nunca modifican el objeto original, siempre **regresan un objeto nuevo**.
+
+## Parte I. Cadenas de texto (`str`)
+
+### Ejercicio 1. Transformar un nombre
+
+Dada la variable `nombre`, muestra:
+
+- El nombre en mayúsculas.
+- El nombre en minúsculas.
+- El nombre sin los espacios al inicio y al final.
+- La variable `nombre` original. ¿Cambió?
+
+```{python}
+nombre = "   Ana María López   "
+
+print(______)   # Mayúsculas
+print(______)   # Minúsculas
+print(______)   # Sin espacios al inicio y al final
+print(nombre)   # Original
+```
+
+<details>
+<summary><b>💡 Pista</b> (da clic para ver)</summary>
+
+
+Usa los métodos `upper()`, `lower()` y `strip()`. Recuerda escribir el punto y los paréntesis: `nombre.upper()`.
+
+</details>
+
+<details>
+<summary><b>✔️ Solución</b> (da clic para ver)</summary>
+
+
+``` python
+nombre = "   Ana María López   "
+
+print(nombre.upper())
+print(nombre.lower())
+print(nombre.strip())
+print(nombre)  # No cambió: las cadenas son inmutables
+```
+
+Cada método regresa una **cadena nueva**; la original no cambia porque las cadenas son **inmutables**.
+
+</details>
+
+### Ejercicio 2. Los dígitos de $\pi$
+
+La variable `pi` guarda las primeras cifras de $\pi$ como **texto**:
+
+1.  Quita el punto decimal con `replace()` y guarda el resultado en `digitos`. Muestra cuántos dígitos son con `len()`.
+2.  Cuenta cuántas veces aparecen los dígitos `"3"`, `"5"` y `"9"` con el método `count()`.
+3.  Calcula el **porcentaje de dígitos impares** (`1`, `3`, `5`, `7` y `9`):
+
+$$\% \text{impares} = \frac{\text{número de dígitos impares}}{\text{total de dígitos}} \times 100$$
+
+Deja el resultado en la **última línea** para que se revise tu respuesta.
+
+```{python}
+pi = "3.1415926535897932384"
+
+digitos = ______
+print("Dígitos:", digitos, "Total:", len(digitos))
+
+print("3:", ______)
+print("5:", ______)
+print("9:", ______)
+
+impares = ______
+porcentaje = ______
+respuesta = porcentaje
+respuesta
+```
+
+```{python}
+# ✅ Verificar el ejercicio 2
+# Ejecuta esta celda después de ejecutar tu solución
+result = respuesta
+if isinstance(result, (int, float)) and round(result, 2) == 65.0:
+    feedback = {"correct": True, "message": "¡Correcto! 13 de los 20 dígitos son impares: 65%."}
+elif isinstance(result, (int, float)) and round(result, 2) == 0.65:
+    feedback = {"correct": False, "message": "Casi: obtuviste la proporción. Multiplica por 100 para obtener el porcentaje."}
+elif isinstance(result, (int, float)) and round(result, 2) == 61.9:
+    feedback = {"correct": False, "message": "Casi: dividiste entre len(pi), que incluye el punto. Divide entre len(digitos)."}
+else:
+    feedback = {"correct": False, "message": "El porcentaje no es correcto. Suma los conteos de 1, 3, 5, 7 y 9, divide entre len(digitos) y multiplica por 100."}
+feedback
+print(("✅ " if feedback["correct"] else "❌ ") + feedback["message"])
+```
+
+<details>
+<summary><b>💡 Pista</b> (da clic para ver)</summary>
+
+
+`pi.replace(".", "")` reemplaza el punto por una cadena vacía, es decir, lo elimina. `digitos.count("3")` regresa cuántos `3` hay. Para los impares suma cinco conteos: `digitos.count("1") + digitos.count("3") + ...`
+
+</details>
+
+<details>
+<summary><b>✔️ Solución</b> (da clic para ver)</summary>
+
+
+``` python
+pi = "3.1415926535897932384"
+
+digitos = pi.replace(".", "")
+print("Dígitos:", digitos, "Total:", len(digitos))   # Total: 20
+
+print("3:", digitos.count("3"))   # 4
+print("5:", digitos.count("5"))   # 3
+print("9:", digitos.count("9"))   # 3
+
+impares = (digitos.count("1") + digitos.count("3") + digitos.count("5")
+           + digitos.count("7") + digitos.count("9"))
+porcentaje = impares / len(digitos) * 100
+respuesta = porcentaje   # 65.0
+respuesta
+```
+
+Observa que `count()` funciona porque `pi` es una cadena de texto (`str`). Si `pi` fuera un número (`float`), no tendría los métodos `replace()` ni `count()`.
+
+</details>
+
+### Ejercicio 3. Separar y unir texto
+
+Separa la siguiente cadena en una lista de frutas con `split()` y después vuelve a unirlas en una sola cadena, separadas por `" | "`, con el método `join()`.
+
+```{python}
+frutas = "manzana,pera,uva,mango"
+
+lista_frutas = ______
+print(lista_frutas)
+print(type(lista_frutas))
+
+unidas = ______
+print(unidas)
+```
+
+<details>
+<summary><b>💡 Pista</b> (da clic para ver)</summary>
+
+
+`split(",")` separa la cadena cada vez que encuentra una coma. `join()` se escribe al revés de lo que esperarías: primero el separador y luego la lista, `" | ".join(lista)`.
+
+</details>
+
+<details>
+<summary><b>✔️ Solución</b> (da clic para ver)</summary>
+
+
+``` python
+frutas = "manzana,pera,uva,mango"
+
+lista_frutas = frutas.split(",")
+print(lista_frutas)
+print(type(lista_frutas))
+
+unidas = " | ".join(lista_frutas)
+print(unidas)
+```
+
+Observa que `split()` convierte una cadena (`str`) en una lista (`list`), y `join()` hace lo contrario.
+
+</details>
+
+## Parte II. Listas (`list`)
+
+### Ejercicio 4. Mi lista de compras
+
+A partir de la lista `compras`:
+
+1.  Agrega `"café"` al final con `append()`.
+2.  Agrega `"pan"` y `"queso"` con `extend()`.
+3.  Inserta `"agua"` en la primera posición con `insert()`.
+4.  Elimina `"leche"` con `remove()`.
+5.  Elimina el último elemento con `pop()` y guárdalo en la variable `ultimo`.
+6.  Muestra la lista final, el elemento eliminado y el número de elementos con `len()`.
+
+```{python}
+compras = ["huevos", "leche", "tortillas"]
+
+# Escribe aquí los pasos 1 a 5
+
+
+print(compras)
+print("Elemento eliminado:", ultimo)
+print("Número de elementos:", len(compras))
+```
+
+<details>
+<summary><b>💡 Pista</b> (da clic para ver)</summary>
+
+
+`extend()` recibe una **lista**: `compras.extend(["pan", "queso"])`. `insert()` recibe la posición y el elemento: `compras.insert(0, "agua")`.
+
+</details>
+
+<details>
+<summary><b>✔️ Solución</b> (da clic para ver)</summary>
+
+
+``` python
+compras = ["huevos", "leche", "tortillas"]
+
+compras.append("café")
+compras.extend(["pan", "queso"])
+compras.insert(0, "agua")
+compras.remove("leche")
+ultimo = compras.pop()
+
+print(compras)
+print("Elemento eliminado:", ultimo)
+print("Número de elementos:", len(compras))
+```
+
+</details>
+
+### Ejercicio 5. Ordenar calificaciones
+
+1.  Ordena las calificaciones de menor a mayor con `sort()`.
+2.  Ordénalas de mayor a menor con `sort(reverse=True)`.
+3.  ¿Cuántas veces aparece el `10`? Usa `count()`.
+4.  Con la lista ordenada de mayor a menor, ¿en qué posición está el primer `6`? Usa `index()` y deja el resultado en la **última línea**.
+
+```{python}
+calificaciones = [8, 10, 6, 9, 10, 7, 6]
+
+______
+print(calificaciones)
+
+______
+print(calificaciones)
+
+print("Veces que aparece el 10:", ______)
+
+respuesta = ______   # Posición del primer 6
+respuesta
+```
+
+```{python}
+# ✅ Verificar el ejercicio 5
+# Ejecuta esta celda después de ejecutar tu solución
+result = respuesta
+if result == 5:
+    feedback = {"correct": True, "message": "¡Correcto! En la lista [10, 10, 9, 8, 7, 6, 6] el primer 6 está en el índice 5."}
+elif result == 0:
+    feedback = {"correct": False, "message": "Obtuviste 0: parece que la lista está ordenada de menor a mayor. Ordénala con sort(reverse=True)."}
+else:
+    feedback = {"correct": False, "message": "La última línea debe regresar la posición del primer 6, usando index()."}
+feedback
+print(("✅ " if feedback["correct"] else "❌ ") + feedback["message"])
+```
+
+<details>
+<summary><b>💡 Pista</b> (da clic para ver)</summary>
+
+
+`sort()` no regresa nada, solo modifica la lista: escribe `calificaciones.sort()` en su propia línea. Para la posición: `calificaciones.index(6)`.
+
+</details>
+
+<details>
+<summary><b>✔️ Solución</b> (da clic para ver)</summary>
+
+
+``` python
+calificaciones = [8, 10, 6, 9, 10, 7, 6]
+
+calificaciones.sort()
+print(calificaciones)
+
+calificaciones.sort(reverse=True)
+print(calificaciones)
+
+print("Veces que aparece el 10:", calificaciones.count(10))
+
+respuesta = calificaciones.index(6)   # 5
+respuesta
+```
+
+</details>
+
+### Ejercicio 6. ¿Por qué obtengo `None`?
+
+Ejecuta el código y responde:
+
+- ¿Qué valor tiene `ordenada`?
+- ¿Qué valor tiene `numeros`?
+- ¿Cómo lo corregirías para que `ordenada` tenga la lista ordenada **sin modificar** `numeros`?
+
+```{python}
+numeros = [5, 2, 9, 1]
+ordenada = numeros.sort()
+
+print("ordenada:", ordenada)
+print("numeros:", numeros)
+```
+
+<details>
+<summary><b>💡 Pista</b> (da clic para ver)</summary>
+
+
+Los métodos que modifican una lista, como `sort()`, regresan `None`. Existe una **función** llamada `sorted()` que regresa una lista nueva.
+
+</details>
+
+<details>
+<summary><b>✔️ Solución</b> (da clic para ver)</summary>
+
+
+El método `sort()` **modifica la lista original** (las listas son mutables) y **no regresa nada**, es decir, regresa `None`. Para obtener una lista nueva ordenada sin modificar la original utilizamos la función `sorted()`:
+
+``` python
+numeros = [5, 2, 9, 1]
+ordenada = sorted(numeros)
+
+print("ordenada:", ordenada)   # [1, 2, 5, 9]
+print("numeros:", numeros)     # [5, 2, 9, 1]
+```
+
+</details>
+
+### Ejercicio 7. Copia vs. referencia
+
+Ejecuta el código. ¿Por qué cambió también `lista_a`? Compruébalo comparando las identidades con `id()` y después corrígelo con el método `copy()`, para que `lista_a` no cambie.
+
+```{python}
+lista_a = [1, 2, 3]
+lista_b = lista_a
+lista_b.append(4)
+
+print("lista_a:", lista_a)
+print("lista_b:", lista_b)
+print("¿Mismo objeto?", id(lista_a) == id(lista_b))
+```
+
+<details>
+<summary><b>💡 Pista</b> (da clic para ver)</summary>
+
+
+Cambia la segunda línea por `lista_b = lista_a.copy()`.
+
+</details>
+
+<details>
+<summary><b>✔️ Solución</b> (da clic para ver)</summary>
+
+
+`lista_b = lista_a` no crea una lista nueva: ambas variables hacen referencia **al mismo objeto**. Con `copy()` creamos un objeto nuevo:
+
+``` python
+lista_a = [1, 2, 3]
+lista_b = lista_a.copy()
+lista_b.append(4)
+
+print("lista_a:", lista_a)   # [1, 2, 3]
+print("lista_b:", lista_b)   # [1, 2, 3, 4]
+print("¿Mismo objeto?", id(lista_a) == id(lista_b))   # False
+```
+
+</details>
+
+## Parte III. Tuplas (`tuple`) y conjuntos (`set`)
+
+### Ejercicio 8. Métodos de una tupla
+
+Las tuplas son inmutables, por lo que solo tienen dos métodos: `count()` e `index()`.
+
+1.  Cuenta cuántas veces aparece `"rojo"`.
+2.  Encuentra la posición de `"azul"`.
+3.  Ejecuta la última línea, que intenta agregar un color con `append()`. ¿Qué error obtienes y por qué?
+
+```{python}
+colores = ("rojo", "verde", "azul", "rojo", "amarillo")
+
+print("Veces que aparece rojo:", ______)
+print("Posición de azul:", ______)
+
+colores.append("negro")
+```
+
+<details>
+<summary><b>💡 Pista</b> (da clic para ver)</summary>
+
+
+`colores.count("rojo")` y `colores.index("azul")`. Usa `dir(colores)` para ver qué métodos tiene una tupla.
+
+</details>
+
+<details>
+<summary><b>✔️ Solución</b> (da clic para ver)</summary>
+
+
+``` python
+colores = ("rojo", "verde", "azul", "rojo", "amarillo")
+
+print("Veces que aparece rojo:", colores.count("rojo"))   # 2
+print("Posición de azul:", colores.index("azul"))         # 2
+
+colores.append("negro")   # AttributeError
+```
+
+Obtenemos un `AttributeError: 'tuple' object has no attribute 'append'`: las tuplas no tienen el método `append()` porque son inmutables.
+
+</details>
+
+### Ejercicio 9. Divisores comunes y máximo común divisor
+
+Los conjuntos `divisores_12` y `divisores_18` deberían contener todos los divisores de 12 y de 18, pero **a uno le falta un elemento**:
+
+1.  Agrega el divisor que le falta a `divisores_12` con `add()`.
+2.  Obtén **todos** los números que dividen a 12 o a 18 con `union()`.
+3.  Obtén los divisores de 12 que **no** dividen a 18 con `difference()`.
+4.  Obtén los **divisores comunes** con `intersection()`.
+5.  En la **última línea**, calcula el **máximo común divisor** (MCD) de 12 y 18 aplicando la función `max()` a los divisores comunes.
+
+```{python}
+divisores_12 = {1, 2, 3, 4, 12}
+divisores_18 = {1, 2, 3, 6, 9, 18}
+
+______
+print("Dividen a 12 o a 18:", ______)
+print("Dividen a 12 pero no a 18:", ______)
+
+comunes = ______
+print("Divisores comunes:", comunes)
+
+respuesta = ______   # MCD
+respuesta
+```
+
+```{python}
+# ✅ Verificar el ejercicio 9
+# Ejecuta esta celda después de ejecutar tu solución
+result = respuesta
+if result == 6:
+    feedback = {"correct": True, "message": "¡Correcto! Los divisores comunes son {1, 2, 3, 6}, así que MCD(12, 18) = 6."}
+elif result == 3:
+    feedback = {"correct": False, "message": "Obtuviste 3: a divisores_12 le falta el 6. Agrégalo con add() antes de calcular la intersección."}
+elif result == {1, 2, 3, 6}:
+    feedback = {"correct": False, "message": "Esos son los divisores comunes. Ahora aplica max() para obtener el MCD."}
+else:
+    feedback = {"correct": False, "message": "La última línea debe regresar el MCD: el máximo de los divisores comunes."}
+feedback
+print(("✅ " if feedback["correct"] else "❌ ") + feedback["message"])
+```
+
+<details>
+<summary><b>💡 Pista</b> (da clic para ver)</summary>
+
+
+12 = 2 × 6, así que el 6 divide a 12. `divisores_12.add(6)` modifica el conjunto; `divisores_12.intersection(divisores_18)` regresa un conjunto nuevo. `max()` es una **función** y no un método: `max(comunes)`.
+
+</details>
+
+<details>
+<summary><b>✔️ Solución</b> (da clic para ver)</summary>
+
+
+``` python
+divisores_12 = {1, 2, 3, 4, 12}
+divisores_18 = {1, 2, 3, 6, 9, 18}
+
+divisores_12.add(6)
+print("Dividen a 12 o a 18:", divisores_12.union(divisores_18))
+print("Dividen a 12 pero no a 18:", divisores_12.difference(divisores_18))   # {4, 12}
+
+comunes = divisores_12.intersection(divisores_18)
+print("Divisores comunes:", comunes)   # {1, 2, 3, 6}
+
+respuesta = max(comunes)   # 6
+respuesta
+```
+
+Recuerda que los conjuntos no tienen orden, por lo que los elementos pueden aparecer en un orden distinto.
+
+</details>
+
+## Parte IV. Diccionarios (`dict`)
+
+### Ejercicio 10. Ficha de un estudiante
+
+A partir del diccionario `estudiante`:
+
+1.  Muestra sus claves con `keys()` y sus valores con `values()`.
+2.  Obtén la carrera con `get()`. ¿Qué pasa si pides una clave que no existe, como `"telefono"`?
+3.  Agrega el semestre (`1`) y actualiza la edad a `20` con `update()`.
+4.  Elimina la clave `"correo"` con `pop()`.
+5.  Muestra los pares clave-valor con `items()`.
+
+```{python}
+estudiante = {
+    "nombre": "Ana",
+    "edad": 19,
+    "carrera": "Matemáticas para el Desarrollo",
+    "correo": "ana@ejemplo.com"
+}
+
+print(______)   # Claves
+print(______)   # Valores
+
+print(______)   # Carrera
+print(______)   # Teléfono
+
+# Pasos 3 y 4
+
+
+print(______)   # Pares clave-valor
+```
+
+<details>
+<summary><b>💡 Pista</b> (da clic para ver)</summary>
+
+
+`update()` recibe otro diccionario: `estudiante.update({"semestre": 1, "edad": 20})`. `pop()` recibe la clave que quieres eliminar.
+
+</details>
+
+<details>
+<summary><b>✔️ Solución</b> (da clic para ver)</summary>
+
+
+``` python
+estudiante = {
+    "nombre": "Ana",
+    "edad": 19,
+    "carrera": "Matemáticas para el Desarrollo",
+    "correo": "ana@ejemplo.com"
+}
+
+print(estudiante.keys())
+print(estudiante.values())
+
+print(estudiante.get("carrera"))
+print(estudiante.get("telefono"))  # Regresa None en lugar de un error
+
+estudiante.update({"semestre": 1, "edad": 20})
+correo = estudiante.pop("correo")
+
+print(estudiante.items())
+```
+
+</details>
+
+## Reto final: estadística sin ciclos
+
+Con los métodos y las funciones integradas que conoces, calcula las principales medidas estadísticas de la lista `datos`, **sin modificar la lista original**:
+
+1.  **Media**: la suma de los datos entre el número de datos, redondeada a 2 decimales.
+2.  **Mediana**: el dato que queda en medio cuando la lista está **ordenada** (la lista tiene 9 datos, así que es el que está en el índice 4).
+3.  **Moda**: el dato que más se repite.
+4.  **Rango**: la diferencia entre el dato mayor y el menor.
+5.  Guarda los resultados en el diccionario `resumen` y déjalo en la **última línea**.
+
+```{python}
+datos = [12, 7, 3, 7, 25, 12, 7, 9, 18]
+
+media = ______
+ordenados = ______
+mediana = ______
+moda = ______
+rango = ______
+
+print("Datos originales:", datos)
+print("Datos ordenados:", ordenados)
+
+resumen = {"media": media, "mediana": mediana, "moda": moda, "rango": rango}
+respuesta = resumen
+respuesta
+```
+
+```{python}
+# ✅ Verificar el reto final
+# Ejecuta esta celda después de ejecutar tu solución
+result = respuesta
+esperado = {"media": 11.11, "mediana": 9, "moda": 7, "rango": 22}
+if not isinstance(result, dict):
+    feedback = {"correct": False, "message": "La última línea debe regresar el diccionario resumen."}
+elif datos != [12, 7, 3, 7, 25, 12, 7, 9, 18]:
+    feedback = {"correct": False, "message": "Modificaste la lista datos. Usa sorted(), que regresa una lista nueva, en lugar de sort()."}
+elif result == esperado:
+    feedback = {"correct": True, "message": "¡Excelente! Media 11.11, mediana 9, moda 7 y rango 22."}
+else:
+    incorrectos = [clave for clave in esperado if result.get(clave) != esperado[clave]]
+    feedback = {"correct": False, "message": "Revisa: " + ", ".join(incorrectos)}
+feedback
+print(("✅ " if feedback["correct"] else "❌ ") + feedback["message"])
+```
+
+<details>
+<summary><b>💡 Pista</b> (da clic para ver)</summary>
+
+
+- Media: `round(sum(datos) / len(datos), 2)`.
+- Mediana: `sorted(datos)` regresa una lista **nueva** ordenada; el elemento de en medio está en el índice `len(ordenados) // 2` (el operador `//` divide y descarta los decimales).
+- Moda: `max()` acepta el argumento `key`, que indica **qué comparar**. `max(set(datos), key=datos.count)` busca, entre los valores únicos, el que tiene el mayor `datos.count(...)`.
+- Rango: usa `max()` y `min()`.
+
+</details>
+
+<details>
+<summary><b>✔️ Solución</b> (da clic para ver)</summary>
+
+
+``` python
+datos = [12, 7, 3, 7, 25, 12, 7, 9, 18]
+
+media = round(sum(datos) / len(datos), 2)
+ordenados = sorted(datos)
+mediana = ordenados[len(ordenados) // 2]
+moda = max(set(datos), key=datos.count)
+rango = max(datos) - min(datos)
+
+print("Datos originales:", datos)
+print("Datos ordenados:", ordenados)
+
+resumen = {"media": media, "mediana": mediana, "moda": moda, "rango": rango}
+respuesta = resumen   # {'media': 11.11, 'mediana': 9, 'moda': 7, 'rango': 22}
+respuesta
+```
+
+Si hubieras usado `datos.sort()`, la lista original se habría modificado (las listas son mutables). `sorted()` es una función que regresa un objeto nuevo y deja intacto el original.
+
+</details>
+
+## Referencias
+
+- [Sección 4 Python: Tipos de datos](https://haydeeperuyero.github.io/Computo_Cientifico/python.html)
+- [Documentación de Python: Estructuras de datos](https://docs.python.org/es/3/tutorial/datastructures.html)
+- [Documentación de Python: Métodos de las cadenas](https://docs.python.org/es/3/library/stdtypes.html#string-methods)

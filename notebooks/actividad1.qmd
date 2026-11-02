@@ -26,19 +26,6 @@ Esta es la versión para **RStudio** de la actividad del [libro del curso](https
 5. En los ejercicios con **✅ Verificar**, ejecuta primero tu solución y después la celda de verificación.
 6. Al terminar, presiona **Render** para generar tu documento HTML con todos tus resultados.
 
-## ¿Y si quiero empezar mi propio `.qmd` desde cero?
-
-También puedes crear un documento nuevo con **File \> New File \> Quarto Document...**, poner el YAML de arriba y copiar ahí los ejercicios que quieras. Así practicas lo que aprendiste en el [Paso 7](https://eveliacoss.github.io/Mt2026_Taller_Computo_libro/quarto_python.html#paso-7.-mi-primer-documento-de-quarto-con-python) del capítulo de configuración.
-:::
-
-
-> **⚠️ Advertencia**
->
-> Si al ejecutar un bloque aparece `ModuleNotFoundError` o `NameError: name '______' is not defined`:
->
-> - `NameError` con `______` significa que **todavía no completaste** ese espacio: es normal.
-> - `ModuleNotFoundError` indica un problema de configuración: consulta la [solución de problemas](https://eveliacoss.github.io/Mt2026_Taller_Computo_libro/quarto_python.html#solución-de-problemas) del capítulo de configuración.
-
 ## Repaso: objeto y variable
 
 ### ¿Qué es un objeto?

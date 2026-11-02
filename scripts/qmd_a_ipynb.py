@@ -60,7 +60,8 @@ def convertir(ruta_qmd, ruta_ipynb):
 
     while i < len(lineas):
         linea = lineas[i]
-        encabezado = re.match(r"^(#{1,6}) (.*)", linea)
+        # Un "## Título" justo después de ":::" es el título de un callout, no una sección
+        encabezado = None if i and lineas[i - 1].startswith(":::") else re.match(r"^(#{1,6}) (.*)", linea)
 
         if encabezado:
             nivel, titulo = len(encabezado[1]), encabezado[2]
@@ -71,7 +72,9 @@ def convertir(ruta_qmd, ruta_ipynb):
             if omitir_nivel is None and titulo.startswith(SECCIONES_OMITIDAS):
                 omitir_nivel = nivel
             if m := re.match(r"Ejercicio (\d+)", titulo):
-                ejercicio = m[1]
+                ejercicio = f"el ejercicio {m[1]}"
+            elif titulo.startswith("Reto"):
+                ejercicio = "el reto final"
         if omitir_nivel is not None or linea.startswith("{{<"):
             i += 1
             continue
@@ -86,6 +89,8 @@ def convertir(ruta_qmd, ruta_ipynb):
             if bloque[1] not in ("python", "pyodide"):     # p. ej. bloques {r} ocultos
                 continue
             guardar_md()
+            # envir_result["x"] solo existe en el libro; fuera de él basta la variable x
+            codigo = [re.sub(r'envir_result\["(\w+)"\]', r"\1", l) for l in codigo]
             if any("check: true" in o for o in opciones):
                 # El ejercicio guarda su última expresión en `respuesta` para poder revisarla
                 ej = celdas[-1]["source"]
@@ -95,7 +100,7 @@ def convertir(ruta_qmd, ruta_ipynb):
                     ej[k:k + 1] = [f"respuesta = {ultima}\n", "respuesta"]
                 con_verificacion.add(ejercicio)
                 celdas.append(celda("code", [
-                    f'#@title ✅ Verificar el ejercicio {ejercicio} {{ display-mode: "form" }}',
+                    f'#@title ✅ Verificar {ejercicio} {{ display-mode: "form" }}',
                     "# Ejecuta esta celda después de ejecutar tu solución",
                     "result = respuesta",
                     *codigo,
