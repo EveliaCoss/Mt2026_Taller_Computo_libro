@@ -881,8 +881,6 @@ print("Casillas negras:", tablero.sum())   # 32
 tablero
 ```
 
-![Construcción del tablero de ajedrez con rebanado con paso.](figures/python_numpy_tablero_ajedrez.png){fig-align="center"}
-
 Con *broadcasting* también se puede hacer en una línea: una casilla es negra si la suma de su fila y su columna es impar.
 
 ``` python
@@ -892,6 +890,8 @@ tablero = (filas + columnas) % 2
 ```
 :::
 ::::
+
+![Construcción del tablero de ajedrez con rebanado con paso.](figures/python_numpy_tablero_ajedrez.png){fig-align="center"}
 
 ## Resumen
 

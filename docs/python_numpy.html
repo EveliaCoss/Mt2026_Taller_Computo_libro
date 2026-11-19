@@ -2489,12 +2489,6 @@ eyJhdHRyIjp7ImNoZWNrIjp0cnVlLCJlZGl0Ijp0cnVlLCJldmFsIjp0cnVlLCJleGVyY2lzZSI6InJl
 <span id="cb161-8"><a href="#cb161-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(tablero)</span>
 <span id="cb161-9"><a href="#cb161-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Casillas negras:"</span>, tablero.<span class="bu">sum</span>())   <span class="co"># 32</span></span>
 <span id="cb161-10"><a href="#cb161-10" aria-hidden="true" tabindex="-1"></a>tablero</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="figures/python_numpy_tablero_ajedrez.png" class="img-fluid figure-img"></p>
-<figcaption>Construcción del tablero de ajedrez con rebanado con paso.</figcaption>
-</figure>
-</div>
 <p>Con <em>broadcasting</em> también se puede hacer en una línea: una casilla es negra si la suma de su fila y su columna es impar.</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb162"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb162-1"><a href="#cb162-1" aria-hidden="true" tabindex="-1"></a>filas <span class="op">=</span> np.arange(<span class="dv">8</span>).reshape(<span class="dv">8</span>, <span class="dv">1</span>)</span>
 <span id="cb162-2"><a href="#cb162-2" aria-hidden="true" tabindex="-1"></a>columnas <span class="op">=</span> np.arange(<span class="dv">8</span>)</span>
@@ -2502,6 +2496,12 @@ eyJhdHRyIjp7ImNoZWNrIjp0cnVlLCJlZGl0Ijp0cnVlLCJldmFsIjp0cnVlLCJleGVyY2lzZSI6InJl
 </div>
 </div>
 </div>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="figures/python_numpy_tablero_ajedrez.png" class="img-fluid figure-img"></p>
+<figcaption>Construcción del tablero de ajedrez con rebanado con paso.</figcaption>
+</figure>
 </div>
 </section>
 <section id="resumen" class="level2" data-number="58.11">
