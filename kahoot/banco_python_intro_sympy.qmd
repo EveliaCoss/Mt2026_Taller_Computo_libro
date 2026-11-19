@@ -566,7 +566,7 @@ format: html
    d) La dirección en la memoria donde vive el objeto
    ✓ Respuesta: a
 
-66. ¿Cuál es la forma correcta de consultar la documentación del método replace de las cadenas?
+66. ¿Qué instrucción muestra la ayuda del método replace() de los textos (str)?
    a) help(str.replace())
    b) str.replace.help()
    c) help(str.replace)
@@ -1174,9 +1174,10 @@ format: html
            print("negativo")
        print("fin")
    a) fin
-   b) None
-   c) True
-   d) False
+   b) negativo
+   c) negativo
+      fin
+   d) No imprime nada
    ✓ Respuesta: a
 
 131. En Python, ¿cómo se indica dónde termina el bloque de un if?
@@ -1423,7 +1424,10 @@ format: html
    d) [[5 7 9]]
    ✓ Respuesta: c
 
-158. Con la misma matriz m de la pregunta anterior, ¿qué imprime print(m.max(axis=1))?
+158. ¿Qué imprime este código?
+       m = np.array([[1, 2, 3],
+                     [4, 5, 6]])
+       print(m.max(axis=1))
    a) [4 5 6]
    b) 6
    c) [ 6 15]
@@ -1464,7 +1468,11 @@ format: html
    d) 8 [2 5 8]
    ✓ Respuesta: b
 
-163. Con la misma matriz m, ¿qué imprime print(m[1:3, 1:3])?
+163. ¿Qué imprime este código?
+       m = np.array([[1, 2, 3],
+                     [4, 5, 6],
+                     [7, 8, 9]])
+       print(m[1:3, 1:3])
    a) [[1 2]
        [4 5]]
    b) [[4 5]
@@ -1484,7 +1492,11 @@ format: html
    d) [10 10 30]
    ✓ Respuesta: d
 
-165. Con la matriz m de 3 × 3 (del 1 al 9), ¿qué imprime print(m[[0, 1, 2], [2, 0, 1]])?
+165. ¿Qué imprime este código?
+       m = np.array([[1, 2, 3],
+                     [4, 5, 6],
+                     [7, 8, 9]])
+       print(m[[0, 1, 2], [2, 0, 1]])
    a) [3 4 8]
    b) [3 1 2]
    c) [7 2 6]
@@ -1500,14 +1512,16 @@ format: html
    d) [1 1 0 0 0 0 0 0 1]
    ✓ Respuesta: b
 
-167. Con el mismo arreglo a, ¿cuál expresión obtiene los elementos mayores que 5 y menores que 13?
+167. Si a es un arreglo de NumPy, ¿cuál expresión obtiene los elementos mayores que 5 y menores que 13?
    a) a[a > 5 and a < 13]
    b) a[(a > 5) & (a < 13)]
    c) a[(a > 5) | (a < 13)]
    d) a[(a > 5) and (a < 13)]
    ✓ Respuesta: b
 
-168. Con el mismo arreglo a, ¿qué imprime print(a[~(a > 5)])?
+168. ¿Qué imprime este código?
+       a = np.array([3, 13, 12, 10, 18, 6, 4, 8, 5])
+       print(a[~(a > 5)])
    a) [5 4 3]
    b) [0 6 8]
    c) [3 4 5]
@@ -1547,7 +1561,10 @@ format: html
    d) [5 7 9]
    ✓ Respuesta: b
 
-172. Con los mismos vectores u = np.array([1, 2, 3]) y v = np.array([4, 5, 6]), ¿qué imprime print(u * v)?
+172. ¿Qué imprime este código?
+       u = np.array([1, 2, 3])
+       v = np.array([4, 5, 6])
+       print(u * v)
    a) 32
    b) [5 7 9]
    c) [ 4 10 18]
@@ -1708,28 +1725,34 @@ format: html
    d) 5
    ✓ Respuesta: c
 
-189. ¿Qué imprime print(sp.factor(x**2 - 5*x + 6))?
+189. ¿Qué imprime este código?
+       x = sp.symbols("x")
+       print(sp.factor(x**2 - 5*x + 6))
    a) x**2 - 5*x + 6
    b) (x - 3)*(x - 2)
    c) (x - 6)*(x + 1)
    d) (x + 2)*(x + 3)
    ✓ Respuesta: b
 
-190. ¿Qué imprime print(sp.expand((x + 1)**2))?
+190. ¿Qué imprime este código?
+       x = sp.symbols("x")
+       print(sp.expand((x + 1)**2))
    a) (x + 1)*(x + 1)
    b) x**2 + x + 1
    c) x**2 + 2*x + 2
    d) x**2 + 2*x + 1
    ✓ Respuesta: d
 
-191. ¿Qué imprime print(sp.solve(x**2 - 4, x))?
+191. ¿Qué imprime este código?
+       x = sp.symbols("x")
+       print(sp.solve(x**2 - 4, x))
    a) [-2, 2]
    b) 2
    c) [4]
    d) [-2.0, 2.0]
    ✓ Respuesta: a
 
-192. ¿Cuál es la forma correcta de escribir en SymPy la ecuación x² - 5x = -6?
+192. Si x = sp.symbols("x"), ¿cuál es la forma correcta de escribir en SymPy la ecuación x² - 5x = -6?
    a) sp.Eq(x**2 - 5*x = -6)
    b) sp.Eq(x**2 - 5*x == -6)
    c) sp.Eq(x**2 - 5*x, -6)
@@ -1737,6 +1760,7 @@ format: html
    ✓ Respuesta: c
 
 193. ¿Qué imprime este código?
+       x = sp.symbols("x")
        print(sp.solveset(x**2 + 1, x, domain=sp.S.Reals))
    a) Imprime Complexes
    b) Imprime EmptySet
@@ -1755,21 +1779,27 @@ format: html
    d) sqrt(t**2) y r
    ✓ Respuesta: d
 
-195. ¿Qué imprime print(sp.diff(x**3, x, 2))?
+195. ¿Qué imprime este código?
+       x = sp.symbols("x")
+       print(sp.diff(x**3, x, 2))
    a) 6*x
    b) 3*x**2
    c) 6
    d) 2*x**3
    ✓ Respuesta: a
 
-196. ¿Qué imprime print(sp.integrate(2*x, (x, 0, 3)))?
+196. ¿Qué imprime este código?
+       x = sp.symbols("x")
+       print(sp.integrate(2*x, (x, 0, 3)))
    a) x**2
    b) x**2 + C
    c) 9
    d) 6
    ✓ Respuesta: c
 
-197. ¿Qué imprime print(sp.limit(sp.sin(x) / x, x, 0))?
+197. ¿Qué imprime este código?
+       x = sp.symbols("x")
+       print(sp.limit(sp.sin(x) / x, x, 0))
    a) 0
    b) 1
    c) oo
