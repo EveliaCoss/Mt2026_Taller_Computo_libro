@@ -5,14 +5,14 @@ format: html
 
 **Temas:** de [Introducción a Python con `reticulate`](../intro_python.qmd) a [Ciclos `for` y `while`](../python_for.qmd).
 
-Banco para la herramienta **crear-examen** (archivo `banco_examen_python.json`). Cada examen lleva 20 de opción múltiple, 4 ejercicios de relacionar columnas de 6 renglones y 36 preguntas abiertas: **80 reactivos**, ordenados de lo más simple a lo más complejo.
+Banco para la herramienta **crear-examen** (archivo `banco_examen_python.json`). Cada examen lleva 30 de opción múltiple, 4 ejercicios de relacionar columnas de 6 renglones y 36 preguntas abiertas: **90 reactivos**, ordenados de lo más simple a lo más complejo.
 
 | Tipo | Básica | Intermedia | Avanzada | Total |
 |----|----|----|----|----|
-| Opción múltiple | 80 | 92 | 58 | 230 |
-| Relacionar columnas (funciones) | 6 | 7 | 5 | 18 |
+| Opción múltiple | 81 | 95 | 56 | 232 |
+| Relacionar columnas (funciones) | 8 | 10 | 5 | 23 |
 | Preguntas abiertas: debugging y ejercicios de programación | 58 | 62 | 53 | 173 |
-| **Total** | 144 | 161 | 116 | **421** |
+| **Total** | 147 | 167 | 114 | **428** |
 
 # Opción múltiple
 
@@ -160,60 +160,6 @@ a) `[100, 20, 30]` ✓
 b) `[10, 100, 30]`  
 c) `[10, 20, 30]`  
 d) `[10, 20, 100]`  
-
-### OM-11-016 · básica · Python básico: objetos, variables y buenas prácticas
-
-¿Qué es un entorno virtual?
-
-a) Una máquina virtual con otro sistema operativo  
-b) Una carpeta con su propio Python y sus paquetes ✓  
-c) Un servidor de Google que ejecuta Python en la nube  
-d) El archivo .Renviron con las rutas de Python  
-
-### OM-11-017 · básica · Python básico: objetos, variables y buenas prácticas
-
-En macOS o Linux, ¿qué comando de la Terminal crea el entorno virtual del curso?
-
-a) python3 -m venv ~/.venvs/quarto-python ✓  
-b) source ~/.venvs/quarto-python/bin/activate  
-c) python3 -m pip install quarto-python  
-d) mkdir -p ~/.venvs/quarto-python/bin  
-
-### OM-11-018 · básica · Python básico: objetos, variables y buenas prácticas
-
-¿Cómo sabes que el entorno virtual está activo en la Terminal?
-
-a) `El indicador de la Terminal cambia a >>>`  
-b) Aparece el mensaje "Entorno activado" en pantalla  
-c) `Aparece (quarto-python) al inicio de la línea` ✓  
-d) RStudio se reinicia solo y abre una nueva sesión  
-
-### OM-11-019 · básica · Python básico: objetos, variables y buenas prácticas
-
-¿Qué hace la opción #| echo: false en un bloque de código?
-
-a) Muestra el resultado pero oculta el código ✓  
-b) Muestra el código pero no lo ejecuta  
-c) Ejecuta el código pero oculta el resultado  
-d) Oculta solo los mensajes de advertencia  
-
-### OM-11-020 · básica · Python básico: objetos, variables y buenas prácticas
-
-Quieres que el código aparezca en el documento, pero sin ejecutarse. ¿Qué opción usas?
-
-a) echo: false  
-b) eval: false ✓  
-c) output: false  
-d) error: false  
-
-### OM-11-021 · básica · Python básico: objetos, variables y buenas prácticas
-
-¿Dónde y cómo se escriben las opciones de un bloque de código en Quarto?
-
-a) `Al final del bloque, en una línea que empieza con #`  
-b) En el archivo .Renviron, una opción por línea  
-c) `Al inicio del bloque, en líneas que inician con #|` ✓  
-d) En la Console, antes de presionar el botón Render  
 
 ### OM-11-022 · básica · Python básico: objetos, variables y buenas prácticas
 
@@ -600,9 +546,15 @@ print("fin")
 ```
 
 a) fin ✓  
-b) None  
-c) True  
-d) False  
+b) negativo  
+c)
+
+```
+negativo
+fin
+```
+
+d) No imprime nada  
 
 ### OM-12-009 · básica · Condicionales
 
@@ -835,7 +787,12 @@ d) 5
 
 ### OM-15-002 · básica · SymPy
 
-¿Qué imprime print(sp.expand((x + 1)**2))?
+¿Qué imprime este código?
+
+``` python
+x = sp.symbols("x")
+print(sp.expand((x + 1)**2))
+```
 
 a) `(x + 1)*(x + 1)`  
 b) `x**2 + x + 1`  
@@ -844,7 +801,12 @@ d) `x**2 + 2*x + 1` ✓
 
 ### OM-15-003 · básica · SymPy
 
-¿Qué imprime print(sp.solve(x**2 - 4, x))?
+¿Qué imprime este código?
+
+``` python
+x = sp.symbols("x")
+print(sp.solve(x**2 - 4, x))
+```
 
 a) `[-2, 2]` ✓  
 b) 2  
@@ -853,7 +815,12 @@ d) `[-2.0, 2.0]`
 
 ### OM-15-004 · básica · SymPy
 
-¿Qué imprime print(sp.limit(sp.sin(x) / x, x, 0))?
+¿Qué imprime este código?
+
+``` python
+x = sp.symbols("x")
+print(sp.limit(sp.sin(x) / x, x, 0))
+```
 
 a) 0  
 b) 1 ✓  
@@ -868,6 +835,73 @@ a) Para convertir una expresión de SymPy a LaTeX
 b) Para simplificar al máximo una expresión  
 c) Para convertir expr en una función de NumPy ✓  
 d) `Para resolver la ecuación expr = 0 con NumPy`  
+
+### OM-17-001 · básica · Objetos y variables: tipo, identidad, valor, atributos, métodos y len()
+
+¿Qué es una variable en Python?
+
+a) Un nombre que hace referencia a un objeto ✓  
+b) Una caja que guarda una copia del valor asignado  
+c) El tipo de dato que tiene cada objeto creado  
+d) La dirección de memoria donde vive un objeto  
+
+### OM-17-002 · básica · Objetos y variables: tipo, identidad, valor, atributos, métodos y len()
+
+¿Qué es un objeto en Python?
+
+a) Un nombre que apunta a un valor en memoria  
+b) Un dato guardado en la memoria de la computadora ✓  
+c) Solo las listas y los diccionarios del programa  
+d) Una instrucción que muestra un valor en pantalla  
+
+### OM-17-003 · básica · Objetos y variables: tipo, identidad, valor, atributos, métodos y len()
+
+¿Qué característica de un objeto consulta la función id()?
+
+a) El tipo de dato del objeto  
+b) El valor que tiene el objeto  
+c) La identidad del objeto ✓  
+d) La lista de sus métodos  
+
+### OM-17-004 · básica · Objetos y variables: tipo, identidad, valor, atributos, métodos y len()
+
+¿Con qué función se consulta el tipo de un objeto?
+
+a) `help(x)`  
+b) `dir(x)`  
+c) `id(x)`  
+d) `type(x)` ✓  
+
+### OM-17-005 · básica · Objetos y variables: tipo, identidad, valor, atributos, métodos y len()
+
+¿Qué hace help(str.upper)?
+
+a) Convierte el texto str a mayúsculas  
+b) Lista los métodos que tiene el tipo str  
+c) Regresa el texto en mayúsculas y minúsculas  
+d) Muestra la documentación del método upper ✓  
+
+### OM-17-006 · básica · Objetos y variables: tipo, identidad, valor, atributos, métodos y len()
+
+¿Qué imprime este código?
+
+``` python
+print(len("matemáticas"))
+```
+
+a) 11 ✓  
+b) 10  
+c) 12  
+d) 9  
+
+### OM-17-007 · básica · Objetos y variables: tipo, identidad, valor, atributos, métodos y len()
+
+¿Cómo se obtiene el número de elementos de la lista primos?
+
+a) `primos.len()`  
+b) `len(primos)` ✓  
+c) `count(primos)`  
+d) primos.length  
 
 ### OM-21-001 · intermedia · Python básico: objetos, variables y buenas prácticas
 
@@ -937,51 +971,6 @@ a) 2 3 20
 b) 2.0 1 100 ✓  
 c) 2 1 100  
 d) 2.0 3.33 20  
-
-### OM-21-006 · intermedia · Python básico: objetos, variables y buenas prácticas
-
-¿Por qué se configuran QUARTO_PYTHON y RETICULATE_PYTHON apuntando al mismo entorno virtual?
-
-a) Porque Quarto necesita dos versiones distintas de Python  
-b) `Porque RETICULATE_PYTHON solo funciona en Windows`  
-c) Porque así los paquetes se instalan más rápido  
-d) Para que ambos motores usen las mismas bibliotecas ✓  
-
-### OM-21-007 · intermedia · Python básico: objetos, variables y buenas prácticas
-
-Al instalar paquetes con pip aparece error: externally-managed-environment. ¿Cuál es la causa?
-
-a) No hay conexión a internet para descargar el paquete  
-b) El entorno no está activo; pip usa el Python del sistema ✓  
-c) El paquete no existe en PyPI con el nombre que escribiste  
-d) No se reinició R después de editar el archivo .Renviron  
-
-### OM-21-008 · intermedia · Python básico: objetos, variables y buenas prácticas
-
-Al escribir python -m pip install numpy aparece SyntaxError: invalid syntax. ¿Cuál es la causa?
-
-a) Falta la opción --upgrade para instalar la versión más reciente  
-b) El nombre está mal escrito; debe ser NumPy con mayúsculas  
-c) Python no está instalado o no está en la variable PATH  
-d) `Se escribió en la Console de R (o en >>>) y no en la Terminal` ✓  
-
-### OM-21-009 · intermedia · Python básico: objetos, variables y buenas prácticas
-
-¿Cuál de estas líneas está escrita correctamente en el archivo .Renviron (macOS)?
-
-a) `QUARTO_PYTHON = /Users/ana/.venvs/quarto-python/bin/python`  
-b) `QUARTO_PYTHON=~/.venvs/quarto-python/bin/python`  
-c) `QUARTO_PYTHON=\Users\ana\.venvs\quarto-python\bin\python`  
-d) `QUARTO_PYTHON=/Users/ana/.venvs/quarto-python/bin/python` ✓  
-
-### OM-21-010 · intermedia · Python básico: objetos, variables y buenas prácticas
-
-Guardaste correctamente las variables en .Renviron, pero Sys.getenv("RETICULATE_PYTHON") regresa "". ¿Qué te faltó hacer?
-
-a) Instalar NumPy dentro del entorno de Python  
-b) Reiniciar R para que lea de nuevo .Renviron ✓  
-c) Instalar Quarto por separado desde su página  
-d) Activar el entorno en la Terminal antes de RStudio  
 
 ### OM-21-011 · intermedia · Python básico: objetos, variables y buenas prácticas
 
@@ -1151,7 +1140,7 @@ d) 4.0 y 3.0
 
 ### OM-21-023 · intermedia · Python básico: objetos, variables y buenas prácticas
 
-¿Cuál es la forma correcta de consultar la documentación del método replace de las cadenas?
+¿Qué instrucción muestra la ayuda del método replace() de los textos (str)?
 
 a) `help(str.replace())`  
 b) `str.replace.help()`  
@@ -1455,15 +1444,6 @@ a) Porque except: sin tipo produce un SyntaxError
 b) Porque except: también oculta errores que no esperabas ✓  
 c) Porque except ValueError: atrapa todos los tipos de error  
 d) Porque así el bloque finally nunca llega a ejecutarse  
-
-### OM-21-044 · intermedia · Python básico: objetos, variables y buenas prácticas
-
-¿Por qué no se recomienda usar exit() en Jupyter, Google Colab o Quarto?
-
-a) Porque detiene el kernel y hay que reiniciarlo ✓  
-b) `Porque la función exit() no existe en esos entornos`  
-c) `Porque exit() solo funciona dentro de un ciclo for`  
-d) `Porque exit() borra el archivo del notebook actual`  
 
 ### OM-22-001 · intermedia · Condicionales
 
@@ -2033,7 +2013,13 @@ d) `[5 7 9]`
 
 ### OM-24-017 · intermedia · NumPy y álgebra lineal
 
-Con los mismos vectores u = np.array([1, 2, 3]) y v = np.array([4, 5, 6]), ¿qué imprime print(u * v)?
+¿Qué imprime este código?
+
+``` python
+u = np.array([1, 2, 3])
+v = np.array([4, 5, 6])
+print(u * v)
+```
 
 a) 32  
 b) `[5 7 9]`  
@@ -2097,7 +2083,12 @@ d) `5; son perpendiculares (90°)`
 
 ### OM-25-001 · intermedia · SymPy
 
-¿Qué imprime print(sp.factor(x**2 - 5*x + 6))?
+¿Qué imprime este código?
+
+``` python
+x = sp.symbols("x")
+print(sp.factor(x**2 - 5*x + 6))
+```
 
 a) `x**2 - 5*x + 6`  
 b) `(x - 3)*(x - 2)` ✓  
@@ -2106,7 +2097,7 @@ d) `(x + 2)*(x + 3)`
 
 ### OM-25-002 · intermedia · SymPy
 
-¿Cuál es la forma correcta de escribir en SymPy la ecuación x² - 5x = -6?
+Si x = sp.symbols("x"), ¿cuál es la forma correcta de escribir en SymPy la ecuación x² - 5x = -6?
 
 a) `sp.Eq(x**2 - 5*x = -6)`  
 b) `sp.Eq(x**2 - 5*x == -6)`  
@@ -2115,7 +2106,12 @@ d) `x**2 - 5*x + 6 == 0`
 
 ### OM-25-003 · intermedia · SymPy
 
-¿Qué imprime print(sp.diff(x**3, x, 2))?
+¿Qué imprime este código?
+
+``` python
+x = sp.symbols("x")
+print(sp.diff(x**3, x, 2))
+```
 
 a) `6*x` ✓  
 b) `3*x**2`  
@@ -2124,7 +2120,12 @@ d) `2*x**3`
 
 ### OM-25-004 · intermedia · SymPy
 
-¿Qué imprime print(sp.integrate(2*x, (x, 0, 3)))?
+¿Qué imprime este código?
+
+``` python
+x = sp.symbols("x")
+print(sp.integrate(2*x, (x, 0, 3)))
+```
 
 a) `x**2`  
 b) `x**2 + C`  
@@ -2145,41 +2146,114 @@ b) `n*(n + 1)/2`
 c) 100  
 d) 5050.0  
 
-### OM-31-001 · avanzada · Python básico: objetos, variables y buenas prácticas
+### OM-27-001 · intermedia · Objetos y variables: tipo, identidad, valor, atributos, métodos y len()
 
-Un documento .qmd tiene solo bloques {python} y no indica motor en el YAML. ¿Qué motor usa Quarto y qué variable consulta para saber qué Python usar?
+Según la tabla objeto vs. variable, ¿qué pertenece al objeto y NO a la variable?
 
-a) `Motor knitr, RETICULATE_PYTHON`  
-b) `Motor knitr, QUARTO_PYTHON`  
-c) `Motor jupyter, QUARTO_PYTHON` ✓  
-d) `Motor jupyter, RETICULATE_PYTHON`  
+a) `El tipo (por ejemplo, int)` ✓  
+b) `El nombre (por ejemplo, x)`  
+c) `El signo = de la asignación`  
+d) La etiqueta que lo nombra  
 
-### OM-31-002 · avanzada · Python básico: objetos, variables y buenas prácticas
+### OM-27-002 · intermedia · Objetos y variables: tipo, identidad, valor, atributos, métodos y len()
 
-Un documento .qmd tiene un bloque {r} y varios bloques {python}. ¿Quién ejecuta el código de Python?
+¿Qué imprime este código?
 
-a) `R con reticulate (motor knitr), usando RETICULATE_PYTHON` ✓  
-b) `Un kernel de Jupyter (motor jupyter), usando QUARTO_PYTHON`  
-c) Nadie: el motor jupyter ignora Python si hay bloques de R  
-d) Quarto lo ejecuta por sí mismo, sin usar ningún motor  
+``` python
+x = 25
+x = "veinticinco"
+print(type(x))
+```
 
-### OM-31-003 · avanzada · Python básico: objetos, variables y buenas prácticas
+a) `<class 'int'>`  
+b) `<class 'str'>` ✓  
+c) `<class 'float'>`  
+d) `<class 'list'>`  
 
-Ejecutaste py_config() y después use_virtualenv("~/.venvs/quarto-python", required = TRUE), pero py_config() sigue mostrando el Python anterior. ¿Por qué?
+### OM-27-003 · intermedia · Objetos y variables: tipo, identidad, valor, atributos, métodos y len()
 
-a) `use_virtualenv() solo funciona en Windows, no en macOS`  
-b) La ruta no puede llevar ~; hay que escribirla completa  
-c) Python ya estaba iniciado; solo se cambia reiniciando R ✓  
-d) Faltó activar antes el entorno en la Terminal con source  
+¿Qué es un atributo de un objeto?
 
-### OM-31-004 · avanzada · Python básico: objetos, variables y buenas prácticas
+a) Una función del objeto que lleva paréntesis  
+b) El nombre de la variable que apunta al objeto  
+c) Un dato del objeto que se usa sin paréntesis ✓  
+d) `El número que regresa la función id()`  
 
-Aparece ModuleNotFoundError: No module named 'pandas', aunque py_config() sí muestra tu entorno quarto-python. ¿Qué debes hacer?
+### OM-27-004 · intermedia · Objetos y variables: tipo, identidad, valor, atributos, métodos y len()
 
-a) `Configurar QUARTO_PYTHON en .Renviron y reiniciar R`  
-b) `Ejecutar py_require("pandas") en la Console de RStudio`  
-c) Reinstalar RStudio para que reconozca el entorno quarto-python  
-d) Activar el entorno en la Terminal e instalar pandas con pip ✓  
+¿Qué es un método de un objeto?
+
+a) Un dato del objeto que se escribe sin paréntesis  
+b) `Una función integrada como len() o type()`  
+c) El valor que guarda el objeto en la memoria  
+d) Una función del objeto que lleva paréntesis ✓  
+
+### OM-27-005 · intermedia · Objetos y variables: tipo, identidad, valor, atributos, métodos y len()
+
+En numero.imag y numero.conjugate(), ¿qué es cada uno?
+
+a) `imag es atributo y conjugate() es método` ✓  
+b) `imag es método y conjugate() es atributo`  
+c) Los dos son atributos del número  
+d) Los dos son métodos del número complejo  
+
+### OM-27-006 · intermedia · Objetos y variables: tipo, identidad, valor, atributos, métodos y len()
+
+¿Qué imprime este código?
+
+``` python
+a = [2, 3, 5]
+b = a
+print(id(a) == id(b), a is b)
+```
+
+a) False False  
+b) True True ✓  
+c) True False  
+d) False True  
+
+### OM-27-007 · intermedia · Objetos y variables: tipo, identidad, valor, atributos, métodos y len()
+
+¿Qué ocurre al ejecutar este código?
+
+``` python
+primos = [2, 3, 5, 7]
+print(primos.len())
+```
+
+a) `Imprime 4, porque len() también se puede usar como método`  
+b) `Imprime [2, 3, 5, 7] y después el número de elementos`  
+c) AttributeError: 'list' object has no attribute 'len' ✓  
+d) SyntaxError: los métodos de las listas no llevan paréntesis  
+
+### OM-27-008 · intermedia · Objetos y variables: tipo, identidad, valor, atributos, métodos y len()
+
+¿Qué imprime este código?
+
+``` python
+texto = "3.1416"
+print(len(texto))
+```
+
+a) 5  
+b) 4  
+c) 1  
+d) 6 ✓  
+
+### OM-27-009 · intermedia · Objetos y variables: tipo, identidad, valor, atributos, métodos y len()
+
+¿Qué imprime este código?
+
+``` python
+m = np.array([[1, 2, 3],
+              [4, 5, 6]])
+print(len(m), m.size)
+```
+
+a) 2 6 ✓  
+b) 6 6  
+c) 3 6  
+d) 2 3  
 
 ### OM-31-005 · avanzada · Python básico: objetos, variables y buenas prácticas
 
@@ -2617,7 +2691,7 @@ d) 3.1416
 
 ### OM-33-007 · avanzada · Ciclos for y while
 
-Se quiere duplicar cada elemento de la lista. ¿Qué imprime este código?
+Se quiere multiplicar por 2 cada elemento de la lista. ¿Qué imprime este código?
 
 ``` python
 cuadrados = [1, 4, 9]
@@ -2790,7 +2864,13 @@ d) `[[5 7 9]]`
 
 ### OM-34-009 · avanzada · NumPy y álgebra lineal
 
-Con la misma matriz m de la pregunta anterior, ¿qué imprime print(m.max(axis=1))?
+¿Qué imprime este código?
+
+``` python
+m = np.array([[1, 2, 3],
+              [4, 5, 6]])
+print(m.max(axis=1))
+```
 
 a) `[4 5 6]`  
 b) 6  
@@ -2808,7 +2888,14 @@ d) NumPy no puede multiplicar más de 20 números
 
 ### OM-34-011 · avanzada · NumPy y álgebra lineal
 
-Con la misma matriz m, ¿qué imprime print(m[1:3, 1:3])?
+¿Qué imprime este código?
+
+``` python
+m = np.array([[1, 2, 3],
+              [4, 5, 6],
+              [7, 8, 9]])
+print(m[1:3, 1:3])
+```
 
 a)
 
@@ -2841,7 +2928,14 @@ d) ✓
 
 ### OM-34-012 · avanzada · NumPy y álgebra lineal
 
-Con la matriz m de 3 × 3 (del 1 al 9), ¿qué imprime print(m[[0, 1, 2], [2, 0, 1]])?
+¿Qué imprime este código?
+
+``` python
+m = np.array([[1, 2, 3],
+              [4, 5, 6],
+              [7, 8, 9]])
+print(m[[0, 1, 2], [2, 0, 1]])
+```
 
 a) `[3 4 8]` ✓  
 b) `[3 1 2]`  
@@ -2850,7 +2944,7 @@ d) `[1 5 9]`
 
 ### OM-34-013 · avanzada · NumPy y álgebra lineal
 
-Con el mismo arreglo a, ¿cuál expresión obtiene los elementos mayores que 5 y menores que 13?
+Si a es un arreglo de NumPy, ¿cuál expresión obtiene los elementos mayores que 5 y menores que 13?
 
 a) `a[a > 5 and a < 13]`  
 b) `a[(a > 5) & (a < 13)]` ✓  
@@ -2859,7 +2953,12 @@ d) `a[(a > 5) and (a < 13)]`
 
 ### OM-34-014 · avanzada · NumPy y álgebra lineal
 
-Con el mismo arreglo a, ¿qué imprime print(a[~(a > 5)])?
+¿Qué imprime este código?
+
+``` python
+a = np.array([3, 13, 12, 10, 18, 6, 4, 8, 5])
+print(a[~(a > 5)])
+```
 
 a) `[5 4 3]`  
 b) `[0 6 8]`  
@@ -2987,6 +3086,7 @@ d) TypeError
 ¿Qué imprime este código?
 
 ``` python
+x = sp.symbols("x")
 print(sp.solveset(x**2 + 1, x, domain=sp.S.Reals))
 ```
 
@@ -3025,6 +3125,29 @@ a) `Matrix([[1, 4], [9, 16]])`
 b) TypeError: en SymPy se usa @  
 c) `Matrix([[7, 15], [10, 22]])`  
 d) `Matrix([[7, 10], [15, 22]])` ✓  
+
+### OM-37-001 · avanzada · Objetos y variables: tipo, identidad, valor, atributos, métodos y len()
+
+Si a = [1, 2] y b = a.copy(), ¿qué es cierto?
+
+a) `a == b es False y a is b es True`  
+b) `a == b y a is b son los dos True`  
+c) `a == b es True y a is b es False` ✓  
+d) `a == b y a is b son los dos False`  
+
+### OM-37-002 · avanzada · Objetos y variables: tipo, identidad, valor, atributos, métodos y len()
+
+¿Qué imprime este código?
+
+``` python
+datos = [[1, 2], [3, 4, 5]]
+print(len(datos))
+```
+
+a) 5  
+b) 2 ✓  
+c) 3  
+d) 7  
 
 # Relacionar columnas (funciones)
 
@@ -3105,6 +3228,32 @@ Relaciona cada función de SymPy con lo que hace.
 | `expr.subs(x, 2)` | Sustituye x por 2 en la expresión |
 | `sp.solve(expr, x)` | Encuentra los valores de x que hacen cero a expr |
 | `sp.Rational(1, 3)` | Crea la fracción exacta un tercio |
+
+### RC-1-007 · básica · Funciones de los objetos: type(), upper(), lower(), replace(), dir(), help()
+
+Relaciona cada función o método con lo que hace (s es un texto).
+
+| Columna izquierda | Respuesta |
+|----|----|
+| `type(x)` | `Regresa el tipo (clase) del objeto` |
+| `s.upper()` | Regresa el texto en mayúsculas |
+| `s.lower()` | Regresa el texto en minúsculas |
+| `s.replace("a", "b")` | Cambia cada "a" por "b" en un texto nuevo |
+| `dir(x)` | Lista los nombres de atributos y métodos |
+| `help(str.upper)` | `Muestra la documentación de upper()` |
+
+### RC-1-008 · básica · Funciones de los objetos: type(), upper(), lower(), replace(), dir(), help()
+
+Relaciona cada concepto con su descripción.
+
+| Columna izquierda | Respuesta |
+|----|----|
+| Objeto | Dato guardado en la memoria |
+| Variable | Nombre que hace referencia a un objeto |
+| Tipo | Clase de dato; nunca cambia |
+| Identidad | Número único del objeto mientras existe |
+| Atributo | Dato del objeto; se usa sin paréntesis |
+| Método | Función del objeto; se usa con paréntesis |
 
 ### RC-2-001 · intermedia · Funciones de Python, NumPy y SymPy
 
@@ -3196,6 +3345,45 @@ Si a = np.arange(12).reshape(3, 4), relaciona cada expresión con lo que muestra
 | a.T.shape | `(4, 3)` |
 | `a.sum(axis=0)` | `[12 15 18 21]` |
 | `a.sum(axis=1)` | `[ 6 22 38]` |
+
+### RC-2-008 · intermedia · Funciones de los objetos: type(), upper(), lower(), replace(), dir(), help()
+
+Si s = "Python", relaciona cada expresión con lo que muestra print().
+
+| Columna izquierda | Respuesta |
+|----|----|
+| `type(s)` | `<class 'str'>` |
+| `s.upper()` | PYTHON |
+| `s.lower()` | python |
+| `s.replace("P", "J")` | Jython |
+| `len(s)` | 6 |
+| `type(len(s))` | `<class 'int'>` |
+
+### RC-2-009 · intermedia · Funciones de los objetos: type(), upper(), lower(), replace(), dir(), help()
+
+Relaciona cada expresión con lo que muestra print().
+
+| Columna izquierda | Respuesta |
+|----|----|
+| `"Álgebra".upper()` | ÁLGEBRA |
+| `"MATRIZ".lower()` | matriz |
+| `"2x + 3".replace("x", "*y")` | `2*y + 3` |
+| `type(3.0)` | `<class 'float'>` |
+| `type("3.0")` | `<class 'str'>` |
+| `len("π ≈ 3.14")` | 8 |
+
+### RC-2-010 · intermedia · Funciones de los objetos: type(), upper(), lower(), replace(), dir(), help()
+
+Relaciona cada característica de un objeto x con la forma de consultarla.
+
+| Columna izquierda | Respuesta |
+|----|----|
+| Tipo | `type(x)` |
+| Identidad | `id(x)` |
+| Valor | `print(x)` |
+| Nombres de atributos y métodos | `dir(x)` |
+| Documentación | `help(x)` |
+| `Parte imaginaria (un atributo)` | x.imag |
 
 ### RC-3-001 · avanzada · Funciones de Python, NumPy y SymPy
 

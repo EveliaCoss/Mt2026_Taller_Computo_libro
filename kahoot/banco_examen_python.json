@@ -407,162 +407,6 @@
    "common": false
   },
   {
-   "id": "OM-11-016",
-   "section": "Python básico: objetos, variables y buenas prácticas",
-   "kind": "multiple_choice",
-   "stem": [
-    {
-     "text": "¿Qué es un entorno virtual?",
-     "code": false
-    }
-   ],
-   "images": [],
-   "options": [
-    "Una máquina virtual con otro sistema operativo",
-    "Una carpeta con su propio Python y sus paquetes",
-    "Un servidor de Google que ejecuta Python en la nube",
-    "El archivo .Renviron con las rutas de Python"
-   ],
-   "pairs": [],
-   "answer": "Una carpeta con su propio Python y sus paquetes",
-   "difficulty": "basica",
-   "origin": "banco",
-   "status": "ok",
-   "issues": [],
-   "original": null,
-   "common": false
-  },
-  {
-   "id": "OM-11-017",
-   "section": "Python básico: objetos, variables y buenas prácticas",
-   "kind": "multiple_choice",
-   "stem": [
-    {
-     "text": "En macOS o Linux, ¿qué comando de la Terminal crea el entorno virtual del curso?",
-     "code": false
-    }
-   ],
-   "images": [],
-   "options": [
-    "python3 -m venv ~/.venvs/quarto-python",
-    "source ~/.venvs/quarto-python/bin/activate",
-    "python3 -m pip install quarto-python",
-    "mkdir -p ~/.venvs/quarto-python/bin"
-   ],
-   "pairs": [],
-   "answer": "python3 -m venv ~/.venvs/quarto-python",
-   "difficulty": "basica",
-   "origin": "banco",
-   "status": "ok",
-   "issues": [],
-   "original": null,
-   "common": false
-  },
-  {
-   "id": "OM-11-018",
-   "section": "Python básico: objetos, variables y buenas prácticas",
-   "kind": "multiple_choice",
-   "stem": [
-    {
-     "text": "¿Cómo sabes que el entorno virtual está activo en la Terminal?",
-     "code": false
-    }
-   ],
-   "images": [],
-   "options": [
-    "El indicador de la Terminal cambia a >>>",
-    "Aparece el mensaje \"Entorno activado\" en pantalla",
-    "Aparece (quarto-python) al inicio de la línea",
-    "RStudio se reinicia solo y abre una nueva sesión"
-   ],
-   "pairs": [],
-   "answer": "Aparece (quarto-python) al inicio de la línea",
-   "difficulty": "basica",
-   "origin": "banco",
-   "status": "ok",
-   "issues": [],
-   "original": null,
-   "common": false
-  },
-  {
-   "id": "OM-11-019",
-   "section": "Python básico: objetos, variables y buenas prácticas",
-   "kind": "multiple_choice",
-   "stem": [
-    {
-     "text": "¿Qué hace la opción #| echo: false en un bloque de código?",
-     "code": false
-    }
-   ],
-   "images": [],
-   "options": [
-    "Muestra el resultado pero oculta el código",
-    "Muestra el código pero no lo ejecuta",
-    "Ejecuta el código pero oculta el resultado",
-    "Oculta solo los mensajes de advertencia"
-   ],
-   "pairs": [],
-   "answer": "Muestra el resultado pero oculta el código",
-   "difficulty": "basica",
-   "origin": "banco",
-   "status": "ok",
-   "issues": [],
-   "original": null,
-   "common": false
-  },
-  {
-   "id": "OM-11-020",
-   "section": "Python básico: objetos, variables y buenas prácticas",
-   "kind": "multiple_choice",
-   "stem": [
-    {
-     "text": "Quieres que el código aparezca en el documento, pero sin ejecutarse. ¿Qué opción usas?",
-     "code": false
-    }
-   ],
-   "images": [],
-   "options": [
-    "echo: false",
-    "eval: false",
-    "output: false",
-    "error: false"
-   ],
-   "pairs": [],
-   "answer": "eval: false",
-   "difficulty": "basica",
-   "origin": "banco",
-   "status": "ok",
-   "issues": [],
-   "original": null,
-   "common": false
-  },
-  {
-   "id": "OM-11-021",
-   "section": "Python básico: objetos, variables y buenas prácticas",
-   "kind": "multiple_choice",
-   "stem": [
-    {
-     "text": "¿Dónde y cómo se escriben las opciones de un bloque de código en Quarto?",
-     "code": false
-    }
-   ],
-   "images": [],
-   "options": [
-    "Al final del bloque, en una línea que empieza con #",
-    "En el archivo .Renviron, una opción por línea",
-    "Al inicio del bloque, en líneas que inician con #|",
-    "En la Console, antes de presionar el botón Render"
-   ],
-   "pairs": [],
-   "answer": "Al inicio del bloque, en líneas que inician con #|",
-   "difficulty": "basica",
-   "origin": "banco",
-   "status": "ok",
-   "issues": [],
-   "original": null,
-   "common": false
-  },
-  {
    "id": "OM-11-022",
    "section": "Python básico: objetos, variables y buenas prácticas",
    "kind": "multiple_choice",
@@ -1585,9 +1429,9 @@
    "images": [],
    "options": [
     "fin",
-    "None",
-    "True",
-    "False"
+    "negativo",
+    "negativo\nfin",
+    "No imprime nada"
    ],
    "pairs": [],
    "answer": "fin",
@@ -2226,8 +2070,16 @@
    "kind": "multiple_choice",
    "stem": [
     {
-     "text": "¿Qué imprime print(sp.expand((x + 1)**2))?",
+     "text": "¿Qué imprime este código?",
      "code": false
+    },
+    {
+     "text": "x = sp.symbols(\"x\")",
+     "code": true
+    },
+    {
+     "text": "print(sp.expand((x + 1)**2))",
+     "code": true
     }
    ],
    "images": [],
@@ -2252,8 +2104,16 @@
    "kind": "multiple_choice",
    "stem": [
     {
-     "text": "¿Qué imprime print(sp.solve(x**2 - 4, x))?",
+     "text": "¿Qué imprime este código?",
      "code": false
+    },
+    {
+     "text": "x = sp.symbols(\"x\")",
+     "code": true
+    },
+    {
+     "text": "print(sp.solve(x**2 - 4, x))",
+     "code": true
     }
    ],
    "images": [],
@@ -2278,8 +2138,16 @@
    "kind": "multiple_choice",
    "stem": [
     {
-     "text": "¿Qué imprime print(sp.limit(sp.sin(x) / x, x, 0))?",
+     "text": "¿Qué imprime este código?",
      "code": false
+    },
+    {
+     "text": "x = sp.symbols(\"x\")",
+     "code": true
+    },
+    {
+     "text": "print(sp.limit(sp.sin(x) / x, x, 0))",
+     "code": true
     }
    ],
    "images": [],
@@ -2317,6 +2185,192 @@
    ],
    "pairs": [],
    "answer": "Para convertir expr en una función de NumPy",
+   "difficulty": "basica",
+   "origin": "banco",
+   "status": "ok",
+   "issues": [],
+   "original": null,
+   "common": false
+  },
+  {
+   "id": "OM-17-001",
+   "section": "Objetos y variables: tipo, identidad, valor, atributos, métodos y len()",
+   "kind": "multiple_choice",
+   "stem": [
+    {
+     "text": "¿Qué es una variable en Python?",
+     "code": false
+    }
+   ],
+   "images": [],
+   "options": [
+    "Un nombre que hace referencia a un objeto",
+    "Una caja que guarda una copia del valor asignado",
+    "El tipo de dato que tiene cada objeto creado",
+    "La dirección de memoria donde vive un objeto"
+   ],
+   "pairs": [],
+   "answer": "Un nombre que hace referencia a un objeto",
+   "difficulty": "basica",
+   "origin": "banco",
+   "status": "ok",
+   "issues": [],
+   "original": null,
+   "common": false
+  },
+  {
+   "id": "OM-17-002",
+   "section": "Objetos y variables: tipo, identidad, valor, atributos, métodos y len()",
+   "kind": "multiple_choice",
+   "stem": [
+    {
+     "text": "¿Qué es un objeto en Python?",
+     "code": false
+    }
+   ],
+   "images": [],
+   "options": [
+    "Un nombre que apunta a un valor en memoria",
+    "Un dato guardado en la memoria de la computadora",
+    "Solo las listas y los diccionarios del programa",
+    "Una instrucción que muestra un valor en pantalla"
+   ],
+   "pairs": [],
+   "answer": "Un dato guardado en la memoria de la computadora",
+   "difficulty": "basica",
+   "origin": "banco",
+   "status": "ok",
+   "issues": [],
+   "original": null,
+   "common": false
+  },
+  {
+   "id": "OM-17-003",
+   "section": "Objetos y variables: tipo, identidad, valor, atributos, métodos y len()",
+   "kind": "multiple_choice",
+   "stem": [
+    {
+     "text": "¿Qué característica de un objeto consulta la función id()?",
+     "code": false
+    }
+   ],
+   "images": [],
+   "options": [
+    "El tipo de dato del objeto",
+    "El valor que tiene el objeto",
+    "La identidad del objeto",
+    "La lista de sus métodos"
+   ],
+   "pairs": [],
+   "answer": "La identidad del objeto",
+   "difficulty": "basica",
+   "origin": "banco",
+   "status": "ok",
+   "issues": [],
+   "original": null,
+   "common": false
+  },
+  {
+   "id": "OM-17-004",
+   "section": "Objetos y variables: tipo, identidad, valor, atributos, métodos y len()",
+   "kind": "multiple_choice",
+   "stem": [
+    {
+     "text": "¿Con qué función se consulta el tipo de un objeto?",
+     "code": false
+    }
+   ],
+   "images": [],
+   "options": [
+    "help(x)",
+    "dir(x)",
+    "id(x)",
+    "type(x)"
+   ],
+   "pairs": [],
+   "answer": "type(x)",
+   "difficulty": "basica",
+   "origin": "banco",
+   "status": "ok",
+   "issues": [],
+   "original": null,
+   "common": false
+  },
+  {
+   "id": "OM-17-005",
+   "section": "Objetos y variables: tipo, identidad, valor, atributos, métodos y len()",
+   "kind": "multiple_choice",
+   "stem": [
+    {
+     "text": "¿Qué hace help(str.upper)?",
+     "code": false
+    }
+   ],
+   "images": [],
+   "options": [
+    "Convierte el texto str a mayúsculas",
+    "Lista los métodos que tiene el tipo str",
+    "Regresa el texto en mayúsculas y minúsculas",
+    "Muestra la documentación del método upper"
+   ],
+   "pairs": [],
+   "answer": "Muestra la documentación del método upper",
+   "difficulty": "basica",
+   "origin": "banco",
+   "status": "ok",
+   "issues": [],
+   "original": null,
+   "common": false
+  },
+  {
+   "id": "OM-17-006",
+   "section": "Objetos y variables: tipo, identidad, valor, atributos, métodos y len()",
+   "kind": "multiple_choice",
+   "stem": [
+    {
+     "text": "¿Qué imprime este código?",
+     "code": false
+    },
+    {
+     "text": "print(len(\"matemáticas\"))",
+     "code": true
+    }
+   ],
+   "images": [],
+   "options": [
+    "11",
+    "10",
+    "12",
+    "9"
+   ],
+   "pairs": [],
+   "answer": "11",
+   "difficulty": "basica",
+   "origin": "banco",
+   "status": "ok",
+   "issues": [],
+   "original": null,
+   "common": false
+  },
+  {
+   "id": "OM-17-007",
+   "section": "Objetos y variables: tipo, identidad, valor, atributos, métodos y len()",
+   "kind": "multiple_choice",
+   "stem": [
+    {
+     "text": "¿Cómo se obtiene el número de elementos de la lista primos?",
+     "code": false
+    }
+   ],
+   "images": [],
+   "options": [
+    "primos.len()",
+    "len(primos)",
+    "count(primos)",
+    "primos.length"
+   ],
+   "pairs": [],
+   "answer": "len(primos)",
    "difficulty": "basica",
    "origin": "banco",
    "status": "ok",
@@ -2495,136 +2549,6 @@
    ],
    "pairs": [],
    "answer": "2.0 1 100",
-   "difficulty": "intermedia",
-   "origin": "banco",
-   "status": "ok",
-   "issues": [],
-   "original": null,
-   "common": false
-  },
-  {
-   "id": "OM-21-006",
-   "section": "Python básico: objetos, variables y buenas prácticas",
-   "kind": "multiple_choice",
-   "stem": [
-    {
-     "text": "¿Por qué se configuran QUARTO_PYTHON y RETICULATE_PYTHON apuntando al mismo entorno virtual?",
-     "code": false
-    }
-   ],
-   "images": [],
-   "options": [
-    "Porque Quarto necesita dos versiones distintas de Python",
-    "Porque RETICULATE_PYTHON solo funciona en Windows",
-    "Porque así los paquetes se instalan más rápido",
-    "Para que ambos motores usen las mismas bibliotecas"
-   ],
-   "pairs": [],
-   "answer": "Para que ambos motores usen las mismas bibliotecas",
-   "difficulty": "intermedia",
-   "origin": "banco",
-   "status": "ok",
-   "issues": [],
-   "original": null,
-   "common": false
-  },
-  {
-   "id": "OM-21-007",
-   "section": "Python básico: objetos, variables y buenas prácticas",
-   "kind": "multiple_choice",
-   "stem": [
-    {
-     "text": "Al instalar paquetes con pip aparece error: externally-managed-environment. ¿Cuál es la causa?",
-     "code": false
-    }
-   ],
-   "images": [],
-   "options": [
-    "No hay conexión a internet para descargar el paquete",
-    "El entorno no está activo; pip usa el Python del sistema",
-    "El paquete no existe en PyPI con el nombre que escribiste",
-    "No se reinició R después de editar el archivo .Renviron"
-   ],
-   "pairs": [],
-   "answer": "El entorno no está activo; pip usa el Python del sistema",
-   "difficulty": "intermedia",
-   "origin": "banco",
-   "status": "ok",
-   "issues": [],
-   "original": null,
-   "common": false
-  },
-  {
-   "id": "OM-21-008",
-   "section": "Python básico: objetos, variables y buenas prácticas",
-   "kind": "multiple_choice",
-   "stem": [
-    {
-     "text": "Al escribir python -m pip install numpy aparece SyntaxError: invalid syntax. ¿Cuál es la causa?",
-     "code": false
-    }
-   ],
-   "images": [],
-   "options": [
-    "Falta la opción --upgrade para instalar la versión más reciente",
-    "El nombre está mal escrito; debe ser NumPy con mayúsculas",
-    "Python no está instalado o no está en la variable PATH",
-    "Se escribió en la Console de R (o en >>>) y no en la Terminal"
-   ],
-   "pairs": [],
-   "answer": "Se escribió en la Console de R (o en >>>) y no en la Terminal",
-   "difficulty": "intermedia",
-   "origin": "banco",
-   "status": "ok",
-   "issues": [],
-   "original": null,
-   "common": false
-  },
-  {
-   "id": "OM-21-009",
-   "section": "Python básico: objetos, variables y buenas prácticas",
-   "kind": "multiple_choice",
-   "stem": [
-    {
-     "text": "¿Cuál de estas líneas está escrita correctamente en el archivo .Renviron (macOS)?",
-     "code": false
-    }
-   ],
-   "images": [],
-   "options": [
-    "QUARTO_PYTHON = /Users/ana/.venvs/quarto-python/bin/python",
-    "QUARTO_PYTHON=~/.venvs/quarto-python/bin/python",
-    "QUARTO_PYTHON=\\Users\\ana\\.venvs\\quarto-python\\bin\\python",
-    "QUARTO_PYTHON=/Users/ana/.venvs/quarto-python/bin/python"
-   ],
-   "pairs": [],
-   "answer": "QUARTO_PYTHON=/Users/ana/.venvs/quarto-python/bin/python",
-   "difficulty": "intermedia",
-   "origin": "banco",
-   "status": "ok",
-   "issues": [],
-   "original": null,
-   "common": false
-  },
-  {
-   "id": "OM-21-010",
-   "section": "Python básico: objetos, variables y buenas prácticas",
-   "kind": "multiple_choice",
-   "stem": [
-    {
-     "text": "Guardaste correctamente las variables en .Renviron, pero Sys.getenv(\"RETICULATE_PYTHON\") regresa \"\". ¿Qué te faltó hacer?",
-     "code": false
-    }
-   ],
-   "images": [],
-   "options": [
-    "Instalar NumPy dentro del entorno de Python",
-    "Reiniciar R para que lea de nuevo .Renviron",
-    "Instalar Quarto por separado desde su página",
-    "Activar el entorno en la Terminal antes de RStudio"
-   ],
-   "pairs": [],
-   "answer": "Reiniciar R para que lea de nuevo .Renviron",
    "difficulty": "intermedia",
    "origin": "banco",
    "status": "ok",
@@ -3050,7 +2974,7 @@
    "kind": "multiple_choice",
    "stem": [
     {
-     "text": "¿Cuál es la forma correcta de consultar la documentación del método replace de las cadenas?",
+     "text": "¿Qué instrucción muestra la ayuda del método replace() de los textos (str)?",
      "code": false
     }
    ],
@@ -3767,32 +3691,6 @@
    ],
    "pairs": [],
    "answer": "Porque except: también oculta errores que no esperabas",
-   "difficulty": "intermedia",
-   "origin": "banco",
-   "status": "ok",
-   "issues": [],
-   "original": null,
-   "common": false
-  },
-  {
-   "id": "OM-21-044",
-   "section": "Python básico: objetos, variables y buenas prácticas",
-   "kind": "multiple_choice",
-   "stem": [
-    {
-     "text": "¿Por qué no se recomienda usar exit() en Jupyter, Google Colab o Quarto?",
-     "code": false
-    }
-   ],
-   "images": [],
-   "options": [
-    "Porque detiene el kernel y hay que reiniciarlo",
-    "Porque la función exit() no existe en esos entornos",
-    "Porque exit() solo funciona dentro de un ciclo for",
-    "Porque exit() borra el archivo del notebook actual"
-   ],
-   "pairs": [],
-   "answer": "Porque detiene el kernel y hay que reiniciarlo",
    "difficulty": "intermedia",
    "origin": "banco",
    "status": "ok",
@@ -5234,8 +5132,20 @@
    "kind": "multiple_choice",
    "stem": [
     {
-     "text": "Con los mismos vectores u = np.array([1, 2, 3]) y v = np.array([4, 5, 6]), ¿qué imprime print(u * v)?",
+     "text": "¿Qué imprime este código?",
      "code": false
+    },
+    {
+     "text": "u = np.array([1, 2, 3])",
+     "code": true
+    },
+    {
+     "text": "v = np.array([4, 5, 6])",
+     "code": true
+    },
+    {
+     "text": "print(u * v)",
+     "code": true
     }
    ],
    "images": [],
@@ -5404,8 +5314,16 @@
    "kind": "multiple_choice",
    "stem": [
     {
-     "text": "¿Qué imprime print(sp.factor(x**2 - 5*x + 6))?",
+     "text": "¿Qué imprime este código?",
      "code": false
+    },
+    {
+     "text": "x = sp.symbols(\"x\")",
+     "code": true
+    },
+    {
+     "text": "print(sp.factor(x**2 - 5*x + 6))",
+     "code": true
     }
    ],
    "images": [],
@@ -5430,7 +5348,7 @@
    "kind": "multiple_choice",
    "stem": [
     {
-     "text": "¿Cuál es la forma correcta de escribir en SymPy la ecuación x² - 5x = -6?",
+     "text": "Si x = sp.symbols(\"x\"), ¿cuál es la forma correcta de escribir en SymPy la ecuación x² - 5x = -6?",
      "code": false
     }
    ],
@@ -5456,8 +5374,16 @@
    "kind": "multiple_choice",
    "stem": [
     {
-     "text": "¿Qué imprime print(sp.diff(x**3, x, 2))?",
+     "text": "¿Qué imprime este código?",
      "code": false
+    },
+    {
+     "text": "x = sp.symbols(\"x\")",
+     "code": true
+    },
+    {
+     "text": "print(sp.diff(x**3, x, 2))",
+     "code": true
     }
    ],
    "images": [],
@@ -5482,8 +5408,16 @@
    "kind": "multiple_choice",
    "stem": [
     {
-     "text": "¿Qué imprime print(sp.integrate(2*x, (x, 0, 3)))?",
+     "text": "¿Qué imprime este código?",
      "code": false
+    },
+    {
+     "text": "x = sp.symbols(\"x\")",
+     "code": true
+    },
+    {
+     "text": "print(sp.integrate(2*x, (x, 0, 3)))",
+     "code": true
     }
    ],
    "images": [],
@@ -5537,25 +5471,25 @@
    "common": false
   },
   {
-   "id": "OM-31-001",
-   "section": "Python básico: objetos, variables y buenas prácticas",
+   "id": "OM-27-001",
+   "section": "Objetos y variables: tipo, identidad, valor, atributos, métodos y len()",
    "kind": "multiple_choice",
    "stem": [
     {
-     "text": "Un documento .qmd tiene solo bloques {python} y no indica motor en el YAML. ¿Qué motor usa Quarto y qué variable consulta para saber qué Python usar?",
+     "text": "Según la tabla objeto vs. variable, ¿qué pertenece al objeto y NO a la variable?",
      "code": false
     }
    ],
    "images": [],
    "options": [
-    "Motor knitr, RETICULATE_PYTHON",
-    "Motor knitr, QUARTO_PYTHON",
-    "Motor jupyter, QUARTO_PYTHON",
-    "Motor jupyter, RETICULATE_PYTHON"
+    "El tipo (por ejemplo, int)",
+    "El nombre (por ejemplo, x)",
+    "El signo = de la asignación",
+    "La etiqueta que lo nombra"
    ],
    "pairs": [],
-   "answer": "Motor jupyter, QUARTO_PYTHON",
-   "difficulty": "avanzada",
+   "answer": "El tipo (por ejemplo, int)",
+   "difficulty": "intermedia",
    "origin": "banco",
    "status": "ok",
    "issues": [],
@@ -5563,25 +5497,37 @@
    "common": false
   },
   {
-   "id": "OM-31-002",
-   "section": "Python básico: objetos, variables y buenas prácticas",
+   "id": "OM-27-002",
+   "section": "Objetos y variables: tipo, identidad, valor, atributos, métodos y len()",
    "kind": "multiple_choice",
    "stem": [
     {
-     "text": "Un documento .qmd tiene un bloque {r} y varios bloques {python}. ¿Quién ejecuta el código de Python?",
+     "text": "¿Qué imprime este código?",
      "code": false
+    },
+    {
+     "text": "x = 25",
+     "code": true
+    },
+    {
+     "text": "x = \"veinticinco\"",
+     "code": true
+    },
+    {
+     "text": "print(type(x))",
+     "code": true
     }
    ],
    "images": [],
    "options": [
-    "R con reticulate (motor knitr), usando RETICULATE_PYTHON",
-    "Un kernel de Jupyter (motor jupyter), usando QUARTO_PYTHON",
-    "Nadie: el motor jupyter ignora Python si hay bloques de R",
-    "Quarto lo ejecuta por sí mismo, sin usar ningún motor"
+    "<class 'int'>",
+    "<class 'str'>",
+    "<class 'float'>",
+    "<class 'list'>"
    ],
    "pairs": [],
-   "answer": "R con reticulate (motor knitr), usando RETICULATE_PYTHON",
-   "difficulty": "avanzada",
+   "answer": "<class 'str'>",
+   "difficulty": "intermedia",
    "origin": "banco",
    "status": "ok",
    "issues": [],
@@ -5589,25 +5535,25 @@
    "common": false
   },
   {
-   "id": "OM-31-003",
-   "section": "Python básico: objetos, variables y buenas prácticas",
+   "id": "OM-27-003",
+   "section": "Objetos y variables: tipo, identidad, valor, atributos, métodos y len()",
    "kind": "multiple_choice",
    "stem": [
     {
-     "text": "Ejecutaste py_config() y después use_virtualenv(\"~/.venvs/quarto-python\", required = TRUE), pero py_config() sigue mostrando el Python anterior. ¿Por qué?",
+     "text": "¿Qué es un atributo de un objeto?",
      "code": false
     }
    ],
    "images": [],
    "options": [
-    "use_virtualenv() solo funciona en Windows, no en macOS",
-    "La ruta no puede llevar ~; hay que escribirla completa",
-    "Python ya estaba iniciado; solo se cambia reiniciando R",
-    "Faltó activar antes el entorno en la Terminal con source"
+    "Una función del objeto que lleva paréntesis",
+    "El nombre de la variable que apunta al objeto",
+    "Un dato del objeto que se usa sin paréntesis",
+    "El número que regresa la función id()"
    ],
    "pairs": [],
-   "answer": "Python ya estaba iniciado; solo se cambia reiniciando R",
-   "difficulty": "avanzada",
+   "answer": "Un dato del objeto que se usa sin paréntesis",
+   "difficulty": "intermedia",
    "origin": "banco",
    "status": "ok",
    "issues": [],
@@ -5615,25 +5561,195 @@
    "common": false
   },
   {
-   "id": "OM-31-004",
-   "section": "Python básico: objetos, variables y buenas prácticas",
+   "id": "OM-27-004",
+   "section": "Objetos y variables: tipo, identidad, valor, atributos, métodos y len()",
    "kind": "multiple_choice",
    "stem": [
     {
-     "text": "Aparece ModuleNotFoundError: No module named 'pandas', aunque py_config() sí muestra tu entorno quarto-python. ¿Qué debes hacer?",
+     "text": "¿Qué es un método de un objeto?",
      "code": false
     }
    ],
    "images": [],
    "options": [
-    "Configurar QUARTO_PYTHON en .Renviron y reiniciar R",
-    "Ejecutar py_require(\"pandas\") en la Console de RStudio",
-    "Reinstalar RStudio para que reconozca el entorno quarto-python",
-    "Activar el entorno en la Terminal e instalar pandas con pip"
+    "Un dato del objeto que se escribe sin paréntesis",
+    "Una función integrada como len() o type()",
+    "El valor que guarda el objeto en la memoria",
+    "Una función del objeto que lleva paréntesis"
    ],
    "pairs": [],
-   "answer": "Activar el entorno en la Terminal e instalar pandas con pip",
-   "difficulty": "avanzada",
+   "answer": "Una función del objeto que lleva paréntesis",
+   "difficulty": "intermedia",
+   "origin": "banco",
+   "status": "ok",
+   "issues": [],
+   "original": null,
+   "common": false
+  },
+  {
+   "id": "OM-27-005",
+   "section": "Objetos y variables: tipo, identidad, valor, atributos, métodos y len()",
+   "kind": "multiple_choice",
+   "stem": [
+    {
+     "text": "En numero.imag y numero.conjugate(), ¿qué es cada uno?",
+     "code": false
+    }
+   ],
+   "images": [],
+   "options": [
+    "imag es atributo y conjugate() es método",
+    "imag es método y conjugate() es atributo",
+    "Los dos son atributos del número",
+    "Los dos son métodos del número complejo"
+   ],
+   "pairs": [],
+   "answer": "imag es atributo y conjugate() es método",
+   "difficulty": "intermedia",
+   "origin": "banco",
+   "status": "ok",
+   "issues": [],
+   "original": null,
+   "common": false
+  },
+  {
+   "id": "OM-27-006",
+   "section": "Objetos y variables: tipo, identidad, valor, atributos, métodos y len()",
+   "kind": "multiple_choice",
+   "stem": [
+    {
+     "text": "¿Qué imprime este código?",
+     "code": false
+    },
+    {
+     "text": "a = [2, 3, 5]",
+     "code": true
+    },
+    {
+     "text": "b = a",
+     "code": true
+    },
+    {
+     "text": "print(id(a) == id(b), a is b)",
+     "code": true
+    }
+   ],
+   "images": [],
+   "options": [
+    "False False",
+    "True True",
+    "True False",
+    "False True"
+   ],
+   "pairs": [],
+   "answer": "True True",
+   "difficulty": "intermedia",
+   "origin": "banco",
+   "status": "ok",
+   "issues": [],
+   "original": null,
+   "common": false
+  },
+  {
+   "id": "OM-27-007",
+   "section": "Objetos y variables: tipo, identidad, valor, atributos, métodos y len()",
+   "kind": "multiple_choice",
+   "stem": [
+    {
+     "text": "¿Qué ocurre al ejecutar este código?",
+     "code": false
+    },
+    {
+     "text": "primos = [2, 3, 5, 7]",
+     "code": true
+    },
+    {
+     "text": "print(primos.len())",
+     "code": true
+    }
+   ],
+   "images": [],
+   "options": [
+    "Imprime 4, porque len() también se puede usar como método",
+    "Imprime [2, 3, 5, 7] y después el número de elementos",
+    "AttributeError: 'list' object has no attribute 'len'",
+    "SyntaxError: los métodos de las listas no llevan paréntesis"
+   ],
+   "pairs": [],
+   "answer": "AttributeError: 'list' object has no attribute 'len'",
+   "difficulty": "intermedia",
+   "origin": "banco",
+   "status": "ok",
+   "issues": [],
+   "original": null,
+   "common": false
+  },
+  {
+   "id": "OM-27-008",
+   "section": "Objetos y variables: tipo, identidad, valor, atributos, métodos y len()",
+   "kind": "multiple_choice",
+   "stem": [
+    {
+     "text": "¿Qué imprime este código?",
+     "code": false
+    },
+    {
+     "text": "texto = \"3.1416\"",
+     "code": true
+    },
+    {
+     "text": "print(len(texto))",
+     "code": true
+    }
+   ],
+   "images": [],
+   "options": [
+    "5",
+    "4",
+    "1",
+    "6"
+   ],
+   "pairs": [],
+   "answer": "6",
+   "difficulty": "intermedia",
+   "origin": "banco",
+   "status": "ok",
+   "issues": [],
+   "original": null,
+   "common": false
+  },
+  {
+   "id": "OM-27-009",
+   "section": "Objetos y variables: tipo, identidad, valor, atributos, métodos y len()",
+   "kind": "multiple_choice",
+   "stem": [
+    {
+     "text": "¿Qué imprime este código?",
+     "code": false
+    },
+    {
+     "text": "m = np.array([[1, 2, 3],",
+     "code": true
+    },
+    {
+     "text": "              [4, 5, 6]])",
+     "code": true
+    },
+    {
+     "text": "print(len(m), m.size)",
+     "code": true
+    }
+   ],
+   "images": [],
+   "options": [
+    "2 6",
+    "6 6",
+    "3 6",
+    "2 3"
+   ],
+   "pairs": [],
+   "answer": "2 6",
+   "difficulty": "intermedia",
    "origin": "banco",
    "status": "ok",
    "issues": [],
@@ -6740,7 +6856,7 @@
    "kind": "multiple_choice",
    "stem": [
     {
-     "text": "Se quiere duplicar cada elemento de la lista. ¿Qué imprime este código?",
+     "text": "Se quiere multiplicar por 2 cada elemento de la lista. ¿Qué imprime este código?",
      "code": false
     },
     {
@@ -7092,8 +7208,20 @@
    "kind": "multiple_choice",
    "stem": [
     {
-     "text": "Con la misma matriz m de la pregunta anterior, ¿qué imprime print(m.max(axis=1))?",
+     "text": "¿Qué imprime este código?",
      "code": false
+    },
+    {
+     "text": "m = np.array([[1, 2, 3],",
+     "code": true
+    },
+    {
+     "text": "              [4, 5, 6]])",
+     "code": true
+    },
+    {
+     "text": "print(m.max(axis=1))",
+     "code": true
     }
    ],
    "images": [],
@@ -7144,8 +7272,24 @@
    "kind": "multiple_choice",
    "stem": [
     {
-     "text": "Con la misma matriz m, ¿qué imprime print(m[1:3, 1:3])?",
+     "text": "¿Qué imprime este código?",
      "code": false
+    },
+    {
+     "text": "m = np.array([[1, 2, 3],",
+     "code": true
+    },
+    {
+     "text": "              [4, 5, 6],",
+     "code": true
+    },
+    {
+     "text": "              [7, 8, 9]])",
+     "code": true
+    },
+    {
+     "text": "print(m[1:3, 1:3])",
+     "code": true
     }
    ],
    "images": [],
@@ -7170,8 +7314,24 @@
    "kind": "multiple_choice",
    "stem": [
     {
-     "text": "Con la matriz m de 3 × 3 (del 1 al 9), ¿qué imprime print(m[[0, 1, 2], [2, 0, 1]])?",
+     "text": "¿Qué imprime este código?",
      "code": false
+    },
+    {
+     "text": "m = np.array([[1, 2, 3],",
+     "code": true
+    },
+    {
+     "text": "              [4, 5, 6],",
+     "code": true
+    },
+    {
+     "text": "              [7, 8, 9]])",
+     "code": true
+    },
+    {
+     "text": "print(m[[0, 1, 2], [2, 0, 1]])",
+     "code": true
     }
    ],
    "images": [],
@@ -7196,7 +7356,7 @@
    "kind": "multiple_choice",
    "stem": [
     {
-     "text": "Con el mismo arreglo a, ¿cuál expresión obtiene los elementos mayores que 5 y menores que 13?",
+     "text": "Si a es un arreglo de NumPy, ¿cuál expresión obtiene los elementos mayores que 5 y menores que 13?",
      "code": false
     }
    ],
@@ -7222,8 +7382,16 @@
    "kind": "multiple_choice",
    "stem": [
     {
-     "text": "Con el mismo arreglo a, ¿qué imprime print(a[~(a > 5)])?",
+     "text": "¿Qué imprime este código?",
      "code": false
+    },
+    {
+     "text": "a = np.array([3, 13, 12, 10, 18, 6, 4, 8, 5])",
+     "code": true
+    },
+    {
+     "text": "print(a[~(a > 5)])",
+     "code": true
     }
    ],
    "images": [],
@@ -7552,6 +7720,10 @@
      "code": false
     },
     {
+     "text": "x = sp.symbols(\"x\")",
+     "code": true
+    },
+    {
      "text": "print(sp.solveset(x**2 + 1, x, domain=sp.S.Reals))",
      "code": true
     }
@@ -7645,6 +7817,66 @@
    ],
    "pairs": [],
    "answer": "Matrix([[7, 10], [15, 22]])",
+   "difficulty": "avanzada",
+   "origin": "banco",
+   "status": "ok",
+   "issues": [],
+   "original": null,
+   "common": false
+  },
+  {
+   "id": "OM-37-001",
+   "section": "Objetos y variables: tipo, identidad, valor, atributos, métodos y len()",
+   "kind": "multiple_choice",
+   "stem": [
+    {
+     "text": "Si a = [1, 2] y b = a.copy(), ¿qué es cierto?",
+     "code": false
+    }
+   ],
+   "images": [],
+   "options": [
+    "a == b es False y a is b es True",
+    "a == b y a is b son los dos True",
+    "a == b es True y a is b es False",
+    "a == b y a is b son los dos False"
+   ],
+   "pairs": [],
+   "answer": "a == b es True y a is b es False",
+   "difficulty": "avanzada",
+   "origin": "banco",
+   "status": "ok",
+   "issues": [],
+   "original": null,
+   "common": false
+  },
+  {
+   "id": "OM-37-002",
+   "section": "Objetos y variables: tipo, identidad, valor, atributos, métodos y len()",
+   "kind": "multiple_choice",
+   "stem": [
+    {
+     "text": "¿Qué imprime este código?",
+     "code": false
+    },
+    {
+     "text": "datos = [[1, 2], [3, 4, 5]]",
+     "code": true
+    },
+    {
+     "text": "print(len(datos))",
+     "code": true
+    }
+   ],
+   "images": [],
+   "options": [
+    "5",
+    "2",
+    "3",
+    "7"
+   ],
+   "pairs": [],
+   "answer": "2",
    "difficulty": "avanzada",
    "origin": "banco",
    "status": "ok",
@@ -7918,6 +8150,98 @@
     {
      "left": "sp.Rational(1, 3)",
      "right": "Crea la fracción exacta un tercio"
+    }
+   ],
+   "answer": null,
+   "difficulty": "basica",
+   "origin": "banco",
+   "status": "ok",
+   "issues": [],
+   "original": null,
+   "common": false
+  },
+  {
+   "id": "RC-1-007",
+   "section": "Funciones de los objetos: type(), upper(), lower(), replace(), dir(), help()",
+   "kind": "matching",
+   "stem": [
+    {
+     "text": "Relaciona cada función o método con lo que hace (s es un texto).",
+     "code": false
+    }
+   ],
+   "images": [],
+   "options": [],
+   "pairs": [
+    {
+     "left": "type(x)",
+     "right": "Regresa el tipo (clase) del objeto"
+    },
+    {
+     "left": "s.upper()",
+     "right": "Regresa el texto en mayúsculas"
+    },
+    {
+     "left": "s.lower()",
+     "right": "Regresa el texto en minúsculas"
+    },
+    {
+     "left": "s.replace(\"a\", \"b\")",
+     "right": "Cambia cada \"a\" por \"b\" en un texto nuevo"
+    },
+    {
+     "left": "dir(x)",
+     "right": "Lista los nombres de atributos y métodos"
+    },
+    {
+     "left": "help(str.upper)",
+     "right": "Muestra la documentación de upper()"
+    }
+   ],
+   "answer": null,
+   "difficulty": "basica",
+   "origin": "banco",
+   "status": "ok",
+   "issues": [],
+   "original": null,
+   "common": false
+  },
+  {
+   "id": "RC-1-008",
+   "section": "Funciones de los objetos: type(), upper(), lower(), replace(), dir(), help()",
+   "kind": "matching",
+   "stem": [
+    {
+     "text": "Relaciona cada concepto con su descripción.",
+     "code": false
+    }
+   ],
+   "images": [],
+   "options": [],
+   "pairs": [
+    {
+     "left": "Objeto",
+     "right": "Dato guardado en la memoria"
+    },
+    {
+     "left": "Variable",
+     "right": "Nombre que hace referencia a un objeto"
+    },
+    {
+     "left": "Tipo",
+     "right": "Clase de dato; nunca cambia"
+    },
+    {
+     "left": "Identidad",
+     "right": "Número único del objeto mientras existe"
+    },
+    {
+     "left": "Atributo",
+     "right": "Dato del objeto; se usa sin paréntesis"
+    },
+    {
+     "left": "Método",
+     "right": "Función del objeto; se usa con paréntesis"
     }
    ],
    "answer": null,
@@ -8240,6 +8564,144 @@
     {
      "left": "a.sum(axis=1)",
      "right": "[ 6 22 38]"
+    }
+   ],
+   "answer": null,
+   "difficulty": "intermedia",
+   "origin": "banco",
+   "status": "ok",
+   "issues": [],
+   "original": null,
+   "common": false
+  },
+  {
+   "id": "RC-2-008",
+   "section": "Funciones de los objetos: type(), upper(), lower(), replace(), dir(), help()",
+   "kind": "matching",
+   "stem": [
+    {
+     "text": "Si s = \"Python\", relaciona cada expresión con lo que muestra print().",
+     "code": false
+    }
+   ],
+   "images": [],
+   "options": [],
+   "pairs": [
+    {
+     "left": "type(s)",
+     "right": "<class 'str'>"
+    },
+    {
+     "left": "s.upper()",
+     "right": "PYTHON"
+    },
+    {
+     "left": "s.lower()",
+     "right": "python"
+    },
+    {
+     "left": "s.replace(\"P\", \"J\")",
+     "right": "Jython"
+    },
+    {
+     "left": "len(s)",
+     "right": "6"
+    },
+    {
+     "left": "type(len(s))",
+     "right": "<class 'int'>"
+    }
+   ],
+   "answer": null,
+   "difficulty": "intermedia",
+   "origin": "banco",
+   "status": "ok",
+   "issues": [],
+   "original": null,
+   "common": false
+  },
+  {
+   "id": "RC-2-009",
+   "section": "Funciones de los objetos: type(), upper(), lower(), replace(), dir(), help()",
+   "kind": "matching",
+   "stem": [
+    {
+     "text": "Relaciona cada expresión con lo que muestra print().",
+     "code": false
+    }
+   ],
+   "images": [],
+   "options": [],
+   "pairs": [
+    {
+     "left": "\"Álgebra\".upper()",
+     "right": "ÁLGEBRA"
+    },
+    {
+     "left": "\"MATRIZ\".lower()",
+     "right": "matriz"
+    },
+    {
+     "left": "\"2x + 3\".replace(\"x\", \"*y\")",
+     "right": "2*y + 3"
+    },
+    {
+     "left": "type(3.0)",
+     "right": "<class 'float'>"
+    },
+    {
+     "left": "type(\"3.0\")",
+     "right": "<class 'str'>"
+    },
+    {
+     "left": "len(\"π ≈ 3.14\")",
+     "right": "8"
+    }
+   ],
+   "answer": null,
+   "difficulty": "intermedia",
+   "origin": "banco",
+   "status": "ok",
+   "issues": [],
+   "original": null,
+   "common": false
+  },
+  {
+   "id": "RC-2-010",
+   "section": "Funciones de los objetos: type(), upper(), lower(), replace(), dir(), help()",
+   "kind": "matching",
+   "stem": [
+    {
+     "text": "Relaciona cada característica de un objeto x con la forma de consultarla.",
+     "code": false
+    }
+   ],
+   "images": [],
+   "options": [],
+   "pairs": [
+    {
+     "left": "Tipo",
+     "right": "type(x)"
+    },
+    {
+     "left": "Identidad",
+     "right": "id(x)"
+    },
+    {
+     "left": "Valor",
+     "right": "print(x)"
+    },
+    {
+     "left": "Nombres de atributos y métodos",
+     "right": "dir(x)"
+    },
+    {
+     "left": "Documentación",
+     "right": "help(x)"
+    },
+    {
+     "left": "Parte imaginaria (un atributo)",
+     "right": "x.imag"
     }
    ],
    "answer": null,
