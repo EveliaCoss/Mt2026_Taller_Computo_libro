@@ -1,0 +1,2380 @@
+---
+title: "Banco de preguntas: de Introducción a Python a SymPy"
+format: html
+---
+
+## **📋 BANCO DE PREGUNTAS — SECCIÓN 7 (PYTHON)**
+
+**Temas:** desde [Introducción a Python en RStudio usando `reticulate`](../intro_python.qmd) hasta [Cálculo simbólico con SymPy](../python_sympy.qmd).
+
+**Formato:** 200 preguntas de opción múltiple (4 opciones) + 27 ejercicios abiertos de *debugging*.
+
+| Capítulo | Preguntas |
+|----|----|
+| Introducción a Python con `reticulate` | 1–20 |
+| Configuraciones para usar Quarto con Python | 21–35 |
+| 🐍 Actividad 1: variables y objetos | 36–60 |
+| 🐍 Actividad 2: atributos y métodos | 61–85 |
+| Sintaxis de nombres, buenas prácticas y programación defensiva | 86–110 |
+| Condicionales | 111–135 |
+| Introducción a NumPy | 136–170 |
+| Álgebra lineal con NumPy | 171–185 |
+| Cálculo simbólico con SymPy | 186–200 |
+| Ejercicios abiertos de *debugging* | D1–D27 |
+
+# Preguntas de opción múltiple
+
+## intro_python — Introducción a Python con reticulate (preguntas 1–20)
+
+```
+1. ¿Quién creó Python y en qué año se publicó por primera vez?
+   a) Guido van Rossum, en 1991
+   b) Guido van Rossum, en 1989
+   c) Dennis Ritchie, en 1991
+   d) Grupo Monty Python, en 1989
+   ✓ Respuesta: a
+
+2. ¿De dónde proviene el nombre "Python"?
+   a) De la serpiente pitón, por la flexibilidad del lenguaje
+   b) De las siglas de un centro de investigación de los Países Bajos
+   c) Del grupo humorístico británico Monty Python's Flying Circus
+   d) De un lenguaje anterior llamado "Py", del que es sucesor
+   ✓ Respuesta: c
+
+3. ¿Qué caracteriza a un lenguaje interpretado como Python?
+   a) Siempre debe compilarse a un archivo .exe antes de poder correr
+   b) Un intérprete ejecuta las instrucciones sin crear un ejecutable
+   c) Solo puede ejecutarse dentro de RStudio con el paquete reticulate
+   d) Traduce el código a lenguaje natural antes de ejecutar cada línea
+   ✓ Respuesta: b
+
+4. Según la tabla del capítulo, ¿cuál es un ejemplo de lenguaje compilado?
+   a) Python
+   b) Bash
+   c) Markdown
+   d) C
+   ✓ Respuesta: d
+
+5. ¿Qué es reticulate?
+   a) Un editor de código exclusivo para programar en Python
+   b) Un paquete de R para ejecutar código de Python desde R
+   c) Una biblioteca de Python para hacer gráficas y mapas
+   d) Un compilador que traduce el código de Python a R
+   ✓ Respuesta: b
+
+6. Al ejecutar repl_python() en la Console de RStudio, ¿cómo cambia el indicador?
+   a) De > a >>>
+   b) De >>> a >
+   c) De $ a >
+   d) De > a $
+   ✓ Respuesta: a
+
+7. Estás dentro de la consola de Python (>>>) abierta con repl_python(). ¿Qué escribes para regresar a R?
+   a) back
+   b) stop
+   c) done
+   d) exit
+   ✓ Respuesta: d
+
+8. ¿Qué muestra este código de R?
+   py_run_string("
+   a = 10
+   b = 20
+   suma = a + b
+   print('La suma es:', suma)
+   ")
+   a) La suma es: suma
+   b) La suma es: 1020
+   c) La suma es: 30
+   d) La suma es: a + b
+   ✓ Respuesta: c
+
+9. En R se ejecuta lo siguiente. ¿Qué regresa la última línea?
+   py_run_string("resultado = 5 * 8")
+   py$resultado
+   a) [1] 40
+   b) [1] NA
+   c) Error
+   d) [1] 58
+   ✓ Respuesta: a
+
+10. ¿Qué función de reticulate ejecuta un archivo .py completo?
+   a) py_run_string()
+   b) py_require()
+   c) py_install()
+   d) py_run_file()
+   ✓ Respuesta: d
+
+11. ¿Qué hace py_require("numpy")?
+   a) Instala NumPy en ese momento en el Python del sistema
+   b) Declara NumPy como dependencia para reticulate
+   c) Importa NumPy y lo guarda en la variable np
+   d) Elimina las versiones anteriores de NumPy del entorno
+   ✓ Respuesta: b
+
+12. Desde R con reticulate escribimos np$mean(numeros). ¿Cuál es la instrucción equivalente dentro de Python?
+   a) np$mean(numeros)
+   b) np::mean(numeros)
+   c) np.mean(numeros)
+   d) mean.np(numeros)
+   ✓ Respuesta: c
+
+13. En R escribimos numeros <- c(10, 20, 30). ¿Cuál es la forma equivalente en Python?
+   a) numeros <- c(10, 20, 30)
+   b) numeros = c(10, 20, 30)
+   c) numeros <- [10, 20, 30]
+   d) numeros = [10, 20, 30]
+   ✓ Respuesta: d
+
+14. En Python todo es un objeto. ¿Qué determina el tipo de un objeto?
+   a) Su clase y las operaciones que admite
+   b) El nombre de la variable que lo guarda
+   c) La dirección en memoria donde se guarda
+   d) Las veces que se usa en el programa
+   ✓ Respuesta: a
+
+15. ¿Qué es una variable en Python?
+   a) Una caja que guarda una copia del dato
+   b) Una copia independiente del objeto original
+   c) Un nombre que hace referencia a un objeto
+   d) Un tipo de dato especial para guardar números
+   ✓ Respuesta: c
+
+16. ¿Qué imprime este código?
+   numero = 10
+   numero = "Diez"
+   print(type(numero))
+   a) <class 'int'>
+   b) <class 'str'>
+   c) <class 'float'>
+   d) <class 'char'>
+   ✓ Respuesta: b
+
+17. ¿Qué imprime este código?
+   print(type(3+4j))
+   a) <class 'float'>
+   b) <class 'tuple'>
+   c) <class 'complex'>
+   d) <class 'complejo'>
+   ✓ Respuesta: c
+
+18. Según la tabla de tipos del capítulo, ¿cuál de estos tipos es mutable?
+   a) tuple
+   b) str
+   c) int
+   d) list
+   ✓ Respuesta: d
+
+19. ¿Qué imprime este código?
+   numeros = [10, 20, 30]
+   numeros[0] = 100
+   print(numeros)
+   a) [100, 20, 30]
+   b) [10, 100, 30]
+   c) [10, 20, 30]
+   d) [10, 20, 100]
+   ✓ Respuesta: a
+
+20. ¿Qué imprime este código?
+   print(10 / 5, 10 % 3, 10 ** 2)
+   a) 2 3 20
+   b) 2.0 1 100
+   c) 2 1 100
+   d) 2.0 3.33 20
+   ✓ Respuesta: b
+```
+
+## quarto_python — Configuraciones para usar Quarto con Python (preguntas 21–35)
+
+```
+21. Un documento .qmd tiene solo bloques {python} y no indica motor en el YAML. ¿Qué motor usa Quarto y qué variable consulta para saber qué Python usar?
+   a) Motor knitr, RETICULATE_PYTHON
+   b) Motor knitr, QUARTO_PYTHON
+   c) Motor jupyter, QUARTO_PYTHON
+   d) Motor jupyter, RETICULATE_PYTHON
+   ✓ Respuesta: c
+
+22. Un documento .qmd tiene un bloque {r} y varios bloques {python}. ¿Quién ejecuta el código de Python?
+   a) R con reticulate (motor knitr), usando RETICULATE_PYTHON
+   b) Un kernel de Jupyter (motor jupyter), usando QUARTO_PYTHON
+   c) Nadie: el motor jupyter ignora Python si hay bloques de R
+   d) Quarto lo ejecuta por sí mismo, sin usar ningún motor
+   ✓ Respuesta: a
+
+23. ¿Por qué se configuran QUARTO_PYTHON y RETICULATE_PYTHON apuntando al mismo entorno virtual?
+   a) Porque Quarto necesita dos versiones distintas de Python
+   b) Porque RETICULATE_PYTHON solo funciona en Windows
+   c) Porque así los paquetes se instalan más rápido
+   d) Para que ambos motores usen las mismas bibliotecas
+   ✓ Respuesta: d
+
+24. ¿Qué es un entorno virtual?
+   a) Una máquina virtual con otro sistema operativo
+   b) Una carpeta con su propio Python y sus paquetes
+   c) Un servidor de Google que ejecuta Python en la nube
+   d) El archivo .Renviron con las rutas de Python
+   ✓ Respuesta: b
+
+25. En macOS o Linux, ¿qué comando de la Terminal crea el entorno virtual del curso?
+   a) python3 -m venv ~/.venvs/quarto-python
+   b) source ~/.venvs/quarto-python/bin/activate
+   c) python3 -m pip install quarto-python
+   d) mkdir -p ~/.venvs/quarto-python/bin
+   ✓ Respuesta: a
+
+26. ¿Cómo sabes que el entorno virtual está activo en la Terminal?
+   a) El indicador de la Terminal cambia a >>>
+   b) Aparece el mensaje "Entorno activado" en pantalla
+   c) Aparece (quarto-python) al inicio de la línea
+   d) RStudio se reinicia solo y abre una nueva sesión
+   ✓ Respuesta: c
+
+27. Al instalar paquetes con pip aparece error: externally-managed-environment. ¿Cuál es la causa?
+   a) No hay conexión a internet para descargar el paquete
+   b) El entorno no está activo; pip usa el Python del sistema
+   c) El paquete no existe en PyPI con el nombre que escribiste
+   d) No se reinició R después de editar el archivo .Renviron
+   ✓ Respuesta: b
+
+28. Al escribir python -m pip install numpy aparece SyntaxError: invalid syntax. ¿Cuál es la causa?
+   a) Falta la opción --upgrade para instalar la versión más reciente
+   b) El nombre está mal escrito; debe ser NumPy con mayúsculas
+   c) Python no está instalado o no está en la variable PATH
+   d) Se escribió en la Console de R (o en >>>) y no en la Terminal
+   ✓ Respuesta: d
+
+29. ¿Cuál de estas líneas está escrita correctamente en el archivo .Renviron (macOS)?
+   a) QUARTO_PYTHON = /Users/ana/.venvs/quarto-python/bin/python
+   b) QUARTO_PYTHON=~/.venvs/quarto-python/bin/python
+   c) QUARTO_PYTHON=\Users\ana\.venvs\quarto-python\bin\python
+   d) QUARTO_PYTHON=/Users/ana/.venvs/quarto-python/bin/python
+   ✓ Respuesta: d
+
+30. Guardaste correctamente las variables en .Renviron, pero Sys.getenv("RETICULATE_PYTHON") regresa "". ¿Qué te faltó hacer?
+   a) Instalar NumPy dentro del entorno de Python
+   b) Reiniciar R para que lea de nuevo .Renviron
+   c) Instalar Quarto por separado desde su página
+   d) Activar el entorno en la Terminal antes de RStudio
+   ✓ Respuesta: b
+
+31. Ejecutaste py_config() y después use_virtualenv("~/.venvs/quarto-python", required = TRUE), pero py_config() sigue mostrando el Python anterior. ¿Por qué?
+   a) use_virtualenv() solo funciona en Windows, no en macOS
+   b) La ruta no puede llevar ~; hay que escribirla completa
+   c) Python ya estaba iniciado; solo se cambia reiniciando R
+   d) Faltó activar antes el entorno en la Terminal con source
+   ✓ Respuesta: c
+
+32. ¿Qué hace la opción #| echo: false en un bloque de código?
+   a) Muestra el resultado pero oculta el código
+   b) Muestra el código pero no lo ejecuta
+   c) Ejecuta el código pero oculta el resultado
+   d) Oculta solo los mensajes de advertencia
+   ✓ Respuesta: a
+
+33. Quieres que el código aparezca en el documento, pero sin ejecutarse. ¿Qué opción usas?
+   a) echo: false
+   b) eval: false
+   c) output: false
+   d) error: false
+   ✓ Respuesta: b
+
+34. Aparece ModuleNotFoundError: No module named 'pandas', aunque py_config() sí muestra tu entorno quarto-python. ¿Qué debes hacer?
+   a) Configurar QUARTO_PYTHON en .Renviron y reiniciar R
+   b) Ejecutar py_require("pandas") en la Console de RStudio
+   c) Reinstalar RStudio para que reconozca el entorno quarto-python
+   d) Activar el entorno en la Terminal e instalar pandas con pip
+   ✓ Respuesta: d
+
+35. ¿Dónde y cómo se escriben las opciones de un bloque de código en Quarto?
+   a) Al final del bloque, en una línea que empieza con #
+   b) En el archivo .Renviron, una opción por línea
+   c) Al inicio del bloque, en líneas que inician con #|
+   d) En la Console, antes de presionar el botón Render
+   ✓ Respuesta: c
+```
+
+## python_ejercicio1 — Actividad 1: variables y objetos (preguntas 36–60)
+
+```
+36. ¿Cuáles son las tres características que siempre tiene un objeto en Python?
+   a) Nombre, tipo y contenido
+   b) Tipo, valor e identidad
+   c) Identidad, nombre e índice
+   d) Tipo, tamaño y nombre
+   ✓ Respuesta: b
+
+37. ¿Qué función regresa la identidad de un objeto?
+   a) type()
+   b) len()
+   c) print()
+   d) id()
+   ✓ Respuesta: d
+
+38. ¿Qué imprime este código?
+   a = [1, 4, 9]
+   b = a
+   print(a is b)
+   a) True
+   b) False
+   c) None
+   d) Error
+   ✓ Respuesta: a
+
+39. ¿Qué imprime este código?
+   a = [1, 4, 9]
+   b = a
+   b[0] = 99
+   print(a)
+   a) [1, 4, 9]
+   b) [1, 4, 99]
+   c) [99, 4, 9]
+   d) TypeError
+   ✓ Respuesta: c
+
+40. ¿Qué imprime este código?
+   a = [1, 4, 9]
+   b = a.copy()
+   print(a is b, a == b)
+   a) False True
+   b) True True
+   c) True False
+   d) False False
+   ✓ Respuesta: a
+
+41. ¿Qué imprime este código?
+   lista_a = [2, 3, 5]
+   lista_b = [2, 3, 5]
+   lista_c = lista_a
+   print(lista_a == lista_b, lista_a is lista_b, lista_a is lista_c)
+   a) True True True
+   b) False False True
+   c) True False False
+   d) True False True
+   ✓ Respuesta: d
+
+42. ¿Qué compara el operador is?
+   a) Si dos objetos tienen el mismo valor
+   b) Si dos nombres apuntan al mismo objeto
+   c) Si dos objetos son del mismo tipo
+   d) Si dos listas tienen la misma longitud
+   ✓ Respuesta: b
+
+43. ¿Qué imprime este código?
+   palabra = "Python"
+   print(palabra[0], palabra[-1])
+   a) y n
+   b) P o
+   c) P n
+   d) y o
+   ✓ Respuesta: c
+
+44. ¿Qué imprime este código?
+   palabra = "Python"
+   print(palabra[0:3])
+   a) Pyt
+   b) Pyth
+   c) yth
+   d) P
+   ✓ Respuesta: a
+
+45. ¿Qué imprime este código?
+   print(len("3.1416"))
+   a) 4
+   b) 5
+   c) 3.1416
+   d) 6
+   ✓ Respuesta: d
+
+46. ¿Qué imprime este código?
+   primos = [2, 3, 5, 7, 11]
+   print(primos[1:4])
+   a) [5, 7, 11]
+   b) [3, 5, 7]
+   c) [2, 3, 5]
+   d) (3, 5, 7)
+   ✓ Respuesta: b
+
+47. ¿Qué imprime este código?
+   cuadrados = [1, 4, 9, 16, 25]
+   print(cuadrados[-2])
+   a) 9
+   b) 4
+   c) 16
+   d) 25
+   ✓ Respuesta: c
+
+48. ¿Qué imprime este código?
+   punto = (3, -2)
+   print(punto[1])
+   a) -2
+   b) 3
+   c) (3, -2)
+   d) IndexError
+   ✓ Respuesta: a
+
+49. ¿Qué ocurre al ejecutar este código?
+   primos = [2, 3, 5, 7, 11]
+   print(primos[5])
+   a) Imprime 11, el quinto elemento de primos
+   b) Imprime None, pues no hay sexto elemento
+   c) Imprime [], porque esa posición está vacía
+   d) IndexError: list index out of range
+   ✓ Respuesta: d
+
+50. ¿Qué imprime este código?
+   calificaciones = [8, 6, 9]
+   antes = id(calificaciones)
+   calificaciones[1] = 10
+   print(calificaciones, id(calificaciones) == antes)
+   a) [10, 6, 9] False
+   b) [8, 10, 9] False
+   c) [8, 10, 9] True
+   d) [8, 6, 10] True
+   ✓ Respuesta: c
+
+51. ¿Qué ocurre al ejecutar este código?
+   texto = "raiz"
+   texto[0] = "R"
+   a) texto ahora vale "Raiz", porque se cambió la primera letra
+   b) TypeError: 'str' object does not support item assignment
+   c) texto ahora vale "Rraiz", porque la R se insertó al inicio
+   d) texto sigue valiendo "raiz", pero no se muestra ningún error
+   ✓ Respuesta: b
+
+52. Después de ejecutar este código, ¿qué afirmación es correcta?
+   animal = "pato"
+   animal = "g" + animal[1:]
+   a) animal apunta a un objeto nuevo "gato"; "pato" no cambió
+   b) Se modificó la primera letra del objeto "pato" original
+   c) Se produce un TypeError, porque las cadenas son inmutables
+   d) animal conserva la misma identidad (id) que tenía antes
+   ✓ Respuesta: a
+
+53. ¿Qué imprime este código y por qué?
+   x = 25
+   antes = id(x)
+   x = x + 1
+   print(id(x) == antes)
+   a) True, porque x sigue siendo la misma variable
+   b) True, porque los enteros de Python son mutables
+   c) TypeError, porque no se puede modificar un entero
+   d) False, porque x + 1 crea un objeto entero nuevo
+   ✓ Respuesta: d
+
+54. ¿Qué imprime este código?
+   a = 20
+   b = "20"
+   print(a + a, b + b)
+   a) 40 40
+   b) 2020 2020
+   c) 40 2020
+   d) TypeError
+   ✓ Respuesta: c
+
+55. ¿Qué imprime este código?
+   print(int(3.99))
+   a) 4
+   b) 3
+   c) 3.99
+   d) ValueError
+   ✓ Respuesta: b
+
+56. ¿Qué imprime este código?
+   print(bool(0), bool("hola"), bool(""))
+   a) False True False
+   b) False True True
+   c) True True False
+   d) False False False
+   ✓ Respuesta: a
+
+57. ¿Cuál de estas instrucciones produce un ValueError?
+   a) float("3.14")
+   b) str(2026.5)
+   c) int("tres")
+   d) int("2026")
+   ✓ Respuesta: c
+
+58. ¿Qué imprime este código?
+   print(float(7), type(str(2026)))
+   a) 7 <class 'int'>
+   b) 7.0 <class 'int'>
+   c) 7 <class 'str'>
+   d) 7.0 <class 'str'>
+   ✓ Respuesta: d
+
+59. ¿Qué imprime este código?
+   nombre = "Emmy"
+   apellido = "Noether"
+   completo = nombre + " " + apellido
+   print(len(completo))
+   a) 11
+   b) 12
+   c) 2
+   d) 10
+   ✓ Respuesta: b
+
+60. Al ejecutar un ejercicio aparece NameError: name '______' is not defined. ¿Qué significa?
+   a) Que todavía no completaste ese espacio en blanco
+   b) Que el entorno quarto-python no está configurado
+   c) Que pediste un índice mayor que el número de elementos
+   d) Que intentaste modificar un objeto inmutable
+   ✓ Respuesta: a
+```
+
+## python_ejercicio2 — Atributos y métodos (preguntas 61–85)
+
+```
+61. ¿Cuál es la diferencia principal entre un atributo y un método de un objeto?
+   a) El atributo es una función; el método es un dato del objeto
+   b) El atributo es un dato; el método es una función y lleva paréntesis
+   c) Los dos llevan paréntesis, pero el método además lleva un punto
+   d) Los atributos solo existen en cadenas y los métodos solo en números
+   ✓ Respuesta: b
+
+62. ¿Qué imprime este código?
+       numero = 3 + 4j
+       print(numero.real)
+       print(numero.imag)
+   a) 3 y 4j
+   b) 3 y 4
+   c) 3.0 y 4.0
+   d) 4.0 y 3.0
+   ✓ Respuesta: c
+
+63. ¿Qué imprime este código?
+       lado = 7
+       print(lado.imag)
+   a) Imprime 0
+   b) Imprime 7
+   c) Imprime 7j
+   d) Da un error
+   ✓ Respuesta: a
+
+64. ¿Qué ocurre al ejecutar este código?
+       z = 2 + 5j
+       print(z.real())
+   a) Imprime 2.0, la parte real del complejo z
+   b) Imprime 2, porque la parte real es entera
+   c) AttributeError, pues z no tiene atributo real
+   d) TypeError: 'float' object is not callable
+   ✓ Respuesta: d
+
+65. ¿Qué regresa la función dir() cuando le das un objeto?
+   a) Una lista con los atributos y métodos del objeto
+   b) La documentación completa del objeto, con ejemplos
+   c) El tipo del objeto, por ejemplo <class 'str'>
+   d) La dirección en la memoria donde vive el objeto
+   ✓ Respuesta: a
+
+66. ¿Cuál es la forma correcta de consultar la documentación del método replace de las cadenas?
+   a) help(str.replace())
+   b) str.replace.help()
+   c) help(str.replace)
+   d) dir(str.replace())
+   ✓ Respuesta: c
+
+67. ¿Qué ocurre al ejecutar este código?
+       primos = [2, 3, 5, 7]
+       print(primos.len())
+   a) Imprime 4, porque len() funciona como método de la lista
+   b) AttributeError: 'list' object has no attribute 'len'
+   c) TypeError: len() takes exactly one argument (0 given)
+   d) Imprime None, porque el método no regresa ningún valor
+   ✓ Respuesta: b
+
+68. ¿Por qué print(7.numerator) produce un SyntaxError, mientras que print((7).numerator) imprime 7?
+   a) Porque los enteros no tienen el atributo numerator
+   b) Porque numerator es un método y le faltan los paréntesis
+   c) Porque Python lee el punto tras el 7 como punto decimal
+   d) Porque numerator solo funciona con fracciones de tipo float
+   ✓ Respuesta: c
+
+69. ¿Qué imprime este código?
+       rango = range(1, 20, 3)
+       print(rango.start, rango.stop, rango.step)
+   a) 1 19 3
+   b) 1 20 3
+   c) 0 20 1
+   d) 1 3 20
+   ✓ Respuesta: b
+
+70. ¿Qué imprime este código?
+       pi = "3.1416"
+       pi.replace(".", ",")
+       print(pi)
+   a) 3.1416
+   b) 3,1416
+   c) None
+   d) 31416
+   ✓ Respuesta: a
+
+71. ¿Qué imprime este código?
+       pi = "3.1415926535"
+       print(pi.count("5"))
+   a) 1
+   b) 2
+   c) 4
+   d) 3
+   ✓ Respuesta: d
+
+72. ¿Qué imprime este código?
+       primos = "2,3,5,7".split(",")
+       print(primos)
+   a) ('2', '3', '5', '7')
+   b) ['2', '3', '5', '7']
+   c) ['2,', '3,', '5,', '7']
+   d) {'2', '3', '5', '7'}
+   ✓ Respuesta: b
+
+73. ¿Qué imprime este código?
+       print(" + ".join(["1", "3", "5"]))
+   a) '1 + 3 + 5'
+   b) + 1 + 3 + 5
+   c) 1 + 3 + 5
+   d) 1 + 3 + 5 +
+   ✓ Respuesta: c
+
+74. ¿Qué imprime este código?
+       cuadrados = [1, 4]
+       cuadrados.append([9, 16])
+       print(len(cuadrados))
+   a) 3
+   b) 4
+   c) 2
+   d) 5
+   ✓ Respuesta: a
+
+75. ¿Qué imprime este código?
+       cuadrados = [1, 9, 16]
+       cuadrados.insert(1, 4)
+       print(cuadrados)
+   a) [4, 1, 9, 16]
+   b) [1, 9, 16, 4]
+   c) [1, 9, 4, 16]
+   d) [1, 4, 9, 16]
+   ✓ Respuesta: d
+
+76. ¿Qué imprime este código?
+       primos = [2, 3, 5, 7]
+       ultimo = primos.pop()
+       print(ultimo, primos)
+   a) 2 [3, 5, 7]
+   b) [7] [2, 3, 5]
+   c) 7 [2, 3, 5]
+   d) 3 [2, 3, 5]
+   ✓ Respuesta: c
+
+77. ¿Qué imprime este código?
+       numeros = [1, 2, 1, 3]
+       numeros.remove(1)
+       print(numeros)
+   a) [2, 3]
+   b) [1, 1, 3]
+   c) [1, 2, 3]
+   d) [2, 1, 3]
+   ✓ Respuesta: d
+
+78. ¿Qué imprime este código?
+       impares = [9, 1, 7, 3]
+       ordenada = impares.sort()
+       print(ordenada)
+   a) None, porque sort() ordena en su lugar
+   b) [1, 3, 7, 9], la lista ya ordenada
+   c) [9, 1, 7, 3], porque sort() no cambia nada
+   d) [9, 7, 3, 1], ordenada de mayor a menor
+   ✓ Respuesta: a
+
+79. Quieres obtener una lista ordenada SIN modificar la lista original datos. ¿Qué escribes?
+   a) ordenados = datos.sort()
+   b) ordenados = sorted(datos)
+   c) ordenados = list(datos)
+   d) ordenados = datos.sorted()
+   ✓ Respuesta: b
+
+80. ¿Qué imprime este código?
+       fracciones = [0.5, 0.25, 0.75, 0.2]
+       fracciones.sort(reverse=True)
+       print(fracciones.index(0.25))
+   a) 1
+   b) 3
+   c) 2
+   d) 0.25
+   ✓ Respuesta: c
+
+81. ¿Qué imprime este código?
+       a = [1, 2, 3]
+       b = a
+       b.append(4)
+       print(a)
+   a) Imprime [1, 2, 3]
+   b) Imprime [1, 2, 3, 4]
+   c) Imprime [4, 1, 2, 3]
+   d) Da AttributeError
+   ✓ Respuesta: b
+
+82. ¿Qué imprime este código?
+       puntos = (1, 4, 9, 4)
+       print(puntos.count(4), puntos.index(4))
+   a) 2 3
+   b) 1 1
+   c) 4 1
+   d) 2 1
+   ✓ Respuesta: d
+
+83. ¿Qué imprime este código?
+       divisores_12 = {1, 2, 3, 4, 6, 12}
+       divisores_18 = {1, 2, 3, 6, 9, 18}
+       print(max(divisores_12.intersection(divisores_18)))
+   a) 6
+   b) 4
+   c) 1
+   d) 3
+   ✓ Respuesta: a
+
+84. ¿Qué imprime este código?
+       constantes = {"pi": 3.1416, "e": 2.7183}
+       print(constantes.get("phi"))
+   a) Un KeyError
+   b) Imprime 0.0
+   c) Imprime None
+   d) Imprime 'phi'
+   ✓ Respuesta: c
+
+85. ¿Qué imprime este código?
+       d = {"a": 1}
+       d.update({"b": 2, "a": 3})
+       print(d)
+   a) {'a': 1, 'b': 2}
+   b) {'b': 2, 'a': 3}
+   c) {'a': 4, 'b': 2}
+   d) {'a': 3, 'b': 2}
+   ✓ Respuesta: d
+```
+
+## python_buenas_practicas — Sintaxis de nombres, buenas prácticas y programación defensiva (preguntas 86–110)
+
+```
+86. ¿Cuál de estos es un nombre de variable válido en Python?
+   a) nota-final
+   b) 2lugar
+   c) nota_final
+   d) class
+   ✓ Respuesta: c
+
+87. ¿Cuál de estas líneas produce un SyntaxError?
+   a) _temporal = 3
+   b) lugar2 = "Luis"
+   c) Pi = 3.14159
+   d) 2pi = 6.2832
+   ✓ Respuesta: d
+
+88. ¿Qué imprime este código?
+       edad = 20
+       Edad = 30
+       EDAD = 40
+       print(edad, Edad, EDAD)
+   a) 40 40 40
+   b) 20 30 40
+   c) 20 20 20
+   d) NameError
+   ✓ Respuesta: b
+
+89. ¿Qué imprime este código?
+       import keyword
+       print(keyword.iskeyword("if"), keyword.iskeyword("clase"))
+   a) True False
+   b) False True
+   c) True True
+   d) False False
+   ✓ Respuesta: a
+
+90. Según la guía de estilo PEP 8, ¿cómo se escribe el nombre de una constante?
+   a) pi = 3.14159
+   b) Pi = 3.14159
+   c) _pi = 3.14159
+   d) PI = 3.14159
+   ✓ Respuesta: d
+
+91. ¿Qué nombre de variable sigue la convención snake_case de PEP 8?
+   a) numeroDeEstudiantes
+   b) NumeroEstudiantes
+   c) numero_estudiantes
+   d) NUMERO-ESTUDIANTES
+   ✓ Respuesta: c
+
+92. Según PEP 8, ¿qué estilo se usa para los nombres de las clases, como MatrizCuadrada?
+   a) PascalCase: cada palabra inicia con mayúscula
+   b) snake_case: minúsculas separadas por guion bajo
+   c) UPPER_CASE: mayúsculas separadas por guion bajo
+   d) _privado: nombres que empiezan con guion bajo
+   ✓ Respuesta: a
+
+93. ¿Por qué se recomienda evitar l (ele minúscula), O (o mayúscula) e I (i mayúscula) como nombres?
+   a) Porque son palabras reservadas de Python
+   b) Porque producen un SyntaxError al usarlas
+   c) Porque se confunden con los números 1 y 0
+   d) Porque Python ignora mayúsculas y minúsculas
+   ✓ Respuesta: c
+
+94. ¿Qué ocurre al ejecutar este código?
+       sum = 10
+       print(sum([1, 2, 3]))
+   a) Imprime 6, porque sum() sigue siendo la función
+   b) Imprime 16, porque suma 10 + 1 + 2 + 3
+   c) SyntaxError: sum es una palabra reservada
+   d) TypeError: 'int' object is not callable
+   ✓ Respuesta: d
+
+95. Sobrescribiste la función integrada max con max = 10. ¿Cómo recuperas la función original?
+   a) del max
+   b) max = 0
+   c) del 10
+   d) rm(max)
+   ✓ Respuesta: a
+
+96. ¿Cuál línea sigue las buenas prácticas de estilo de PEP 8?
+   a) total=a + b * 2
+   b) total = a + b * 2
+   c) total =a+ b * 2
+   d) total = a + b * 2;
+   ✓ Respuesta: b
+
+97. ¿Por qué es mejor escribir precio * TASA_IVA que precio * 0.16?
+   a) Porque Python no acepta decimales en una multiplicación
+   b) Porque así el programa se ejecuta mucho más rápido
+   c) Porque el nombre TASA_IVA explica qué significa el 0.16
+   d) Porque las constantes no se pueden escribir con minúsculas
+   ✓ Respuesta: c
+
+98. ¿Qué es un error silencioso (o error lógico)?
+   a) Un error que detiene el programa sin mostrar mensaje en pantalla
+   b) Un programa que no marca error, pero da un resultado incorrecto
+   c) Un SyntaxError que Python solo detecta al final del programa
+   d) Un error que solo ocurre cuando se ejecuta en Google Colab
+   ✓ Respuesta: b
+
+99. ¿Qué imprime este código, que intenta calcular el promedio de 6 y 10?
+       promedio = 6 + 10 / 2
+       print(promedio)
+   a) 8.0
+   b) 13.0
+   c) 11.0
+   d) 5.0
+   ✓ Respuesta: c
+
+100. ¿Qué imprime este código?
+       mitad = 17 // 2
+       print(mitad)
+   a) 8
+   b) 8.5
+   c) 9
+   d) 1
+   ✓ Respuesta: a
+
+101. ¿Qué imprime este código?
+       total = "8" + "9"
+       print(total)
+   a) 17
+   b) 89
+   c) TypeError
+   d) "8" + "9"
+   ✓ Respuesta: b
+
+102. Al ejecutar math.sin(90) obtienes 0.8939966636005579 en lugar de 1.0. ¿Por qué?
+   a) Porque math.sin() redondea siempre sus resultados
+   b) Porque hay que escribir el ángulo como math.sin(90.0)
+   c) Porque los decimales se guardan de forma aproximada
+   d) Porque math.sin() espera radianes, no grados
+   ✓ Respuesta: d
+
+103. ¿Qué tipo de error produce int("diez")?
+   a) ValueError
+   b) TypeError
+   c) NameError
+   d) SyntaxError
+   ✓ Respuesta: a
+
+104. ¿Qué ocurre al ejecutar este código?
+       primos = [2, 3, 5]
+       print(primos[3])
+   a) Imprime 5 (el tercer elemento de la lista)
+   b) ValueError: list index out of range
+   c) IndexError: list index out of range
+   d) Imprime None (no hay un cuarto elemento)
+   ✓ Respuesta: c
+
+105. ¿Qué ocurre al ejecutar este código?
+       cuadrados = [1, 4, 9]
+       assert len(cuadrados) > 3, "Faltan cuadrados"
+       print("Listo")
+   a) Imprime Listo, porque assert solo da una advertencia
+   b) Imprime Faltan cuadrados y después imprime Listo
+   c) Se detiene con AssertionError: Faltan cuadrados
+   d) Se detiene con un ValueError: Faltan cuadrados
+   ✓ Respuesta: c
+
+106. ¿Qué imprime este código?
+       texto = "3.5"
+       try:
+           numero = int(texto)
+           print("Número:", numero)
+       except ValueError:
+           print("Aviso: no es un entero")
+       print("El programa continúa")
+   a) Número: 3
+      El programa continúa
+   b) Aviso: no es un entero
+      El programa continúa
+   c) Número: 3.5
+      El programa continúa
+   d) Se detiene con ValueError sin imprimir nada
+   ✓ Respuesta: b
+
+107. ¿Qué imprime este código?
+       dividendo = 10
+       divisor = 4
+       try:
+           resultado = dividendo / divisor
+           print("Resultado:", resultado)
+       except ZeroDivisionError:
+           print("Error: no se puede dividir entre cero")
+       finally:
+           print("Fin del cálculo")
+   a) Resultado: 2
+      Fin del cálculo
+   b) Fin del cálculo
+      Resultado: 2.5
+   c) Resultado: 0.4
+      Fin del cálculo
+   d) Resultado: 2.5
+      Fin del cálculo
+   ✓ Respuesta: d
+
+108. ¿Por qué se recomienda escribir except ValueError: en lugar de solo except:?
+   a) Porque except: sin tipo produce un SyntaxError
+   b) Porque except: también oculta errores que no esperabas
+   c) Porque except ValueError: atrapa todos los tipos de error
+   d) Porque así el bloque finally nunca llega a ejecutarse
+   ✓ Respuesta: b
+
+109. ¿Para qué sirve la instrucción pass?
+   a) Para salir de un ciclo y continuar con el programa
+   b) Para detener por completo la ejecución del programa
+   c) Para lanzar un error con un mensaje escrito por ti
+   d) Para no hacer nada en un bloque que aún no escribes
+   ✓ Respuesta: d
+
+110. ¿Por qué no se recomienda usar exit() en Jupyter, Google Colab o Quarto?
+   a) Porque detiene el kernel y hay que reiniciarlo
+   b) Porque la función exit() no existe en esos entornos
+   c) Porque exit() solo funciona dentro de un ciclo for
+   d) Porque exit() borra el archivo del notebook actual
+   ✓ Respuesta: a
+```
+
+## python_condicionales — Condicionales (preguntas 111–135)
+
+```
+111. ¿Qué imprime este código?
+       x = 7
+       print(x > 3 and x % 2 == 0)
+   a) True
+   b) False
+   c) 7
+   d) SyntaxError
+   ✓ Respuesta: b
+
+112. ¿Qué imprime print(not 5 > 3 or 2 == 2)?
+   a) False
+   b) SyntaxError
+   c) True
+   d) None
+   ✓ Respuesta: c
+
+113. ¿Qué imprime este código?
+       print(bool([0]), bool(""), bool(0.0), bool(None))
+   a) False False False False
+   b) True True False False
+   c) False True False True
+   d) True False False False
+   ✓ Respuesta: d
+
+114. ¿Qué imprime este código?
+       x = -0.5
+       print(0 <= x <= 10)
+   a) False
+   b) True
+   c) FALSE
+   d) -0.5
+   ✓ Respuesta: a
+
+115. ¿Qué imprime este código?
+       calificacion = 8
+       if calificacion >= 9:
+           print("MB")
+       elif calificacion >= 8:
+           print("B")
+       elif calificacion >= 6:
+           print("S")
+       else:
+           print("NA")
+   a) MB
+   b) S
+   c) B
+   d) B y S
+   ✓ Respuesta: c
+
+116. ¿Qué ocurre al ejecutar la línea if x = 5: ?
+   a) Asigna 5 a x y entra al bloque
+   b) SyntaxError: se debe usar ==
+   c) Compara x con 5 normalmente
+   d) Siempre da True y entra al if
+   ✓ Respuesta: b
+
+117. ¿Qué imprime este código?
+       color = "verde"
+       if color == "rojo" or "azul":
+           print("cálido")
+       else:
+           print("frío")
+   a) Imprime frío
+   b) No imprime nada
+   c) Da TypeError
+   d) Imprime cálido
+   ✓ Respuesta: d
+
+118. ¿Qué imprime este código?
+       numero = 0
+       if numero != 0:
+           if numero > 0:
+               print("Positivo")
+           else:
+               print("Negativo")
+       else:
+           print("Cero")
+   a) Solo imprime "Cero"
+   b) Solo imprime "Positivo"
+   c) Solo imprime "Negativo"
+   d) No imprime ningún texto
+   ✓ Respuesta: a
+
+119. ¿Qué imprime este código?
+       paridad = "par" if 15 % 2 == 0 else "impar"
+       print(paridad)
+   a) par
+   b) impar
+   c) 1
+   d) paridad
+   ✓ Respuesta: b
+
+120. ¿Qué imprime este código? (regla del año bisiesto)
+       anio = 2100
+       print((anio % 4 == 0 and anio % 100 != 0) or anio % 400 == 0)
+   a) True
+   b) 2100
+   c) False
+   d) SyntaxError
+   ✓ Respuesta: c
+
+121. ¿Qué imprime este código?
+       a, b, c = 1, 2, 1
+       disc = b ** 2 - 4 * a * c
+       if disc > 0:
+           print("Dos raíces reales")
+       elif disc == 0:
+           print("Una raíz real")
+       else:
+           print("Ninguna raíz real")
+   a) Imprime "Dos raíces reales"
+   b) Imprime "Ninguna raíz real"
+   c) No imprime ningún mensaje
+   d) Imprime "Una raíz real"
+   ✓ Respuesta: d
+
+122. ¿Qué ocurre al ejecutar if "8" > 6: ?
+   a) TypeError: no se puede comparar str con int
+   b) Es True, porque Python convierte "8" en 8
+   c) Es False, porque un texto es menor que un número
+   d) SyntaxError, porque falta un paréntesis en el if
+   ✓ Respuesta: a
+
+123. ¿Qué error produce este código?
+       x = 5
+       if x > 3
+           print(x)
+   a) IndentationError (sobra la sangría)
+   b) SyntaxError (faltan los dos puntos)
+   c) Ninguno, el programa imprime 5
+   d) NameError (x no está definida)
+   ✓ Respuesta: b
+
+124. ¿Qué hace la instrucción raise ValueError("mensaje") dentro de un if?
+   a) Muestra un aviso y el programa continúa normal
+   b) Convierte el valor recibido al tipo correcto
+   c) Detiene el programa con ValueError: mensaje
+   d) Pide al usuario que escriba un nuevo valor
+   ✓ Respuesta: c
+
+125. ¿Qué imprime este código?
+       print("gora" in "Pitágoras", 4 in [1, 2, 3])
+   a) False False
+   b) True True
+   c) False True
+   d) True False
+   ✓ Respuesta: d
+
+126. ¿Qué imprime print(bool("0"), bool(0))?
+   a) True False
+   b) False False
+   c) False True
+   d) True True
+   ✓ Respuesta: a
+
+127. ¿Qué imprime este código? (observa que son dos if, sin elif)
+       n = 12
+       if n % 2 == 0:
+           print("par")
+       if n % 3 == 0:
+           print("múltiplo de 3")
+   a) Solo par, porque el primer if ya se cumplió
+   b) par y múltiplo de 3, porque son dos if separados
+   c) Solo múltiplo de 3, porque el último if gana
+   d) No imprime nada, porque falta escribir el else final
+   ✓ Respuesta: b
+
+128. ¿Qué imprime este código?
+       n = 12
+       if n % 2 == 0:
+           print("par")
+       elif n % 3 == 0:
+           print("múltiplo de 3")
+   a) par y múltiplo de 3, porque ambas son ciertas
+   b) Solo múltiplo de 3, porque elif tiene prioridad
+   c) Solo par, porque el elif ya no se revisa
+   d) SyntaxError, porque elif necesita un else
+   ✓ Respuesta: c
+
+129. ¿Qué imprime este código?
+       x = 5
+       if x > 3:
+           x = x - 4
+       if x > 3:
+           print("grande")
+       else:
+           print("chico")
+   a) Imprime grande
+   b) Imprime ambas
+   c) No imprime nada
+   d) Imprime chico
+   ✓ Respuesta: d
+
+130. ¿Qué imprime este código?
+       numero = 4
+       if numero < 0:
+           print("negativo")
+       print("fin")
+   a) fin
+   b) None
+   c) True
+   d) False
+   ✓ Respuesta: a
+
+131. En Python, ¿cómo se indica dónde termina el bloque de un if?
+   a) Con la palabra fi, como en Bash
+   b) Cuando termina la indentación
+   c) Con la palabra end al final
+   d) Con una llave de cierre }
+   ✓ Respuesta: b
+
+132. ¿Qué imprime este código?
+       c = "8.5"
+       print(isinstance(c, (int, float)) and 0 <= c <= 10)
+   a) Imprime True
+   b) Da TypeError
+   c) Imprime False
+   d) Da ValueError
+   ✓ Respuesta: c
+
+133. Queremos calcular promedio = total / estudiantes, pero estudiantes puede ser 0 y el programa debe seguir. ¿Qué herramienta es la adecuada?
+   a) assert estudiantes > 0, "No hay estudiantes"
+   b) if estudiantes == 0: raise ValueError(...)
+   c) Ninguna: Python regresa 0 cuando se divide entre 0
+   d) Un if / else que divida solo si estudiantes > 0
+   ✓ Respuesta: d
+
+134. ¿Cuál condición revisa correctamente si color es "rojo" o "azul"?
+   a) color in ["rojo", "azul"]
+   b) color == "rojo" or "azul"
+   c) color == ("rojo" or "azul")
+   d) color = "rojo" or "azul"
+   ✓ Respuesta: a
+
+135. ¿Qué imprime este código?
+       n = 9
+       if n % 2 == 0 and n != 2:
+           print("compuesto (par)")
+       elif n in [2, 3, 5, 7]:
+           print("primo")
+       else:
+           print("revisar más divisores")
+   a) primo y revisar más divisores
+   b) Solo revisar más divisores
+   c) Solo el mensaje compuesto (par)
+   d) No imprime ningún mensaje
+   ✓ Respuesta: b
+```
+
+## python_numpy — Introducción a NumPy (preguntas 136–170)
+
+```
+136. ¿Qué imprime este código?
+       import numpy as np
+       print([1, 2] * 2, np.array([1, 2]) * 2)
+   a) [[1, 2], [1, 2]] [2 4]
+   b) [1, 2, 1, 2] [1 2 1 2]
+   c) [1, 2, 1, 2] [2 4]
+   d) [1, 2, 1, 2] [2. 4.]
+   ✓ Respuesta: c
+
+137. ¿Cuál afirmación sobre los arreglos de NumPy es correcta?
+   a) Todos sus elementos tienen el mismo tipo (dtype)
+   b) Pueden mezclar texto y números igual que una lista
+   c) El operador + pega un arreglo al final del otro
+   d) Son más lentos que las listas en cálculos numéricos
+   ✓ Respuesta: a
+
+138. ¿Qué imprime este código?
+       v = np.array([1, 2.5, 3])
+       print(v.dtype)
+   a) int64
+   b) object
+   c) float32
+   d) float64
+   ✓ Respuesta: d
+
+139. ¿Qué imprime print(np.arange(0, 10, 3))?
+   a) [0 3 6 9]
+   b) [3 6 9 12]
+   c) [0 3 6 10]
+   d) [0 10 3]
+   ✓ Respuesta: a
+
+140. ¿Qué imprime print(np.linspace(0, 2, 5))?
+   a) [0.  0.5 1.  1.5]
+   b) [0.  0.5 1.  1.5 2. ]
+   c) [0.4 0.8 1.2 1.6 2. ]
+   d) [0.  0.4 0.8 1.2 1.6]
+   ✓ Respuesta: b
+
+141. ¿Qué imprime este código?
+       m = np.array([[1, 2, 3],
+                     [4, 5, 6]])
+       print(m.ndim, m.shape, m.size)
+   a) 2 (3, 2) 6
+   b) 6 (2, 3) 2
+   c) 1 (6,) 6
+   d) 2 (2, 3) 6
+   ✓ Respuesta: d
+
+142. ¿Qué imprime este código?
+       c = np.zeros((4, 2, 5))
+       print(c.ndim, c.size)
+   a) 3 40
+   b) 3 11
+   c) 40 3
+   d) 4 40
+   ✓ Respuesta: a
+
+143. Si a = np.arange(12), ¿cuál de estas instrucciones produce un ValueError?
+   a) a.reshape(3, 4)
+   b) a.reshape(2, 2, 3)
+   c) a.reshape(5, 3)
+   d) a.reshape(6, 2)
+   ✓ Respuesta: c
+
+144. ¿Qué imprime este código?
+       a = np.array([[1, 2], [3, 4]])
+       b = np.array([[5, 6], [7, 8]])
+       print(a * b)
+   a) [[19 22]
+       [43 50]]
+   b) [[ 5 12]
+       [21 32]]
+   c) [[ 6  8]
+       [10 12]]
+   d) [[23 34]
+       [31 46]]
+   ✓ Respuesta: b
+
+145. ¿Qué imprime print(np.array([4, 6]) / 2)?
+   a) [2 3]
+   b) [4 6 4 6]
+   c) [2. 3.]
+   d) [2, 3]
+   ✓ Respuesta: c
+
+146. ¿Qué imprime este código?
+       x = np.array([7, 8])
+       y = np.array([2, 3])
+       print(x // y, x % y)
+   a) [4 3] [1 2]
+   b) [3 3] [1 2]
+   c) [1 2] [3 2]
+   d) [3 2] [1 2]
+   ✓ Respuesta: d
+
+147. ¿Qué imprime este código?
+       a = np.array([[1, 2, 3],
+                     [4, 5, 6]])
+       b = np.array([10, 20, 30])
+       print(a + b)
+   a) ValueError: formas distintas
+   b) [[11 12 13]
+       [24 25 26]]
+   c) [[11 22 33]
+       [14 25 36]]
+   d) [[11 22 33]
+       [ 4  5  6]]
+   ✓ Respuesta: c
+
+148. Si a tiene forma (2, 3), ¿cuál operación produce un ValueError?
+   a) a + np.array([10, 20])
+   b) a + np.full((2, 3), 10)
+   c) a + np.array([[10], [20]])
+   d) a + np.array([1, 2, 3])
+   ✓ Respuesta: a
+
+149. ¿Qué imprime este código?
+       columna = np.arange(1, 4).reshape(3, 1)
+       fila = np.arange(1, 4)
+       print(columna * fila)
+   a) [[1 0 0]
+       [0 4 0]
+       [0 0 9]]
+   b) ValueError: shapes (3,1) (3,)
+   c) [[1 1 1]
+       [2 2 2]
+       [3 3 3]]
+   d) [[1 2 3]
+       [2 4 6]
+       [3 6 9]]
+   ✓ Respuesta: d
+
+150. print(np.sin(np.pi)) muestra 1.2246467991473532e-16. ¿Qué significa ese número?
+   a) 1.2246... × 10^(-16), es decir, casi cero
+   b) Un código de error interno que regresa NumPy
+   c) 1.2246... menos 16, es decir, -14.77...
+   d) 1.2246... × 10^16, es decir, un número enorme
+   ✓ Respuesta: a
+
+151. ¿Por qué np.sin(np.pi) no da exactamente 0?
+   a) Porque np.sin trabaja en grados, no en radianes
+   b) Porque np.pi es solo una aproximación de π
+   c) Porque NumPy tiene un error en la función seno
+   d) Porque primero hay que escribir import math
+   ✓ Respuesta: b
+
+152. ¿Qué ocurre al ejecutar print(np.sqrt([-1, 4]))?
+   a) ValueError: math domain error; se detiene
+   b) Imprime [1. 2.], usando el valor absoluto
+   c) Da un RuntimeWarning e imprime [nan  2.]
+   d) Imprime [0.+1.j 2.+0.j] sin advertencia
+   ✓ Respuesta: c
+
+153. ¿Qué imprime print(np.log([0, 1])) (además de una advertencia)?
+   a) [-inf   1.]
+   b) [nan  0.]
+   c) [inf  0.]
+   d) [-inf   0.]
+   ✓ Respuesta: d
+
+154. ¿Qué número representa 3e5?
+   a) 300000
+   b) 3⁵ = 243
+   c) 15
+   d) 0.00003
+   ✓ Respuesta: a
+
+155. ¿Qué imprime este código?
+       d = np.array([2, 9, 4, 7, 3])
+       print(np.mean(d), np.median(d))
+   a) 4.0 5.0
+   b) 5.0 7.0
+   c) 5.0 4.0
+   d) 25 4.0
+   ✓ Respuesta: c
+
+156. ¿Qué imprime este código?
+       d = np.array([4, 1, 9, 2])
+       print(np.argmax(d), np.argmin(d))
+   a) 9 1
+   b) 2 1
+   c) 1 2
+   d) 3 2
+   ✓ Respuesta: b
+
+157. ¿Qué imprime este código?
+       m = np.array([[1, 2, 3],
+                     [4, 5, 6]])
+       print(m.sum(axis=0))
+   a) [ 6 15]
+   b) 21
+   c) [5 7 9]
+   d) [[5 7 9]]
+   ✓ Respuesta: c
+
+158. Con la misma matriz m de la pregunta anterior, ¿qué imprime print(m.max(axis=1))?
+   a) [4 5 6]
+   b) 6
+   c) [ 6 15]
+   d) [3 6]
+   ✓ Respuesta: d
+
+159. ¿Qué imprime print(np.arange(1, 6).prod())?
+   a) 15
+   b) 120
+   c) 24
+   d) 720
+   ✓ Respuesta: b
+
+160. np.arange(1, 22).prod() debería dar 21!, pero imprime un número negativo. ¿Por qué?
+   a) 21! no cabe en un int64 y se desborda sin avisar
+   b) prod() solo funciona con menos de 20 elementos
+   c) np.arange(1, 22) incluye también números negativos
+   d) NumPy no puede multiplicar más de 20 números
+   ✓ Respuesta: a
+
+161. ¿Qué imprime este código?
+       a = np.array([10, 20, 30, 40, 50])
+       print(a[1:4], a[::2])
+   a) [10 20 30] [10 30 50]
+   b) [20 30 40 50] [20 40]
+   c) [20 30 40] [10 30 50]
+   d) [20 30 40] [20 40]
+   ✓ Respuesta: c
+
+162. ¿Qué imprime este código?
+       m = np.array([[1, 2, 3],
+                     [4, 5, 6],
+                     [7, 8, 9]])
+       print(m[1, 2], m[:, 1])
+   a) 8 [4 5 6]
+   b) 6 [2 5 8]
+   c) 6 [4 5 6]
+   d) 8 [2 5 8]
+   ✓ Respuesta: b
+
+163. Con la misma matriz m, ¿qué imprime print(m[1:3, 1:3])?
+   a) [[1 2]
+       [4 5]]
+   b) [[4 5]
+       [7 8]]
+   c) [[2 3]
+       [5 6]]
+   d) [[5 6]
+       [8 9]]
+   ✓ Respuesta: d
+
+164. ¿Qué imprime este código?
+       a = np.arange(0, 50, 10)
+       print(a[[1, 1, 3]])
+   a) [20 20 40]
+   b) [ 0  0 20]
+   c) IndexError
+   d) [10 10 30]
+   ✓ Respuesta: d
+
+165. Con la matriz m de 3 × 3 (del 1 al 9), ¿qué imprime print(m[[0, 1, 2], [2, 0, 1]])?
+   a) [3 4 8]
+   b) [3 1 2]
+   c) [7 2 6]
+   d) [1 5 9]
+   ✓ Respuesta: a
+
+166. ¿Qué imprime este código?
+       a = np.array([3, 13, 12, 10, 18, 6, 4, 8, 5])
+       print(a[a % 2 == 0])
+   a) [0 0 1 1 1 1 1 1 0]
+   b) [12 10 18  6  4  8]
+   c) [ 4  6  8 10 12 18]
+   d) [1 1 0 0 0 0 0 0 1]
+   ✓ Respuesta: b
+
+167. Con el mismo arreglo a, ¿cuál expresión obtiene los elementos mayores que 5 y menores que 13?
+   a) a[a > 5 and a < 13]
+   b) a[(a > 5) & (a < 13)]
+   c) a[(a > 5) | (a < 13)]
+   d) a[(a > 5) and (a < 13)]
+   ✓ Respuesta: b
+
+168. Con el mismo arreglo a, ¿qué imprime print(a[~(a > 5)])?
+   a) [5 4 3]
+   b) [0 6 8]
+   c) [3 4 5]
+   d) [4 5 6]
+   ✓ Respuesta: c
+
+169. ¿Qué imprime este código?
+       x = np.array([-2, 5, 0, -7, 3])
+       print(np.where(x >= 0, x, 0))
+   a) [0 5 0 0 3]
+   b) [0 1 1 0 1]
+   c) [-2 0 0 -7 0]
+   d) [2 5 0 7 3]
+   ✓ Respuesta: a
+
+170. ¿Qué imprime este código?
+       a = np.array([9, 2, 6, 1, 7])
+       b = np.sort(a)
+       print(a, np.argsort(a))
+   a) [1 2 6 7 9] [3 1 2 4 0]
+   b) [1 2 6 7 9] [0 1 2 3 4]
+   c) [9 2 6 1 7] [1 2 6 7 9]
+   d) [9 2 6 1 7] [3 1 2 4 0]
+   ✓ Respuesta: d
+```
+
+## python_algebra_lineal — Álgebra lineal con NumPy (preguntas 171–185)
+
+```
+171. ¿Qué imprime este código?
+       u = np.array([1, 2, 3])
+       v = np.array([4, 5, 6])
+       print(u @ v)
+   a) [ 4 10 18]
+   b) 32
+   c) 15
+   d) [5 7 9]
+   ✓ Respuesta: b
+
+172. Con los mismos vectores u = np.array([1, 2, 3]) y v = np.array([4, 5, 6]), ¿qué imprime print(u * v)?
+   a) 32
+   b) [5 7 9]
+   c) [ 4 10 18]
+   d) ValueError
+   ✓ Respuesta: c
+
+173. ¿Qué instrucción calcula la norma (longitud) de un vector v?
+   a) np.linalg.norm(v)
+   b) np.linalg.det(v)
+   c) np.sum(np.sqrt(v))
+   d) np.sqrt(np.sum(v))
+   ✓ Respuesta: a
+
+174. ¿Qué imprime este código?
+       w = np.array([3, 4])
+       print(np.linalg.norm(w))
+   a) 25
+   b) 7
+   c) [3. 4.]
+   d) 5.0
+   ✓ Respuesta: d
+
+175. ¿Qué imprime este código?
+       A = np.array([[1, 2],
+                     [3, 4]])
+       B = np.array([[0, 1],
+                     [1, 0]])
+       print(A @ B)
+   a) [[2 1] [4 3]]
+   b) [[0 2] [3 0]]
+   c) [[3 4] [1 2]]
+   d) [[1 2] [3 4]]
+   ✓ Respuesta: a
+
+176. Si A tiene forma (2, 3) y B tiene forma (3, 4), ¿qué forma tiene A @ B?
+   a) (3, 3)
+   b) (2, 3)
+   c) (2, 4)
+   d) (3, 4)
+   ✓ Respuesta: c
+
+177. ¿Qué ocurre al ejecutar este código?
+       C = np.array([[1, 2, 0],
+                     [0, 1, 3]])
+       C @ C
+   a) Eleva al cuadrado cada elemento, como C**2
+   b) ValueError: C tiene 3 columnas y solo 2 filas
+   c) Imprime una matriz de forma (2, 2), sin error
+   d) Imprime una matriz de forma (3, 3), sin error
+   ✓ Respuesta: b
+
+178. ¿Qué imprime este código?
+       M = np.array([[1, 2, 3],
+                     [4, 5, 6]])
+       print(M.T.shape)
+   a) (2, 3)
+   b) 6
+   c) (3, 3)
+   d) (3, 2)
+   ✓ Respuesta: d
+
+179. ¿Qué imprime print(np.eye(2))?
+   a) [[1. 0.] [0. 1.]]
+   b) [[1. 1.] [1. 1.]]
+   c) [[0. 0.] [0. 0.]]
+   d) [[0. 1.] [1. 0.]]
+   ✓ Respuesta: a
+
+180. ¿Qué imprime este código?
+       A = np.array([[2, 1],
+                     [1, 3]])
+       print(np.linalg.det(A))
+   a) Imprime 5, un entero exacto
+   b) Imprime 7.000000000000001
+   c) Imprime 5.000000000000001
+   d) Imprime la inversa de A
+   ✓ Respuesta: c
+
+181. ¿Qué ocurre al ejecutar este código?
+       S = np.array([[1, 2],
+                     [2, 4]])
+       np.linalg.inv(S)
+   a) Regresa la matriz cero [[0. 0.] [0. 0.]]
+   b) LinAlgError: S es singular (det(S) = 0)
+   c) Regresa [[ 4 -2] [-2  1]] como inversa
+   d) Regresa una matriz de inf, pues det(S) = 0
+   ✓ Respuesta: b
+
+182. Para comprobar que A @ np.linalg.inv(A) es la identidad, ¿por qué el capítulo usa np.allclose() en lugar de ==?
+   a) Porque == no funciona con arreglos de NumPy
+   b) Porque np.allclose() calcula la inversa más rápido
+   c) Porque == solo compara la primera fila de A
+   d) Porque los decimales tienen precisión limitada
+   ✓ Respuesta: d
+
+183. El sistema 2x + y = 5, x + 3y = 10 se resuelve con este código. ¿Qué imprime?
+       A = np.array([[2, 1],
+                     [1, 3]])
+       b = np.array([5, 10])
+       print(np.linalg.solve(A, b))
+   a) [ 5 10]
+   b) [3. 1.]
+   c) [1. 3.]
+   d) [2. 1.]
+   ✓ Respuesta: c
+
+184. ¿Qué imprime este código y qué ángulo forman los vectores?
+       a = np.array([2, 1])
+       b = np.array([-1, 2])
+       print(a @ b)
+   a) 0; son perpendiculares (90°)
+   b) 0; son paralelos, forman 0°
+   c) [-2  2]; forman 45° entre sí
+   d) 5; son perpendiculares (90°)
+   ✓ Respuesta: a
+
+185. ¿Qué imprime este código?
+       A = np.array([[1, 1],
+                     [0, 1]])
+       B = np.array([[1, 0],
+                     [1, 1]])
+       print(A @ B)
+   a) [[1 1] [1 2]]
+   b) [[2 1] [1 1]]
+   c) [[1 0] [0 1]]
+   d) [[2 1] [1 2]]
+   ✓ Respuesta: b
+```
+
+## python_sympy — Cálculo simbólico con SymPy (preguntas 186–200)
+
+```
+186. ¿Qué imprime este código?
+       import sympy as sp
+       print(sp.sqrt(8))
+   a) Imprime 2.82842712
+   b) Imprime sqrt(8)
+   c) Imprime 4*sqrt(2)
+   d) Imprime 2*sqrt(2)
+   ✓ Respuesta: d
+
+187. ¿Qué imprime este código?
+       x = sp.symbols("x")
+       print(x + 1/2)
+   a) x + 0.5
+   b) x + 1/2
+   c) x + 1
+   d) TypeError
+   ✓ Respuesta: a
+
+188. ¿Qué imprime este código?
+       x = sp.symbols("x")
+       f = x**2 + 3*x - 1
+       print(f.subs(x, 2))
+   a) 7
+   b) 6
+   c) 9
+   d) 5
+   ✓ Respuesta: c
+
+189. ¿Qué imprime print(sp.factor(x**2 - 5*x + 6))?
+   a) x**2 - 5*x + 6
+   b) (x - 3)*(x - 2)
+   c) (x - 6)*(x + 1)
+   d) (x + 2)*(x + 3)
+   ✓ Respuesta: b
+
+190. ¿Qué imprime print(sp.expand((x + 1)**2))?
+   a) (x + 1)*(x + 1)
+   b) x**2 + x + 1
+   c) x**2 + 2*x + 2
+   d) x**2 + 2*x + 1
+   ✓ Respuesta: d
+
+191. ¿Qué imprime print(sp.solve(x**2 - 4, x))?
+   a) [-2, 2]
+   b) 2
+   c) [4]
+   d) [-2.0, 2.0]
+   ✓ Respuesta: a
+
+192. ¿Cuál es la forma correcta de escribir en SymPy la ecuación x² - 5x = -6?
+   a) sp.Eq(x**2 - 5*x = -6)
+   b) sp.Eq(x**2 - 5*x == -6)
+   c) sp.Eq(x**2 - 5*x, -6)
+   d) x**2 - 5*x + 6 == 0
+   ✓ Respuesta: c
+
+193. ¿Qué imprime este código?
+       print(sp.solveset(x**2 + 1, x, domain=sp.S.Reals))
+   a) Imprime Complexes
+   b) Imprime EmptySet
+   c) Imprime {-I, I}
+   d) Imprime {-1, 1}
+   ✓ Respuesta: b
+
+194. ¿Qué imprime este código?
+       t = sp.symbols("t")
+       r = sp.symbols("r", positive=True)
+       print(sp.sqrt(t**2))
+       print(sp.sqrt(r**2))
+   a) t y sqrt(r**2)
+   b) Abs(t) y Abs(r)
+   c) t*sign(t) y r
+   d) sqrt(t**2) y r
+   ✓ Respuesta: d
+
+195. ¿Qué imprime print(sp.diff(x**3, x, 2))?
+   a) 6*x
+   b) 3*x**2
+   c) 6
+   d) 2*x**3
+   ✓ Respuesta: a
+
+196. ¿Qué imprime print(sp.integrate(2*x, (x, 0, 3)))?
+   a) x**2
+   b) x**2 + C
+   c) 9
+   d) 6
+   ✓ Respuesta: c
+
+197. ¿Qué imprime print(sp.limit(sp.sin(x) / x, x, 0))?
+   a) 0
+   b) 1
+   c) oo
+   d) nan
+   ✓ Respuesta: b
+
+198. ¿Qué imprime este código?
+       M = sp.Matrix([[1, 2],
+                      [3, 4]])
+       print(M * M)
+   a) Matrix([[1, 4], [9, 16]])
+   b) TypeError: en SymPy se usa @
+   c) Matrix([[7, 15], [10, 22]])
+   d) Matrix([[7, 10], [15, 22]])
+   ✓ Respuesta: d
+
+199. ¿Qué imprime este código?
+       i = sp.symbols("i", integer=True, positive=True)
+       print(sp.summation(i, (i, 1, 100)))
+   a) 5050
+   b) n*(n + 1)/2
+   c) 100
+   d) 5050.0
+   ✓ Respuesta: a
+
+200. ¿Para qué sirve sp.lambdify(x, expr, "numpy")?
+   a) Para convertir una expresión de SymPy a LaTeX
+   b) Para simplificar al máximo una expresión
+   c) Para convertir expr en una función de NumPy
+   d) Para resolver la ecuación expr = 0 con NumPy
+   ✓ Respuesta: c
+```
+
+# Ejercicios abiertos de *debugging*
+
+Cada ejercicio muestra un código con un error o un resultado inesperado. Pide a los alumnos que **predigan** qué pasa antes de ejecutarlo, que **expliquen** por qué y que **corrijan** el código.
+
+### D1. El área que no se actualiza
+
+``` python
+lado = 4
+area = lado ** 2
+lado = 5
+print(area)
+```
+
+**Pregunta:** Un estudiante esperaba ver `25`. ¿Qué imprime? ¿Por qué? ¿Cómo lo corriges?
+
+**Respuesta esperada:** Imprime `16`. La línea `area = lado ** 2` se evaluó cuando `lado` apuntaba a `4`, así que `area` quedó apuntando al objeto `16`. Reasignar `lado = 5` solo hace que `lado` apunte a otro objeto; no recalcula `area`. Para obtener el nuevo valor hay que volver a calcularlo después de la reasignación.
+
+``` python
+lado = 4
+lado = 5
+area = lado ** 2
+print(area)   # 25
+```
+
+### D2. El respaldo que también cambió
+
+``` python
+cuadrados = [1, 4, 9, 16]
+respaldo = cuadrados
+cuadrados[3] = 15
+print(respaldo)
+print(respaldo is cuadrados)
+```
+
+**Pregunta:** Se quería guardar un respaldo de la lista antes de modificarla. ¿Qué imprime? ¿Por qué el respaldo no sirvió? ¿Cómo lo corriges?
+
+**Respuesta esperada:** Imprime `[1, 4, 9, 15]` y `True`. `respaldo = cuadrados` no crea una lista nueva: hay un solo objeto con dos nombres, así que el cambio hecho a través de `cuadrados` también se ve desde `respaldo` (tienen el mismo `id()`). Para tener un objeto nuevo con el mismo valor hay que copiar la lista.
+
+``` python
+cuadrados = [1, 4, 9, 16]
+respaldo = cuadrados.copy()
+cuadrados[3] = 15
+print(respaldo)                  # [1, 4, 9, 16]
+print(respaldo is cuadrados)     # False
+```
+
+### D3. ¿Mismas fracciones, mismo objeto?
+
+``` python
+v1 = [1/2, 1/3, 1/4]
+v2 = [1/2, 1/3, 1/4]
+print(v1 is v2)
+print(id(v1) == id(v2))
+```
+
+**Pregunta:** Un estudiante quería comprobar que ambas listas contienen las mismas fracciones y se sorprendió del resultado. ¿Qué imprime? ¿Por qué? ¿Qué operador debió usar?
+
+**Respuesta esperada:** Imprime `False` y `False`. Cada literal `[...]` crea un objeto nuevo, así que `v1` y `v2` son dos objetos distintos (identidades diferentes) aunque tengan el mismo valor. `is` (y comparar `id()`) pregunta si son el mismo objeto; para comparar valores se usa `==`.
+
+``` python
+v1 = [1/2, 1/3, 1/4]
+v2 = [1/2, 1/3, 1/4]
+print(v1 == v2)   # True
+```
+
+### D4. Corregir una mayúscula y una coordenada
+
+``` python
+palabra = "primo"
+palabra[0] = "P"
+
+punto = (3, -2)
+punto[0] = 5
+```
+
+**Pregunta:** ¿Qué error produce cada parte? ¿Por qué con una lista sí funcionaría? ¿Cómo lo corriges sin usar métodos?
+
+**Respuesta esperada:** La línea `palabra[0] = "P"` produce `TypeError: 'str' object does not support item assignment` (y, si se corrige, `punto[0] = 5` produce `TypeError: 'tuple' object does not support item assignment`). Las cadenas y las tuplas son inmutables: no se puede cambiar un elemento, a diferencia de las listas, que son mutables. La solución es crear un objeto nuevo y reasignar la variable (su identidad cambia).
+
+``` python
+palabra = "primo"
+palabra = "P" + palabra[1:]
+print(palabra)   # Primo
+
+punto = (3, -2)
+punto = (5, punto[1])
+print(punto)     # (5, -2)
+```
+
+### D5. El último primo
+
+``` python
+primos = [2, 3, 5, 7, 11]
+print(len(primos))
+print(primos[5])
+```
+
+**Pregunta:** El estudiante pensó: "la lista tiene 5 elementos, así que el último está en la posición 5". ¿Qué imprime? ¿Cuál es el error? ¿Cómo lo corriges?
+
+**Respuesta esperada:** Imprime `5` y después `IndexError: list index out of range`. Los índices empiezan en `0`, así que una lista de 5 elementos tiene índices del `0` al `4`; el índice `5` no existe. El último elemento se obtiene con `primos[4]` o, mejor, con `primos[-1]`, que funciona sin importar la longitud.
+
+``` python
+primos = [2, 3, 5, 7, 11]
+print(primos[-1])   # 11
+```
+
+### D6. Rango incompleto de cuadrados
+
+``` python
+cuadrados = [0, 1, 4, 9, 16, 25]
+# Se quieren los cuadrados de 1 a 4, es decir, 1, 4, 9 y 16 (índices 1 al 4)
+print(cuadrados[1:4])
+```
+
+**Pregunta:** ¿Qué imprime? ¿Por qué falta un elemento? ¿Cómo lo corriges?
+
+**Respuesta esperada:** Imprime `[1, 4, 9]`. En `lista[inicio:fin]` se incluye el índice `inicio` pero **no** el índice `fin`, así que `[1:4]` toma los índices 1, 2 y 3. Para llegar hasta el índice 4, el final debe ser `5` (y `fin - inicio = 4` elementos).
+
+``` python
+cuadrados = [0, 1, 4, 9, 16, 25]
+print(cuadrados[1:5])   # [1, 4, 9, 16]
+```
+
+### D7. Sumar un número que es texto
+
+``` python
+n = "3"
+print(n + 4)
+```
+
+**Pregunta:** ¿Qué ocurre? ¿Por qué? Escribe dos correcciones: una que imprima `7` y otra que imprima `34`.
+
+**Respuesta esperada:** Produce `TypeError: can only concatenate str (not "int") to str`. `n` apunta a un objeto de tipo `str`, aunque "se vea" como número; con cadenas `+` concatena, y Python no puede unir una cadena con un entero. Hay que convertir uno de los dos para que ambos tengan el mismo tipo.
+
+``` python
+n = "3"
+print(int(n) + 4)   # 7  (suma de enteros)
+print(n + str(4))   # 34 (concatenación de cadenas)
+```
+
+### D8. ¿Dónde quedó pi?
+
+``` python
+Pi = 3.14159
+radio = 2
+area = pi * radio ** 2
+print(area)
+```
+
+**Pregunta:** ¿Qué error aparece? ¿Por qué, si `Pi` sí se definió? ¿Cómo lo corriges?
+
+**Respuesta esperada:** Aparece `NameError: name 'pi' is not defined. Did you mean: 'Pi'?`. Python distingue mayúsculas de minúsculas, así que `Pi` y `pi` son nombres distintos y `pi` nunca se asignó a ningún objeto. Basta con usar el mismo nombre en la definición y en el cálculo.
+
+``` python
+Pi = 3.14159
+radio = 2
+area = Pi * radio ** 2
+print(area)   # 12.56636
+```
+
+### D9. La lista que dejó de ser función
+
+``` python
+list = [2, 3, 5, 7]       # primos menores que 10
+digitos = list("314")     # dígitos de pi como lista
+print(digitos)
+```
+
+**Pregunta:** ¿Qué imprime? ¿Por qué? ¿Cómo lo corriges?
+
+**Respuesta esperada:** No imprime nada: se detiene con `TypeError: 'list' object is not callable`. En la primera línea, el nombre `list` deja de apuntar a la función integrada `list()` y pasa a ser una lista; después, `list("314")` intenta "llamar" a esa lista como si fuera función. Python no marca error al sobrescribir el nombre, pero perdemos la función original. Se corrige con un nombre descriptivo (o, si ya se sobrescribió, con `del list`):
+
+``` python
+primos = [2, 3, 5, 7]     # primos menores que 10
+digitos = list("314")
+print(digitos)            # ['3', '1', '4']
+```
+
+### D10. El área que desapareció
+
+``` python
+area = 3.14159 * 2 ** 2   # área del círculo de radio 2
+area = 4 * 4              # área del cuadrado de lado 4
+print("Área del círculo:", area)
+```
+
+**Pregunta:** ¿Qué imprime? ¿Por qué? ¿Cómo lo corriges?
+
+**Respuesta esperada:** Imprime `Área del círculo: 16`. Es un error silencioso: la segunda asignación **sobrescribe** el valor de `area` y el área del círculo (12.56636) se pierde; una variable solo guarda su último valor. Se corrige usando un nombre descriptivo distinto para cada dato (y una constante para $\pi$):
+
+``` python
+PI = 3.14159
+
+area_circulo = PI * 2 ** 2
+area_cuadrado = 4 * 4
+print("Área del círculo:", area_circulo)     # 12.56636
+print("Área del cuadrado:", area_cuadrado)   # 16
+```
+
+### D11. ¿Dónde quedaron mis cuadrados?
+
+``` python
+cuadrados = [16, 1, 9, 4]
+cuadrados = cuadrados.sort()
+print(cuadrados)
+print(max(cuadrados))
+```
+
+**Pregunta:** ¿Qué imprime? ¿Por qué? ¿Cómo lo corriges?
+
+**Respuesta esperada:** Imprime `None` y después se detiene con `TypeError: 'NoneType' object is not iterable`. El método `sort()` modifica la lista en su lugar y regresa `None`; al escribir `cuadrados = cuadrados.sort()` guardamos ese `None` y perdemos la lista (lo mismo pasa con `append()`). Se corrige llamando al método en su propia línea, o usando `sorted()` si se quiere una lista nueva:
+
+``` python
+cuadrados = [16, 1, 9, 4]
+cuadrados.sort()
+print(cuadrados)        # [1, 4, 9, 16]
+print(max(cuadrados))   # 16
+```
+
+### D12. La fracción que no cambió
+
+``` python
+fraccion = " 3/4 "
+fraccion.strip()
+fraccion.replace("/", " entre ")
+print(fraccion)
+print(len(fraccion))
+```
+
+**Pregunta:** ¿Qué imprime? ¿Por qué? ¿Cómo lo corriges?
+
+**Respuesta esperada:** Imprime ` 3/4 ` (con los espacios) y `5`. Las cadenas son **inmutables**: `strip()` y `replace()` no modifican `fraccion`, sino que regresan una cadena **nueva**, que aquí no se guarda en ninguna variable. Se corrige reasignando el resultado:
+
+``` python
+fraccion = " 3/4 "
+fraccion = fraccion.strip()
+fraccion = fraccion.replace("/", " entre ")
+print(fraccion)        # 3 entre 4
+print(len(fraccion))   # 9
+```
+
+### D13. Nombres que Python no acepta
+
+``` python
+2pi = 6.28318
+radio-circulo = 3
+lambda = 0.5
+```
+
+**Pregunta:** ¿Qué error aparece? ¿Qué regla rompe cada línea? ¿Cómo lo corriges?
+
+**Respuesta esperada:** El programa no se ejecuta: aparece `SyntaxError` (Python reporta la primera línea, `invalid decimal literal`, pero las tres son inválidas). `2pi` empieza con un dígito; `radio-circulo` usa guion medio, que Python lee como una resta; `lambda` es una palabra reservada. Los nombres solo pueden tener letras, dígitos y `_`, no pueden empezar con dígito ni ser palabras reservadas:
+
+``` python
+DOS_PI = 6.28318
+radio_circulo = 3
+tasa = 0.5
+```
+
+### D14. ¿0.1 + 0.2 no es 0.3?
+
+``` python
+suma = 0.1 + 0.2
+print(suma)
+print(suma == 0.3)
+```
+
+**Pregunta:** ¿Qué imprime? ¿Por qué? ¿Cómo lo corriges?
+
+**Respuesta esperada:** Imprime `0.30000000000000004` y `False`. Los decimales (`float`) se guardan de forma **aproximada** en la computadora, así que la suma no es exactamente `0.3` y la comparación con `==` falla: es un error silencioso. Para comparar decimales se usa `math.isclose()`:
+
+``` python
+import math
+
+suma = 0.1 + 0.2
+print(math.isclose(suma, 0.3))   # True
+```
+
+### D15. El `except` equivocado
+
+``` python
+numerador = 3
+denominador = 0
+
+try:
+    fraccion = numerador / denominador
+except ValueError:
+    print("El denominador no puede ser 0")
+
+print("Fracción:", fraccion)
+```
+
+**Pregunta:** ¿Qué imprime? ¿Por qué el `try` / `except` no evita el error? ¿Cómo lo corriges?
+
+**Respuesta esperada:** No imprime el aviso: el programa se detiene con `ZeroDivisionError: division by zero`. Dividir entre cero produce un `ZeroDivisionError`, no un `ValueError`, y el bloque `except` solo atrapa el tipo de error que indicamos. Además, si el error se atrapara, `fraccion` no existiría y el último `print()` daría `NameError`; por eso hay que darle un valor (como `None`) dentro del `except`:
+
+``` python
+numerador = 3
+denominador = 0
+
+try:
+    fraccion = numerador / denominador
+except ZeroDivisionError:
+    print("El denominador no puede ser 0")
+    fraccion = None
+
+print("Fracción:", fraccion)   # Fracción: None
+```
+
+### D16. Una variable que cambia a mitad del camino
+
+``` python
+numero = 6
+
+if numero % 2 == 0:
+    print(numero, "es par")
+    numero = numero + 1     # guardo el siguiente número
+if numero % 2 != 0:
+    print(numero, "es impar")
+```
+
+**Pregunta:** ¿Qué imprime? ¿Por qué? ¿Cómo lo corriges para que solo diga si 6 es par o impar?
+
+**Respuesta esperada:** Imprime `6 es par` y después `7 es impar`. Dentro del primer bloque se **sobrescribe** `numero`, así que el segundo `if` ya no revisa 6 sino 7. Además, son dos `if` independientes: ambos se evalúan. Hay que usar `else` (los casos son excluyentes) y guardar el siguiente número en otra variable.
+
+``` python
+numero = 6
+
+if numero % 2 == 0:
+    print(numero, "es par")
+else:
+    print(numero, "es impar")
+
+siguiente = numero + 1
+```
+
+### D17. Asignar en lugar de comparar
+
+``` python
+a, b, c = 1, 2, 1
+discriminante = b ** 2 - 4 * a * c
+
+if discriminante = 0:
+    print("Una raíz real")
+```
+
+**Pregunta:** ¿Qué ocurre al ejecutarlo? ¿Por qué? ¿Cómo lo corriges?
+
+**Respuesta esperada:** No se ejecuta: Python marca `SyntaxError: invalid syntax. Maybe you meant '==' or ':=' instead of '='?`. Un solo `=` **asigna** un valor; para **comparar** se usan dos (`==`). Con la corrección imprime `Una raíz real`, porque el discriminante es 0.
+
+``` python
+if discriminante == 0:
+    print("Una raíz real")
+```
+
+### D18. El orden de los elif
+
+``` python
+n = 30
+
+if n % 2 == 0:
+    print("múltiplo de 2")
+elif n % 3 == 0:
+    print("múltiplo de 3")
+elif n % 6 == 0:
+    print("múltiplo de 6")
+```
+
+**Pregunta:** ¿Qué imprime? ¿Puede llegar a imprimirse alguna vez `"múltiplo de 6"`? ¿Cómo lo corriges para que se informe la condición más específica?
+
+**Respuesta esperada:** Imprime solo `múltiplo de 2`. Python ejecuta **solo el primer bloque verdadero**; todo múltiplo de 6 también es múltiplo de 2, así que la última rama nunca se alcanza. Hay que escribir primero la condición más restrictiva. Con la corrección imprime `múltiplo de 6`.
+
+``` python
+if n % 6 == 0:
+    print("múltiplo de 6")
+elif n % 3 == 0:
+    print("múltiplo de 3")
+elif n % 2 == 0:
+    print("múltiplo de 2")
+```
+
+### D19. `and` con arreglos de NumPy
+
+``` python
+import numpy as np
+
+a = np.array([3, 13, 12, 10, 18, 6, 4, 8, 5])
+print(a[a > 5 and a < 13])
+```
+
+**Pregunta:** ¿Qué ocurre? ¿Por qué? ¿Cómo lo corriges?
+
+**Respuesta esperada:** Se detiene con `ValueError: The truth value of an array with more than one element is ambiguous...`. `and`, `or` y `not` esperan **un solo** `True` o `False`, pero `a > 5` es un arreglo de muchos booleanos. Con arreglos se usan `&`, `|` y `~`, con **paréntesis** en cada condición (sin ellos, `a > 5 & a < 13` también falla). La corrección imprime `[12 10  6  8]`.
+
+``` python
+print(a[(a > 5) & (a < 13)])
+```
+
+### D20. Dos errores de forma
+
+``` python
+import numpy as np
+
+m = np.arange(1, 6).reshape(2, 3)   # quiero la matriz [[1 2 3], [4 5 6]]
+sumar = np.array([10, 20])          # sumar 10 a la fila 0 y 20 a la fila 1
+print(m + sumar)
+```
+
+**Pregunta:** Este código tiene dos errores que aparecen uno después del otro. ¿Cuáles son? ¿Cómo los corriges?
+
+**Respuesta esperada:** Primero: `ValueError: cannot reshape array of size 5 into shape (2,3)`, porque `np.arange(1, 6)` no incluye el 6 y genera solo 5 elementos, pero 2 × 3 = 6. Al corregirlo aparece el segundo: `ValueError: operands could not be broadcast together with shapes (2,3) (2,)`, porque *broadcasting* alinea `(2,)` con el **último** eje (de tamaño 3) y 2 ≠ 3. Hay que convertir `sumar` en columna, de forma `(2, 1)`. El resultado es `[[11 12 13]` / `[24 25 26]]`.
+
+``` python
+m = np.arange(1, 7).reshape(2, 3)
+sumar = np.array([10, 20]).reshape(2, 1)   # o np.array([[10], [20]])
+print(m + sumar)
+```
+
+### D21. ¿Dónde quedaron los decimales?
+
+``` python
+import numpy as np
+
+constantes = np.array([0, 0, 0])
+constantes[0] = np.pi
+constantes[1] = np.e
+print(constantes)
+```
+
+**Pregunta:** ¿Qué imprime? ¿Por qué no aparecen π y e? ¿Cómo lo corriges?
+
+**Respuesta esperada:** Imprime `[3 2 0]`. El arreglo se creó con enteros, así que su `dtype` es `int64`; todos los elementos de un arreglo son del mismo tipo, y al guardar un decimal en él NumPy lo **trunca** sin avisar. Hay que crear el arreglo con decimales desde el inicio. La corrección imprime `[3.14159265 2.71828183 0.        ]`.
+
+``` python
+constantes = np.zeros(3)              # np.zeros crea floats: [0. 0. 0.]
+constantes[0] = np.pi
+constantes[1] = np.e
+print(constantes)
+```
+
+### D22. El factorial que parece correcto
+
+``` python
+import numpy as np
+
+print(np.arange(1, 26).prod())   # 25!
+```
+
+**Pregunta:** El código imprime `7034535277573963776`. ¿Es 25!? ¿Por qué NumPy no marca un error? ¿Cómo lo corriges?
+
+**Respuesta esperada:** No: 25! = 15511210043330985984000000, un número de 26 dígitos. Los enteros de NumPy (`int64`) solo guardan valores hasta ≈ 9.2 × 10¹⁸; desde 21! el resultado se desborda y NumPy da un número **incorrecto sin avisar** (a veces negativo, como con 21!, y a veces positivo, como aquí, lo que lo hace más difícil de detectar). Para factoriales grandes se usa `math.factorial()`, que trabaja con enteros de Python sin límite de tamaño.
+
+``` python
+import math
+
+print(math.factorial(25))   # 15511210043330985984000000
+```
+
+### D23. `*` en lugar de `@`
+
+``` python
+import numpy as np
+
+A = np.array([[1, 2],
+              [3, 4]])
+B = np.array([[5, 6],
+              [7, 8]])
+
+# Queremos el producto de matrices AB
+print(A * B)
+```
+
+**Pregunta:** ¿Qué imprime? ¿Por qué no es el producto de matrices AB? ¿Cómo lo corriges?
+
+**Respuesta esperada:** Imprime `[[ 5 12] [21 32]]`, porque en NumPy `*` multiplica **elemento a elemento** (1·5, 2·6, 3·7, 4·8). En el producto de matrices, cada entrada es el producto punto de una fila de `A` con una columna de `B`; por ejemplo, la entrada (0, 0) es 1·5 + 2·7 = 19. Se corrige con el operador `@`:
+
+``` python
+print(A @ B)   # [[19 22] [43 50]]
+```
+
+### D24. Formas incompatibles en `@`
+
+``` python
+import numpy as np
+
+A = np.array([[1, 2, 0],
+              [0, 1, 3]])
+v = np.array([1, 2])
+
+print(A @ v)
+```
+
+**Pregunta:** ¿Qué ocurre? ¿Por qué? ¿Cómo lo corriges?
+
+**Respuesta esperada:** Da un `ValueError` (`... size 2 is different from 3`). `A` tiene forma (2, 3): tiene 3 columnas, así que solo se puede multiplicar por un vector con 3 entradas; `v` solo tiene 2. Se corrige usando un vector de longitud 3 (o una matriz con el número de columnas adecuado):
+
+``` python
+v = np.array([1, 2, 1])
+print(A @ v)   # [5 5]
+```
+
+### D25. Sistema con matriz singular
+
+``` python
+import numpy as np
+
+# x + 2y = 3
+# 2x + 4y = 6
+A = np.array([[1, 2],
+              [2, 4]])
+b = np.array([3, 6])
+
+print(np.linalg.det(A))
+x = np.linalg.solve(A, b)
+```
+
+**Pregunta:** ¿Qué imprime? ¿Por qué falla `np.linalg.solve()`? ¿Cómo lo evitas?
+
+**Respuesta esperada:** Imprime `0.0` y después da `LinAlgError: Singular matrix`. La segunda ecuación es el doble de la primera, así que $\det(A) = 0$: la matriz es singular, no tiene inversa y el sistema no tiene solución única. Antes de resolver conviene revisar el determinante; si el sistema es otro (por ejemplo, $x + 2y = 3$, $2x + 3y = 7$), sí tiene solución única:
+
+``` python
+A = np.array([[1, 2],
+              [2, 3]])
+b = np.array([3, 7])
+
+if round(np.linalg.det(A), 10) != 0:
+    print(np.linalg.solve(A, b))   # [ 5. -1.]
+else:
+    print("El sistema no tiene solución única")
+```
+
+### D26. Comparar decimales con `==`
+
+``` python
+import numpy as np
+
+A = np.array([[2, 1],
+              [1, 3]])
+I = np.eye(2)
+
+print(A @ np.linalg.inv(A) == I)
+```
+
+**Pregunta:** ¿Qué imprime? Si $AA^{-1} = I$, ¿por qué no sale todo `True`? ¿Cómo lo corriges?
+
+**Respuesta esperada:** Imprime `[[ True  True] [False  True]]`. La inversa se calcula con decimales de precisión limitada, y la entrada (1, 0) del producto es `-5.55111512e-17` en lugar de 0; `==` exige igualdad exacta. Para comparar resultados con decimales se usa `np.allclose()`, que responde `True` si todos los elementos son casi iguales:
+
+``` python
+print(np.allclose(A @ np.linalg.inv(A), I))   # True
+```
+
+### D27. Sobrescribir un símbolo de SymPy
+
+``` python
+import sympy as sp
+
+x = sp.symbols("x")
+x = 3
+f = x**2 + 1
+
+print(f)
+print(sp.diff(f, x))
+```
+
+**Pregunta:** ¿Qué imprime cada línea? ¿Por qué falla la derivada? ¿Cómo lo corriges?
+
+**Respuesta esperada:** El primer `print` muestra `10` y el segundo da `ValueError: First variable cannot be a number: 3`. Al escribir `x = 3`, el nombre `x` deja de ser el símbolo y pasa a valer 3, así que `f` se calcula como el número 3**2 + 1 = 10, no como una expresión; luego SymPy intenta derivar respecto al número 3. Para evaluar en un punto no se reasigna el símbolo: se usa `subs()`:
+
+``` python
+x = sp.symbols("x")
+f = x**2 + 1
+
+print(f.subs(x, 3))    # 10
+print(sp.diff(f, x))   # 2*x
+```

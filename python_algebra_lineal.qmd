@@ -1,0 +1,425 @@
+---
+engine: knitr
+---
+
+# Álgebra lineal con NumPy
+
+{{< include ./_extensions/r-wasm/live/_knitr.qmd >}}
+
+```{r}
+#| include: false
+# Usar el entorno del curso (~/.venvs/quarto-python) si existe, aunque RStudio tenga configurado otro Python.
+# Si no existe, reticulate descarga automáticamente las bibliotecas necesarias.
+venv_python <- path.expand(c("~/.venvs/quarto-python/bin/python", "~/.venvs/quarto-python/Scripts/python.exe"))
+venv_python <- venv_python[file.exists(venv_python)]
+if (length(venv_python) > 0) {
+  Sys.setenv(RETICULATE_PYTHON = venv_python[1])
+} else {
+  reticulate::py_require("numpy")
+}
+```
+
+> **Fecha:** 05 de noviembre, 2026
+
+En el capítulo de [NumPy](python_numpy.qmd) vimos que las operaciones con arreglos se hacen **elemento a elemento**. Pero en álgebra lineal los vectores y las matrices tienen sus propias operaciones: el producto punto, el producto de matrices, el determinante, la inversa... NumPy las incluye en el operador `@` y en el módulo `np.linalg` (*linear algebra*).
+
+En este capítulo veremos:
+
+- Vectores: producto punto, norma y ángulo entre vectores.
+- El producto de matrices y la diferencia entre `@` y `*`.
+- La transpuesta y la matriz identidad.
+- El determinante y la matriz inversa.
+- Cómo resolver **sistemas de ecuaciones lineales**.
+
+```{python}
+import numpy as np
+```
+
+## Resumen de operaciones
+
+| Operación | Notación matemática | NumPy |
+|------------------------|------------------------|------------------------|
+| Producto punto | $\mathbf{u} \cdot \mathbf{v}$ | `u @ v` o `np.dot(u, v)` |
+| Norma (longitud) | $\lVert \mathbf{v} \rVert$ | `np.linalg.norm(v)` |
+| Producto de matrices | $AB$ | `A @ B` |
+| Transpuesta | $A^T$ | `A.T` |
+| Identidad | $I_n$ | `np.eye(n)` |
+| Determinante | $\det(A)$ | `np.linalg.det(A)` |
+| Inversa | $A^{-1}$ | `np.linalg.inv(A)` |
+| Resolver $Ax = b$ | $x = A^{-1}b$ | `np.linalg.solve(A, b)` |
+
+## Vectores
+
+En NumPy un vector es un arreglo de **una dimensión**. La suma de vectores y el producto por un escalar ya los conocemos, porque son operaciones elemento a elemento:
+
+```{python}
+u = np.array([1, 2, 3])
+v = np.array([4, 5, 6])
+
+print("u + v =", u + v)
+print("2u =", 2 * u)
+```
+
+### Producto punto
+
+El **producto punto** multiplica los elementos en la misma posición y **suma** los resultados:
+
+$$\mathbf{u} \cdot \mathbf{v} = u_0 v_0 + u_1 v_1 + \dots + u_{n-1} v_{n-1}$$
+
+```{python}
+print("u * v =", u * v)                 # Elemento a elemento: [ 4 10 18]
+print("(u * v).sum() =", (u * v).sum()) # Sumamos: 4 + 10 + 18 = 32
+print("u @ v =", u @ v)                 # Producto punto en un solo paso
+print("np.dot(u, v) =", np.dot(u, v))   # Equivalente
+```
+
+### Norma de un vector
+
+La **norma** es la longitud del vector: $\lVert \mathbf{v} \rVert = \sqrt{v_0^2 + v_1^2 + \dots + v_{n-1}^2}$.
+
+```{python}
+w = np.array([3, 4])
+
+print(np.sqrt((w ** 2).sum()))   # Con la fórmula: √(9 + 16) = 5
+print(np.linalg.norm(w))         # Con NumPy
+```
+
+### Ángulo entre vectores
+
+Con el producto punto y las normas obtenemos el **ángulo** $\theta$ entre dos vectores:
+
+$$\cos \theta = \frac{\mathbf{u} \cdot \mathbf{v}}{\lVert \mathbf{u} \rVert \, \lVert \mathbf{v} \rVert}$$
+
+Para despejar $\theta$ usamos `np.arccos()` (la función inversa del coseno, en radianes) y `np.rad2deg()` para pasar a grados:
+
+```{python}
+a = np.array([1, 0])
+b = np.array([1, 1])
+
+cos_theta = (a @ b) / (np.linalg.norm(a) * np.linalg.norm(b))
+theta = np.arccos(cos_theta)
+
+print("cos θ =", cos_theta)
+print("θ en radianes =", theta)
+print("θ en grados =", np.rad2deg(theta).round(2))
+```
+
+Si $\mathbf{u} \cdot \mathbf{v} = 0$, el ángulo es de 90°: los vectores son **perpendiculares** (ortogonales).
+
+## Producto de matrices
+
+El producto de matrices $AB$ **no** es elemento a elemento: cada entrada $(i, j)$ del resultado es el **producto punto** de la fila $i$ de $A$ con la columna $j$ de $B$. En NumPy se escribe con `@`:
+
+```{python}
+A = np.array([[2, 1],
+              [1, 3]])
+B = np.array([[1, 0],
+              [2, 1]])
+
+print("A @ B =\n", A @ B)          # Producto de matrices
+print("A * B =\n", A * B)          # Producto elemento a elemento (¡diferente!)
+```
+
+Por ejemplo, la entrada $(0, 0)$ de `A @ B` es la fila 0 de `A` por la columna 0 de `B`: $2 \cdot 1 + 1 \cdot 2 = 4$.
+
+::: callout-important
+`A * B` multiplica **elemento a elemento**; el producto de matrices que conoces del álgebra lineal es `A @ B`.
+:::
+
+**El orden importa:** en general $AB \neq BA$.
+
+```{python}
+print("A @ B =\n", A @ B)
+print("B @ A =\n", B @ A)
+```
+
+**Las formas deben ser compatibles:** una matriz de $m \times n$ solo se puede multiplicar por una de $n \times p$, y el resultado es de $m \times p$. El número de **columnas** de la primera debe ser igual al número de **filas** de la segunda:
+
+```{python}
+C = np.array([[1, 2, 0],
+              [0, 1, 3]])          # forma (2, 3)
+D = np.array([[2, 1],
+              [0, 1],
+              [1, 0]])             # forma (3, 2)
+
+print((C @ D).shape)   # (2, 3) @ (3, 2) -> (2, 2)
+print((D @ C).shape)   # (3, 2) @ (2, 3) -> (3, 3)
+```
+
+```{python}
+C @ C   # (2, 3) @ (2, 3): 3 ≠ 2 -> ValueError
+```
+
+## Transpuesta e identidad
+
+La **transpuesta** $A^T$ intercambia filas por columnas. La **identidad** $I_n$ tiene unos en la diagonal y ceros fuera de ella; cumple $AI = IA = A$:
+
+```{python}
+print("C =\n", C)
+print("C^T =\n", C.T)              # forma (2, 3) -> (3, 2)
+
+I = np.eye(2)
+print("A @ I =\n", A @ I)          # Igual a A
+```
+
+## Determinante e inversa
+
+```{python}
+print("det(A) =", np.linalg.det(A))
+print("A^-1 =\n", np.linalg.inv(A))
+```
+
+El determinante de `A` es exactamente $2 \cdot 3 - 1 \cdot 1 = 5$, pero NumPy da `5.000000000000001`. Es el mismo problema de **precisión limitada** que vimos con $\sin(\pi)$ en el capítulo de [NumPy](python_numpy.qmd): por eso conviene redondear con `round()`.
+
+Para comprobar que la inversa es correcta, multiplicamos $AA^{-1}$, que debe dar la identidad. Como los decimales son aproximados, comparamos con `np.allclose()`, que responde `True` si **todos** los elementos son casi iguales:
+
+```{python}
+producto = A @ np.linalg.inv(A)
+print(producto)                        # -5.55e-17 en lugar de 0
+print(np.allclose(producto, np.eye(2)))
+```
+
+::: callout-warning
+Una matriz con $\det(A) = 0$ es **singular**: no tiene inversa y NumPy da un error `LinAlgError`.
+
+```{python}
+S = np.array([[1, 2],
+              [2, 4]])      # La fila 1 es el doble de la fila 0
+print("det(S) =", np.linalg.det(S))
+np.linalg.inv(S)
+```
+:::
+
+## Sistemas de ecuaciones lineales
+
+Un sistema de ecuaciones lineales se escribe en forma matricial como $Ax = b$, donde $A$ es la matriz de **coeficientes**, $x$ el vector de **incógnitas** y $b$ el vector de **términos independientes**. Por ejemplo:
+
+$$\begin{cases}
+2x + y = 5 \\
+x + 3y = 10
+\end{cases}
+\quad \Longrightarrow \quad
+\underbrace{\begin{pmatrix} 2 & 1 \\ 1 & 3 \end{pmatrix}}_{A}
+\begin{pmatrix} x \\ y \end{pmatrix}
+=
+\underbrace{\begin{pmatrix} 5 \\ 10 \end{pmatrix}}_{b}$$
+
+Si $\det(A) \neq 0$, el sistema tiene **solución única** $x = A^{-1}b$. En la práctica se usa `np.linalg.solve(A, b)`, que es más rápido y más preciso que calcular la inversa:
+
+```{python}
+b = np.array([5, 10])
+
+x = np.linalg.solve(A, b)
+print("Solución:", x)
+print("Comprobación A @ x:", A @ x)
+print(np.allclose(A @ x, b))
+```
+
+## Ejercicios
+
+Resuelve los ejercicios en los editores interactivos. Recuerda que lo que escribas **no se guarda** al recargar la página. La primera vez que ejecutes un editor, NumPy puede tardar unos segundos en cargar.
+
+### Ejercicio 1. Producto de matrices
+
+1.  Calcula el producto de matrices $CD$ y guárdalo en `CD`.
+2.  Imprime la forma de `D @ C`. ¿Por qué es distinta de la de `CD`?
+3.  Deja `CD` en la **última línea**.
+
+```{pyodide}
+#| exercise: al1
+import numpy as np
+
+C = np.array([[1, 2, 0],
+              [0, 1, 3]])
+D = np.array([[2, 1],
+              [0, 1],
+              [1, 0]])
+
+CD = ______
+print("Forma de D @ C:", ______)
+CD
+```
+
+```{pyodide}
+#| exercise: al1
+#| check: true
+import numpy as np
+if isinstance(result, np.ndarray) and np.array_equal(result, [[2, 3], [3, 1]]):
+    feedback = {"correct": True, "message": "¡Correcto! (2, 3) @ (3, 2) da una matriz de 2 × 2."}
+elif isinstance(result, np.ndarray) and result.shape == (2, 3):
+    feedback = {"correct": False, "message": "Ese es el producto elemento a elemento o una forma incorrecta. Usa @."}
+else:
+    feedback = {"correct": False, "message": "Usa el operador @ para el producto de matrices: C @ D."}
+feedback
+```
+
+:::: {.hint exercise="al1"}
+::: {.callout-note collapse="false"}
+## Pista
+
+El producto de matrices se escribe `C @ D`. La forma de un arreglo está en su atributo `.shape`.
+:::
+::::
+
+:::: {.solution exercise="al1"}
+::: {.callout-tip collapse="false"}
+## Solución
+
+``` python
+import numpy as np
+
+C = np.array([[1, 2, 0],
+              [0, 1, 3]])
+D = np.array([[2, 1],
+              [0, 1],
+              [1, 0]])
+
+CD = C @ D
+print("Forma de D @ C:", (D @ C).shape)   # (3, 3): (3, 2) @ (2, 3)
+CD                                        # [[2 3] [3 1]], forma (2, 2)
+```
+:::
+::::
+
+### Ejercicio 2. Ángulo entre vectores
+
+Calcula el ángulo, **en grados**, entre los vectores $\mathbf{u} = (1, 2, 2)$ y $\mathbf{v} = (2, 1, -2)$, y déjalo en la **última línea**. ¿Qué tipo de vectores son?
+
+```{pyodide}
+#| exercise: al2
+import numpy as np
+
+u = np.array([1, 2, 2])
+v = np.array([2, 1, -2])
+
+cos_theta = ______
+theta_grados = ______
+theta_grados
+```
+
+```{pyodide}
+#| exercise: al2
+#| check: true
+import numpy as np
+es_numero = isinstance(result, (int, float, np.number))
+if es_numero and np.isclose(result, 90):
+    feedback = {"correct": True, "message": "¡Correcto! u · v = 0, así que los vectores son perpendiculares (90°)."}
+elif es_numero and np.isclose(result, np.pi / 2):
+    feedback = {"correct": False, "message": "Ese valor está en radianes. Conviértelo a grados con np.rad2deg()."}
+else:
+    feedback = {"correct": False, "message": "Revisa la fórmula: cos θ = (u @ v) / (norma de u · norma de v)."}
+feedback
+```
+
+:::: {.hint exercise="al2"}
+::: {.callout-note collapse="false"}
+## Pista
+
+`cos_theta = (u @ v) / (np.linalg.norm(u) * np.linalg.norm(v))`. Después usa `np.arccos()` y `np.rad2deg()`.
+:::
+::::
+
+:::: {.solution exercise="al2"}
+::: {.callout-tip collapse="false"}
+## Solución
+
+``` python
+import numpy as np
+
+u = np.array([1, 2, 2])
+v = np.array([2, 1, -2])
+
+cos_theta = (u @ v) / (np.linalg.norm(u) * np.linalg.norm(v))   # 0 / 9 = 0
+theta_grados = np.rad2deg(np.arccos(cos_theta))
+theta_grados                                                     # 90.0: perpendiculares
+```
+:::
+::::
+
+### Ejercicio 3. Sistema de ecuaciones
+
+Resuelve el sistema de ecuaciones:
+
+$$\begin{cases}
+2x + y - z = 3 \\
+x - y + 2z = 5 \\
+3x + 2y + z = 10
+\end{cases}$$
+
+1.  Escribe la matriz de coeficientes `A` y el vector de términos independientes `b`.
+2.  Verifica que el sistema tiene solución única calculando $\det(A) \neq 0$.
+3.  Resuelve el sistema con `np.linalg.solve()` y deja la solución en la **última línea**.
+4.  Comprueba la solución calculando `A @ solucion`, que debe ser igual a `b`.
+
+```{pyodide}
+#| exercise: al3
+import numpy as np
+
+A = np.array(______)
+b = np.array(______)
+
+print("det(A) =", np.linalg.det(A))
+
+solucion = ______
+print("Solución:", solucion)
+print("Comprobación A @ solución:", ______)
+solucion
+```
+
+```{pyodide}
+#| exercise: al3
+#| check: true
+import numpy as np
+if isinstance(result, np.ndarray) and result.shape == (3,) and np.allclose(result, [2, 1, 2]):
+    feedback = {"correct": True, "message": "¡Correcto! x = 2, y = 1, z = 2."}
+else:
+    feedback = {"correct": False, "message": "Revisa A (una fila por ecuación, con los coeficientes de x, y, z) y b (los términos de la derecha)."}
+feedback
+```
+
+:::: {.hint exercise="al3"}
+::: {.callout-note collapse="false"}
+## Pista
+
+Cada fila de `A` contiene los coeficientes de una ecuación: la primera es `[2, 1, -1]`. El vector `b` es `[3, 5, 10]`. Después usa `np.linalg.solve(A, b)`.
+:::
+::::
+
+:::: {.solution exercise="al3"}
+::: {.callout-tip collapse="false"}
+## Solución
+
+``` python
+import numpy as np
+
+A = np.array([[2, 1, -1],
+              [1, -1, 2],
+              [3, 2, 1]])
+b = np.array([3, 5, 10])
+
+print("det(A) =", np.linalg.det(A))   # -10.0 (aprox.), distinto de 0
+
+solucion = np.linalg.solve(A, b)
+print("Solución:", solucion)           # [2. 1. 2.]
+print("Comprobación A @ solución:", A @ solucion)
+solucion
+```
+:::
+::::
+
+## Resumen
+
+| Tema | Idea clave |
+|------------------------------------|------------------------------------|
+| Vectores | Producto punto `u @ v`, norma `np.linalg.norm(v)`, ángulo con `np.arccos()`. |
+| Producto de matrices | `A @ B`; las formas $(m, n)$ y $(n, p)$ dan $(m, p)$; en general $AB \neq BA$. |
+| `@` vs. `*` | `@` es el producto de matrices; `*` es elemento a elemento. |
+| Transpuesta e identidad | `A.T`, `np.eye(n)`. |
+| Determinante e inversa | `np.linalg.det(A)`, `np.linalg.inv(A)`; si $\det(A) = 0$ no hay inversa. |
+| Sistemas de ecuaciones | `np.linalg.solve(A, b)`; comprueba con `np.allclose(A @ x, b)`. |
+
+## Referencias
+
+- [NumPy: álgebra lineal (`numpy.linalg`)](https://numpy.org/doc/stable/reference/routines.linalg.html)
+- [Scientific Python Lectures: NumPy](https://lectures.scientific-python.org/intro/numpy/index.html)
+- [3Blue1Brown: Esencia del álgebra lineal](https://www.3blue1brown.com/topics/linear-algebra)

@@ -1,0 +1,8269 @@
+---
+title: "Banco del examen de Python (crear-examen)"
+format: html
+---
+
+**Temas:** de [Introducción a Python con `reticulate`](../intro_python.qmd) a [Ciclos `for` y `while`](../python_for.qmd).
+
+Banco para la herramienta **crear-examen** (archivo `banco_examen_python.json`). Cada examen lleva 20 de opción múltiple, 4 ejercicios de relacionar columnas de 6 renglones y 36 preguntas abiertas: **80 reactivos**, ordenados de lo más simple a lo más complejo.
+
+| Tipo | Básica | Intermedia | Avanzada | Total |
+|----|----|----|----|----|
+| Opción múltiple | 80 | 92 | 58 | 230 |
+| Relacionar columnas (funciones) | 6 | 7 | 5 | 18 |
+| Preguntas abiertas: debugging y ejercicios de programación | 58 | 62 | 53 | 173 |
+| **Total** | 144 | 161 | 116 | **421** |
+
+# Opción múltiple
+
+### OM-11-001 · básica · Python básico: objetos, variables y buenas prácticas
+
+¿Quién creó Python y en qué año se publicó por primera vez?
+
+a) Guido van Rossum, en 1991 ✓  
+b) Guido van Rossum, en 1989  
+c) Dennis Ritchie, en 1991  
+d) Grupo Monty Python, en 1989  
+
+### OM-11-002 · básica · Python básico: objetos, variables y buenas prácticas
+
+¿De dónde proviene el nombre "Python"?
+
+a) De la serpiente pitón, por la flexibilidad del lenguaje  
+b) De las siglas de un centro de investigación de los Países Bajos  
+c) Del grupo humorístico británico Monty Python's Flying Circus ✓  
+d) De un lenguaje anterior llamado "Py", del que es sucesor  
+
+### OM-11-003 · básica · Python básico: objetos, variables y buenas prácticas
+
+¿Qué caracteriza a un lenguaje interpretado como Python?
+
+a) Siempre debe compilarse a un archivo .exe antes de poder correr  
+b) Un intérprete ejecuta las instrucciones sin crear un ejecutable ✓  
+c) Solo puede ejecutarse dentro de RStudio con el paquete reticulate  
+d) Traduce el código a lenguaje natural antes de ejecutar cada línea  
+
+### OM-11-004 · básica · Python básico: objetos, variables y buenas prácticas
+
+Según la tabla del capítulo, ¿cuál es un ejemplo de lenguaje compilado?
+
+a) Python  
+b) Bash  
+c) Markdown  
+d) C ✓  
+
+### OM-11-005 · básica · Python básico: objetos, variables y buenas prácticas
+
+¿Qué es reticulate?
+
+a) Un editor de código exclusivo para programar en Python  
+b) Un paquete de R para ejecutar código de Python desde R ✓  
+c) Una biblioteca de Python para hacer gráficas y mapas  
+d) Un compilador que traduce el código de Python a R  
+
+### OM-11-006 · básica · Python básico: objetos, variables y buenas prácticas
+
+Al ejecutar repl_python() en la Console de RStudio, ¿cómo cambia el indicador?
+
+a) `De > a >>>` ✓  
+b) `De >>> a >`  
+c) `De $ a >`  
+d) `De > a $`  
+
+### OM-11-007 · básica · Python básico: objetos, variables y buenas prácticas
+
+Estás dentro de la consola de Python (>>>) abierta con repl_python(). ¿Qué escribes para regresar a R?
+
+a) back  
+b) stop  
+c) done  
+d) exit ✓  
+
+### OM-11-008 · básica · Python básico: objetos, variables y buenas prácticas
+
+¿Qué función de reticulate ejecuta un archivo .py completo?
+
+a) `py_run_string()`  
+b) `py_require()`  
+c) `py_install()`  
+d) `py_run_file()` ✓  
+
+### OM-11-009 · básica · Python básico: objetos, variables y buenas prácticas
+
+Desde R con reticulate escribimos np$mean(numeros). ¿Cuál es la instrucción equivalente dentro de Python?
+
+a) `np$mean(numeros)`  
+b) `np::mean(numeros)`  
+c) `np.mean(numeros)` ✓  
+d) `mean.np(numeros)`  
+
+### OM-11-010 · básica · Python básico: objetos, variables y buenas prácticas
+
+En R escribimos numeros <- c(10, 20, 30). ¿Cuál es la forma equivalente en Python?
+
+a) `numeros <- c(10, 20, 30)`  
+b) `numeros = c(10, 20, 30)`  
+c) `numeros <- [10, 20, 30]`  
+d) `numeros = [10, 20, 30]` ✓  
+
+### OM-11-011 · básica · Python básico: objetos, variables y buenas prácticas
+
+En Python todo es un objeto. ¿Qué determina el tipo de un objeto?
+
+a) Su clase y las operaciones que admite ✓  
+b) El nombre de la variable que lo guarda  
+c) La dirección en memoria donde se guarda  
+d) Las veces que se usa en el programa  
+
+### OM-11-012 · básica · Python básico: objetos, variables y buenas prácticas
+
+¿Qué es una variable en Python?
+
+a) Una caja que guarda una copia del dato  
+b) Una copia independiente del objeto original  
+c) Un nombre que hace referencia a un objeto ✓  
+d) Un tipo de dato especial para guardar números  
+
+### OM-11-013 · básica · Python básico: objetos, variables y buenas prácticas
+
+¿Qué imprime este código?
+
+``` python
+print(type(3+4j))
+```
+
+a) `<class 'float'>`  
+b) `<class 'tuple'>`  
+c) `<class 'complex'>` ✓  
+d) `<class 'complejo'>`  
+
+### OM-11-014 · básica · Python básico: objetos, variables y buenas prácticas
+
+Según la tabla de tipos del capítulo, ¿cuál de estos tipos es mutable?
+
+a) tuple  
+b) str  
+c) int  
+d) list ✓  
+
+### OM-11-015 · básica · Python básico: objetos, variables y buenas prácticas
+
+¿Qué imprime este código?
+
+``` python
+numeros = [10, 20, 30]
+numeros[0] = 100
+print(numeros)
+```
+
+a) `[100, 20, 30]` ✓  
+b) `[10, 100, 30]`  
+c) `[10, 20, 30]`  
+d) `[10, 20, 100]`  
+
+### OM-11-016 · básica · Python básico: objetos, variables y buenas prácticas
+
+¿Qué es un entorno virtual?
+
+a) Una máquina virtual con otro sistema operativo  
+b) Una carpeta con su propio Python y sus paquetes ✓  
+c) Un servidor de Google que ejecuta Python en la nube  
+d) El archivo .Renviron con las rutas de Python  
+
+### OM-11-017 · básica · Python básico: objetos, variables y buenas prácticas
+
+En macOS o Linux, ¿qué comando de la Terminal crea el entorno virtual del curso?
+
+a) python3 -m venv ~/.venvs/quarto-python ✓  
+b) source ~/.venvs/quarto-python/bin/activate  
+c) python3 -m pip install quarto-python  
+d) mkdir -p ~/.venvs/quarto-python/bin  
+
+### OM-11-018 · básica · Python básico: objetos, variables y buenas prácticas
+
+¿Cómo sabes que el entorno virtual está activo en la Terminal?
+
+a) `El indicador de la Terminal cambia a >>>`  
+b) Aparece el mensaje "Entorno activado" en pantalla  
+c) `Aparece (quarto-python) al inicio de la línea` ✓  
+d) RStudio se reinicia solo y abre una nueva sesión  
+
+### OM-11-019 · básica · Python básico: objetos, variables y buenas prácticas
+
+¿Qué hace la opción #| echo: false en un bloque de código?
+
+a) Muestra el resultado pero oculta el código ✓  
+b) Muestra el código pero no lo ejecuta  
+c) Ejecuta el código pero oculta el resultado  
+d) Oculta solo los mensajes de advertencia  
+
+### OM-11-020 · básica · Python básico: objetos, variables y buenas prácticas
+
+Quieres que el código aparezca en el documento, pero sin ejecutarse. ¿Qué opción usas?
+
+a) echo: false  
+b) eval: false ✓  
+c) output: false  
+d) error: false  
+
+### OM-11-021 · básica · Python básico: objetos, variables y buenas prácticas
+
+¿Dónde y cómo se escriben las opciones de un bloque de código en Quarto?
+
+a) `Al final del bloque, en una línea que empieza con #`  
+b) En el archivo .Renviron, una opción por línea  
+c) `Al inicio del bloque, en líneas que inician con #|` ✓  
+d) En la Console, antes de presionar el botón Render  
+
+### OM-11-022 · básica · Python básico: objetos, variables y buenas prácticas
+
+¿Cuáles son las tres características que siempre tiene un objeto en Python?
+
+a) Nombre, tipo y contenido  
+b) Tipo, valor e identidad ✓  
+c) Identidad, nombre e índice  
+d) Tipo, tamaño y nombre  
+
+### OM-11-023 · básica · Python básico: objetos, variables y buenas prácticas
+
+¿Qué función regresa la identidad de un objeto?
+
+a) `type()`  
+b) `len()`  
+c) `print()`  
+d) `id()` ✓  
+
+### OM-11-024 · básica · Python básico: objetos, variables y buenas prácticas
+
+¿Qué compara el operador is?
+
+a) Si dos objetos tienen el mismo valor  
+b) Si dos nombres apuntan al mismo objeto ✓  
+c) Si dos objetos son del mismo tipo  
+d) Si dos listas tienen la misma longitud  
+
+### OM-11-025 · básica · Python básico: objetos, variables y buenas prácticas
+
+¿Qué imprime este código?
+
+``` python
+palabra = "Python"
+print(palabra[0], palabra[-1])
+```
+
+a) y n  
+b) P o  
+c) P n ✓  
+d) y o  
+
+### OM-11-026 · básica · Python básico: objetos, variables y buenas prácticas
+
+¿Qué imprime este código?
+
+``` python
+palabra = "Python"
+print(palabra[0:3])
+```
+
+a) Pyt ✓  
+b) Pyth  
+c) yth  
+d) P  
+
+### OM-11-027 · básica · Python básico: objetos, variables y buenas prácticas
+
+¿Qué imprime este código?
+
+``` python
+cuadrados = [1, 4, 9, 16, 25]
+print(cuadrados[-2])
+```
+
+a) 9  
+b) 4  
+c) 16 ✓  
+d) 25  
+
+### OM-11-028 · básica · Python básico: objetos, variables y buenas prácticas
+
+¿Qué imprime este código?
+
+``` python
+punto = (3, -2)
+print(punto[1])
+```
+
+a) -2 ✓  
+b) 3  
+c) `(3, -2)`  
+d) IndexError  
+
+### OM-11-029 · básica · Python básico: objetos, variables y buenas prácticas
+
+¿Qué imprime este código?
+
+``` python
+print(int(3.99))
+```
+
+a) 4  
+b) 3 ✓  
+c) 3.99  
+d) ValueError  
+
+### OM-11-030 · básica · Python básico: objetos, variables y buenas prácticas
+
+Al ejecutar un ejercicio aparece NameError: name '______' is not defined. ¿Qué significa?
+
+a) Que todavía no completaste ese espacio en blanco ✓  
+b) Que el entorno quarto-python no está configurado  
+c) Que pediste un índice mayor que el número de elementos  
+d) Que intentaste modificar un objeto inmutable  
+
+### OM-11-031 · básica · Python básico: objetos, variables y buenas prácticas
+
+¿Cuál es la diferencia principal entre un atributo y un método de un objeto?
+
+a) El atributo es una función; el método es un dato del objeto  
+b) El atributo es un dato; el método es una función y lleva paréntesis ✓  
+c) Los dos llevan paréntesis, pero el método además lleva un punto  
+d) Los atributos solo existen en cadenas y los métodos solo en números  
+
+### OM-11-032 · básica · Python básico: objetos, variables y buenas prácticas
+
+¿Qué regresa la función dir() cuando le das un objeto?
+
+a) Una lista con los atributos y métodos del objeto ✓  
+b) La documentación completa del objeto, con ejemplos  
+c) `El tipo del objeto, por ejemplo <class 'str'>`  
+d) La dirección en la memoria donde vive el objeto  
+
+### OM-11-033 · básica · Python básico: objetos, variables y buenas prácticas
+
+¿Qué imprime este código?
+
+``` python
+rango = range(1, 20, 3)
+print(rango.start, rango.stop, rango.step)
+```
+
+a) 1 19 3  
+b) 1 20 3 ✓  
+c) 0 20 1  
+d) 1 3 20  
+
+### OM-11-034 · básica · Python básico: objetos, variables y buenas prácticas
+
+¿Cuál de estos es un nombre de variable válido en Python?
+
+a) nota-final  
+b) 2lugar  
+c) `nota_final` ✓  
+d) class  
+
+### OM-11-035 · básica · Python básico: objetos, variables y buenas prácticas
+
+¿Cuál de estas líneas produce un SyntaxError?
+
+a) `_temporal = 3`  
+b) `lugar2 = "Luis"`  
+c) `Pi = 3.14159`  
+d) `2pi = 6.2832` ✓  
+
+### OM-11-036 · básica · Python básico: objetos, variables y buenas prácticas
+
+Según la guía de estilo PEP 8, ¿cómo se escribe el nombre de una constante?
+
+a) `pi = 3.14159`  
+b) `Pi = 3.14159`  
+c) `_pi = 3.14159`  
+d) `PI = 3.14159` ✓  
+
+### OM-11-037 · básica · Python básico: objetos, variables y buenas prácticas
+
+¿Qué nombre de variable sigue la convención snake_case de PEP 8?
+
+a) numeroDeEstudiantes  
+b) NumeroEstudiantes  
+c) `numero_estudiantes` ✓  
+d) NUMERO-ESTUDIANTES  
+
+### OM-11-038 · básica · Python básico: objetos, variables y buenas prácticas
+
+Según PEP 8, ¿qué estilo se usa para los nombres de las clases, como MatrizCuadrada?
+
+a) PascalCase: cada palabra inicia con mayúscula ✓  
+b) `snake_case: minúsculas separadas por guion bajo`  
+c) `UPPER_CASE: mayúsculas separadas por guion bajo`  
+d) `_privado: nombres que empiezan con guion bajo`  
+
+### OM-11-039 · básica · Python básico: objetos, variables y buenas prácticas
+
+¿Por qué se recomienda evitar l (ele minúscula), O (o mayúscula) e I (i mayúscula) como nombres?
+
+a) Porque son palabras reservadas de Python  
+b) Porque producen un SyntaxError al usarlas  
+c) Porque se confunden con los números 1 y 0 ✓  
+d) Porque Python ignora mayúsculas y minúsculas  
+
+### OM-11-040 · básica · Python básico: objetos, variables y buenas prácticas
+
+¿Cuál línea sigue las buenas prácticas de estilo de PEP 8?
+
+a) `total=a + b * 2`  
+b) `total = a + b * 2` ✓  
+c) `total =a+ b * 2`  
+d) `total = a + b * 2;`  
+
+### OM-11-041 · básica · Python básico: objetos, variables y buenas prácticas
+
+¿Por qué es mejor escribir precio * TASA_IVA que precio * 0.16?
+
+a) Porque Python no acepta decimales en una multiplicación  
+b) Porque así el programa se ejecuta mucho más rápido  
+c) `Porque el nombre TASA_IVA explica qué significa el 0.16` ✓  
+d) Porque las constantes no se pueden escribir con minúsculas  
+
+### OM-11-042 · básica · Python básico: objetos, variables y buenas prácticas
+
+¿Qué es un error silencioso (o error lógico)?
+
+a) Un error que detiene el programa sin mostrar mensaje en pantalla  
+b) Un programa que no marca error, pero da un resultado incorrecto ✓  
+c) Un SyntaxError que Python solo detecta al final del programa  
+d) Un error que solo ocurre cuando se ejecuta en Google Colab  
+
+### OM-11-043 · básica · Python básico: objetos, variables y buenas prácticas
+
+¿Qué imprime este código?
+
+``` python
+mitad = 17 // 2
+print(mitad)
+```
+
+a) 8 ✓  
+b) 8.5  
+c) 9  
+d) 1  
+
+### OM-11-044 · básica · Python básico: objetos, variables y buenas prácticas
+
+¿Qué imprime este código?
+
+``` python
+total = "8" + "9"
+print(total)
+```
+
+a) 17  
+b) 89 ✓  
+c) TypeError  
+d) "8" + "9"  
+
+### OM-11-045 · básica · Python básico: objetos, variables y buenas prácticas
+
+¿Qué tipo de error produce int("diez")?
+
+a) ValueError ✓  
+b) TypeError  
+c) NameError  
+d) SyntaxError  
+
+### OM-11-046 · básica · Python básico: objetos, variables y buenas prácticas
+
+¿Qué ocurre al ejecutar este código?
+
+``` python
+primos = [2, 3, 5]
+print(primos[3])
+```
+
+a) `Imprime 5 (el tercer elemento de la lista)`  
+b) ValueError: list index out of range  
+c) IndexError: list index out of range ✓  
+d) `Imprime None (no hay un cuarto elemento)`  
+
+### OM-11-047 · básica · Python básico: objetos, variables y buenas prácticas
+
+¿Para qué sirve la instrucción pass?
+
+a) Para salir de un ciclo y continuar con el programa  
+b) Para detener por completo la ejecución del programa  
+c) Para lanzar un error con un mensaje escrito por ti  
+d) Para no hacer nada en un bloque que aún no escribes ✓  
+
+### OM-12-001 · básica · Condicionales
+
+¿Qué imprime este código?
+
+``` python
+x = 7
+print(x > 3 and x % 2 == 0)
+```
+
+a) True  
+b) False ✓  
+c) 7  
+d) SyntaxError  
+
+### OM-12-002 · básica · Condicionales
+
+¿Qué imprime este código?
+
+``` python
+x = -0.5
+print(0 <= x <= 10)
+```
+
+a) False ✓  
+b) True  
+c) FALSE  
+d) -0.5  
+
+### OM-12-003 · básica · Condicionales
+
+¿Qué imprime este código?
+
+``` python
+calificacion = 8
+if calificacion >= 9:
+    print("MB")
+elif calificacion >= 8:
+    print("B")
+elif calificacion >= 6:
+    print("S")
+else:
+    print("NA")
+```
+
+a) MB  
+b) S  
+c) B ✓  
+d) B y S  
+
+### OM-12-004 · básica · Condicionales
+
+¿Qué ocurre al ejecutar la línea if x = 5: ?
+
+a) Asigna 5 a x y entra al bloque  
+b) `SyntaxError: se debe usar ==` ✓  
+c) Compara x con 5 normalmente  
+d) Siempre da True y entra al if  
+
+### OM-12-005 · básica · Condicionales
+
+¿Qué error produce este código?
+
+``` python
+x = 5
+if x > 3
+    print(x)
+```
+
+a) `IndentationError (sobra la sangría)`  
+b) `SyntaxError (faltan los dos puntos)` ✓  
+c) Ninguno, el programa imprime 5  
+d) `NameError (x no está definida)`  
+
+### OM-12-006 · básica · Condicionales
+
+¿Qué hace la instrucción raise ValueError("mensaje") dentro de un if?
+
+a) Muestra un aviso y el programa continúa normal  
+b) Convierte el valor recibido al tipo correcto  
+c) Detiene el programa con ValueError: mensaje ✓  
+d) Pide al usuario que escriba un nuevo valor  
+
+### OM-12-007 · básica · Condicionales
+
+¿Qué imprime este código?
+
+``` python
+print("gora" in "Pitágoras", 4 in [1, 2, 3])
+```
+
+a) False False  
+b) True True  
+c) False True  
+d) True False ✓  
+
+### OM-12-008 · básica · Condicionales
+
+¿Qué imprime este código?
+
+``` python
+numero = 4
+if numero < 0:
+    print("negativo")
+print("fin")
+```
+
+a) fin ✓  
+b) None  
+c) True  
+d) False  
+
+### OM-12-009 · básica · Condicionales
+
+En Python, ¿cómo se indica dónde termina el bloque de un if?
+
+a) Con la palabra fi, como en Bash  
+b) Cuando termina la indentación ✓  
+c) Con la palabra end al final  
+d) Con una llave de cierre }  
+
+### OM-13-001 · básica · Ciclos for y while
+
+¿Con qué termina la línea de encabezado de un ciclo for en Python?
+
+a) `Con dos puntos (:)` ✓  
+b) `Con punto y coma (;)`  
+c) Con la palabra do  
+d) `Con una llave ({)`  
+
+### OM-13-002 · básica · Ciclos for y while
+
+En Python, ¿cómo se indica cuáles instrucciones se repiten dentro de un ciclo for?
+
+a) `Con la indentación (4 espacios) bajo la línea del for` ✓  
+b) Escribiendo done al final del bloque, como en Bash  
+c) Encerrando las instrucciones repetidas entre llaves {}  
+d) Escribiendo todas las instrucciones en la línea del for  
+
+### OM-13-003 · básica · Ciclos for y while
+
+¿Qué imprime este código?
+
+``` python
+print(list(range(5)))
+```
+
+a) `[0, 1, 2, 3, 4]` ✓  
+b) `[1, 2, 3, 4, 5]`  
+c) `[0, 1, 2, 3, 4, 5]`  
+d) `(0, 1, 2, 3, 4)`  
+
+### OM-13-004 · básica · Ciclos for y while
+
+¿Qué imprime este código?
+
+``` python
+for letra in "suma":
+    print(letra, end="-")
+```
+
+a) s-u-m-a- ✓  
+b) s-u-m-a  
+c) suma-  
+d) -s-u-m-a  
+
+### OM-13-005 · básica · Ciclos for y while
+
+¿Qué instrucción genera los números enteros del 1 al 10 (incluido el 10)?
+
+a) `range(1, 11)` ✓  
+b) `range(1, 10)`  
+c) `range(0, 10)`  
+d) `range(0, 11)`  
+
+### OM-13-006 · básica · Ciclos for y while
+
+¿Qué imprime este código?
+
+``` python
+suma = 0
+for n in (2, 4, 6):
+    suma += n
+print(suma)
+```
+
+a) 12 ✓  
+b) 6  
+c) 246  
+d) `(2, 4, 6)`  
+
+### OM-13-007 · básica · Ciclos for y while
+
+Para calcular 6! = 1 · 2 · 3 · 4 · 5 · 6 con un acumulador, ¿con qué valor se inicializa la variable factorial antes del ciclo?
+
+a) 1 ✓  
+b) 0  
+c) `[]`  
+d) 6  
+
+### OM-13-008 · básica · Ciclos for y while
+
+¿En qué situación conviene usar un ciclo while en lugar de un ciclo for?
+
+a) Cuando no se sabe de antemano cuántas vueltas dar ✓  
+b) Cuando queremos recorrer cada elemento de una lista  
+c) Cuando el ciclo debe dar exactamente 10 vueltas  
+d) Cuando queremos construir una lista en una sola línea  
+
+### OM-13-009 · básica · Ciclos for y while
+
+¿Cuál es la forma abreviada de escribir suma = suma + i?
+
+a) `suma += i` ✓  
+b) `suma =+ i`  
+c) `i += suma`  
+d) suma + i  
+
+### OM-13-010 · básica · Ciclos for y while
+
+¿Qué imprime este código?
+
+``` python
+contador = 1
+while contador <= 3:
+    print(contador, end=" ")
+    contador += 1
+```
+
+a) 1 2 3 ✓  
+b) 1 2  
+c) 1 2 3 4  
+d) 0 1 2 3  
+
+### OM-14-001 · básica · NumPy y álgebra lineal
+
+¿Cuál afirmación sobre los arreglos de NumPy es correcta?
+
+a) `Todos sus elementos tienen el mismo tipo (dtype)` ✓  
+b) Pueden mezclar texto y números igual que una lista  
+c) El operador + pega un arreglo al final del otro  
+d) Son más lentos que las listas en cálculos numéricos  
+
+### OM-14-002 · básica · NumPy y álgebra lineal
+
+¿Qué imprime print(np.arange(0, 10, 3))?
+
+a) `[0 3 6 9]` ✓  
+b) `[3 6 9 12]`  
+c) `[0 3 6 10]`  
+d) `[0 10 3]`  
+
+### OM-14-003 · básica · NumPy y álgebra lineal
+
+print(np.sin(np.pi)) muestra 1.2246467991473532e-16. ¿Qué significa ese número?
+
+a) `1.2246... × 10^(-16), es decir, casi cero` ✓  
+b) Un código de error interno que regresa NumPy  
+c) 1.2246... menos 16, es decir, -14.77...  
+d) 1.2246... × 10^16, es decir, un número enorme  
+
+### OM-14-004 · básica · NumPy y álgebra lineal
+
+¿Qué número representa 3e5?
+
+a) 300000 ✓  
+b) `3⁵ = 243`  
+c) 15  
+d) 0.00003  
+
+### OM-14-005 · básica · NumPy y álgebra lineal
+
+¿Qué imprime print(np.arange(1, 6).prod())?
+
+a) 15  
+b) 120 ✓  
+c) 24  
+d) 720  
+
+### OM-14-006 · básica · NumPy y álgebra lineal
+
+¿Qué instrucción calcula la norma (longitud) de un vector v?
+
+a) `np.linalg.norm(v)` ✓  
+b) `np.linalg.det(v)`  
+c) `np.sum(np.sqrt(v))`  
+d) `np.sqrt(np.sum(v))`  
+
+### OM-14-007 · básica · NumPy y álgebra lineal
+
+¿Qué imprime este código?
+
+``` python
+w = np.array([3, 4])
+print(np.linalg.norm(w))
+```
+
+a) 25  
+b) 7  
+c) `[3. 4.]`  
+d) 5.0 ✓  
+
+### OM-14-008 · básica · NumPy y álgebra lineal
+
+¿Qué imprime este código?
+
+``` python
+M = np.array([[1, 2, 3],
+              [4, 5, 6]])
+print(M.T.shape)
+```
+
+a) `(2, 3)`  
+b) 6  
+c) `(3, 3)`  
+d) `(3, 2)` ✓  
+
+### OM-14-009 · básica · NumPy y álgebra lineal
+
+¿Qué imprime print(np.eye(2))?
+
+a) `[[1. 0.] [0. 1.]]` ✓  
+b) `[[1. 1.] [1. 1.]]`  
+c) `[[0. 0.] [0. 0.]]`  
+d) `[[0. 1.] [1. 0.]]`  
+
+### OM-15-001 · básica · SymPy
+
+¿Qué imprime este código?
+
+``` python
+x = sp.symbols("x")
+f = x**2 + 3*x - 1
+print(f.subs(x, 2))
+```
+
+a) 7  
+b) 6  
+c) 9 ✓  
+d) 5  
+
+### OM-15-002 · básica · SymPy
+
+¿Qué imprime print(sp.expand((x + 1)**2))?
+
+a) `(x + 1)*(x + 1)`  
+b) `x**2 + x + 1`  
+c) `x**2 + 2*x + 2`  
+d) `x**2 + 2*x + 1` ✓  
+
+### OM-15-003 · básica · SymPy
+
+¿Qué imprime print(sp.solve(x**2 - 4, x))?
+
+a) `[-2, 2]` ✓  
+b) 2  
+c) `[4]`  
+d) `[-2.0, 2.0]`  
+
+### OM-15-004 · básica · SymPy
+
+¿Qué imprime print(sp.limit(sp.sin(x) / x, x, 0))?
+
+a) 0  
+b) 1 ✓  
+c) oo  
+d) nan  
+
+### OM-15-005 · básica · SymPy
+
+¿Para qué sirve sp.lambdify(x, expr, "numpy")?
+
+a) Para convertir una expresión de SymPy a LaTeX  
+b) Para simplificar al máximo una expresión  
+c) Para convertir expr en una función de NumPy ✓  
+d) `Para resolver la ecuación expr = 0 con NumPy`  
+
+### OM-21-001 · intermedia · Python básico: objetos, variables y buenas prácticas
+
+¿Qué muestra este código de R?
+
+``` python
+py_run_string("
+a = 10
+b = 20
+suma = a + b
+print('La suma es:', suma)
+")
+```
+
+a) La suma es: suma  
+b) La suma es: 1020  
+c) La suma es: 30 ✓  
+d) La suma es: a + b  
+
+### OM-21-002 · intermedia · Python básico: objetos, variables y buenas prácticas
+
+En R se ejecuta lo siguiente. ¿Qué regresa la última línea?
+
+``` python
+py_run_string("resultado = 5 * 8")
+py$resultado
+```
+
+a) `[1] 40` ✓  
+b) `[1] NA`  
+c) Error  
+d) `[1] 58`  
+
+### OM-21-003 · intermedia · Python básico: objetos, variables y buenas prácticas
+
+¿Qué hace py_require("numpy")?
+
+a) Instala NumPy en ese momento en el Python del sistema  
+b) Declara NumPy como dependencia para reticulate ✓  
+c) Importa NumPy y lo guarda en la variable np  
+d) Elimina las versiones anteriores de NumPy del entorno  
+
+### OM-21-004 · intermedia · Python básico: objetos, variables y buenas prácticas
+
+¿Qué imprime este código?
+
+``` python
+numero = 10
+numero = "Diez"
+print(type(numero))
+```
+
+a) `<class 'int'>`  
+b) `<class 'str'>` ✓  
+c) `<class 'float'>`  
+d) `<class 'char'>`  
+
+### OM-21-005 · intermedia · Python básico: objetos, variables y buenas prácticas
+
+¿Qué imprime este código?
+
+``` python
+print(10 / 5, 10 % 3, 10 ** 2)
+```
+
+a) 2 3 20  
+b) 2.0 1 100 ✓  
+c) 2 1 100  
+d) 2.0 3.33 20  
+
+### OM-21-006 · intermedia · Python básico: objetos, variables y buenas prácticas
+
+¿Por qué se configuran QUARTO_PYTHON y RETICULATE_PYTHON apuntando al mismo entorno virtual?
+
+a) Porque Quarto necesita dos versiones distintas de Python  
+b) `Porque RETICULATE_PYTHON solo funciona en Windows`  
+c) Porque así los paquetes se instalan más rápido  
+d) Para que ambos motores usen las mismas bibliotecas ✓  
+
+### OM-21-007 · intermedia · Python básico: objetos, variables y buenas prácticas
+
+Al instalar paquetes con pip aparece error: externally-managed-environment. ¿Cuál es la causa?
+
+a) No hay conexión a internet para descargar el paquete  
+b) El entorno no está activo; pip usa el Python del sistema ✓  
+c) El paquete no existe en PyPI con el nombre que escribiste  
+d) No se reinició R después de editar el archivo .Renviron  
+
+### OM-21-008 · intermedia · Python básico: objetos, variables y buenas prácticas
+
+Al escribir python -m pip install numpy aparece SyntaxError: invalid syntax. ¿Cuál es la causa?
+
+a) Falta la opción --upgrade para instalar la versión más reciente  
+b) El nombre está mal escrito; debe ser NumPy con mayúsculas  
+c) Python no está instalado o no está en la variable PATH  
+d) `Se escribió en la Console de R (o en >>>) y no en la Terminal` ✓  
+
+### OM-21-009 · intermedia · Python básico: objetos, variables y buenas prácticas
+
+¿Cuál de estas líneas está escrita correctamente en el archivo .Renviron (macOS)?
+
+a) `QUARTO_PYTHON = /Users/ana/.venvs/quarto-python/bin/python`  
+b) `QUARTO_PYTHON=~/.venvs/quarto-python/bin/python`  
+c) `QUARTO_PYTHON=\Users\ana\.venvs\quarto-python\bin\python`  
+d) `QUARTO_PYTHON=/Users/ana/.venvs/quarto-python/bin/python` ✓  
+
+### OM-21-010 · intermedia · Python básico: objetos, variables y buenas prácticas
+
+Guardaste correctamente las variables en .Renviron, pero Sys.getenv("RETICULATE_PYTHON") regresa "". ¿Qué te faltó hacer?
+
+a) Instalar NumPy dentro del entorno de Python  
+b) Reiniciar R para que lea de nuevo .Renviron ✓  
+c) Instalar Quarto por separado desde su página  
+d) Activar el entorno en la Terminal antes de RStudio  
+
+### OM-21-011 · intermedia · Python básico: objetos, variables y buenas prácticas
+
+¿Qué imprime este código?
+
+``` python
+a = [1, 4, 9]
+b = a
+print(a is b)
+```
+
+a) True ✓  
+b) False  
+c) None  
+d) Error  
+
+### OM-21-012 · intermedia · Python básico: objetos, variables y buenas prácticas
+
+¿Qué imprime este código?
+
+``` python
+a = [1, 4, 9]
+b = a.copy()
+print(a is b, a == b)
+```
+
+a) False True ✓  
+b) True True  
+c) True False  
+d) False False  
+
+### OM-21-013 · intermedia · Python básico: objetos, variables y buenas prácticas
+
+¿Qué imprime este código?
+
+``` python
+print(len("3.1416"))
+```
+
+a) 4  
+b) 5  
+c) 3.1416  
+d) 6 ✓  
+
+### OM-21-014 · intermedia · Python básico: objetos, variables y buenas prácticas
+
+¿Qué imprime este código?
+
+``` python
+primos = [2, 3, 5, 7, 11]
+print(primos[1:4])
+```
+
+a) `[5, 7, 11]`  
+b) `[3, 5, 7]` ✓  
+c) `[2, 3, 5]`  
+d) `(3, 5, 7)`  
+
+### OM-21-015 · intermedia · Python básico: objetos, variables y buenas prácticas
+
+¿Qué ocurre al ejecutar este código?
+
+``` python
+primos = [2, 3, 5, 7, 11]
+print(primos[5])
+```
+
+a) Imprime 11, el quinto elemento de primos  
+b) Imprime None, pues no hay sexto elemento  
+c) `Imprime [], porque esa posición está vacía`  
+d) IndexError: list index out of range ✓  
+
+### OM-21-016 · intermedia · Python básico: objetos, variables y buenas prácticas
+
+¿Qué ocurre al ejecutar este código?
+
+``` python
+texto = "raiz"
+texto[0] = "R"
+```
+
+a) texto ahora vale "Raiz", porque se cambió la primera letra  
+b) TypeError: 'str' object does not support item assignment ✓  
+c) texto ahora vale "Rraiz", porque la R se insertó al inicio  
+d) texto sigue valiendo "raiz", pero no se muestra ningún error  
+
+### OM-21-017 · intermedia · Python básico: objetos, variables y buenas prácticas
+
+¿Qué imprime este código?
+
+``` python
+a = 20
+b = "20"
+print(a + a, b + b)
+```
+
+a) 40 40  
+b) 2020 2020  
+c) 40 2020 ✓  
+d) TypeError  
+
+### OM-21-018 · intermedia · Python básico: objetos, variables y buenas prácticas
+
+¿Qué imprime este código?
+
+``` python
+print(bool(0), bool("hola"), bool(""))
+```
+
+a) False True False ✓  
+b) False True True  
+c) True True False  
+d) False False False  
+
+### OM-21-019 · intermedia · Python básico: objetos, variables y buenas prácticas
+
+¿Cuál de estas instrucciones produce un ValueError?
+
+a) `float("3.14")`  
+b) `str(2026.5)`  
+c) `int("tres")` ✓  
+d) `int("2026")`  
+
+### OM-21-020 · intermedia · Python básico: objetos, variables y buenas prácticas
+
+¿Qué imprime este código?
+
+``` python
+print(float(7), type(str(2026)))
+```
+
+a) `7 <class 'int'>`  
+b) `7.0 <class 'int'>`  
+c) `7 <class 'str'>`  
+d) `7.0 <class 'str'>` ✓  
+
+### OM-21-021 · intermedia · Python básico: objetos, variables y buenas prácticas
+
+¿Qué imprime este código?
+
+``` python
+nombre = "Emmy"
+apellido = "Noether"
+completo = nombre + " " + apellido
+print(len(completo))
+```
+
+a) 11  
+b) 12 ✓  
+c) 2  
+d) 10  
+
+### OM-21-022 · intermedia · Python básico: objetos, variables y buenas prácticas
+
+¿Qué imprime este código?
+
+``` python
+numero = 3 + 4j
+print(numero.real)
+print(numero.imag)
+```
+
+a) 3 y 4j  
+b) 3 y 4  
+c) 3.0 y 4.0 ✓  
+d) 4.0 y 3.0  
+
+### OM-21-023 · intermedia · Python básico: objetos, variables y buenas prácticas
+
+¿Cuál es la forma correcta de consultar la documentación del método replace de las cadenas?
+
+a) `help(str.replace())`  
+b) `str.replace.help()`  
+c) `help(str.replace)` ✓  
+d) `dir(str.replace())`  
+
+### OM-21-024 · intermedia · Python básico: objetos, variables y buenas prácticas
+
+¿Qué ocurre al ejecutar este código?
+
+``` python
+primos = [2, 3, 5, 7]
+print(primos.len())
+```
+
+a) `Imprime 4, porque len() funciona como método de la lista`  
+b) AttributeError: 'list' object has no attribute 'len' ✓  
+c) `TypeError: len() takes exactly one argument (0 given)`  
+d) Imprime None, porque el método no regresa ningún valor  
+
+### OM-21-025 · intermedia · Python básico: objetos, variables y buenas prácticas
+
+¿Qué imprime este código?
+
+``` python
+pi = "3.1415926535"
+print(pi.count("5"))
+```
+
+a) 1  
+b) 2  
+c) 4  
+d) 3 ✓  
+
+### OM-21-026 · intermedia · Python básico: objetos, variables y buenas prácticas
+
+¿Qué imprime este código?
+
+``` python
+primos = "2,3,5,7".split(",")
+print(primos)
+```
+
+a) `('2', '3', '5', '7')`  
+b) `['2', '3', '5', '7']` ✓  
+c) `['2,', '3,', '5,', '7']`  
+d) {'2', '3', '5', '7'}  
+
+### OM-21-027 · intermedia · Python básico: objetos, variables y buenas prácticas
+
+¿Qué imprime este código?
+
+``` python
+print(" + ".join(["1", "3", "5"]))
+```
+
+a) '1 + 3 + 5'  
+b) + 1 + 3 + 5  
+c) 1 + 3 + 5 ✓  
+d) 1 + 3 + 5 +  
+
+### OM-21-028 · intermedia · Python básico: objetos, variables y buenas prácticas
+
+¿Qué imprime este código?
+
+``` python
+cuadrados = [1, 9, 16]
+cuadrados.insert(1, 4)
+print(cuadrados)
+```
+
+a) `[4, 1, 9, 16]`  
+b) `[1, 9, 16, 4]`  
+c) `[1, 9, 4, 16]`  
+d) `[1, 4, 9, 16]` ✓  
+
+### OM-21-029 · intermedia · Python básico: objetos, variables y buenas prácticas
+
+¿Qué imprime este código?
+
+``` python
+primos = [2, 3, 5, 7]
+ultimo = primos.pop()
+print(ultimo, primos)
+```
+
+a) `2 [3, 5, 7]`  
+b) `[7] [2, 3, 5]`  
+c) `7 [2, 3, 5]` ✓  
+d) `3 [2, 3, 5]`  
+
+### OM-21-030 · intermedia · Python básico: objetos, variables y buenas prácticas
+
+¿Qué imprime este código?
+
+``` python
+numeros = [1, 2, 1, 3]
+numeros.remove(1)
+print(numeros)
+```
+
+a) `[2, 3]`  
+b) `[1, 1, 3]`  
+c) `[1, 2, 3]`  
+d) `[2, 1, 3]` ✓  
+
+### OM-21-031 · intermedia · Python básico: objetos, variables y buenas prácticas
+
+Quieres obtener una lista ordenada SIN modificar la lista original datos. ¿Qué escribes?
+
+a) `ordenados = datos.sort()`  
+b) `ordenados = sorted(datos)` ✓  
+c) `ordenados = list(datos)`  
+d) `ordenados = datos.sorted()`  
+
+### OM-21-032 · intermedia · Python básico: objetos, variables y buenas prácticas
+
+¿Qué imprime este código?
+
+``` python
+puntos = (1, 4, 9, 4)
+print(puntos.count(4), puntos.index(4))
+```
+
+a) 2 3  
+b) 1 1  
+c) 4 1  
+d) 2 1 ✓  
+
+### OM-21-033 · intermedia · Python básico: objetos, variables y buenas prácticas
+
+¿Qué imprime este código?
+
+``` python
+divisores_12 = {1, 2, 3, 4, 6, 12}
+divisores_18 = {1, 2, 3, 6, 9, 18}
+print(max(divisores_12.intersection(divisores_18)))
+```
+
+a) 6 ✓  
+b) 4  
+c) 1  
+d) 3  
+
+### OM-21-034 · intermedia · Python básico: objetos, variables y buenas prácticas
+
+¿Qué imprime este código?
+
+``` python
+constantes = {"pi": 3.1416, "e": 2.7183}
+print(constantes.get("phi"))
+```
+
+a) Un KeyError  
+b) Imprime 0.0  
+c) Imprime None ✓  
+d) Imprime 'phi'  
+
+### OM-21-035 · intermedia · Python básico: objetos, variables y buenas prácticas
+
+¿Qué imprime este código?
+
+``` python
+d = {"a": 1}
+d.update({"b": 2, "a": 3})
+print(d)
+```
+
+a) {'a': 1, 'b': 2}  
+b) {'b': 2, 'a': 3}  
+c) {'a': 4, 'b': 2}  
+d) {'a': 3, 'b': 2} ✓  
+
+### OM-21-036 · intermedia · Python básico: objetos, variables y buenas prácticas
+
+¿Qué imprime este código?
+
+``` python
+edad = 20
+Edad = 30
+EDAD = 40
+print(edad, Edad, EDAD)
+```
+
+a) 40 40 40  
+b) 20 30 40 ✓  
+c) 20 20 20  
+d) NameError  
+
+### OM-21-037 · intermedia · Python básico: objetos, variables y buenas prácticas
+
+¿Qué imprime este código?
+
+``` python
+import keyword
+print(keyword.iskeyword("if"), keyword.iskeyword("clase"))
+```
+
+a) True False ✓  
+b) False True  
+c) True True  
+d) False False  
+
+### OM-21-038 · intermedia · Python básico: objetos, variables y buenas prácticas
+
+Sobrescribiste la función integrada max con max = 10. ¿Cómo recuperas la función original?
+
+a) del max ✓  
+b) `max = 0`  
+c) del 10  
+d) `rm(max)`  
+
+### OM-21-039 · intermedia · Python básico: objetos, variables y buenas prácticas
+
+¿Qué imprime este código, que intenta calcular el promedio de 6 y 10?
+
+``` python
+promedio = 6 + 10 / 2
+print(promedio)
+```
+
+a) 8.0  
+b) 13.0  
+c) 11.0 ✓  
+d) 5.0  
+
+### OM-21-040 · intermedia · Python básico: objetos, variables y buenas prácticas
+
+Al ejecutar math.sin(90) obtienes 0.8939966636005579 en lugar de 1.0. ¿Por qué?
+
+a) `Porque math.sin() redondea siempre sus resultados`  
+b) `Porque hay que escribir el ángulo como math.sin(90.0)`  
+c) Porque los decimales se guardan de forma aproximada  
+d) `Porque math.sin() espera radianes, no grados` ✓  
+
+### OM-21-041 · intermedia · Python básico: objetos, variables y buenas prácticas
+
+¿Qué ocurre al ejecutar este código?
+
+``` python
+cuadrados = [1, 4, 9]
+assert len(cuadrados) > 3, "Faltan cuadrados"
+print("Listo")
+```
+
+a) Imprime Listo, porque assert solo da una advertencia  
+b) Imprime Faltan cuadrados y después imprime Listo  
+c) Se detiene con AssertionError: Faltan cuadrados ✓  
+d) Se detiene con un ValueError: Faltan cuadrados  
+
+### OM-21-042 · intermedia · Python básico: objetos, variables y buenas prácticas
+
+¿Qué imprime este código?
+
+``` python
+dividendo = 10
+divisor = 4
+try:
+    resultado = dividendo / divisor
+    print("Resultado:", resultado)
+except ZeroDivisionError:
+    print("Error: no se puede dividir entre cero")
+finally:
+    print("Fin del cálculo")
+```
+
+a)
+
+```
+Resultado: 2
+Fin del cálculo
+```
+
+b)
+
+```
+Fin del cálculo
+Resultado: 2.5
+```
+
+c)
+
+```
+Resultado: 0.4
+Fin del cálculo
+```
+
+d) ✓
+
+```
+Resultado: 2.5
+Fin del cálculo
+```
+
+
+### OM-21-043 · intermedia · Python básico: objetos, variables y buenas prácticas
+
+¿Por qué se recomienda escribir except ValueError: en lugar de solo except:?
+
+a) Porque except: sin tipo produce un SyntaxError  
+b) Porque except: también oculta errores que no esperabas ✓  
+c) Porque except ValueError: atrapa todos los tipos de error  
+d) Porque así el bloque finally nunca llega a ejecutarse  
+
+### OM-21-044 · intermedia · Python básico: objetos, variables y buenas prácticas
+
+¿Por qué no se recomienda usar exit() en Jupyter, Google Colab o Quarto?
+
+a) Porque detiene el kernel y hay que reiniciarlo ✓  
+b) `Porque la función exit() no existe en esos entornos`  
+c) `Porque exit() solo funciona dentro de un ciclo for`  
+d) `Porque exit() borra el archivo del notebook actual`  
+
+### OM-22-001 · intermedia · Condicionales
+
+¿Qué imprime este código?
+
+``` python
+numero = 0
+if numero != 0:
+    if numero > 0:
+        print("Positivo")
+    else:
+        print("Negativo")
+else:
+    print("Cero")
+```
+
+a) Solo imprime "Cero" ✓  
+b) Solo imprime "Positivo"  
+c) Solo imprime "Negativo"  
+d) No imprime ningún texto  
+
+### OM-22-002 · intermedia · Condicionales
+
+¿Qué imprime este código?
+
+``` python
+paridad = "par" if 15 % 2 == 0 else "impar"
+print(paridad)
+```
+
+a) par  
+b) impar ✓  
+c) 1  
+d) paridad  
+
+### OM-22-003 · intermedia · Condicionales
+
+¿Qué imprime este código?
+
+``` python
+a, b, c = 1, 2, 1
+disc = b ** 2 - 4 * a * c
+if disc > 0:
+    print("Dos raíces reales")
+elif disc == 0:
+    print("Una raíz real")
+else:
+    print("Ninguna raíz real")
+```
+
+a) Imprime "Dos raíces reales"  
+b) Imprime "Ninguna raíz real"  
+c) No imprime ningún mensaje  
+d) Imprime "Una raíz real" ✓  
+
+### OM-22-004 · intermedia · Condicionales
+
+¿Qué ocurre al ejecutar if "8" > 6: ?
+
+a) TypeError: no se puede comparar str con int ✓  
+b) Es True, porque Python convierte "8" en 8  
+c) Es False, porque un texto es menor que un número  
+d) SyntaxError, porque falta un paréntesis en el if  
+
+### OM-22-005 · intermedia · Condicionales
+
+¿Qué imprime print(bool("0"), bool(0))?
+
+a) True False ✓  
+b) False False  
+c) False True  
+d) True True  
+
+### OM-22-006 · intermedia · Condicionales
+
+¿Qué imprime este código? (observa que son dos if, sin elif)
+
+``` python
+n = 12
+if n % 2 == 0:
+    print("par")
+if n % 3 == 0:
+    print("múltiplo de 3")
+```
+
+a) Solo par, porque el primer if ya se cumplió  
+b) par y múltiplo de 3, porque son dos if separados ✓  
+c) Solo múltiplo de 3, porque el último if gana  
+d) No imprime nada, porque falta escribir el else final  
+
+### OM-22-007 · intermedia · Condicionales
+
+¿Qué imprime este código?
+
+``` python
+n = 12
+if n % 2 == 0:
+    print("par")
+elif n % 3 == 0:
+    print("múltiplo de 3")
+```
+
+a) par y múltiplo de 3, porque ambas son ciertas  
+b) Solo múltiplo de 3, porque elif tiene prioridad  
+c) Solo par, porque el elif ya no se revisa ✓  
+d) SyntaxError, porque elif necesita un else  
+
+### OM-22-008 · intermedia · Condicionales
+
+Queremos calcular promedio = total / estudiantes, pero estudiantes puede ser 0 y el programa debe seguir. ¿Qué herramienta es la adecuada?
+
+a) `assert estudiantes > 0, "No hay estudiantes"`  
+b) `if estudiantes == 0: raise ValueError(...)`  
+c) Ninguna: Python regresa 0 cuando se divide entre 0  
+d) `Un if / else que divida solo si estudiantes > 0` ✓  
+
+### OM-22-009 · intermedia · Condicionales
+
+¿Cuál condición revisa correctamente si color es "rojo" o "azul"?
+
+a) `color in ["rojo", "azul"]` ✓  
+b) `color == "rojo" or "azul"`  
+c) `color == ("rojo" or "azul")`  
+d) `color = "rojo" or "azul"`  
+
+### OM-22-010 · intermedia · Condicionales
+
+¿Qué imprime este código?
+
+``` python
+n = 9
+if n % 2 == 0 and n != 2:
+    print("compuesto (par)")
+elif n in [2, 3, 5, 7]:
+    print("primo")
+else:
+    print("revisar más divisores")
+```
+
+a) primo y revisar más divisores  
+b) Solo revisar más divisores ✓  
+c) `Solo el mensaje compuesto (par)`  
+d) No imprime ningún mensaje  
+
+### OM-23-001 · intermedia · Ciclos for y while
+
+¿Qué imprime este código?
+
+``` python
+print(list(range(10, 0, -3)))
+```
+
+a) `[10, 7, 4, 1]` ✓  
+b) `[9, 6, 3, 0]`  
+c) `[0, 3, 6, 9]`  
+d) `[1, 4, 7, 10]`  
+
+### OM-23-002 · intermedia · Ciclos for y while
+
+¿Qué imprime este código?
+
+``` python
+for i in range(1, 8):
+    if i % 2 == 0:
+        continue
+    print(i, end=" ")
+```
+
+a) Imprime 1 3 5 7 ✓  
+b) Imprime 2 4 6  
+c) Imprime 1 y sale  
+d) Imprime 1 3 5  
+
+### OM-23-003 · intermedia · Ciclos for y while
+
+¿Qué imprime este código?
+
+``` python
+for n in [3, 9, 12, 15, 4]:
+    if n % 4 == 0:
+        break
+    print(n, end=" ")
+```
+
+a) 3 9 ✓  
+b) 3 9 12  
+c) 3 9 15  
+d) 3 9 15 4  
+
+### OM-23-004 · intermedia · Ciclos for y while
+
+¿Qué imprime este código?
+
+``` python
+veces = 0
+for i in range(3):
+    for j in range(4):
+        veces += 1
+print(veces)
+```
+
+a) 12 ✓  
+b) 7  
+c) 4  
+d) 20  
+
+### OM-23-005 · intermedia · Ciclos for y while
+
+¿Qué imprime este código?
+
+``` python
+xs = [1, 2, 3]
+ys = [10, 20, 30]
+for x, y in zip(xs, ys):
+    print(x * y, end=" ")
+```
+
+a) 10 40 90 ✓  
+b) 11 22 33  
+c) 10 20 30  
+d) 10 50 140  
+
+### OM-23-006 · intermedia · Ciclos for y while
+
+¿Qué imprime este código?
+
+``` python
+cuadrados = [1, 4, 9]
+for i, valor in enumerate(cuadrados, start=1):
+    print(i * valor, end=" ")
+```
+
+a) 1 8 27 ✓  
+b) 0 4 18  
+c) 1 4 9  
+d) 1 16 81  
+
+### OM-23-007 · intermedia · Ciclos for y while
+
+¿Qué imprime este código?
+
+``` python
+print([i ** 2 for i in range(1, 8) if i % 2 == 1])
+```
+
+a) `[1, 9, 25, 49]` ✓  
+b) `[1, 3, 5, 7]`  
+c) `[2, 6, 10, 14]`  
+d) `[4, 16, 36, 64]`  
+
+### OM-23-008 · intermedia · Ciclos for y while
+
+Este código intenta calcular 1 + 2 + 3 + 4. ¿Qué imprime?
+
+``` python
+for i in range(1, 5):
+    suma = 0
+    suma += i
+print(suma)
+```
+
+a) 4 ✓  
+b) 10  
+c) 0  
+d) 1  
+
+### OM-23-009 · intermedia · Ciclos for y while
+
+¿Qué imprime este código?
+
+``` python
+n = 100
+pasos = 0
+while n > 1:
+    n = n // 2
+    pasos += 1
+print(pasos)
+```
+
+a) 6 ✓  
+b) 7  
+c) 5  
+d) 50  
+
+### OM-23-010 · intermedia · Ciclos for y while
+
+¿Qué ocurre al ejecutar este código?
+
+``` python
+for i in 5:
+    print(i)
+```
+
+a) TypeError: 'int' object is not iterable ✓  
+b) Imprime 0 1 2 3 4, un número por línea  
+c) Imprime 5 una sola vez y termina el for  
+d) SyntaxError: faltan los paréntesis de range  
+
+### OM-23-011 · intermedia · Ciclos for y while
+
+Este código revisa si 91 es primo. ¿Qué imprime?
+
+``` python
+n = 91
+es_primo = True
+for divisor in range(2, n):
+    if n % divisor == 0:
+        es_primo = False
+        break
+print(es_primo, divisor)
+```
+
+a) False 7 ✓  
+b) False 13  
+c) True 90  
+d) False 90  
+
+### OM-23-012 · intermedia · Ciclos for y while
+
+Este código cuenta los divisores de 12. ¿Qué imprime?
+
+``` python
+contador = 0
+for d in range(1, 13):
+    if 12 % d == 0:
+        contador += 1
+print(contador)
+```
+
+a) 6 ✓  
+b) 5  
+c) 28  
+d) 12  
+
+### OM-24-001 · intermedia · NumPy y álgebra lineal
+
+¿Qué imprime este código?
+
+``` python
+v = np.array([1, 2.5, 3])
+print(v.dtype)
+```
+
+a) int64  
+b) object  
+c) float32  
+d) float64 ✓  
+
+### OM-24-002 · intermedia · NumPy y álgebra lineal
+
+¿Qué imprime print(np.linspace(0, 2, 5))?
+
+a) `[0.  0.5 1.  1.5]`  
+b) `[0.  0.5 1.  1.5 2. ]` ✓  
+c) `[0.4 0.8 1.2 1.6 2. ]`  
+d) `[0.  0.4 0.8 1.2 1.6]`  
+
+### OM-24-003 · intermedia · NumPy y álgebra lineal
+
+¿Qué imprime este código?
+
+``` python
+m = np.array([[1, 2, 3],
+              [4, 5, 6]])
+print(m.ndim, m.shape, m.size)
+```
+
+a) `2 (3, 2) 6`  
+b) `6 (2, 3) 2`  
+c) `1 (6,) 6`  
+d) `2 (2, 3) 6` ✓  
+
+### OM-24-004 · intermedia · NumPy y álgebra lineal
+
+¿Qué imprime este código?
+
+``` python
+c = np.zeros((4, 2, 5))
+print(c.ndim, c.size)
+```
+
+a) 3 40 ✓  
+b) 3 11  
+c) 40 3  
+d) 4 40  
+
+### OM-24-005 · intermedia · NumPy y álgebra lineal
+
+Si a = np.arange(12), ¿cuál de estas instrucciones produce un ValueError?
+
+a) `a.reshape(3, 4)`  
+b) `a.reshape(2, 2, 3)`  
+c) `a.reshape(5, 3)` ✓  
+d) `a.reshape(6, 2)`  
+
+### OM-24-006 · intermedia · NumPy y álgebra lineal
+
+¿Qué imprime este código?
+
+``` python
+a = np.array([[1, 2], [3, 4]])
+b = np.array([[5, 6], [7, 8]])
+print(a * b)
+```
+
+a)
+
+```
+[[19 22]
+ [43 50]]
+```
+
+b) ✓
+
+```
+[[ 5 12]
+ [21 32]]
+```
+
+c)
+
+```
+[[ 6  8]
+ [10 12]]
+```
+
+d)
+
+```
+[[23 34]
+ [31 46]]
+```
+
+
+### OM-24-007 · intermedia · NumPy y álgebra lineal
+
+¿Qué imprime print(np.array([4, 6]) / 2)?
+
+a) `[2 3]`  
+b) `[4 6 4 6]`  
+c) `[2. 3.]` ✓  
+d) `[2, 3]`  
+
+### OM-24-008 · intermedia · NumPy y álgebra lineal
+
+¿Por qué np.sin(np.pi) no da exactamente 0?
+
+a) Porque np.sin trabaja en grados, no en radianes  
+b) Porque np.pi es solo una aproximación de π ✓  
+c) Porque NumPy tiene un error en la función seno  
+d) Porque primero hay que escribir import math  
+
+### OM-24-009 · intermedia · NumPy y álgebra lineal
+
+¿Qué imprime este código?
+
+``` python
+d = np.array([2, 9, 4, 7, 3])
+print(np.mean(d), np.median(d))
+```
+
+a) 4.0 5.0  
+b) 5.0 7.0  
+c) 5.0 4.0 ✓  
+d) 25 4.0  
+
+### OM-24-010 · intermedia · NumPy y álgebra lineal
+
+¿Qué imprime este código?
+
+``` python
+d = np.array([4, 1, 9, 2])
+print(np.argmax(d), np.argmin(d))
+```
+
+a) 9 1  
+b) 2 1 ✓  
+c) 1 2  
+d) 3 2  
+
+### OM-24-011 · intermedia · NumPy y álgebra lineal
+
+¿Qué imprime este código?
+
+``` python
+a = np.array([10, 20, 30, 40, 50])
+print(a[1:4], a[::2])
+```
+
+a) `[10 20 30] [10 30 50]`  
+b) `[20 30 40 50] [20 40]`  
+c) `[20 30 40] [10 30 50]` ✓  
+d) `[20 30 40] [20 40]`  
+
+### OM-24-012 · intermedia · NumPy y álgebra lineal
+
+¿Qué imprime este código?
+
+``` python
+m = np.array([[1, 2, 3],
+              [4, 5, 6],
+              [7, 8, 9]])
+print(m[1, 2], m[:, 1])
+```
+
+a) `8 [4 5 6]`  
+b) `6 [2 5 8]` ✓  
+c) `6 [4 5 6]`  
+d) `8 [2 5 8]`  
+
+### OM-24-013 · intermedia · NumPy y álgebra lineal
+
+¿Qué imprime este código?
+
+``` python
+a = np.arange(0, 50, 10)
+print(a[[1, 1, 3]])
+```
+
+a) `[20 20 40]`  
+b) `[ 0  0 20]`  
+c) IndexError  
+d) `[10 10 30]` ✓  
+
+### OM-24-014 · intermedia · NumPy y álgebra lineal
+
+¿Qué imprime este código?
+
+``` python
+a = np.array([3, 13, 12, 10, 18, 6, 4, 8, 5])
+print(a[a % 2 == 0])
+```
+
+a) `[0 0 1 1 1 1 1 1 0]`  
+b) `[12 10 18  6  4  8]` ✓  
+c) `[ 4  6  8 10 12 18]`  
+d) `[1 1 0 0 0 0 0 0 1]`  
+
+### OM-24-015 · intermedia · NumPy y álgebra lineal
+
+¿Qué imprime este código?
+
+``` python
+x = np.array([-2, 5, 0, -7, 3])
+print(np.where(x >= 0, x, 0))
+```
+
+a) `[0 5 0 0 3]` ✓  
+b) `[0 1 1 0 1]`  
+c) `[-2 0 0 -7 0]`  
+d) `[2 5 0 7 3]`  
+
+### OM-24-016 · intermedia · NumPy y álgebra lineal
+
+¿Qué imprime este código?
+
+``` python
+u = np.array([1, 2, 3])
+v = np.array([4, 5, 6])
+print(u @ v)
+```
+
+a) `[ 4 10 18]`  
+b) 32 ✓  
+c) 15  
+d) `[5 7 9]`  
+
+### OM-24-017 · intermedia · NumPy y álgebra lineal
+
+Con los mismos vectores u = np.array([1, 2, 3]) y v = np.array([4, 5, 6]), ¿qué imprime print(u * v)?
+
+a) 32  
+b) `[5 7 9]`  
+c) `[ 4 10 18]` ✓  
+d) ValueError  
+
+### OM-24-018 · intermedia · NumPy y álgebra lineal
+
+Si A tiene forma (2, 3) y B tiene forma (3, 4), ¿qué forma tiene A @ B?
+
+a) `(3, 3)`  
+b) `(2, 3)`  
+c) `(2, 4)` ✓  
+d) `(3, 4)`  
+
+### OM-24-019 · intermedia · NumPy y álgebra lineal
+
+¿Qué ocurre al ejecutar este código?
+
+``` python
+S = np.array([[1, 2],
+              [2, 4]])
+np.linalg.inv(S)
+```
+
+a) `Regresa la matriz cero [[0. 0.] [0. 0.]]`  
+b) `LinAlgError: S es singular (det(S) = 0)` ✓  
+c) `Regresa [[ 4 -2] [-2  1]] como inversa`  
+d) `Regresa una matriz de inf, pues det(S) = 0`  
+
+### OM-24-020 · intermedia · NumPy y álgebra lineal
+
+El sistema 2x + y = 5, x + 3y = 10 se resuelve con este código. ¿Qué imprime?
+
+``` python
+A = np.array([[2, 1],
+              [1, 3]])
+b = np.array([5, 10])
+print(np.linalg.solve(A, b))
+```
+
+a) `[ 5 10]`  
+b) `[3. 1.]`  
+c) `[1. 3.]` ✓  
+d) `[2. 1.]`  
+
+### OM-24-021 · intermedia · NumPy y álgebra lineal
+
+¿Qué imprime este código y qué ángulo forman los vectores?
+
+``` python
+a = np.array([2, 1])
+b = np.array([-1, 2])
+print(a @ b)
+```
+
+a) `0; son perpendiculares (90°)` ✓  
+b) 0; son paralelos, forman 0°  
+c) `[-2  2]; forman 45° entre sí`  
+d) `5; son perpendiculares (90°)`  
+
+### OM-25-001 · intermedia · SymPy
+
+¿Qué imprime print(sp.factor(x**2 - 5*x + 6))?
+
+a) `x**2 - 5*x + 6`  
+b) `(x - 3)*(x - 2)` ✓  
+c) `(x - 6)*(x + 1)`  
+d) `(x + 2)*(x + 3)`  
+
+### OM-25-002 · intermedia · SymPy
+
+¿Cuál es la forma correcta de escribir en SymPy la ecuación x² - 5x = -6?
+
+a) `sp.Eq(x**2 - 5*x = -6)`  
+b) `sp.Eq(x**2 - 5*x == -6)`  
+c) `sp.Eq(x**2 - 5*x, -6)` ✓  
+d) `x**2 - 5*x + 6 == 0`  
+
+### OM-25-003 · intermedia · SymPy
+
+¿Qué imprime print(sp.diff(x**3, x, 2))?
+
+a) `6*x` ✓  
+b) `3*x**2`  
+c) 6  
+d) `2*x**3`  
+
+### OM-25-004 · intermedia · SymPy
+
+¿Qué imprime print(sp.integrate(2*x, (x, 0, 3)))?
+
+a) `x**2`  
+b) `x**2 + C`  
+c) 9 ✓  
+d) 6  
+
+### OM-25-005 · intermedia · SymPy
+
+¿Qué imprime este código?
+
+``` python
+i = sp.symbols("i", integer=True, positive=True)
+print(sp.summation(i, (i, 1, 100)))
+```
+
+a) 5050 ✓  
+b) `n*(n + 1)/2`  
+c) 100  
+d) 5050.0  
+
+### OM-31-001 · avanzada · Python básico: objetos, variables y buenas prácticas
+
+Un documento .qmd tiene solo bloques {python} y no indica motor en el YAML. ¿Qué motor usa Quarto y qué variable consulta para saber qué Python usar?
+
+a) `Motor knitr, RETICULATE_PYTHON`  
+b) `Motor knitr, QUARTO_PYTHON`  
+c) `Motor jupyter, QUARTO_PYTHON` ✓  
+d) `Motor jupyter, RETICULATE_PYTHON`  
+
+### OM-31-002 · avanzada · Python básico: objetos, variables y buenas prácticas
+
+Un documento .qmd tiene un bloque {r} y varios bloques {python}. ¿Quién ejecuta el código de Python?
+
+a) `R con reticulate (motor knitr), usando RETICULATE_PYTHON` ✓  
+b) `Un kernel de Jupyter (motor jupyter), usando QUARTO_PYTHON`  
+c) Nadie: el motor jupyter ignora Python si hay bloques de R  
+d) Quarto lo ejecuta por sí mismo, sin usar ningún motor  
+
+### OM-31-003 · avanzada · Python básico: objetos, variables y buenas prácticas
+
+Ejecutaste py_config() y después use_virtualenv("~/.venvs/quarto-python", required = TRUE), pero py_config() sigue mostrando el Python anterior. ¿Por qué?
+
+a) `use_virtualenv() solo funciona en Windows, no en macOS`  
+b) La ruta no puede llevar ~; hay que escribirla completa  
+c) Python ya estaba iniciado; solo se cambia reiniciando R ✓  
+d) Faltó activar antes el entorno en la Terminal con source  
+
+### OM-31-004 · avanzada · Python básico: objetos, variables y buenas prácticas
+
+Aparece ModuleNotFoundError: No module named 'pandas', aunque py_config() sí muestra tu entorno quarto-python. ¿Qué debes hacer?
+
+a) `Configurar QUARTO_PYTHON en .Renviron y reiniciar R`  
+b) `Ejecutar py_require("pandas") en la Console de RStudio`  
+c) Reinstalar RStudio para que reconozca el entorno quarto-python  
+d) Activar el entorno en la Terminal e instalar pandas con pip ✓  
+
+### OM-31-005 · avanzada · Python básico: objetos, variables y buenas prácticas
+
+¿Qué imprime este código?
+
+``` python
+a = [1, 4, 9]
+b = a
+b[0] = 99
+print(a)
+```
+
+a) `[1, 4, 9]`  
+b) `[1, 4, 99]`  
+c) `[99, 4, 9]` ✓  
+d) TypeError  
+
+### OM-31-006 · avanzada · Python básico: objetos, variables y buenas prácticas
+
+¿Qué imprime este código?
+
+``` python
+lista_a = [2, 3, 5]
+lista_b = [2, 3, 5]
+lista_c = lista_a
+print(lista_a == lista_b, lista_a is lista_b, lista_a is lista_c)
+```
+
+a) True True True  
+b) False False True  
+c) True False False  
+d) True False True ✓  
+
+### OM-31-007 · avanzada · Python básico: objetos, variables y buenas prácticas
+
+¿Qué imprime este código?
+
+``` python
+calificaciones = [8, 6, 9]
+antes = id(calificaciones)
+calificaciones[1] = 10
+print(calificaciones, id(calificaciones) == antes)
+```
+
+a) `[10, 6, 9] False`  
+b) `[8, 10, 9] False`  
+c) `[8, 10, 9] True` ✓  
+d) `[8, 6, 10] True`  
+
+### OM-31-008 · avanzada · Python básico: objetos, variables y buenas prácticas
+
+Después de ejecutar este código, ¿qué afirmación es correcta?
+
+``` python
+animal = "pato"
+animal = "g" + animal[1:]
+```
+
+a) animal apunta a un objeto nuevo "gato"; "pato" no cambió ✓  
+b) Se modificó la primera letra del objeto "pato" original  
+c) Se produce un TypeError, porque las cadenas son inmutables  
+d) `animal conserva la misma identidad (id) que tenía antes`  
+
+### OM-31-009 · avanzada · Python básico: objetos, variables y buenas prácticas
+
+¿Qué imprime este código y por qué?
+
+``` python
+x = 25
+antes = id(x)
+x = x + 1
+print(id(x) == antes)
+```
+
+a) True, porque x sigue siendo la misma variable  
+b) True, porque los enteros de Python son mutables  
+c) TypeError, porque no se puede modificar un entero  
+d) False, porque x + 1 crea un objeto entero nuevo ✓  
+
+### OM-31-010 · avanzada · Python básico: objetos, variables y buenas prácticas
+
+¿Qué imprime este código?
+
+``` python
+lado = 7
+print(lado.imag)
+```
+
+a) Imprime 0 ✓  
+b) Imprime 7  
+c) Imprime 7j  
+d) Da un error  
+
+### OM-31-011 · avanzada · Python básico: objetos, variables y buenas prácticas
+
+¿Qué ocurre al ejecutar este código?
+
+``` python
+z = 2 + 5j
+print(z.real())
+```
+
+a) Imprime 2.0, la parte real del complejo z  
+b) Imprime 2, porque la parte real es entera  
+c) AttributeError, pues z no tiene atributo real  
+d) TypeError: 'float' object is not callable ✓  
+
+### OM-31-012 · avanzada · Python básico: objetos, variables y buenas prácticas
+
+¿Por qué print(7.numerator) produce un SyntaxError, mientras que print((7).numerator) imprime 7?
+
+a) Porque los enteros no tienen el atributo numerator  
+b) Porque numerator es un método y le faltan los paréntesis  
+c) Porque Python lee el punto tras el 7 como punto decimal ✓  
+d) Porque numerator solo funciona con fracciones de tipo float  
+
+### OM-31-013 · avanzada · Python básico: objetos, variables y buenas prácticas
+
+¿Qué imprime este código?
+
+``` python
+pi = "3.1416"
+pi.replace(".", ",")
+print(pi)
+```
+
+a) 3.1416 ✓  
+b) 3,1416  
+c) None  
+d) 31416  
+
+### OM-31-014 · avanzada · Python básico: objetos, variables y buenas prácticas
+
+¿Qué imprime este código?
+
+``` python
+cuadrados = [1, 4]
+cuadrados.append([9, 16])
+print(len(cuadrados))
+```
+
+a) 3 ✓  
+b) 4  
+c) 2  
+d) 5  
+
+### OM-31-015 · avanzada · Python básico: objetos, variables y buenas prácticas
+
+¿Qué imprime este código?
+
+``` python
+impares = [9, 1, 7, 3]
+ordenada = impares.sort()
+print(ordenada)
+```
+
+a) `None, porque sort() ordena en su lugar` ✓  
+b) `[1, 3, 7, 9], la lista ya ordenada`  
+c) `[9, 1, 7, 3], porque sort() no cambia nada`  
+d) `[9, 7, 3, 1], ordenada de mayor a menor`  
+
+### OM-31-016 · avanzada · Python básico: objetos, variables y buenas prácticas
+
+¿Qué imprime este código?
+
+``` python
+fracciones = [0.5, 0.25, 0.75, 0.2]
+fracciones.sort(reverse=True)
+print(fracciones.index(0.25))
+```
+
+a) 1  
+b) 3  
+c) 2 ✓  
+d) 0.25  
+
+### OM-31-017 · avanzada · Python básico: objetos, variables y buenas prácticas
+
+¿Qué imprime este código?
+
+``` python
+a = [1, 2, 3]
+b = a
+b.append(4)
+print(a)
+```
+
+a) `Imprime [1, 2, 3]`  
+b) `Imprime [1, 2, 3, 4]` ✓  
+c) `Imprime [4, 1, 2, 3]`  
+d) Da AttributeError  
+
+### OM-31-018 · avanzada · Python básico: objetos, variables y buenas prácticas
+
+¿Qué ocurre al ejecutar este código?
+
+``` python
+sum = 10
+print(sum([1, 2, 3]))
+```
+
+a) `Imprime 6, porque sum() sigue siendo la función`  
+b) Imprime 16, porque suma 10 + 1 + 2 + 3  
+c) SyntaxError: sum es una palabra reservada  
+d) TypeError: 'int' object is not callable ✓  
+
+### OM-31-019 · avanzada · Python básico: objetos, variables y buenas prácticas
+
+¿Qué imprime este código?
+
+``` python
+texto = "3.5"
+try:
+    numero = int(texto)
+    print("Número:", numero)
+except ValueError:
+    print("Aviso: no es un entero")
+print("El programa continúa")
+```
+
+a)
+
+```
+Número: 3
+El programa continúa
+```
+
+b) ✓
+
+```
+Aviso: no es un entero
+El programa continúa
+```
+
+c)
+
+```
+Número: 3.5
+El programa continúa
+```
+
+d) Se detiene con ValueError sin imprimir nada  
+
+### OM-32-001 · avanzada · Condicionales
+
+¿Qué imprime print(not 5 > 3 or 2 == 2)?
+
+a) False  
+b) SyntaxError  
+c) True ✓  
+d) None  
+
+### OM-32-002 · avanzada · Condicionales
+
+¿Qué imprime este código?
+
+``` python
+print(bool([0]), bool(""), bool(0.0), bool(None))
+```
+
+a) False False False False  
+b) True True False False  
+c) False True False True  
+d) True False False False ✓  
+
+### OM-32-003 · avanzada · Condicionales
+
+¿Qué imprime este código?
+
+``` python
+color = "verde"
+if color == "rojo" or "azul":
+    print("cálido")
+else:
+    print("frío")
+```
+
+a) Imprime frío  
+b) No imprime nada  
+c) Da TypeError  
+d) Imprime cálido ✓  
+
+### OM-32-004 · avanzada · Condicionales
+
+¿Qué imprime este código? (regla del año bisiesto)
+
+``` python
+anio = 2100
+print((anio % 4 == 0 and anio % 100 != 0) or anio % 400 == 0)
+```
+
+a) True  
+b) 2100  
+c) False ✓  
+d) SyntaxError  
+
+### OM-32-005 · avanzada · Condicionales
+
+¿Qué imprime este código?
+
+``` python
+x = 5
+if x > 3:
+    x = x - 4
+if x > 3:
+    print("grande")
+else:
+    print("chico")
+```
+
+a) Imprime grande  
+b) Imprime ambas  
+c) No imprime nada  
+d) Imprime chico ✓  
+
+### OM-32-006 · avanzada · Condicionales
+
+¿Qué imprime este código?
+
+``` python
+c = "8.5"
+print(isinstance(c, (int, float)) and 0 <= c <= 10)
+```
+
+a) Imprime True  
+b) Da TypeError  
+c) Imprime False ✓  
+d) Da ValueError  
+
+### OM-33-001 · avanzada · Ciclos for y while
+
+Se quieren eliminar los números pares de la lista mientras se recorre. ¿Qué imprime este código?
+
+``` python
+numeros = [2, 4, 6, 7, 8]
+for n in numeros:
+    if n % 2 == 0:
+        numeros.remove(n)
+print(numeros)
+```
+
+a) `Imprime la lista [4, 7]` ✓  
+b) `Imprime la lista [7]`  
+c) `Imprime la lista [7, 8]`  
+d) Lanza un RuntimeError  
+
+### OM-33-002 · avanzada · Ciclos for y while
+
+Este código calcula términos de la sucesión de Fibonacci. ¿Qué imprime?
+
+``` python
+a, b = 0, 1
+for _ in range(6):
+    a, b = b, a + b
+print(a)
+```
+
+a) 8 ✓  
+b) 13  
+c) 32  
+d) 5  
+
+### OM-33-003 · avanzada · Ciclos for y while
+
+Este código aplica la regla de Collatz (si n es par se divide entre 2; si es impar se calcula 3n + 1). ¿Qué imprime?
+
+``` python
+n = 6
+pasos = 0
+while True:
+    if n == 1:
+        break
+    if n % 2 == 0:
+        n = n // 2
+    else:
+        n = 3 * n + 1
+    pasos += 1
+print(pasos)
+```
+
+a) Imprime 8 ✓  
+b) Imprime 9  
+c) Imprime 7  
+d) No termina  
+
+### OM-33-004 · avanzada · Ciclos for y while
+
+¿Qué imprime este código?
+
+``` python
+for i in range(1, 4):
+    for j in range(1, 4):
+        if j > i:
+            break
+        print(i * j, end=" ")
+```
+
+a) Imprime 1 2 4 3 6 9 ✓  
+b) Imprime 1 y termina  
+c) Imprime solo 1 4 9  
+d) Imprime los 9 números  
+
+### OM-33-005 · avanzada · Ciclos for y while
+
+Con a = np.arange(1, 101), ¿qué expresión de NumPy da el mismo resultado que este ciclo?
+
+``` python
+suma = 0
+for i in range(1, 101):
+    if i % 3 == 0:
+        suma += i
+print(suma)
+```
+
+a) `a[a % 3 == 0].sum()` ✓  
+b) `(a % 3 == 0).sum()`  
+c) `a[a % 3 == 0].cumsum()`  
+d) `a[a % 3 != 0].sum()`  
+
+### OM-33-006 · avanzada · Ciclos for y while
+
+Este código usa los primeros términos de la serie de Leibniz para aproximar π. ¿Qué imprime?
+
+``` python
+suma = 0
+for k in range(4):
+    suma += (-1) ** k / (2 * k + 1)
+print(round(4 * suma, 4))
+```
+
+a) 2.8952 ✓  
+b) 3.4667  
+c) 3.3397  
+d) 3.1416  
+
+### OM-33-007 · avanzada · Ciclos for y while
+
+Se quiere duplicar cada elemento de la lista. ¿Qué imprime este código?
+
+``` python
+cuadrados = [1, 4, 9]
+for x in cuadrados:
+    x = x * 2
+print(cuadrados)
+```
+
+a) `[1, 4, 9]` ✓  
+b) `[2, 8, 18]`  
+c) `[2, 4, 9]`  
+d) `[1, 16, 81]`  
+
+### OM-33-008 · avanzada · Ciclos for y while
+
+¿Qué ocurre al ejecutar este código?
+
+``` python
+i = 0
+while i != 5:
+    print(i, end=" ")
+    i += 2
+```
+
+a) Nunca termina: i salta de 4 a 6 y nunca vale 5 ✓  
+b) Imprime 0 2 4 y termina cuando i llega a 6  
+c) Imprime 0 2 4 6 y termina porque 6 es mayor que 5  
+d) `No imprime nada: i != 5 es falsa desde el inicio`  
+
+### OM-34-001 · avanzada · NumPy y álgebra lineal
+
+¿Qué imprime este código?
+
+``` python
+import numpy as np
+print([1, 2] * 2, np.array([1, 2]) * 2)
+```
+
+a) `[[1, 2], [1, 2]] [2 4]`  
+b) `[1, 2, 1, 2] [1 2 1 2]`  
+c) `[1, 2, 1, 2] [2 4]` ✓  
+d) `[1, 2, 1, 2] [2. 4.]`  
+
+### OM-34-002 · avanzada · NumPy y álgebra lineal
+
+¿Qué imprime este código?
+
+``` python
+x = np.array([7, 8])
+y = np.array([2, 3])
+print(x // y, x % y)
+```
+
+a) `[4 3] [1 2]`  
+b) `[3 3] [1 2]`  
+c) `[1 2] [3 2]`  
+d) `[3 2] [1 2]` ✓  
+
+### OM-34-003 · avanzada · NumPy y álgebra lineal
+
+¿Qué imprime este código?
+
+``` python
+a = np.array([[1, 2, 3],
+              [4, 5, 6]])
+b = np.array([10, 20, 30])
+print(a + b)
+```
+
+a) ValueError: formas distintas  
+b)
+
+```
+[[11 12 13]
+ [24 25 26]]
+```
+
+c) ✓
+
+```
+[[11 22 33]
+ [14 25 36]]
+```
+
+d)
+
+```
+[[11 22 33]
+ [ 4  5  6]]
+```
+
+
+### OM-34-004 · avanzada · NumPy y álgebra lineal
+
+Si a tiene forma (2, 3), ¿cuál operación produce un ValueError?
+
+a) `a + np.array([10, 20])` ✓  
+b) `a + np.full((2, 3), 10)`  
+c) `a + np.array([[10], [20]])`  
+d) `a + np.array([1, 2, 3])`  
+
+### OM-34-005 · avanzada · NumPy y álgebra lineal
+
+¿Qué imprime este código?
+
+``` python
+columna = np.arange(1, 4).reshape(3, 1)
+fila = np.arange(1, 4)
+print(columna * fila)
+```
+
+a)
+
+```
+[[1 0 0]
+ [0 4 0]
+ [0 0 9]]
+```
+
+b) `ValueError: shapes (3,1) (3,)`  
+c)
+
+```
+[[1 1 1]
+ [2 2 2]
+ [3 3 3]]
+```
+
+d) ✓
+
+```
+[[1 2 3]
+ [2 4 6]
+ [3 6 9]]
+```
+
+
+### OM-34-006 · avanzada · NumPy y álgebra lineal
+
+¿Qué ocurre al ejecutar print(np.sqrt([-1, 4]))?
+
+a) ValueError: math domain error; se detiene  
+b) `Imprime [1. 2.], usando el valor absoluto`  
+c) `Da un RuntimeWarning e imprime [nan  2.]` ✓  
+d) `Imprime [0.+1.j 2.+0.j] sin advertencia`  
+
+### OM-34-007 · avanzada · NumPy y álgebra lineal
+
+¿Qué imprime print(np.log([0, 1])) (además de una advertencia)?
+
+a) `[-inf   1.]`  
+b) `[nan  0.]`  
+c) `[inf  0.]`  
+d) `[-inf   0.]` ✓  
+
+### OM-34-008 · avanzada · NumPy y álgebra lineal
+
+¿Qué imprime este código?
+
+``` python
+m = np.array([[1, 2, 3],
+              [4, 5, 6]])
+print(m.sum(axis=0))
+```
+
+a) `[ 6 15]`  
+b) 21  
+c) `[5 7 9]` ✓  
+d) `[[5 7 9]]`  
+
+### OM-34-009 · avanzada · NumPy y álgebra lineal
+
+Con la misma matriz m de la pregunta anterior, ¿qué imprime print(m.max(axis=1))?
+
+a) `[4 5 6]`  
+b) 6  
+c) `[ 6 15]`  
+d) `[3 6]` ✓  
+
+### OM-34-010 · avanzada · NumPy y álgebra lineal
+
+np.arange(1, 22).prod() debería dar 21!, pero imprime un número negativo. ¿Por qué?
+
+a) 21! no cabe en un int64 y se desborda sin avisar ✓  
+b) `prod() solo funciona con menos de 20 elementos`  
+c) `np.arange(1, 22) incluye también números negativos`  
+d) NumPy no puede multiplicar más de 20 números  
+
+### OM-34-011 · avanzada · NumPy y álgebra lineal
+
+Con la misma matriz m, ¿qué imprime print(m[1:3, 1:3])?
+
+a)
+
+```
+[[1 2]
+ [4 5]]
+```
+
+b)
+
+```
+[[4 5]
+ [7 8]]
+```
+
+c)
+
+```
+[[2 3]
+ [5 6]]
+```
+
+d) ✓
+
+```
+[[5 6]
+ [8 9]]
+```
+
+
+### OM-34-012 · avanzada · NumPy y álgebra lineal
+
+Con la matriz m de 3 × 3 (del 1 al 9), ¿qué imprime print(m[[0, 1, 2], [2, 0, 1]])?
+
+a) `[3 4 8]` ✓  
+b) `[3 1 2]`  
+c) `[7 2 6]`  
+d) `[1 5 9]`  
+
+### OM-34-013 · avanzada · NumPy y álgebra lineal
+
+Con el mismo arreglo a, ¿cuál expresión obtiene los elementos mayores que 5 y menores que 13?
+
+a) `a[a > 5 and a < 13]`  
+b) `a[(a > 5) & (a < 13)]` ✓  
+c) `a[(a > 5) | (a < 13)]`  
+d) `a[(a > 5) and (a < 13)]`  
+
+### OM-34-014 · avanzada · NumPy y álgebra lineal
+
+Con el mismo arreglo a, ¿qué imprime print(a[~(a > 5)])?
+
+a) `[5 4 3]`  
+b) `[0 6 8]`  
+c) `[3 4 5]` ✓  
+d) `[4 5 6]`  
+
+### OM-34-015 · avanzada · NumPy y álgebra lineal
+
+¿Qué imprime este código?
+
+``` python
+a = np.array([9, 2, 6, 1, 7])
+b = np.sort(a)
+print(a, np.argsort(a))
+```
+
+a) `[1 2 6 7 9] [3 1 2 4 0]`  
+b) `[1 2 6 7 9] [0 1 2 3 4]`  
+c) `[9 2 6 1 7] [1 2 6 7 9]`  
+d) `[9 2 6 1 7] [3 1 2 4 0]` ✓  
+
+### OM-34-016 · avanzada · NumPy y álgebra lineal
+
+¿Qué imprime este código?
+
+``` python
+A = np.array([[1, 2],
+              [3, 4]])
+B = np.array([[0, 1],
+              [1, 0]])
+print(A @ B)
+```
+
+a) `[[2 1] [4 3]]` ✓  
+b) `[[0 2] [3 0]]`  
+c) `[[3 4] [1 2]]`  
+d) `[[1 2] [3 4]]`  
+
+### OM-34-017 · avanzada · NumPy y álgebra lineal
+
+¿Qué ocurre al ejecutar este código?
+
+``` python
+C = np.array([[1, 2, 0],
+              [0, 1, 3]])
+C @ C
+```
+
+a) `Eleva al cuadrado cada elemento, como C**2`  
+b) ValueError: C tiene 3 columnas y solo 2 filas ✓  
+c) `Imprime una matriz de forma (2, 2), sin error`  
+d) `Imprime una matriz de forma (3, 3), sin error`  
+
+### OM-34-018 · avanzada · NumPy y álgebra lineal
+
+¿Qué imprime este código?
+
+``` python
+A = np.array([[2, 1],
+              [1, 3]])
+print(np.linalg.det(A))
+```
+
+a) Imprime 5, un entero exacto  
+b) Imprime 7.000000000000001  
+c) Imprime 5.000000000000001 ✓  
+d) Imprime la inversa de A  
+
+### OM-34-019 · avanzada · NumPy y álgebra lineal
+
+Para comprobar que A @ np.linalg.inv(A) es la identidad, ¿por qué el capítulo usa np.allclose() en lugar de ==?
+
+a) `Porque == no funciona con arreglos de NumPy`  
+b) `Porque np.allclose() calcula la inversa más rápido`  
+c) `Porque == solo compara la primera fila de A`  
+d) Porque los decimales tienen precisión limitada ✓  
+
+### OM-34-020 · avanzada · NumPy y álgebra lineal
+
+¿Qué imprime este código?
+
+``` python
+A = np.array([[1, 1],
+              [0, 1]])
+B = np.array([[1, 0],
+              [1, 1]])
+print(A @ B)
+```
+
+a) `[[1 1] [1 2]]`  
+b) `[[2 1] [1 1]]` ✓  
+c) `[[1 0] [0 1]]`  
+d) `[[2 1] [1 2]]`  
+
+### OM-35-001 · avanzada · SymPy
+
+¿Qué imprime este código?
+
+``` python
+import sympy as sp
+print(sp.sqrt(8))
+```
+
+a) Imprime 2.82842712  
+b) `Imprime sqrt(8)`  
+c) `Imprime 4*sqrt(2)`  
+d) `Imprime 2*sqrt(2)` ✓  
+
+### OM-35-002 · avanzada · SymPy
+
+¿Qué imprime este código?
+
+``` python
+x = sp.symbols("x")
+print(x + 1/2)
+```
+
+a) x + 0.5 ✓  
+b) x + 1/2  
+c) x + 1  
+d) TypeError  
+
+### OM-35-003 · avanzada · SymPy
+
+¿Qué imprime este código?
+
+``` python
+print(sp.solveset(x**2 + 1, x, domain=sp.S.Reals))
+```
+
+a) Imprime Complexes  
+b) Imprime EmptySet ✓  
+c) Imprime {-I, I}  
+d) Imprime {-1, 1}  
+
+### OM-35-004 · avanzada · SymPy
+
+¿Qué imprime este código?
+
+``` python
+t = sp.symbols("t")
+r = sp.symbols("r", positive=True)
+print(sp.sqrt(t**2))
+print(sp.sqrt(r**2))
+```
+
+a) `t y sqrt(r**2)`  
+b) `Abs(t) y Abs(r)`  
+c) `t*sign(t) y r`  
+d) `sqrt(t**2) y r` ✓  
+
+### OM-35-005 · avanzada · SymPy
+
+¿Qué imprime este código?
+
+``` python
+M = sp.Matrix([[1, 2],
+               [3, 4]])
+print(M * M)
+```
+
+a) `Matrix([[1, 4], [9, 16]])`  
+b) TypeError: en SymPy se usa @  
+c) `Matrix([[7, 15], [10, 22]])`  
+d) `Matrix([[7, 10], [15, 22]])` ✓  
+
+# Relacionar columnas (funciones)
+
+### RC-1-001 · básica · Funciones de Python, NumPy y SymPy
+
+Relaciona cada función integrada de Python con lo que hace.
+
+| Columna izquierda | Respuesta |
+|----|----|
+| `type(x)` | Regresa el tipo del objeto |
+| `id(x)` | Regresa la identidad del objeto en memoria |
+| `len(x)` | Regresa el número de elementos |
+| `sorted(x)` | Regresa una lista nueva ordenada |
+| `abs(x)` | Calcula el valor absoluto |
+| `round(x, 2)` | Redondea a dos decimales |
+
+### RC-1-002 · básica · Funciones de Python, NumPy y SymPy
+
+Relaciona cada expresión con el valor que muestra print().
+
+| Columna izquierda | Respuesta |
+|----|----|
+| `len("matemáticas")` | 11 |
+| `round(3.14159, 2)` | 3.14 |
+| `int("7") + 1` | 8 |
+| `abs(-12)` | 12 |
+| `float(7)` | 7.0 |
+| `int(3.99)` | 3 |
+
+### RC-1-003 · básica · Funciones de Python, NumPy y SymPy
+
+Relaciona cada expresión con el tipo que muestra print().
+
+| Columna izquierda | Respuesta |
+|----|----|
+| `type(7 / 7)` | `<class 'float'>` |
+| `type(7 // 2)` | `<class 'int'>` |
+| `type("8" + "9")` | `<class 'str'>` |
+| `type(3 > 2)` | `<class 'bool'>` |
+| `type([1, 2])` | `<class 'list'>` |
+| `type((3, -2))` | `<class 'tuple'>` |
+
+### RC-1-004 · básica · Funciones de Python, NumPy y SymPy
+
+Relaciona cada método de cadenas (texto) o de listas (lista) con lo que hace.
+
+| Columna izquierda | Respuesta |
+|----|----|
+| `texto.upper()` | Regresa la cadena en mayúsculas |
+| `texto.split(",")` | Separa la cadena en una lista usando la coma |
+| `texto.strip()` | Quita los espacios al inicio y al final |
+| `lista.append(x)` | Agrega x al final de la lista |
+| `lista.insert(0, x)` | Inserta x en la posición 0 |
+| `lista.pop()` | Elimina y regresa el último elemento |
+
+### RC-1-005 · básica · Funciones de Python, NumPy y SymPy
+
+Relaciona cada función de NumPy con el arreglo que crea.
+
+| Columna izquierda | Respuesta |
+|----|----|
+| `np.arange(0, 10, 2)` | Los enteros de 0 a 8, de 2 en 2 |
+| `np.linspace(0, 1, 5)` | 5 valores igualmente espaciados de 0 a 1 |
+| `np.zeros((2, 3))` | Matriz de 2 × 3 llena de ceros |
+| `np.ones(4)` | Vector con cuatro unos |
+| `np.full((2, 2), 7)` | Matriz de 2 × 2 llena de sietes |
+| `np.eye(3)` | Matriz identidad de 3 × 3 |
+
+### RC-1-006 · básica · Funciones de Python, NumPy y SymPy
+
+Relaciona cada función de SymPy con lo que hace.
+
+| Columna izquierda | Respuesta |
+|----|----|
+| `sp.symbols("x y")` | Declara x e y como símbolos matemáticos |
+| `sp.expand(expr)` | Desarrolla productos y potencias |
+| `sp.factor(expr)` | Factoriza la expresión |
+| `expr.subs(x, 2)` | Sustituye x por 2 en la expresión |
+| `sp.solve(expr, x)` | Encuentra los valores de x que hacen cero a expr |
+| `sp.Rational(1, 3)` | Crea la fracción exacta un tercio |
+
+### RC-2-001 · intermedia · Funciones de Python, NumPy y SymPy
+
+Relaciona cada método de cadenas con el resultado que muestra print().
+
+| Columna izquierda | Respuesta |
+|----|----|
+| `"3.1415926".replace(".", "")` | 31415926 |
+| `"3.1415926".count("1")` | 2 |
+| `"x,y,z".split(",")` | `['x', 'y', 'z']` |
+| `" + ".join(["a", "b", "c"])` | a + b + c |
+| `"  Álgebra  ".strip()` | Álgebra |
+| `"seno".upper()` | SENO |
+
+### RC-2-002 · intermedia · Funciones de Python, NumPy y SymPy
+
+Si datos = [4, 7, 1, 9, 4], relaciona cada expresión con lo que muestra print().
+
+| Columna izquierda | Respuesta |
+|----|----|
+| `sum(datos)` | 25 |
+| `max(datos)` | 9 |
+| `min(datos)` | 1 |
+| `sorted(datos)` | `[1, 4, 4, 7, 9]` |
+| `datos.count(4)` | 2 |
+| `datos.index(9)` | 3 |
+
+### RC-2-003 · intermedia · Funciones de Python, NumPy y SymPy
+
+Si datos = np.array([12, 7, 3, 7, 25, 12, 7, 9, 18]), relaciona cada expresión con lo que muestra print().
+
+| Columna izquierda | Respuesta |
+|----|----|
+| `np.sum(datos)` | 100 |
+| `np.median(datos)` | 9.0 |
+| `np.argmax(datos)` | 4 |
+| `np.argmin(datos)` | 2 |
+| `np.mean(datos).round(2)` | 11.11 |
+| `np.max(datos) - np.min(datos)` | 22 |
+
+### RC-2-004 · intermedia · Funciones de Python, NumPy y SymPy
+
+Relaciona cada función universal de NumPy con lo que muestra print().
+
+| Columna izquierda | Respuesta |
+|----|----|
+| `np.sqrt([1, 4, 9])` | `[1. 2. 3.]` |
+| `np.floor([2.7, -2.7])` | `[ 2. -3.]` |
+| `np.ceil([2.7, -2.7])` | `[ 3. -2.]` |
+| `np.abs([-3, 2])` | `[3 2]` |
+| `np.log10([10, 1000])` | `[1. 3.]` |
+| `np.cos([0, np.pi])` | `[ 1. -1.]` |
+
+### RC-2-005 · intermedia · Funciones de Python, NumPy y SymPy
+
+Relaciona cada expresión con la lista que muestra print().
+
+| Columna izquierda | Respuesta |
+|----|----|
+| `list(range(5))` | `[0, 1, 2, 3, 4]` |
+| `list(range(1, 6))` | `[1, 2, 3, 4, 5]` |
+| `list(range(0, 11, 2))` | `[0, 2, 4, 6, 8, 10]` |
+| `list(range(10, 0, -2))` | `[10, 8, 6, 4, 2]` |
+| `list(enumerate(["x", "y"]))` | `[(0, 'x'), (1, 'y')]` |
+| `list(zip([1, 2], [3, 4]))` | `[(1, 3), (2, 4)]` |
+
+### RC-2-006 · intermedia · Funciones de Python, NumPy y SymPy
+
+Después de import math, relaciona cada expresión con lo que muestra print().
+
+| Columna izquierda | Respuesta |
+|----|----|
+| `math.sin(math.radians(90))` | 1.0 |
+| `math.factorial(5)` | 120 |
+| `round(math.pi, 4)` | 3.1416 |
+| `math.isclose(0.1 + 0.2, 0.3)` | True |
+| `0.1 + 0.2 == 0.3` | False |
+| `int("8") + int("9")` | 17 |
+
+### RC-2-007 · intermedia · Funciones de Python, NumPy y SymPy
+
+Si a = np.arange(12).reshape(3, 4), relaciona cada expresión con lo que muestra print().
+
+| Columna izquierda | Respuesta |
+|----|----|
+| a.shape | `(3, 4)` |
+| a.ndim | 2 |
+| a.size | 12 |
+| a.T.shape | `(4, 3)` |
+| `a.sum(axis=0)` | `[12 15 18 21]` |
+| `a.sum(axis=1)` | `[ 6 22 38]` |
+
+### RC-3-001 · avanzada · Funciones de Python, NumPy y SymPy
+
+Si u = np.array([1, 2, 3]), v = np.array([4, 5, 6]), A = np.array([[2, 1], [1, 3]]) y b = np.array([5, 10]), relaciona cada expresión con lo que muestra print().
+
+| Columna izquierda | Respuesta |
+|----|----|
+| u @ v | 32 |
+| `u * v` | `[ 4 10 18]` |
+| `np.linalg.norm(np.array([3, 4]))` | 5.0 |
+| `np.linalg.solve(A, b)` | `[1. 3.]` |
+| `np.rad2deg(np.arccos(0))` | 90.0 |
+| `np.eye(2) @ b` | `[ 5. 10.]` |
+
+### RC-3-002 · avanzada · Funciones de Python, NumPy y SymPy
+
+Si x = sp.symbols("x"), relaciona cada expresión con lo que muestra print().
+
+| Columna izquierda | Respuesta |
+|----|----|
+| `sp.expand((x + 1)**2)` | `x**2 + 2*x + 1` |
+| `sp.factor(x**2 - 5*x + 6)` | `(x - 3)*(x - 2)` |
+| `sp.solve(x**2 - 4, x)` | `[-2, 2]` |
+| `sp.diff(x**3, x)` | `3*x**2` |
+| `sp.limit(sp.sin(x)/x, x, 0)` | 1 |
+| `(x**2 + 3*x - 1).subs(x, 2)` | 9 |
+
+### RC-3-003 · avanzada · Funciones de Python, NumPy y SymPy
+
+Si x, n = sp.symbols("x n"), relaciona cada expresión con lo que muestra print().
+
+| Columna izquierda | Respuesta |
+|----|----|
+| `sp.sqrt(8)` | `2*sqrt(2)` |
+| `sp.Rational(1, 10) + sp.Rational(2, 10)` | 3/10 |
+| `sp.Matrix([[2, 1], [1, 3]]).det()` | 5 |
+| `sp.integrate(2*x, (x, 0, 3))` | 9 |
+| `sp.limit((1 + 1/n)**n, n, sp.oo)` | E |
+| `sp.series(sp.exp(x), x, 0, 3)` | `1 + x + x**2/2 + O(x**3)` |
+
+### RC-3-004 · avanzada · Funciones de Python, NumPy y SymPy
+
+Si a = np.array([9, 2, 6, 1, 7]), relaciona cada expresión con lo que muestra print().
+
+| Columna izquierda | Respuesta |
+|----|----|
+| `np.sort(a)` | `[1 2 6 7 9]` |
+| `np.argsort(a)` | `[3 1 2 4 0]` |
+| `np.sort(a)[::-1]` | `[9 7 6 2 1]` |
+| `a[a > 5]` | `[9 6 7]` |
+| `np.where(a > 5, "sí", "no")` | `['sí' 'no' 'sí' 'no' 'sí']` |
+| `a[1:4]` | `[2 6 1]` |
+
+### RC-3-005 · avanzada · Funciones de Python, NumPy y SymPy
+
+Relaciona cada expresión que usa ciclos o range() con lo que muestra print().
+
+| Columna izquierda | Respuesta |
+|----|----|
+| `sum(range(1, 101))` | 5050 |
+| `[i ** 2 for i in range(1, 6)]` | `[1, 4, 9, 16, 25]` |
+| `[i for i in range(1, 16) if i % 5 == 0]` | `[5, 10, 15]` |
+| `[p * q for p, q in zip([1, 2], [3, 4])]` | `[3, 8]` |
+| `[i * c for i, c in enumerate([5, 6, 7])]` | `[0, 6, 14]` |
+| `len([n for n in range(1, 31) if n % 3 == 0])` | 10 |
+
+# Preguntas abiertas: debugging y ejercicios de programación
+
+### AB-11-001 · básica · Python básico: objetos, variables y buenas prácticas
+
+El código tiene un error de sintaxis. Escribe el código corregido y lo que imprime.
+
+``` python
+radio = 5
+area_circulo = 3.14 * radio ** 2
+print("Área del círculo:", area_circulo
+```
+
+**Respuesta esperada:**
+
+```
+Error: falta el paréntesis de cierre de print().
+
+Código corregido:
+radio = 5
+area_circulo = 3.14 * radio ** 2
+print("Área del círculo:", area_circulo)
+
+Salida:
+Área del círculo: 78.5
+```
+
+### AB-11-002 · básica · Python básico: objetos, variables y buenas prácticas
+
+El código tiene un error de sintaxis. Escribe el código corregido y lo que imprime.
+
+``` python
+lado = 5
+perimetro = 4 * lado
+print "Perímetro del cuadrado:", perimetro
+```
+
+**Respuesta esperada:**
+
+```
+Error: en Python 3, print es una función y necesita paréntesis.
+
+Código corregido:
+lado = 5
+perimetro = 4 * lado
+print("Perímetro del cuadrado:", perimetro)
+
+Salida:
+Perímetro del cuadrado: 20
+```
+
+### AB-11-003 · básica · Python básico: objetos, variables y buenas prácticas
+
+El código tiene un error de sintaxis. Escribe el código corregido y lo que imprime.
+
+``` python
+primos = [2, 3, 5, 7, 11]
+print("Primos menores que 12:, primos)
+```
+
+**Respuesta esperada:**
+
+```
+Error: falta la comilla de cierre del texto; sin ella, la cadena nunca termina.
+
+Código corregido:
+primos = [2, 3, 5, 7, 11]
+print("Primos menores que 12:", primos)
+
+Salida:
+Primos menores que 12: [2, 3, 5, 7, 11]
+```
+
+### AB-11-004 · básica · Python básico: objetos, variables y buenas prácticas
+
+El código tiene un error de sintaxis. Escribe el código corregido y lo que imprime.
+
+``` python
+nombre_constante = 'pi"
+valor = 3.14159
+print(nombre_constante, valor)
+```
+
+**Respuesta esperada:**
+
+```
+Error: la cadena abre con comilla simple y cierra con comilla doble; deben ser del mismo tipo.
+
+Código corregido:
+nombre_constante = "pi"
+valor = 3.14159
+print(nombre_constante, valor)
+
+Salida:
+pi 3.14159
+```
+
+### AB-11-005 · básica · Python básico: objetos, variables y buenas prácticas
+
+El código tiene un error de sintaxis. Escribe el código corregido y lo que imprime.
+
+``` python
+calificaciones = [8, 9.5 7, 10]
+print("Número de calificaciones:", len(calificaciones))
+print("Mayor calificación:", max(calificaciones))
+```
+
+**Respuesta esperada:**
+
+```
+Error: falta la coma entre 9.5 y 7 dentro de la lista.
+
+Código corregido:
+calificaciones = [8, 9.5, 7, 10]
+print("Número de calificaciones:", len(calificaciones))
+print("Mayor calificación:", max(calificaciones))
+
+Salida:
+Número de calificaciones: 4
+Mayor calificación: 10
+```
+
+### AB-11-006 · básica · Python básico: objetos, variables y buenas prácticas
+
+El código tiene un error de sintaxis. Escribe el código corregido y lo que imprime.
+
+``` python
+base = 6
+altura = 4
+    area_triangulo = base * altura / 2
+print("Área del triángulo:", area_triangulo)
+```
+
+**Respuesta esperada:**
+
+```
+Error: la tercera línea tiene una indentación inesperada; las instrucciones al mismo nivel deben empezar en la misma columna.
+
+Código corregido:
+base = 6
+altura = 4
+area_triangulo = base * altura / 2
+print("Área del triángulo:", area_triangulo)
+
+Salida:
+Área del triángulo: 12.0
+```
+
+### AB-11-007 · básica · Python básico: objetos, variables y buenas prácticas
+
+El código tiene un error en una palabra reservada. Escribe el código corregido y lo que imprime.
+
+``` python
+numero = 10
+es_par = Ture   # 10 sí es par
+print(numero, "es par:", es_par)
+```
+
+**Respuesta esperada:**
+
+```
+Error: Ture está mal escrito; el valor booleano es True (Python lo trata como una variable inexistente y marca NameError).
+
+Código corregido:
+numero = 10
+es_par = True   # 10 sí es par
+print(numero, "es par:", es_par)
+
+Salida:
+10 es par: True
+```
+
+### AB-11-008 · básica · Python básico: objetos, variables y buenas prácticas
+
+El código tiene un error de sintaxis. Escribe el código corregido y lo que imprime.
+
+``` python
+texto = "42"
+try
+    numero = int(texto)
+    print("El doble es:", numero * 2)
+except ValueError:
+    print("El texto no es un número")
+```
+
+**Respuesta esperada:**
+
+```
+Error: faltan los dos puntos (:) al final de try.
+
+Código corregido:
+texto = "42"
+try:
+    numero = int(texto)
+    print("El doble es:", numero * 2)
+except ValueError:
+    print("El texto no es un número")
+
+Salida:
+El doble es: 84
+```
+
+### AB-11-009 · básica · Python básico: objetos, variables y buenas prácticas
+
+El código tiene un error de sintaxis. Escribe el código corregido y lo que imprime.
+
+``` python
+estudiante = {"nombre": "Ana", "promedio": 9.2 "semestre": 1}
+print(estudiante["nombre"], "tiene promedio", estudiante["promedio"])
+```
+
+**Respuesta esperada:**
+
+```
+Error: falta la coma entre los pares "promedio": 9.2 y "semestre": 1 del diccionario.
+
+Código corregido:
+estudiante = {"nombre": "Ana", "promedio": 9.2, "semestre": 1}
+print(estudiante["nombre"], "tiene promedio", estudiante["promedio"])
+
+Salida:
+Ana tiene promedio 9.2
+```
+
+### AB-11-010 · básica · Python básico: objetos, variables y buenas prácticas
+
+El código tiene un error de sintaxis. Escribe el código corregido y lo que imprime.
+
+``` python
+divisores_12 = [1, 2, 3, 4, 6, 12
+print("Divisores de 12:", divisores_12)
+print("Cantidad de divisores:", len(divisores_12))
+```
+
+**Respuesta esperada:**
+
+```
+Error: falta el corchete de cierre ] de la lista.
+
+Código corregido:
+divisores_12 = [1, 2, 3, 4, 6, 12]
+print("Divisores de 12:", divisores_12)
+print("Cantidad de divisores:", len(divisores_12))
+
+Salida:
+Divisores de 12: [1, 2, 3, 4, 6, 12]
+Cantidad de divisores: 6
+```
+
+### AB-11-011 · básica · Python básico: objetos, variables y buenas prácticas
+
+El código tiene un error. Escribe el código corregido y lo que imprime.
+
+``` python
+Pi = 3.14159
+radio = 2
+area = pi * radio ** 2
+print(area)
+```
+
+**Respuesta esperada:**
+
+```
+Error: Aparece NameError: name 'pi' is not defined. Python distingue mayúsculas de minúsculas, así que Pi y pi son nombres distintos y pi nunca se asignó a ningún objeto. Basta con usar el mismo nombre en la definición y en el cálculo.
+
+Código corregido:
+Pi = 3.14159
+radio = 2
+area = Pi * radio ** 2
+print(area)
+
+Salida:
+12.56636
+```
+
+### AB-12-001 · básica · Condicionales
+
+El código tiene un error de sintaxis. Escribe el código corregido y lo que imprime.
+
+``` python
+numero = 17
+if numero % 2 == 0
+    print(numero, "es par")
+else:
+    print(numero, "es impar")
+```
+
+**Respuesta esperada:**
+
+```
+Error: faltan los dos puntos (:) al final de la línea del if.
+
+Código corregido:
+numero = 17
+if numero % 2 == 0:
+    print(numero, "es par")
+else:
+    print(numero, "es impar")
+
+Salida:
+17 es impar
+```
+
+### AB-12-002 · básica · Condicionales
+
+El código tiene un error de sintaxis. Escribe el código corregido y lo que imprime.
+
+``` python
+calificacion = 5.5
+if calificacion >= 6:
+    print("Aprobado")
+else
+    print("Reprobado")
+```
+
+**Respuesta esperada:**
+
+```
+Error: faltan los dos puntos (:) después de else.
+
+Código corregido:
+calificacion = 5.5
+if calificacion >= 6:
+    print("Aprobado")
+else:
+    print("Reprobado")
+
+Salida:
+Reprobado
+```
+
+### AB-12-003 · básica · Condicionales
+
+El código tiene un error de sintaxis. Escribe el código corregido y lo que imprime.
+
+``` python
+numero = 0
+if numero > 0:
+    print("Positivo")
+elif numero < 0
+    print("Negativo")
+else:
+    print("Cero")
+```
+
+**Respuesta esperada:**
+
+```
+Error: faltan los dos puntos (:) al final de la línea del elif.
+
+Código corregido:
+numero = 0
+if numero > 0:
+    print("Positivo")
+elif numero < 0:
+    print("Negativo")
+else:
+    print("Cero")
+
+Salida:
+Cero
+```
+
+### AB-12-004 · básica · Condicionales
+
+El código tiene un error de sintaxis. Escribe el código corregido y lo que imprime.
+
+``` python
+x = 12
+if x % 3 == 0:
+print(x, "es múltiplo de 3")
+```
+
+**Respuesta esperada:**
+
+```
+Error: la instrucción que pertenece al if debe ir indentada con 4 espacios: IndentationError.
+
+Código corregido:
+x = 12
+if x % 3 == 0:
+    print(x, "es múltiplo de 3")
+
+Salida:
+12 es múltiplo de 3
+```
+
+### AB-12-005 · básica · Condicionales
+
+El código tiene un error de sintaxis. Escribe el código corregido y lo que imprime.
+
+``` python
+discriminante = 0
+if discriminante > 0:
+    print("Dos raíces reales")
+Elif discriminante == 0:
+    print("Una raíz real")
+else:
+    print("Ninguna raíz real")
+```
+
+**Respuesta esperada:**
+
+```
+Error: la palabra reservada es elif, en minúsculas; Python distingue mayúsculas de minúsculas.
+
+Código corregido:
+discriminante = 0
+if discriminante > 0:
+    print("Dos raíces reales")
+elif discriminante == 0:
+    print("Una raíz real")
+else:
+    print("Ninguna raíz real")
+
+Salida:
+Una raíz real
+```
+
+### AB-12-006 · básica · Condicionales
+
+El código tiene un error de sintaxis. Escribe el código corregido y lo que imprime.
+
+``` python
+a = 8
+b = 12
+if a > b:
+    print("El mayor es", a)
+esle:
+    print("El mayor es", b)
+```
+
+**Respuesta esperada:**
+
+```
+Error: la palabra reservada else está mal escrita (esle).
+
+Código corregido:
+a = 8
+b = 12
+if a > b:
+    print("El mayor es", a)
+else:
+    print("El mayor es", b)
+
+Salida:
+El mayor es 12
+```
+
+### AB-12-007 · básica · Condicionales
+
+El código tiene un error de sintaxis. Escribe el código corregido y lo que imprime.
+
+``` python
+numero = 25
+if numero % 5 == 0:
+    print("25 es múltiplo de 5')
+```
+
+**Respuesta esperada:**
+
+```
+Error: el texto abre con comilla doble y cierra con comilla simple; deben ser iguales.
+
+Código corregido:
+numero = 25
+if numero % 5 == 0:
+    print("25 es múltiplo de 5")
+
+Salida:
+25 es múltiplo de 5
+```
+
+### AB-12-008 · básica · Condicionales
+
+El código tiene un error en una palabra reservada. Escribe el código corregido y lo que imprime.
+
+``` python
+numero = 7
+es_primo = Ture   # 7 sí es primo
+if es_primo:
+    print(numero, "es primo")
+else:
+    print(numero, "no es primo")
+```
+
+**Respuesta esperada:**
+
+```
+Error: Ture está mal escrito; el valor booleano es True (Python lo trata como una variable inexistente: NameError).
+
+Código corregido:
+numero = 7
+es_primo = True   # 7 sí es primo
+if es_primo:
+    print(numero, "es primo")
+else:
+    print(numero, "no es primo")
+
+Salida:
+7 es primo
+```
+
+### AB-13-001 · básica · Ciclos for y while
+
+El código tiene un error de sintaxis. Escribe el código corregido y lo que imprime.
+
+``` python
+suma = 0
+for i in range(1, 6)
+    suma += i
+print("Suma:", suma)
+```
+
+**Respuesta esperada:**
+
+```
+Error: falta el signo de dos puntos (:) al final de la línea del for.
+
+Código corregido:
+suma = 0
+for i in range(1, 6):
+    suma += i
+print("Suma:", suma)
+
+Salida:
+Suma: 15
+```
+
+### AB-13-002 · básica · Ciclos for y while
+
+El código tiene un error de sintaxis. Escribe el código corregido y lo que imprime.
+
+``` python
+# Primera potencia de 2 mayor o igual que 100
+n = 1
+while n < 100
+    n = n * 2
+print(n)
+```
+
+**Respuesta esperada:**
+
+```
+Error: falta el signo de dos puntos (:) al final de la línea del while.
+
+Código corregido:
+# Primera potencia de 2 mayor o igual que 100
+n = 1
+while n < 100:
+    n = n * 2
+print(n)
+
+Salida:
+128
+```
+
+### AB-13-003 · básica · Ciclos for y while
+
+El código tiene un error de sintaxis. Escribe el código corregido y lo que imprime.
+
+``` python
+numeros = [4, 7, 10, 13, 16]
+for numero in numeros:
+    if numero % 2 == 0
+        print(numero, "es par")
+```
+
+**Respuesta esperada:**
+
+```
+Error: falta el signo de dos puntos (:) al final de la línea del if.
+
+Código corregido:
+numeros = [4, 7, 10, 13, 16]
+for numero in numeros:
+    if numero % 2 == 0:
+        print(numero, "es par")
+
+Salida:
+4 es par
+10 es par
+16 es par
+```
+
+### AB-13-004 · básica · Ciclos for y while
+
+El código tiene un error de sintaxis. Escribe el código corregido y lo que imprime.
+
+``` python
+# Cuadrados de los números del 0 al 4
+for i in range 5:
+    print(i ** 2)
+```
+
+**Respuesta esperada:**
+
+```
+Error: range es una función: su argumento va entre paréntesis, range(5).
+
+Código corregido:
+# Cuadrados de los números del 0 al 4
+for i in range(5):
+    print(i ** 2)
+
+Salida:
+0
+1
+4
+9
+16
+```
+
+### AB-13-005 · básica · Ciclos for y while
+
+El código tiene un error de sintaxis. Escribe el código corregido y lo que imprime.
+
+``` python
+factorial = 1
+for i in range(1, 6):
+factorial = factorial * i
+print("5! =", factorial)
+```
+
+**Respuesta esperada:**
+
+```
+Error: la instrucción que se repite debe ir indentada 4 espacios dentro del for (IndentationError).
+
+Código corregido:
+factorial = 1
+for i in range(1, 6):
+    factorial = factorial * i
+print("5! =", factorial)
+
+Salida:
+5! = 120
+```
+
+### AB-13-006 · básica · Ciclos for y while
+
+El código tiene un error de sintaxis. Escribe el código corregido y lo que imprime.
+
+``` python
+# Tabla del 7 del 1 al 3
+for i in range(1, 4):
+    print(i, "x 7 =", i * 7
+```
+
+**Respuesta esperada:**
+
+```
+Error: falta cerrar el paréntesis de print().
+
+Código corregido:
+# Tabla del 7 del 1 al 3
+for i in range(1, 4):
+    print(i, "x 7 =", i * 7)
+
+Salida:
+1 x 7 = 7
+2 x 7 = 14
+3 x 7 = 21
+```
+
+### AB-13-007 · básica · Ciclos for y while
+
+El código tiene un error de sintaxis. Escribe el código corregido y lo que imprime.
+
+``` python
+primos = [2, 3, 5, 7, 11
+for p in primos:
+    print(p, "al cuadrado es", p ** 2)
+```
+
+**Respuesta esperada:**
+
+```
+Error: falta el corchete ] que cierra la lista primos.
+
+Código corregido:
+primos = [2, 3, 5, 7, 11]
+for p in primos:
+    print(p, "al cuadrado es", p ** 2)
+
+Salida:
+2 al cuadrado es 4
+3 al cuadrado es 9
+5 al cuadrado es 25
+7 al cuadrado es 49
+11 al cuadrado es 121
+```
+
+### AB-13-008 · básica · Ciclos for y while
+
+El código tiene un error de sintaxis. Escribe el código corregido y lo que imprime.
+
+``` python
+numeros = [3, 8 12, 5]
+total = 0
+for n in numeros:
+    total += n
+print("Total:", total)
+```
+
+**Respuesta esperada:**
+
+```
+Error: falta la coma entre 8 y 12 en la lista.
+
+Código corregido:
+numeros = [3, 8, 12, 5]
+total = 0
+for n in numeros:
+    total += n
+print("Total:", total)
+
+Salida:
+Total: 28
+```
+
+### AB-13-009 · básica · Ciclos for y while
+
+El código tiene un error de sintaxis. Escribe el código corregido y lo que imprime.
+
+``` python
+# Tabla del 9 del 1 al 5
+for i range(1, 6):
+    print("9 x", i, "=", 9 * i)
+```
+
+**Respuesta esperada:**
+
+```
+Error: falta la palabra in: la estructura es for variable in coleccion:.
+
+Código corregido:
+# Tabla del 9 del 1 al 5
+for i in range(1, 6):
+    print("9 x", i, "=", 9 * i)
+
+Salida:
+9 x 1 = 9
+9 x 2 = 18
+9 x 3 = 27
+9 x 4 = 36
+9 x 5 = 45
+```
+
+### AB-13-010 · básica · Ciclos for y while
+
+El código tiene un error de sintaxis. Escribe el código corregido y lo que imprime.
+
+``` python
+# Suma de los primeros 4 números impares: 1 + 3 + 5 + 7
+k = 0
+suma = 0
+while k < 4:
+    suma += 2 * k + 1
+  k += 1
+print("Suma:", suma)
+```
+
+**Respuesta esperada:**
+
+```
+Error: la línea k += 1 tiene 2 espacios de indentación; dentro del while deben ser 4 (IndentationError).
+
+Código corregido:
+# Suma de los primeros 4 números impares: 1 + 3 + 5 + 7
+k = 0
+suma = 0
+while k < 4:
+    suma += 2 * k + 1
+    k += 1
+print("Suma:", suma)
+
+Salida:
+Suma: 16
+```
+
+### AB-14-001 · básica · NumPy y álgebra lineal
+
+El código tiene un error de sintaxis. Escribe el código corregido y lo que imprime.
+
+``` python
+import numpy np
+a = np.array([1, 2, 3])
+print(a * 2)
+```
+
+**Respuesta esperada:**
+
+```
+Error: falta la palabra as en la importación: import numpy as np.
+
+Código corregido:
+import numpy as np
+a = np.array([1, 2, 3])
+print(a * 2)
+
+Salida:
+[2 4 6]
+```
+
+### AB-14-002 · básica · NumPy y álgebra lineal
+
+El código tiene un error de sintaxis. Escribe el código corregido y lo que imprime.
+
+``` python
+import numpy as np
+A = np.array([[1, 2], [3, 4])
+print(A.T)
+```
+
+**Respuesta esperada:**
+
+```
+Error: falta el corchete ] que cierra la lista exterior de la matriz.
+
+Código corregido:
+import numpy as np
+A = np.array([[1, 2], [3, 4]])
+print(A.T)
+
+Salida:
+[[1 3]
+ [2 4]]
+```
+
+### AB-14-003 · básica · NumPy y álgebra lineal
+
+El código tiene un error de sintaxis. Escribe el código corregido y lo que imprime.
+
+``` python
+import numpy as np
+v = np.array([3, 4 12])
+print(np.linalg.norm(v))
+```
+
+**Respuesta esperada:**
+
+```
+Error: falta la coma entre 4 y 12.
+
+Código corregido:
+import numpy as np
+v = np.array([3, 4, 12])
+print(np.linalg.norm(v))
+
+Salida:
+13.0
+```
+
+### AB-14-004 · básica · NumPy y álgebra lineal
+
+El código tiene un error de sintaxis. Escribe el código corregido y lo que imprime.
+
+``` python
+import numpy as np
+Z = np.zeros((2, 3)
+print(Z.shape)
+```
+
+**Respuesta esperada:**
+
+```
+Error: falta cerrar el paréntesis de np.zeros(); la forma (2, 3) va dentro de los paréntesis de la función.
+
+Código corregido:
+import numpy as np
+Z = np.zeros((2, 3))
+print(Z.shape)
+
+Salida:
+(2, 3)
+```
+
+### AB-14-005 · básica · NumPy y álgebra lineal
+
+El código produce un error al ejecutarse. Escribe el código corregido y lo que imprime.
+
+``` python
+import numpy as Np
+x = np.linspace(0, 1, 5)
+print(x)
+```
+
+**Respuesta esperada:**
+
+```
+Error: Python distingue mayúsculas y minúsculas: el alias se definió como Np pero se usa np (NameError). La convención es import numpy as np.
+
+Código corregido:
+import numpy as np
+x = np.linspace(0, 1, 5)
+print(x)
+
+Salida:
+[0.   0.25 0.5  0.75 1.  ]
+```
+
+### AB-14-006 · básica · NumPy y álgebra lineal
+
+El código tiene un error de sintaxis. Escribe el código corregido y lo que imprime.
+
+``` python
+import numpy as np
+m = np.arange(1, 10).reshape(3, 3)
+print(m[1 2])   # fila 1, columna 2
+```
+
+**Respuesta esperada:**
+
+```
+Error: los índices de cada eje se separan con coma: m[fila, columna].
+
+Código corregido:
+import numpy as np
+m = np.arange(1, 10).reshape(3, 3)
+print(m[1, 2])   # fila 1, columna 2
+
+Salida:
+6
+```
+
+### AB-14-007 · básica · NumPy y álgebra lineal
+
+El código tiene un error de sintaxis. Escribe el código corregido y lo que imprime.
+
+``` python
+import numpy as np
+A = np.array([[2, 1], [1, 3]])
+print(round(np.linalg.det(A), 2)
+```
+
+**Respuesta esperada:**
+
+```
+Error: falta cerrar el paréntesis de print().
+
+Código corregido:
+import numpy as np
+A = np.array([[2, 1], [1, 3]])
+print(round(np.linalg.det(A), 2))
+
+Salida:
+5.0
+```
+
+### AB-14-008 · básica · NumPy y álgebra lineal
+
+El código tiene un error de sintaxis. Escribe el código corregido y lo que imprime.
+
+``` python
+import numpy as np
+a = np.arange(1, 101)
+print("Suma de 1 a 100:, a.sum())
+```
+
+**Respuesta esperada:**
+
+```
+Error: faltan las comillas que cierran el texto "Suma de 1 a 100:".
+
+Código corregido:
+import numpy as np
+a = np.arange(1, 101)
+print("Suma de 1 a 100:", a.sum())
+
+Salida:
+Suma de 1 a 100: 5050
+```
+
+### AB-14-009 · básica · NumPy y álgebra lineal
+
+El código tiene un error de sintaxis. Escribe el código corregido y lo que imprime.
+
+``` python
+import numpy as np
+a = np.array([3, 13, 12, 10, 18, 6])
+print(a[a > 10)
+```
+
+**Respuesta esperada:**
+
+```
+Error: falta el corchete ] que cierra la máscara a[a > 10].
+
+Código corregido:
+import numpy as np
+a = np.array([3, 13, 12, 10, 18, 6])
+print(a[a > 10])
+
+Salida:
+[13 12 18]
+```
+
+### AB-14-010 · básica · NumPy y álgebra lineal
+
+El código produce un error al ejecutarse. Escribe el código corregido y lo que imprime.
+
+``` python
+import numpy as np
+u = np.array[1, 2, 3]
+print(u + 10)
+```
+
+**Respuesta esperada:**
+
+```
+Error: np.array es una función: se llama con paréntesis y la lista va dentro, np.array([1, 2, 3]) (TypeError).
+
+Código corregido:
+import numpy as np
+u = np.array([1, 2, 3])
+print(u + 10)
+
+Salida:
+[11 12 13]
+```
+
+### AB-15-001 · básica · SymPy
+
+El código tiene un error de sintaxis. Escribe el código corregido y lo que imprime.
+
+``` python
+import sympy as sp
+x = sp.symbols("x")
+print(sp.expand((x + 2)**2)
+```
+
+**Respuesta esperada:**
+
+```
+Error: Falta cerrar el paréntesis de print() (SyntaxError: '(' was never closed).
+
+Código corregido:
+import sympy as sp
+x = sp.symbols("x")
+print(sp.expand((x + 2)**2))
+
+Salida:
+x**2 + 4*x + 4
+```
+
+### AB-15-002 · básica · SymPy
+
+El código tiene un error de sintaxis. Escribe el código corregido y lo que imprime.
+
+``` python
+import sympy sp
+x = sp.symbols("x")
+print(sp.factor(x**2 - 9))
+```
+
+**Respuesta esperada:**
+
+```
+Error: Para importar con un alias se escribe import sympy as sp; falta la palabra as (SyntaxError).
+
+Código corregido:
+import sympy as sp
+x = sp.symbols("x")
+print(sp.factor(x**2 - 9))
+
+Salida:
+(x - 3)*(x + 3)
+```
+
+### AB-15-003 · básica · SymPy
+
+El código tiene un error de sintaxis. Escribe el código corregido y lo que imprime.
+
+``` python
+import sympy as sp
+x = sp.symbols("x")
+f = 3x**2 + 2
+print(sp.diff(f, x))
+```
+
+**Respuesta esperada:**
+
+```
+Error: Python no tiene multiplicación implícita: 3x no es válido (SyntaxError: invalid decimal literal); se escribe 3*x.
+
+Código corregido:
+import sympy as sp
+x = sp.symbols("x")
+f = 3*x**2 + 2
+print(sp.diff(f, x))
+
+Salida:
+6*x
+```
+
+### AB-15-004 · básica · SymPy
+
+El código tiene un error. Escribe el código corregido y lo que imprime.
+
+``` python
+import sympy as sp
+x = sp.symbols(x)
+print(sp.solve(x**2 - 4, x))
+```
+
+**Respuesta esperada:**
+
+```
+Error: El nombre del símbolo se pasa como texto entre comillas; sin comillas Python busca una variable x que todavía no existe (NameError: name 'x' is not defined).
+
+Código corregido:
+import sympy as sp
+x = sp.symbols("x")
+print(sp.solve(x**2 - 4, x))
+
+Salida:
+[-2, 2]
+```
+
+### AB-15-005 · básica · SymPy
+
+El código tiene un error. Escribe el código corregido y lo que imprime.
+
+``` python
+import sympy as sp
+x, y = sp.symbols("x", "y")
+print(sp.expand((x + y)*(x - y)))
+```
+
+**Respuesta esperada:**
+
+```
+Error: Sp.symbols() recibe una sola cadena con los nombres separados por espacios; con dos cadenas da TypeError: symbols() takes 1 positional argument but 2 were given.
+
+Código corregido:
+import sympy as sp
+x, y = sp.symbols("x y")
+print(sp.expand((x + y)*(x - y)))
+
+Salida:
+x**2 - y**2
+```
+
+### AB-15-006 · básica · SymPy
+
+El código tiene un error de sintaxis. Escribe el código corregido y lo que imprime.
+
+``` python
+import sympy as sp
+x y = sp.symbols("x y")
+print(sp.expand(x*(x + y)))
+```
+
+**Respuesta esperada:**
+
+```
+Error: Para asignar dos nombres a la vez se separan con coma: x, y = ... (sin la coma es SyntaxError).
+
+Código corregido:
+import sympy as sp
+x, y = sp.symbols("x y")
+print(sp.expand(x*(x + y)))
+
+Salida:
+x**2 + x*y
+```
+
+### AB-15-007 · básica · SymPy
+
+El código tiene un error. Escribe el código corregido y lo que imprime.
+
+``` python
+import sympy as sp
+x = sp.symbols("x")
+print(sp.expand((x + 1)(x - 1)))
+```
+
+**Respuesta esperada:**
+
+```
+Error: Entre dos paréntesis falta el operador *; sin él Python intenta llamar a (x + 1) como si fuera función (TypeError: 'Add' object is not callable).
+
+Código corregido:
+import sympy as sp
+x = sp.symbols("x")
+print(sp.expand((x + 1)*(x - 1)))
+
+Salida:
+x**2 - 1
+```
+
+### AB-16-001 · básica · Ejercicios de programación (como en las lecciones)
+
+A partir de las variables nombre y apellido, completa el código: crea completo uniendo ambas cadenas con un espacio en medio (usa +), muestra la primera letra del apellido, la última letra del nombre y el número de caracteres de completo. Escribe el código y lo que imprime.
+
+``` python
+nombre = "Emmy"
+apellido = "Noether"
+
+completo = ______
+print(completo)
+print(______)   # Primera letra del apellido
+print(______)   # Última letra del nombre
+print(______)   # Número de caracteres de completo
+```
+
+**Respuesta esperada:**
+
+```
+Solución:
+nombre = "Emmy"
+apellido = "Noether"
+
+completo = nombre + " " + apellido
+print(completo)
+print(apellido[0])
+print(nombre[-1])
+print(len(completo))
+
+Salida:
+Emmy Noether
+N
+y
+12
+```
+
+### AB-16-002 · básica · Ejercicios de programación (como en las lecciones)
+
+Con la lista cuadrados y la tupla punto, muestra el primer elemento de cuadrados, los elementos del índice 2 al 4 (incluido), la tercera coordenada de punto y el último elemento de cuadrados usando un índice negativo. Escribe el código y lo que imprime.
+
+``` python
+cuadrados = [1, 4, 9, 16, 25, 36]
+punto = (5, -1, 2)
+
+print(______)   # Primer elemento de cuadrados
+print(______)   # Índices 2 al 4 (incluido)
+print(______)   # Tercera coordenada de punto
+print(______)   # Último elemento de cuadrados
+```
+
+**Respuesta esperada:**
+
+```
+Solución:
+cuadrados = [1, 4, 9, 16, 25, 36]
+punto = (5, -1, 2)
+
+print(cuadrados[0])
+print(cuadrados[2:5])
+print(punto[2])
+print(cuadrados[-1])
+
+Salida:
+1
+[9, 16, 25]
+2
+36
+```
+
+### AB-16-003 · básica · Ejercicios de programación (como en las lecciones)
+
+El programa no funciona porque los cuatro nombres de variables son inválidos (empiezan con número, tienen guion o espacio, o son palabras reservadas). Cámbialos por nombres válidos en snake_case para que se ejecute y muestre los cuatro valores. Escribe el código y lo que imprime.
+
+``` python
+1er_primo = 2
+suma-total = 1 + 2 + 3
+lambda = 0.5
+radio circulo = 3
+
+print(1er_primo, suma-total, lambda, radio circulo)
+```
+
+**Respuesta esperada:**
+
+```
+Solución:
+primer_primo = 2
+suma_total = 1 + 2 + 3
+tasa = 0.5
+radio_circulo = 3
+
+print(primer_primo, suma_total, tasa, radio_circulo)
+
+Salida:
+2 6 0.5 3
+```
+
+### AB-16-004 · básica · Ejercicios de programación (como en las lecciones)
+
+Completa el programa para que mensaje sea "es múltiplo de 9" si numero es divisible entre 9, o "no es múltiplo de 9" en otro caso (usa el operador %). Escribe el código y lo que imprime.
+
+``` python
+numero = 2025
+
+if ______:
+    mensaje = "es múltiplo de 9"
+______
+    mensaje = "no es múltiplo de 9"
+
+print(numero, mensaje)
+```
+
+**Respuesta esperada:**
+
+```
+Solución:
+numero = 2025
+
+if numero % 9 == 0:
+    mensaje = "es múltiplo de 9"
+else:
+    mensaje = "no es múltiplo de 9"
+
+print(numero, mensaje)
+
+Salida:
+2025 es múltiplo de 9
+```
+
+### AB-16-005 · básica · Ejercicios de programación (como en las lecciones)
+
+Escribe una sola expresión booleana, guardada en es_valido, que verifique que n es un entero (usa isinstance()), que está entre 1 y 100 (incluidos) y que es impar. Escribe el código y lo que imprime.
+
+``` python
+n = 37
+
+es_valido = ______
+print("¿Es válido?", es_valido)
+```
+
+**Respuesta esperada:**
+
+```
+Solución:
+n = 37
+
+es_valido = isinstance(n, int) and 1 <= n <= 100 and n % 2 == 1
+print("¿Es válido?", es_valido)
+
+Salida:
+¿Es válido? True
+```
+
+### AB-16-006 · básica · Ejercicios de programación (como en las lecciones)
+
+Crea con np.arange() un arreglo con los números impares del 1 al 19, crea con np.full() una matriz de 2 × 4 con todos sus elementos iguales a 7 y muestra la suma de todos los elementos de la matriz. Escribe el código y lo que imprime.
+
+``` python
+import numpy as np
+
+impares = ______
+print(impares)
+
+sietes = ______
+print(sietes)
+print("Suma:", ______)
+```
+
+**Respuesta esperada:**
+
+```
+Solución:
+import numpy as np
+
+impares = np.arange(1, 20, 2)
+print(impares)
+
+sietes = np.full((2, 4), 7)
+print(sietes)
+print("Suma:", sietes.sum())
+
+Salida:
+[ 1  3  5  7  9 11 13 15 17 19]
+[[7 7 7 7]
+ [7 7 7 7]]
+Suma: 56
+```
+
+### AB-16-007 · básica · Ejercicios de programación (como en las lecciones)
+
+Crea un arreglo d de 3 dimensiones con los números del 0 al 23 y forma (4, 3, 2). Muestra su número de dimensiones, su forma y su número de elementos, y después el elemento d[2, 1, 1]. Escribe el código y lo que imprime.
+
+``` python
+import numpy as np
+
+d = ______
+print(d.ndim, d.shape, d.size)
+print(______)
+```
+
+**Respuesta esperada:**
+
+```
+Solución:
+import numpy as np
+
+d = np.arange(24).reshape(4, 3, 2)
+print(d.ndim, d.shape, d.size)
+print(d[2, 1, 1])
+
+Salida:
+3 (4, 3, 2) 24
+15
+```
+
+### AB-16-008 · básica · Ejercicios de programación (como en las lecciones)
+
+Calcula el producto de matrices AB con el operador @ y muéstralo; después muestra la forma (shape) de B @ A. Escribe el código y lo que imprime.
+
+``` python
+import numpy as np
+
+A = np.array([[1, 0, 2],
+              [3, 1, 0]])
+B = np.array([[1, 2],
+              [0, 1],
+              [4, 0]])
+
+AB = ______
+print(AB)
+print("Forma de B @ A:", ______)
+```
+
+**Respuesta esperada:**
+
+```
+Solución:
+import numpy as np
+
+A = np.array([[1, 0, 2],
+              [3, 1, 0]])
+B = np.array([[1, 2],
+              [0, 1],
+              [4, 0]])
+
+AB = A @ B
+print(AB)
+print("Forma de B @ A:", (B @ A).shape)
+
+Salida:
+[[9 2]
+ [3 7]]
+Forma de B @ A: (3, 3)
+```
+
+### AB-16-009 · básica · Ejercicios de programación (como en las lecciones)
+
+Con SymPy, expande (x − 2)³ y factoriza x² − 7x + 12. Escribe el código y lo que imprime.
+
+``` python
+import sympy as sp
+x = sp.symbols("x")
+
+print(______)   # (x - 2)^3 expandido
+print(______)   # x^2 - 7x + 12 factorizado
+```
+
+**Respuesta esperada:**
+
+```
+Solución:
+import sympy as sp
+x = sp.symbols("x")
+
+print(sp.expand((x - 2)**3))
+print(sp.factor(x**2 - 7*x + 12))
+
+Salida:
+x**3 - 6*x**2 + 12*x - 8
+(x - 4)*(x - 3)
+```
+
+### AB-16-010 · básica · Ejercicios de programación (como en las lecciones)
+
+Calcula con sp.limit() el límite de (1 + 2/n)ⁿ cuando n tiende a infinito y muéstralo exacto y con 20 dígitos usando sp.N(); después calcula el límite de sin(3x)/x cuando x tiende a 0. Escribe el código y lo que imprime.
+
+``` python
+import sympy as sp
+n, x = sp.symbols("n x")
+
+limite = ______
+print("Límite:", limite)
+print("Valor decimal:", ______)
+print("Límite de sin(3x)/x:", ______)
+```
+
+**Respuesta esperada:**
+
+```
+Solución:
+import sympy as sp
+n, x = sp.symbols("n x")
+
+limite = sp.limit((1 + 2/n)**n, n, sp.oo)
+print("Límite:", limite)
+print("Valor decimal:", sp.N(limite, 20))
+print("Límite de sin(3x)/x:", sp.limit(sp.sin(3*x)/x, x, 0))
+
+Salida:
+Límite: exp(2)
+Valor decimal: 7.3890560989306502272
+Límite de sin(3x)/x: 3
+```
+
+### AB-16-011 · básica · Ejercicios de programación (como en las lecciones)
+
+Calcula con un ciclo for y un acumulador la suma de los números impares 1 + 3 + 5 + ··· + 99 y compárala con la fórmula n², donde n = 50 es la cantidad de impares. Escribe el código y lo que imprime.
+
+``` python
+suma = ______
+
+for i in ______:
+    suma += ______
+
+print("Con el ciclo:", suma)
+print("Con la fórmula:", 50 ** 2)
+```
+
+**Respuesta esperada:**
+
+```
+Solución:
+suma = 0
+
+for i in range(1, 100, 2):
+    suma += i
+
+print("Con el ciclo:", suma)
+print("Con la fórmula:", 50 ** 2)
+
+Salida:
+Con el ciclo: 2500
+Con la fórmula: 2500
+```
+
+### AB-16-012 · básica · Ejercicios de programación (como en las lecciones)
+
+Calcula 8! = 1 · 2 · 3 ··· 8 con un ciclo for y un acumulador. Escribe el código y lo que imprime.
+
+``` python
+n = 8
+factorial = ______
+
+for i in ______:
+    ______
+
+print(n, "! =", factorial)
+```
+
+**Respuesta esperada:**
+
+```
+Solución:
+n = 8
+factorial = 1
+
+for i in range(1, n + 1):
+    factorial *= i
+
+print(n, "! =", factorial)
+
+Salida:
+8 ! = 40320
+```
+
+### AB-21-001 · intermedia · Python básico: objetos, variables y buenas prácticas
+
+El código se ejecuta, pero el operador de potencia es incorrecto: debe calcular el área de un cuadrado de lado 7. Escribe el código corregido y lo que imprime.
+
+``` python
+# Área de un cuadrado de lado 7
+lado = 7
+area = lado ^ 2
+print("Área:", area)
+```
+
+**Respuesta esperada:**
+
+```
+Error: en Python ^ no es potencia (es un operador entre bits y da 5); la potencia se escribe con **.
+
+Código corregido:
+# Área de un cuadrado de lado 7
+lado = 7
+area = lado ** 2
+print("Área:", area)
+
+Salida:
+Área: 49
+```
+
+### AB-21-002 · intermedia · Python básico: objetos, variables y buenas prácticas
+
+El código tiene un error de operador, signo o nombre. Escribe el código corregido y lo que imprime.
+
+``` python
+suma = 3 + 4
+print("La suma de 3 y 4 es " + suma)
+```
+
+**Respuesta esperada:**
+
+```
+Error: no se puede unir con + un texto (str) y un entero (int): TypeError. Hay que convertir el número con str().
+
+Código corregido:
+suma = 3 + 4
+print("La suma de 3 y 4 es " + str(suma))
+
+Salida:
+La suma de 3 y 4 es 7
+```
+
+### AB-21-003 · intermedia · Python básico: objetos, variables y buenas prácticas
+
+El código tiene un error de operador, signo o nombre. Escribe el código corregido y lo que imprime.
+
+``` python
+primos = [2, 3, 5, 7, 11, 13]
+cantidad = lenght(primos)
+print("Hay", cantidad, "primos menores que 15")
+```
+
+**Respuesta esperada:**
+
+```
+Error: la función integrada se llama len(), no lenght(): NameError.
+
+Código corregido:
+primos = [2, 3, 5, 7, 11, 13]
+cantidad = len(primos)
+print("Hay", cantidad, "primos menores que 15")
+
+Salida:
+Hay 6 primos menores que 15
+```
+
+### AB-21-004 · intermedia · Python básico: objetos, variables y buenas prácticas
+
+El código tiene un error de operador, signo o nombre. Escribe el código corregido y lo que imprime.
+
+``` python
+constante = "pi"
+print("La constante es " + constante.upper)
+```
+
+**Respuesta esperada:**
+
+```
+Error: upper es un método y hay que llamarlo con paréntesis; sin ellos se intenta sumar un texto con un método: TypeError.
+
+Código corregido:
+constante = "pi"
+print("La constante es " + constante.upper())
+
+Salida:
+La constante es PI
+```
+
+### AB-21-005 · intermedia · Python básico: objetos, variables y buenas prácticas
+
+El código tiene un error de operador, signo o nombre. Escribe el código corregido y lo que imprime.
+
+``` python
+cuadrados = [1, 4, 9, 16]
+cuadrados.apend(25)
+print(cuadrados)
+```
+
+**Respuesta esperada:**
+
+```
+Error: el método de las listas se llama append(), no apend(): AttributeError.
+
+Código corregido:
+cuadrados = [1, 4, 9, 16]
+cuadrados.append(25)
+print(cuadrados)
+
+Salida:
+[1, 4, 9, 16, 25]
+```
+
+### AB-21-006 · intermedia · Python básico: objetos, variables y buenas prácticas
+
+El código se ejecuta, pero el operador de división es incorrecto: debe mostrar el cociente entero y el residuo de 17 entre 5. Escribe el código corregido y lo que imprime.
+
+``` python
+# Cociente entero y residuo de 17 entre 5
+cociente = 17 / 5
+residuo = 17 % 5
+print("Cociente:", cociente, "Residuo:", residuo)
+```
+
+**Respuesta esperada:**
+
+```
+Error: / es la división normal (da 3.4); el cociente entero se obtiene con //.
+
+Código corregido:
+# Cociente entero y residuo de 17 entre 5
+cociente = 17 // 5
+residuo = 17 % 5
+print("Cociente:", cociente, "Residuo:", residuo)
+
+Salida:
+Cociente: 3 Residuo: 2
+```
+
+### AB-21-007 · intermedia · Python básico: objetos, variables y buenas prácticas
+
+El código tiene un nombre de variable inválido. Escribe el código corregido y lo que imprime.
+
+``` python
+nota-final = 9.5
+print("Nota final:", nota-final)
+```
+
+**Respuesta esperada:**
+
+```
+Error: un nombre de variable no puede tener guion medio (Python lo lee como una resta); se usa guion bajo: nota_final.
+
+Código corregido:
+nota_final = 9.5
+print("Nota final:", nota_final)
+
+Salida:
+Nota final: 9.5
+```
+
+### AB-21-008 · intermedia · Python básico: objetos, variables y buenas prácticas
+
+El código tiene un error de tipos: debe calcular el promedio numérico de dos calificaciones guardadas como texto. Escribe el código corregido y lo que imprime.
+
+``` python
+# Promedio de dos calificaciones guardadas como texto
+cal1 = "8"
+cal2 = "10"
+promedio = (cal1 + cal2) / 2
+print("Promedio:", promedio)
+```
+
+**Respuesta esperada:**
+
+```
+Error: cal1 + cal2 une los textos ("810") y luego no se puede dividir un str entre 2: TypeError. Hay que convertirlos con int().
+
+Código corregido:
+# Promedio de dos calificaciones guardadas como texto
+cal1 = "8"
+cal2 = "10"
+promedio = (int(cal1) + int(cal2)) / 2
+print("Promedio:", promedio)
+
+Salida:
+Promedio: 9.0
+```
+
+### AB-21-009 · intermedia · Python básico: objetos, variables y buenas prácticas
+
+El código se ejecuta, pero no hace lo que se quiere: un estudiante esperaba ver 25. Escribe el código corregido y lo que imprime.
+
+``` python
+lado = 4
+area = lado ** 2
+lado = 5
+print(area)
+```
+
+**Respuesta esperada:**
+
+```
+Error: Imprime 16. La línea area = lado ** 2 se evaluó cuando lado apuntaba a 4, así que area quedó apuntando al objeto 16. Reasignar lado = 5 solo hace que lado apunte a otro objeto; no recalcula area. Hay que volver a calcularlo después de la reasignación.
+
+Código corregido:
+lado = 4
+lado = 5
+area = lado ** 2
+print(area)
+
+Salida:
+25
+```
+
+### AB-21-010 · intermedia · Python básico: objetos, variables y buenas prácticas
+
+El código se ejecuta, pero no hace lo que se quiere: se quería guardar un respaldo de la lista antes de modificarla. Escribe el código corregido y lo que imprime.
+
+``` python
+cuadrados = [1, 4, 9, 16]
+respaldo = cuadrados
+cuadrados[3] = 15
+print(respaldo)
+print(respaldo is cuadrados)
+```
+
+**Respuesta esperada:**
+
+```
+Error: Imprime [1, 4, 9, 15] y True. respaldo = cuadrados no crea una lista nueva: hay un solo objeto con dos nombres, así que el cambio hecho a través de cuadrados también se ve desde respaldo (tienen el mismo id()). Para tener un objeto nuevo con el mismo valor hay que copiar la lista.
+
+Código corregido:
+cuadrados = [1, 4, 9, 16]
+respaldo = cuadrados.copy()
+cuadrados[3] = 15
+print(respaldo)
+print(respaldo is cuadrados)
+
+Salida:
+[1, 4, 9, 16]
+False
+```
+
+### AB-21-011 · intermedia · Python básico: objetos, variables y buenas prácticas
+
+El código se ejecuta, pero no hace lo que se quiere: se quería comprobar que ambas listas contienen las mismas fracciones (debe imprimir True). Escribe el código corregido y lo que imprime.
+
+``` python
+v1 = [1/2, 1/3, 1/4]
+v2 = [1/2, 1/3, 1/4]
+print(v1 is v2)
+```
+
+**Respuesta esperada:**
+
+```
+Error: Imprime False. Cada literal [...] crea un objeto nuevo, así que v1 y v2 son dos objetos distintos (identidades diferentes) aunque tengan el mismo valor. is (y comparar id()) pregunta si son el mismo objeto; para comparar valores se usa ==.
+
+Código corregido:
+v1 = [1/2, 1/3, 1/4]
+v2 = [1/2, 1/3, 1/4]
+print(v1 == v2)
+
+Salida:
+True
+```
+
+### AB-21-012 · intermedia · Python básico: objetos, variables y buenas prácticas
+
+El código quiere imprimir la longitud de la lista y su último primo, pero tiene un error. Escribe el código corregido y lo que imprime.
+
+``` python
+primos = [2, 3, 5, 7, 11]
+print(len(primos))
+print(primos[5])
+```
+
+**Respuesta esperada:**
+
+```
+Error: Imprime 5 y después IndexError: list index out of range. Los índices empiezan en 0, así que una lista de 5 elementos tiene índices del 0 al 4; el índice 5 no existe. El último elemento se obtiene con primos[4] o, mejor, con primos[-1], que funciona sin importar la longitud.
+
+Código corregido:
+primos = [2, 3, 5, 7, 11]
+print(len(primos))
+print(primos[-1])
+
+Salida:
+5
+11
+```
+
+### AB-21-013 · intermedia · Python básico: objetos, variables y buenas prácticas
+
+El código se ejecuta, pero no hace lo que se quiere: deben imprimirse los cuadrados 1, 4, 9 y 16 (índices 1 al 4). Escribe el código corregido y lo que imprime.
+
+``` python
+cuadrados = [0, 1, 4, 9, 16, 25]
+# Se quieren los cuadrados de 1 a 4 (índices 1 al 4)
+print(cuadrados[1:4])
+```
+
+**Respuesta esperada:**
+
+```
+Error: Imprime [1, 4, 9]. En lista[inicio:fin] se incluye el índice inicio pero no el índice fin, así que [1:4] toma los índices 1, 2 y 3. Para llegar hasta el índice 4, el final debe ser 5.
+
+Código corregido:
+cuadrados = [0, 1, 4, 9, 16, 25]
+print(cuadrados[1:5])
+
+Salida:
+[1, 4, 9, 16]
+```
+
+### AB-21-014 · intermedia · Python básico: objetos, variables y buenas prácticas
+
+El código tiene un error. Escribe dos correcciones en el mismo código (una que imprima 7 y otra que imprima 34) y lo que imprime.
+
+``` python
+n = "3"
+print(n + 4)
+```
+
+**Respuesta esperada:**
+
+```
+Error: Produce TypeError: can only concatenate str (not "int") to str. n apunta a un objeto de tipo str, aunque "se vea" como número; con cadenas + concatena, y Python no puede unir una cadena con un entero. Hay que convertir uno de los dos para que ambos tengan el mismo tipo.
+
+Código corregido:
+n = "3"
+print(int(n) + 4)
+print(n + str(4))
+
+Salida:
+7
+34
+```
+
+### AB-21-015 · intermedia · Python básico: objetos, variables y buenas prácticas
+
+El código tiene un error: se quiere obtener la lista de dígitos de "314". Escribe el código corregido y lo que imprime.
+
+``` python
+list = [2, 3, 5, 7]       # primos menores que 10
+digitos = list("314")     # dígitos de pi como lista
+print(digitos)
+```
+
+**Respuesta esperada:**
+
+```
+Error: No imprime nada: se detiene con TypeError: 'list' object is not callable. En la primera línea, el nombre list deja de apuntar a la función integrada list() y pasa a ser una lista; después, list("314") intenta "llamar" a esa lista como si fuera función. Python no marca error al sobrescribir el nombre, pero perdemos la función original. Se corrige con un nombre descriptivo.
+
+Código corregido:
+primos = [2, 3, 5, 7]     # primos menores que 10
+digitos = list("314")
+print(digitos)
+
+Salida:
+['3', '1', '4']
+```
+
+### AB-22-001 · intermedia · Condicionales
+
+El código tiene un error de operador, signo o nombre. Escribe el código corregido y lo que imprime.
+
+``` python
+residuo = 10 % 2
+if residuo = 0:
+    print("10 es par")
+```
+
+**Respuesta esperada:**
+
+```
+Error: = asigna y == compara; en una condición se usa ==.
+
+Código corregido:
+residuo = 10 % 2
+if residuo == 0:
+    print("10 es par")
+
+Salida:
+10 es par
+```
+
+### AB-22-002 · intermedia · Condicionales
+
+El código tiene un error de operador, signo o nombre. Escribe el código corregido y lo que imprime.
+
+``` python
+calificacion = 6
+if calificacion => 6:
+    print("Aprobado")
+else:
+    print("Reprobado")
+```
+
+**Respuesta esperada:**
+
+```
+Error: el operador "mayor o igual que" se escribe >= (primero el signo mayor, luego el igual).
+
+Código corregido:
+calificacion = 6
+if calificacion >= 6:
+    print("Aprobado")
+else:
+    print("Reprobado")
+
+Salida:
+Aprobado
+```
+
+### AB-22-003 · intermedia · Condicionales
+
+El código tiene un error de operador, signo o nombre. Escribe el código corregido y lo que imprime.
+
+``` python
+divisor = 0
+if divisor =! 0:
+    print("Cociente:", 15 / divisor)
+else:
+    print("No se puede dividir entre cero")
+```
+
+**Respuesta esperada:**
+
+```
+Error: el operador "diferente de" se escribe != (primero el signo de admiración).
+
+Código corregido:
+divisor = 0
+if divisor != 0:
+    print("Cociente:", 15 / divisor)
+else:
+    print("No se puede dividir entre cero")
+
+Salida:
+No se puede dividir entre cero
+```
+
+### AB-22-004 · intermedia · Condicionales
+
+El código tiene un error de operador, signo o nombre. Escribe el código corregido y lo que imprime.
+
+``` python
+numero = 30
+if numero % 2 == 0 && numero % 3 == 0:
+    print(numero, "es múltiplo de 6")
+```
+
+**Respuesta esperada:**
+
+```
+Error: && es de Bash; en Python el "y" lógico se escribe and.
+
+Código corregido:
+numero = 30
+if numero % 2 == 0 and numero % 3 == 0:
+    print(numero, "es múltiplo de 6")
+
+Salida:
+30 es múltiplo de 6
+```
+
+### AB-22-005 · intermedia · Condicionales
+
+El código tiene un error de operador, signo o nombre. Escribe el código corregido y lo que imprime.
+
+``` python
+numero = 9
+if numero < 0 || numero > 10:
+    print("Fuera del rango de 0 a 10")
+else:
+    print("Dentro del rango de 0 a 10")
+```
+
+**Respuesta esperada:**
+
+```
+Error: || es de Bash; en Python el "o" lógico se escribe or.
+
+Código corregido:
+numero = 9
+if numero < 0 or numero > 10:
+    print("Fuera del rango de 0 a 10")
+else:
+    print("Dentro del rango de 0 a 10")
+
+Salida:
+Dentro del rango de 0 a 10
+```
+
+### AB-22-006 · intermedia · Condicionales
+
+El código tiene un error de tipos: debe decidir si la calificación, guardada como texto, es aprobatoria. Escribe el código corregido y lo que imprime.
+
+``` python
+calificacion_texto = "8"
+if calificacion_texto >= 6:
+    print("Aprobado")
+else:
+    print("Reprobado")
+```
+
+**Respuesta esperada:**
+
+```
+Error: no se puede comparar un texto con un número (TypeError); hay que convertir primero con int().
+
+Código corregido:
+calificacion_texto = "8"
+if int(calificacion_texto) >= 6:
+    print("Aprobado")
+else:
+    print("Reprobado")
+
+Salida:
+Aprobado
+```
+
+### AB-22-007 · intermedia · Condicionales
+
+El código se ejecuta, pero usa el operador equivocado para saber si un número es par. Escribe el código corregido y lo que imprime.
+
+``` python
+numero = 14
+if numero / 2 == 0:
+    print(numero, "es par")
+else:
+    print(numero, "es impar")
+```
+
+**Respuesta esperada:**
+
+```
+Error: / da el cociente (7.0), no el residuo; para saber si es par se usa el módulo %: numero % 2 == 0.
+
+Código corregido:
+numero = 14
+if numero % 2 == 0:
+    print(numero, "es par")
+else:
+    print(numero, "es impar")
+
+Salida:
+14 es par
+```
+
+### AB-22-008 · intermedia · Condicionales
+
+El código tiene un error de sintaxis. Escribe el código corregido y lo que imprime.
+
+``` python
+a, b, c = 1, 2, 1
+discriminante = b ** 2 - 4 * a * c
+
+if discriminante = 0:
+    print("Una raíz real")
+```
+
+**Respuesta esperada:**
+
+```
+Error: No se ejecuta: Python marca SyntaxError: invalid syntax. Maybe you meant '==' or ':=' instead of '='? Un solo = asigna un valor; para comparar se usan dos (==). Con la corrección imprime Una raíz real, porque el discriminante es 0.
+
+Código corregido:
+a, b, c = 1, 2, 1
+discriminante = b ** 2 - 4 * a * c
+
+if discriminante == 0:
+    print("Una raíz real")
+
+Salida:
+Una raíz real
+```
+
+### AB-23-001 · intermedia · Ciclos for y while
+
+El código tiene un error en un operador o en una función. Escribe el código corregido y lo que imprime.
+
+``` python
+for n in range(1, 11):
+    if n % 3 = 0:
+        print(n, "es múltiplo de 3")
+```
+
+**Respuesta esperada:**
+
+```
+Error: para comparar se usa ==; un solo = es asignación y produce SyntaxError.
+
+Código corregido:
+for n in range(1, 11):
+    if n % 3 == 0:
+        print(n, "es múltiplo de 3")
+
+Salida:
+3 es múltiplo de 3
+6 es múltiplo de 3
+9 es múltiplo de 3
+```
+
+### AB-23-002 · intermedia · Ciclos for y while
+
+El código se ejecuta, pero el resultado es incorrecto porque se usó un operador equivocado. Escribe el código corregido y lo que imprime.
+
+``` python
+# Suma de los cuadrados del 1 al 4: 1 + 4 + 9 + 16
+suma = 0
+for i in range(1, 5):
+    suma += i ^ 2
+print(suma)
+```
+
+**Respuesta esperada:**
+
+```
+Error: en Python la potencia es **; ^ es otra operación (XOR bit a bit), por eso imprimía 10.
+
+Código corregido:
+# Suma de los cuadrados del 1 al 4: 1 + 4 + 9 + 16
+suma = 0
+for i in range(1, 5):
+    suma += i ** 2
+print(suma)
+
+Salida:
+30
+```
+
+### AB-23-003 · intermedia · Ciclos for y while
+
+El código se ejecuta, pero el resultado es incorrecto porque se usó un operador equivocado. Escribe el código corregido y lo que imprime.
+
+``` python
+# Contar cuántos números de la lista son negativos
+numeros = [3, -1, -4, 1, -5, 9]
+negativos = 0
+for x in numeros:
+    if x < 0:
+        negativos =+ 1
+print("Negativos:", negativos)
+```
+
+**Respuesta esperada:**
+
+```
+Error: =+ 1 significa 'asignar +1' (siempre vale 1); para incrementar se escribe +=.
+
+Código corregido:
+# Contar cuántos números de la lista son negativos
+numeros = [3, -1, -4, 1, -5, 9]
+negativos = 0
+for x in numeros:
+    if x < 0:
+        negativos += 1
+print("Negativos:", negativos)
+
+Salida:
+Negativos: 3
+```
+
+### AB-23-004 · intermedia · Ciclos for y while
+
+El código se ejecuta, pero no calcula n!: corrige el rango. Escribe el código corregido y lo que imprime.
+
+``` python
+# Factorial de n: 1 * 2 * ... * n
+n = 6
+factorial = 1
+for i in range(1, n):
+    factorial *= i
+print("n! =", factorial)
+```
+
+**Respuesta esperada:**
+
+```
+Error: range(1, n) no incluye n (calculaba 5! = 120); para llegar hasta n se usa range(1, n + 1).
+
+Código corregido:
+# Factorial de n: 1 * 2 * ... * n
+n = 6
+factorial = 1
+for i in range(1, n + 1):
+    factorial *= i
+print("n! =", factorial)
+
+Salida:
+n! = 720
+```
+
+### AB-23-005 · intermedia · Ciclos for y while
+
+El código produce un error al ejecutarse. Escribe el código corregido y lo que imprime.
+
+``` python
+palabras = ["seno", "coseno", "tangente"]
+for palabra in palabras:
+    print(palabra, "tiene", palabra.lenght, "letras")
+```
+
+**Respuesta esperada:**
+
+```
+Error: las cadenas no tienen el atributo .lenght (AttributeError); la longitud se obtiene con la función len().
+
+Código corregido:
+palabras = ["seno", "coseno", "tangente"]
+for palabra in palabras:
+    print(palabra, "tiene", len(palabra), "letras")
+
+Salida:
+seno tiene 4 letras
+coseno tiene 6 letras
+tangente tiene 8 letras
+```
+
+### AB-23-006 · intermedia · Ciclos for y while
+
+El código se ejecuta pero no imprime nada; debería contar hacia atrás 10, 8, 6, 4, 2. Escribe el código corregido y lo que imprime.
+
+``` python
+# Cuenta regresiva de 2 en 2: 10, 8, 6, 4, 2
+for i in range(10, 0, 2):
+    print(i)
+```
+
+**Respuesta esperada:**
+
+```
+Error: para contar hacia atrás el paso debe ser negativo: range(10, 0, -2). Con paso 2 el rango está vacío.
+
+Código corregido:
+# Cuenta regresiva de 2 en 2: 10, 8, 6, 4, 2
+for i in range(10, 0, -2):
+    print(i)
+
+Salida:
+10
+8
+6
+4
+2
+```
+
+### AB-23-007 · intermedia · Ciclos for y while
+
+El código produce un error al ejecutarse. Escribe el código corregido y lo que imprime.
+
+``` python
+cubos = []
+for i in range(1, 5):
+    cubos.add(i ** 3)
+print(cubos)
+```
+
+**Respuesta esperada:**
+
+```
+Error: las listas no tienen el método .add() (AttributeError; ese es de los conjuntos); para agregar al final se usa .append().
+
+Código corregido:
+cubos = []
+for i in range(1, 5):
+    cubos.append(i ** 3)
+print(cubos)
+
+Salida:
+[1, 8, 27, 64]
+```
+
+### AB-23-008 · intermedia · Ciclos for y while
+
+El código se ejecuta, pero imprime decimales (3.0, 10.0, ...) en lugar de enteros por un operador equivocado. Escribe el código corregido y lo que imprime.
+
+``` python
+# Sucesión de Collatz a partir de 6 (solo enteros)
+n = 6
+while n != 1:
+    if n % 2 == 0:
+        n = n / 2
+    else:
+        n = 3 * n + 1
+    print(n)
+```
+
+**Respuesta esperada:**
+
+```
+Error: / siempre da float; para la división entera se usa //.
+
+Código corregido:
+# Sucesión de Collatz a partir de 6 (solo enteros)
+n = 6
+while n != 1:
+    if n % 2 == 0:
+        n = n // 2
+    else:
+        n = 3 * n + 1
+    print(n)
+
+Salida:
+3
+10
+5
+16
+8
+4
+2
+1
+```
+
+### AB-24-001 · intermedia · NumPy y álgebra lineal
+
+El código produce un error al ejecutarse. Escribe el código corregido y lo que imprime.
+
+``` python
+import numpy as np
+pares = np.arrange(0, 11, 2)
+print(pares)
+```
+
+**Respuesta esperada:**
+
+```
+Error: la función se llama np.arange (con una sola r); np.arrange no existe (AttributeError).
+
+Código corregido:
+import numpy as np
+pares = np.arange(0, 11, 2)
+print(pares)
+
+Salida:
+[ 0  2  4  6  8 10]
+```
+
+### AB-24-002 · intermedia · NumPy y álgebra lineal
+
+El código produce un error al ejecutarse. Escribe el código corregido y lo que imprime.
+
+``` python
+import numpy as np
+x = np.linespace(0, np.pi, 3)
+print(np.cos(x).round(2))
+```
+
+**Respuesta esperada:**
+
+```
+Error: la función se llama np.linspace (de linear space); np.linespace no existe (AttributeError).
+
+Código corregido:
+import numpy as np
+x = np.linspace(0, np.pi, 3)
+print(np.cos(x).round(2))
+
+Salida:
+[ 1.  0. -1.]
+```
+
+### AB-24-003 · intermedia · NumPy y álgebra lineal
+
+El código produce un error al ejecutarse. Escribe el código corregido y lo que imprime.
+
+``` python
+import numpy as np
+v = np.array(1, 2, 3)
+print(v ** 2)
+```
+
+**Respuesta esperada:**
+
+```
+Error: np.array() recibe una sola lista con los elementos: faltan los corchetes, np.array([1, 2, 3]) (TypeError).
+
+Código corregido:
+import numpy as np
+v = np.array([1, 2, 3])
+print(v ** 2)
+
+Salida:
+[1 4 9]
+```
+
+### AB-24-004 · intermedia · NumPy y álgebra lineal
+
+El código produce un error al ejecutarse. Escribe el código corregido y lo que imprime.
+
+``` python
+import numpy as np
+a = np.arange(1, 21)
+print(a[a > 5 and a < 10])   # entre 5 y 10
+```
+
+**Respuesta esperada:**
+
+```
+Error: con arreglos no se usa and (ValueError); se usa & y cada condición va entre paréntesis.
+
+Código corregido:
+import numpy as np
+a = np.arange(1, 21)
+print(a[(a > 5) & (a < 10)])   # entre 5 y 10
+
+Salida:
+[6 7 8 9]
+```
+
+### AB-24-005 · intermedia · NumPy y álgebra lineal
+
+El código se ejecuta, pero no calcula el producto de matrices AB. Escribe el código corregido y lo que imprime.
+
+``` python
+import numpy as np
+A = np.array([[2, 1], [1, 3]])
+B = np.array([[1, 0], [2, 1]])
+print(A * B)   # producto de matrices AB
+```
+
+**Respuesta esperada:**
+
+```
+Error: * multiplica elemento a elemento; el producto de matrices se escribe con @.
+
+Código corregido:
+import numpy as np
+A = np.array([[2, 1], [1, 3]])
+B = np.array([[1, 0], [2, 1]])
+print(A @ B)   # producto de matrices AB
+
+Salida:
+[[4 1]
+ [7 3]]
+```
+
+### AB-24-006 · intermedia · NumPy y álgebra lineal
+
+El código produce un error al ejecutarse. Escribe el código corregido y lo que imprime.
+
+``` python
+import numpy as np
+A = np.array([[2, 0], [0, 4]])
+print(np.linalg.inverse(A))
+```
+
+**Respuesta esperada:**
+
+```
+Error: la inversa se calcula con np.linalg.inv(); np.linalg.inverse no existe (AttributeError).
+
+Código corregido:
+import numpy as np
+A = np.array([[2, 0], [0, 4]])
+print(np.linalg.inv(A))
+
+Salida:
+[[0.5  0.  ]
+ [0.   0.25]]
+```
+
+### AB-24-007 · intermedia · NumPy y álgebra lineal
+
+El código produce un error al ejecutarse. Escribe el código corregido y lo que imprime.
+
+``` python
+import numpy as np
+a = np.arange(1, 13)
+print(a.reshape(3, 5))   # matriz de 3 filas
+```
+
+**Respuesta esperada:**
+
+```
+Error: a tiene 12 elementos y 3 × 5 = 15 (ValueError); con 3 filas deben ser 4 columnas: reshape(3, 4).
+
+Código corregido:
+import numpy as np
+a = np.arange(1, 13)
+print(a.reshape(3, 4))   # matriz de 3 filas
+
+Salida:
+[[ 1  2  3  4]
+ [ 5  6  7  8]
+ [ 9 10 11 12]]
+```
+
+### AB-24-008 · intermedia · NumPy y álgebra lineal
+
+El código produce un error al ejecutarse. Escribe el código corregido y lo que imprime.
+
+``` python
+import numpy as np
+C = np.array([[1, 2, 3], [4, 5, 6]])
+print(C.T().shape)
+```
+
+**Respuesta esperada:**
+
+```
+Error: .T es un atributo, no un método: se escribe sin paréntesis (TypeError).
+
+Código corregido:
+import numpy as np
+C = np.array([[1, 2, 3], [4, 5, 6]])
+print(C.T.shape)
+
+Salida:
+(3, 2)
+```
+
+### AB-24-009 · intermedia · NumPy y álgebra lineal
+
+El código tiene un error: se quieren los elementos mayores que 5 y menores que 13. Escribe el código corregido y lo que imprime.
+
+``` python
+import numpy as np
+
+a = np.array([3, 13, 12, 10, 18, 6, 4, 8, 5])
+print(a[a > 5 and a < 13])
+```
+
+**Respuesta esperada:**
+
+```
+Error: Se detiene con ValueError: The truth value of an array with more than one element is ambiguous... and, or y not esperan un solo True o False, pero a > 5 es un arreglo de muchos booleanos. Con arreglos se usan &, | y ~, con paréntesis en cada condición (sin ellos, a > 5 & a < 13 también falla).
+
+Código corregido:
+import numpy as np
+
+a = np.array([3, 13, 12, 10, 18, 6, 4, 8, 5])
+print(a[(a > 5) & (a < 13)])
+
+Salida:
+[12 10  6  8]
+```
+
+### AB-24-010 · intermedia · NumPy y álgebra lineal
+
+El código se ejecuta, pero no hace lo que se quiere: debería imprimir el producto de matrices AB. Escribe el código corregido y lo que imprime.
+
+``` python
+import numpy as np
+
+A = np.array([[1, 2],
+              [3, 4]])
+B = np.array([[5, 6],
+              [7, 8]])
+print(A * B)   # producto de matrices AB
+```
+
+**Respuesta esperada:**
+
+```
+Error: Imprime [[ 5 12] [21 32]], porque en NumPy * multiplica elemento a elemento (1·5, 2·6, 3·7, 4·8). En el producto de matrices, cada entrada es el producto punto de una fila de A con una columna de B; por ejemplo, la entrada (0, 0) es 1·5 + 2·7 = 19. Se corrige con el operador @.
+
+Código corregido:
+import numpy as np
+
+A = np.array([[1, 2],
+              [3, 4]])
+B = np.array([[5, 6],
+              [7, 8]])
+print(A @ B)
+
+Salida:
+[[19 22]
+ [43 50]]
+```
+
+### AB-24-011 · intermedia · NumPy y álgebra lineal
+
+El código tiene un error: se quiere multiplicar A por el vector v = (1, 2, 1). Escribe el código corregido y lo que imprime.
+
+``` python
+import numpy as np
+
+A = np.array([[1, 2, 0],
+              [0, 1, 3]])
+v = np.array([1, 2])
+print(A @ v)
+```
+
+**Respuesta esperada:**
+
+```
+Error: Da un ValueError (... size 2 is different from 3). A tiene forma (2, 3): tiene 3 columnas, así que solo se puede multiplicar por un vector con 3 entradas; v solo tiene 2. Se corrige usando un vector de longitud 3.
+
+Código corregido:
+import numpy as np
+
+A = np.array([[1, 2, 0],
+              [0, 1, 3]])
+v = np.array([1, 2, 1])
+print(A @ v)
+
+Salida:
+[5 5]
+```
+
+### AB-25-001 · intermedia · SymPy
+
+El código tiene un error. Escribe el código corregido y lo que imprime.
+
+``` python
+import sympy as sp
+x = sp.symbols("x")
+f = x^3 + 1
+print(sp.diff(f, x))
+```
+
+**Respuesta esperada:**
+
+```
+Error: En Python la potencia se escribe con **; ^ es otro operador (XOR) y con un símbolo da TypeError: unsupported operand type(s) for ^: 'Symbol' and 'int'.
+
+Código corregido:
+import sympy as sp
+x = sp.symbols("x")
+f = x**3 + 1
+print(sp.diff(f, x))
+
+Salida:
+3*x**2
+```
+
+### AB-25-002 · intermedia · SymPy
+
+El código quiere resolver la ecuación x² = 9, pero tiene un error. Escribe el código corregido y lo que imprime.
+
+``` python
+import sympy as sp
+x = sp.symbols("x")
+print(sp.solve(x**2 = 9, x))
+```
+
+**Respuesta esperada:**
+
+```
+Error: = asigna, no escribe una ecuación (SyntaxError: expression cannot contain assignment); en SymPy una ecuación se escribe con sp.Eq(lado_izquierdo, lado_derecho).
+
+Código corregido:
+import sympy as sp
+x = sp.symbols("x")
+print(sp.solve(sp.Eq(x**2, 9), x))
+
+Salida:
+[-3, 3]
+```
+
+### AB-25-003 · intermedia · SymPy
+
+El código se ejecuta, pero no hace lo que se quiere: la derivada de x³/3 debería salir exacta, como x**2. Escribe el código corregido y lo que imprime.
+
+``` python
+import sympy as sp
+x = sp.symbols("x")
+f = 1/3 * x**3
+print(sp.diff(f, x))
+```
+
+**Respuesta esperada:**
+
+```
+Error: 1/3 lo calcula Python antes que SymPy y da el decimal 0.333..., por eso el resultado sale 1.0*x**2; para una fracción exacta se usa sp.Rational(1, 3).
+
+Código corregido:
+import sympy as sp
+x = sp.symbols("x")
+f = sp.Rational(1, 3) * x**3
+print(sp.diff(f, x))
+
+Salida:
+x**2
+```
+
+### AB-25-004 · intermedia · SymPy
+
+El código tiene un error. Escribe el código corregido y lo que imprime.
+
+``` python
+import sympy as sp
+x = sp.symbols("x")
+print(sp.derivative(sp.sin(x), x))
+```
+
+**Respuesta esperada:**
+
+```
+Error: SymPy no tiene una función sp.derivative (AttributeError: module 'sympy' has no attribute 'derivative'); la derivada se calcula con sp.diff().
+
+Código corregido:
+import sympy as sp
+x = sp.symbols("x")
+print(sp.diff(sp.sin(x), x))
+
+Salida:
+cos(x)
+```
+
+### AB-25-005 · intermedia · SymPy
+
+El código tiene un error. Escribe el código corregido y lo que imprime.
+
+``` python
+import math
+import sympy as sp
+x = sp.symbols("x")
+f = math.sqrt(x**2 + 1)
+print(sp.diff(f, x))
+```
+
+**Respuesta esperada:**
+
+```
+Error: Math.sqrt() solo trabaja con números y no puede recibir un símbolo (TypeError: Cannot convert expression to float); con expresiones simbólicas se usa sp.sqrt().
+
+Código corregido:
+import sympy as sp
+x = sp.symbols("x")
+f = sp.sqrt(x**2 + 1)
+print(sp.diff(f, x))
+
+Salida:
+x/sqrt(x**2 + 1)
+```
+
+### AB-25-006 · intermedia · SymPy
+
+El código quiere calcular el límite cuando x tiende a infinito, pero tiene un error. Escribe el código corregido y lo que imprime.
+
+``` python
+import sympy as sp
+x = sp.symbols("x")
+print(sp.limit((2*x + 1)/(x + 3), x, oo))
+```
+
+**Respuesta esperada:**
+
+```
+Error: Oo no existe por sí solo (NameError: name 'oo' is not defined); el infinito de SymPy se escribe sp.oo.
+
+Código corregido:
+import sympy as sp
+x = sp.symbols("x")
+print(sp.limit((2*x + 1)/(x + 3), x, sp.oo))
+
+Salida:
+2
+```
+
+### AB-26-001 · intermedia · Ejercicios de programación (como en las lecciones)
+
+La variable e guarda las primeras cifras del número e como texto. Quita el punto con replace() y muestra cuántos dígitos son, cuántas veces aparece el dígito "8" con count() y el porcentaje de dígitos pares (0, 2, 4, 6 y 8) redondeado a 2 decimales con round(). Escribe el código y lo que imprime.
+
+``` python
+e = "2.71828182845904523536"
+
+digitos = ______
+print("Total de dígitos:", ______)
+print("Veces que aparece 8:", ______)
+
+pares = ______
+porcentaje = ______
+print("Porcentaje de pares:", round(porcentaje, 2))
+```
+
+**Respuesta esperada:**
+
+```
+Solución:
+e = "2.71828182845904523536"
+
+digitos = e.replace(".", "")
+print("Total de dígitos:", len(digitos))
+print("Veces que aparece 8:", digitos.count("8"))
+
+pares = digitos.count("0") + digitos.count("2") + digitos.count("4") + digitos.count("6") + digitos.count("8")
+porcentaje = pares / len(digitos) * 100
+print("Porcentaje de pares:", round(porcentaje, 2))
+
+Salida:
+Total de dígitos: 21
+Veces que aparece 8: 4
+Porcentaje de pares: 57.14
+```
+
+### AB-26-002 · intermedia · Ejercicios de programación (como en las lecciones)
+
+El programa marca TypeError: 'int' object is not callable en la penúltima línea. Corrígelo cambiando la variable de la primera línea por una constante con un nombre adecuado (CALIFICACION_APROBATORIA), para que min() vuelva a funcionar y se muestre la peor calificación. Escribe el código y lo que imprime.
+
+``` python
+min = 6   # Calificación mínima aprobatoria
+
+calificaciones = [7, 5.5, 9, 8]
+print("Mínimo para aprobar:", min)
+
+peor = min(calificaciones)
+print("Peor calificación:", peor)
+```
+
+**Respuesta esperada:**
+
+```
+Solución:
+CALIFICACION_APROBATORIA = 6   # Calificación mínima aprobatoria
+
+calificaciones = [7, 5.5, 9, 8]
+print("Mínimo para aprobar:", CALIFICACION_APROBATORIA)
+
+peor = min(calificaciones)
+print("Peor calificación:", peor)
+
+Salida:
+Mínimo para aprobar: 6
+Peor calificación: 5.5
+```
+
+### AB-26-003 · intermedia · Ejercicios de programación (como en las lecciones)
+
+Completa el programa con try y except para que intente convertir texto en entero con int(); si aparece un ValueError, debe convertirlo con float() y mostrar un aviso, sin detener el programa. Al final se muestra el doble del número. Escribe el código y lo que imprime.
+
+``` python
+texto = "12.5"
+
+______:
+    numero = int(texto)
+______ ValueError:
+    numero = ______
+    print("No es entero, se convirtió a float:", numero)
+
+print("Doble:", numero * 2)
+```
+
+**Respuesta esperada:**
+
+```
+Solución:
+texto = "12.5"
+
+try:
+    numero = int(texto)
+except ValueError:
+    numero = float(texto)
+    print("No es entero, se convirtió a float:", numero)
+
+print("Doble:", numero * 2)
+
+Salida:
+No es entero, se convirtió a float: 12.5
+Doble: 25.0
+```
+
+### AB-26-004 · intermedia · Ejercicios de programación (como en las lecciones)
+
+Dados los lados a, b y c, el programa debe verificar primero la desigualdad del triángulo (cada lado menor que la suma de los otros dos); si no se cumple, tipo debe ser "No es triángulo". Si se cumple, clasifícalo como "Equilátero", "Isósceles" o "Escaleno" con if, elif y else. Escribe el código y lo que imprime.
+
+``` python
+a, b, c = 5, 5, 8
+
+if not (a < b + c and b < a + c and c < a + b):
+    tipo = "No es triángulo"
+elif ______:
+    tipo = "Equilátero"
+elif ______:
+    tipo = "Isósceles"
+else:
+    tipo = ______
+
+print("Lados:", a, b, c, "->", tipo)
+print("Perímetro:", a + b + c)
+```
+
+**Respuesta esperada:**
+
+```
+Solución:
+a, b, c = 5, 5, 8
+
+if not (a < b + c and b < a + c and c < a + b):
+    tipo = "No es triángulo"
+elif a == b and b == c:
+    tipo = "Equilátero"
+elif a == b or b == c or a == c:
+    tipo = "Isósceles"
+else:
+    tipo = "Escaleno"
+
+print("Lados:", a, b, c, "->", tipo)
+print("Perímetro:", a + b + c)
+
+Salida:
+Lados: 5 5 8 -> Isósceles
+Perímetro: 18
+```
+
+### AB-26-005 · intermedia · Ejercicios de programación (como en las lecciones)
+
+Completa el programa para que la lista raices contenga las raíces reales de 2x² − 2x − 12 = 0 según el signo del discriminante Δ = b² − 4ac (dos, una o ninguna raíz). Si a == 0 debe lanzar un ValueError. Escribe el código y lo que imprime.
+
+``` python
+a, b, c = 2, -2, -12
+
+if a == 0:
+    raise ValueError("a no puede ser 0: la ecuación no es cuadrática")
+
+discriminante = ______
+
+if ______:
+    x1 = (-b + discriminante ** 0.5) / (2 * a)
+    x2 = (-b - discriminante ** 0.5) / (2 * a)
+    raices = [x1, x2]
+elif ______:
+    raices = [-b / (2 * a)]
+else:
+    raices = []
+
+print("Discriminante:", discriminante)
+print("Raíces reales:", raices)
+```
+
+**Respuesta esperada:**
+
+```
+Solución:
+a, b, c = 2, -2, -12
+
+if a == 0:
+    raise ValueError("a no puede ser 0: la ecuación no es cuadrática")
+
+discriminante = b ** 2 - 4 * a * c
+
+if discriminante > 0:
+    x1 = (-b + discriminante ** 0.5) / (2 * a)
+    x2 = (-b - discriminante ** 0.5) / (2 * a)
+    raices = [x1, x2]
+elif discriminante == 0:
+    raices = [-b / (2 * a)]
+else:
+    raices = []
+
+print("Discriminante:", discriminante)
+print("Raíces reales:", raices)
+
+Salida:
+Discriminante: 100
+Raíces reales: [3.0, -2.0]
+```
+
+### AB-26-006 · intermedia · Ejercicios de programación (como en las lecciones)
+
+Con NumPy calcula la media, la mediana y la desviación estándar de datos, redondeadas a 2 decimales, y la posición del dato más grande con np.argmax(). Escribe el código y lo que imprime.
+
+``` python
+import numpy as np
+
+datos = np.array([15, 4, 9, 4, 21, 15, 4, 10, 8, 30])
+
+media = ______
+mediana = ______
+desviacion = ______
+posicion_maximo = ______
+
+print("Media:", media)
+print("Mediana:", mediana)
+print("Desviación estándar:", desviacion)
+print("Posición del máximo:", posicion_maximo)
+```
+
+**Respuesta esperada:**
+
+```
+Solución:
+import numpy as np
+
+datos = np.array([15, 4, 9, 4, 21, 15, 4, 10, 8, 30])
+
+media = round(np.mean(datos), 2)
+mediana = round(np.median(datos), 2)
+desviacion = round(np.std(datos), 2)
+posicion_maximo = np.argmax(datos)
+
+print("Media:", media)
+print("Mediana:", mediana)
+print("Desviación estándar:", desviacion)
+print("Posición del máximo:", posicion_maximo)
+
+Salida:
+Media: 12.0
+Mediana: 9.5
+Desviación estándar: 8.02
+Posición del máximo: 9
+```
+
+### AB-26-007 · intermedia · Ejercicios de programación (como en las lecciones)
+
+A partir de la matriz a, muestra la máscara booleana de los múltiplos de 3 y úsala para obtener esos elementos. Después, combinando dos condiciones con &, obtén los elementos pares mayores que 5. Escribe el código y lo que imprime.
+
+``` python
+import numpy as np
+
+a = np.arange(1, 13).reshape(3, 4)
+
+mascara = ______
+print(mascara)
+print(______)   # Múltiplos de 3
+print(______)   # Pares mayores que 5
+```
+
+**Respuesta esperada:**
+
+```
+Solución:
+import numpy as np
+
+a = np.arange(1, 13).reshape(3, 4)
+
+mascara = a % 3 == 0
+print(mascara)
+print(a[mascara])
+print(a[(a % 2 == 0) & (a > 5)])
+
+Salida:
+[[False False  True False]
+ [False  True False False]
+ [ True False False  True]]
+[ 3  6  9 12]
+[ 6  8 10 12]
+```
+
+### AB-26-008 · intermedia · Ejercicios de programación (como en las lecciones)
+
+La matriz letras contiene el abecedario y algunos dígitos. Usa indexación extravagante (una lista de filas y una lista de columnas) para obtener las letras D, O, S en ese orden, y después únelas en una sola cadena con join(). Escribe el código y lo que imprime.
+
+``` python
+import numpy as np
+
+letras = np.array(list("ABCDEFGHIJKLMNOPQRSTUVWXYZ1234")).reshape(5, 6)
+
+palabra = ______   # D, O, S
+print(palabra)
+print(______)      # Unidas en una cadena
+```
+
+**Respuesta esperada:**
+
+```
+Solución:
+import numpy as np
+
+letras = np.array(list("ABCDEFGHIJKLMNOPQRSTUVWXYZ1234")).reshape(5, 6)
+
+palabra = letras[[0, 2, 3], [3, 2, 0]]
+print(palabra)
+print("".join(palabra))
+
+Salida:
+['D' 'O' 'S']
+DOS
+```
+
+### AB-26-009 · intermedia · Ejercicios de programación (como en las lecciones)
+
+Calcula el producto punto de u = (1, 1, 0) y v = (1, 0, 1), y el ángulo entre ellos en grados con cos θ = u·v / (‖u‖‖v‖), usando np.linalg.norm(), np.arccos() y np.rad2deg(). Muestra el ángulo redondeado a 2 decimales. Escribe el código y lo que imprime.
+
+``` python
+import numpy as np
+
+u = np.array([1, 1, 0])
+v = np.array([1, 0, 1])
+
+producto = ______
+cos_theta = ______
+theta_grados = ______
+
+print("Producto punto:", producto)
+print("Ángulo:", round(theta_grados, 2))
+```
+
+**Respuesta esperada:**
+
+```
+Solución:
+import numpy as np
+
+u = np.array([1, 1, 0])
+v = np.array([1, 0, 1])
+
+producto = u @ v
+cos_theta = producto / (np.linalg.norm(u) * np.linalg.norm(v))
+theta_grados = np.rad2deg(np.arccos(cos_theta))
+
+print("Producto punto:", producto)
+print("Ángulo:", round(theta_grados, 2))
+
+Salida:
+Producto punto: 1
+Ángulo: 60.0
+```
+
+### AB-26-010 · intermedia · Ejercicios de programación (como en las lecciones)
+
+Resuelve el sistema x + y + z = 6, 2x − y + z = 3, x + 2y − z = 2: escribe la matriz A y el vector b, muestra det(A) redondeado a 2 decimales, resuelve con np.linalg.solve() (muestra la solución redondeada con np.round(solucion, 4)) y comprueba con np.allclose() que A @ solucion es igual a b. Escribe el código y lo que imprime.
+
+``` python
+import numpy as np
+
+A = np.array(______)
+b = np.array(______)
+
+print("det(A) =", round(np.linalg.det(A), 2))
+
+solucion = ______
+print("Solución:", np.round(solucion, 4))
+print("Comprobación:", ______)
+```
+
+**Respuesta esperada:**
+
+```
+Solución:
+import numpy as np
+
+A = np.array([[1, 1, 1],
+              [2, -1, 1],
+              [1, 2, -1]])
+b = np.array([6, 3, 2])
+
+print("det(A) =", round(np.linalg.det(A), 2))
+
+solucion = np.linalg.solve(A, b)
+print("Solución:", np.round(solucion, 4))
+print("Comprobación:", np.allclose(A @ solucion, b))
+
+Salida:
+det(A) = 7.0
+Solución: [1. 2. 3.]
+Comprobación: True
+```
+
+### AB-26-011 · intermedia · Ejercicios de programación (como en las lecciones)
+
+Encuentra con sp.solve() todas las raíces de p(x) = x³ − 2x² − 5x + 6. Después verifica con subs() que p(3) = 0 y calcula p(0). Escribe el código y lo que imprime.
+
+``` python
+import sympy as sp
+x = sp.symbols("x")
+
+p = x**3 - 2*x**2 - 5*x + 6
+raices = ______
+
+print("Raíces:", raices)
+print("p(3) =", ______)
+print("p(0) =", ______)
+```
+
+**Respuesta esperada:**
+
+```
+Solución:
+import sympy as sp
+x = sp.symbols("x")
+
+p = x**3 - 2*x**2 - 5*x + 6
+raices = sp.solve(p, x)
+
+print("Raíces:", raices)
+print("p(3) =", p.subs(x, 3))
+print("p(0) =", p.subs(x, 0))
+
+Salida:
+Raíces: [-2, 1, 3]
+p(3) = 0
+p(0) = 6
+```
+
+### AB-26-012 · intermedia · Ejercicios de programación (como en las lecciones)
+
+Calcula la integral indefinida de x·cos(x), verifica el resultado derivándolo (debe dar de nuevo x·cos(x)) y calcula la integral definida de 0 a π. Escribe el código y lo que imprime.
+
+``` python
+import sympy as sp
+x = sp.symbols("x")
+
+indefinida = ______
+print("Integral indefinida:", indefinida)
+print("Verificación:", ______)
+print("Integral de 0 a pi:", ______)
+```
+
+**Respuesta esperada:**
+
+```
+Solución:
+import sympy as sp
+x = sp.symbols("x")
+
+indefinida = sp.integrate(x * sp.cos(x), x)
+print("Integral indefinida:", indefinida)
+print("Verificación:", sp.simplify(sp.diff(indefinida, x)))
+print("Integral de 0 a pi:", sp.integrate(x * sp.cos(x), (x, 0, sp.pi)))
+
+Salida:
+Integral indefinida: x*sin(x) + cos(x)
+Verificación: x*cos(x)
+Integral de 0 a pi: -2
+```
+
+### AB-26-013 · intermedia · Ejercicios de programación (como en las lecciones)
+
+Construye la lista divisores con todos los divisores positivos de 60 usando un ciclo for y un if, y muestra cuántos son. Escribe el código y lo que imprime.
+
+``` python
+n = 60
+divisores = []
+
+for d in range(1, n + 1):
+    if ______:
+        ______
+
+print(divisores)
+print("Cantidad:", ______)
+```
+
+**Respuesta esperada:**
+
+```
+Solución:
+n = 60
+divisores = []
+
+for d in range(1, n + 1):
+    if n % d == 0:
+        divisores.append(d)
+
+print(divisores)
+print("Cantidad:", len(divisores))
+
+Salida:
+[1, 2, 3, 4, 5, 6, 10, 12, 15, 20, 30, 60]
+Cantidad: 12
+```
+
+### AB-26-014 · intermedia · Ejercicios de programación (como en las lecciones)
+
+La sucesión de Lucas empieza con 2 y 1, y cada término es la suma de los dos anteriores. Completa la lista lucas para que tenga los primeros 10 términos y muestra también la suma de esos 10 términos. Escribe el código y lo que imprime.
+
+``` python
+lucas = [2, 1]
+
+for i in range(______):
+    siguiente = ______
+    lucas.append(siguiente)
+
+print(lucas)
+print("Suma:", sum(lucas))
+```
+
+**Respuesta esperada:**
+
+```
+Solución:
+lucas = [2, 1]
+
+for i in range(8):
+    siguiente = lucas[-1] + lucas[-2]
+    lucas.append(siguiente)
+
+print(lucas)
+print("Suma:", sum(lucas))
+
+Salida:
+[2, 1, 3, 4, 7, 11, 18, 29, 47, 76]
+Suma: 198
+```
+
+### AB-31-001 · avanzada · Python básico: objetos, variables y buenas prácticas
+
+El código se ejecuta, pero no hace lo que se quiere: debe mostrar la lista de calificaciones ordenada de menor a mayor. Escribe el código corregido y lo que imprime.
+
+``` python
+calificaciones = [9, 6, 10, 8]
+calificaciones = calificaciones.sort()
+print("Ordenadas:", calificaciones)
+```
+
+**Respuesta esperada:**
+
+```
+Error: .sort() ordena la lista en su lugar y regresa None; al asignar el resultado, calificaciones pasa a valer None. Basta con llamar al método sin reasignar (o usar sorted(calificaciones)).
+
+Código corregido:
+calificaciones = [9, 6, 10, 8]
+calificaciones.sort()
+print("Ordenadas:", calificaciones)
+
+Salida:
+Ordenadas: [6, 8, 9, 10]
+```
+
+### AB-31-002 · avanzada · Python básico: objetos, variables y buenas prácticas
+
+El código se ejecuta, pero no hace lo que se quiere: la lista originales no debe cambiar; solo la copia debe tener un punto extra en la primera calificación. Escribe el código corregido y lo que imprime.
+
+``` python
+originales = [7, 8, 9]
+con_extra = originales
+con_extra[0] = con_extra[0] + 1
+print("Originales:", originales)
+print("Con punto extra:", con_extra)
+```
+
+**Respuesta esperada:**
+
+```
+Error: con_extra = originales no crea una copia: ambos nombres apuntan al mismo objeto (mutable), así que modificar uno modifica el otro. Se necesita originales.copy().
+
+Código corregido:
+originales = [7, 8, 9]
+con_extra = originales.copy()
+con_extra[0] = con_extra[0] + 1
+print("Originales:", originales)
+print("Con punto extra:", con_extra)
+
+Salida:
+Originales: [7, 8, 9]
+Con punto extra: [8, 8, 9]
+```
+
+### AB-31-003 · avanzada · Python básico: objetos, variables y buenas prácticas
+
+El código se ejecuta, pero no hace lo que se quiere: debe indicar True, porque matemáticamente 0.1 + 0.2 = 0.3. Escribe el código corregido y lo que imprime.
+
+``` python
+import math
+suma = 0.1 + 0.2
+print("¿0.1 + 0.2 es igual a 0.3?", suma == 0.3)
+```
+
+**Respuesta esperada:**
+
+```
+Error: los decimales se guardan de forma aproximada (suma vale 0.30000000000000004), así que == da False; para comparar float se usa math.isclose().
+
+Código corregido:
+import math
+suma = 0.1 + 0.2
+print("¿0.1 + 0.2 es igual a 0.3?", math.isclose(suma, 0.3))
+
+Salida:
+¿0.1 + 0.2 es igual a 0.3? True
+```
+
+### AB-31-004 · avanzada · Python básico: objetos, variables y buenas prácticas
+
+El código marca un error: debe calcular el promedio de las calificaciones. Escribe el código corregido y lo que imprime.
+
+``` python
+calificaciones = [7, 8, 10, 9]
+sum = 0   # aquí guardaremos la suma
+sum = sum(calificaciones)
+promedio = sum / len(calificaciones)
+print("Promedio:", promedio)
+```
+
+**Respuesta esperada:**
+
+```
+Error: al usar sum como nombre de variable se sobrescribe la función integrada sum(); en la tercera línea sum ya es el entero 0 y no se puede llamar: TypeError ('int' object is not callable). Usa otro nombre, como suma.
+
+Código corregido:
+calificaciones = [7, 8, 10, 9]
+suma = sum(calificaciones)
+promedio = suma / len(calificaciones)
+print("Promedio:", promedio)
+
+Salida:
+Promedio: 8.5
+```
+
+### AB-31-005 · avanzada · Python básico: objetos, variables y buenas prácticas
+
+El programa se detiene con un AssertionError aunque los datos son válidos (las calificaciones van de 0 a 10, incluido el 10). Escribe el código corregido y lo que imprime.
+
+``` python
+CALIFICACION_MAXIMA = 10
+calificaciones = [9, 10, 8]
+assert max(calificaciones) < CALIFICACION_MAXIMA, "Hay calificaciones mayores que 10"
+promedio = sum(calificaciones) / len(calificaciones)
+print("Promedio:", promedio)
+```
+
+**Respuesta esperada:**
+
+```
+Error: la condición usa < y excluye el 10, que es una calificación válida; debe ser <=.
+
+Código corregido:
+CALIFICACION_MAXIMA = 10
+calificaciones = [9, 10, 8]
+assert max(calificaciones) <= CALIFICACION_MAXIMA, "Hay calificaciones mayores que 10"
+promedio = sum(calificaciones) / len(calificaciones)
+print("Promedio:", promedio)
+
+Salida:
+Promedio: 9.0
+```
+
+### AB-31-006 · avanzada · Python básico: objetos, variables y buenas prácticas
+
+El código tiene dos errores: debe calcular el volumen de un cubo de lado 3 y mostrarlo en un solo texto. Escribe el código corregido y lo que imprime.
+
+``` python
+lado = 3
+volumen = lado ^ 3
+print("Volumen del cubo: " + volumen)
+```
+
+**Respuesta esperada:**
+
+```
+Error: (1) la potencia se escribe con **, no con ^; (2) no se puede unir un str con un int usando +, hay que convertir con str().
+
+Código corregido:
+lado = 3
+volumen = lado ** 3
+print("Volumen del cubo: " + str(volumen))
+
+Salida:
+Volumen del cubo: 27
+```
+
+### AB-31-007 · avanzada · Python básico: objetos, variables y buenas prácticas
+
+El código tiene dos errores: se quiere cambiar la primera letra a mayúscula y la primera coordenada a 5, sin usar métodos. Escribe el código corregido y lo que imprime.
+
+``` python
+palabra = "primo"
+palabra[0] = "P"
+print(palabra)
+
+punto = (3, -2)
+punto[0] = 5
+print(punto)
+```
+
+**Respuesta esperada:**
+
+```
+Error: Palabra[0] = "P" produce TypeError: 'str' object does not support item assignment (y, si se corrige, punto[0] = 5 produce TypeError: 'tuple' object does not support item assignment). Las cadenas y las tuplas son inmutables: no se puede cambiar un elemento, a diferencia de las listas, que son mutables. La solución es crear un objeto nuevo y reasignar la variable (su identidad cambia).
+
+Código corregido:
+palabra = "primo"
+palabra = "P" + palabra[1:]
+print(palabra)
+
+punto = (3, -2)
+punto = (5, punto[1])
+print(punto)
+
+Salida:
+Primo
+(5, -2)
+```
+
+### AB-31-008 · avanzada · Python básico: objetos, variables y buenas prácticas
+
+El código se ejecuta, pero no hace lo que se quiere: debe imprimir el área del círculo de radio 2 y el área del cuadrado de lado 4, cada una con su propio nombre de variable. Escribe el código corregido y lo que imprime.
+
+``` python
+area = 3.14159 * 2 ** 2   # área del círculo de radio 2
+area = 4 * 4              # área del cuadrado de lado 4
+print("Área del círculo:", area)
+```
+
+**Respuesta esperada:**
+
+```
+Error: Imprime Área del círculo: 16. Es un error silencioso: la segunda asignación sobrescribe el valor de area y el área del círculo (12.56636) se pierde; una variable solo guarda su último valor. Se corrige usando un nombre descriptivo distinto para cada dato (y una constante para pi).
+
+Código corregido:
+PI = 3.14159
+
+area_circulo = PI * 2 ** 2
+area_cuadrado = 4 * 4
+print("Área del círculo:", area_circulo)
+print("Área del cuadrado:", area_cuadrado)
+
+Salida:
+Área del círculo: 12.56636
+Área del cuadrado: 16
+```
+
+### AB-31-009 · avanzada · Python básico: objetos, variables y buenas prácticas
+
+El código tiene un error: se quiere imprimir la lista ordenada y su máximo. Escribe el código corregido y lo que imprime.
+
+``` python
+cuadrados = [16, 1, 9, 4]
+cuadrados = cuadrados.sort()
+print(cuadrados)
+print(max(cuadrados))
+```
+
+**Respuesta esperada:**
+
+```
+Error: Imprime None y después se detiene con TypeError: 'NoneType' object is not iterable. El método sort() modifica la lista en su lugar y regresa None; al escribir cuadrados = cuadrados.sort() guardamos ese None y perdemos la lista (lo mismo pasa con append()). Se corrige llamando al método en su propia línea (o usando sorted() si se quiere una lista nueva).
+
+Código corregido:
+cuadrados = [16, 1, 9, 4]
+cuadrados.sort()
+print(cuadrados)
+print(max(cuadrados))
+
+Salida:
+[1, 4, 9, 16]
+16
+```
+
+### AB-31-010 · avanzada · Python básico: objetos, variables y buenas prácticas
+
+El código se ejecuta, pero no hace lo que se quiere: debería quitar los espacios y cambiar "/" por " entre ". Tiene dos errores. Escribe el código corregido y lo que imprime.
+
+``` python
+fraccion = " 3/4 "
+fraccion.strip()
+fraccion.replace("/", " entre ")
+print(fraccion)
+print(len(fraccion))
+```
+
+**Respuesta esperada:**
+
+```
+Error: Imprime " 3/4 " (con los espacios) y 5. Las cadenas son inmutables: strip() y replace() no modifican fraccion, sino que regresan una cadena nueva, que aquí no se guarda en ninguna variable. Se corrige reasignando el resultado.
+
+Código corregido:
+fraccion = " 3/4 "
+fraccion = fraccion.strip()
+fraccion = fraccion.replace("/", " entre ")
+print(fraccion)
+print(len(fraccion))
+
+Salida:
+3 entre 4
+9
+```
+
+### AB-31-011 · avanzada · Python básico: objetos, variables y buenas prácticas
+
+El código tiene tres nombres de variable inválidos. Escribe el código corregido (con nombres válidos y descriptivos) y lo que imprime.
+
+``` python
+2pi = 6.28318
+radio-circulo = 3
+lambda = 0.5
+print(2pi, radio-circulo, lambda)
+```
+
+**Respuesta esperada:**
+
+```
+Error: El programa no se ejecuta: aparece SyntaxError (Python reporta la primera línea, invalid decimal literal, pero las tres son inválidas). 2pi empieza con un dígito; radio-circulo usa guion medio, que Python lee como una resta; lambda es una palabra reservada. Los nombres solo pueden tener letras, dígitos y _, no pueden empezar con dígito ni ser palabras reservadas.
+
+Código corregido:
+DOS_PI = 6.28318
+radio_circulo = 3
+tasa = 0.5
+print(DOS_PI, radio_circulo, tasa)
+
+Salida:
+6.28318 3 0.5
+```
+
+### AB-31-012 · avanzada · Python básico: objetos, variables y buenas prácticas
+
+El código se ejecuta, pero no hace lo que se quiere: la comparación debería indicar que 0.1 + 0.2 es 0.3 (True). Escribe el código corregido y lo que imprime.
+
+``` python
+suma = 0.1 + 0.2
+print(suma)
+print(suma == 0.3)
+```
+
+**Respuesta esperada:**
+
+```
+Error: Imprime 0.30000000000000004 y False. Los decimales (float) se guardan de forma aproximada en la computadora, así que la suma no es exactamente 0.3 y la comparación con == falla: es un error silencioso. Para comparar decimales se usa math.isclose().
+
+Código corregido:
+import math
+
+suma = 0.1 + 0.2
+print(suma)
+print(math.isclose(suma, 0.3))
+
+Salida:
+0.30000000000000004
+True
+```
+
+### AB-31-013 · avanzada · Python básico: objetos, variables y buenas prácticas
+
+El código tiene dos errores: se quiere que, si el denominador es 0, imprima un aviso y la fracción quede como None. Escribe el código corregido y lo que imprime.
+
+``` python
+numerador = 3
+denominador = 0
+
+try:
+    fraccion = numerador / denominador
+except ValueError:
+    print("El denominador no puede ser 0")
+
+print("Fracción:", fraccion)
+```
+
+**Respuesta esperada:**
+
+```
+Error: No imprime el aviso: el programa se detiene con ZeroDivisionError: division by zero. Dividir entre cero produce un ZeroDivisionError, no un ValueError, y el bloque except solo atrapa el tipo de error que indicamos. Además, si el error se atrapara, fraccion no existiría y el último print() daría NameError; por eso hay que darle un valor (como None) dentro del except.
+
+Código corregido:
+numerador = 3
+denominador = 0
+
+try:
+    fraccion = numerador / denominador
+except ZeroDivisionError:
+    print("El denominador no puede ser 0")
+    fraccion = None
+
+print("Fracción:", fraccion)
+
+Salida:
+El denominador no puede ser 0
+Fracción: None
+```
+
+### AB-32-001 · avanzada · Condicionales
+
+El código se ejecuta, pero no hace lo que se quiere: si el número es múltiplo de 15 debe decirlo (es el caso más específico); si solo es múltiplo de 3, debe decir "es múltiplo de 3". Escribe el código corregido y lo que imprime.
+
+``` python
+numero = 30
+if numero % 3 == 0:
+    print(numero, "es múltiplo de 3")
+elif numero % 15 == 0:
+    print(numero, "es múltiplo de 15")
+else:
+    print(numero, "no es múltiplo de 3")
+```
+
+**Respuesta esperada:**
+
+```
+Error: todo múltiplo de 15 también es múltiplo de 3, así que la primera condición atrapa el caso y el elif nunca se ejecuta. La condición más restrictiva (% 15) debe ir primero.
+
+Código corregido:
+numero = 30
+if numero % 15 == 0:
+    print(numero, "es múltiplo de 15")
+elif numero % 3 == 0:
+    print(numero, "es múltiplo de 3")
+else:
+    print(numero, "no es múltiplo de 3")
+
+Salida:
+30 es múltiplo de 15
+```
+
+### AB-32-002 · avanzada · Condicionales
+
+El código se ejecuta, pero no hace lo que se quiere: una calificación es válida si está entre 0 y 10, incluyendo ambos extremos. Escribe el código corregido y lo que imprime.
+
+``` python
+calificacion = 10
+if 0 <= calificacion < 10:
+    print("Calificación válida:", calificacion)
+else:
+    print("Calificación fuera de rango")
+```
+
+**Respuesta esperada:**
+
+```
+Error: la frontera superior usa < y deja fuera al 10; debe ser <=.
+
+Código corregido:
+calificacion = 10
+if 0 <= calificacion <= 10:
+    print("Calificación válida:", calificacion)
+else:
+    print("Calificación fuera de rango")
+
+Salida:
+Calificación válida: 10
+```
+
+### AB-32-003 · avanzada · Condicionales
+
+El código se ejecuta, pero no hace lo que se quiere: debe decir si el número es uno de los primos menores que 10 (2, 3, 5 o 7). Escribe el código corregido y lo que imprime.
+
+``` python
+numero = 9
+if numero == 2 or 3 or 5 or 7:
+    print(numero, "es primo")
+else:
+    print(numero, "no es primo")
+```
+
+**Respuesta esperada:**
+
+```
+Error: Python lee la condición como (numero == 2) or 3 or 5 or 7, y 3 es un valor "verdadero", así que la condición siempre es True. Hay que comparar cada valor (numero == 2 or numero == 3 or ...) o usar in.
+
+Código corregido:
+numero = 9
+if numero in [2, 3, 5, 7]:
+    print(numero, "es primo")
+else:
+    print(numero, "no es primo")
+
+Salida:
+9 no es primo
+```
+
+### AB-32-004 · avanzada · Condicionales
+
+El código tiene dos errores: debe calcular el discriminante b² - 4ac de x² + 2x + 1 y, si vale cero, mostrar su única raíz real. Escribe el código corregido y lo que imprime.
+
+``` python
+a, b, c = 1, 2, 1
+discriminante = b ^ 2 - 4 * a * c
+if discriminante = 0:
+    print("Una raíz real:", -b / (2 * a))
+else:
+    print("No tiene exactamente una raíz real")
+```
+
+**Respuesta esperada:**
+
+```
+Error: (1) la potencia se escribe con **, no con ^ (con ^ el discriminante da -4); (2) en la condición se compara con ==, no se asigna con =.
+
+Código corregido:
+a, b, c = 1, 2, 1
+discriminante = b ** 2 - 4 * a * c
+if discriminante == 0:
+    print("Una raíz real:", -b / (2 * a))
+else:
+    print("No tiene exactamente una raíz real")
+
+Salida:
+Una raíz real: -1.0
+```
+
+### AB-32-005 · avanzada · Condicionales
+
+El código se ejecuta, pero no hace lo que se quiere: 0.6 + 0.3 + 0.1 = 1, así que debe reconocer una distribución de probabilidad válida. Escribe el código corregido y lo que imprime.
+
+``` python
+import math
+p_a, p_b, p_c = 0.6, 0.3, 0.1
+if p_a + p_b + p_c == 1:
+    print("Es una distribución de probabilidad válida")
+else:
+    print("Las probabilidades no suman 1")
+```
+
+**Respuesta esperada:**
+
+```
+Error: los decimales se guardan de forma aproximada y la suma da 0.9999999999999999, así que == es False; para comparar float se usa math.isclose().
+
+Código corregido:
+import math
+p_a, p_b, p_c = 0.6, 0.3, 0.1
+if math.isclose(p_a + p_b + p_c, 1):
+    print("Es una distribución de probabilidad válida")
+else:
+    print("Las probabilidades no suman 1")
+
+Salida:
+Es una distribución de probabilidad válida
+```
+
+### AB-32-006 · avanzada · Condicionales
+
+El código se ejecuta, pero no hace lo que se quiere: solo debe decir si 6 es par o impar (y guardar el siguiente número en otra variable). Escribe el código corregido y lo que imprime.
+
+``` python
+numero = 6
+
+if numero % 2 == 0:
+    print(numero, "es par")
+    numero = numero + 1     # guardo el siguiente número
+if numero % 2 != 0:
+    print(numero, "es impar")
+```
+
+**Respuesta esperada:**
+
+```
+Error: Imprime 6 es par y después 7 es impar. Dentro del primer bloque se sobrescribe numero, así que el segundo if ya no revisa 6 sino 7. Además, son dos if independientes: ambos se evalúan. Hay que usar else (los casos son excluyentes) y guardar el siguiente número en otra variable.
+
+Código corregido:
+numero = 6
+
+if numero % 2 == 0:
+    print(numero, "es par")
+else:
+    print(numero, "es impar")
+
+siguiente = numero + 1
+
+Salida:
+6 es par
+```
+
+### AB-32-007 · avanzada · Condicionales
+
+El código se ejecuta, pero no hace lo que se quiere: debe informar la condición más específica que cumple n (para 30, múltiplo de 6). Escribe el código corregido y lo que imprime.
+
+``` python
+n = 30
+
+if n % 2 == 0:
+    print("múltiplo de 2")
+elif n % 3 == 0:
+    print("múltiplo de 3")
+elif n % 6 == 0:
+    print("múltiplo de 6")
+```
+
+**Respuesta esperada:**
+
+```
+Error: Imprime solo múltiplo de 2. Python ejecuta solo el primer bloque verdadero; todo múltiplo de 6 también es múltiplo de 2, así que la última rama nunca se alcanza. Hay que escribir primero la condición más restrictiva.
+
+Código corregido:
+n = 30
+
+if n % 6 == 0:
+    print("múltiplo de 6")
+elif n % 3 == 0:
+    print("múltiplo de 3")
+elif n % 2 == 0:
+    print("múltiplo de 2")
+
+Salida:
+múltiplo de 6
+```
+
+### AB-33-001 · avanzada · Ciclos for y while
+
+El ciclo nunca termina. Corrige el código para que cuente hacia atrás de 5 a 1 y escribe lo que imprime.
+
+``` python
+# Cuenta regresiva de 5 a 1
+n = 5
+while n > 0:
+    print(n)
+    n += 1
+print("¡Despegue!")
+```
+
+**Respuesta esperada:**
+
+```
+Error: n += 1 hace que n crezca y la condición n > 0 nunca se vuelve falsa (ciclo infinito); hay que disminuir n con n -= 1.
+
+Código corregido:
+# Cuenta regresiva de 5 a 1
+n = 5
+while n > 0:
+    print(n)
+    n -= 1
+print("¡Despegue!")
+
+Salida:
+5
+4
+3
+2
+1
+¡Despegue!
+```
+
+### AB-33-002 · avanzada · Ciclos for y while
+
+El código se ejecuta, pero no hace lo que se quiere: debería imprimir la suma 1² + 2² + 3² + 4² + 5². Escribe el código corregido y lo que imprime.
+
+``` python
+# Suma de los cuadrados del 1 al 5
+for i in range(1, 6):
+    suma = 0
+    suma += i ** 2
+print("Suma de cuadrados:", suma)
+```
+
+**Respuesta esperada:**
+
+```
+Error: el acumulador se reinicia en 0 en cada vuelta (al final solo vale 5² = 25); debe inicializarse antes del for.
+
+Código corregido:
+# Suma de los cuadrados del 1 al 5
+suma = 0
+for i in range(1, 6):
+    suma += i ** 2
+print("Suma de cuadrados:", suma)
+
+Salida:
+Suma de cuadrados: 55
+```
+
+### AB-33-003 · avanzada · Ciclos for y while
+
+El código se ejecuta, pero no hace lo que se quiere: debería decir correctamente si 21 es primo (21 = 3 × 7). Escribe el código corregido y lo que imprime.
+
+``` python
+# ¿Es 21 un número primo?
+n = 21
+es_primo = True
+for d in range(2, n):
+    if n % d == 0:
+        es_primo = False
+    break
+print(n, "es primo:", es_primo)
+```
+
+**Respuesta esperada:**
+
+```
+Error: el break está fuera del if, así que el ciclo termina en la primera vuelta (solo prueba d = 2); debe ir dentro del if, al encontrar un divisor.
+
+Código corregido:
+# ¿Es 21 un número primo?
+n = 21
+es_primo = True
+for d in range(2, n):
+    if n % d == 0:
+        es_primo = False
+        break
+print(n, "es primo:", es_primo)
+
+Salida:
+21 es primo: False
+```
+
+### AB-33-004 · avanzada · Ciclos for y while
+
+El código tiene dos errores. Debería construir la lista con los primeros 10 términos de Fibonacci; escribe el código corregido y lo que imprime.
+
+``` python
+# Primeros 10 términos de Fibonacci
+fibonacci = [0, 1]
+for i in range(8):
+    siguiente = fibonacci[-1] + fibonacci[1]
+     fibonacci.append(siguiente)
+print(fibonacci)
+```
+
+**Respuesta esperada:**
+
+```
+Error: (1) fibonacci.append(...) tiene 5 espacios de indentación (IndentationError); deben ser 4. (2) El penúltimo término es fibonacci[-2], no fibonacci[1] (que siempre es el segundo elemento).
+
+Código corregido:
+# Primeros 10 términos de Fibonacci
+fibonacci = [0, 1]
+for i in range(8):
+    siguiente = fibonacci[-1] + fibonacci[-2]
+    fibonacci.append(siguiente)
+print(fibonacci)
+
+Salida:
+[0, 1, 1, 2, 3, 5, 8, 13, 21, 34]
+```
+
+### AB-33-005 · avanzada · Ciclos for y while
+
+El código tiene dos errores. Debería contar los múltiplos de 7 del 1 al 70, incluido el 70; escribe el código corregido y lo que imprime.
+
+``` python
+# Múltiplos de 7 del 1 al 70 (incluido el 70)
+contador = 0
+for n in range(1, 70):
+    if n % 7 = 0:
+        contador += 1
+print("Múltiplos de 7:", contador)
+```
+
+**Respuesta esperada:**
+
+```
+Error: (1) Para comparar se usa ==, no = (SyntaxError). (2) range(1, 70) no incluye el 70; debe ser range(1, 71).
+
+Código corregido:
+# Múltiplos de 7 del 1 al 70 (incluido el 70)
+contador = 0
+for n in range(1, 71):
+    if n % 7 == 0:
+        contador += 1
+print("Múltiplos de 7:", contador)
+
+Salida:
+Múltiplos de 7: 10
+```
+
+### AB-33-006 · avanzada · Ciclos for y while
+
+El código se ejecuta, pero no hace lo que se quiere: debería aproximar π ≈ 3.14 con la serie de Leibniz. Escribe el código corregido y lo que imprime.
+
+``` python
+# Serie de Leibniz: π = 4 * (1 - 1/3 + 1/5 - 1/7 + ...)
+suma = 0
+for k in range(1000):
+    suma += -1 ** k / (2 * k + 1)
+print(round(4 * suma, 4))
+```
+
+**Respuesta esperada:**
+
+```
+Error: ** tiene mayor prioridad que el signo menos: -1 ** k es -(1 ** k) = -1 siempre, así que todos los términos se restan. Se necesitan paréntesis: (-1) ** k.
+
+Código corregido:
+# Serie de Leibniz: π = 4 * (1 - 1/3 + 1/5 - 1/7 + ...)
+suma = 0
+for k in range(1000):
+    suma += (-1) ** k / (2 * k + 1)
+print(round(4 * suma, 4))
+
+Salida:
+3.1406
+```
+
+### AB-34-001 · avanzada · NumPy y álgebra lineal
+
+El código se ejecuta, pero no hace lo que se quiere: debería imprimir la suma de cada fila de m. Escribe el código corregido y lo que imprime.
+
+``` python
+import numpy as np
+m = np.array([[1, 2, 3],
+              [4, 5, 6]])
+print(m.sum(axis=0))   # suma de cada fila
+```
+
+**Respuesta esperada:**
+
+```
+Error: axis=0 suma por columnas (hacia abajo); la suma de cada fila es axis=1.
+
+Código corregido:
+import numpy as np
+m = np.array([[1, 2, 3],
+              [4, 5, 6]])
+print(m.sum(axis=1))   # suma de cada fila
+
+Salida:
+[ 6 15]
+```
+
+### AB-34-002 · avanzada · NumPy y álgebra lineal
+
+El código se ejecuta, pero no hace lo que se quiere: x[0] debería valer 0.5 y no 0. Corrige la creación del arreglo y escribe lo que imprime.
+
+``` python
+import numpy as np
+x = np.array([1, 2, 3, 4])
+x[0] = 0.5
+print(x / 2)
+```
+
+**Respuesta esperada:**
+
+```
+Error: x es un arreglo de enteros (int64), así que al asignar 0.5 se trunca a 0. Basta un decimal al crearlo (o dtype=float) para que sea float.
+
+Código corregido:
+import numpy as np
+x = np.array([1.0, 2, 3, 4])
+x[0] = 0.5
+print(x / 2)
+
+Salida:
+[0.25 1.   1.5  2.  ]
+```
+
+### AB-34-003 · avanzada · NumPy y álgebra lineal
+
+El código se ejecuta, pero no hace lo que se quiere: debería imprimir un solo True si A por su inversa es la identidad. Escribe el código corregido y lo que imprime.
+
+``` python
+import numpy as np
+A = np.array([[2, 1], [1, 3]])
+producto = A @ np.linalg.inv(A)
+print(producto == np.eye(2))
+```
+
+**Respuesta esperada:**
+
+```
+Error: por la precisión limitada, el producto tiene valores como -5.55e-17 en lugar de 0, y == compara exactamente elemento por elemento. Para comparar decimales se usa np.allclose().
+
+Código corregido:
+import numpy as np
+A = np.array([[2, 1], [1, 3]])
+producto = A @ np.linalg.inv(A)
+print(np.allclose(producto, np.eye(2)))
+
+Salida:
+True
+```
+
+### AB-34-004 · avanzada · NumPy y álgebra lineal
+
+El código se ejecuta, pero no hace lo que se quiere: debería imprimir el valor exacto de 25!. Corrígelo usando el módulo math y escribe lo que imprime.
+
+``` python
+import numpy as np
+# 25! = 1 * 2 * ... * 25
+print(np.arange(1, 26).prod())
+```
+
+**Respuesta esperada:**
+
+```
+Error: 25! no cabe en un int64 (límite ≈ 9.2 × 10^18), así que .prod() da un número incorrecto sin avisar; math.factorial() usa enteros de Python sin límite.
+
+Código corregido:
+import math
+# 25! = 1 * 2 * ... * 25
+print(math.factorial(25))
+
+Salida:
+15511210043330985984000000
+```
+
+### AB-34-005 · avanzada · NumPy y álgebra lineal
+
+El código tiene dos errores. Debería resolver el sistema 2x + y = 5, x + 3y = 10; escribe el código corregido y lo que imprime.
+
+``` python
+import numpy as np
+A = np.array([[2, 1] [1, 3]])
+b = np.array([5, 10])
+x = np.linalg.solve(b, A)
+print(x)
+```
+
+**Respuesta esperada:**
+
+```
+Error: (1) Falta la coma entre las filas [2, 1] y [1, 3] (TypeError). (2) np.linalg.solve recibe primero la matriz de coeficientes y después el vector: np.linalg.solve(A, b).
+
+Código corregido:
+import numpy as np
+A = np.array([[2, 1], [1, 3]])
+b = np.array([5, 10])
+x = np.linalg.solve(A, b)
+print(x)
+
+Salida:
+[1. 3.]
+```
+
+### AB-34-006 · avanzada · NumPy y álgebra lineal
+
+El código tiene dos errores. Debería imprimir el ángulo en grados entre u y v usando cos θ = (u · v) / (‖u‖ ‖v‖); escribe el código corregido y lo que imprime.
+
+``` python
+import numpy as np
+u = np.array([1, 0])
+v = np.array([1, 1])
+cos_theta = u * v / np.linalg.norm(u) * np.linalg.norm(v)
+print(np.rad2deg(np.arccos(cos_theta)).round(2))
+```
+
+**Respuesta esperada:**
+
+```
+Error: (1) u * v multiplica elemento a elemento; el producto punto es u @ v. (2) Faltan paréntesis en el denominador: sin ellos se divide entre ‖u‖ y luego se multiplica por ‖v‖.
+
+Código corregido:
+import numpy as np
+u = np.array([1, 0])
+v = np.array([1, 1])
+cos_theta = (u @ v) / (np.linalg.norm(u) * np.linalg.norm(v))
+print(np.rad2deg(np.arccos(cos_theta)).round(2))
+
+Salida:
+45.0
+```
+
+### AB-34-007 · avanzada · NumPy y álgebra lineal
+
+El código tiene dos errores que aparecen uno después del otro. Escribe el código corregido y lo que imprime.
+
+``` python
+import numpy as np
+
+m = np.arange(1, 6).reshape(2, 3)   # quiero la matriz [[1 2 3], [4 5 6]]
+sumar = np.array([10, 20])          # sumar 10 a la fila 0 y 20 a la fila 1
+print(m + sumar)
+```
+
+**Respuesta esperada:**
+
+```
+Error: Primero: ValueError: cannot reshape array of size 5 into shape (2,3), porque np.arange(1, 6) no incluye el 6 y genera solo 5 elementos, pero 2 × 3 = 6. Al corregirlo aparece el segundo: ValueError: operands could not be broadcast together with shapes (2,3) (2,), porque broadcasting alinea (2,) con el último eje (de tamaño 3) y 2 ≠ 3. Hay que convertir sumar en columna, de forma (2, 1) (o np.array([[10], [20]])).
+
+Código corregido:
+import numpy as np
+
+m = np.arange(1, 7).reshape(2, 3)
+sumar = np.array([10, 20]).reshape(2, 1)
+print(m + sumar)
+
+Salida:
+[[11 12 13]
+ [24 25 26]]
+```
+
+### AB-34-008 · avanzada · NumPy y álgebra lineal
+
+El código se ejecuta, pero no hace lo que se quiere: el arreglo debería guardar π y e con sus decimales. Escribe el código corregido y lo que imprime.
+
+``` python
+import numpy as np
+
+constantes = np.array([0, 0, 0])
+constantes[0] = np.pi
+constantes[1] = np.e
+print(constantes)
+```
+
+**Respuesta esperada:**
+
+```
+Error: Imprime [3 2 0]. El arreglo se creó con enteros, así que su dtype es int64; todos los elementos de un arreglo son del mismo tipo, y al guardar un decimal en él NumPy lo trunca sin avisar. Hay que crear el arreglo con decimales desde el inicio (np.zeros crea floats).
+
+Código corregido:
+import numpy as np
+
+constantes = np.zeros(3)
+constantes[0] = np.pi
+constantes[1] = np.e
+print(constantes)
+
+Salida:
+[3.14159265 2.71828183 0.        ]
+```
+
+### AB-34-009 · avanzada · NumPy y álgebra lineal
+
+El código se ejecuta, pero no hace lo que se quiere: imprime 7034535277573963776, que no es 25!. Escribe el código corregido y lo que imprime.
+
+``` python
+import numpy as np
+
+print(np.arange(1, 26).prod())   # 25!
+```
+
+**Respuesta esperada:**
+
+```
+Error: 25! = 15511210043330985984000000, un número de 26 dígitos. Los enteros de NumPy (int64) solo guardan valores hasta ≈ 9.2 × 10¹⁸; desde 21! el resultado se desborda y NumPy da un número incorrecto sin avisar (a veces negativo y a veces positivo, como aquí, lo que lo hace más difícil de detectar). Para factoriales grandes se usa math.factorial(), que trabaja con enteros de Python sin límite de tamaño.
+
+Código corregido:
+import math
+
+print(math.factorial(25))
+
+Salida:
+15511210043330985984000000
+```
+
+### AB-34-010 · avanzada · NumPy y álgebra lineal
+
+El código falla porque el sistema no tiene solución única. Cámbialo para que revise el determinante antes de resolver, usa el sistema x + 2y = 3, 2x + 3y = 7, y escribe lo que imprime.
+
+``` python
+import numpy as np
+
+# x + 2y = 3
+# 2x + 4y = 6
+A = np.array([[1, 2],
+              [2, 4]])
+b = np.array([3, 6])
+print(np.linalg.det(A))
+x = np.linalg.solve(A, b)
+```
+
+**Respuesta esperada:**
+
+```
+Error: Imprime 0.0 y después da LinAlgError: Singular matrix. La segunda ecuación es el doble de la primera, así que det(A) = 0: la matriz es singular, no tiene inversa y el sistema no tiene solución única. Antes de resolver conviene revisar el determinante; el sistema x + 2y = 3, 2x + 3y = 7 sí tiene solución única.
+
+Código corregido:
+import numpy as np
+
+A = np.array([[1, 2],
+              [2, 3]])
+b = np.array([3, 7])
+
+if round(np.linalg.det(A), 10) != 0:
+    print(np.linalg.solve(A, b))
+else:
+    print("El sistema no tiene solución única")
+
+Salida:
+[ 5. -1.]
+```
+
+### AB-34-011 · avanzada · NumPy y álgebra lineal
+
+El código se ejecuta, pero no hace lo que se quiere: debería confirmar con un solo True que A·A⁻¹ = I. Escribe el código corregido y lo que imprime.
+
+``` python
+import numpy as np
+
+A = np.array([[2, 1],
+              [1, 3]])
+I = np.eye(2)
+print(A @ np.linalg.inv(A) == I)
+```
+
+**Respuesta esperada:**
+
+```
+Error: Imprime [[ True  True] [False  True]]. La inversa se calcula con decimales de precisión limitada, y la entrada (1, 0) del producto es -5.55111512e-17 en lugar de 0; == exige igualdad exacta. Para comparar resultados con decimales se usa np.allclose(), que responde True si todos los elementos son casi iguales.
+
+Código corregido:
+import numpy as np
+
+A = np.array([[2, 1],
+              [1, 3]])
+I = np.eye(2)
+print(np.allclose(A @ np.linalg.inv(A), I))
+
+Salida:
+True
+```
+
+### AB-35-001 · avanzada · SymPy
+
+El código tiene dos errores: se quiere imprimir el valor de f en x = 3 y después la derivada de f. Escribe el código corregido y lo que imprime.
+
+``` python
+import sympy as sp
+x = sp.symbols("x")
+f = x**2 - 4*x
+x = 3            # quiero evaluar f en x = 3
+print(f)
+print(sp.diff(f, x))
+```
+
+**Respuesta esperada:**
+
+```
+Error: Reasignar x = 3 no evalúa f (f ya se construyó con el símbolo, así que print(f) muestra x**2 - 4*x) y además x deja de ser el símbolo, por lo que sp.diff(f, 3) da ValueError. Para evaluar se usa f.subs(x, 3) sin sobrescribir x.
+
+Código corregido:
+import sympy as sp
+x = sp.symbols("x")
+f = x**2 - 4*x
+print(f.subs(x, 3))
+print(sp.diff(f, x))
+
+Salida:
+-3
+2*x - 4
+```
+
+### AB-35-002 · avanzada · SymPy
+
+El código tiene dos errores: se quiere la derivada exacta de sin(πx). Escribe el código corregido y lo que imprime.
+
+``` python
+import numpy as np
+import sympy as sp
+x = sp.symbols("x")
+f = np.sin(np.pi * x)
+print(sp.diff(f, x))
+```
+
+**Respuesta esperada:**
+
+```
+Error: Np.sin() es numérica y no acepta símbolos (TypeError: loop of ufunc does not support argument 0 of type Mul ...); hay que usar sp.sin(). Además np.pi es el decimal 3.14159..., así que el resultado no sería exacto; se usa sp.pi.
+
+Código corregido:
+import sympy as sp
+x = sp.symbols("x")
+f = sp.sin(sp.pi * x)
+print(sp.diff(f, x))
+
+Salida:
+pi*cos(pi*x)
+```
+
+### AB-35-003 · avanzada · SymPy
+
+El código se ejecuta, pero no hace lo que se quiere: debería imprimir f simplificada y g desarrollada. Tiene dos errores. Escribe el código corregido y lo que imprime.
+
+``` python
+import sympy as sp
+x = sp.symbols("x")
+f = (x**2 - 1) / (x - 1)
+sp.simplify(f)
+print(f)
+g = (x + 1)**2
+sp.expand(g)
+print(g)
+```
+
+**Respuesta esperada:**
+
+```
+Error: Sp.simplify() y sp.expand() no modifican la expresión original: regresan una expresión nueva que aquí no se guarda, por eso se imprimen f y g sin cambios. Hay que reasignar el resultado.
+
+Código corregido:
+import sympy as sp
+x = sp.symbols("x")
+f = (x**2 - 1) / (x - 1)
+f = sp.simplify(f)
+print(f)
+g = (x + 1)**2
+g = sp.expand(g)
+print(g)
+
+Salida:
+x + 1
+x**2 + 2*x + 1
+```
+
+### AB-35-004 · avanzada · SymPy
+
+El código se ejecuta, pero no hace lo que se quiere: ambos resultados deben ser exactos (sin decimales). Tiene dos errores. Escribe el código corregido y lo que imprime.
+
+``` python
+import sympy as sp
+x = sp.symbols("x")
+print(sp.solve(x**2 - 0.5, x))
+print(sp.integrate(x**2, (x, 0, 1)).evalf())
+```
+
+**Respuesta esperada:**
+
+```
+Error: 0.5 es un decimal, así que SymPy da las raíces como decimales (±0.707...); para un resultado exacto se usa sp.Rational(1, 2). Y .evalf() convierte el 1/3 exacto de la integral en 0.333...; hay que quitarlo.
+
+Código corregido:
+import sympy as sp
+x = sp.symbols("x")
+print(sp.solve(x**2 - sp.Rational(1, 2), x))
+print(sp.integrate(x**2, (x, 0, 1)))
+
+Salida:
+[-sqrt(2)/2, sqrt(2)/2]
+1/3
+```
+
+### AB-35-005 · avanzada · SymPy
+
+El código tiene dos errores: se quiere la integral exacta de x²/3 entre 0 y 3. Escribe el código corregido y lo que imprime.
+
+``` python
+import sympy as sp
+x = sp.symbols("x")
+f = 1/3 * x**2
+print(sp.integrate(f, (0, 3, x)))
+```
+
+**Respuesta esperada:**
+
+```
+Error: Los límites se escriben en el orden (variable, inferior, superior); (0, 3, x) da ValueError: Invalid limits given. Además 1/3 es el decimal 0.333..., así que el resultado saldría 3.00000000000000; para que sea exacto se usa sp.Rational(1, 3).
+
+Código corregido:
+import sympy as sp
+x = sp.symbols("x")
+f = sp.Rational(1, 3) * x**2
+print(sp.integrate(f, (x, 0, 3)))
+
+Salida:
+3
+```
+
+### AB-35-006 · avanzada · SymPy
+
+El código tiene un error: se quiere imprimir el valor de f en x = 3 y la derivada de f. Escribe el código corregido y lo que imprime.
+
+``` python
+import sympy as sp
+
+x = sp.symbols("x")
+x = 3
+f = x**2 + 1
+print(f)
+print(sp.diff(f, x))
+```
+
+**Respuesta esperada:**
+
+```
+Error: El primer print muestra 10 y el segundo da ValueError: First variable cannot be a number: 3. Al escribir x = 3, el nombre x deja de ser el símbolo y pasa a valer 3, así que f se calcula como el número 3**2 + 1 = 10, no como una expresión; luego SymPy intenta derivar respecto al número 3. Para evaluar en un punto no se reasigna el símbolo: se usa subs().
+
+Código corregido:
+import sympy as sp
+
+x = sp.symbols("x")
+f = x**2 + 1
+print(f.subs(x, 3))
+print(sp.diff(f, x))
+
+Salida:
+10
+2*x
+```
+
+### AB-36-001 · avanzada · Ejercicios de programación (como en las lecciones)
+
+A divisores_24 le falta un divisor. Agrégalo con add() y, usando métodos de conjuntos, muestra (ordenados con sorted()) los divisores de 24 que no dividen a 36 y los divisores comunes; después calcula el MCD con max() y el mcm con la fórmula mcm = 24 · 36 // MCD. Escribe el código y lo que imprime.
+
+``` python
+divisores_24 = {1, 2, 3, 4, 6, 8, 24}
+divisores_36 = {1, 2, 3, 4, 6, 9, 12, 18, 36}
+
+______
+print("Divisores de 24:", sorted(divisores_24))
+print("Dividen a 24 pero no a 36:", ______)
+
+comunes = ______
+print("Divisores comunes:", sorted(comunes))
+
+mcd = ______
+mcm = ______
+print("MCD:", mcd, "mcm:", mcm)
+```
+
+**Respuesta esperada:**
+
+```
+Solución:
+divisores_24 = {1, 2, 3, 4, 6, 8, 24}
+divisores_36 = {1, 2, 3, 4, 6, 9, 12, 18, 36}
+
+divisores_24.add(12)
+print("Divisores de 24:", sorted(divisores_24))
+print("Dividen a 24 pero no a 36:", sorted(divisores_24.difference(divisores_36)))
+
+comunes = divisores_24.intersection(divisores_36)
+print("Divisores comunes:", sorted(comunes))
+
+mcd = max(comunes)
+mcm = 24 * 36 // mcd
+print("MCD:", mcd, "mcm:", mcm)
+
+Salida:
+Divisores de 24: [1, 2, 3, 4, 6, 8, 12, 24]
+Dividen a 24 pero no a 36: [8, 24]
+Divisores comunes: [1, 2, 3, 4, 6, 12]
+MCD: 12 mcm: 72
+```
+
+### AB-36-002 · avanzada · Ejercicios de programación (como en las lecciones)
+
+El programa se detiene con un AssertionError porque las tres primeras líneas de cálculo tienen errores silenciosos. Corrígelas para obtener el promedio de 7, 9 y 8 (8.0), el coseno de 60 grados (0.5) y la suma de las calificaciones que llegaron como texto (10), sin modificar los assert ni los print. Escribe el código y lo que imprime.
+
+``` python
+import math
+
+promedio = 7 + 9 + 8 / 3
+coseno = math.cos(60)
+total = "4" + "6"
+
+assert 0 <= promedio <= 10, "El promedio debe estar entre 0 y 10"
+assert math.isclose(coseno, 0.5), "cos(60°) debe ser 0.5"
+
+print("Promedio:", promedio)
+print("Coseno de 60°:", round(coseno, 4))
+print("Total:", total)
+```
+
+**Respuesta esperada:**
+
+```
+Solución:
+import math
+
+promedio = (7 + 9 + 8) / 3
+coseno = math.cos(math.radians(60))
+total = int("4") + int("6")
+
+assert 0 <= promedio <= 10, "El promedio debe estar entre 0 y 10"
+assert math.isclose(coseno, 0.5), "cos(60°) debe ser 0.5"
+
+print("Promedio:", promedio)
+print("Coseno de 60°:", round(coseno, 4))
+print("Total:", total)
+
+Salida:
+Promedio: 8.0
+Coseno de 60°: 0.5
+Total: 10
+```
+
+### AB-36-003 · avanzada · Ejercicios de programación (como en las lecciones)
+
+Sin usar max() ni sort(), encuentra con if/elif/else el mayor de los tres números a, b y c y guarda los otros dos en p y q. Después decide si forman una terna pitagórica (mayor² = p² + q²) y muestra el mayor y el mensaje "Es terna pitagórica" o "No es terna pitagórica". Escribe el código y lo que imprime.
+
+``` python
+a, b, c = 8, 17, 15
+
+# Encuentra el mayor y guarda los otros dos en p y q
+
+
+# Decide si es terna pitagórica
+```
+
+**Respuesta esperada:**
+
+```
+Solución:
+a, b, c = 8, 17, 15
+
+if a >= b and a >= c:
+    mayor, p, q = a, b, c
+elif b >= a and b >= c:
+    mayor, p, q = b, a, c
+else:
+    mayor, p, q = c, a, b
+
+print("Mayor:", mayor)
+if mayor ** 2 == p ** 2 + q ** 2:
+    print("Es terna pitagórica")
+else:
+    print("No es terna pitagórica")
+
+Salida:
+Mayor: 17
+Es terna pitagórica
+```
+
+### AB-36-004 · avanzada · Ejercicios de programación (como en las lecciones)
+
+Con una máscara booleana obtén las calificaciones aprobatorias (mayores o iguales a 6) del arreglo calificaciones. Muestra cuántas son, su promedio, el porcentaje de aprobados respecto al total y la posición de la calificación más alta del grupo. Escribe el código y lo que imprime.
+
+``` python
+import numpy as np
+
+calificaciones = np.array([9.5, 4.0, 7.5, 5.5, 10.0, 6.0, 8.5, 3.0, 6.5, 8.0])
+```
+
+**Respuesta esperada:**
+
+```
+Solución:
+import numpy as np
+
+calificaciones = np.array([9.5, 4.0, 7.5, 5.5, 10.0, 6.0, 8.5, 3.0, 6.5, 8.0])
+
+aprobados = calificaciones[calificaciones >= 6]
+print("Aprobados:", aprobados.size)
+print("Promedio de aprobados:", np.mean(aprobados))
+print("Porcentaje de aprobados:", aprobados.size / calificaciones.size * 100)
+print("Posición de la más alta:", np.argmax(calificaciones))
+
+Salida:
+Aprobados: 7
+Promedio de aprobados: 8.0
+Porcentaje de aprobados: 70.0
+Posición de la más alta: 4
+```
+
+### AB-36-005 · avanzada · Ejercicios de programación (como en las lecciones)
+
+Construye un tablero de 6 × 6 de ceros (dtype=int) y, usando rebanadas con paso, pon un 1 en las casillas con fila y columna pares y en las casillas con fila y columna impares (sin ciclos). Muestra el tablero y cuántas casillas valen 1. Escribe el código y lo que imprime.
+
+``` python
+import numpy as np
+
+tablero = np.zeros((6, 6), dtype=int)
+
+tablero[______] = 1   # Filas pares, columnas pares
+tablero[______] = 1   # Filas impares, columnas impares
+
+print(tablero)
+print("Casillas con 1:", ______)
+```
+
+**Respuesta esperada:**
+
+```
+Solución:
+import numpy as np
+
+tablero = np.zeros((6, 6), dtype=int)
+
+tablero[::2, ::2] = 1
+tablero[1::2, 1::2] = 1
+
+print(tablero)
+print("Casillas con 1:", tablero.sum())
+
+Salida:
+[[1 0 1 0 1 0]
+ [0 1 0 1 0 1]
+ [1 0 1 0 1 0]
+ [0 1 0 1 0 1]
+ [1 0 1 0 1 0]
+ [0 1 0 1 0 1]]
+Casillas con 1: 18
+```
+
+### AB-36-006 · avanzada · Ejercicios de programación (como en las lecciones)
+
+Para A = [[2, 1], [5, 3]] y b = (4, 11): si det(A) (redondeado) es distinto de 0, calcula la inversa con np.linalg.inv(), comprueba con np.allclose() que A @ inversa es la identidad np.eye(2) y resuelve el sistema como inversa @ b; si det(A) es 0, imprime "Sin solución única". Muestra det(A), la inversa y la solución redondeadas con np.round(..., 4). Escribe el código y lo que imprime.
+
+``` python
+import numpy as np
+
+A = np.array([[2, 1],
+              [5, 3]])
+b = np.array([4, 11])
+```
+
+**Respuesta esperada:**
+
+```
+Solución:
+import numpy as np
+
+A = np.array([[2, 1],
+              [5, 3]])
+b = np.array([4, 11])
+
+determinante = round(np.linalg.det(A), 4)
+if determinante != 0:
+    inversa = np.linalg.inv(A)
+    print("det(A) =", determinante)
+    print(np.round(inversa, 4))
+    print("¿A @ inversa = I?", np.allclose(A @ inversa, np.eye(2)))
+    print("Solución:", np.round(inversa @ b, 4))
+else:
+    print("Sin solución única")
+
+Salida:
+det(A) = 1.0
+[[ 3. -1.]
+ [-5.  2.]]
+¿A @ inversa = I? True
+Solución: [1. 2.]
+```
+
+### AB-36-007 · avanzada · Ejercicios de programación (como en las lecciones)
+
+Para f(x) = x³ − 6x² + 9x + 1, encuentra los puntos críticos resolviendo f'(x) = 0 con sp.solve(). Para cada punto crítico (sin ciclos, usa los índices de la lista) evalúa con subs() f y f'' y decide con un if si es máximo local (f'' < 0) o mínimo local. Escribe el código y lo que imprime.
+
+``` python
+import sympy as sp
+x = sp.symbols("x")
+
+f = x**3 - 6*x**2 + 9*x + 1
+```
+
+**Respuesta esperada:**
+
+```
+Solución:
+import sympy as sp
+x = sp.symbols("x")
+
+f = x**3 - 6*x**2 + 9*x + 1
+primera = sp.diff(f, x)
+segunda = sp.diff(f, x, 2)
+criticos = sp.solve(primera, x)
+print("Puntos críticos:", criticos)
+
+a = criticos[0]
+tipo_a = "máximo local" if segunda.subs(x, a) < 0 else "mínimo local"
+print("x =", a, "f =", f.subs(x, a), "f'' =", segunda.subs(x, a), "->", tipo_a)
+
+b = criticos[1]
+tipo_b = "máximo local" if segunda.subs(x, b) < 0 else "mínimo local"
+print("x =", b, "f =", f.subs(x, b), "f'' =", segunda.subs(x, b), "->", tipo_b)
+
+Salida:
+Puntos críticos: [1, 3]
+x = 1 f = 5 f'' = -6 -> máximo local
+x = 3 f = 1 f'' = 6 -> mínimo local
+```
+
+### AB-36-008 · avanzada · Ejercicios de programación (como en las lecciones)
+
+Con dos ciclos for anidados y una variable es_primo (sale del ciclo interno con break al encontrar un divisor), construye la lista de los números primos menores que 30. Muestra la lista, cuántos son y su suma. Escribe el código y lo que imprime.
+
+``` python
+primos = []
+
+for n in range(2, 30):
+    es_primo = True
+    for divisor in range(2, n):
+        if ______:
+            es_primo = False
+            ______
+    if ______:
+        primos.append(n)
+
+print(primos)
+print("Cantidad:", len(primos), "Suma:", sum(primos))
+```
+
+**Respuesta esperada:**
+
+```
+Solución:
+primos = []
+
+for n in range(2, 30):
+    es_primo = True
+    for divisor in range(2, n):
+        if n % divisor == 0:
+            es_primo = False
+            break
+    if es_primo:
+        primos.append(n)
+
+print(primos)
+print("Cantidad:", len(primos), "Suma:", sum(primos))
+
+Salida:
+[2, 3, 5, 7, 11, 13, 17, 19, 23, 29]
+Cantidad: 10 Suma: 129
+```
+
+### AB-36-009 · avanzada · Ejercicios de programación (como en las lecciones)
+
+Aplica la regla de Collatz (si n es par, divídelo entre 2; si es impar, n = 3n + 1) con un ciclo while empezando en n = 7, hasta llegar a 1. Guarda la sucesión en la lista sucesion y muestra la sucesión, el número de pasos y el valor máximo alcanzado. Escribe el código y lo que imprime.
+
+``` python
+n = 7
+pasos = 0
+sucesion = [n]
+
+while ______:
+    if ______:
+        n = n // 2
+    else:
+        n = ______
+    sucesion.append(n)
+    pasos += 1
+
+print(sucesion)
+print("Pasos:", pasos)
+print("Máximo:", ______)
+```
+
+**Respuesta esperada:**
+
+```
+Solución:
+n = 7
+pasos = 0
+sucesion = [n]
+
+while n != 1:
+    if n % 2 == 0:
+        n = n // 2
+    else:
+        n = 3 * n + 1
+    sucesion.append(n)
+    pasos += 1
+
+print(sucesion)
+print("Pasos:", pasos)
+print("Máximo:", max(sucesion))
+
+Salida:
+[7, 22, 11, 34, 17, 52, 26, 13, 40, 20, 10, 5, 16, 8, 4, 2, 1]
+Pasos: 16
+Máximo: 52
+```
+
+### AB-36-010 · avanzada · Ejercicios de programación (como en las lecciones)
+
+Con la serie de Leibniz, π ≈ 4·(1 − 1/3 + 1/5 − 1/7 + ···), usa un ciclo while para sumar términos (k = 0, 1, 2, …) mientras el error |aproximación − math.pi| sea mayor o igual que 0.01. Muestra cuántos términos se necesitaron y la aproximación redondeada a 4 decimales. Escribe el código y lo que imprime.
+
+``` python
+import math
+
+suma = 0
+k = 0
+aproximacion = 0
+
+while ______:
+    suma += ______
+    k += 1
+    aproximacion = ______
+
+print("Términos:", k)
+print("Aproximación:", round(aproximacion, 4))
+```
+
+**Respuesta esperada:**
+
+```
+Solución:
+import math
+
+suma = 0
+k = 0
+aproximacion = 0
+
+while abs(aproximacion - math.pi) >= 0.01:
+    suma += (-1) ** k / (2 * k + 1)
+    k += 1
+    aproximacion = 4 * suma
+
+print("Términos:", k)
+print("Aproximación:", round(aproximacion, 4))
+
+Salida:
+Términos: 100
+Aproximación: 3.1316
+```

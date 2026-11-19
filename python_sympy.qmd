@@ -179,7 +179,7 @@ print(sp.solve(a*x**2 + b*x + c, x))
 
 ### Sistemas de ecuaciones
 
-Es el mismo sistema que resolvimos con `np.linalg.solve()` en el capítulo de [NumPy](python_numpy.qmd), pero ahora con solución **exacta**:
+Es el mismo sistema que resolvimos con `np.linalg.solve()` en el capítulo de [Álgebra lineal con NumPy](python_algebra_lineal.qmd), pero ahora con solución **exacta**:
 
 ```{python}
 x, y, z = sp.symbols("x y z")

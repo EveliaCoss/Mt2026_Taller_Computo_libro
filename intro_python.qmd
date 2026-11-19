@@ -250,6 +250,9 @@ Cada objeto tiene tres características principales:
 - **Identidad:** permite distinguir un objeto de otro.
 - **Tipo:** determina qué clase de objeto es y qué operaciones admite.
 - **Valor:** representa la información que contiene el objeto.
+
+Además, los objetos tienen:
+
 - **Atributos:** representan características o información asociada con un objeto.
 - **Métodos:** son funciones asociadas con un objeto que permiten realizar operaciones.
 
@@ -287,7 +290,7 @@ Python dispone de diferentes tipos de datos integrados.
 +-----------------+-----------------------------------------------+----------------------+-----------------------------------+---------------+---------------+-------------+
 | Cadena de texto | Cadena de caracteres                          | `str`                | `‘Hola’, “Mundo”`                 | No            | Sí            | No          |
 +-----------------+-----------------------------------------------+----------------------+-----------------------------------+---------------+---------------+-------------+
-| Booleano        | Booleano (Verdadero o Falso)                  | `bool`               | `True`, `False`                   | No            | Sí            | No          |
+| Booleano        | Booleano (Verdadero o Falso)                  | `bool`               | `True`, `False`                   | No            | No            | No          |
 +-----------------+-----------------------------------------------+----------------------+-----------------------------------+---------------+---------------+-------------+
 | Lista           | Lista ordenada de elementos                   | `list`               | `[10, 20, 30]`                    | Sí            | Sí            | Sí          |
 +-----------------+-----------------------------------------------+----------------------+-----------------------------------+---------------+---------------+-------------+
