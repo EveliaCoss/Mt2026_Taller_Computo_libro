@@ -27,10 +27,10 @@ En este capítulo veremos:
 
 - Por qué usar arreglos de NumPy en lugar de listas.
 - Cómo crear arreglos y conocer sus **dimensiones** con sus atributos.
-- Operaciones elemento a elemento, funciones matemáticas y estadísticas.
+- Operaciones elemento a elemento, *broadcasting*, funciones matemáticas y estadísticas.
 - Cómo operar con **todo el arreglo a la vez** (vectorización).
 - Indexación, rebanado, indexación extravagante y máscaras booleanas.
-- Vistas y copias, ordenamiento, *broadcasting* y álgebra lineal.
+- Ordenamiento.
 
 ## Instalar e importar NumPy
 
@@ -147,6 +147,10 @@ a.reshape(5, 3)   # 5 × 3 = 15 ≠ 12: ValueError
 
 ## Operaciones con arreglos
 
+En esta sección veremos la **aritmética** entre arreglos, el ***broadcasting*** (operar arreglos de formas distintas), las **funciones matemáticas** y las **funciones estadísticas**.
+
+### Operaciones aritméticas: ¿qué podemos hacer con los arreglos?
+
 Las operaciones aritméticas se aplican **elemento a elemento**:
 
 ```{python}
@@ -158,17 +162,132 @@ print("a * b =\n", a * b)     # Producto elemento a elemento (NO es el producto 
 print("a ** 2 =\n", a ** 2)
 ```
 
-**Funciones matemáticas** (se llaman *funciones universales*): se aplican a cada elemento.
+![Suma y producto elemento a elemento con NumPy.](figures/python_numpy_operaciones.png){fig-align="center"}
+
+**Reglas principales** de las operaciones con arreglos:
+
+1.  **Se opera posición por posición:** el elemento `[i, j]` del resultado se calcula con los elementos `[i, j]` de cada arreglo.
+2.  **Los arreglos deben tener la misma forma** (`shape`). Si no coinciden, NumPy da un `ValueError` (salvo los casos de *broadcasting* que veremos a continuación).
+3.  **Un escalar se aplica a cada elemento:** `a + 10` suma 10 a todos los elementos.
+4.  **El resultado es un arreglo nuevo** con la misma forma; los arreglos originales no cambian.
+5.  **El tipo de dato se ajusta:** al mezclar enteros y decimales el resultado es `float`, y la división `/` siempre da `float`.
+6.  **`*` no es el producto de matrices:** multiplica elemento a elemento. El producto de matrices (`@`) lo veremos en el capítulo de [Álgebra lineal con NumPy](python_algebra_lineal.qmd).
+
+Todos los operadores aritméticos de Python funcionan elemento a elemento. Por ejemplo, con `x = np.array([7, 8])` y `y = np.array([2, 3])`:
+
+| Operador | Operación        | Ejemplo  | Resultado          |
+|----------|------------------|----------|--------------------|
+| `+`      | Suma             | `x + y`  | `[ 9 11]`          |
+| `-`      | Resta            | `x - y`  | `[5 5]`            |
+| `*`      | Producto         | `x * y`  | `[14 24]`          |
+| `/`      | División         | `x / y`  | `[3.5 2.66666667]` |
+| `//`     | División entera  | `x // y` | `[3 2]`            |
+| `%`      | Residuo (módulo) | `x % y`  | `[1 2]`            |
+| `**`     | Potencia         | `x ** y` | `[ 49 512]`        |
 
 ```{python}
-x = np.array([0, np.pi / 2, np.pi])
+print("a + 10 =\n", a + 10)       # Regla 3: el escalar se suma a cada elemento
+print("a / b =\n", a / b)         # Regla 5: la división da float
+print("a sigue igual:\n", a)      # Regla 4: el original no cambia
+```
 
-print(np.sin(x).round(3))
+```{python}
+c = np.array([1, 2, 3])
+a + c   # Regla 2: forma (2, 2) y (3,) no coinciden -> ValueError
+```
+
+### *Broadcasting*
+
+El *broadcasting* permite operar arreglos de **formas distintas**. NumPy "estira" el arreglo más pequeño para que coincida con el más grande, siguiendo tres reglas:
+
+1.  Si los arreglos tienen distinto número de dimensiones, se agrega una dimensión de tamaño 1 **a la izquierda** de la forma del más pequeño.
+2.  Los ejes de tamaño 1 se estiran para coincidir con el otro arreglo.
+3.  Si en algún eje los tamaños son distintos y ninguno es 1, se produce un error.
+
+![*Broadcasting*: NumPy repite los valores del arreglo pequeño para que las formas coincidan.](figures/python_numpy_broadcasting.png){fig-align="center"}
+
+```{python}
+a = np.array([[1, 2, 3],
+              [4, 5, 6]])     # forma (2, 3)
+
+print(a + 10)                  # Un escalar se suma a cada elemento
+
+b = np.array([10, 20, 30])    # forma (3,) -> (1, 3) -> (2, 3)
+print(a + b)                   # b se suma a cada fila
+
+c = np.array([[10], [20]])    # forma (2, 1) -> (2, 3)
+print(a + c)                   # c se suma a cada columna
+```
+
+Una columna por una fila genera una **tabla** completa, por ejemplo la tabla de multiplicar sin ciclos:
+
+```{python}
+columna = np.arange(1, 6).reshape(5, 1)   # forma (5, 1)
+fila = np.arange(1, 6)                     # forma (5,)
+
+print(columna * fila)                      # forma (5, 5)
+```
+
+### Funciones matemáticas
+
+Las funciones matemáticas de NumPy (se llaman *funciones universales* o *ufuncs*) se aplican a cada elemento. Si $f$ es la función, `np.f(x)` regresa el arreglo $[f(x_0), f(x_1), \dots, f(x_{n-1})]$ con la **misma forma** que `x`. También aceptan listas o un solo número.
+
+| Función | Notación matemática | Ejemplo | Resultado |
+|------------------------|------------------------|------------------------|------------------------|
+| `np.sqrt(x)` | $\sqrt{x}$ | `np.sqrt([1, 4, 9])` | `[1. 2. 3.]` |
+| `np.exp(x)` | $e^{x}$ | `np.exp([0, 1])` | `[1. 2.71828183]` |
+| `np.log(x)` | $\ln x$ (logaritmo natural) | `np.log([1, np.e])` | `[0. 1.]` |
+| `np.log10(x)` | $\log_{10} x$ | `np.log10([10, 1000])` | `[1. 3.]` |
+| `np.abs(x)` | $\lvert x \rvert$ | `np.abs([-3, 2])` | `[3 2]` |
+| `np.sin(x)`, `np.cos(x)`, `np.tan(x)` | $\sin x$, $\cos x$, $\tan x$ (en **radianes**) | `np.cos([0, np.pi])` | `[ 1. -1.]` |
+| `np.deg2rad(x)` | Grados → radianes | `np.deg2rad([90, 180])` | `[1.57079633 3.14159265]` |
+| `np.floor(x)`, `np.ceil(x)` | $\lfloor x \rfloor$, $\lceil x \rceil$ | `np.floor([2.7, -2.7])` | `[ 2. -3.]` |
+
+NumPy también trae las **constantes** `np.pi` ($\pi$) y `np.e` ($e$).
+
+En el siguiente ejemplo, `x = np.array([0, np.pi / 2, np.pi])` crea un arreglo con **tres ángulos en radianes**: $0$, $\frac{\pi}{2}$ y $\pi$ (es decir, 0°, 90° y 180°). Al aplicar `np.sin(x)` obtenemos el seno de cada ángulo, como en la tabla:
+
+| `x` (radianes) | Grados | $\sin(x)$ esperado |
+|----------------|--------|--------------------|
+| $0$            | 0°     | $0$                |
+| $\pi/2$        | 90°    | $1$                |
+| $\pi$          | 180°   | $0$                |
+
+```{python}
+x = np.array([0, np.pi / 2, np.pi])   # Tres ángulos: 0, π/2 y π
+print(x)
+
+print(np.sin(x))              # sin(π) da 1.2e-16 en lugar de 0
+print(np.sin(x).round(3))     # .round(3) redondea a 3 decimales
 print(np.sqrt([1, 4, 9, 16]))
 print(np.exp([0, 1, 2]).round(3))
 ```
 
-**Funciones estadísticas:**
+El resultado `1.2246468e-16` está en **notación científica**: `e-16` significa "por $10^{-16}$", es decir, $1.2246468 \times 10^{-16} = 0.00000000000000012246468$, un número muy cercano a cero. De la misma forma, `3e5` es $3 \times 10^{5} = 300000$.
+
+¿Por qué $\sin(\pi)$ no da exactamente `0`? Porque `np.pi` es una **aproximación** de $\pi$ con 16 dígitos, y la computadora guarda los decimales con precisión limitada:
+
+| Valor        | Dígitos                       |
+|--------------|-------------------------------|
+| `np.pi`      | `3.141592653589793`           |
+| $\pi$ real   | `3.14159265358979323846...`   |
+
+Los 16 dígitos de `np.pi` coinciden con $\pi$, pero el $\pi$ real **continúa** (`...23846...`) sin terminar nunca. Esa diferencia, de aproximadamente $1.2 \times 10^{-16}$, es justo el `1.2e-16` que obtuvimos en $\sin(\pi)$. Por eso usamos `.round()` para mostrar resultados más legibles.
+
+```{python}
+print(np.pi)
+```
+
+Si un valor está **fuera del dominio** de la función, NumPy no se detiene con un error: muestra una advertencia (`RuntimeWarning`) y regresa un valor especial:
+
+```{python}
+print(np.sqrt([-1, 4]))   # nan: "not a number", √-1 no es real
+print(np.log([0, 1]))     # -inf: ln(x) → -∞ cuando x → 0
+```
+
+### Funciones estadísticas
+
+Resumen un arreglo en uno o varios números:
 
 | Función                      | ¿Qué calcula?                         |
 |------------------------------|---------------------------------------|
@@ -193,7 +312,9 @@ print("Posición del máximo:", np.argmax(datos))
 
 Muchas de estas funciones también existen como **métodos**: `datos.sum()`, `datos.mean()`, `datos.max()`.
 
-### El argumento `axis`
+#### El argumento `axis`
+
+![El argumento `axis` en NumPy.](figures/python_numpy_axis.png){fig-align="center"}
 
 En una matriz, `axis=0` opera **por columnas** (hacia abajo) y `axis=1` **por filas** (hacia la derecha):
 
@@ -216,6 +337,27 @@ print("10! =", np.arange(1, 11).prod())
 print("Cuadrados del 1 al 5:", np.arange(1, 6) ** 2)
 ```
 
+Veamos paso a paso cómo se calcula el **factorial** $10! = 1 \cdot 2 \cdot 3 \cdots 10$:
+
+1.  `np.arange(1, 11)` crea el arreglo `[1 2 3 4 5 6 7 8 9 10]`. Como en `range()`, el final (`11`) **no se incluye**; por eso escribimos `11` para llegar hasta `10`.
+2.  `.prod()` **multiplica todos los elementos** del arreglo, así como `.sum()` los suma: $\prod_{k=1}^{10} k$.
+
+```{python}
+numeros = np.arange(1, 11)
+print("Arreglo:", numeros)
+print("Producto:", numeros.prod())   # 1 · 2 · 3 · ... · 10 = 3628800
+```
+
+::: callout-warning
+Los enteros de NumPy tienen un **límite** (`int64` guarda números hasta $\approx 9.2 \times 10^{18}$). Desde $21!$ el resultado ya no cabe y NumPy da un número **incorrecto, sin avisar**:
+
+```{python}
+print("21! con NumPy:", np.arange(1, 22).prod())   # ¡Negativo!
+```
+
+Para factoriales grandes usa `math.factorial(21)` del módulo `math`, que trabaja con enteros de Python sin límite de tamaño.
+:::
+
 Además de ser corto, el código vectorizado es **muy rápido**, porque NumPy hace los cálculos internamente en el lenguaje C. En el capítulo de [ciclos `for`](python_for.qmd) compararemos la velocidad de un ciclo con la de NumPy.
 
 ## Indexación y rebanado
@@ -236,6 +378,8 @@ print(a[::2])        # De 2 en 2
 
 Se escribe **un índice por eje**, separados por comas: `m[fila, columna]`.
 
+![Indexación de un arreglo de dos dimensiones: `m[fila, columna]`.](figures/python_numpy_indexacion2d.png){fig-align="center"}
+
 ```{python}
 m = np.array([[1, 2, 3],
               [4, 5, 6],
@@ -253,13 +397,17 @@ El símbolo `:` solo significa "**todos** los elementos de ese eje".
 
 Podemos pasar una **lista de índices** para obtener varios elementos a la vez, incluso repetidos:
 
+![Indexación extravagante: seleccionar filas, columnas o elementos con listas de índices.](figures/python_numpy_fancy_indexing.png){fig-align="center"}
+
 ```{python}
 a = np.arange(0, 100, 10)
 print(a)
 print(a[[2, 3, 2, 4, 2]])
 
 m = np.array([[1, 2, 3], [4, 5, 6], [7, 8, 9]])
-print(m[[1, 2], [1, 2]])   # Elementos (1, 1) y (2, 2) -> [5 9]
+print(m[[0, 2], :])                # Filas 0 y 2, todas las columnas
+print(m[:, [0, 2]])                # Todas las filas, columnas 0 y 2
+print(m[[0, 1, 2], [2, 0, 1]])     # Elementos (0, 2), (1, 0) y (2, 1) -> [3 4 8]
 ```
 
 También sirve para **asignar** valores:
@@ -307,37 +455,6 @@ calificaciones = np.array([9.5, 5, 7, 4.5, 10])
 print(np.where(calificaciones >= 6, "Aprobado", "Reprobado"))
 ```
 
-## Vistas y copias
-
-Recuerda del capítulo de [variables y objetos](python_ejercicio1.qmd) que dos nombres pueden apuntar al **mismo objeto**. En NumPy ocurre algo parecido con las **vistas**:
-
-|   | Vista (*view*) | Copia (*copy*) |
-|------------------------|------------------------|------------------------|
-| ¿Qué es? | Otra forma de ver los **mismos datos**. | Un arreglo **nuevo** con sus propios datos. |
-| ¿Modificarla cambia el original? | **Sí.** | No. |
-| ¿Cuándo se produce? | Rebanado (`a[1:3]`), `reshape()`. | Indexación extravagante (`a[[1, 2]]`), máscaras, `.copy()`. |
-| Atributo `.base` | El arreglo original. | `None`. |
-
-```{python}
-a = np.arange(1, 6)
-vista = a[1:3]
-vista[0] = 99
-
-print("vista:", vista)
-print("a:", a)               # ¡El original también cambió!
-print(vista.base is a)       # La vista depende de a
-```
-
-```{python}
-a = np.arange(1, 6)
-copia = a[1:3].copy()
-copia[0] = 99
-
-print("copia:", copia)
-print("a:", a)               # El original no cambió
-print(copia.base is None)    # La copia es independiente
-```
-
 ## Ordenamiento
 
 Igual que con las listas (`sorted()` vs. `sort()`), en NumPy hay dos formas de ordenar:
@@ -368,62 +485,6 @@ print(np.sort(m))
 print(np.sort(m, axis=0))
 ```
 
-## *Broadcasting*
-
-El *broadcasting* permite operar arreglos de **formas distintas**. NumPy "estira" el arreglo más pequeño para que coincida con el más grande, siguiendo tres reglas:
-
-1.  Si los arreglos tienen distinto número de dimensiones, se agrega una dimensión de tamaño 1 **a la izquierda** de la forma del más pequeño.
-2.  Los ejes de tamaño 1 se estiran para coincidir con el otro arreglo.
-3.  Si en algún eje los tamaños son distintos y ninguno es 1, se produce un error.
-
-```{python}
-a = np.array([[1, 2, 3],
-              [4, 5, 6]])     # forma (2, 3)
-
-print(a + 10)                  # Un escalar se suma a cada elemento
-
-b = np.array([10, 20, 30])    # forma (3,) -> (1, 3) -> (2, 3)
-print(a + b)                   # b se suma a cada fila
-```
-
-Una columna por una fila genera una **tabla** completa, por ejemplo la tabla de multiplicar sin ciclos:
-
-```{python}
-columna = np.arange(1, 6).reshape(5, 1)   # forma (5, 1)
-fila = np.arange(1, 6)                     # forma (5,)
-
-print(columna * fila)                      # forma (5, 5)
-```
-
-## Álgebra lineal
-
-NumPy incluye las operaciones de matrices más comunes:
-
-| Operación            | Notación matemática | NumPy                   |
-|----------------------|---------------------|-------------------------|
-| Producto de matrices | $AB$                | `A @ B`                 |
-| Transpuesta          | $A^T$               | `A.T`                   |
-| Determinante         | $\det(A)$           | `np.linalg.det(A)`      |
-| Inversa              | $A^{-1}$            | `np.linalg.inv(A)`      |
-| Resolver $Ax = b$    | $x = A^{-1}b$       | `np.linalg.solve(A, b)` |
-
-```{python}
-A = np.array([[2, 1],
-              [1, 3]])
-B = np.array([[1, 0],
-              [2, 1]])
-
-print("A @ B =\n", A @ B)          # Producto de matrices
-print("A * B =\n", A * B)          # Producto elemento a elemento (¡diferente!)
-print("A^T =\n", A.T)
-print("det(A) =", round(np.linalg.det(A), 2))
-print("A^-1 =\n", np.linalg.inv(A))
-```
-
-::: callout-important
-`A * B` multiplica **elemento a elemento**; el producto de matrices que conoces del álgebra lineal es `A @ B`.
-:::
-
 ## Ejercicios
 
 Resuelve los ejercicios en los editores interactivos. Recuerda que lo que escribas **no se guarda** al recargar la página. La primera vez que ejecutes un editor, NumPy puede tardar unos segundos en cargar.
@@ -444,7 +505,15 @@ print(numeros)
 cincos = ______
 print(cincos)
 
-matriz = np.array([[1, 2, 3], [4, 5, 6], [7, 8, 9]])
+# Opción 1: declarar los valores directamente
+matriz = np.array([[1, 2, 3],
+                   [4, 5, 6],
+                   [7, 8, 9]])
+
+# Opción 2: generar los valores y reorganizarlos
+matriz = np.arange(1, 10).reshape(3, 3)
+
+print(matriz)
 ______   # Suma de los elementos de matriz
 ```
 
@@ -462,7 +531,7 @@ feedback
 ::: {.callout-note collapse="false"}
 ## Pista
 
-`np.arange(1, 11)`, `np.full((3, 3), 5)` y `matriz.sum()` (o `np.sum(matriz)`).
+`np.arange(1, 11)` y `np.full((3, 3), 5)`. Para la suma hay tres opciones: `matriz.sum()`, `np.sum(matriz)` o `sum(matriz).sum()`.
 :::
 ::::
 
@@ -479,9 +548,26 @@ print(numeros)
 cincos = np.full((3, 3), 5)
 print(cincos)
 
-matriz = np.array([[1, 2, 3], [4, 5, 6], [7, 8, 9]])
+# Opción 1: declarar los valores directamente
+matriz = np.array([[1, 2, 3],
+                   [4, 5, 6],
+                   [7, 8, 9]])
+
+# Opción 2: generar los valores y reorganizarlos
+matriz = np.arange(1, 10).reshape(3, 3)
+
+print(matriz)
+
+# Tres formas de sumar todos los elementos
+print("Opción 1:", matriz.sum())          # Método del arreglo
+print("Opción 2:", np.sum(matriz))        # Función de NumPy
+print("Opción 3:", sum(matriz).sum())     # sum() de Python + método .sum()
 matriz.sum()   # 45
 ```
+
+Las dos opciones crean **la misma matriz**: la primera escribe los valores a mano y la segunda genera `[1 2 ... 9]` con `np.arange(1, 10)` y los acomoda en 3 × 3 con `reshape()`.
+
+En la opción 3, `sum(matriz)` es la función `sum()` de Python: recorre la matriz **fila por fila** y suma las filas, así que da la suma por columnas `[12 15 18]`. Después, `.sum()` suma esos tres números: $12 + 15 + 18 = 45$.
 :::
 ::::
 
@@ -734,133 +820,6 @@ letras[[2, 2, 1], [2, 0, 0]]          # ['O' 'M' 'G']
 :::
 ::::
 
-### Ejercicio 6. Vista o copia
-
-Ejecuta el código: al modificar `parte`, **también cambió** `original`. Corrígelo para que `parte` sea una **copia** independiente y `original` conserve sus valores. Deja `original` en la **última línea**.
-
-```{pyodide}
-#| exercise: np6
-import numpy as np
-
-original = np.arange(1, 6)
-parte = original[1:4]
-parte[0] = 100
-
-print("parte:", parte)
-print("original:", original)
-print("¿parte depende de original?", parte.base is original)
-original
-```
-
-```{pyodide}
-#| exercise: np6
-#| check: true
-import numpy as np
-if isinstance(result, np.ndarray) and result.tolist() == [1, 2, 3, 4, 5]:
-    feedback = {"correct": True, "message": "¡Correcto! Con .copy(), parte es un arreglo nuevo y original no cambia."}
-else:
-    feedback = {"correct": False, "message": "original debe seguir siendo [1, 2, 3, 4, 5]. El rebanado crea una vista: conviértela en copia."}
-feedback
-```
-
-:::: {.hint exercise="np6"}
-::: {.callout-note collapse="false"}
-## Pista
-
-El rebanado `original[1:4]` crea una **vista**. Agrega `.copy()` al final de esa línea.
-:::
-::::
-
-:::: {.solution exercise="np6"}
-::: {.callout-tip collapse="false"}
-## Solución
-
-``` python
-import numpy as np
-
-original = np.arange(1, 6)
-parte = original[1:4].copy()
-parte[0] = 100
-
-print("parte:", parte)                                     # [100   3   4]
-print("original:", original)                               # [1 2 3 4 5]
-print("¿parte depende de original?", parte.base is original)  # False
-original
-```
-:::
-::::
-
-### Ejercicio 7. Sistema de ecuaciones
-
-Resuelve el sistema de ecuaciones:
-
-$$\begin{cases}
-2x + y - z = 3 \\
-x - y + 2z = 5 \\
-3x + 2y + z = 10
-\end{cases}$$
-
-1.  Escribe la matriz de coeficientes `A` y el vector de términos independientes `b`.
-2.  Verifica que el sistema tiene solución única calculando $\det(A) \neq 0$.
-3.  Resuelve el sistema con `np.linalg.solve()` y deja la solución en la **última línea**.
-4.  Comprueba la solución calculando `A @ solucion`, que debe ser igual a `b`.
-
-```{pyodide}
-#| exercise: np7
-import numpy as np
-
-A = np.array(______)
-b = np.array(______)
-
-print("det(A) =", np.linalg.det(A))
-
-solucion = ______
-print("Solución:", solucion)
-print("Comprobación A @ solución:", ______)
-solucion
-```
-
-```{pyodide}
-#| exercise: np7
-#| check: true
-import numpy as np
-if isinstance(result, np.ndarray) and result.shape == (3,) and np.allclose(result, [2, 1, 2]):
-    feedback = {"correct": True, "message": "¡Correcto! x = 2, y = 1, z = 2."}
-else:
-    feedback = {"correct": False, "message": "Revisa A (una fila por ecuación, con los coeficientes de x, y, z) y b (los términos de la derecha)."}
-feedback
-```
-
-:::: {.hint exercise="np7"}
-::: {.callout-note collapse="false"}
-## Pista
-
-Cada fila de `A` contiene los coeficientes de una ecuación: la primera es `[2, 1, -1]`. El vector `b` es `[3, 5, 10]`. Después usa `np.linalg.solve(A, b)`.
-:::
-::::
-
-:::: {.solution exercise="np7"}
-::: {.callout-tip collapse="false"}
-## Solución
-
-``` python
-import numpy as np
-
-A = np.array([[2, 1, -1],
-              [1, -1, 2],
-              [3, 2, 1]])
-b = np.array([3, 5, 10])
-
-print("det(A) =", np.linalg.det(A))   # -10.0 (aprox.), distinto de 0
-
-solucion = np.linalg.solve(A, b)
-print("Solución:", solucion)           # [2. 1. 2.]
-print("Comprobación A @ solución:", A @ solucion)
-solucion
-```
-:::
-::::
-
 ## Reto final: el tablero de ajedrez
 
 Construye un tablero de ajedrez de 8 × 8 donde las casillas negras valen `1` y las blancas `0`. La casilla de la esquina superior izquierda (`[0, 0]`) es blanca.
@@ -922,6 +881,8 @@ print("Casillas negras:", tablero.sum())   # 32
 tablero
 ```
 
+![Construcción del tablero de ajedrez con rebanado con paso.](figures/python_numpy_tablero_ajedrez.png){fig-align="center"}
+
 Con *broadcasting* también se puede hacer en una línea: una casilla es negra si la suma de su fila y su columna es impar.
 
 ``` python
@@ -941,13 +902,11 @@ tablero = (filas + columnas) % 2
 | Atributos | `ndim` (ejes), `shape` (tamaño por eje), `size` (total), `dtype` (tipo). |
 | `reshape()` | Cambia la forma sin cambiar el número de elementos. |
 | Operaciones | Elemento a elemento: `+`, `-`, `*`, `/`, `**`, `np.sqrt()`, `np.sin()`... |
+| *Broadcasting* | Operar arreglos de formas distintas pero compatibles. |
 | Estadística | `sum`, `mean`, `median`, `std`, `min`, `max`, `argmax`; `axis=0` columnas, `axis=1` filas. |
 | Vectorización | Operar todo el arreglo a la vez, sin recorrer elemento por elemento. |
 | Indexación | `m[fila, columna]`, rebanado `m[1:3, ::2]`, extravagante `a[[1, 3]]`, máscaras `a[a > 5]`. |
-| Vistas y copias | El rebanado crea vistas (comparten datos); `.copy()` crea un arreglo independiente. |
 | Ordenamiento | `np.sort(a)` (copia), `a.sort()` (en su lugar), `np.argsort(a)` (índices). |
-| *Broadcasting* | Operar arreglos de formas distintas pero compatibles. |
-| Álgebra lineal | `A @ B`, `A.T`, `np.linalg.det`, `np.linalg.inv`, `np.linalg.solve`. |
 
 ## Referencias
 

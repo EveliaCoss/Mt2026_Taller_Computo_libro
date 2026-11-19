@@ -104,6 +104,7 @@ book:
         - python_buenas_practicas.qmd   # Sintaxis de nombres, buenas prácticas y programación defensiva
         - python_condicionales.qmd      # Condicionales: if, elif, else
         - python_numpy.qmd              # Introducción a NumPy
+        - python_algebra_lineal.qmd     # Álgebra lineal con NumPy
         - python_sympy.qmd              # Cálculo simbólico con SymPy
         - python_for.qmd                # Ciclos for
         - python_funciones.qmd          # Funciones y buenas prácticas

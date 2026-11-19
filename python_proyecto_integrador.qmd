@@ -53,7 +53,7 @@ que le corresponda a su equipo: **clasificarla**, **eliminar el término $xy$** 
 | 2. Funciones del proyecto | Discriminante $B^2 - 4AC$, ángulo de rotación | [Funciones](python_funciones.qmd), [buenas prácticas](python_buenas_practicas.qmd), [condicionales](python_condicionales.qmd) |
 | 3. Análisis algebraico | Rotación de ejes, forma canónica, elementos | [SymPy](python_sympy.qmd) |
 | 4. Visualización 2D | Gráfica de la cónica y sus elementos | [Visualización I](python_visualizacion.qmd) y [II](python_visualizacion2.qmd) |
-| 5. Transformación con matrices | Rotación de ejes como transformación | [Transformaciones geométricas](python_transformaciones.qmd), [NumPy](python_numpy.qmd) |
+| 5. Transformación con matrices | Rotación de ejes como transformación | [Transformaciones geométricas](python_transformaciones.qmd), [Álgebra lineal con NumPy](python_algebra_lineal.qmd) |
 | 6. Lugar geométrico | Definición de cada cónica con distancias | [Visualización II](python_visualizacion2.qmd#lugares-geométricos), [ciclos](python_for.qmd) |
 | 7. Área con Monte Carlo | Área de la elipse o de una región | [Números aleatorios](python_aleatorios.qmd) |
 | 8. Visualización 3D interactiva | La cónica como curva de nivel | [Visualización III](python_visualizacion3d.qmd) |
