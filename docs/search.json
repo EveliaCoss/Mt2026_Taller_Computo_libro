@@ -5233,17 +5233,6 @@
     ]
   },
   {
-    "objectID": "python_proyecto_integrador.html#calendario-sugerido",
-    "href": "python_proyecto_integrador.html#calendario-sugerido",
-    "title": "72  🧩 Proyecto integrador: atlas de cónicas rotadas",
-    "section": "72.11 Calendario sugerido",
-    "text": "72.11 Calendario sugerido\n\n\n\n\n\n\n\nSemana\nAvance esperado\n\n\n\n\n1\nFormar el equipo, crear el repositorio y el sitio vacío publicado. Escribir y probar funciones.py. Clasificar la cónica y encontrar el ángulo de rotación.\n\n\n2\nForma canónica y elementos. Gráfica 2D, comprobación con la matriz de rotación y comprobación del lugar geométrico.\n\n\n3\nÁrea con Monte Carlo, gráfica 3D, conclusiones y revisión del sitio. Presentación en clase.",
-    "crumbs": [
-      "**Sección 7** - Introducción a Python",
-      "<span class='chapter-number'>72</span>  <span class='chapter-title'>**🧩 Proyecto integrador: atlas de cónicas rotadas**</span>"
-    ]
-  },
-  {
     "objectID": "python_proyecto_integrador.html#rúbrica-de-evaluación",
     "href": "python_proyecto_integrador.html#rúbrica-de-evaluación",
     "title": "72  🧩 Proyecto integrador: atlas de cónicas rotadas",
@@ -5258,8 +5247,8 @@
     "objectID": "python_proyecto_integrador.html#lista-de-verificación-antes-de-entregar",
     "href": "python_proyecto_integrador.html#lista-de-verificación-antes-de-entregar",
     "title": "72  🧩 Proyecto integrador: atlas de cónicas rotadas",
-    "section": "72.12 Lista de verificación antes de entregar",
-    "text": "72.12 Lista de verificación antes de entregar\n\nEl sitio está publicado y abre desde la dirección de GitHub Pages.\nTodos los integrantes tienen commits en el repositorio.\nfunciones.py tiene docstrings y las pruebas con assert pasan.\nLa forma canónica y los elementos están escritos en LaTeX.\nTodas las gráficas tienen título, etiquetas y la misma escala en ambos ejes (set_aspect(\"equal\")).\nLa simulación de Monte Carlo usa una semilla y reporta el número de puntos.\nLa gráfica 3D de Plotly funciona en el sitio publicado.\nHay una sección de conclusiones y de referencias.\nEl documento se renderiza sin errores.",
+    "section": "72.11 Lista de verificación antes de entregar",
+    "text": "72.11 Lista de verificación antes de entregar\n\nEl sitio está publicado y abre desde la dirección de GitHub Pages.\nTodos los integrantes tienen commits en el repositorio.\nfunciones.py tiene docstrings y las pruebas con assert pasan.\nLa forma canónica y los elementos están escritos en LaTeX.\nTodas las gráficas tienen título, etiquetas y la misma escala en ambos ejes (set_aspect(\"equal\")).\nLa simulación de Monte Carlo usa una semilla y reporta el número de puntos.\nLa gráfica 3D de Plotly funciona en el sitio publicado.\nHay una sección de conclusiones y de referencias.\nEl documento se renderiza sin errores.",
     "crumbs": [
       "**Sección 7** - Introducción a Python",
       "<span class='chapter-number'>72</span>  <span class='chapter-title'>**🧩 Proyecto integrador: atlas de cónicas rotadas**</span>"
@@ -5269,8 +5258,8 @@
     "objectID": "python_proyecto_integrador.html#preguntas-frecuentes",
     "href": "python_proyecto_integrador.html#preguntas-frecuentes",
     "title": "72  🧩 Proyecto integrador: atlas de cónicas rotadas",
-    "section": "72.13 Preguntas frecuentes",
-    "text": "72.13 Preguntas frecuentes\n¿Hay un ejemplo resuelto que podamos seguir? Está el ejemplo de entrega, pero sin las funciones: la idea es que ustedes construyan el análisis. Además, cada herramienta tiene ejemplos resueltos en su capítulo; por ejemplo, la rotación de \\(xy = 4\\) en Transformaciones geométricas y el método de operar, graficar y comprobar en Geometría analítica en el espacio.\n¿Podemos usar inteligencia artificial? Sí, como apoyo para entender errores o ideas, pero deben entender y poder explicar cada línea de su código en la presentación. Indiquen en las referencias si la usaron y para qué.\n¿Qué hacemos si quarto render falla? Lean el último mensaje de error y busquen la solución en Configuraciones para usar Quarto con Python. Si aparece ModuleNotFoundError, revisen QUARTO_PYTHON.\n¿Cómo trabajamos varias personas sin romper el código? Antes de empezar a trabajar, hagan git pull; al terminar, git add, git commit y git push. Si es posible, cada integrante trabaja en una página distinta.",
+    "section": "72.12 Preguntas frecuentes",
+    "text": "72.12 Preguntas frecuentes\n¿Hay un ejemplo resuelto que podamos seguir? Está el ejemplo de entrega, pero sin las funciones: la idea es que ustedes construyan el análisis. Además, cada herramienta tiene ejemplos resueltos en su capítulo; por ejemplo, la rotación de \\(xy = 4\\) en Transformaciones geométricas y el método de operar, graficar y comprobar en Geometría analítica en el espacio.\n¿Podemos usar inteligencia artificial? Sí, como apoyo para entender errores o ideas, pero deben entender y poder explicar cada línea de su código en la presentación. Indiquen en las referencias si la usaron y para qué.\n¿Qué hacemos si quarto render falla? Lean el último mensaje de error y busquen la solución en Configuraciones para usar Quarto con Python. Si aparece ModuleNotFoundError, revisen QUARTO_PYTHON.\n¿Cómo trabajamos varias personas sin romper el código? Antes de empezar a trabajar, hagan git pull; al terminar, git add, git commit y git push. Si es posible, cada integrante trabaja en una página distinta.",
     "crumbs": [
       "**Sección 7** - Introducción a Python",
       "<span class='chapter-number'>72</span>  <span class='chapter-title'>**🧩 Proyecto integrador: atlas de cónicas rotadas**</span>"
@@ -5280,8 +5269,8 @@
     "objectID": "python_proyecto_integrador.html#referencias",
     "href": "python_proyecto_integrador.html#referencias",
     "title": "72  🧩 Proyecto integrador: atlas de cónicas rotadas",
-    "section": "72.14 Referencias",
-    "text": "72.14 Referencias\n\nHoja de ejercicios Curvas y Lugares Geométricos, Geometría Analítica, semestre 2027-1.\nSymPy: resolución de ecuaciones y simplificación\nQuarto: crear un sitio web\nQuarto: publicar en GitHub Pages\nWikipedia: sección cónica",
+    "section": "72.13 Referencias",
+    "text": "72.13 Referencias\n\nHoja de ejercicios Curvas y Lugares Geométricos, Geometría Analítica, semestre 2027-1.\nSymPy: resolución de ecuaciones y simplificación\nQuarto: crear un sitio web\nQuarto: publicar en GitHub Pages\nWikipedia: sección cónica",
     "crumbs": [
       "**Sección 7** - Introducción a Python",
       "<span class='chapter-number'>72</span>  <span class='chapter-title'>**🧩 Proyecto integrador: atlas de cónicas rotadas**</span>"
