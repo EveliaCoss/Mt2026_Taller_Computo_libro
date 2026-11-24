@@ -23,6 +23,17 @@ if (length(venv_python) > 0) {
 >
 > **Invitado:** Dr. José Crispin Ruiz Pantaleon (JCRP)
 
+::: {.callout-note icon="false"}
+## 📓 Notebook de la clase
+
+En la clase del **Dr. José Crispin Ruiz Pantaleon** se siguió el notebook **S3_1_SymPy.ipynb**: símbolos y expresiones, la función `sympify`, cómo evaluar, derivar e integrar funciones de variable real, y el **método de Newton-Raphson** con su gráfica y criterio de paro.
+
+[![Abrir en Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/EveliaCoss/Mt2026_Taller_Computo_libro/blob/main/notebooks/S3_1_SymPy.ipynb)
+
+- [**Ver el notebook en GitHub**](https://github.com/EveliaCoss/Mt2026_Taller_Computo_libro/blob/main/notebooks/S3_1_SymPy.ipynb)
+- [**📥 Descargar S3_1_SymPy.ipynb**](notebooks/S3_1_SymPy.ipynb){download="S3_1_SymPy.ipynb"}
+:::
+
 [SymPy](https://www.sympy.org/) es una biblioteca de Python para hacer **matemáticas simbólicas**: manipula expresiones con variables como lo haríamos con lápiz y papel, y obtiene resultados **exactos** en lugar de aproximaciones decimales.
 
 En este capítulo veremos:
