@@ -4,7 +4,6 @@ project:
   resources:
     - notebooks/*.ipynb   # Notebooks de las actividades (descarga y Google Colab)
     - notebooks/*.qmd     # Archivos .qmd de las actividades (descarga para RStudio)
-    - ejemplos/proyecto-conicas-ejemplo.zip        # Proyecto integrador de ejemplo (código fuente)
     - ejemplos/proyecto-conicas-ejemplo/docs/**    # Proyecto integrador de ejemplo (sitio publicado)
 
 book:
