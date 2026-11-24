@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>64&nbsp; Visualización II: curvas, lugares geométricos y gráficas avanzadas en 2D – Taller de Cómputo</title>
+<title>67&nbsp; Visualización II: gráficas estadísticas con Seaborn y mapas de calor – Taller de Cómputo</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -69,7 +69,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
 <link href="./python_aleatorios.html" rel="next">
-<link href="./python_visualizacion.html" rel="prev">
+<link href="./python_visualizacion_plotly.html" rel="prev">
 <link href="./flyer/logo.png" rel="icon" type="image/png">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
@@ -169,7 +169,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./intro_python.html"><strong>Sección 7</strong> - Introducción a Python</a></li><li class="breadcrumb-item"><a href="./python_visualizacion2.html"><span class="chapter-number">64</span>&nbsp; <span class="chapter-title">Visualización II: curvas, lugares geométricos y gráficas avanzadas en 2D</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./intro_python.html"><strong>Sección 7</strong> - Introducción a Python</a></li><li class="breadcrumb-item"><a href="./python_visualizacion2.html"><span class="chapter-number">67</span>&nbsp; <span class="chapter-title">Visualización II: gráficas estadísticas con Seaborn y mapas de calor</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Buscar" onclick="window.quartoOpenSearch();">
@@ -679,44 +679,68 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./game10.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">62</span>&nbsp; <span class="chapter-title"><strong>🎮 AhaSlides 10 -Manos a la obra</strong></span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./python_funciones.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">62</span>&nbsp; <span class="chapter-title">Funciones en Python</span></span></a>
+ <span class="menu-text"><span class="chapter-number">63</span>&nbsp; <span class="chapter-title">Funciones en Python</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./game11.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">64</span>&nbsp; <span class="chapter-title"><strong>🎮 AhaSlides 11 -Manos a la obra</strong></span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./python_visualizacion.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">63</span>&nbsp; <span class="chapter-title">Visualización de datos con Matplotlib y Plotly</span></span></a>
+ <span class="menu-text"><span class="chapter-number">65</span>&nbsp; <span class="chapter-title">Visualización de datos con Matplotlib</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./python_visualizacion_plotly.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">66</span>&nbsp; <span class="chapter-title">Varias gráficas en una figura y gráficas interactivas con Plotly</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./python_visualizacion2.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">64</span>&nbsp; <span class="chapter-title">Visualización II: curvas, lugares geométricos y gráficas avanzadas en 2D</span></span></a>
+ <span class="menu-text"><span class="chapter-number">67</span>&nbsp; <span class="chapter-title">Visualización II: gráficas estadísticas con Seaborn y mapas de calor</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./python_aleatorios.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">65</span>&nbsp; <span class="chapter-title">Números aleatorios y aplicaciones</span></span></a>
+ <span class="menu-text"><span class="chapter-number">68</span>&nbsp; <span class="chapter-title">Números aleatorios y aplicaciones</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./python_visualizacion3d.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">66</span>&nbsp; <span class="chapter-title">Visualización III: gráficas en 3D</span></span></a>
+ <span class="menu-text"><span class="chapter-number">69</span>&nbsp; <span class="chapter-title">Visualización III: gráficas en 3D</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./python_geometria_espacio.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">70</span>&nbsp; <span class="chapter-title">Geometría analítica en el espacio con Python: rectas y planos</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./python_transformaciones.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">67</span>&nbsp; <span class="chapter-title">Transformaciones geométricas en 2D y 3D</span></span></a>
+ <span class="menu-text"><span class="chapter-number">71</span>&nbsp; <span class="chapter-title">Transformaciones geométricas en 2D y 3D</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./python_proyecto_integrador.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">68</span>&nbsp; <span class="chapter-title">🧩 Proyecto integrador: atlas de cónicas rotadas</span></span></a>
+ <span class="menu-text"><span class="chapter-number">72</span>&nbsp; <span class="chapter-title">🧩 Proyecto integrador: atlas de cónicas rotadas</span></span></a>
   </div>
 </li>
       </ul>
@@ -766,52 +790,32 @@ window.Quarto = {
     <h2 id="toc-title">Tabla de contenidos</h2>
    
   <ul>
-  <li><a href="#un-plano-cartesiano-para-geometría-analítica" id="toc-un-plano-cartesiano-para-geometría-analítica" class="nav-link active" data-scroll-target="#un-plano-cartesiano-para-geometría-analítica"><span class="header-section-number">64.1</span> Un plano cartesiano para geometría analítica</a></li>
-  <li><a href="#cuatro-formas-de-describir-una-curva" id="toc-cuatro-formas-de-describir-una-curva" class="nav-link" data-scroll-target="#cuatro-formas-de-describir-una-curva"><span class="header-section-number">64.2</span> Cuatro formas de describir una curva</a>
+  <li><a href="#seaborn-gráficas-estadísticas" id="toc-seaborn-gráficas-estadísticas" class="nav-link active" data-scroll-target="#seaborn-gráficas-estadísticas"><span class="header-section-number">67.1</span> Seaborn: gráficas estadísticas</a>
   <ul>
-  <li><a href="#curvas-implícitas-la-curva-de-nivel-cero" id="toc-curvas-implícitas-la-curva-de-nivel-cero" class="nav-link" data-scroll-target="#curvas-implícitas-la-curva-de-nivel-cero"><span class="header-section-number">64.2.1</span> Curvas implícitas: la curva de nivel cero</a></li>
-  <li><a href="#curvas-paramétricas-y-polares" id="toc-curvas-paramétricas-y-polares" class="nav-link" data-scroll-target="#curvas-paramétricas-y-polares"><span class="header-section-number">64.2.2</span> Curvas paramétricas y polares</a></li>
+  <li><a href="#distribuciones-por-grupo" id="toc-distribuciones-por-grupo" class="nav-link" data-scroll-target="#distribuciones-por-grupo"><span class="header-section-number">67.1.1</span> Distribuciones por grupo</a></li>
+  <li><a href="#matriz-de-dispersión-pairplot" id="toc-matriz-de-dispersión-pairplot" class="nav-link" data-scroll-target="#matriz-de-dispersión-pairplot"><span class="header-section-number">67.1.2</span> Matriz de dispersión: <code>pairplot()</code></a></li>
   </ul></li>
-  <li><a href="#discutir-una-curva-con-sympy-y-matplotlib" id="toc-discutir-una-curva-con-sympy-y-matplotlib" class="nav-link" data-scroll-target="#discutir-una-curva-con-sympy-y-matplotlib"><span class="header-section-number">64.3</span> Discutir una curva con SymPy y Matplotlib</a></li>
-  <li><a href="#dónde-existen-puntos-reales" id="toc-dónde-existen-puntos-reales" class="nav-link" data-scroll-target="#dónde-existen-puntos-reales"><span class="header-section-number">64.4</span> Dónde existen puntos reales</a></li>
-  <li><a href="#intersecciones-entre-curvas" id="toc-intersecciones-entre-curvas" class="nav-link" data-scroll-target="#intersecciones-entre-curvas"><span class="header-section-number">64.5</span> Intersecciones entre curvas</a></li>
-  <li><a href="#curvas-que-se-factorizan" id="toc-curvas-que-se-factorizan" class="nav-link" data-scroll-target="#curvas-que-se-factorizan"><span class="header-section-number">64.6</span> Curvas que se factorizan</a></li>
-  <li><a href="#lugares-geométricos" id="toc-lugares-geométricos" class="nav-link" data-scroll-target="#lugares-geométricos"><span class="header-section-number">64.7</span> Lugares geométricos</a>
+  <li><a href="#mapas-de-calor-en-2d" id="toc-mapas-de-calor-en-2d" class="nav-link" data-scroll-target="#mapas-de-calor-en-2d"><span class="header-section-number">67.2</span> Mapas de calor en 2D</a>
   <ul>
-  <li><a href="#ejemplo-la-mediatriz-ejercicio-5" id="toc-ejemplo-la-mediatriz-ejercicio-5" class="nav-link" data-scroll-target="#ejemplo-la-mediatriz-ejercicio-5"><span class="header-section-number">64.7.1</span> Ejemplo: la mediatriz (ejercicio 5)</a></li>
-  <li><a href="#ejemplo-la-parábola-ejercicio-6" id="toc-ejemplo-la-parábola-ejercicio-6" class="nav-link" data-scroll-target="#ejemplo-la-parábola-ejercicio-6"><span class="header-section-number">64.7.2</span> Ejemplo: la parábola (ejercicio 6)</a></li>
+  <li><a href="#matriz-de-correlación-con-seaborn" id="toc-matriz-de-correlación-con-seaborn" class="nav-link" data-scroll-target="#matriz-de-correlación-con-seaborn"><span class="header-section-number">67.2.1</span> Matriz de correlación con Seaborn</a></li>
+  <li><a href="#el-mapa-de-calor-de-un-lugar-geométrico" id="toc-el-mapa-de-calor-de-un-lugar-geométrico" class="nav-link" data-scroll-target="#el-mapa-de-calor-de-un-lugar-geométrico"><span class="header-section-number">67.2.2</span> El mapa de calor de un lugar geométrico</a></li>
   </ul></li>
-  <li><a href="#seaborn-gráficas-estadísticas" id="toc-seaborn-gráficas-estadísticas" class="nav-link" data-scroll-target="#seaborn-gráficas-estadísticas"><span class="header-section-number">64.8</span> Seaborn: gráficas estadísticas</a>
+  <li><a href="#ejercicios" id="toc-ejercicios" class="nav-link" data-scroll-target="#ejercicios"><span class="header-section-number">67.3</span> Ejercicios</a>
   <ul>
-  <li><a href="#distribuciones-por-grupo" id="toc-distribuciones-por-grupo" class="nav-link" data-scroll-target="#distribuciones-por-grupo"><span class="header-section-number">64.8.1</span> Distribuciones por grupo</a></li>
-  <li><a href="#matriz-de-dispersión-pairplot" id="toc-matriz-de-dispersión-pairplot" class="nav-link" data-scroll-target="#matriz-de-dispersión-pairplot"><span class="header-section-number">64.8.2</span> Matriz de dispersión: <code>pairplot()</code></a></li>
+  <li><a href="#ejercicio-1.-comparar-tres-grupos-con-seaborn" id="toc-ejercicio-1.-comparar-tres-grupos-con-seaborn" class="nav-link" data-scroll-target="#ejercicio-1.-comparar-tres-grupos-con-seaborn"><span class="header-section-number">67.3.1</span> Ejercicio 1. Comparar tres grupos con Seaborn</a></li>
+  <li><a href="#ejercicio-2.-un-mapa-de-calor-de-la-aritmética-modular" id="toc-ejercicio-2.-un-mapa-de-calor-de-la-aritmética-modular" class="nav-link" data-scroll-target="#ejercicio-2.-un-mapa-de-calor-de-la-aritmética-modular"><span class="header-section-number">67.3.2</span> Ejercicio 2. Un mapa de calor de la aritmética modular</a></li>
   </ul></li>
-  <li><a href="#mapas-de-calor-en-2d" id="toc-mapas-de-calor-en-2d" class="nav-link" data-scroll-target="#mapas-de-calor-en-2d"><span class="header-section-number">64.9</span> Mapas de calor en 2D</a>
-  <ul>
-  <li><a href="#matriz-de-correlación-con-seaborn" id="toc-matriz-de-correlación-con-seaborn" class="nav-link" data-scroll-target="#matriz-de-correlación-con-seaborn"><span class="header-section-number">64.9.1</span> Matriz de correlación con Seaborn</a></li>
-  <li><a href="#el-mapa-de-calor-de-un-lugar-geométrico" id="toc-el-mapa-de-calor-de-un-lugar-geométrico" class="nav-link" data-scroll-target="#el-mapa-de-calor-de-un-lugar-geométrico"><span class="header-section-number">64.9.2</span> El mapa de calor de un lugar geométrico</a></li>
-  </ul></li>
-  <li><a href="#ejercicios" id="toc-ejercicios" class="nav-link" data-scroll-target="#ejercicios"><span class="header-section-number">64.10</span> Ejercicios</a>
-  <ul>
-  <li><a href="#ejercicio-1.-discutir-xy-4-ejercicio-1c" id="toc-ejercicio-1.-discutir-xy-4-ejercicio-1c" class="nav-link" data-scroll-target="#ejercicio-1.-discutir-xy-4-ejercicio-1c"><span class="header-section-number">64.10.1</span> Ejercicio 1. Discutir <span class="math inline">\(xy = 4\)</span> (ejercicio 1c)</a></li>
-  <li><a href="#ejercicio-2.-intersección-de-una-circunferencia-y-una-recta" id="toc-ejercicio-2.-intersección-de-una-circunferencia-y-una-recta" class="nav-link" data-scroll-target="#ejercicio-2.-intersección-de-una-circunferencia-y-una-recta"><span class="header-section-number">64.10.2</span> Ejercicio 2. Intersección de una circunferencia y una recta</a></li>
-  <li><a href="#ejercicio-3.-lugar-geométrico-equidistancia-ejercicio-7" id="toc-ejercicio-3.-lugar-geométrico-equidistancia-ejercicio-7" class="nav-link" data-scroll-target="#ejercicio-3.-lugar-geométrico-equidistancia-ejercicio-7"><span class="header-section-number">64.10.3</span> Ejercicio 3. Lugar geométrico: equidistancia (ejercicio 7)</a></li>
-  <li><a href="#ejercicio-4.-lugar-geométrico-una-circunferencia-escondida-ejercicio-8" id="toc-ejercicio-4.-lugar-geométrico-una-circunferencia-escondida-ejercicio-8" class="nav-link" data-scroll-target="#ejercicio-4.-lugar-geométrico-una-circunferencia-escondida-ejercicio-8"><span class="header-section-number">64.10.4</span> Ejercicio 4. Lugar geométrico: una circunferencia escondida (ejercicio 8)</a></li>
-  <li><a href="#ejercicio-5.-la-elipse-de-los-jardineros-ejercicio-9" id="toc-ejercicio-5.-la-elipse-de-los-jardineros-ejercicio-9" class="nav-link" data-scroll-target="#ejercicio-5.-la-elipse-de-los-jardineros-ejercicio-9"><span class="header-section-number">64.10.5</span> Ejercicio 5. La elipse de los jardineros (ejercicio 9)</a></li>
-  <li><a href="#ejercicio-6.-un-mapa-de-calor-de-la-aritmética-modular" id="toc-ejercicio-6.-un-mapa-de-calor-de-la-aritmética-modular" class="nav-link" data-scroll-target="#ejercicio-6.-un-mapa-de-calor-de-la-aritmética-modular"><span class="header-section-number">64.10.6</span> Ejercicio 6. Un mapa de calor de la aritmética modular</a></li>
-  </ul></li>
-  <li><a href="#reto-final-discute-la-curva-completa" id="toc-reto-final-discute-la-curva-completa" class="nav-link" data-scroll-target="#reto-final-discute-la-curva-completa"><span class="header-section-number">64.11</span> Reto final: discute la curva completa</a></li>
-  <li><a href="#resumen" id="toc-resumen" class="nav-link" data-scroll-target="#resumen"><span class="header-section-number">64.12</span> Resumen</a></li>
-  <li><a href="#referencias" id="toc-referencias" class="nav-link" data-scroll-target="#referencias"><span class="header-section-number">64.13</span> Referencias</a></li>
+  <li><a href="#resumen" id="toc-resumen" class="nav-link" data-scroll-target="#resumen"><span class="header-section-number">67.4</span> Resumen</a></li>
+  <li><a href="#referencias" id="toc-referencias" class="nav-link" data-scroll-target="#referencias"><span class="header-section-number">67.5</span> Referencias</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./intro_python.html"><strong>Sección 7</strong> - Introducción a Python</a></li><li class="breadcrumb-item"><a href="./python_visualizacion2.html"><span class="chapter-number">64</span>&nbsp; <span class="chapter-title">Visualización II: curvas, lugares geométricos y gráficas avanzadas en 2D</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./intro_python.html"><strong>Sección 7</strong> - Introducción a Python</a></li><li class="breadcrumb-item"><a href="./python_visualizacion2.html"><span class="chapter-number">67</span>&nbsp; <span class="chapter-title">Visualización II: gráficas estadísticas con Seaborn y mapas de calor</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">64</span>&nbsp; <span class="chapter-title">Visualización II: curvas, lugares geométricos y gráficas avanzadas en 2D</span></h1>
+<h1 class="title"><span class="chapter-number">67</span>&nbsp; <span class="chapter-title">Visualización II: gráficas estadísticas con Seaborn y mapas de calor</span></h1>
 </div>
 
 
@@ -831,553 +835,22 @@ window.Quarto = {
 <blockquote class="blockquote">
 <p><strong>Fecha:</strong> 19 de noviembre, 2026</p>
 </blockquote>
-<p>En la <a href="./python_visualizacion.html">primera parte de visualización</a> aprendimos a construir gráficas con Matplotlib y Plotly. En esta segunda parte usaremos esas herramientas para <strong>estudiar curvas</strong> como en el curso de <strong>Geometría Analítica</strong>, y conoceremos <strong>Seaborn</strong>, una biblioteca para gráficas estadísticas.</p>
+<p>En <a href="./python_visualizacion.html">Visualización de datos con Matplotlib</a> aprendimos a construir gráficas y a estudiar curvas y lugares geométricos, y en <a href="./python_visualizacion_plotly.html">Varias gráficas en una figura y gráficas interactivas con Plotly</a> a reunir varias gráficas en una figura. En esta segunda parte conoceremos <strong>Seaborn</strong>, una biblioteca para gráficas estadísticas, y profundizaremos en los <strong>mapas de calor</strong> en 2D.</p>
 <p>Al terminar este capítulo podrás:</p>
 <ul>
-<li>Preparar un <strong>plano cartesiano</strong> “matemático” con Matplotlib: ejes centrados, misma escala y cuadrícula.</li>
-<li>Graficar curvas <strong>explícitas</strong>, <strong>implícitas</strong>, <strong>paramétricas</strong> y <strong>polares</strong>.</li>
-<li><strong>Discutir una curva</strong> con SymPy y visualizar sus intersecciones, simetrías, extensión y asíntotas.</li>
-<li>Obtener y graficar <strong>lugares geométricos</strong>.</li>
-<li>Crear gráficas estadísticas con <strong>Seaborn</strong> y <strong>mapas de calor</strong> en 2D.</li>
+<li>Crear gráficas estadísticas con <strong>Seaborn</strong>: histogramas con densidad, diagramas de violín y matrices de dispersión.</li>
+<li>Dibujar <strong>mapas de calor</strong> con <code>imshow()</code>, <code>pcolormesh()</code> y <code>sns.heatmap()</code>.</li>
+<li>Elegir una <strong>paleta de colores</strong> secuencial, divergente o cualitativa según los datos.</li>
 </ul>
-<p>Los ejemplos y ejercicios están basados en la hoja <strong>Ejercicios: Curvas y Lugares Geométricos</strong> de Geometría Analítica.</p>
 <div class="cell">
 <details open="" class="code-fold">
 <summary>Código</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sympy <span class="im">as</span> sp</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
-<section id="un-plano-cartesiano-para-geometría-analítica" class="level2" data-number="64.1">
-<h2 data-number="64.1" class="anchored" data-anchor-id="un-plano-cartesiano-para-geometría-analítica"><span class="header-section-number">64.1</span> Un plano cartesiano para geometría analítica</h2>
-<p>Las gráficas de Matplotlib tienen, por defecto, los ejes en los bordes y escalas distintas en <span class="math inline">\(x\)</span> y en <span class="math inline">\(y\)</span>: una circunferencia se vería como una elipse. Para geometría analítica conviene <strong>centrar los ejes</strong> en el origen y usar la <strong>misma escala</strong>. Como lo haremos muchas veces, escribimos una <strong>función</strong> (capítulo de <a href="./python_funciones.html">funciones</a>):</p>
-<div class="cell">
-<details open="" class="code-fold">
-<summary>Código</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> plano_cartesiano(ax, limite<span class="op">=</span><span class="dv">5</span>):</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Configura ax como un plano cartesiano: ejes en el origen, misma escala y cuadrícula."""</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    ax.spines[<span class="st">"left"</span>].set_position(<span class="st">"zero"</span>)      <span class="co"># Eje y en x = 0</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    ax.spines[<span class="st">"bottom"</span>].set_position(<span class="st">"zero"</span>)    <span class="co"># Eje x en y = 0</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    ax.spines[<span class="st">"right"</span>].set_visible(<span class="va">False</span>)</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    ax.spines[<span class="st">"top"</span>].set_visible(<span class="va">False</span>)</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    ax.set_xlim(<span class="op">-</span>limite, limite)</span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    ax.set_ylim(<span class="op">-</span>limite, limite)</span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    ax.set_aspect(<span class="st">"equal"</span>)                      <span class="co"># Misma escala en ambos ejes</span></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    ax.grid(<span class="va">True</span>, alpha<span class="op">=</span><span class="fl">0.3</span>)</span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> ax</span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">5</span>, <span class="dv">5</span>))</span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>plano_cartesiano(ax)</span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>ax.set_title(<span class="st">"Plano cartesiano"</span>)</span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="python_visualizacion2_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="480"></p>
-</figure>
-</div>
-</div>
-</div>
-<table class="caption-top table">
-<colgroup>
-<col style="width: 50%">
-<col style="width: 50%">
-</colgroup>
-<thead>
-<tr class="header">
-<th>Instrucción</th>
-<th>¿Qué hace?</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code>ax.spines["left"].set_position("zero")</code></td>
-<td>Mueve el eje vertical a <span class="math inline">\(x = 0\)</span>.</td>
-</tr>
-<tr class="even">
-<td><code>ax.spines["bottom"].set_position("zero")</code></td>
-<td>Mueve el eje horizontal a <span class="math inline">\(y = 0\)</span>.</td>
-</tr>
-<tr class="odd">
-<td><code>ax.spines["right"].set_visible(False)</code></td>
-<td>Oculta el borde derecho (y lo mismo con <code>"top"</code>).</td>
-</tr>
-<tr class="even">
-<td><code>ax.set_aspect("equal")</code></td>
-<td>Una unidad mide lo mismo en ambos ejes.</td>
-</tr>
-</tbody>
-</table>
-</section>
-<section id="cuatro-formas-de-describir-una-curva" class="level2" data-number="64.2">
-<h2 data-number="64.2" class="anchored" data-anchor-id="cuatro-formas-de-describir-una-curva"><span class="header-section-number">64.2</span> Cuatro formas de describir una curva</h2>
-<table class="caption-top table">
-<colgroup>
-<col style="width: 33%">
-<col style="width: 33%">
-<col style="width: 33%">
-</colgroup>
-<thead>
-<tr class="header">
-<th>Forma</th>
-<th>Ejemplo (circunferencia de radio 3)</th>
-<th>¿Cómo se grafica?</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><strong>Explícita</strong> <span class="math inline">\(y = f(x)\)</span></td>
-<td><span class="math inline">\(y = \pm\sqrt{9 - x^2}\)</span> (dos funciones)</td>
-<td><code>ax.plot(x, f(x))</code></td>
-</tr>
-<tr class="even">
-<td><strong>Implícita</strong> <span class="math inline">\(F(x, y) = 0\)</span></td>
-<td><span class="math inline">\(x^2 + y^2 - 9 = 0\)</span></td>
-<td><code>ax.contour(X, Y, F, levels=[0])</code></td>
-</tr>
-<tr class="odd">
-<td><strong>Paramétrica</strong> <span class="math inline">\((x(t), y(t))\)</span></td>
-<td><span class="math inline">\(x = 3\cos t,\ y = 3\sin t\)</span></td>
-<td><code>ax.plot(x(t), y(t))</code></td>
-</tr>
-<tr class="even">
-<td><strong>Polar</strong> <span class="math inline">\(r = r(\theta)\)</span></td>
-<td><span class="math inline">\(r = 3\)</span></td>
-<td><code>x = r cos θ</code>, <code>y = r sin θ</code></td>
-</tr>
-</tbody>
-</table>
-<section id="curvas-implícitas-la-curva-de-nivel-cero" class="level3" data-number="64.2.1">
-<h3 data-number="64.2.1" class="anchored" data-anchor-id="curvas-implícitas-la-curva-de-nivel-cero"><span class="header-section-number">64.2.1</span> Curvas implícitas: la curva de nivel cero</h3>
-<p>Muchas curvas de geometría analítica están dadas en forma <strong>implícita</strong>, como <span class="math inline">\(x^2 + y^2 = 9\)</span> o <span class="math inline">\(xy = 4\)</span>, y no siempre es fácil despejar <span class="math inline">\(y\)</span>. El truco es graficar la <strong>curva de nivel 0</strong> de <span class="math inline">\(F(x, y)\)</span>, con <code>contour()</code> (lo vimos en <a href="./python_visualizacion.html#funciones-de-dos-variables">funciones de dos variables</a>):</p>
-<div class="cell">
-<details open="" class="code-fold">
-<summary>Código</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.linspace(<span class="op">-</span><span class="dv">5</span>, <span class="dv">5</span>, <span class="dv">400</span>)</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> np.linspace(<span class="op">-</span><span class="dv">5</span>, <span class="dv">5</span>, <span class="dv">400</span>)</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>X, Y <span class="op">=</span> np.meshgrid(x, y)</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">5</span>, <span class="dv">5</span>))</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>plano_cartesiano(ax)</span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>ax.contour(X, Y, X<span class="op">**</span><span class="dv">2</span> <span class="op">+</span> Y<span class="op">**</span><span class="dv">2</span> <span class="op">-</span> <span class="dv">9</span>, levels<span class="op">=</span>[<span class="dv">0</span>], colors<span class="op">=</span><span class="st">"tab:blue"</span>)    <span class="co"># x² + y² = 9</span></span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>ax.contour(X, Y, X <span class="op">*</span> Y <span class="op">-</span> <span class="dv">4</span>, levels<span class="op">=</span>[<span class="dv">0</span>], colors<span class="op">=</span><span class="st">"tab:red"</span>)           <span class="co"># xy = 4</span></span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>ax.set_title(<span class="st">"$x^2 + y^2 = 9$ (azul) y $xy = 4$ (rojo)"</span>)</span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="python_visualizacion2_files/figure-html/unnamed-chunk-5-3.png" class="img-fluid figure-img" width="480"></p>
-</figure>
-</div>
-</div>
-</div>
-<p><code>levels=[0]</code> dibuja <strong>solo</strong> los puntos donde <span class="math inline">\(F(x, y) = 0\)</span>, es decir, la curva.</p>
-</section>
-<section id="curvas-paramétricas-y-polares" class="level3" data-number="64.2.2">
-<h3 data-number="64.2.2" class="anchored" data-anchor-id="curvas-paramétricas-y-polares"><span class="header-section-number">64.2.2</span> Curvas paramétricas y polares</h3>
-<div class="cell">
-<details open="" class="code-fold">
-<summary>Código</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>t <span class="op">=</span> np.linspace(<span class="dv">0</span>, <span class="dv">2</span> <span class="op">*</span> np.pi, <span class="dv">400</span>)</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>fig, axs <span class="op">=</span> plt.subplots(<span class="dv">1</span>, <span class="dv">2</span>, figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">5</span>))</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Paramétrica: una elipse x = 4 cos t, y = 2 sin t</span></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>plano_cartesiano(axs[<span class="dv">0</span>])</span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>axs[<span class="dv">0</span>].plot(<span class="dv">4</span> <span class="op">*</span> np.cos(t), <span class="dv">2</span> <span class="op">*</span> np.sin(t))</span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>axs[<span class="dv">0</span>].set_title(<span class="st">"Paramétrica: $x = 4</span><span class="ch">\\</span><span class="st">cos t$, $y = 2</span><span class="ch">\\</span><span class="st">sin t$"</span>)</span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Polar: una rosa de 4 pétalos r = 4 cos(2θ)</span></span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>r <span class="op">=</span> <span class="dv">4</span> <span class="op">*</span> np.cos(<span class="dv">2</span> <span class="op">*</span> t)</span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>plano_cartesiano(axs[<span class="dv">1</span>])</span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>axs[<span class="dv">1</span>].plot(r <span class="op">*</span> np.cos(t), r <span class="op">*</span> np.sin(t), color<span class="op">=</span><span class="st">"tab:purple"</span>)</span>
-<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>axs[<span class="dv">1</span>].set_title(<span class="st">"Polar: $r = 4</span><span class="ch">\\</span><span class="st">cos(2</span><span class="ch">\\</span><span class="st">theta)$"</span>)</span>
-<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="python_visualizacion2_files/figure-html/unnamed-chunk-6-5.png" class="img-fluid figure-img" width="960"></p>
-</figure>
-</div>
-</div>
-</div>
-</section>
-</section>
-<section id="discutir-una-curva-con-sympy-y-matplotlib" class="level2" data-number="64.3">
-<h2 data-number="64.3" class="anchored" data-anchor-id="discutir-una-curva-con-sympy-y-matplotlib"><span class="header-section-number">64.3</span> Discutir una curva con SymPy y Matplotlib</h2>
-<p><strong>Discutir</strong> una curva es analizar sus intersecciones con los ejes, simetrías, extensión y asíntotas <strong>antes</strong> de bosquejarla. SymPy hace los cálculos y Matplotlib la gráfica. Tomemos el ejercicio 1a) de la hoja: <span class="math inline">\(xy - x - 2y = 0\)</span>.</p>
-<div class="cell">
-<details open="" class="code-fold">
-<summary>Código</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>x, y <span class="op">=</span> sp.symbols(<span class="st">"x y"</span>, real<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>F <span class="op">=</span> x<span class="op">*</span>y <span class="op">-</span> x <span class="op">-</span> <span class="dv">2</span><span class="op">*</span>y</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
-</div>
-<p><strong>1. Intersecciones con los ejes.</strong> Con el eje <span class="math inline">\(x\)</span> (<span class="math inline">\(y = 0\)</span>) y con el eje <span class="math inline">\(y\)</span> (<span class="math inline">\(x = 0\)</span>):</p>
-<div class="cell">
-<details open="" class="code-fold">
-<summary>Código</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Con el eje x:"</span>, sp.solve(F.subs(y, <span class="dv">0</span>), x))</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
-<div class="cell-output cell-output-stdout">
-<pre><code>Con el eje x: [0]</code></pre>
-</div>
-<details open="" class="code-fold">
-<summary>Código</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Con el eje y:"</span>, sp.solve(F.subs(x, <span class="dv">0</span>), y))</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
-<div class="cell-output cell-output-stdout">
-<pre><code>Con el eje y: [0]</code></pre>
-</div>
-</div>
-<p>La curva pasa por el <strong>origen</strong>.</p>
-<p><strong>2. Simetrías.</strong> Una curva <span class="math inline">\(F(x, y) = 0\)</span> es simétrica respecto al eje <span class="math inline">\(x\)</span> si al cambiar <span class="math inline">\(y\)</span> por <span class="math inline">\(-y\)</span> la ecuación no cambia; respecto al eje <span class="math inline">\(y\)</span> si al cambiar <span class="math inline">\(x\)</span> por <span class="math inline">\(-x\)</span> no cambia; y respecto al origen si al cambiar ambos no cambia:</p>
-<div class="cell">
-<details open="" class="code-fold">
-<summary>Código</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> es_simetrica(F, sustitucion):</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Regresa True si F no cambia al aplicar la sustitución."""</span></span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> sp.expand(F.subs(sustitucion, simultaneous<span class="op">=</span><span class="va">True</span>) <span class="op">-</span> F) <span class="op">==</span> <span class="dv">0</span></span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Eje x:  "</span>, es_simetrica(F, {y: <span class="op">-</span>y}))</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
-<div class="cell-output cell-output-stdout">
-<pre><code>Eje x:   False</code></pre>
-</div>
-<details open="" class="code-fold">
-<summary>Código</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Eje y:  "</span>, es_simetrica(F, {x: <span class="op">-</span>x}))</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
-<div class="cell-output cell-output-stdout">
-<pre><code>Eje y:   False</code></pre>
-</div>
-<details open="" class="code-fold">
-<summary>Código</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Origen: "</span>, es_simetrica(F, {x: <span class="op">-</span>x, y: <span class="op">-</span>y}))</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
-<div class="cell-output cell-output-stdout">
-<pre><code>Origen:  False</code></pre>
-</div>
-</div>
-<p>No es simétrica respecto a los ejes ni al origen.</p>
-<p><strong>3. Extensión y asíntotas.</strong> Despejamos <span class="math inline">\(y\)</span>:</p>
-<div class="cell">
-<details open="" class="code-fold">
-<summary>Código</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>y_despejada <span class="op">=</span> sp.solve(F, y)[<span class="dv">0</span>]</span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"y ="</span>, y_despejada)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
-<div class="cell-output cell-output-stdout">
-<pre><code>y = x/(x - 2)</code></pre>
-</div>
-<details open="" class="code-fold">
-<summary>Código</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Límite cuando x → ∞:"</span>, sp.limit(y_despejada, x, sp.oo))</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
-<div class="cell-output cell-output-stdout">
-<pre><code>Límite cuando x → ∞: 1</code></pre>
-</div>
-<details open="" class="code-fold">
-<summary>Código</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Límite cuando x → 2⁺:"</span>, sp.limit(y_despejada, x, <span class="dv">2</span>, <span class="st">"+"</span>))</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
-<div class="cell-output cell-output-stdout">
-<pre><code>Límite cuando x → 2⁺: oo</code></pre>
-</div>
-</div>
-<p>Como <span class="math inline">\(y = \frac{x}{x - 2}\)</span>, la curva no está definida en <span class="math inline">\(x = 2\)</span> (<strong>asíntota vertical</strong>), y <span class="math inline">\(y \to 1\)</span> cuando <span class="math inline">\(x \to \pm\infty\)</span> (<strong>asíntota horizontal</strong> <span class="math inline">\(y = 1\)</span>). Por eso la extensión es <span class="math inline">\(x \neq 2\)</span>, <span class="math inline">\(y \neq 1\)</span>.</p>
-<p><strong>4. La gráfica.</strong> Reunimos todo: la curva, sus asíntotas punteadas y el punto de corte con los ejes:</p>
-<div class="cell">
-<details open="" class="code-fold">
-<summary>Código</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">6</span>, <span class="dv">6</span>))</span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>plano_cartesiano(ax, limite<span class="op">=</span><span class="dv">6</span>)</span>
-<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>xs <span class="op">=</span> np.linspace(<span class="op">-</span><span class="dv">6</span>, <span class="dv">6</span>, <span class="dv">1001</span>)          <span class="co"># 1001 puntos: así x = 2 no está en la malla</span></span>
-<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>ys <span class="op">=</span> xs <span class="op">/</span> (xs <span class="op">-</span> <span class="dv">2</span>)</span>
-<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>ys[np.<span class="bu">abs</span>(xs <span class="op">-</span> <span class="dv">2</span>) <span class="op">&lt;</span> <span class="fl">0.02</span>] <span class="op">=</span> np.nan        <span class="co"># Evita una línea falsa que una las dos ramas</span></span>
-<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>ax.plot(xs, ys, color<span class="op">=</span><span class="st">"tab:blue"</span>, label<span class="op">=</span><span class="st">"$xy - x - 2y = 0$"</span>)</span>
-<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>ax.axvline(<span class="dv">2</span>, color<span class="op">=</span><span class="st">"gray"</span>, linestyle<span class="op">=</span><span class="st">"--"</span>, label<span class="op">=</span><span class="st">"Asíntota $x = 2$"</span>)</span>
-<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a>ax.axhline(<span class="dv">1</span>, color<span class="op">=</span><span class="st">"gray"</span>, linestyle<span class="op">=</span><span class="st">":"</span>, label<span class="op">=</span><span class="st">"Asíntota $y = 1$"</span>)</span>
-<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a>ax.scatter([<span class="dv">0</span>], [<span class="dv">0</span>], color<span class="op">=</span><span class="st">"black"</span>, zorder<span class="op">=</span><span class="dv">3</span>, label<span class="op">=</span><span class="st">"Corte con los ejes $(0, 0)$"</span>)</span>
-<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a>ax.legend(loc<span class="op">=</span><span class="st">"lower left"</span>, fontsize<span class="op">=</span><span class="dv">8</span>)</span>
-<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="python_visualizacion2_files/figure-html/unnamed-chunk-11-7.png" class="img-fluid figure-img" width="576"></p>
-</figure>
-</div>
-</div>
-</div>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Tip
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Cerca de una asíntota vertical, <code>plt.plot()</code> une el último punto de una rama con el primero de la otra y dibuja una línea vertical <strong>falsa</strong>. Cambiar esos valores por <code>np.nan</code> (“no es un número”) corta la línea.</p>
-</div>
-</div>
-</section>
-<section id="dónde-existen-puntos-reales" class="level2" data-number="64.4">
-<h2 data-number="64.4" class="anchored" data-anchor-id="dónde-existen-puntos-reales"><span class="header-section-number">64.4</span> Dónde existen puntos reales</h2>
-<p>En <span class="math inline">\(y^2 = x - 1\)</span> (ejercicio 2a), <span class="math inline">\(y\)</span> solo es real cuando <span class="math inline">\(x - 1 \geq 0\)</span>. SymPy encuentra ese conjunto con <code>solveset()</code>, y podemos <strong>sombrear</strong> en la gráfica la región donde existe la curva:</p>
-<div class="cell">
-<details open="" class="code-fold">
-<summary>Código</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> sp.symbols(<span class="st">"x"</span>, real<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"2a) y² = x - 1:     "</span>, sp.solveset(x <span class="op">-</span> <span class="dv">1</span> <span class="op">&gt;=</span> <span class="dv">0</span>, x, sp.S.Reals))</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
-<div class="cell-output cell-output-stdout">
-<pre><code>2a) y² = x - 1:      Interval(1, oo)</code></pre>
-</div>
-<details open="" class="code-fold">
-<summary>Código</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"2b) y² = x(x - 2):  "</span>, sp.solveset(x <span class="op">*</span> (x <span class="op">-</span> <span class="dv">2</span>) <span class="op">&gt;=</span> <span class="dv">0</span>, x, sp.S.Reals))</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
-<div class="cell-output cell-output-stdout">
-<pre><code>2b) y² = x(x - 2):   Union(Interval(-oo, 0), Interval(2, oo))</code></pre>
-</div>
-</div>
-<div class="cell">
-<details open="" class="code-fold">
-<summary>Código</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>X, Y <span class="op">=</span> np.meshgrid(np.linspace(<span class="op">-</span><span class="dv">4</span>, <span class="dv">6</span>, <span class="dv">400</span>), np.linspace(<span class="op">-</span><span class="dv">5</span>, <span class="dv">5</span>, <span class="dv">400</span>))</span>
-<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>fig, axs <span class="op">=</span> plt.subplots(<span class="dv">1</span>, <span class="dv">2</span>, figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">5</span>))</span>
-<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>plano_cartesiano(axs[<span class="dv">0</span>])</span>
-<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>axs[<span class="dv">0</span>].axvspan(<span class="dv">1</span>, <span class="dv">5</span>, color<span class="op">=</span><span class="st">"tab:green"</span>, alpha<span class="op">=</span><span class="fl">0.15</span>, label<span class="op">=</span><span class="st">"$x </span><span class="ch">\\</span><span class="st">geq 1$"</span>)</span>
-<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>axs[<span class="dv">0</span>].contour(X, Y, Y<span class="op">**</span><span class="dv">2</span> <span class="op">-</span> (X <span class="op">-</span> <span class="dv">1</span>), levels<span class="op">=</span>[<span class="dv">0</span>], colors<span class="op">=</span><span class="st">"tab:green"</span>)</span>
-<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a>axs[<span class="dv">0</span>].set_title(<span class="st">"2a) $y^2 = x - 1$"</span>)</span>
-<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a>axs[<span class="dv">0</span>].legend(loc<span class="op">=</span><span class="st">"lower left"</span>)</span>
-<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a>plano_cartesiano(axs[<span class="dv">1</span>])</span>
-<span id="cb27-12"><a href="#cb27-12" aria-hidden="true" tabindex="-1"></a>axs[<span class="dv">1</span>].axvspan(<span class="op">-</span><span class="dv">5</span>, <span class="dv">0</span>, color<span class="op">=</span><span class="st">"tab:orange"</span>, alpha<span class="op">=</span><span class="fl">0.15</span>, label<span class="op">=</span><span class="st">"$x </span><span class="ch">\\</span><span class="st">leq 0$ o $x </span><span class="ch">\\</span><span class="st">geq 2$"</span>)</span>
-<span id="cb27-13"><a href="#cb27-13" aria-hidden="true" tabindex="-1"></a>axs[<span class="dv">1</span>].axvspan(<span class="dv">2</span>, <span class="dv">5</span>, color<span class="op">=</span><span class="st">"tab:orange"</span>, alpha<span class="op">=</span><span class="fl">0.15</span>)</span>
-<span id="cb27-14"><a href="#cb27-14" aria-hidden="true" tabindex="-1"></a>axs[<span class="dv">1</span>].contour(X, Y, Y<span class="op">**</span><span class="dv">2</span> <span class="op">-</span> X <span class="op">*</span> (X <span class="op">-</span> <span class="dv">2</span>), levels<span class="op">=</span>[<span class="dv">0</span>], colors<span class="op">=</span><span class="st">"tab:orange"</span>)</span>
-<span id="cb27-15"><a href="#cb27-15" aria-hidden="true" tabindex="-1"></a>axs[<span class="dv">1</span>].set_title(<span class="st">"2b) $y^2 = x(x - 2)$"</span>)</span>
-<span id="cb27-16"><a href="#cb27-16" aria-hidden="true" tabindex="-1"></a>axs[<span class="dv">1</span>].legend(loc<span class="op">=</span><span class="st">"lower left"</span>)</span>
-<span id="cb27-17"><a href="#cb27-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-18"><a href="#cb27-18" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="python_visualizacion2_files/figure-html/unnamed-chunk-13-9.png" class="img-fluid figure-img" width="960"></p>
-</figure>
-</div>
-</div>
-</div>
-<p><code>ax.axvspan(a, b)</code> sombrea la franja vertical entre <span class="math inline">\(x = a\)</span> y <span class="math inline">\(x = b\)</span>.</p>
-</section>
-<section id="intersecciones-entre-curvas" class="level2" data-number="64.5">
-<h2 data-number="64.5" class="anchored" data-anchor-id="intersecciones-entre-curvas"><span class="header-section-number">64.5</span> Intersecciones entre curvas</h2>
-<p>Para el ejercicio 3a), las intersecciones de <span class="math inline">\(x^2 + y^2 = 5\)</span> y <span class="math inline">\(y = x + 1\)</span> son las soluciones del <strong>sistema</strong>:</p>
-<div class="cell">
-<details open="" class="code-fold">
-<summary>Código</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>x, y <span class="op">=</span> sp.symbols(<span class="st">"x y"</span>, real<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>puntos <span class="op">=</span> sp.solve([x<span class="op">**</span><span class="dv">2</span> <span class="op">+</span> y<span class="op">**</span><span class="dv">2</span> <span class="op">-</span> <span class="dv">5</span>, y <span class="op">-</span> (x <span class="op">+</span> <span class="dv">1</span>)], [x, y])</span>
-<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Intersecciones:"</span>, puntos)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
-<div class="cell-output cell-output-stdout">
-<pre><code>Intersecciones: [(-2, -1), (1, 2)]</code></pre>
-</div>
-<details open="" class="code-fold">
-<summary>Código</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>X, Y <span class="op">=</span> np.meshgrid(np.linspace(<span class="op">-</span><span class="dv">4</span>, <span class="dv">4</span>, <span class="dv">400</span>), np.linspace(<span class="op">-</span><span class="dv">4</span>, <span class="dv">4</span>, <span class="dv">400</span>))</span>
-<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">5</span>, <span class="dv">5</span>))</span>
-<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>plano_cartesiano(ax, limite<span class="op">=</span><span class="dv">4</span>)</span>
-<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>ax.contour(X, Y, X<span class="op">**</span><span class="dv">2</span> <span class="op">+</span> Y<span class="op">**</span><span class="dv">2</span> <span class="op">-</span> <span class="dv">5</span>, levels<span class="op">=</span>[<span class="dv">0</span>], colors<span class="op">=</span><span class="st">"tab:blue"</span>)</span>
-<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>xs <span class="op">=</span> np.linspace(<span class="op">-</span><span class="dv">4</span>, <span class="dv">4</span>, <span class="dv">100</span>)</span>
-<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a>ax.plot(xs, xs <span class="op">+</span> <span class="dv">1</span>, color<span class="op">=</span><span class="st">"tab:red"</span>)</span>
-<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> px_, py_ <span class="kw">in</span> puntos:</span>
-<span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a>    ax.scatter(<span class="bu">float</span>(px_), <span class="bu">float</span>(py_), color<span class="op">=</span><span class="st">"black"</span>, zorder<span class="op">=</span><span class="dv">3</span>)</span>
-<span id="cb30-9"><a href="#cb30-9" aria-hidden="true" tabindex="-1"></a>    ax.annotate(<span class="ss">f"(</span><span class="sc">{</span>px_<span class="sc">}</span><span class="ss">, </span><span class="sc">{</span>py_<span class="sc">}</span><span class="ss">)"</span>, (<span class="bu">float</span>(px_), <span class="bu">float</span>(py_)), xytext<span class="op">=</span>(<span class="dv">8</span>, <span class="op">-</span><span class="dv">12</span>), textcoords<span class="op">=</span><span class="st">"offset points"</span>)</span>
-<span id="cb30-10"><a href="#cb30-10" aria-hidden="true" tabindex="-1"></a>ax.set_title(<span class="st">"$x^2 + y^2 = 5$ y $y = x + 1$"</span>)</span>
-<span id="cb30-11"><a href="#cb30-11" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="python_visualizacion2_files/figure-html/unnamed-chunk-14-11.png" class="img-fluid figure-img" width="480"></p>
-</figure>
-</div>
-</div>
-</div>
-<p>En el ejercicio 3b), <code>sp.solve([x**2 + y**2 - 1, y - 2], [x, y])</code> regresa <code>[]</code>: la recta <span class="math inline">\(y = 2\)</span> queda <strong>fuera</strong> de la circunferencia de radio 1 y no hay intersección.</p>
-</section>
-<section id="curvas-que-se-factorizan" class="level2" data-number="64.6">
-<h2 data-number="64.6" class="anchored" data-anchor-id="curvas-que-se-factorizan"><span class="header-section-number">64.6</span> Curvas que se factorizan</h2>
-<p>Si una ecuación se puede <strong>factorizar</strong>, su gráfica es la <strong>unión</strong> de las gráficas de cada factor, porque un producto es cero cuando alguno de sus factores es cero. Para el ejercicio 4a):</p>
-<div class="cell">
-<details open="" class="code-fold">
-<summary>Código</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(sp.factor(x<span class="op">**</span><span class="dv">2</span> <span class="op">+</span> x<span class="op">*</span>y <span class="op">-</span> <span class="dv">2</span><span class="op">*</span>y<span class="op">**</span><span class="dv">2</span>))</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
-<div class="cell-output cell-output-stdout">
-<pre><code>(x - y)*(x + 2*y)</code></pre>
-</div>
-</div>
-<p><span class="math inline">\(x^2 + xy - 2y^2 = (x - y)(x + 2y) = 0\)</span> es la unión de las rectas <span class="math inline">\(y = x\)</span> y <span class="math inline">\(y = -\frac{x}{2}\)</span>. Para el ejercicio 4b), <span class="math inline">\((x^2 + y^2 - 4)(y - x) = 0\)</span> es la unión de una circunferencia de radio 2 y la recta <span class="math inline">\(y = x\)</span>:</p>
-<div class="cell">
-<details open="" class="code-fold">
-<summary>Código</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>X, Y <span class="op">=</span> np.meshgrid(np.linspace(<span class="op">-</span><span class="dv">4</span>, <span class="dv">4</span>, <span class="dv">400</span>), np.linspace(<span class="op">-</span><span class="dv">4</span>, <span class="dv">4</span>, <span class="dv">400</span>))</span>
-<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>fig, axs <span class="op">=</span> plt.subplots(<span class="dv">1</span>, <span class="dv">2</span>, figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">5</span>))</span>
-<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>plano_cartesiano(axs[<span class="dv">0</span>], limite<span class="op">=</span><span class="dv">4</span>)</span>
-<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>axs[<span class="dv">0</span>].contour(X, Y, X<span class="op">**</span><span class="dv">2</span> <span class="op">+</span> X <span class="op">*</span> Y <span class="op">-</span> <span class="dv">2</span> <span class="op">*</span> Y<span class="op">**</span><span class="dv">2</span>, levels<span class="op">=</span>[<span class="dv">0</span>], colors<span class="op">=</span><span class="st">"tab:blue"</span>)</span>
-<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a>axs[<span class="dv">0</span>].set_title(<span class="st">"4a) $x^2 + xy - 2y^2 = 0$"</span>)</span>
-<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a>plano_cartesiano(axs[<span class="dv">1</span>], limite<span class="op">=</span><span class="dv">4</span>)</span>
-<span id="cb33-9"><a href="#cb33-9" aria-hidden="true" tabindex="-1"></a>axs[<span class="dv">1</span>].contour(X, Y, (X<span class="op">**</span><span class="dv">2</span> <span class="op">+</span> Y<span class="op">**</span><span class="dv">2</span> <span class="op">-</span> <span class="dv">4</span>) <span class="op">*</span> (Y <span class="op">-</span> X), levels<span class="op">=</span>[<span class="dv">0</span>], colors<span class="op">=</span><span class="st">"tab:purple"</span>)</span>
-<span id="cb33-10"><a href="#cb33-10" aria-hidden="true" tabindex="-1"></a>axs[<span class="dv">1</span>].set_title(<span class="st">"4b) $(x^2 + y^2 - 4)(y - x) = 0$"</span>)</span>
-<span id="cb33-11"><a href="#cb33-11" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="python_visualizacion2_files/figure-html/unnamed-chunk-16-13.png" class="img-fluid figure-img" width="960"></p>
-</figure>
-</div>
-</div>
-</div>
-<p>¡No necesitamos factorizar para graficar! <code>contour()</code> con <code>levels=[0]</code> dibuja directamente la unión de las curvas.</p>
-</section>
-<section id="lugares-geométricos" class="level2" data-number="64.7">
-<h2 data-number="64.7" class="anchored" data-anchor-id="lugares-geométricos"><span class="header-section-number">64.7</span> Lugares geométricos</h2>
-<p>Un <strong>lugar geométrico</strong> es el conjunto de <strong>todos</strong> los puntos <span class="math inline">\(P(x, y)\)</span> que cumplen una condición. El método siempre es el mismo:</p>
-<ol type="1">
-<li>Escribir la condición con la <strong>fórmula de la distancia</strong>: <span class="math inline">\(d(P, A) = \sqrt{(x - x_A)^2 + (y - y_A)^2}\)</span>.</li>
-<li><strong>Simplificar</strong> con SymPy hasta obtener una ecuación en <span class="math inline">\(x\)</span> y <span class="math inline">\(y\)</span>.</li>
-<li><strong>Graficar</strong> la ecuación junto con los puntos de la condición, para interpretarla.</li>
-</ol>
-<p>Para no repetir la fórmula, la guardamos en una función. Usamos el <strong>cuadrado</strong> de la distancia, que no tiene raíz y es más fácil de simplificar:</p>
-<div class="cell">
-<details open="" class="code-fold">
-<summary>Código</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> distancia2(P, Q):</span>
-<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Regresa el cuadrado de la distancia entre los puntos P y Q."""</span></span>
-<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> (P[<span class="dv">0</span>] <span class="op">-</span> Q[<span class="dv">0</span>])<span class="op">**</span><span class="dv">2</span> <span class="op">+</span> (P[<span class="dv">1</span>] <span class="op">-</span> Q[<span class="dv">1</span>])<span class="op">**</span><span class="dv">2</span></span>
-<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a>x, y <span class="op">=</span> sp.symbols(<span class="st">"x y"</span>, real<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a>P <span class="op">=</span> (x, y)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
-</div>
-<section id="ejemplo-la-mediatriz-ejercicio-5" class="level3" data-number="64.7.1">
-<h3 data-number="64.7.1" class="anchored" data-anchor-id="ejemplo-la-mediatriz-ejercicio-5"><span class="header-section-number">64.7.1</span> Ejemplo: la mediatriz (ejercicio 5)</h3>
-<p>Los puntos que <strong>equidistan</strong> de <span class="math inline">\(A = (-2, 1)\)</span> y <span class="math inline">\(B = (4, 3)\)</span> cumplen <span class="math inline">\(d(P, A)^2 = d(P, B)^2\)</span>:</p>
-<div class="cell">
-<details open="" class="code-fold">
-<summary>Código</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>A, B <span class="op">=</span> (<span class="op">-</span><span class="dv">2</span>, <span class="dv">1</span>), (<span class="dv">4</span>, <span class="dv">3</span>)</span>
-<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>ecuacion <span class="op">=</span> sp.expand(distancia2(P, A) <span class="op">-</span> distancia2(P, B))</span>
-<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(ecuacion, <span class="st">"= 0"</span>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
-<div class="cell-output cell-output-stdout">
-<pre><code>12*x + 4*y - 20 = 0</code></pre>
-</div>
-<details open="" class="code-fold">
-<summary>Código</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Simplificada:"</span>, sp.factor(ecuacion), <span class="st">"= 0"</span>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
-<div class="cell-output cell-output-stdout">
-<pre><code>Simplificada: 4*(3*x + y - 5) = 0</code></pre>
-</div>
-</div>
-<p>La ecuación <span class="math inline">\(3x + y - 5 = 0\)</span> es una <strong>recta</strong>: la <strong>mediatriz</strong> del segmento <span class="math inline">\(AB\)</span>, que pasa por el punto medio del segmento y es perpendicular a él.</p>
-<div class="cell">
-<details open="" class="code-fold">
-<summary>Código</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb39"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">5</span>, <span class="dv">5</span>))</span>
-<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>plano_cartesiano(ax, limite<span class="op">=</span><span class="dv">6</span>)</span>
-<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>xs <span class="op">=</span> np.linspace(<span class="op">-</span><span class="dv">6</span>, <span class="dv">6</span>, <span class="dv">100</span>)</span>
-<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a>ax.plot(xs, <span class="dv">5</span> <span class="op">-</span> <span class="dv">3</span> <span class="op">*</span> xs, label<span class="op">=</span><span class="st">"Mediatriz $3x + y - 5 = 0$"</span>)</span>
-<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a>ax.plot([A[<span class="dv">0</span>], B[<span class="dv">0</span>]], [A[<span class="dv">1</span>], B[<span class="dv">1</span>]], <span class="st">"k--"</span>, label<span class="op">=</span><span class="st">"Segmento $AB$"</span>)</span>
-<span id="cb39-6"><a href="#cb39-6" aria-hidden="true" tabindex="-1"></a>ax.scatter(<span class="op">*</span><span class="bu">zip</span>(A, B), color<span class="op">=</span><span class="st">"black"</span>, zorder<span class="op">=</span><span class="dv">3</span>)</span>
-<span id="cb39-7"><a href="#cb39-7" aria-hidden="true" tabindex="-1"></a>ax.scatter([<span class="dv">1</span>], [<span class="dv">2</span>], color<span class="op">=</span><span class="st">"tab:red"</span>, zorder<span class="op">=</span><span class="dv">3</span>, label<span class="op">=</span><span class="st">"Punto medio $(1, 2)$"</span>)</span>
-<span id="cb39-8"><a href="#cb39-8" aria-hidden="true" tabindex="-1"></a>ax.annotate(<span class="st">"A"</span>, A, xytext<span class="op">=</span>(<span class="op">-</span><span class="dv">14</span>, <span class="dv">4</span>), textcoords<span class="op">=</span><span class="st">"offset points"</span>)</span>
-<span id="cb39-9"><a href="#cb39-9" aria-hidden="true" tabindex="-1"></a>ax.annotate(<span class="st">"B"</span>, B, xytext<span class="op">=</span>(<span class="dv">6</span>, <span class="dv">4</span>), textcoords<span class="op">=</span><span class="st">"offset points"</span>)</span>
-<span id="cb39-10"><a href="#cb39-10" aria-hidden="true" tabindex="-1"></a>ax.legend(loc<span class="op">=</span><span class="st">"lower left"</span>, fontsize<span class="op">=</span><span class="dv">8</span>)</span>
-<span id="cb39-11"><a href="#cb39-11" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="python_visualizacion2_files/figure-html/unnamed-chunk-19-15.png" class="img-fluid figure-img" width="480"></p>
-</figure>
-</div>
-</div>
-</div>
-</section>
-<section id="ejemplo-la-parábola-ejercicio-6" class="level3" data-number="64.7.2">
-<h3 data-number="64.7.2" class="anchored" data-anchor-id="ejemplo-la-parábola-ejercicio-6"><span class="header-section-number">64.7.2</span> Ejemplo: la parábola (ejercicio 6)</h3>
-<p>Los puntos cuya distancia al <strong>eje</strong> <span class="math inline">\(x\)</span> (que es <span class="math inline">\(|y|\)</span>) es igual a su distancia al punto <span class="math inline">\(F = (0, 4)\)</span> cumplen <span class="math inline">\(y^2 = d(P, F)^2\)</span>:</p>
-<div class="cell">
-<details open="" class="code-fold">
-<summary>Código</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb40"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>F_ <span class="op">=</span> (<span class="dv">0</span>, <span class="dv">4</span>)</span>
-<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>ecuacion <span class="op">=</span> sp.expand(y<span class="op">**</span><span class="dv">2</span> <span class="op">-</span> distancia2(P, F_))</span>
-<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(ecuacion, <span class="st">"= 0"</span>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
-<div class="cell-output cell-output-stdout">
-<pre><code>-x**2 + 8*y - 16 = 0</code></pre>
-</div>
-<details open="" class="code-fold">
-<summary>Código</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb42"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"y ="</span>, sp.solve(ecuacion, y)[<span class="dv">0</span>])</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
-<div class="cell-output cell-output-stdout">
-<pre><code>y = x**2/8 + 2</code></pre>
-</div>
-</div>
-<p>Es la <strong>parábola</strong> <span class="math inline">\(y = \frac{x^2}{8} + 2\)</span>, con <strong>foco</strong> en <span class="math inline">\(F = (0, 4)\)</span> y <strong>directriz</strong> el eje <span class="math inline">\(x\)</span>. Verifiquemos la propiedad con un punto cualquiera de la curva:</p>
-<div class="cell">
-<details open="" class="code-fold">
-<summary>Código</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb44"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">6</span>, <span class="dv">5</span>))</span>
-<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>plano_cartesiano(ax, limite<span class="op">=</span><span class="dv">8</span>)</span>
-<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a>ax.set_ylim(<span class="op">-</span><span class="dv">1</span>, <span class="dv">9</span>)</span>
-<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a>xs <span class="op">=</span> np.linspace(<span class="op">-</span><span class="dv">8</span>, <span class="dv">8</span>, <span class="dv">200</span>)</span>
-<span id="cb44-5"><a href="#cb44-5" aria-hidden="true" tabindex="-1"></a>ax.plot(xs, xs<span class="op">**</span><span class="dv">2</span> <span class="op">/</span> <span class="dv">8</span> <span class="op">+</span> <span class="dv">2</span>, label<span class="op">=</span><span class="st">"$y = x^2/8 + 2$"</span>)</span>
-<span id="cb44-6"><a href="#cb44-6" aria-hidden="true" tabindex="-1"></a>ax.scatter(<span class="op">*</span>F_, color<span class="op">=</span><span class="st">"tab:red"</span>, zorder<span class="op">=</span><span class="dv">3</span>, label<span class="op">=</span><span class="st">"Foco $F = (0, 4)$"</span>)</span>
-<span id="cb44-7"><a href="#cb44-7" aria-hidden="true" tabindex="-1"></a>ax.axhline(<span class="dv">0</span>, color<span class="op">=</span><span class="st">"tab:green"</span>, linewidth<span class="op">=</span><span class="dv">2</span>, label<span class="op">=</span><span class="st">"Directriz: eje $x$"</span>)</span>
-<span id="cb44-8"><a href="#cb44-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb44-9"><a href="#cb44-9" aria-hidden="true" tabindex="-1"></a>px0 <span class="op">=</span> <span class="dv">4</span></span>
-<span id="cb44-10"><a href="#cb44-10" aria-hidden="true" tabindex="-1"></a>py0 <span class="op">=</span> px0<span class="op">**</span><span class="dv">2</span> <span class="op">/</span> <span class="dv">8</span> <span class="op">+</span> <span class="dv">2</span>                                      <span class="co"># Un punto de la parábola: (4, 4)</span></span>
-<span id="cb44-11"><a href="#cb44-11" aria-hidden="true" tabindex="-1"></a>ax.plot([px0, F_[<span class="dv">0</span>]], [py0, F_[<span class="dv">1</span>]], <span class="st">"r--"</span>)               <span class="co"># Distancia al foco</span></span>
-<span id="cb44-12"><a href="#cb44-12" aria-hidden="true" tabindex="-1"></a>ax.plot([px0, px0], [py0, <span class="dv">0</span>], <span class="st">"g--"</span>)                     <span class="co"># Distancia a la directriz</span></span>
-<span id="cb44-13"><a href="#cb44-13" aria-hidden="true" tabindex="-1"></a>ax.scatter([px0], [py0], color<span class="op">=</span><span class="st">"black"</span>, zorder<span class="op">=</span><span class="dv">3</span>)</span>
-<span id="cb44-14"><a href="#cb44-14" aria-hidden="true" tabindex="-1"></a>ax.legend(loc<span class="op">=</span><span class="st">"upper left"</span>, fontsize<span class="op">=</span><span class="dv">8</span>)</span>
-<span id="cb44-15"><a href="#cb44-15" aria-hidden="true" tabindex="-1"></a>ax.set_title(<span class="ss">f"En P = (</span><span class="sc">{</span>px0<span class="sc">}</span><span class="ss">, </span><span class="sc">{</span>py0<span class="sc">:.0f}</span><span class="ss">): distancia al foco = distancia al eje x = </span><span class="sc">{</span>py0<span class="sc">:.0f}</span><span class="ss">"</span>)</span>
-<span id="cb44-16"><a href="#cb44-16" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="python_visualizacion2_files/figure-html/unnamed-chunk-21-17.png" class="img-fluid figure-img" width="576"></p>
-</figure>
-</div>
-</div>
-</div>
-</section>
-</section>
-<section id="seaborn-gráficas-estadísticas" class="level2" data-number="64.8">
-<h2 data-number="64.8" class="anchored" data-anchor-id="seaborn-gráficas-estadísticas"><span class="header-section-number">64.8</span> Seaborn: gráficas estadísticas</h2>
+<section id="seaborn-gráficas-estadísticas" class="level2" data-number="67.1">
+<h2 data-number="67.1" class="anchored" data-anchor-id="seaborn-gráficas-estadísticas"><span class="header-section-number">67.1</span> Seaborn: gráficas estadísticas</h2>
 <p><a href="https://seaborn.pydata.org/">Seaborn</a> es una biblioteca construida <strong>sobre Matplotlib</strong> para hacer gráficas estadísticas con muy poco código. Trabaja directamente con tablas de pandas (<code>DataFrame</code>) y elige automáticamente colores, leyendas y etiquetas.</p>
 <table class="caption-top table">
 <colgroup>
@@ -1418,11 +891,11 @@ Tip
 <div class="cell">
 <details open="" class="code-fold">
 <summary>Código</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb45"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
-<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> plotly.express <span class="im">as</span> px</span>
-<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb45-4"><a href="#cb45-4" aria-hidden="true" tabindex="-1"></a>sns.set_theme(style<span class="op">=</span><span class="st">"whitegrid"</span>)       <span class="co"># Estilo general de las gráficas</span></span>
-<span id="cb45-5"><a href="#cb45-5" aria-hidden="true" tabindex="-1"></a>iris <span class="op">=</span> px.data.iris()                  <span class="co"># El conjunto iris que conocimos en la primera parte</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> plotly.express <span class="im">as</span> px</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>sns.set_theme(style<span class="op">=</span><span class="st">"whitegrid"</span>)       <span class="co"># Estilo general de las gráficas</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>iris <span class="op">=</span> px.data.iris()                  <span class="co"># El conjunto iris que conocimos en la primera parte</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
 <table class="caption-top table">
@@ -1467,44 +940,44 @@ Tip
 </tr>
 </tbody>
 </table>
-<section id="distribuciones-por-grupo" class="level3" data-number="64.8.1">
-<h3 data-number="64.8.1" class="anchored" data-anchor-id="distribuciones-por-grupo"><span class="header-section-number">64.8.1</span> Distribuciones por grupo</h3>
+<section id="distribuciones-por-grupo" class="level3" data-number="67.1.1">
+<h3 data-number="67.1.1" class="anchored" data-anchor-id="distribuciones-por-grupo"><span class="header-section-number">67.1.1</span> Distribuciones por grupo</h3>
 <div class="cell">
 <details open="" class="code-fold">
 <summary>Código</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb46"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>fig, axs <span class="op">=</span> plt.subplots(<span class="dv">1</span>, <span class="dv">2</span>, figsize<span class="op">=</span>(<span class="dv">11</span>, <span class="dv">4</span>))</span>
-<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a>sns.histplot(data<span class="op">=</span>iris, x<span class="op">=</span><span class="st">"petal_length"</span>, hue<span class="op">=</span><span class="st">"species"</span>, kde<span class="op">=</span><span class="va">True</span>, ax<span class="op">=</span>axs[<span class="dv">0</span>])</span>
-<span id="cb46-4"><a href="#cb46-4" aria-hidden="true" tabindex="-1"></a>axs[<span class="dv">0</span>].set_title(<span class="st">"Histograma con densidad"</span>)</span>
-<span id="cb46-5"><a href="#cb46-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb46-6"><a href="#cb46-6" aria-hidden="true" tabindex="-1"></a>sns.violinplot(data<span class="op">=</span>iris, x<span class="op">=</span><span class="st">"species"</span>, y<span class="op">=</span><span class="st">"petal_length"</span>, ax<span class="op">=</span>axs[<span class="dv">1</span>])</span>
-<span id="cb46-7"><a href="#cb46-7" aria-hidden="true" tabindex="-1"></a>axs[<span class="dv">1</span>].set_title(<span class="st">"Diagrama de violín"</span>)</span>
-<span id="cb46-8"><a href="#cb46-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb46-9"><a href="#cb46-9" aria-hidden="true" tabindex="-1"></a>fig.tight_layout()</span>
-<span id="cb46-10"><a href="#cb46-10" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>fig, axs <span class="op">=</span> plt.subplots(<span class="dv">1</span>, <span class="dv">2</span>, figsize<span class="op">=</span>(<span class="dv">11</span>, <span class="dv">4</span>))</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>sns.histplot(data<span class="op">=</span>iris, x<span class="op">=</span><span class="st">"petal_length"</span>, hue<span class="op">=</span><span class="st">"species"</span>, kde<span class="op">=</span><span class="va">True</span>, ax<span class="op">=</span>axs[<span class="dv">0</span>])</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>axs[<span class="dv">0</span>].set_title(<span class="st">"Histograma con densidad"</span>)</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>sns.violinplot(data<span class="op">=</span>iris, x<span class="op">=</span><span class="st">"species"</span>, y<span class="op">=</span><span class="st">"petal_length"</span>, ax<span class="op">=</span>axs[<span class="dv">1</span>])</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>axs[<span class="dv">1</span>].set_title(<span class="st">"Diagrama de violín"</span>)</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>fig.tight_layout()</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="python_visualizacion2_files/figure-html/unnamed-chunk-23-19.png" class="img-fluid figure-img" width="1056"></p>
+<p><img src="python_visualizacion2_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="1056"></p>
 </figure>
 </div>
 </div>
 </div>
 <p>Observa el argumento <code>ax=</code>: así una gráfica de Seaborn se coloca en uno de los <code>subplots</code> de Matplotlib.</p>
 </section>
-<section id="matriz-de-dispersión-pairplot" class="level3" data-number="64.8.2">
-<h3 data-number="64.8.2" class="anchored" data-anchor-id="matriz-de-dispersión-pairplot"><span class="header-section-number">64.8.2</span> Matriz de dispersión: <code>pairplot()</code></h3>
+<section id="matriz-de-dispersión-pairplot" class="level3" data-number="67.1.2">
+<h3 data-number="67.1.2" class="anchored" data-anchor-id="matriz-de-dispersión-pairplot"><span class="header-section-number">67.1.2</span> Matriz de dispersión: <code>pairplot()</code></h3>
 <div class="cell">
 <details open="" class="code-fold">
 <summary>Código</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb47"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>sns.pairplot(iris.drop(columns<span class="op">=</span><span class="st">"species_id"</span>), hue<span class="op">=</span><span class="st">"species"</span>, height<span class="op">=</span><span class="dv">2</span>)</span>
-<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>sns.pairplot(iris.drop(columns<span class="op">=</span><span class="st">"species_id"</span>), hue<span class="op">=</span><span class="st">"species"</span>, height<span class="op">=</span><span class="dv">2</span>)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="python_visualizacion2_files/figure-html/unnamed-chunk-24-21.png" class="img-fluid figure-img" width="882"></p>
+<p><img src="python_visualizacion2_files/figure-html/unnamed-chunk-6-3.png" class="img-fluid figure-img" width="882"></p>
 </figure>
 </div>
 </div>
@@ -1512,8 +985,8 @@ Tip
 <p>Una sola línea crea las <span class="math inline">\(4 \times 4\)</span> combinaciones de variables. En la diagonal aparece la distribución de cada variable.</p>
 </section>
 </section>
-<section id="mapas-de-calor-en-2d" class="level2" data-number="64.9">
-<h2 data-number="64.9" class="anchored" data-anchor-id="mapas-de-calor-en-2d"><span class="header-section-number">64.9</span> Mapas de calor en 2D</h2>
+<section id="mapas-de-calor-en-2d" class="level2" data-number="67.2">
+<h2 data-number="67.2" class="anchored" data-anchor-id="mapas-de-calor-en-2d"><span class="header-section-number">67.2</span> Mapas de calor en 2D</h2>
 <p>Un <strong>mapa de calor</strong> (<em>heatmap</em>) representa los valores de una <strong>matriz</strong> con colores. Hay tres formas principales de hacerlo:</p>
 <table class="caption-top table">
 <colgroup>
@@ -1541,23 +1014,23 @@ Tip
 </tr>
 </tbody>
 </table>
-<section id="matriz-de-correlación-con-seaborn" class="level3" data-number="64.9.1">
-<h3 data-number="64.9.1" class="anchored" data-anchor-id="matriz-de-correlación-con-seaborn"><span class="header-section-number">64.9.1</span> Matriz de correlación con Seaborn</h3>
+<section id="matriz-de-correlación-con-seaborn" class="level3" data-number="67.2.1">
+<h3 data-number="67.2.1" class="anchored" data-anchor-id="matriz-de-correlación-con-seaborn"><span class="header-section-number">67.2.1</span> Matriz de correlación con Seaborn</h3>
 <p>La <strong>correlación</strong> mide qué tan relacionadas están dos variables, de <span class="math inline">\(-1\)</span> a <span class="math inline">\(1\)</span>. Pandas calcula la matriz de correlación con <code>.corr()</code> y Seaborn la dibuja:</p>
 <div class="cell">
 <details open="" class="code-fold">
 <summary>Código</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb48"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>correlacion <span class="op">=</span> iris.drop(columns<span class="op">=</span>[<span class="st">"species"</span>, <span class="st">"species_id"</span>]).corr()</span>
-<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">6</span>, <span class="dv">5</span>))</span>
-<span id="cb48-4"><a href="#cb48-4" aria-hidden="true" tabindex="-1"></a>sns.heatmap(correlacion, annot<span class="op">=</span><span class="va">True</span>, fmt<span class="op">=</span><span class="st">".2f"</span>, cmap<span class="op">=</span><span class="st">"RdBu_r"</span>, vmin<span class="op">=-</span><span class="dv">1</span>, vmax<span class="op">=</span><span class="dv">1</span>, square<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb48-5"><a href="#cb48-5" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Correlación entre las medidas de iris"</span>)</span>
-<span id="cb48-6"><a href="#cb48-6" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>correlacion <span class="op">=</span> iris.drop(columns<span class="op">=</span>[<span class="st">"species"</span>, <span class="st">"species_id"</span>]).corr()</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">6</span>, <span class="dv">5</span>))</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>sns.heatmap(correlacion, annot<span class="op">=</span><span class="va">True</span>, fmt<span class="op">=</span><span class="st">".2f"</span>, cmap<span class="op">=</span><span class="st">"RdBu_r"</span>, vmin<span class="op">=-</span><span class="dv">1</span>, vmax<span class="op">=</span><span class="dv">1</span>, square<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Correlación entre las medidas de iris"</span>)</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="python_visualizacion2_files/figure-html/unnamed-chunk-25-23.png" class="img-fluid figure-img" width="576"></p>
+<p><img src="python_visualizacion2_files/figure-html/unnamed-chunk-7-5.png" class="img-fluid figure-img" width="576"></p>
 </figure>
 </div>
 </div>
@@ -1595,28 +1068,28 @@ Tip
 </tbody>
 </table>
 </section>
-<section id="el-mapa-de-calor-de-un-lugar-geométrico" class="level3" data-number="64.9.2">
-<h3 data-number="64.9.2" class="anchored" data-anchor-id="el-mapa-de-calor-de-un-lugar-geométrico"><span class="header-section-number">64.9.2</span> El mapa de calor de un lugar geométrico</h3>
-<p>Un mapa de calor también ayuda a <strong>ver</strong> un lugar geométrico. Pintemos, en cada punto del plano, la diferencia <span class="math inline">\(d(P, A) - d(P, B)\)</span> para los puntos del ejercicio 5. La mediatriz es exactamente donde esa diferencia vale <strong>cero</strong>:</p>
+<section id="el-mapa-de-calor-de-un-lugar-geométrico" class="level3" data-number="67.2.2">
+<h3 data-number="67.2.2" class="anchored" data-anchor-id="el-mapa-de-calor-de-un-lugar-geométrico"><span class="header-section-number">67.2.2</span> El mapa de calor de un lugar geométrico</h3>
+<p>Un mapa de calor también ayuda a <strong>ver</strong> un lugar geométrico. Pintemos, en cada punto del plano, la diferencia <span class="math inline">\(d(P, A) - d(P, B)\)</span> para los puntos <span class="math inline">\(A = (-2, 1)\)</span> y <span class="math inline">\(B = (4, 3)\)</span> del <a href="./python_visualizacion.html#lugares-geométricos">ejemplo de la mediatriz</a>. La mediatriz es exactamente donde esa diferencia vale <strong>cero</strong>:</p>
 <div class="cell">
 <details open="" class="code-fold">
 <summary>Código</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb49"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>X, Y <span class="op">=</span> np.meshgrid(np.linspace(<span class="op">-</span><span class="dv">6</span>, <span class="dv">6</span>, <span class="dv">300</span>), np.linspace(<span class="op">-</span><span class="dv">6</span>, <span class="dv">6</span>, <span class="dv">300</span>))</span>
-<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a>diferencia <span class="op">=</span> np.sqrt((X <span class="op">+</span> <span class="dv">2</span>)<span class="op">**</span><span class="dv">2</span> <span class="op">+</span> (Y <span class="op">-</span> <span class="dv">1</span>)<span class="op">**</span><span class="dv">2</span>) <span class="op">-</span> np.sqrt((X <span class="op">-</span> <span class="dv">4</span>)<span class="op">**</span><span class="dv">2</span> <span class="op">+</span> (Y <span class="op">-</span> <span class="dv">3</span>)<span class="op">**</span><span class="dv">2</span>)</span>
-<span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-4"><a href="#cb49-4" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">6</span>, <span class="dv">5</span>))</span>
-<span id="cb49-5"><a href="#cb49-5" aria-hidden="true" tabindex="-1"></a>malla <span class="op">=</span> ax.pcolormesh(X, Y, diferencia, cmap<span class="op">=</span><span class="st">"RdBu_r"</span>, shading<span class="op">=</span><span class="st">"auto"</span>)</span>
-<span id="cb49-6"><a href="#cb49-6" aria-hidden="true" tabindex="-1"></a>fig.colorbar(malla, label<span class="op">=</span><span class="st">"$d(P, A) - d(P, B)$"</span>)</span>
-<span id="cb49-7"><a href="#cb49-7" aria-hidden="true" tabindex="-1"></a>ax.contour(X, Y, diferencia, levels<span class="op">=</span>[<span class="dv">0</span>], colors<span class="op">=</span><span class="st">"black"</span>, linewidths<span class="op">=</span><span class="dv">2</span>)</span>
-<span id="cb49-8"><a href="#cb49-8" aria-hidden="true" tabindex="-1"></a>ax.scatter([<span class="op">-</span><span class="dv">2</span>, <span class="dv">4</span>], [<span class="dv">1</span>, <span class="dv">3</span>], color<span class="op">=</span><span class="st">"black"</span>, zorder<span class="op">=</span><span class="dv">3</span>)</span>
-<span id="cb49-9"><a href="#cb49-9" aria-hidden="true" tabindex="-1"></a>ax.set_aspect(<span class="st">"equal"</span>)</span>
-<span id="cb49-10"><a href="#cb49-10" aria-hidden="true" tabindex="-1"></a>ax.set_title(<span class="st">"La mediatriz: donde $d(P, A) = d(P, B)$"</span>)</span>
-<span id="cb49-11"><a href="#cb49-11" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>X, Y <span class="op">=</span> np.meshgrid(np.linspace(<span class="op">-</span><span class="dv">6</span>, <span class="dv">6</span>, <span class="dv">300</span>), np.linspace(<span class="op">-</span><span class="dv">6</span>, <span class="dv">6</span>, <span class="dv">300</span>))</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>diferencia <span class="op">=</span> np.sqrt((X <span class="op">+</span> <span class="dv">2</span>)<span class="op">**</span><span class="dv">2</span> <span class="op">+</span> (Y <span class="op">-</span> <span class="dv">1</span>)<span class="op">**</span><span class="dv">2</span>) <span class="op">-</span> np.sqrt((X <span class="op">-</span> <span class="dv">4</span>)<span class="op">**</span><span class="dv">2</span> <span class="op">+</span> (Y <span class="op">-</span> <span class="dv">3</span>)<span class="op">**</span><span class="dv">2</span>)</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">6</span>, <span class="dv">5</span>))</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>malla <span class="op">=</span> ax.pcolormesh(X, Y, diferencia, cmap<span class="op">=</span><span class="st">"RdBu_r"</span>, shading<span class="op">=</span><span class="st">"auto"</span>)</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>fig.colorbar(malla, label<span class="op">=</span><span class="st">"$d(P, A) - d(P, B)$"</span>)</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>ax.contour(X, Y, diferencia, levels<span class="op">=</span>[<span class="dv">0</span>], colors<span class="op">=</span><span class="st">"black"</span>, linewidths<span class="op">=</span><span class="dv">2</span>)</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>ax.scatter([<span class="op">-</span><span class="dv">2</span>, <span class="dv">4</span>], [<span class="dv">1</span>, <span class="dv">3</span>], color<span class="op">=</span><span class="st">"black"</span>, zorder<span class="op">=</span><span class="dv">3</span>)</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>ax.set_aspect(<span class="st">"equal"</span>)</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>ax.set_title(<span class="st">"La mediatriz: donde $d(P, A) = d(P, B)$"</span>)</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="python_visualizacion2_files/figure-html/unnamed-chunk-26-25.png" class="img-fluid figure-img" width="576"></p>
+<p><img src="python_visualizacion2_files/figure-html/unnamed-chunk-8-7.png" class="img-fluid figure-img" width="576"></p>
 </figure>
 </div>
 </div>
@@ -1624,334 +1097,74 @@ Tip
 <p>Los puntos rojos están más cerca de <span class="math inline">\(B\)</span> y los azules más cerca de <span class="math inline">\(A\)</span>; la frontera blanca es la mediatriz.</p>
 </section>
 </section>
-<section id="ejercicios" class="level2" data-number="64.10">
-<h2 data-number="64.10" class="anchored" data-anchor-id="ejercicios"><span class="header-section-number">64.10</span> Ejercicios</h2>
-<p>Resuelve los ejercicios en los editores interactivos. Recuerda que lo que escribas <strong>no se guarda</strong> al recargar la página. Cada editor incluye la función <code>plano_cartesiano()</code> para que la uses.</p>
-<section id="ejercicio-1.-discutir-xy-4-ejercicio-1c" class="level3" data-number="64.10.1">
-<h3 data-number="64.10.1" class="anchored" data-anchor-id="ejercicio-1.-discutir-xy-4-ejercicio-1c"><span class="header-section-number">64.10.1</span> Ejercicio 1. Discutir <span class="math inline">\(xy = 4\)</span> (ejercicio 1c)</h3>
-<ol type="1">
-<li>Usa la función <code>es_simetrica()</code> para averiguar si <span class="math inline">\(xy = 4\)</span> es simétrica respecto al eje <span class="math inline">\(x\)</span>, al eje <span class="math inline">\(y\)</span>, al origen y a la recta <span class="math inline">\(y = x\)</span> (sustitución <code>{x: y, y: x}</code>).</li>
-<li>Grafica la curva con <code>contour()</code> y sus asíntotas (los ejes).</li>
-<li>En la última línea deja la tupla <code>(eje_x, eje_y, origen, recta_y_x)</code> con tus cuatro resultados.</li>
-</ol>
-<div class="cell" data-exercise="vis2_1">
+<section id="ejercicios" class="level2" data-number="67.3">
+<h2 data-number="67.3" class="anchored" data-anchor-id="ejercicios"><span class="header-section-number">67.3</span> Ejercicios</h2>
+<p>Resuelve los ejercicios en los editores interactivos. Recuerda que lo que escribas <strong>no se guarda</strong> al recargar la página. La primera vez que ejecutes un editor, Seaborn tarda unos segundos en instalarse.</p>
+<section id="ejercicio-1.-comparar-tres-grupos-con-seaborn" class="level3" data-number="67.3.1">
+<h3 data-number="67.3.1" class="anchored" data-anchor-id="ejercicio-1.-comparar-tres-grupos-con-seaborn"><span class="header-section-number">67.3.1</span> Ejercicio 1. Comparar tres grupos con Seaborn</h3>
+<p>Dibuja las calificaciones simuladas de tres grupos con un <strong>diagrama de violín</strong>, <code>sns.violinplot()</code>, y responde: ¿qué grupo tiene la <strong>mediana</strong> más alta? ¿Cuál está más <strong>disperso</strong>?</p>
+<div class="cell" data-exercise="vis2_sns">
 <div>
 <div id="pyodide-1" class="exercise-cell">
 
 </div>
 <script type="pyodide-1-contents">
-eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWUsImV4ZXJjaXNlIjoidmlzMl8xIn0sImNvZGUiOiJpbXBvcnQgbnVtcHkgYXMgbnBcbmltcG9ydCBtYXRwbG90bGliLnB5cGxvdCBhcyBwbHRcbmltcG9ydCBzeW1weSBhcyBzcFxuXG5kZWYgcGxhbm9fY2FydGVzaWFubyhheCwgbGltaXRlPTUpOlxuICAgIGF4LnNwaW5lc1tcImxlZnRcIl0uc2V0X3Bvc2l0aW9uKFwiemVyb1wiKTsgYXguc3BpbmVzW1wiYm90dG9tXCJdLnNldF9wb3NpdGlvbihcInplcm9cIilcbiAgICBheC5zcGluZXNbXCJyaWdodFwiXS5zZXRfdmlzaWJsZShGYWxzZSk7IGF4LnNwaW5lc1tcInRvcFwiXS5zZXRfdmlzaWJsZShGYWxzZSlcbiAgICBheC5zZXRfeGxpbSgtbGltaXRlLCBsaW1pdGUpOyBheC5zZXRfeWxpbSgtbGltaXRlLCBsaW1pdGUpXG4gICAgYXguc2V0X2FzcGVjdChcImVxdWFsXCIpOyBheC5ncmlkKFRydWUsIGFscGhhPTAuMylcblxuZGVmIGVzX3NpbWV0cmljYShGLCBzdXN0aXR1Y2lvbik6XG4gICAgcmV0dXJuIHNwLmV4cGFuZChGLnN1YnMoc3VzdGl0dWNpb24sIHNpbXVsdGFuZW91cz1UcnVlKSAtIEYpID09IDBcblxueCwgeSA9IHNwLnN5bWJvbHMoXCJ4IHlcIiwgcmVhbD1UcnVlKVxuRiA9IHgqeSAtIDRcblxuZWplX3ggPSBlc19zaW1ldHJpY2EoRiwgX19fX19fKVxuZWplX3kgPSBlc19zaW1ldHJpY2EoRiwgX19fX19fKVxub3JpZ2VuID0gZXNfc2ltZXRyaWNhKEYsIF9fX19fXylcbnJlY3RhX3lfeCA9IGVzX3NpbWV0cmljYShGLCBfX19fX18pXG5cblgsIFkgPSBucC5tZXNoZ3JpZChucC5saW5zcGFjZSgtNSwgNSwgNDAwKSwgbnAubGluc3BhY2UoLTUsIDUsIDQwMCkpXG5maWcsIGF4ID0gcGx0LnN1YnBsb3RzKGZpZ3NpemU9KDUsIDUpKVxucGxhbm9fY2FydGVzaWFubyhheClcbmF4LmNvbnRvdXIoWCwgWSwgX19fX19fLCBsZXZlbHM9WzBdLCBjb2xvcnM9XCJ0YWI6cmVkXCIpXG5heC5zZXRfdGl0bGUoXCJ4eSA9IDRcIilcbnBsdC5zaG93KClcblxuKGVqZV94LCBlamVfeSwgb3JpZ2VuLCByZWN0YV95X3gpIn0=
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWUsImV4ZXJjaXNlIjoidmlzMl9zbnMifSwiY29kZSI6IiMgLS0tIFByZXBhcmFyIFNlYWJvcm4gZW4gZWwgbmF2ZWdhZG9yIChubyBtb2RpZmljYXIpIC0tLVxuaW1wb3J0IG1pY3JvcGlwXG5hd2FpdCBtaWNyb3BpcC5pbnN0YWxsKFwic2VhYm9yblwiKVxuIyAtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tXG5cbmltcG9ydCBudW1weSBhcyBucFxuaW1wb3J0IG1hdHBsb3RsaWIucHlwbG90IGFzIHBsdFxuaW1wb3J0IHNlYWJvcm4gYXMgc25zXG5cbnJuZyA9IG5wLnJhbmRvbS5kZWZhdWx0X3JuZyhzZWVkPTIwMjYpXG5ncnVwb19hID0gcm5nLm5vcm1hbCg3LjUsIDEuMCwgNDApXG5ncnVwb19iID0gcm5nLm5vcm1hbCg4LjIsIDAuOCwgNDApXG5ncnVwb19jID0gcm5nLm5vcm1hbCg2LjksIDEuNCwgNDApXG5cbnBsdC5maWd1cmUoZmlnc2l6ZT0oNiwgNCkpXG5zbnMuX19fX19fKGRhdGE9W2dydXBvX2EsIGdydXBvX2IsIGdydXBvX2NdKVxucGx0Lnh0aWNrcyhbMCwgMSwgMl0sIFtcIkdydXBvIEFcIiwgXCJHcnVwbyBCXCIsIFwiR3J1cG8gQ1wiXSlcbnBsdC55bGFiZWwoXCJDYWxpZmljYWNpw7NuXCIpXG5wbHQudGl0bGUoXCJDYWxpZmljYWNpb25lcyBwb3IgZ3J1cG9cIilcbnBsdC5zaG93KCkifQ==
 </script>
 </div>
 </div>
-<div class="cell" data-exercise="vis2_1" data-check="true">
-<script type="exercise-check-vis2_1-contents">
-eyJhdHRyIjp7ImNoZWNrIjp0cnVlLCJlZGl0Ijp0cnVlLCJldmFsIjp0cnVlLCJleGVyY2lzZSI6InZpczJfMSJ9LCJjb2RlIjoiaWYgcmVzdWx0ID09IChGYWxzZSwgRmFsc2UsIFRydWUsIFRydWUpOlxuICAgIGZlZWRiYWNrID0ge1wiY29ycmVjdFwiOiBUcnVlLCBcIm1lc3NhZ2VcIjogXCLCoUNvcnJlY3RvISBMYSBoaXDDqXJib2xhIHh5ID0gNCBlcyBzaW3DqXRyaWNhIHJlc3BlY3RvIGFsIG9yaWdlbiB5IGEgbGFzIHJlY3RhcyB5ID0geCB5IHkgPSAteCwgcGVybyBubyBhIGxvcyBlamVzLlwifVxuZWxzZTpcbiAgICBmZWVkYmFjayA9IHtcImNvcnJlY3RcIjogRmFsc2UsIFwibWVzc2FnZVwiOiBcIlJldmlzYSBsYXMgc3VzdGl0dWNpb25lczogZWplIHgge3k6IC15fSwgZWplIHkge3g6IC14fSwgb3JpZ2VuIHt4OiAteCwgeTogLXl9LCByZWN0YSB5ID0geCB7eDogeSwgeTogeH0uXCJ9XG5mZWVkYmFjayJ9
-</script>
-</div>
-<div class="hint webr-ojs-exercise exercise-hint d-none" data-exercise="vis2_1">
+<div class="hint webr-ojs-exercise exercise-hint d-none" data-exercise="vis2_sns">
 <div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Nota</span>Pista
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<p>La función es <code>sns.violinplot()</code>. Con <code>data=</code> una lista de arreglos, Seaborn dibuja un violín por arreglo en las posiciones 0, 1 y 2.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="webr-ojs-exercise exercise-solution d-none" data-exercise="vis2_sns">
+<div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="true" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Nota</span>Pista
+<span class="screen-reader-only">Tip</span>Solución
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-2" class="callout-2-contents callout-collapse collapse show">
 <div class="callout-body-container callout-body">
-<p>Las sustituciones son diccionarios: <code>{y: -y}</code>, <code>{x: -x}</code>, <code>{x: -x, y: -y}</code> y <code>{x: y, y: x}</code>. Para la gráfica, la función en la malla es <code>X * Y - 4</code>.</p>
-</div>
-</div>
-</div>
-</div>
-<div class="webr-ojs-exercise exercise-solution d-none" data-exercise="vis2_1">
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="true" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>Solución
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-3" class="callout-3-contents callout-collapse collapse show">
-<div class="callout-body-container callout-body">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb50"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>eje_x <span class="op">=</span> es_simetrica(F, {y: <span class="op">-</span>y})            <span class="co"># False</span></span>
-<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a>eje_y <span class="op">=</span> es_simetrica(F, {x: <span class="op">-</span>x})            <span class="co"># False</span></span>
-<span id="cb50-3"><a href="#cb50-3" aria-hidden="true" tabindex="-1"></a>origen <span class="op">=</span> es_simetrica(F, {x: <span class="op">-</span>x, y: <span class="op">-</span>y})    <span class="co"># True</span></span>
-<span id="cb50-4"><a href="#cb50-4" aria-hidden="true" tabindex="-1"></a>recta_y_x <span class="op">=</span> es_simetrica(F, {x: y, y: x})   <span class="co"># True</span></span>
-<span id="cb50-5"><a href="#cb50-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb50-6"><a href="#cb50-6" aria-hidden="true" tabindex="-1"></a>X, Y <span class="op">=</span> np.meshgrid(np.linspace(<span class="op">-</span><span class="dv">5</span>, <span class="dv">5</span>, <span class="dv">400</span>), np.linspace(<span class="op">-</span><span class="dv">5</span>, <span class="dv">5</span>, <span class="dv">400</span>))</span>
-<span id="cb50-7"><a href="#cb50-7" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">5</span>, <span class="dv">5</span>))</span>
-<span id="cb50-8"><a href="#cb50-8" aria-hidden="true" tabindex="-1"></a>plano_cartesiano(ax)</span>
-<span id="cb50-9"><a href="#cb50-9" aria-hidden="true" tabindex="-1"></a>ax.contour(X, Y, X <span class="op">*</span> Y <span class="op">-</span> <span class="dv">4</span>, levels<span class="op">=</span>[<span class="dv">0</span>], colors<span class="op">=</span><span class="st">"tab:red"</span>)</span>
-<span id="cb50-10"><a href="#cb50-10" aria-hidden="true" tabindex="-1"></a>ax.set_title(<span class="st">"xy = 4"</span>)</span>
-<span id="cb50-11"><a href="#cb50-11" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
-<span id="cb50-12"><a href="#cb50-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb50-13"><a href="#cb50-13" aria-hidden="true" tabindex="-1"></a>(eje_x, eje_y, origen, recta_y_x)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Las asíntotas son los propios ejes: cuando <span class="math inline">\(x \to \infty\)</span>, <span class="math inline">\(y = 4/x \to 0\)</span>.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">6</span>, <span class="dv">4</span>))</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>sns.violinplot(data<span class="op">=</span>[grupo_a, grupo_b, grupo_c])</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>plt.xticks([<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">2</span>], [<span class="st">"Grupo A"</span>, <span class="st">"Grupo B"</span>, <span class="st">"Grupo C"</span>])</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Calificación"</span>)</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Calificaciones por grupo"</span>)</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<p>El <strong>grupo B</strong> tiene la mediana más alta (la línea blanca del centro está más arriba) y el <strong>grupo C</strong> es el más disperso: su violín es el más alargado. <strong>Extra:</strong> cámbialo por <code>sns.boxplot()</code> y compara qué información muestra cada gráfica.</p>
 </div>
 </div>
 </div>
 </div>
 </section>
-<section id="ejercicio-2.-intersección-de-una-circunferencia-y-una-recta" class="level3" data-number="64.10.2">
-<h3 data-number="64.10.2" class="anchored" data-anchor-id="ejercicio-2.-intersección-de-una-circunferencia-y-una-recta"><span class="header-section-number">64.10.2</span> Ejercicio 2. Intersección de una circunferencia y una recta</h3>
-<p>Encuentra con SymPy las intersecciones de la circunferencia <span class="math inline">\(x^2 + y^2 = 25\)</span> y la recta <span class="math inline">\(x + y = 7\)</span>. Grafica ambas curvas y marca los puntos. Deja la lista de puntos en la <strong>última línea</strong>.</p>
-<div class="cell" data-exercise="vis2_2">
-<div>
-<div id="pyodide-3" class="exercise-cell">
-
-</div>
-<script type="pyodide-3-contents">
-eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWUsImV4ZXJjaXNlIjoidmlzMl8yIn0sImNvZGUiOiJpbXBvcnQgbnVtcHkgYXMgbnBcbmltcG9ydCBtYXRwbG90bGliLnB5cGxvdCBhcyBwbHRcbmltcG9ydCBzeW1weSBhcyBzcFxuXG5kZWYgcGxhbm9fY2FydGVzaWFubyhheCwgbGltaXRlPTUpOlxuICAgIGF4LnNwaW5lc1tcImxlZnRcIl0uc2V0X3Bvc2l0aW9uKFwiemVyb1wiKTsgYXguc3BpbmVzW1wiYm90dG9tXCJdLnNldF9wb3NpdGlvbihcInplcm9cIilcbiAgICBheC5zcGluZXNbXCJyaWdodFwiXS5zZXRfdmlzaWJsZShGYWxzZSk7IGF4LnNwaW5lc1tcInRvcFwiXS5zZXRfdmlzaWJsZShGYWxzZSlcbiAgICBheC5zZXRfeGxpbSgtbGltaXRlLCBsaW1pdGUpOyBheC5zZXRfeWxpbSgtbGltaXRlLCBsaW1pdGUpXG4gICAgYXguc2V0X2FzcGVjdChcImVxdWFsXCIpOyBheC5ncmlkKFRydWUsIGFscGhhPTAuMylcblxueCwgeSA9IHNwLnN5bWJvbHMoXCJ4IHlcIiwgcmVhbD1UcnVlKVxucHVudG9zID0gc3Auc29sdmUoW19fX19fXywgX19fX19fXSwgW3gsIHldKVxucHJpbnQocHVudG9zKVxuXG5YLCBZID0gbnAubWVzaGdyaWQobnAubGluc3BhY2UoLTgsIDgsIDQwMCksIG5wLmxpbnNwYWNlKC04LCA4LCA0MDApKVxuZmlnLCBheCA9IHBsdC5zdWJwbG90cyhmaWdzaXplPSg1LCA1KSlcbnBsYW5vX2NhcnRlc2lhbm8oYXgsIGxpbWl0ZT04KVxuYXguY29udG91cihYLCBZLCBYKioyICsgWSoqMiAtIDI1LCBsZXZlbHM9WzBdLCBjb2xvcnM9XCJ0YWI6Ymx1ZVwiKVxuYXguY29udG91cihYLCBZLCBYICsgWSAtIDcsIGxldmVscz1bMF0sIGNvbG9ycz1cInRhYjpyZWRcIilcbmZvciBwdW50byBpbiBwdW50b3M6XG4gICAgYXguc2NhdHRlcihmbG9hdChwdW50b1swXSksIGZsb2F0KHB1bnRvWzFdKSwgY29sb3I9XCJibGFja1wiLCB6b3JkZXI9MylcbnBsdC5zaG93KClcblxucHVudG9zIn0=
-</script>
-</div>
-</div>
-<div class="cell" data-exercise="vis2_2" data-check="true">
-<script type="exercise-check-vis2_2-contents">
-eyJhdHRyIjp7ImNoZWNrIjp0cnVlLCJlZGl0Ijp0cnVlLCJldmFsIjp0cnVlLCJleGVyY2lzZSI6InZpczJfMiJ9LCJjb2RlIjoiaWYgaXNpbnN0YW5jZShyZXN1bHQsIGxpc3QpIGFuZCBzb3J0ZWQocmVzdWx0KSA9PSBbKDMsIDQpLCAoNCwgMyldOlxuICAgIGZlZWRiYWNrID0ge1wiY29ycmVjdFwiOiBUcnVlLCBcIm1lc3NhZ2VcIjogXCLCoUNvcnJlY3RvISBTZSBjb3J0YW4gZW4gKDMsIDQpIHkgKDQsIDMpOiDCoWRvcyB0ZXJuYXMgcGl0YWfDs3JpY2FzIVwifVxuZWxpZiBpc2luc3RhbmNlKHJlc3VsdCwgbGlzdCkgYW5kIGxlbihyZXN1bHQpID09IDA6XG4gICAgZmVlZGJhY2sgPSB7XCJjb3JyZWN0XCI6IEZhbHNlLCBcIm1lc3NhZ2VcIjogXCJObyBoYXkgc29sdWNpb25lczogcmV2aXNhIHF1ZSBlc2NyaWJpc3RlIGJpZW4gbGFzIGRvcyBlY3VhY2lvbmVzIChpZ3VhbGFkYXMgYSBjZXJvKS5cIn1cbmVsc2U6XG4gICAgZmVlZGJhY2sgPSB7XCJjb3JyZWN0XCI6IEZhbHNlLCBcIm1lc3NhZ2VcIjogXCJFc2NyaWJlIGxhcyBlY3VhY2lvbmVzIGlndWFsYWRhcyBhIGNlcm86IHgqKjIgKyB5KioyIC0gMjUgeSB4ICsgeSAtIDcuXCJ9XG5mZWVkYmFjayJ9
-</script>
-</div>
-<div class="hint webr-ojs-exercise exercise-hint d-none" data-exercise="vis2_2">
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="true" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Nota</span>Pista
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-4" class="callout-4-contents callout-collapse collapse show">
-<div class="callout-body-container callout-body">
-<p><code>sp.solve()</code> supone que cada expresión está igualada a cero: escribe <code>x**2 + y**2 - 25</code> y <code>x + y - 7</code>.</p>
-</div>
-</div>
-</div>
-</div>
-<div class="webr-ojs-exercise exercise-solution d-none" data-exercise="vis2_2">
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="true" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>Solución
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-5" class="callout-5-contents callout-collapse collapse show">
-<div class="callout-body-container callout-body">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb51"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a>puntos <span class="op">=</span> sp.solve([x<span class="op">**</span><span class="dv">2</span> <span class="op">+</span> y<span class="op">**</span><span class="dv">2</span> <span class="op">-</span> <span class="dv">25</span>, x <span class="op">+</span> y <span class="op">-</span> <span class="dv">7</span>], [x, y])</span>
-<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(puntos)   <span class="co"># [(3, 4), (4, 3)]</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-</div>
-</div>
-</div>
-</section>
-<section id="ejercicio-3.-lugar-geométrico-equidistancia-ejercicio-7" class="level3" data-number="64.10.3">
-<h3 data-number="64.10.3" class="anchored" data-anchor-id="ejercicio-3.-lugar-geométrico-equidistancia-ejercicio-7"><span class="header-section-number">64.10.3</span> Ejercicio 3. Lugar geométrico: equidistancia (ejercicio 7)</h3>
-<p>Obtén la ecuación del lugar geométrico de los puntos <span class="math inline">\(P(x, y)\)</span> que equidistan de <span class="math inline">\(A(1, -2)\)</span> y <span class="math inline">\(B(5, 4)\)</span>. Grafícalo junto con los puntos <span class="math inline">\(A\)</span> y <span class="math inline">\(B\)</span>. Deja la ecuación simplificada (la expresión igualada a cero) en la <strong>última línea</strong>.</p>
-<div class="cell" data-exercise="vis2_3">
-<div>
-<div id="pyodide-5" class="exercise-cell">
-
-</div>
-<script type="pyodide-5-contents">
-eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWUsImV4ZXJjaXNlIjoidmlzMl8zIn0sImNvZGUiOiJpbXBvcnQgbnVtcHkgYXMgbnBcbmltcG9ydCBtYXRwbG90bGliLnB5cGxvdCBhcyBwbHRcbmltcG9ydCBzeW1weSBhcyBzcFxuXG5kZWYgZGlzdGFuY2lhMihQLCBRKTpcbiAgICByZXR1cm4gKFBbMF0gLSBRWzBdKSoqMiArIChQWzFdIC0gUVsxXSkqKjJcblxueCwgeSA9IHNwLnN5bWJvbHMoXCJ4IHlcIiwgcmVhbD1UcnVlKVxuUCA9ICh4LCB5KVxuQSwgQiA9ICgxLCAtMiksICg1LCA0KVxuXG5lY3VhY2lvbiA9IHNwLmV4cGFuZChfX19fX18pXG5wcmludChzcC5mYWN0b3IoZWN1YWNpb24pLCBcIj0gMFwiKVxuXG54cyA9IG5wLmxpbnNwYWNlKC0yLCA4LCAxMDApXG5wbHQucGxvdCh4cywgKDkgLSAyICogeHMpIC8gMywgbGFiZWw9XCJMdWdhciBnZW9tw6l0cmljb1wiKVxucGx0LnNjYXR0ZXIoWzEsIDVdLCBbLTIsIDRdLCBjb2xvcj1cImJsYWNrXCIpXG5wbHQuZ2NhKCkuc2V0X2FzcGVjdChcImVxdWFsXCIpXG5wbHQuZ3JpZChUcnVlKVxucGx0LmxlZ2VuZCgpXG5wbHQuc2hvdygpXG5cbmVjdWFjaW9uIn0=
-</script>
-</div>
-</div>
-<div class="cell" data-exercise="vis2_3" data-check="true">
-<script type="exercise-check-vis2_3-contents">
-eyJhdHRyIjp7ImNoZWNrIjp0cnVlLCJlZGl0Ijp0cnVlLCJldmFsIjp0cnVlLCJleGVyY2lzZSI6InZpczJfMyJ9LCJjb2RlIjoiaW1wb3J0IHN5bXB5IGFzIHNwXG54LCB5ID0gc3Auc3ltYm9scyhcInggeVwiLCByZWFsPVRydWUpXG5pZiBub3QgaXNpbnN0YW5jZShyZXN1bHQsIHNwLkJhc2ljKTpcbiAgICBmZWVkYmFjayA9IHtcImNvcnJlY3RcIjogRmFsc2UsIFwibWVzc2FnZVwiOiBcIkxhIMO6bHRpbWEgbMOtbmVhIGRlYmUgcmVncmVzYXIgbGEgZWN1YWNpw7NuICh1bmEgZXhwcmVzacOzbiBkZSBTeW1QeSkuXCJ9XG5lbHNlOlxuICAgIGNvY2llbnRlID0gc3Auc2ltcGxpZnkocmVzdWx0IC8gKDIqeCArIDMqeSAtIDkpKVxuICAgIGlmIGNvY2llbnRlLmlzX251bWJlciBhbmQgY29jaWVudGUgIT0gMDpcbiAgICAgICAgZmVlZGJhY2sgPSB7XCJjb3JyZWN0XCI6IFRydWUsIFwibWVzc2FnZVwiOiBcIsKhQ29ycmVjdG8hIEVzIGxhIHJlY3RhIDJ4ICsgM3kgLSA5ID0gMDogbGEgbWVkaWF0cml6IGRlbCBzZWdtZW50byBBQi5cIn1cbiAgICBlbHNlOlxuICAgICAgICBmZWVkYmFjayA9IHtcImNvcnJlY3RcIjogRmFsc2UsIFwibWVzc2FnZVwiOiBcIlJldmlzYSBsYSBjb25kaWNpw7NuOiBkaXN0YW5jaWEyKFAsIEEpIC0gZGlzdGFuY2lhMihQLCBCKS5cIn1cbmZlZWRiYWNrIn0=
-</script>
-</div>
-<div class="hint webr-ojs-exercise exercise-hint d-none" data-exercise="vis2_3">
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="true" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Nota</span>Pista
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-6" class="callout-6-contents callout-collapse collapse show">
-<div class="callout-body-container callout-body">
-<p>La condición <span class="math inline">\(d(P, A) = d(P, B)\)</span> es equivalente a <span class="math inline">\(d(P, A)^2 - d(P, B)^2 = 0\)</span>: escribe <code>distancia2(P, A) - distancia2(P, B)</code>.</p>
-</div>
-</div>
-</div>
-</div>
-<div class="webr-ojs-exercise exercise-solution d-none" data-exercise="vis2_3">
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="true" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>Solución
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-7" class="callout-7-contents callout-collapse collapse show">
-<div class="callout-body-container callout-body">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb52"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a>ecuacion <span class="op">=</span> sp.expand(distancia2(P, A) <span class="op">-</span> distancia2(P, B))</span>
-<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(sp.factor(ecuacion), <span class="st">"= 0"</span>)   <span class="co"># 4*(2*x + 3*y - 9) = 0</span></span>
-<span id="cb52-3"><a href="#cb52-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb52-4"><a href="#cb52-4" aria-hidden="true" tabindex="-1"></a>ecuacion</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Es la recta <span class="math inline">\(2x + 3y - 9 = 0\)</span>, la <strong>mediatriz</strong> del segmento <span class="math inline">\(AB\)</span>, igual que en el ejemplo del ejercicio 5.</p>
-</div>
-</div>
-</div>
-</div>
-</section>
-<section id="ejercicio-4.-lugar-geométrico-una-circunferencia-escondida-ejercicio-8" class="level3" data-number="64.10.4">
-<h3 data-number="64.10.4" class="anchored" data-anchor-id="ejercicio-4.-lugar-geométrico-una-circunferencia-escondida-ejercicio-8"><span class="header-section-number">64.10.4</span> Ejercicio 4. Lugar geométrico: una circunferencia escondida (ejercicio 8)</h3>
-<p>El cuadrado de la distancia de <span class="math inline">\(P(x, y)\)</span> a <span class="math inline">\(A(4, 1)\)</span> es igual a su distancia al eje <span class="math inline">\(Y\)</span>, que es <span class="math inline">\(|x|\)</span>. Para los puntos con <span class="math inline">\(x \geq 0\)</span>, la condición es <span class="math inline">\(d(P, A)^2 = x\)</span>.</p>
-<ol type="1">
-<li>Obtén la ecuación con SymPy.</li>
-<li>Encuentra el <strong>centro</strong> de la curva: el punto donde las derivadas de la ecuación respecto a <span class="math inline">\(x\)</span> y a <span class="math inline">\(y\)</span> valen cero (así se “completa el cuadrado” con cálculo).</li>
-<li>Grafica la curva con <code>contour()</code>.</li>
-<li>Deja el centro como tupla <code>(cx, cy)</code> en la <strong>última línea</strong>.</li>
-</ol>
-<div class="cell" data-exercise="vis2_4">
-<div>
-<div id="pyodide-7" class="exercise-cell">
-
-</div>
-<script type="pyodide-7-contents">
-eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWUsImV4ZXJjaXNlIjoidmlzMl80In0sImNvZGUiOiJpbXBvcnQgbnVtcHkgYXMgbnBcbmltcG9ydCBtYXRwbG90bGliLnB5cGxvdCBhcyBwbHRcbmltcG9ydCBzeW1weSBhcyBzcFxuXG5kZWYgZGlzdGFuY2lhMihQLCBRKTpcbiAgICByZXR1cm4gKFBbMF0gLSBRWzBdKSoqMiArIChQWzFdIC0gUVsxXSkqKjJcblxueCwgeSA9IHNwLnN5bWJvbHMoXCJ4IHlcIiwgcmVhbD1UcnVlKVxuUCA9ICh4LCB5KVxuXG5lY3VhY2lvbiA9IHNwLmV4cGFuZChkaXN0YW5jaWEyKFAsICg0LCAxKSkgLSB4KVxucHJpbnQoZWN1YWNpb24sIFwiPSAwXCIpXG5cbmNlbnRybyA9IHNwLnNvbHZlKFtzcC5kaWZmKGVjdWFjaW9uLCB4KSwgX19fX19fXSwgW3gsIHldKVxuY3gsIGN5ID0gY2VudHJvW3hdLCBjZW50cm9beV1cbnJhZGlvID0gc3Auc3FydCgtZWN1YWNpb24uc3Vicyh7eDogY3gsIHk6IGN5fSkpXG5wcmludChcIkNlbnRybzpcIiwgKGN4LCBjeSksIFwiIFJhZGlvOlwiLCByYWRpbylcblxuWCwgWSA9IG5wLm1lc2hncmlkKG5wLmxpbnNwYWNlKDAsIDgsIDQwMCksIG5wLmxpbnNwYWNlKC0zLCA1LCA0MDApKVxucGx0LmNvbnRvdXIoWCwgWSwgKFggLSA0KSoqMiArIChZIC0gMSkqKjIgLSBYLCBsZXZlbHM9WzBdLCBjb2xvcnM9XCJ0YWI6cHVycGxlXCIpXG5wbHQuc2NhdHRlcihbZmxvYXQoY3gpXSwgW2Zsb2F0KGN5KV0sIGNvbG9yPVwiYmxhY2tcIilcbnBsdC5nY2EoKS5zZXRfYXNwZWN0KFwiZXF1YWxcIilcbnBsdC5ncmlkKFRydWUpXG5wbHQuc2hvdygpXG5cbihjeCwgY3kpIn0=
-</script>
-</div>
-</div>
-<div class="cell" data-exercise="vis2_4" data-check="true">
-<script type="exercise-check-vis2_4-contents">
-eyJhdHRyIjp7ImNoZWNrIjp0cnVlLCJlZGl0Ijp0cnVlLCJldmFsIjp0cnVlLCJleGVyY2lzZSI6InZpczJfNCJ9LCJjb2RlIjoiaW1wb3J0IHN5bXB5IGFzIHNwXG5pZiByZXN1bHQgPT0gKHNwLlJhdGlvbmFsKDksIDIpLCAxKTpcbiAgICBmZWVkYmFjayA9IHtcImNvcnJlY3RcIjogVHJ1ZSwgXCJtZXNzYWdlXCI6IFwiwqFDb3JyZWN0byEgRXMgbGEgY2lyY3VuZmVyZW5jaWEgZGUgY2VudHJvICg5LzIsIDEpIHkgcmFkaW8g4oiaMTcvMi5cIn1cbmVsc2U6XG4gICAgZmVlZGJhY2sgPSB7XCJjb3JyZWN0XCI6IEZhbHNlLCBcIm1lc3NhZ2VcIjogXCJFbCBzZWd1bmRvIGVsZW1lbnRvIGRlIGxhIGxpc3RhIGVzIGxhIGRlcml2YWRhIHJlc3BlY3RvIGEgeTogc3AuZGlmZihlY3VhY2lvbiwgeSkuXCJ9XG5mZWVkYmFjayJ9
-</script>
-</div>
-<div class="hint webr-ojs-exercise exercise-hint d-none" data-exercise="vis2_4">
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="true" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Nota</span>Pista
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-8" class="callout-8-contents callout-collapse collapse show">
-<div class="callout-body-container callout-body">
-<p>El sistema es la derivada respecto a <code>x</code> <strong>y</strong> la derivada respecto a <code>y</code>: <code>sp.diff(ecuacion, y)</code>.</p>
-</div>
-</div>
-</div>
-</div>
-<div class="webr-ojs-exercise exercise-solution d-none" data-exercise="vis2_4">
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="true" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>Solución
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-9" class="callout-9-contents callout-collapse collapse show">
-<div class="callout-body-container callout-body">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb53"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a>centro <span class="op">=</span> sp.solve([sp.diff(ecuacion, x), sp.diff(ecuacion, y)], [x, y])</span>
-<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a>cx, cy <span class="op">=</span> centro[x], centro[y]</span>
-<span id="cb53-3"><a href="#cb53-3" aria-hidden="true" tabindex="-1"></a>radio <span class="op">=</span> sp.sqrt(<span class="op">-</span>ecuacion.subs({x: cx, y: cy}))</span>
-<span id="cb53-4"><a href="#cb53-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Centro:"</span>, (cx, cy), <span class="st">" Radio:"</span>, radio)   <span class="co"># Centro: (9/2, 1)  Radio: sqrt(17)/2</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
-<p>La ecuación <span class="math inline">\(x^2 - 9x + y^2 - 2y + 17 = 0\)</span> es equivalente a <span class="math inline">\(\left(x - \frac{9}{2}\right)^2 + (y - 1)^2 = \frac{17}{4}\)</span>. Todos sus puntos tienen <span class="math inline">\(x &gt; 0\)</span>, así que el caso <span class="math inline">\(x &lt; 0\)</span> no aporta puntos.</p>
-</div>
-</div>
-</div>
-</div>
-</section>
-<section id="ejercicio-5.-la-elipse-de-los-jardineros-ejercicio-9" class="level3" data-number="64.10.5">
-<h3 data-number="64.10.5" class="anchored" data-anchor-id="ejercicio-5.-la-elipse-de-los-jardineros-ejercicio-9"><span class="header-section-number">64.10.5</span> Ejercicio 5. La elipse de los jardineros (ejercicio 9)</h3>
-<p>Los puntos cuya <strong>suma</strong> de distancias a <span class="math inline">\(A(3, 0)\)</span> y <span class="math inline">\(B(-3, 0)\)</span> es 8 forman una <strong>elipse</strong> con focos <span class="math inline">\(A\)</span> y <span class="math inline">\(B\)</span>. Si clavas dos estacas en los focos, atas una cuerda de longitud 8 y la mantienes tensa con un lápiz, ¡dibujas esta elipse!</p>
-<p>Para una elipse con centro en el origen: el <strong>semieje mayor</strong> es <span class="math inline">\(a = \frac{8}{2}\)</span>, la distancia del centro a cada foco es <span class="math inline">\(c = 3\)</span> y el <strong>semieje menor</strong> cumple <span class="math inline">\(b^2 = a^2 - c^2\)</span>.</p>
-<ol type="1">
-<li>Calcula <code>a</code>, <code>c</code> y <code>b</code>.</li>
-<li>Grafica la curva <span class="math inline">\(d(P, A) + d(P, B) = 8\)</span> con <code>contour()</code> y compárala con la paramétrica <span class="math inline">\(x = a\cos t\)</span>, <span class="math inline">\(y = b\sin t\)</span>.</li>
-<li>Deja la tupla <code>(a, b**2, c)</code> en la <strong>última línea</strong>.</li>
-</ol>
-<div class="cell" data-exercise="vis2_5">
-<div>
-<div id="pyodide-9" class="exercise-cell">
-
-</div>
-<script type="pyodide-9-contents">
-eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWUsImV4ZXJjaXNlIjoidmlzMl81In0sImNvZGUiOiJpbXBvcnQgbnVtcHkgYXMgbnBcbmltcG9ydCBtYXRwbG90bGliLnB5cGxvdCBhcyBwbHRcblxuYSA9IF9fX19fX1xuYyA9IF9fX19fX1xuYiA9IF9fX19fX1xuXG5YLCBZID0gbnAubWVzaGdyaWQobnAubGluc3BhY2UoLTUsIDUsIDQwMCksIG5wLmxpbnNwYWNlKC01LCA1LCA0MDApKVxuc3VtYSA9IG5wLnNxcnQoKFggLSAzKSoqMiArIFkqKjIpICsgbnAuc3FydCgoWCArIDMpKioyICsgWSoqMilcbnBsdC5jb250b3VyKFgsIFksIHN1bWEsIGxldmVscz1bOF0sIGNvbG9ycz1cInRhYjpibHVlXCIsIGxpbmV3aWR0aHM9NClcblxudCA9IG5wLmxpbnNwYWNlKDAsIDIgKiBucC5waSwgMjAwKVxucGx0LnBsb3QoYSAqIG5wLmNvcyh0KSwgYiAqIG5wLnNpbih0KSwgXCJ5LS1cIiwgbGFiZWw9XCJQYXJhbcOpdHJpY2FcIilcbnBsdC5zY2F0dGVyKFszLCAtM10sIFswLCAwXSwgY29sb3I9XCJyZWRcIiwgbGFiZWw9XCJGb2Nvc1wiKVxucGx0LmdjYSgpLnNldF9hc3BlY3QoXCJlcXVhbFwiKVxucGx0LmxlZ2VuZCgpXG5wbHQuc2hvdygpXG5cbihhLCBiKioyLCBjKSJ9
-</script>
-</div>
-</div>
-<div class="cell" data-exercise="vis2_5" data-check="true">
-<script type="exercise-check-vis2_5-contents">
-eyJhdHRyIjp7ImNoZWNrIjp0cnVlLCJlZGl0Ijp0cnVlLCJldmFsIjp0cnVlLCJleGVyY2lzZSI6InZpczJfNSJ9LCJjb2RlIjoiaW1wb3J0IG1hdGhcbmlmIGlzaW5zdGFuY2UocmVzdWx0LCB0dXBsZSkgYW5kIGxlbihyZXN1bHQpID09IDMgYW5kIG1hdGguaXNjbG9zZShyZXN1bHRbMF0sIDQpIGFuZCBtYXRoLmlzY2xvc2UocmVzdWx0WzFdLCA3KSBhbmQgbWF0aC5pc2Nsb3NlKHJlc3VsdFsyXSwgMyk6XG4gICAgZmVlZGJhY2sgPSB7XCJjb3JyZWN0XCI6IFRydWUsIFwibWVzc2FnZVwiOiBcIsKhQ29ycmVjdG8hIExhIGVsaXBzZSBlcyB4wrIvMTYgKyB5wrIvNyA9IDE6IGxhIGN1cnZhIGRlIG5pdmVsIHkgbGEgcGFyYW3DqXRyaWNhIGNvaW5jaWRlbi5cIn1cbmVsc2U6XG4gICAgZmVlZGJhY2sgPSB7XCJjb3JyZWN0XCI6IEZhbHNlLCBcIm1lc3NhZ2VcIjogXCJSZXZpc2E6IGEgPSA4IC8gMiwgYyA9IDMgeSBiID0gKGEqKjIgLSBjKioyKSAqKiAwLjUuXCJ9XG5mZWVkYmFjayJ9
-</script>
-</div>
-<div class="hint webr-ojs-exercise exercise-hint d-none" data-exercise="vis2_5">
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="true" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Nota</span>Pista
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-10" class="callout-10-contents callout-collapse collapse show">
-<div class="callout-body-container callout-body">
-<p><code>a = 8 / 2</code>, <code>c = 3</code> y <code>b = (a**2 - c**2) ** 0.5</code>.</p>
-</div>
-</div>
-</div>
-</div>
-<div class="webr-ojs-exercise exercise-solution d-none" data-exercise="vis2_5">
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-11-contents" aria-controls="callout-11" aria-expanded="true" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>Solución
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-11" class="callout-11-contents callout-collapse collapse show">
-<div class="callout-body-container callout-body">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb54"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> <span class="dv">8</span> <span class="op">/</span> <span class="dv">2</span>                      <span class="co"># 4.0</span></span>
-<span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a>c <span class="op">=</span> <span class="dv">3</span></span>
-<span id="cb54-3"><a href="#cb54-3" aria-hidden="true" tabindex="-1"></a>b <span class="op">=</span> (a<span class="op">**</span><span class="dv">2</span> <span class="op">-</span> c<span class="op">**</span><span class="dv">2</span>) <span class="op">**</span> <span class="fl">0.5</span>       <span class="co"># √7 ≈ 2.6458</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
-<p>La ecuación es <span class="math inline">\(\frac{x^2}{16} + \frac{y^2}{7} = 1\)</span>. La curva de nivel (gruesa) y la paramétrica (punteada) coinciden.</p>
-</div>
-</div>
-</div>
-</div>
-</section>
-<section id="ejercicio-6.-un-mapa-de-calor-de-la-aritmética-modular" class="level3" data-number="64.10.6">
-<h3 data-number="64.10.6" class="anchored" data-anchor-id="ejercicio-6.-un-mapa-de-calor-de-la-aritmética-modular"><span class="header-section-number">64.10.6</span> Ejercicio 6. Un mapa de calor de la aritmética modular</h3>
+<section id="ejercicio-2.-un-mapa-de-calor-de-la-aritmética-modular" class="level3" data-number="67.3.2">
+<h3 data-number="67.3.2" class="anchored" data-anchor-id="ejercicio-2.-un-mapa-de-calor-de-la-aritmética-modular"><span class="header-section-number">67.3.2</span> Ejercicio 2. Un mapa de calor de la aritmética modular</h3>
 <p>Construye la <strong>tabla de multiplicar módulo 7</strong>: la entrada <span class="math inline">\((i, j)\)</span> es <span class="math inline">\(i \cdot j \bmod 7\)</span>, para <span class="math inline">\(i, j = 0, 1, \dots, 6\)</span>. Usa <em>broadcasting</em> de NumPy (sin ciclos) y dibuja la tabla con <code>sns.heatmap()</code>. ¿Qué patrón observas en las filas?</p>
 <div class="cell" data-exercise="vis2_6">
 <div>
-<div id="pyodide-11" class="exercise-cell">
+<div id="pyodide-2" class="exercise-cell">
 
 </div>
-<script type="pyodide-11-contents">
+<script type="pyodide-2-contents">
 eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWUsImV4ZXJjaXNlIjoidmlzMl82In0sImNvZGUiOiIjIC0tLSBQcmVwYXJhciBTZWFib3JuIGVuIGVsIG5hdmVnYWRvciAobm8gbW9kaWZpY2FyKSAtLS1cbmltcG9ydCBtaWNyb3BpcFxuYXdhaXQgbWljcm9waXAuaW5zdGFsbChcInNlYWJvcm5cIilcbiMgLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLVxuXG5pbXBvcnQgbnVtcHkgYXMgbnBcbmltcG9ydCBtYXRwbG90bGliLnB5cGxvdCBhcyBwbHRcbmltcG9ydCBzZWFib3JuIGFzIHNuc1xuXG5uID0gN1xuaSA9IG5wLmFyYW5nZShuKS5yZXNoYXBlKG4sIDEpICAgICMgQ29sdW1uYVxuaiA9IG5wLmFyYW5nZShuKSAgICAgICAgICAgICAgICAgICMgRmlsYVxudGFibGEgPSBfX19fX19cblxucGx0LmZpZ3VyZShmaWdzaXplPSg1LCA0KSlcbnNucy5oZWF0bWFwKHRhYmxhLCBhbm5vdD1UcnVlLCBjbWFwPVwidmlyaWRpc1wiLCBjYmFyPUZhbHNlLCBzcXVhcmU9VHJ1ZSlcbnBsdC50aXRsZShcIk11bHRpcGxpY2FjacOzbiBtw7NkdWxvIDdcIilcbnBsdC5zaG93KClcblxudGFibGEifQ==
 </script>
 </div>
@@ -1963,7 +1176,7 @@ eyJhdHRyIjp7ImNoZWNrIjp0cnVlLCJlZGl0Ijp0cnVlLCJldmFsIjp0cnVlLCJleGVyY2lzZSI6InZp
 </div>
 <div class="hint webr-ojs-exercise exercise-hint d-none" data-exercise="vis2_6">
 <div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-12-contents" aria-controls="callout-12" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="true" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -1972,7 +1185,7 @@ eyJhdHRyIjp7ImNoZWNrIjp0cnVlLCJlZGl0Ijp0cnVlLCJldmFsIjp0cnVlLCJleGVyY2lzZSI6InZp
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-12" class="callout-12-contents callout-collapse collapse show">
+<div id="callout-3" class="callout-3-contents callout-collapse collapse show">
 <div class="callout-body-container callout-body">
 <p>Con <em>broadcasting</em>, <code>i * j</code> produce una matriz de <span class="math inline">\(7 \times 7\)</span>. Después aplica <code>% n</code>.</p>
 </div>
@@ -1981,7 +1194,7 @@ eyJhdHRyIjp7ImNoZWNrIjp0cnVlLCJlZGl0Ijp0cnVlLCJldmFsIjp0cnVlLCJleGVyY2lzZSI6InZp
 </div>
 <div class="webr-ojs-exercise exercise-solution d-none" data-exercise="vis2_6">
 <div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-13-contents" aria-controls="callout-13" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="true" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -1990,9 +1203,9 @@ eyJhdHRyIjp7ImNoZWNrIjp0cnVlLCJlZGl0Ijp0cnVlLCJldmFsIjp0cnVlLCJleGVyY2lzZSI6InZp
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-13" class="callout-13-contents callout-collapse collapse show">
+<div id="callout-4" class="callout-4-contents callout-collapse collapse show">
 <div class="callout-body-container callout-body">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb55"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a>tabla <span class="op">=</span> (i <span class="op">*</span> j) <span class="op">%</span> n</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>tabla <span class="op">=</span> (i <span class="op">*</span> j) <span class="op">%</span> n</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <p><strong>Extra:</strong> cambia <code>n = 7</code> por <code>n = 8</code>. Como 8 no es primo, algunas filas ya no contienen todos los números.</p>
 </div>
 </div>
@@ -2000,73 +1213,8 @@ eyJhdHRyIjp7ImNoZWNrIjp0cnVlLCJlZGl0Ijp0cnVlLCJldmFsIjp0cnVlLCJleGVyY2lzZSI6InZp
 </div>
 </section>
 </section>
-<section id="reto-final-discute-la-curva-completa" class="level2" data-number="64.11">
-<h2 data-number="64.11" class="anchored" data-anchor-id="reto-final-discute-la-curva-completa"><span class="header-section-number">64.11</span> Reto final: discute la curva completa</h2>
-<p>Discute la curva <span class="math inline">\(y^2 = x(x - 2)\)</span> (ejercicio 2b) en un solo programa:</p>
-<ol type="1">
-<li>Intersecciones con los ejes.</li>
-<li>Simetrías respecto al eje <span class="math inline">\(x\)</span>, al eje <span class="math inline">\(y\)</span> y al origen.</li>
-<li>Valores de <span class="math inline">\(x\)</span> para los que existen puntos reales.</li>
-<li>Su gráfica con la región de existencia sombreada.</li>
-<li>Deja en la <strong>última línea</strong> la tupla <code>(cortes_eje_x, simetrica_eje_x)</code> con la lista de cortes con el eje <span class="math inline">\(x\)</span> ordenada y si es simétrica respecto al eje <span class="math inline">\(x\)</span>.</li>
-</ol>
-<div class="cell" data-exercise="reto_vis2">
-<div>
-<div id="pyodide-13" class="exercise-cell">
-
-</div>
-<script type="pyodide-13-contents">
-eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWUsImV4ZXJjaXNlIjoicmV0b192aXMyIn0sImNvZGUiOiJpbXBvcnQgbnVtcHkgYXMgbnBcbmltcG9ydCBtYXRwbG90bGliLnB5cGxvdCBhcyBwbHRcbmltcG9ydCBzeW1weSBhcyBzcFxuXG54LCB5ID0gc3Auc3ltYm9scyhcInggeVwiLCByZWFsPVRydWUpXG5GID0geSoqMiAtIHgqKHggLSAyKVxuXG5jb3J0ZXNfZWplX3ggPSBzb3J0ZWQoc3Auc29sdmUoRi5zdWJzKHksIDApLCB4KSlcbmNvcnRlc19lamVfeSA9IHNwLnNvbHZlKEYuc3Vicyh4LCAwKSwgeSlcbnNpbWV0cmljYV9lamVfeCA9IF9fX19fX1xuc2ltZXRyaWNhX2VqZV95ID0gX19fX19fXG5leGlzdGVuY2lhID0gc3Auc29sdmVzZXQoX19fX19fID49IDAsIHgsIHNwLlMuUmVhbHMpXG5cbnByaW50KFwiQ29ydGVzIGNvbiBlbCBlamUgeDpcIiwgY29ydGVzX2VqZV94LCBcIiBjb24gZWwgZWplIHk6XCIsIGNvcnRlc19lamVfeSlcbnByaW50KFwiU2ltw6l0cmljYSBlamUgeDpcIiwgc2ltZXRyaWNhX2VqZV94LCBcIiBlamUgeTpcIiwgc2ltZXRyaWNhX2VqZV95KVxucHJpbnQoXCJFeGlzdGUgcGFyYSB4IGVuOlwiLCBleGlzdGVuY2lhKVxuXG5YLCBZID0gbnAubWVzaGdyaWQobnAubGluc3BhY2UoLTQsIDYsIDQwMCksIG5wLmxpbnNwYWNlKC01LCA1LCA0MDApKVxucGx0LmF4dnNwYW4oLTQsIDAsIGNvbG9yPVwib3JhbmdlXCIsIGFscGhhPTAuMTUpXG5wbHQuYXh2c3BhbigyLCA2LCBjb2xvcj1cIm9yYW5nZVwiLCBhbHBoYT0wLjE1KVxucGx0LmNvbnRvdXIoWCwgWSwgWSoqMiAtIFggKiAoWCAtIDIpLCBsZXZlbHM9WzBdLCBjb2xvcnM9XCJ0YWI6b3JhbmdlXCIpXG5wbHQuYXhobGluZSgwLCBjb2xvcj1cImJsYWNrXCIsIGxpbmV3aWR0aD0wLjgpXG5wbHQuYXh2bGluZSgwLCBjb2xvcj1cImJsYWNrXCIsIGxpbmV3aWR0aD0wLjgpXG5wbHQuZ2NhKCkuc2V0X2FzcGVjdChcImVxdWFsXCIpXG5wbHQuc2hvdygpXG5cbihjb3J0ZXNfZWplX3gsIHNpbWV0cmljYV9lamVfeCkifQ==
-</script>
-</div>
-</div>
-<div class="cell" data-exercise="reto_vis2" data-check="true">
-<script type="exercise-check-reto_vis2-contents">
-eyJhdHRyIjp7ImNoZWNrIjp0cnVlLCJlZGl0Ijp0cnVlLCJldmFsIjp0cnVlLCJleGVyY2lzZSI6InJldG9fdmlzMiJ9LCJjb2RlIjoiaWYgcmVzdWx0ID09IChbMCwgMl0sIFRydWUpOlxuICAgIGZlZWRiYWNrID0ge1wiY29ycmVjdFwiOiBUcnVlLCBcIm1lc3NhZ2VcIjogXCLCoUV4Y2VsZW50ZSEgQ29ydGEgYWwgZWplIHggZW4gMCB5IDIsIGVzIHNpbcOpdHJpY2EgcmVzcGVjdG8gYWwgZWplIHggeSBleGlzdGUgcGFyYSB4IOKJpCAwIG8geCDiiaUgMjogZXMgdW5hIGhpcMOpcmJvbGEuXCJ9XG5lbGlmIGlzaW5zdGFuY2UocmVzdWx0LCB0dXBsZSkgYW5kIHJlc3VsdFswXSA9PSBbMCwgMl06XG4gICAgZmVlZGJhY2sgPSB7XCJjb3JyZWN0XCI6IEZhbHNlLCBcIm1lc3NhZ2VcIjogXCJMb3MgY29ydGVzIHNvbiBjb3JyZWN0b3MuIFJldmlzYSBsYSBzaW1ldHLDrWE6IGNvbXBhcmEgRiBjb24gRiBhbCBjYW1iaWFyIHkgcG9yIC15LlwifVxuZWxzZTpcbiAgICBmZWVkYmFjayA9IHtcImNvcnJlY3RcIjogRmFsc2UsIFwibWVzc2FnZVwiOiBcIkxhIMO6bHRpbWEgbMOtbmVhIGRlYmUgc2VyIChjb3J0ZXNfZWplX3gsIHNpbWV0cmljYV9lamVfeCkuXCJ9XG5mZWVkYmFjayJ9
-</script>
-</div>
-<div class="hint webr-ojs-exercise exercise-hint d-none" data-exercise="reto_vis2">
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-14-contents" aria-controls="callout-14" aria-expanded="true" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Nota</span>Pista
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-14" class="callout-14-contents callout-collapse collapse show">
-<div class="callout-body-container callout-body">
-<p>Para la simetría respecto al eje <span class="math inline">\(x\)</span>: <code>sp.expand(F.subs(y, -y) - F) == 0</code>. La condición de existencia es que el lado derecho no sea negativo: <code>x*(x - 2) &gt;= 0</code>.</p>
-</div>
-</div>
-</div>
-</div>
-<div class="webr-ojs-exercise exercise-solution d-none" data-exercise="reto_vis2">
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-15-contents" aria-controls="callout-15" aria-expanded="true" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>Solución
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-15" class="callout-15-contents callout-collapse collapse show">
-<div class="callout-body-container callout-body">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb56"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a>simetrica_eje_x <span class="op">=</span> sp.expand(F.subs(y, <span class="op">-</span>y) <span class="op">-</span> F) <span class="op">==</span> <span class="dv">0</span>     <span class="co"># True</span></span>
-<span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a>simetrica_eje_y <span class="op">=</span> sp.expand(F.subs(x, <span class="op">-</span>x) <span class="op">-</span> F) <span class="op">==</span> <span class="dv">0</span>     <span class="co"># False</span></span>
-<span id="cb56-3"><a href="#cb56-3" aria-hidden="true" tabindex="-1"></a>existencia <span class="op">=</span> sp.solveset(x<span class="op">*</span>(x <span class="op">-</span> <span class="dv">2</span>) <span class="op">&gt;=</span> <span class="dv">0</span>, x, sp.S.Reals) <span class="co"># (-oo, 0] ∪ [2, oo)</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Completando el cuadrado, <span class="math inline">\(y^2 = x^2 - 2x\)</span> es <span class="math inline">\((x - 1)^2 - y^2 = 1\)</span>: una <strong>hipérbola</strong> con centro en <span class="math inline">\((1, 0)\)</span>.</p>
-</div>
-</div>
-</div>
-</div>
-</section>
-<section id="resumen" class="level2" data-number="64.12">
-<h2 data-number="64.12" class="anchored" data-anchor-id="resumen"><span class="header-section-number">64.12</span> Resumen</h2>
+<section id="resumen" class="level2" data-number="67.4">
+<h2 data-number="67.4" class="anchored" data-anchor-id="resumen"><span class="header-section-number">67.4</span> Resumen</h2>
 <table class="caption-top table">
 <colgroup>
 <col style="width: 50%">
@@ -2080,52 +1228,21 @@ eyJhdHRyIjp7ImNoZWNrIjp0cnVlLCJlZGl0Ijp0cnVlLCJldmFsIjp0cnVlLCJleGVyY2lzZSI6InJl
 </thead>
 <tbody>
 <tr class="odd">
-<td>Plano cartesiano</td>
-<td><code>ax.spines[...].set_position("zero")</code> y <code>ax.set_aspect("equal")</code></td>
-</tr>
-<tr class="even">
-<td>Curvas implícitas</td>
-<td><code>ax.contour(X, Y, F, levels=[0])</code></td>
-</tr>
-<tr class="odd">
-<td>Paramétricas y polares</td>
-<td><code>ax.plot(x(t), y(t))</code>, con <code>x = r cos θ</code>, <code>y = r sin θ</code></td>
-</tr>
-<tr class="even">
-<td>Discutir una curva</td>
-<td>SymPy: <code>solve</code> (cortes), <code>subs</code> (simetrías), <code>limit</code> (asíntotas), <code>solveset</code> (extensión)</td>
-</tr>
-<tr class="odd">
-<td>Asíntotas</td>
-<td><code>ax.axvline()</code>, <code>ax.axhline()</code> y <code>np.nan</code> para cortar la línea</td>
-</tr>
-<tr class="even">
-<td>Regiones</td>
-<td><code>ax.axvspan()</code></td>
-</tr>
-<tr class="odd">
-<td>Lugares geométricos</td>
-<td>Distancia al cuadrado + <code>sp.expand()</code> / <code>sp.factor()</code> + gráfica</td>
-</tr>
-<tr class="even">
 <td>Seaborn</td>
 <td><code>histplot</code>, <code>violinplot</code>, <code>pairplot</code>, <code>heatmap</code>, con <code>hue</code> y <code>ax=</code></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td>Mapas de calor 2D</td>
 <td><code>imshow</code>, <code>pcolormesh</code>, <code>sns.heatmap</code>; paletas secuenciales, divergentes y cualitativas</td>
 </tr>
 </tbody>
 </table>
 </section>
-<section id="referencias" class="level2" data-number="64.13">
-<h2 data-number="64.13" class="anchored" data-anchor-id="referencias"><span class="header-section-number">64.13</span> Referencias</h2>
+<section id="referencias" class="level2" data-number="67.5">
+<h2 data-number="67.5" class="anchored" data-anchor-id="referencias"><span class="header-section-number">67.5</span> Referencias</h2>
 <ul>
-<li><a href="https://matplotlib.org/stable/gallery/spines/spine_placement_demo.html">Matplotlib: posición de los ejes (<em>spines</em>)</a></li>
-<li><a href="https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.contour.html">Matplotlib: <code>contour</code></a></li>
 <li><a href="https://seaborn.pydata.org/tutorial.html">Seaborn: tutorial oficial</a></li>
 <li><a href="https://matplotlib.org/stable/users/explain/colors/colormaps.html">Matplotlib: elegir mapas de colores</a></li>
-<li>Hoja de ejercicios <em>Curvas y Lugares Geométricos</em>, Geometría Analítica, semestre 2027-1.</li>
 </ul>
 
 
@@ -2133,7 +1250,7 @@ eyJhdHRyIjp7ImNoZWNrIjp0cnVlLCJlZGl0Ijp0cnVlLCJldmFsIjp0cnVlLCJleGVyY2lzZSI6InJl
 eyJvcHRpb25zIjp7ImVudiI6eyJQTE9UTFlfUkVOREVSRVIiOiJwbG90bHlfbWltZXR5cGUifSwiaW5kZXhVUkwiOiJodHRwczovL2Nkbi5qc2RlbGl2ci5uZXQvcHlvZGlkZS92MC4yOC4xL2Z1bGwvIn0sInBhY2thZ2VzIjp7InBrZ3MiOlsicHlvZGlkZV9odHRwIiwibWljcm9waXAiLCJpcHl0aG9uIl19fQ==
 </script>
 <script type="ojs-module-contents">
-eyJjb250ZW50cyI6W3siY2VsbE5hbWUiOiJweW9kaWRlLTEzIiwiaW5saW5lIjpmYWxzZSwibWV0aG9kTmFtZSI6ImludGVycHJldCIsInNvdXJjZSI6InZpZXdvZiBfcHlvZGlkZV9lZGl0b3JfMTMgPSB7XG4gIGNvbnN0IHsgUHlvZGlkZUV4ZXJjaXNlRWRpdG9yLCBiNjREZWNvZGUgfSA9IHdpbmRvdy5fZXhlcmNpc2Vfb2pzX3J1bnRpbWU7XG5cbiAgY29uc3Qgc2NyaXB0Q29udGVudCA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoYHNjcmlwdFt0eXBlPVxcXCJweW9kaWRlLTEzLWNvbnRlbnRzXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgYmxvY2sgPSBKU09OLnBhcnNlKGI2NERlY29kZShzY3JpcHRDb250ZW50KSk7XG5cbiAgLy8gRGVmYXVsdCBleGVyY2lzZSBjb25maWd1cmF0aW9uXG4gIGNvbnN0IG9wdGlvbnMgPSBPYmplY3QuYXNzaWduKFxuICAgIHtcbiAgICAgIGlkOiBcInB5b2RpZGUtMTMtY29udGVudHNcIixcbiAgICAgIGVudmlyOiBgZXhlcmNpc2UtZW52LSR7YmxvY2suYXR0ci5leGVyY2lzZX1gLFxuICAgICAgZXJyb3I6IGZhbHNlLFxuICAgICAgY2FwdGlvbjogJ0V4ZXJjaXNlJyxcbiAgICB9LFxuICAgIGJsb2NrLmF0dHJcbiAgKTtcblxuICBjb25zdCBlZGl0b3IgPSBuZXcgUHlvZGlkZUV4ZXJjaXNlRWRpdG9yKHB5b2RpZGVPanMucHlvZGlkZVByb21pc2UsIGJsb2NrLmNvZGUsIG9wdGlvbnMpO1xuICByZXR1cm4gZWRpdG9yLmNvbnRhaW5lcjtcbn1cbnZpZXdvZiBfcHlvZGlkZV92YWx1ZV8xMyA9IHB5b2RpZGVPanMucHJvY2VzcyhfcHlvZGlkZV9lZGl0b3JfMTMsIHt9KTtcbl9weW9kaWRlX2ZlZWRiYWNrXzEzID0ge1xuICBjb25zdCB7IFB5b2RpZGVHcmFkZXIgfSA9IHdpbmRvdy5fZXhlcmNpc2Vfb2pzX3J1bnRpbWU7XG4gIGNvbnN0IGVtcHR5RmVlZGJhY2sgPSBkb2N1bWVudC5jcmVhdGVFbGVtZW50KCdkaXYnKTtcblxuICBjb25zdCBncmFkZXIgPSBuZXcgUHlvZGlkZUdyYWRlcihfcHlvZGlkZV92YWx1ZV8xMy5ldmFsdWF0b3IpO1xuICBjb25zdCBmZWVkYmFjayA9IGF3YWl0IGdyYWRlci5ncmFkZUV4ZXJjaXNlKCk7XG4gIGlmICghZmVlZGJhY2spIHJldHVybiBlbXB0eUZlZWRiYWNrO1xuICByZXR1cm4gZmVlZGJhY2s7XG59XG4ifSx7ImNlbGxOYW1lIjoicHlvZGlkZS0xMSIsImlubGluZSI6ZmFsc2UsIm1ldGhvZE5hbWUiOiJpbnRlcnByZXQiLCJzb3VyY2UiOiJ2aWV3b2YgX3B5b2RpZGVfZWRpdG9yXzExID0ge1xuICBjb25zdCB7IFB5b2RpZGVFeGVyY2lzZUVkaXRvciwgYjY0RGVjb2RlIH0gPSB3aW5kb3cuX2V4ZXJjaXNlX29qc19ydW50aW1lO1xuXG4gIGNvbnN0IHNjcmlwdENvbnRlbnQgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKGBzY3JpcHRbdHlwZT1cXFwicHlvZGlkZS0xMS1jb250ZW50c1xcXCJdYCkudGV4dENvbnRlbnQ7XG4gIGNvbnN0IGJsb2NrID0gSlNPTi5wYXJzZShiNjREZWNvZGUoc2NyaXB0Q29udGVudCkpO1xuXG4gIC8vIERlZmF1bHQgZXhlcmNpc2UgY29uZmlndXJhdGlvblxuICBjb25zdCBvcHRpb25zID0gT2JqZWN0LmFzc2lnbihcbiAgICB7XG4gICAgICBpZDogXCJweW9kaWRlLTExLWNvbnRlbnRzXCIsXG4gICAgICBlbnZpcjogYGV4ZXJjaXNlLWVudi0ke2Jsb2NrLmF0dHIuZXhlcmNpc2V9YCxcbiAgICAgIGVycm9yOiBmYWxzZSxcbiAgICAgIGNhcHRpb246ICdFeGVyY2lzZScsXG4gICAgfSxcbiAgICBibG9jay5hdHRyXG4gICk7XG5cbiAgY29uc3QgZWRpdG9yID0gbmV3IFB5b2RpZGVFeGVyY2lzZUVkaXRvcihweW9kaWRlT2pzLnB5b2RpZGVQcm9taXNlLCBibG9jay5jb2RlLCBvcHRpb25zKTtcbiAgcmV0dXJuIGVkaXRvci5jb250YWluZXI7XG59XG52aWV3b2YgX3B5b2RpZGVfdmFsdWVfMTEgPSBweW9kaWRlT2pzLnByb2Nlc3MoX3B5b2RpZGVfZWRpdG9yXzExLCB7fSk7XG5fcHlvZGlkZV9mZWVkYmFja18xMSA9IHtcbiAgY29uc3QgeyBQeW9kaWRlR3JhZGVyIH0gPSB3aW5kb3cuX2V4ZXJjaXNlX29qc19ydW50aW1lO1xuICBjb25zdCBlbXB0eUZlZWRiYWNrID0gZG9jdW1lbnQuY3JlYXRlRWxlbWVudCgnZGl2Jyk7XG5cbiAgY29uc3QgZ3JhZGVyID0gbmV3IFB5b2RpZGVHcmFkZXIoX3B5b2RpZGVfdmFsdWVfMTEuZXZhbHVhdG9yKTtcbiAgY29uc3QgZmVlZGJhY2sgPSBhd2FpdCBncmFkZXIuZ3JhZGVFeGVyY2lzZSgpO1xuICBpZiAoIWZlZWRiYWNrKSByZXR1cm4gZW1wdHlGZWVkYmFjaztcbiAgcmV0dXJuIGZlZWRiYWNrO1xufVxuIn0seyJjZWxsTmFtZSI6InB5b2RpZGUtOSIsImlubGluZSI6ZmFsc2UsIm1ldGhvZE5hbWUiOiJpbnRlcnByZXQiLCJzb3VyY2UiOiJ2aWV3b2YgX3B5b2RpZGVfZWRpdG9yXzkgPSB7XG4gIGNvbnN0IHsgUHlvZGlkZUV4ZXJjaXNlRWRpdG9yLCBiNjREZWNvZGUgfSA9IHdpbmRvdy5fZXhlcmNpc2Vfb2pzX3J1bnRpbWU7XG5cbiAgY29uc3Qgc2NyaXB0Q29udGVudCA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoYHNjcmlwdFt0eXBlPVxcXCJweW9kaWRlLTktY29udGVudHNcXFwiXWApLnRleHRDb250ZW50O1xuICBjb25zdCBibG9jayA9IEpTT04ucGFyc2UoYjY0RGVjb2RlKHNjcmlwdENvbnRlbnQpKTtcblxuICAvLyBEZWZhdWx0IGV4ZXJjaXNlIGNvbmZpZ3VyYXRpb25cbiAgY29uc3Qgb3B0aW9ucyA9IE9iamVjdC5hc3NpZ24oXG4gICAge1xuICAgICAgaWQ6IFwicHlvZGlkZS05LWNvbnRlbnRzXCIsXG4gICAgICBlbnZpcjogYGV4ZXJjaXNlLWVudi0ke2Jsb2NrLmF0dHIuZXhlcmNpc2V9YCxcbiAgICAgIGVycm9yOiBmYWxzZSxcbiAgICAgIGNhcHRpb246ICdFeGVyY2lzZScsXG4gICAgfSxcbiAgICBibG9jay5hdHRyXG4gICk7XG5cbiAgY29uc3QgZWRpdG9yID0gbmV3IFB5b2RpZGVFeGVyY2lzZUVkaXRvcihweW9kaWRlT2pzLnB5b2RpZGVQcm9taXNlLCBibG9jay5jb2RlLCBvcHRpb25zKTtcbiAgcmV0dXJuIGVkaXRvci5jb250YWluZXI7XG59XG52aWV3b2YgX3B5b2RpZGVfdmFsdWVfOSA9IHB5b2RpZGVPanMucHJvY2VzcyhfcHlvZGlkZV9lZGl0b3JfOSwge30pO1xuX3B5b2RpZGVfZmVlZGJhY2tfOSA9IHtcbiAgY29uc3QgeyBQeW9kaWRlR3JhZGVyIH0gPSB3aW5kb3cuX2V4ZXJjaXNlX29qc19ydW50aW1lO1xuICBjb25zdCBlbXB0eUZlZWRiYWNrID0gZG9jdW1lbnQuY3JlYXRlRWxlbWVudCgnZGl2Jyk7XG5cbiAgY29uc3QgZ3JhZGVyID0gbmV3IFB5b2RpZGVHcmFkZXIoX3B5b2RpZGVfdmFsdWVfOS5ldmFsdWF0b3IpO1xuICBjb25zdCBmZWVkYmFjayA9IGF3YWl0IGdyYWRlci5ncmFkZUV4ZXJjaXNlKCk7XG4gIGlmICghZmVlZGJhY2spIHJldHVybiBlbXB0eUZlZWRiYWNrO1xuICByZXR1cm4gZmVlZGJhY2s7XG59XG4ifSx7ImNlbGxOYW1lIjoicHlvZGlkZS03IiwiaW5saW5lIjpmYWxzZSwibWV0aG9kTmFtZSI6ImludGVycHJldCIsInNvdXJjZSI6InZpZXdvZiBfcHlvZGlkZV9lZGl0b3JfNyA9IHtcbiAgY29uc3QgeyBQeW9kaWRlRXhlcmNpc2VFZGl0b3IsIGI2NERlY29kZSB9ID0gd2luZG93Ll9leGVyY2lzZV9vanNfcnVudGltZTtcblxuICBjb25zdCBzY3JpcHRDb250ZW50ID0gZG9jdW1lbnQucXVlcnlTZWxlY3Rvcihgc2NyaXB0W3R5cGU9XFxcInB5b2RpZGUtNy1jb250ZW50c1xcXCJdYCkudGV4dENvbnRlbnQ7XG4gIGNvbnN0IGJsb2NrID0gSlNPTi5wYXJzZShiNjREZWNvZGUoc2NyaXB0Q29udGVudCkpO1xuXG4gIC8vIERlZmF1bHQgZXhlcmNpc2UgY29uZmlndXJhdGlvblxuICBjb25zdCBvcHRpb25zID0gT2JqZWN0LmFzc2lnbihcbiAgICB7XG4gICAgICBpZDogXCJweW9kaWRlLTctY29udGVudHNcIixcbiAgICAgIGVudmlyOiBgZXhlcmNpc2UtZW52LSR7YmxvY2suYXR0ci5leGVyY2lzZX1gLFxuICAgICAgZXJyb3I6IGZhbHNlLFxuICAgICAgY2FwdGlvbjogJ0V4ZXJjaXNlJyxcbiAgICB9LFxuICAgIGJsb2NrLmF0dHJcbiAgKTtcblxuICBjb25zdCBlZGl0b3IgPSBuZXcgUHlvZGlkZUV4ZXJjaXNlRWRpdG9yKHB5b2RpZGVPanMucHlvZGlkZVByb21pc2UsIGJsb2NrLmNvZGUsIG9wdGlvbnMpO1xuICByZXR1cm4gZWRpdG9yLmNvbnRhaW5lcjtcbn1cbnZpZXdvZiBfcHlvZGlkZV92YWx1ZV83ID0gcHlvZGlkZU9qcy5wcm9jZXNzKF9weW9kaWRlX2VkaXRvcl83LCB7fSk7XG5fcHlvZGlkZV9mZWVkYmFja183ID0ge1xuICBjb25zdCB7IFB5b2RpZGVHcmFkZXIgfSA9IHdpbmRvdy5fZXhlcmNpc2Vfb2pzX3J1bnRpbWU7XG4gIGNvbnN0IGVtcHR5RmVlZGJhY2sgPSBkb2N1bWVudC5jcmVhdGVFbGVtZW50KCdkaXYnKTtcblxuICBjb25zdCBncmFkZXIgPSBuZXcgUHlvZGlkZUdyYWRlcihfcHlvZGlkZV92YWx1ZV83LmV2YWx1YXRvcik7XG4gIGNvbnN0IGZlZWRiYWNrID0gYXdhaXQgZ3JhZGVyLmdyYWRlRXhlcmNpc2UoKTtcbiAgaWYgKCFmZWVkYmFjaykgcmV0dXJuIGVtcHR5RmVlZGJhY2s7XG4gIHJldHVybiBmZWVkYmFjaztcbn1cbiJ9LHsiY2VsbE5hbWUiOiJweW9kaWRlLTUiLCJpbmxpbmUiOmZhbHNlLCJtZXRob2ROYW1lIjoiaW50ZXJwcmV0Iiwic291cmNlIjoidmlld29mIF9weW9kaWRlX2VkaXRvcl81ID0ge1xuICBjb25zdCB7IFB5b2RpZGVFeGVyY2lzZUVkaXRvciwgYjY0RGVjb2RlIH0gPSB3aW5kb3cuX2V4ZXJjaXNlX29qc19ydW50aW1lO1xuXG4gIGNvbnN0IHNjcmlwdENvbnRlbnQgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKGBzY3JpcHRbdHlwZT1cXFwicHlvZGlkZS01LWNvbnRlbnRzXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgYmxvY2sgPSBKU09OLnBhcnNlKGI2NERlY29kZShzY3JpcHRDb250ZW50KSk7XG5cbiAgLy8gRGVmYXVsdCBleGVyY2lzZSBjb25maWd1cmF0aW9uXG4gIGNvbnN0IG9wdGlvbnMgPSBPYmplY3QuYXNzaWduKFxuICAgIHtcbiAgICAgIGlkOiBcInB5b2RpZGUtNS1jb250ZW50c1wiLFxuICAgICAgZW52aXI6IGBleGVyY2lzZS1lbnYtJHtibG9jay5hdHRyLmV4ZXJjaXNlfWAsXG4gICAgICBlcnJvcjogZmFsc2UsXG4gICAgICBjYXB0aW9uOiAnRXhlcmNpc2UnLFxuICAgIH0sXG4gICAgYmxvY2suYXR0clxuICApO1xuXG4gIGNvbnN0IGVkaXRvciA9IG5ldyBQeW9kaWRlRXhlcmNpc2VFZGl0b3IocHlvZGlkZU9qcy5weW9kaWRlUHJvbWlzZSwgYmxvY2suY29kZSwgb3B0aW9ucyk7XG4gIHJldHVybiBlZGl0b3IuY29udGFpbmVyO1xufVxudmlld29mIF9weW9kaWRlX3ZhbHVlXzUgPSBweW9kaWRlT2pzLnByb2Nlc3MoX3B5b2RpZGVfZWRpdG9yXzUsIHt9KTtcbl9weW9kaWRlX2ZlZWRiYWNrXzUgPSB7XG4gIGNvbnN0IHsgUHlvZGlkZUdyYWRlciB9ID0gd2luZG93Ll9leGVyY2lzZV9vanNfcnVudGltZTtcbiAgY29uc3QgZW1wdHlGZWVkYmFjayA9IGRvY3VtZW50LmNyZWF0ZUVsZW1lbnQoJ2RpdicpO1xuXG4gIGNvbnN0IGdyYWRlciA9IG5ldyBQeW9kaWRlR3JhZGVyKF9weW9kaWRlX3ZhbHVlXzUuZXZhbHVhdG9yKTtcbiAgY29uc3QgZmVlZGJhY2sgPSBhd2FpdCBncmFkZXIuZ3JhZGVFeGVyY2lzZSgpO1xuICBpZiAoIWZlZWRiYWNrKSByZXR1cm4gZW1wdHlGZWVkYmFjaztcbiAgcmV0dXJuIGZlZWRiYWNrO1xufVxuIn0seyJjZWxsTmFtZSI6InB5b2RpZGUtMyIsImlubGluZSI6ZmFsc2UsIm1ldGhvZE5hbWUiOiJpbnRlcnByZXQiLCJzb3VyY2UiOiJ2aWV3b2YgX3B5b2RpZGVfZWRpdG9yXzMgPSB7XG4gIGNvbnN0IHsgUHlvZGlkZUV4ZXJjaXNlRWRpdG9yLCBiNjREZWNvZGUgfSA9IHdpbmRvdy5fZXhlcmNpc2Vfb2pzX3J1bnRpbWU7XG5cbiAgY29uc3Qgc2NyaXB0Q29udGVudCA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoYHNjcmlwdFt0eXBlPVxcXCJweW9kaWRlLTMtY29udGVudHNcXFwiXWApLnRleHRDb250ZW50O1xuICBjb25zdCBibG9jayA9IEpTT04ucGFyc2UoYjY0RGVjb2RlKHNjcmlwdENvbnRlbnQpKTtcblxuICAvLyBEZWZhdWx0IGV4ZXJjaXNlIGNvbmZpZ3VyYXRpb25cbiAgY29uc3Qgb3B0aW9ucyA9IE9iamVjdC5hc3NpZ24oXG4gICAge1xuICAgICAgaWQ6IFwicHlvZGlkZS0zLWNvbnRlbnRzXCIsXG4gICAgICBlbnZpcjogYGV4ZXJjaXNlLWVudi0ke2Jsb2NrLmF0dHIuZXhlcmNpc2V9YCxcbiAgICAgIGVycm9yOiBmYWxzZSxcbiAgICAgIGNhcHRpb246ICdFeGVyY2lzZScsXG4gICAgfSxcbiAgICBibG9jay5hdHRyXG4gICk7XG5cbiAgY29uc3QgZWRpdG9yID0gbmV3IFB5b2RpZGVFeGVyY2lzZUVkaXRvcihweW9kaWRlT2pzLnB5b2RpZGVQcm9taXNlLCBibG9jay5jb2RlLCBvcHRpb25zKTtcbiAgcmV0dXJuIGVkaXRvci5jb250YWluZXI7XG59XG52aWV3b2YgX3B5b2RpZGVfdmFsdWVfMyA9IHB5b2RpZGVPanMucHJvY2VzcyhfcHlvZGlkZV9lZGl0b3JfMywge30pO1xuX3B5b2RpZGVfZmVlZGJhY2tfMyA9IHtcbiAgY29uc3QgeyBQeW9kaWRlR3JhZGVyIH0gPSB3aW5kb3cuX2V4ZXJjaXNlX29qc19ydW50aW1lO1xuICBjb25zdCBlbXB0eUZlZWRiYWNrID0gZG9jdW1lbnQuY3JlYXRlRWxlbWVudCgnZGl2Jyk7XG5cbiAgY29uc3QgZ3JhZGVyID0gbmV3IFB5b2RpZGVHcmFkZXIoX3B5b2RpZGVfdmFsdWVfMy5ldmFsdWF0b3IpO1xuICBjb25zdCBmZWVkYmFjayA9IGF3YWl0IGdyYWRlci5ncmFkZUV4ZXJjaXNlKCk7XG4gIGlmICghZmVlZGJhY2spIHJldHVybiBlbXB0eUZlZWRiYWNrO1xuICByZXR1cm4gZmVlZGJhY2s7XG59XG4ifSx7ImNlbGxOYW1lIjoicHlvZGlkZS0xIiwiaW5saW5lIjpmYWxzZSwibWV0aG9kTmFtZSI6ImludGVycHJldCIsInNvdXJjZSI6InZpZXdvZiBfcHlvZGlkZV9lZGl0b3JfMSA9IHtcbiAgY29uc3QgeyBQeW9kaWRlRXhlcmNpc2VFZGl0b3IsIGI2NERlY29kZSB9ID0gd2luZG93Ll9leGVyY2lzZV9vanNfcnVudGltZTtcblxuICBjb25zdCBzY3JpcHRDb250ZW50ID0gZG9jdW1lbnQucXVlcnlTZWxlY3Rvcihgc2NyaXB0W3R5cGU9XFxcInB5b2RpZGUtMS1jb250ZW50c1xcXCJdYCkudGV4dENvbnRlbnQ7XG4gIGNvbnN0IGJsb2NrID0gSlNPTi5wYXJzZShiNjREZWNvZGUoc2NyaXB0Q29udGVudCkpO1xuXG4gIC8vIERlZmF1bHQgZXhlcmNpc2UgY29uZmlndXJhdGlvblxuICBjb25zdCBvcHRpb25zID0gT2JqZWN0LmFzc2lnbihcbiAgICB7XG4gICAgICBpZDogXCJweW9kaWRlLTEtY29udGVudHNcIixcbiAgICAgIGVudmlyOiBgZXhlcmNpc2UtZW52LSR7YmxvY2suYXR0ci5leGVyY2lzZX1gLFxuICAgICAgZXJyb3I6IGZhbHNlLFxuICAgICAgY2FwdGlvbjogJ0V4ZXJjaXNlJyxcbiAgICB9LFxuICAgIGJsb2NrLmF0dHJcbiAgKTtcblxuICBjb25zdCBlZGl0b3IgPSBuZXcgUHlvZGlkZUV4ZXJjaXNlRWRpdG9yKHB5b2RpZGVPanMucHlvZGlkZVByb21pc2UsIGJsb2NrLmNvZGUsIG9wdGlvbnMpO1xuICByZXR1cm4gZWRpdG9yLmNvbnRhaW5lcjtcbn1cbnZpZXdvZiBfcHlvZGlkZV92YWx1ZV8xID0gcHlvZGlkZU9qcy5wcm9jZXNzKF9weW9kaWRlX2VkaXRvcl8xLCB7fSk7XG5fcHlvZGlkZV9mZWVkYmFja18xID0ge1xuICBjb25zdCB7IFB5b2RpZGVHcmFkZXIgfSA9IHdpbmRvdy5fZXhlcmNpc2Vfb2pzX3J1bnRpbWU7XG4gIGNvbnN0IGVtcHR5RmVlZGJhY2sgPSBkb2N1bWVudC5jcmVhdGVFbGVtZW50KCdkaXYnKTtcblxuICBjb25zdCBncmFkZXIgPSBuZXcgUHlvZGlkZUdyYWRlcihfcHlvZGlkZV92YWx1ZV8xLmV2YWx1YXRvcik7XG4gIGNvbnN0IGZlZWRiYWNrID0gYXdhaXQgZ3JhZGVyLmdyYWRlRXhlcmNpc2UoKTtcbiAgaWYgKCFmZWVkYmFjaykgcmV0dXJuIGVtcHR5RmVlZGJhY2s7XG4gIHJldHVybiBmZWVkYmFjaztcbn1cbiJ9LHsiY2VsbE5hbWUiOiJweW9kaWRlLXByZWx1ZGUiLCJpbmxpbmUiOmZhbHNlLCJtZXRob2ROYW1lIjoiaW50ZXJwcmV0UXVpZXQiLCJzb3VyY2UiOiJweW9kaWRlT2pzID0ge1xuICBjb25zdCB7XG4gICAgUHlvZGlkZUV2YWx1YXRvcixcbiAgICBQeW9kaWRlRW52aXJvbm1lbnRNYW5hZ2VyLFxuICAgIHNldHVwUHl0aG9uLFxuICAgIHN0YXJ0UHlvZGlkZVdvcmtlcixcbiAgICBiNjREZWNvZGUsXG4gICAgY29sbGFwc2VQYXRoLFxuICB9ID0gd2luZG93Ll9leGVyY2lzZV9vanNfcnVudGltZTtcblxuICBjb25zdCBzdGF0dXNDb250YWluZXIgPSBkb2N1bWVudC5nZXRFbGVtZW50QnlJZChcImV4ZXJjaXNlLWxvYWRpbmctc3RhdHVzXCIpO1xuICBjb25zdCBpbmRpY2F0b3JDb250YWluZXIgPSBkb2N1bWVudC5nZXRFbGVtZW50QnlJZChcImV4ZXJjaXNlLWxvYWRpbmctaW5kaWNhdG9yXCIpO1xuICBpbmRpY2F0b3JDb250YWluZXIuY2xhc3NMaXN0LnJlbW92ZShcImQtbm9uZVwiKTtcblxuICBsZXQgc3RhdHVzVGV4dCA9IGRvY3VtZW50LmNyZWF0ZUVsZW1lbnQoXCJkaXZcIilcbiAgc3RhdHVzVGV4dC5jbGFzc0xpc3QgPSBcImV4ZXJjaXNlLWxvYWRpbmctZGV0YWlsc1wiO1xuICBzdGF0dXNUZXh0ID0gc3RhdHVzQ29udGFpbmVyLmFwcGVuZENoaWxkKHN0YXR1c1RleHQpO1xuICBzdGF0dXNUZXh0LnRleHRDb250ZW50ID0gYEluaXRpYWxpc2VgO1xuXG4gIC8vIEhvaXN0IGluZGljYXRvciBvdXQgZnJvbSBmaW5hbCBzbGlkZSB3aGVuIHJ1bm5pbmcgdW5kZXIgcmV2ZWFsXG4gIGNvbnN0IHJldmVhbFN0YXR1cyA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoXCIucmV2ZWFsIC5leGVyY2lzZS1sb2FkaW5nLWluZGljYXRvclwiKTtcbiAgaWYgKHJldmVhbFN0YXR1cykge1xuICAgIHJldmVhbFN0YXR1cy5yZW1vdmUoKTtcbiAgICBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKFwiLnJldmVhbCA+IC5zbGlkZXNcIikuYXBwZW5kQ2hpbGQocmV2ZWFsU3RhdHVzKTtcbiAgfVxuXG4gIC8vIE1ha2UgYW55IHJldmVhbCBzbGlkZXMgd2l0aCBsaXZlIGNlbGxzIHNjcm9sbGFibGVcbiAgZG9jdW1lbnQucXVlcnlTZWxlY3RvckFsbChcIi5yZXZlYWwgLmV4ZXJjaXNlLWNlbGxcIikuZm9yRWFjaCgoZWwpID0+IHtcbiAgICBlbC5jbG9zZXN0KCdzZWN0aW9uLnNsaWRlJykuY2xhc3NMaXN0LmFkZChcInNjcm9sbGFibGVcIik7XG4gIH0pXG5cbiAgLy8gUHlvZGlkZSBzdXBwbGVtZW50YWwgZGF0YSBhbmQgb3B0aW9uc1xuICBjb25zdCBkYXRhQ29udGVudCA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoYHNjcmlwdFt0eXBlPVxcXCJweW9kaWRlLWRhdGFcXFwiXWApLnRleHRDb250ZW50O1xuICBjb25zdCBkYXRhID0gSlNPTi5wYXJzZShiNjREZWNvZGUoZGF0YUNvbnRlbnQpKTtcblxuICAvLyBHcmFiIGxpc3Qgb2YgcmVzb3VyY2VzIHRvIGJlIGRvd25sb2FkZWRcbiAgY29uc3QgZmlsZXNDb250ZW50ID0gZG9jdW1lbnQucXVlcnlTZWxlY3Rvcihgc2NyaXB0W3R5cGU9XFxcInZmcy1maWxlXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgZmlsZXMgPSBKU09OLnBhcnNlKGI2NERlY29kZShmaWxlc0NvbnRlbnQpKTtcblxuICBsZXQgcHlvZGlkZVByb21pc2UgPSAoYXN5bmMgKCkgPT4ge1xuICAgIHN0YXR1c1RleHQudGV4dENvbnRlbnQgPSBgRG93bmxvYWRpbmcgUHlvZGlkZWA7XG4gICAgY29uc3QgcHlvZGlkZSA9IGF3YWl0IHN0YXJ0UHlvZGlkZVdvcmtlcihkYXRhLm9wdGlvbnMpO1xuXG4gICAgc3RhdHVzVGV4dC50ZXh0Q29udGVudCA9IGBEb3dubG9hZGluZyBwYWNrYWdlOiBtaWNyb3BpcGA7XG4gICAgYXdhaXQgcHlvZGlkZS5sb2FkUGFja2FnZShcIm1pY3JvcGlwXCIpO1xuICAgIGNvbnN0IG1pY3JvcGlwID0gYXdhaXQgcHlvZGlkZS5weWltcG9ydChcIm1pY3JvcGlwXCIpO1xuICAgIGF3YWl0IGRhdGEucGFja2FnZXMucGtncy5tYXAoKHBrZykgPT4gKCkgPT4ge1xuICAgICAgc3RhdHVzVGV4dC50ZXh0Q29udGVudCA9IGBEb3dubG9hZGluZyBwYWNrYWdlOiAke3BrZ31gO1xuICAgICAgcmV0dXJuIG1pY3JvcGlwLmluc3RhbGwocGtnKTtcbiAgICB9KS5yZWR1Y2UoKGN1ciwgbmV4dCkgPT4gY3VyLnRoZW4obmV4dCksIFByb21pc2UucmVzb2x2ZSgpKTtcbiAgICBhd2FpdCBtaWNyb3BpcC5kZXN0cm95KCk7XG5cbiAgICAvLyBEb3dubG9hZCBhbmQgaW5zdGFsbCByZXNvdXJjZXNcbiAgICBhd2FpdCBmaWxlcy5tYXAoKGZpbGUpID0+IGFzeW5jICgpID0+IHtcbiAgICAgIGNvbnN0IG5hbWUgPSBmaWxlLnN1YnN0cmluZyhmaWxlLmxhc3RJbmRleE9mKCcvJykgKyAxKTtcbiAgICAgIHN0YXR1c1RleHQudGV4dENvbnRlbnQgPSBgRG93bmxvYWRpbmcgcmVzb3VyY2U6ICR7bmFtZX1gO1xuICAgICAgY29uc3QgcmVzcG9uc2UgPSBhd2FpdCBmZXRjaChmaWxlKTtcbiAgICAgIGlmICghcmVzcG9uc2Uub2spIHtcbiAgICAgICAgdGhyb3cgbmV3IEVycm9yKGBDYW4ndCBkb3dubG9hZCBcXGAke2ZpbGV9XFxgLiBFcnJvciAke3Jlc3BvbnNlLnN0YXR1c306IFwiJHtyZXNwb25zZS5zdGF0dXNUZXh0fVwiLmApO1xuICAgICAgfVxuICAgICAgY29uc3QgZGF0YSA9IGF3YWl0IHJlc3BvbnNlLmFycmF5QnVmZmVyKCk7XG5cbiAgICAgIC8vIFN0b3JlIFVSTHMgaW4gdGhlIGN3ZCB3aXRob3V0IGFueSBzdWJkaXJlY3Rvcnkgc3RydWN0dXJlXG4gICAgICBpZiAoZmlsZS5pbmNsdWRlcyhcIjovL1wiKSkge1xuICAgICAgICBmaWxlID0gbmFtZTtcbiAgICAgIH1cblxuICAgICAgLy8gQ29sbGFwc2UgaGlnaGVyIGRpcmVjdG9yeSBzdHJ1Y3R1cmVcbiAgICAgIGZpbGUgPSBjb2xsYXBzZVBhdGgoZmlsZSk7XG5cbiAgICAgIC8vIENyZWF0ZSBkaXJlY3RvcnkgdHJlZSwgaWdub3JpbmcgXCJkaXJlY3RvcnkgZXhpc3RzXCIgVkZTIGVycm9yc1xuICAgICAgY29uc3QgcGFydHMgPSBmaWxlLnNwbGl0KCcvJykuc2xpY2UoMCwgLTEpO1xuICAgICAgbGV0IHBhdGggPSAnJztcbiAgICAgIHdoaWxlIChwYXJ0cy5sZW5ndGggPiAwKSB7XG4gICAgICAgIHBhdGggKz0gcGFydHMuc2hpZnQoKSArICcvJztcbiAgICAgICAgdHJ5IHtcbiAgICAgICAgICBhd2FpdCBweW9kaWRlLkZTLm1rZGlyKHBhdGgpO1xuICAgICAgICB9IGNhdGNoIChlKSB7XG4gICAgICAgICAgaWYgKGUubmFtZSAhPT0gXCJFcnJub0Vycm9yXCIpIHRocm93IGU7XG4gICAgICAgICAgaWYgKGUuZXJybm8gIT09IDIwKSB7XG4gICAgICAgICAgICBjb25zdCBlcnJvclRleHRQdHIgPSBhd2FpdCBweW9kaWRlLl9tb2R1bGUuX3N0cmVycm9yKGUuZXJybm8pO1xuICAgICAgICAgICAgY29uc3QgZXJyb3JUZXh0ID0gYXdhaXQgcHlvZGlkZS5fbW9kdWxlLlVURjhUb1N0cmluZyhlcnJvclRleHRQdHIpO1xuICAgICAgICAgICAgdGhyb3cgbmV3IEVycm9yKGBGaWxlc3lzdGVtIEVycm9yICR7ZS5lcnJub30gXCIke2Vycm9yVGV4dH1cIi5gKTtcbiAgICAgICAgICB9XG4gICAgICAgIH1cbiAgICAgIH1cblxuICAgICAgLy8gV3JpdGUgdGhpcyBmaWxlIHRvIHRoZSBWRlNcbiAgICAgIHRyeSB7XG4gICAgICAgIHJldHVybiBhd2FpdCBweW9kaWRlLkZTLndyaXRlRmlsZShmaWxlLCBuZXcgVWludDhBcnJheShkYXRhKSk7XG4gICAgICB9IGNhdGNoIChlKSB7XG4gICAgICAgIGlmIChlLm5hbWUgIT09IFwiRXJybm9FcnJvclwiKSB0aHJvdyBlO1xuICAgICAgICBjb25zdCBlcnJvclRleHRQdHIgPSBhd2FpdCBweW9kaWRlLl9tb2R1bGUuX3N0cmVycm9yKGUuZXJybm8pO1xuICAgICAgICBjb25zdCBlcnJvclRleHQgPSBhd2FpdCBweW9kaWRlLl9tb2R1bGUuVVRGOFRvU3RyaW5nKGVycm9yVGV4dFB0cik7XG4gICAgICAgIHRocm93IG5ldyBFcnJvcihgRmlsZXN5c3RlbSBFcnJvciAke2UuZXJybm99IFwiJHtlcnJvclRleHR9XCIuYCk7XG4gICAgICB9XG4gICAgfSkucmVkdWNlKChjdXIsIG5leHQpID0+IGN1ci50aGVuKG5leHQpLCBQcm9taXNlLnJlc29sdmUoKSk7XG5cbiAgICBzdGF0dXNUZXh0LnRleHRDb250ZW50ID0gYFB5b2RpZGUgZW52aXJvbm1lbnQgc2V0dXBgO1xuICAgIGF3YWl0IHNldHVwUHl0aG9uKHB5b2RpZGUpO1xuXG4gICAgc3RhdHVzVGV4dC5yZW1vdmUoKTtcbiAgICBpZiAoc3RhdHVzQ29udGFpbmVyLmNoaWxkcmVuLmxlbmd0aCA9PSAwKSB7XG4gICAgICBzdGF0dXNDb250YWluZXIucGFyZW50Tm9kZS5yZW1vdmUoKTtcbiAgICB9XG4gICAgcmV0dXJuIHB5b2RpZGU7XG4gIH0pKCkuY2F0Y2goKGVycikgPT4ge1xuICAgIHN0YXR1c1RleHQuc3R5bGUuY29sb3IgPSBcInZhcigtLWV4ZXJjaXNlLWVkaXRvci1obC1lciwgI0FEMDAwMClcIjtcbiAgICBzdGF0dXNUZXh0LnRleHRDb250ZW50ID0gZXJyLm1lc3NhZ2U7XG4gICAgLy9pbmRpY2F0b3JDb250YWluZXIucXVlcnlTZWxlY3RvcihcIi5zcGlubmVyLWdyb3dcIikuY2xhc3NMaXN0LmFkZChcImQtbm9uZVwiKTtcbiAgICB0aHJvdyBlcnI7XG4gIH0pO1xuXG4gIC8vIEtlZXAgdHJhY2sgb2YgaW5pdGlhbCBPSlMgYmxvY2sgcmVuZGVyXG4gIGNvbnN0IHJlbmRlcmVkT2pzID0ge307XG5cbiAgY29uc3QgcHJvY2VzcyA9IGFzeW5jIChjb250ZXh0LCBpbnB1dHMpID0+IHtcbiAgICBjb25zdCBweW9kaWRlID0gYXdhaXQgcHlvZGlkZVByb21pc2U7XG4gICAgY29uc3QgZXZhbHVhdG9yID0gbmV3IFB5b2RpZGVFdmFsdWF0b3IocHlvZGlkZSwgY29udGV4dCk7XG4gICAgYXdhaXQgZXZhbHVhdG9yLnByb2Nlc3MoaW5wdXRzKTtcbiAgICByZXR1cm4gZXZhbHVhdG9yLmNvbnRhaW5lcjtcbiAgfVxuXG4gIHJldHVybiB7XG4gICAgcHlvZGlkZVByb21pc2UsXG4gICAgcmVuZGVyZWRPanMsXG4gICAgcHJvY2VzcyxcbiAgfTtcbn1cbiJ9XX0=
+eyJjb250ZW50cyI6W3siY2VsbE5hbWUiOiJweW9kaWRlLTIiLCJpbmxpbmUiOmZhbHNlLCJtZXRob2ROYW1lIjoiaW50ZXJwcmV0Iiwic291cmNlIjoidmlld29mIF9weW9kaWRlX2VkaXRvcl8yID0ge1xuICBjb25zdCB7IFB5b2RpZGVFeGVyY2lzZUVkaXRvciwgYjY0RGVjb2RlIH0gPSB3aW5kb3cuX2V4ZXJjaXNlX29qc19ydW50aW1lO1xuXG4gIGNvbnN0IHNjcmlwdENvbnRlbnQgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKGBzY3JpcHRbdHlwZT1cXFwicHlvZGlkZS0yLWNvbnRlbnRzXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgYmxvY2sgPSBKU09OLnBhcnNlKGI2NERlY29kZShzY3JpcHRDb250ZW50KSk7XG5cbiAgLy8gRGVmYXVsdCBleGVyY2lzZSBjb25maWd1cmF0aW9uXG4gIGNvbnN0IG9wdGlvbnMgPSBPYmplY3QuYXNzaWduKFxuICAgIHtcbiAgICAgIGlkOiBcInB5b2RpZGUtMi1jb250ZW50c1wiLFxuICAgICAgZW52aXI6IGBleGVyY2lzZS1lbnYtJHtibG9jay5hdHRyLmV4ZXJjaXNlfWAsXG4gICAgICBlcnJvcjogZmFsc2UsXG4gICAgICBjYXB0aW9uOiAnRXhlcmNpc2UnLFxuICAgIH0sXG4gICAgYmxvY2suYXR0clxuICApO1xuXG4gIGNvbnN0IGVkaXRvciA9IG5ldyBQeW9kaWRlRXhlcmNpc2VFZGl0b3IocHlvZGlkZU9qcy5weW9kaWRlUHJvbWlzZSwgYmxvY2suY29kZSwgb3B0aW9ucyk7XG4gIHJldHVybiBlZGl0b3IuY29udGFpbmVyO1xufVxudmlld29mIF9weW9kaWRlX3ZhbHVlXzIgPSBweW9kaWRlT2pzLnByb2Nlc3MoX3B5b2RpZGVfZWRpdG9yXzIsIHt9KTtcbl9weW9kaWRlX2ZlZWRiYWNrXzIgPSB7XG4gIGNvbnN0IHsgUHlvZGlkZUdyYWRlciB9ID0gd2luZG93Ll9leGVyY2lzZV9vanNfcnVudGltZTtcbiAgY29uc3QgZW1wdHlGZWVkYmFjayA9IGRvY3VtZW50LmNyZWF0ZUVsZW1lbnQoJ2RpdicpO1xuXG4gIGNvbnN0IGdyYWRlciA9IG5ldyBQeW9kaWRlR3JhZGVyKF9weW9kaWRlX3ZhbHVlXzIuZXZhbHVhdG9yKTtcbiAgY29uc3QgZmVlZGJhY2sgPSBhd2FpdCBncmFkZXIuZ3JhZGVFeGVyY2lzZSgpO1xuICBpZiAoIWZlZWRiYWNrKSByZXR1cm4gZW1wdHlGZWVkYmFjaztcbiAgcmV0dXJuIGZlZWRiYWNrO1xufVxuIn0seyJjZWxsTmFtZSI6InB5b2RpZGUtMSIsImlubGluZSI6ZmFsc2UsIm1ldGhvZE5hbWUiOiJpbnRlcnByZXQiLCJzb3VyY2UiOiJ2aWV3b2YgX3B5b2RpZGVfZWRpdG9yXzEgPSB7XG4gIGNvbnN0IHsgUHlvZGlkZUV4ZXJjaXNlRWRpdG9yLCBiNjREZWNvZGUgfSA9IHdpbmRvdy5fZXhlcmNpc2Vfb2pzX3J1bnRpbWU7XG5cbiAgY29uc3Qgc2NyaXB0Q29udGVudCA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoYHNjcmlwdFt0eXBlPVxcXCJweW9kaWRlLTEtY29udGVudHNcXFwiXWApLnRleHRDb250ZW50O1xuICBjb25zdCBibG9jayA9IEpTT04ucGFyc2UoYjY0RGVjb2RlKHNjcmlwdENvbnRlbnQpKTtcblxuICAvLyBEZWZhdWx0IGV4ZXJjaXNlIGNvbmZpZ3VyYXRpb25cbiAgY29uc3Qgb3B0aW9ucyA9IE9iamVjdC5hc3NpZ24oXG4gICAge1xuICAgICAgaWQ6IFwicHlvZGlkZS0xLWNvbnRlbnRzXCIsXG4gICAgICBlbnZpcjogYGV4ZXJjaXNlLWVudi0ke2Jsb2NrLmF0dHIuZXhlcmNpc2V9YCxcbiAgICAgIGVycm9yOiBmYWxzZSxcbiAgICAgIGNhcHRpb246ICdFeGVyY2lzZScsXG4gICAgfSxcbiAgICBibG9jay5hdHRyXG4gICk7XG5cbiAgY29uc3QgZWRpdG9yID0gbmV3IFB5b2RpZGVFeGVyY2lzZUVkaXRvcihweW9kaWRlT2pzLnB5b2RpZGVQcm9taXNlLCBibG9jay5jb2RlLCBvcHRpb25zKTtcbiAgcmV0dXJuIGVkaXRvci5jb250YWluZXI7XG59XG52aWV3b2YgX3B5b2RpZGVfdmFsdWVfMSA9IHB5b2RpZGVPanMucHJvY2VzcyhfcHlvZGlkZV9lZGl0b3JfMSwge30pO1xuX3B5b2RpZGVfZmVlZGJhY2tfMSA9IHtcbiAgY29uc3QgeyBQeW9kaWRlR3JhZGVyIH0gPSB3aW5kb3cuX2V4ZXJjaXNlX29qc19ydW50aW1lO1xuICBjb25zdCBlbXB0eUZlZWRiYWNrID0gZG9jdW1lbnQuY3JlYXRlRWxlbWVudCgnZGl2Jyk7XG5cbiAgY29uc3QgZ3JhZGVyID0gbmV3IFB5b2RpZGVHcmFkZXIoX3B5b2RpZGVfdmFsdWVfMS5ldmFsdWF0b3IpO1xuICBjb25zdCBmZWVkYmFjayA9IGF3YWl0IGdyYWRlci5ncmFkZUV4ZXJjaXNlKCk7XG4gIGlmICghZmVlZGJhY2spIHJldHVybiBlbXB0eUZlZWRiYWNrO1xuICByZXR1cm4gZmVlZGJhY2s7XG59XG4ifSx7ImNlbGxOYW1lIjoicHlvZGlkZS1wcmVsdWRlIiwiaW5saW5lIjpmYWxzZSwibWV0aG9kTmFtZSI6ImludGVycHJldFF1aWV0Iiwic291cmNlIjoicHlvZGlkZU9qcyA9IHtcbiAgY29uc3Qge1xuICAgIFB5b2RpZGVFdmFsdWF0b3IsXG4gICAgUHlvZGlkZUVudmlyb25tZW50TWFuYWdlcixcbiAgICBzZXR1cFB5dGhvbixcbiAgICBzdGFydFB5b2RpZGVXb3JrZXIsXG4gICAgYjY0RGVjb2RlLFxuICAgIGNvbGxhcHNlUGF0aCxcbiAgfSA9IHdpbmRvdy5fZXhlcmNpc2Vfb2pzX3J1bnRpbWU7XG5cbiAgY29uc3Qgc3RhdHVzQ29udGFpbmVyID0gZG9jdW1lbnQuZ2V0RWxlbWVudEJ5SWQoXCJleGVyY2lzZS1sb2FkaW5nLXN0YXR1c1wiKTtcbiAgY29uc3QgaW5kaWNhdG9yQ29udGFpbmVyID0gZG9jdW1lbnQuZ2V0RWxlbWVudEJ5SWQoXCJleGVyY2lzZS1sb2FkaW5nLWluZGljYXRvclwiKTtcbiAgaW5kaWNhdG9yQ29udGFpbmVyLmNsYXNzTGlzdC5yZW1vdmUoXCJkLW5vbmVcIik7XG5cbiAgbGV0IHN0YXR1c1RleHQgPSBkb2N1bWVudC5jcmVhdGVFbGVtZW50KFwiZGl2XCIpXG4gIHN0YXR1c1RleHQuY2xhc3NMaXN0ID0gXCJleGVyY2lzZS1sb2FkaW5nLWRldGFpbHNcIjtcbiAgc3RhdHVzVGV4dCA9IHN0YXR1c0NvbnRhaW5lci5hcHBlbmRDaGlsZChzdGF0dXNUZXh0KTtcbiAgc3RhdHVzVGV4dC50ZXh0Q29udGVudCA9IGBJbml0aWFsaXNlYDtcblxuICAvLyBIb2lzdCBpbmRpY2F0b3Igb3V0IGZyb20gZmluYWwgc2xpZGUgd2hlbiBydW5uaW5nIHVuZGVyIHJldmVhbFxuICBjb25zdCByZXZlYWxTdGF0dXMgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKFwiLnJldmVhbCAuZXhlcmNpc2UtbG9hZGluZy1pbmRpY2F0b3JcIik7XG4gIGlmIChyZXZlYWxTdGF0dXMpIHtcbiAgICByZXZlYWxTdGF0dXMucmVtb3ZlKCk7XG4gICAgZG9jdW1lbnQucXVlcnlTZWxlY3RvcihcIi5yZXZlYWwgPiAuc2xpZGVzXCIpLmFwcGVuZENoaWxkKHJldmVhbFN0YXR1cyk7XG4gIH1cblxuICAvLyBNYWtlIGFueSByZXZlYWwgc2xpZGVzIHdpdGggbGl2ZSBjZWxscyBzY3JvbGxhYmxlXG4gIGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3JBbGwoXCIucmV2ZWFsIC5leGVyY2lzZS1jZWxsXCIpLmZvckVhY2goKGVsKSA9PiB7XG4gICAgZWwuY2xvc2VzdCgnc2VjdGlvbi5zbGlkZScpLmNsYXNzTGlzdC5hZGQoXCJzY3JvbGxhYmxlXCIpO1xuICB9KVxuXG4gIC8vIFB5b2RpZGUgc3VwcGxlbWVudGFsIGRhdGEgYW5kIG9wdGlvbnNcbiAgY29uc3QgZGF0YUNvbnRlbnQgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKGBzY3JpcHRbdHlwZT1cXFwicHlvZGlkZS1kYXRhXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgZGF0YSA9IEpTT04ucGFyc2UoYjY0RGVjb2RlKGRhdGFDb250ZW50KSk7XG5cbiAgLy8gR3JhYiBsaXN0IG9mIHJlc291cmNlcyB0byBiZSBkb3dubG9hZGVkXG4gIGNvbnN0IGZpbGVzQ29udGVudCA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoYHNjcmlwdFt0eXBlPVxcXCJ2ZnMtZmlsZVxcXCJdYCkudGV4dENvbnRlbnQ7XG4gIGNvbnN0IGZpbGVzID0gSlNPTi5wYXJzZShiNjREZWNvZGUoZmlsZXNDb250ZW50KSk7XG5cbiAgbGV0IHB5b2RpZGVQcm9taXNlID0gKGFzeW5jICgpID0+IHtcbiAgICBzdGF0dXNUZXh0LnRleHRDb250ZW50ID0gYERvd25sb2FkaW5nIFB5b2RpZGVgO1xuICAgIGNvbnN0IHB5b2RpZGUgPSBhd2FpdCBzdGFydFB5b2RpZGVXb3JrZXIoZGF0YS5vcHRpb25zKTtcblxuICAgIHN0YXR1c1RleHQudGV4dENvbnRlbnQgPSBgRG93bmxvYWRpbmcgcGFja2FnZTogbWljcm9waXBgO1xuICAgIGF3YWl0IHB5b2RpZGUubG9hZFBhY2thZ2UoXCJtaWNyb3BpcFwiKTtcbiAgICBjb25zdCBtaWNyb3BpcCA9IGF3YWl0IHB5b2RpZGUucHlpbXBvcnQoXCJtaWNyb3BpcFwiKTtcbiAgICBhd2FpdCBkYXRhLnBhY2thZ2VzLnBrZ3MubWFwKChwa2cpID0+ICgpID0+IHtcbiAgICAgIHN0YXR1c1RleHQudGV4dENvbnRlbnQgPSBgRG93bmxvYWRpbmcgcGFja2FnZTogJHtwa2d9YDtcbiAgICAgIHJldHVybiBtaWNyb3BpcC5pbnN0YWxsKHBrZyk7XG4gICAgfSkucmVkdWNlKChjdXIsIG5leHQpID0+IGN1ci50aGVuKG5leHQpLCBQcm9taXNlLnJlc29sdmUoKSk7XG4gICAgYXdhaXQgbWljcm9waXAuZGVzdHJveSgpO1xuXG4gICAgLy8gRG93bmxvYWQgYW5kIGluc3RhbGwgcmVzb3VyY2VzXG4gICAgYXdhaXQgZmlsZXMubWFwKChmaWxlKSA9PiBhc3luYyAoKSA9PiB7XG4gICAgICBjb25zdCBuYW1lID0gZmlsZS5zdWJzdHJpbmcoZmlsZS5sYXN0SW5kZXhPZignLycpICsgMSk7XG4gICAgICBzdGF0dXNUZXh0LnRleHRDb250ZW50ID0gYERvd25sb2FkaW5nIHJlc291cmNlOiAke25hbWV9YDtcbiAgICAgIGNvbnN0IHJlc3BvbnNlID0gYXdhaXQgZmV0Y2goZmlsZSk7XG4gICAgICBpZiAoIXJlc3BvbnNlLm9rKSB7XG4gICAgICAgIHRocm93IG5ldyBFcnJvcihgQ2FuJ3QgZG93bmxvYWQgXFxgJHtmaWxlfVxcYC4gRXJyb3IgJHtyZXNwb25zZS5zdGF0dXN9OiBcIiR7cmVzcG9uc2Uuc3RhdHVzVGV4dH1cIi5gKTtcbiAgICAgIH1cbiAgICAgIGNvbnN0IGRhdGEgPSBhd2FpdCByZXNwb25zZS5hcnJheUJ1ZmZlcigpO1xuXG4gICAgICAvLyBTdG9yZSBVUkxzIGluIHRoZSBjd2Qgd2l0aG91dCBhbnkgc3ViZGlyZWN0b3J5IHN0cnVjdHVyZVxuICAgICAgaWYgKGZpbGUuaW5jbHVkZXMoXCI6Ly9cIikpIHtcbiAgICAgICAgZmlsZSA9IG5hbWU7XG4gICAgICB9XG5cbiAgICAgIC8vIENvbGxhcHNlIGhpZ2hlciBkaXJlY3Rvcnkgc3RydWN0dXJlXG4gICAgICBmaWxlID0gY29sbGFwc2VQYXRoKGZpbGUpO1xuXG4gICAgICAvLyBDcmVhdGUgZGlyZWN0b3J5IHRyZWUsIGlnbm9yaW5nIFwiZGlyZWN0b3J5IGV4aXN0c1wiIFZGUyBlcnJvcnNcbiAgICAgIGNvbnN0IHBhcnRzID0gZmlsZS5zcGxpdCgnLycpLnNsaWNlKDAsIC0xKTtcbiAgICAgIGxldCBwYXRoID0gJyc7XG4gICAgICB3aGlsZSAocGFydHMubGVuZ3RoID4gMCkge1xuICAgICAgICBwYXRoICs9IHBhcnRzLnNoaWZ0KCkgKyAnLyc7XG4gICAgICAgIHRyeSB7XG4gICAgICAgICAgYXdhaXQgcHlvZGlkZS5GUy5ta2RpcihwYXRoKTtcbiAgICAgICAgfSBjYXRjaCAoZSkge1xuICAgICAgICAgIGlmIChlLm5hbWUgIT09IFwiRXJybm9FcnJvclwiKSB0aHJvdyBlO1xuICAgICAgICAgIGlmIChlLmVycm5vICE9PSAyMCkge1xuICAgICAgICAgICAgY29uc3QgZXJyb3JUZXh0UHRyID0gYXdhaXQgcHlvZGlkZS5fbW9kdWxlLl9zdHJlcnJvcihlLmVycm5vKTtcbiAgICAgICAgICAgIGNvbnN0IGVycm9yVGV4dCA9IGF3YWl0IHB5b2RpZGUuX21vZHVsZS5VVEY4VG9TdHJpbmcoZXJyb3JUZXh0UHRyKTtcbiAgICAgICAgICAgIHRocm93IG5ldyBFcnJvcihgRmlsZXN5c3RlbSBFcnJvciAke2UuZXJybm99IFwiJHtlcnJvclRleHR9XCIuYCk7XG4gICAgICAgICAgfVxuICAgICAgICB9XG4gICAgICB9XG5cbiAgICAgIC8vIFdyaXRlIHRoaXMgZmlsZSB0byB0aGUgVkZTXG4gICAgICB0cnkge1xuICAgICAgICByZXR1cm4gYXdhaXQgcHlvZGlkZS5GUy53cml0ZUZpbGUoZmlsZSwgbmV3IFVpbnQ4QXJyYXkoZGF0YSkpO1xuICAgICAgfSBjYXRjaCAoZSkge1xuICAgICAgICBpZiAoZS5uYW1lICE9PSBcIkVycm5vRXJyb3JcIikgdGhyb3cgZTtcbiAgICAgICAgY29uc3QgZXJyb3JUZXh0UHRyID0gYXdhaXQgcHlvZGlkZS5fbW9kdWxlLl9zdHJlcnJvcihlLmVycm5vKTtcbiAgICAgICAgY29uc3QgZXJyb3JUZXh0ID0gYXdhaXQgcHlvZGlkZS5fbW9kdWxlLlVURjhUb1N0cmluZyhlcnJvclRleHRQdHIpO1xuICAgICAgICB0aHJvdyBuZXcgRXJyb3IoYEZpbGVzeXN0ZW0gRXJyb3IgJHtlLmVycm5vfSBcIiR7ZXJyb3JUZXh0fVwiLmApO1xuICAgICAgfVxuICAgIH0pLnJlZHVjZSgoY3VyLCBuZXh0KSA9PiBjdXIudGhlbihuZXh0KSwgUHJvbWlzZS5yZXNvbHZlKCkpO1xuXG4gICAgc3RhdHVzVGV4dC50ZXh0Q29udGVudCA9IGBQeW9kaWRlIGVudmlyb25tZW50IHNldHVwYDtcbiAgICBhd2FpdCBzZXR1cFB5dGhvbihweW9kaWRlKTtcblxuICAgIHN0YXR1c1RleHQucmVtb3ZlKCk7XG4gICAgaWYgKHN0YXR1c0NvbnRhaW5lci5jaGlsZHJlbi5sZW5ndGggPT0gMCkge1xuICAgICAgc3RhdHVzQ29udGFpbmVyLnBhcmVudE5vZGUucmVtb3ZlKCk7XG4gICAgfVxuICAgIHJldHVybiBweW9kaWRlO1xuICB9KSgpLmNhdGNoKChlcnIpID0+IHtcbiAgICBzdGF0dXNUZXh0LnN0eWxlLmNvbG9yID0gXCJ2YXIoLS1leGVyY2lzZS1lZGl0b3ItaGwtZXIsICNBRDAwMDApXCI7XG4gICAgc3RhdHVzVGV4dC50ZXh0Q29udGVudCA9IGVyci5tZXNzYWdlO1xuICAgIC8vaW5kaWNhdG9yQ29udGFpbmVyLnF1ZXJ5U2VsZWN0b3IoXCIuc3Bpbm5lci1ncm93XCIpLmNsYXNzTGlzdC5hZGQoXCJkLW5vbmVcIik7XG4gICAgdGhyb3cgZXJyO1xuICB9KTtcblxuICAvLyBLZWVwIHRyYWNrIG9mIGluaXRpYWwgT0pTIGJsb2NrIHJlbmRlclxuICBjb25zdCByZW5kZXJlZE9qcyA9IHt9O1xuXG4gIGNvbnN0IHByb2Nlc3MgPSBhc3luYyAoY29udGV4dCwgaW5wdXRzKSA9PiB7XG4gICAgY29uc3QgcHlvZGlkZSA9IGF3YWl0IHB5b2RpZGVQcm9taXNlO1xuICAgIGNvbnN0IGV2YWx1YXRvciA9IG5ldyBQeW9kaWRlRXZhbHVhdG9yKHB5b2RpZGUsIGNvbnRleHQpO1xuICAgIGF3YWl0IGV2YWx1YXRvci5wcm9jZXNzKGlucHV0cyk7XG4gICAgcmV0dXJuIGV2YWx1YXRvci5jb250YWluZXI7XG4gIH1cblxuICByZXR1cm4ge1xuICAgIHB5b2RpZGVQcm9taXNlLFxuICAgIHJlbmRlcmVkT2pzLFxuICAgIHByb2Nlc3MsXG4gIH07XG59XG4ifV19
 </script>
 <div id="exercise-loading-indicator" class="exercise-loading-indicator d-none d-flex align-items-center gap-2">
 <div id="exercise-loading-status" class="d-flex gap-2">
@@ -2601,13 +1718,13 @@ window._ojs.runtime.interpretFromScriptTags();
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./python_visualizacion.html" class="pagination-link" aria-label="Visualización de datos con Matplotlib y Plotly">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">63</span>&nbsp; <span class="chapter-title">Visualización de datos con Matplotlib y Plotly</span></span>
+      <a href="./python_visualizacion_plotly.html" class="pagination-link" aria-label="Varias gráficas en una figura y gráficas interactivas con Plotly">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">66</span>&nbsp; <span class="chapter-title">Varias gráficas en una figura y gráficas interactivas con Plotly</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="./python_aleatorios.html" class="pagination-link" aria-label="Números aleatorios y aplicaciones">
-        <span class="nav-page-text"><span class="chapter-number">65</span>&nbsp; <span class="chapter-title">Números aleatorios y aplicaciones</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">68</span>&nbsp; <span class="chapter-title">Números aleatorios y aplicaciones</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

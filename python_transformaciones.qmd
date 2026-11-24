@@ -287,7 +287,7 @@ En geometría analítica, **rotar los ejes** un ángulo $\theta$ permite elimina
 
 $$x = u\cos\theta - v\sin\theta, \qquad y = u\sin\theta + v\cos\theta$$
 
-Para la hipérbola $xy = 4$ (ejercicio 1c de la [parte II](python_visualizacion2.qmd)), con $\theta = 45°$:
+Para la hipérbola $xy = 4$ (ejercicio 1c, en [Visualización de datos con Matplotlib](python_visualizacion.qmd#discutir-una-curva-con-sympy-y-matplotlib)), con $\theta = 45°$:
 
 ```{python}
 import sympy as sp

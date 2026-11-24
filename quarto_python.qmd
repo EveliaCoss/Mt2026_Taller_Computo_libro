@@ -176,7 +176,7 @@ La instalación tarda algunos minutos y muestra muchos mensajes. Al final debe a
 | `seaborn` | Gráficas estadísticas, construidas sobre Matplotlib. | Visualización de datos. |
 | `scipy` | Herramientas científicas: estadística, optimización, álgebra lineal. | Cómputo científico. |
 | `sympy` | Cálculo simbólico (derivadas, integrales, ecuaciones). | [Cálculo simbólico con SymPy](python_sympy.qmd). |
-| `plotly` | Gráficas interactivas. | [Visualización de datos](python_visualizacion.qmd). |
+| `plotly` | Gráficas interactivas. | [Gráficas interactivas con Plotly](python_visualizacion_plotly.qmd#plotly-gráficas-interactivas). |
 
 ### Comprobar la instalación
 

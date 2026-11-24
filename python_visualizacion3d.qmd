@@ -267,7 +267,7 @@ Los puntos oscuros están cerca del origen y los claros en las esquinas del cubo
 
 ## Gráficas 3D interactivas con Plotly
 
-Las gráficas de Matplotlib son imágenes fijas: el punto de vista se elige al programarlas. Con Plotly puedes **girarlas con el ratón**, hacer zoom y ver el valor de cada punto. Usaremos el módulo `plotly.graph_objects` (`go`), que vimos en la [primera parte](python_visualizacion.qmd#superficie-en-3d).
+Las gráficas de Matplotlib son imágenes fijas: el punto de vista se elige al programarlas. Con Plotly puedes **girarlas con el ratón**, hacer zoom y ver el valor de cada punto. Usaremos el módulo `plotly.graph_objects` (`go`), que vimos en la [primera parte](python_visualizacion_plotly.qmd#superficie-en-3d).
 
 | Función de Plotly | ¿Qué dibuja? | Equivalente en Matplotlib |
 |------------------------|------------------------|------------------------|
@@ -356,7 +356,7 @@ fig.tight_layout()
 plt.show()
 ```
 
-Las curvas de nivel $x^2 - y^2 = c$ son **hipérbolas**: conectan esta gráfica con las cónicas de la [parte II](python_visualizacion2.qmd).
+Las curvas de nivel $x^2 - y^2 = c$ son **hipérbolas**: conectan esta gráfica con las cónicas de la [parte I](python_visualizacion.qmd#geometría-analítica-en-el-plano-curvas-y-lugares-geométricos).
 
 ### En una misma figura de Plotly: `make_subplots`
 
