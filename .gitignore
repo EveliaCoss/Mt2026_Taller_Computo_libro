@@ -6,3 +6,6 @@
 /.quarto/
 
 **/*.quarto_ipynb
+
+# Solución de las funciones del proyecto de ejemplo (solo local, para las profesoras)
+ejemplos/proyecto-conicas-ejemplo/funciones_solucion.py
