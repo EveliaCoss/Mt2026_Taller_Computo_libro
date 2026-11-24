@@ -6,7 +6,7 @@ engine: knitr
 
 {{< include ./_extensions/r-wasm/live/_knitr.qmd >}}
 
-> **Fecha:** 17 de noviembre, 2026
+> **Fecha:** 24 de noviembre, 2026
 
 Desde el inicio del curso hemos usado **funciones**: `print()`, `len()`, `type()`, `sum()`, `max()`... Son bloques de código con un nombre que realizan una tarea. En este capítulo aprenderemos a **crear nuestras propias funciones** y a escribirlas siguiendo **buenas prácticas**.
 
@@ -23,6 +23,8 @@ En este capítulo veremos:
 ## ¿Por qué crear funciones?
 
 Imagina que necesitas calcular el área de un círculo en varias partes de tu programa:
+
+![](figures/python_area_circulo.png){fig-align="center" width="70%"}
 
 ``` python
 area_1 = 3.141592653589793 * 2 ** 2
@@ -44,7 +46,7 @@ print(area_circulo(7.5))
 ```
 
 | Ventaja | ¿Qué significa? |
-|------------------------------------|------------------------------------|
+|----|----|
 | **Reutilizar** código | Escribes la lógica una vez y la usas muchas veces. |
 | **No repetirte** | Principio *DRY* (*Don't Repeat Yourself*): si algo cambia, lo cambias en un solo lugar. |
 | **Organizar** | Divides un problema grande en tareas pequeñas con nombres claros. |
@@ -55,6 +57,8 @@ Es la misma idea que una función en matemáticas: $f(x) = x^2 + 1$ recibe un va
 
 ## Definir y llamar una función
 
+![](figures/python_funciones_estructura.png){fig-align="center"}
+
 ``` python
 def nombre_funcion(parametro_1, parametro_2):
     """Descripción breve de lo que hace la función."""
@@ -63,7 +67,7 @@ def nombre_funcion(parametro_1, parametro_2):
 ```
 
 | Parte | ¿Qué es? |
-|------------------------------------|------------------------------------|
+|----|----|
 | `def` | Palabra reservada para **definir** una función. |
 | `nombre_funcion` | El nombre de la función (en `snake_case`, como las variables). |
 | `(parametro_1, parametro_2)` | Los **parámetros**: los datos que recibe. Puede no tener ninguno: `()`. |
@@ -103,6 +107,8 @@ La función debe **definirse antes** de llamarla. Si la llamas antes de la líne
 
 ### Argumentos por posición y por nombre
 
+![](figures/python_funcion_potencia.png){fig-align="center"}
+
 ```{python}
 def potencia(base, exponente):
     return base ** exponente
@@ -128,6 +134,8 @@ print(potencia(5, 3))     # Usa exponente=3 -> 125
 
 Ya usamos valores por defecto sin saberlo: `print()` tiene `sep=" "` y `end="\n"`, y `round()` tiene `ndigits=None`.
 
+![](figures/python_valores_por_defecto.png){fig-align="center"}
+
 ::: callout-warning
 Los parámetros con valor por defecto van **al final**: `def f(a, b=2)` es correcto, pero `def f(a=1, b)` produce un `SyntaxError`.
 :::
@@ -137,10 +145,12 @@ Los parámetros con valor por defecto van **al final**: `def f(a, b=2)` es corre
 Es la confusión más común al empezar:
 
 |   | `print()` | `return` |
-|------------------------|------------------------|------------------------|
+|----|----|----|
 | ¿Qué hace? | **Muestra** un valor en la pantalla. | **Regresa** un valor a quien llamó la función. |
 | ¿Se puede guardar el resultado? | **No**. | **Sí**: `x = funcion()`. |
 | ¿Termina la función? | No. | **Sí**, inmediatamente. |
+
+![](figures/python_return_vs_print.png){fig-align="center"}
 
 ```{python}
 def doble_con_print(x):
@@ -150,10 +160,11 @@ def doble_con_return(x):
     return x * 2
 
 a = doble_con_print(5)     # Muestra 10, pero no regresa nada
-b = doble_con_return(5)    # No muestra nada, regresa 10
-
 print("a =", a)            # None
+
+b = doble_con_return(5)    # No muestra nada, regresa 10
 print("b =", b)            # 10
+
 print(b + 1)               # Podemos seguir usando el resultado
 ```
 
@@ -190,7 +201,83 @@ def es_primo(n):
 print([n for n in range(1, 30) if es_primo(n)])
 ```
 
-Compara con el ejercicio de números primos del capítulo de [ciclos](python_for.qmd): `return` reemplaza a la combinación de una variable `es_primo` y `break`.
+![](figures/python_es_primo.png){fig-align="center"}
+
+Esta versión solo prueba divisores hasta $\sqrt{n}$. ¿Por qué basta? Si $n = a \times b$ con $a \le b$, entonces $a \le \sqrt{n}$: si $n$ tiene algún divisor, encontraremos uno antes de llegar a $\sqrt{n}$. Así, para $n = 97$ revisamos 8 divisores en lugar de 95.
+
+Compara con el ejercicio de números primos del capítulo de [ciclos](python_for.qmd). Para que la comparación sea justa, en ambos casos probamos todos los divisores de 2 a $n - 1$:
+
+:::::: columns
+::: {.column width="48%"}
+**Con ciclos** (capítulo de [ciclos](python_for.qmd))
+
+``` python
+n = 97
+
+es_primo = n > 1
+
+for divisor in range(2, n):
+    if n % divisor == 0:
+        es_primo = False
+        break
+
+print(n, "es primo:", es_primo)
+```
+:::
+
+::: {.column width="4%"}
+:::
+
+::: {.column width="48%"}
+**Con una función**
+
+``` python
+def es_primo(n):
+    if n < 2:
+        return False
+    for divisor in range(2, n):
+        if n % divisor == 0:
+            return False
+    return True
+
+print(97, "es primo:", es_primo(97))
+```
+:::
+::::::
+
+Con la función ya no necesitamos la variable `es_primo` ni `break`: en cuanto encontramos un divisor, `return False` **termina** la función. Además, podemos reutilizarla con cualquier número sin copiar el ciclo.
+
+::: {.callout-note collapse="false"}
+## Código explicado: ¿cómo leer `es_primo()`?
+
+Lee la función por **pasos**. Cada paso empieza en el comentario `# Paso` y termina justo antes del siguiente:
+
+``` python
+def es_primo(n):
+    # Paso 1: descartar los números menores que 2
+    if n < 2:
+        return False                 # 0 y 1 no son primos: la función termina aquí
+
+    # Paso 2: probar cada divisor, desde 2 hasta n - 1
+    for divisor in range(2, n):
+
+        # Paso 3: ¿el divisor es exacto?
+        if n % divisor == 0:
+            return False             # Encontramos un divisor: termina aquí
+
+    # Paso 4: el ciclo terminó sin encontrar divisores
+    return True                      # n es primo
+
+print(97, "es primo:", es_primo(97))
+```
+
+1.  **Descartar `n < 2`.** Los números 0 y 1 no son primos. `return False` termina la función y **no se ejecuta nada más**.
+2.  **Probar divisores.** El `for` recorre `divisor = 2, 3, 4, ..., n - 1`.
+3.  **¿Divisor exacto?** Si `n % divisor == 0`, el residuo es 0 y `divisor` divide a `n`. `return False` termina la función **y el ciclo a la vez**: por eso ya no necesitamos `break`.
+4.  **No hubo divisores.** Solo llegamos a `return True` si el ciclo terminó completo sin encontrar ningún divisor.
+
+Por ejemplo, con `es_primo(91)`: el paso 1 no aplica, el ciclo prueba 2, 3, 4, 5, 6 y en el 7 encuentra que `91 % 7 == 0`, así que regresa `False`. Con `es_primo(97)` ningún divisor funciona, el ciclo termina y regresa `True`.
+:::
 
 ## Documentar funciones
 
@@ -254,7 +341,7 @@ print(calcular_iva(100, tasa=0.08))
 ```
 
 |   | Variable local | Variable global |
-|------------------------|------------------------|------------------------|
+|----|----|----|
 | ¿Dónde se crea? | Dentro de una función. | Fuera de todas las funciones. |
 | ¿Dónde existe? | Solo dentro de esa función. | En todo el programa. |
 | Recomendación | Úsalas libremente. | Úsalas solo para **constantes** (`MAYUSCULAS`). |
@@ -266,18 +353,24 @@ Una función no sabe con qué datos la llamarán. Siguiendo lo que vimos en el c
 ```{python}
 def factorial(n):
     """Regresa n! para un entero n >= 0."""
+    # Paso 1: validar el TIPO de n (debe ser un entero)
     if not isinstance(n, int):
-        raise TypeError("n debe ser un número entero")
-    if n < 0:
-        raise ValueError("n no puede ser negativo; se recibió " + str(n))
+        raise TypeError("n debe ser un número entero")   # Ej. factorial(2.5): la función se detiene aquí
 
-    resultado = 1
-    for i in range(2, n + 1):
-        resultado *= i
+    # Paso 2: validar el VALOR de n (no puede ser negativo)
+    if n < 0:
+        raise ValueError("n no puede ser negativo; se recibió " + str(n))   # Ej. factorial(-3)
+
+    # Paso 3: calcular n! = 1 × 2 × 3 × ... × n
+    resultado = 1                    # Empezamos en 1 (así 0! = 1 y 1! = 1)
+    for i in range(2, n + 1):        # i toma los valores 2, 3, ..., n
+        resultado *= i               # Equivale a: resultado = resultado * i
+
+    # Paso 4: regresar el resultado
     return resultado
 
-print(factorial(5))
-print(factorial(-3))
+print(factorial(5))      # 1 × 2 × 3 × 4 × 5 = 120
+print(factorial(-3))     # Lanza ValueError: n no puede ser negativo
 ```
 
 Quien llama a la función puede **atrapar** el error con `try` / `except`:
@@ -318,16 +411,97 @@ numeros = [23, 51, 17, 40, 88]
 print(sorted(numeros, key=ultimo_digito))    # Ordenar por el último dígito
 ```
 
-Una función **`lambda`** es una función pequeña, de una sola expresión y sin nombre, útil para estos casos:
+### ¿Qué es una función `lambda`?
+
+Una función **`lambda`** es una forma **corta** de escribir una función **sin nombre**, en una sola línea. Estas dos funciones hacen exactamente lo mismo:
+
+:::::: columns
+::: {.column width="48%"}
+**Con `def`**
+
+``` python
+def ultimo_digito(n):
+    return n % 10
+```
+:::
+
+::: {.column width="4%"}
+:::
+
+::: {.column width="48%"}
+**Con `lambda`**
+
+``` python
+lambda n: n % 10
+```
+:::
+::::::
+
+| Parte | ¿Qué es? |
+|----|----|
+| `lambda` | Palabra reservada para crear una función (como `def`, pero sin nombre). |
+| `n` | Los **parámetros**, antes de los dos puntos y **sin paréntesis**. Puede haber varios: `lambda a, b: a + b`. |
+| `n % 10` | Una **sola expresión**, que es el valor que regresa. No se escribe `return`. |
+
+### ¿Por qué usarla?
+
+Muchas veces necesitamos una función **una sola vez**, solo para enviarla como argumento. Con `def` hay que inventarle un nombre y escribirla en otro lugar; con `lambda` la escribimos **justo donde se usa**:
 
 ```{python}
+# Mismo resultado que sorted(numeros, key=ultimo_digito), sin definir ultimo_digito
 print(sorted(numeros, key=lambda n: n % 10))
-
-cuadrado = lambda x: x ** 2       # Funciona, pero para esto es mejor usar def
-print(cuadrado(9))
 ```
 
-Usa `lambda` solo para funciones muy cortas que pasas como argumento; si necesitas un nombre, usa `def`.
+El argumento `key=` de `sorted()`, `max()` y `min()` recibe una **función** que se aplica a cada elemento: Python ordena (o compara) usando el valor que regresa esa función, pero muestra los elementos originales.
+
+![](figures/python_sorted_lambda.png){fig-align="center"}
+
+### ¿Cuándo usarla?
+
+Cuando una función **corta** se usa **una sola vez como argumento**. Por ejemplo:
+
+```{python}
+# Ordenar puntos [x, y] por su distancia al origen (basta comparar x² + y²)
+puntos = [[3, 4], [1, 1], [-2, 0], [0, -5]]
+print(sorted(puntos, key=lambda p: p[0] ** 2 + p[1] ** 2))
+```
+
+![](figures/python_lambda_distancia_origen.png){fig-align="center"}
+
+También sirve con **nuestras propias funciones** que reciben otra función. Aquí `tabla()` evalúa **cualquier** función matemática $f(x)$, y con `lambda` le enviamos la función sin tener que definirla antes:
+
+```{python}
+def tabla(f, valores):
+    """Muestra f(x) para cada x en valores."""
+    for x in valores:
+        print("f(", x, ") = ", f(x), sep="")
+
+tabla(lambda x: x ** 2 - 1, [0, 1, 2, 3])     # f(x) = x² - 1
+print()
+tabla(lambda x: 2 ** x, [0, 1, 2, 3])         # f(x) = 2^x
+```
+
+### ¿Cuándo **no** usarla?
+
+- **Si la función necesita más de una línea** (un `if` con varias ramas, un `for`, validaciones): `lambda` solo admite **una expresión**. Usa `def`.
+- **Si la vas a usar varias veces o merece un nombre**: usa `def`, que además permite escribir un *docstring*.
+- **Si ya existe una función que hace lo mismo**, pásala directamente: escribe `key=abs` en lugar de `key=lambda x: abs(x)`.
+
+```{python}
+cuadrado = lambda x: x ** 2       # Funciona, pero no es buena práctica
+print(cuadrado(9))
+
+def cuadrado(x):                  # Mejor: tiene un nombre claro y se puede documentar
+    """Regresa x al cuadrado."""
+    return x ** 2
+print(cuadrado(9))
+
+print(sorted([-7, 3, -1, 5], key=abs))      # abs ya existe: no hace falta lambda
+```
+
+::: callout-tip
+**Regla práctica:** `lambda` es una función **desechable de una línea** que escribes justo donde la envías como argumento. Para todo lo demás, usa `def`.
+:::
 
 ## Recursión
 
@@ -344,10 +518,149 @@ print(factorial_recursivo(5))   # 5 * 4 * 3 * 2 * 1 * 1 = 120
 
 Toda función recursiva necesita un **caso base**; sin él, se llamaría a sí misma indefinidamente hasta producir un `RecursionError`.
 
+### Recursión vs. acumuladores y contadores
+
+En el capítulo de [ciclos](python_for.qmd#acumuladores-y-contadores) calculamos $5!$ con un **acumulador**. La recursión resuelve **el mismo problema** con las mismas ideas (un valor inicial, algo que cambia en cada repetición y una condición para parar), pero las organiza de otra forma:
+
+:::::: columns
+::: {.column width="48%"}
+**Con un ciclo y un acumulador**
+
+``` python
+def factorial_ciclo(n):
+    resultado = 1                 # ACUMULADOR: inicia en 1
+    for i in range(2, n + 1):     # CONTADOR: i = 2, 3, ..., n
+        resultado = resultado * i # ACUMULADOR: se actualiza
+    return resultado              # Se usa el ACUMULADOR
+```
+:::
+
+::: {.column width="4%"}
+:::
+
+::: {.column width="48%"}
+**Con recursión**
+
+``` python
+def factorial_recursivo(n):       # n: CONTADOR (baja)
+    if n == 0:                    # El CONTADOR llegó a 0
+        return 1                  # Valor inicial (como
+                                  # inicializar el ACUMULADOR)
+    # No hay variable ACUMULADORA: n * ... queda pendiente
+    # n - 1 actualiza el CONTADOR para la siguiente llamada
+    return n * factorial_recursivo(n - 1)
+```
+:::
+::::::
+
+Cada parte del ciclo tiene su equivalente en la función recursiva:
+
+| Papel | Ciclo con acumulador | Recursión |
+|----|----|----|
+| **Valor inicial** (el neutro del producto) | `resultado = 1`, **antes** del ciclo | `return 1` en el **caso base**, al **final** de las llamadas |
+| **Lo que cambia** en cada repetición | El contador `i` **sube**: 2, 3, 4, 5 | El parámetro `n` **baja**: 5, 4, 3, 2, 1, 0 |
+| **Cuándo parar** | Cuando `range()` se termina | Cuando `n == 0` (caso base) |
+| **Dónde se acumula** | En la variable `resultado` | En las multiplicaciones **pendientes**, que se resuelven al regresar |
+| **Cuándo se multiplica** | **De ida**: en cada vuelta del ciclo | **De regreso**: cuando cada llamada recibe su `return` |
+
+#### ¿Dónde se guarda el resultado parcial?
+
+Con el ciclo, el acumulador **guarda** el resultado parcial en cada vuelta:
+
+```{python}
+resultado = 1                      # ACUMULADOR: valor inicial (neutro del producto)
+for i in range(2, 6):              # CONTADOR: i = 2, 3, 4, 5
+    resultado = resultado * i      # ACUMULADOR: guarda el producto parcial
+    print("i =", i, " resultado =", resultado)
+```
+
+Con la recursión **no hay variable acumuladora**. Cada llamada **se queda esperando** el resultado de la siguiente, y las multiplicaciones se hacen **al regresar**, cuando se llega al caso base. Agregamos `print()` para ver la ida y el regreso:
+
+```{python}
+def factorial_traza(n):                     # n: CONTADOR (5, 4, 3, 2, 1, 0)
+    if n == 0:                              # El CONTADOR llegó a 0: caso base
+        print("Caso base: factorial(0) regresa 1")
+        return 1                            # Valor inicial (como inicializar el ACUMULADOR)
+    print("Ida:     factorial(", n, ") espera a factorial(", n - 1, ")", sep="")
+    # n - 1 actualiza el CONTADOR; la multiplicación queda pendiente hasta que regrese
+    resultado = n * factorial_traza(n - 1)
+    # Ojo: resultado NO es un ACUMULADOR; es una variable local de esta llamada
+    print("Regreso: factorial(", n, ") = ", n, " * factorial(", n - 1, ") = ", resultado, sep="")
+    return resultado                        # Entrega el producto parcial a quien llamó
+
+print(factorial_traza(5))
+```
+
+Es decir, de ida Python **apila** las operaciones pendientes y de regreso las **resuelve**:
+
+$$\begin{aligned}
+5! &= 5 \cdot 4! \\
+   &= 5 \cdot (4 \cdot 3!) \\
+   &= 5 \cdot (4 \cdot (3 \cdot (2 \cdot (1 \cdot 1)))) \quad \leftarrow \text{caso base: } 0! = 1 \\
+   &= 120 \quad \leftarrow \text{se multiplica al regresar}
+\end{aligned}$$
+
+![](figures/python_contador_acumulador_recursion.png){fig-align="center"}
+
+La versión iterativa de la imagen usa un ciclo `while`: el **contador** empieza en `n` y **baja** hasta 1, mientras el **acumulador** guarda el producto parcial. Contar hacia arriba (`for i in range(2, n + 1)`) o hacia abajo da el mismo resultado:
+
+```{python}
+def factorial_iter(n):
+    """Regresa n! usando un ciclo while con contador y acumulador."""
+    acumulador = 1              # ACUMULADOR: inicia en 1 (neutro del producto)
+    i = n                       # CONTADOR: empieza en n
+    while i > 0:                # Repetir mientras el CONTADOR no llegue a 0
+        acumulador *= i         # ACUMULADOR: acumulador = acumulador * i
+        i -= 1                  # CONTADOR: se actualiza (baja 1)
+    return acumulador           # Se usa el ACUMULADOR
+
+# Al ejecutar factorial_iter(5):
+#   i = 5 → acumulador = 1 × 5 = 5
+#   i = 4 → acumulador = 5 × 4 = 20
+#   i = 3 → acumulador = 20 × 3 = 60
+#   i = 2 → acumulador = 60 × 2 = 120
+#   i = 1 → acumulador = 120 × 1 = 120
+#   i = 0 → el ciclo termina y regresa 120
+print(factorial_iter(5))
+```
+
+#### Recursión con un acumulador explícito
+
+Si queremos que la recursión se parezca aún más al ciclo, podemos enviar el **acumulador como parámetro**. Ahora `n` hace de **contador** y `acumulado` de **acumulador**, y la multiplicación se hace **de ida**, igual que en el ciclo:
+
+```{python}
+def factorial_acumulador(n, acumulado=1):   # n: CONTADOR; acumulado: ACUMULADOR (inicia en 1)
+    """Regresa n! llevando el resultado parcial en el parámetro acumulado."""
+    # Paso 1 (caso base): el CONTADOR llegó a 0, ya no quedan números por multiplicar
+    if n == 0:
+        return acumulado                    # Se usa el ACUMULADOR
+    # Paso 2: multiplicar ahora y pasar el resultado parcial a la siguiente llamada
+    #   n - 1          → actualiza el CONTADOR
+    #   acumulado * n  → actualiza el ACUMULADOR
+    return factorial_acumulador(n - 1, acumulado * n)
+
+# Al ejecutar factorial_acumulador(5):
+#   (n=5, acumulado=1) → (n=4, acumulado=5) → (n=3, acumulado=20)
+#   → (n=2, acumulado=60) → (n=1, acumulado=120) → (n=0, acumulado=120): regresa 120
+print(factorial_acumulador(5))
+```
+
+#### ¿Cuál conviene usar?
+
+Las tres versiones calculan lo mismo, pero:
+
+- **El ciclo** es la opción más directa en Python: no tiene límite de repeticiones y es más rápido.
+- **La recursión** es útil cuando la **definición matemática ya es recursiva** ($n! = n \cdot (n-1)!$, la sucesión de Fibonacci, el algoritmo de Euclides para el máximo común divisor) o cuando un problema se divide en **subproblemas iguales pero más pequeños**. Su código se parece mucho a la fórmula.
+- Python permite **alrededor de 1000 llamadas recursivas** anidadas: `factorial_recursivo(5000)` produce un `RecursionError`, mientras que `factorial_ciclo(5000)` funciona sin problema.
+
+::: callout-tip
+**Idea clave:** un ciclo **guarda** el resultado parcial en un acumulador; una función recursiva **deja pendientes** las operaciones y las resuelve al regresar del caso base. El caso base de la recursión cumple el papel de la **inicialización** del acumulador: por eso el factorial regresa `1` y una suma regresaría `0`.
+:::
+
 ## Buenas prácticas al escribir funciones
 
 | Práctica | Mal | Bien |
-|------------------------|------------------------|------------------------|
+|----|----|----|
 | Nombres con **verbos** en `snake_case`. | `def x(a):` | `def calcular_promedio(datos):` |
 | **Una sola tarea** por función. | Una función que lee datos, calcula y grafica. | Tres funciones pequeñas. |
 | **Regresar** valores en lugar de imprimirlos. | `print(resultado)` dentro de la función. | `return resultado` y que quien la llama decida. |
@@ -361,7 +674,7 @@ Toda función recursiva necesita un **caso base**; sin él, se llamaría a sí m
 ## Errores comunes
 
 | Error | Ejemplo | Corrección |
-|------------------------|------------------------|------------------------|
+|----|----|----|
 | Olvidar los paréntesis al llamar | `area_circulo` (muestra `<function ...>`) | `area_circulo(5)` |
 | Olvidar el `return` | La función regresa `None`. | Agrega `return resultado`. |
 | Llamar antes de definir | `NameError: name 'f' is not defined` | Escribe el `def` antes de la llamada. |
@@ -382,9 +695,11 @@ Completa la función `area_rectangulo(base, altura)` para que **regrese** el ár
 #| exercise: fn1
 def area_rectangulo(base, altura):
     """Regresa el área de un rectángulo."""
+    # Paso 1: calcula el área (base × altura) y regrésala con return
     ______
 
-print(area_rectangulo(3, 4))
+# Llamamos a la función: base = 3, altura = 4
+print(area_rectangulo(3, 4))   # Debe ser 12
 ```
 
 ```{pyodide}
@@ -420,8 +735,13 @@ Escribe `return base * altura`. Si usas `print()`, la función mostrará el valo
 ``` python
 def area_rectangulo(base, altura):
     """Regresa el área de un rectángulo."""
+    # Paso 1: calcular el área y regresarla
     return base * altura
 
+# Al ejecutar area_rectangulo(3, 4):
+#   1. Python asigna base = 3 y altura = 4
+#   2. Calcula 3 * 4 = 12
+#   3. return entrega 12 y print() lo muestra
 print(area_rectangulo(3, 4))   # 12
 ```
 :::
@@ -434,8 +754,11 @@ Escribe la función `celsius_a_fahrenheit(celsius)` que convierta una temperatur
 ```{pyodide}
 #| exercise: fn2
 def celsius_a_fahrenheit(celsius):
+    # Paso 1: escribe un docstring que explique qué hace la función
+    # Paso 2: aplica la fórmula F = 9/5 · C + 32 y regresa el resultado
     ______
 
+# Llamamos a la función con dos temperaturas conocidas
 print(celsius_a_fahrenheit(0))      # Debe ser 32
 print(celsius_a_fahrenheit(100))    # Debe ser 212
 ```
@@ -482,8 +805,14 @@ El *docstring* va en la primera línea del cuerpo: `"""Convierte grados Celsius 
 ``` python
 def celsius_a_fahrenheit(celsius):
     """Convierte una temperatura de grados Celsius a grados Fahrenheit."""
+    # Paso 1: el docstring (arriba) documenta qué hace la función
+    # Paso 2: aplicar F = 9/5 · C + 32 y regresar el resultado
     return 9 / 5 * celsius + 32
 
+# Al ejecutar celsius_a_fahrenheit(100):
+#   1. Python asigna celsius = 100
+#   2. Calcula 9 / 5 * 100 + 32 = 180.0 + 32 = 212.0
+#   3. return entrega 212.0
 print(celsius_a_fahrenheit(0))      # 32.0
 print(celsius_a_fahrenheit(100))    # 212.0
 ```
@@ -497,9 +826,12 @@ Escribe la función `es_par(n)` que regrese `True` si `n` es par y `False` si es
 ```{pyodide}
 #| exercise: fn3
 def es_par(n):
+    # Paso 1: calcula el residuo de dividir n entre 2
+    # Paso 2: regresa True si el residuo es 0 (intenta hacerlo sin if)
     ______
 
-print(es_par(4), es_par(7))
+# Llamamos a la función con un número par y uno impar
+print(es_par(4), es_par(7))   # Debe ser True False
 ```
 
 ```{pyodide}
@@ -533,8 +865,13 @@ La expresión `n % 2 == 0` ya es `True` o `False`: puedes regresarla directament
 ``` python
 def es_par(n):
     """Regresa True si n es par."""
+    # Paso 1: n % 2 es el residuo: 0 si n es par, 1 si es impar
+    # Paso 2: n % 2 == 0 ya es True o False, así que lo regresamos directamente
     return n % 2 == 0
 
+# Al ejecutar la función:
+#   es_par(4): 4 % 2 = 0  →  0 == 0  →  True
+#   es_par(7): 7 % 2 = 1  →  1 == 0  →  False
 print(es_par(4), es_par(7))   # True False
 ```
 
@@ -553,14 +890,19 @@ Completa la función `factorial(n)` para que:
 #| exercise: fn4
 def factorial(n):
     """Regresa n! para un entero n >= 0."""
+    # Paso 1: validar que n no sea negativo
     if ______:
         raise ValueError("n no puede ser negativo")
-    resultado = 1
-    for i in range(2, n + 1):
-        ______
+
+    # Paso 2: calcular n! = 1 × 2 × 3 × ... × n
+    resultado = 1                  # Empezamos en 1 (así 0! = 1)
+    for i in range(2, n + 1):      # i toma los valores 2, 3, ..., n
+        ______                     # Multiplica resultado por i
+
+    # Paso 3: regresar el resultado
     return resultado
 
-print(factorial(5))
+print(factorial(5))   # Debe ser 120
 ```
 
 ```{pyodide}
@@ -598,13 +940,22 @@ La condición es `n < 0`. Dentro del ciclo, acumula el producto con `resultado *
 ``` python
 def factorial(n):
     """Regresa n! para un entero n >= 0."""
+    # Paso 1: validar que n no sea negativo
     if n < 0:
         raise ValueError("n no puede ser negativo")
+
+    # Paso 2: calcular n! = 1 × 2 × 3 × ... × n
     resultado = 1
     for i in range(2, n + 1):
-        resultado *= i
+        resultado *= i             # Equivale a: resultado = resultado * i
+
+    # Paso 3: regresar el resultado
     return resultado
 
+# Al ejecutar factorial(5):
+#   Paso 1: 5 no es negativo, seguimos
+#   Paso 2: resultado = 1 → ×2 = 2 → ×3 = 6 → ×4 = 24 → ×5 = 120
+#   Paso 3: regresa 120
 print(factorial(5))   # 120
 ```
 :::
@@ -618,8 +969,11 @@ Escribe la función `estadisticas(datos)` que regrese **tres valores**: la media
 #| exercise: fn5
 def estadisticas(datos):
     """Regresa la media, el mínimo y el máximo de una lista de números."""
+    # Paso 1: calcula la media (suma de los datos / cantidad de datos)
+    # Paso 2: regresa los tres valores separados por comas: media, mínimo y máximo
     ______
 
+# La función regresa una tupla; la desempaquetamos en tres variables
 media, minimo, maximo = estadisticas([4, 8, 15, 16, 23, 42])
 print("Media:", media, " Mínimo:", minimo, " Máximo:", maximo)
 ```
@@ -661,9 +1015,15 @@ Usa las funciones integradas `sum()`, `len()`, `min()` y `max()`, y regresa los 
 ``` python
 def estadisticas(datos):
     """Regresa la media, el mínimo y el máximo de una lista de números."""
+    # Paso 1: media = suma / cantidad
     media = sum(datos) / len(datos)
+    # Paso 2: regresar tres valores (Python los agrupa en una tupla)
     return media, min(datos), max(datos)
 
+# Al ejecutar estadisticas([4, 8, 15, 16, 23, 42]):
+#   Paso 1: media = 108 / 6 = 18.0
+#   Paso 2: regresa la tupla (18.0, 4, 42)
+# Al desempaquetar: media = 18.0, minimo = 4, maximo = 42
 media, minimo, maximo = estadisticas([4, 8, 15, 16, 23, 42])
 print("Media:", media, " Mínimo:", minimo, " Máximo:", maximo)
 ```
@@ -682,10 +1042,13 @@ Usa **anotaciones de tipo** y un *docstring*.
 #| exercise: fn6
 def distancia(p: tuple, q: tuple) -> float:
     """______"""
+    # Paso 1: separa las coordenadas de cada punto (desempaquetar la tupla)
     x1, y1 = p
     x2, y2 = q
+    # Paso 2: aplica la fórmula y regresa la distancia
     ______
 
+# Llamamos a la función: p = (0, 0), q = (3, 4)
 print(distancia((0, 0), (3, 4)))    # Debe ser 5.0
 ```
 
@@ -727,10 +1090,15 @@ La raíz cuadrada es elevar a `0.5`: `return ((x2 - x1) ** 2 + (y2 - y1) ** 2) *
 ``` python
 def distancia(p: tuple, q: tuple) -> float:
     """Regresa la distancia euclidiana entre los puntos p = (x1, y1) y q = (x2, y2)."""
+    # Paso 1: separar las coordenadas de cada punto
     x1, y1 = p
     x2, y2 = q
+    # Paso 2: aplicar la fórmula (elevar a 0.5 es sacar raíz cuadrada)
     return ((x2 - x1) ** 2 + (y2 - y1) ** 2) ** 0.5
 
+# Al ejecutar distancia((0, 0), (3, 4)):
+#   Paso 1: x1 = 0, y1 = 0, x2 = 3, y2 = 4
+#   Paso 2: (3 - 0)² + (4 - 0)² = 9 + 16 = 25  →  25 ** 0.5 = 5.0
 print(distancia((0, 0), (3, 4)))    # 5.0
 ```
 
@@ -747,10 +1115,14 @@ Corrígela usando `None` como valor por defecto.
 ```{pyodide}
 #| exercise: fn7
 def agregar_calificacion(calificacion, lista=[]):
+    # Paso 1: agregar la calificación al final de la lista
     lista.append(calificacion)
+    # Paso 2: regresar la lista
     return lista
 
+# Primera llamada: no enviamos lista, así que se usa el valor por defecto
 print(agregar_calificacion(9))     # [9]
+# Segunda llamada: tampoco enviamos lista... ¿qué lista está usando?
 print(agregar_calificacion(7))     # Debería ser [7]
 ```
 
@@ -788,11 +1160,17 @@ El valor por defecto `[]` se crea **una sola vez**, al definir la función, y to
 
 ``` python
 def agregar_calificacion(calificacion, lista=None):
+    # Paso 1: si no nos enviaron una lista, crear una nueva
     if lista is None:
         lista = []          # Una lista nueva en cada llamada
+    # Paso 2: agregar la calificación al final de la lista
     lista.append(calificacion)
+    # Paso 3: regresar la lista
     return lista
 
+# Al ejecutar la función:
+#   agregar_calificacion(9): lista = None → se crea []        → [9]
+#   agregar_calificacion(7): lista = None → se crea OTRA []   → [7]
 print(agregar_calificacion(9))     # [9]
 print(agregar_calificacion(7))     # [7]
 ```
@@ -815,6 +1193,11 @@ En el capítulo de [ciclos](python_for.qmd) aproximamos $\sqrt{2}$ con el métod
 #| exercise: reto_fn
 def raiz_newton(n, tolerancia=1e-10):
     """______"""
+    # Paso 1: si n es negativo, lanza un ValueError
+    # Paso 2: si n es 0, regresa 0
+    # Paso 3: empieza en x = n
+    # Paso 4: mientras |x² - n| > tolerancia, aplica x = x - (x² - n) / (2x)
+    # Paso 5: regresa x
     ______
 
 print(raiz_newton(2))      # Aproximadamente 1.41421356
@@ -876,15 +1259,25 @@ def raiz_newton(n, tolerancia=1e-10):
     Regresa:
         float: aproximación de la raíz cuadrada de n.
     """
+    # Paso 1: validar que n no sea negativo
     if n < 0:
         raise ValueError("n no puede ser negativo")
+    # Paso 2: caso especial (evita dividir entre 0 en la fórmula)
     if n == 0:
         return 0
+    # Paso 3: valor inicial
     x = n
+    # Paso 4: mejorar x mientras x² esté lejos de n
     while abs(x ** 2 - n) > tolerancia:
         x = x - (x ** 2 - n) / (2 * x)
+    # Paso 5: regresar la aproximación
     return x
 
+# Al ejecutar raiz_newton(9):
+#   Pasos 1 y 2: 9 no es negativo ni 0, seguimos
+#   Paso 3: x = 9
+#   Paso 4: x = 9 → 5.0 → 3.4 → 3.0235... → 3.00009... → 3.000000001... → 3.0
+#   Paso 5: |3.0² - 9| = 0 ya no es mayor que la tolerancia: regresa 3.0
 print(raiz_newton(2))      # 1.4142135623746899
 print(raiz_newton(9))      # 3.0
 ```
@@ -896,7 +1289,7 @@ Ahora el método se puede usar con **cualquier** número, se prueba fácilmente 
 ## Resumen
 
 | Tema | Idea clave |
-|------------------------------------|------------------------------------|
+|----|----|
 | Definir | `def nombre(parametros):` con el cuerpo indentado 4 espacios. |
 | Llamar | `nombre(argumentos)`; definir no es lo mismo que ejecutar. |
 | `return` | Regresa un valor y termina la función; sin `return`, la función regresa `None`. |

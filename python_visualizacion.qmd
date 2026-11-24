@@ -35,7 +35,7 @@ def _mostrar_en_libro(self, *args, **kwargs):
 go.Figure.show = _mostrar_en_libro
 ```
 
-> **Fecha:** 19 de noviembre, 2026
+> **Fecha:** 24 de noviembre, 2026
 
 Una buena gráfica permite ver en segundos lo que en una tabla de números tardaríamos mucho en descubrir: tendencias, relaciones, valores atípicos o el comportamiento de una función.
 
@@ -50,15 +50,96 @@ En este capítulo usaremos dos bibliotecas:
 
 ## Antes de empezar
 
-Las bibliotecas de este capítulo (`numpy`, `pandas`, `matplotlib`, `plotly` y `sympy`) ya las instalaste en tu entorno `quarto-python` en el capítulo [Configuraciones para usar Quarto con Python](quarto_python.qmd). Si necesitas repasar algo, consulta ahí:
+Este capítulo usa cinco bibliotecas: `numpy`, `pandas`, `matplotlib`, `plotly` y `sympy`. Si seguiste el capítulo [Configuraciones para usar Quarto con Python](quarto_python.qmd), ya están instaladas en tu entorno `quarto-python`. Primero **comprueba** que RStudio las encuentra y, solo si falta alguna, **instálala**.
 
-| Si necesitas... | Consulta |
-|----|----|
-| Instalar las bibliotecas | [Paso 3. Instalar todos los paquetes del curso](quarto_python.qmd#paso-3.-instalar-todos-los-paquetes-del-curso) |
-| Comprobar que RStudio usa tu entorno | [Paso 6. Verificar que todo funciona](quarto_python.qmd#paso-6.-verificar-que-todo-funciona) |
-| Resolver `ModuleNotFoundError: No module named 'matplotlib'` (o `'plotly'`) | [Solución de problemas: `ModuleNotFoundError` al ejecutar o renderizar desde RStudio](quarto_python.qmd#modulenotfounderror-al-ejecutar-o-renderizar-desde-rstudio) |
+::: callout-note
+En **Google Colab** y en los **editores interactivos** de esta página las bibliotecas **ya están disponibles**: puedes saltar directamente a [Importar las bibliotecas](#importar-las-bibliotecas).
+:::
 
-En Google Colab y en los editores de esta página las bibliotecas **ya están disponibles**. Por convención se importan así:
+### Paso 1. Comprobar si ya están instaladas
+
+En la pestaña **Console** de RStudio (indicador `>`):
+
+```{r, eval=FALSE}
+library(reticulate)
+py_config()                          # La línea python: debe mostrar .../.venvs/quarto-python/...
+
+py_module_available("numpy")         # TRUE
+py_module_available("pandas")        # TRUE
+py_module_available("matplotlib")    # TRUE
+py_module_available("plotly")        # TRUE
+py_module_available("sympy")         # TRUE
+```
+
+- Si todas dicen `TRUE`, ya está todo listo: continúa en [Importar las bibliotecas](#importar-las-bibliotecas).
+- Si alguna dice `FALSE`, instálala con el paso 2.
+- Si la línea `python:` **no** muestra `.venvs/quarto-python`, RStudio está usando otro Python: revisa el [Paso 4 de la configuración](quarto_python.qmd#paso-4.-indicar-a-quarto-y-a-rstudio-qué-python-usar) antes de instalar nada.
+
+### Paso 2. Instalar los paquetes desde RStudio
+
+Puedes instalarlos de **dos formas**; ambas instalan los paquetes **dentro** del entorno `quarto-python`. Usa solo una.
+
+#### Opción A. Desde la Terminal de RStudio (con `pip`)
+
+Abre la pestaña **Terminal** (indicador `$` o `%`; si no la ves, **Tools \> Terminal \> New Terminal**). Primero **activa el entorno** y después instala:
+
+::: panel-tabset
+## macOS y Linux
+
+``` bash
+# 1. Activar el entorno (debe aparecer (quarto-python) al inicio de la línea)
+source ~/.venvs/quarto-python/bin/activate
+
+# 2. Instalar los paquetes del capítulo
+python -m pip install numpy pandas matplotlib plotly sympy
+
+# 3. Comprobar la instalación
+python -c "import numpy, pandas, matplotlib, plotly, sympy; print('Todo correcto')"
+```
+
+## Windows (Git Bash)
+
+``` bash
+# 1. Activar el entorno (debe aparecer (quarto-python) al inicio de la línea)
+source ~/.venvs/quarto-python/Scripts/activate
+
+# 2. Instalar los paquetes del capítulo
+python -m pip install numpy pandas matplotlib plotly sympy
+
+# 3. Comprobar la instalación
+python -c "import numpy, pandas, matplotlib, plotly, sympy; print('Todo correcto')"
+```
+:::
+
+Al final de la instalación debe aparecer `Successfully installed ...` (o `Requirement already satisfied` si ya estaban), y la comprobación debe imprimir `Todo correcto`.
+
+#### Opción B. Desde la Console de R (con `reticulate`)
+
+Sin salir de R, `reticulate` puede instalar los paquetes en el entorno por ti:
+
+```{r, eval=FALSE}
+library(reticulate)
+
+# Instalar los paquetes en el entorno quarto-python
+virtualenv_install(
+  envname  = path.expand("~/.venvs/quarto-python"),
+  packages = c("numpy", "pandas", "matplotlib", "plotly", "sympy")
+)
+
+# Comprobar
+py_module_available("matplotlib")    # TRUE
+py_module_available("plotly")        # TRUE
+```
+
+::: callout-important
+- Escribe los comandos de **Bash** (`source`, `python -m pip`) en la **Terminal**, y los de **R** (`library()`, `virtualenv_install()`) en la **Console**. Es el error más común.
+- Los paquetes se instalan **una sola vez**: quedan guardados en el entorno y no necesitas reinstalarlos cada vez que abras RStudio.
+- Si después de instalar sigue apareciendo `ModuleNotFoundError: No module named 'matplotlib'`, ve a **Session \> Restart R** y vuelve a intentarlo. Si el error continúa, consulta la [solución de problemas](quarto_python.qmd#modulenotfounderror-al-ejecutar-o-renderizar-desde-rstudio).
+:::
+
+### Importar las bibliotecas {#importar-las-bibliotecas}
+
+Por convención, al inicio de cada documento o *notebook* se importan así:
 
 ```{python}
 import numpy as np
@@ -66,9 +147,201 @@ import matplotlib.pyplot as plt
 import plotly.express as px
 ```
 
-## Matplotlib: la estructura de una gráfica
+## Partes de una gráfica en Matplotlib
 
-Toda gráfica de Matplotlib se compone de una **figura** (`Figure`, el lienzo completo) que contiene uno o más **ejes** (`Axes`, cada gráfica con sus ejes $x$ y $y$).
+Antes de dibujar, conviene conocer **cómo está construida** una gráfica. Cada elemento que ves (título, ejes, líneas, leyenda...) es una **pieza** que podemos agregar y personalizar por separado:
+
+![](figures/python_matplotlib_partes.png){fig-align="center"}
+
+### Una gráfica se construye por capas
+
+Matplotlib trabaja como si dibujáramos sobre **hojas transparentes encimadas**: cada instrucción agrega una **capa** encima de las anteriores, y al final `plt.show()` muestra el resultado completo.
+
+1.  **La figura** (`Figure`): el **lienzo** completo, la "hoja" donde va todo. Define el tamaño.
+2.  **Los ejes** (`Axes`): el **área de la gráfica** dentro de la figura, con su eje $x$, su eje $y$, sus marcas y sus bordes. Una figura puede tener **varios** ejes (lo veremos en [`subplots()`](#varias-gráficas-en-una-figura-subplots)).
+3.  **Los datos**: líneas (`plot`), puntos (`scatter`), barras (`bar`), etc., dibujados **dentro** de los ejes.
+4.  **Los textos y adornos**: título, etiquetas de los ejes, leyenda, cuadrícula, anotaciones.
+
+Veamos las capas una por una con un ejemplo: ¿quién crece más rápido, $n^2$ o $2^n$?
+
+```{python}
+n = np.arange(0, 9)                                  # n = 0, 1, ..., 8
+
+# Capa 1: la figura (lienzo) y los ejes (área de la gráfica)
+fig, ax = plt.subplots(figsize=(6, 4))
+
+# Capa 2: los datos (línea + marcadores)
+ax.plot(n, n**2, marker="o", label="$n^2$")
+ax.plot(n, 2**n, marker="s", label="$2^n$")
+
+# Capa 3: los textos
+ax.set_title("¿Quién crece más rápido?")             # Título
+ax.set_xlabel("n")                                   # Etiqueta del eje x
+ax.set_ylabel("valor")                               # Etiqueta del eje y
+
+# Capa 4: las marcas de los ejes (ticks)
+ax.set_xticks(range(0, 9))                           # Una marca en cada entero
+
+# Capa 5: la cuadrícula
+ax.grid(True, linestyle="--", alpha=0.5)
+
+# Capa 6: la leyenda (usa el label de cada línea)
+ax.legend()
+
+# Capa 7: los bordes (spines): quitamos el de arriba y el de la derecha
+ax.spines["top"].set_visible(False)
+ax.spines["right"].set_visible(False)
+
+plt.show()
+```
+
+¿Ves dónde se cruzan? $n^2 = 2^n$ en $n = 2$ y $n = 4$; a partir de ahí, $2^n$ crece mucho más rápido.
+
+::: callout-note
+## El orden de las capas importa
+
+Lo que se dibuja **después** queda **encima**. Si un punto queda tapado por una línea, puedes cambiar el orden de las instrucciones o usar el argumento `zorder`: entre mayor sea, más arriba se dibuja (por ejemplo, `plt.scatter(..., zorder=3)`).
+:::
+
+### Dos formas de escribir lo mismo: `plt` y `ax` {#dos-formas-de-escribir-lo-mismo-plt-y-ax}
+
+Matplotlib tiene **dos estilos** para construir una gráfica:
+
+- **Estilo `plt`** (*pyplot*): cada función actúa sobre la gráfica "actual". Es corto y cómodo para gráficas sencillas: `plt.plot()`, `plt.title()`.
+- **Estilo `ax`** (orientado a objetos): primero creamos la figura y los ejes con `fig, ax = plt.subplots()` y luego llamamos los **métodos** de `ax`: `ax.plot()`, `ax.set_title()`. Es el estilo de la imagen y el más claro cuando hay **varias** gráficas en una figura.
+
+Casi todas las funciones existen en los dos estilos; la diferencia más común es que en el estilo `ax` los nombres empiezan con `set_`:
+
+| Parte de la gráfica | Estilo `plt` | Estilo `ax` | ¿Qué hace? |
+|----|----|----|----|
+| Figura | `plt.figure(figsize=(ancho, alto))` | `fig, ax = plt.subplots(figsize=(ancho, alto))` | Crea el lienzo (tamaño en pulgadas). |
+| Línea | `plt.plot(x, y)` | `ax.plot(x, y)` | Dibuja una línea que une los puntos. |
+| Marcadores | `plt.scatter(x, y)` | `ax.scatter(x, y)` | Dibuja puntos sin unirlos (o usa `marker="o"` en `plot`). |
+| Título | `plt.title()` | `ax.set_title()` | Describe qué muestra la gráfica. |
+| Etiquetas de los ejes | `plt.xlabel()`, `plt.ylabel()` | `ax.set_xlabel()`, `ax.set_ylabel()` | Nombre (y unidades) de cada eje. |
+| Límites de los ejes | `plt.xlim()`, `plt.ylim()` | `ax.set_xlim()`, `ax.set_ylim()` | Rango visible de cada eje. |
+| Marcas (*ticks*) | `plt.xticks()`, `plt.yticks()` | `ax.set_xticks()`, `ax.set_yticks()` | Valores que aparecen sobre los ejes. |
+| Cuadrícula | `plt.grid(True)` | `ax.grid(True)` | Líneas de referencia que facilitan la lectura. |
+| Leyenda | `plt.legend()` | `ax.legend()` | Identifica cada serie (usa el argumento `label`). |
+| Texto | `plt.text(x, y, "texto")` | `ax.text(x, y, "texto")` | Escribe un texto en la coordenada $(x, y)$. |
+| Bordes (*spines*) | — | `ax.spines["top"].set_visible(False)` | Muestra u oculta el marco de la gráfica. |
+| Guardar | `plt.savefig("archivo.png", dpi=300)` | `fig.savefig("archivo.png", dpi=300)` | Guarda la figura en un archivo. |
+| Mostrar | `plt.show()` | `plt.show()` | Muestra la figura. |
+
+::: callout-tip
+No mezcles los dos estilos en la misma gráfica mientras aprendes. En este capítulo usaremos el estilo `plt` para gráficas sencillas y el estilo `ax` cuando haya varias gráficas en una figura.
+:::
+
+## Coordenadas: colocar puntos en una gráfica
+
+Antes de graficar funciones, empecemos por lo más básico del plano cartesiano: **colocar un punto** $(x, y)$. Toda gráfica, por complicada que sea, está hecha de puntos.
+
+### Un punto
+
+Para dibujar el punto $A(2, 3)$ usamos `plt.scatter(x, y)`. Agregamos los ejes $x$ y $y$ con `plt.axhline()` y `plt.axvline()`, y una etiqueta con `plt.text()`:
+
+```{python}
+plt.figure(figsize=(5, 5))
+
+plt.scatter(2, 3, color="tab:red", s=60)        # Paso 1: el punto A(2, 3); s es el tamaño
+plt.text(2.2, 3.2, "A(2, 3)")                   # Paso 2: etiqueta un poco arriba a la derecha
+
+plt.axhline(0, color="black", linewidth=0.8)    # Paso 3: eje x (la recta y = 0)
+plt.axvline(0, color="black", linewidth=0.8)    #         eje y (la recta x = 0)
+
+plt.xlim(-5, 5)                                 # Paso 4: mostrar de -5 a 5 en ambos ejes
+plt.ylim(-5, 5)
+plt.grid(True)
+plt.xlabel("x")
+plt.ylabel("y")
+plt.title("Un punto en el plano cartesiano")
+plt.show()
+```
+
+| Función | ¿Qué hace? |
+|----|----|
+| `plt.scatter(x, y)` | Dibuja un **punto** (o varios) en la coordenada $(x, y)$. |
+| `plt.text(x, y, "texto")` | Escribe un texto con su esquina inferior izquierda en $(x, y)$. |
+| `plt.axhline(0)` | Dibuja una recta **horizontal** en $y = 0$: el eje $x$. |
+| `plt.axvline(0)` | Dibuja una recta **vertical** en $x = 0$: el eje $y$. |
+| `plt.xlim(a, b)`, `plt.ylim(a, b)` | Fijan el rango visible de cada eje. |
+
+::: callout-tip
+Ponemos la etiqueta en `(2.2, 3.2)` y no en `(2, 3)` para que el texto no tape el punto.
+:::
+
+### Varios puntos
+
+`plt.scatter()` **no** recibe parejas $(x, y)$, sino **dos listas**: una con todas las coordenadas $x$ y otra con todas las coordenadas $y$. El primer punto es `(xs[0], ys[0])`, el segundo `(xs[1], ys[1])`, y así sucesivamente.
+
+Coloquemos un punto en cada cuadrante:
+
+```{python}
+nombres = ["A", "B", "C", "D"]
+xs = [2, -3, -1, 4]        # Coordenadas x de A, B, C, D
+ys = [3, 1, -4, -2]        # Coordenadas y de A, B, C, D
+
+plt.figure(figsize=(5, 5))
+plt.scatter(xs, ys, color="tab:blue", s=60)
+
+# Etiquetar cada punto: zip() recorre las tres listas en paralelo
+for nombre, x, y in zip(nombres, xs, ys):
+    plt.text(x + 0.2, y + 0.2, nombre + "(" + str(x) + ", " + str(y) + ")")
+
+plt.axhline(0, color="black", linewidth=0.8)
+plt.axvline(0, color="black", linewidth=0.8)
+plt.xlim(-5, 5)
+plt.ylim(-5, 5)
+plt.grid(True)
+plt.xlabel("x")
+plt.ylabel("y")
+plt.title("Un punto en cada cuadrante")
+plt.show()
+```
+
+### Unir puntos con líneas
+
+Si en lugar de `plt.scatter()` usamos `plt.plot()`, Matplotlib **une los puntos en orden** con segmentos de recta. Para cerrar una figura, repetimos el primer punto al final. Por ejemplo, el triángulo con vértices $A(-2, -1)$, $B(3, -1)$ y $C(1, 3)$:
+
+```{python}
+xs = [-2, 3, 1, -2]        # A, B, C y otra vez A para cerrar el triángulo
+ys = [-1, -1, 3, -1]
+
+plt.figure(figsize=(5, 5))
+plt.plot(xs, ys, marker="o", color="tab:green")   # marker="o" marca cada vértice
+plt.axhline(0, color="black", linewidth=0.8)
+plt.axvline(0, color="black", linewidth=0.8)
+plt.xlim(-5, 5)
+plt.ylim(-5, 5)
+plt.grid(True)
+plt.title("Triángulo ABC")
+plt.show()
+```
+
+### De puntos a la gráfica de una función
+
+La gráfica de una función $f(x)$ es el conjunto de puntos $(x, f(x))$. Si calculamos **pocos** puntos de $f(x) = x^2$ y los unimos, la curva se ve "quebrada"; con **muchos** puntos (usando `np.linspace()`) se ve suave:
+
+```{python}
+x_pocos = np.array([-2, -1, 0, 1, 2])
+x_muchos = np.linspace(-2, 2, 100)            # 100 puntos entre -2 y 2
+
+plt.figure(figsize=(6, 4))
+plt.plot(x_muchos, x_muchos**2, color="tab:gray", label="100 puntos")
+plt.plot(x_pocos, x_pocos**2, marker="o", color="tab:red", label="5 puntos")
+plt.xlabel("x")
+plt.ylabel("y")
+plt.title("$f(x) = x^2$ a partir de sus puntos")
+plt.legend()
+plt.grid(True)
+plt.show()
+```
+
+Esta es la idea detrás de todas las gráficas de las siguientes secciones. En [Visualización II](python_visualizacion2.qmd) prepararemos un plano cartesiano "matemático" más completo: ejes centrados en el origen y la misma escala en $x$ y $y$.
+
+## Graficar funciones con Matplotlib
+
+Con las partes de una gráfica y la idea de "muchos puntos unidos" ya podemos graficar funciones. Este ejemplo usa el estilo `plt` y las funciones de la [tabla de partes de una gráfica](#dos-formas-de-escribir-lo-mismo-plt-y-ax):
 
 ```{python}
 x = np.linspace(-3, 3, 100)        # 100 puntos entre -3 y 3
@@ -83,18 +356,6 @@ plt.legend()
 plt.grid(True)
 plt.show()
 ```
-
-| Función | ¿Qué hace? |
-|----|----|
-| `plt.figure(figsize=(ancho, alto))` | Crea una figura nueva del tamaño indicado. |
-| `plt.plot(x, y)` | Dibuja una línea que une los puntos. |
-| `plt.xlabel()`, `plt.ylabel()` | Etiquetas de los ejes. |
-| `plt.title()` | Título. |
-| `plt.legend()` | Muestra la leyenda (usa el argumento `label` de cada línea). |
-| `plt.grid(True)` | Agrega una cuadrícula. |
-| `plt.xlim()`, `plt.ylim()` | Límites de los ejes. |
-| `plt.savefig("archivo.png", dpi=300)` | Guarda la figura en un archivo. |
-| `plt.show()` | Muestra la figura. |
 
 Los textos entre signos de dólar, como `"$f(x) = x^2$"`, se escriben en **LaTeX**, igual que en Markdown.
 
@@ -137,7 +398,7 @@ plt.title("Área entre sen(x) y cos(x)")
 plt.show()
 ```
 
-## Varias gráficas en una figura: `subplots()`
+## Varias gráficas en una figura: `subplots()` {#varias-gráficas-en-una-figura-subplots}
 
 Con `plt.subplots(filas, columnas)` creamos una cuadrícula de gráficas. Esta forma de trabajar se llama **orientada a objetos**: cada gráfica es un objeto `ax` con sus propios **métodos**.
 
@@ -174,31 +435,117 @@ Observa que `axs` es un **arreglo de NumPy** de 2 × 2, por eso usamos `axs[fila
 
 ## Tipos de gráficas
 
-| Gráfica | ¿Para qué sirve? | Matplotlib | Plotly Express |
+![](figures/python_matplotlib_tipos_graficas.png){fig-align="center"}
+
+| Gráfica | ¿Para qué sirve? | Matplotlib | Plotly |
 |----|----|----|----|
+| **Gráficas en 2D** |  |  |  |
 | Línea | Funciones, tendencias en el tiempo. | `plt.plot()` | `px.line()` |
+| Barras | Comparar cantidades entre categorías. | `plt.bar()` | `px.bar()` |
+| Barras horizontales | Comparar categorías con etiquetas largas. | `plt.barh()` | `px.bar(..., orientation="h")` |
 | Dispersión | Relación entre dos variables. | `plt.scatter()` | `px.scatter()` |
-| Barras | Comparar categorías. | `plt.bar()` | `px.bar()` |
 | Histograma | Distribución de una variable. | `plt.hist()` | `px.histogram()` |
-| Caja (*boxplot*) | Mediana, cuartiles y valores atípicos. | `plt.boxplot()` | `px.box()` |
-| Pastel | Proporciones de un total (pocas categorías). | `plt.pie()` | `px.pie()` |
-| Curvas de nivel | Funciones de dos variables $f(x, y)$. | `plt.contour()` | `go.Contour()` |
-| Mapa de calor | Matrices de valores. | `plt.imshow()` | `px.imshow()` |
+| Caja y bigotes (*boxplot*) | Mediana, cuartiles y valores atípicos; comparar distribuciones. | `plt.boxplot()` | `px.box()` |
+| Pastel (*pie*) | Proporciones de un total (pocas categorías). | `plt.pie()` | `px.pie()` |
+| Área | Destacar la magnitud acumulada bajo una curva. | `plt.fill_between()` | `px.area()` |
+| Mapa de calor (*heatmap*) | Valores de una matriz representados con colores. | `plt.imshow()` | `px.imshow()` |
+| Contorno o curvas de nivel (*contour*) | Funciones de dos variables $f(x, y)$: líneas donde $f$ tiene el mismo valor. | `plt.contour()`, `plt.contourf()` (relleno) | `go.Contour()` |
+| **Gráficas en 3D** |  |  |  |
 | Superficie 3D | Funciones $z = f(x, y)$. | `ax.plot_surface()` | `go.Surface()` |
+| Dispersión 3D | Puntos $(x, y, z)$ en el espacio. | `ax.scatter(x, y, z)` | `px.scatter_3d()` |
+| Líneas 3D | Trayectorias y curvas en el espacio, como una hélice. | `ax.plot(x, y, z)` | `px.line_3d()` |
+
+Las gráficas en 3D de Matplotlib se dibujan sobre ejes 3D, `ax = plt.figure().add_subplot(projection="3d")`, por eso se escriben con `ax.` y no con `plt.`. Las veremos en [Visualización III: gráficas en 3D](python_visualizacion3d.qmd).
+
+### ¿Qué gráfica elegir para explicar algo?
+
+Una gráfica es una **respuesta visual a una pregunta**. Antes de escribir código, pregúntate: **¿qué quiero que el lector vea?** La pregunta decide la gráfica:
+
+| Quiero mostrar... | Pregunta que responde | Mejor opción | Ejemplo matemático | Evita |
+|----|----|----|----|----|
+| **Cambio o tendencia** de una variable continua | ¿Cómo cambia $y$ cuando $x$ crece? | **Línea** | La gráfica de $f(x) = \sin x$; una sucesión que converge. | Barras: sugieren categorías separadas. |
+| **Relación** entre dos variables numéricas | ¿Están relacionadas $x$ y $y$? ¿Hay un patrón? | **Dispersión** | Puntos $(x, y)$ aleatorios; $n$ contra el número de divisores de $n$. | Unir los puntos con líneas si el orden no importa. |
+| **Comparar** cantidades entre categorías | ¿Cuál es mayor? ¿Por cuánto? | **Barras** | Cuántos primos terminan en 1, 3, 7 y 9. | Pastel con muchas categorías. |
+| **Distribución** de una variable | ¿Qué valores son más frecuentes? ¿Es simétrica? | **Histograma** | Los resultados de lanzar dos dados 1000 veces. | Barras de cada valor individual si hay muchos. |
+| **Comparar distribuciones** entre grupos | ¿Qué grupo tiene mayor mediana o más dispersión? ¿Hay valores atípicos? | **Caja** (*boxplot*) | Calificaciones de tres grupos. | Solo mostrar los promedios. |
+| **Partes de un todo** | ¿Qué fracción del total es cada parte? | **Pastel** (máximo 4 o 5 partes) o **barras** | Proporción de pares e impares. | Pastel con partes de tamaño parecido. |
+| Una función de **dos variables** | ¿Dónde están los máximos, mínimos y puntos silla? | **Curvas de nivel** o **mapa de calor** | $f(x, y) = x^2 - y^2$. | 3D si una vista 2D basta. |
+| La **forma** de una superficie | ¿Cómo se ve $z = f(x, y)$? | **Superficie 3D** (mejor interactiva, con Plotly) | Un paraboloide. | 3D estática si oculta partes importantes. |
+
+#### Ejemplo: el mismo dato, dos gráficas
+
+Contemos en qué dígito terminan los números primos menores que 1000. Con una **gráfica de pastel** es difícil decidir qué rebanada es mayor, porque el ojo compara **ángulos** con poca precisión. Con **barras** comparamos **alturas** sobre una misma base, y la respuesta salta a la vista:
+
+```{python}
+# Paso 1: contar en qué dígito terminan los primos menores que 1000
+conteo = [0] * 10                               # CONTADORES: uno por cada dígito 0, 1, ..., 9
+for n in range(2, 1000):                        # Revisar cada número del 2 al 999
+    es_primo = True                             # Suponemos que n es primo...
+    for d in range(2, int(n ** 0.5) + 1):       # ...y probamos divisores hasta √n
+        if n % d == 0:                          # Si d divide a n,
+            es_primo = False                    #   n no es primo
+            break                               #   y dejamos de buscar
+    if es_primo:
+        conteo[n % 10] += 1                     # n % 10 es el último dígito de n: sumamos 1 a su contador
+
+# Paso 2: quedarnos solo con los dígitos en los que termina algún primo (1, 2, 3, 5, 7, 9)
+etiquetas = [str(d) for d in range(10) if conteo[d] > 0]     # Los dígitos como texto: "1", "2", ...
+cantidades = [conteo[d] for d in range(10) if conteo[d] > 0] # Cuántos primos terminan en cada uno
+
+# Paso 3: una figura con dos gráficas lado a lado (1 fila, 2 columnas)
+fig, axs = plt.subplots(1, 2, figsize=(10, 4))
+
+# Paso 4: la gráfica de la izquierda, axs[0], es un pastel
+axs[0].pie(cantidades, labels=etiquetas)                     # ❌ Difícil de comparar ángulos
+axs[0].set_title("Pastel: ¿cuál es mayor?")
+
+# Paso 5: la gráfica de la derecha, axs[1], es de barras
+axs[1].bar(etiquetas, cantidades, color="tab:blue")          # ✅ Fácil de comparar alturas
+axs[1].set_title("Barras: el 7 gana")
+axs[1].set_xlabel("Último dígito del primo")
+axs[1].set_ylabel("Cantidad de primos")
+
+# Paso 6: ajustar los espacios para que los textos no se encimen, y mostrar
+plt.tight_layout()
+plt.show()
+
+# Paso 7: imprimir los conteos para comprobar lo que vemos en la gráfica
+for digito, cantidad in zip(etiquetas, cantidades):
+    print("Terminan en", digito, ":", cantidad, "primos")
+```
+
+Con barras se ve de inmediato que el 7 es el más frecuente, que 1, 3 y 9 están muy parejos (entre 38 y 42), y que solo **un** primo termina en 2 (el 2) y solo uno en 5 (el 5). En el pastel, esas diferencias casi no se notan.
+
+::: callout-tip
+## Tres preguntas antes de graficar
+
+1.  **¿Qué pregunta responde mi gráfica?** Si no puedes decirla en una frase, la gráfica no será clara.
+2.  **¿Qué tipo de datos tengo?** Categorías → barras; números continuos → línea, dispersión o histograma.
+3.  **¿Se entiende sin leer el código?** Título, ejes con etiquetas (y unidades) y leyenda. Revisa también las [buenas prácticas de visualización](#buenas-prácticas-de-visualización).
+:::
 
 ### Dispersión con mapa de colores
 
 ```{python}
-rng = np.random.default_rng(seed=2026)
-puntos_x = rng.normal(size=300)
-puntos_y = rng.normal(size=300)
+# Paso 1: generar 300 puntos aleatorios (x, y)
+rng = np.random.default_rng(seed=2026)          # Generador con semilla: siempre los mismos números
+puntos_x = rng.normal(size=300)                 # 300 coordenadas x (distribución normal)
+puntos_y = rng.normal(size=300)                 # 300 coordenadas y
+
+# Paso 2: calcular el ángulo de cada punto respecto al eje x (entre -π y π)
 angulo = np.arctan2(puntos_y, puntos_x)
 
+# Paso 3: dibujar los puntos, coloreados según su ángulo
 plt.figure(figsize=(5, 4))
-plt.scatter(puntos_x, puntos_y, c=angulo, cmap="viridis", alpha=0.8)
-plt.colorbar(label="Ángulo (radianes)")
+plt.scatter(puntos_x, puntos_y,
+            c=angulo,                           # c: el valor que decide el color de cada punto
+            cmap="viridis",                     # cmap: la paleta de colores
+            alpha=0.8)                          # alpha: un poco transparentes para ver los encimados
+
+# Paso 4: agregar la barra de colores, el título y la misma escala en ambos ejes
+plt.colorbar(label="Ángulo (radianes)")         # Explica qué valor representa cada color
 plt.title("Puntos aleatorios coloreados por su ángulo")
-plt.axis("equal")
+plt.axis("equal")                               # Una unidad en x mide lo mismo que en y
 plt.show()
 ```
 
@@ -207,15 +554,17 @@ plt.show()
 Para las siguientes gráficas usaremos calificaciones **simuladas** con números aleatorios de NumPy (con semilla, para obtener siempre los mismos datos):
 
 ```{python}
-rng = np.random.default_rng(seed=2026)
+rng = np.random.default_rng(seed=2026)          # Generador con semilla: siempre los mismos datos
 
-niveles = ["MB", "B", "S", "NA"]
-estudiantes_por_nivel = [28, 45, 35, 12]
+# Datos por CATEGORÍA (para barras y pastel)
+niveles = ["MB", "B", "S", "NA"]                # Muy bien, Bien, Suficiente, No acreditado
+estudiantes_por_nivel = [28, 45, 35, 12]        # Cuántos estudiantes hay en cada nivel
 
-calificaciones = np.clip(rng.normal(7.8, 1.3, 120), 0, 10)   # 120 calificaciones entre 0 y 10
-grupo_a = rng.normal(7.5, 1.0, 40)
-grupo_b = rng.normal(8.2, 0.8, 40)
-grupo_c = rng.normal(6.9, 1.4, 40)
+# Datos NUMÉRICOS (para histograma y caja)
+calificaciones = np.clip(rng.normal(7.8, 1.3, 120), 0, 10)   # 120 calificaciones (media 7.8) recortadas entre 0 y 10
+grupo_a = rng.normal(7.5, 1.0, 40)              # 40 calificaciones: media 7.5, desviación 1.0
+grupo_b = rng.normal(8.2, 0.8, 40)              # 40 calificaciones: media 8.2, desviación 0.8
+grupo_c = rng.normal(6.9, 1.4, 40)              # 40 calificaciones: media 6.9, desviación 1.4
 ```
 
 `rng.normal(media, desviacion, n)` genera `n` números con distribución normal, y `np.clip(datos, 0, 10)` recorta los valores para que queden entre 0 y 10.
@@ -225,12 +574,12 @@ grupo_c = rng.normal(6.9, 1.4, 40)
 Una gráfica de barras **compara cantidades entre categorías**. Recibe las categorías (eje $x$) y la altura de cada barra (eje $y$):
 
 ```{python}
-plt.figure(figsize=(6, 4))
-plt.bar(niveles, estudiantes_por_nivel, color="tab:blue")
-plt.xlabel("Nivel")
+plt.figure(figsize=(6, 4))                                  # Paso 1: crear la figura (6 × 4 pulgadas)
+plt.bar(niveles, estudiantes_por_nivel, color="tab:blue")   # Paso 2: una barra por nivel; su altura es el número de estudiantes
+plt.xlabel("Nivel")                                         # Paso 3: etiquetas de los ejes y título
 plt.ylabel("Número de estudiantes")
 plt.title("Estudiantes por nivel")
-plt.show()
+plt.show()                                                  # Paso 4: mostrar la gráfica
 ```
 
 Para barras horizontales usa `plt.barh()`, útil cuando los nombres de las categorías son largos.
@@ -240,14 +589,22 @@ Para barras horizontales usa `plt.barh()`, útil cuando los nombres de las categ
 Un histograma muestra la **distribución** de una variable numérica: divide el rango de los datos en intervalos (*bins*) y cuenta cuántos datos caen en cada uno.
 
 ```{python}
-plt.figure(figsize=(6, 4))
-plt.hist(calificaciones, bins=15, color="tab:green", edgecolor="white")
+plt.figure(figsize=(6, 4))                          # Paso 1: crear la figura
+
+# Paso 2: el histograma: divide las calificaciones en 15 intervalos y cuenta cuántas caen en cada uno
+plt.hist(calificaciones, bins=15,
+         color="tab:green",
+         edgecolor="white")                         # Borde blanco para separar las barras
+
+# Paso 3: una línea vertical punteada en la media de las calificaciones
 plt.axvline(calificaciones.mean(), color="black", linestyle="--", label="Media")
+
+# Paso 4: etiquetas, título y leyenda (la leyenda usa el label de axvline)
 plt.xlabel("Calificación")
 plt.ylabel("Número de estudiantes")
 plt.title("Histograma de calificaciones")
 plt.legend()
-plt.show()
+plt.show()                                          # Paso 5: mostrar la gráfica
 ```
 
 - `bins` es el número de intervalos: pocos *bins* ocultan detalles y demasiados producen una gráfica "con ruido".
@@ -262,12 +619,12 @@ No confundas un histograma con una gráfica de barras: las barras comparan **cat
 Un diagrama de caja (*boxplot*) resume una distribución con cinco valores y permite **comparar varios grupos**:
 
 ```{python}
-plt.figure(figsize=(6, 4))
-plt.boxplot([grupo_a, grupo_b, grupo_c])
-plt.xticks([1, 2, 3], ["Grupo A", "Grupo B", "Grupo C"])
-plt.ylabel("Calificación")
+plt.figure(figsize=(6, 4))                                  # Paso 1: crear la figura
+plt.boxplot([grupo_a, grupo_b, grupo_c])                    # Paso 2: una caja por grupo (se dibujan en x = 1, 2, 3)
+plt.xticks([1, 2, 3], ["Grupo A", "Grupo B", "Grupo C"])    # Paso 3: cambiar las marcas 1, 2, 3 por el nombre del grupo
+plt.ylabel("Calificación")                                  # Paso 4: etiqueta y título
 plt.title("Calificaciones por grupo")
-plt.show()
+plt.show()                                                  # Paso 5: mostrar la gráfica
 ```
 
 | Parte de la caja | ¿Qué representa? |
@@ -282,10 +639,12 @@ plt.show()
 Una gráfica de pastel muestra la **proporción** de cada categoría respecto al total:
 
 ```{python}
-plt.figure(figsize=(5, 5))
-plt.pie(estudiantes_por_nivel, labels=niveles, autopct="%1.0f%%")
-plt.title("Proporción de estudiantes por nivel")
-plt.show()
+plt.figure(figsize=(5, 5))                          # Paso 1: figura cuadrada, para que el pastel sea un círculo
+plt.pie(estudiantes_por_nivel,                      # Paso 2: el tamaño de cada rebanada es proporcional a su valor
+        labels=niveles,                             #   nombre de cada rebanada
+        autopct="%1.0f%%")                          #   porcentaje dentro de cada rebanada, sin decimales
+plt.title("Proporción de estudiantes por nivel")    # Paso 3: título
+plt.show()                                          # Paso 4: mostrar la gráfica
 ```
 
 `autopct="%1.0f%%"` muestra el porcentaje de cada rebanada sin decimales. Úsala solo con **pocas** categorías; si hay muchas, una gráfica de barras se lee mejor.
@@ -295,24 +654,30 @@ plt.show()
 Ahora que conocemos cada gráfica, podemos reunirlas en una figura de 2 × 2 con `plt.subplots()`. Observa que el código de cada gráfica es el mismo, pero ahora usamos los **métodos** de cada `ax` (`axs[0, 0].bar()`, `axs[0, 0].set_title()`...) en lugar de `plt.bar()` y `plt.title()`:
 
 ```{python}
+# Paso 1: una figura con 2 filas y 2 columnas de gráficas; axs[fila, columna] es cada una
 fig, axs = plt.subplots(2, 2, figsize=(9, 7))
 
+# Paso 2: arriba a la izquierda (fila 0, columna 0): barras
 axs[0, 0].bar(niveles, estudiantes_por_nivel, color="tab:blue")
 axs[0, 0].set_title("Barras: estudiantes por nivel")
 axs[0, 0].set_ylabel("Número de estudiantes")
 
+# Paso 3: arriba a la derecha (fila 0, columna 1): histograma con la media
 axs[0, 1].hist(calificaciones, bins=15, color="tab:green", edgecolor="white")
 axs[0, 1].axvline(calificaciones.mean(), color="black", linestyle="--", label="Media")
 axs[0, 1].set_title("Histograma de calificaciones")
 axs[0, 1].legend()
 
+# Paso 4: abajo a la izquierda (fila 1, columna 0): diagrama de caja
 axs[1, 0].boxplot([grupo_a, grupo_b, grupo_c])
-axs[1, 0].set_xticks([1, 2, 3], ["Grupo A", "Grupo B", "Grupo C"])
+axs[1, 0].set_xticks([1, 2, 3], ["Grupo A", "Grupo B", "Grupo C"])   # Nombres en lugar de 1, 2, 3
 axs[1, 0].set_title("Caja: calificaciones por grupo")
 
+# Paso 5: abajo a la derecha (fila 1, columna 1): pastel
 axs[1, 1].pie(estudiantes_por_nivel, labels=niveles, autopct="%1.0f%%")
 axs[1, 1].set_title("Pastel: proporción por nivel")
 
+# Paso 6: ajustar los espacios entre gráficas para que no se encimen, y mostrar
 fig.tight_layout()
 plt.show()
 ```
@@ -642,7 +1007,7 @@ fig.write_html("mi_grafica.html")   # Archivo HTML interactivo (se abre en el na
 fig.write_image("mi_grafica.png")   # Imagen estática (requiere el paquete kaleido)
 ```
 
-## Buenas prácticas de visualización
+## Buenas prácticas de visualización {#buenas-prácticas-de-visualización}
 
 | Práctica | ¿Por qué? |
 |----|----|
