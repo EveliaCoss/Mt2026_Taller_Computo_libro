@@ -607,6 +607,8 @@ El ejemplo es una **guía**, no una plantilla para copiar: su cónica es diferen
 
 **¿Cómo trabajamos varias personas sin romper el código?** Antes de empezar a trabajar, hagan `git pull`; al terminar, `git add`, `git commit` y `git push`. Si es posible, cada integrante trabaja en una página distinta.
 
+![](figures/proyecto_juegos_del_hambre.jpg){fig-align="center" width="60%" fig-alt="Ilustración de una chica de cabello azul con lentes y vestido negro con dorado, junto a un gato, en una arena: «¡Que comiencen los juegos del hambre! (del proyecto final)»."}
+
 ## Referencias
 
 - Hoja de ejercicios *Curvas y Lugares Geométricos*, Geometría Analítica, semestre 2027-1.
