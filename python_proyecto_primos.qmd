@@ -11,7 +11,7 @@ engine: knitr
 ::: callout-important
 ## ¿Para quién es este proyecto?
 
-Este proyecto es la alternativa **individual** al [proyecto integrador de cónicas](python_proyecto_integrador.qmd) para quien tomó **todo** el Taller de Cómputo pero **no** cursa Geometría Analítica. Integra las mismas herramientas del curso, pero el tema es la **teoría de números**: no necesitas nada de cónicas ni de rotación de ejes. Los detalles (variantes, partes y rúbrica) pueden cambiar mientras terminamos de definirlo.
+Este proyecto es la alternativa **individual** al [proyecto integrador de cónicas](python_proyecto_integrador.qmd) para quien tomó **todo** el Taller de Cómputo pero **no** cursa Geometría Analítica. Integra las mismas herramientas del curso, pero el tema es la **teoría de números**: no necesitas nada de cónicas ni de rotación de ejes.
 :::
 
 Los **números primos** son los "átomos" de los enteros: todo entero mayor que 1 se escribe como producto de primos de una sola forma. Parecen aparecer al azar, pero esconden patrones que los matemáticos llevan siglos estudiando. En este proyecto construirás un sitio web que **explore** esos patrones usando **todo** lo que aprendimos en el Taller de Cómputo: Python, funciones, NumPy, SymPy, visualización, álgebra lineal, números aleatorios, Quarto, Git y GitHub.

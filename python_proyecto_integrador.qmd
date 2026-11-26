@@ -8,11 +8,7 @@ engine: knitr
 
 > 📅 **Inicio:** jueves 26 de noviembre de 2026 · **Entrega del sitio:** jueves 3 de diciembre de 2026 · **Presentaciones:** martes 8 de diciembre de 2026
 
-::: callout-important
-## 🚧 Proyecto en construcción
-
-Este proyecto lo estamos **definiendo en conjunto** la **Dra. Haydeé Peruyero**, profesora de **Geometría Analítica**, y la **Dra. Evelia Coss**, profesora del **Taller de Cómputo**, para que integre lo que aprenden en ambas materias. Los detalles (cónicas asignadas, partes y rúbrica) pueden cambiar mientras terminamos de definirlo.
-:::
+Este proyecto lo diseñamos en conjunto la **Dra. Haydeé Peruyero**, profesora de **Geometría Analítica**, y la **Dra. Evelia Coss**, profesora del **Taller de Cómputo**, para que integre lo que aprenden en ambas materias.
 
 En **Geometría Analítica** estudiaron las cónicas (elipse, parábola e hipérbola) y aprendieron que una ecuación de segundo grado con término $xy$ representa una cónica **rotada**. En este proyecto construirán, **en equipo**, un sitio web que analice una de esas cónicas usando **todo** lo que aprendimos en el Taller de Cómputo: Python, SymPy, NumPy, visualización, transformaciones geométricas, números aleatorios, Quarto, Git y GitHub.
 
