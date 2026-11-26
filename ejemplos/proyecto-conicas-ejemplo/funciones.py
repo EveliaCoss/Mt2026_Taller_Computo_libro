@@ -36,6 +36,8 @@ def clasificar_conica(A, B, C):
 
 def angulo_rotacion(A, B, C):
     """Ángulo θ (en radianes) que elimina el término xy: tan(2θ) = B / (A - C)."""
+    # Nota: aquí el ángulo va en RADIANES, porque SymPy y NumPy trabajan en radianes.
+    #       En el Calentamiento 2 lo calcularon en GRADOS; para mostrarlo en grados usen sp.deg(theta).
     if B == 0:
         return ______                                # Sin término xy: ¿cuánto hay que rotar?
     if A == C:

@@ -52,6 +52,8 @@ que le corresponda a su equipo: **clasificarla**, **eliminar el término $xy$** 
 - El resultado es un **sitio web de Quarto** publicado en GitHub Pages, con su código, gráficas y explicaciones.
 - Al final, cada equipo **presenta** su sitio en clase (5 a 7 minutos).
 
+¿No cursas Geometría Analítica? Revisa el [proyecto alternativo: atlas de números primos](python_proyecto_primos.qmd), individual y con las mismas herramientas del curso.
+
 ### Cónicas asignadas
 
 | Equipo | Ecuación |
@@ -59,9 +61,14 @@ que le corresponda a su equipo: **clasificarla**, **eliminar el término $xy$** 
 | 1 | $7x^2 - 6\sqrt{3}\,xy + 13y^2 - 16 = 0$ |
 | 2 | $3x^2 - 10xy + 3y^2 + 32 = 0$ |
 | 3 | $x^2 - 2xy + y^2 - 8x - 8y = 0$ |
-| 4 | $xy - 2x - 2y = 0$ |
-| 5 | $2x^2 + 3xy - 2y^2 - 25 = 0$ |
-| 6 | $13x^2 + 10xy + 13y^2 - 72 = 0$ |
+| 4 | $2x^2 + 3xy - 2y^2 - 25 = 0$ |
+| 5 | $13x^2 + 10xy + 13y^2 - 72 = 0$ |
+| 6 | $4x^2 + 4xy + y^2 + \sqrt{5}\,x - 1 = 0$ |
+| 7 | $9x^2 + 3xy + 9y^2 - 5 = 0$ |
+| 8 | $5x^2 + 4xy + 2y^2 - 2 = 0$ |
+| 9 | $2x^2 - 5xy + 2y^2 = 0$ |
+| 10 | $x^2 - 2xy + y^2 - 4 = 0$ |
+| 11 | $16x^2 + 24xy + 9y^2 + 25x = 0$ |
 
 ::: callout-tip
 La profesora puede asignar las cónicas por sorteo... ¡con `random.choice()`! Si hay más equipos que cónicas, dos equipos pueden tener la misma ecuación.
@@ -77,7 +84,7 @@ El sitio debe tener las siguientes secciones. Cada una se describe en [Partes de
 | 2 | Funciones documentadas y probadas: `clasificar_conica()` y `angulo_rotacion()` | 15 |
 | 3 | Análisis algebraico con SymPy: clasificación, rotación, forma canónica y elementos | 20 |
 | 4 | Gráfica 2D de la cónica con sus ejes rotados y sus elementos | 15 |
-| 5 | Comprobación de la rotación con una matriz de NumPy | 10 |
+| 5 | Rotación con matrices: de las ecuaciones de clase a la matriz, y comprobación con NumPy | 10 |
 | 6 | Comprobación numérica de la definición como lugar geométrico | 10 |
 | 7 | Área estimada con Monte Carlo, comparada con el valor exacto | 10 |
 | 8 | Gráfica 3D interactiva con Plotly | 5 |
@@ -90,13 +97,19 @@ El sitio debe tener las siguientes secciones. Cada una se describe en [Partes de
 |----|----|----|----|
 | **Repositorio y sitio** (10) | Sitio publicado y navegable; todos los integrantes tienen *commits* con mensajes claros. (10) | Sitio publicado, pero con páginas incompletas o *commits* de una sola persona. (6) | El sitio no está publicado. (0–3) |
 | **Funciones** (15) | Funciones con *docstring*, validación y pruebas con `assert` que pasan. (15) | Funciones correctas, pero sin documentación o sin pruebas. (9) | Las funciones no existen o dan resultados incorrectos. (0–5) |
-| **Análisis algebraico** (20) | Clasificación, ángulo, forma canónica y **todos** los elementos correctos, obtenidos con SymPy. (20) | Forma canónica correcta, pero faltan elementos. (12) | Forma canónica incorrecta o calculada a mano sin código. (0–7) |
+| **Análisis algebraico** (20) | Clasificación, ángulo, forma canónica y **todos** los elementos correctos, obtenidos con SymPy; identifican el caso del ángulo ($B = 0$, $A = C$ o $A \ne C$) y explican su estrategia. (20) | Forma canónica correcta, pero faltan elementos o no explican la estrategia para el ángulo. (12) | Forma canónica incorrecta o calculada a mano sin código. (0–7) |
 | **Visualización 2D** (15) | Cónica, ejes rotados y elementos, con título, leyenda, etiquetas y misma escala en los ejes. (15) | Cónica graficada, pero faltan elementos o etiquetas. (9) | Gráfica incorrecta o ausente. (0–5) |
-| **Matriz de rotación** (10) | La canónica girada con NumPy coincide con la original y se reporta el error. (10) | Se gira la curva, pero sin comparar ni reportar el error. (6) | No se usa la matriz de rotación. (0–3) |
+| **Matriz de rotación** (10) | Explican que las ecuaciones de rotación de clase son lo mismo que el producto de la matriz de rotación por $(x', y')$ y lo desarrollan con matrices (en LaTeX y con SymPy) hasta llegar a ellas; la canónica girada con NumPy coincide con la original, se reporta el error y comentan si confirma la estrategia del ángulo. (10) | Desarrollan el producto o giran la curva, pero no explican la relación con las ecuaciones de clase, no reportan el error o no comentan la estrategia del ángulo. (6) | No se usa la matriz de rotación. (0–3) |
 | **Lugar geométrico** (10) | Se comprueba numéricamente la definición en muchos puntos y se interpreta el resultado. (10) | Se comprueba en pocos puntos o sin interpretación. (6) | No se comprueba. (0–3) |
 | **Monte Carlo** (10) | Estimación reproducible (con semilla), comparada con el valor exacto y con una gráfica de convergencia. (10) | Estimación correcta, sin comparación o sin gráfica. (6) | Estimación incorrecta o ausente. (0–3) |
 | **3D interactiva** (5) | Gráfica de Plotly que muestra la cónica como curva de nivel, con título. (5) | Gráfica 3D estática o sin explicación. (3) | Ausente. (0) |
 | **Presentación y documentación** (5) | Explicaciones claras en cada sección, fórmulas en LaTeX, figuras con pie y conclusiones. (5) | Explicaciones breves o incompletas. (3) | Solo código, sin explicaciones. (0–1) |
+
+::: callout-warning
+## Ecuaciones en LaTeX
+
+**Todas** las ecuaciones matemáticas del sitio deben escribirse con estilo de LaTeX (por ejemplo, `$x^2 + y^2 = 1$` y no `x^2 + y^2 = 1` o `x**2 + y**2 = 1` en el texto). Si alguna no lo está, se descuentan **10 puntos** de los 100 de la calificación final. Repasen [de SymPy a LaTeX](python_sympy.qmd#de-sympy-a-latex).
+:::
 
 ## Aprender del capítulo de geometría en el espacio
 
@@ -171,6 +184,8 @@ def clasificar_conica(A, B, C):
 
 def angulo_rotacion(A, B, C):
     """Ángulo θ (en radianes) que elimina el término xy: tan(2θ) = B / (A - C)."""
+    # Nota: aquí el ángulo va en RADIANES, porque SymPy y NumPy trabajan en radianes.
+    #       En el Calentamiento 2 lo calcularon en GRADOS; para mostrarlo en grados usen sp.deg(theta).
     if B == 0:
         return ______                                # Sin término xy: ¿cuánto hay que rotar?
     if A == C:
@@ -210,6 +225,8 @@ Sus funciones deben ir acompañadas de **pruebas con `assert`** en `analisis.qmd
 
 **Qué hacer:** con SymPy, **clasificar** su cónica, encontrar el **ángulo de rotación**, **rotar** los ejes, llegar a la **forma canónica** y obtener todos sus **elementos**, primero en las coordenadas $(u, v)$ y después en las originales $(x, y)$.
 
+Al calcular el ángulo, **identifiquen** en qué caso está su cónica ($B = 0$, $A = C$ o $A \ne C$) y **expliquen** con sus palabras qué estrategia usaron para obtener $\theta$ y por qué.
+
 | Si su cónica es... | Elementos que deben reportar |
 |----|----|
 | Elipse | Centro, vértices, covértices, focos, excentricidad y eje focal. |
@@ -235,12 +252,21 @@ Sus funciones deben ir acompañadas de **pruebas con `assert`** en `analisis.qmd
 
 ### Parte 5. Comprobación con una matriz de rotación
 
-**Qué hacer:** tomar la forma **canónica** en $(u, v)$, **parametrizarla**, **girarla** el ángulo $\theta$ con una matriz de NumPy y comprobar que cae sobre la curva original. Reporten el **error máximo**.
+**Qué hacer:**
+
+1.  **De las ecuaciones de clase a una matriz.** En Geometría Analítica vieron la rotación de ejes como
+
+    $$x = x'\cos\theta - y'\sin\theta, \qquad y = x'\sin\theta + y'\cos\theta.$$
+
+    Expliquen con sus palabras por qué estas dos ecuaciones son **lo mismo** que multiplicar la [matriz de rotación](python_transformaciones.qmd#transformaciones-lineales-una-matriz-de-2-times-2) por el vector $(x', y')$. Escriban el producto **paso a paso** en LaTeX y háganlo también con matrices de SymPy, hasta llegar a las ecuaciones de clase. En el proyecto, $x' = u$ y $y' = v$.
+
+2.  **Comprobación numérica.** Tomar la forma **canónica** en $(u, v)$, **parametrizarla**, **girarla** el ángulo $\theta$ con una matriz de NumPy y comprobar que cae sobre la curva original. Reporten el **error máximo**. Comenten si el resultado confirma la estrategia que eligieron para el ángulo en la Parte 3 (el caso $A = C$ o $A \ne C$).
 
 📖 **Dónde estudiarlo:**
 
 - [Figuras como matrices de puntos](python_transformaciones.qmd#figuras-como-matrices-de-puntos), [transformaciones lineales](python_transformaciones.qmd#transformaciones-lineales-una-matriz-de-2-times-2) y [rotar alrededor de un punto](python_transformaciones.qmd#rotar-alrededor-de-un-punto-cualquiera) (si su cónica no está centrada en el origen).
-- [Producto de matrices](python_algebra_lineal.qmd#producto-de-matrices) con `@`.
+- [Producto de matrices](python_algebra_lineal.qmd#producto-de-matrices) con `@`, y [matrices en SymPy](python_sympy.qmd#matrices) para el producto simbólico.
+- [Conexión con geometría analítica: rotación de ejes](python_transformaciones.qmd#conexión-con-geometría-analítica-rotación-de-ejes).
 - [Curvas paramétricas y polares](python_visualizacion.qmd#curvas-paramétricas-y-polares).
 - En geometría en el espacio: [Avanzado 1](python_geometria_espacio.qmd#avanzado-1.-la-recta-de-intersección-de-dos-planos) (muchos puntos de una recta de una sola vez) y [Avanzado 2](python_geometria_espacio.qmd#avanzado-2.-el-ángulo-entre-dos-planos-que-no-se-pueden-despejar-en-z) (forma paramétrica cuando no se puede despejar).
 
@@ -590,8 +616,9 @@ El ejemplo es una **guía**, no una plantilla para copiar: su cónica es diferen
 - [ ] El sitio está publicado y abre desde la dirección de GitHub Pages.
 - [ ] Todos los integrantes tienen *commits* en el repositorio.
 - [ ] `funciones.py` tiene *docstrings* y las pruebas con `assert` pasan.
-- [ ] La forma canónica y los elementos están escritos en LaTeX.
+- [ ] **Todas** las ecuaciones (forma canónica, elementos y explicaciones) están escritas en LaTeX; si no, se descuentan 10 puntos de los 100.
 - [ ] Todas las gráficas tienen título, etiquetas y la misma escala en ambos ejes (`set_aspect("equal")`).
+- [ ] En la Parte 5 explican y desarrollan con matrices cómo se llega a las ecuaciones de rotación de clase.
 - [ ] La simulación de Monte Carlo usa una **semilla** y reporta el número de puntos.
 - [ ] La gráfica 3D de Plotly funciona en el sitio publicado.
 - [ ] Hay una sección de **conclusiones** y de **referencias**.
