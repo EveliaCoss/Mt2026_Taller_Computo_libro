@@ -68,7 +68,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./python_entornos.html" rel="next">
+<link href="./python_proyecto_primos.html" rel="next">
 <link href="./python_transformaciones.html" rel="prev">
 <link href="./flyer/logo.png" rel="icon" type="image/png">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
@@ -743,6 +743,12 @@ window.Quarto = {
  <span class="menu-text"><span class="chapter-number">72</span>&nbsp; <span class="chapter-title"><strong>🧩 Proyecto integrador: atlas de cónicas rotadas</strong></span></span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./python_proyecto_primos.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">73</span>&nbsp; <span class="chapter-title"><strong>🔢 Proyecto alternativo: atlas de números primos</strong></span></span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
@@ -953,6 +959,7 @@ window.Quarto = {
 <li>El resultado es un <strong>sitio web de Quarto</strong> publicado en GitHub Pages, con su código, gráficas y explicaciones.</li>
 <li>Al final, cada equipo <strong>presenta</strong> su sitio en clase (5 a 7 minutos).</li>
 </ul>
+<p>¿No cursas Geometría Analítica? Revisa el <a href="./python_proyecto_primos.html">proyecto alternativo: atlas de números primos</a>, individual y con las mismas herramientas del curso.</p>
 <section id="cónicas-asignadas" class="level3" data-number="72.2.1">
 <h3 data-number="72.2.1" class="anchored" data-anchor-id="cónicas-asignadas"><span class="header-section-number">72.2.1</span> Cónicas asignadas</h3>
 <table class="caption-top table">
@@ -977,15 +984,35 @@ window.Quarto = {
 </tr>
 <tr class="even">
 <td>4</td>
-<td><span class="math inline">\(xy - 2x - 2y = 0\)</span></td>
+<td><span class="math inline">\(2x^2 + 3xy - 2y^2 - 25 = 0\)</span></td>
 </tr>
 <tr class="odd">
 <td>5</td>
-<td><span class="math inline">\(2x^2 + 3xy - 2y^2 - 25 = 0\)</span></td>
+<td><span class="math inline">\(13x^2 + 10xy + 13y^2 - 72 = 0\)</span></td>
 </tr>
 <tr class="even">
 <td>6</td>
-<td><span class="math inline">\(13x^2 + 10xy + 13y^2 - 72 = 0\)</span></td>
+<td><span class="math inline">\(4x^2 + 4xy + y^2 + \sqrt{5}\,x - 1 = 0\)</span></td>
+</tr>
+<tr class="odd">
+<td>7</td>
+<td><span class="math inline">\(9x^2 + 3xy + 9y^2 - 5 = 0\)</span></td>
+</tr>
+<tr class="even">
+<td>8</td>
+<td><span class="math inline">\(5x^2 + 4xy + 2y^2 - 2 = 0\)</span></td>
+</tr>
+<tr class="odd">
+<td>9</td>
+<td><span class="math inline">\(2x^2 - 5xy + 2y^2 = 0\)</span></td>
+</tr>
+<tr class="even">
+<td>10</td>
+<td><span class="math inline">\(x^2 - 2xy + y^2 - 4 = 0\)</span></td>
+</tr>
+<tr class="odd">
+<td>11</td>
+<td><span class="math inline">\(16x^2 + 24xy + 9y^2 + 25x = 0\)</span></td>
 </tr>
 </tbody>
 </table>
@@ -1043,7 +1070,7 @@ Tip
 </tr>
 <tr class="odd">
 <td>5</td>
-<td>Comprobación de la rotación con una matriz de NumPy</td>
+<td>Rotación con matrices: de las ecuaciones de clase a la matriz, y comprobación con NumPy</td>
 <td>10</td>
 </tr>
 <tr class="even">
@@ -1106,8 +1133,8 @@ Tip
 </tr>
 <tr class="odd">
 <td><strong>Análisis algebraico</strong> (20)</td>
-<td>Clasificación, ángulo, forma canónica y <strong>todos</strong> los elementos correctos, obtenidos con SymPy. (20)</td>
-<td>Forma canónica correcta, pero faltan elementos. (12)</td>
+<td>Clasificación, ángulo, forma canónica y <strong>todos</strong> los elementos correctos, obtenidos con SymPy; identifican el caso del ángulo (<span class="math inline">\(B = 0\)</span>, <span class="math inline">\(A = C\)</span> o <span class="math inline">\(A \ne C\)</span>) y explican su estrategia. (20)</td>
+<td>Forma canónica correcta, pero faltan elementos o no explican la estrategia para el ángulo. (12)</td>
 <td>Forma canónica incorrecta o calculada a mano sin código. (0–7)</td>
 </tr>
 <tr class="even">
@@ -1118,8 +1145,8 @@ Tip
 </tr>
 <tr class="odd">
 <td><strong>Matriz de rotación</strong> (10)</td>
-<td>La canónica girada con NumPy coincide con la original y se reporta el error. (10)</td>
-<td>Se gira la curva, pero sin comparar ni reportar el error. (6)</td>
+<td>Explican que las ecuaciones de rotación de clase son lo mismo que el producto de la matriz de rotación por <span class="math inline">\((x', y')\)</span> y lo desarrollan con matrices (en LaTeX y con SymPy) hasta llegar a ellas; la canónica girada con NumPy coincide con la original, se reporta el error y comentan si confirma la estrategia del ángulo. (10)</td>
+<td>Desarrollan el producto o giran la curva, pero no explican la relación con las ecuaciones de clase, no reportan el error o no comentan la estrategia del ángulo. (6)</td>
 <td>No se usa la matriz de rotación. (0–3)</td>
 </tr>
 <tr class="even">
@@ -1148,6 +1175,19 @@ Tip
 </tr>
 </tbody>
 </table>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Advertencia</span>Ecuaciones en LaTeX
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>Todas</strong> las ecuaciones matemáticas del sitio deben escribirse con estilo de LaTeX (por ejemplo, <code>$x^2 + y^2 = 1$</code> y no <code>x^2 + y^2 = 1</code> o <code>x**2 + y**2 = 1</code> en el texto). Si alguna no lo está, se descuentan <strong>10 puntos</strong> de los 100 de la calificación final. Repasen <a href="./python_sympy.html#de-sympy-a-latex">de SymPy a LaTeX</a>.</p>
+</div>
+</div>
 </section>
 <section id="aprender-del-capítulo-de-geometría-en-el-espacio" class="level2" data-number="72.5">
 <h2 data-number="72.5" class="anchored" data-anchor-id="aprender-del-capítulo-de-geometría-en-el-espacio"><span class="header-section-number">72.5</span> Aprender del capítulo de geometría en el espacio</h2>
@@ -1248,17 +1288,19 @@ Tip
 <span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> angulo_rotacion(A, B, C):</span>
 <span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Ángulo θ (en radianes) que elimina el término xy: tan(2θ) = B / (A - C)."""</span></span>
-<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> B <span class="op">==</span> <span class="dv">0</span>:</span>
-<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> ______                                <span class="co"># Sin término xy: ¿cuánto hay que rotar?</span></span>
-<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> A <span class="op">==</span> C:</span>
-<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> sp.pi <span class="op">/</span> <span class="dv">2</span>                             <span class="co"># 🐞 Si 2θ = 90°, ¿cuánto vale θ?</span></span>
-<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> sp.atan((A <span class="op">-</span> C) <span class="op">/</span> B) <span class="op">/</span> <span class="dv">2</span>                  <span class="co"># 🐞 Revisen la fracción con el docstring.</span></span>
-<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> matriz_rotacion(theta):</span>
-<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Matriz de rotación de NumPy (2 × 2) para un ángulo theta en radianes."""</span></span>
-<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a>    t <span class="op">=</span> <span class="bu">float</span>(theta)                                 <span class="co"># NumPy necesita un número, no un símbolo de SymPy</span></span>
-<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> np.array(______)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Nota: aquí el ángulo va en RADIANES, porque SymPy y NumPy trabajan en radianes.</span></span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a>    <span class="co">#       En el Calentamiento 2 lo calcularon en GRADOS; para mostrarlo en grados usen sp.deg(theta).</span></span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> B <span class="op">==</span> <span class="dv">0</span>:</span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> ______                                <span class="co"># Sin término xy: ¿cuánto hay que rotar?</span></span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> A <span class="op">==</span> C:</span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> sp.pi <span class="op">/</span> <span class="dv">2</span>                             <span class="co"># 🐞 Si 2θ = 90°, ¿cuánto vale θ?</span></span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> sp.atan((A <span class="op">-</span> C) <span class="op">/</span> B) <span class="op">/</span> <span class="dv">2</span>                  <span class="co"># 🐞 Revisen la fracción con el docstring.</span></span>
+<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> matriz_rotacion(theta):</span>
+<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Matriz de rotación de NumPy (2 × 2) para un ángulo theta en radianes."""</span></span>
+<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a>    t <span class="op">=</span> <span class="bu">float</span>(theta)                                 <span class="co"># NumPy necesita un número, no un símbolo de SymPy</span></span>
+<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> np.array(______)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="callout callout-style-default callout-warning callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -1294,6 +1336,7 @@ Tip
 <section id="parte-3.-análisis-algebraico" class="level3" data-number="72.6.3">
 <h3 data-number="72.6.3" class="anchored" data-anchor-id="parte-3.-análisis-algebraico"><span class="header-section-number">72.6.3</span> Parte 3. Análisis algebraico</h3>
 <p><strong>Qué hacer:</strong> con SymPy, <strong>clasificar</strong> su cónica, encontrar el <strong>ángulo de rotación</strong>, <strong>rotar</strong> los ejes, llegar a la <strong>forma canónica</strong> y obtener todos sus <strong>elementos</strong>, primero en las coordenadas <span class="math inline">\((u, v)\)</span> y después en las originales <span class="math inline">\((x, y)\)</span>.</p>
+<p>Al calcular el ángulo, <strong>identifiquen</strong> en qué caso está su cónica (<span class="math inline">\(B = 0\)</span>, <span class="math inline">\(A = C\)</span> o <span class="math inline">\(A \ne C\)</span>) y <strong>expliquen</strong> con sus palabras qué estrategia usaron para obtener <span class="math inline">\(\theta\)</span> y por qué.</p>
 <table class="caption-top table">
 <colgroup>
 <col style="width: 50%">
@@ -1340,11 +1383,18 @@ Tip
 </section>
 <section id="parte-5.-comprobación-con-una-matriz-de-rotación" class="level3" data-number="72.6.5">
 <h3 data-number="72.6.5" class="anchored" data-anchor-id="parte-5.-comprobación-con-una-matriz-de-rotación"><span class="header-section-number">72.6.5</span> Parte 5. Comprobación con una matriz de rotación</h3>
-<p><strong>Qué hacer:</strong> tomar la forma <strong>canónica</strong> en <span class="math inline">\((u, v)\)</span>, <strong>parametrizarla</strong>, <strong>girarla</strong> el ángulo <span class="math inline">\(\theta\)</span> con una matriz de NumPy y comprobar que cae sobre la curva original. Reporten el <strong>error máximo</strong>.</p>
+<p><strong>Qué hacer:</strong></p>
+<ol type="1">
+<li><p><strong>De las ecuaciones de clase a una matriz.</strong> En Geometría Analítica vieron la rotación de ejes como</p>
+<p><span class="math display">\[x = x'\cos\theta - y'\sin\theta, \qquad y = x'\sin\theta + y'\cos\theta.\]</span></p>
+<p>Expliquen con sus palabras por qué estas dos ecuaciones son <strong>lo mismo</strong> que multiplicar la <a href="./python_transformaciones.html#transformaciones-lineales-una-matriz-de-2-times-2">matriz de rotación</a> por el vector <span class="math inline">\((x', y')\)</span>. Escriban el producto <strong>paso a paso</strong> en LaTeX y háganlo también con matrices de SymPy, hasta llegar a las ecuaciones de clase. En el proyecto, <span class="math inline">\(x' = u\)</span> y <span class="math inline">\(y' = v\)</span>.</p></li>
+<li><p><strong>Comprobación numérica.</strong> Tomar la forma <strong>canónica</strong> en <span class="math inline">\((u, v)\)</span>, <strong>parametrizarla</strong>, <strong>girarla</strong> el ángulo <span class="math inline">\(\theta\)</span> con una matriz de NumPy y comprobar que cae sobre la curva original. Reporten el <strong>error máximo</strong>. Comenten si el resultado confirma la estrategia que eligieron para el ángulo en la Parte 3 (el caso <span class="math inline">\(A = C\)</span> o <span class="math inline">\(A \ne C\)</span>).</p></li>
+</ol>
 <p>📖 <strong>Dónde estudiarlo:</strong></p>
 <ul>
 <li><a href="./python_transformaciones.html#figuras-como-matrices-de-puntos">Figuras como matrices de puntos</a>, <a href="./python_transformaciones.html#transformaciones-lineales-una-matriz-de-2-times-2">transformaciones lineales</a> y <a href="./python_transformaciones.html#rotar-alrededor-de-un-punto-cualquiera">rotar alrededor de un punto</a> (si su cónica no está centrada en el origen).</li>
-<li><a href="./python_algebra_lineal.html#producto-de-matrices">Producto de matrices</a> con <code>@</code>.</li>
+<li><a href="./python_algebra_lineal.html#producto-de-matrices">Producto de matrices</a> con <code>@</code>, y <a href="./python_sympy.html#matrices">matrices en SymPy</a> para el producto simbólico.</li>
+<li><a href="./python_transformaciones.html#conexión-con-geometría-analítica-rotación-de-ejes">Conexión con geometría analítica: rotación de ejes</a>.</li>
 <li><a href="./python_visualizacion.html#curvas-paramétricas-y-polares">Curvas paramétricas y polares</a>.</li>
 <li>En geometría en el espacio: <a href="./python_geometria_espacio.html#avanzado-1.-la-recta-de-intersección-de-dos-planos">Avanzado 1</a> (muchos puntos de una recta de una sola vez) y <a href="./python_geometria_espacio.html#avanzado-2.-el-ángulo-entre-dos-planos-que-no-se-pueden-despejar-en-z">Avanzado 2</a> (forma paramétrica cuando no se puede despejar).</li>
 </ul>
@@ -1482,7 +1532,7 @@ eyJhdHRyIjp7ImNoZWNrIjp0cnVlLCJlZGl0Ijp0cnVlLCJldmFsIjp0cnVlLCJleGVyY2lzZSI6InBp
 </div>
 <div class="hint webr-ojs-exercise exercise-hint d-none" data-exercise="pi1">
 <div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="true" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -1491,7 +1541,7 @@ eyJhdHRyIjp7ImNoZWNrIjp0cnVlLCJlZGl0Ijp0cnVlLCJldmFsIjp0cnVlLCJleGVyY2lzZSI6InBp
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-7" class="callout-7-contents callout-collapse collapse show">
+<div id="callout-8" class="callout-8-contents callout-collapse collapse show">
 <div class="callout-body-container callout-body">
 <p>Escriban el discriminante <span class="math inline">\(B^2 - 4AC\)</span> con los operadores de Python (repasen la potencia en <a href="./intro_python.html">Introducción a Python</a>). ¿Qué valor tiene el discriminante cuando la cónica es una parábola? Para <strong>comparar</strong> dos valores usen el operador que vimos en <a href="./python_condicionales.html#operadores-de-comparación">operadores de comparación</a>.</p>
 </div>
@@ -1524,7 +1574,7 @@ eyJhdHRyIjp7ImNoZWNrIjp0cnVlLCJlZGl0Ijp0cnVlLCJldmFsIjp0cnVlLCJleGVyY2lzZSI6InBp
 </div>
 <div class="hint webr-ojs-exercise exercise-hint d-none" data-exercise="pi2">
 <div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="true" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -1533,7 +1583,7 @@ eyJhdHRyIjp7ImNoZWNrIjp0cnVlLCJlZGl0Ijp0cnVlLCJldmFsIjp0cnVlLCJleGVyY2lzZSI6InBp
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-8" class="callout-8-contents callout-collapse collapse show">
+<div id="callout-9" class="callout-9-contents callout-collapse collapse show">
 <div class="callout-body-container callout-body">
 <p><code>math.atan()</code> es la tangente inversa y regresa el ángulo en <strong>radianes</strong>; <code>math.degrees()</code> lo convierte a grados. La fórmula da <span class="math inline">\(2\theta\)</span>: ¿qué falta para obtener <span class="math inline">\(\theta\)</span>? Si <span class="math inline">\(2\theta = 90°\)</span>, ¿cuánto vale <span class="math inline">\(\theta\)</span>?</p>
 </div>
@@ -1562,7 +1612,7 @@ eyJhdHRyIjp7ImNoZWNrIjp0cnVlLCJlZGl0Ijp0cnVlLCJldmFsIjp0cnVlLCJleGVyY2lzZSI6InBp
 </div>
 <div class="hint webr-ojs-exercise exercise-hint d-none" data-exercise="pi_pruebas">
 <div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="true" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -1571,7 +1621,7 @@ eyJhdHRyIjp7ImNoZWNrIjp0cnVlLCJlZGl0Ijp0cnVlLCJldmFsIjp0cnVlLCJleGVyY2lzZSI6InBp
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-9" class="callout-9-contents callout-collapse collapse show">
+<div id="callout-10" class="callout-10-contents callout-collapse collapse show">
 <div class="callout-body-container callout-body">
 <p>Los resultados esperados se escriben <strong>entre comillas</strong>, igual que los regresa la función: <code>"elipse"</code>, <code>"parábola"</code> o <code>"hipérbola"</code>. Para los coeficientes, escriban tres números separados por comas, <code>A, B, C</code>, de una ecuación que conozcan de Geometría Analítica (por ejemplo, de su forma canónica): ¿cuánto vale cada uno si el término no aparece? Y si no hay término <span class="math inline">\(xy\)</span>, ¿cuánto hay que rotar?</p>
 </div>
@@ -1739,8 +1789,9 @@ __pycache__/
 <li><label><input type="checkbox">El sitio está publicado y abre desde la dirección de GitHub Pages.</label></li>
 <li><label><input type="checkbox">Todos los integrantes tienen <em>commits</em> en el repositorio.</label></li>
 <li><label><input type="checkbox"><code>funciones.py</code> tiene <em>docstrings</em> y las pruebas con <code>assert</code> pasan.</label></li>
-<li><label><input type="checkbox">La forma canónica y los elementos están escritos en LaTeX.</label></li>
+<li><label><input type="checkbox"><strong>Todas</strong> las ecuaciones (forma canónica, elementos y explicaciones) están escritas en LaTeX; si no, se descuentan 10 puntos de los 100.</label></li>
 <li><label><input type="checkbox">Todas las gráficas tienen título, etiquetas y la misma escala en ambos ejes (<code>set_aspect("equal")</code>).</label></li>
+<li><label><input type="checkbox">En la Parte 5 explican y desarrollan con matrices cómo se llega a las ecuaciones de rotación de clase.</label></li>
 <li><label><input type="checkbox">La simulación de Monte Carlo usa una <strong>semilla</strong> y reporta el número de puntos.</label></li>
 <li><label><input type="checkbox">La gráfica 3D de Plotly funciona en el sitio publicado.</label></li>
 <li><label><input type="checkbox">Hay una sección de <strong>conclusiones</strong> y de <strong>referencias</strong>.</label></li>
@@ -2247,8 +2298,8 @@ window._ojs.runtime.interpretFromScriptTags();
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./python_entornos.html" class="pagination-link" aria-label="Entornos para trabajar con Python: RStudio, Google Colab y Jupyter Notebook">
-        <span class="nav-page-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Entornos para trabajar con Python: RStudio, Google Colab y Jupyter Notebook</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./python_proyecto_primos.html" class="pagination-link" aria-label="**🔢 Proyecto alternativo: atlas de números primos**">
+        <span class="nav-page-text"><span class="chapter-number">73</span>&nbsp; <span class="chapter-title"><strong>🔢 Proyecto alternativo: atlas de números primos</strong></span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

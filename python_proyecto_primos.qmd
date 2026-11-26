@@ -1,0 +1,579 @@
+---
+engine: knitr
+---
+
+# **🔢 Proyecto alternativo: atlas de números primos**
+
+{{< include ./_extensions/r-wasm/live/_knitr.qmd >}}
+
+> **Fecha de entrega:** *por definir*
+
+::: callout-important
+## ¿Para quién es este proyecto?
+
+Este proyecto es la alternativa **individual** al [proyecto integrador de cónicas](python_proyecto_integrador.qmd) para quien tomó **todo** el Taller de Cómputo pero **no** cursa Geometría Analítica. Integra las mismas herramientas del curso, pero el tema es la **teoría de números**: no necesitas nada de cónicas ni de rotación de ejes. Los detalles (variantes, partes, rúbrica y fecha de entrega) pueden cambiar mientras terminamos de definirlo.
+:::
+
+Los **números primos** son los "átomos" de los enteros: todo entero mayor que 1 se escribe como producto de primos de una sola forma. Parecen aparecer al azar, pero esconden patrones que los matemáticos llevan siglos estudiando. En este proyecto construirás un sitio web que **explore** esos patrones usando **todo** lo que aprendimos en el Taller de Cómputo: Python, funciones, NumPy, SymPy, visualización, álgebra lineal, números aleatorios, Quarto, Git y GitHub.
+
+::: {.callout-note icon="false"}
+## 🧭 Este capítulo es una guía, no un ejemplo resuelto
+
+Aquí **no** encontrarás las respuestas. Para cada parte del proyecto te decimos **qué** debes entregar y 📖 **dónde estudiarlo** en el libro. El único código que te damos es el punto de partida de `funciones.py`: **incompleto y con errores** que tú debes corregir.
+:::
+
+## Objetivo
+
+Construir un **atlas de los números primos** hasta un número $N$: **encontrarlos** con la criba de Eratóstenes, **contarlos** y compararlos con el **teorema de los números primos**, **visualizar** sus patrones (la espiral de Ulam, las "carreras" de primos y la conjetura de Goldbach), **estimar $\pi$** con números aleatorios a partir de la probabilidad de que dos enteros no tengan divisores en común, y **publicar** todo en un sitio web de Quarto en GitHub Pages.
+
+### ¿Qué temas integra?
+
+| Parte del proyecto | Matemáticas | Dónde estudiarlo en el libro |
+|----|----|----|
+| 1. Repositorio y sitio web | — | [Git/GitHub](cap15.qmd), [Quarto](Intro_Quarto.qmd), [Quarto con Python](quarto_python.qmd) |
+| 2. Funciones del proyecto | Primalidad, criba de Eratóstenes, algoritmo de Euclides | [Funciones](python_funciones.qmd), [ciclos](python_for.qmd), [condicionales](python_condicionales.qmd), [máscaras booleanas](python_numpy.qmd#máscaras-booleanas) |
+| 3. Análisis con SymPy | Función $\pi(x)$, teorema de los números primos, primos en progresiones | [SymPy](python_sympy.qmd), [límites](python_sympy.qmd#límites) |
+| 4. Visualización 2D | Gráficas de $\pi(x)$, de los huecos entre primos y de las "carreras" | [Visualización I](python_visualizacion.qmd), [subplots](python_visualizacion_plotly.qmd#varias-gráficas-en-una-figura-subplots) |
+| 5. Espiral de Ulam | Una matriz de primos y un sistema de ecuaciones | [Indexación de arreglos 2D](python_numpy.qmd#arreglos-de-dos-o-más-dimensiones), [mapas de calor](python_visualizacion2.qmd#mapas-de-calor-en-2d), [sistemas de ecuaciones](python_algebra_lineal.qmd#sistemas-de-ecuaciones-lineales) |
+| 6. Conjetura de Goldbach | Comprobación numérica de una conjetura | [Ciclos](python_for.qmd), [máscaras booleanas](python_numpy.qmd#máscaras-booleanas) |
+| 7. $\pi$ con Monte Carlo | Probabilidad de que dos enteros sean coprimos | [Números aleatorios](python_aleatorios.qmd#el-método-de-monte-carlo), [sumas con SymPy](python_sympy.qmd#sumas) |
+| 8. Visualización 3D interactiva | La superficie del máximo común divisor | [Visualización III](python_visualizacion3d.qmd), [Plotly](python_visualizacion_plotly.qmd#plotly-gráficas-interactivas) |
+
+## Organización
+
+- Proyecto **individual**.
+- Trabajas en **un repositorio de GitHub** propio. Haz *commits* **frecuentes** a lo largo del proyecto (se revisará el historial): un solo *commit* al final no cuenta como trabajo constante.
+- El resultado es un **sitio web de Quarto** publicado en GitHub Pages, con tu código, gráficas y explicaciones.
+- Al final **presentas** tu sitio en clase (5 a 7 minutos).
+
+### Variante asignada
+
+Si hay más de una persona haciendo este proyecto, cada una usa una variante distinta. $N$ es el límite de tu atlas, $m$ el módulo de tu "carrera de primos" (Parte 3) y $G$ el límite hasta el que compruebas la conjetura de Goldbach (Parte 6).
+
+| Variante | $N$ | Módulo $m$ | Goldbach hasta $G$ |
+|----|----|----|----|
+| 1 | $100\,000$ | $4$ | $10\,000$ |
+| 2 | $200\,000$ | $3$ | $20\,000$ |
+| 3 | $150\,000$ | $6$ | $15\,000$ |
+| 4 | $120\,000$ | $10$ | $12\,000$ |
+
+## Los entregables
+
+El sitio debe tener las siguientes secciones. Cada una se describe en [Partes del proyecto](#partes-del-proyecto) y se evalúa con la [rúbrica](#rúbrica-de-evaluación).
+
+| Parte | Entregable | Puntos |
+|----|----|----|
+| 1 | Repositorio en GitHub y sitio publicado en GitHub Pages | 10 |
+| 2 | Funciones documentadas y probadas: `es_primo()`, `criba()`, `mcd()` y `contar_primos()` | 15 |
+| 3 | Análisis con SymPy: $\pi(x)$, teorema de los números primos y carrera de primos | 20 |
+| 4 | Gráficas 2D de $\pi(x)$, de los huecos entre primos y de la carrera | 15 |
+| 5 | Espiral de Ulam: matriz de primos y polinomio de una diagonal | 10 |
+| 6 | Comprobación numérica de la conjetura de Goldbach | 10 |
+| 7 | Estimación de $\pi$ con Monte Carlo, comparada con el valor exacto | 10 |
+| 8 | Gráfica 3D interactiva con Plotly | 5 |
+| 9 | Presentación, claridad y documentación | 5 |
+| | **Total** | **100** |
+
+## Rúbrica de evaluación
+
+| Criterio | Excelente | Suficiente | Insuficiente |
+|----|----|----|----|
+| **Repositorio y sitio** (10) | Sitio publicado y navegable; *commits* frecuentes con mensajes claros. (10) | Sitio publicado, pero con páginas incompletas o con muy pocos *commits*. (6) | El sitio no está publicado. (0–3) |
+| **Funciones** (15) | Funciones con *docstring*, validación y pruebas con `assert` que pasan. (15) | Funciones correctas, pero sin documentación o sin pruebas. (9) | Las funciones no existen o dan resultados incorrectos. (0–5) |
+| **Análisis con SymPy** (20) | $\pi(x)$ comparada con `sp.primepi()`, con $x/\ln x$ y con $\operatorname{Li}(x)$; límite calculado con SymPy; carrera de primos completa, y explica por qué solo compiten ciertas clases de residuos. (20) | Tablas correctas, pero sin el límite o sin explicar la carrera. (12) | Resultados incorrectos o calculados sin código. (0–7) |
+| **Visualización 2D** (15) | Las tres gráficas, con título, leyenda, etiquetas y escalas adecuadas, citadas e interpretadas en el texto. (15) | Gráficas correctas, pero faltan etiquetas, alguna gráfica o su interpretación. (9) | Gráficas incorrectas o ausentes. (0–5) |
+| **Espiral de Ulam** (10) | Matriz construida con NumPy y dibujada como mapa de calor; polinomio de una diagonal obtenido resolviendo un sistema de ecuaciones y comprobado con SymPy; explica la estrategia. (10) | Espiral correcta, pero sin el polinomio o sin explicar cómo lo obtuvo. (6) | No hay espiral o no está construida con una matriz. (0–3) |
+| **Goldbach** (10) | Comprobación de todos los pares hasta $G$, gráfica del "cometa" e interpretación (por qué no es una demostración). (10) | Comprobación en pocos números o sin interpretación. (6) | No se comprueba. (0–3) |
+| **Monte Carlo** (10) | Estimación reproducible (con semilla), comparada con el valor exacto de SymPy y con una gráfica de convergencia. (10) | Estimación correcta, sin comparación o sin gráfica. (6) | Estimación incorrecta o ausente. (0–3) |
+| **3D interactiva** (5) | Superficie de Plotly del máximo común divisor, con título y explicación. (5) | Gráfica 3D estática o sin explicación. (3) | Ausente. (0) |
+| **Presentación y documentación** (5) | Explicaciones claras en cada sección, fórmulas en LaTeX, figuras con pie y conclusiones. (5) | Explicaciones breves o incompletas. (3) | Solo código, sin explicaciones. (0–1) |
+
+::: callout-warning
+## Ecuaciones en LaTeX
+
+**Todas** las ecuaciones matemáticas del sitio deben escribirse con estilo de LaTeX (por ejemplo, `$\pi(x) \sim x / \ln x$` y no `pi(x) ~ x/ln(x)` en el texto). Si alguna no lo está, se descuentan **10 puntos** de los 100 de la calificación final. Repasa [de SymPy a LaTeX](python_sympy.qmd#de-sympy-a-latex).
+:::
+
+## Partes del proyecto
+
+### Parte 1. Repositorio y sitio web
+
+**Qué hacer:** crear el repositorio, el sitio web de Quarto y publicarlo en GitHub Pages **desde la primera semana**, aunque esté vacío. Así detectas a tiempo los problemas de configuración.
+
+📖 **Dónde estudiarlo:** [Introducción a Git/GitHub](cap15.qmd), [Introducción a Quarto](Intro_Quarto.qmd), [Configuraciones para usar Quarto con Python](quarto_python.qmd) y [Publicar en GitHub Pages](python_visualizacion3d.qmd#publicar-en-github-pages).
+
+Los pasos están en la sección [Estructura del sitio](#estructura-del-sitio).
+
+### Parte 2. Funciones del proyecto
+
+**Qué hacer:** escribir en el archivo `funciones.py` las funciones que usarás en todo el sitio. Como mínimo `es_primo(n)`, `criba(N)`, `mcd(a, b)` y `contar_primos(x, primos)`, con *docstring*, validación de los argumentos y pruebas con `assert`.
+
+📖 **Dónde estudiarlo:**
+
+- [Definir y llamar una función](python_funciones.qmd#definir-y-llamar-una-función), [*docstrings*](python_funciones.qmd#docstrings), [programación defensiva en funciones](python_funciones.qmd#programación-defensiva-en-funciones) y [probar funciones](python_funciones.qmd#probar-funciones).
+- [Código explicado: ¿cómo leer `es_primo()`?](python_funciones.qmd#return-termina-la-función) y el [ejercicio 4 de ciclos: ¿es un número primo?](python_for.qmd#ejercicio-4.-es-un-número-primo).
+- [Ciclos `while`](python_for.qmd#ciclos-while), para el algoritmo de Euclides.
+- [Máscaras booleanas](python_numpy.qmd#máscaras-booleanas) e [indexación y rebanado](python_numpy.qmd#indexación-y-rebanado), para la criba.
+
+**Punto de partida de `funciones.py`:** copia este código en tu archivo. Las funciones están **incompletas** y tienen **errores a propósito**: tu trabajo es completarlas, encontrar los errores y corregirlos.
+
+``` python
+"""Funciones del proyecto alternativo: atlas de números primos."""
+import numpy as np
+
+
+# ⚠️ Estas funciones están INCOMPLETAS y tienen ERRORES A PROPÓSITO.
+#    1. Completa cada ______.
+#    2. Cada línea marcada con 🐞 tiene un error: debes cambiar algo para corregirlo.
+#    3. Comprueba tus correcciones con las pruebas (assert) de la página Análisis.
+
+
+def es_primo(n):
+    """Regresa True si n es primo. Solo prueba los divisores d con d² ≤ n."""
+    if n < 2:
+        return False
+    for d in range(2, int(n ** 0.5)):                # 🐞 ¿Se prueba el divisor √n? Pruébala con 49.
+        if n % d == 0:
+            return False
+    return True
+
+
+def criba(N):
+    """Arreglo de NumPy con todos los primos p ≤ N (criba de Eratóstenes)."""
+    es_p = np.ones(N + 1, dtype=bool)                # es_p[k] dice si k "sigue siendo" candidato a primo
+    es_p[:2] = ______                                # 0 y 1 no son primos
+    for p in range(2, int(N ** 0.5) + 1):
+        if es_p[p]:
+            es_p[p * p :: p] = True                  # 🐞 ¿Qué hay que hacer con los múltiplos de p?
+    return np.arange(N + 1)[es_p]
+
+
+def mcd(a, b):
+    """Máximo común divisor de a y b con el algoritmo de Euclides."""
+    while b != 0:
+        a, b = b, a // b                             # 🐞 Euclides usa el residuo, no el cociente.
+    return ______                                    # Cuando b llega a 0, ¿cuál es el mcd?
+
+
+def contar_primos(x, primos):
+    """π(x): cuántos primos del arreglo `primos` son menores o iguales que x."""
+    return np.sum(primos < x)                        # 🐞 Si x es primo, ¿se cuenta? Pruébala con x = 7.
+```
+
+::: callout-warning
+## 🐞 Encuentra y corrige los errores
+
+Las líneas marcadas con 🐞 tienen al menos un error cada una, y todos son **errores silenciosos**: el código se ejecuta sin avisar, pero da resultados incorrectos. Por eso **no basta con que corra**: escribe las [pruebas](#pruebas-de-las-funciones) y corrige hasta que **todas** pasen. En tu entrega, `funciones.py` **no** debe tener ningún `______` ni ningún 🐞. Repasa [errores silenciosos](python_buenas_practicas.qmd#un-error-silencioso) y [leer los mensajes de error](python_buenas_practicas.qmd#leer-los-mensajes-de-error).
+:::
+
+La **criba de Eratóstenes** es nueva: en vez de probar cada número por separado, empieza suponiendo que **todos** son primos y va **tachando** los múltiplos de cada primo. Con NumPy, tachar todos los múltiplos de `p` es una sola asignación con rebanado (`es_p[p * p :: p] = ...`). Puedes agregar más funciones si te ayudan.
+
+::: callout-important
+## Tus funciones deben verse en la página Análisis
+
+La profesora revisará tus funciones **en tu sitio publicado**, así que la página `analisis.qmd` debe tener una sección **Funciones del proyecto** que muestre el contenido completo de `funciones.py`. La forma más sencilla es incluir el archivo; así la página siempre muestra la versión más reciente:
+
+````markdown
+```{.python filename="funciones.py"}
+{{{< include funciones.py >}}}
+```
+````
+:::
+
+Tus funciones deben ir acompañadas de **pruebas con `assert`** en `analisis.qmd`. Practícalo en el [Calentamiento 3](#pruebas-de-las-funciones).
+
+### Parte 3. Análisis con SymPy
+
+**Qué hacer:**
+
+1.  **Contar primos.** Con tu `criba()` y tu `contar_primos()`, calcula $\pi(x)$ para $x = 10, 100, 1\,000, \dots$ hasta $N$, y compruébalo con `sp.primepi(x)` de SymPy.
+2.  **El teorema de los números primos.** Este teorema dice que $\pi(x) \sim \dfrac{x}{\ln x}$, es decir, que el cociente de ambos tiende a 1. Haz una **tabla** con $\pi(x)$, $\dfrac{x}{\ln x}$, la integral logarítmica $\operatorname{Li}(x)$ (`sp.li(x)`) y los cocientes $\pi(x) \big/ \dfrac{x}{\ln x}$. Calcula con SymPy el **límite** $\displaystyle\lim_{x \to \infty} \frac{\operatorname{Li}(x)}{x / \ln x}$ y explica qué dice tu tabla: ¿cuál de las dos aproximaciones es mejor?
+3.  **La carrera de primos módulo $m$.** Clasifica tus primos según su **residuo** al dividirlos entre el $m$ de tu variante y cuenta cuántos hay en cada clase. **Identifica** qué residuos tienen muchos primos y cuáles tienen a lo más uno, y **explica** con tus palabras por qué pasa eso (piensa en el máximo común divisor del residuo y $m$). ¿Qué clase "va ganando" la carrera?
+4.  **Huecos y gemelos.** Calcula los **huecos** entre primos consecutivos (la diferencia $p_{k+1} - p_k$), el hueco **más grande** hasta $N$ y cuántas parejas de **primos gemelos** (hueco igual a 2) hay.
+
+📖 **Dónde estudiarlo:**
+
+- SymPy: [sustituir y evaluar](python_sympy.qmd#sustituir-y-evaluar), [límites](python_sympy.qmd#límites) y [de SymPy a LaTeX](python_sympy.qmd#de-sympy-a-latex).
+- NumPy: [funciones matemáticas](python_numpy.qmd#funciones-matemáticas) (`np.log()`, `np.diff()`), [máscaras booleanas](python_numpy.qmd#máscaras-booleanas) y [funciones estadísticas](python_numpy.qmd#funciones-estadísticas).
+- El [mapa de calor de la aritmética modular](python_visualizacion2.qmd#ejercicio-2.-un-mapa-de-calor-de-la-aritmética-modular): residuos con `%`.
+
+`sp.primepi()`, `sp.li()` y `np.diff()` son nuevas: consulta su ayuda con `help()` o en la documentación.
+
+### Parte 4. Visualización 2D
+
+**Qué hacer:** una figura con varias gráficas (`subplots`):
+
+- $\pi(x)$, $\dfrac{x}{\ln x}$ y $\operatorname{Li}(x)$ en la misma gráfica, de 2 a $N$.
+- Un **histograma** de los huecos entre primos consecutivos.
+- La **carrera de primos**: para cada clase de residuo que compite, cuántos primos lleva hasta $x$, como función de $x$.
+
+Cada gráfica con título, leyenda y etiquetas, citada e **interpretada** en el texto.
+
+📖 **Dónde estudiarlo:**
+
+- [Graficar funciones con Matplotlib](python_visualizacion.qmd#graficar-funciones-con-matplotlib), [histograma](python_visualizacion.qmd#histograma-plt.hist) y [buenas prácticas de visualización](python_visualizacion.qmd#buenas-prácticas-de-visualización).
+- [Varias gráficas en una figura: `subplots()`](python_visualizacion_plotly.qmd#varias-gráficas-en-una-figura-subplots).
+- El [ejercicio 2 de Visualización I: visualizar la convergencia de una serie](python_visualizacion.qmd#ejercicio-2.-visualizar-la-convergencia-de-una-serie).
+
+### Parte 5. La espiral de Ulam: una matriz de primos
+
+**Qué hacer:**
+
+1.  **Construir la espiral.** Escribe los enteros $1, 2, 3, \dots$ en una **matriz** cuadrada de NumPy (por ejemplo, de $201 \times 201$), empezando en el centro y avanzando en espiral: un paso a la derecha, uno hacia arriba, dos a la izquierda, dos hacia abajo, tres a la derecha, tres hacia arriba... Después crea una matriz de `True`/`False` que diga en qué casillas hay un primo y dibújala como **mapa de calor**. Explica en tu sitio cómo recorriste la espiral.
+2.  **El polinomio de una diagonal.** En la espiral se ven **diagonales** con muchos primos. Elige una, toma tres de sus números consecutivos y encuentra el polinomio $f(n) = an^2 + bn + c$ que los genera **planteando y resolviendo un sistema de ecuaciones** de $3 \times 3$ en forma matricial (con NumPy o con matrices de SymPy). **Explica tu estrategia**: qué representa cada fila del sistema y por qué tres puntos bastan. Comprueba con `sp.isprime()` cuántos de los primeros valores de $f(n)$ son primos.
+3.  **El polinomio de Euler.** Comprueba con SymPy que $n^2 + n + 41$ es primo para $n = 0, 1, \dots, 39$, y explica por qué **no** puede ser primo para $n = 40$ (factoriza con `sp.factorint()`).
+
+📖 **Dónde estudiarlo:**
+
+- [Dimensiones de un arreglo](python_numpy.qmd#dimensiones-de-un-arreglo), [indexación de arreglos de dos o más dimensiones](python_numpy.qmd#arreglos-de-dos-o-más-dimensiones) y [máscaras booleanas](python_numpy.qmd#máscaras-booleanas).
+- [Mapas de calor en 2D](python_visualizacion2.qmd#mapas-de-calor-en-2d) y [mapa de calor con `plt.imshow()`](python_visualizacion.qmd#paso-3a.-mapa-de-calor-plt.imshow).
+- [Sistemas de ecuaciones lineales](python_algebra_lineal.qmd#sistemas-de-ecuaciones-lineales) y [matrices en SymPy](python_sympy.qmd#matrices).
+- [Ciclos `while`](python_for.qmd#ciclos-while) y [ciclos anidados](python_for.qmd#ciclos-anidados).
+
+### Parte 6. La conjetura de Goldbach
+
+**Qué hacer:** la **conjetura de Goldbach** (1742) dice que todo número par mayor que 2 es la suma de dos primos; por ejemplo, $28 = 5 + 23 = 11 + 17$. Nadie la ha demostrado. **Comprueba numéricamente** que se cumple para **todos** los pares de 4 a $G$, y cuenta de **cuántas formas** se puede escribir cada par. Grafica ese número de formas contra el par (el "**cometa de Goldbach**") e **interpreta** el resultado: ¿por qué tu comprobación **no** es una demostración?
+
+📖 **Dónde estudiarlo:**
+
+- [`for` con condicionales](python_for.qmd#for-con-condicionales), [acumuladores y contadores](python_for.qmd#acumuladores-y-contadores) y [`break`](python_for.qmd#break-salir-del-ciclo).
+- [Máscaras booleanas](python_numpy.qmd#máscaras-booleanas): con un arreglo `es_p` de `True`/`False`, `es_p[n - primos]` revisa muchos números de una sola vez.
+- [Ciclos `for` vs. NumPy](python_for.qmd#ciclos-for-vs.-numpy).
+
+### Parte 7. $\pi$ con el método de Monte Carlo
+
+**Qué hacer:** dos enteros son **coprimos** si su máximo común divisor es 1. Se sabe que la probabilidad de que dos enteros elegidos al azar sean coprimos es
+
+$$P = \frac{1}{\displaystyle\sum_{k=1}^{\infty} \frac{1}{k^2}}.$$
+
+1.  Calcula con SymPy el valor **exacto** de la suma y, con él, el de $P$.
+2.  **Estima** $P$ eligiendo muchas parejas de enteros al azar (por ejemplo, entre 1 y $10^6$) y contando cuántas son coprimas con tu `mcd()`. Despeja $\pi$ de tu estimación.
+3.  Haz una **gráfica de convergencia** que muestre cómo se acerca tu estimación de $\pi$ al valor real al aumentar el número de parejas.
+
+📖 **Dónde estudiarlo:**
+
+- [Números aleatorios con NumPy](python_aleatorios.qmd#números-aleatorios-con-numpy), [estimar $\pi$ lanzando "dardos"](python_aleatorios.qmd#estimar-pi-lanzando-dardos) y [¿qué tan rápido converge?](python_aleatorios.qmd#qué-tan-rápido-converge).
+- [Documentar simulaciones en Quarto](python_aleatorios.qmd#documentar-simulaciones-en-quarto).
+- [Sumas con SymPy](python_sympy.qmd#sumas) y el [reto final de SymPy: dos series famosas](python_sympy.qmd#reto-final-dos-series-famosas).
+
+### Parte 8. Visualización 3D interactiva
+
+**Qué hacer:** con Plotly, dibuja la **superficie** $z = \operatorname{mcd}(a, b)$ para $a, b = 1, 2, \dots, 40$, usando tu `mcd()` para llenar la matriz de valores. Explica qué representan los "picos" y las regiones donde $z = 1$, y relaciónalo con la Parte 7.
+
+📖 **Dónde estudiarlo:**
+
+- [Superficies $z = f(x, y)$](python_visualizacion3d.qmd#superficies-z-fx-y) y [gráficas 3D interactivas con Plotly](python_visualizacion3d.qmd#gráficas-3d-interactivas-con-plotly).
+- [Superficie en 3D con Plotly](python_visualizacion_plotly.qmd#superficie-en-3d).
+- [Ciclos anidados](python_for.qmd#ciclos-anidados), para llenar la matriz.
+- [Publicar en GitHub Pages](python_visualizacion3d.qmd#publicar-en-github-pages).
+
+## Calentamiento: pon a prueba tus funciones
+
+Antes de empezar el proyecto, completa y prueba dos de las funciones principales y escribe tus primeras pruebas con `assert`. **Run Code** probará tus funciones con varios números.
+
+### Calentamiento 1. Primos más rápido
+
+En [Funciones](python_funciones.qmd#return-termina-la-función) la función `es_primo()` probaba **todos** los divisores de 2 a $n - 1$. Si $n = a \cdot b$ con $a \le b$, entonces $a^2 \le n$: basta probar los divisores $d$ con $d^2 \le n$. Completa la función con esa idea.
+
+```{pyodide}
+#| exercise: pp1
+def es_primo(n):
+    """Regresa True si n es primo. Solo prueba los divisores d con d² ≤ n."""
+    if n < 2:
+        return False
+    d = 2
+    while ______:
+        if n % d == 0:
+            return False
+        d = d + 1
+    return True
+
+print(es_primo(97), es_primo(91), es_primo(49))
+```
+
+```{pyodide}
+#| exercise: pp1
+#| check: true
+def lento(n):
+    if n < 2:
+        return False
+    for divisor in range(2, n):
+        if n % divisor == 0:
+            return False
+    return True
+
+try:
+    f = envir_result["es_primo"]
+except Exception:
+    f = None
+if f is None:
+    feedback = {"correct": False, "message": "No encontré la función es_primo."}
+else:
+    ok = True
+    try:
+        for k in range(0, 400):
+            if f(k) != lento(k):
+                ok = False
+                break
+    except Exception:
+        ok = False
+    if ok:
+        feedback = {"correct": True, "message": "¡Correcto! Tu función coincide con la versión lenta en todos los números de 0 a 399."}
+    else:
+        feedback = {"correct": False, "message": "Tu función no coincide con la versión lenta en al menos un número. Revisa los cuadrados de primos, como 49: ¿se prueba el divisor 7?"}
+feedback
+```
+
+::: {.hint exercise="pp1"}
+::: {.callout-note collapse="false"}
+## Pista
+
+La condición del `while` debe decir "mientras $d^2 \le n$". Repasa la potencia en [Introducción a Python](intro_python.qmd) y los [operadores de comparación](python_condicionales.qmd#operadores-de-comparación). ¿Qué pasa con 49 si usas `<` en vez de `<=`?
+:::
+:::
+
+### Calentamiento 2. El algoritmo de Euclides
+
+El **algoritmo de Euclides** calcula el máximo común divisor con una idea: $\operatorname{mcd}(a, b) = \operatorname{mcd}(b, r)$, donde $r$ es el **residuo** de dividir $a$ entre $b$. Se repite hasta que el segundo número sea 0. Por ejemplo,
+
+$$\operatorname{mcd}(48, 18) = \operatorname{mcd}(18, 12) = \operatorname{mcd}(12, 6) = \operatorname{mcd}(6, 0) = 6.$$
+
+```{pyodide}
+#| exercise: pp2
+def mcd(a, b):
+    """Máximo común divisor de a y b con el algoritmo de Euclides."""
+    while b != 0:
+        a, b = ______, ______
+    return ______
+
+print(mcd(48, 18))
+```
+
+```{pyodide}
+#| exercise: pp2
+#| check: true
+import math
+try:
+    f = envir_result["mcd"]
+except Exception:
+    f = None
+if f is None:
+    feedback = {"correct": False, "message": "No encontré la función mcd."}
+else:
+    ok = True
+    try:
+        for a in range(0, 40):
+            for b in range(1, 40):
+                if f(a, b) != math.gcd(a, b):
+                    ok = False
+    except Exception:
+        ok = False
+    if ok:
+        feedback = {"correct": True, "message": "¡Correcto! Tu mcd() coincide con math.gcd() en todas las parejas de prueba."}
+    else:
+        feedback = {"correct": False, "message": "Al menos un mcd no coincide. Revisa qué par de números sigue en cada paso y qué regresas al final."}
+feedback
+```
+
+::: {.hint exercise="pp2"}
+::: {.callout-note collapse="false"}
+## Pista
+
+En cada paso, el nuevo `a` es el `b` de antes y el nuevo `b` es el **residuo** (operador `%`). Escribirlo en una sola línea, `a, b = ..., ...`, evita perder el valor viejo de `a`. Cuando `b` llega a 0, el mcd es el otro número.
+:::
+:::
+
+### Calentamiento 3. Pruebas con `assert` {#pruebas-de-las-funciones}
+
+Antes de usar tus funciones en el análisis, **escribe tus propias pruebas con `assert`**, como aprendimos en [Probar funciones](python_funciones.qmd#probar-funciones) y en [`assert`: verificar que algo sea verdadero](python_buenas_practicas.qmd#assert-verificar-que-algo-sea-verdadero). Cada prueba llama a una función con un número cuya respuesta **ya conoces** y la compara con el resultado esperado.
+
+Copia en el editor **tus** funciones de los calentamientos 1 y 2, ya completas. Después completa cada `______` con el **resultado esperado** o con un **número** que tú elijas. **Run Code** revisará que tus funciones sean correctas y que todas tus pruebas pasen.
+
+```{pyodide}
+#| exercise: pp_pruebas
+# 1. Copia aquí tus funciones es_primo() y mcd() de los calentamientos 1 y 2.
+______
+
+
+# 2. Pruebas de es_primo(n)
+assert es_primo(2) == ______                 # El único primo par
+assert es_primo(1) == ______                 # 1 no es primo
+assert es_primo(______) == False             # El cuadrado de un primo
+assert es_primo(______) == True              # Un primo mayor que 50
+
+# 3. Pruebas de mcd(a, b)
+assert mcd(48, 18) == ______
+assert mcd(______) == 1                      # Dos números coprimos
+
+print("Todas las pruebas pasaron ✅")
+```
+
+```{pyodide}
+#| exercise: pp_pruebas
+#| check: true
+import math
+import traceback
+num_assert = user_code.count("assert ")
+if "______" in user_code:
+    feedback = {"correct": False, "message": "Todavía hay espacios ______ sin completar."}
+elif "def es_primo" not in user_code or "def mcd" not in user_code:
+    feedback = {"correct": False, "message": "Copia en el editor tus funciones es_primo() y mcd() de los calentamientos 1 y 2."}
+elif num_assert < 6:
+    feedback = {"correct": False, "message": "Escribe al menos 6 pruebas con assert (tienes " + str(num_assert) + ")."}
+else:
+    entorno = {}
+    try:
+        exec(user_code, entorno)
+        primo = entorno["es_primo"]
+        mcd_alumno = entorno["mcd"]
+        bien = primo(49) == False and primo(97) == True and primo(0) == False and primo(121) == False
+        bien = bien and mcd_alumno(84, 36) == 12 and mcd_alumno(35, 64) == 1
+        if bien:
+            feedback = {"correct": True, "message": "¡Correcto! Tus funciones son correctas y tus " + str(num_assert) + " pruebas pasan. Escribe pruebas así en tu analisis.qmd, también para criba() y contar_primos()."}
+        else:
+            feedback = {"correct": False, "message": "Tus pruebas pasan, pero tus funciones no son correctas: revísalas con los calentamientos 1 y 2."}
+    except AssertionError as e:
+        linea = traceback.extract_tb(e.__traceback__)[-1].lineno
+        feedback = {"correct": False, "message": "La prueba de la línea " + str(linea) + " falló: revisa el resultado esperado, el número que elegiste o tu función."}
+    except Exception as e:
+        feedback = {"correct": False, "message": "Tu código tiene un error: " + type(e).__name__ + ": " + str(e)}
+feedback
+```
+
+::: {.hint exercise="pp_pruebas"}
+::: {.callout-note collapse="false"}
+## Pista
+
+Los resultados de `es_primo()` son `True` o `False`, **sin** comillas. Para `mcd()`, escribe dos números separados por comas, `a, b`. ¿Qué dos números no tienen ningún divisor en común además del 1?
+:::
+:::
+
+En **tu** proyecto, escribe las pruebas en `analisis.qmd`, **antes** del análisis, y agrega también pruebas para `criba()` y `contar_primos()` con un $N$ pequeño cuyos primos puedas escribir a mano (por ejemplo, $N = 30$).
+
+## Estructura del sitio
+
+### 1. Crear el proyecto
+
+En RStudio: **File \> New Project \> New Directory \> Quarto Website**. Llama al proyecto, por ejemplo, `proyecto-primos`. Después configura `_quarto.yml`:
+
+``` yaml
+project:
+  type: website
+  output-dir: docs
+
+website:
+  title: "Atlas de números primos"
+  navbar:
+    left:
+      - href: index.qmd
+        text: Inicio
+      - href: analisis.qmd
+        text: Análisis
+      - href: visualizacion.qmd
+        text: Visualización
+      - href: simulacion.qmd
+        text: Monte Carlo
+      - href: conclusiones.qmd
+        text: Conclusiones
+
+format:
+  html:
+    theme: cosmo
+    toc: true
+
+execute:
+  error: true
+```
+
+### 2. Archivos de la entrega
+
+```
+proyecto-primos/
+├── _quarto.yml          # Configuración del sitio web
+├── index.qmd            # Inicio: autor(a), variante y resumen de resultados
+├── funciones.py         # Funciones del proyecto (documentadas)
+├── analisis.qmd         # Pruebas, conteo de primos, teorema de los números primos y carrera
+├── visualizacion.qmd    # Gráficas 2D, espiral de Ulam, Goldbach y 3D
+├── simulacion.qmd       # Monte Carlo y convergencia
+├── conclusiones.qmd     # Conclusiones y referencias
+├── README.md            # Descripción del repositorio
+├── .gitignore           # Archivos que Git no debe guardar
+└── docs/                # Sitio generado por quarto render (se publica en GitHub Pages)
+```
+
+| Archivo | Partes de la rúbrica | Qué debe tener |
+|----|----|----|
+| `_quarto.yml` | 1 | `type: website`, `output-dir: docs` (para GitHub Pages) y el menú de navegación. |
+| `index.qmd` | 1, 9 | Tu nombre, tu variante ($N$, $m$ y $G$) y una **tabla de resumen** de resultados. Si calculas los valores con código en línea `` `{python} ...` ``, la tabla se actualiza sola. |
+| `funciones.py` | 2 | Las funciones de la [Parte 2](#parte-2.-funciones-del-proyecto), cada una con *docstring*. Las páginas las importan con `from funciones import ...`. |
+| `analisis.qmd` | 2, 3 | Una sección **Funciones del proyecto** que muestre todo `funciones.py`, las **pruebas con `assert`** antes del análisis y las tablas de la Parte 3 con sus fórmulas en LaTeX. |
+| `visualizacion.qmd` | 4, 5, 6, 8 | Figuras con `label: fig-...` y `fig-cap`, citadas en el texto con `@fig-...` ([pies de figura y referencias cruzadas](python_visualizacion3d.qmd#pies-de-figura-y-referencias-cruzadas)); el sistema de ecuaciones de la espiral y el resultado de Goldbach **explicados e interpretados**. |
+| `simulacion.qmd` | 7 | Semilla y parámetros al inicio, comparación con el valor exacto y gráfica de convergencia. |
+| `conclusiones.qmd` | 9 | Qué aprendiste y referencias (incluido el uso de IA). |
+
+Cada página de Python debe empezar con un encabezado como este:
+
+````
+---
+title: "Análisis"
+jupyter: python3
+---
+
+```{{python}}
+import numpy as np
+import sympy as sp
+from funciones import es_primo, criba, mcd, contar_primos
+```
+````
+
+Y el `.gitignore` debe incluir, al menos:
+
+```
+/.quarto/
+__pycache__/
+*.quarto_ipynb
+```
+
+### 3. Publicar en GitHub Pages
+
+1.  Crea el repositorio en GitHub.
+2.  Renderiza el sitio con **Build \> Render Website** (o `quarto render` en la Terminal).
+3.  Sube los cambios: `git add .`, `git commit -m "..."` y `git push`.
+4.  En GitHub, **Settings \> Pages**: rama `main`, carpeta `/docs`, **Save**.
+5.  Tu sitio estará en `https://usuario.github.io/proyecto-primos/`.
+
+Consulta [Configuraciones para usar Quarto con Python](quarto_python.qmd) si aparece algún error al renderizar, y [Visualización III](python_visualizacion3d.qmd#publicar-en-github-pages) para más detalles de la publicación. Para ver cómo se organiza un sitio terminado (con otro tema), revisa el [sitio de ejemplo del proyecto de cónicas](ejemplos/proyecto-conicas-ejemplo/docs/index.html){target="_blank"}.
+
+## Lista de verificación antes de entregar
+
+- [ ] El sitio está publicado y abre desde la dirección de GitHub Pages.
+- [ ] El repositorio tiene *commits* frecuentes, no uno solo al final.
+- [ ] `funciones.py` tiene *docstrings*, no tiene ningún `______` ni 🐞, y las pruebas con `assert` pasan.
+- [ ] **Todas** las ecuaciones (fórmulas, tablas y explicaciones) están escritas en LaTeX; si no, se descuentan 10 puntos de los 100.
+- [ ] Todas las gráficas tienen título, etiquetas y leyenda.
+- [ ] En la Parte 3 explicas por qué solo ciertas clases de residuos compiten en la carrera.
+- [ ] En la Parte 5 explicas cómo planteaste y resolviste el sistema de ecuaciones de la diagonal.
+- [ ] La simulación de Monte Carlo usa una **semilla** y reporta el número de parejas.
+- [ ] La gráfica 3D de Plotly funciona en el sitio publicado.
+- [ ] Hay una sección de **conclusiones** y de **referencias**.
+- [ ] El documento se renderiza sin errores.
+
+## Preguntas frecuentes
+
+**¿Puedo usar `sp.isprime()` o `np.gcd()` en lugar de mis funciones?** Puedes usarlas para **comprobar** tus funciones (por ejemplo, en tus pruebas con `assert`), pero los resultados del proyecto deben salir de **tus** funciones de `funciones.py`.
+
+**Mi criba tarda mucho.** Revisa que tache los múltiplos con **rebanado** de NumPy (`es_p[p * p :: p]`) y no con un ciclo sobre cada múltiplo, y que el ciclo exterior se detenga en $\sqrt{N}$.
+
+**¿Puedo usar inteligencia artificial?** Sí, como apoyo para entender errores o ideas, pero debes **entender y poder explicar** cada línea de tu código en la presentación. Indica en las referencias si la usaste y para qué.
+
+**¿Qué hago si `quarto render` falla?** Lee el último mensaje de error y busca la solución en [Configuraciones para usar Quarto con Python](quarto_python.qmd#solución-de-problemas). Si aparece `ModuleNotFoundError`, revisa `QUARTO_PYTHON`.
+
+## Referencias
+
+- [SymPy: teoría de números (`primepi`, `isprime`, `factorint`)](https://docs.sympy.org/latest/modules/ntheory.html)
+- [Wikipedia: teorema de los números primos](https://es.wikipedia.org/wiki/Teorema_de_los_n%C3%BAmeros_primos)
+- [Wikipedia: espiral de Ulam](https://es.wikipedia.org/wiki/Espiral_de_Ulam)
+- [Wikipedia: conjetura de Goldbach](https://es.wikipedia.org/wiki/Conjetura_de_Goldbach)
+- [Wikipedia: criba de Eratóstenes](https://es.wikipedia.org/wiki/Criba_de_Erat%C3%B3stenes)
+- [Quarto: crear un sitio web](https://quarto.org/docs/websites/)
+- [Quarto: publicar en GitHub Pages](https://quarto.org/docs/publishing/github-pages.html)

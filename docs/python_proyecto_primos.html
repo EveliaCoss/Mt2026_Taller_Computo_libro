@@ -1,0 +1,2106 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es" xml:lang="es"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.37">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>73&nbsp; 🔢 Proyecto alternativo: atlas de números primos – Taller de Cómputo</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./python_entornos.html" rel="next">
+<link href="./python_proyecto_integrador.html" rel="prev">
+<link href="./flyer/logo.png" rel="icon" type="image/png">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-6f5e339e910af865eb2cfbba9cbcf7d6.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="site_libs/quarto-contrib/focus-mode-1.0.0/focus-mode.js"></script>
+<link href="site_libs/quarto-contrib/focus-mode-1.0.0/focus-mode.css" rel="stylesheet">
+<script src="site_libs/quarto-contrib/live-runtime/live-runtime.js" type="module"></script>
+<link href="site_libs/quarto-contrib/live-runtime/live-runtime.css" rel="stylesheet">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No se han encontrado resultados",
+    "search-matching-documents-text": "documentos encontrados",
+    "search-copy-link-title": "Copiar el enlace en la búsqueda",
+    "search-hide-matches-text": "Ocultar resultados adicionales",
+    "search-more-match-text": "resultado adicional en este documento",
+    "search-more-matches-text": "resultados adicionales en este documento",
+    "search-clear-button-title": "Borrar",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancelar",
+    "search-submit-button-title": "Enviar",
+    "search-label": "Buscar"
+  }
+}</script><script type="module" src="site_libs/quarto-ojs/quarto-ojs-runtime.js"></script>
+<link href="site_libs/quarto-ojs/quarto-ojs.css" rel="stylesheet">
+<script>
+(function () {
+  try {
+    if (!window.matchMedia("(hover: hover) and (pointer: fine)").matches) return;
+    if (window.localStorage.getItem("quarto-focus-mode") === "1") {
+      document.documentElement.classList.add("focus-mode-persisted");
+    }
+    if (window.localStorage.getItem("quarto-presentation-mode") === "1") {
+      document.documentElement.classList.add("presentation-mode-preload");
+    }
+  } catch (e) {}
+})();
+</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./intro_python.html"><strong>Sección 7</strong> - Introducción a Python</a></li><li class="breadcrumb-item"><a href="./python_proyecto_primos.html"><span class="chapter-number">73</span>&nbsp; <span class="chapter-title"><strong>🔢 Proyecto alternativo: atlas de números primos</strong></span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Buscar" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
+      <a href="./index.html" class="sidebar-logo-link">
+      <img src="./flyer/logo_enes.png" alt="" class="sidebar-logo light-content py-0 d-lg-inline d-none">
+      <img src="./flyer/logo_enes.png" alt="" class="sidebar-logo dark-content py-0 d-lg-inline d-none">
+      </a>
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Taller de Cómputo</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/EveliaCoss/Mt2026_Taller_Computo_libro" title="Ejecutar el código" class="quarto-navigation-tool px-1" aria-label="Ejecutar el código"><i class="bi bi-github"></i></a>
+    <div class="dropdown">
+      <a href="" title="Compartir" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" role="link" aria-label="Compartir"><i class="bi bi-share"></i></a>
+      <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-0">
+          <li>
+            <a class="dropdown-item sidebar-tools-main-item" href="https://twitter.com/intent/tweet?url=|url|">
+              <i class="bi bi-twitter pe-1"></i>
+            Twitter
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item sidebar-tools-main-item" href="https://www.facebook.com/sharer/sharer.php?u=|url|">
+              <i class="bi bi-facebook pe-1"></i>
+            Facebook
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item sidebar-tools-main-item" href="https://www.linkedin.com/sharing/share-offsite/?url=|url|">
+              <i class="bi bi-linkedin pe-1"></i>
+            LinkedIn
+            </a>
+          </li>
+      </ul>
+    </div>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Buscar"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Información general</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./temario.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Temario</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cap1A.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introducción e integración</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./evaluacion.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Sistema de evaluación + DOC</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text"><strong>Sección 1</strong> - Componentes de una computadora</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Alternar sección">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cap2A.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Introducción a los Componentes de una Computadora</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./game1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title"><strong>🎮 AhaSlides 1 - Manos a la obra</strong></span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cap2B.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Sistema Operativo (SO) y sus funciones</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Tarea1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title"><strong>✏️ Tarea 1 -</strong> Mi Sistema Operativo</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cap3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Buenas prácticas en programación</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./s1_actividad1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title"><strong>📚</strong> <strong>Actividad 1 en equipo -</strong> Mi primer algoritmo</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./game2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title"><strong>🎮 AhaSlides 2 -Manos a la obra</strong></span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./udocz.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Doc (uDocz) para el apoyo de este curso <strong>🤖</strong></span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text"><strong>Sección 2</strong> - Instalación de programas</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Alternar sección">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./TodoLits.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">📌 <strong>To do list -</strong> Instalación de programas</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./install_B.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Instalación de Git y Bash</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./install_R.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Instalación de R, RStudio y Rtools/XCode</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./intro_R.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Introducción a R y Rstudio</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./install_python.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Instalación de Python y reticulate en Rstudio</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./integracion_bash_rstudio.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Integración de Bash en la terminal de Rstudio</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text"><strong>Sección 3</strong> - Introducción a Bash</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Alternar sección">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cap4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Introducción a Linux/Unix</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cap5.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Mis primeros pasos en Bash</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./game3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title"><strong>🎮 AhaSlides 3 -Manos a la obra</strong></span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cap6.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Caracteres, Strings y Wildcards</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./game4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title"><strong>🎮 AhaSlides 4 -Manos a la obra</strong></span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./regex.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Expresiones regulares (REGEX)</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cap7.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Encontrar patrones con <code>grep</code></span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./game5.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title"><strong>🎮 AhaSlides 5 -Manos a la obra</strong></span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
+ <span class="menu-text"><strong>Sección 4</strong> - Edición de archivos con Bash</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Alternar sección">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cap8.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Edición de archivos con los editores de texto (<code>nano</code> y <code>vim</code>)</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cap8_crearRproject.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Crear un R Project</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Bash_script.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Scripts en Bash</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cap9.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Edición de archivos con el editor de flujo <code>sed</code></span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cap10.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">Tipos de enlaces - symlinks, hard links e hipervínculos</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./s1_actividad2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title"><strong>📚 Proyecto integrador en equipo -</strong> Script Bash</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cap11.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">Filtrado de texto (<code>grep, cut, sort, uniq, wc</code>)</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cap12.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">32</span>&nbsp; <span class="chapter-title">printf vs echo</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./s3_actividad2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">33</span>&nbsp; <span class="chapter-title"><strong>📚</strong> <strong>Actividad 2 en equipo -</strong> ¡REDUCE EL CÓDIGO BASH!</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cap13.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">34</span>&nbsp; <span class="chapter-title">Condicionales</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./game6.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">35</span>&nbsp; <span class="chapter-title"><strong>🎮 AhaSlides 6 -Manos a la obra</strong></span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cap14.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">36</span>&nbsp; <span class="chapter-title">Bucles (for loops)</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./game7.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">37</span>&nbsp; <span class="chapter-title"><strong>🎮 AhaSlides 7 -Manos a la obra</strong></span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
+ <span class="menu-text"><strong>Sección 5</strong> - Introducción a Git/GitHub</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Alternar sección">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Rstudio_paquetes.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">38</span>&nbsp; <span class="chapter-title">Descargar y cargar Librerías en Rstudio</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cap15.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">39</span>&nbsp; <span class="chapter-title">Introducción a Git / GitHub</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cap22.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">40</span>&nbsp; <span class="chapter-title">Conectar a GitHub con SSH</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cap16.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">41</span>&nbsp; <span class="chapter-title">Configurar Git</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cap17.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">42</span>&nbsp; <span class="chapter-title">Repositorios</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cap18.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">43</span>&nbsp; <span class="chapter-title">Ignorar archivos/carpetas</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./s5_actividades1y2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">44</span>&nbsp; <span class="chapter-title"><strong>📚</strong> Actividad 1 y 2</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cap23.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">45</span>&nbsp; <span class="chapter-title">Resumen y Práctica Final</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true">
+ <span class="menu-text"><strong>Sección 6</strong> - Introducción a R y Rstudio</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true" aria-label="Alternar sección">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cap29.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">46</span>&nbsp; <span class="chapter-title">Introducción a Markdown</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./s5_actividades3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">47</span>&nbsp; <span class="chapter-title"><strong>📚</strong> Actividad 3: Página web con Rmarkdown</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Intro_Quarto.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">48</span>&nbsp; <span class="chapter-title">Introducción a Quarto</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./s5_actividades4y5.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">49</span>&nbsp; <span class="chapter-title"><strong>📚</strong> Actividad 4 y 5</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true">
+ <span class="menu-text"><strong>Sección 7</strong> - Introducción a Python</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true" aria-label="Alternar sección">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./intro_python.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">50</span>&nbsp; <span class="chapter-title">Introducción a Python en Rstudio usando <code>reticulate</code></span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./quarto_python.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">51</span>&nbsp; <span class="chapter-title">Configuraciones para usar Quarto con Python</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./python_ejercicio1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">52</span>&nbsp; <span class="chapter-title">🐍 Actividad 1: variables y objetos (tipo, valor e identidad)</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./game8.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">53</span>&nbsp; <span class="chapter-title"><strong>🎮 AhaSlides 8 -Manos a la obra</strong></span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./python_ejercicio2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">54</span>&nbsp; <span class="chapter-title">🐍 Actividad 2: atributos y métodos de los objetos</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./game9.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">55</span>&nbsp; <span class="chapter-title"><strong>🎮 AhaSlides 9 -Manos a la obra</strong></span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./python_buenas_practicas.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">56</span>&nbsp; <span class="chapter-title">Sintaxis de nombres, buenas prácticas y programación defensiva en Python</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./python_condicionales.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">57</span>&nbsp; <span class="chapter-title">Condicionales en Python</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./python_numpy.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">58</span>&nbsp; <span class="chapter-title">Introducción a NumPy</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./python_algebra_lineal.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">59</span>&nbsp; <span class="chapter-title">Álgebra lineal con NumPy</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./python_sympy.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">60</span>&nbsp; <span class="chapter-title">Cálculo simbólico con SymPy</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./python_for.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">61</span>&nbsp; <span class="chapter-title">Ciclos <code>for</code> y <code>while</code> en Python</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./game10.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">62</span>&nbsp; <span class="chapter-title"><strong>🎮 AhaSlides 10 -Manos a la obra</strong></span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./python_funciones.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">63</span>&nbsp; <span class="chapter-title">Funciones en Python</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./game11.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">64</span>&nbsp; <span class="chapter-title"><strong>🎮 AhaSlides 11 -Manos a la obra</strong></span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./python_visualizacion.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">65</span>&nbsp; <span class="chapter-title">Visualización de datos con Matplotlib</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./python_visualizacion_plotly.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">66</span>&nbsp; <span class="chapter-title">Varias gráficas en una figura y gráficas interactivas con Plotly</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./python_visualizacion2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">67</span>&nbsp; <span class="chapter-title">Visualización II: gráficas estadísticas con Seaborn y mapas de calor</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./python_aleatorios.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">68</span>&nbsp; <span class="chapter-title">Números aleatorios y aplicaciones</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./python_visualizacion3d.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">69</span>&nbsp; <span class="chapter-title">Visualización III: gráficas en 3D</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./python_geometria_espacio.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">70</span>&nbsp; <span class="chapter-title">Geometría analítica en el espacio con Python: rectas y planos</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./python_transformaciones.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">71</span>&nbsp; <span class="chapter-title">Transformaciones geométricas en 2D y 3D</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./python_proyecto_integrador.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">72</span>&nbsp; <span class="chapter-title"><strong>🧩 Proyecto integrador: atlas de cónicas rotadas</strong></span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./python_proyecto_primos.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">73</span>&nbsp; <span class="chapter-title"><strong>🔢 Proyecto alternativo: atlas de números primos</strong></span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="true">
+ <span class="menu-text">Apéndices</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="true" aria-label="Alternar sección">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./python_entornos.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Entornos para trabajar con Python: RStudio, Google Colab y Jupyter Notebook</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./python_conda.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Conda y Miniconda: gestión de entornos y paquetes</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ejemplo_quizdown.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">Quizzes</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ejemplo_CodeRandPython.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">D</span>&nbsp; <span class="chapter-title">Codigo en R</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Tabla de contenidos</h2>
+   
+  <ul>
+  <li><a href="#objetivo" id="toc-objetivo" class="nav-link active" data-scroll-target="#objetivo"><span class="header-section-number">73.1</span> Objetivo</a>
+  <ul>
+  <li><a href="#qué-temas-integra" id="toc-qué-temas-integra" class="nav-link" data-scroll-target="#qué-temas-integra"><span class="header-section-number">73.1.1</span> ¿Qué temas integra?</a></li>
+  </ul></li>
+  <li><a href="#organización" id="toc-organización" class="nav-link" data-scroll-target="#organización"><span class="header-section-number">73.2</span> Organización</a>
+  <ul>
+  <li><a href="#variante-asignada" id="toc-variante-asignada" class="nav-link" data-scroll-target="#variante-asignada"><span class="header-section-number">73.2.1</span> Variante asignada</a></li>
+  </ul></li>
+  <li><a href="#los-entregables" id="toc-los-entregables" class="nav-link" data-scroll-target="#los-entregables"><span class="header-section-number">73.3</span> Los entregables</a></li>
+  <li><a href="#rúbrica-de-evaluación" id="toc-rúbrica-de-evaluación" class="nav-link" data-scroll-target="#rúbrica-de-evaluación"><span class="header-section-number">73.4</span> Rúbrica de evaluación</a></li>
+  <li><a href="#partes-del-proyecto" id="toc-partes-del-proyecto" class="nav-link" data-scroll-target="#partes-del-proyecto"><span class="header-section-number">73.5</span> Partes del proyecto</a>
+  <ul>
+  <li><a href="#parte-1.-repositorio-y-sitio-web" id="toc-parte-1.-repositorio-y-sitio-web" class="nav-link" data-scroll-target="#parte-1.-repositorio-y-sitio-web"><span class="header-section-number">73.5.1</span> Parte 1. Repositorio y sitio web</a></li>
+  <li><a href="#parte-2.-funciones-del-proyecto" id="toc-parte-2.-funciones-del-proyecto" class="nav-link" data-scroll-target="#parte-2.-funciones-del-proyecto"><span class="header-section-number">73.5.2</span> Parte 2. Funciones del proyecto</a></li>
+  <li><a href="#parte-3.-análisis-con-sympy" id="toc-parte-3.-análisis-con-sympy" class="nav-link" data-scroll-target="#parte-3.-análisis-con-sympy"><span class="header-section-number">73.5.3</span> Parte 3. Análisis con SymPy</a></li>
+  <li><a href="#parte-4.-visualización-2d" id="toc-parte-4.-visualización-2d" class="nav-link" data-scroll-target="#parte-4.-visualización-2d"><span class="header-section-number">73.5.4</span> Parte 4. Visualización 2D</a></li>
+  <li><a href="#parte-5.-la-espiral-de-ulam-una-matriz-de-primos" id="toc-parte-5.-la-espiral-de-ulam-una-matriz-de-primos" class="nav-link" data-scroll-target="#parte-5.-la-espiral-de-ulam-una-matriz-de-primos"><span class="header-section-number">73.5.5</span> Parte 5. La espiral de Ulam: una matriz de primos</a></li>
+  <li><a href="#parte-6.-la-conjetura-de-goldbach" id="toc-parte-6.-la-conjetura-de-goldbach" class="nav-link" data-scroll-target="#parte-6.-la-conjetura-de-goldbach"><span class="header-section-number">73.5.6</span> Parte 6. La conjetura de Goldbach</a></li>
+  <li><a href="#parte-7.-pi-con-el-método-de-monte-carlo" id="toc-parte-7.-pi-con-el-método-de-monte-carlo" class="nav-link" data-scroll-target="#parte-7.-pi-con-el-método-de-monte-carlo"><span class="header-section-number">73.5.7</span> Parte 7. <span class="math inline">\(\pi\)</span> con el método de Monte Carlo</a></li>
+  <li><a href="#parte-8.-visualización-3d-interactiva" id="toc-parte-8.-visualización-3d-interactiva" class="nav-link" data-scroll-target="#parte-8.-visualización-3d-interactiva"><span class="header-section-number">73.5.8</span> Parte 8. Visualización 3D interactiva</a></li>
+  </ul></li>
+  <li><a href="#calentamiento-pon-a-prueba-tus-funciones" id="toc-calentamiento-pon-a-prueba-tus-funciones" class="nav-link" data-scroll-target="#calentamiento-pon-a-prueba-tus-funciones"><span class="header-section-number">73.6</span> Calentamiento: pon a prueba tus funciones</a>
+  <ul>
+  <li><a href="#calentamiento-1.-primos-más-rápido" id="toc-calentamiento-1.-primos-más-rápido" class="nav-link" data-scroll-target="#calentamiento-1.-primos-más-rápido"><span class="header-section-number">73.6.1</span> Calentamiento 1. Primos más rápido</a></li>
+  <li><a href="#calentamiento-2.-el-algoritmo-de-euclides" id="toc-calentamiento-2.-el-algoritmo-de-euclides" class="nav-link" data-scroll-target="#calentamiento-2.-el-algoritmo-de-euclides"><span class="header-section-number">73.6.2</span> Calentamiento 2. El algoritmo de Euclides</a></li>
+  <li><a href="#pruebas-de-las-funciones" id="toc-pruebas-de-las-funciones" class="nav-link" data-scroll-target="#pruebas-de-las-funciones"><span class="header-section-number">73.6.3</span> Calentamiento 3. Pruebas con <code>assert</code></a></li>
+  </ul></li>
+  <li><a href="#estructura-del-sitio" id="toc-estructura-del-sitio" class="nav-link" data-scroll-target="#estructura-del-sitio"><span class="header-section-number">73.7</span> Estructura del sitio</a>
+  <ul>
+  <li><a href="#crear-el-proyecto" id="toc-crear-el-proyecto" class="nav-link" data-scroll-target="#crear-el-proyecto"><span class="header-section-number">73.7.1</span> 1. Crear el proyecto</a></li>
+  <li><a href="#archivos-de-la-entrega" id="toc-archivos-de-la-entrega" class="nav-link" data-scroll-target="#archivos-de-la-entrega"><span class="header-section-number">73.7.2</span> 2. Archivos de la entrega</a></li>
+  <li><a href="#publicar-en-github-pages" id="toc-publicar-en-github-pages" class="nav-link" data-scroll-target="#publicar-en-github-pages"><span class="header-section-number">73.7.3</span> 3. Publicar en GitHub Pages</a></li>
+  </ul></li>
+  <li><a href="#lista-de-verificación-antes-de-entregar" id="toc-lista-de-verificación-antes-de-entregar" class="nav-link" data-scroll-target="#lista-de-verificación-antes-de-entregar"><span class="header-section-number">73.8</span> Lista de verificación antes de entregar</a></li>
+  <li><a href="#preguntas-frecuentes" id="toc-preguntas-frecuentes" class="nav-link" data-scroll-target="#preguntas-frecuentes"><span class="header-section-number">73.9</span> Preguntas frecuentes</a></li>
+  <li><a href="#referencias" id="toc-referencias" class="nav-link" data-scroll-target="#referencias"><span class="header-section-number">73.10</span> Referencias</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./intro_python.html"><strong>Sección 7</strong> - Introducción a Python</a></li><li class="breadcrumb-item"><a href="./python_proyecto_primos.html"><span class="chapter-number">73</span>&nbsp; <span class="chapter-title"><strong>🔢 Proyecto alternativo: atlas de números primos</strong></span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">73</span>&nbsp; <span class="chapter-title"><strong>🔢 Proyecto alternativo: atlas de números primos</strong></span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<blockquote class="blockquote">
+<p><strong>Fecha de entrega:</strong> <em>por definir</em></p>
+</blockquote>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Importante</span>¿Para quién es este proyecto?
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Este proyecto es la alternativa <strong>individual</strong> al <a href="./python_proyecto_integrador.html">proyecto integrador de cónicas</a> para quien tomó <strong>todo</strong> el Taller de Cómputo pero <strong>no</strong> cursa Geometría Analítica. Integra las mismas herramientas del curso, pero el tema es la <strong>teoría de números</strong>: no necesitas nada de cónicas ni de rotación de ejes. Los detalles (variantes, partes, rúbrica y fecha de entrega) pueden cambiar mientras terminamos de definirlo.</p>
+</div>
+</div>
+<p>Los <strong>números primos</strong> son los “átomos” de los enteros: todo entero mayor que 1 se escribe como producto de primos de una sola forma. Parecen aparecer al azar, pero esconden patrones que los matemáticos llevan siglos estudiando. En este proyecto construirás un sitio web que <strong>explore</strong> esos patrones usando <strong>todo</strong> lo que aprendimos en el Taller de Cómputo: Python, funciones, NumPy, SymPy, visualización, álgebra lineal, números aleatorios, Quarto, Git y GitHub.</p>
+<div class="callout callout-style-default callout-note no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Nota</span>🧭 Este capítulo es una guía, no un ejemplo resuelto
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Aquí <strong>no</strong> encontrarás las respuestas. Para cada parte del proyecto te decimos <strong>qué</strong> debes entregar y 📖 <strong>dónde estudiarlo</strong> en el libro. El único código que te damos es el punto de partida de <code>funciones.py</code>: <strong>incompleto y con errores</strong> que tú debes corregir.</p>
+</div>
+</div>
+<section id="objetivo" class="level2" data-number="73.1">
+<h2 data-number="73.1" class="anchored" data-anchor-id="objetivo"><span class="header-section-number">73.1</span> Objetivo</h2>
+<p>Construir un <strong>atlas de los números primos</strong> hasta un número <span class="math inline">\(N\)</span>: <strong>encontrarlos</strong> con la criba de Eratóstenes, <strong>contarlos</strong> y compararlos con el <strong>teorema de los números primos</strong>, <strong>visualizar</strong> sus patrones (la espiral de Ulam, las “carreras” de primos y la conjetura de Goldbach), <strong>estimar <span class="math inline">\(\pi\)</span></strong> con números aleatorios a partir de la probabilidad de que dos enteros no tengan divisores en común, y <strong>publicar</strong> todo en un sitio web de Quarto en GitHub Pages.</p>
+<section id="qué-temas-integra" class="level3" data-number="73.1.1">
+<h3 data-number="73.1.1" class="anchored" data-anchor-id="qué-temas-integra"><span class="header-section-number">73.1.1</span> ¿Qué temas integra?</h3>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Parte del proyecto</th>
+<th>Matemáticas</th>
+<th>Dónde estudiarlo en el libro</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1. Repositorio y sitio web</td>
+<td>—</td>
+<td><a href="./cap15.html">Git/GitHub</a>, <a href="./Intro_Quarto.html">Quarto</a>, <a href="./quarto_python.html">Quarto con Python</a></td>
+</tr>
+<tr class="even">
+<td>2. Funciones del proyecto</td>
+<td>Primalidad, criba de Eratóstenes, algoritmo de Euclides</td>
+<td><a href="./python_funciones.html">Funciones</a>, <a href="./python_for.html">ciclos</a>, <a href="./python_condicionales.html">condicionales</a>, <a href="./python_numpy.html#máscaras-booleanas">máscaras booleanas</a></td>
+</tr>
+<tr class="odd">
+<td>3. Análisis con SymPy</td>
+<td>Función <span class="math inline">\(\pi(x)\)</span>, teorema de los números primos, primos en progresiones</td>
+<td><a href="./python_sympy.html">SymPy</a>, <a href="./python_sympy.html#límites">límites</a></td>
+</tr>
+<tr class="even">
+<td>4. Visualización 2D</td>
+<td>Gráficas de <span class="math inline">\(\pi(x)\)</span>, de los huecos entre primos y de las “carreras”</td>
+<td><a href="./python_visualizacion.html">Visualización I</a>, <a href="./python_visualizacion_plotly.html#varias-gráficas-en-una-figura-subplots">subplots</a></td>
+</tr>
+<tr class="odd">
+<td>5. Espiral de Ulam</td>
+<td>Una matriz de primos y un sistema de ecuaciones</td>
+<td><a href="./python_numpy.html#arreglos-de-dos-o-más-dimensiones">Indexación de arreglos 2D</a>, <a href="./python_visualizacion2.html#mapas-de-calor-en-2d">mapas de calor</a>, <a href="./python_algebra_lineal.html#sistemas-de-ecuaciones-lineales">sistemas de ecuaciones</a></td>
+</tr>
+<tr class="even">
+<td>6. Conjetura de Goldbach</td>
+<td>Comprobación numérica de una conjetura</td>
+<td><a href="./python_for.html">Ciclos</a>, <a href="./python_numpy.html#máscaras-booleanas">máscaras booleanas</a></td>
+</tr>
+<tr class="odd">
+<td>7. <span class="math inline">\(\pi\)</span> con Monte Carlo</td>
+<td>Probabilidad de que dos enteros sean coprimos</td>
+<td><a href="./python_aleatorios.html#el-método-de-monte-carlo">Números aleatorios</a>, <a href="./python_sympy.html#sumas">sumas con SymPy</a></td>
+</tr>
+<tr class="even">
+<td>8. Visualización 3D interactiva</td>
+<td>La superficie del máximo común divisor</td>
+<td><a href="./python_visualizacion3d.html">Visualización III</a>, <a href="./python_visualizacion_plotly.html#plotly-gráficas-interactivas">Plotly</a></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="organización" class="level2" data-number="73.2">
+<h2 data-number="73.2" class="anchored" data-anchor-id="organización"><span class="header-section-number">73.2</span> Organización</h2>
+<ul>
+<li>Proyecto <strong>individual</strong>.</li>
+<li>Trabajas en <strong>un repositorio de GitHub</strong> propio. Haz <em>commits</em> <strong>frecuentes</strong> a lo largo del proyecto (se revisará el historial): un solo <em>commit</em> al final no cuenta como trabajo constante.</li>
+<li>El resultado es un <strong>sitio web de Quarto</strong> publicado en GitHub Pages, con tu código, gráficas y explicaciones.</li>
+<li>Al final <strong>presentas</strong> tu sitio en clase (5 a 7 minutos).</li>
+</ul>
+<section id="variante-asignada" class="level3" data-number="73.2.1">
+<h3 data-number="73.2.1" class="anchored" data-anchor-id="variante-asignada"><span class="header-section-number">73.2.1</span> Variante asignada</h3>
+<p>Si hay más de una persona haciendo este proyecto, cada una usa una variante distinta. <span class="math inline">\(N\)</span> es el límite de tu atlas, <span class="math inline">\(m\)</span> el módulo de tu “carrera de primos” (Parte 3) y <span class="math inline">\(G\)</span> el límite hasta el que compruebas la conjetura de Goldbach (Parte 6).</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Variante</th>
+<th><span class="math inline">\(N\)</span></th>
+<th>Módulo <span class="math inline">\(m\)</span></th>
+<th>Goldbach hasta <span class="math inline">\(G\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td><span class="math inline">\(100\,000\)</span></td>
+<td><span class="math inline">\(4\)</span></td>
+<td><span class="math inline">\(10\,000\)</span></td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td><span class="math inline">\(200\,000\)</span></td>
+<td><span class="math inline">\(3\)</span></td>
+<td><span class="math inline">\(20\,000\)</span></td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td><span class="math inline">\(150\,000\)</span></td>
+<td><span class="math inline">\(6\)</span></td>
+<td><span class="math inline">\(15\,000\)</span></td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td><span class="math inline">\(120\,000\)</span></td>
+<td><span class="math inline">\(10\)</span></td>
+<td><span class="math inline">\(12\,000\)</span></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="los-entregables" class="level2" data-number="73.3">
+<h2 data-number="73.3" class="anchored" data-anchor-id="los-entregables"><span class="header-section-number">73.3</span> Los entregables</h2>
+<p>El sitio debe tener las siguientes secciones. Cada una se describe en <a href="#partes-del-proyecto">Partes del proyecto</a> y se evalúa con la <a href="#rúbrica-de-evaluación">rúbrica</a>.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Parte</th>
+<th>Entregable</th>
+<th>Puntos</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>Repositorio en GitHub y sitio publicado en GitHub Pages</td>
+<td>10</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>Funciones documentadas y probadas: <code>es_primo()</code>, <code>criba()</code>, <code>mcd()</code> y <code>contar_primos()</code></td>
+<td>15</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>Análisis con SymPy: <span class="math inline">\(\pi(x)\)</span>, teorema de los números primos y carrera de primos</td>
+<td>20</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>Gráficas 2D de <span class="math inline">\(\pi(x)\)</span>, de los huecos entre primos y de la carrera</td>
+<td>15</td>
+</tr>
+<tr class="odd">
+<td>5</td>
+<td>Espiral de Ulam: matriz de primos y polinomio de una diagonal</td>
+<td>10</td>
+</tr>
+<tr class="even">
+<td>6</td>
+<td>Comprobación numérica de la conjetura de Goldbach</td>
+<td>10</td>
+</tr>
+<tr class="odd">
+<td>7</td>
+<td>Estimación de <span class="math inline">\(\pi\)</span> con Monte Carlo, comparada con el valor exacto</td>
+<td>10</td>
+</tr>
+<tr class="even">
+<td>8</td>
+<td>Gráfica 3D interactiva con Plotly</td>
+<td>5</td>
+</tr>
+<tr class="odd">
+<td>9</td>
+<td>Presentación, claridad y documentación</td>
+<td>5</td>
+</tr>
+<tr class="even">
+<td></td>
+<td><strong>Total</strong></td>
+<td><strong>100</strong></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="rúbrica-de-evaluación" class="level2" data-number="73.4">
+<h2 data-number="73.4" class="anchored" data-anchor-id="rúbrica-de-evaluación"><span class="header-section-number">73.4</span> Rúbrica de evaluación</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Criterio</th>
+<th>Excelente</th>
+<th>Suficiente</th>
+<th>Insuficiente</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Repositorio y sitio</strong> (10)</td>
+<td>Sitio publicado y navegable; <em>commits</em> frecuentes con mensajes claros. (10)</td>
+<td>Sitio publicado, pero con páginas incompletas o con muy pocos <em>commits</em>. (6)</td>
+<td>El sitio no está publicado. (0–3)</td>
+</tr>
+<tr class="even">
+<td><strong>Funciones</strong> (15)</td>
+<td>Funciones con <em>docstring</em>, validación y pruebas con <code>assert</code> que pasan. (15)</td>
+<td>Funciones correctas, pero sin documentación o sin pruebas. (9)</td>
+<td>Las funciones no existen o dan resultados incorrectos. (0–5)</td>
+</tr>
+<tr class="odd">
+<td><strong>Análisis con SymPy</strong> (20)</td>
+<td><span class="math inline">\(\pi(x)\)</span> comparada con <code>sp.primepi()</code>, con <span class="math inline">\(x/\ln x\)</span> y con <span class="math inline">\(\operatorname{Li}(x)\)</span>; límite calculado con SymPy; carrera de primos completa, y explica por qué solo compiten ciertas clases de residuos. (20)</td>
+<td>Tablas correctas, pero sin el límite o sin explicar la carrera. (12)</td>
+<td>Resultados incorrectos o calculados sin código. (0–7)</td>
+</tr>
+<tr class="even">
+<td><strong>Visualización 2D</strong> (15)</td>
+<td>Las tres gráficas, con título, leyenda, etiquetas y escalas adecuadas, citadas e interpretadas en el texto. (15)</td>
+<td>Gráficas correctas, pero faltan etiquetas, alguna gráfica o su interpretación. (9)</td>
+<td>Gráficas incorrectas o ausentes. (0–5)</td>
+</tr>
+<tr class="odd">
+<td><strong>Espiral de Ulam</strong> (10)</td>
+<td>Matriz construida con NumPy y dibujada como mapa de calor; polinomio de una diagonal obtenido resolviendo un sistema de ecuaciones y comprobado con SymPy; explica la estrategia. (10)</td>
+<td>Espiral correcta, pero sin el polinomio o sin explicar cómo lo obtuvo. (6)</td>
+<td>No hay espiral o no está construida con una matriz. (0–3)</td>
+</tr>
+<tr class="even">
+<td><strong>Goldbach</strong> (10)</td>
+<td>Comprobación de todos los pares hasta <span class="math inline">\(G\)</span>, gráfica del “cometa” e interpretación (por qué no es una demostración). (10)</td>
+<td>Comprobación en pocos números o sin interpretación. (6)</td>
+<td>No se comprueba. (0–3)</td>
+</tr>
+<tr class="odd">
+<td><strong>Monte Carlo</strong> (10)</td>
+<td>Estimación reproducible (con semilla), comparada con el valor exacto de SymPy y con una gráfica de convergencia. (10)</td>
+<td>Estimación correcta, sin comparación o sin gráfica. (6)</td>
+<td>Estimación incorrecta o ausente. (0–3)</td>
+</tr>
+<tr class="even">
+<td><strong>3D interactiva</strong> (5)</td>
+<td>Superficie de Plotly del máximo común divisor, con título y explicación. (5)</td>
+<td>Gráfica 3D estática o sin explicación. (3)</td>
+<td>Ausente. (0)</td>
+</tr>
+<tr class="odd">
+<td><strong>Presentación y documentación</strong> (5)</td>
+<td>Explicaciones claras en cada sección, fórmulas en LaTeX, figuras con pie y conclusiones. (5)</td>
+<td>Explicaciones breves o incompletas. (3)</td>
+<td>Solo código, sin explicaciones. (0–1)</td>
+</tr>
+</tbody>
+</table>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Advertencia</span>Ecuaciones en LaTeX
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>Todas</strong> las ecuaciones matemáticas del sitio deben escribirse con estilo de LaTeX (por ejemplo, <code>$\pi(x) \sim x / \ln x$</code> y no <code>pi(x) ~ x/ln(x)</code> en el texto). Si alguna no lo está, se descuentan <strong>10 puntos</strong> de los 100 de la calificación final. Repasa <a href="./python_sympy.html#de-sympy-a-latex">de SymPy a LaTeX</a>.</p>
+</div>
+</div>
+</section>
+<section id="partes-del-proyecto" class="level2" data-number="73.5">
+<h2 data-number="73.5" class="anchored" data-anchor-id="partes-del-proyecto"><span class="header-section-number">73.5</span> Partes del proyecto</h2>
+<section id="parte-1.-repositorio-y-sitio-web" class="level3" data-number="73.5.1">
+<h3 data-number="73.5.1" class="anchored" data-anchor-id="parte-1.-repositorio-y-sitio-web"><span class="header-section-number">73.5.1</span> Parte 1. Repositorio y sitio web</h3>
+<p><strong>Qué hacer:</strong> crear el repositorio, el sitio web de Quarto y publicarlo en GitHub Pages <strong>desde la primera semana</strong>, aunque esté vacío. Así detectas a tiempo los problemas de configuración.</p>
+<p>📖 <strong>Dónde estudiarlo:</strong> <a href="./cap15.html">Introducción a Git/GitHub</a>, <a href="./Intro_Quarto.html">Introducción a Quarto</a>, <a href="./quarto_python.html">Configuraciones para usar Quarto con Python</a> y <a href="./python_visualizacion3d.html#publicar-en-github-pages">Publicar en GitHub Pages</a>.</p>
+<p>Los pasos están en la sección <a href="#estructura-del-sitio">Estructura del sitio</a>.</p>
+</section>
+<section id="parte-2.-funciones-del-proyecto" class="level3" data-number="73.5.2">
+<h3 data-number="73.5.2" class="anchored" data-anchor-id="parte-2.-funciones-del-proyecto"><span class="header-section-number">73.5.2</span> Parte 2. Funciones del proyecto</h3>
+<p><strong>Qué hacer:</strong> escribir en el archivo <code>funciones.py</code> las funciones que usarás en todo el sitio. Como mínimo <code>es_primo(n)</code>, <code>criba(N)</code>, <code>mcd(a, b)</code> y <code>contar_primos(x, primos)</code>, con <em>docstring</em>, validación de los argumentos y pruebas con <code>assert</code>.</p>
+<p>📖 <strong>Dónde estudiarlo:</strong></p>
+<ul>
+<li><a href="./python_funciones.html#definir-y-llamar-una-función">Definir y llamar una función</a>, <a href="./python_funciones.html#docstrings"><em>docstrings</em></a>, <a href="./python_funciones.html#programación-defensiva-en-funciones">programación defensiva en funciones</a> y <a href="./python_funciones.html#probar-funciones">probar funciones</a>.</li>
+<li><a href="./python_funciones.html#return-termina-la-función">Código explicado: ¿cómo leer <code>es_primo()</code>?</a> y el <a href="./python_for.html#ejercicio-4.-es-un-número-primo">ejercicio 4 de ciclos: ¿es un número primo?</a>.</li>
+<li><a href="./python_for.html#ciclos-while">Ciclos <code>while</code></a>, para el algoritmo de Euclides.</li>
+<li><a href="./python_numpy.html#máscaras-booleanas">Máscaras booleanas</a> e <a href="./python_numpy.html#indexación-y-rebanado">indexación y rebanado</a>, para la criba.</li>
+</ul>
+<p><strong>Punto de partida de <code>funciones.py</code>:</strong> copia este código en tu archivo. Las funciones están <strong>incompletas</strong> y tienen <strong>errores a propósito</strong>: tu trabajo es completarlas, encontrar los errores y corregirlos.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">"""Funciones del proyecto alternativo: atlas de números primos."""</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co"># ⚠️ Estas funciones están INCOMPLETAS y tienen ERRORES A PROPÓSITO.</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co">#    1. Completa cada ______.</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co">#    2. Cada línea marcada con 🐞 tiene un error: debes cambiar algo para corregirlo.</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co">#    3. Comprueba tus correcciones con las pruebas (assert) de la página Análisis.</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> es_primo(n):</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Regresa True si n es primo. Solo prueba los divisores d con d² ≤ n."""</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> n <span class="op">&lt;</span> <span class="dv">2</span>:</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">False</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> d <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">2</span>, <span class="bu">int</span>(n <span class="op">**</span> <span class="fl">0.5</span>)):                <span class="co"># 🐞 ¿Se prueba el divisor √n? Pruébala con 49.</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> n <span class="op">%</span> d <span class="op">==</span> <span class="dv">0</span>:</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> <span class="va">False</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="va">True</span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> criba(N):</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Arreglo de NumPy con todos los primos p ≤ N (criba de Eratóstenes)."""</span></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>    es_p <span class="op">=</span> np.ones(N <span class="op">+</span> <span class="dv">1</span>, dtype<span class="op">=</span><span class="bu">bool</span>)                <span class="co"># es_p[k] dice si k "sigue siendo" candidato a primo</span></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>    es_p[:<span class="dv">2</span>] <span class="op">=</span> ______                                <span class="co"># 0 y 1 no son primos</span></span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> p <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">2</span>, <span class="bu">int</span>(N <span class="op">**</span> <span class="fl">0.5</span>) <span class="op">+</span> <span class="dv">1</span>):</span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> es_p[p]:</span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>            es_p[p <span class="op">*</span> p :: p] <span class="op">=</span> <span class="va">True</span>                  <span class="co"># 🐞 ¿Qué hay que hacer con los múltiplos de p?</span></span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> np.arange(N <span class="op">+</span> <span class="dv">1</span>)[es_p]</span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> mcd(a, b):</span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Máximo común divisor de a y b con el algoritmo de Euclides."""</span></span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> b <span class="op">!=</span> <span class="dv">0</span>:</span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>        a, b <span class="op">=</span> b, a <span class="op">//</span> b                             <span class="co"># 🐞 Euclides usa el residuo, no el cociente.</span></span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> ______                                    <span class="co"># Cuando b llega a 0, ¿cuál es el mcd?</span></span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> contar_primos(x, primos):</span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""π(x): cuántos primos del arreglo `primos` son menores o iguales que x."""</span></span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> np.<span class="bu">sum</span>(primos <span class="op">&lt;</span> x)                        <span class="co"># 🐞 Si x es primo, ¿se cuenta? Pruébala con x = 7.</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Advertencia</span>🐞 Encuentra y corrige los errores
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Las líneas marcadas con 🐞 tienen al menos un error cada una, y todos son <strong>errores silenciosos</strong>: el código se ejecuta sin avisar, pero da resultados incorrectos. Por eso <strong>no basta con que corra</strong>: escribe las <a href="#pruebas-de-las-funciones">pruebas</a> y corrige hasta que <strong>todas</strong> pasen. En tu entrega, <code>funciones.py</code> <strong>no</strong> debe tener ningún <code>______</code> ni ningún 🐞. Repasa <a href="./python_buenas_practicas.html#un-error-silencioso">errores silenciosos</a> y <a href="./python_buenas_practicas.html#leer-los-mensajes-de-error">leer los mensajes de error</a>.</p>
+</div>
+</div>
+<p>La <strong>criba de Eratóstenes</strong> es nueva: en vez de probar cada número por separado, empieza suponiendo que <strong>todos</strong> son primos y va <strong>tachando</strong> los múltiplos de cada primo. Con NumPy, tachar todos los múltiplos de <code>p</code> es una sola asignación con rebanado (<code>es_p[p * p :: p] = ...</code>). Puedes agregar más funciones si te ayudan.</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Importante</span>Tus funciones deben verse en la página Análisis
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>La profesora revisará tus funciones <strong>en tu sitio publicado</strong>, así que la página <code>analisis.qmd</code> debe tener una sección <strong>Funciones del proyecto</strong> que muestre el contenido completo de <code>funciones.py</code>. La forma más sencilla es incluir el archivo; así la página siempre muestra la versión más reciente:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{.python filename="funciones.py"}</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>{{<span class="op">&lt;</span> include funciones.py <span class="op">&gt;</span>}}</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+<p>Tus funciones deben ir acompañadas de <strong>pruebas con <code>assert</code></strong> en <code>analisis.qmd</code>. Practícalo en el <a href="#pruebas-de-las-funciones">Calentamiento 3</a>.</p>
+</section>
+<section id="parte-3.-análisis-con-sympy" class="level3" data-number="73.5.3">
+<h3 data-number="73.5.3" class="anchored" data-anchor-id="parte-3.-análisis-con-sympy"><span class="header-section-number">73.5.3</span> Parte 3. Análisis con SymPy</h3>
+<p><strong>Qué hacer:</strong></p>
+<ol type="1">
+<li><strong>Contar primos.</strong> Con tu <code>criba()</code> y tu <code>contar_primos()</code>, calcula <span class="math inline">\(\pi(x)\)</span> para <span class="math inline">\(x = 10, 100, 1\,000, \dots\)</span> hasta <span class="math inline">\(N\)</span>, y compruébalo con <code>sp.primepi(x)</code> de SymPy.</li>
+<li><strong>El teorema de los números primos.</strong> Este teorema dice que <span class="math inline">\(\pi(x) \sim \dfrac{x}{\ln x}\)</span>, es decir, que el cociente de ambos tiende a 1. Haz una <strong>tabla</strong> con <span class="math inline">\(\pi(x)\)</span>, <span class="math inline">\(\dfrac{x}{\ln x}\)</span>, la integral logarítmica <span class="math inline">\(\operatorname{Li}(x)\)</span> (<code>sp.li(x)</code>) y los cocientes <span class="math inline">\(\pi(x) \big/ \dfrac{x}{\ln x}\)</span>. Calcula con SymPy el <strong>límite</strong> <span class="math inline">\(\displaystyle\lim_{x \to \infty} \frac{\operatorname{Li}(x)}{x / \ln x}\)</span> y explica qué dice tu tabla: ¿cuál de las dos aproximaciones es mejor?</li>
+<li><strong>La carrera de primos módulo <span class="math inline">\(m\)</span>.</strong> Clasifica tus primos según su <strong>residuo</strong> al dividirlos entre el <span class="math inline">\(m\)</span> de tu variante y cuenta cuántos hay en cada clase. <strong>Identifica</strong> qué residuos tienen muchos primos y cuáles tienen a lo más uno, y <strong>explica</strong> con tus palabras por qué pasa eso (piensa en el máximo común divisor del residuo y <span class="math inline">\(m\)</span>). ¿Qué clase “va ganando” la carrera?</li>
+<li><strong>Huecos y gemelos.</strong> Calcula los <strong>huecos</strong> entre primos consecutivos (la diferencia <span class="math inline">\(p_{k+1} - p_k\)</span>), el hueco <strong>más grande</strong> hasta <span class="math inline">\(N\)</span> y cuántas parejas de <strong>primos gemelos</strong> (hueco igual a 2) hay.</li>
+</ol>
+<p>📖 <strong>Dónde estudiarlo:</strong></p>
+<ul>
+<li>SymPy: <a href="./python_sympy.html#sustituir-y-evaluar">sustituir y evaluar</a>, <a href="./python_sympy.html#límites">límites</a> y <a href="./python_sympy.html#de-sympy-a-latex">de SymPy a LaTeX</a>.</li>
+<li>NumPy: <a href="./python_numpy.html#funciones-matemáticas">funciones matemáticas</a> (<code>np.log()</code>, <code>np.diff()</code>), <a href="./python_numpy.html#máscaras-booleanas">máscaras booleanas</a> y <a href="./python_numpy.html#funciones-estadísticas">funciones estadísticas</a>.</li>
+<li>El <a href="./python_visualizacion2.html#ejercicio-2.-un-mapa-de-calor-de-la-aritmética-modular">mapa de calor de la aritmética modular</a>: residuos con <code>%</code>.</li>
+</ul>
+<p><code>sp.primepi()</code>, <code>sp.li()</code> y <code>np.diff()</code> son nuevas: consulta su ayuda con <code>help()</code> o en la documentación.</p>
+</section>
+<section id="parte-4.-visualización-2d" class="level3" data-number="73.5.4">
+<h3 data-number="73.5.4" class="anchored" data-anchor-id="parte-4.-visualización-2d"><span class="header-section-number">73.5.4</span> Parte 4. Visualización 2D</h3>
+<p><strong>Qué hacer:</strong> una figura con varias gráficas (<code>subplots</code>):</p>
+<ul>
+<li><span class="math inline">\(\pi(x)\)</span>, <span class="math inline">\(\dfrac{x}{\ln x}\)</span> y <span class="math inline">\(\operatorname{Li}(x)\)</span> en la misma gráfica, de 2 a <span class="math inline">\(N\)</span>.</li>
+<li>Un <strong>histograma</strong> de los huecos entre primos consecutivos.</li>
+<li>La <strong>carrera de primos</strong>: para cada clase de residuo que compite, cuántos primos lleva hasta <span class="math inline">\(x\)</span>, como función de <span class="math inline">\(x\)</span>.</li>
+</ul>
+<p>Cada gráfica con título, leyenda y etiquetas, citada e <strong>interpretada</strong> en el texto.</p>
+<p>📖 <strong>Dónde estudiarlo:</strong></p>
+<ul>
+<li><a href="./python_visualizacion.html#graficar-funciones-con-matplotlib">Graficar funciones con Matplotlib</a>, <a href="./python_visualizacion.html#histograma-plt.hist">histograma</a> y <a href="./python_visualizacion.html#buenas-prácticas-de-visualización">buenas prácticas de visualización</a>.</li>
+<li><a href="./python_visualizacion_plotly.html#varias-gráficas-en-una-figura-subplots">Varias gráficas en una figura: <code>subplots()</code></a>.</li>
+<li>El <a href="./python_visualizacion.html#ejercicio-2.-visualizar-la-convergencia-de-una-serie">ejercicio 2 de Visualización I: visualizar la convergencia de una serie</a>.</li>
+</ul>
+</section>
+<section id="parte-5.-la-espiral-de-ulam-una-matriz-de-primos" class="level3" data-number="73.5.5">
+<h3 data-number="73.5.5" class="anchored" data-anchor-id="parte-5.-la-espiral-de-ulam-una-matriz-de-primos"><span class="header-section-number">73.5.5</span> Parte 5. La espiral de Ulam: una matriz de primos</h3>
+<p><strong>Qué hacer:</strong></p>
+<ol type="1">
+<li><strong>Construir la espiral.</strong> Escribe los enteros <span class="math inline">\(1, 2, 3, \dots\)</span> en una <strong>matriz</strong> cuadrada de NumPy (por ejemplo, de <span class="math inline">\(201 \times 201\)</span>), empezando en el centro y avanzando en espiral: un paso a la derecha, uno hacia arriba, dos a la izquierda, dos hacia abajo, tres a la derecha, tres hacia arriba… Después crea una matriz de <code>True</code>/<code>False</code> que diga en qué casillas hay un primo y dibújala como <strong>mapa de calor</strong>. Explica en tu sitio cómo recorriste la espiral.</li>
+<li><strong>El polinomio de una diagonal.</strong> En la espiral se ven <strong>diagonales</strong> con muchos primos. Elige una, toma tres de sus números consecutivos y encuentra el polinomio <span class="math inline">\(f(n) = an^2 + bn + c\)</span> que los genera <strong>planteando y resolviendo un sistema de ecuaciones</strong> de <span class="math inline">\(3 \times 3\)</span> en forma matricial (con NumPy o con matrices de SymPy). <strong>Explica tu estrategia</strong>: qué representa cada fila del sistema y por qué tres puntos bastan. Comprueba con <code>sp.isprime()</code> cuántos de los primeros valores de <span class="math inline">\(f(n)\)</span> son primos.</li>
+<li><strong>El polinomio de Euler.</strong> Comprueba con SymPy que <span class="math inline">\(n^2 + n + 41\)</span> es primo para <span class="math inline">\(n = 0, 1, \dots, 39\)</span>, y explica por qué <strong>no</strong> puede ser primo para <span class="math inline">\(n = 40\)</span> (factoriza con <code>sp.factorint()</code>).</li>
+</ol>
+<p>📖 <strong>Dónde estudiarlo:</strong></p>
+<ul>
+<li><a href="./python_numpy.html#dimensiones-de-un-arreglo">Dimensiones de un arreglo</a>, <a href="./python_numpy.html#arreglos-de-dos-o-más-dimensiones">indexación de arreglos de dos o más dimensiones</a> y <a href="./python_numpy.html#máscaras-booleanas">máscaras booleanas</a>.</li>
+<li><a href="./python_visualizacion2.html#mapas-de-calor-en-2d">Mapas de calor en 2D</a> y <a href="./python_visualizacion.html#paso-3a.-mapa-de-calor-plt.imshow">mapa de calor con <code>plt.imshow()</code></a>.</li>
+<li><a href="./python_algebra_lineal.html#sistemas-de-ecuaciones-lineales">Sistemas de ecuaciones lineales</a> y <a href="./python_sympy.html#matrices">matrices en SymPy</a>.</li>
+<li><a href="./python_for.html#ciclos-while">Ciclos <code>while</code></a> y <a href="./python_for.html#ciclos-anidados">ciclos anidados</a>.</li>
+</ul>
+</section>
+<section id="parte-6.-la-conjetura-de-goldbach" class="level3" data-number="73.5.6">
+<h3 data-number="73.5.6" class="anchored" data-anchor-id="parte-6.-la-conjetura-de-goldbach"><span class="header-section-number">73.5.6</span> Parte 6. La conjetura de Goldbach</h3>
+<p><strong>Qué hacer:</strong> la <strong>conjetura de Goldbach</strong> (1742) dice que todo número par mayor que 2 es la suma de dos primos; por ejemplo, <span class="math inline">\(28 = 5 + 23 = 11 + 17\)</span>. Nadie la ha demostrado. <strong>Comprueba numéricamente</strong> que se cumple para <strong>todos</strong> los pares de 4 a <span class="math inline">\(G\)</span>, y cuenta de <strong>cuántas formas</strong> se puede escribir cada par. Grafica ese número de formas contra el par (el “<strong>cometa de Goldbach</strong>”) e <strong>interpreta</strong> el resultado: ¿por qué tu comprobación <strong>no</strong> es una demostración?</p>
+<p>📖 <strong>Dónde estudiarlo:</strong></p>
+<ul>
+<li><a href="./python_for.html#for-con-condicionales"><code>for</code> con condicionales</a>, <a href="./python_for.html#acumuladores-y-contadores">acumuladores y contadores</a> y <a href="./python_for.html#break-salir-del-ciclo"><code>break</code></a>.</li>
+<li><a href="./python_numpy.html#máscaras-booleanas">Máscaras booleanas</a>: con un arreglo <code>es_p</code> de <code>True</code>/<code>False</code>, <code>es_p[n - primos]</code> revisa muchos números de una sola vez.</li>
+<li><a href="./python_for.html#ciclos-for-vs.-numpy">Ciclos <code>for</code> vs.&nbsp;NumPy</a>.</li>
+</ul>
+</section>
+<section id="parte-7.-pi-con-el-método-de-monte-carlo" class="level3" data-number="73.5.7">
+<h3 data-number="73.5.7" class="anchored" data-anchor-id="parte-7.-pi-con-el-método-de-monte-carlo"><span class="header-section-number">73.5.7</span> Parte 7. <span class="math inline">\(\pi\)</span> con el método de Monte Carlo</h3>
+<p><strong>Qué hacer:</strong> dos enteros son <strong>coprimos</strong> si su máximo común divisor es 1. Se sabe que la probabilidad de que dos enteros elegidos al azar sean coprimos es</p>
+<p><span class="math display">\[P = \frac{1}{\displaystyle\sum_{k=1}^{\infty} \frac{1}{k^2}}.\]</span></p>
+<ol type="1">
+<li>Calcula con SymPy el valor <strong>exacto</strong> de la suma y, con él, el de <span class="math inline">\(P\)</span>.</li>
+<li><strong>Estima</strong> <span class="math inline">\(P\)</span> eligiendo muchas parejas de enteros al azar (por ejemplo, entre 1 y <span class="math inline">\(10^6\)</span>) y contando cuántas son coprimas con tu <code>mcd()</code>. Despeja <span class="math inline">\(\pi\)</span> de tu estimación.</li>
+<li>Haz una <strong>gráfica de convergencia</strong> que muestre cómo se acerca tu estimación de <span class="math inline">\(\pi\)</span> al valor real al aumentar el número de parejas.</li>
+</ol>
+<p>📖 <strong>Dónde estudiarlo:</strong></p>
+<ul>
+<li><a href="./python_aleatorios.html#números-aleatorios-con-numpy">Números aleatorios con NumPy</a>, <a href="./python_aleatorios.html#estimar-pi-lanzando-dardos">estimar <span class="math inline">\(\pi\)</span> lanzando “dardos”</a> y <a href="./python_aleatorios.html#qué-tan-rápido-converge">¿qué tan rápido converge?</a>.</li>
+<li><a href="./python_aleatorios.html#documentar-simulaciones-en-quarto">Documentar simulaciones en Quarto</a>.</li>
+<li><a href="./python_sympy.html#sumas">Sumas con SymPy</a> y el <a href="./python_sympy.html#reto-final-dos-series-famosas">reto final de SymPy: dos series famosas</a>.</li>
+</ul>
+</section>
+<section id="parte-8.-visualización-3d-interactiva" class="level3" data-number="73.5.8">
+<h3 data-number="73.5.8" class="anchored" data-anchor-id="parte-8.-visualización-3d-interactiva"><span class="header-section-number">73.5.8</span> Parte 8. Visualización 3D interactiva</h3>
+<p><strong>Qué hacer:</strong> con Plotly, dibuja la <strong>superficie</strong> <span class="math inline">\(z = \operatorname{mcd}(a, b)\)</span> para <span class="math inline">\(a, b = 1, 2, \dots, 40\)</span>, usando tu <code>mcd()</code> para llenar la matriz de valores. Explica qué representan los “picos” y las regiones donde <span class="math inline">\(z = 1\)</span>, y relaciónalo con la Parte 7.</p>
+<p>📖 <strong>Dónde estudiarlo:</strong></p>
+<ul>
+<li><a href="./python_visualizacion3d.html#superficies-z-fx-y">Superficies <span class="math inline">\(z = f(x, y)\)</span></a> y <a href="./python_visualizacion3d.html#gráficas-3d-interactivas-con-plotly">gráficas 3D interactivas con Plotly</a>.</li>
+<li><a href="./python_visualizacion_plotly.html#superficie-en-3d">Superficie en 3D con Plotly</a>.</li>
+<li><a href="./python_for.html#ciclos-anidados">Ciclos anidados</a>, para llenar la matriz.</li>
+<li><a href="./python_visualizacion3d.html#publicar-en-github-pages">Publicar en GitHub Pages</a>.</li>
+</ul>
+</section>
+</section>
+<section id="calentamiento-pon-a-prueba-tus-funciones" class="level2" data-number="73.6">
+<h2 data-number="73.6" class="anchored" data-anchor-id="calentamiento-pon-a-prueba-tus-funciones"><span class="header-section-number">73.6</span> Calentamiento: pon a prueba tus funciones</h2>
+<p>Antes de empezar el proyecto, completa y prueba dos de las funciones principales y escribe tus primeras pruebas con <code>assert</code>. <strong>Run Code</strong> probará tus funciones con varios números.</p>
+<section id="calentamiento-1.-primos-más-rápido" class="level3" data-number="73.6.1">
+<h3 data-number="73.6.1" class="anchored" data-anchor-id="calentamiento-1.-primos-más-rápido"><span class="header-section-number">73.6.1</span> Calentamiento 1. Primos más rápido</h3>
+<p>En <a href="./python_funciones.html#return-termina-la-función">Funciones</a> la función <code>es_primo()</code> probaba <strong>todos</strong> los divisores de 2 a <span class="math inline">\(n - 1\)</span>. Si <span class="math inline">\(n = a \cdot b\)</span> con <span class="math inline">\(a \le b\)</span>, entonces <span class="math inline">\(a^2 \le n\)</span>: basta probar los divisores <span class="math inline">\(d\)</span> con <span class="math inline">\(d^2 \le n\)</span>. Completa la función con esa idea.</p>
+<div class="cell" data-exercise="pp1">
+<div>
+<div id="pyodide-1" class="exercise-cell">
+
+</div>
+<script type="pyodide-1-contents">
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWUsImV4ZXJjaXNlIjoicHAxIn0sImNvZGUiOiJkZWYgZXNfcHJpbW8obik6XG4gICAgXCJcIlwiUmVncmVzYSBUcnVlIHNpIG4gZXMgcHJpbW8uIFNvbG8gcHJ1ZWJhIGxvcyBkaXZpc29yZXMgZCBjb24gZMKyIOKJpCBuLlwiXCJcIlxuICAgIGlmIG4gPCAyOlxuICAgICAgICByZXR1cm4gRmFsc2VcbiAgICBkID0gMlxuICAgIHdoaWxlIF9fX19fXzpcbiAgICAgICAgaWYgbiAlIGQgPT0gMDpcbiAgICAgICAgICAgIHJldHVybiBGYWxzZVxuICAgICAgICBkID0gZCArIDFcbiAgICByZXR1cm4gVHJ1ZVxuXG5wcmludChlc19wcmltbyg5NyksIGVzX3ByaW1vKDkxKSwgZXNfcHJpbW8oNDkpKSJ9
+</script>
+</div>
+</div>
+<div class="cell" data-exercise="pp1" data-check="true">
+<script type="exercise-check-pp1-contents">
+eyJhdHRyIjp7ImNoZWNrIjp0cnVlLCJlZGl0Ijp0cnVlLCJldmFsIjp0cnVlLCJleGVyY2lzZSI6InBwMSJ9LCJjb2RlIjoiZGVmIGxlbnRvKG4pOlxuICAgIGlmIG4gPCAyOlxuICAgICAgICByZXR1cm4gRmFsc2VcbiAgICBmb3IgZGl2aXNvciBpbiByYW5nZSgyLCBuKTpcbiAgICAgICAgaWYgbiAlIGRpdmlzb3IgPT0gMDpcbiAgICAgICAgICAgIHJldHVybiBGYWxzZVxuICAgIHJldHVybiBUcnVlXG5cbnRyeTpcbiAgICBmID0gZW52aXJfcmVzdWx0W1wiZXNfcHJpbW9cIl1cbmV4Y2VwdCBFeGNlcHRpb246XG4gICAgZiA9IE5vbmVcbmlmIGYgaXMgTm9uZTpcbiAgICBmZWVkYmFjayA9IHtcImNvcnJlY3RcIjogRmFsc2UsIFwibWVzc2FnZVwiOiBcIk5vIGVuY29udHLDqSBsYSBmdW5jacOzbiBlc19wcmltby5cIn1cbmVsc2U6XG4gICAgb2sgPSBUcnVlXG4gICAgdHJ5OlxuICAgICAgICBmb3IgayBpbiByYW5nZSgwLCA0MDApOlxuICAgICAgICAgICAgaWYgZihrKSAhPSBsZW50byhrKTpcbiAgICAgICAgICAgICAgICBvayA9IEZhbHNlXG4gICAgICAgICAgICAgICAgYnJlYWtcbiAgICBleGNlcHQgRXhjZXB0aW9uOlxuICAgICAgICBvayA9IEZhbHNlXG4gICAgaWYgb2s6XG4gICAgICAgIGZlZWRiYWNrID0ge1wiY29ycmVjdFwiOiBUcnVlLCBcIm1lc3NhZ2VcIjogXCLCoUNvcnJlY3RvISBUdSBmdW5jacOzbiBjb2luY2lkZSBjb24gbGEgdmVyc2nDs24gbGVudGEgZW4gdG9kb3MgbG9zIG7Dum1lcm9zIGRlIDAgYSAzOTkuXCJ9XG4gICAgZWxzZTpcbiAgICAgICAgZmVlZGJhY2sgPSB7XCJjb3JyZWN0XCI6IEZhbHNlLCBcIm1lc3NhZ2VcIjogXCJUdSBmdW5jacOzbiBubyBjb2luY2lkZSBjb24gbGEgdmVyc2nDs24gbGVudGEgZW4gYWwgbWVub3MgdW4gbsO6bWVyby4gUmV2aXNhIGxvcyBjdWFkcmFkb3MgZGUgcHJpbW9zLCBjb21vIDQ5OiDCv3NlIHBydWViYSBlbCBkaXZpc29yIDc/XCJ9XG5mZWVkYmFjayJ9
+</script>
+</div>
+<div class="hint webr-ojs-exercise exercise-hint d-none" data-exercise="pp1">
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Nota</span>Pista
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-6" class="callout-6-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<p>La condición del <code>while</code> debe decir “mientras <span class="math inline">\(d^2 \le n\)</span>”. Repasa la potencia en <a href="./intro_python.html">Introducción a Python</a> y los <a href="./python_condicionales.html#operadores-de-comparación">operadores de comparación</a>. ¿Qué pasa con 49 si usas <code>&lt;</code> en vez de <code>&lt;=</code>?</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="calentamiento-2.-el-algoritmo-de-euclides" class="level3" data-number="73.6.2">
+<h3 data-number="73.6.2" class="anchored" data-anchor-id="calentamiento-2.-el-algoritmo-de-euclides"><span class="header-section-number">73.6.2</span> Calentamiento 2. El algoritmo de Euclides</h3>
+<p>El <strong>algoritmo de Euclides</strong> calcula el máximo común divisor con una idea: <span class="math inline">\(\operatorname{mcd}(a, b) = \operatorname{mcd}(b, r)\)</span>, donde <span class="math inline">\(r\)</span> es el <strong>residuo</strong> de dividir <span class="math inline">\(a\)</span> entre <span class="math inline">\(b\)</span>. Se repite hasta que el segundo número sea 0. Por ejemplo,</p>
+<p><span class="math display">\[\operatorname{mcd}(48, 18) = \operatorname{mcd}(18, 12) = \operatorname{mcd}(12, 6) = \operatorname{mcd}(6, 0) = 6.\]</span></p>
+<div class="cell" data-exercise="pp2">
+<div>
+<div id="pyodide-3" class="exercise-cell">
+
+</div>
+<script type="pyodide-3-contents">
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWUsImV4ZXJjaXNlIjoicHAyIn0sImNvZGUiOiJkZWYgbWNkKGEsIGIpOlxuICAgIFwiXCJcIk3DoXhpbW8gY29tw7puIGRpdmlzb3IgZGUgYSB5IGIgY29uIGVsIGFsZ29yaXRtbyBkZSBFdWNsaWRlcy5cIlwiXCJcbiAgICB3aGlsZSBiICE9IDA6XG4gICAgICAgIGEsIGIgPSBfX19fX18sIF9fX19fX1xuICAgIHJldHVybiBfX19fX19cblxucHJpbnQobWNkKDQ4LCAxOCkpIn0=
+</script>
+</div>
+</div>
+<div class="cell" data-exercise="pp2" data-check="true">
+<script type="exercise-check-pp2-contents">
+eyJhdHRyIjp7ImNoZWNrIjp0cnVlLCJlZGl0Ijp0cnVlLCJldmFsIjp0cnVlLCJleGVyY2lzZSI6InBwMiJ9LCJjb2RlIjoiaW1wb3J0IG1hdGhcbnRyeTpcbiAgICBmID0gZW52aXJfcmVzdWx0W1wibWNkXCJdXG5leGNlcHQgRXhjZXB0aW9uOlxuICAgIGYgPSBOb25lXG5pZiBmIGlzIE5vbmU6XG4gICAgZmVlZGJhY2sgPSB7XCJjb3JyZWN0XCI6IEZhbHNlLCBcIm1lc3NhZ2VcIjogXCJObyBlbmNvbnRyw6kgbGEgZnVuY2nDs24gbWNkLlwifVxuZWxzZTpcbiAgICBvayA9IFRydWVcbiAgICB0cnk6XG4gICAgICAgIGZvciBhIGluIHJhbmdlKDAsIDQwKTpcbiAgICAgICAgICAgIGZvciBiIGluIHJhbmdlKDEsIDQwKTpcbiAgICAgICAgICAgICAgICBpZiBmKGEsIGIpICE9IG1hdGguZ2NkKGEsIGIpOlxuICAgICAgICAgICAgICAgICAgICBvayA9IEZhbHNlXG4gICAgZXhjZXB0IEV4Y2VwdGlvbjpcbiAgICAgICAgb2sgPSBGYWxzZVxuICAgIGlmIG9rOlxuICAgICAgICBmZWVkYmFjayA9IHtcImNvcnJlY3RcIjogVHJ1ZSwgXCJtZXNzYWdlXCI6IFwiwqFDb3JyZWN0byEgVHUgbWNkKCkgY29pbmNpZGUgY29uIG1hdGguZ2NkKCkgZW4gdG9kYXMgbGFzIHBhcmVqYXMgZGUgcHJ1ZWJhLlwifVxuICAgIGVsc2U6XG4gICAgICAgIGZlZWRiYWNrID0ge1wiY29ycmVjdFwiOiBGYWxzZSwgXCJtZXNzYWdlXCI6IFwiQWwgbWVub3MgdW4gbWNkIG5vIGNvaW5jaWRlLiBSZXZpc2EgcXXDqSBwYXIgZGUgbsO6bWVyb3Mgc2lndWUgZW4gY2FkYSBwYXNvIHkgcXXDqSByZWdyZXNhcyBhbCBmaW5hbC5cIn1cbmZlZWRiYWNrIn0=
+</script>
+</div>
+<div class="hint webr-ojs-exercise exercise-hint d-none" data-exercise="pp2">
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Nota</span>Pista
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-7" class="callout-7-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<p>En cada paso, el nuevo <code>a</code> es el <code>b</code> de antes y el nuevo <code>b</code> es el <strong>residuo</strong> (operador <code>%</code>). Escribirlo en una sola línea, <code>a, b = ..., ...</code>, evita perder el valor viejo de <code>a</code>. Cuando <code>b</code> llega a 0, el mcd es el otro número.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="pruebas-de-las-funciones" class="level3" data-number="73.6.3">
+<h3 data-number="73.6.3" class="anchored" data-anchor-id="pruebas-de-las-funciones"><span class="header-section-number">73.6.3</span> Calentamiento 3. Pruebas con <code>assert</code></h3>
+<p>Antes de usar tus funciones en el análisis, <strong>escribe tus propias pruebas con <code>assert</code></strong>, como aprendimos en <a href="./python_funciones.html#probar-funciones">Probar funciones</a> y en <a href="./python_buenas_practicas.html#assert-verificar-que-algo-sea-verdadero"><code>assert</code>: verificar que algo sea verdadero</a>. Cada prueba llama a una función con un número cuya respuesta <strong>ya conoces</strong> y la compara con el resultado esperado.</p>
+<p>Copia en el editor <strong>tus</strong> funciones de los calentamientos 1 y 2, ya completas. Después completa cada <code>______</code> con el <strong>resultado esperado</strong> o con un <strong>número</strong> que tú elijas. <strong>Run Code</strong> revisará que tus funciones sean correctas y que todas tus pruebas pasen.</p>
+<div class="cell" data-exercise="pp_pruebas">
+<div>
+<div id="pyodide-5" class="exercise-cell">
+
+</div>
+<script type="pyodide-5-contents">
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWUsImV4ZXJjaXNlIjoicHBfcHJ1ZWJhcyJ9LCJjb2RlIjoiIyAxLiBDb3BpYSBhcXXDrSB0dXMgZnVuY2lvbmVzIGVzX3ByaW1vKCkgeSBtY2QoKSBkZSBsb3MgY2FsZW50YW1pZW50b3MgMSB5IDIuXG5fX19fX19cblxuXG4jIDIuIFBydWViYXMgZGUgZXNfcHJpbW8obilcbmFzc2VydCBlc19wcmltbygyKSA9PSBfX19fX18gICAgICAgICAgICAgICAgICMgRWwgw7puaWNvIHByaW1vIHBhclxuYXNzZXJ0IGVzX3ByaW1vKDEpID09IF9fX19fXyAgICAgICAgICAgICAgICAgIyAxIG5vIGVzIHByaW1vXG5hc3NlcnQgZXNfcHJpbW8oX19fX19fKSA9PSBGYWxzZSAgICAgICAgICAgICAjIEVsIGN1YWRyYWRvIGRlIHVuIHByaW1vXG5hc3NlcnQgZXNfcHJpbW8oX19fX19fKSA9PSBUcnVlICAgICAgICAgICAgICAjIFVuIHByaW1vIG1heW9yIHF1ZSA1MFxuXG4jIDMuIFBydWViYXMgZGUgbWNkKGEsIGIpXG5hc3NlcnQgbWNkKDQ4LCAxOCkgPT0gX19fX19fXG5hc3NlcnQgbWNkKF9fX19fXykgPT0gMSAgICAgICAgICAgICAgICAgICAgICAjIERvcyBuw7ptZXJvcyBjb3ByaW1vc1xuXG5wcmludChcIlRvZGFzIGxhcyBwcnVlYmFzIHBhc2Fyb24g4pyFXCIpIn0=
+</script>
+</div>
+</div>
+<div class="cell" data-exercise="pp_pruebas" data-check="true">
+<script type="exercise-check-pp_pruebas-contents">
+eyJhdHRyIjp7ImNoZWNrIjp0cnVlLCJlZGl0Ijp0cnVlLCJldmFsIjp0cnVlLCJleGVyY2lzZSI6InBwX3BydWViYXMifSwiY29kZSI6ImltcG9ydCBtYXRoXG5pbXBvcnQgdHJhY2ViYWNrXG5udW1fYXNzZXJ0ID0gdXNlcl9jb2RlLmNvdW50KFwiYXNzZXJ0IFwiKVxuaWYgXCJfX19fX19cIiBpbiB1c2VyX2NvZGU6XG4gICAgZmVlZGJhY2sgPSB7XCJjb3JyZWN0XCI6IEZhbHNlLCBcIm1lc3NhZ2VcIjogXCJUb2RhdsOtYSBoYXkgZXNwYWNpb3MgX19fX19fIHNpbiBjb21wbGV0YXIuXCJ9XG5lbGlmIFwiZGVmIGVzX3ByaW1vXCIgbm90IGluIHVzZXJfY29kZSBvciBcImRlZiBtY2RcIiBub3QgaW4gdXNlcl9jb2RlOlxuICAgIGZlZWRiYWNrID0ge1wiY29ycmVjdFwiOiBGYWxzZSwgXCJtZXNzYWdlXCI6IFwiQ29waWEgZW4gZWwgZWRpdG9yIHR1cyBmdW5jaW9uZXMgZXNfcHJpbW8oKSB5IG1jZCgpIGRlIGxvcyBjYWxlbnRhbWllbnRvcyAxIHkgMi5cIn1cbmVsaWYgbnVtX2Fzc2VydCA8IDY6XG4gICAgZmVlZGJhY2sgPSB7XCJjb3JyZWN0XCI6IEZhbHNlLCBcIm1lc3NhZ2VcIjogXCJFc2NyaWJlIGFsIG1lbm9zIDYgcHJ1ZWJhcyBjb24gYXNzZXJ0ICh0aWVuZXMgXCIgKyBzdHIobnVtX2Fzc2VydCkgKyBcIikuXCJ9XG5lbHNlOlxuICAgIGVudG9ybm8gPSB7fVxuICAgIHRyeTpcbiAgICAgICAgZXhlYyh1c2VyX2NvZGUsIGVudG9ybm8pXG4gICAgICAgIHByaW1vID0gZW50b3Jub1tcImVzX3ByaW1vXCJdXG4gICAgICAgIG1jZF9hbHVtbm8gPSBlbnRvcm5vW1wibWNkXCJdXG4gICAgICAgIGJpZW4gPSBwcmltbyg0OSkgPT0gRmFsc2UgYW5kIHByaW1vKDk3KSA9PSBUcnVlIGFuZCBwcmltbygwKSA9PSBGYWxzZSBhbmQgcHJpbW8oMTIxKSA9PSBGYWxzZVxuICAgICAgICBiaWVuID0gYmllbiBhbmQgbWNkX2FsdW1ubyg4NCwgMzYpID09IDEyIGFuZCBtY2RfYWx1bW5vKDM1LCA2NCkgPT0gMVxuICAgICAgICBpZiBiaWVuOlxuICAgICAgICAgICAgZmVlZGJhY2sgPSB7XCJjb3JyZWN0XCI6IFRydWUsIFwibWVzc2FnZVwiOiBcIsKhQ29ycmVjdG8hIFR1cyBmdW5jaW9uZXMgc29uIGNvcnJlY3RhcyB5IHR1cyBcIiArIHN0cihudW1fYXNzZXJ0KSArIFwiIHBydWViYXMgcGFzYW4uIEVzY3JpYmUgcHJ1ZWJhcyBhc8OtIGVuIHR1IGFuYWxpc2lzLnFtZCwgdGFtYmnDqW4gcGFyYSBjcmliYSgpIHkgY29udGFyX3ByaW1vcygpLlwifVxuICAgICAgICBlbHNlOlxuICAgICAgICAgICAgZmVlZGJhY2sgPSB7XCJjb3JyZWN0XCI6IEZhbHNlLCBcIm1lc3NhZ2VcIjogXCJUdXMgcHJ1ZWJhcyBwYXNhbiwgcGVybyB0dXMgZnVuY2lvbmVzIG5vIHNvbiBjb3JyZWN0YXM6IHJldsOtc2FsYXMgY29uIGxvcyBjYWxlbnRhbWllbnRvcyAxIHkgMi5cIn1cbiAgICBleGNlcHQgQXNzZXJ0aW9uRXJyb3IgYXMgZTpcbiAgICAgICAgbGluZWEgPSB0cmFjZWJhY2suZXh0cmFjdF90YihlLl9fdHJhY2ViYWNrX18pWy0xXS5saW5lbm9cbiAgICAgICAgZmVlZGJhY2sgPSB7XCJjb3JyZWN0XCI6IEZhbHNlLCBcIm1lc3NhZ2VcIjogXCJMYSBwcnVlYmEgZGUgbGEgbMOtbmVhIFwiICsgc3RyKGxpbmVhKSArIFwiIGZhbGzDszogcmV2aXNhIGVsIHJlc3VsdGFkbyBlc3BlcmFkbywgZWwgbsO6bWVybyBxdWUgZWxlZ2lzdGUgbyB0dSBmdW5jacOzbi5cIn1cbiAgICBleGNlcHQgRXhjZXB0aW9uIGFzIGU6XG4gICAgICAgIGZlZWRiYWNrID0ge1wiY29ycmVjdFwiOiBGYWxzZSwgXCJtZXNzYWdlXCI6IFwiVHUgY8OzZGlnbyB0aWVuZSB1biBlcnJvcjogXCIgKyB0eXBlKGUpLl9fbmFtZV9fICsgXCI6IFwiICsgc3RyKGUpfVxuZmVlZGJhY2sifQ==
+</script>
+</div>
+<div class="hint webr-ojs-exercise exercise-hint d-none" data-exercise="pp_pruebas">
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Nota</span>Pista
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-8" class="callout-8-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<p>Los resultados de <code>es_primo()</code> son <code>True</code> o <code>False</code>, <strong>sin</strong> comillas. Para <code>mcd()</code>, escribe dos números separados por comas, <code>a, b</code>. ¿Qué dos números no tienen ningún divisor en común además del 1?</p>
+</div>
+</div>
+</div>
+</div>
+<p>En <strong>tu</strong> proyecto, escribe las pruebas en <code>analisis.qmd</code>, <strong>antes</strong> del análisis, y agrega también pruebas para <code>criba()</code> y <code>contar_primos()</code> con un <span class="math inline">\(N\)</span> pequeño cuyos primos puedas escribir a mano (por ejemplo, <span class="math inline">\(N = 30\)</span>).</p>
+</section>
+</section>
+<section id="estructura-del-sitio" class="level2" data-number="73.7">
+<h2 data-number="73.7" class="anchored" data-anchor-id="estructura-del-sitio"><span class="header-section-number">73.7</span> Estructura del sitio</h2>
+<section id="crear-el-proyecto" class="level3" data-number="73.7.1">
+<h3 data-number="73.7.1" class="anchored" data-anchor-id="crear-el-proyecto"><span class="header-section-number">73.7.1</span> 1. Crear el proyecto</h3>
+<p>En RStudio: <strong>File &gt; New Project &gt; New Directory &gt; Quarto Website</strong>. Llama al proyecto, por ejemplo, <code>proyecto-primos</code>. Después configura <code>_quarto.yml</code>:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">project</span><span class="kw">:</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">type</span><span class="kw">:</span><span class="at"> website</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">output-dir</span><span class="kw">:</span><span class="at"> docs</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="fu">website</span><span class="kw">:</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">"Atlas de números primos"</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">navbar</span><span class="kw">:</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">left</span><span class="kw">:</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">href</span><span class="kw">:</span><span class="at"> index.qmd</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">text</span><span class="kw">:</span><span class="at"> Inicio</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">href</span><span class="kw">:</span><span class="at"> analisis.qmd</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">text</span><span class="kw">:</span><span class="at"> Análisis</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">href</span><span class="kw">:</span><span class="at"> visualizacion.qmd</span></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">text</span><span class="kw">:</span><span class="at"> Visualización</span></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">href</span><span class="kw">:</span><span class="at"> simulacion.qmd</span></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">text</span><span class="kw">:</span><span class="at"> Monte Carlo</span></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">href</span><span class="kw">:</span><span class="at"> conclusiones.qmd</span></span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">text</span><span class="kw">:</span><span class="at"> Conclusiones</span></span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a><span class="fu">format</span><span class="kw">:</span></span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">html</span><span class="kw">:</span></span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">theme</span><span class="kw">:</span><span class="at"> cosmo</span></span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">toc</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a><span class="fu">execute</span><span class="kw">:</span></span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">error</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="archivos-de-la-entrega" class="level3" data-number="73.7.2">
+<h3 data-number="73.7.2" class="anchored" data-anchor-id="archivos-de-la-entrega"><span class="header-section-number">73.7.2</span> 2. Archivos de la entrega</h3>
+<pre><code>proyecto-primos/
+├── _quarto.yml          # Configuración del sitio web
+├── index.qmd            # Inicio: autor(a), variante y resumen de resultados
+├── funciones.py         # Funciones del proyecto (documentadas)
+├── analisis.qmd         # Pruebas, conteo de primos, teorema de los números primos y carrera
+├── visualizacion.qmd    # Gráficas 2D, espiral de Ulam, Goldbach y 3D
+├── simulacion.qmd       # Monte Carlo y convergencia
+├── conclusiones.qmd     # Conclusiones y referencias
+├── README.md            # Descripción del repositorio
+├── .gitignore           # Archivos que Git no debe guardar
+└── docs/                # Sitio generado por quarto render (se publica en GitHub Pages)</code></pre>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Archivo</th>
+<th>Partes de la rúbrica</th>
+<th>Qué debe tener</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>_quarto.yml</code></td>
+<td>1</td>
+<td><code>type: website</code>, <code>output-dir: docs</code> (para GitHub Pages) y el menú de navegación.</td>
+</tr>
+<tr class="even">
+<td><code>index.qmd</code></td>
+<td>1, 9</td>
+<td>Tu nombre, tu variante (<span class="math inline">\(N\)</span>, <span class="math inline">\(m\)</span> y <span class="math inline">\(G\)</span>) y una <strong>tabla de resumen</strong> de resultados. Si calculas los valores con código en línea <code>`{python} ...`</code>, la tabla se actualiza sola.</td>
+</tr>
+<tr class="odd">
+<td><code>funciones.py</code></td>
+<td>2</td>
+<td>Las funciones de la <a href="#parte-2.-funciones-del-proyecto">Parte 2</a>, cada una con <em>docstring</em>. Las páginas las importan con <code>from funciones import ...</code>.</td>
+</tr>
+<tr class="even">
+<td><code>analisis.qmd</code></td>
+<td>2, 3</td>
+<td>Una sección <strong>Funciones del proyecto</strong> que muestre todo <code>funciones.py</code>, las <strong>pruebas con <code>assert</code></strong> antes del análisis y las tablas de la Parte 3 con sus fórmulas en LaTeX.</td>
+</tr>
+<tr class="odd">
+<td><code>visualizacion.qmd</code></td>
+<td>4, 5, 6, 8</td>
+<td>Figuras con <code>label: fig-...</code> y <code>fig-cap</code>, citadas en el texto con <code>@fig-...</code> (<a href="./python_visualizacion3d.html#pies-de-figura-y-referencias-cruzadas">pies de figura y referencias cruzadas</a>); el sistema de ecuaciones de la espiral y el resultado de Goldbach <strong>explicados e interpretados</strong>.</td>
+</tr>
+<tr class="even">
+<td><code>simulacion.qmd</code></td>
+<td>7</td>
+<td>Semilla y parámetros al inicio, comparación con el valor exacto y gráfica de convergencia.</td>
+</tr>
+<tr class="odd">
+<td><code>conclusiones.qmd</code></td>
+<td>9</td>
+<td>Qué aprendiste y referencias (incluido el uso de IA).</td>
+</tr>
+</tbody>
+</table>
+<p>Cada página de Python debe empezar con un encabezado como este:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Análisis"</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="an">jupyter:</span><span class="co"> python3</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sympy <span class="im">as</span> sp</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> funciones <span class="im">import</span> es_primo, criba, mcd, contar_primos</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Y el <code>.gitignore</code> debe incluir, al menos:</p>
+<pre><code>/.quarto/
+__pycache__/
+*.quarto_ipynb</code></pre>
+</section>
+<section id="publicar-en-github-pages" class="level3" data-number="73.7.3">
+<h3 data-number="73.7.3" class="anchored" data-anchor-id="publicar-en-github-pages"><span class="header-section-number">73.7.3</span> 3. Publicar en GitHub Pages</h3>
+<ol type="1">
+<li>Crea el repositorio en GitHub.</li>
+<li>Renderiza el sitio con <strong>Build &gt; Render Website</strong> (o <code>quarto render</code> en la Terminal).</li>
+<li>Sube los cambios: <code>git add .</code>, <code>git commit -m "..."</code> y <code>git push</code>.</li>
+<li>En GitHub, <strong>Settings &gt; Pages</strong>: rama <code>main</code>, carpeta <code>/docs</code>, <strong>Save</strong>.</li>
+<li>Tu sitio estará en <code>https://usuario.github.io/proyecto-primos/</code>.</li>
+</ol>
+<p>Consulta <a href="./quarto_python.html">Configuraciones para usar Quarto con Python</a> si aparece algún error al renderizar, y <a href="./python_visualizacion3d.html#publicar-en-github-pages">Visualización III</a> para más detalles de la publicación. Para ver cómo se organiza un sitio terminado (con otro tema), revisa el <a href="ejemplos/proyecto-conicas-ejemplo/docs/index.html" target="_blank">sitio de ejemplo del proyecto de cónicas</a>.</p>
+</section>
+</section>
+<section id="lista-de-verificación-antes-de-entregar" class="level2" data-number="73.8">
+<h2 data-number="73.8" class="anchored" data-anchor-id="lista-de-verificación-antes-de-entregar"><span class="header-section-number">73.8</span> Lista de verificación antes de entregar</h2>
+<ul class="task-list">
+<li><label><input type="checkbox">El sitio está publicado y abre desde la dirección de GitHub Pages.</label></li>
+<li><label><input type="checkbox">El repositorio tiene <em>commits</em> frecuentes, no uno solo al final.</label></li>
+<li><label><input type="checkbox"><code>funciones.py</code> tiene <em>docstrings</em>, no tiene ningún <code>______</code> ni 🐞, y las pruebas con <code>assert</code> pasan.</label></li>
+<li><label><input type="checkbox"><strong>Todas</strong> las ecuaciones (fórmulas, tablas y explicaciones) están escritas en LaTeX; si no, se descuentan 10 puntos de los 100.</label></li>
+<li><label><input type="checkbox">Todas las gráficas tienen título, etiquetas y leyenda.</label></li>
+<li><label><input type="checkbox">En la Parte 3 explicas por qué solo ciertas clases de residuos compiten en la carrera.</label></li>
+<li><label><input type="checkbox">En la Parte 5 explicas cómo planteaste y resolviste el sistema de ecuaciones de la diagonal.</label></li>
+<li><label><input type="checkbox">La simulación de Monte Carlo usa una <strong>semilla</strong> y reporta el número de parejas.</label></li>
+<li><label><input type="checkbox">La gráfica 3D de Plotly funciona en el sitio publicado.</label></li>
+<li><label><input type="checkbox">Hay una sección de <strong>conclusiones</strong> y de <strong>referencias</strong>.</label></li>
+<li><label><input type="checkbox">El documento se renderiza sin errores.</label></li>
+</ul>
+</section>
+<section id="preguntas-frecuentes" class="level2" data-number="73.9">
+<h2 data-number="73.9" class="anchored" data-anchor-id="preguntas-frecuentes"><span class="header-section-number">73.9</span> Preguntas frecuentes</h2>
+<p><strong>¿Puedo usar <code>sp.isprime()</code> o <code>np.gcd()</code> en lugar de mis funciones?</strong> Puedes usarlas para <strong>comprobar</strong> tus funciones (por ejemplo, en tus pruebas con <code>assert</code>), pero los resultados del proyecto deben salir de <strong>tus</strong> funciones de <code>funciones.py</code>.</p>
+<p><strong>Mi criba tarda mucho.</strong> Revisa que tache los múltiplos con <strong>rebanado</strong> de NumPy (<code>es_p[p * p :: p]</code>) y no con un ciclo sobre cada múltiplo, y que el ciclo exterior se detenga en <span class="math inline">\(\sqrt{N}\)</span>.</p>
+<p><strong>¿Puedo usar inteligencia artificial?</strong> Sí, como apoyo para entender errores o ideas, pero debes <strong>entender y poder explicar</strong> cada línea de tu código en la presentación. Indica en las referencias si la usaste y para qué.</p>
+<p><strong>¿Qué hago si <code>quarto render</code> falla?</strong> Lee el último mensaje de error y busca la solución en <a href="./quarto_python.html#solución-de-problemas">Configuraciones para usar Quarto con Python</a>. Si aparece <code>ModuleNotFoundError</code>, revisa <code>QUARTO_PYTHON</code>.</p>
+</section>
+<section id="referencias" class="level2" data-number="73.10">
+<h2 data-number="73.10" class="anchored" data-anchor-id="referencias"><span class="header-section-number">73.10</span> Referencias</h2>
+<ul>
+<li><a href="https://docs.sympy.org/latest/modules/ntheory.html">SymPy: teoría de números (<code>primepi</code>, <code>isprime</code>, <code>factorint</code>)</a></li>
+<li><a href="https://es.wikipedia.org/wiki/Teorema_de_los_n%C3%BAmeros_primos">Wikipedia: teorema de los números primos</a></li>
+<li><a href="https://es.wikipedia.org/wiki/Espiral_de_Ulam">Wikipedia: espiral de Ulam</a></li>
+<li><a href="https://es.wikipedia.org/wiki/Conjetura_de_Goldbach">Wikipedia: conjetura de Goldbach</a></li>
+<li><a href="https://es.wikipedia.org/wiki/Criba_de_Erat%C3%B3stenes">Wikipedia: criba de Eratóstenes</a></li>
+<li><a href="https://quarto.org/docs/websites/">Quarto: crear un sitio web</a></li>
+<li><a href="https://quarto.org/docs/publishing/github-pages.html">Quarto: publicar en GitHub Pages</a></li>
+</ul>
+
+
+<script type="pyodide-data">
+eyJvcHRpb25zIjp7ImVudiI6eyJQTE9UTFlfUkVOREVSRVIiOiJwbG90bHlfbWltZXR5cGUifSwiaW5kZXhVUkwiOiJodHRwczovL2Nkbi5qc2RlbGl2ci5uZXQvcHlvZGlkZS92MC4yOC4xL2Z1bGwvIn0sInBhY2thZ2VzIjp7InBrZ3MiOlsicHlvZGlkZV9odHRwIiwibWljcm9waXAiLCJpcHl0aG9uIl19fQ==
+</script>
+<script type="ojs-module-contents">
+eyJjb250ZW50cyI6W3siY2VsbE5hbWUiOiJweW9kaWRlLTUiLCJpbmxpbmUiOmZhbHNlLCJtZXRob2ROYW1lIjoiaW50ZXJwcmV0Iiwic291cmNlIjoidmlld29mIF9weW9kaWRlX2VkaXRvcl81ID0ge1xuICBjb25zdCB7IFB5b2RpZGVFeGVyY2lzZUVkaXRvciwgYjY0RGVjb2RlIH0gPSB3aW5kb3cuX2V4ZXJjaXNlX29qc19ydW50aW1lO1xuXG4gIGNvbnN0IHNjcmlwdENvbnRlbnQgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKGBzY3JpcHRbdHlwZT1cXFwicHlvZGlkZS01LWNvbnRlbnRzXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgYmxvY2sgPSBKU09OLnBhcnNlKGI2NERlY29kZShzY3JpcHRDb250ZW50KSk7XG5cbiAgLy8gRGVmYXVsdCBleGVyY2lzZSBjb25maWd1cmF0aW9uXG4gIGNvbnN0IG9wdGlvbnMgPSBPYmplY3QuYXNzaWduKFxuICAgIHtcbiAgICAgIGlkOiBcInB5b2RpZGUtNS1jb250ZW50c1wiLFxuICAgICAgZW52aXI6IGBleGVyY2lzZS1lbnYtJHtibG9jay5hdHRyLmV4ZXJjaXNlfWAsXG4gICAgICBlcnJvcjogZmFsc2UsXG4gICAgICBjYXB0aW9uOiAnRXhlcmNpc2UnLFxuICAgIH0sXG4gICAgYmxvY2suYXR0clxuICApO1xuXG4gIGNvbnN0IGVkaXRvciA9IG5ldyBQeW9kaWRlRXhlcmNpc2VFZGl0b3IocHlvZGlkZU9qcy5weW9kaWRlUHJvbWlzZSwgYmxvY2suY29kZSwgb3B0aW9ucyk7XG4gIHJldHVybiBlZGl0b3IuY29udGFpbmVyO1xufVxudmlld29mIF9weW9kaWRlX3ZhbHVlXzUgPSBweW9kaWRlT2pzLnByb2Nlc3MoX3B5b2RpZGVfZWRpdG9yXzUsIHt9KTtcbl9weW9kaWRlX2ZlZWRiYWNrXzUgPSB7XG4gIGNvbnN0IHsgUHlvZGlkZUdyYWRlciB9ID0gd2luZG93Ll9leGVyY2lzZV9vanNfcnVudGltZTtcbiAgY29uc3QgZW1wdHlGZWVkYmFjayA9IGRvY3VtZW50LmNyZWF0ZUVsZW1lbnQoJ2RpdicpO1xuXG4gIGNvbnN0IGdyYWRlciA9IG5ldyBQeW9kaWRlR3JhZGVyKF9weW9kaWRlX3ZhbHVlXzUuZXZhbHVhdG9yKTtcbiAgY29uc3QgZmVlZGJhY2sgPSBhd2FpdCBncmFkZXIuZ3JhZGVFeGVyY2lzZSgpO1xuICBpZiAoIWZlZWRiYWNrKSByZXR1cm4gZW1wdHlGZWVkYmFjaztcbiAgcmV0dXJuIGZlZWRiYWNrO1xufVxuIn0seyJjZWxsTmFtZSI6InB5b2RpZGUtMyIsImlubGluZSI6ZmFsc2UsIm1ldGhvZE5hbWUiOiJpbnRlcnByZXQiLCJzb3VyY2UiOiJ2aWV3b2YgX3B5b2RpZGVfZWRpdG9yXzMgPSB7XG4gIGNvbnN0IHsgUHlvZGlkZUV4ZXJjaXNlRWRpdG9yLCBiNjREZWNvZGUgfSA9IHdpbmRvdy5fZXhlcmNpc2Vfb2pzX3J1bnRpbWU7XG5cbiAgY29uc3Qgc2NyaXB0Q29udGVudCA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoYHNjcmlwdFt0eXBlPVxcXCJweW9kaWRlLTMtY29udGVudHNcXFwiXWApLnRleHRDb250ZW50O1xuICBjb25zdCBibG9jayA9IEpTT04ucGFyc2UoYjY0RGVjb2RlKHNjcmlwdENvbnRlbnQpKTtcblxuICAvLyBEZWZhdWx0IGV4ZXJjaXNlIGNvbmZpZ3VyYXRpb25cbiAgY29uc3Qgb3B0aW9ucyA9IE9iamVjdC5hc3NpZ24oXG4gICAge1xuICAgICAgaWQ6IFwicHlvZGlkZS0zLWNvbnRlbnRzXCIsXG4gICAgICBlbnZpcjogYGV4ZXJjaXNlLWVudi0ke2Jsb2NrLmF0dHIuZXhlcmNpc2V9YCxcbiAgICAgIGVycm9yOiBmYWxzZSxcbiAgICAgIGNhcHRpb246ICdFeGVyY2lzZScsXG4gICAgfSxcbiAgICBibG9jay5hdHRyXG4gICk7XG5cbiAgY29uc3QgZWRpdG9yID0gbmV3IFB5b2RpZGVFeGVyY2lzZUVkaXRvcihweW9kaWRlT2pzLnB5b2RpZGVQcm9taXNlLCBibG9jay5jb2RlLCBvcHRpb25zKTtcbiAgcmV0dXJuIGVkaXRvci5jb250YWluZXI7XG59XG52aWV3b2YgX3B5b2RpZGVfdmFsdWVfMyA9IHB5b2RpZGVPanMucHJvY2VzcyhfcHlvZGlkZV9lZGl0b3JfMywge30pO1xuX3B5b2RpZGVfZmVlZGJhY2tfMyA9IHtcbiAgY29uc3QgeyBQeW9kaWRlR3JhZGVyIH0gPSB3aW5kb3cuX2V4ZXJjaXNlX29qc19ydW50aW1lO1xuICBjb25zdCBlbXB0eUZlZWRiYWNrID0gZG9jdW1lbnQuY3JlYXRlRWxlbWVudCgnZGl2Jyk7XG5cbiAgY29uc3QgZ3JhZGVyID0gbmV3IFB5b2RpZGVHcmFkZXIoX3B5b2RpZGVfdmFsdWVfMy5ldmFsdWF0b3IpO1xuICBjb25zdCBmZWVkYmFjayA9IGF3YWl0IGdyYWRlci5ncmFkZUV4ZXJjaXNlKCk7XG4gIGlmICghZmVlZGJhY2spIHJldHVybiBlbXB0eUZlZWRiYWNrO1xuICByZXR1cm4gZmVlZGJhY2s7XG59XG4ifSx7ImNlbGxOYW1lIjoicHlvZGlkZS0xIiwiaW5saW5lIjpmYWxzZSwibWV0aG9kTmFtZSI6ImludGVycHJldCIsInNvdXJjZSI6InZpZXdvZiBfcHlvZGlkZV9lZGl0b3JfMSA9IHtcbiAgY29uc3QgeyBQeW9kaWRlRXhlcmNpc2VFZGl0b3IsIGI2NERlY29kZSB9ID0gd2luZG93Ll9leGVyY2lzZV9vanNfcnVudGltZTtcblxuICBjb25zdCBzY3JpcHRDb250ZW50ID0gZG9jdW1lbnQucXVlcnlTZWxlY3Rvcihgc2NyaXB0W3R5cGU9XFxcInB5b2RpZGUtMS1jb250ZW50c1xcXCJdYCkudGV4dENvbnRlbnQ7XG4gIGNvbnN0IGJsb2NrID0gSlNPTi5wYXJzZShiNjREZWNvZGUoc2NyaXB0Q29udGVudCkpO1xuXG4gIC8vIERlZmF1bHQgZXhlcmNpc2UgY29uZmlndXJhdGlvblxuICBjb25zdCBvcHRpb25zID0gT2JqZWN0LmFzc2lnbihcbiAgICB7XG4gICAgICBpZDogXCJweW9kaWRlLTEtY29udGVudHNcIixcbiAgICAgIGVudmlyOiBgZXhlcmNpc2UtZW52LSR7YmxvY2suYXR0ci5leGVyY2lzZX1gLFxuICAgICAgZXJyb3I6IGZhbHNlLFxuICAgICAgY2FwdGlvbjogJ0V4ZXJjaXNlJyxcbiAgICB9LFxuICAgIGJsb2NrLmF0dHJcbiAgKTtcblxuICBjb25zdCBlZGl0b3IgPSBuZXcgUHlvZGlkZUV4ZXJjaXNlRWRpdG9yKHB5b2RpZGVPanMucHlvZGlkZVByb21pc2UsIGJsb2NrLmNvZGUsIG9wdGlvbnMpO1xuICByZXR1cm4gZWRpdG9yLmNvbnRhaW5lcjtcbn1cbnZpZXdvZiBfcHlvZGlkZV92YWx1ZV8xID0gcHlvZGlkZU9qcy5wcm9jZXNzKF9weW9kaWRlX2VkaXRvcl8xLCB7fSk7XG5fcHlvZGlkZV9mZWVkYmFja18xID0ge1xuICBjb25zdCB7IFB5b2RpZGVHcmFkZXIgfSA9IHdpbmRvdy5fZXhlcmNpc2Vfb2pzX3J1bnRpbWU7XG4gIGNvbnN0IGVtcHR5RmVlZGJhY2sgPSBkb2N1bWVudC5jcmVhdGVFbGVtZW50KCdkaXYnKTtcblxuICBjb25zdCBncmFkZXIgPSBuZXcgUHlvZGlkZUdyYWRlcihfcHlvZGlkZV92YWx1ZV8xLmV2YWx1YXRvcik7XG4gIGNvbnN0IGZlZWRiYWNrID0gYXdhaXQgZ3JhZGVyLmdyYWRlRXhlcmNpc2UoKTtcbiAgaWYgKCFmZWVkYmFjaykgcmV0dXJuIGVtcHR5RmVlZGJhY2s7XG4gIHJldHVybiBmZWVkYmFjaztcbn1cbiJ9LHsiY2VsbE5hbWUiOiJweW9kaWRlLXByZWx1ZGUiLCJpbmxpbmUiOmZhbHNlLCJtZXRob2ROYW1lIjoiaW50ZXJwcmV0UXVpZXQiLCJzb3VyY2UiOiJweW9kaWRlT2pzID0ge1xuICBjb25zdCB7XG4gICAgUHlvZGlkZUV2YWx1YXRvcixcbiAgICBQeW9kaWRlRW52aXJvbm1lbnRNYW5hZ2VyLFxuICAgIHNldHVwUHl0aG9uLFxuICAgIHN0YXJ0UHlvZGlkZVdvcmtlcixcbiAgICBiNjREZWNvZGUsXG4gICAgY29sbGFwc2VQYXRoLFxuICB9ID0gd2luZG93Ll9leGVyY2lzZV9vanNfcnVudGltZTtcblxuICBjb25zdCBzdGF0dXNDb250YWluZXIgPSBkb2N1bWVudC5nZXRFbGVtZW50QnlJZChcImV4ZXJjaXNlLWxvYWRpbmctc3RhdHVzXCIpO1xuICBjb25zdCBpbmRpY2F0b3JDb250YWluZXIgPSBkb2N1bWVudC5nZXRFbGVtZW50QnlJZChcImV4ZXJjaXNlLWxvYWRpbmctaW5kaWNhdG9yXCIpO1xuICBpbmRpY2F0b3JDb250YWluZXIuY2xhc3NMaXN0LnJlbW92ZShcImQtbm9uZVwiKTtcblxuICBsZXQgc3RhdHVzVGV4dCA9IGRvY3VtZW50LmNyZWF0ZUVsZW1lbnQoXCJkaXZcIilcbiAgc3RhdHVzVGV4dC5jbGFzc0xpc3QgPSBcImV4ZXJjaXNlLWxvYWRpbmctZGV0YWlsc1wiO1xuICBzdGF0dXNUZXh0ID0gc3RhdHVzQ29udGFpbmVyLmFwcGVuZENoaWxkKHN0YXR1c1RleHQpO1xuICBzdGF0dXNUZXh0LnRleHRDb250ZW50ID0gYEluaXRpYWxpc2VgO1xuXG4gIC8vIEhvaXN0IGluZGljYXRvciBvdXQgZnJvbSBmaW5hbCBzbGlkZSB3aGVuIHJ1bm5pbmcgdW5kZXIgcmV2ZWFsXG4gIGNvbnN0IHJldmVhbFN0YXR1cyA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoXCIucmV2ZWFsIC5leGVyY2lzZS1sb2FkaW5nLWluZGljYXRvclwiKTtcbiAgaWYgKHJldmVhbFN0YXR1cykge1xuICAgIHJldmVhbFN0YXR1cy5yZW1vdmUoKTtcbiAgICBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKFwiLnJldmVhbCA+IC5zbGlkZXNcIikuYXBwZW5kQ2hpbGQocmV2ZWFsU3RhdHVzKTtcbiAgfVxuXG4gIC8vIE1ha2UgYW55IHJldmVhbCBzbGlkZXMgd2l0aCBsaXZlIGNlbGxzIHNjcm9sbGFibGVcbiAgZG9jdW1lbnQucXVlcnlTZWxlY3RvckFsbChcIi5yZXZlYWwgLmV4ZXJjaXNlLWNlbGxcIikuZm9yRWFjaCgoZWwpID0+IHtcbiAgICBlbC5jbG9zZXN0KCdzZWN0aW9uLnNsaWRlJykuY2xhc3NMaXN0LmFkZChcInNjcm9sbGFibGVcIik7XG4gIH0pXG5cbiAgLy8gUHlvZGlkZSBzdXBwbGVtZW50YWwgZGF0YSBhbmQgb3B0aW9uc1xuICBjb25zdCBkYXRhQ29udGVudCA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoYHNjcmlwdFt0eXBlPVxcXCJweW9kaWRlLWRhdGFcXFwiXWApLnRleHRDb250ZW50O1xuICBjb25zdCBkYXRhID0gSlNPTi5wYXJzZShiNjREZWNvZGUoZGF0YUNvbnRlbnQpKTtcblxuICAvLyBHcmFiIGxpc3Qgb2YgcmVzb3VyY2VzIHRvIGJlIGRvd25sb2FkZWRcbiAgY29uc3QgZmlsZXNDb250ZW50ID0gZG9jdW1lbnQucXVlcnlTZWxlY3Rvcihgc2NyaXB0W3R5cGU9XFxcInZmcy1maWxlXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgZmlsZXMgPSBKU09OLnBhcnNlKGI2NERlY29kZShmaWxlc0NvbnRlbnQpKTtcblxuICBsZXQgcHlvZGlkZVByb21pc2UgPSAoYXN5bmMgKCkgPT4ge1xuICAgIHN0YXR1c1RleHQudGV4dENvbnRlbnQgPSBgRG93bmxvYWRpbmcgUHlvZGlkZWA7XG4gICAgY29uc3QgcHlvZGlkZSA9IGF3YWl0IHN0YXJ0UHlvZGlkZVdvcmtlcihkYXRhLm9wdGlvbnMpO1xuXG4gICAgc3RhdHVzVGV4dC50ZXh0Q29udGVudCA9IGBEb3dubG9hZGluZyBwYWNrYWdlOiBtaWNyb3BpcGA7XG4gICAgYXdhaXQgcHlvZGlkZS5sb2FkUGFja2FnZShcIm1pY3JvcGlwXCIpO1xuICAgIGNvbnN0IG1pY3JvcGlwID0gYXdhaXQgcHlvZGlkZS5weWltcG9ydChcIm1pY3JvcGlwXCIpO1xuICAgIGF3YWl0IGRhdGEucGFja2FnZXMucGtncy5tYXAoKHBrZykgPT4gKCkgPT4ge1xuICAgICAgc3RhdHVzVGV4dC50ZXh0Q29udGVudCA9IGBEb3dubG9hZGluZyBwYWNrYWdlOiAke3BrZ31gO1xuICAgICAgcmV0dXJuIG1pY3JvcGlwLmluc3RhbGwocGtnKTtcbiAgICB9KS5yZWR1Y2UoKGN1ciwgbmV4dCkgPT4gY3VyLnRoZW4obmV4dCksIFByb21pc2UucmVzb2x2ZSgpKTtcbiAgICBhd2FpdCBtaWNyb3BpcC5kZXN0cm95KCk7XG5cbiAgICAvLyBEb3dubG9hZCBhbmQgaW5zdGFsbCByZXNvdXJjZXNcbiAgICBhd2FpdCBmaWxlcy5tYXAoKGZpbGUpID0+IGFzeW5jICgpID0+IHtcbiAgICAgIGNvbnN0IG5hbWUgPSBmaWxlLnN1YnN0cmluZyhmaWxlLmxhc3RJbmRleE9mKCcvJykgKyAxKTtcbiAgICAgIHN0YXR1c1RleHQudGV4dENvbnRlbnQgPSBgRG93bmxvYWRpbmcgcmVzb3VyY2U6ICR7bmFtZX1gO1xuICAgICAgY29uc3QgcmVzcG9uc2UgPSBhd2FpdCBmZXRjaChmaWxlKTtcbiAgICAgIGlmICghcmVzcG9uc2Uub2spIHtcbiAgICAgICAgdGhyb3cgbmV3IEVycm9yKGBDYW4ndCBkb3dubG9hZCBcXGAke2ZpbGV9XFxgLiBFcnJvciAke3Jlc3BvbnNlLnN0YXR1c306IFwiJHtyZXNwb25zZS5zdGF0dXNUZXh0fVwiLmApO1xuICAgICAgfVxuICAgICAgY29uc3QgZGF0YSA9IGF3YWl0IHJlc3BvbnNlLmFycmF5QnVmZmVyKCk7XG5cbiAgICAgIC8vIFN0b3JlIFVSTHMgaW4gdGhlIGN3ZCB3aXRob3V0IGFueSBzdWJkaXJlY3Rvcnkgc3RydWN0dXJlXG4gICAgICBpZiAoZmlsZS5pbmNsdWRlcyhcIjovL1wiKSkge1xuICAgICAgICBmaWxlID0gbmFtZTtcbiAgICAgIH1cblxuICAgICAgLy8gQ29sbGFwc2UgaGlnaGVyIGRpcmVjdG9yeSBzdHJ1Y3R1cmVcbiAgICAgIGZpbGUgPSBjb2xsYXBzZVBhdGgoZmlsZSk7XG5cbiAgICAgIC8vIENyZWF0ZSBkaXJlY3RvcnkgdHJlZSwgaWdub3JpbmcgXCJkaXJlY3RvcnkgZXhpc3RzXCIgVkZTIGVycm9yc1xuICAgICAgY29uc3QgcGFydHMgPSBmaWxlLnNwbGl0KCcvJykuc2xpY2UoMCwgLTEpO1xuICAgICAgbGV0IHBhdGggPSAnJztcbiAgICAgIHdoaWxlIChwYXJ0cy5sZW5ndGggPiAwKSB7XG4gICAgICAgIHBhdGggKz0gcGFydHMuc2hpZnQoKSArICcvJztcbiAgICAgICAgdHJ5IHtcbiAgICAgICAgICBhd2FpdCBweW9kaWRlLkZTLm1rZGlyKHBhdGgpO1xuICAgICAgICB9IGNhdGNoIChlKSB7XG4gICAgICAgICAgaWYgKGUubmFtZSAhPT0gXCJFcnJub0Vycm9yXCIpIHRocm93IGU7XG4gICAgICAgICAgaWYgKGUuZXJybm8gIT09IDIwKSB7XG4gICAgICAgICAgICBjb25zdCBlcnJvclRleHRQdHIgPSBhd2FpdCBweW9kaWRlLl9tb2R1bGUuX3N0cmVycm9yKGUuZXJybm8pO1xuICAgICAgICAgICAgY29uc3QgZXJyb3JUZXh0ID0gYXdhaXQgcHlvZGlkZS5fbW9kdWxlLlVURjhUb1N0cmluZyhlcnJvclRleHRQdHIpO1xuICAgICAgICAgICAgdGhyb3cgbmV3IEVycm9yKGBGaWxlc3lzdGVtIEVycm9yICR7ZS5lcnJub30gXCIke2Vycm9yVGV4dH1cIi5gKTtcbiAgICAgICAgICB9XG4gICAgICAgIH1cbiAgICAgIH1cblxuICAgICAgLy8gV3JpdGUgdGhpcyBmaWxlIHRvIHRoZSBWRlNcbiAgICAgIHRyeSB7XG4gICAgICAgIHJldHVybiBhd2FpdCBweW9kaWRlLkZTLndyaXRlRmlsZShmaWxlLCBuZXcgVWludDhBcnJheShkYXRhKSk7XG4gICAgICB9IGNhdGNoIChlKSB7XG4gICAgICAgIGlmIChlLm5hbWUgIT09IFwiRXJybm9FcnJvclwiKSB0aHJvdyBlO1xuICAgICAgICBjb25zdCBlcnJvclRleHRQdHIgPSBhd2FpdCBweW9kaWRlLl9tb2R1bGUuX3N0cmVycm9yKGUuZXJybm8pO1xuICAgICAgICBjb25zdCBlcnJvclRleHQgPSBhd2FpdCBweW9kaWRlLl9tb2R1bGUuVVRGOFRvU3RyaW5nKGVycm9yVGV4dFB0cik7XG4gICAgICAgIHRocm93IG5ldyBFcnJvcihgRmlsZXN5c3RlbSBFcnJvciAke2UuZXJybm99IFwiJHtlcnJvclRleHR9XCIuYCk7XG4gICAgICB9XG4gICAgfSkucmVkdWNlKChjdXIsIG5leHQpID0+IGN1ci50aGVuKG5leHQpLCBQcm9taXNlLnJlc29sdmUoKSk7XG5cbiAgICBzdGF0dXNUZXh0LnRleHRDb250ZW50ID0gYFB5b2RpZGUgZW52aXJvbm1lbnQgc2V0dXBgO1xuICAgIGF3YWl0IHNldHVwUHl0aG9uKHB5b2RpZGUpO1xuXG4gICAgc3RhdHVzVGV4dC5yZW1vdmUoKTtcbiAgICBpZiAoc3RhdHVzQ29udGFpbmVyLmNoaWxkcmVuLmxlbmd0aCA9PSAwKSB7XG4gICAgICBzdGF0dXNDb250YWluZXIucGFyZW50Tm9kZS5yZW1vdmUoKTtcbiAgICB9XG4gICAgcmV0dXJuIHB5b2RpZGU7XG4gIH0pKCkuY2F0Y2goKGVycikgPT4ge1xuICAgIHN0YXR1c1RleHQuc3R5bGUuY29sb3IgPSBcInZhcigtLWV4ZXJjaXNlLWVkaXRvci1obC1lciwgI0FEMDAwMClcIjtcbiAgICBzdGF0dXNUZXh0LnRleHRDb250ZW50ID0gZXJyLm1lc3NhZ2U7XG4gICAgLy9pbmRpY2F0b3JDb250YWluZXIucXVlcnlTZWxlY3RvcihcIi5zcGlubmVyLWdyb3dcIikuY2xhc3NMaXN0LmFkZChcImQtbm9uZVwiKTtcbiAgICB0aHJvdyBlcnI7XG4gIH0pO1xuXG4gIC8vIEtlZXAgdHJhY2sgb2YgaW5pdGlhbCBPSlMgYmxvY2sgcmVuZGVyXG4gIGNvbnN0IHJlbmRlcmVkT2pzID0ge307XG5cbiAgY29uc3QgcHJvY2VzcyA9IGFzeW5jIChjb250ZXh0LCBpbnB1dHMpID0+IHtcbiAgICBjb25zdCBweW9kaWRlID0gYXdhaXQgcHlvZGlkZVByb21pc2U7XG4gICAgY29uc3QgZXZhbHVhdG9yID0gbmV3IFB5b2RpZGVFdmFsdWF0b3IocHlvZGlkZSwgY29udGV4dCk7XG4gICAgYXdhaXQgZXZhbHVhdG9yLnByb2Nlc3MoaW5wdXRzKTtcbiAgICByZXR1cm4gZXZhbHVhdG9yLmNvbnRhaW5lcjtcbiAgfVxuXG4gIHJldHVybiB7XG4gICAgcHlvZGlkZVByb21pc2UsXG4gICAgcmVuZGVyZWRPanMsXG4gICAgcHJvY2VzcyxcbiAgfTtcbn1cbiJ9XX0=
+</script>
+<div id="exercise-loading-indicator" class="exercise-loading-indicator d-none d-flex align-items-center gap-2">
+<div id="exercise-loading-status" class="d-flex gap-2">
+
+</div>
+<div class="spinner-grow spinner-grow-sm">
+
+</div>
+</div>
+<script type="vfs-file">
+W10=
+</script>
+</section>
+
+</main> <!-- /main -->
+<script type="ojs-module-contents">
+eyJjb250ZW50cyI6W119
+</script>
+<script type="module">
+if (window.location.protocol === "file:") { alert("The OJS runtime does not work with file:// URLs. Please use a web server to view this document."); }
+window._ojs.paths.runtimeToDoc = "../..";
+window._ojs.paths.runtimeToRoot = "../..";
+window._ojs.paths.docToRoot = "";
+window._ojs.selfContained = false;
+window._ojs.runtime.interpretFromScriptTags();
+</script>
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copiado");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copiado");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/github\.com\/EveliaCoss\/Mt2026_Taller_Computo_libro");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        const annoteTargets = window.document.querySelectorAll('.code-annotation-anchor');
+        for (let i=0; i<annoteTargets.length; i++) {
+          const annoteTarget = annoteTargets[i];
+          const targetCell = annoteTarget.getAttribute("data-target-cell");
+          const targetAnnotation = annoteTarget.getAttribute("data-target-annotation");
+          const contentFn = () => {
+            const content = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+            if (content) {
+              const tipContent = content.cloneNode(true);
+              tipContent.classList.add("code-annotation-tip-content");
+              return tipContent.outerHTML;
+            }
+          }
+          const config = {
+            allowHTML: true,
+            content: contentFn,
+            onShow: (instance) => {
+              selectCodeLines(instance.reference);
+              instance.reference.classList.add('code-annotation-active');
+              window.tippy.hideAll();
+            },
+            onHide: (instance) => {
+              unselectCodeLines();
+              instance.reference.classList.remove('code-annotation-active');
+            },
+            maxWidth: 300,
+            delay: [50, 0],
+            duration: [200, 0],
+            offset: [5, 10],
+            arrow: true,
+            appendTo: function(el) {
+              return el.parentElement.parentElement.parentElement;
+            },
+            interactive: true,
+            interactiveBorder: 10,
+            theme: 'quarto',
+            placement: 'right',
+            popperOptions: {
+              modifiers: [
+              {
+                name: 'flip',
+                options: {
+                  flipVariations: false, // true by default
+                  allowedAutoPlacements: ['right'],
+                  fallbackPlacements: ['right', 'top', 'top-start', 'top-end', 'bottom', 'bottom-start', 'bottom-end', 'left'],
+                },
+              },
+              {
+                name: 'preventOverflow',
+                options: {
+                  mainAxis: false,
+                  altAxis: false
+                }
+              }
+              ]        
+            }      
+          };
+          window.tippy(annoteTarget, config); 
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./python_proyecto_integrador.html" class="pagination-link" aria-label="**🧩 Proyecto integrador: atlas de cónicas rotadas**">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">72</span>&nbsp; <span class="chapter-title"><strong>🧩 Proyecto integrador: atlas de cónicas rotadas</strong></span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./python_entornos.html" class="pagination-link" aria-label="Entornos para trabajar con Python: RStudio, Google Colab y Jupyter Notebook">
+        <span class="nav-page-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Entornos para trabajar con Python: RStudio, Google Colab y Jupyter Notebook</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+<p>Taller de Cómputo, 1er semestre: Dra. Evelia Coss</p>
+</div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>
